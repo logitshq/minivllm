@@ -1,0 +1,80 @@
+"""Gated DeltaNet（24 层里的 18 层）。第 1 步用最直白的逐 token 递推，和 HF 的 torch_recurrent_gated_delta_rule 逐行对应。
+
+每个 token t（每个 v 头独立，状态 S 是 Dk×Dv 的矩阵，fp32）：
+    S = S * exp(g_t)                       # 衰减，g_t = -exp(A_log) * softplus(a_t + dt_bias) < 0
+    kv_mem = k_t^T S                       # 当前状态对 k_t 的"记忆"
+    S = S + k_t ⊗ (v_t - kv_mem) * beta_t  # delta rule：只写入新信息，beta_t = sigmoid(b_t)
+    o_t = q_t^T S
+q、k 先做 L2 归一化，q 再除以 sqrt(Dk)。进 q/k/v 之前先过一个深度可分离的因果卷积（kernel 4）+ silu。
+"""
+import mlx.core as mx
+import mlx.nn as nn
+
+from ..config import ModelConfig
+from .layers import GatedRMSNorm, Linear
+
+
+def causal_conv1d(x: mx.array, w: mx.array) -> mx.array:
+    """x: [T, C]，w: [C, K]。y[t] = sum_j w[:, j] * x[t - (K-1) + j]，越界补 0。等价于 HF 的 conv1d(padding=K-1) 取前 T 个。"""
+    K = w.shape[1]
+    xp = mx.pad(x, [(K - 1, 0), (0, 0)])
+    T = x.shape[0]
+    return sum(xp[j:j + T] * w[:, j] for j in range(K))
+
+
+def l2norm(x: mx.array, eps: float = 1e-6) -> mx.array:
+    return x * mx.rsqrt((x * x).sum(-1, keepdims=True) + eps)
+
+
+def gated_delta_rule_recurrent(q, k, v, g, beta, state=None):
+    """q, k: [T, Hv, Dk]；v: [T, Hv, Dv]；g, beta: [T, Hv]（fp32）。返回 o [T, Hv, Dv] 和末状态 [Hv, Dk, Dv]。"""
+    T, Hv, Dk = k.shape
+    Dv = v.shape[-1]
+    q, k, v = (t.astype(mx.float32) for t in (q, k, v))
+    q, k = l2norm(q), l2norm(k)
+    q = q / (Dk ** 0.5)
+    S = mx.zeros((Hv, Dk, Dv), dtype=mx.float32) if state is None else state
+    outs = []
+    for t in range(T):
+        S = S * mx.exp(g[t])[:, None, None]
+        kv_mem = (S * k[t][:, :, None]).sum(axis=1)             # [Hv, Dv]
+        delta = (v[t] - kv_mem) * beta[t][:, None]
+        S = S + k[t][:, :, None] * delta[:, None, :]
+        outs.append((S * q[t][:, :, None]).sum(axis=1))         # [Hv, Dv]
+    return mx.stack(outs), S
+
+
+class GatedDeltaNet(nn.Module):
+    def __init__(self, cfg: ModelConfig):
+        super().__init__()
+        self.Hk, self.Hv = cfg.linear_num_key_heads, cfg.linear_num_value_heads
+        self.Dk, self.Dv = cfg.linear_key_head_dim, cfg.linear_value_head_dim
+        key_dim, value_dim = self.Hk * self.Dk, self.Hv * self.Dv
+        self.conv_dim = 2 * key_dim + value_dim
+        q = cfg.quantization
+        self.in_proj_qkv = Linear(cfg.hidden_size, self.conv_dim, q)
+        self.in_proj_z = Linear(cfg.hidden_size, value_dim, q)
+        self.in_proj_b = Linear(cfg.hidden_size, self.Hv, q)
+        self.in_proj_a = Linear(cfg.hidden_size, self.Hv, q)
+        self.conv1d_weight = mx.zeros((self.conv_dim, cfg.linear_conv_kernel_dim), dtype=mx.bfloat16)
+        self.A_log = mx.zeros((self.Hv,), dtype=mx.float32)
+        self.dt_bias = mx.zeros((self.Hv,), dtype=mx.float32)
+        self.norm = GatedRMSNorm(self.Dv, cfg.rms_norm_eps)
+        self.out_proj = Linear(value_dim, cfg.hidden_size, q)
+
+    def __call__(self, x: mx.array) -> mx.array:
+        T = x.shape[0]
+        qkv = self.in_proj_qkv(x)
+        z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
+        b, a = self.in_proj_b(x), self.in_proj_a(x)
+        qkv = nn.silu(causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype)))
+        q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
+        q, k, v = q.reshape(T, self.Hk, self.Dk), k.reshape(T, self.Hk, self.Dk), v.reshape(T, self.Hv, self.Dv)
+        if self.Hv > self.Hk:                                        # 27B：16 个 k 头服务 48 个 v 头
+            rep = self.Hv // self.Hk
+            q, k = mx.repeat(q, rep, axis=1), mx.repeat(k, rep, axis=1)
+        beta = mx.sigmoid(b.astype(mx.float32))
+        g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
+        o, _ = gated_delta_rule_recurrent(q, k, v, g, beta)
+        o = self.norm(o.astype(x.dtype), z)
+        return self.out_proj(o.reshape(T, -1))
