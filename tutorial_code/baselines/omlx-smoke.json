@@ -1,0 +1,93 @@
+{
+  "baseline": "omlx",
+  "purpose": "optimized-engine reference smoke",
+  "versions": {
+    "omlx": "0.7.1.dev1",
+    "mlx": "0.32.3",
+    "mlx-lm": "0.31.4.dev132+g94cdcae13",
+    "transformers": "5.17.0"
+  },
+  "native_kernels": {
+    "bonsai": {
+      "available": true,
+      "import_error": null
+    },
+    "decode_fast": {
+      "available": true,
+      "import_error": null
+    },
+    "glm_moe_dsa": {
+      "available": true,
+      "import_error": null
+    },
+    "minimax_m3": {
+      "available": true,
+      "import_error": null
+    },
+    "qwen35_prefill": {
+      "available": true,
+      "import_error": null
+    }
+  },
+  "model_dir": "/Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4",
+  "config_sha256": "9865e6100ff36f53de7cec6c624f0c415af7ba9f1c7f4a8569980c969f5ec4c6",
+  "quantization": {
+    "group_size": 16,
+    "bits": 4,
+    "mode": "nvfp4"
+  },
+  "request": {
+    "prompt_ids": [
+      248045,
+      846,
+      198,
+      95826,
+      110827,
+      98682,
+      108829,
+      81726,
+      6297,
+      1710,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "temperature": 0,
+    "max_tokens": 8,
+    "repetition_penalty": 1.0
+  },
+  "settings": {
+    "concurrency": 1,
+    "paged_prefix_cache": false,
+    "speculative_decoding": false,
+    "warmup_output_tokens": 2,
+    "transport": "HTTP SSE; client timing includes server overhead"
+  },
+  "usage": {
+    "prompt_tokens": 19,
+    "completion_tokens": 8,
+    "total_tokens": 27,
+    "input_tokens": 19,
+    "output_tokens": 8,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "time_to_first_token": 0.02,
+    "total_time": 0.04,
+    "prompt_eval_duration": 0.02,
+    "generation_duration": 0.02,
+    "prompt_tokens_per_second": 917.35,
+    "generation_tokens_per_second": 373.08
+  },
+  "text": "KV Cache 是 GPU 中用于",
+  "client_latency_s": 0.06459308299236,
+  "client_ttft_text_s": 0.043784791996586137,
+  "output_tokens_per_client_second": 123.85227069818346,
+  "scope": "short functional check; not a sustained 27B benchmark or HF speed comparison"
+}
