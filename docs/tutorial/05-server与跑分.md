@@ -33,3 +33,9 @@ server 层多了 37 s（13%），asyncio 的逐 token 写 SSE，待查。
 - **MLX 的 allocator 缓存**：释放的 buffer 留着复用，每步的 K/V 拷贝尺寸各不相同，几分钟攒出 20 GB，逼近 37 GB 工作集后系统压缩内存。
   `mx.set_cache_limit(2 GB)` 之后并发 32 的峰值从 31 GB 降到 24 GB，端到端从 28 提到 33 tok/s。dflash-mlx 默认 4 GB 也是为这个。
 - mlx-lm 的 server 默认把跑完的请求的 KV 留在 LRU 里复用，`--prompt-cache-bytes 1` 关掉才公平。
+
+## Pareto 曲线（2026-10-14 补）
+
+`bench/run_pareto.sh` 扫并发 1 到 32，`bench/pareto.py` 画成 `docs/pareto.html`（InferenceX 的画法：x = 每用户 tok/s，y = 整机 tok/s）。
+并发 1 到 16 两条线重合（kernel 都是 MLX 的）；24 和 32 时 mlx-lm 的静态 batch 是 116 和 142，我们是 103 和 115，差 20%，原因没查；
+但它的 server 并发 8 只有 48、并发 32 OOM，静态 batch 的数字它自己的 server 拿不到。单用户开 DFlash2 的三个点在最右边。
