@@ -76,8 +76,11 @@ class GatedDeltaNet(nn.Module):
         if cache is not None and cache.record:
             cache.tape = (raw, q, k, v, g, beta)                      # 投机解码回滚用
         S0 = cache.S if cache is not None and cache.offset > 0 else None
-        rule = gated_delta_rule_recurrent if T == 1 else gated_delta_rule_chunk   # decode 递推，prefill 分块
-        o, S = rule(q, k, v, g, beta, S0)
+        if T == 1:
+            o, S = gated_delta_rule_recurrent(q, k, v, g, beta, S0)                 # decode：递推
+        else:
+            chunk = 64 if T > 32 else (16 if T > 8 else 8)                          # 投机解码 verify 的 8 个 token 用小块
+            o, S = gated_delta_rule_chunk(q, k, v, g, beta, S0, chunk=chunk)
         if cache is not None:
             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)

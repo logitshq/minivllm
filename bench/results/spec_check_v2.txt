@@ -1,0 +1,18 @@
+plain  kv   :  24.8 tok/s (incl. prefill)
+plain  math :  23.6 tok/s (incl. prefill)
+plain  code :  24.2 tok/s (incl. prefill)
+--- block adaptive
+dflash kv   :  25.3 tok/s (1.02x); 128 tokens in 66 rounds = 1.94 tok/round, 0.92 drafts accepted/round; greedy matches plain for 50/128
+    'KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。\n\nassistant\n<think>\n用户要求用
+dflash math :  47.7 tok/s (2.02x); 128 tokens in 25 rounds = 5.12 tok/round, 4.20 drafts accepted/round; greedy matches plain for 128/128
+    "To find all integers $n$ such that $f(n)=n$, we first need to determine the explicit form of the function $f(
+dflash code :  47.0 tok/s (1.94x); 128 tokens in 24 rounds = 5.33 tok/round, 4.58 drafts accepted/round; greedy matches plain for 128/128
+    '```python\nfrom datetime import datetime\nimport unittest\n\n\ndef parse_iso8601(date_string: str) -> datetim
+--- block 8
+dflash kv   :  23.3 tok/s (0.94x); 128 tokens in 44 rounds = 2.91 tok/round, 2.02 drafts accepted/round; greedy matches plain for 77/128
+dflash math :  45.6 tok/s (1.93x); 128 tokens in 22 rounds = 5.82 tok/round, 4.82 drafts accepted/round; greedy matches plain for 128/128
+dflash code :  47.2 tok/s (1.95x); 128 tokens in 22 rounds = 5.82 tok/round, 5.00 drafts accepted/round; greedy matches plain for 128/128
+--- block 5
+dflash kv   :  24.0 tok/s (0.97x); 128 tokens in 60 rounds = 2.13 tok/round, 1.12 drafts accepted/round; greedy matches plain for 50/128
+dflash math :  47.9 tok/s (2.03x); 128 tokens in 30 rounds = 4.27 tok/round, 3.30 drafts accepted/round; greedy matches plain for 128/128
+dflash code :  54.6 tok/s (2.25x); 128 tokens in 28 rounds = 4.57 tok/round, 3.61 drafts accepted/round; greedy matches plain for 128/128

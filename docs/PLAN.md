@@ -1,5 +1,7 @@
 # minivllm（本地版）— 手搓计划 v2
 
+> 2026-10-14：步骤 0–6 全部完成，数字见 README 和各教程页。剩余优化项在 tutorial 05/06 末尾。
+
 > 远程版（surf-gpu，CUDA/Triton，目标 unsloth/Qwen3.8-27B-NVFP4 打平 vLLM）由另一组 agent 并行在做，接口契约见 `ARCHITECTURE.remote.md`。
 > 本地版在 M4 Max（48 GB）上用 **MLX** 一步一步带着搭，目标和远程同级：**Qwen3.8-27B NVFP4 + 投机解码**，对标 `mlx_lm.server`。
 

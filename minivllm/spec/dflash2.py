@@ -139,10 +139,11 @@ class DFlash2Drafter(nn.Module):
         for l in self.layers:
             l.self_attn.reset()
 
-    def draft(self, feats_new, anchor: int, start: int, embed_fn, lm_head_fn) -> list[int]:
-        """feats_new: 还没喂给 drafter 的上下文特征 [n, 5·H]（位置 start-n..start-1）；anchor 在位置 start。返回 7 个草稿 token。"""
+    def draft(self, feats_new, anchor: int, start: int, embed_fn, lm_head_fn, block_size: int | None = None) -> list[int]:
+        """feats_new: 还没喂给 drafter 的上下文特征 [n, 5·H]（位置 start-n..start-1）；anchor 在位置 start。
+        返回 block_size-1 个草稿 token（drafter 按 block 8 训练，更小的块只是少取几个位置）。"""
         ctx = self.hidden_norm(self.fc(feats_new)) if feats_new is not None and feats_new.shape[0] > 0 else None
-        B = self.cfg.block_size
+        B = block_size or self.cfg.block_size
         ids = mx.array([anchor] + [self.cfg.mask_token_id] * (B - 1))
         x = embed_fn(ids)
         for layer in self.layers:

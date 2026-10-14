@@ -15,7 +15,7 @@ from .scheduler import SchedulerOutput
 
 
 class ModelRunner:
-    def __init__(self, model, max_len: int, drafter=None):
+    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None):
         self.model = model
         self.max_len = max_len
         self.batch = DecodeBatch(model)
@@ -24,11 +24,12 @@ class ModelRunner:
         self.feats: dict[str, list] = {}            # req_id → 全部上下文特征（按块存；drafter 按需补吃）
         if drafter is not None:
             from .spec_runner import SpecRunner
-            self.spec = SpecRunner(model, drafter)
+            self.spec = SpecRunner(model, drafter, spec_block)
 
     def run(self, out: SchedulerOutput) -> dict[str, int]:
         sampled: dict[str, int | list[int]] = {}
         to_eval = []
+        decode = out.decode                                      # 不改 out：scheduler.update 还要用它
         # ---- solo 投机解码：只有一个请求在 decode，且装了 drafter ----
         if self.spec is not None and len(out.decode) == 1 and out.decode[0].req_id in self.staging:
             req = out.decode[0]
@@ -38,29 +39,29 @@ class ModelRunner:
                 hist[:] = [mx.concatenate(hist)]
             hist.append(new_feats)
             sampled[req.req_id] = produced
-            out.decode = []
+            decode = []
         elif self.spec is not None and len(out.decode) == 1 and self.batch.size == 1 and self.batch.req_ids == [out.decode[0].req_id]:
             # batch 缩到只剩一个：抽回 solo 模式，下一步走投机解码
             self.staging[out.decode[0].req_id] = self.batch.extract(0)
             self.batch.clear()
             return self.run(out)
         # ---- decode ----
-        if out.decode:
-            self._sync_batch(out.decode)
-            positions = [r.num_computed_tokens for r in out.decode]
-            tokens = mx.array([r.output_token_ids[-1] for r in out.decode])
+        if decode:
+            self._sync_batch(decode)
+            positions = [r.num_computed_tokens for r in decode]
+            tokens = mx.array([r.output_token_ids[-1] for r in decode])
             ctx = ForwardContext("decode", self.batch.layers, positions=mx.array(positions),
                                  lens=mx.array([p + 1 for p in positions]), max_len=max(positions) + 1)
             if self.spec is not None:
                 logits, f = self.model(tokens, ctx, capture=self.spec.capture)
-                for i, r in enumerate(out.decode):
+                for i, r in enumerate(decode):
                     self.feats.setdefault(r.req_id, []).append(f[i:i + 1])
                 to_eval.append(f)
             else:
                 logits = self.model(tokens, ctx)
-            toks = sample(logits, [r.sampling for r in out.decode])
+            toks = sample(logits, [r.sampling for r in decode])
             to_eval.append(toks)
-            decode_reqs = out.decode
+            decode_reqs = decode
             self.batch.lens = [p + 1 for p in positions]
         elif self.batch.size:
             self.batch.clear()                                  # 没人在 decode 了：释放批量 cache
@@ -81,7 +82,7 @@ class ModelRunner:
             else:
                 to_eval.append(logits)                      # 让这一块的计算现在就执行
         mx.eval(*to_eval, *self.batch.arrays())
-        if out.decode:
+        if decode:
             for r, t in zip(decode_reqs, toks.tolist()):
                 sampled[r.req_id] = t
         for r, t in prefill_toks:

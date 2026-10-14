@@ -6,6 +6,18 @@
 - 计划和每步的教程：`docs/PLAN.md`、`docs/tutorial/`
 - 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
 
+## 现状（2026-10-14，27B nvfp4，M4 Max 48 GB）
+
+| 场景 | minivllm | 对照 |
+|---|---|---|
+| prefill 1024 token | 248 tok/s | mlx-lm 同 checkpoint 138，affine 4bit 241 |
+| 单流 decode | 25 tok/s | mlx-lm 24–29 |
+| 单流 + DFlash2 投机解码（无损） | 56–62 tok/s | dflash-mlx 64 |
+| 并发 8 decode 阶段 | 90 tok/s | mlx-lm server 48 |
+| 并发 32 | 跑得起来，峰值 24 GB，持续 127 tok/s | mlx-lm Metal OOM |
+
+教程按步骤在 `docs/tutorial/00`–`06`。
+
 ## 环境
 
 ```bash
