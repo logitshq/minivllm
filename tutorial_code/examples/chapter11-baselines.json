@@ -134,5 +134,18 @@
       ]
     }
   ],
-  "rule": "Keep correctness tests, API measurements, core measurements and published projections as separate evidence."
+  "rule": "Keep correctness tests, API measurements, core measurements and published projections as separate evidence.",
+  "experimental_variants": [
+    {
+      "name": "M4 Apple9 official accelerator on",
+      "default_profile_modified": false,
+      "full_m5_profile_applied": false,
+      "formal_reports": [
+        "chapter11-m4-accelerator-0.8b.json",
+        "chapter11-m4-accelerator-27b.json"
+      ],
+      "comparison": "historical default-off vs observed-on; instrumentation/output limitations preserved",
+      "tag": "baseline-m4-accelerator-ab-v1"
+    }
+  ]
 }

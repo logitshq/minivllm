@@ -1,0 +1,379 @@
+{
+  "baseline": "Lithos Metal",
+  "status": "measured local target-only",
+  "recorded_at": "2026-10-14T22:06:55.445456+00:00",
+  "installation": {
+    "distribution_version": "0.1.2",
+    "archive_url": "https://github.com/lithos-ai/lithos-metal/releases/download/v0.1.2/lithos-metal-0.1.2-macos-arm64.tar.gz",
+    "archive_sha256": "a51b821923b21ed4134979779f0ed77c98cbc9b227fed7627ec620704169a3e3",
+    "python": "3.12.13",
+    "source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "source_archive_url": "https://github.com/lithos-ai/lithos-metal/archive/5485ad6bac0a5649d66a347f3e01a655ea29d937.tar.gz",
+    "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
+    "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+    "native_runtime": "compiled from the complete official pinned source, no local patches"
+  },
+  "versions": {
+    "lithos-metal": "0.1.2",
+    "numpy": "2.5.3",
+    "transformers": "5.18.0",
+    "tokenizers": "0.23.2"
+  },
+  "host": {
+    "chip": "Apple M4 Max",
+    "gpu_cores": 40,
+    "apple_family": 9,
+    "unified_memory_bytes": 51539607552,
+    "macos": "27.0.1"
+  },
+  "backend": "m4_max",
+  "backend_profile": {
+    "name": "apple-m4-max-40c",
+    "backend": "m4_max",
+    "chip": "Apple M4 Max",
+    "gpu_family": "Apple9",
+    "gpu_cores": 40,
+    "nominal_gbps": 0,
+    "validation": "unmeasured",
+    "note": "Conservative native-kernel fallback. No latency, bandwidth, fusion or acceptance claims; tune on this exact device.",
+    "engine": {
+      "family": "Apple9",
+      "lane_order": "interleaved16",
+      "scale_placement": "block",
+      "threadgroups_per_core": 1,
+      "sibling_order": "either",
+      "max_cb_ms": 16,
+      "attention": "v1",
+      "attention_rows": 4,
+      "accelerator": "off",
+      "accelerator_min_t": {},
+      "cost_T": {},
+      "gdn_mixer_fusion": {}
+    }
+  },
+  "checkpoint": {
+    "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "format": "MLX NVFP4 group16 bits4",
+    "served_metadata_view": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "generation_config_policy": "existing generation_config.json",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "source_weight_bytes": 16054475404
+  },
+  "prompt": "用一句话解释什么是 KV cache。",
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    95826,
+    110827,
+    98682,
+    108829,
+    81726,
+    6297,
+    1710,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "prompt_ids_match_baseline": true,
+  "sampling": {
+    "temperature": 0,
+    "top_p": 1,
+    "eos": "normal stopping",
+    "eos_ids": [
+      248044,
+      248046
+    ]
+  },
+  "draft": null,
+  "concurrency": 1,
+  "max_new_tokens_cap": 16,
+  "max_context": 2048,
+  "cache_policy": "serving prefix cache enabled; exact short 19-token prompt had zero cached prompt tokens on every run",
+  "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
+  "backend_timing_scope": "prefill_gpu_ms/decode_gpu_ms are sums of Metal command-buffer GPU end minus start; include dispatch/queue contents, not isolated arithmetic kernels; steps can include queued done/no-op submissions and are not output-token counts",
+  "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
+  "kernel_route": "registered M4Max Apple9 identity retained; one explicit official accelerator A/B override, compiled live-program evidence below; no M5 profile/cost table/fusion override",
+  "experiment": {
+    "requested_accelerator": "on",
+    "profile_accelerator": "off",
+    "observed_programs_after_generation": [
+      {
+        "session_accelerator_override": "on",
+        "profile_accelerator": "off",
+        "profile": "apple-m4-max-40c",
+        "family": "Apple9",
+        "attention_override": null,
+        "profile_attention": "v1",
+        "threadgroups_per_core": 1,
+        "commute_norm": true,
+        "programs": [
+          {
+            "kind": "prefill.128",
+            "backend_id": "m4_max",
+            "config_digest": "4dda3ab2eea632c7",
+            "encoded_ops": 1209,
+            "gemm_tile_ops": 321,
+            "apple9_gemm_tile_ops": 321,
+            "tile_examples": [
+              {
+                "op": "gemv:layers.0.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.linear_attn.out_proj.out_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.mlp.gate_up.gate_proj+up_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.mlp.down.down_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.1.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              }
+            ]
+          },
+          {
+            "kind": "1",
+            "backend_id": "m4_max",
+            "config_digest": "4dda3ab2eea632c7",
+            "encoded_ops": 535,
+            "gemm_tile_ops": 0,
+            "apple9_gemm_tile_ops": 0,
+            "tile_examples": []
+          }
+        ],
+        "scope": "Read actual live Engines after complete() returned; their programs are compiled, encoded and generation completed. Predicated ops remain subject to recorded active T range; no isolated per-op GPU timestamp proof."
+      },
+      {
+        "session_accelerator_override": "on",
+        "profile_accelerator": "off",
+        "profile": "apple-m4-max-40c",
+        "family": "Apple9",
+        "attention_override": null,
+        "profile_attention": "v1",
+        "threadgroups_per_core": 1,
+        "commute_norm": true,
+        "programs": [
+          {
+            "kind": "prefill.128",
+            "backend_id": "m4_max",
+            "config_digest": "4dda3ab2eea632c7",
+            "encoded_ops": 1209,
+            "gemm_tile_ops": 321,
+            "apple9_gemm_tile_ops": 321,
+            "tile_examples": [
+              {
+                "op": "gemv:layers.0.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.linear_attn.out_proj.out_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.mlp.gate_up.gate_proj+up_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.0.mlp.down.down_proj",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              },
+              {
+                "op": "gemv:layers.1.linear_attn.in_proj.in_proj_z+in_proj_qkv+in_proj_a+in_proj_b",
+                "accelerator": true,
+                "COOP_A9": "1",
+                "TM": "32",
+                "T_SRC": "0",
+                "T_LO": "1",
+                "T_HI": "128",
+                "language_version": 262144
+              }
+            ]
+          },
+          {
+            "kind": "1",
+            "backend_id": "m4_max",
+            "config_digest": "4dda3ab2eea632c7",
+            "encoded_ops": 535,
+            "gemm_tile_ops": 0,
+            "apple9_gemm_tile_ops": 0,
+            "tile_examples": []
+          }
+        ],
+        "scope": "Read actual live Engines after complete() returned; their programs are compiled, encoded and generation completed. Predicated ops remain subject to recorded active T range; no isolated per-op GPU timestamp proof."
+      }
+    ],
+    "launcher": "/private/tmp/lithos-m4-accel-experiment-20261014/lithos_proof_server.py",
+    "launcher_sha256": "e4b82401ef17a4b5b9d17d46d84bbf4952b587f0219fb9c7f4dad6d681e7cb15"
+  },
+  "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
+  "memory": {
+    "server_resident_buffer_bytes": 17045438688,
+    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"
+  },
+  "warmup": {
+    "client_elapsed_s": 16.51965800000471,
+    "usage": {
+      "prompt_tokens": 19,
+      "completion_tokens": 16,
+      "total_tokens": 35
+    },
+    "finish_reason": "length",
+    "backend_metrics": {
+      "steps": 15,
+      "decode_gpu_ms": 595.15783333336,
+      "wall_ms": 16360.91220799426,
+      "prefill_gpu_ms": 454.08799999859184,
+      "prefill_wall_ms": 464.5828749984503,
+      "state_reset_ms": 0.0007500057108700275,
+      "checkpoint_ms": 0.0,
+      "setup_ms": 15296.801000004052,
+      "load_ms": 137.9105000087293,
+      "first_text_ms": null,
+      "decode_wall_ms": 598.7975833266973,
+      "cached_prompt_tokens": 0,
+      "prefix_source": null,
+      "prefix_load_ms": 0.0,
+      "prefill_encode_ms": 0.4010833501815796,
+      "prefill_commit_ms": 0.04683332145214081,
+      "prefill_wait_ms": 464.1060416698456,
+      "verify_tokens": 1,
+      "decode_step_ms": 39.67718888889067
+    }
+  },
+  "runs": [
+    {
+      "client_elapsed_s": 1.0481462919997284,
+      "client_ttft_text_s": 0.45732033299282193,
+      "client_completion_tokens_per_s": 15.265044700462619,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 16,
+        "total_tokens": 35
+      },
+      "logical_completion_tokens": 16,
+      "finish_reason": "length",
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的",
+      "done": true,
+      "backend_metrics": {
+        "steps": 15,
+        "decode_gpu_ms": 594.2746249929769,
+        "wall_ms": 1044.3067080050241,
+        "prefill_gpu_ms": 435.7507499953499,
+        "prefill_wall_ms": 436.3052083402872,
+        "state_reset_ms": 12.903583003208041,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.08350001007784158,
+        "first_text_ms": 450.78962499974295,
+        "decode_wall_ms": 594.6085416525602,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.01737499237060547,
+        "prefill_commit_ms": 0.00579167902469635,
+        "prefill_wait_ms": 436.2681666761637,
+        "verify_tokens": 1,
+        "decode_step_ms": 39.618308332865126
+      }
+    }
+  ],
+  "startup": {
+    "process_to_api_ready_s": 1.4340831249865005,
+    "scope": "server process start through models API readiness; includes checkpoint packing when absent and imports/tokenizer setup; --no-warmup defers GPU session loading/compilation to explicit warmup",
+    "pack_cache": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/packs"
+  },
+  "median_client_completion_tokens_per_s": 15.265044700462619,
+  "median_client_elapsed_s": 1.0481462919997284,
+  "median_client_ttft_text_s": 0.45732033299282193,
+  "server_log": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/runs/02b27848ccfa/server.log",
+  "owned_server_exit_code": -15
+}

@@ -35,6 +35,7 @@ def main():
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--startup-timeout", type=float, default=900)
     parser.add_argument("--prepare-only", action="store_true", help="Validate metadata/prompt IDs and prepare symlink view on CPU; no server or GPU device")
+    parser.add_argument("--accelerator", choices=["profile", "on", "off"], default="profile")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if min(args.repeat, args.max_new_tokens, args.max_context) < 1:
@@ -114,7 +115,11 @@ def main():
     key = secrets.token_urlsafe(24)
     env = {**os.environ, "LITHOS_METAL_API_KEY": key, "HF_HUB_OFFLINE": "1",
            "TOKENIZERS_PARALLELISM": "false", "PYTHONDONTWRITEBYTECODE": "1"}
-    command = [str(cli), "serve", "--model", str(served_checkpoint), "--no-draft", "--pack", str(runtime / "packs"),
+    env.pop("MONOLITH_ACCELERATOR", None)
+    if args.accelerator != "profile":
+        env["MONOLITH_ACCELERATOR"] = args.accelerator
+    command = [str(runtime / ".venv/bin/python"), str(Path(__file__).with_name("lithos_proof_server.py")),
+               "--model", str(served_checkpoint), "--no-draft", "--pack", str(runtime / "packs"),
                "--local-files-only", "--host", "127.0.0.1", "--port", str(port),
                "--max-context", str(args.max_context), "--keep-warm", "0", "--no-warmup"]
     measurements = []
@@ -209,6 +214,16 @@ def main():
         assert counters["cached_prompt_tokens"] == 0
         assert counters["verify_tokens"] == 1  # target-only, no speculative proposals
         entry["backend_metrics"] = counters
+    proof = [json.loads(line.split("Lithos-Experiment-Proof: ", 1)[1])
+             for line in log_path.read_text().splitlines() if "Lithos-Experiment-Proof: " in line]
+    assert len(proof) == args.repeat + 1
+    for item in proof:
+        assert item["profile"] == "apple-m4-max-40c" and item["family"] == "Apple9"
+        assert item["threadgroups_per_core"] == 1 and item["profile_attention"] == "v1"
+        assert item["commute_norm"] is True
+        if args.accelerator == "on":
+            assert item["session_accelerator_override"] == "on"
+            assert any(p["apple9_gemm_tile_ops"] > 0 for p in item["programs"])
     from monolith.runtime import _native
     info = _native.Device().info()
     from monolith.backends.metal import config_for_device
@@ -235,7 +250,12 @@ def main():
         "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
         "backend_timing_scope": "prefill_gpu_ms/decode_gpu_ms are sums of Metal command-buffer GPU end minus start; include dispatch/queue contents, not isolated arithmetic kernels; steps can include queued done/no-op submissions and are not output-token counts",
         "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
-        "kernel_route": "registered M4 fallback; no automatic mixer megakernels or tensor accelerator; profile availability is not per-kernel dispatch evidence",
+        "kernel_route": "registered M4Max Apple9 identity retained; one explicit official accelerator A/B override, compiled live-program evidence below; no M5 profile/cost table/fusion override",
+        "experiment": {"requested_accelerator": args.accelerator,
+                       "profile_accelerator": profile.accelerator,
+                       "observed_programs_after_generation": proof,
+                       "launcher": str(Path(__file__).with_name("lithos_proof_server.py")),
+                       "launcher_sha256": sha(Path(__file__).with_name("lithos_proof_server.py"))},
         "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
         "memory": {"server_resident_buffer_bytes": resident_buffers,
                    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"},

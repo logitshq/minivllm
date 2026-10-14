@@ -68,3 +68,5 @@ Lithos 的 completion usage 来自 committed token IDs，包括终端 EOS；显�
 同一 0.8B checkpoint 的 [三次测量](../examples/chapter11-lithos-0.8b.json) 和固定 27B 的 [三次测量](../examples/chapter11-lithos-27b.json) 已完成；各自先通过功能 smoke。计时、实际 EOS 输出数、cache 与 verify counters、native M4 fallback、normalization policy 和 unique buffer bytes 均在 JSON 中。
 
 第十一章扩展版 [`tutorial-11-v2`](../../docs/tutorial-v2/11-benchmark.md) 分列 0.8B 与 27B 各自三条引擎的计时边界，不从不同模型、输出长度或计时边界推导简单加速倍数。安装前 qualification 与 CPU prepare-only JSON 保留为历史步骤。
+
+本机 M4 官方 accelerator-on 的独立实验已记录，见 [实验说明](m4-accelerator-README.md)；完整 M5 配置被官方设备检查拒绝，未绕过验证。推荐第十一章阅读版本为 `tutorial-11-v3`，默认 profile/off 与原 `tutorial-11-v2` 记录保留。

@@ -8,7 +8,7 @@
 | 8-token oMLX 功能冒烟 | 全长度预热、重复测量、保存每轮实际输出数 |
 | 只看一个 tok/s | 分清 TTFT、后续生成、引擎和 HTTP 边界 |
 
-代码版本：`tutorial-11-v2`（保留原 `tutorial-11`）；上一个版本是 `tutorial-10`。入口 [benchmark_core.py](../../tutorial_code/benchmark_core.py)、[run_omlx.py](../../tutorial_code/baselines/run_omlx.py) 和 [probe_baselines.py](../../tutorial_code/baselines/probe_baselines.py)。现有 [baseline 说明](../../tutorial_code/baselines/README.md) 保留安装、版本固定和短请求记录。
+代码版本：`tutorial-11-v3`（保留原 `tutorial-11` / `tutorial-11-v2`）；上一个版本是 `tutorial-10`。入口 [benchmark_core.py](../../tutorial_code/benchmark_core.py)、[run_omlx.py](../../tutorial_code/baselines/run_omlx.py) 和 [probe_baselines.py](../../tutorial_code/baselines/probe_baselines.py)。现有 [baseline 说明](../../tutorial_code/baselines/README.md) 保留安装、版本固定和短请求记录。
 
 ## 1. 几个 baseline 各负责什么
 
@@ -301,3 +301,45 @@ git diff tutorial-11 tutorial-11-v2 -- tutorial_code/baselines docs/tutorial-v2/
 ```
 
 本次扩展没有重写模型数学或重新调整 M4 配方；它完成第三条实际 baseline 与同目标记录，并保留每次已运行结果的范围。
+
+## 本机 M4 矩阵加速试验
+
+这是在同一 M4 Max 40-core / Apple9 上增加一个明确的官方开关，不是把整份 M5 配置套到 M4。官方 `m5_max_40c` 要求 Apple M5 Max / Apple10，实际 `validate_device` 已拒绝本机；[拒绝证据](../../tutorial_code/examples/chapter11-m5-profile-rejection.json) 记录没有创建 native GPU device，也没有绕过检查。
+
+官方 [M5 配置快照](../../tutorial_code/examples/chapter11-m5-profile-config.json) 写的是 M5 Max 40 GPU 核、`memory_gb=48`；GPU working-set 和单 buffer 容量分别为 `37.44` 与 `28.08`。这些是 profile 的容量字段，不是模型实际 RSS，也没有在本机应用。
+
+实际保持 `m4_max` / Apple9、TG=1、attention=v1、commute_norm=True、原 NVFP4 权重与 EOS、context2048。只为自有服务设置官方 `MONOLITH_ACCELERATOR=on`；未修改已安装的模型、kernel、芯片 JSON、M5 cost/fusion recipe 或设备验证。复现入口与原始记录见 [M4 实验说明](../../tutorial_code/baselines/m4-accelerator-README.md)。默认 `--accelerator profile` 仍让本机 profile 选择 off，并清除继承的同名环境变量。
+
+### 实际运行路径的证据
+
+生成完成后，诊断 launcher 读取 live Engines 的 program。0.8B/27B prefill program 分别有 97/321 个 `gemm_tile` op，全部 `COOP_A9=1`、MSL4，T predicate 为 [1,128]，本次真实输入 T=19 在其中。这是完成生成关联的编译/编码 program 与有效 predicate 证据，不是每个 op 的独立 GPU timestamp。
+
+Apple9 cooperative matrix tile 与 M5 神经加速器是不同硬件路径。T=1 decode program 没有 gemm_tile，但官方 accelerator 开关也影响部分单行 projection 与 GDN prepared 路径，所以不能把整个收益只归因于这些 prefill tile。
+
+### 历史 off 与本次 on：分别保存事实
+
+同一目标、19 输入 IDs、greedy、正常 EOS、cap128、并发1、预热后3次请求；cache0、verify1、setup0。以下 off 是已归档的默认配置历史运行，on 多了一层后置 program 读取/打印，既不同时段交替，也不完全同仪器。
+
+| 目标与记录 | 完成 IDs（含 EOS） | 首文本中位数 | HTTP 全请求中位数 | prefill command-buffer 中位数 |
+|---|---|---|---|---|
+| 0.8b 历史 profile-off | [34, 34, 34] | 1460.169 ms | 1.657610 s | 1449.785 ms |
+| 0.8b 本次 accelerator-on | [29, 29, 29] | 223.002 ms | 0.353966 s | 214.360 ms |
+| 27b 历史 profile-off | [45, 45, 45] | 42781.459 ms | 46.192591 s | 42769.921 ms |
+| 27b 本次 accelerator-on | [45, 45, 45] | 433.515 ms | 2.208017 s | 420.269 ms |
+
+27B on/off 都是 45 committed IDs（44 logical completion），此 prompt 的完整可见文本相同，各自3轮稳定；on 的 decode GPU command-buffer 中位数约 1766.329 ms，历史 off 约 3341.699 ms。HTTP 没有返回完整 generated-ID 数组，文本相同不是完整 token/tensor 等价证明。
+
+0.8B on 是 29 IDs /28 logical，历史 off 是 34/33，文本也改变；本次 on 的可见文本与该 prompt 的 oMLX 0.8B 记录相同。模型句子中的“减少显存”解释不准确，不能拿生成文本替代 KV cache 的数学定义或 kernel 数值验证。因此不把全请求 TPS 比例称为相同生成序列的无损加速。
+
+后置诊断会给客户端总耗时增加少量 CPU 开销；已经结束的 native GPU command-buffer 时间不含这段读取/打印。prefill GPU 时间比较的输入是相同19行，但仍只代表这个参数和输入案例，不校准整份 profile，不宣称最优配置，也没有新增 batch、投机或 p99 实验。
+
+本次 on unique session buffer 当前值：0.8B 为 703,742,032 bytes（十进制 0.704 GB），27B 为 17,045,438,688 bytes（十进制 17.045 GB）。这里不是 RSS、系统总内存或峰值；源 JSON 保留 bytes。全部自有服务已退出，见 [比较/cleanup](../../tutorial_code/examples/chapter11-m4-accelerator-comparison.json)。
+
+[0.8B on 原始报告](../../tutorial_code/examples/chapter11-m4-accelerator-0.8b.json)、[27B on 原始报告](../../tutorial_code/examples/chapter11-m4-accelerator-27b.json) 与 [独立 CPU 算术审阅](../../tutorial_code/examples/chapter11-m4-accelerator-arithmetic.json) 保留 profile-off/live-session-on、真实路径、实际输出与所有测量边界。`tutorial-11-v2` / `baseline-trio-v1` 的默认配置数据保持原样；新增实验用 `tutorial-11-v3` / `baseline-m4-accelerator-ab-v1` 固定。
+
+```bash
+git diff tutorial-11-v2 tutorial-11-v3 -- tutorial_code/baselines docs/tutorial-v2/11-benchmark.md
+.artifacts/lithos-baseline/.venv/bin/python -m tutorial_code.baselines.run_lithos \
+  --accelerator on --max-new-tokens 128 --repeat 3 \
+  --out .artifacts/lithos-baseline/m4-accelerator-on.json
+```

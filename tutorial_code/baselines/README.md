@@ -88,3 +88,5 @@ HF 此处是原始权重转 fp32，oMLX smoke 使用 NVFP4 转换权重。权重
 ## Lithos 的独立环境
 
 第三条外部 baseline 已在隔离 Python 3.12 环境准备好；完整官方固定源码构建、CPU checkpoint 资格、EOS 元数据视图与 API 计时说明见 [Lithos README](lithos-README.md)。CPU 准备通过与实际 GPU 测量分别记录。当前已安装，并在应用清理后完成 0.8B/27B target-only 真实 GPU 测量；详见第十一章扩展版与各自 JSON。
+
+本机 M4 官方 accelerator-on 的独立实验已记录，见 [实验说明](m4-accelerator-README.md)；完整 M5 配置被官方设备检查拒绝，未绕过验证。推荐第十一章阅读版本为 `tutorial-11-v3`，默认 profile/off 与原 `tutorial-11-v2` 记录保留。

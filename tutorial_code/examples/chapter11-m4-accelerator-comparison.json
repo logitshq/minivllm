@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "model": "0.8b",
+      "same_prompt_ids": true,
+      "same_config_sha": true,
+      "on_counts": [
+        29,
+        29,
+        29
+      ],
+      "off_counts": [
+        34,
+        34,
+        34
+      ],
+      "on_text_equal_off": false,
+      "on_text_repeat_identical": true,
+      "on_text": "KV Cache 是 GPU 中用于存储计算结果和参数缓存的内存区域，主要用于减少显存占用并提升计算效率。",
+      "on_ttft": 0.22300158299913164,
+      "off_ttft": 1.4601693330041599,
+      "on_latency": 0.3539660829992499,
+      "off_latency": 1.6576097910001408,
+      "on_prefill_gpu_ms": 214.35970833408646,
+      "off_prefill_gpu_ms": 1449.7851250052918,
+      "on_decode_gpu_ms": 135.2350833331002,
+      "off_decode_gpu_ms": 186.50354162673466,
+      "on_buffers": 703742032
+    },
+    {
+      "model": "27b",
+      "same_prompt_ids": true,
+      "same_config_sha": true,
+      "on_counts": [
+        45,
+        45,
+        45
+      ],
+      "off_counts": [
+        45,
+        45,
+        45
+      ],
+      "on_text_equal_off": true,
+      "on_text_repeat_identical": true,
+      "on_text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "on_ttft": 0.43351499999698717,
+      "off_ttft": 42.781459250007174,
+      "on_latency": 2.2080174169968814,
+      "off_latency": 46.19259108400729,
+      "on_prefill_gpu_ms": 420.26912499568425,
+      "off_prefill_gpu_ms": 42769.92083333607,
+      "on_decode_gpu_ms": 1766.3292916695355,
+      "off_decode_gpu_ms": 3341.6989166726125,
+      "on_buffers": 17045438688
+    }
+  ],
+  "known_owned_server_pids": [
+    "20096",
+    "20207",
+    "20447",
+    "20651"
+  ],
+  "all_owned_servers_absent": true,
+  "historical_off_not_interleaved_instrumented_pair": true
+}

@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "missing": [],
+  "M5_profile_rejected_without_device_or_bypass": true,
+  "author_comparison_arithmetic_verified": true,
+  "audit_scope": "CPU actual-report arithmetic and metadata/log consistency; reviewer ran no GPU work",
+  "measurements": [
+    {
+      "artifact": "/private/tmp/lithos-m4-accel-experiment-20261014/0.8b-on-smoke.json",
+      "model": "0.8b",
+      "kind": "smoke",
+      "count": [
+        16
+      ],
+      "logical_count": [
+        16
+      ],
+      "finish_reason": [
+        "length"
+      ],
+      "client_ttft_text_median_s": 0.21078966700588353,
+      "client_total_median_s": 0.2770080830086954,
+      "client_emitted_ids_per_s_median": 57.76004738279696,
+      "native_prefill_command_buffer_median_ms": 207.83154167293105,
+      "native_decode_command_buffer_median_ms": 63.43762499454897,
+      "observed_Apple9_prefill_gemm_tile_count": 97,
+      "default_off_historical_count": [
+        34,
+        34,
+        34
+      ],
+      "text_equals_default_off": null,
+      "smoke_text_is_prefix_of_default_off": false
+    },
+    {
+      "artifact": "/private/tmp/lithos-m4-accel-experiment-20261014/0.8b-on-measurement.json",
+      "model": "0.8b",
+      "kind": "measurement",
+      "count": [
+        29,
+        29,
+        29
+      ],
+      "logical_count": [
+        28,
+        28,
+        28
+      ],
+      "finish_reason": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "client_ttft_text_median_s": 0.22300158299913164,
+      "client_total_median_s": 0.3539660829992499,
+      "client_emitted_ids_per_s_median": 81.9287536090328,
+      "native_prefill_command_buffer_median_ms": 214.35970833408646,
+      "native_decode_command_buffer_median_ms": 135.2350833331002,
+      "observed_Apple9_prefill_gemm_tile_count": 97,
+      "default_off_historical_count": [
+        34,
+        34,
+        34
+      ],
+      "text_equals_default_off": false,
+      "smoke_text_is_prefix_of_default_off": null
+    },
+    {
+      "artifact": "/private/tmp/lithos-m4-accel-experiment-20261014/27b-on-smoke.json",
+      "model": "27b",
+      "kind": "smoke",
+      "count": [
+        16
+      ],
+      "logical_count": [
+        16
+      ],
+      "finish_reason": [
+        "length"
+      ],
+      "client_ttft_text_median_s": 0.45732033299282193,
+      "client_total_median_s": 1.0481462919997284,
+      "client_emitted_ids_per_s_median": 15.265044700462619,
+      "native_prefill_command_buffer_median_ms": 435.7507499953499,
+      "native_decode_command_buffer_median_ms": 594.2746249929769,
+      "observed_Apple9_prefill_gemm_tile_count": 321,
+      "default_off_historical_count": [
+        45,
+        45,
+        45
+      ],
+      "text_equals_default_off": null,
+      "smoke_text_is_prefix_of_default_off": true
+    },
+    {
+      "artifact": "/private/tmp/lithos-m4-accel-experiment-20261014/27b-on-measurement.json",
+      "model": "27b",
+      "kind": "measurement",
+      "count": [
+        45,
+        45,
+        45
+      ],
+      "logical_count": [
+        44,
+        44,
+        44
+      ],
+      "finish_reason": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "client_ttft_text_median_s": 0.43351499999698717,
+      "client_total_median_s": 2.2080174169968814,
+      "client_emitted_ids_per_s_median": 20.380274020303872,
+      "native_prefill_command_buffer_median_ms": 420.26912499568425,
+      "native_decode_command_buffer_median_ms": 1766.3292916695355,
+      "observed_Apple9_prefill_gemm_tile_count": 321,
+      "default_off_historical_count": [
+        45,
+        45,
+        45
+      ],
+      "text_equals_default_off": true,
+      "smoke_text_is_prefix_of_default_off": null
+    }
+  ],
+  "limits": [
+    "Official accelerator override changes more than prefill gemm tile selection.",
+    "Live compiled/encoded programs and active predicates are not isolated per-op timestamp counters.",
+    "Apple9 cooperative tile is not M5 neural-accelerator hardware.",
+    "Historical off requests were uninstrumented; current on wrapper adds post-generation observation overhead.",
+    "Different output lengths and BF16 rounding paths prohibit a lossless or fixed-output speedup claim.",
+    "No cross-core/API, cross-model, p99, batching, speculation or optimal-M4 claim."
+  ]
+}
