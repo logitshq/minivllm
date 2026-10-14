@@ -226,3 +226,11 @@ git diff tutorial-10 tutorial-11 -- tutorial_code/benchmark_core.py tutorial_cod
   "limitations": "one short 0.8B prompt, early EOS; no sustained 128-token, 27B throughput, concurrency or speculative performance claim; no cross-scope speedup ratio"
 }
 ```
+
+## Lithos 安装与 CPU 准备
+
+在保留 `tutorial-11` 之后，本机已安装第三条外部 baseline。官方 v0.1.2 wheel 缺少 M4 Max 登记与 MLX untied 输出头名称映射，因此使用完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构建 native runtime；没有本地模型或 kernel 补丁。归档 SHA 与实际构建文件 hash 见 [安装记录](../../tutorial_code/baselines/lithos-installation.json) 和 [构建 hash](../../tutorial_code/baselines/lithos-build-hashes.json)，重建命令见 [Lithos 说明](../../tutorial_code/baselines/lithos-README.md)。
+
+CPU 准备已验证现有 [0.8B](../../tutorial_code/examples/chapter11-lithos-0.8b-cpu-prepared.json) 的 187 个和 [27B](../../tutorial_code/examples/chapter11-lithos-27b-cpu-prepared.json) 的 498 个 NVFP4 tensor binding；两者的聊天模板都逐个匹配第一章 19 个输入 IDs，EOS 集合均为 `{248044,248046}`。0.8B 缺少 generation_config，adapter 在隔离目录用符号链接构造只补 EOS 元数据的 checkpoint 视图，原 tensor/config/tokenizer 字节保持原样。
+
+这些是安装和 CPU 格式准备记录，尚未启动 GPU 模型或测量吞吐。GPU 实测等待关闭其他应用、释放内存之后单独进行；原 qualification JSON 保留为安装前记录，不能当作当前已测性能。运行时明确 `--no-draft`，DFlash2 不能代替 Lithos 的 DSpark。

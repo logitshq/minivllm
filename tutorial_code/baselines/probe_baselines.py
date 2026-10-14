@@ -10,10 +10,13 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--core-report',type=Path);ap.add_argument('--omlx-report',type=Path)
     ap.add_argument('--lithos-report',type=Path,help='An actual local measurement artifact, never a README projection')
+    ap.add_argument('--lithos-preparation-report',type=Path,help='CPU preparation only; never counted as a GPU measurement')
     ap.add_argument('--out',type=Path);args=ap.parse_args()
     macos=platform.mac_ver()[0]
     major=int(macos.split('.')[0]) if macos else None
-    lithos=shutil.which('lithos-metal')
+    workspace=Path(__file__).resolve().parents[2]
+    isolated_binary=workspace/'.artifacts/lithos-baseline/.venv/bin/lithos-metal'
+    lithos=str(isolated_binary) if isolated_binary.exists() else shutil.which('lithos-metal')
     rows=[{'name':'HF PyTorch/MPS','role':'correctness and framework reference',
            'artifact':'tutorial_code/examples/chapter01-trace.json','performance_comparison':'not used for optimized-engine speedup'},
           {'name':'tutorial miniengine','role':'our independently implemented token-ID core engine','timing_scope':'engine scheduling + evaluated GPU work'},
@@ -33,6 +36,17 @@ def main():
             data=json.loads(artifact.read_text())
             row['artifact_keys']=sorted(data.keys())
             row['interpretation']='Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact.'
+    if args.lithos_preparation_report:
+        preparation=json.loads(args.lithos_preparation_report.read_text())
+        assert preparation['status']=='CPU prepared, GPU unmeasured'
+        assert preparation['server_started'] is False and preparation['native_device_created'] is False
+        rows[-1]['role']='Apple Silicon engine reference; installed and CPU prepared'
+        rows[-1]['preparation_status']='prepared_not_measured'
+        rows[-1]['preparation_artifact']=str(args.lithos_preparation_report.resolve())
+        installation=workspace/'tutorial_code/baselines/lithos-installation.json'
+        rows[-1]['installation']=json.loads(installation.read_text())
+        if args.lithos_report is None:
+            rows[-1]['measurement_status']='prepared_not_measured; no GPU server run'
     report={'host':platform.platform(),'baselines':rows,
             'rule':'Keep correctness tests, API measurements, core measurements and published projections as separate evidence.'}
     print(json.dumps(report,ensure_ascii=False,indent=2))

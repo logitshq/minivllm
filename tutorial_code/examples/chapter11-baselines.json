@@ -60,8 +60,8 @@
     },
     {
       "name": "Lithos Metal",
-      "role": "candidate Apple Silicon engine reference",
-      "local_binary": null,
+      "role": "Apple Silicon engine reference; installed and CPU prepared",
+      "local_binary": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/bin/lithos-metal",
       "required_macos_major": 26,
       "local_macos": "27.0.1",
       "macos_requirement_met": true,
@@ -70,8 +70,21 @@
       "upstream_source": "https://github.com/lithos-ai/lithos-metal#models-and-hardware",
       "upstream_projection": "168 token/s is a published M5 Max target-compute projection under assumed acceptance; it excludes draft/accept/rewind and is not a local end-to-end measurement.",
       "upstream_projection_source": "https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md",
-      "measurement_status": "unmeasured in this report",
-      "measurement_artifact": null
+      "measurement_status": "prepared_not_measured; no GPU server run",
+      "measurement_artifact": null,
+      "preparation_status": "prepared_not_measured",
+      "preparation_artifact": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-lithos-0.8b-cpu-prepared.json",
+      "installation": {
+        "distribution_version": "0.1.2",
+        "archive_url": "https://github.com/lithos-ai/lithos-metal/releases/download/v0.1.2/lithos-metal-0.1.2-macos-arm64.tar.gz",
+        "archive_sha256": "a51b821923b21ed4134979779f0ed77c98cbc9b227fed7627ec620704169a3e3",
+        "python": "3.12.13",
+        "source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+        "source_archive_url": "https://github.com/lithos-ai/lithos-metal/archive/5485ad6bac0a5649d66a347f3e01a655ea29d937.tar.gz",
+        "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
+        "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+        "native_runtime": "compiled from the complete official pinned source, no local patches"
+      }
     }
   ],
   "rule": "Keep correctness tests, API measurements, core measurements and published projections as separate evidence."

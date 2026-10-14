@@ -84,3 +84,7 @@ HF 此处是原始权重转 fp32，oMLX smoke 使用 NVFP4 转换权重。权重
 正式性能记录至少包括：checkpoint、量化格式、运行版本、输入/输出 token 数、采样与 EOS 规则、cache 命中、并发、预热、重复次数、原生 kernel 状态和内存。单流、批量、纯 decode、端到端测量分开标记。
 
 本次新增 baseline 工具，不改变 `generate.py` 的 HF 前向，也不修改第一、二章已经固定的代码 tag。
+
+## Lithos 的独立环境
+
+第三条外部 baseline 已在隔离 Python 3.12 环境准备好；完整官方固定源码构建、CPU checkpoint 资格、EOS 元数据视图与 API 计时说明见 [Lithos README](lithos-README.md)。CPU 准备通过与实际 GPU 测量分别记录。当前已安装，正式 GPU 运行将在用户要求的其他应用关闭后开始。

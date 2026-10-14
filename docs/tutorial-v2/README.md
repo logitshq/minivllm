@@ -30,7 +30,7 @@
 |---|---|---|
 | HF Transformers / MPS | 原始 fp32 权重下的模型数学与 greedy 参照 | [generate.py](../../tutorial_code/generate.py)、各章 checker |
 | oMLX | 已有优化的 Apple Silicon 引擎性能参照 | [baseline 工具说明](../../tutorial_code/baselines/README.md)、第十一章重复测量 |
-| Lithos Metal | 另一种 Metal 引擎设计与同机性能候选 | [第十一章的资格说明](11-benchmark.md)、[上游模型/硬件表](https://github.com/lithos-ai/lithos-metal#models-and-hardware) |
+| Lithos Metal | 第三条外部引擎；已安装、CPU 准备，GPU 实测待完成 | [第十一章的资格说明](11-benchmark.md)、[上游模型/硬件表](https://github.com/lithos-ai/lithos-metal#models-and-hardware) |
 
 我们自己的测量入口是 [benchmark_core.py](../../tutorial_code/benchmark_core.py)。HF 第一章的无 cache 循环用于理解与正确性，不作为最终速度目标。量化模型与同 checkpoint 的参考核对，不要求它与 raw fp32 一直生成相同 token。
 
@@ -92,3 +92,9 @@ cd /Users/ryanli/code/minivllm-tutorial
 ```
 
 其他机器先按照仓库依赖准备环境和所需 checkpoint；oMLX 使用独立安装环境，详见 baseline 说明。教程核心不要求实现 tokenizer 或启动自己的 HTTP 服务。
+
+## 第三条 baseline 的当前准备状态
+
+Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构建并安装到独立 Python 3.12 环境；没有本地 kernel 或模型补丁。0.8B/27B 的 CPU checkpoint 格式、19 个输入 IDs 与完整 EOS 集合均已核对，复现步骤见 [Lithos README](../../tutorial_code/baselines/lithos-README.md)。安装与准备记录用 `baseline-lithos-setup-v1` 保存。
+
+用户要求先关闭其他应用释放内存。系统当前锁屏，应用清理尚未完成，因此 GPU benchmark 还没开始；目录与报告明确标记 `prepared_not_measured`。原 `tutorial-11` 的 Lithos 资格 JSON 保留为安装前记录，未来实际 GPU 结果将另存新版本，不覆盖旧 tag。
