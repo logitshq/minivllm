@@ -63,3 +63,13 @@ def test_metal_step_equals_batch_step():
     for b in range(B):   # 和逐 token 递推（带初始状态）逐序列对比
         o3, S3 = gated_delta_rule_recurrent(q[b:b+1], k[b:b+1], v[b:b+1], g[b:b+1], beta[b:b+1], S[b])
         assert np.abs(np.array(o3[0] - o2[b])).max() < 1e-4 * np.abs(np.array(o3)).max()
+
+
+def test_metal_solve_equals_python_solve():
+    from minivllm.kernels.gdn import _solve_unit_lower
+    from minivllm.kernels.gdn_metal import solve_unit_lower_metal
+    mx.random.seed(7)
+    A = mx.tril(mx.random.normal((3, 5, 64, 64)), -1)
+    V = mx.random.normal((3, 5, 64, 256))
+    X1, X2 = _solve_unit_lower(A, V), solve_unit_lower_metal(A, V)
+    assert np.abs(np.array(X1 - X2)).max() < 1e-3 * np.abs(np.array(X1)).max()

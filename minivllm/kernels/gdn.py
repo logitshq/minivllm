@@ -42,6 +42,14 @@ def _solve_unit_lower(A: mx.array, V: mx.array) -> mx.array:
     return mx.concatenate(rows, axis=-2)
 
 
+def _solve(A, V):
+    try:                                   # Metal 版（一次发射）；没有 Metal 时退回纯 MLX 的前向代入
+        from .gdn_metal import solve_unit_lower_metal
+        return solve_unit_lower_metal(A, V)
+    except ImportError:
+        return _solve_unit_lower(A, V)
+
+
 def gated_delta_rule_chunk(q, k, v, g, beta, state=None, chunk: int = 64):
     T, Hv, Dk = k.shape
     Dv = v.shape[-1]
@@ -64,7 +72,7 @@ def gated_delta_rule_chunk(q, k, v, g, beta, state=None, chunk: int = 64):
     pair = mx.exp(mx.where(lower, pair, -mx.inf))                             # 上三角 → 0
     A = mx.tril((k_beta @ k.transpose(0, 1, 3, 2)) * pair, -1)                # 严格下三角
     intra = (q @ k.transpose(0, 1, 3, 2)) * pair                              # 块内注意力
-    sol = _solve_unit_lower(A, mx.concatenate([v_beta, k_beta * mx.exp(cum)[..., None]], axis=-1))
+    sol = _solve(A, mx.concatenate([v_beta, k_beta * mx.exp(cum)[..., None]], axis=-1))
     new_values, k_cumdecay = sol[..., :Dv], sol[..., Dv:]                     # "u"：块内 delta rule 合并后的新值；读旧状态的衰减键
     q = q * mx.exp(cum)[..., None]
     k = k * mx.exp(cum[..., -1:] - cum)[..., None]

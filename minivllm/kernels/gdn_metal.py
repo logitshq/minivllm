@@ -73,3 +73,40 @@ def gated_delta_step_metal(q, k, v, g, beta, S):
         output_shapes=[(B, Hv, Dv), (B, Hv, Dk, Dv)], output_dtypes=[mx.float32, mx.float32],
     )
     return o, S_new
+
+
+# ---------------------------------------------------------------------------------------------
+# 第二个 kernel：分块 GDN 里的单位下三角求解 (I + A) X = V，前向代入。
+# 纯 MLX 版是 63 步 Python 循环（每步 concat + 小矩阵乘），每层约 190 次发射。这里一个 threadgroup 解一个 (头, 块)：
+# 线程 m 管第 m 列，按行 i = 0..C-1 顺序算 x_i[m] = v_i[m] − Σ_{j<i} A[i][j]·x_j[m]，行与行之间用 barrier 同步。
+# X 放在 device 内存（64×256 个 float 超过 threadgroup 内存的 32 KB），刚写的行在 L1 里，读回很便宜。
+_SOLVE_SOURCE = """
+    uint m = thread_position_in_threadgroup.x;
+    uint n = threadgroup_position_in_grid.x;
+    uint C = A_shape[1];
+    uint M = V_shape[2];
+    const device float* An = A + (size_t)n * C * C;
+    const device float* Vn = V + (size_t)n * C * M;
+    device float* Xn = X + (size_t)n * C * M;
+    for (uint i = 0; i < C; i++) {
+        float acc = Vn[i * M + m];
+        for (uint j = 0; j < i; j++) acc -= An[i * C + j] * Xn[j * M + m];
+        Xn[i * M + m] = acc;
+        threadgroup_barrier(mem_flags::mem_device);
+    }
+"""
+
+_solve_kernel = mx.fast.metal_kernel(name="unit_lower_solve", input_names=["A", "V"], output_names=["X"], source=_SOLVE_SOURCE)
+
+
+def solve_unit_lower_metal(A: mx.array, V: mx.array) -> mx.array:
+    """A [..., C, C] 严格下三角，V [..., C, M]，返回 X [..., C, M]，fp32。M 必须 ≤ 1024（一个 threadgroup）。"""
+    *lead, C, _ = A.shape
+    M = V.shape[-1]
+    N = 1
+    for d in lead:
+        N *= d
+    A2 = A.astype(mx.float32).reshape(N, C, C)
+    V2 = V.astype(mx.float32).reshape(N, C, M)
+    (X,) = _solve_kernel(inputs=[A2, V2], grid=(M * N, 1, 1), threadgroup=(M, 1, 1), output_shapes=[(N, C, M)], output_dtypes=[mx.float32])
+    return X.reshape(*lead, C, M)
