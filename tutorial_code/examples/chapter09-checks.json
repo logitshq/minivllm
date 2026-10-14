@@ -1,0 +1,222 @@
+{
+  "checks": [
+    {
+      "kernel": "decode_step",
+      "batch": 1,
+      "shape": [
+        1,
+        4,
+        128,
+        128
+      ],
+      "dtype": "float32",
+      "output_max_abs": 9.313225746154785e-09,
+      "state_max_abs": 5.960464477539063e-08,
+      "mlx_reference_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.00045900000259280205,
+          0.00039308299892582,
+          0.0003635419998317957,
+          0.000630208000075072,
+          0.0003345420118421316
+        ],
+        "median_s": 0.00039308299892582,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      },
+      "metal_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.00023441600205842406,
+          0.0002274169964948669,
+          0.0002710410044528544,
+          0.00026950000028591603,
+          0.00044533399341162294
+        ],
+        "median_s": 0.00026950000028591603,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      }
+    },
+    {
+      "kernel": "decode_step",
+      "batch": 3,
+      "shape": [
+        3,
+        4,
+        128,
+        128
+      ],
+      "dtype": "float32",
+      "output_max_abs": 8.381903171539307e-09,
+      "state_max_abs": 5.960464477539063e-08,
+      "mlx_reference_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0003490000090096146,
+          0.0003885000041918829,
+          0.00042891599878203124,
+          0.0004181669937679544,
+          0.0005873340123798698
+        ],
+        "median_s": 0.0004181669937679544,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      },
+      "metal_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0002472500054864213,
+          0.00024458300322294235,
+          0.00036204200296197087,
+          0.0002795409964164719,
+          0.00024774999474175274
+        ],
+        "median_s": 0.00024774999474175274,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      }
+    },
+    {
+      "kernel": "unit_lower_solve",
+      "chunk": 8,
+      "shape_A": [
+        2,
+        8,
+        8
+      ],
+      "shape_V": [
+        2,
+        8,
+        256
+      ],
+      "dtype": "float32",
+      "max_abs": 4.76837158203125e-07,
+      "mlx_reference_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0003768330061575398,
+          0.0003819590056082234,
+          0.0018105829949490726,
+          0.0003965419891756028,
+          0.0005012080073356628
+        ],
+        "median_s": 0.0003965419891756028,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      },
+      "metal_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0001646250020712614,
+          0.00022695799998473376,
+          0.00029362500936258584,
+          0.00020658300491049886,
+          0.0001740830048220232
+        ],
+        "median_s": 0.00020658300491049886,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      }
+    },
+    {
+      "kernel": "unit_lower_solve",
+      "chunk": 16,
+      "shape_A": [
+        2,
+        16,
+        16
+      ],
+      "shape_V": [
+        2,
+        16,
+        256
+      ],
+      "dtype": "float32",
+      "max_abs": 7.152557373046875e-07,
+      "mlx_reference_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0006409999914467335,
+          0.0005972499930066988,
+          0.0020252499962225556,
+          0.0006495840061688796,
+          0.0008986250031739473
+        ],
+        "median_s": 0.0006495840061688796,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      },
+      "metal_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.00023966700246091932,
+          0.00023150000197347254,
+          0.0002000840031541884,
+          0.000218084009247832,
+          0.00022362500021699816
+        ],
+        "median_s": 0.00022362500021699816,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      }
+    },
+    {
+      "kernel": "unit_lower_solve",
+      "chunk": 64,
+      "shape_A": [
+        2,
+        64,
+        64
+      ],
+      "shape_V": [
+        2,
+        64,
+        256
+      ],
+      "dtype": "float32",
+      "max_abs": 1.430511474609375e-06,
+      "mlx_reference_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.002468416001647711,
+          0.0027721250080503523,
+          0.0025501249911030754,
+          0.0031441250030184165,
+          0.002518624998629093
+        ],
+        "median_s": 0.0025501249911030754,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      },
+      "metal_timing": {
+        "warmups": 2,
+        "repeats": 5,
+        "samples_s": [
+          0.0005314160080160946,
+          0.0005360419891076162,
+          0.0005729999975301325,
+          0.0008220839954447001,
+          0.0005507500027306378
+        ],
+        "median_s": 0.0005507500027306378,
+        "timing_scope": "one complete evaluated operation; includes graph building and dispatch"
+      }
+    },
+    {
+      "kernel": "chunk_vs_recurrent",
+      "tokens": 73,
+      "chunk": 16,
+      "tail_tokens": 9,
+      "nonzero_initial_state": true,
+      "output_max_abs": 1.4901161193847656e-08,
+      "state_max_abs": 1.4901161193847656e-07
+    }
+  ],
+  "evaluated_dispatch_counts": {
+    "decode_step": 16,
+    "unit_lower_solve": 25
+  },
+  "scope": "correctness, evaluated Metal execution, and warmed operation-level timing; no full-engine speedup claim"
+}

@@ -98,3 +98,4 @@ git switch tutorial/step-by-step
 - [06 增量cache](06-cache.md) — `tutorial-06`
 - [07 量化权重](07-quantization.md) — `tutorial-07-v2`（保留原 `tutorial-07`）
 - [08 批量调度](08-scheduler.md) — `tutorial-08`
+- [09 Metal核函数](09-metal.md) — `tutorial-09`

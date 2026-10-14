@@ -36,7 +36,8 @@ def _solve_unit_lower(A: mx.array, V: mx.array) -> mx.array:
 
 
 def _solve(A, V):
-    return _solve_unit_lower(A, V)
+    from .gdn_metal import solve_unit_lower_metal
+    return solve_unit_lower_metal(A, V)
 
 
 def gated_delta_rule_chunk(q, k, v, g, beta, state=None, chunk: int = 64):
