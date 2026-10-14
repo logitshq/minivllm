@@ -27,6 +27,7 @@ def _map_name(name: str) -> str | None:
 def load_model(model_dir: str | Path, dtype=mx.bfloat16) -> tuple[Qwen3_5ForCausalLM, ModelConfig]:
     cfg = ModelConfig.from_dir(model_dir)
     model = Qwen3_5ForCausalLM(cfg)
+    model.embed_tokens._output_dtype = dtype  # dequantize defaults to BF16 without this output cast.
     weights = {}
     for f in sorted(glob.glob(str(Path(model_dir) / "*.safetensors"))):
         for raw_k, v in mx.load(f).items():

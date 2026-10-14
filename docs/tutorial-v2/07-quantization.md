@@ -8,7 +8,7 @@
 | 只支持原始 checkpoint | 支持本地 MLX 格式的量化 checkpoint |
 | 与 HF fp32 参考核对 | 量化结果与**同一个量化 checkpoint**的参考核对 |
 
-代码版本：`tutorial-07`；上一个版本是 `tutorial-06`。主要变化在 [layers.py](../../tutorial_code/miniengine/model/layers.py) 与 [loader.py](../../tutorial_code/miniengine/model/loader.py)，参考原 [minivllm 层](../../minivllm/model/layers.py) 和 [权重加载](../../minivllm/model/loader.py)。
+代码版本：`tutorial-07-v2`（原 `tutorial-07` 保留）；上一个版本是 `tutorial-06`。主要变化在 [layers.py](../../tutorial_code/miniengine/model/layers.py) 与 [loader.py](../../tutorial_code/miniengine/model/loader.py)，参考原 [minivllm 层](../../minivllm/model/layers.py) 和 [权重加载](../../minivllm/model/loader.py)。
 
 ## 1. 量化在省什么
 
@@ -161,4 +161,23 @@ git diff tutorial-06 tutorial-07 -- tutorial_code/miniengine/model
   ],
   "note": "quantized outputs are not required to equal raw HF fp32"
 }
+```
+
+## 修复：量化权重和激活 dtype 是两件事
+
+在 `tutorial-07`，`load_model(dtype=mx.float32)` 转换了浮点参数，却没有转换量化 Embedding 解出来的向量。`mx.dequantize` 在这个 checkpoint 上默认产生 bfloat16，因此激活和 logits 仍是 bfloat16。第八章做批量验证时发现了这个接口问题。
+
+`tutorial-07-v2` 明确保留 packed 权重与 scale 的整数格式，同时让 Embedding 的输出服从所请求的浮点 dtype：
+
+```diff
++ model.embed_tokens._output_dtype = dtype
+- return mx.dequantize(packed_rows, scales, ...)
++ return mx.dequantize(packed_rows, scales, ...).astype(self._output_dtype)
+```
+
+上面是阅读节选，完整参数在源码中。float32 和 bfloat16 两种设置都已检查 Embedding/logits 的真实 dtype；packed 权重仍为 uint32，NVFP4 scale 仍为 uint8。结果见 [dtype-checks](../../tutorial_code/examples/chapter07-dtype-checks.json)。默认 bfloat16 下的量化参考结果仍是前 11/12 token 匹配，不把这一修复解释成跨实现完全一致。
+
+```bash
+git diff tutorial-07 tutorial-07-v2 -- tutorial_code/miniengine/model/layers.py tutorial_code/miniengine/model/loader.py
+python -m tutorial_code.check_quantized --dtype bfloat16
 ```

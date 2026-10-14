@@ -68,6 +68,7 @@ class Embedding(nn.Module):
     def __init__(self, vocab_size: int, dim: int, quantization: dict | None = None):
         super().__init__()
         self.q = quantization
+        self._output_dtype = mx.bfloat16  # Activations; packed uint32 weights remain packed.
         if quantization is None:
             self.weight = mx.zeros((vocab_size, dim), dtype=mx.bfloat16)
         else:
@@ -83,7 +84,7 @@ class Embedding(nn.Module):
             return self.weight[ids]
         b = getattr(self, "biases", None)
         return mx.dequantize(self.weight[ids], self.scales[ids], None if b is None else b[ids],
-                             group_size=self.q["group_size"], bits=self.q["bits"], mode=self.q["mode"])
+                             group_size=self.q["group_size"], bits=self.q["bits"], mode=self.q["mode"]).astype(self._output_dtype)
 
     def as_linear(self, x: mx.array) -> mx.array:
         if self.q is None:

@@ -1,0 +1,20 @@
+{
+  "chapter": "07-v2",
+  "fix": "requested activation dtype now honored after packed Embedding dequantization",
+  "checks": [
+    {
+      "requested_dtype": "mlx.core.float32",
+      "embedding_dtype": "mlx.core.float32",
+      "logits_dtype": "mlx.core.float32",
+      "packed_weight_dtype": "mlx.core.uint32",
+      "packed_scale_dtype": "mlx.core.uint8"
+    },
+    {
+      "requested_dtype": "mlx.core.bfloat16",
+      "embedding_dtype": "mlx.core.bfloat16",
+      "logits_dtype": "mlx.core.bfloat16",
+      "packed_weight_dtype": "mlx.core.uint32",
+      "packed_scale_dtype": "mlx.core.uint8"
+    }
+  ]
+}
