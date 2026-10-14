@@ -1,0 +1,28 @@
+{
+  "chapter": "07",
+  "baseline": "mlx-lm same nvfp4 checkpoint reference",
+  "quantization": {
+    "group_size": 16,
+    "bits": 4,
+    "mode": "nvfp4"
+  },
+  "max_abs_error": 1.04833984375,
+  "prompt_argmax_agreement": 1.0,
+  "greedy_prefix_match": 11,
+  "greedy_tokens_checked": 12,
+  "generated_ids": [
+    79852,
+    18887,
+    220,
+    95761,
+    21966,
+    220,
+    95789,
+    98618,
+    99580,
+    97792,
+    97989,
+    96172
+  ],
+  "note": "quantized outputs are not required to equal raw HF fp32"
+}
