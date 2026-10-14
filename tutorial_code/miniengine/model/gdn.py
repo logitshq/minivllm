@@ -3,7 +3,7 @@ import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
-from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent
+from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
 from .layers import GatedRMSNorm, Linear
 
 
@@ -38,7 +38,7 @@ class GatedDeltaNet(nn.Module):
 
     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
         if ctx is not None and ctx.mode == "decode":
-            raise ValueError("Batch decode arrives in chapter 08")
+            return self._decode(x, ctx.caches[layer_idx])
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
     def _gates(self, b, a):
@@ -75,3 +75,18 @@ class GatedDeltaNet(nn.Module):
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(T, -1))
 
+
+    def _decode(self, x: mx.array, st) -> mx.array:
+        """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
+        B = x.shape[0]
+        qkv = self.in_proj_qkv(x)                                   # [B, C]
+        z = self.in_proj_z(x).reshape(B, self.Hv, self.Dv)
+        w = self.conv1d_weight.astype(qkv.dtype)                    # [C, K]
+        xp = mx.concatenate([st.conv.astype(qkv.dtype), qkv[:, None]], axis=1)   # [B, K, C]
+        qkv = (xp * w.T[None]).sum(axis=1)                          # 因果卷积在最后一个位置的值
+        q, k, v = self._split_heads(nn.silu(qkv), B)
+        beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        o, S = gated_delta_step_batch(q, k, v, g, beta, st.S)
+        st.conv, st.S = xp[:, 1:], S
+        o = self.norm(o.astype(x.dtype), z)
+        return self.out_proj(o.reshape(B, -1))

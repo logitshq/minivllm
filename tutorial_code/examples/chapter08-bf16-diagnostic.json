@@ -1,0 +1,612 @@
+{
+  "scope": "before tutorial-07-v2 dtype fix; teacher-forced single-sequence prefill versus three-row batch; not identical to scheduler single-row-decode comparison",
+  "requested_dtype": "float32",
+  "actual_quantized_embedding_and_logits_dtype": "bfloat16",
+  "original_scheduler_failure": {
+    "prompt_lengths": [
+      19,
+      7,
+      12
+    ],
+    "prompt_length_7_first_mismatch_output_position": 7,
+    "single_token_id": 198,
+    "batch_token_id": 74455
+  },
+  "teacher_forced_logit_checks": [
+    {
+      "output_position": 2,
+      "prompt_length": 19,
+      "single_argmax": 18887,
+      "batch_argmax": 18887,
+      "logit_max_abs_error": 0.15625,
+      "reference_top2_ids": [
+        18887,
+        6297
+      ],
+      "reference_top2_margin": 1.25,
+      "max_cache_errors": {
+        "state_error": 0.017630696296691895,
+        "value_error": 0.03125,
+        "key_error": 0.046875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 2,
+      "prompt_length": 7,
+      "single_argmax": 95883,
+      "batch_argmax": 95883,
+      "logit_max_abs_error": 0.09375,
+      "reference_top2_ids": [
+        95883,
+        95979
+      ],
+      "reference_top2_margin": 0.3125,
+      "max_cache_errors": {
+        "state_error": 0.014914870262145996,
+        "value_error": 0.03125,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 2,
+      "prompt_length": 12,
+      "single_argmax": 198,
+      "batch_argmax": 198,
+      "logit_max_abs_error": 0.3203125,
+      "reference_top2_ids": [
+        198,
+        74455
+      ],
+      "reference_top2_margin": 2.75,
+      "max_cache_errors": {
+        "state_error": 0.012774437665939331,
+        "value_error": 0.0625,
+        "key_error": 0.09375,
+        "conv_error": 0.15625
+      }
+    },
+    {
+      "output_position": 3,
+      "prompt_length": 19,
+      "single_argmax": 220,
+      "batch_argmax": 220,
+      "logit_max_abs_error": 0.15625,
+      "reference_top2_ids": [
+        220,
+        9616
+      ],
+      "reference_top2_margin": 2.25,
+      "max_cache_errors": {
+        "state_error": 0.021306991577148438,
+        "value_error": 0.03125,
+        "key_error": 0.046875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 3,
+      "prompt_length": 7,
+      "single_argmax": 828,
+      "batch_argmax": 828,
+      "logit_max_abs_error": 0.125,
+      "reference_top2_ids": [
+        828,
+        96273
+      ],
+      "reference_top2_margin": 0.3125,
+      "max_cache_errors": {
+        "state_error": 0.014463305473327637,
+        "value_error": 0.03125,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 3,
+      "prompt_length": 12,
+      "single_argmax": 248068,
+      "batch_argmax": 248068,
+      "logit_max_abs_error": 0.296875,
+      "reference_top2_ids": [
+        248068,
+        248045
+      ],
+      "reference_top2_margin": 3.75,
+      "max_cache_errors": {
+        "state_error": 0.018488973379135132,
+        "value_error": 0.0625,
+        "key_error": 0.09375,
+        "conv_error": 0.15625
+      }
+    },
+    {
+      "output_position": 4,
+      "prompt_length": 19,
+      "single_argmax": 95761,
+      "batch_argmax": 95761,
+      "logit_max_abs_error": 0.25,
+      "reference_top2_ids": [
+        95761,
+        98435
+      ],
+      "reference_top2_margin": 1.0,
+      "max_cache_errors": {
+        "state_error": 0.01537466049194336,
+        "value_error": 0.05078125,
+        "key_error": 0.05078125,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 4,
+      "prompt_length": 7,
+      "single_argmax": 10992,
+      "batch_argmax": 248046,
+      "logit_max_abs_error": 0.125,
+      "reference_top2_ids": [
+        248046,
+        10992
+      ],
+      "reference_top2_margin": 0.0,
+      "max_cache_errors": {
+        "state_error": 0.016368985176086426,
+        "value_error": 0.03125,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 4,
+      "prompt_length": 12,
+      "single_argmax": 198,
+      "batch_argmax": 198,
+      "logit_max_abs_error": 0.375,
+      "reference_top2_ids": [
+        198,
+        271
+      ],
+      "reference_top2_margin": 1.625,
+      "max_cache_errors": {
+        "state_error": 0.03221571445465088,
+        "value_error": 0.0859375,
+        "key_error": 0.09375,
+        "conv_error": 0.25
+      }
+    },
+    {
+      "output_position": 5,
+      "prompt_length": 19,
+      "single_argmax": 21966,
+      "batch_argmax": 21966,
+      "logit_max_abs_error": 0.1875,
+      "reference_top2_ids": [
+        21966,
+        98618
+      ],
+      "reference_top2_margin": 1.0,
+      "max_cache_errors": {
+        "state_error": 0.019842803478240967,
+        "value_error": 0.05078125,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 5,
+      "prompt_length": 7,
+      "single_argmax": 198,
+      "batch_argmax": 198,
+      "logit_max_abs_error": 0.125,
+      "reference_top2_ids": [
+        198,
+        248046
+      ],
+      "reference_top2_margin": 0.75,
+      "max_cache_errors": {
+        "state_error": 0.025243282318115234,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 5,
+      "prompt_length": 12,
+      "single_argmax": 90700,
+      "batch_argmax": 90700,
+      "logit_max_abs_error": 0.3828125,
+      "reference_top2_ids": [
+        90700,
+        97237
+      ],
+      "reference_top2_margin": 0.75,
+      "max_cache_errors": {
+        "state_error": 0.025796115398406982,
+        "value_error": 0.0859375,
+        "key_error": 0.1015625,
+        "conv_error": 0.25
+      }
+    },
+    {
+      "output_position": 6,
+      "prompt_length": 19,
+      "single_argmax": 220,
+      "batch_argmax": 220,
+      "logit_max_abs_error": 0.1875,
+      "reference_top2_ids": [
+        220,
+        9616
+      ],
+      "reference_top2_margin": 4.0,
+      "max_cache_errors": {
+        "state_error": 0.02098029851913452,
+        "value_error": 0.05078125,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 6,
+      "prompt_length": 7,
+      "single_argmax": 95826,
+      "batch_argmax": 95826,
+      "logit_max_abs_error": 0.140625,
+      "reference_top2_ids": [
+        95826,
+        248046
+      ],
+      "reference_top2_margin": 0.625,
+      "max_cache_errors": {
+        "state_error": 0.016371488571166992,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 6,
+      "prompt_length": 12,
+      "single_argmax": 8340,
+      "batch_argmax": 8340,
+      "logit_max_abs_error": 0.5625,
+      "reference_top2_ids": [
+        8340,
+        1817
+      ],
+      "reference_top2_margin": 3.75,
+      "max_cache_errors": {
+        "state_error": 0.02450406551361084,
+        "value_error": 0.0859375,
+        "key_error": 0.125,
+        "conv_error": 0.3125
+      }
+    },
+    {
+      "output_position": 7,
+      "prompt_length": 19,
+      "single_argmax": 95789,
+      "batch_argmax": 95789,
+      "logit_max_abs_error": 0.203125,
+      "reference_top2_ids": [
+        95789,
+        108777
+      ],
+      "reference_top2_margin": 0.625,
+      "max_cache_errors": {
+        "state_error": 0.021080613136291504,
+        "value_error": 0.05078125,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 7,
+      "prompt_length": 7,
+      "single_argmax": 110827,
+      "batch_argmax": 110827,
+      "logit_max_abs_error": 0.15625,
+      "reference_top2_ids": [
+        110827,
+        104213
+      ],
+      "reference_top2_margin": 4.5,
+      "max_cache_errors": {
+        "state_error": 0.0349278450012207,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 7,
+      "prompt_length": 12,
+      "single_argmax": 25,
+      "batch_argmax": 25,
+      "logit_max_abs_error": 0.58203125,
+      "reference_top2_ids": [
+        25,
+        4960
+      ],
+      "reference_top2_margin": 8.625,
+      "max_cache_errors": {
+        "state_error": 0.027482494711875916,
+        "value_error": 0.09375,
+        "key_error": 0.125,
+        "conv_error": 0.375
+      }
+    },
+    {
+      "output_position": 8,
+      "prompt_length": 19,
+      "single_argmax": 98618,
+      "batch_argmax": 98618,
+      "logit_max_abs_error": 0.15625,
+      "reference_top2_ids": [
+        98618,
+        95814
+      ],
+      "reference_top2_margin": 2.875,
+      "max_cache_errors": {
+        "state_error": 0.0192011296749115,
+        "value_error": 0.0625,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 8,
+      "prompt_length": 7,
+      "single_argmax": 98682,
+      "batch_argmax": 98682,
+      "logit_max_abs_error": 0.140625,
+      "reference_top2_ids": [
+        98682,
+        97913
+      ],
+      "reference_top2_margin": 5.625,
+      "max_cache_errors": {
+        "state_error": 0.031456708908081055,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 8,
+      "prompt_length": 12,
+      "single_argmax": 271,
+      "batch_argmax": 271,
+      "logit_max_abs_error": 0.59375,
+      "reference_top2_ids": [
+        271,
+        198
+      ],
+      "reference_top2_margin": 8.75,
+      "max_cache_errors": {
+        "state_error": 0.04372048377990723,
+        "value_error": 0.1328125,
+        "key_error": 0.234375,
+        "conv_error": 0.375
+      }
+    },
+    {
+      "output_position": 9,
+      "prompt_length": 19,
+      "single_argmax": 99580,
+      "batch_argmax": 99580,
+      "logit_max_abs_error": 0.1875,
+      "reference_top2_ids": [
+        99580,
+        111734
+      ],
+      "reference_top2_margin": 0.75,
+      "max_cache_errors": {
+        "state_error": 0.01963791251182556,
+        "value_error": 0.0625,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 9,
+      "prompt_length": 7,
+      "single_argmax": 108829,
+      "batch_argmax": 108829,
+      "logit_max_abs_error": 0.1328125,
+      "reference_top2_ids": [
+        108829,
+        2005
+      ],
+      "reference_top2_margin": 4.375,
+      "max_cache_errors": {
+        "state_error": 0.023589253425598145,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 9,
+      "prompt_length": 12,
+      "single_argmax": 16,
+      "batch_argmax": 16,
+      "logit_max_abs_error": 0.396484375,
+      "reference_top2_ids": [
+        16,
+        17
+      ],
+      "reference_top2_margin": 10.625,
+      "max_cache_errors": {
+        "state_error": 0.0320587158203125,
+        "value_error": 0.1328125,
+        "key_error": 0.234375,
+        "conv_error": 0.375
+      }
+    },
+    {
+      "output_position": 10,
+      "prompt_length": 19,
+      "single_argmax": 97792,
+      "batch_argmax": 97792,
+      "logit_max_abs_error": 0.1875,
+      "reference_top2_ids": [
+        97792,
+        95793
+      ],
+      "reference_top2_margin": 0.375,
+      "max_cache_errors": {
+        "state_error": 0.019560039043426514,
+        "value_error": 0.0625,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 10,
+      "prompt_length": 7,
+      "single_argmax": 2005,
+      "batch_argmax": 2005,
+      "logit_max_abs_error": 0.171875,
+      "reference_top2_ids": [
+        2005,
+        96369
+      ],
+      "reference_top2_margin": 6.5625,
+      "max_cache_errors": {
+        "state_error": 0.020807266235351562,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 10,
+      "prompt_length": 12,
+      "single_argmax": 13,
+      "batch_argmax": 13,
+      "logit_max_abs_error": 0.3203125,
+      "reference_top2_ids": [
+        13,
+        159029
+      ],
+      "reference_top2_margin": 11.4375,
+      "max_cache_errors": {
+        "state_error": 0.03497481346130371,
+        "value_error": 0.1328125,
+        "key_error": 0.234375,
+        "conv_error": 0.25
+      }
+    },
+    {
+      "output_position": 11,
+      "prompt_length": 19,
+      "single_argmax": 97989,
+      "batch_argmax": 97989,
+      "logit_max_abs_error": 0.21875,
+      "reference_top2_ids": [
+        99125,
+        97989
+      ],
+      "reference_top2_margin": 0.0,
+      "max_cache_errors": {
+        "state_error": 0.022839069366455078,
+        "value_error": 0.0625,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 11,
+      "prompt_length": 7,
+      "single_argmax": 95883,
+      "batch_argmax": 95883,
+      "logit_max_abs_error": 0.125,
+      "reference_top2_ids": [
+        95883,
+        96369
+      ],
+      "reference_top2_margin": 0.5,
+      "max_cache_errors": {
+        "state_error": 0.01883995532989502,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 11,
+      "prompt_length": 12,
+      "single_argmax": 220,
+      "batch_argmax": 220,
+      "logit_max_abs_error": 0.328125,
+      "reference_top2_ids": [
+        220,
+        36189
+      ],
+      "reference_top2_margin": 10.125,
+      "max_cache_errors": {
+        "state_error": 0.03769928216934204,
+        "value_error": 0.1328125,
+        "key_error": 0.234375,
+        "conv_error": 0.25
+      }
+    },
+    {
+      "output_position": 12,
+      "prompt_length": 19,
+      "single_argmax": 95793,
+      "batch_argmax": 96172,
+      "logit_max_abs_error": 0.25,
+      "reference_top2_ids": [
+        96172,
+        95793
+      ],
+      "reference_top2_margin": 0.0,
+      "max_cache_errors": {
+        "state_error": 0.018815726041793823,
+        "value_error": 0.0625,
+        "key_error": 0.0625,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 12,
+      "prompt_length": 7,
+      "single_argmax": 828,
+      "batch_argmax": 828,
+      "logit_max_abs_error": 0.1875,
+      "reference_top2_ids": [
+        828,
+        32478
+      ],
+      "reference_top2_margin": 3.375,
+      "max_cache_errors": {
+        "state_error": 0.020848393440246582,
+        "value_error": 0.0625,
+        "key_error": 0.07421875,
+        "conv_error": 0.125
+      }
+    },
+    {
+      "output_position": 12,
+      "prompt_length": 12,
+      "single_argmax": 2972,
+      "batch_argmax": 2972,
+      "logit_max_abs_error": 0.5,
+      "reference_top2_ids": [
+        2972,
+        348
+      ],
+      "reference_top2_margin": 7.625,
+      "max_cache_errors": {
+        "state_error": 0.028887033462524414,
+        "value_error": 0.1328125,
+        "key_error": 0.234375,
+        "conv_error": 0.25
+      }
+    }
+  ],
+  "interpretation": "The dtype argument did not affect packed Embedding output; BF16-rounded top-two logits tied on some positions. The corrected requested float32 mode passes strict batch and late-arrival parity."
+}

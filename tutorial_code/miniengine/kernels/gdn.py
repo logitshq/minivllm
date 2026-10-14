@@ -77,3 +77,20 @@ def gated_delta_rule_chunk(q, k, v, g, beta, state=None, chunk: int = 64):
     return o.transpose(1, 0, 2), S
 
 
+
+
+def gated_delta_step_batch(q, k, v, g, beta, S):
+    """decode 一步、B 个序列一起：q, k [B, Hv, Dk]，v [B, Hv, Dv]，g, beta [B, Hv]，S [B, Hv, Dk, Dv] fp32。
+    返回 o [B, Hv, Dv] 和新状态。数学和逐 token 递推一样，只是把 o 的读取合并进去：
+        o = qᵀS_new = e·(qᵀS) + (q·k)·δ，其中 δ = (v − kᵀS)·β，e = exp(g)
+    这样 S 只读两次（qᵀS 和 kᵀS 合成一次矩阵乘、更新时一次）、写一次。S 是 decode 时最大的内存流量（27B 每层 3 MB/序列）。"""
+    q, k, v = (t.astype(mx.float32) for t in (q, k, v))
+    q, k = l2norm(q), l2norm(k)
+    q = q * k.shape[-1] ** -0.5
+    e = mx.exp(g)[..., None]                                                  # [B, Hv, 1]
+    qk_S = mx.concatenate([q[..., None, :], k[..., None, :]], axis=-2) @ S    # [B, Hv, 2, Dv]
+    qS, kS = qk_S[..., 0, :], qk_S[..., 1, :]
+    delta = (v - e * kS) * beta[..., None]                                    # kᵀ(e·S) = e·kᵀS
+    o = e * qS + (q * k).sum(-1, keepdims=True) * delta
+    S = S * e[..., None] + k[..., :, None] * delta[..., None, :]
+    return o, S
