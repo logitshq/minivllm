@@ -93,3 +93,4 @@ git switch tutorial/step-by-step
 ## 后续章节
 
 - [03 Attention](03-attention.md) — `tutorial-03`
+- [04 GDN](04-gdn.md) — `tutorial-04`
