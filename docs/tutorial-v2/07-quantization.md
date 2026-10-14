@@ -115,7 +115,7 @@ python -m tutorial_code.check_quantized
 python -m tutorial_code.generate_mlx \
   --model-dir /Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4 \
   --dtype bfloat16 --max-new-tokens 8
-git diff tutorial-06 tutorial-07 -- tutorial_code/miniengine/model
+git diff tutorial-06 tutorial-07-v2 -- tutorial_code/miniengine/model
 ```
 
 `check_quantized` 默认使用本地 0.8B NVFP4 checkpoint，结果见 [chapter07-checks.json](../../tutorial_code/examples/chapter07-checks.json)。参考是 [同 checkpoint 的 MLX-LM 记录](../../tests/data/mlxlm_0.8b_nvfp4.npz)，不是原 HF fp32 的输出。

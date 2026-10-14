@@ -1,0 +1,70 @@
+{
+  "scheduler_budget_and_admission": true,
+  "eos_stop": true,
+  "max_tokens_zero_rejected": true,
+  "events": [
+    {
+      "decode": [],
+      "prefill": [
+        [
+          "a",
+          3
+        ]
+      ]
+    },
+    {
+      "decode": [],
+      "prefill": [
+        [
+          "a",
+          2
+        ],
+        [
+          "b",
+          1
+        ]
+      ]
+    },
+    {
+      "decode": [
+        "a"
+      ],
+      "prefill": [
+        [
+          "b",
+          1
+        ]
+      ]
+    },
+    {
+      "decode": [
+        "a",
+        "b"
+      ],
+      "prefill": []
+    },
+    {
+      "decode": [
+        "b"
+      ],
+      "prefill": [
+        [
+          "c",
+          1
+        ]
+      ]
+    },
+    {
+      "decode": [
+        "c"
+      ],
+      "prefill": []
+    },
+    {
+      "decode": [
+        "c"
+      ],
+      "prefill": []
+    }
+  ]
+}

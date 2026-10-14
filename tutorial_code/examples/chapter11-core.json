@@ -1,0 +1,562 @@
+{
+  "baseline": "tutorial miniengine",
+  "measurement_scope": "token-ID synchronous engine; includes Python scheduling and GPU evaluation; excludes loading/tokenization/HTTP",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "processor": "arm",
+  "random_seed": 42,
+  "mlx_version": "0.32.3",
+  "model_dir": "/Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4",
+  "config_sha256": "9865e6100ff36f53de7cec6c624f0c415af7ba9f1c7f4a8569980c969f5ec4c6",
+  "quantization": {
+    "group_size": 16,
+    "bits": 4,
+    "mode": "nvfp4"
+  },
+  "model_shape": {
+    "hidden_size": 1024,
+    "num_hidden_layers": 24,
+    "vocab_size": 248320,
+    "num_attention_heads": 8,
+    "num_key_value_heads": 2,
+    "head_dim": 256,
+    "linear_num_key_heads": 16,
+    "linear_num_value_heads": 16,
+    "linear_key_head_dim": 128,
+    "linear_value_head_dim": 128
+  },
+  "memory_scope": "MLX allocator active and peak bytes; not process RSS or total unified-memory use",
+  "output_count_definition": "output_tokens counts every emitted ID, including a terminal EOS; logical_completion_tokens excludes a terminal EOS when EOS stopping is enabled. Rates use emitted-ID counts.",
+  "decode_rate_definition": "(output tokens minus first delivery tokens)/(end minus first delivery time); token ID delivery can be a speculative burst",
+  "dtype": "bfloat16",
+  "drafter_dir": null,
+  "request": {
+    "prompt_ids": [
+      248045,
+      846,
+      198,
+      95826,
+      110827,
+      98682,
+      108829,
+      81726,
+      6297,
+      1710,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "prompt_tokens": 19,
+    "max_new_tokens": 128,
+    "ignore_eos": false,
+    "eos_token_ids": [
+      248044,
+      248046
+    ],
+    "temperature": 0,
+    "concurrency": 1
+  },
+  "warmup_runs": 1,
+  "repeat": 3,
+  "runs": [
+    {
+      "output_ids": [
+        79852,
+        18887,
+        220,
+        95761,
+        21966,
+        220,
+        95789,
+        98618,
+        99580,
+        97792,
+        97989,
+        95793,
+        101630,
+        111734,
+        95726,
+        108777,
+        98623,
+        3709,
+        113148,
+        98837,
+        96547,
+        96458,
+        110790,
+        96172,
+        97489,
+        97792,
+        98453,
+        1710,
+        248046
+      ],
+      "output_tokens": 29,
+      "engine_elapsed_s": 0.15473970799939707,
+      "terminal_eos_in_output_ids": true,
+      "logical_completion_tokens": 28,
+      "engine_ttft_s": 0.012300624992349185,
+      "post_first_delivery_s": 0.14243908300704788,
+      "first_delivery_tokens": 1,
+      "decode_tokens_per_s": 196.57526157069236,
+      "output_tokens_per_engine_s": 187.41149492225355,
+      "step_delivery_times": [
+        {
+          "elapsed_s": 0.012300624992349185,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.017276500002481043,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.022088582991273142,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.026853165996726602,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.032473915998707525,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.03765283299435396,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.04269645799649879,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.048147124995011836,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05299562499567401,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05802483299339656,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06291733299440239,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06831858299847227,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.07321487499575596,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.07804241600388195,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.08285583299584687,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.08759174999431707,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.09278758299478795,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.09787654099636711,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10294904100010172,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10794504100340419,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.11293679100344889,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.11815358299645595,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1231793749902863,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1282487080025021,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13391983299516141,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13910941599169746,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14417845799471252,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14939387499180157,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.15470887499395758,
+          "tokens": 1
+        }
+      ],
+      "accepted_drafts_and_rounds": null,
+      "mlx_peak_memory_bytes": 511464387,
+      "mlx_active_memory_after_finish_bytes": 423938828
+    },
+    {
+      "output_ids": [
+        79852,
+        18887,
+        220,
+        95761,
+        21966,
+        220,
+        95789,
+        98618,
+        99580,
+        97792,
+        97989,
+        95793,
+        101630,
+        111734,
+        95726,
+        108777,
+        98623,
+        3709,
+        113148,
+        98837,
+        96547,
+        96458,
+        110790,
+        96172,
+        97489,
+        97792,
+        98453,
+        1710,
+        248046
+      ],
+      "output_tokens": 29,
+      "engine_elapsed_s": 0.16285720800806303,
+      "terminal_eos_in_output_ids": true,
+      "logical_completion_tokens": 28,
+      "engine_ttft_s": 0.013225458009401336,
+      "post_first_delivery_s": 0.1496317499986617,
+      "first_delivery_tokens": 1,
+      "decode_tokens_per_s": 187.12606114845568,
+      "output_tokens_per_engine_s": 178.0701042017386,
+      "step_delivery_times": [
+        {
+          "elapsed_s": 0.013225458009401336,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.018620832997839898,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.02545637500588782,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.030809290998149663,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.036989166008424945,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.042750833003083244,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.04780008300440386,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05287408300500829,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05811458300740924,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06340887500846293,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06859854100912344,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.07416008300788235,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.07993216600152664,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.08525550000194926,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.09039045800454915,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.09553662499820348,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10061308300646488,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10569483300787397,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.11115325000719167,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1167636250029318,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.12206141599745024,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.12751104100607336,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13258366601075977,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13775595799961593,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14283054100815207,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14772941599949263,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.15274441600195132,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1576754580019042,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.16283262500655837,
+          "tokens": 1
+        }
+      ],
+      "accepted_drafts_and_rounds": null,
+      "mlx_peak_memory_bytes": 510180251,
+      "mlx_active_memory_after_finish_bytes": 423938828
+    },
+    {
+      "output_ids": [
+        79852,
+        18887,
+        220,
+        95761,
+        21966,
+        220,
+        95789,
+        98618,
+        99580,
+        97792,
+        97989,
+        95793,
+        101630,
+        111734,
+        95726,
+        108777,
+        98623,
+        3709,
+        113148,
+        98837,
+        96547,
+        96458,
+        110790,
+        96172,
+        97489,
+        97792,
+        98453,
+        1710,
+        248046
+      ],
+      "output_tokens": 29,
+      "engine_elapsed_s": 0.1540306669921847,
+      "terminal_eos_in_output_ids": true,
+      "logical_completion_tokens": 28,
+      "engine_ttft_s": 0.012208375002956018,
+      "post_first_delivery_s": 0.1418222919892287,
+      "first_delivery_tokens": 1,
+      "decode_tokens_per_s": 197.43017551942103,
+      "output_tokens_per_engine_s": 188.27419608246856,
+      "step_delivery_times": [
+        {
+          "elapsed_s": 0.012208375002956018,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.017449624996515922,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.022686750002321787,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.027607458003330976,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.0326977920049103,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.03791979199741036,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.042778457995154895,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.04803991700464394,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05300333299965132,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.05822129199805204,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06349220799165778,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.06843229199876077,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.07344245800049976,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.0784311669995077,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.08338416699552909,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.08842833299422637,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.09338545799255371,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.0982739169994602,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10311729200475384,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.10802091700315941,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.11340770800597966,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1185094999964349,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.12390320800477639,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.1289105829928303,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13382679199276026,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.13887125000474043,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14374499999394175,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.14898541699221823,
+          "tokens": 1
+        },
+        {
+          "elapsed_s": 0.15400224999757484,
+          "tokens": 1
+        }
+      ],
+      "accepted_drafts_and_rounds": null,
+      "mlx_peak_memory_bytes": 511462723,
+      "mlx_active_memory_after_finish_bytes": 423938828
+    }
+  ],
+  "median_engine_ttft_s": 0.012300624992349185,
+  "median_output_tokens_per_engine_s": 187.41149492225355,
+  "median_decode_tokens_per_s": 196.57526157069236,
+  "comparison_rule": "Keep oMLX HTTP and Lithos timing scopes separate; do not derive a speedup from different timing boundaries or published projections."
+}

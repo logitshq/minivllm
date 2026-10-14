@@ -140,7 +140,7 @@ python -m tutorial_code.check_chapter08 --scheduler-only \
 python -m tutorial_code.check_chapter08 \
   --model-dir /Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4 \
   --max-new-tokens 12 --out tutorial_code/examples/chapter08-checks.json
-git diff tutorial-07 tutorial-08 -- tutorial_code/miniengine
+git diff tutorial-07-v2 tutorial-08 -- tutorial_code/miniengine
 ```
 
 纯调度检查预算、生命周期与边界。GPU 检查用长度不同的三条 prompt，比较各自串行运行与合批运行的 greedy 输出；再测试运行中加入请求、结束后清理 cache。结果分别保存在 [调度报告](../../tutorial_code/examples/chapter08-scheduler.json) 与 [完整引擎报告](../../tutorial_code/examples/chapter08-checks.json)。

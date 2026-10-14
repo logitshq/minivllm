@@ -1,102 +1,94 @@
 # 一章一章写一个推理引擎
 
-教程按章累积实现；每章保留可运行代码、数值验证和固定 Git tag。
+从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—11 的代码与讲解放在同一教学分支，每章保存固定版本。
 
-教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原来的 `/Users/ryanli/code/minivllm` 保持在 `main`，已有引擎和旧教程都保留。
+教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原 `/Users/ryanli/code/minivllm` 保留在 `main`；完成版与旧教程仍可作为源码参照。
 
-## 从第一章开始
+## 阅读顺序与真正的替换点
 
-[01 一次文本生成是怎么发生的](01-一次文本生成是怎么发生的.md)
+| 章节 | 本章内容 | 完整生成接入状态 | 固定版本 |
+|---|---|---|---|
+| [01 一次文本生成是怎么发生的](01-一次文本生成是怎么发生的.md) | IDs、logits、greedy、生成循环 | 完整模型使用 HF | `tutorial-01` |
+| [02 模型的基础计算块](02-从ID到向量再到分数.md) | Embedding、Linear、RMSNorm、MLP、残差 | 同输入核对组件；完整模型使用 HF | `tutorial-02-v2` |
+| [03 Attention](03-attention.md) | Q/K/V、GQA、partial RoPE、因果 mask、输出门 | 同输入核对完整 Attention 组件 | `tutorial-03` |
+| [04 GDN](04-gdn.md) | 因果卷积、门、delta 递推、矩阵记忆 | 同输入核对完整 GDN 组件 | `tutorial-04` |
+| [05 完整模型](05-model.md) | 层装配、严格加载权重、独立 forward | **完整生成第一次使用自己的模型** | `tutorial-05` |
+| [06 Cache](06-cache.md) | prefill/decode、KV/GDN 状态、分块 prompt | 单请求 cache 已接入 | `tutorial-06` |
+| [07 量化](07-quantization.md) | packed weights、scales、量化算子、norm 存储约定 | MLX 量化 checkpoint 已接入 | `tutorial-07-v2` |
+| [08 调度与批量](08-scheduler.md) | 请求生命周期、预算、chunked prefill、decode batch | 多请求核心引擎 | `tutorial-08` |
+| [09 Metal](09-metal.md) | 融合 GDN 单步、chunk 三角求解 | 自定义 kernel 接入引擎 | `tutorial-09` |
+| [10 投机解码](10-speculative.md) | DFlash2、verify、accept、bonus、回滚 | greedy 单流投机路径 | `tutorial-10` |
+| [11 Baseline 与实验](11-benchmark.md) | 重复测量、指标边界、同条件比较 | 核心与外部引擎各自报告 | `tutorial-11` |
 
-[02 模型的基础计算块](02-从ID到向量再到分数.md)
+第二章初版 `tutorial-02` 只包含较少组件，阅读使用扩展版 `tutorial-02-v2`。第七章保留初版 `tutorial-07`，修正量化 Embedding 的激活 dtype 接口后使用 `tutorial-07-v2`；旧 tag 不覆盖。
 
-第一章用 HF 做完整模型的正确性参照，自己写生成循环。第二章在 MLX 中实现基础计算块，用相同输入与真实权重逐项对照；生成循环暂时仍调用 HF。教学代码不导入已经完成的 `minivllm` 引擎。
+下一步从第三章读起。可以先只读前半章的数学图与小例子，再看 HF 内部代码、我们对应的实现和 diff；不需要一次读完后面的调度与 kernel。
 
-## 两条 baseline 的分工
+## 两种验证，加一个候选性能参照
 
-| 参照 | 用途 | 入口 |
+| 参照 | 主要用途 | 入口与记录 |
 |---|---|---|
-| HF Transformers | 复写模型数学、核对 logits 和 greedy；第一章无 cache 循环是教学版本 | [generate.py](../../tutorial_code/generate.py) |
-| oMLX | 对照已有优化的 Apple Silicon 引擎性能：单流、并发、cache、投机 | [运行与配置说明](../../tutorial_code/baselines/README.md) |
+| HF Transformers / MPS | 原始 fp32 权重下的模型数学与 greedy 参照 | [generate.py](../../tutorial_code/generate.py)、各章 checker |
+| oMLX | 已有优化的 Apple Silicon 引擎性能参照 | [baseline 工具说明](../../tutorial_code/baselines/README.md)、第十一章重复测量 |
+| Lithos Metal | 另一种 Metal 引擎设计与同机性能候选 | [第十一章的资格说明](11-benchmark.md)、[上游模型/硬件表](https://github.com/lithos-ai/lithos-metal#models-and-hardware) |
 
-HF 的教学循环不作为最终速度目标。后面性能对照以 oMLX 为主，使用与手写引擎相同的 MLX checkpoint 和测试条件。oMLX 的请求接口只用于测量外部 baseline，HTTP serving 不成为核心推理引擎的学习前提。
+我们自己的测量入口是 [benchmark_core.py](../../tutorial_code/benchmark_core.py)。HF 第一章的无 cache 循环用于理解与正确性，不作为最终速度目标。量化模型与同 checkpoint 的参考核对，不要求它与 raw fp32 一直生成相同 token。
 
-每章既展示“原始数学实现 → 手写对应代码”，也交代该组件在优化引擎中的位置。正确性通过与性能达到目标是两项分别验证的结果。
+oMLX 当前驱动经 HTTP/SSE；手写引擎计时从 IDs 输入开始。两个计时边界在报告中分列，不把不同边界的数字相除称为优化倍数。Lithos 在 M4 Max 的上游状态是未测 native fallback；它的 DSpark 与这里的 DFlash2 也不是相同实验，尚未完成的本机测量不填成绩。
 
-当前两条都能运行：HF 已有固定参考结果；oMLX 官方预编译版本在独立环境安装完毕，已通过同一 19-token 输入的 8-token 功能验证。正式 27B 持续性能测试留到完整引擎阶段。
+核心交付的原始 IDs 可能包含终端 EOS，API completion usage 不一定包含它；第十一章另列逻辑完成数与结束原因，不能只看两个输出计数就判断生成工作相同。
 
 ## 每章的代码阅读格式
 
-后续章节沿用第一、二章的标记方式：
+1. 先读“之前 → 本章之后”，确认新增或替换的能力。
+2. 在关键节选中用 `# ← 关键①` 标出数学、形状和状态变化。
+3. 展示 HF 或上一章调用内部的原计算，再看手写对应计算。
+4. 明确该组件是独立核对，还是已经进入完整生成路径。
+5. 阅读 `diff`，并用相邻 tag 查看真实文件变化。
+6. 看各章 checker 的实际 JSON，区分有限精度数值验证、完整输出验证与性能测量。
 
-1. 开头列出“之前 → 本章之后”，说明新增能力、替换范围或优化目标。
-2. 在最小关键片段上用 `# ← 关键①` 等注释标出要读的行，旁边解释形状或数学含义。
-3. 给出 baseline 的文件、类和函数，摘出框架原始计算，再展示手写对应计算；高亮每个替换点。仅展示一行框架调用不够，要让读者看见调用内部原本做了什么。
-4. 明确替换状态：独立实现、同输入对照通过、已接入生成路径、仍由 baseline 执行。涉及组件重写时，先有同输入正确性证据；接入后再验证完整生成。
-5. 用 `diff` 代码块摘出本章新增或修改的核心行，再给出相邻固定版本的 `git diff` 命令。
-6. 说明怎样验证。新增组件比较正确性；性能优化同时报告相同条件下的前后速度、内存或延迟。
+节选省略训练、视觉或接口细节时会明确说明；完整代码保持可运行。结构与 kernel 参考原 `minivllm` 并注明来源，教学代码放在独立的 `tutorial_code/miniengine/`，运行时没有导入完成版引擎。
 
-标记和节选放在教程正文，完整代码保持可运行。代码以各章 tag 为准；文档的解释和阅读标记可以继续完善，已有 tag 的内容保持固定。
+## 第一章 baseline 与第二章的实际变化
 
-## 第一、二章之间的实际代码变化
+第一章的完整入口 [generate.py](../../tutorial_code/generate.py) 用 HF 加载模型，`model(input_ids, use_cache=False)` 计算 logits，我们写循环和 argmax。
 
-第一章的完整 baseline 入口是 [generate.py](../../tutorial_code/generate.py)：`AutoModelForCausalLM.from_pretrained` 加载 HF 模型，`model(input_ids, use_cache=False)` 计算 logits，我们写循环和 argmax。
-
-第二章新增 [layers.py](../../tutorial_code/layers.py) 和固定版本的 [check_layers.py](../../tutorial_code/check_layers.py)，分别实现基础组件、做同输入验证。第二章没有修改 `generate.py`，所以完整生成仍走 HF。
+第二章新增 [layers.py](../../tutorial_code/layers.py) 与 checker，分别实现基础组件、做同输入核对，没有修改 `generate.py`。完整第二章 checker 以固定 tag 为准：
 
 ```bash
-# 没有输出：第一章到第二章没有改变完整生成入口
+git show tutorial-02-v2:tutorial_code/check_layers.py
 git diff tutorial-01 tutorial-02-v2 -- tutorial_code/generate.py
-
-# 显示新增组件和验证代码
 git diff tutorial-01 tutorial-02-v2 -- tutorial_code/layers.py tutorial_code/check_layers.py
 ```
 
-## 代码怎样逐章保存
+第五章新增 [generate_mlx.py](../../tutorial_code/generate_mlx.py) 才换掉完整 forward。保留 HF 入口让两个结果可以继续对照；使用 HF tokenizer 只是输入输出边界，核心模型与引擎只处理 token IDs。
 
-| 章节 | 固定版本 | 本章代码 |
-|---|---|---|
-| 01 | `tutorial-01` | [tutorial_code/generate.py](../../tutorial_code/generate.py) |
-| 02 初版 | `tutorial-02` | Embedding、Linear 的固定版本 |
-| 02 扩展版 | `tutorial-02-v2` | [layers.py](../../tutorial_code/layers.py)、[check_layers.py](../../tutorial_code/check_layers.py)：加上 norm、MLP、残差 |
+## 用固定版本阅读，避免后面代码混进前面
 
-每章在同一份 `tutorial_code/` 上接着改，并创建一个 commit 和 tag。读某章时以该章 tag 为准；后续章节的优化不会改变旧 tag 指向的代码。新增能力与性能优化都会在章节开头说明。
-
-这个分支从已经完成的引擎仓库创建，因此 Git 历史中仍有原项目。逐章复写的代码单独放在 `tutorial_code/`，从第一章的参考生成循环开始积累。`minivllm/` 是可对照的完成版。
-
-查看第一章代码：
+每章在同一份 `tutorial_code/` 上继续修改，并创建 commit 与 tag。后续优化不改变旧 tag 指向的代码。
 
 ```bash
-git show tutorial-01:tutorial_code/generate.py
+# 查看第三章的固定代码
+git show tutorial-03:tutorial_code/miniengine/model/attention.py
+
+# 看第三章到第四章新增了什么
+git diff tutorial-03 tutorial-04 -- tutorial_code/miniengine
+
+# 第八章基于第七章的 dtype 修正版
+git diff tutorial-07-v2 tutorial-08 -- tutorial_code/miniengine
 ```
 
-查看本章改动：
+如果当前目录有自己的修改，优先用 `git show` 阅读固定版本。要切换整棵目录时先保存本地修改，再 `git switch --detach tutorial-03`；继续开发时回到 `git switch tutorial/step-by-step`。
+
+模型权重留在本地 HF cache 或模型目录，不提交到 Git。章节报告记录实际 checkpoint 路径、精度和验证条件；tag 固定代码，报告固定已运行的案例，不宣称覆盖所有输入。
+
+## 运行环境
+
+下面命令里的 `python` 指已有 MLX/Torch 环境的解释器。本机路径是 `/Users/ryanli/code/minivllm/.venv/bin/python`；例如运行第三章：
 
 ```bash
-git show tutorial-01 -- docs/tutorial-v2 tutorial_code README.md
+cd /Users/ryanli/code/minivllm-tutorial
+/Users/ryanli/code/minivllm/.venv/bin/python -m tutorial_code.check_attention
 ```
 
-如需切换整个教学目录到固定版本，先确保本地修改已经保存，再执行：
-
-```bash
-git switch --detach tutorial-01
-```
-
-继续编写教程时回到：
-
-```bash
-git switch tutorial/step-by-step
-```
-
-换到其他机器时执行 `uv sync`，再按章运行示例。模型权重存放在 HF cache，不提交到 Git；每次示例 trace 记录实际使用的模型 snapshot 路径。Git tag 固定代码与依赖锁文件，trace 记录运行条件。
-
-## 后续章节
-
-- [03 Attention](03-attention.md) — `tutorial-03`
-- [04 GDN](04-gdn.md) — `tutorial-04`
-- [05 完整模型](05-model.md) — `tutorial-05`
-- [06 增量cache](06-cache.md) — `tutorial-06`
-- [07 量化权重](07-quantization.md) — `tutorial-07-v2`（保留原 `tutorial-07`）
-- [08 批量调度](08-scheduler.md) — `tutorial-08`
-- [09 Metal核函数](09-metal.md) — `tutorial-09`
-- [10 投机解码](10-speculative.md) — `tutorial-10`
+其他机器先按照仓库依赖准备环境和所需 checkpoint；oMLX 使用独立安装环境，详见 baseline 说明。教程核心不要求实现 tokenizer 或启动自己的 HTTP 服务。

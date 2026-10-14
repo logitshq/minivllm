@@ -1,0 +1,52 @@
+{
+  "model": "Qwen3.5-0.8B NVFP4 same local checkpoint",
+  "prompt_tokens": 19,
+  "output_cap": 128,
+  "repeats": 3,
+  "core": {
+    "output_counts": [
+      29,
+      29,
+      29
+    ],
+    "logical_counts": [
+      28,
+      28,
+      28
+    ],
+    "median_ttft_id_s": 0.012300624992349185,
+    "median_emitted_ids_per_engine_s": 187.41149492225355,
+    "median_decode_ids_per_s": 196.57526157069236,
+    "peak_memory_bytes": [
+      511464387,
+      510180251,
+      511462723
+    ],
+    "scope": "token-ID synchronous engine; includes Python scheduling and GPU evaluation; excludes loading/tokenization/HTTP"
+  },
+  "omlx": {
+    "completion_counts": [
+      28,
+      28,
+      28
+    ],
+    "finish_reasons": [
+      "stop",
+      "stop",
+      "stop"
+    ],
+    "median_ttft_text_s": 0.016139874991495162,
+    "median_client_elapsed_s": 0.07838933299353812,
+    "median_completion_tokens_per_client_s": 357.19145616799835,
+    "scope": "HTTP SSE client timing includes server overhead; independent of pure engine timing"
+  },
+  "regressions": {
+    "tutorial_final_raw_fp32_greedy": 48,
+    "tutorial_final_cache": true,
+    "original_pytest_passed": 22,
+    "original_pytest_seconds": 9.38,
+    "original_pytest_first_attempt": "18 passed, 1 failed, 3 setup errors: ignored local models folder missing; resolved by ignored symlink to existing model, then rerun all 22"
+  },
+  "lithos": "qualified but no run in tutorial-11; actual run preparation proceeds separately",
+  "limitations": "one short 0.8B prompt, early EOS; no sustained 128-token, 27B throughput, concurrency or speculative performance claim; no cross-scope speedup ratio"
+}

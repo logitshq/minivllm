@@ -1,0 +1,61 @@
+{
+  "baseline": "Lithos Metal",
+  "measurement_status": "unmeasured local candidate",
+  "qualification_date": "2026-10-14",
+  "host": {
+    "macos": "27.0.1",
+    "chip": "Apple M4 Max",
+    "gpu_cores": 40,
+    "unified_memory_gb": 48
+  },
+  "availability": {
+    "lithos_binary": null,
+    "python3_12": null,
+    "brew": "/opt/homebrew/bin/brew",
+    "macos_requirement_met": true,
+    "source_build_documented_requirements": [
+      "Xcode Command Line Tools",
+      "Python 3.12"
+    ]
+  },
+  "upstream": {
+    "main_revision": "not resolved; API unavailable via browser and shell network DNS restricted",
+    "hardware_status": "unmeasured native fallback",
+    "automatic_megakernel_fusion": false,
+    "tensor_accelerator": false,
+    "homebrew_formula_version": "0.1.2",
+    "research_revision": "46b2bc4cda57826c072d94afe90a58633aaeb6d9",
+    "sources": [
+      "https://github.com/lithos-ai/lithos-metal#models-and-hardware",
+      "https://github.com/lithos-ai/lithos-metal/blob/main/docs/design/models.md",
+      "https://github.com/lithos-ai/lithos-metal/blob/main/docs/design/speculative-decoding.md",
+      "https://github.com/lithos-ai/lithos-metal/blob/main/docs/design/serving.md",
+      "https://raw.githubusercontent.com/lithos-ai/homebrew-tap/main/Formula/lithos-metal.rb",
+      "https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md"
+    ]
+  },
+  "checkpoint_qualification": {
+    "local_small_target": "Qwen3.5-0.8B-nvfp4 converted MLX, group_size16/bits4; not an automatic serving pair",
+    "local_large_target": "mlx-community/Qwen3.8-27B-nvfp4 @5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6; converted MLX layout compatibility not verified",
+    "local_drafter": "z-lab/Qwen3.8-27B-DFlash2 @50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+    "lithos_catalog_target": "nvidia/Qwen3.8-27B-NVFP4",
+    "lithos_catalog_drafter": "LithosAI/Qwen3.8-27B-DSpark-NVFP4",
+    "same_quantization_label_is_not_same_tensor_layout": true,
+    "dflash2_is_not_dspark": true
+  },
+  "benchmark_contract": {
+    "recommended_mode": "target-only --no-draft first; speculative pairs tracked separately",
+    "concurrency": "one generation at a time; overlapping non-Ollama API requests receive HTTP429",
+    "published168_tps": "M5 Max target-compute projection assuming 6 accepted tokens per 8-row pass, excludes draft/accept/rewind; not measured end-to-end TPS",
+    "required_future_local_metadata": [
+      "target and draft revisions/formats",
+      "local kernel route",
+      "same prompt IDs and output counting",
+      "sampling and cache policy",
+      "warmups/repetitions",
+      "core versus API timing boundary",
+      "real committed output count and acceptance"
+    ]
+  },
+  "reason_unmeasured": "No installed executable; converted MLX target loader and matching DSpark head not qualified. No software installation or model download attempted."
+}

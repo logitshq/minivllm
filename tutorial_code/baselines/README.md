@@ -49,11 +49,15 @@ git show tutorial-02-v2:tutorial_code/check_layers.py
 
 脚本会启动自己的本地前台子进程，指定独立的设置和模型目录，完成请求后关闭该进程。模型目录用符号链接复用已有权重，不再下载一份。
 
-本次设置：单请求、greedy、无投机解码、关闭 oMLX 的跨请求分页缓存、先用 2-token 请求加载权重并预热。decode 内部仍然使用 KV/GDN 状态，`--no-cache` 不会把它变成第一章的无 cache 循环。
+当前 runner 的设置：单请求、greedy、无投机解码、关闭 oMLX 的跨请求分页缓存；先用与正式请求相同的 `max_tokens` 上限加载权重并预热，报告同时保存预热实际输出数。模型仍可在 EOS 处提前结束。decode 内部仍然使用 KV/GDN 状态，`--no-cache` 不会把它变成第一章的无 cache 循环。
+
+历史 [omlx-smoke.json](omlx-smoke.json) 使用 2-token 预热与 8-token 正式请求，保留原始记录。第十一章的重复测量使用当前完整工作负载预热。
 
 为了固定输入，脚本使用第一章的 19 个 IDs，还原含特殊标记的文本，通过 `/v1/completions` 发送；验证本地再编码和服务返回的 prompt token 数都为 19。
 
 HTTP 在这里仅用于驱动外部 baseline，教程的核心引擎仍以 token IDs 为输入。客户端耗时包含 HTTP/SSE 与服务层开销，不能标成纯模型 decode 吞吐。
+
+每个正式流保存 `finish_reason`，并确认服务返回的 `cached_tokens=0`。oMLX 的 `completion_tokens` 排除终端 EOS；我们的核心引擎交付的 ID 数包含该 EOS，因此核心报告另外给出排除终端 EOS 的 `logical_completion_tokens`。速度字段各自沿用报告声明的计数方式；不能靠相同输出上限推定两边实际输出数相同。
 
 ## 4. 这次已经验证的内容
 

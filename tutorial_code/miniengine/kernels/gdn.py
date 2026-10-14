@@ -25,8 +25,8 @@ def gated_delta_rule_recurrent(q, k, v, g, beta, state=None):
 
 def _solve_unit_lower(A: mx.array, V: mx.array) -> mx.array:
     """解 (I + A) X = V，A 严格下三角 [..., C, C]，V [..., C, N]。前向代入：x_i = v_i − Σ_{j<i} A_ij x_j。
-    不要显式求逆：真实数据里相邻 token 的键高度相关、β≈1 时，(I+A)^{-1} 的元素按 2^(i−j) 增长再相消，fp32 会炸。
-    解本身（就是 delta rule 的修正量 u）是有界的，前向代入稳定。"""
+    按行解单位下三角系统，无需显式形成逆矩阵或额外的逆矩阵乘法。
+    浮点误差仍取决于系统条件和输入；正确性由与递推参考的数值对照检验。"""
     C = A.shape[-2]
     rows = [V[..., 0:1, :]]
     for i in range(1, C):

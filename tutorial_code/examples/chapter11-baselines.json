@@ -1,0 +1,78 @@
+{
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "baselines": [
+    {
+      "name": "HF PyTorch/MPS",
+      "role": "correctness and framework reference",
+      "artifact": "tutorial_code/examples/chapter01-trace.json",
+      "performance_comparison": "not used for optimized-engine speedup"
+    },
+    {
+      "name": "tutorial miniengine",
+      "role": "our independently implemented token-ID core engine",
+      "timing_scope": "engine scheduling + evaluated GPU work",
+      "measurement_status": "local artifact supplied",
+      "measurement_artifact": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-core.json",
+      "artifact_keys": [
+        "baseline",
+        "comparison_rule",
+        "config_sha256",
+        "decode_rate_definition",
+        "drafter_dir",
+        "dtype",
+        "machine",
+        "measurement_scope",
+        "median_decode_tokens_per_s",
+        "median_engine_ttft_s",
+        "median_output_tokens_per_engine_s",
+        "memory_scope",
+        "mlx_version",
+        "model_dir",
+        "model_shape",
+        "output_count_definition",
+        "platform",
+        "processor",
+        "quantization",
+        "random_seed",
+        "repeat",
+        "request",
+        "runs",
+        "warmup_runs"
+      ],
+      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact."
+    },
+    {
+      "name": "oMLX",
+      "role": "optimized Apple Silicon engine reference",
+      "timing_scope": "HTTP SSE client; includes server and transport overhead",
+      "measurement_status": "local artifact supplied",
+      "measurement_artifact": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-omlx.json",
+      "artifact_keys": [
+        "baseline",
+        "median_client_latency_s",
+        "median_client_ttft_text_s",
+        "purpose",
+        "repeat",
+        "runs",
+        "scope"
+      ],
+      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact."
+    },
+    {
+      "name": "Lithos Metal",
+      "role": "candidate Apple Silicon engine reference",
+      "local_binary": null,
+      "required_macos_major": 26,
+      "local_macos": "27.0.1",
+      "macos_requirement_met": true,
+      "hardware_note": "M4 Max 32/40-core paths were unmeasured in the cited upstream hardware table; verify local kernel route before interpreting speed.",
+      "draft_note": "DSpark is a separate draft setup; do not label it DFlash2.",
+      "upstream_source": "https://github.com/lithos-ai/lithos-metal#models-and-hardware",
+      "upstream_projection": "168 token/s is a published M5 Max target-compute projection under assumed acceptance; it excludes draft/accept/rewind and is not a local end-to-end measurement.",
+      "upstream_projection_source": "https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md",
+      "measurement_status": "unmeasured in this report",
+      "measurement_artifact": null
+    }
+  ],
+  "rule": "Keep correctness tests, API measurements, core measurements and published projections as separate evidence."
+}

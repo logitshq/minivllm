@@ -8,7 +8,7 @@
 | 只有 Attention mixer | 两种 mixer 都能独立运行和核对 |
 | 完整生成调用 HF | **完整生成仍调用 HF；第五章完成装配** |
 
-代码版本：`tutorial-04`；上一个版本是 `tutorial-03`。本章参考原 [GDN 层](../../minivllm/model/gdn.py) 与 [递推实现](../../minivllm/kernels/gdn.py)，使用独立的 [教学 GDN](../../tutorial_code/miniengine/model/gdn.py) 和 [教学递推](../../tutorial_code/miniengine/kernels/gdn.py)。先写清楚递推，分块和 Metal 放到第九章。
+代码版本：`tutorial-04`；上一个版本是 `tutorial-03`。本章参考原 [GDN 层](../../minivllm/model/gdn.py) 与 [递推实现](../../minivllm/kernels/gdn.py)，使用独立的 [教学 GDN](../../tutorial_code/miniengine/model/gdn.py) 和 [教学递推](../../tutorial_code/miniengine/kernels/gdn.py)。先写清楚递推。第六章接入通用 MLX 分块算法，第九章解释块内求解并用 Metal 优化。
 
 ## 1. Attention 保存记录，GDN 更新状态
 

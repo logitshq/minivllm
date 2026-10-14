@@ -1,25 +1,13 @@
 """LLMEngine：同步引擎。add_request / step / generate。只认 token id，分词在外面。"""
-import json
-from pathlib import Path
 
 import mlx.core as mx
 
 from ..model.loader import load_model
+from ..eos import read_eos_ids
 from ..sampling_params import SamplingParams
 from .model_runner import ModelRunner
 from .request import Request
 from .scheduler import Scheduler
-
-
-def read_eos_ids(model_dir: str) -> set[int]:
-    ids = set()
-    for name in ("generation_config.json", "config.json"):
-        p = Path(model_dir) / name
-        if p.exists():
-            e = json.loads(p.read_text()).get("eos_token_id")
-            if e is not None:
-                ids |= set(e if isinstance(e, list) else [e])
-    return ids
 
 
 class LLMEngine:

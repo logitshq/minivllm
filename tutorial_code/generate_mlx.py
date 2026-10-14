@@ -5,6 +5,7 @@ from pathlib import Path
 import mlx.core as mx
 from tutorial_code.reference_helpers import raw_model_dir, write_report
 from tutorial_code.miniengine.model.loader import load_model
+from tutorial_code.miniengine.eos import read_eos_ids
 from tutorial_code.miniengine.cache import make_cache
 from tutorial_code.miniengine.context import ForwardContext
 
@@ -26,9 +27,7 @@ def main():
         prompt_ids = prompt_ids["input_ids"]
     prompt_ids = list(prompt_ids)
     model, cfg = load_model(model_dir, dtype=getattr(mx, args.dtype))
-    gen = model_dir / "generation_config.json"
-    eos = json.loads(gen.read_text()).get("eos_token_id", []) if gen.exists() else []
-    eos = set(eos if isinstance(eos,list) else [eos])
+    eos = read_eos_ids(str(model_dir))
     ids, out, rounds = list(prompt_ids), [], []
     ctx = ForwardContext("prefill", make_cache(model))
     current = list(prompt_ids)
