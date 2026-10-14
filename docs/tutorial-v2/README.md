@@ -18,11 +18,26 @@
 
 1. 开头列出“之前 → 本章之后”，说明新增能力、替换范围或优化目标。
 2. 在最小关键片段上用 `# ← 关键①` 等注释标出要读的行，旁边解释形状或数学含义。
-3. 展示 HF 调用与手写计算的对照；底层框架不同的片段标明为同输入比较，避免误以为可直接替换整个模型。
-4. 用 `diff` 代码块摘出本章新增或修改的核心行，再给出相邻固定版本的 `git diff` 命令。
-5. 说明怎样验证。新增组件比较正确性；性能优化同时报告相同条件下的前后速度、内存或延迟。
+3. 给出 baseline 的文件、类和函数，摘出框架原始计算，再展示手写对应计算；高亮每个替换点。仅展示一行框架调用不够，要让读者看见调用内部原本做了什么。
+4. 明确替换状态：独立实现、同输入对照通过、已接入生成路径、仍由 baseline 执行。涉及组件重写时，先有同输入正确性证据；接入后再验证完整生成。
+5. 用 `diff` 代码块摘出本章新增或修改的核心行，再给出相邻固定版本的 `git diff` 命令。
+6. 说明怎样验证。新增组件比较正确性；性能优化同时报告相同条件下的前后速度、内存或延迟。
 
 标记和节选放在教程正文，完整代码保持可运行。代码以各章 tag 为准；文档的解释和阅读标记可以继续完善，已有 tag 的内容保持固定。
+
+## 第一、二章之间的实际代码变化
+
+第一章的完整 baseline 入口是 [generate.py](../../tutorial_code/generate.py)：`AutoModelForCausalLM.from_pretrained` 加载 HF 模型，`model(input_ids, use_cache=False)` 计算 logits，我们写循环和 argmax。
+
+第二章新增 [layers.py](../../tutorial_code/layers.py) 和固定版本的 [check_layers.py](../../tutorial_code/check_layers.py)，分别实现基础组件、做同输入验证。第二章没有修改 `generate.py`，所以完整生成仍走 HF。
+
+```bash
+# 没有输出：第一章到第二章没有改变完整生成入口
+git diff tutorial-01 tutorial-02-v2 -- tutorial_code/generate.py
+
+# 显示新增组件和验证代码
+git diff tutorial-01 tutorial-02-v2 -- tutorial_code/layers.py tutorial_code/check_layers.py
+```
 
 ## 代码怎样逐章保存
 
