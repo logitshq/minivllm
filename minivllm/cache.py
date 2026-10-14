@@ -20,6 +20,14 @@ class AttnCache:
         self.keys = None
         self.values = None
         self.offset = 0
+        self._snap = 0
+
+    def snapshot(self):
+        self._snap = self.offset
+
+    def rollback(self, n: int):
+        """只保留 verify 块的前 n 个 token：K/V 多写的几列留着，下次直接覆盖。"""
+        self.offset = self._snap + n
 
     def update(self, k: mx.array, v: mx.array) -> tuple[mx.array, mx.array]:
         """k, v: [1, Hkv, T, D]。写入后返回 [1, Hkv, offset+T, D] 的完整历史。"""
@@ -40,10 +48,38 @@ class AttnCache:
 
 
 class GDNCache:
+    """conv_state [K-1, C]，S [Hv, Dk, Dv] fp32。
+    投机解码的回滚：verify 前 snapshot()，verify 时层把每个 token 的递推输入记在 tape 里，接受 n 个之后 rollback(n)
+    从快照状态把这 n 个 token 重新递推一遍（"磁带回放"），conv_state 也从快照 + 前 n 个原始输入重建。"""
+
     def __init__(self):
         self.conv_state = None     # [K-1, C]
         self.S = None              # [Hv, Dk, Dv] fp32
         self.offset = 0
+        self.record = False        # True 时 _prefill 会把 tape 存进来
+        self.tape = None           # (raw_qkv [T, C] 卷积前, q, k, v, g, beta)
+        self._snap = None
+
+    def snapshot(self):
+        self._snap = (self.conv_state, self.S, self.offset)
+        self.record = True
+
+    def rollback(self, n: int):
+        """只保留 verify 块的前 n 个 token。"""
+        from .kernels.gdn import gated_delta_rule_chunk
+        conv0, S0, off0 = self._snap
+        raw, q, k, v, g, beta = self.tape
+        T = raw.shape[0]
+        if n < T:
+            if n == 0:
+                self.S = S0 if S0 is not None else mx.zeros_like(self.S)
+            else:
+                _, self.S = gated_delta_rule_chunk(q[:n], k[:n], v[:n], g[:n], beta[:n], S0)
+            K1 = self.conv_state.shape[0]
+            prev = mx.zeros((K1, raw.shape[1]), raw.dtype) if conv0 is None else conv0.astype(raw.dtype)
+            self.conv_state = mx.concatenate([prev, raw[:n]])[-K1:]
+            self.offset = off0 + n
+        self.record, self.tape, self._snap = False, None, None
 
 
 def make_cache(model) -> list:
@@ -122,6 +158,19 @@ class DecodeBatch:
             if isinstance(l, BatchKV):
                 return l.K.shape[2]
         return 0
+
+    def extract(self, row: int) -> list:
+        """把第 row 行抽成单序列 cache 列表（AttnCache / GDNCache），供投机解码的 solo 模式用。"""
+        out = []
+        n = self.lens[row]
+        for i, layer in enumerate(self.model.layers):
+            l = self.layers[i]
+            if layer.is_attn:
+                c = AttnCache(); c.keys, c.values, c.offset = l.K[row:row + 1], l.V[row:row + 1], n
+            else:
+                c = GDNCache(); c.conv_state, c.S, c.offset = l.conv[row], l.S[row], n
+            out.append(c)
+        return out
 
     def clear(self) -> None:
         self.req_ids, self.lens, self.layers = [], [], [None] * len(self.model.layers)

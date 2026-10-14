@@ -24,14 +24,18 @@ def read_eos_ids(model_dir: str) -> set[int]:
 
 class LLMEngine:
     def __init__(self, model_dir: str, max_seqs: int = 8, max_len: int = 4096, max_batched_tokens: int = 512,
-                 dtype=mx.bfloat16, cache_limit_gb: int = 2):
+                 dtype=mx.bfloat16, cache_limit_gb: int = 2, drafter_dir: str | None = None):
         # MLX 的 allocator 会把释放的 buffer 留着复用；decode 每步都在生成新的 K/V 拷贝，尺寸各不相同，
         # 不限制的话几分钟就攒出 20 GB 的"缓存"，逼近 37 GB 工作集后系统开始压缩内存，整体变慢。
         mx.set_cache_limit(cache_limit_gb << 30)
         self.model, self.cfg = load_model(model_dir, dtype=dtype)
         self.eos_ids = read_eos_ids(model_dir)
         self.scheduler = Scheduler(max_seqs, max_len, max_batched_tokens, self.eos_ids)
-        self.runner = ModelRunner(self.model, max_len)
+        drafter = None
+        if drafter_dir:
+            from ..spec.dflash2 import load_drafter
+            drafter = load_drafter(drafter_dir)
+        self.runner = ModelRunner(self.model, max_len, drafter)
         self.requests: dict[str, Request] = {}
         self._counter = 0
 

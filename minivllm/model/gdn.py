@@ -69,9 +69,12 @@ class GatedDeltaNet(nn.Module):
         qkv = self.in_proj_qkv(x)
         z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
         conv_state = cache.conv_state if cache is not None and cache.offset > 0 else None
+        raw = qkv
         qkv, new_conv_state = causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype), conv_state)
         q, k, v = self._split_heads(nn.silu(qkv), T)
         beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        if cache is not None and cache.record:
+            cache.tape = (raw, q, k, v, g, beta)                      # 投机解码回滚用
         S0 = cache.S if cache is not None and cache.offset > 0 else None
         rule = gated_delta_rule_recurrent if T == 1 else gated_delta_rule_chunk   # decode 递推，prefill 分块
         o, S = rule(q, k, v, g, beta, S0)

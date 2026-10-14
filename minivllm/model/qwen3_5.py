@@ -51,11 +51,22 @@ class Qwen3_5ForCausalLM(nn.Module):
         if not cfg.tie_word_embeddings:
             self.lm_head = Linear(cfg.hidden_size, cfg.vocab_size, cfg.quantization)
 
-    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False) -> mx.array:
+    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = ()):
         """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 见 forward_context.py。
-        last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。"""
+        last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。
+        capture=(5, 19, ...) 时额外返回这些层的输出拼起来的特征 [T, len(capture)·hidden]（DFlash2 drafter 的上下文）。"""
         x = self.embed_tokens(input_ids)
+        feats = []
         for i, layer in enumerate(self.layers):
             x = layer(x, ctx, i)
+            if i in capture:
+                feats.append(x)
         x = self.norm(x[-1:] if last_only else x)
-        return self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)
+        logits = self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)
+        if capture:
+            return logits, mx.concatenate(feats, axis=-1)
+        return logits
+
+    def lm_head_fn(self, h: mx.array) -> mx.array:
+        """给 drafter 用的输出头（drafter 自己没有 lm_head，借目标模型的）。"""
+        return self.embed_tokens.as_linear(h) if self.cfg.tie_word_embeddings else self.lm_head(h)

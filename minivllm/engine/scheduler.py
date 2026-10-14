@@ -80,16 +80,22 @@ class Scheduler:
             budget -= n
         return out
 
-    def update(self, out: SchedulerOutput, sampled: dict[str, int]) -> None:
-        """sampled: 这一步产出了 token 的请求 → token id（所有 decode 请求 + 刚好算完 prompt 的 prefill 请求）。"""
+    def update(self, out: SchedulerOutput, sampled: dict[str, int | list[int]]) -> None:
+        """sampled: 这一步产出了 token 的请求 → token id（或投机解码时的多个 token id）。
+        不变量：cache 里的 token 数 = 已有 token 数 − 1（最新采样的那个还没进 cache，下一步作为输入）。
+        所以 decode 请求产出 m 个 token 时 num_computed_tokens += m。"""
         for req, n in out.prefill:
             req.num_computed_tokens += n
-        for req in out.decode:
-            req.num_computed_tokens += 1            # 上一步采样出来的那个 token 这一步进了 cache
         for req in out.decode + [r for r, _ in out.prefill if r.prompt_done]:
-            tok = sampled[req.req_id]
-            req.output_token_ids.append(tok)
-            self._check_finish(req, tok)
+            toks = sampled[req.req_id]
+            toks = [toks] if isinstance(toks, int) else list(toks)
+            if req in out.decode:
+                req.num_computed_tokens += len(toks)
+            for tok in toks:
+                req.output_token_ids.append(tok)
+                self._check_finish(req, tok)
+                if req.is_finished:
+                    break
         still = []
         for req in self.running:
             if req.is_finished:
