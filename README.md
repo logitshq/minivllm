@@ -1,0 +1,29 @@
+# minivllm
+
+从零手搓一个 vLLM 式推理引擎，跑 Qwen3.8-27B（nvfp4）在 Apple Silicon 上，教学用、自包含。
+设计跟 vLLM V1（统一调度、paged KV、continuous batching），后端是 MLX。远程还有一份 CUDA/Triton 版，接口契约相同。
+
+- 计划和每步的教程：`docs/PLAN.md`、`docs/tutorial/`
+- 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
+
+## 环境
+
+```bash
+uv sync                     # 引擎 + 开发依赖 → .venv，锁在 uv.lock
+uv run pytest -q            # 跑测试
+./bench/setup_baseline.sh   # 基线环境 → .venv-mlx（mlx-lm、dflash-mlx）
+```
+
+模型：`uv run hf download Qwen/Qwen3.5-0.8B`（开发用，和 27B 同架构）、`uv run hf download mlx-community/Qwen3.8-27B-nvfp4`（目标）。
+0.8B 的 nvfp4 开发版用 mlx-lm 转：见 `docs/tutorial/00-环境与基线.md`。
+
+## 目录
+
+```
+minivllm/          引擎（只 import mlx）
+  config.py        从 config.json 读模型配置
+  model/           Qwen3.5 架构的前向：layers / attention / gdn / qwen3_5 / loader
+tests/             pytest；tests/make_refs.py 用 HF 生成参考答案到 tests/data/
+bench/             跑分 client（复刻 vllm bench serve）、基线脚本、结果
+docs/              计划、教程、远程版的契约和 notes
+```

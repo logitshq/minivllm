@@ -7,7 +7,7 @@ Mac 上没有 vLLM，所以 `bench_serve.py` 自己实现了同样的协议：10
 ```bash
 # 基线：mlx-lm server（.venv-mlx）
 .venv-mlx/bin/python -m mlx_lm.server --model mlx-community/Qwen3.8-27B-nvfp4 --port 8080 --decode-concurrency 32 --prompt-concurrency 8
-.venv/bin/python bench/bench_serve.py --base-url http://localhost:8080 --model mlx-community/Qwen3.8-27B-nvfp4 \
+uv run bench/bench_serve.py --base-url http://localhost:8080 --model mlx-community/Qwen3.8-27B-nvfp4 \
     --num-prompts 100 --input-len 1024 --output-len 1024 --max-concurrency 32 --name mlxlm-27b-nvfp4-c32 --out bench/results/mlxlm-27b-nvfp4-c32.json
 
 # 单流投机解码基线：dflash-mlx（.venv-mlx）

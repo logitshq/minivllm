@@ -1,14 +1,23 @@
 [project]
 name = "minivllm"
 version = "0.0.1"
+description = "A vLLM-style inference engine for Qwen3.8-27B on Apple Silicon, written from scratch for teaching."
 requires-python = ">=3.12"
-# 依赖原则：这是一个自包含的教学项目。引擎本体只依赖 mlx（Metal 的算子库，相当于远程版的 torch + triton）。
+# 依赖原则：自包含的教学项目。引擎本体只依赖 mlx（Metal 的算子库，相当于远程版的 torch + triton）。
 # 分词用 tokenizers（HF 的 Rust 库，分词不是推理引擎要教的东西）；chat 模板、HTTP/SSE server 都自己写，不引入框架。
 dependencies = ["mlx>=0.32", "tokenizers"]
 
-[project.optional-dependencies]
-# 开发/测试：HF 参考实现、下载、跑分客户端。永远不被 minivllm/ import；基线（mlx-lm、dflash-mlx）另放 .venv-mlx。
+# 开发/测试：HF 参考实现、下载、跑分客户端。永远不被 minivllm/ import。
+# 基线（mlx-lm、dflash-mlx）另放 .venv-mlx，见 bench/setup_baseline.sh。
+[dependency-groups]
 dev = ["torch", "transformers", "numpy", "pytest", "huggingface_hub", "httpx"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["minivllm"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
