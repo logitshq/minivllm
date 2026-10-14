@@ -3,7 +3,8 @@
 从零手搓一个 vLLM 式推理引擎，跑 Qwen3.8-27B（nvfp4）在 Apple Silicon 上，教学用、自包含。
 设计跟 vLLM V1（统一调度、paged KV、continuous batching），后端是 MLX。远程还有一份 CUDA/Triton 版，接口契约相同。
 
-- 计划和每步的教程：`docs/PLAN.md`、`docs/tutorial/`
+- **逐章重写教程**：[从第一章开始](docs/tutorial-v2/README.md)，每章一个 commit/tag，教学代码在 `tutorial_code/`。
+- 原计划和实验记录：`docs/PLAN.md`、`docs/tutorial/`
 - 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
 
 ## 现状（2026-10-14，27B nvfp4，M4 Max 48 GB）
