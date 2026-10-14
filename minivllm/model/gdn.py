@@ -14,12 +14,15 @@ from ..config import ModelConfig
 from .layers import GatedRMSNorm, Linear
 
 
-def causal_conv1d(x: mx.array, w: mx.array) -> mx.array:
-    """x: [T, C]，w: [C, K]。y[t] = sum_j w[:, j] * x[t - (K-1) + j]，越界补 0。等价于 HF 的 conv1d(padding=K-1) 取前 T 个。"""
+def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tuple[mx.array, mx.array]:
+    """x: [T, C]，w: [C, K]，state: 之前的 K-1 个输入 [K-1, C]（None = 补 0，即序列开头）。
+    y[t] = sum_j w[:, j] * x[t - (K-1) + j]。等价于 HF 的 conv1d(padding=K-1) 取前 T 个。
+    返回 y 和新的 state（最后 K-1 个输入），decode 时 T=1 也走这条路。"""
     K = w.shape[1]
-    xp = mx.pad(x, [(K - 1, 0), (0, 0)])
     T = x.shape[0]
-    return sum(xp[j:j + T] * w[:, j] for j in range(K))
+    xp = mx.concatenate([mx.zeros((K - 1, x.shape[1]), x.dtype) if state is None else state.astype(x.dtype), x])
+    y = sum(xp[j:j + T] * w[:, j] for j in range(K))
+    return y, xp[T:]
 
 
 def l2norm(x: mx.array, eps: float = 1e-6) -> mx.array:
@@ -62,12 +65,14 @@ class GatedDeltaNet(nn.Module):
         self.norm = GatedRMSNorm(self.Dv, cfg.rms_norm_eps)
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
 
-    def __call__(self, x: mx.array) -> mx.array:
+    def __call__(self, x: mx.array, cache=None) -> mx.array:
         T = x.shape[0]
         qkv = self.in_proj_qkv(x)
         z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
         b, a = self.in_proj_b(x), self.in_proj_a(x)
-        qkv = nn.silu(causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype)))
+        conv_state = cache.conv_state if cache is not None else None
+        qkv, new_conv_state = causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype), conv_state)
+        qkv = nn.silu(qkv)
         q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
         q, k, v = q.reshape(T, self.Hk, self.Dk), k.reshape(T, self.Hk, self.Dk), v.reshape(T, self.Hv, self.Dv)
         if self.Hv > self.Hk:                                        # 27B：16 个 k 头服务 48 个 v 头
@@ -75,6 +80,8 @@ class GatedDeltaNet(nn.Module):
             q, k = mx.repeat(q, rep, axis=1), mx.repeat(k, rep, axis=1)
         beta = mx.sigmoid(b.astype(mx.float32))
         g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
-        o, _ = gated_delta_rule_recurrent(q, k, v, g, beta)
+        o, S = gated_delta_rule_recurrent(q, k, v, g, beta, cache.S if cache is not None else None)
+        if cache is not None:
+            cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(T, -1))
