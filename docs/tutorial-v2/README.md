@@ -1,6 +1,6 @@
 # 一章一章写一个推理引擎
 
-当前完成第一、二章。每次读懂并验证一章，再写下一章。
+教程按章累积实现；每章保留可运行代码、数值验证和固定 Git tag。
 
 教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原来的 `/Users/ryanli/code/minivllm` 保持在 `main`，已有引擎和旧教程都保留。
 
@@ -89,3 +89,7 @@ git switch tutorial/step-by-step
 ```
 
 换到其他机器时执行 `uv sync`，再按章运行示例。模型权重存放在 HF cache，不提交到 Git；每次示例 trace 记录实际使用的模型 snapshot 路径。Git tag 固定代码与依赖锁文件，trace 记录运行条件。
+
+## 后续章节
+
+- [03 Attention](03-attention.md) — `tutorial-03`
