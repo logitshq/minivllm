@@ -1,0 +1,58 @@
+{
+  "chapter": "02-v2",
+  "model_snapshot": "/Users/ryanli/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+  "hf_device": "mps",
+  "dtype": "float32",
+  "checked_layer": 0,
+  "embedding_weight_shape": [
+    248320,
+    1024
+  ],
+  "ids_shape": [
+    1,
+    19
+  ],
+  "embedding_output_shape": [
+    1,
+    19,
+    1024
+  ],
+  "mlp_gate_weight_shape": [
+    3584,
+    1024
+  ],
+  "mlp_down_weight_shape": [
+    1024,
+    3584
+  ],
+  "feed_forward_shape": [
+    1,
+    19,
+    1024
+  ],
+  "logits_shape": [
+    1,
+    19,
+    248320
+  ],
+  "weights_shared": true,
+  "max_errors": {
+    "toy_embedding": 0.0,
+    "toy_linear": 0.0,
+    "toy_rms_norm": 0.0,
+    "toy_silu": 1.1920928955078125e-07,
+    "toy_mlp": 2.384185791015625e-07,
+    "zero_branch_preserves_residual": 0.0,
+    "embedding": 0.0,
+    "input_norm": 4.76837158203125e-07,
+    "post_norm": 1.9073486328125e-06,
+    "final_norm": 3.814697265625e-06,
+    "mlp": 3.2782554626464844e-07,
+    "feed_forward_with_residual": 4.172325134277344e-07,
+    "output_head": 0.0,
+    "final_norm_and_output_head": 7.62939453125e-06
+  },
+  "argmax_all_positions_agree": true,
+  "next_token_id": 79852,
+  "scope": "isolated blocks, one MLP residual sub-block and final norm+head; full decoder still HF"
+}
