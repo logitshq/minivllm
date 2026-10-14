@@ -1,12 +1,14 @@
 # 一章一章写一个推理引擎
 
-当前只完成第一章。每次读懂并验证一章，再写下一章。
+当前完成第一、二章。每次读懂并验证一章，再写下一章。
 
 教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原来的 `/Users/ryanli/code/minivllm` 保持在 `main`，已有引擎和旧教程都保留。
 
 ## 从第一章开始
 
 [01 一次文本生成是怎么发生的](01-一次文本生成是怎么发生的.md)
+
+[02 从 ID 到向量，再到分数](02-从ID到向量再到分数.md)
 
 这一章使用 HF 参考模型，显式写出生成循环，观察输入长度、logits 和输出 token。代码不调用已经完成的 `minivllm` 引擎。
 
@@ -15,6 +17,7 @@
 | 章节 | 固定版本 | 本章代码 |
 |---|---|---|
 | 01 | `tutorial-01` | [tutorial_code/generate.py](../../tutorial_code/generate.py) |
+| 02 | `tutorial-02` | [layers.py](../../tutorial_code/layers.py)、[check_layers.py](../../tutorial_code/check_layers.py) |
 
 每章在同一份 `tutorial_code/` 上接着改，并创建一个 commit 和 tag。读某章时以该章 tag 为准；后续章节的优化不会改变旧 tag 指向的代码。新增能力与性能优化都会在章节开头说明。
 
