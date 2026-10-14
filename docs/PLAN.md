@@ -27,7 +27,8 @@
 |---|---|---|
 | 0.8B bf16 | 220 | 1812 |
 | 0.8B nvfp4 | 441 | 2614 |
-| 27B nvfp4 | 28.8（p=256 g=64） | 68（b=8 已饱和在 76） |
+| 27B nvfp4 | 24–29（波动 15%） | server 并发 8：decode 48 tok/s；并发 32：OOM（见 tutorial 00 基线结果） |
+| 27B 4bit + DFlash2（dflash-mlx，block 5） | 64.2 | 不适用 |
 
 单流投机解码基线：oMLX + MTP k=3 在 M4 Max 上 53 / 72 tok/s（文 / 代码）；dflash-mlx（装在 `.venv-mlx`）。这台机器上 verify k 个 token 的成本：k≤4 免费，k=5 +32%，k=8 ×2（见 tutorial 00）。
 serving 基线：`mlx_lm.server --decode-concurrency 32 --prompt-concurrency N` + 自己写的 bench client（复刻 `vllm bench serve --random-input-len 1024 --random-output-len 1024 --num-prompts 100 --max-concurrency 32`），记 TTFT / TPOT / 吞吐。
