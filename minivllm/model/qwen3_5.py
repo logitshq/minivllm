@@ -35,9 +35,9 @@ class DecoderLayer(nn.Module):
         self.input_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
         self.post_attention_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
 
-    def __call__(self, x, cache=None):
+    def __call__(self, x, ctx=None, layer_idx=0):
         h = self.input_layernorm(x)
-        x = x + (self.self_attn(h, cache) if self.is_attn else self.linear_attn(h, cache))
+        x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx))
         return x + self.mlp(self.post_attention_layernorm(x))
 
 
@@ -51,10 +51,11 @@ class Qwen3_5ForCausalLM(nn.Module):
         if not cfg.tie_word_embeddings:
             self.lm_head = Linear(cfg.hidden_size, cfg.vocab_size, cfg.quantization)
 
-    def __call__(self, input_ids: mx.array, cache: list | None = None) -> mx.array:
-        """input_ids: [T] 个新 token。cache=None：整句前向；否则 cache[i] 是第 i 层的 AttnCache / GDNCache，会被原地更新。"""
+    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False) -> mx.array:
+        """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 见 forward_context.py。
+        last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。"""
         x = self.embed_tokens(input_ids)
         for i, layer in enumerate(self.layers):
-            x = layer(x, cache[i] if cache is not None else None)
-        x = self.norm(x)
+            x = layer(x, ctx, i)
+        x = self.norm(x[-1:] if last_only else x)
         return self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)

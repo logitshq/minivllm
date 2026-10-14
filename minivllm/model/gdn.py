@@ -11,7 +11,7 @@ import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
-from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent
+from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
 from .layers import GatedRMSNorm, Linear
 
 
@@ -44,25 +44,52 @@ class GatedDeltaNet(nn.Module):
         self.norm = GatedRMSNorm(self.Dv, cfg.rms_norm_eps)
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
 
-    def __call__(self, x: mx.array, cache=None) -> mx.array:
-        T = x.shape[0]
-        qkv = self.in_proj_qkv(x)
-        z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
-        b, a = self.in_proj_b(x), self.in_proj_a(x)
-        conv_state = cache.conv_state if cache is not None else None
-        qkv, new_conv_state = causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype), conv_state)
-        qkv = nn.silu(qkv)
+    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+        if ctx is not None and ctx.mode == "decode":
+            return self._decode(x, ctx.caches[layer_idx])
+        return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
+
+    def _gates(self, b, a):
+        beta = mx.sigmoid(b.astype(mx.float32))
+        g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
+        return beta, g
+
+    def _split_heads(self, qkv, n):
         q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
-        q, k, v = q.reshape(T, self.Hk, self.Dk), k.reshape(T, self.Hk, self.Dk), v.reshape(T, self.Hv, self.Dv)
+        q, k, v = q.reshape(n, self.Hk, self.Dk), k.reshape(n, self.Hk, self.Dk), v.reshape(n, self.Hv, self.Dv)
         if self.Hv > self.Hk:                                        # 27B：16 个 k 头服务 48 个 v 头
             rep = self.Hv // self.Hk
             q, k = mx.repeat(q, rep, axis=1), mx.repeat(k, rep, axis=1)
-        beta = mx.sigmoid(b.astype(mx.float32))
-        g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
-        S0 = cache.S if cache is not None else None
+        return q, k, v
+
+    def _prefill(self, x: mx.array, cache) -> mx.array:
+        """单序列：x [T, hidden]。T=1 走递推，否则走分块；状态接 cache。"""
+        T = x.shape[0]
+        qkv = self.in_proj_qkv(x)
+        z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
+        conv_state = cache.conv_state if cache is not None and cache.offset > 0 else None
+        qkv, new_conv_state = causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype), conv_state)
+        q, k, v = self._split_heads(nn.silu(qkv), T)
+        beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        S0 = cache.S if cache is not None and cache.offset > 0 else None
         rule = gated_delta_rule_recurrent if T == 1 else gated_delta_rule_chunk   # decode 递推，prefill 分块
         o, S = rule(q, k, v, g, beta, S0)
         if cache is not None:
             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(T, -1))
+
+    def _decode(self, x: mx.array, st) -> mx.array:
+        """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
+        B = x.shape[0]
+        qkv = self.in_proj_qkv(x)                                   # [B, C]
+        z = self.in_proj_z(x).reshape(B, self.Hv, self.Dv)
+        w = self.conv1d_weight.astype(qkv.dtype)                    # [C, K]
+        xp = mx.concatenate([st.conv.astype(qkv.dtype), qkv[:, None]], axis=1)   # [B, K, C]
+        qkv = (xp * w.T[None]).sum(axis=1)                          # 因果卷积在最后一个位置的值
+        q, k, v = self._split_heads(nn.silu(qkv), B)
+        beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        o, S = gated_delta_step_batch(q, k, v, g, beta, st.S)
+        st.conv, st.S = xp[:, 1:], S
+        o = self.norm(o.astype(x.dtype), z)
+        return self.out_proj(o.reshape(B, -1))

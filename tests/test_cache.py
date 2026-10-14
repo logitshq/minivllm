@@ -4,6 +4,7 @@ import numpy as np
 import mlx.core as mx
 
 from minivllm.cache import make_cache
+from minivllm.forward_context import ForwardContext
 from minivllm.model.loader import load_model
 
 HF_DIR = glob.glob(os.path.expanduser("~/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/*"))[0]
@@ -20,21 +21,21 @@ def test_prefill_then_decode_equals_full_forward():
     ref = np.load("tests/data/hf_0.8b.npz")
     full_ids = PROMPT + ref["fp32_greedy"].tolist()[:30]
     full = logits_np(model(mx.array(full_ids)))                        # [T, V] 整句
-    cache = make_cache(model)
+    cache = ForwardContext("prefill", make_cache(model))
     out = logits_np(model(mx.array(PROMPT), cache))                    # prefill
     assert np.abs(out - full[: len(PROMPT)]).max() < 1e-2
     for t in range(len(PROMPT), len(full_ids)):
         step = logits_np(model(mx.array([full_ids[t]]), cache))        # decode：只算 1 个 token
         assert np.abs(step[0] - full[t]).max() < 1e-2, f"position {t}"
         assert step[0].argmax() == full[t].argmax()
-    assert cache[0].offset == len(full_ids) and cache[3].offset == len(full_ids)
+    assert cache.caches[0].offset == len(full_ids) and cache.caches[3].offset == len(full_ids)
 
 
 def test_chunked_prefill_equals_one_shot():
     """分块 prefill（7 个一块，最后一块 5 个）== 一次性 prefill：验证注意力的右下角 causal 对齐和 GDN 的状态接续。"""
     model, _ = load_model(HF_DIR, dtype=mx.float32)
     one = logits_np(model(mx.array(PROMPT)))
-    cache = make_cache(model)
+    cache = ForwardContext("prefill", make_cache(model))
     outs = [logits_np(model(mx.array(PROMPT[i:i + 7]), cache)) for i in range(0, len(PROMPT), 7)]
     chunked = np.concatenate(outs)
     assert chunked.shape == one.shape
@@ -47,7 +48,7 @@ def test_bf16_greedy_with_cache_matches_no_cache():
     ids = list(PROMPT); no_cache = []
     for _ in range(32):
         no_cache.append(int(mx.argmax(model(mx.array(ids))[-1]).item())); ids.append(no_cache[-1])
-    cache = make_cache(model)
+    cache = ForwardContext("prefill", make_cache(model))
     nxt = int(mx.argmax(model(mx.array(PROMPT), cache)[-1]).item()); with_cache = [nxt]
     for _ in range(31):
         nxt = int(mx.argmax(model(mx.array([nxt]), cache)[-1]).item()); with_cache.append(nxt)

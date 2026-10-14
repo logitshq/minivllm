@@ -24,14 +24,24 @@ class Attention(nn.Module):
         self.q_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
         self.k_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
 
-    def __call__(self, x: mx.array, cache=None) -> mx.array:
-        T, _ = x.shape
-        offset = cache.offset if cache is not None else 0      # 已有多少 token：RoPE 的位置从这里起算
+    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+        if ctx is not None and ctx.mode == "decode":
+            return self._decode(x, ctx, layer_idx)
+        return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
+
+    def _project(self, x):
+        T = x.shape[0]
         qg = self.q_proj(x).reshape(T, self.n_heads, 2 * self.head_dim)
         q, gate = mx.split(qg, 2, axis=-1)                       # 每个头：前 D 是 q，后 D 是门
         k = self.k_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
         v = self.v_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
-        q, k = self.q_norm(q), self.k_norm(k)                    # 按头做 RMSNorm（零中心）
+        return self.q_norm(q), self.k_norm(k), v, gate.reshape(T, -1)   # 按头做 RMSNorm（零中心）
+
+    def _prefill(self, x: mx.array, cache) -> mx.array:
+        """单序列：x [T, hidden]；cache=None 时整句前向，否则接着 cache.offset 往后算。"""
+        T = x.shape[0]
+        offset = cache.offset if cache is not None else 0      # 已有多少 token：RoPE 的位置从这里起算
+        q, k, v, gate = self._project(x)
         q = apply_rope(q.transpose(1, 0, 2)[None], offset, self.rotary_dim, self.theta)   # [1, H, T, D]
         k = apply_rope(k.transpose(1, 0, 2)[None], offset, self.rotary_dim, self.theta)
         v = v.transpose(1, 0, 2)[None]
@@ -41,5 +51,19 @@ class Attention(nn.Module):
         mask = "causal" if T > 1 else None
         o = mx.fast.scaled_dot_product_attention(q, k, v, scale=self.scale, mask=mask)  # GQA 自动广播
         o = o[0].transpose(1, 0, 2).reshape(T, -1)
-        o = o * mx.sigmoid(gate.reshape(T, -1))
-        return self.o_proj(o)
+        return self.o_proj(o * mx.sigmoid(gate))
+
+    def _decode(self, x: mx.array, ctx, layer_idx: int) -> mx.array:
+        """批量：x [B, hidden]，每行一个新 token，位置各不相同。"""
+        B = x.shape[0]
+        kv = ctx.caches[layer_idx]
+        q, k, v, gate = self._project(x)                         # [B, H, D], [B, Hkv, D]
+        q = apply_rope(q[:, :, None], ctx.positions, self.rotary_dim, self.theta)   # [B, H, 1, D]，每行自己的位置
+        k = apply_rope(k[:, :, None], ctx.positions, self.rotary_dim, self.theta)[:, :, 0]
+        kv.write(k, v, ctx.positions)
+        L = ctx.max_len
+        K, V = kv.K[:, :, :L], kv.V[:, :, :L]
+        mask = (mx.arange(L)[None, :] < ctx.lens[:, None])[:, None, None, :]        # 每行只看自己的历史
+        o = mx.fast.scaled_dot_product_attention(q, K, V, scale=self.scale, mask=mask)
+        o = o[:, :, 0].reshape(B, -1)
+        return self.o_proj(o * mx.sigmoid(gate))
