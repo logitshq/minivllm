@@ -94,3 +94,4 @@ git switch tutorial/step-by-step
 
 - [03 Attention](03-attention.md) — `tutorial-03`
 - [04 GDN](04-gdn.md) — `tutorial-04`
+- [05 完整模型](05-model.md) — `tutorial-05`
