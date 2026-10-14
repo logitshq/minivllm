@@ -1,9 +1,9 @@
-"""Chapter 04: projections → causal depthwise conv → gates → recurrent GDN → gated norm."""
+"""Chapter 06: keep convolution tail and GDN state across chunks and single-token steps."""
 import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
-from ..kernels.gdn import gated_delta_rule_recurrent
+from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent
 from .layers import GatedRMSNorm, Linear
 
 
@@ -37,8 +37,8 @@ class GatedDeltaNet(nn.Module):
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
 
     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
-        if ctx is not None:
-            raise ValueError("Cache arrives in chapter 06")
+        if ctx is not None and ctx.mode == "decode":
+            raise ValueError("Batch decode arrives in chapter 08")
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
     def _gates(self, b, a):
@@ -64,7 +64,12 @@ class GatedDeltaNet(nn.Module):
         qkv, new_conv_state = causal_conv1d(qkv, self.conv1d_weight.astype(qkv.dtype), conv_state)
         q, k, v = self._split_heads(nn.silu(qkv), T)
         beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
-        o, S = gated_delta_rule_recurrent(q, k, v, g, beta)
+        S0 = cache.S if cache is not None and cache.offset > 0 else None
+        if T == 1:
+            o, S = gated_delta_rule_recurrent(q, k, v, g, beta, S0)                 # decode：递推
+        else:
+            chunk = 64 if T > 32 else (16 if T > 8 else 8)                          # 投机解码 verify 的 8 个 token 用小块
+            o, S = gated_delta_rule_chunk(q, k, v, g, beta, S0, chunk=chunk)
         if cache is not None:
             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)

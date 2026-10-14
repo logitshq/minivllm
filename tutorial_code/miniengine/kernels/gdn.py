@@ -1,4 +1,4 @@
-"""Chapter 04: explicit fp32 Gated DeltaNet recurrence. State decays before prediction."""
+"""Chapter 06: recurrent and chunk-parallel GDN, pure MLX forward substitution; no custom Metal."""
 import mlx.core as mx
 
 
@@ -21,5 +21,59 @@ def gated_delta_rule_recurrent(q, k, v, g, beta, state=None):
         S = S + k[t][:, :, None] * delta[:, None, :]
         outs.append((S * q[t][:, :, None]).sum(axis=1))
     return mx.stack(outs), S
+
+
+def _solve_unit_lower(A: mx.array, V: mx.array) -> mx.array:
+    """解 (I + A) X = V，A 严格下三角 [..., C, C]，V [..., C, N]。前向代入：x_i = v_i − Σ_{j<i} A_ij x_j。
+    不要显式求逆：真实数据里相邻 token 的键高度相关、β≈1 时，(I+A)^{-1} 的元素按 2^(i−j) 增长再相消，fp32 会炸。
+    解本身（就是 delta rule 的修正量 u）是有界的，前向代入稳定。"""
+    C = A.shape[-2]
+    rows = [V[..., 0:1, :]]
+    for i in range(1, C):
+        X = mx.concatenate(rows, axis=-2)                                     # [..., i, N]
+        rows.append(V[..., i:i + 1, :] - A[..., i:i + 1, :i] @ X)
+    return mx.concatenate(rows, axis=-2)
+
+
+def _solve(A, V):
+    return _solve_unit_lower(A, V)
+
+
+def gated_delta_rule_chunk(q, k, v, g, beta, state=None, chunk: int = 64):
+    T, Hv, Dk = k.shape
+    Dv = v.shape[-1]
+    q, k, v = (t.astype(mx.float32).transpose(1, 0, 2) for t in (q, k, v))     # [Hv, T, D]
+    g, beta = g.T, beta.T                                                     # [Hv, T]
+    q, k = l2norm(q), l2norm(k)
+    q = q * Dk ** -0.5
+    pad = (chunk - T % chunk) % chunk
+    if pad:
+        q, k, v = (mx.pad(t, [(0, 0), (0, pad), (0, 0)]) for t in (q, k, v))
+        g, beta = (mx.pad(t, [(0, 0), (0, pad)]) for t in (g, beta))
+    nc = (T + pad) // chunk
+    q, k, v = (t.reshape(Hv, nc, chunk, -1) for t in (q, k, v))               # [Hv, nc, C, D]
+    g, beta = g.reshape(Hv, nc, chunk), beta.reshape(Hv, nc, chunk)
+    v_beta, k_beta = v * beta[..., None], k * beta[..., None]
+
+    cum = mx.cumsum(g, axis=-1)                                               # [Hv, nc, C] 块内累计 log 衰减
+    pair = cum[..., :, None] - cum[..., None, :]                              # (i, j): 从 j 到 i 的衰减
+    lower = mx.tril(mx.ones((chunk, chunk), dtype=mx.bool_))
+    pair = mx.exp(mx.where(lower, pair, -mx.inf))                             # 上三角 → 0
+    A = mx.tril((k_beta @ k.transpose(0, 1, 3, 2)) * pair, -1)                # 严格下三角
+    intra = (q @ k.transpose(0, 1, 3, 2)) * pair                              # 块内注意力
+    sol = _solve(A, mx.concatenate([v_beta, k_beta * mx.exp(cum)[..., None]], axis=-1))
+    new_values, k_cumdecay = sol[..., :Dv], sol[..., Dv:]                     # "u"：块内 delta rule 合并后的新值；读旧状态的衰减键
+    q = q * mx.exp(cum)[..., None]
+    k = k * mx.exp(cum[..., -1:] - cum)[..., None]
+    chunk_decay = mx.exp(cum[..., -1])                                        # [Hv, nc]
+
+    S = mx.zeros((Hv, Dk, Dv), dtype=mx.float32) if state is None else state
+    outs = []
+    for i in range(nc):
+        v_new = new_values[:, i] - k_cumdecay[:, i] @ S                       # 减掉旧状态已经"知道"的部分
+        outs.append(q[:, i] @ S + intra[:, i] @ v_new)                        # 读旧状态 + 块内
+        S = S * chunk_decay[:, i][:, None, None] + k[:, i].transpose(0, 2, 1) @ v_new
+    o = mx.concatenate(outs, axis=1)[:, :T]                                   # [Hv, T, Dv]
+    return o.transpose(1, 0, 2), S
 
 

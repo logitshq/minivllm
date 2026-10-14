@@ -1,10 +1,12 @@
-"""Chapter 05: generate with the independent MLX model. Tokenizer stays at the boundary."""
+"""Chapter 06: generate with the independent MLX model. Tokenizer stays at the boundary."""
 import argparse
 import json
 from pathlib import Path
 import mlx.core as mx
 from tutorial_code.reference_helpers import raw_model_dir, write_report
 from tutorial_code.miniengine.model.loader import load_model
+from tutorial_code.miniengine.cache import make_cache
+from tutorial_code.miniengine.context import ForwardContext
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -28,17 +30,20 @@ def main():
     eos = json.loads(gen.read_text()).get("eos_token_id", []) if gen.exists() else []
     eos = set(eos if isinstance(eos,list) else [eos])
     ids, out, rounds = list(prompt_ids), [], []
+    ctx = ForwardContext("prefill", make_cache(model))
+    current = list(prompt_ids)
     for step in range(args.max_new_tokens):
-        logits = model(mx.array(ids), last_only=True)
+        logits = model(mx.array(current), ctx, last_only=True)
         nxt = int(mx.argmax(logits[-1]).item())
-        rounds.append({"round":step+1,"input_tokens":len(ids),"logits_shape":list(logits.shape),"next_token_id":nxt})
+        rounds.append({"round":step+1,"input_tokens":len(current),"logits_shape":list(logits.shape),"next_token_id":nxt})
         ids.append(nxt); out.append(nxt)
+        current = [nxt]
         if nxt in eos:
             break
     print("generated IDs:", out)
     print("generated text:", tokenizer.decode(out, skip_special_tokens=True))
     if args.trace_json:
-        write_report(args.trace_json, {"chapter":"05", "model_snapshot":str(model_dir),"dtype":args.dtype,"use_cache":False,"prompt_ids":prompt_ids,"generated_ids":out,"rounds":rounds})
+        write_report(args.trace_json, {"chapter":"06", "model_snapshot":str(model_dir),"dtype":args.dtype,"use_cache":True,"prompt_ids":prompt_ids,"generated_ids":out,"rounds":rounds})
 
 if __name__ == "__main__":
     main()

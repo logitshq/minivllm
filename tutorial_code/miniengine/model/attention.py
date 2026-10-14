@@ -1,4 +1,4 @@
-"""Chapter 03: GQA, per-head q/gate split, partial RoPE and output gate. No cache yet."""
+"""Chapter 06: reuse KV with position offset and right-aligned causal mask."""
 import mlx.core as mx
 import mlx.nn as nn
 
@@ -21,8 +21,8 @@ class Attention(nn.Module):
         self.k_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
 
     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
-        if ctx is not None:
-            raise ValueError("Cache arrives in chapter 06; batch decode in chapter 08")
+        if ctx is not None and ctx.mode == "decode":
+            raise ValueError("Batch decode arrives in chapter 08")
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
     def _project(self, x):
