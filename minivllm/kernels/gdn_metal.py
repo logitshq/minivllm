@@ -1,0 +1,75 @@
+"""GDN decode 一步的 Metal kernel（mx.fast.metal_kernel）。
+
+纯 MLX 版（kernels/gdn.py 的 gated_delta_step_batch）要把 S（27B 每层每序列 3 MB，B=32 时 100 MB）读两三遍、写一遍，
+每层 1.9 ms。这里一个 threadgroup 管一个 (序列, 头) 的 128×128 状态，线程 t 管第 t 列（再按 dk 拆 4 段提高并行度）：
+    第一遍：kv[t] = Σ_dk k[dk]·S[dk, t]                     （读 S）
+    δ[t]   = (v[t] − e·kv[t])·β
+    第二遍：S'[dk, t] = e·S[dk, t] + k[dk]·δ[t]，o[t] += q[dk]·S'[dk, t]   （读 S，写 S'）
+相邻线程读写相邻地址，访存完全合并。q、k 的 L2 归一化、缩放和 exp(g) 也在 kernel 里做，省掉每层十来个小算子的发射开销。
+"""
+import mlx.core as mx
+
+
+# 每个 (序列, 头) 一个 threadgroup：Dv 列 × SPLIT 段。线程 (t, s) 管第 t 列、dk ∈ [s·Dk/SPLIT, (s+1)·Dk/SPLIT)。
+# 两次段间归约走 threadgroup 内存。B 小的时候线程数是瓶颈（B=1 只有 48 个头），拆段把线程数乘 SPLIT。
+SPLIT = 4
+_SOURCE = """
+    uint dv = thread_position_in_threadgroup.x;
+    uint sp = thread_position_in_threadgroup.y;
+    uint h  = threadgroup_position_in_grid.y;
+    uint b  = threadgroup_position_in_grid.z;
+    uint Hv = S_shape[1];
+    uint Dk = S_shape[2];
+    uint Dv = S_shape[3];
+    uint bh = b * Hv + h;
+    uint seg = Dk / SPLIT;
+    uint d0 = sp * seg;
+    size_t base = (size_t)bh * Dk * Dv;
+    const device float* qh = q + (size_t)bh * Dk;
+    const device float* kh = k + (size_t)bh * Dk;
+    threadgroup float red[SPLIT * 128];
+    float qn = 0.0f, kn = 0.0f;
+    for (uint d = 0; d < Dk; d++) { qn += qh[d] * qh[d]; kn += kh[d] * kh[d]; }
+    float qs = metal::rsqrt(qn + 1e-6f) * metal::rsqrt((float)Dk);   // L2 归一化 + Dk^-0.5
+    float ks = metal::rsqrt(kn + 1e-6f);
+    float ex = metal::exp(g[bh]);
+    float be = beta[bh];
+    float kv = 0.0f;
+    for (uint d = d0; d < d0 + seg; d++) kv += ks * kh[d] * S[base + d * Dv + dv];
+    red[sp * Dv + dv] = kv;
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    kv = 0.0f;
+    for (uint i = 0; i < SPLIT; i++) kv += red[i * Dv + dv];
+    float delta = (v[(size_t)bh * Dv + dv] - ex * kv) * be;
+    float acc = 0.0f;
+    for (uint d = d0; d < d0 + seg; d++) {
+        float s = ex * S[base + d * Dv + dv] + ks * kh[d] * delta;
+        S_new[base + d * Dv + dv] = s;
+        acc += qs * qh[d] * s;
+    }
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    red[sp * Dv + dv] = acc;
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    if (sp == 0) {
+        acc = 0.0f;
+        for (uint i = 0; i < SPLIT; i++) acc += red[i * Dv + dv];
+        o[(size_t)bh * Dv + dv] = acc;
+    }
+"""
+
+_kernel = mx.fast.metal_kernel(
+    name="gdn_decode_step", input_names=["q", "k", "v", "g", "beta", "S"], output_names=["o", "S_new"],
+    source=_SOURCE.replace("SPLIT", str(SPLIT)),
+)
+
+
+def gated_delta_step_metal(q, k, v, g, beta, S):
+    """和 gated_delta_step_batch 同样的接口：q, k [B, Hv, Dk]，v [B, Hv, Dv]，g, beta [B, Hv]，S [B, Hv, Dk, Dv] fp32。
+    归一化、缩放、exp 都在 kernel 里做。"""
+    B, Hv, Dk, Dv = S.shape
+    o, S_new = _kernel(
+        inputs=[q.astype(mx.float32), k.astype(mx.float32), v.astype(mx.float32), g.astype(mx.float32), beta.astype(mx.float32), S],
+        grid=(Dv, Hv * SPLIT, B), threadgroup=(Dv, SPLIT, 1),
+        output_shapes=[(B, Hv, Dv), (B, Hv, Dk, Dv)], output_dtypes=[mx.float32, mx.float32],
+    )
+    return o, S_new

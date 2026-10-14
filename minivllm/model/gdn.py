@@ -11,7 +11,8 @@ import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
-from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
+from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent
+from ..kernels.gdn_metal import gated_delta_step_metal
 from .layers import GatedRMSNorm, Linear
 
 
@@ -89,7 +90,7 @@ class GatedDeltaNet(nn.Module):
         qkv = (xp * w.T[None]).sum(axis=1)                          # 因果卷积在最后一个位置的值
         q, k, v = self._split_heads(nn.silu(qkv), B)
         beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
-        o, S = gated_delta_step_batch(q, k, v, g, beta, st.S)
+        o, S = gated_delta_step_metal(q, k, v, g, beta, st.S)
         st.conv, st.S = xp[:, 1:], S
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(B, -1))

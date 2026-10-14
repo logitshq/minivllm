@@ -45,3 +45,21 @@ def test_chunk_with_correlated_keys():
     o2, S2 = gated_delta_rule_chunk(q, k, v, g, beta)
     assert np.abs(np.array(o1 - o2)).max() < 1e-3 * np.abs(np.array(o1)).max()
     assert np.abs(np.array(S1 - S2)).max() < 1e-3 * np.abs(np.array(S1)).max()
+
+
+def test_metal_step_equals_batch_step():
+    """Metal 版 decode 一步 == 纯 MLX 版 == 逐 token 递推。"""
+    from minivllm.kernels.gdn import gated_delta_step_batch
+    from minivllm.kernels.gdn_metal import gated_delta_step_metal
+    mx.random.seed(5)
+    B, Hv, Dk, Dv = 3, 4, 128, 128
+    q, k, v = (mx.random.normal((B, Hv, d)) for d in (Dk, Dk, Dv))
+    g = -mx.random.uniform(0.0, 3.0, (B, Hv)); beta = mx.sigmoid(mx.random.normal((B, Hv)))
+    S = mx.random.normal((B, Hv, Dk, Dv))
+    o1, S1 = gated_delta_step_batch(q, k, v, g, beta, S)
+    o2, S2 = gated_delta_step_metal(q, k, v, g, beta, S)
+    assert np.abs(np.array(o1 - o2)).max() < 1e-4 * np.abs(np.array(o1)).max()
+    assert np.abs(np.array(S1 - S2)).max() < 1e-5 * np.abs(np.array(S1)).max()
+    for b in range(B):   # 和逐 token 递推（带初始状态）逐序列对比
+        o3, S3 = gated_delta_rule_recurrent(q[b:b+1], k[b:b+1], v[b:b+1], g[b:b+1], beta[b:b+1], S[b])
+        assert np.abs(np.array(o3[0] - o2[b])).max() < 1e-4 * np.abs(np.array(o3)).max()
