@@ -1,0 +1,94 @@
+<title>minivllm 复盘</title>
+<style>
+/* 布局：单栏文档，65 字宽；数字表格用等宽数字；蓝色只给"我们"这一方 */
+:root{--bg:#fbfaf7;--fg:#1b1a17;--muted:#6b6a64;--line:#e4e2db;--panel:#f2f0ea;--accent:#2a78d6;--accent-ink:#1c5cab;
+  --font-body:-apple-system,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif;
+  --font-num:"SF Mono",Menlo,Consolas,"Noto Sans Mono CJK SC",monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#191917;--fg:#f1efe9;--muted:#a3a19a;--line:#33322e;--panel:#232220;--accent:#5a9ae6;--accent-ink:#86b6ef;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#191917;--fg:#f1efe9;--muted:#a3a19a;--line:#33322e;--panel:#232220;--accent:#5a9ae6;--accent-ink:#86b6ef;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.6;padding-block:40px 64px;padding-inline:20px}
+main{max-width:760px;margin:0 auto}
+h1{font-size:28px;line-height:1.25;margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
+.lede{font-size:16px;color:var(--muted);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+p{margin:0 0 12px;max-width:65ch}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0 6px}
+.kpi{background:var(--panel);border-radius:8px;padding:14px 16px}
+.kpi b{display:block;font-family:var(--font-num);font-variant-numeric:tabular-nums;font-size:26px;font-weight:600;color:var(--accent-ink);line-height:1.1}
+.kpi span{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+.tbl{overflow-x:auto;margin:10px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.n,th.n{text-align:right;font-family:var(--font-num);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.ours{color:var(--accent-ink);font-weight:600}
+.note{font-size:13px;color:var(--muted);max-width:70ch}
+ol,ul{padding-left:22px;max-width:70ch}li{margin-bottom:6px}
+.steps li{margin-bottom:8px}.steps b{font-weight:600}
+code{font-family:var(--font-num);font-size:.92em;background:var(--panel);padding:1px 5px;border-radius:4px}
+.foot{margin-top:36px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+</style>
+<main>
+<h1>minivllm 复盘：1,745 行 Python，把 27B 在一台 MacBook 上跑到 vLLM 级的服务</h1>
+<p class="lede">2026-10-13 晚到 10-14 上午，M4 Max 48 GB，Qwen3.8-27B nvfp4。一个只依赖 mlx 和 tokenizers 的推理引擎，从模型前向写到 OpenAI 兼容 server 和投机解码，每一步有测试和教程。</p>
+
+<div class="kpis">
+  <div class="kpi"><b>1,745</b><span>行 Python（含 112 行 Metal），22 个测试</span></div>
+  <div class="kpi"><b>2.2×</b><span>单用户速度（DFlash2 投机解码，结果逐 token 相同）</span></div>
+  <div class="kpi"><b>32</b><span>并发能跑，峰值 24 GB；mlx-lm 的 server 在这里 OOM</span></div>
+  <div class="kpi"><b>248</b><span>prefill tok/s，从第一版的 103 来</span></div>
+</div>
+
+<h2>用多少代码，替代了什么</h2>
+<p>这不是功能等价：vLLM 支持几百个模型、多卡、十几种量化，我们只支持一个架构、一块芯片。下面的行数说的是"要看懂一个推理引擎的每一层，需要读多少代码"。</p>
+<div class="tbl"><table>
+<tr><th>我们的部分</th><th class="n">行数</th><th>对应的现成实现</th><th class="n">行数</th></tr>
+<tr><td class="ours">engine/：请求、调度器、批量 runner、引擎、async</td><td class="n">456</td><td>vLLM v1 核心：scheduler、kv_cache_manager、block_pool、gpu_model_runner、engine core</td><td class="n">15,396</td></tr>
+<tr><td class="ours">server.py：asyncio 手写 HTTP/SSE，OpenAI 兼容</td><td class="n">151</td><td>vLLM entrypoints/openai；mlx-lm 的 server + generate + cache</td><td class="n">11,054；5,820</td></tr>
+<tr><td class="ours">spec/ + spec_runner：DFlash2 drafter、验证、状态回滚</td><td class="n">280</td><td>vLLM spec_decode；dflash-mlx 整个包</td><td class="n">15,033；24,710</td></tr>
+<tr><td class="ours">model/ + kernels/：Qwen3.5 架构、分块 GDN、2 个 Metal kernel</td><td class="n">610</td><td>mlx-lm 的 qwen3_5.py + gated_delta.py（它的 Metal kernel 在里面）</td><td class="n">1,219</td></tr>
+<tr><td class="ours">基础：config、cache、sampler、tokenizer 封装</td><td class="n">338</td><td>—</td><td class="n">—</td></tr>
+<tr><td class="ours">合计</td><td class="n">1,745</td><td>vLLM 0.31.0 全部；mlx-lm 全部</td><td class="n">1,137,162；56,734</td></tr>
+</table></div>
+<p class="note">依赖：引擎只 import mlx；分词用 tokenizers；chat 模板和 HTTP 都自己写。torch、transformers 只用来生成参考答案，mlx-lm 和 dflash-mlx 只做基线，各自放在别的 venv。</p>
+
+<h2>快了多少</h2>
+<div class="tbl"><table>
+<tr><th>指标（27B nvfp4）</th><th class="n">起点</th><th class="n">现在</th><th>对照</th><th>靠什么</th></tr>
+<tr><td>prefill，1024 token</td><td class="n">103 tok/s</td><td class="n ours">248 tok/s</td><td>mlx-lm 同 checkpoint 138，affine 4bit 241</td><td>分块 GDN + 三角求解 Metal kernel</td></tr>
+<tr><td>单用户 decode</td><td class="n">3 tok/s（无 cache）</td><td class="n ours">25 tok/s</td><td>mlx-lm 24 到 29；带宽上限 28</td><td>KV cache + GDN 状态</td></tr>
+<tr><td>单用户 + 投机解码</td><td class="n">25 tok/s</td><td class="n ours">56 到 62 tok/s</td><td>dflash-mlx 54.6 到 56.1</td><td>DFlash2 drafter，块 5，自适应</td></tr>
+<tr><td>decode 一步，并发 32</td><td class="n">260 ms</td><td class="n ours">186 ms（持续 250）</td><td>mlx-lm 静态 batch 快 20%</td><td>GDN 状态更新 Metal kernel</td></tr>
+<tr><td>并发 8，decode 阶段</td><td class="n">—</td><td class="n ours">90 tok/s</td><td>mlx-lm server 48</td><td>紧凑批量 cache，prefill/decode 交错</td></tr>
+<tr><td>并发 32</td><td class="n">—</td><td class="n ours">115 到 127 tok/s，24 GB</td><td>mlx-lm server OOM（38 GB）</td><td>内存账面分配 + allocator 限 2 GB</td></tr>
+</table></div>
+<p class="note">所有数字同一台机器、同一个 checkpoint、同一个 client，跑分前退出全部桌面 app。MacBook 持续负载 20 步后降频，并发 32 的持续值比爆发值低 25%。</p>
+
+<h2>七步，每步一个判据</h2>
+<ol class="steps">
+<li><b>基线。</b>HF transformers 的 greedy 当标准答案；mlx-lm、dflash-mlx、oMLX 在这台机器上的数字当靶子。</li>
+<li><b>模型前向，无 cache。</b>fp32 对 HF fp32 逐 token 相同（logits 差 0.0001）；27B 对 mlx-lm 24/24。踩坑：mlx-community 把 RMSNorm 的 +1 烧进了权重。</li>
+<li><b>cache 和分块 GDN。</b>prefill 后逐 token decode == 整句前向。踩坑：显式求逆在真实数据上炸，改前向代入。</li>
+<li><b>调度器。</b>固定槽位、无抢占、分块 prefill、decode 优先；CPU 单测 200 个随机请求。</li>
+<li><b>批量 decode + Metal kernel。</b>三个请求合批 == 各自单跑。发现 MLX 散写是整块拷贝，放弃"大池子"。</li>
+<li><b>server。</b>自己写的 client 复刻 vllm bench serve；并发 32 跑通；MLX allocator 缓存限到 2 GB。</li>
+<li><b>DFlash2。</b>投机的 greedy == 不投机的 greedy，128/128；GDN 状态用磁带重放回滚，1 ms。</li>
+</ol>
+
+<h2>最值钱的三个教训</h2>
+<ul>
+<li>判据先于代码：fp32 对 fp32 逐 token 相同才算对，bf16 的分叉不要追；kernel 测试要用真实数据的统计形状。</li>
+<li>Mac 不是小号 GPU：数组不可变、算力带宽比低一个量级、持续负载降频，vLLM 的三个设计假设都不成立，照抄会慢。</li>
+<li>跑分前先清机器：桌面 app 的 12 GB swap 和 allocator 的 20 GB 缓存，各自能让数字差一倍。</li>
+</ul>
+
+<h2>还没做的</h2>
+<ul>
+<li>verify 的小 M 量化矩阵乘：8 个 token 的前向 95 ms，应该接近 40；做好了投机解码从 2.2 倍到 3 倍。</li>
+<li>并发 24 到 32 的批量 decode 比 mlx-lm 静态 batch 慢 20%，原因没查。</li>
+<li>server 层比裸引擎慢 13%，asyncio 的逐 token 写 SSE 待查。</li>
+<li>完整的 100 条 × 1024 协议留着夜里跑。</li>
+</ul>
+
+<p class="foot">代码在本机 <code>~/code/minivllm</code>（还没推 GitHub）；每一步的教程在 <code>docs/tutorial/00</code> 到 <code>06</code>，Pareto 曲线在 <code>docs/pareto.html</code>。</p>
+</main>

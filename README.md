@@ -16,7 +16,7 @@
 | 并发 8 decode 阶段 | 90 tok/s | mlx-lm server 48 |
 | 并发 32 | 跑得起来，峰值 24 GB，持续 115–127 tok/s | mlx-lm server Metal OOM；其静态 batch 142（比我们快 20%） |
 
-教程按步骤在 `docs/tutorial/00`–`06`；吞吐 vs 每用户速度的 Pareto 曲线在 `docs/pareto.html`（`uv run bench/pareto.py` 重画）。
+教程按步骤在 `docs/tutorial/00`–`06`；吞吐 vs 每用户速度的 Pareto 曲线在 `docs/pareto.html`（`uv run bench/pareto.py` 重画），一页复盘在 `docs/summary.html`。
 
 ## 环境
 

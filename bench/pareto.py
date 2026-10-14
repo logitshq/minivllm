@@ -26,27 +26,37 @@ for m in re.finditer(r"dflash (\w+)\s*:\s*([\d.]+) tok/s decode-only \(([\d.]+)x
     k, v, sp = m.group(1), float(m.group(2)), m.group(3)
     spec.append({"label": names.get(k, k), "B": 1, "x": v, "y": v, "note": f"{sp}×，块 5，无损"})
 # mlx-lm 真正的 server（continuous batching）在并发 8 的 decode 阶段：TPOT 165 ms → 每用户 6.1，整机 48.5（tutorial 05）。
-mlx_server = [{"label": "server 并发 8", "B": 8, "x": 1000 / 165, "y": 8 * 1000 / 165, "note": "mlx_lm.server，decode 阶段；并发 32 OOM", "hollow": True}]
+mlx_server = [{"label": "它的 server，并发 8", "B": 8, "x": 1000 / 165, "y": 8 * 1000 / 165, "note": "mlx_lm.server，decode 阶段；并发 32 OOM", "hollow": True}]
+# dflash-mlx 在同样三个 prompt 上（块 5，128 token，27B-4bit，它默认开 thinking）：bench/results/dflash-mlx-3prompts.txt
+dm = {}
+for line in (R / "dflash-mlx-3prompts.txt").read_text().splitlines():
+    if line.startswith("=== "): cur = line[4:].strip()
+    m = re.search(r"dflash generation_tps median\s*:\s*([\d.]+)", line) or re.search(r"dflash ([\d.]+) speedup", line)
+    if m: dm[cur] = float(m.group(1))
+dflash_mlx = [{"label": names.get(k, k), "B": 1, "x": v, "y": v, "note": "dflash-mlx，块 5，4bit affine" + ("；它开了 thinking，答案长得多" if k == "kv" else ""), "diamond": True, "hollow": True} for k, v in dm.items()]
+for p in spec: p["diamond"] = True
 data = {"series": [
-    {"name": "minivllm（引擎，decode 阶段）", "slot": 1, "points": ours, "connect": True},
-    {"name": "mlx-lm（静态 batch；空心点 = 它的 server）", "slot": 2, "points": mlx + mlx_server, "connect": True, "fail": mlx_fail},
-    {"name": "minivllm + DFlash2（单用户，无损）", "slot": 3, "points": spec, "connect": False},
+    {"name": "minivllm（引擎，并发 1 到 32）", "slot": 1, "points": ours, "connect": True},
+    {"name": "minivllm + DFlash2（单用户，无损）", "slot": 1, "points": spec, "connect": False},
+    {"name": "mlx-lm（静态 batch；空心 = 它的 server）", "slot": 2, "points": mlx + mlx_server, "connect": True, "fail": mlx_fail},
+    {"name": "dflash-mlx（单用户）", "slot": 2, "points": dflash_mlx, "connect": False},
 ]}
 html = r'''<!doctype html>
 <html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pareto 曲线</title>
 <style>
 .viz-root{color-scheme:light;--surface-1:#fcfcfb;--surface-2:#f0efec;--text-primary:#0b0b0b;--text-secondary:#52514e;--grid:#e6e5e1;
-  --series-1:#2a78d6;--series-2:#eb6834;--series-3:#1baf7a;font-family:-apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif;
+  --series-1:#2a78d6;--series-2:#8a8984;--series-3:#1baf7a;font-family:-apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif;
   background:var(--surface-1);color:var(--text-primary);padding:16px;max-width:900px;margin:0 auto}
 @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;--surface-1:#1a1a19;--surface-2:#383835;
-  --text-primary:#fff;--text-secondary:#c3c2b7;--grid:#2e2e2c;--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70}}
+  --text-primary:#fff;--text-secondary:#c3c2b7;--grid:#2e2e2c;--series-1:#3987e5;--series-2:#9c9b95;--series-3:#199e70}}
 :root[data-theme="dark"] .viz-root{color-scheme:dark;--surface-1:#1a1a19;--surface-2:#383835;--text-primary:#fff;--text-secondary:#c3c2b7;--grid:#2e2e2c;
-  --series-1:#3987e5;--series-2:#d95926;--series-3:#199e70}
+  --series-1:#3987e5;--series-2:#9c9b95;--series-3:#199e70}
 body{margin:0;background:#fcfcfb}@media (prefers-color-scheme:dark){body{background:#1a1a19}}
 h1{font-size:18px;margin:0 0 4px;font-weight:600}.sub{font-size:13px;color:var(--text-secondary);margin:0 0 12px}
 .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:0 0 6px}.legend span{display:inline-flex;align-items:center;gap:6px}
 .key{width:18px;height:2px;background:currentColor;display:inline-block;position:relative}.key::after{content:"";position:absolute;left:5px;top:-3px;width:8px;height:8px;border-radius:50%;background:currentColor}
+.key.diamond{background:none}.key.diamond::after{border-radius:0;transform:rotate(45deg);left:5px;top:-4px}
 svg{width:100%;height:auto;display:block}
 .grid line{stroke:var(--grid);stroke-width:1}.axis text{fill:var(--text-secondary);font-size:12px}.axis line,.axis path{stroke:var(--text-secondary);stroke-width:1}
 .axis .title{font-size:13px;fill:var(--text-primary)}
@@ -56,12 +66,12 @@ svg{width:100%;height:auto;display:block}
 details{margin-top:14px;font-size:13px}table{border-collapse:collapse;margin-top:8px}td,th{padding:4px 10px;border-bottom:1px solid var(--grid);text-align:right}th:first-child,td:first-child{text-align:left}
 .foot{font-size:12px;color:var(--text-secondary);margin-top:10px}
 </style></head><body><div class="viz-root">
-<h1>单用户开 DFlash2 快 2.2 倍；并发 16 以内和 mlx-lm 的 kernel 打平，24 以上它快 20%，但它的 server 跑不到那里</h1>
+<h1>单用户开 DFlash2 快 2.2 倍，和 dflash-mlx 打平；并发 16 以内和 mlx-lm 的 kernel 打平，24 以上它快 20%，但它的 server 跑不到那里</h1>
 <p class="sub">Qwen3.8-27B nvfp4，M4 Max 48 GB。每个点是一个并发数：x = 每用户 decode tok/s（交互速度），y = 整机 decode tok/s（吞吐），右上越好。1024 token 进、128 出，decode 阶段持续值。画法参考 InferenceX。</p>
 <div class="legend" id="legend"></div>
 <div id="chart"></div><div class="tip" id="tip"></div>
 <details><summary>数据表</summary><div id="table"></div></details>
-<p class="foot">mlx-lm 用 <code>mlx_lm.benchmark</code> 静态 batch（它的 server 在并发 32 时 Metal OOM）；DFlash2 的三个点是单用户投机解码、greedy 结果和不投机相同。</p>
+<p class="foot">蓝 = 这个引擎，灰 = 基线；圆点 = 合批扫描（随机 token 的 prompt），菱形 = 单用户投机解码（真实 prompt，块 5）。mlx-lm 用 <code>mlx_lm.benchmark</code> 静态 batch，它的 server 在并发 32 时 Metal OOM；dflash-mlx 跑的是同样三个 prompt，但它默认开 thinking，短中文那条答案长得多，不可直接比。</p>
 </div>
 <script>
 const DATA = __DATA__;
@@ -87,10 +97,14 @@ DATA.series.forEach(s=>{
   if(s.connect&&solid.length>1){g.appendChild(el("path",{d:solid.map((p,i)=>(i?"L":"M")+sx(p.x)+" "+sy(p.y)).join(" "),fill:"none",stroke:col,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}))}
   ps.forEach((p,i)=>{
     g.appendChild(el("circle",{cx:sx(p.x),cy:sy(p.y),r:6.5,class:"ring"}));
-    const dot=p.hollow?el("circle",{cx:sx(p.x),cy:sy(p.y),r:4.5,fill:"var(--surface-1)",stroke:col,"stroke-width":2}):el("circle",{cx:sx(p.x),cy:sy(p.y),r:4.5,fill:col});g.appendChild(dot);
-    const want=s.slot===1?["1","2","4","8","16","32"].includes(p.label):(s.slot===2?(p.hollow||p.label==="32"):true);
-    if(want){const left=s.slot===2&&!p.hollow;const dy=s.slot===1?(p.label==="1"?16:-8):(p.hollow?16:-8);
-      const lab=el("text",{x:sx(p.x)+(left?-9:9),y:sy(p.y)+dy,class:"pt-label","text-anchor":left?"end":"start"});
+    let dot;
+    if(p.diamond){dot=el("rect",{x:sx(p.x)-5,y:sy(p.y)-5,width:10,height:10,transform:`rotate(45 ${sx(p.x)} ${sy(p.y)})`,fill:p.hollow?"var(--surface-1)":col,stroke:col,"stroke-width":2})}
+    else{dot=p.hollow?el("circle",{cx:sx(p.x),cy:sy(p.y),r:4.5,fill:"var(--surface-1)",stroke:col,"stroke-width":2}):el("circle",{cx:sx(p.x),cy:sy(p.y),r:4.5,fill:col})}
+    g.appendChild(dot);
+    const want=s.connect?(s.slot===1?["1","2","4","8","16","32"].includes(p.label):(p.hollow||p.label==="32")):true;
+    if(want){const dy=s.connect?((p.label==="1"&&!p.hollow)||p.hollow?16:-8):(p.hollow?16:-8);let dx=(s.connect&&["16","24","32"].includes(p.label))?20:9;
+      const left=!s.connect&&p.hollow&&p.y<55; if(left)dx=-9;
+      const lab=el("text",{x:sx(p.x)+dx,y:sy(p.y)+dy,class:"pt-label","text-anchor":left?"end":"start"});
       lab.textContent=(s.connect&&!p.hollow?"并发 ":"")+p.label;g.appendChild(lab)}
     const hit=el("circle",{cx:sx(p.x),cy:sy(p.y),r:14,fill:"transparent",tabindex:0});
     const show=ev=>{tip.style.display="block";tip.innerHTML="";const b=document.createElement("b");b.textContent=`${p.y.toFixed(1)} tok/s 整机 · ${p.x.toFixed(1)} tok/s 每用户`;
@@ -102,7 +116,7 @@ DATA.series.forEach(s=>{
   });
   if(s.fail&&ps.length){const last=ps[ps.length-1];const t=el("text",{x:sx(last.x)-9,y:sy(last.y)+28,class:"pt-label","text-anchor":"end"});t.textContent=`并发 ${s.fail}：Metal OOM`;g.appendChild(t)}
   svg.appendChild(g);
-  const li=document.createElement("span");li.style.color=col;const key=document.createElement("i");key.className="key";li.appendChild(key);
+  const li=document.createElement("span");li.style.color=col;const key=document.createElement("i");key.className=s.connect?"key":"key diamond";li.appendChild(key);
   const nm=document.createElement("span");nm.style.color="var(--text-primary)";nm.textContent=s.name;li.appendChild(nm);document.getElementById("legend").appendChild(li);
 });
 document.getElementById("chart").appendChild(svg);
