@@ -29,10 +29,15 @@ flowchart TD
 
 计算写成两行：
 
-$$x'=x+\operatorname{Mixer}(\operatorname{Norm}_1(x)),$$
-$$x''=x'+\operatorname{MLP}(\operatorname{Norm}_2(x')).$$
+\[
+x'=x+\operatorname{Mixer}(\operatorname{Norm}_1(x)),
+\]
 
-两次相加都是 residual（残差连接）。第二次 norm 的输入是**已经加过 mixer 输出的 $x'$**，不是最初的 x。
+\[
+x''=x'+\operatorname{MLP}(\operatorname{Norm}_2(x')).
+\]
+
+两次相加都是 residual（残差连接）。第二次 norm 的输入是**已经加过 mixer 输出的 \(x'\)**，不是最初的 x。
 
 用标量玩具例子检查顺序：x=10，mixer 分支输出 2，MLP 分支对 x'=12 得到 3。最终输出是 15；如果误把第二次 residual 用成最初的 10，就会得到 13。
 

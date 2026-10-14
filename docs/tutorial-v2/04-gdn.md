@@ -19,15 +19,19 @@ GDN：        S0 → S1 → S2 → S3 → ...     后来的 Q 读取当前矩阵
 
 对一个头，状态 `S` 的形状是 `[Dk, Dv]`。可以把它理解为“输入一个 key 方向，返回一个 value 向量”的小型记忆表：
 
-$$\text{读记忆}(k)=k^\top S.$$
+\[
+\text{读记忆}(k)=k^\top S.
+\]
 
 它是有限容量的矩阵，并不保存每个 token 的独立条目。因此状态大小不随历史长度增长，也不能像普通 Attention 那样任意逐条读取完整过去。
 
 ## 2. Delta：写入还没记住的部分
 
-先省略衰减。假设当前 key 是 $k$，希望它对应的内容是 $v$。状态已经给出预测 $k^\top S$，就只需要补上差额：
+先省略衰减。假设当前 key 是 \(k\)，希望它对应的内容是 \(v\)。状态已经给出预测 \(k^\top S\)，就只需要补上差额：
 
-$$\delta=\beta(v-k^\top S),\qquad S\leftarrow S+k\delta^\top.$$
+\[
+\delta=\beta(v-k^\top S),\qquad S\leftarrow S+k\delta^\top.
+\]
 
 `β` 在 0 和 1 之间，控制写入强度。`k δᵀ` 是外积：`[Dk] × [Dv]` 得到 `[Dk, Dv]`，所以可以加到 S 上。
 
@@ -46,11 +50,19 @@ k = [1, 0]，v = [4]，β = 0.5，S = [[0], [0]]
 
 完整的一步有明确顺序：
 
-$$\bar S_t=e^{g_t}S_{t-1},$$
-$$\delta_t=\beta_t(v_t-k_t^\top\bar S_t),$$
-$$S_t=\bar S_t+k_t\delta_t^\top,\qquad o_t=q_t^\top S_t.$$
+\[
+\bar S_t=e^{g_t}S_{t-1},
+\]
 
-**预测必须读衰减后的状态 $\bar S_t$。** 写成 `v − kᵀS_old` 再衰减，会得到另一套算法。
+\[
+\delta_t=\beta_t(v_t-k_t^\top\bar S_t),
+\]
+
+\[
+S_t=\bar S_t+k_t\delta_t^\top,\qquad o_t=q_t^\top S_t.
+\]
+
+**预测必须读衰减后的状态 \(\bar S_t\)。** 写成 `v − kᵀS_old` 再衰减，会得到另一套算法。
 
 继续刚才的状态 `S=[[2],[0]]`，令衰减倍率 `exp(g)=0.5`：
 
@@ -65,8 +77,10 @@ $$S_t=\bar S_t+k_t\delta_t^\top,\qquad o_t=q_t^\top S_t.$$
 
 真实模型从输入投影出 `a`、`b`，再产生门：
 
-$$\beta=\sigma(b),\qquad
-g=-e^{A_{\log}}\operatorname{softplus}(a+dt_{bias}).$$
+\[
+\beta=\sigma(b),\qquad
+g=-e^{A_{\log}}\operatorname{softplus}(a+dt_{bias}).
+\]
 
 `g≤0`，所以 `0<exp(g)≤1`。这里的 g 是**衰减倍率的对数**，不是已经可以直接乘状态的倍率。门参数和矩阵状态使用 fp32，降低长序列累积误差。
 

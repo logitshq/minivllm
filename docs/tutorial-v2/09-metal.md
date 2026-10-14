@@ -14,10 +14,15 @@
 
 第四章的数学保持不变：
 
-$$\bar S=e^g S,\quad\delta=\beta(v-k^\top\bar S),$$
-$$S_{new}=\bar S+k\delta^\top,\quad o=q^\top S_{new}.$$
+\[
+\bar S=e^g S,\quad\delta=\beta(v-k^\top\bar S),
+\]
 
-Q/K 仍需 L2 归一化，Q 再乘 $D_k^{-1/2}$。Metal 路径把它们放在 kernel 内，调用前不能再归一化一次。
+\[
+S_{new}=\bar S+k\delta^\top,\quad o=q^\top S_{new}.
+\]
+
+Q/K 仍需 L2 归一化，Q 再乘 \(D_k^{-1/2}\)。Metal 路径把它们放在 kernel 内，调用前不能再归一化一次。
 
 一个头的状态是 `Dk×Dv`。假设两个维度都是 128，单头有 16,384 个 fp32 数；很多头、很多层、多个请求一起运行时，反复读写这些状态会产生明显流量。
 
@@ -62,16 +67,20 @@ for (...) {
 
 第六章已使用纯 MLX chunk 计算。直觉是：一块内的状态影响可以写成矩阵运算，块与块之间继续传递末尾 S。
 
-从逐 token 更新展开可得到每个 token 的修正量 $\delta_i$：
+从逐 token 更新展开可得到每个 token 的修正量 \(\delta_i\)：
 
-$$\delta_i=\beta_i\left(v_i-k_i^\top e^{G_i}S_{start}
--\sum_{j<i}e^{G_i-G_j}(k_i\cdot k_j)\delta_j\right),$$
+\[
+\delta_i=\beta_i\left(v_i-k_i^\top e^{G_i}S_{start}
+-\sum_{j<i}e^{G_i-G_j}(k_i\cdot k_j)\delta_j\right),
+\]
 
-其中 $G_i=\sum_{r\le i}g_r$ 是块内累计 log 衰减。前面 token 的写入影响后面的预测，因此修正量不是简单并行的 `β×v`。
+其中 \(G_i=\sum_{r\le i}g_r\) 是块内累计 log 衰减。前面 token 的写入影响后面的预测，因此修正量不是简单并行的 `β×v`。
 
 把相互影响收进严格下三角矩阵 A，写成：
 
-$$ (I+A)\Delta=V_{rhs}. $$
+\[
+(I+A)\Delta=V_{rhs}.
+\]
 
 这就是 chunk 实现里需要三角求解的原因。后面的输出与块末状态，再由这些修正量和矩阵乘计算。
 

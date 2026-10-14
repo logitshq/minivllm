@@ -35,11 +35,25 @@ flowchart LR
     V --> O
 ```
 
-对位置 $i$，先算每个允许读取的位置 $j$ 的分数：
+对位置 \(i\)，先算每个允许读取的位置 \(j\) 的分数：
 
-$$s_{ij}=\frac{q_i\cdot k_j}{\sqrt D},\qquad
-p_{ij}=\operatorname{softmax}(s_i)_j,\qquad
-o_i=\sum_j p_{ij}v_j.$$
+先算匹配分数：
+
+\[
+s_{ij}=\frac{q_i\cdot k_j}{\sqrt D}
+\]
+
+再把分数转换为权重：
+
+\[
+p_{ij}=\operatorname{softmax}(s_i)_j
+\]
+
+最后按权重混合内容：
+
+\[
+o_i=\sum_j p_{ij}v_j
+\]
 
 举一个已经完成 softmax 的例子：第三个位置对三个位置的权重是 `[0.1, 0.2, 0.7]`，V 是 `[2, 4, 10]`。输出就是 `0.1×2 + 0.2×4 + 0.7×10 = 8`。真实 V 是向量，按每个分量做同样的加权。
 

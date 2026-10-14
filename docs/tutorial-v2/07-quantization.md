@@ -83,7 +83,9 @@ x = mx.dequantize(selected_weight, selected_scales, ..., mode=self.q["mode"])
 
 原 HF 的零中心 RMSNorm 计算：
 
-$$y=\operatorname{normalize}(x)\,(1+w_{HF}).$$
+\[
+y=\operatorname{normalize}(x)\,(1+w_{HF}).
+\]
 
 MLX 转换文件里的这些 norm 权重已经包含 `+1`，即 `w_MLX=1+w_HF`。教学类仍沿用 HF 的 `1+w` 公式，所以 loader 要减回去：
 

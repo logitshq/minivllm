@@ -114,8 +114,10 @@ GDN 的做法是：
 
 一轮接收 n 个草稿，加上 bonus，共交付 n+1 个 token。近似吞吐可以写成：
 
-$$\text{tok/s}\approx
-\frac{\mathbb E[n+1]}{t_{draft}+t_{verify}+t_{rollback}+t_{other}}.$$
+\[
+\text{tok/s}\approx
+\frac{\mathbb E[n+1]}{t_{draft}+t_{verify}+t_{rollback}+t_{other}}.
+\]
 
 块更大可能接受更多，也会提高验证与回滚成本。只报告接受率不足以说明速度；接受率很高但 drafter 很慢，也可能没有收益。
 
