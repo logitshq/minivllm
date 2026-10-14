@@ -1,4 +1,4 @@
-"""Gated DeltaNet（24 层里的 18 层）。第 1 步用最直白的逐 token 递推，和 HF 的 torch_recurrent_gated_delta_rule 逐行对应。
+"""Gated DeltaNet（24 层里的 18 层）。递推/分块两个 kernel 在 kernels/gdn.py；这里是投影、卷积、门和归一化。
 
 每个 token t（每个 v 头独立，状态 S 是 Dk×Dv 的矩阵，fp32）：
     S = S * exp(g_t)                       # 衰减，g_t = -exp(A_log) * softplus(a_t + dt_bias) < 0
@@ -11,6 +11,7 @@ import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
+from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent
 from .layers import GatedRMSNorm, Linear
 
 
@@ -23,28 +24,6 @@ def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tu
     xp = mx.concatenate([mx.zeros((K - 1, x.shape[1]), x.dtype) if state is None else state.astype(x.dtype), x])
     y = sum(xp[j:j + T] * w[:, j] for j in range(K))
     return y, xp[T:]
-
-
-def l2norm(x: mx.array, eps: float = 1e-6) -> mx.array:
-    return x * mx.rsqrt((x * x).sum(-1, keepdims=True) + eps)
-
-
-def gated_delta_rule_recurrent(q, k, v, g, beta, state=None):
-    """q, k: [T, Hv, Dk]；v: [T, Hv, Dv]；g, beta: [T, Hv]（fp32）。返回 o [T, Hv, Dv] 和末状态 [Hv, Dk, Dv]。"""
-    T, Hv, Dk = k.shape
-    Dv = v.shape[-1]
-    q, k, v = (t.astype(mx.float32) for t in (q, k, v))
-    q, k = l2norm(q), l2norm(k)
-    q = q / (Dk ** 0.5)
-    S = mx.zeros((Hv, Dk, Dv), dtype=mx.float32) if state is None else state
-    outs = []
-    for t in range(T):
-        S = S * mx.exp(g[t])[:, None, None]
-        kv_mem = (S * k[t][:, :, None]).sum(axis=1)             # [Hv, Dv]
-        delta = (v[t] - kv_mem) * beta[t][:, None]
-        S = S + k[t][:, :, None] * delta[:, None, :]
-        outs.append((S * q[t][:, :, None]).sum(axis=1))         # [Hv, Dv]
-    return mx.stack(outs), S
 
 
 class GatedDeltaNet(nn.Module):
@@ -80,7 +59,9 @@ class GatedDeltaNet(nn.Module):
             q, k = mx.repeat(q, rep, axis=1), mx.repeat(k, rep, axis=1)
         beta = mx.sigmoid(b.astype(mx.float32))
         g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
-        o, S = gated_delta_rule_recurrent(q, k, v, g, beta, cache.S if cache is not None else None)
+        S0 = cache.S if cache is not None else None
+        rule = gated_delta_rule_recurrent if T == 1 else gated_delta_rule_chunk   # decode 递推，prefill 分块
+        o, S = rule(q, k, v, g, beta, S0)
         if cache is not None:
             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)
