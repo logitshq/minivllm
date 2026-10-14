@@ -17,7 +17,7 @@ cd /Users/ryanli/code/minivllm-tutorial
   --out .artifacts/lithos-baseline/latest.json
 ```
 
-当前仅完成 CPU 准备，GPU **尚未实测**。两个 CPU 报告为 `/private/tmp/minivllm-remaining-20261014/lithos-0.8b-cpu-prepared.json` 与 `/private/tmp/minivllm-remaining-20261014/lithos-27b-cpu-prepared.json`；它们分别验证 187/498 个 NVFP4 bindings、相同的 19 个 prompt IDs 和 EOS 集合，并明确记录没有启动 server 或创建 GPU device。
+当前 CPU 准备、0.8B/27B 的真实 GPU smoke 与预热后三次重复测量均已完成。两个 CPU 报告为 `/private/tmp/minivllm-remaining-20261014/lithos-0.8b-cpu-prepared.json` 与 `/private/tmp/minivllm-remaining-20261014/lithos-27b-cpu-prepared.json`；它们分别验证 187/498 个 NVFP4 bindings、相同的 19 个 prompt IDs 和 EOS 集合，并明确记录没有启动 server 或创建 GPU device。
 
 重新做 CPU 准备时：
 
@@ -29,7 +29,7 @@ cd /Users/ryanli/code/minivllm-tutorial
   --prepare-only --out .artifacts/lithos-baseline/27b-prepared.json
 ```
 
-解锁 macOS、退出其他占内存的应用并取得 GPU 运行时段后，按下面顺序执行。每条命令结束都会在 `finally` 中正常终止并等待自己的 server 子进程；仅该 owned 子进程超过 15 秒未退出时才强制结束它。
+复现时先退出空闲且占内存的应用、取得独占 GPU 运行时段，再按下面顺序执行。每条命令结束都会在 `finally` 中正常终止并等待自己的 server 子进程；仅该 owned 子进程超过 15 秒未退出时才强制结束它。
 
 ```bash
 # 0.8B：16-token 功能 smoke，再完整预热和三次重复测量
@@ -62,3 +62,9 @@ Lithos 的 completion usage 来自 committed token IDs，包括终端 EOS；显�
 上游公开的约 168 tok/s 数字是 M5 Max 的 target-compute projection，假设每次八行验证接受六个 token，并排除 draft、acceptance 与 rewind。它不能填进本机端到端测试表。第十一章既有的 0.8B 数字也不能直接与此 27B 数字排速度；要对比，先补同一个 27B checkpoint 的 oMLX 与手写引擎测量，保留核心/API 边界。
 
 脚本只启动并关闭自己的 loopback 子进程，使用随机端口和临时 API key，不修改任何 coding agent 的全局配置。安装 manifest、完整依赖记录和每次 server log 保存在 `.artifacts/lithos-baseline/`。
+
+## 已保存的实际 GPU 记录
+
+同一 0.8B checkpoint 的 [三次测量](../examples/chapter11-lithos-0.8b.json) 和固定 27B 的 [三次测量](../examples/chapter11-lithos-27b.json) 已完成；各自先通过功能 smoke。计时、实际 EOS 输出数、cache 与 verify counters、native M4 fallback、normalization policy 和 unique buffer bytes 均在 JSON 中。
+
+第十一章扩展版 [`tutorial-11-v2`](../../docs/tutorial-v2/11-benchmark.md) 分列 0.8B 与 27B 各自三条引擎的计时边界，不从不同模型、输出长度或计时边界推导简单加速倍数。安装前 qualification 与 CPU prepare-only JSON 保留为历史步骤。

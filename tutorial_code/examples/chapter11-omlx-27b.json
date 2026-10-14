@@ -1,0 +1,298 @@
+{
+  "baseline": "omlx",
+  "purpose": "repeated warmed HTTP client measurements",
+  "repeat": 3,
+  "runs": [
+    {
+      "baseline": "omlx",
+      "purpose": "optimized-engine warmed client measurement",
+      "versions": {
+        "omlx": "0.7.1.dev1",
+        "mlx": "0.32.3",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "transformers": "5.17.0"
+      },
+      "native_kernels": {
+        "bonsai": {
+          "available": true,
+          "import_error": null
+        },
+        "decode_fast": {
+          "available": true,
+          "import_error": null
+        },
+        "glm_moe_dsa": {
+          "available": true,
+          "import_error": null
+        },
+        "minimax_m3": {
+          "available": true,
+          "import_error": null
+        },
+        "qwen35_prefill": {
+          "available": true,
+          "import_error": null
+        }
+      },
+      "model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+      "quantization": {
+        "group_size": 16,
+        "bits": 4,
+        "mode": "nvfp4"
+      },
+      "request": {
+        "prompt_ids": [
+          248045,
+          846,
+          198,
+          95826,
+          110827,
+          98682,
+          108829,
+          81726,
+          6297,
+          1710,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "temperature": 0,
+        "max_tokens": 128,
+        "repetition_penalty": 1.0
+      },
+      "settings": {
+        "concurrency": 1,
+        "paged_prefix_cache": false,
+        "speculative_decoding": false,
+        "warmup_output_tokens": 128,
+        "warmup_actual_output_tokens": 44,
+        "transport": "HTTP SSE; client timing includes server overhead"
+      },
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 44,
+        "total_tokens": 63,
+        "input_tokens": 19,
+        "output_tokens": 44,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "time_to_first_token": 0.24,
+        "total_time": 2.0,
+        "prompt_eval_duration": 0.24,
+        "generation_duration": 1.76,
+        "prompt_tokens_per_second": 80.07,
+        "generation_tokens_per_second": 25.02
+      },
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "finish_reason": "stop",
+      "output_count_definition": "oMLX completion_tokens excludes a terminal EOS; text may omit other special IDs. Rates use server-reported completion_tokens.",
+      "client_latency_s": 1.997892375002266,
+      "client_ttft_text_s": 0.2424064999941038,
+      "output_tokens_per_client_second": 22.02320833220563,
+      "scope": "warmed HTTP client measurement; actual completion length recorded; EOS stopping enabled"
+    },
+    {
+      "baseline": "omlx",
+      "purpose": "optimized-engine warmed client measurement",
+      "versions": {
+        "omlx": "0.7.1.dev1",
+        "mlx": "0.32.3",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "transformers": "5.17.0"
+      },
+      "native_kernels": {
+        "bonsai": {
+          "available": true,
+          "import_error": null
+        },
+        "decode_fast": {
+          "available": true,
+          "import_error": null
+        },
+        "glm_moe_dsa": {
+          "available": true,
+          "import_error": null
+        },
+        "minimax_m3": {
+          "available": true,
+          "import_error": null
+        },
+        "qwen35_prefill": {
+          "available": true,
+          "import_error": null
+        }
+      },
+      "model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+      "quantization": {
+        "group_size": 16,
+        "bits": 4,
+        "mode": "nvfp4"
+      },
+      "request": {
+        "prompt_ids": [
+          248045,
+          846,
+          198,
+          95826,
+          110827,
+          98682,
+          108829,
+          81726,
+          6297,
+          1710,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "temperature": 0,
+        "max_tokens": 128,
+        "repetition_penalty": 1.0
+      },
+      "settings": {
+        "concurrency": 1,
+        "paged_prefix_cache": false,
+        "speculative_decoding": false,
+        "warmup_output_tokens": 128,
+        "warmup_actual_output_tokens": 44,
+        "transport": "HTTP SSE; client timing includes server overhead"
+      },
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 44,
+        "total_tokens": 63,
+        "input_tokens": 19,
+        "output_tokens": 44,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "time_to_first_token": 0.24,
+        "total_time": 1.99,
+        "prompt_eval_duration": 0.24,
+        "generation_duration": 1.75,
+        "prompt_tokens_per_second": 79.66,
+        "generation_tokens_per_second": 25.13
+      },
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "finish_reason": "stop",
+      "output_count_definition": "oMLX completion_tokens excludes a terminal EOS; text may omit other special IDs. Rates use server-reported completion_tokens.",
+      "client_latency_s": 1.9916130409983452,
+      "client_ttft_text_s": 0.24355812500289176,
+      "output_tokens_per_client_second": 22.09264505415365,
+      "scope": "warmed HTTP client measurement; actual completion length recorded; EOS stopping enabled"
+    },
+    {
+      "baseline": "omlx",
+      "purpose": "optimized-engine warmed client measurement",
+      "versions": {
+        "omlx": "0.7.1.dev1",
+        "mlx": "0.32.3",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "transformers": "5.17.0"
+      },
+      "native_kernels": {
+        "bonsai": {
+          "available": true,
+          "import_error": null
+        },
+        "decode_fast": {
+          "available": true,
+          "import_error": null
+        },
+        "glm_moe_dsa": {
+          "available": true,
+          "import_error": null
+        },
+        "minimax_m3": {
+          "available": true,
+          "import_error": null
+        },
+        "qwen35_prefill": {
+          "available": true,
+          "import_error": null
+        }
+      },
+      "model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+      "quantization": {
+        "group_size": 16,
+        "bits": 4,
+        "mode": "nvfp4"
+      },
+      "request": {
+        "prompt_ids": [
+          248045,
+          846,
+          198,
+          95826,
+          110827,
+          98682,
+          108829,
+          81726,
+          6297,
+          1710,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "temperature": 0,
+        "max_tokens": 128,
+        "repetition_penalty": 1.0
+      },
+      "settings": {
+        "concurrency": 1,
+        "paged_prefix_cache": false,
+        "speculative_decoding": false,
+        "warmup_output_tokens": 128,
+        "warmup_actual_output_tokens": 44,
+        "transport": "HTTP SSE; client timing includes server overhead"
+      },
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 44,
+        "total_tokens": 63,
+        "input_tokens": 19,
+        "output_tokens": 44,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "time_to_first_token": 0.24,
+        "total_time": 2.0,
+        "prompt_eval_duration": 0.24,
+        "generation_duration": 1.76,
+        "prompt_tokens_per_second": 79.04,
+        "generation_tokens_per_second": 24.97
+      },
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "finish_reason": "stop",
+      "output_count_definition": "oMLX completion_tokens excludes a terminal EOS; text may omit other special IDs. Rates use server-reported completion_tokens.",
+      "client_latency_s": 2.0045493329962483,
+      "client_ttft_text_s": 0.24482908300706185,
+      "output_tokens_per_client_second": 21.950070909071684,
+      "scope": "warmed HTTP client measurement; actual completion length recorded; EOS stopping enabled"
+    }
+  ],
+  "median_client_latency_s": 1.997892375002266,
+  "median_client_ttft_text_s": 0.24355812500289176,
+  "scope": "HTTP SSE client timing includes server overhead; independent of pure engine timing"
+}

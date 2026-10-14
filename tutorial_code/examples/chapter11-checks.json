@@ -47,6 +47,54 @@
     "original_pytest_seconds": 9.38,
     "original_pytest_first_attempt": "18 passed, 1 failed, 3 setup errors: ignored local models folder missing; resolved by ignored symlink to existing model, then rerun all 22"
   },
-  "lithos": "qualified but no run in tutorial-11; actual run preparation proceeds separately",
-  "limitations": "one short 0.8B prompt, early EOS; no sustained 128-token, 27B throughput, concurrency or speculative performance claim; no cross-scope speedup ratio"
+  "lithos": {
+    "status": "measured local target-only",
+    "small_checkpoint_report": "chapter11-lithos-0.8b.json",
+    "large_checkpoint_report": "chapter11-lithos-27b.json",
+    "scope": "HTTP client, no draft; EOS count includes terminal EOS; native M4 fallback profile remains uncalibrated"
+  },
+  "limitations": "One short prompt per model size, three repeats, early EOS; no sustained128-token, batch/spec/p99 evidence, optimal-configuration ranking, or speedup ratio across timing/count/capacity scopes. Current M4 fallback has no automatic mixer megakernels/tensor accelerator.",
+  "matching_27b": {
+    "snapshot": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "same_prompt_tokens": 19,
+    "repeat": 3,
+    "cap": 128,
+    "core": {
+      "emitted_ids": [
+        37,
+        37,
+        37
+      ],
+      "logical_counts": [
+        36,
+        36,
+        36
+      ],
+      "median_ttft_id_s": 0.18956745800096542,
+      "median_emitted_ids_per_engine_s": 18.10623133909217
+    },
+    "omlx": {
+      "completion_counts": [
+        44,
+        44,
+        44
+      ],
+      "median_ttft_text_s": 0.24355812500289176,
+      "median_completion_tokens_per_client_s": 22.02320833220563
+    },
+    "lithos": {
+      "committed_ids": [
+        45,
+        45,
+        45
+      ],
+      "logical_counts": [
+        44,
+        44,
+        44
+      ],
+      "median_ttft_text_s": 42.781459250007174,
+      "median_committed_ids_per_client_s": 0.974182199871871
+    }
+  }
 }

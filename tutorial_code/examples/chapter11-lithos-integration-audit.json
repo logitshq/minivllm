@@ -1,0 +1,58 @@
+{
+  "audits": [
+    {
+      "path": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-0.8b-measurement.json",
+      "checks": "passed",
+      "completion_counts": [
+        34,
+        34,
+        34
+      ],
+      "logical_counts": [
+        33,
+        33,
+        33
+      ],
+      "finish_reasons": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "median_client_completion_tokens_per_s": 20.51146185586033,
+      "median_client_ttft_text_s": 1.4601693330041599,
+      "median_client_elapsed_s": 1.6576097910001408,
+      "resident_buffer_bytes": 700525328,
+      "kernel_scope": "registered unmeasured-profile M4 native fallback; target-only",
+      "gpu_not_run_by_auditor": true
+    },
+    {
+      "path": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-27b-measurement.json",
+      "checks": "passed",
+      "completion_counts": [
+        45,
+        45,
+        45
+      ],
+      "logical_counts": [
+        44,
+        44,
+        44
+      ],
+      "finish_reasons": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "median_client_completion_tokens_per_s": 0.974182199871871,
+      "median_client_ttft_text_s": 42.781459250007174,
+      "median_client_elapsed_s": 46.19259108400729,
+      "resident_buffer_bytes": 17001511056,
+      "kernel_scope": "registered unmeasured-profile M4 native fallback; target-only",
+      "gpu_not_run_by_auditor": true
+    }
+  ],
+  "audit_scope": "CPU JSON arithmetic and metadata only; no model execution",
+  "same_small_checkpoint_verified": true,
+  "comparison_limits": "Timing scopes and EOS counts differ; compare each model size separately, no across-scope or across-model speedup ratio.",
+  "same_large_checkpoint_verified": true
+}

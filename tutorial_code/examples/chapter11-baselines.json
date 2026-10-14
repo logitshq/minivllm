@@ -39,7 +39,11 @@
         "runs",
         "warmup_runs"
       ],
-      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact."
+      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact.",
+      "measurement_artifacts": [
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-core.json",
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-core-27b.json"
+      ]
     },
     {
       "name": "oMLX",
@@ -56,11 +60,15 @@
         "runs",
         "scope"
       ],
-      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact."
+      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact.",
+      "measurement_artifacts": [
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-omlx.json",
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-omlx-27b.json"
+      ]
     },
     {
       "name": "Lithos Metal",
-      "role": "Apple Silicon engine reference; installed and CPU prepared",
+      "role": "Apple Silicon engine reference; measured local target-only",
       "local_binary": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/bin/lithos-metal",
       "required_macos_major": 26,
       "local_macos": "27.0.1",
@@ -70,9 +78,44 @@
       "upstream_source": "https://github.com/lithos-ai/lithos-metal#models-and-hardware",
       "upstream_projection": "168 token/s is a published M5 Max target-compute projection under assumed acceptance; it excludes draft/accept/rewind and is not a local end-to-end measurement.",
       "upstream_projection_source": "https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md",
-      "measurement_status": "prepared_not_measured; no GPU server run",
-      "measurement_artifact": null,
-      "preparation_status": "prepared_not_measured",
+      "measurement_status": "measured_local_target_only",
+      "measurement_artifact": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-lithos-0.8b.json",
+      "artifact_keys": [
+        "backend",
+        "backend_profile",
+        "backend_timing_scope",
+        "baseline",
+        "cache_policy",
+        "checkpoint",
+        "concurrency",
+        "counting",
+        "draft",
+        "host",
+        "installation",
+        "kernel_route",
+        "max_context",
+        "max_new_tokens_cap",
+        "median_client_completion_tokens_per_s",
+        "median_client_elapsed_s",
+        "median_client_ttft_text_s",
+        "memory",
+        "normalization_policy",
+        "owned_server_exit_code",
+        "prompt",
+        "prompt_ids",
+        "prompt_ids_match_baseline",
+        "recorded_at",
+        "runs",
+        "sampling",
+        "server_log",
+        "startup",
+        "status",
+        "timing_scope",
+        "versions",
+        "warmup"
+      ],
+      "interpretation": "Inspect the actual timing scope, prompt IDs, output counts and weight format in the linked artifact.",
+      "preparation_status": "CPU format checks completed; historical preparation artifact retained",
       "preparation_artifact": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-lithos-0.8b-cpu-prepared.json",
       "installation": {
         "distribution_version": "0.1.2",
@@ -84,7 +127,11 @@
         "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
         "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
         "native_runtime": "compiled from the complete official pinned source, no local patches"
-      }
+      },
+      "measurement_artifacts": [
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-lithos-0.8b.json",
+        "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter11-lithos-27b.json"
+      ]
     }
   ],
   "rule": "Keep correctness tests, API measurements, core measurements and published projections as separate evidence."

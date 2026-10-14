@@ -1,0 +1,257 @@
+{
+  "baseline": "Lithos Metal",
+  "status": "measured local target-only",
+  "recorded_at": "2026-10-14T21:44:59.974125+00:00",
+  "installation": {
+    "distribution_version": "0.1.2",
+    "archive_url": "https://github.com/lithos-ai/lithos-metal/releases/download/v0.1.2/lithos-metal-0.1.2-macos-arm64.tar.gz",
+    "archive_sha256": "a51b821923b21ed4134979779f0ed77c98cbc9b227fed7627ec620704169a3e3",
+    "python": "3.12.13",
+    "source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "source_archive_url": "https://github.com/lithos-ai/lithos-metal/archive/5485ad6bac0a5649d66a347f3e01a655ea29d937.tar.gz",
+    "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
+    "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+    "native_runtime": "compiled from the complete official pinned source, no local patches"
+  },
+  "versions": {
+    "lithos-metal": "0.1.2",
+    "numpy": "2.5.3",
+    "transformers": "5.18.0",
+    "tokenizers": "0.23.2"
+  },
+  "host": {
+    "chip": "Apple M4 Max",
+    "gpu_cores": 40,
+    "apple_family": 9,
+    "unified_memory_bytes": 51539607552,
+    "macos": "27.0.1"
+  },
+  "backend": "m4_max",
+  "backend_profile": {
+    "name": "apple-m4-max-40c",
+    "backend": "m4_max",
+    "chip": "Apple M4 Max",
+    "gpu_family": "Apple9",
+    "gpu_cores": 40,
+    "nominal_gbps": 0,
+    "validation": "unmeasured",
+    "note": "Conservative native-kernel fallback. No latency, bandwidth, fusion or acceptance claims; tune on this exact device.",
+    "engine": {
+      "family": "Apple9",
+      "lane_order": "interleaved16",
+      "scale_placement": "block",
+      "threadgroups_per_core": 1,
+      "sibling_order": "either",
+      "max_cb_ms": 16,
+      "attention": "v1",
+      "attention_rows": 4,
+      "accelerator": "off",
+      "accelerator_min_t": {},
+      "cost_T": {},
+      "gdn_mixer_fusion": {}
+    }
+  },
+  "checkpoint": {
+    "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "format": "MLX NVFP4 group16 bits4",
+    "served_metadata_view": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "generation_config_policy": "existing generation_config.json",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "source_weight_bytes": 16054475404
+  },
+  "prompt": "用一句话解释什么是 KV cache。",
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    95826,
+    110827,
+    98682,
+    108829,
+    81726,
+    6297,
+    1710,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "prompt_ids_match_baseline": true,
+  "sampling": {
+    "temperature": 0,
+    "top_p": 1,
+    "eos": "normal stopping",
+    "eos_ids": [
+      248044,
+      248046
+    ]
+  },
+  "draft": null,
+  "concurrency": 1,
+  "max_new_tokens_cap": 128,
+  "max_context": 2048,
+  "cache_policy": "serving prefix cache enabled; exact short 19-token prompt had zero cached prompt tokens on every run",
+  "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
+  "backend_timing_scope": "prefill_gpu_ms/decode_gpu_ms are sums of Metal command-buffer GPU end minus start; include dispatch/queue contents, not isolated arithmetic kernels; steps can include queued done/no-op submissions and are not output-token counts",
+  "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
+  "kernel_route": "registered M4 fallback; no automatic mixer megakernels or tensor accelerator; profile availability is not per-kernel dispatch evidence",
+  "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
+  "memory": {
+    "server_resident_buffer_bytes": 17001511056,
+    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"
+  },
+  "warmup": {
+    "client_elapsed_s": 49.85895479199826,
+    "usage": {
+      "prompt_tokens": 19,
+      "completion_tokens": 45,
+      "total_tokens": 64
+    },
+    "finish_reason": "stop",
+    "backend_metrics": {
+      "steps": 64,
+      "decode_gpu_ms": 4132.342750002863,
+      "wall_ms": 49697.62404100038,
+      "prefill_gpu_ms": 42271.99925000605,
+      "prefill_wall_ms": 42314.126958325505,
+      "state_reset_ms": 0.0008749921107664704,
+      "checkpoint_ms": 0.0,
+      "setup_ms": 3207.9484989953926,
+      "load_ms": 140.0875410035951,
+      "first_text_ms": null,
+      "decode_wall_ms": 4174.655416682363,
+      "cached_prompt_tokens": 0,
+      "prefix_source": null,
+      "prefix_load_ms": 0.0,
+      "prefill_encode_ms": 0.25470833480358124,
+      "prefill_commit_ms": 0.03220832347869873,
+      "prefill_wait_ms": 42313.806041657925,
+      "verify_tokens": 1,
+      "decode_step_ms": 64.56785546879473
+    }
+  },
+  "runs": [
+    {
+      "client_elapsed_s": 46.412776459008455,
+      "client_ttft_text_s": 42.915397917007795,
+      "client_completion_tokens_per_s": 0.9695606131157395,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 45,
+        "total_tokens": 64
+      },
+      "logical_completion_tokens": 44,
+      "finish_reason": "stop",
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 48,
+        "decode_gpu_ms": 3424.2327916726936,
+        "wall_ms": 46400.14054099447,
+        "prefill_gpu_ms": 42885.02974998846,
+        "prefill_wall_ms": 42896.063791662455,
+        "state_reset_ms": 7.894916998338886,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.06566700176335871,
+        "first_text_ms": 42905.09262500564,
+        "decode_wall_ms": 3494.5744999945164,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.02308332920074463,
+        "prefill_commit_ms": 0.006083324551582336,
+        "prefill_wait_ms": 42896.01591666043,
+        "verify_tokens": 1,
+        "decode_step_ms": 71.33818315984779
+      }
+    },
+    {
+      "client_elapsed_s": 46.19259108400729,
+      "client_ttft_text_s": 42.781459250007174,
+      "client_completion_tokens_per_s": 0.974182199871871,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 45,
+        "total_tokens": 64
+      },
+      "logical_completion_tokens": 44,
+      "finish_reason": "stop",
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 48,
+        "decode_gpu_ms": 3341.6989166726125,
+        "wall_ms": 46180.07695800043,
+        "prefill_gpu_ms": 42769.92083333607,
+        "prefill_wall_ms": 42770.21954165399,
+        "state_reset_ms": 3.0684999946970493,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.0551249977434054,
+        "first_text_ms": 42774.00012499129,
+        "decode_wall_ms": 3405.741333320737,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.019333332777023315,
+        "prefill_commit_ms": 0.0065000057220458984,
+        "prefill_wait_ms": 42770.176291659474,
+        "verify_tokens": 1,
+        "decode_step_ms": 69.61872743067943
+      }
+    },
+    {
+      "client_elapsed_s": 45.156699500003015,
+      "client_ttft_text_s": 41.789370041995426,
+      "client_completion_tokens_per_s": 0.996529872604994,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 45,
+        "total_tokens": 64
+      },
+      "logical_completion_tokens": 44,
+      "finish_reason": "stop",
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量，以避免重复计算，从而显著提升推理速度的技术。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 48,
+        "decode_gpu_ms": 3286.5800416766433,
+        "wall_ms": 45148.34066700132,
+        "prefill_gpu_ms": 41782.535083344555,
+        "prefill_wall_ms": 41783.11725001037,
+        "state_reset_ms": 2.837375010130927,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.07041699427645653,
+        "first_text_ms": 41786.614333992475,
+        "decode_wall_ms": 3361.101624980569,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.015916675329208374,
+        "prefill_commit_ms": 0.007500007748603821,
+        "prefill_wait_ms": 41783.07729168236,
+        "verify_tokens": 1,
+        "decode_step_ms": 68.47041753493006
+      }
+    }
+  ],
+  "startup": {
+    "process_to_api_ready_s": 1.4445202920032898,
+    "scope": "server process start through models API readiness; includes checkpoint packing when absent and imports/tokenizer setup; --no-warmup defers GPU session loading/compilation to explicit warmup",
+    "pack_cache": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/packs"
+  },
+  "median_client_completion_tokens_per_s": 0.974182199871871,
+  "median_client_elapsed_s": 46.19259108400729,
+  "median_client_ttft_text_s": 42.781459250007174,
+  "server_log": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/runs/81141659150f/server.log",
+  "owned_server_exit_code": -15
+}

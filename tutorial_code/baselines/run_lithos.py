@@ -120,6 +120,7 @@ def main():
     measurements = []
     resident_buffers = None
     with log_path.open("w") as log:
+        startup_started = time.perf_counter()
         proc = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, env=env)
         try:
             with httpx.Client(headers={"Authorization": f"Bearer {key}"}, timeout=900, trust_env=False) as client:
@@ -132,6 +133,7 @@ def main():
                         response = client.get(base + "/v1/models", timeout=1)
                         if response.status_code == 200:
                             model_name = response.json()["data"][0]["id"]
+                            startup_elapsed_s = time.perf_counter() - startup_started
                             break
                     except httpx.HTTPError:
                         pass
@@ -231,12 +233,16 @@ def main():
         "concurrency": 1, "max_new_tokens_cap": args.max_new_tokens, "max_context": args.max_context,
         "cache_policy": "serving prefix cache enabled; exact short 19-token prompt had zero cached prompt tokens on every run",
         "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
+        "backend_timing_scope": "prefill_gpu_ms/decode_gpu_ms are sums of Metal command-buffer GPU end minus start; include dispatch/queue contents, not isolated arithmetic kernels; steps can include queued done/no-op submissions and are not output-token counts",
         "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
         "kernel_route": "registered M4 fallback; no automatic mixer megakernels or tensor accelerator; profile availability is not per-kernel dispatch evidence",
         "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
         "memory": {"server_resident_buffer_bytes": resident_buffers,
                    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"},
         "warmup": warmup, "runs": measurements,
+        "startup": {"process_to_api_ready_s": startup_elapsed_s,
+                    "scope": "server process start through models API readiness; includes checkpoint packing when absent and imports/tokenizer setup; --no-warmup defers GPU session loading/compilation to explicit warmup",
+                    "pack_cache": str(runtime / "packs")},
         "median_client_completion_tokens_per_s": statistics.median(x["client_completion_tokens_per_s"] for x in measurements),
         "median_client_elapsed_s": statistics.median(x["client_elapsed_s"] for x in measurements),
         "median_client_ttft_text_s": statistics.median(x["client_ttft_text_s"] for x in measurements if x["client_ttft_text_s"] is not None),

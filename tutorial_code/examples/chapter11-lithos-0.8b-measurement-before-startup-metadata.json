@@ -1,0 +1,251 @@
+{
+  "baseline": "Lithos Metal",
+  "status": "measured local target-only",
+  "recorded_at": "2026-10-14T21:38:31.615847+00:00",
+  "installation": {
+    "distribution_version": "0.1.2",
+    "archive_url": "https://github.com/lithos-ai/lithos-metal/releases/download/v0.1.2/lithos-metal-0.1.2-macos-arm64.tar.gz",
+    "archive_sha256": "a51b821923b21ed4134979779f0ed77c98cbc9b227fed7627ec620704169a3e3",
+    "python": "3.12.13",
+    "source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "source_archive_url": "https://github.com/lithos-ai/lithos-metal/archive/5485ad6bac0a5649d66a347f3e01a655ea29d937.tar.gz",
+    "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
+    "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+    "native_runtime": "compiled from the complete official pinned source, no local patches"
+  },
+  "versions": {
+    "lithos-metal": "0.1.2",
+    "numpy": "2.5.3",
+    "transformers": "5.18.0",
+    "tokenizers": "0.23.2"
+  },
+  "host": {
+    "chip": "Apple M4 Max",
+    "gpu_cores": 40,
+    "apple_family": 9,
+    "unified_memory_bytes": 51539607552,
+    "macos": "27.0.1"
+  },
+  "backend": "m4_max",
+  "backend_profile": {
+    "name": "apple-m4-max-40c",
+    "backend": "m4_max",
+    "chip": "Apple M4 Max",
+    "gpu_family": "Apple9",
+    "gpu_cores": 40,
+    "nominal_gbps": 0,
+    "validation": "unmeasured",
+    "note": "Conservative native-kernel fallback. No latency, bandwidth, fusion or acceptance claims; tune on this exact device.",
+    "engine": {
+      "family": "Apple9",
+      "lane_order": "interleaved16",
+      "scale_placement": "block",
+      "threadgroups_per_core": 1,
+      "sibling_order": "either",
+      "max_cb_ms": 16,
+      "attention": "v1",
+      "attention_rows": 4,
+      "accelerator": "off",
+      "accelerator_min_t": {},
+      "cost_T": {},
+      "gdn_mixer_fusion": {}
+    }
+  },
+  "checkpoint": {
+    "path": "/Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4",
+    "revision": null,
+    "format": "MLX NVFP4 group16 bits4",
+    "served_metadata_view": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/checkpoints/Qwen3.5-0.8B-nvfp4-9865e6100ff3",
+    "generation_config_policy": "metadata-only symlink view: add EOS set read from unchanged nested model config and tokenizer metadata; no tensor copies or edits",
+    "config_sha256": "9865e6100ff36f53de7cec6c624f0c415af7ba9f1c7f4a8569980c969f5ec4c6",
+    "index_sha256": "56261454edb61f042763077d9bc43c2e6ec48cebc00fac5ee7b8ff7b2981eb96",
+    "source_weight_bytes": 424002513
+  },
+  "prompt": "用一句话解释什么是 KV cache。",
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    95826,
+    110827,
+    98682,
+    108829,
+    81726,
+    6297,
+    1710,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "prompt_ids_match_baseline": true,
+  "sampling": {
+    "temperature": 0,
+    "top_p": 1,
+    "eos": "normal stopping",
+    "eos_ids": [
+      248044,
+      248046
+    ]
+  },
+  "draft": null,
+  "concurrency": 1,
+  "max_new_tokens_cap": 128,
+  "max_context": 2048,
+  "cache_policy": "serving prefix cache enabled; exact short 19-token prompt had zero cached prompt tokens on every run",
+  "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
+  "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
+  "kernel_route": "registered M4 fallback; no automatic mixer megakernels or tensor accelerator; profile availability is not per-kernel dispatch evidence",
+  "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
+  "memory": {
+    "server_resident_buffer_bytes": 700525328,
+    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"
+  },
+  "warmup": {
+    "client_elapsed_s": 3.0341561249952065,
+    "usage": {
+      "prompt_tokens": 19,
+      "completion_tokens": 34,
+      "total_tokens": 53
+    },
+    "finish_reason": "stop",
+    "backend_metrics": {
+      "steps": 56,
+      "decode_gpu_ms": 274.7240000026068,
+      "wall_ms": 2983.6402499931864,
+      "prefill_gpu_ms": 1544.229749997612,
+      "prefill_wall_ms": 1584.644041672349,
+      "state_reset_ms": 0.0006250047590583563,
+      "checkpoint_ms": 0.0,
+      "setup_ms": 1115.0320000160718,
+      "load_ms": 32.589459005976096,
+      "first_text_ms": null,
+      "decode_wall_ms": 283.4827499985695,
+      "cached_prompt_tokens": 0,
+      "prefix_source": null,
+      "prefix_load_ms": 0.0,
+      "prefill_encode_ms": 0.23083333671092987,
+      "prefill_commit_ms": 0.03333333134651184,
+      "prefill_wait_ms": 1584.3495833277702,
+      "verify_tokens": 1,
+      "decode_step_ms": 4.905785714332263
+    }
+  },
+  "runs": [
+    {
+      "client_elapsed_s": 1.7521926250046818,
+      "client_ttft_text_s": 1.5524759170075413,
+      "client_completion_tokens_per_s": 19.404259277663126,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 34,
+        "total_tokens": 53
+      },
+      "logical_completion_tokens": 33,
+      "finish_reason": "stop",
+      "text": "KV Cache 是 GPU 中用于存储计算过程中产生的计算结果（即计算输出）的内存区域，主要用于减少显存占用并提升计算效率。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 40,
+        "decode_gpu_ms": 195.77112499973737,
+        "wall_ms": 1739.4760409952141,
+        "prefill_gpu_ms": 1539.1696250007953,
+        "prefill_wall_ms": 1539.4273333251476,
+        "state_reset_ms": 0.7293750095413998,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.06320800457615405,
+        "first_text_ms": 1541.0483330051647,
+        "decode_wall_ms": 197.9456249922514,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.015625,
+        "prefill_commit_ms": 0.00466667115688324,
+        "prefill_wait_ms": 1539.3877916783094,
+        "verify_tokens": 1,
+        "decode_step_ms": 4.894278124993434
+      }
+    },
+    {
+      "client_elapsed_s": 1.7742886250052834,
+      "client_ttft_text_s": 1.566151916005765,
+      "client_completion_tokens_per_s": 19.162609465468876,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 34,
+        "total_tokens": 53
+      },
+      "logical_completion_tokens": 33,
+      "finish_reason": "stop",
+      "text": "KV Cache 是 GPU 中用于存储计算过程中产生的计算结果（即计算输出）的内存区域，主要用于减少显存占用并提升计算效率。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 40,
+        "decode_gpu_ms": 197.4717499979306,
+        "wall_ms": 1769.1605830041226,
+        "prefill_gpu_ms": 1553.863208333496,
+        "prefill_wall_ms": 1554.4802083224058,
+        "state_reset_ms": 1.0101250081788749,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.1286249898839742,
+        "first_text_ms": 1556.6726669931086,
+        "decode_wall_ms": 212.10791665315628,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.04054166376590729,
+        "prefill_commit_ms": 0.011208340525627136,
+        "prefill_wait_ms": 1554.4104166477919,
+        "verify_tokens": 1,
+        "decode_step_ms": 4.936793749948265
+      }
+    },
+    {
+      "client_elapsed_s": 1.7633474169997498,
+      "client_ttft_text_s": 1.5544872499885969,
+      "client_completion_tokens_per_s": 19.281509515492615,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 34,
+        "total_tokens": 53
+      },
+      "logical_completion_tokens": 33,
+      "finish_reason": "stop",
+      "text": "KV Cache 是 GPU 中用于存储计算过程中产生的计算结果（即计算输出）的内存区域，主要用于减少显存占用并提升计算效率。",
+      "done": true,
+      "backend_metrics": {
+        "steps": 40,
+        "decode_gpu_ms": 195.37245832907502,
+        "wall_ms": 1756.2480000051437,
+        "prefill_gpu_ms": 1542.0690000028117,
+        "prefill_wall_ms": 1542.6010833382607,
+        "state_reset_ms": 1.0885000083362684,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.13454101281240582,
+        "first_text_ms": 1546.7147919989657,
+        "decode_wall_ms": 209.3356250077486,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.038291677832603455,
+        "prefill_commit_ms": 0.013333335518836975,
+        "prefill_wait_ms": 1542.5249583274126,
+        "verify_tokens": 1,
+        "decode_step_ms": 4.884311458226875
+      }
+    }
+  ],
+  "median_client_completion_tokens_per_s": 19.281509515492615,
+  "median_client_elapsed_s": 1.7633474169997498,
+  "median_client_ttft_text_s": 1.5544872499885969,
+  "server_log": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/runs/c27b4869594b/server.log",
+  "owned_server_exit_code": -15
+}

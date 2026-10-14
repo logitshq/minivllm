@@ -9,6 +9,9 @@ from pathlib import Path
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--core-report',type=Path);ap.add_argument('--omlx-report',type=Path)
+    ap.add_argument('--core-additional-report',type=Path,action='append',default=[])
+    ap.add_argument('--omlx-additional-report',type=Path,action='append',default=[])
+    ap.add_argument('--lithos-additional-report',type=Path,action='append',default=[])
     ap.add_argument('--lithos-report',type=Path,help='An actual local measurement artifact, never a README projection')
     ap.add_argument('--lithos-preparation-report',type=Path,help='CPU preparation only; never counted as a GPU measurement')
     ap.add_argument('--out',type=Path);args=ap.parse_args()
@@ -47,6 +50,17 @@ def main():
         rows[-1]['installation']=json.loads(installation.read_text())
         if args.lithos_report is None:
             rows[-1]['measurement_status']='prepared_not_measured; no GPU server run'
+    for row,primary,additional in zip(rows[1:],[args.core_report,args.omlx_report,args.lithos_report],[args.core_additional_report,args.omlx_additional_report,args.lithos_additional_report]):
+        artifacts=([primary] if primary else [])+additional
+        row['measurement_artifacts']=[str(p.resolve()) for p in artifacts]
+        for artifact in artifacts:
+            data=json.loads(artifact.read_text())
+            assert data.get('runs'), 'A measured report must contain actual runs'
+            if row['name']=='Lithos Metal':
+                assert data.get('status')=='measured local target-only', 'CPU preparation is not a GPU benchmark'
+                row['role']='Apple Silicon engine reference; measured local target-only'
+                row['measurement_status']='measured_local_target_only'
+                row['preparation_status']='CPU format checks completed; historical preparation artifact retained'
     report={'host':platform.platform(),'baselines':rows,
             'rule':'Keep correctness tests, API measurements, core measurements and published projections as separate evidence.'}
     print(json.dumps(report,ensure_ascii=False,indent=2))

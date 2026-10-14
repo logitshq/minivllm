@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "artifacts": [
+    "/private/tmp/minivllm-remaining-20261014/chapter11-core-27b.json",
+    "/private/tmp/minivllm-remaining-20261014/chapter11-omlx-27b.json",
+    "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-27b-measurement.json"
+  ],
+  "same_checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "same_prompt_19_ids": true,
+  "same_nvfp4_group16_bits4": true,
+  "same_cap128_normal_eos_target_only_concurrency1": true,
+  "core_emitted_ids": [
+    37,
+    37,
+    37
+  ],
+  "core_logical_completions": [
+    36,
+    36,
+    36
+  ],
+  "omlx_logical_completions": [
+    44,
+    44,
+    44
+  ],
+  "lithos_emitted_ids": [
+    45,
+    45,
+    45
+  ],
+  "lithos_logical_completions": [
+    44,
+    44,
+    44
+  ],
+  "core_median_ttft_id_s": 0.18956745800096542,
+  "omlx_median_ttft_text_s": 0.24355812500289176,
+  "lithos_median_ttft_text_s": 42.781459250007174,
+  "core_median_emitted_ids_per_engine_s": 18.10623133909217,
+  "omlx_median_client_latency_s": 1.997892375002266,
+  "lithos_median_client_latency_s": 46.19259108400729,
+  "limits": [
+    "No core/API speedup ratio is computed.",
+    "Completion counting differs by whether EOS is included.",
+    "Greedy text may differ across BF16 arithmetic paths; no exact equality is promised.",
+    "These are single-prompt three-repeat experiments, not batch/spec/long-context or p99 evidence.",
+    "MLX allocator peak and Lithos current session buffer count are different memory scopes."
+  ]
+}

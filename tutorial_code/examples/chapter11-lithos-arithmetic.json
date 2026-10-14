@@ -1,0 +1,175 @@
+{
+  "status": "passed",
+  "missing": [],
+  "review_scope": "CPU arithmetic, actual artifacts, metadata and server-log consistency; no GPU execution by reviewer",
+  "same_0_8b_prompt_and_checkpoint_as_existing_baselines": true,
+  "runs": [
+    {
+      "artifact": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-0.8b-smoke.json",
+      "model": "0.8b",
+      "workload": "smoke",
+      "cap": 16,
+      "completion_counts": [
+        16
+      ],
+      "logical_counts": [
+        16
+      ],
+      "finish_reasons": [
+        "length"
+      ],
+      "median_client_elapsed_s": 1.5136228750052396,
+      "median_client_ttft_text_s": 1.4360795410029823,
+      "median_client_completion_tokens_per_s": 10.570664770076638,
+      "cache_hits_zero": true,
+      "draft": null,
+      "resident_session_buffer_bytes": 700525328,
+      "owned_server_exit_code": -15
+    },
+    {
+      "artifact": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-0.8b-measurement.json",
+      "model": "0.8b",
+      "workload": "measurement",
+      "cap": 128,
+      "completion_counts": [
+        34,
+        34,
+        34
+      ],
+      "logical_counts": [
+        33,
+        33,
+        33
+      ],
+      "finish_reasons": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "median_client_elapsed_s": 1.6576097910001408,
+      "median_client_ttft_text_s": 1.4601693330041599,
+      "median_client_completion_tokens_per_s": 20.51146185586033,
+      "cache_hits_zero": true,
+      "draft": null,
+      "resident_session_buffer_bytes": 700525328,
+      "owned_server_exit_code": -15
+    },
+    {
+      "artifact": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-27b-smoke.json",
+      "model": "27b",
+      "workload": "smoke",
+      "cap": 16,
+      "completion_counts": [
+        16
+      ],
+      "logical_counts": [
+        16
+      ],
+      "finish_reasons": [
+        "length"
+      ],
+      "median_client_elapsed_s": 43.38870350000798,
+      "median_client_ttft_text_s": 42.33484004100319,
+      "median_client_completion_tokens_per_s": 0.3687595781698584,
+      "cache_hits_zero": true,
+      "draft": null,
+      "resident_session_buffer_bytes": 17001511056,
+      "owned_server_exit_code": -15
+    },
+    {
+      "artifact": "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-27b-measurement.json",
+      "model": "27b",
+      "workload": "measurement",
+      "cap": 128,
+      "completion_counts": [
+        45,
+        45,
+        45
+      ],
+      "logical_counts": [
+        44,
+        44,
+        44
+      ],
+      "finish_reasons": [
+        "stop",
+        "stop",
+        "stop"
+      ],
+      "median_client_elapsed_s": 46.19259108400729,
+      "median_client_ttft_text_s": 42.781459250007174,
+      "median_client_completion_tokens_per_s": 0.974182199871871,
+      "cache_hits_zero": true,
+      "draft": null,
+      "resident_session_buffer_bytes": 17001511056,
+      "owned_server_exit_code": -15
+    }
+  ],
+  "no_across_backend_or_across_model_speedup_ratio": true,
+  "within_backend_smoke_text_prefix_preserved": {
+    "0.8b": true,
+    "27b": true
+  },
+  "limits": [
+    "Three repetitions support a basic median, not p99.",
+    "API completion count includes EOS; oMLX count excludes EOS.",
+    "Memory is current session buffer allocations, not RSS or peak.",
+    "Matched27B core/API timing boundaries and actual output counts differ; no speedup ratio is computed.",
+    "Native fallback measurement does not calibrate every M4 recipe or show megakernel dispatch."
+  ],
+  "paired_27b_audit": {
+    "status": "passed",
+    "artifacts": [
+      "/private/tmp/minivllm-remaining-20261014/chapter11-core-27b.json",
+      "/private/tmp/minivllm-remaining-20261014/chapter11-omlx-27b.json",
+      "/private/tmp/minivllm-remaining-20261014/chapter11-lithos-27b-measurement.json"
+    ],
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "same_checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "same_prompt_19_ids": true,
+    "same_nvfp4_group16_bits4": true,
+    "same_cap128_normal_eos_target_only_concurrency1": true,
+    "core_emitted_ids": [
+      37,
+      37,
+      37
+    ],
+    "core_logical_completions": [
+      36,
+      36,
+      36
+    ],
+    "omlx_logical_completions": [
+      44,
+      44,
+      44
+    ],
+    "lithos_emitted_ids": [
+      45,
+      45,
+      45
+    ],
+    "lithos_logical_completions": [
+      44,
+      44,
+      44
+    ],
+    "core_median_ttft_id_s": 0.18956745800096542,
+    "omlx_median_ttft_text_s": 0.24355812500289176,
+    "lithos_median_ttft_text_s": 42.781459250007174,
+    "core_median_emitted_ids_per_engine_s": 18.10623133909217,
+    "omlx_median_client_latency_s": 1.997892375002266,
+    "lithos_median_client_latency_s": 46.19259108400729,
+    "core_peak_allocator_bytes": 15493470551,
+    "core_peak_allocator_GiB": 14.429418883286417,
+    "lithos_current_session_buffer_bytes": 17001511056,
+    "lithos_current_session_buffer_GiB": 15.833891049027443,
+    "limits": [
+      "No core/API speedup ratio is computed.",
+      "Completion counting differs by whether EOS is included.",
+      "Greedy text may differ across BF16 arithmetic paths; no exact equality is promised.",
+      "These are single-prompt three-repeat experiments, not batch/spec/long-context or p99 evidence.",
+      "MLX allocator peak and Lithos current session buffer count are different memory scopes."
+    ]
+  }
+}

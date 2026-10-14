@@ -1,0 +1,186 @@
+{
+  "baseline": "Lithos Metal",
+  "status": "measured local target-only",
+  "recorded_at": "2026-10-14T21:41:28.314354+00:00",
+  "installation": {
+    "distribution_version": "0.1.2",
+    "archive_url": "https://github.com/lithos-ai/lithos-metal/releases/download/v0.1.2/lithos-metal-0.1.2-macos-arm64.tar.gz",
+    "archive_sha256": "a51b821923b21ed4134979779f0ed77c98cbc9b227fed7627ec620704169a3e3",
+    "python": "3.12.13",
+    "source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "source_archive_url": "https://github.com/lithos-ai/lithos-metal/archive/5485ad6bac0a5649d66a347f3e01a655ea29d937.tar.gz",
+    "source_archive_sha256": "2b33f72e22d3b392df72cda547f27ffbc03ea0597e17acde243fb53bb5081c6f",
+    "checkpoint_adapter_sha256": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+    "native_runtime": "compiled from the complete official pinned source, no local patches"
+  },
+  "versions": {
+    "lithos-metal": "0.1.2",
+    "numpy": "2.5.3",
+    "transformers": "5.18.0",
+    "tokenizers": "0.23.2"
+  },
+  "host": {
+    "chip": "Apple M4 Max",
+    "gpu_cores": 40,
+    "apple_family": 9,
+    "unified_memory_bytes": 51539607552,
+    "macos": "27.0.1"
+  },
+  "backend": "m4_max",
+  "backend_profile": {
+    "name": "apple-m4-max-40c",
+    "backend": "m4_max",
+    "chip": "Apple M4 Max",
+    "gpu_family": "Apple9",
+    "gpu_cores": 40,
+    "nominal_gbps": 0,
+    "validation": "unmeasured",
+    "note": "Conservative native-kernel fallback. No latency, bandwidth, fusion or acceptance claims; tune on this exact device.",
+    "engine": {
+      "family": "Apple9",
+      "lane_order": "interleaved16",
+      "scale_placement": "block",
+      "threadgroups_per_core": 1,
+      "sibling_order": "either",
+      "max_cb_ms": 16,
+      "attention": "v1",
+      "attention_rows": 4,
+      "accelerator": "off",
+      "accelerator_min_t": {},
+      "cost_T": {},
+      "gdn_mixer_fusion": {}
+    }
+  },
+  "checkpoint": {
+    "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "format": "MLX NVFP4 group16 bits4",
+    "served_metadata_view": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "generation_config_policy": "existing generation_config.json",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "source_weight_bytes": 16054475404
+  },
+  "prompt": "用一句话解释什么是 KV cache。",
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    95826,
+    110827,
+    98682,
+    108829,
+    81726,
+    6297,
+    1710,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "prompt_ids_match_baseline": true,
+  "sampling": {
+    "temperature": 0,
+    "top_p": 1,
+    "eos": "normal stopping",
+    "eos_ids": [
+      248044,
+      248046
+    ]
+  },
+  "draft": null,
+  "concurrency": 1,
+  "max_new_tokens_cap": 16,
+  "max_context": 2048,
+  "cache_policy": "serving prefix cache enabled; exact short 19-token prompt had zero cached prompt tokens on every run",
+  "timing_scope": "client POST through SSE DONE, including HTTP/service/prefill/decode; excludes installation, packing, model loading and explicit full-workload warmup",
+  "counting": "Lithos API completion_tokens counts committed IDs including terminal EOS (decoded text hides special tokens)",
+  "kernel_route": "registered M4 fallback; no automatic mixer megakernels or tensor accelerator; profile availability is not per-kernel dispatch evidence",
+  "normalization_policy": "official Session default commute_norm=True; BF16 normalization/projection fusion can change rounding versus unfused paths",
+  "memory": {
+    "server_resident_buffer_bytes": 17001511056,
+    "scope": "Lithos /api/ps size_vram: unique session buffer allocations; excludes CPU packs and process RSS"
+  },
+  "warmup": {
+    "client_elapsed_s": 52.56180624999979,
+    "usage": {
+      "prompt_tokens": 19,
+      "completion_tokens": 16,
+      "total_tokens": 35
+    },
+    "finish_reason": "length",
+    "backend_metrics": {
+      "steps": 15,
+      "decode_gpu_ms": 986.3579166558338,
+      "wall_ms": 52394.214541011024,
+      "prefill_gpu_ms": 42152.11391667253,
+      "prefill_wall_ms": 42220.38758331537,
+      "state_reset_ms": 0.0006659975042566657,
+      "checkpoint_ms": 0.0,
+      "setup_ms": 9144.298166997032,
+      "load_ms": 144.28341700113378,
+      "first_text_ms": null,
+      "decode_wall_ms": 1028.6982916742563,
+      "cached_prompt_tokens": 0,
+      "prefix_source": null,
+      "prefix_load_ms": 0.0,
+      "prefill_encode_ms": 1.1054999977350235,
+      "prefill_commit_ms": 0.03204166889190674,
+      "prefill_wait_ms": 42219.22808332741,
+      "verify_tokens": 1,
+      "decode_step_ms": 65.75719444372226
+    }
+  },
+  "runs": [
+    {
+      "client_elapsed_s": 43.38870350000798,
+      "client_ttft_text_s": 42.33484004100319,
+      "client_completion_tokens_per_s": 0.3687595781698584,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 16,
+        "total_tokens": 35
+      },
+      "logical_completion_tokens": 16,
+      "finish_reason": "length",
+      "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的",
+      "done": true,
+      "backend_metrics": {
+        "steps": 15,
+        "decode_gpu_ms": 968.9924999984214,
+        "wall_ms": 43375.564958987525,
+        "prefill_gpu_ms": 42313.72225000814,
+        "prefill_wall_ms": 42314.46037501097,
+        "state_reset_ms": 13.177208995330147,
+        "checkpoint_ms": 0.0,
+        "setup_ms": 0.0,
+        "load_ms": 0.10537500202190131,
+        "first_text_ms": 42328.79562499875,
+        "decode_wall_ms": 1047.0380833297968,
+        "cached_prompt_tokens": 0,
+        "prefix_source": null,
+        "prefix_load_ms": 0.0,
+        "prefill_encode_ms": 0.022166669368743896,
+        "prefill_commit_ms": 0.007791653275489807,
+        "prefill_wait_ms": 42314.40683333576,
+        "verify_tokens": 1,
+        "decode_step_ms": 64.59949999989476
+      }
+    }
+  ],
+  "startup": {
+    "process_to_api_ready_s": 31.008294041996123,
+    "scope": "server process start through models API readiness; includes checkpoint packing when absent and imports/tokenizer setup; --no-warmup defers GPU session loading/compilation to explicit warmup",
+    "pack_cache": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/packs"
+  },
+  "median_client_completion_tokens_per_s": 0.3687595781698584,
+  "median_client_elapsed_s": 43.38870350000798,
+  "median_client_ttft_text_s": 42.33484004100319,
+  "server_log": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/runs/a219f51c87c0/server.log",
+  "owned_server_exit_code": -15
+}

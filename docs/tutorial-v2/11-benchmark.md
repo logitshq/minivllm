@@ -8,7 +8,7 @@
 | 8-token oMLX 功能冒烟 | 全长度预热、重复测量、保存每轮实际输出数 |
 | 只看一个 tok/s | 分清 TTFT、后续生成、引擎和 HTTP 边界 |
 
-代码版本：`tutorial-11`；上一个版本是 `tutorial-10`。入口 [benchmark_core.py](../../tutorial_code/benchmark_core.py)、[run_omlx.py](../../tutorial_code/baselines/run_omlx.py) 和 [probe_baselines.py](../../tutorial_code/baselines/probe_baselines.py)。现有 [baseline 说明](../../tutorial_code/baselines/README.md) 保留安装、版本固定和短请求记录。
+代码版本：`tutorial-11-v2`（保留原 `tutorial-11`）；上一个版本是 `tutorial-10`。入口 [benchmark_core.py](../../tutorial_code/benchmark_core.py)、[run_omlx.py](../../tutorial_code/baselines/run_omlx.py) 和 [probe_baselines.py](../../tutorial_code/baselines/probe_baselines.py)。现有 [baseline 说明](../../tutorial_code/baselines/README.md) 保留安装、版本固定和短请求记录。
 
 ## 1. 几个 baseline 各负责什么
 
@@ -23,7 +23,7 @@
 
 Lithos 值得参考其 layer-wise mixer megakernel 与 GPU 生成控制设计。官方要求 macOS 26+，但 M4 Max 32/40-core 当前列为未测量 native fallback，未测 backend 不自动启用 megakernel fusion/tensor accelerator；它使用的 DSpark 草稿也与我们的 DFlash2 不同。见 [官方硬件与模型说明](https://github.com/lithos-ai/lithos-metal#models-and-hardware)。
 
-官方报告里的 M5 Max 168 tok/s 是假设接受 6 个草稿、验证 8 行的目标计算投影，排除了 draft、accept 与 rewind，不是本机端到端结果。见 [固定版本的验证报告](https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md)。本章将其登记为候选，不填未经本机测量的成绩。
+官方报告里的 M5 Max 168 tok/s 是假设接受 6 个草稿、验证 8 行的目标计算投影，排除了 draft、accept 与 rewind，不是本机端到端结果。见 [固定版本的验证报告](https://github.com/lithos-ai/lithos-metal/blob/46b2bc4cda57826c072d94afe90a58633aaeb6d9/docs/research/m5max-27b-backend-verification.md)。原 `tutorial-11` 将其登记为候选；本章扩展版只填下方真实本机测量的成绩。
 
 ## 2. 先统一哪些条件
 
@@ -122,7 +122,7 @@ python -m tutorial_code.baselines.probe_baselines \
 
 [baseline 清单](../../tutorial_code/examples/chapter11-baselines.json) 将可运行、系统要求满足和实际有测量报告分开记录。只有确实完成本机 Lithos 测量后，才传 `--lithos-report`；README 宣传值不是这份参数应读取的报告。
 
-性能表先按边界分列：我们的核心引擎、oMLX HTTP 客户端、Lithos 未测候选。若要严谨比较 API 端到端速度，双方都用相同 API 驱动和请求条件；若要比较模型核心，就为双方都准备相同核心计时接口。
+性能表按边界分列：我们的核心引擎、oMLX 与 Lithos 的 HTTP 客户端。若要严谨比较 API 端到端速度，双方都用相同 API 驱动和请求条件；若要比较模型核心，就为双方都准备相同核心计时接口。
 
 ## 7. 回到每章究竟改了什么
 
@@ -233,4 +233,71 @@ git diff tutorial-10 tutorial-11 -- tutorial_code/benchmark_core.py tutorial_cod
 
 CPU 准备已验证现有 [0.8B](../../tutorial_code/examples/chapter11-lithos-0.8b-cpu-prepared.json) 的 187 个和 [27B](../../tutorial_code/examples/chapter11-lithos-27b-cpu-prepared.json) 的 498 个 NVFP4 tensor binding；两者的聊天模板都逐个匹配第一章 19 个输入 IDs，EOS 集合均为 `{248044,248046}`。0.8B 缺少 generation_config，adapter 在隔离目录用符号链接构造只补 EOS 元数据的 checkpoint 视图，原 tensor/config/tokenizer 字节保持原样。
 
-这些是安装和 CPU 格式准备记录，尚未启动 GPU 模型或测量吞吐。GPU 实测等待关闭其他应用、释放内存之后单独进行；原 qualification JSON 保留为安装前记录，不能当作当前已测性能。运行时明确 `--no-draft`，DFlash2 不能代替 Lithos 的 DSpark。
+上面的 CPU 准备记录与随后的真实 GPU 测量分别保留。用户解锁后正常退出空闲应用，保留正在运行的远端 CUDA 工作与 Codex，然后串行完成 GPU 实测；原 qualification JSON 保留为安装前记录，不能当作当前性能成绩。运行时明确 `--no-draft`，DFlash2 不能代替 Lithos 的 DSpark。
+
+## Lithos 实际运行：同一 0.8B checkpoint 的第三条记录
+
+`tutorial-11-v2` 追加真实 Lithos GPU 记录，原章节 tag、安装前资格与 CPU 准备记录都保留。先通过 16-token 功能 smoke，再用输出上限 128 的同一工作负载预热、重复三次；全部使用 target-only `--no-draft`、greedy、正常 EOS、并发 1。报告对应实际 M4 Max 40 GPU 核、48GiB、macOS 27.0.1。
+
+同一 0.8B NVFP4 checkpoint 与配置 SHA、同一 19 个输入 IDs，不代表不同实现逐 token 一致。本次 Lithos 的 BF16 normalization/projection fusion 默认 `commute_norm=True`，与其他路径的数值组织不同；实际输出长度也不同。
+
+| 0.8B 测量边界 | 实际完成数 | 首次交付中位时间 | 本边界吞吐中位数 |
+|---|---|---|---|
+| 教学核心：IDs 输入到 IDs 交付 | 29 IDs 含 EOS；28 logical | 12.30 ms（首 ID） | 187.41 emitted IDs/s |
+| oMLX：HTTP/SSE 客户端 | 28 completion，不含终端 EOS | 16.14 ms（首文本） | 357.19 completion tokens/s |
+| Lithos：HTTP/SSE 客户端 | 34 committed IDs 含 EOS；33 logical | 1460.17 ms（首文本） | 20.51 committed IDs/s |
+
+完整结果见 [Lithos 0.8B](../../tutorial_code/examples/chapter11-lithos-0.8b.json)、[0.8B smoke](../../tutorial_code/examples/chapter11-lithos-0.8b-smoke.json) 和已有核心/oMLX JSON。每次 Lithos 请求 `cached_prompt_tokens=0`、`verify_tokens=1`，确实走了目标模型；退出时仅终止自己的服务进程。
+
+这些是各自边界下的真实数值，不能称为相同输出工作量的简单加速倍数。Lithos 的 `max_context=2048`，教学核心按 `prompt长度 + 输出上限 + 16` 设置 max_len，并使用随批容量增长的 cache；容量与分配策略也未统一。客户端 tok/s 包含 prefill 与服务，不是纯 decode tok/s；不同输出长度、EOS 计数与浮点路径都已保留。三轮提前 EOS，不能写成持续生成满 128 个 token。
+
+Lithos 0.8B 日志中，三轮 prefill GPU command-buffer duration 中位数约 1449.79 ms，decode GPU duration 约 186.50 ms，测量轮 `setup_ms=0`。这些是 native GPUStart/End command-buffer 时间，不是 CPU 首次编译，也不是单个算子的纯数学耗时。记录的 `steps=[40, 40, 40]` 包含结束后的 no-op，不能当成实际输出 token 数去计算吞吐。
+
+0.8B 本次服务进程到 API ready 为 1.443 s，显式完整预热请求为 2.940 s，均在正式重复请求之外。`--no-warmup` 把 GPU session 首次加载/编译留给显式预热；API ready 本身不证明模型已加载，pack 已存在时也不能把 ready 时间当成首次 pack 成本。
+
+27B 本次服务进程到 API ready 为 1.445 s，显式完整预热请求为 49.859 s，均在正式重复请求之外。`--no-warmup` 把 GPU session 首次加载/编译留给显式预热；API ready 本身不证明模型已加载，pack 已存在时也不能把 ready 时间当成首次 pack 成本。
+
+## 同一 27B checkpoint 的三条独立记录
+
+下面记录固定缓存 checkpoint `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6`。三条引擎复用这一相同 checkpoint、19 个输入 IDs、输出上限 128、greedy 与正常 EOS，预热后重复三次。核心和 API 仍分列；模型规模与上面的 0.8B 不同，不跨模型排速度。
+
+| 27B 测量边界 | 实际完成数（三轮） | 首次交付中位时间 | 本边界吞吐中位数 |
+|---|---|---|---|
+| 教学核心：IDs 输入到 IDs 交付 | 37, 37, 37 emitted IDs；logical 36, 36, 36 | 189.57 ms（首 ID） | 18.11 emitted IDs/s |
+| oMLX：HTTP/SSE 客户端 | 44, 44, 44 completion，不含终端 EOS | 243.56 ms（首文本） | 22.02 completion tokens/s |
+| Lithos：HTTP/SSE 客户端，no-draft | 45, 45, 45 committed IDs；logical 44, 44, 44 | 42781.46 ms（首文本） | 0.97 committed IDs/s |
+
+完整结果见 [教学核心 27B](../../tutorial_code/examples/chapter11-core-27b.json)、[oMLX 27B](../../tutorial_code/examples/chapter11-omlx-27b.json)、[Lithos 27B](../../tutorial_code/examples/chapter11-lithos-27b.json) 与 [27B smoke](../../tutorial_code/examples/chapter11-lithos-27b-smoke.json)。这是本机 registered M4 native fallback 的实际目标模型路径，上游 profile 仍标为 `unmeasured`，automatic mixer megakernel fusion 与 tensor accelerator 没有启用；本次测量不能被描述为整套 profile 校准，也没有测 DSpark 或 DFlash2 投机性能。
+
+同一个测试 prompt 上，27B oMLX 的 44 个 logical completion 对应的完整可见文本与 Lithos 相同；教学核心产生 36 个 logical completion，措辞与长度不同。这是此案例的观察，文本相同也不等于证明完整内部 token IDs 或所有输入下的 greedy 路径相等。
+
+27B 三轮日志的 prefill GPU command-buffer duration 为 41.78–42.89 s，测量轮 `setup_ms=0`。native `steps=[48, 48, 48]`（预热 64）包括排队后的 done/no-op，不是 45 个 committed 输出的计数。不能把约 42 秒解释成首次 CPU 编译，也不从这些 step 数推导每 token 吞吐。
+
+报告的 `/api/ps size_vram` 是 unique session buffer allocations，不包括 CPU packs 或进程 RSS，也不是总系统内存/峰值。与教学核心 MLX allocator peak 的含义不同，分别保存，不混成同一内存排名。Source JSON 都保留 bytes；下表以十进制 GB（bytes / 1e9）展示，不称为 GiB。
+
+| 内存记录 | 原始 bytes | 十进制 GB | 测量含义 |
+|---|---|---|---|
+| 0.8B 教学核心 | 511464387 | 0.511 | MLX allocator peak |
+| 0.8B Lithos | 700525328 | 0.701 | unique session buffer current |
+| 27B 教学核心 | 15493470551 | 15.493 | MLX allocator peak |
+| 27B Lithos | 17001511056 | 17.002 | unique session buffer current |
+
+
+[独立算术复核](../../tutorial_code/examples/chapter11-lithos-arithmetic.json) 、[同一 27B 三路复核](../../tutorial_code/examples/chapter11-paired-27b-arithmetic.json) 和 [集成时 CPU 复核](../../tutorial_code/examples/chapter11-lithos-integration-audit.json) 核对了实际输入、输出计数、EOS、native fallback、cache/verify、计时与中位数。这些复核都读取真实 GPU 运行后的报告，本身没有额外运行模型。
+
+最终当前报告以带 startup 元数据的版本为准。较早 0.8B [测量](../../tutorial_code/examples/chapter11-lithos-0.8b-measurement-before-startup-metadata.json) 与 [smoke](../../tutorial_code/examples/chapter11-lithos-0.8b-smoke-before-startup-metadata.json) 单独保留，未用它们替换本表。各 owned 服务退出记录见 [清理检查](../../tutorial_code/examples/chapter11-owned-server-cleanup.json)。
+
+## 从第十一章初版到扩展版
+
+```diff
+- Lithos 只有安装资格/CPU 格式准备，性能未测
++ 官方固定源码实际运行，保存 0.8B 与 27B GPU smoke/重复测量
++ 相同 27B checkpoint 补齐教学核心与 oMLX 的重复请求
++ 分列核心/API、EOS 计数、startup/预热/正式请求与内存边界
+```
+
+```bash
+git diff tutorial-11 tutorial-11-v2 -- tutorial_code/baselines docs/tutorial-v2/11-benchmark.md
+```
+
+本次扩展没有重写模型数学或重新调整 M4 配方；它完成第三条实际 baseline 与同目标记录，并保留每次已运行结果的范围。

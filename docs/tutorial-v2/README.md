@@ -18,7 +18,7 @@
 | [08 调度与批量](08-scheduler.md) | 请求生命周期、预算、chunked prefill、decode batch | 多请求核心引擎 | `tutorial-08` |
 | [09 Metal](09-metal.md) | 融合 GDN 单步、chunk 三角求解 | 自定义 kernel 接入引擎 | `tutorial-09` |
 | [10 投机解码](10-speculative.md) | DFlash2、verify、accept、bonus、回滚 | greedy 单流投机路径 | `tutorial-10` |
-| [11 Baseline 与实验](11-benchmark.md) | 重复测量、指标边界、同条件比较 | 核心与外部引擎各自报告 | `tutorial-11` |
+| [11 Baseline 与实验](11-benchmark.md) | 重复测量、指标边界、同条件比较 | 核心与外部引擎各自报告 | `tutorial-11-v2` |
 
 第二章初版 `tutorial-02` 只包含较少组件，阅读使用扩展版 `tutorial-02-v2`。第七章保留初版 `tutorial-07`，修正量化 Embedding 的激活 dtype 接口后使用 `tutorial-07-v2`；旧 tag 不覆盖。
 
@@ -30,11 +30,11 @@
 |---|---|---|
 | HF Transformers / MPS | 原始 fp32 权重下的模型数学与 greedy 参照 | [generate.py](../../tutorial_code/generate.py)、各章 checker |
 | oMLX | 已有优化的 Apple Silicon 引擎性能参照 | [baseline 工具说明](../../tutorial_code/baselines/README.md)、第十一章重复测量 |
-| Lithos Metal | 第三条外部引擎；已安装、CPU 准备，GPU 实测待完成 | [第十一章的资格说明](11-benchmark.md)、[上游模型/硬件表](https://github.com/lithos-ai/lithos-metal#models-and-hardware) |
+| Lithos Metal | 第三条外部引擎；0.8B/27B GPU 实测已完成 | [第十一章的资格说明](11-benchmark.md)、[上游模型/硬件表](https://github.com/lithos-ai/lithos-metal#models-and-hardware) |
 
 我们自己的测量入口是 [benchmark_core.py](../../tutorial_code/benchmark_core.py)。HF 第一章的无 cache 循环用于理解与正确性，不作为最终速度目标。量化模型与同 checkpoint 的参考核对，不要求它与 raw fp32 一直生成相同 token。
 
-oMLX 当前驱动经 HTTP/SSE；手写引擎计时从 IDs 输入开始。两个计时边界在报告中分列，不把不同边界的数字相除称为优化倍数。Lithos 在 M4 Max 的上游状态是未测 native fallback；它的 DSpark 与这里的 DFlash2 也不是相同实验，尚未完成的本机测量不填成绩。
+oMLX 当前驱动经 HTTP/SSE；手写引擎计时从 IDs 输入开始。两个计时边界在报告中分列，不把不同边界的数字相除称为优化倍数。Lithos 在 M4 Max 的上游状态是未测 native fallback；它的 DSpark 与这里的 DFlash2 也不是相同实验，真实 0.8B/27B 本机报告在第十一章扩展版分别列出，未测其他场景不填成绩。
 
 核心交付的原始 IDs 可能包含终端 EOS，API completion usage 不一定包含它；第十一章另列逻辑完成数与结束原因，不能只看两个输出计数就判断生成工作相同。
 
@@ -97,4 +97,4 @@ cd /Users/ryanli/code/minivllm-tutorial
 
 Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构建并安装到独立 Python 3.12 环境；没有本地 kernel 或模型补丁。0.8B/27B 的 CPU checkpoint 格式、19 个输入 IDs 与完整 EOS 集合均已核对，复现步骤见 [Lithos README](../../tutorial_code/baselines/lithos-README.md)。安装与准备记录用 `baseline-lithos-setup-v1` 保存。
 
-用户要求先关闭其他应用释放内存。系统当前锁屏，应用清理尚未完成，因此 GPU benchmark 还没开始；目录与报告明确标记 `prepared_not_measured`。原 `tutorial-11` 的 Lithos 资格 JSON 保留为安装前记录，未来实际 GPU 结果将另存新版本，不覆盖旧 tag。
+用户解锁后关闭空闲应用、保留正在执行的远端 CUDA 工作与 Codex，随后独占 GPU 串行运行。0.8B/27B 的 smoke 与三次重复测量均已完成，报告标记为真实 target-only 本机测量；`tutorial-11-v2` 保存扩展结果。原 `tutorial-11` 和 `baseline-lithos-setup-v1` 的资格/CPU 准备记录保留，不覆盖旧 tag。
