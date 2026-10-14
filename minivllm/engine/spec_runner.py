@@ -38,8 +38,8 @@ class SpecRunner:
         if fed < start:
             full = history[0] if len(history) == 1 else mx.concatenate(history)
             feats = full[fed:start]
-        block = self.block or (5 if st.q >= 0.45 else 3)       # Mac 的 verify 成本在 5 之后陡增：默认 5，接受率太低时缩到 3
-        drafts = self.drafter.draft(feats, anchor, start, self.model.embed_tokens, self.model.lm_head_fn, block)
+        bs = self.block or (5 if st.q >= 0.45 else 3)          # 块长。Mac 的 verify 成本在 5 之后陡增：默认 5，接受率太低时缩到 3
+        drafts = self.drafter.draft(feats, anchor, start, self.model.embed_tokens, self.model.lm_head_fn, bs)
         block = [anchor] + drafts
         for c in caches:
             c.snapshot()
@@ -54,7 +54,7 @@ class SpecRunner:
         for c in caches:
             c.rollback(n + 1)                                # cache 保留锚点 + n 个草稿
         st.stats[0] += n; st.stats[1] += 1
-        st.q = 0.8 * st.q + 0.2 * (n / max(1, block - 1))
+        st.q = 0.8 * st.q + 0.2 * (n / max(1, bs - 1))
         return produced, new_feats[: n + 1]                 # 锚点 + 接受的草稿的特征，追加进 history
 
     def drop(self, req_id: str):
