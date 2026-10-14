@@ -1,5 +1,4 @@
-"""Chapter 08, adapted from minivllm/engine/model_runner.py.
-ModelRunner：把调度器的一步变成模型的前向。
+"""ModelRunner：把调度器的一步变成模型的前向。
 
 每步两类工作：
   decode  —— 所有 prompt 已算完的请求排成一个 batch，一次前向出 B 个 token。它们的 cache 在 DecodeBatch 里。
@@ -16,16 +15,36 @@ from .scheduler import SchedulerOutput
 
 
 class ModelRunner:
-    def __init__(self, model, max_len: int):
+    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None):
         self.model = model
         self.max_len = max_len
         self.batch = DecodeBatch(model)
-        self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段）
+        self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段，以及投机解码的 solo 模式）
+        self.spec = None
+        self.feats: dict[str, list] = {}            # req_id → 全部上下文特征（按块存；drafter 按需补吃）
+        if drafter is not None:
+            from .spec_runner import SpecRunner
+            self.spec = SpecRunner(model, drafter, spec_block)
 
     def run(self, out: SchedulerOutput) -> dict[str, int | list[int]]:
         sampled: dict[str, int | list[int]] = {}
         to_eval = []
         decode = out.decode                                      # 不改 out：scheduler.update 还要用它
+        # ---- solo 投机解码：只有一个请求在 decode，且装了 drafter ----
+        if self.spec is not None and len(out.decode) == 1 and out.decode[0].req_id in self.staging:
+            req = out.decode[0]
+            hist = self.feats.setdefault(req.req_id, [])
+            produced, new_feats = self.spec.step(req, self.staging[req.req_id], hist)
+            if len(hist) > 64:                                   # 合并，免得列表越来越长
+                hist[:] = [mx.concatenate(hist)]
+            hist.append(new_feats)
+            sampled[req.req_id] = produced
+            decode = []
+        elif self.spec is not None and len(out.decode) == 1 and self.batch.size == 1 and self.batch.req_ids == [out.decode[0].req_id]:
+            # batch 缩到只剩一个：抽回 solo 模式，下一步走投机解码
+            self.staging[out.decode[0].req_id] = self.batch.extract(0)
+            self.batch.clear()
+            return self.run(out)
         # ---- decode ----
         if decode:
             self._sync_batch(decode)
@@ -33,7 +52,13 @@ class ModelRunner:
             tokens = mx.array([r.output_token_ids[-1] for r in decode])
             ctx = ForwardContext("decode", self.batch.layers, positions=mx.array(positions),
                                  lens=mx.array([p + 1 for p in positions]), max_len=max(positions) + 1)
-            logits = self.model(tokens, ctx)
+            if self.spec is not None:
+                logits, f = self.model(tokens, ctx, capture=self.spec.capture)
+                for i, r in enumerate(decode):
+                    self.feats.setdefault(r.req_id, []).append(f[i:i + 1])
+                to_eval.append(f)
+            else:
+                logits = self.model(tokens, ctx)
             toks = sample(logits, [r.sampling for r in decode])
             to_eval.append(toks)
             decode_reqs = decode
@@ -46,7 +71,11 @@ class ModelRunner:
             caches = self.staging.setdefault(req.req_id, make_cache(self.model))
             start = req.num_computed_tokens
             ids = mx.array(req.all_token_ids[start:start + n])
-            logits = self.model(ids, ForwardContext("prefill", caches), last_only=True)
+            if self.spec is not None:
+                logits, f = self.model(ids, ForwardContext("prefill", caches), last_only=True, capture=self.spec.capture)
+                self.feats.setdefault(req.req_id, []).append(f); to_eval.append(f)
+            else:
+                logits = self.model(ids, ForwardContext("prefill", caches), last_only=True)
             if start + n >= req.num_prompt_tokens:          # 这一块算完了 prompt → 第一个 token
                 t = sample(logits, [req.sampling])
                 prefill_toks.append((req, t)); to_eval.append(t)
@@ -72,12 +101,19 @@ class ModelRunner:
                 caches = self.staging.pop(r.req_id)
                 new.append((r.req_id, caches, r.num_prompt_tokens + r.sampling.max_tokens))
         self.batch.rebuild(keep, new)
+        if self.spec is not None:
+            self.spec.drafter.reset()                       # 有人进了 batch：drafter 上下文作废，pending 特征保留着
+        # 丢掉的行（结束的请求）不需要做任何事：它们的 staging 早已搬走，batch 里的行被 rebuild 过滤掉了
 
     def drop(self, req_id: str) -> None:
         self.staging.pop(req_id, None)
+        self.feats.pop(req_id, None)
         if req_id in self.batch.req_ids:
             keep = [i for i, rid in enumerate(self.batch.req_ids) if rid != req_id]
             if keep:
                 self.batch.rebuild(keep, [])
             else:
                 self.batch.clear()
+        if self.spec is not None:
+            self.spec.drop(req_id)
+            self.spec.drafter.reset()                       # drafter 的上下文 cache 只服务一个 solo 请求

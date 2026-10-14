@@ -99,3 +99,4 @@ git switch tutorial/step-by-step
 - [07 量化权重](07-quantization.md) — `tutorial-07-v2`（保留原 `tutorial-07`）
 - [08 批量调度](08-scheduler.md) — `tutorial-08`
 - [09 Metal核函数](09-metal.md) — `tutorial-09`
+- [10 投机解码](10-speculative.md) — `tutorial-10`
