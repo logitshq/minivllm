@@ -1,0 +1,1517 @@
+{
+  "schema": "tutorial-chapter15-gdn-gates-compact-v1",
+  "status": "accepted optional optimization; default off; formal example actual off/on GPU smoke PASS; local version history retained",
+  "scope": "Native ordinary B1 gates opt-in only; no new official-engine comparison/Pareto/global win",
+  "candidate": {
+    "frozen_build": {
+      "artifact": "gdn-gates-frozen-build1.json",
+      "sha256": "f0cd8b3760ce2490011cf5b0ee30d6737dada8189769b9607ac7870586ea7731",
+      "bytes": 6127
+    },
+    "source_manifest": {
+      "artifact": "source-manifest-v17-gdn-gates-build1.json",
+      "sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c",
+      "bytes": 5042
+    },
+    "source_count": 25,
+    "unchanged_parent_sources": 24,
+    "changed_sources": [
+      "model/gdn.py"
+    ],
+    "gdn_source_sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+    "parent_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+    "constructor_default_off": true,
+    "only_example_enables_after_model_construction": true,
+    "all_gate_weights_explicit_arguments": true,
+    "no_new_Config_Runner_route": true
+  },
+  "checkpoint": {
+    "repo": "mlx-community/Qwen3.8-27B-nvfp4",
+    "snapshot": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "actual_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "metadata_sha256": {
+      "config.json": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+      "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "model.safetensors.index.json": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90"
+    },
+    "quantization": {
+      "mode": "nvfp4",
+      "bits": 4,
+      "group_size": 16
+    },
+    "activation_dtype": "bfloat16"
+  },
+  "backend": {
+    "mlx": "0.32.3",
+    "device_info": {
+      "device_name": "Apple M4 Max",
+      "max_recommended_working_set_size": 40200896512,
+      "memory_size": 51539607552,
+      "architecture": "applegpu_g16s",
+      "max_buffer_length": 30150672384,
+      "resource_limit": 499000
+    },
+    "default_device": "Device(gpu, 0)"
+  },
+  "source_reference": {
+    "installed_omlx_version": "0.7.1.dev1",
+    "files": [
+      {
+        "relative_to_installed_site_packages": "mlx_lm/models/gated_delta.py",
+        "sha256": "f69e837ea68641dbb06fdb5dcc024a9a7e1d9353f08ae58c05275253a0c39428",
+        "locations_and_scope": "18–20: compute_g pure compiled function returns decay; boundary reference only"
+      },
+      {
+        "relative_to_installed_site_packages": "mlx_vlm/models/qwen3_5/language.py",
+        "sha256": "bdeb2cb3e01338b9cfdb2a5fac7f021265dda62d81d75b952136d38839d4b953",
+        "locations_and_scope": "70–73,1026–1037,1078–1090: actual VLM Qwen3.5 language conv routes"
+      },
+      {
+        "relative_to_installed_site_packages": "omlx/engine/vlm.py",
+        "sha256": "b24406d697cd549ed083a9cb83e21cec4a7efb3f11f9fbf3747ae6bccdbf5121",
+        "locations_and_scope": "2614–2629: install qwen35 prework patch with fallback"
+      },
+      {
+        "relative_to_installed_site_packages": "omlx/patches/qwen35_gdn_prework.py",
+        "sha256": "bfcd1225ac8c8dc4390d9cdf11068c68d7a5f0d8a900080a4cf4280776b58f94",
+        "locations_and_scope": "105–125,1864–1901,2049–2094: larger guarded fused prework, different intermediate arithmetic"
+      }
+    ],
+    "caveat": "LM compute_g is a pure-function reference, not proof actual VLM service calls it each token; VLM/prework engagement in every historical run is not attested; do not copy different BF16 rounding or decay/log-decay interface"
+  },
+  "profile": {
+    "report": {
+      "artifact": "c1-pipeline-profile-AC-attempt1.json",
+      "sha256": "bf7460eba55677b499c8deb65f25ec1cdf008e69397ab29a9f8b87de6b9d01c8",
+      "bytes": 240895
+    },
+    "raw_profile_sha256": "4c8a44cbb10c93776c4768195d83abd67cc5a670032d469941795ba557c7d19d",
+    "instrumented_diagnostic_only": true,
+    "prefill_steps": 1,
+    "decode_steps": 31,
+    "steady_ahead_hit_steps": 29,
+    "steady_median_ms": {
+      "model_successor": 2.455167,
+      "async_successor": 33.644542,
+      "eval_current_cache": 0.027917,
+      "tolist": 0.001875,
+      "engine_outside_runner": 0.01125
+    },
+    "limits": "API wall includes unknown graph/dispatch/wait components; nested spans not summed; not proof gates dominant; not Pareto data"
+  },
+  "micro": {
+    "raw": {
+      "artifact": "gdn-gates-micro-AC-attempt1.json",
+      "sha256": "8d74741ef0e605ebfc0ce4a759e262eff90427f76e817f57161d0a33add526a5",
+      "bytes": 854646
+    },
+    "inventory": {
+      "artifact": "gdn-gates-micro-AC-attempt1-raw-inventory.json",
+      "sha256": "d0c15cc4026f86350a81b1173a93e034a5be4c099503db2b03e3791f8122e527",
+      "bytes": 1569
+    },
+    "independent_replay": {
+      "artifact": "gdn-gates-micro-AC-attempt1-independent-replay.json",
+      "sha256": "6baf1bd72c65200392eaa73a08fa806ac9b951c7392703461f374bb7379a5bfe",
+      "bytes": 1829
+    },
+    "strict_math": {
+      "real_layers": 48,
+      "banks": 10,
+      "outputs_per_bank": 2,
+      "finite_canonical_FP32_byte_comparisons": 960,
+      "compared_bytes_per_arm": 184320,
+      "all_exact": true,
+      "only_small_weight_payload_bytes_read": 9216,
+      "whole_model_loaded": false
+    },
+    "timing": {
+      "scope": "48 gates per repeat; fresh host input arrays, Python graph/eval and consumption of all96 outputs; not GPU kernel only",
+      "pairs": 10,
+      "AB_pairs": 5,
+      "BA_pairs": 5,
+      "stationarity_checks": 6,
+      "all_stationarity_pass": true,
+      "median_wall_ns_per_repeat": {
+        "off": 854626.547,
+        "on": 417438.395
+      },
+      "on_vs_off_wall_reduction_percent": 51.30328164224036,
+      "wins": 10,
+      "decision": {
+        "stationarity_checks": {
+          "pre_A_internal": true,
+          "pre_B_internal": true,
+          "post_A_internal": true,
+          "post_B_internal": true,
+          "A_front_back": true,
+          "B_front_back": true
+        },
+        "stationarity_pass": true,
+        "median_gain": 0.5130328164224036,
+        "wins": 10,
+        "by_order": {
+          "AB": {
+            "median_gain": 0.513245326663148,
+            "wins": 5
+          },
+          "BA": {
+            "median_gain": 0.5128203061816592,
+            "wins": 5
+          }
+        },
+        "micro_gate_pass": true,
+        "decision": "ELIGIBLE-FOR-SEPARATE-MODEL-QUALIFICATION",
+        "scope": "Local gates micro only; no model/E2E or accepted Pareto result"
+      }
+    },
+    "not_an_E2E_gain": true
+  },
+  "whole_model_qualification": {
+    "raw": {
+      "artifact": "gdn-gates-model-qual-v2-AC-attempt1.json",
+      "sha256": "45b0d746e8a0b4eb4033d12451ba9842be0c3454d3f4280fc5872472ca7b7baf",
+      "bytes": 711509
+    },
+    "raw_inventory": {
+      "artifact": "gdn-gates-model-qual-v2-raw-inventory.json",
+      "sha256": "2b68090cb480b815eb57769a882b2b08f3ad2324dafb015ef51c4b5b576e99d2",
+      "bytes": 1466
+    },
+    "independent_review": {
+      "artifact": "INDEPENDENT-GDN-GATES-MODEL-QUAL-V2-RESULTS-REVIEW.md",
+      "sha256": "9e4c0f808619b47eb31f0ca9a4e4c556693fcdccc0d5d3248753d177db74b1a0",
+      "bytes": 4401
+    },
+    "independent_replay": {
+      "artifact": "independent-gdn-gates-model-qual-v2-results-replay.json",
+      "sha256": "8986eef757b6617815deca5cbe09ff4ac708a796386e3b35c483a900a337e43d",
+      "bytes": 16407
+    },
+    "rounds": [
+      {
+        "name": "oracle-off",
+        "actual_ids": 32,
+        "prefill": 1,
+        "decode": 31,
+        "signatures": 4128,
+        "actual_compiled_calls": 0,
+        "actual_oracle_calls": 1536,
+        "wrapper_creations": 0
+      },
+      {
+        "name": "compiled-on",
+        "actual_ids": 32,
+        "prefill": 1,
+        "decode": 31,
+        "signatures": 4128,
+        "actual_compiled_calls": 1488,
+        "actual_oracle_calls": 48,
+        "wrapper_creations": 48
+      },
+      {
+        "name": "reset-off",
+        "actual_ids": 32,
+        "prefill": 1,
+        "decode": 31,
+        "signatures": 4128,
+        "actual_compiled_calls": 0,
+        "actual_oracle_calls": 1536,
+        "wrapper_creations": 0
+      }
+    ],
+    "finite_canonical_FP32_hash_comparisons": 8256,
+    "all_exact": true,
+    "parameter_arrays": 1349,
+    "real_fallback_cases": 14,
+    "parameter_replacement_test": "real tiny Module replaces A_log and dt_bias once each; same wrapper consumes explicit new values; exact reset; full model weights untouched",
+    "limits": [
+      "CPU audit authenticates recorded signatures/assertion source; raw GPU tensors not saved or independently recomputed",
+      "recorded prefill tape assigned six arrays but tape values not independently saved/hash-qualified",
+      "spec coverage dispatch/captured prefill only, not complete speculative continuation"
+    ]
+  },
+  "E2E": {
+    "freeze": {
+      "artifact": "gdn-gates-e2e-frozen-v2.json",
+      "sha256": "0c3644eb35db7a9308c7b09ccc0c252b8fbd0428e40e4bef520344f396e44f84",
+      "bytes": 3599
+    },
+    "raw_inventory": {
+      "artifact": "gdn-gates-e2e-v2-raw-inventory.json",
+      "sha256": "5841f28f4b0778a80193769bf72ec74caa8ebdf28d11f1b2bf75be73e004c340",
+      "bytes": 19099
+    },
+    "owner_replay": {
+      "artifact": "gdn-gates-e2e-v2-results-replay.json",
+      "sha256": "db0fb93c2ce72419ea5925905242ca29fbcef1059e8fee63664aacd878d4aa8c",
+      "bytes": 85854
+    },
+    "independent_review": {
+      "artifact": "INDEPENDENT-GDN-GATES-E2E-V2-RESULTS-REVIEW.md",
+      "sha256": "4adf3bee81fc5accbff33e364525d48b5482e88e21cd1f52b250324f8ea73c8d",
+      "bytes": 5176
+    },
+    "independent_replay": {
+      "artifact": "independent-gdn-gates-e2e-v2-results-replay.json",
+      "sha256": "6f84522e000d40c7703a792d4984578779db917210d88b5c1804fe8bfcc9d73a",
+      "bytes": 100112
+    },
+    "workload": {
+      "model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "prompt_ids": [
+        248045,
+        846,
+        198,
+        95826,
+        110827,
+        98682,
+        108829,
+        81726,
+        6297,
+        1710,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "max_tokens": 32,
+      "temperature": 0,
+      "ignore_eos": false,
+      "concurrency": 1,
+      "capacity": 4,
+      "max_batched_tokens": 512,
+      "max_len": 2048,
+      "prefix_cache_reuse": false,
+      "drafter": null
+    },
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "MLX_METAL_GPU_ARCH": null
+    },
+    "protocol": {
+      "fresh_process_order": [
+        "off",
+        "on",
+        "on",
+        "off",
+        "off",
+        "on"
+      ],
+      "warmup_groups_per_process": 3,
+      "measured_groups_per_process": 3,
+      "x": "(actualN - canonical firstchunk tokens)/(incoming DONE - first nonempty text); client-delivery proxy",
+      "y": "actualN/(incoming DONE - POST); includes queue/prefill/HTTP; cleanup excluded",
+      "process_statistic": "median of 3 measured request groups for each metric",
+      "aggregate_statistic": "median of 3 process medians per arm for each metric; compare on/off aggregates; not pooled latency",
+      "requests": 36,
+      "tokens": 1152,
+      "measured_requests": 18,
+      "measured_tokens": 576,
+      "all_raw_visible_SSE_32IDs_exact": true,
+      "all_original_client_Handler_SSE_source_bytes_AST_exact": true,
+      "new_timed_hooks_or_extra_eval": false
+    },
+    "processes": [
+      {
+        "config": "pair1-A-off",
+        "enabled": false,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair1-A-off/result.json",
+          "sha256": "dfac8382a9a4556bb1a649496fb884962e25e51c5cbe50332871861f1b5a8072",
+          "bytes": 461381
+        },
+        "process_medians": {
+          "x": 27.648022831836975,
+          "y": 24.943893291452643,
+          "TTFT_s": 0.16164162500353996,
+          "E2E_s": 1.2828791250067297
+        },
+        "measured_groups": [
+          {
+            "config": "pair1-A-off",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 27.68888677488086,
+            "y": 24.979523620982135,
+            "TTFT_s": 0.1614664999942761,
+            "E2E_s": 1.2810492499993416,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-A-off",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.648022831836975,
+            "y": 24.943893291452643,
+            "TTFT_s": 0.16164162500353996,
+            "E2E_s": 1.2828791250067297,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-A-off",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 27.5783556975731,
+            "y": 24.866779782510395,
+            "TTFT_s": 0.1627874999976484,
+            "E2E_s": 1.2868574169988278,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair1-A-off",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 25.82789154714106,
+            "y": 11.143096246804356,
+            "TTFT_s": 1.6714804170042044,
+            "E2E_s": 2.871733250009129,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-A-off",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 27.74014049713957,
+            "y": 25.03045290935019,
+            "TTFT_s": 0.16092854100861587,
+            "E2E_s": 1.2784427080041496,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-A-off",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.665224612792375,
+            "y": 24.96470322529331,
+            "TTFT_s": 0.16126941700349562,
+            "E2E_s": 1.2818097499985015,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 201,
+          "Compressions": 879590,
+          "Decompressions": 788497
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 598
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 19122,
+              "Decompressions": 5997
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 415
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 0,
+        "owned_PID_waited_reaped_absent": true
+      },
+      {
+        "config": "pair1-B-on",
+        "enabled": true,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair1-B-on/result.json",
+          "sha256": "d55169ee65abf0b49d2e266151babfc1f9cea2d2e0557c5f3183fcc80a1e6a07",
+          "bytes": 461275
+        },
+        "process_medians": {
+          "x": 27.920442633232167,
+          "y": 25.16781327684946,
+          "TTFT_s": 0.16138850001152605,
+          "E2E_s": 1.271465249999892
+        },
+        "measured_groups": [
+          {
+            "config": "pair1-B-on",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 28.01453531845727,
+            "y": 25.237450556067806,
+            "TTFT_s": 0.16138850001152605,
+            "E2E_s": 1.2679569169995375,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-B-on",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.920442633232167,
+            "y": 25.16781327684946,
+            "TTFT_s": 0.16116766599589027,
+            "E2E_s": 1.271465249999892,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-B-on",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 27.907137964878533,
+            "y": 25.15034372483223,
+            "TTFT_s": 0.16152149999106769,
+            "E2E_s": 1.2723484159942018,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair1-B-on",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 25.081436288557217,
+            "y": 11.526876127473802,
+            "TTFT_s": 1.5401468749914784,
+            "E2E_s": 2.7761207499861484,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-B-on",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 28.01223276131866,
+            "y": 25.227568772805373,
+            "TTFT_s": 0.16179420799016953,
+            "E2E_s": 1.2684535829903325,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair1-B-on",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.906827072899677,
+            "y": 25.156126032530743,
+            "TTFT_s": 0.1612166669947328,
+            "E2E_s": 1.2720559580047848,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 144,
+          "Compressions": 821298,
+          "Decompressions": 761091
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 459
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 3153
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 2181
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 48,
+        "owned_PID_waited_reaped_absent": true
+      },
+      {
+        "config": "pair2-B-on",
+        "enabled": true,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair2-B-on/result.json",
+          "sha256": "c4a9c69fd4fa35a6ef00586d0e158cda1f3356b664a2d372210014c49968b79b",
+          "bytes": 461311
+        },
+        "process_medians": {
+          "x": 28.028557190250524,
+          "y": 25.2416277893567,
+          "TTFT_s": 0.1617322499951115,
+          "E2E_s": 1.2677470829949016
+        },
+        "measured_groups": [
+          {
+            "config": "pair2-B-on",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 28.028557190250524,
+            "y": 25.2416277893567,
+            "TTFT_s": 0.1617322499951115,
+            "E2E_s": 1.2677470829949016,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-B-on",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.998824634690102,
+            "y": 25.211609269762917,
+            "TTFT_s": 0.16206720800255425,
+            "E2E_s": 1.269256542000221,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-B-on",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 28.029209760103356,
+            "y": 25.245691861950323,
+            "TTFT_s": 0.1615539170015836,
+            "E2E_s": 1.2675430000090273,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair2-B-on",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 25.560411148935433,
+            "y": 11.275794481054444,
+            "TTFT_s": 1.6251244580053026,
+            "E2E_s": 2.8379374999931315,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-B-on",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 27.911718385940258,
+            "y": 25.137489459225396,
+            "TTFT_s": 0.16235441699973308,
+            "E2E_s": 1.2729990420048125,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-B-on",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.954018345072534,
+            "y": 25.181742161500388,
+            "TTFT_s": 0.1617979589937022,
+            "E2E_s": 1.2707619589928072,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 8,
+          "Pageouts": 77,
+          "Compressions": 815275,
+          "Decompressions": 788564
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 568
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 1204
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 1000
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 48,
+        "owned_PID_waited_reaped_absent": true
+      },
+      {
+        "config": "pair2-A-off",
+        "enabled": false,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair2-A-off/result.json",
+          "sha256": "2b71fbdae597ec7a29d80286340d0194bc6b84bae1da27b327e3a97d2fedf54e",
+          "bytes": 461398
+        },
+        "process_medians": {
+          "x": 27.633918175163863,
+          "y": 24.930806455561584,
+          "TTFT_s": 0.16142229200340807,
+          "E2E_s": 1.2835525419941405
+        },
+        "measured_groups": [
+          {
+            "config": "pair2-A-off",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 27.633918175163863,
+            "y": 24.930806455561584,
+            "TTFT_s": 0.1617427500023041,
+            "E2E_s": 1.2835525419941405,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-A-off",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.6704421986721,
+            "y": 24.971506301772482,
+            "TTFT_s": 0.1611315000045579,
+            "E2E_s": 1.2814605419989675,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-A-off",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 27.510820931224853,
+            "y": 24.839867754957464,
+            "TTFT_s": 0.16142229200340807,
+            "E2E_s": 1.2882516249956097,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair2-A-off",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 25.990989433803485,
+            "y": 11.802936330812383,
+            "TTFT_s": 1.5184687080036383,
+            "E2E_s": 2.711189749999903,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-A-off",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 27.48261264641451,
+            "y": 24.816277959664113,
+            "TTFT_s": 0.16149029199732468,
+            "E2E_s": 1.2894762079959037,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair2-A-off",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.591111300843192,
+            "y": 24.900264403109496,
+            "TTFT_s": 0.1615766659961082,
+            "E2E_s": 1.2851269160019,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 162,
+          "Compressions": 831957,
+          "Decompressions": 756508
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 436,
+              "Decompressions": 1737
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 480
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 17438
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 0,
+        "owned_PID_waited_reaped_absent": true
+      },
+      {
+        "config": "pair3-A-off",
+        "enabled": false,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair3-A-off/result.json",
+          "sha256": "f0afff91d8492d797a6f6c965cf0f2e219fefc9c2bd300c9ab3f0716f91ac1d1",
+          "bytes": 461396
+        },
+        "process_medians": {
+          "x": 27.63122827946663,
+          "y": 24.93453628399976,
+          "TTFT_s": 0.16144154200446792,
+          "E2E_s": 1.2833605420019012
+        },
+        "measured_groups": [
+          {
+            "config": "pair3-A-off",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 27.65656759205865,
+            "y": 24.952627378514357,
+            "TTFT_s": 0.161539000007906,
+            "E2E_s": 1.282430082996143,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-A-off",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.63122827946663,
+            "y": 24.93453628399976,
+            "TTFT_s": 0.16144154200446792,
+            "E2E_s": 1.2833605420019012,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-A-off",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 27.405308497515623,
+            "y": 24.75688370787647,
+            "TTFT_s": 0.16140208300203085,
+            "E2E_s": 1.2925697909959126,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair3-A-off",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 26.916634400226783,
+            "y": 13.032489403944167,
+            "TTFT_s": 1.3036977910087444,
+            "E2E_s": 2.455401957995491,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-A-off",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 27.653207239998,
+            "y": 24.94450416861524,
+            "TTFT_s": 0.16182041699357796,
+            "E2E_s": 1.2828477080038283,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-A-off",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.583153002838685,
+            "y": 24.89452162022557,
+            "TTFT_s": 0.1615489579999121,
+            "E2E_s": 1.2854233749967534,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 116,
+          "Compressions": 690364,
+          "Decompressions": 656560
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 3417,
+              "Decompressions": 1798
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 619,
+              "Decompressions": 1705
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 24902
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 0,
+        "owned_PID_waited_reaped_absent": true
+      },
+      {
+        "config": "pair3-B-on",
+        "enabled": true,
+        "raw_result": {
+          "artifact": "gdn-gates-e2e-AC-attempt2/pair3-B-on/result.json",
+          "sha256": "94a22231ff4427df5e339676c9eb57a42842f01562d10a7447d6c20d94118bad",
+          "bytes": 461283
+        },
+        "process_medians": {
+          "x": 27.90496078780521,
+          "y": 25.1416542278434,
+          "TTFT_s": 0.16179933300008997,
+          "E2E_s": 1.272788166999817
+        },
+        "measured_groups": [
+          {
+            "config": "pair3-B-on",
+            "phase": "measure",
+            "group": "C1-measure-0",
+            "x": 27.909212839252234,
+            "y": 25.152329621352663,
+            "TTFT_s": 0.16150362500047777,
+            "E2E_s": 1.272247958011576,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-B-on",
+            "phase": "measure",
+            "group": "C1-measure-1",
+            "x": 27.90496078780521,
+            "y": 25.1416542278434,
+            "TTFT_s": 0.1618745830055559,
+            "E2E_s": 1.272788166999817,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-B-on",
+            "phase": "measure",
+            "group": "C1-measure-2",
+            "x": 27.855063498510702,
+            "y": 25.10388857926644,
+            "TTFT_s": 0.16179933300008997,
+            "E2E_s": 1.274702916998649,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "warmup_groups": [
+          {
+            "config": "pair3-B-on",
+            "phase": "warm",
+            "group": "C1-warm-0",
+            "x": 26.07459394606782,
+            "y": 12.725182078180229,
+            "TTFT_s": 1.3258020420034882,
+            "E2E_s": 2.5146987920015818,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-B-on",
+            "phase": "warm",
+            "group": "C1-warm-1",
+            "x": 27.64840196132411,
+            "y": 24.946285910447866,
+            "TTFT_s": 0.16153395800211,
+            "E2E_s": 1.2827560830046423,
+            "first_chunk_tokens": 1
+          },
+          {
+            "config": "pair3-B-on",
+            "phase": "warm",
+            "group": "C1-warm-2",
+            "x": 27.803944677911062,
+            "y": 25.069255463360477,
+            "TTFT_s": 0.16151420799724292,
+            "E2E_s": 1.2764639160013758,
+            "first_chunk_tokens": 1
+          }
+        ],
+        "full_process_VM_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 139,
+          "Compressions": 699199,
+          "Decompressions": 650945
+        },
+        "measurement_VM_deltas": [
+          {
+            "group": 0,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 1296
+            }
+          },
+          {
+            "group": 1,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 148,
+              "Decompressions": 930
+            }
+          },
+          {
+            "group": 2,
+            "VM_delta": {
+              "Swapouts": 0,
+              "Swapins": 0,
+              "Pageouts": 0,
+              "Compressions": 0,
+              "Decompressions": 2093
+            }
+          }
+        ],
+        "parameter_array_count": 1349,
+        "startup_compiled_callables": 0,
+        "post_three_warm_compiled_callables": 48,
+        "owned_PID_waited_reaped_absent": true
+      }
+    ],
+    "pairs": [
+      {
+        "pair": 1,
+        "order": "AB",
+        "off": {
+          "x": 27.648022831836975,
+          "y": 24.943893291452643,
+          "TTFT_s": 0.16164162500353996,
+          "E2E_s": 1.2828791250067297
+        },
+        "on": {
+          "x": 27.920442633232167,
+          "y": 25.16781327684946,
+          "TTFT_s": 0.16138850001152605,
+          "E2E_s": 1.271465249999892
+        },
+        "on_vs_off_percent": {
+          "x": 0.985313861508752,
+          "y": 0.8976946091793447,
+          "TTFT_s": -0.15659641630574317,
+          "E2E_s": -0.8897077506641815
+        },
+        "per_group_on_vs_off_percent": [
+          {
+            "group_index": 0,
+            "x": 1.1760983611368347,
+            "y": 1.032553458581642,
+            "TTFT_s": -0.04830722332670456,
+            "E2E_s": -1.0220007544449072
+          },
+          {
+            "group_index": 1,
+            "x": 0.985313861508752,
+            "y": 0.8976946091793447,
+            "TTFT_s": -0.29321593843126825,
+            "E2E_s": -0.8897077506641815
+          },
+          {
+            "group_index": 2,
+            "x": 1.192175019101538,
+            "y": 1.1403323824071165,
+            "TTFT_s": -0.7777009946089319,
+            "E2E_s": -1.127475415144552
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "order": "BA",
+        "off": {
+          "x": 27.633918175163863,
+          "y": 24.930806455561584,
+          "TTFT_s": 0.16142229200340807,
+          "E2E_s": 1.2835525419941405
+        },
+        "on": {
+          "x": 28.028557190250524,
+          "y": 25.2416277893567,
+          "TTFT_s": 0.1617322499951115,
+          "E2E_s": 1.2677470829949016
+        },
+        "on_vs_off_percent": {
+          "x": 1.4280964884717084,
+          "y": 1.246735978433522,
+          "TTFT_s": 0.19201684467278213,
+          "E2E_s": -1.231383872660441
+        },
+        "per_group_on_vs_off_percent": [
+          {
+            "group_index": 0,
+            "x": 1.4280964884717084,
+            "y": 1.246735978433522,
+            "TTFT_s": -0.006491794650731464,
+            "E2E_s": -1.231383872660441
+          },
+          {
+            "group_index": 1,
+            "x": 1.1867625159736717,
+            "y": 0.9615077484268264,
+            "TTFT_s": 0.580710784650984,
+            "E2E_s": -0.9523508214860255
+          },
+          {
+            "group_index": 2,
+            "x": 1.884308833147652,
+            "y": 1.6337611415498277,
+            "TTFT_s": 0.08154078135178544,
+            "E2E_s": -1.6074984564178663
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "order": "AB",
+        "off": {
+          "x": 27.63122827946663,
+          "y": 24.93453628399976,
+          "TTFT_s": 0.16144154200446792,
+          "E2E_s": 1.2833605420019012
+        },
+        "on": {
+          "x": 27.90496078780521,
+          "y": 25.1416542278434,
+          "TTFT_s": 0.16179933300008997,
+          "E2E_s": 1.272788166999817
+        },
+        "on_vs_off_percent": {
+          "x": 0.9906635549097098,
+          "y": 0.8306468645921772,
+          "TTFT_s": 0.22162263267540006,
+          "E2E_s": -0.8238039628047589
+        },
+        "per_group_on_vs_off_percent": [
+          {
+            "group_index": 0,
+            "x": 0.9135090475440144,
+            "y": 0.8003255120551334,
+            "TTFT_s": -0.021898741125359056,
+            "E2E_s": -0.7939711583167641
+          },
+          {
+            "group_index": 1,
+            "x": 0.9906635549097098,
+            "y": 0.8306468645921772,
+            "TTFT_s": 0.268233935151585,
+            "E2E_s": -0.8238039628047589
+          },
+          {
+            "group_index": 2,
+            "x": 1.641123656885135,
+            "y": 1.4016500440221735,
+            "TTFT_s": 0.24612445556488893,
+            "E2E_s": -1.3822753805423083
+          }
+        ]
+      }
+    ],
+    "aggregate_median_of_3_process_medians": {
+      "off": {
+        "x": 27.633918175163863,
+        "y": 24.93453628399976,
+        "TTFT_s": 0.16144154200446792,
+        "E2E_s": 1.2833605420019012
+      },
+      "on": {
+        "x": 27.920442633232167,
+        "y": 25.16781327684946,
+        "TTFT_s": 0.1617322499951115,
+        "E2E_s": 1.271465249999892
+      },
+      "on_vs_off_percent": {
+        "x": 1.0368578796973393,
+        "y": 0.9355577749380339,
+        "TTFT_s": 0.1800701275731953,
+        "E2E_s": -0.9268862188527183
+      }
+    },
+    "resources": {
+      "total_actual_samples": 104,
+      "internal": 102,
+      "external": 2,
+      "power": "AC Power",
+      "battery_percent": 100,
+      "thermal": 0,
+      "pressure": 1,
+      "all_measured_envelope_swapin_swapout_pageout_zero": true,
+      "compression_decompression_sometimes_nonzero": true,
+      "full_process_VM_deltas_retained": true,
+      "system_VM_not_process_causality": true,
+      "GUI_or_unknown_GPU_work_not_excluded": true
+    },
+    "decision": "PASS within frozen native off/on scope; limited approximately1percent result",
+    "TTFT": {
+      "aggregate_on_vs_off_percent": 0.1800701275731953,
+      "pair2_on_vs_off_percent": 0.19201684467278213,
+      "pair3_on_vs_off_percent": 0.22162263267540006,
+      "worse_values_retained": true
+    },
+    "separate_failure": {
+      "artifact": "gdn-gates-e2e-AC-attempt1",
+      "reason": "startup builtins.id metadata NameError",
+      "request_groups": 0,
+      "performance_points": 0,
+      "pooled_into_v2": false
+    },
+    "limits": [
+      "Only native off/on C1, same candidate source; no same-round oMLX/Lithos comparison",
+      "No new C2/C4 qualification or E2E gain",
+      "About 0.94 percent throughput gain is not local51 percent reduction carried to E2E",
+      "Small finite workload; no global win or universal performance claim"
+    ]
+  },
+  "example": {
+    "target_path": "tutorial_code/chapter15_gdn_gates.py",
+    "author_CPU_syntax_only": true,
+    "GPU_smoke_not_yet_run": false,
+    "scope": "post-construction setters, existing LLMEngine.generate, 19 IDs, greedy max32 normalEOS; no tokenizer/server implementation; no timing claim",
+    "actual_GPU_smoke_status": "PASS",
+    "actual_smoke": {
+      "receipt": {
+        "artifact": "chapter15-example-smoke-receipt-v1.json",
+        "sha256": "a6aba0f4723224985f0df52b092990a49ed83d085d282a6395f502eac5fd0e12",
+        "bytes": 58419
+      },
+      "scope": "actual chapter15 module token-ID smoke only; no performance conclusion",
+      "execution_domain": "exec_command require_escalated",
+      "fresh_process_order": [
+        "off",
+        "on"
+      ],
+      "runs": [
+        {
+          "gates": "off",
+          "actual_output_tokens": 32,
+          "output_ids": [
+            79852,
+            18887,
+            220,
+            95761,
+            60277,
+            220,
+            103725,
+            95772,
+            103910,
+            109120,
+            95865,
+            3709,
+            111734,
+            96221,
+            97792,
+            100658,
+            5141,
+            220,
+            95793,
+            4997,
+            220,
+            117888,
+            3709,
+            120718,
+            108695,
+            97792,
+            96671,
+            129933,
+            3709,
+            99131,
+            146502,
+            111892
+          ],
+          "compiled_wrappers_created": 0,
+          "raw_stdout_sha256": "1f4cb0b9a424c0eac6a16a2b85c4b6ecac14d51d770ee2bf4bd926541e7cc9df",
+          "raw_stderr_sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1",
+          "expected_IDs_exact": true,
+          "wait_exit": 0,
+          "owned_PID_reaped_exact_absent": true
+        },
+        {
+          "gates": "on",
+          "actual_output_tokens": 32,
+          "output_ids": [
+            79852,
+            18887,
+            220,
+            95761,
+            60277,
+            220,
+            103725,
+            95772,
+            103910,
+            109120,
+            95865,
+            3709,
+            111734,
+            96221,
+            97792,
+            100658,
+            5141,
+            220,
+            95793,
+            4997,
+            220,
+            117888,
+            3709,
+            120718,
+            108695,
+            97792,
+            96671,
+            129933,
+            3709,
+            99131,
+            146502,
+            111892
+          ],
+          "compiled_wrappers_created": 48,
+          "raw_stdout_sha256": "17df6f4c1d7e2461e9dac3b8a3f8c404570ae8812d40ad62ad1555593c4f434c",
+          "raw_stderr_sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1",
+          "expected_IDs_exact": true,
+          "wait_exit": 0,
+          "owned_PID_reaped_exact_absent": true
+        }
+      ],
+      "off_on_ids_equal": true,
+      "eos_statement": "ignore_eos=False observed; normal EOS policy and successful engine-empty assertion; no claim 32nd token was EOS",
+      "resource_summary": {
+        "execution_domain": "require_escalated only",
+        "observed_power_sources": [
+          "AC Power"
+        ],
+        "sample_count": 10,
+        "battery_percent_values": [
+          100
+        ],
+        "thermal_codes": [
+          0
+        ],
+        "pressure_levels": [
+          1
+        ],
+        "min_sampled_free_percent": 35,
+        "preflight_free_percent": 71,
+        "final_free_percent": 68,
+        "preflight_swap_used_mb": 1926.44,
+        "final_swap_used_mb": 1926.44,
+        "whole_preflight_to_final_system_vm_deltas": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 200,
+          "Compressions": 1830276,
+          "Decompressions": 1575175
+        },
+        "final_known_inference_count": 0,
+        "battery_execution": false,
+        "no_power_source_change_observed": true,
+        "scope": "system counter samples only; nonzero compression/pageouts retained; GUI or unrecognized GPU work not excluded",
+        "off_system_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 135,
+          "Compressions": 1031334,
+          "Decompressions": 846325
+        },
+        "on_system_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 65,
+          "Compressions": 798942,
+          "Decompressions": 669913
+        }
+      },
+      "artifact_pins": [
+        {
+          "artifact": "chapter15-example-smoke-source-v1.json",
+          "sha256": "d43329e6fc9e2b0ae84a97ddb9e0dd61983d86dfcad000d73ab480d7e3653274",
+          "bytes": 4305
+        },
+        {
+          "artifact": "chapter15-smoke-expected-v1.json",
+          "sha256": "0553b213d0ed09db87cc52dd7ad06ae1147599ac49a7f05dd820e65f48151e1c",
+          "bytes": 1756
+        },
+        {
+          "artifact": "chapter15-applied-CPU-review-v1.json",
+          "sha256": "db84f4e25e8bc7982d5cca4a8e32994043bee8389738d58dc0682a6f790ee77c",
+          "bytes": 1562
+        },
+        {
+          "artifact": "source-manifest-v17-gdn-gates-build1.json",
+          "sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c",
+          "bytes": 5042
+        },
+        {
+          "artifact": "resource_snapshot_power_v1.py",
+          "sha256": "f4624d7dd8e977759865e11c4b7d3ed0489d1fd55b496e60c29fc087b7d9eb42",
+          "bytes": 4896
+        },
+        {
+          "artifact": "resource_snapshot_precise_v1.py",
+          "sha256": "d0aaa466e1cee70e109dbd4d02e4d457edda2a5e535dafab1b17d9dd6654538f",
+          "bytes": 4023
+        },
+        {
+          "artifact": "chapter15_example_smoke_control_v1.py",
+          "sha256": "aee96cbd831049df39d21d8f87bf9720625dafbe26a10cef063f4cae4b572d34",
+          "bytes": 10073
+        },
+        {
+          "artifact": "chapter15-example-smoke-preflight-v1.json",
+          "sha256": "856afab62e0488195591b234c8d3822c5cfe68df8ea8aae5b67ff9d52244207d",
+          "bytes": 104835
+        },
+        {
+          "artifact": "chapter15-example-smoke-final-post-v1.json",
+          "sha256": "970a613af5d9b9b0f3fb3200e2975891c2e2fbf4acfce9d53e86d03443751a10",
+          "bytes": 4972
+        },
+        {
+          "artifact": "chapter15-example-off-stdout-v1.log",
+          "sha256": "1f4cb0b9a424c0eac6a16a2b85c4b6ecac14d51d770ee2bf4bd926541e7cc9df",
+          "bytes": 1038
+        },
+        {
+          "artifact": "chapter15-example-off-stderr-v1.log",
+          "sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1",
+          "bytes": 104
+        },
+        {
+          "artifact": "chapter15-example-on-stdout-v1.log",
+          "sha256": "17df6f4c1d7e2461e9dac3b8a3f8c404570ae8812d40ad62ad1555593c4f434c",
+          "bytes": 1038
+        },
+        {
+          "artifact": "chapter15-example-on-stderr-v1.log",
+          "sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1",
+          "bytes": 104
+        }
+      ]
+    }
+  },
+  "tags_status": "local reading versions: tutorial-15-gates-optin core, then tutorial-15-v1 complete chapter; resolve commit hashes from Git refs",
+  "formal_application": {
+    "source_file_count": 25,
+    "all_core_file_bytes_match_candidate_manifest": true,
+    "only_changed_core_file": "model/gdn.py",
+    "candidate_gdn_sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+    "runtime_import_claim": false,
+    "scope": "CPU per-file identity matches frozen candidate; path equality is not a same-runtime-import claim. Formal example was separately run twice; see actual_smoke receipt."
+  },
+  "local_tags": [
+    "tutorial-15-gates-optin",
+    "tutorial-15-v1"
+  ],
+  "local_versions": {
+    "source": {
+      "tag": "tutorial-15-gates-optin",
+      "commit": "7cc54c53d00ca27d6c947b26b1bcc3d88a569c7e",
+      "files": [
+        "tutorial_code/miniengine/model/gdn.py"
+      ]
+    },
+    "complete_chapter": {
+      "tag": "tutorial-15-v1",
+      "commit_resolution": "git rev-parse tutorial-15-v1",
+      "scope": "complete chapter; current commit hash is intentionally not embedded in its own contents"
+    }
+  },
+  "independent_doc_source_review": {
+    "status": "PASS",
+    "checks_passed": 271,
+    "review": {
+      "artifact": "INDEPENDENT-CH15-DOC-SOURCE-REVIEW.md",
+      "sha256": "911cb01265159c4ba69da6c00765dcb9980e62d8d317332f534b34c23af75621",
+      "bytes": 3440
+    },
+    "receipt": {
+      "artifact": "independent-ch15-doc-source-review-v1.json",
+      "sha256": "1dcfd408968a50b801d7857e016969e7d3d479a182953b2f7c3e849ca64054b1",
+      "bytes": 29899
+    },
+    "scope": "Source/example, evidence and real smoke reviewed before final status-only editorial updates; final commit identity is verified separately. No GPU rerun by reviewer."
+  }
+}
