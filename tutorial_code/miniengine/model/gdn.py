@@ -4,7 +4,7 @@ import mlx.nn as nn
 
 from ..config import ModelConfig
 from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
-from .layers import GatedRMSNorm, Linear
+from .layers import GatedRMSNorm, Linear, prefill_linear
 
 
 def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tuple[mx.array, mx.array]:
@@ -37,6 +37,8 @@ class GatedDeltaNet(nn.Module):
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
 
     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+        if ctx is not None and ctx.mode == "prefill_batch":
+            return self._prefill_batch(x, ctx, layer_idx)
         if ctx is not None and ctx.mode == "decode":
             return self._decode(x, ctx.caches[layer_idx])
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
@@ -76,6 +78,37 @@ class GatedDeltaNet(nn.Module):
             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(T, -1))
+
+
+    def _prefill_batch(self, x: mx.array, ctx, layer_idx: int) -> mx.array:
+        """Fold only independent row/head axes; preserve each sequence's time axis."""
+        B, T = ctx.prefill_shape
+        caches = ctx.caches[layer_idx]
+        raw = prefill_linear(self.in_proj_qkv, x, (B, T)).reshape(B, T, self.conv_dim)
+        z = prefill_linear(self.in_proj_z, x, (B, T)).reshape(B * T, self.Hv, self.Dv)
+        w = self.conv1d_weight.astype(raw.dtype)
+        convolved, tails = [], []
+        for row in range(B):
+            y, tail = causal_conv1d(raw[row], w)
+            convolved.append(y); tails.append(tail)
+        q, k, v = self._split_heads(nn.silu(mx.stack(convolved).reshape(B * T, self.conv_dim)), B * T)
+        q = q.reshape(B, T, self.Hv, self.Dk).transpose(1, 0, 2, 3).reshape(T, B * self.Hv, self.Dk)
+        k = k.reshape(B, T, self.Hv, self.Dk).transpose(1, 0, 2, 3).reshape(T, B * self.Hv, self.Dk)
+        v = v.reshape(B, T, self.Hv, self.Dv).transpose(1, 0, 2, 3).reshape(T, B * self.Hv, self.Dv)
+        beta, g = self._gates(prefill_linear(self.in_proj_b, x, (B, T)), prefill_linear(self.in_proj_a, x, (B, T)))
+        beta = beta.reshape(B, T, self.Hv).transpose(1, 0, 2).reshape(T, B * self.Hv)
+        g = g.reshape(B, T, self.Hv).transpose(1, 0, 2).reshape(T, B * self.Hv)
+        if T == 1:
+            o, state = gated_delta_rule_recurrent(q, k, v, g, beta)
+        else:
+            chunk = 64 if T > 32 else (16 if T > 8 else 8)
+            o, state = gated_delta_rule_chunk(q, k, v, g, beta, chunk=chunk)
+        state = state.reshape(B, self.Hv, self.Dk, self.Dv)
+        for row, cache in enumerate(caches):
+            cache.conv_state, cache.S, cache.offset = tails[row], state[row], T
+        o = o.reshape(T, B, self.Hv, self.Dv).transpose(1, 0, 2, 3).reshape(B * T, self.Hv, self.Dv)
+        o = self.norm(o.astype(x.dtype), z)
+        return prefill_linear(self.out_proj, o.reshape(B * T, -1), (B, T))
 
 
     def _decode(self, x: mx.array, st) -> mx.array:

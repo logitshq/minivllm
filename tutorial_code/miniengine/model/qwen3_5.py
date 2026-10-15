@@ -5,7 +5,7 @@ import mlx.nn as nn
 from ..config import ModelConfig
 from .attention import Attention
 from .gdn import GatedDeltaNet
-from .layers import Embedding, Linear, RMSNorm
+from .layers import Embedding, Linear, RMSNorm, prefill_linear
 
 
 class MLP(nn.Module):
@@ -18,6 +18,11 @@ class MLP(nn.Module):
 
     def __call__(self, x):
         return self.down_proj(nn.silu(self.gate_proj(x)) * self.up_proj(x))
+
+    def _prefill_batch(self, x, shape):
+        gate = prefill_linear(self.gate_proj, x, shape)
+        up = prefill_linear(self.up_proj, x, shape)
+        return prefill_linear(self.down_proj, nn.silu(gate) * up, shape)
 
 
 class DecoderLayer(nn.Module):
@@ -35,6 +40,8 @@ class DecoderLayer(nn.Module):
     def __call__(self, x, ctx=None, layer_idx=0):
         h = self.input_layernorm(x)
         x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx))
+        if ctx is not None and ctx.mode == "prefill_batch":
+            return x + self.mlp._prefill_batch(self.post_attention_layernorm(x), ctx.prefill_shape)
         return x + self.mlp(self.post_attention_layernorm(x))
 
 
@@ -52,17 +59,34 @@ class Qwen3_5ForCausalLM(nn.Module):
         """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 为后续 cache/batch 接口（本章仅整句无 cache）。
         last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。
         capture=(5, 19, ...) 时额外返回这些层的输出拼起来的特征 [T, len(capture)·hidden]（DFlash2 drafter 的上下文）。"""
-        x = self.embed_tokens(input_ids)
+        grouped = ctx is not None and ctx.mode == "prefill_batch"
+        if grouped:
+            if capture:
+                raise ValueError("grouped prefill does not support capture")
+            B, T = ctx.prefill_shape
+            if input_ids.shape != (B, T):
+                raise ValueError("grouped prefill token shape mismatch")
+            x = self.embed_tokens(input_ids.reshape(-1))
+        else:
+            x = self.embed_tokens(input_ids)
         feats = []
         for i, layer in enumerate(self.layers):
             x = layer(x, ctx, i)
             if i in capture:
                 feats.append(x)
-        x = self.norm(x[-1:] if last_only else x)
-        logits = self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)
+        if grouped and last_only:
+            x = x.reshape(B, T, -1)[:, -1]
+        else:
+            x = x[-1:] if last_only else x
+        x = self.norm(x)
+        if grouped:
+            output = self.embed_tokens.as_linear if self.cfg.tie_word_embeddings else self.lm_head
+            logits = prefill_linear(output, x, (B, 1 if last_only else T))
+        else:
+            logits = self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)
         if capture:
             return logits, mx.concatenate(feats, axis=-1)
-        return logits
+        return logits.reshape(B, T, -1) if grouped and not last_only else logits
 
     def lm_head_fn(self, h: mx.array) -> mx.array:
         """给 drafter 用的输出头（drafter 自己没有 lm_head，借目标模型的）。"""

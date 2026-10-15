@@ -11,3 +11,4 @@ class ForwardContext:
     positions: mx.array | None = None # decode: [B] 每行新 token 的位置（= 已有长度）
     lens: mx.array | None = None      # decode: [B] 写入后的长度（positions + 1）
     max_len: int = 0                  # decode: 这一步要读的 K/V 列数（= max(lens)）
+    prefill_shape: tuple[int, int] | None = None  # grouped fresh prefill: (B,T), caches[layer][row]
