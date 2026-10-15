@@ -1,6 +1,6 @@
 {
   "chapter": 14,
-  "status": "accepted13-only six-file source; actual numerical/lifecycle PASS; formal AC C4 paired pending",
+  "status": "accepted13-only six-file source; numerical/lifecycle PASS; separate actual AC C4 paired and C1/C2 exploratory screens recorded; no stable dual-axis win",
   "start_tutorial_commit": "8081ac328475825ba2b77af9a1f1174b343f9268",
   "candidate_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
   "candidate_tree_sha256": "5a80c9323415017cfba6e5a3c3b049b1c2805e3c8ef144d45cbd21a2c74445d3",
@@ -202,6 +202,56 @@
       "filename": "power-confirm-after-user-connected-ac-v1.json",
       "sha256": "1c4eef90c9201438278700314099631c2315ad050362304c4efe23d31175f9b3",
       "bytes": 262
+    },
+    {
+      "filename": "AC-C4-FINAL-INDEPENDENT-REVIEW.md",
+      "sha256": "a35ead5ae44062048175ebee965455ea36d2cbb20df34ef9ccd725b5f3a89341",
+      "bytes": 8085
+    },
+    {
+      "filename": "ac-c4-attempt2-visualization-data-v1.json",
+      "sha256": "3794642ce10313fcd2f70f2a4b2e8ba87fa9e1c6aeb0fc1d8bfc5288f4040baf",
+      "bytes": 79709
+    },
+    {
+      "filename": "ac-c4-attempt2-independent-replay-v1.json",
+      "sha256": "7eb0d706267653eb480c91f4fe1ed4de3afc52ec64ab68c8f6863f92d71d7a6c",
+      "bytes": 940005
+    },
+    {
+      "filename": "ac-c4-attempt2-independent-receipt-v1.json",
+      "sha256": "eec5fc8f90a6d5174b3661aa8196a59323557a5d8870ccfd4fd612b6bf11d200",
+      "bytes": 668235
+    },
+    {
+      "filename": "ac-c4-attempt2-final-binding-v1.json",
+      "sha256": "df4efc3d00295a7b64218c769a63bc5ae833c8c50c119799e6ff8dd24a579abd",
+      "bytes": 1684
+    },
+    {
+      "filename": "SUMMARY-AC-FRONTIER-SCREENS.md",
+      "sha256": "18b4c46b537430195a9f9efa6dd48e9cd9b12d8a293062c82c0b7a36ec3f8b70",
+      "bytes": 4820
+    },
+    {
+      "filename": "freshscreens-ac-frontier-attempt1/plan.json",
+      "sha256": "9ea66875280e87a1b37d717e5f7161e559801c7c0591cf0ff90fd20f4215a28c",
+      "bytes": 6142
+    },
+    {
+      "filename": "freshscreens-ac-frontier-attempt1/owner-replay-v1.json",
+      "sha256": "cb21d56e00bcaecb9764f1f6508febf70ed9059e373a2a8b1e25d169489f6c57",
+      "bytes": 21192
+    },
+    {
+      "filename": "AC-FRONTIER-VISUAL-REVIEW.md",
+      "sha256": "79c696338a3f4e753ee36060212f09e4859ef587479067277b46dcee68f18a51",
+      "bytes": 6006
+    },
+    {
+      "filename": "ac-frontier-visual-data-v1.json",
+      "sha256": "0ce2d3d9ecbdfab87a76fe7af208bcd28d9a16e836902ccda81bf33dd172f757",
+      "bytes": 37984
     }
   ],
   "numerical": {
@@ -800,7 +850,1171 @@
     "core_caveat": "B4 full core drifts; no stable overall/HTTP win inferred; diagnostic not formal AC paired point"
   },
   "formal_http": {
-    "status": "pending separate fresh AC C4 AB/BA/AB; do not use battery/profile as formal results",
-    "results": []
+    "status": "recorded actual fresh AC C4 AB/BA/AB; independent CPU audit PASS for recorded protocol/identity/reconstruction; no stable dual-axis win",
+    "attempt": "freshpaired-ac-v7accepted13-c4-attempt2",
+    "review_provenance": "independent raw request/event/frozen CPU tokenizer replay; no GPU rerun or mathematical requalification",
+    "model": {
+      "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "actual_config_model_type": "qwen3_5",
+      "quantization": "NVFP4 group16 bits4",
+      "activation_dtype": "bfloat16",
+      "folder_label_caveat": "cached folder label contains Qwen3.8; actual config identity governs"
+    },
+    "protocol": {
+      "fresh_process_pairs": 3,
+      "order": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "A": "tutorial native accepted13 plus pure batch prefill",
+      "B": "official oMLX balanced, cache disabled, default multi-request burst 0.03",
+      "warmup_groups_excluded_per_process": 3,
+      "measured_groups_per_process": 3,
+      "concurrency": 4,
+      "prompt_tokens": 19,
+      "actual_output_tokens_per_request": 32,
+      "greedy": true,
+      "normal_eos": true,
+      "cache_tokens": 0,
+      "draft": null
+    },
+    "results": [
+      {
+        "pair": 1,
+        "position": 1,
+        "variant": "A",
+        "engine": "tutorial",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-1-1-A.json",
+          "sha256": "ace8a6f0e274c9dbd36c21bdea41e51ddd3ba5fdf88f04f7928312a6fada846d",
+          "bytes": 329589
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+          "official_environment_manifest_sha256": null,
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4"
+        },
+        "statistics": {
+          "x": {
+            "median": 18.921617912481665,
+            "min": 18.53002950085594,
+            "max": 20.4439415696978,
+            "all": [
+              20.4439415696978,
+              18.921617912481665,
+              18.53002950085594
+            ]
+          },
+          "y": {
+            "median": 60.925666759356105,
+            "min": 58.429818446702576,
+            "max": 61.076809187667074,
+            "all": [
+              61.076809187667074,
+              58.429818446702576,
+              60.925666759356105
+            ]
+          },
+          "ttft_s": {
+            "median": 0.48074750000523636,
+            "min": 0.16990462499961723,
+            "max": 0.6934973330062348
+          },
+          "e2e_s": {
+            "median": 2.095564249997551,
+            "min": 2.045844542008126,
+            "max": 2.190508833009517
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 140,
+          "Pageouts": 0,
+          "Compressions": 10,
+          "Decompressions": 12090
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pair": 1,
+        "position": 2,
+        "variant": "B",
+        "engine": "omlx",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-1-2-B.json",
+          "sha256": "c053538a92aa0558f7c579e4c9744d92956f5e8b1de319cc91477d80f9c58969",
+          "bytes": 151870
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 19.578734245205602,
+            "min": 18.5533064463873,
+            "max": 20.10853398433844,
+            "all": [
+              20.10853398433844,
+              19.578734245205602,
+              18.5533064463873
+            ]
+          },
+          "y": {
+            "median": 52.19346785813394,
+            "min": 50.45940065530806,
+            "max": 53.185785261451294,
+            "all": [
+              53.185785261451294,
+              52.19346785813394,
+              50.45940065530806
+            ]
+          },
+          "ttft_s": {
+            "median": 0.8074973960028728,
+            "min": 0.4294880829984322,
+            "max": 0.9934447499981616
+          },
+          "e2e_s": {
+            "median": 2.405734875006601,
+            "min": 2.2612102499988396,
+            "max": 2.5364356670033885
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 39857
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pair": 2,
+        "position": 1,
+        "variant": "B",
+        "engine": "omlx",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-2-1-B.json",
+          "sha256": "686f2ef6ec1081f0eb83bc0ce84aee59b01a76117850a5c4fcff923f982b0ddd",
+          "bytes": 151828
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 17.960367496698908,
+            "min": 17.625792191132064,
+            "max": 18.36746653327888,
+            "all": [
+              18.36746653327888,
+              17.960367496698908,
+              17.625792191132064
+            ]
+          },
+          "y": {
+            "median": 49.09400230930389,
+            "min": 48.03987383984026,
+            "max": 50.09086876906211,
+            "all": [
+              50.09086876906211,
+              49.09400230930389,
+              48.03987383984026
+            ]
+          },
+          "ttft_s": {
+            "median": 0.8264310629965621,
+            "min": 0.4309013330057496,
+            "max": 1.0328652919997694
+          },
+          "e2e_s": {
+            "median": 2.5569480000049225,
+            "min": 2.4089930420013843,
+            "max": 2.664278791999095
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 42795
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pair": 2,
+        "position": 2,
+        "variant": "A",
+        "engine": "tutorial",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-2-2-A.json",
+          "sha256": "15dd753bd9e2b62cce090b76416fa322f0cc750878e016b561607675700e1089",
+          "bytes": 329719
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+          "official_environment_manifest_sha256": null,
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4"
+        },
+        "statistics": {
+          "x": {
+            "median": 18.81776005817583,
+            "min": 17.288984311854673,
+            "max": 18.964261291065753,
+            "all": [
+              18.964261291065753,
+              18.81776005817583,
+              17.288984311854673
+            ]
+          },
+          "y": {
+            "median": 56.71914738699602,
+            "min": 54.75223951405799,
+            "max": 57.472071846129005,
+            "all": [
+              57.472071846129005,
+              56.71914738699602,
+              54.75223951405799
+            ]
+          },
+          "ttft_s": {
+            "median": 0.5923026460004621,
+            "min": 0.16902745900733862,
+            "max": 0.6879051249998156
+          },
+          "e2e_s": {
+            "median": 2.2562677710011485,
+            "min": 2.1769322090112837,
+            "max": 2.337729999999283
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 197,
+          "Decompressions": 12077
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pair": 3,
+        "position": 1,
+        "variant": "A",
+        "engine": "tutorial",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-3-1-A.json",
+          "sha256": "3ebec9cddf95baed7cd0848f2b19bec3829c82ffe312bb709439f16cef6ea5b5",
+          "bytes": 329733
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+          "official_environment_manifest_sha256": null,
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4"
+        },
+        "statistics": {
+          "x": {
+            "median": 19.75238159541051,
+            "min": 18.535626001910387,
+            "max": 20.106517616239522,
+            "all": [
+              18.535626001910387,
+              20.106517616239522,
+              19.75238159541051
+            ]
+          },
+          "y": {
+            "median": 59.91146677571039,
+            "min": 59.138765147961706,
+            "max": 60.990786995978816,
+            "all": [
+              60.990786995978816,
+              59.91146677571039,
+              59.138765147961706
+            ]
+          },
+          "ttft_s": {
+            "median": 0.5917896040045889,
+            "min": 0.17132558299636003,
+            "max": 0.5947884589986643
+          },
+          "e2e_s": {
+            "median": 2.1253806250024354,
+            "min": 2.05280608398607,
+            "max": 2.16440095899452
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 4,
+          "Pageouts": 0,
+          "Compressions": 8139,
+          "Decompressions": 26726
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pair": 3,
+        "position": 2,
+        "variant": "B",
+        "engine": "omlx",
+        "concurrency": 4,
+        "raw": {
+          "filename": "freshpaired-ac-v7accepted13-c4-attempt2/pair-3-2-B.json",
+          "sha256": "91ef4bf2cbef90f9221075c0859ddfb542f67fe14468d572df414920be201a62",
+          "bytes": 151025
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "c0c4f17b27ce2fd23d1baee086d8cf33b00a55480d18daf38ed6a9c7eb855123",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 11.370875451960494,
+            "min": 10.785326394324095,
+            "max": 11.60665863945274,
+            "all": [
+              11.60665863945274,
+              11.370875451960494,
+              10.785326394324095
+            ]
+          },
+          "y": {
+            "median": 33.72079389609149,
+            "min": 32.03417780085382,
+            "max": 35.776643205558685,
+            "all": [
+              35.776643205558685,
+              33.72079389609149,
+              32.03417780085382
+            ]
+          },
+          "ttft_s": {
+            "median": 1.0143679170068935,
+            "min": 0.28997733400319703,
+            "max": 1.5045758750056848
+          },
+          "e2e_s": {
+            "median": 3.7186377290054224,
+            "min": 3.310196874997928,
+            "max": 3.995486375002656
+          }
+        },
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 183,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 29645
+        },
+        "sampled_thermal_codes": [
+          0,
+          0,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "pairs": [
+      {
+        "pair": 1,
+        "order": [
+          "A",
+          "B"
+        ],
+        "median_delta_percent": {
+          "x": -3.356275867960412,
+          "y": 16.7304439799957
+        },
+        "same_index": [
+          {
+            "index": 0,
+            "x_delta_percent": 1.667986267027688,
+            "y_delta_percent": 14.836716027459197,
+            "ttft_delta_percent": -28.232953137050508,
+            "e2e_delta_percent": -11.189172328965224
+          },
+          {
+            "index": 1,
+            "x_delta_percent": -3.356275867960412,
+            "y_delta_percent": 11.948526979505436,
+            "ttft_delta_percent": -36.59098754693564,
+            "e2e_delta_percent": -9.900406897683789
+          },
+          {
+            "index": 2,
+            "x_delta_percent": -0.12545982355556262,
+            "y_delta_percent": 20.74195485504058,
+            "ttft_delta_percent": -52.71992079364798,
+            "e2e_delta_percent": -17.44688119595301
+          }
+        ],
+        "ttft_median_delta_percent": -40.46451389379763,
+        "e2e_median_delta_percent": -12.892967892324336,
+        "throughput_median_A_greater": true,
+        "e2e_median_A_lower": true
+      },
+      {
+        "pair": 2,
+        "order": [
+          "B",
+          "A"
+        ],
+        "median_delta_percent": {
+          "x": 4.773802995036203,
+          "y": 15.531724282025138
+        },
+        "same_index": [
+          {
+            "index": 0,
+            "x_delta_percent": 3.2491947471665616,
+            "y_delta_percent": 14.735625990231949,
+            "ttft_delta_percent": -26.88297821221767,
+            "e2e_delta_percent": -11.20890754346574
+          },
+          {
+            "index": 1,
+            "x_delta_percent": 4.773802995036203,
+            "y_delta_percent": 15.531724282025138,
+            "ttft_delta_percent": -25.992168791844595,
+            "e2e_delta_percent": -11.836574429662072
+          },
+          {
+            "index": 2,
+            "x_delta_percent": -1.9108808025482427,
+            "y_delta_percent": 13.972488138907346,
+            "ttft_delta_percent": -40.08314899505214,
+            "e2e_delta_percent": -11.548041380242925
+          }
+        ],
+        "ttft_median_delta_percent": -28.33006011985708,
+        "e2e_median_delta_percent": -11.75934078452887,
+        "throughput_median_A_greater": true,
+        "e2e_median_A_lower": true
+      },
+      {
+        "pair": 3,
+        "order": [
+          "A",
+          "B"
+        ],
+        "median_delta_percent": {
+          "x": 73.71029767109914,
+          "y": 77.66920601075944
+        },
+        "same_index": [
+          {
+            "index": 0,
+            "x_delta_percent": 59.69820925813283,
+            "y_delta_percent": 70.47654986956005,
+            "ttft_delta_percent": -54.09132613607831,
+            "e2e_delta_percent": -41.4119368874019
+          },
+          {
+            "index": 1,
+            "x_delta_percent": 76.82471064945912,
+            "y_delta_percent": 77.66920601075944,
+            "ttft_delta_percent": -40.05910269003349,
+            "e2e_delta_percent": -42.56232363418226
+          },
+          {
+            "index": 2,
+            "x_delta_percent": 83.14125018789822,
+            "y_delta_percent": 84.6114656527425,
+            "ttft_delta_percent": -42.894733954591445,
+            "e2e_delta_percent": -44.75012317726394
+          }
+        ],
+        "ttft_median_delta_percent": -41.659274304456616,
+        "e2e_median_delta_percent": -42.84518202931038,
+        "throughput_median_A_greater": true,
+        "e2e_median_A_lower": true
+      }
+    ],
+    "stable_dual_axis_win": false,
+    "limitations": [
+      "Raw DONE time is a stored timestamp; original wire SSE transcript was not persisted. Frozen client source confirms DONE-branch timing and cleanup exclusion.",
+      "Official API exposes usage/text, not per-ID engine tokens; canonical visible tokenizer count32 verified, no stronger internal-ID assertion.",
+      "Phase snapshots are sampled system-wide observations, not continuous monitoring or engine-specific paging. Known matcher omits omlx-server; exact ownedPID supplements it; unknown GUI/runtime GPU use remains unknown.",
+      "Native engine step wall is host wall time; post-step active_decode_batch is not exact step input batch.",
+      "No isolated mathematical/numerical requalification or prior-run transfer occurs in this performance audit.",
+      "Three paired process replications and three within-process groups each do not establish statistical significance or a thermal causal mechanism.",
+      "x loses pair1 and three of nine same-index measured-group comparisons; within-process groups are not independent fresh-process replications.",
+      "Pair3 oMLX x11.3709/y33.7208 is retained; the +77.6692% y delta includes a degraded comparator observation and is not a reproducible implementation benefit.",
+      "Pair3 official thermal samples rise to fair(1); causal attribution is unknown. Measurement paging is not uniformly zero.",
+      "This is an engine/config comparison, not a paired accepted13-parent regression measurement or causal isolation of batch prefill.",
+      "No pooled C4+C1+C2 score or general workload/concurrency victory is claimed."
+    ]
+  },
+  "http_metrics": {
+    "x_unit": "client delivery estimate tokens/s/user",
+    "request_x": "(actual output token count - first nonempty chunk token count) / (precise SSE DONE timestamp - first nonempty text timestamp)",
+    "group_x": "median request_x across simultaneous submissions",
+    "process_x": "median group_x across the three measured groups; do not pool request medians",
+    "y_unit": "actual output tokens/s/Mac",
+    "group_y": "sum actual output tokens / (latest precise SSE DONE timestamp - earliest POST timestamp)",
+    "process_y": "median group_y across the three measured groups",
+    "ttft": "POST to first nonempty text; seconds; measured-request summary",
+    "e2e": "POST to precise SSE DONE; seconds; cleanup excluded",
+    "concurrency": "simultaneously submitted requests; does not certify every GPU step has batch C",
+    "not_gpu_tpot": true
+  },
+  "exploratory_http_screens": {
+    "status": "six actual fresh AC process screens; owner CPU replay and independent CPU/visual-data review PASS; exploratory single process per configuration",
+    "attempt": "freshscreens-ac-frontier-attempt1",
+    "review_provenance": "AC-FRONTIER-VISUAL-REVIEW.md independently checks six raw points, 48 requests, 18 scored groups, 24 measured requests/768 tokens and model/source/M4 identity",
+    "protocol": {
+      "order": [
+        "native-c1",
+        "omlx-balanced-c1",
+        "lithos-m4-c1",
+        "native-c2",
+        "omlx-balanced-c2",
+        "omlx-aggressive-c1"
+      ],
+      "fresh_processes_per_configuration": 1,
+      "warmup_groups_excluded_per_process": 3,
+      "measured_groups_per_process": 3,
+      "prompt_tokens": 19,
+      "actual_output_tokens_per_request": 32,
+      "greedy": true,
+      "normal_eos": true,
+      "cache_tokens": 0,
+      "draft": null,
+      "native_scheduler_capacity": 4,
+      "comparison_scope": "sequential screens; not AB/BA/AB fresh-process pairs; do not pool with C4"
+    },
+    "results": [
+      {
+        "name": "native-c1",
+        "engine": "tutorial",
+        "concurrency": 1,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/native-c1.json",
+          "sha256": "9fd73ba2f199eb742853e328b98ad0ac7feeee9745593037a1d1cf7a34e9bb7f",
+          "bytes": 109927
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+          "official_environment_manifest_sha256": null,
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4"
+        },
+        "statistics": {
+          "x": {
+            "median": 27.7674458495946,
+            "min": 27.504247909047002,
+            "max": 27.785590383340935,
+            "all": [
+              27.785590383340935,
+              27.7674458495946,
+              27.504247909047002
+            ]
+          },
+          "y": {
+            "median": 25.060279271401885,
+            "min": 24.8233060592049,
+            "max": 25.068645000316568,
+            "all": [
+              25.068645000316568,
+              25.060279271401885,
+              24.8233060592049
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.16080879099899903,
+            "min": 0.16050587499921676,
+            "max": 0.16201249998994172
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.276921124997898,
+            "min": 1.276495000012801,
+            "max": 1.289111124991905
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 860,
+          "Decompressions": 15678
+        }
+      },
+      {
+        "name": "omlx-balanced-c1",
+        "engine": "omlx",
+        "concurrency": 1,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/omlx-balanced-c1.json",
+          "sha256": "e4871b754462507290d7a25a5c6ffb1162c4803761ed2779affc11928b29bc60",
+          "bytes": 55061
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 29.691321598066295,
+            "min": 29.671560926590036,
+            "max": 29.69659656888979,
+            "all": [
+              29.69659656888979,
+              29.691321598066295,
+              29.671560926590036
+            ]
+          },
+          "y": {
+            "median": 25.44140000191875,
+            "min": 25.43569810806216,
+            "max": 25.45884512360152,
+            "all": [
+              25.43569810806216,
+              25.45884512360152,
+              25.44140000191875
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.21302095799183007,
+            "min": 0.21285441701184027,
+            "max": 0.21418370799801778
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.2577924169891048,
+            "min": 1.256930542003829,
+            "max": 1.258074375000433
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 2668
+        }
+      },
+      {
+        "name": "lithos-m4-c1",
+        "engine": "lithos",
+        "concurrency": 1,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/lithos-m4-c1.json",
+          "sha256": "96ba43b3f1e6e6cb927c5cde0fe11dfc1b55daf20f4f9326e443d0f9a61ec40d",
+          "bytes": 54596
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "c1c9486b64a4a8ee674fc17b6561b06ed36c8cb2d79836119756598296f8c041",
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 29.2340869705028,
+            "min": 29.130618993901535,
+            "max": 29.36567883925565,
+            "all": [
+              29.130618993901535,
+              29.36567883925565,
+              29.2340869705028
+            ]
+          },
+          "y": {
+            "median": 21.61384563162262,
+            "min": 21.581795553159864,
+            "max": 21.71522819387507,
+            "all": [
+              21.61384563162262,
+              21.71522819387507,
+              21.581795553159864
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.4179661250091158,
+            "min": 0.4163600830070209,
+            "max": 0.4223251670046011
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.4805324580083834,
+            "min": 1.4736202500062063,
+            "max": 1.4827311249973718
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 1429
+        }
+      },
+      {
+        "name": "native-c2",
+        "engine": "tutorial",
+        "concurrency": 2,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/native-c2.json",
+          "sha256": "31427581ecc890794877b9a3b25facf4d8319388111d1263ffd30e84019cd198",
+          "bytes": 182970
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": "2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad",
+          "official_environment_manifest_sha256": null,
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4"
+        },
+        "statistics": {
+          "x": {
+            "median": 26.76249579903763,
+            "min": 25.230393630512012,
+            "max": 26.870930934463306,
+            "all": [
+              26.870930934463306,
+              25.230393630512012,
+              26.76249579903763
+            ]
+          },
+          "y": {
+            "median": 43.75678179284924,
+            "min": 42.20519392248264,
+            "max": 43.87126683069292,
+            "all": [
+              43.87126683069292,
+              42.20519392248264,
+              43.75678179284924
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.3044405209948309,
+            "min": 0.16647795800236054,
+            "max": 0.3602333750022808
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.462431354499131,
+            "min": 1.458255959005328,
+            "max": 1.5164010410080664
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 16703
+        }
+      },
+      {
+        "name": "omlx-balanced-c2",
+        "engine": "omlx",
+        "concurrency": 2,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/omlx-balanced-c2.json",
+          "sha256": "796063be27f05b61fe4e49d3cb116d7760d593ccfd4b882949354351154f16ff",
+          "bytes": 92461
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 27.665950565314304,
+            "min": 27.52716258171987,
+            "max": 27.711471190603714,
+            "all": [
+              27.711471190603714,
+              27.665950565314304,
+              27.52716258171987
+            ]
+          },
+          "y": {
+            "median": 40.43094119715244,
+            "min": 39.95391148968826,
+            "max": 40.54007724000335,
+            "all": [
+              40.43094119715244,
+              40.54007724000335,
+              39.95391148968826
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.4437088330014376,
+            "min": 0.41532887500943616,
+            "max": 0.47250925000116695
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.5672100619995035,
+            "min": 1.5323720410087844,
+            "max": 1.6018456670135492
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 21209
+        }
+      },
+      {
+        "name": "omlx-aggressive-c1",
+        "engine": "omlx",
+        "concurrency": 1,
+        "raw": {
+          "filename": "freshscreens-ac-frontier-attempt1/omlx-aggressive-c1.json",
+          "sha256": "5e1ad3df3451e1703db392661d3c08b4cbe802dcc72e0a85c8b634393886506e",
+          "bytes": 52383
+        },
+        "identity": {
+          "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+          "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+          "quantization": {
+            "group_size": 16,
+            "bits": 4,
+            "mode": "nvfp4"
+          },
+          "activation_dtype": "bfloat16",
+          "source_manifest_sha256": null,
+          "official_environment_manifest_sha256": "4ffd1edada0f77d342bc3a7ccf54b1796de8ade454a876768c31ee3e958bc783",
+          "benchmark_script_sha256": "1d33a7065a3a0ce51406bca3e018ecc5a13e546f5b6afd758e6b5a71616cd600",
+          "adapter_sha256": null
+        },
+        "statistics": {
+          "x": {
+            "median": 29.691068018980168,
+            "min": 29.59946787802532,
+            "max": 29.721028588904204,
+            "all": [
+              29.721028588904204,
+              29.691068018980168,
+              29.59946787802532
+            ]
+          },
+          "y": {
+            "median": 25.448649248322493,
+            "min": 25.38531301622518,
+            "max": 25.459812325839586,
+            "all": [
+              25.459812325839586,
+              25.448649248322493,
+              25.38531301622518
+            ]
+          },
+          "TTFT_s_all_measured_requests": {
+            "median": 0.2133490829874063,
+            "min": 0.2132552920083981,
+            "max": 0.21385025000199676
+          },
+          "POST_to_DONE_s_all_measured_requests": {
+            "median": 1.2574341250001453,
+            "min": 1.2568827920040349,
+            "max": 1.260571417005849
+          }
+        },
+        "sampled_power_sources": [
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power",
+          "AC Power"
+        ],
+        "sampled_thermal_codes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measurement_vm_delta": {
+          "Swapouts": 0,
+          "Swapins": 0,
+          "Pageouts": 0,
+          "Compressions": 105,
+          "Decompressions": 4017
+        }
+      }
+    ],
+    "environment_identity": {
+      "native": {
+        "receipt": {
+          "filename": "freshscreens-ac-frontier-attempt1/native-environment-initial.json",
+          "sha256": "903c7fd4324d99c01f1ffe06bdafacbf200cf751fed693065b6ef3835472f3ff",
+          "bytes": 89091
+        },
+        "source_and_native_tree_sha256": "5c337db63d0c2de032126600f99b163d166a96d02bb5557b6e64af5b210b6385",
+        "source_and_native_file_count": 469
+      },
+      "omlx": {
+        "receipt": {
+          "filename": "freshscreens-ac-frontier-attempt1/official-omlx-initial.json",
+          "sha256": "53093b60c887eca288ada3d32fe72566bb92481dc5c2cee303a482d0ac2a3301",
+          "bytes": 569475
+        },
+        "source_and_native_tree_sha256": "291516fcd115066a1c01b23e5753d2827cc95a010cca6ac78b2f6da6b27a9f0e",
+        "source_and_native_file_count": 2688
+      },
+      "lithos": {
+        "receipt": {
+          "filename": "freshscreens-ac-frontier-attempt1/official-lithos-initial.json",
+          "sha256": "2c534bc40c9fb2e7ca02fd5192accfa22de8cf9b94f63f76c4379c5480903aa7",
+          "bytes": 42782
+        },
+        "source_and_native_tree_sha256": "db3039dcbdc282c15795a6a9ce5e43c5afcdbab6d755a8fea6050d40a44f414e",
+        "source_and_native_file_count": 196
+      }
+    },
+    "counts": {
+      "warm_groups": 18,
+      "measured_groups": 18,
+      "warm_requests": 24,
+      "measured_requests": 24,
+      "native_actual_raw_ids_requests": 18,
+      "official_usage_visible_only_requests": 30,
+      "measured_tokens": 768,
+      "all_tokens": 1536,
+      "explicit_usage_cache0_requests": 42,
+      "lithos_native_metrics_cache0_requests": 6
+    },
+    "native_vs_balanced_omlx_process_median_delta_pct": {
+      "C1": {
+        "x": -6.479589472356095,
+        "y": -1.4980336400045702
+      },
+      "C2": {
+        "x": -3.2655836789116655,
+        "y": 8.225978661933887
+      }
+    },
+    "limitations": [
+      "C1 native remains lower than balanced oMLX on x and y; C2 native y is +8.23% while x is -3.27%.",
+      "Balanced and aggressive oMLX C1 are effectively tied at this resolution; no stable winner is inferred from one fresh process.",
+      "The strongest tested oMLX choice is limited to tested configs: balanced/default multi-request burst0.03 at C2/C4; C1 aggressive and balanced are near-tied. This is not a search of all possible oMLX configurations.",
+      "Lithos actual backend m4_max/profile apple-m4-max-40c/draft=None/accelerator on; only C1 measured. No fabricated Lithos C2/C4 points or connecting line.",
+      "All screen phase samples AC31% charging/thermal0/pressure1 and stable2054.5MiB swap; measured Swapins/Swapouts/Pageouts are0/0/0, while load/warm Pageouts are nonzero and system-wide.",
+      "Official APIs verify usage/text/canonical32 tokens, without exposing internal per-ID tokens. Lithos cache0 uses native generation metrics because SSE usage omits that optional field.",
+      "Sampled resources do not establish continuous conditions, engine-specific paging or absence of unknown GUI/GPU activity.",
+      "No fresh accepted13-parent C1 process was included; no paired parent-regression claim or stable dual-axis/overall victory follows."
+    ]
   }
 }

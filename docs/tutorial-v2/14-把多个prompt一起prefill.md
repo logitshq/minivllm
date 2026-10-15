@@ -198,9 +198,28 @@ GPU负责人实际使用同一27B checkpoint `mlx-community/Qwen3.8-27B-nvfp4@5f
 | 2 | 350.676ms | 330.035ms | -5.89% |
 | 4 | 745.692ms | 602.204ms | -19.24% |
 
-这说明该记录中的prefill阶段有收益。完整core请求的B4波动明显，不能用prefill的19.24%宣布端到端稳定提速，也不能据此宣布超过oMLX。正式AC、fresh-process、交替配对的C4 HTTP记录正在单独取得；本版证据标为pending，不把旧电池或诊断点移过去。
+这说明该记录中的prefill阶段有收益。完整core请求的B4波动明显，不能用prefill的19.24%宣布端到端稳定提速。下面另列实际AC供电的HTTP结果；旧电池数值资格、prefill微测与这些完整请求记录各有自己的范围。
 
-[compact证据](../../tutorial_code/examples/chapter14-batch-prefill.json)保存25源码hash、原始报告/脚本SHA、17例计数与scope、资源摘要和prefill三对原始时间。完整raw留在原实验目录，不把88k比较记录全部复制进教程。
+先读两个指标：x是客户端交付速率代理，每请求按`(实际输出tokens−首个非空chunk的tokens)/(DONE−首个非空文本)`计算；y是整机实际总吞吐，按`总输出tokens/(最后DONE−最早POST)`计算。每组x取请求中位数，每个进程的x/y再取3个测量组的中位数。x包含首个chunk之后的等待与HTTP传输，不是GPU逐token的TPOT。
+
+同一checkpoint、19-token prompt、greedy输出32个实际tokens、正常EOS、cache0、无draft；每个配置都在fresh process内做3组预热、3组测量。Native核对原始32个token ID；官方服务核对usage和文本重编码，不声称跨引擎ID完全相同。C表示同时提交的请求数，不保证每个GPU step恰好是batch C。下表是C1/C2的六个探索性筛查，每配置只有一个进程，不能当成三对交替配对：
+
+| 配置 | C | x：tokens/s/user | y：tokens/s/Mac |
+|---|---:|---:|---:|
+| 本章Native | 1 | 27.767446 | 25.060279 |
+| oMLX balanced | 1 | 29.691322 | 25.441400 |
+| oMLX aggressive | 1 | 29.691068 | 25.448649 |
+| Lithos M4 Max | 1 | 29.234087 | 21.613846 |
+| 本章Native | 2 | 26.762496 | 43.756782 |
+| oMLX balanced | 2 | 27.665951 | 40.430941 |
+
+C1的Native两轴仍低于oMLX balanced；C2则是y高8.23%、x低3.27%的取舍。oMLX的C1 aggressive与balanced在此次分辨率下近乎持平；C2/C4采用当前受测配置中较强的balanced与默认多请求burst 0.03，不代表遍历了全部配置。Lithos只测了C1，没有C2/C4结果可补线。
+
+C4另做了正式的三对fresh-process AB/BA/AB，A是本章Native，B是oMLX balanced。三对y分别为60.9257/52.1935、56.7191/49.0940、59.9115/33.7208 tokens/s/Mac，Native分别高16.73%、15.53%、77.67%。但首对x为18.9216/19.5787，低3.36%；九次同序号测量组比较里，三次x仍较低。第三对oMLX的x/y降至11.3709/33.7208，采样thermal到fair(1)，这个异常偏慢点保留在记录中；其77.67%不能解释成可重复的实现收益，也不能凭采样确定原因。
+
+所以本章减少了兼容prompt的重复prefill组织工作，实际C4也观察到较高总吞吐；我们仍没有全并发、全指标的稳定胜出证据。上述是引擎/配置对比，未单独配对测量accepted13 parent，不能把全部差异归因于batch prefill。C4三对记录与C1/C2单进程筛查的证据强度也不同。
+
+[compact证据](../../tutorial_code/examples/chapter14-batch-prefill.json)保留旧资格与微测，另存六个筛查点、六个C4进程点、组内范围、源码/模型身份和raw SHA。C4与筛查均经CPU独立复核，未重跑GPU；资源是采样的系统数据，C4测量paging并非始终为零，不推断独占GPU或热状态因果。完整raw留在原实验目录。
 
 ## 7. 用三个版本阅读真实改动
 
@@ -213,6 +232,8 @@ git diff tutorial-14-batched-ops tutorial-14-batch-prefill -- \
 # 文档和compact evidence；核心源码与上一个tag相同。
 git diff tutorial-14-batch-prefill tutorial-14-v1 -- docs tutorial_code/examples
 ```
+
+后补的AC实测保存在 `tutorial-14-ac-evidence`，只变更本章讲解与compact JSON；三个旧tag保持原内容。
 
 完整生成仍使用第十一章的 `tutorial_code.benchmark_core` 入口；GPU命令需在具备相应模型与MLX环境时运行。固定tag用于查看阶段代码，最终证据绑定本章完整六文件组合，不能让中间版本继承不存在的测速。
 
