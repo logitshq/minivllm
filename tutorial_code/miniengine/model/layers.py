@@ -1,6 +1,21 @@
 """Chapter 07: add packed quantized Linear/Embedding while retaining explicit RMSNorm math."""
 import mlx.core as mx
 import mlx.nn as nn
+from functools import partial
+
+
+@partial(mx.compile, shapeless=True)
+def _rms_norm_explicit(x, w, eps):
+    xf = x.astype(mx.float32)
+    y = xf * mx.rsqrt(mx.mean(xf * xf, axis=-1, keepdims=True) + eps)
+    return (y * w).astype(x.dtype)
+
+
+@partial(mx.compile, shapeless=True)
+def _gated_rms_norm_explicit(x, w, gate, eps):
+    xf = x.astype(mx.float32)
+    y = (xf * mx.rsqrt(mx.mean(xf * xf, axis=-1, keepdims=True) + eps) * w).astype(x.dtype)
+    return y * nn.silu(gate.astype(mx.float32)).astype(y.dtype)
 
 
 class RMSNorm(nn.Module):
@@ -12,9 +27,7 @@ class RMSNorm(nn.Module):
 
     def __call__(self, x: mx.array) -> mx.array:
         w = 1.0 + self.weight if self.zero_centered else self.weight
-        xf = x.astype(mx.float32)
-        y = xf * mx.rsqrt(mx.mean(xf * xf, axis=-1, keepdims=True) + self.eps)
-        return (y * w).astype(x.dtype)
+        return _rms_norm_explicit(x, w, self.eps)
 
 
 class GatedRMSNorm(nn.Module):
@@ -26,9 +39,7 @@ class GatedRMSNorm(nn.Module):
         self.eps = eps
 
     def __call__(self, x: mx.array, gate: mx.array) -> mx.array:
-        xf = x.astype(mx.float32)
-        y = (xf * mx.rsqrt(mx.mean(xf * xf, axis=-1, keepdims=True) + self.eps) * self.weight).astype(x.dtype)
-        return y * nn.silu(gate.astype(mx.float32)).astype(y.dtype)
+        return _gated_rms_norm_explicit(x, self.weight, gate, self.eps)
 
 
 def apply_rope(x: mx.array, offset: int, rotary_dim: int, theta: float) -> mx.array:
