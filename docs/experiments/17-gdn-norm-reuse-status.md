@@ -2,14 +2,14 @@
 
 本分支保存实验源码和已核验的证据；V19 default OFF、未采用，教程章节尚未完成。
 未获得完整模型、E2E、默认启用或性能晋级资格；未证明模型收益或相对官方引擎胜出。
-accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提交 `b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6`。
-本次仅更新状态和结果 JSON；26 个实验源码逐字不变，不合入教程主分支。
+完整模型资格测试的 accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提交 `b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6`。
+本次仅归档状态、结果 JSON 和代码讲解；26 个实验源码逐字不变，不合入教程主分支。
 
 ## 已完成的局部核验
 
 - 独立 CPU source review：SOURCE_CPU_PASS；default OFF、严格布尔参数、normal eligibility 和 fallback 已核验。
 - 纯 kernel 15 banks（9 real + 6 synthetic）严格数值 PASS；前、后、释放前数值及只读审计 PASS。
-- saved15 局部 host-wall micro：A 148.959340 μs、B 129.099457 μs，降低 13.332419%，10/10 pairs 胜。
+- saved15 局部 host-wall micro：A=V17 decode isolated public 片段（nn.silu→split/repeat→原 gated_delta_step_metal），148.959340 μs；B=N2 public 两 kernel（norm-reuse 源码同 V19），129.099457 μs；降低 13.332419%，10/10 pairs 胜；A 不是 V18。
 - 上述 PASS 和 13.33% 只属于局部算子，不是完整模型收益或 E2E 吞吐结论。
 
 ## 两次完整模型资格测试分别为 STOP
@@ -26,6 +26,7 @@ accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提�
 
 ## Chrome 与 E2E 的边界
 
+- 用户已暂停27B整机测试，保留普通应用，后续仅代码讲解/静态分析；恢复实际load需用户明确恢复授权。
 - Chrome 已成功正常退出一次；观察到系统物理 free 增加、压缩器物理占用下降，不能全部归因于 Chrome。
 - RSS 降幅不等于回收物理 RAM；系统资源改善不保证 27B load 或稳态安全，最新资格仍 STOP。
 - E2E build2：CPU 27 checks、1421 frozen pins；仅 CPU_BIND_READY_QUAL_PENDING，尚未独立审查、实际 E2E=0，不可采用。
@@ -34,6 +35,7 @@ accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提�
 
 ## 精简证据索引
 
+- [代码讲解与静态边界](17-gdn-norm-reuse-walkthrough.md) 说明源码、数学、shape 和成本，不授予完整模型资格。
 - [结果 JSON](17-gdn-norm-reuse-result.json) 保存必要 metadata、原始 proof 路径及 SHA256，不复制大 raw。
 - Source manifest SHA256 `d86be282646c1fc9d26155ad54014cf461f608c8222e32cd66d11088e180a32e`（26 sources）。
 - 原局部算子 receipt SHA256 `999ced1e1d1c8facb1db1c61f97b062b66afabff8a1f774605360fb354cbdfd4`。
