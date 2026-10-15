@@ -1,6 +1,6 @@
 # 一章一章写一个推理引擎
 
-从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—15 的代码与讲解放在同一教学分支，每章保存固定版本。
+从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—15 的代码与讲解放在同一教学分支，每章保存固定版本。第16章单独保留未采纳的实验历史，不合并当前主教程核心。
 
 教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原 `/Users/ryanli/code/minivllm` 保留在 `main`；完成版与旧教程仍可作为源码参照。
 
@@ -23,6 +23,7 @@
 | [13 单核 norm](13-把norm写成一个Metal核.md) | 保留归约拓扑、FP32舍入与BF16门控边界的Metal核 | norm接入完整模型；保留guard与旧表达式回退 | `tutorial-13-v1` |
 | [14 批量 prefill](14-把多个prompt一起prefill.md) | fresh同长prompt、独立Attention/GDN状态、量化dispatch回退 | 完整六文件组合17例数值/lifecycle通过；正式AC配对另测 | `tutorial-14-batched-ops` → `tutorial-14-batch-prefill` → `tutorial-14-v1` |
 | [15 局部门编译](15-把GDN的小门计算一起编译.md) | 四输入纯函数、显式opt-in与局部/全模型/端到端分层验证 | 默认off；example启用普通B1 decode；C1内部配对吞吐约+0.94% | `tutorial-15-gates-optin` → `tutorial-15-v1` |
+| [16 GDN输入融合实验](16-把GDN的SiLU和拆头并入状态更新.md) | BF16 SiLU与按头读取并入状态更新 | **未采纳**；E2E y+0.632%低于+1%门槛；仅实验分支，默认off | `tutorial-16-experiment-code` → `tutorial-16-experiment-v1`（文档tag待审） |
 
 第二章初版 `tutorial-02` 只包含较少组件，阅读使用扩展版 `tutorial-02-v2`。第七章保留初版 `tutorial-07`，修正量化 Embedding 的激活 dtype 接口后使用 `tutorial-07-v2`；旧 tag 不覆盖。
 

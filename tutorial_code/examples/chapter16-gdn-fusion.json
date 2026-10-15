@@ -1,0 +1,87 @@
+{
+  "schema": "chapter16-gdn-fusion-example-config-v1",
+  "checkpoint": {
+    "repo": "mlx-community/Qwen3.8-27B-nvfp4",
+    "snapshot": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "actual_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "quantization": {
+      "mode": "nvfp4",
+      "bits": 4,
+      "group_size": 16
+    },
+    "activation_dtype": "bfloat16"
+  },
+  "engine": {
+    "max_seqs": 4,
+    "max_len": 2048,
+    "max_batched_tokens": 512,
+    "cache_limit_gb": 0,
+    "drafter_dir": null
+  },
+  "generation": {
+    "max_tokens": 32,
+    "temperature": 0,
+    "ignore_eos": false
+  },
+  "switches": {
+    "gates_compile": true,
+    "postconv_fusion_default": false
+  },
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    95826,
+    110827,
+    98682,
+    108829,
+    81726,
+    6297,
+    1710,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "expected_output_ids": [
+    79852,
+    18887,
+    220,
+    95761,
+    60277,
+    220,
+    103725,
+    95772,
+    103910,
+    109120,
+    95865,
+    3709,
+    111734,
+    96221,
+    97792,
+    100658,
+    5141,
+    220,
+    95793,
+    4997,
+    220,
+    117888,
+    3709,
+    120718,
+    108695,
+    97792,
+    96671,
+    129933,
+    3709,
+    99131,
+    146502,
+    111892
+  ],
+  "expected_ids_source": "V18 fullmodel correctness four arms; new chapter16 example has not run",
+  "scope": "token-ID smoke configuration and expected IDs; no benchmark numbers"
+}

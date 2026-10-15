@@ -1,0 +1,587 @@
+{
+  "schema": "chapter16-gdn-postconv-experiment-results-v1",
+  "status": "NOT_ADOPTED_INDEPENDENT_EXPERIMENT",
+  "adoption_decision": "DO_NOT_ADOPT_KEEP_UNPROMOTED",
+  "branch": "tutorial/16-gdn-postconv-experiment",
+  "not_merged_into": "tutorial/step-by-step",
+  "candidate_source_manifest_sha256": "198750c027274fb50eb364416db0acd9becbbd4d2dc1484b3991fe76a200ed58",
+  "checkpoint": {
+    "repo": "mlx-community/Qwen3.8-27B-nvfp4",
+    "snapshot": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "actual_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "quantization": {
+      "mode": "nvfp4",
+      "bits": 4,
+      "group_size": 16
+    },
+    "activation_dtype": "bfloat16"
+  },
+  "workload": {
+    "prompt_ids": [
+      248045,
+      846,
+      198,
+      95826,
+      110827,
+      98682,
+      108829,
+      81726,
+      6297,
+      1710,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "expected_output_ids": [
+      79852,
+      18887,
+      220,
+      95761,
+      60277,
+      220,
+      103725,
+      95772,
+      103910,
+      109120,
+      95865,
+      3709,
+      111734,
+      96221,
+      97792,
+      100658,
+      5141,
+      220,
+      95793,
+      4997,
+      220,
+      117888,
+      3709,
+      120718,
+      108695,
+      97792,
+      96671,
+      129933,
+      3709,
+      99131,
+      146502,
+      111892
+    ],
+    "max_seqs": 4,
+    "max_len": 2048,
+    "max_batched_tokens": 512,
+    "cache_limit_gb": 0,
+    "drafter_dir": null,
+    "max_tokens": 32,
+    "temperature": 0,
+    "ignore_eos": false,
+    "normal_EOS": true,
+    "observed_finish_reason": "length",
+    "gates_compile_both_arms": true,
+    "only_toggle": "postconv fusion",
+    "fresh_pairs_order": [
+      "AB",
+      "BA",
+      "AB"
+    ],
+    "warmup_groups_per_process": 3,
+    "measured_groups_per_process": 3,
+    "actual_requests": 36,
+    "actual_output_tokens": 1152,
+    "measured_requests": 18,
+    "measured_tokens": 576
+  },
+  "metric_boundaries": {
+    "x": "client text delivery proxy after first text chunk; not GPU model TPS",
+    "y": "actual completion tokens divided by POST-to-DONE group wall including queue/prefill/HTTP",
+    "TTFT_s": "POST start to first text chunk",
+    "E2E_s": "POST start to DONE",
+    "aggregation": "median of three measured groups per process, then median of three process medians per arm; no pooling warmups"
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "order": "AB",
+      "off": {
+        "x": 28.00202504518048,
+        "y": 25.227848864766823,
+        "TTFT_s": 0.16159354099363554,
+        "E2E_s": 1.2684394999960205
+      },
+      "on": {
+        "x": 28.23599170422601,
+        "y": 25.397031999877278,
+        "TTFT_s": 0.16190295800333843,
+        "E2E_s": 1.2599897499894723
+      },
+      "on_vs_off_percent": {
+        "x": 0.8355347824595905,
+        "y": 0.6706205353351979,
+        "TTFT_s": 0.191478575071935,
+        "E2E_s": -0.6661531753445638
+      }
+    },
+    {
+      "pair": 2,
+      "order": "BA",
+      "off": {
+        "x": 28.0285149450736,
+        "y": 25.23898409542828,
+        "TTFT_s": 0.16186337498947978,
+        "E2E_s": 1.2678798749984708
+      },
+      "on": {
+        "x": 28.281427735522854,
+        "y": 25.446036213118145,
+        "TTFT_s": 0.16143754200311378,
+        "E2E_s": 1.2575632500083884
+      },
+      "on_vs_off_percent": {
+        "x": 0.9023410300006196,
+        "y": 0.8203662909212373,
+        "TTFT_s": -0.2630817418663667,
+        "E2E_s": -0.8136910438849565
+      }
+    },
+    {
+      "pair": 3,
+      "order": "AB",
+      "off": {
+        "x": 28.01969768821268,
+        "y": 25.237522708347353,
+        "TTFT_s": 0.16178379199118353,
+        "E2E_s": 1.2679532920010388
+      },
+      "on": {
+        "x": 28.21677812853325,
+        "y": 25.387278309383667,
+        "TTFT_s": 0.16180308400362264,
+        "E2E_s": 1.260473832997377
+      },
+      "on_vs_off_percent": {
+        "x": 0.7033639067543396,
+        "y": 0.5933847104049761,
+        "TTFT_s": 0.011924564384147018,
+        "E2E_s": -0.5898844264095815
+      }
+    }
+  ],
+  "aggregate": {
+    "off": {
+      "x": 28.01969768821268,
+      "y": 25.237522708347353,
+      "TTFT_s": 0.16178379199118353,
+      "E2E_s": 1.2679532920010388
+    },
+    "on": {
+      "x": 28.23599170422601,
+      "y": 25.397031999877278,
+      "TTFT_s": 0.16180308400362264,
+      "E2E_s": 1.2599897499894723
+    },
+    "on_vs_off_percent": {
+      "x": 0.7719355805338335,
+      "y": 0.6320322853128779,
+      "TTFT_s": 0.011924564384147018,
+      "E2E_s": -0.6280627261118332
+    }
+  },
+  "predeclared_criteria": {
+    "three_of_three_pair_y_positive": true,
+    "aggregate_y_at_least_1_percent": false,
+    "aggregate_x_delivery_proxy_nonnegative": true,
+    "all_numerical_source_resource_protocol_cleanup_gates_pass": true
+  },
+  "qualification": {
+    "micro": {
+      "status": "MICRO_PASS_LOCAL_HOSTWALL_ONLY",
+      "banks": 15,
+      "real_banks": 9,
+      "synthetic_banks": 6,
+      "pairs": 10,
+      "wins": 10,
+      "off_median_us": 150.52006,
+      "on_median_us": 129.508057,
+      "duration_reduction_percent": 13.959603,
+      "controls_and_drift": "PASS original 5 percent gates",
+      "finite_BF16_activation_inputs": 65280,
+      "FP32_o_Snew_elements_per_complete_audit": 11888640,
+      "output_comparison": "strict original bytes including signed zero"
+    },
+    "fullmodel": {
+      "status": "PASS_BOUNDED_FULLMODEL_CORRECTNESS",
+      "arms": [
+        "accepted15",
+        "candidate-OFF",
+        "candidate-ON",
+        "reset-OFF"
+      ],
+      "output_IDs_per_arm": 32,
+      "canonical_FP32_signatures_per_arm": 4128,
+      "postconv_dispatches_ON": 1488,
+      "fallback_cases": 18,
+      "parameter_arrays": 1349,
+      "permanent_logits_raw_files": 128,
+      "permanent_state": "canonical FP32 signatures/hashes only; state raw not saved",
+      "no_reload_or_drafter_inference_qualification": true
+    },
+    "E2E": {
+      "protocol": "PASS_PROTOCOL_GPU_RELEASED",
+      "IDs": "36 requests actual raw32 = visible32 = expected32",
+      "CPU_replay": "PASS_CPU_RAW_REPLAY",
+      "all_262_pins_authenticated_after_replay": true,
+      "error": null,
+      "cleanup_errors": [],
+      "eight_PIDs_waited_reaped_and_external_absence": true,
+      "owner_driver_server_PIDs": [
+        39451,
+        39467,
+        39511,
+        39726,
+        39934,
+        40130,
+        40333,
+        40514
+      ]
+    },
+    "new_example_GPU_smoke": "NOT_RUN; CPU AST only"
+  },
+  "resources": {
+    "raw_count": 106,
+    "power": "AC",
+    "thermal_codes": [
+      0
+    ],
+    "pressure_values": [
+      1
+    ],
+    "free_percent_min": 35,
+    "free_percent_max": 72,
+    "swap_used_mb_min": 1886.38,
+    "swap_used_mb_max": 1886.38,
+    "raw_known_inference_counts": [
+      0
+    ],
+    "measurement_VM_delta_range": {
+      "Swapouts": [
+        0,
+        0
+      ],
+      "Swapins": [
+        0,
+        0
+      ],
+      "Pageouts": [
+        0,
+        0
+      ],
+      "Compressions": [
+        0,
+        12931
+      ],
+      "Decompressions": [
+        84,
+        19458
+      ]
+    }
+  },
+  "resources_limit": "system snapshots only; compression/decompression nonzero; no model causality or GPU exclusivity inference",
+  "evidence_refs": [
+    {
+      "artifact": "v18-e2e-incremental-build1/ROOT-PREDECLARED-ADOPTION.json",
+      "sha256": "8c1f275f706f6b3bcd0ab92734e4c409382c94afc7ed0273e4916e74bf06ef86",
+      "bytes": 1039
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/external-owner-AC-attempt1/e2e-final-receipt.json",
+      "sha256": "a6dc2c5e418c3ef2187cfa177d2158a4e62f2cec16d421534b9b7d9b623069ed",
+      "bytes": 53665
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/external-owner-AC-attempt1/RESULT-AUDIT.json",
+      "sha256": "2c4e08f50b921405f26b9c12be6331fbc128cc163d9d1eb1b1d2176c93af8d8b",
+      "bytes": 88480
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/external-owner-AC-attempt1/GPU-RELEASE.json",
+      "sha256": "4f6a4799198b1b04614abb540967734e31d5c1c278ff7b4349c8f378c58e51ab",
+      "bytes": 4008
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/external-owner-AC-attempt1/cpu-replay.stdout.json",
+      "sha256": "e0fc25d207be0a7c65340a42b11b17b1dc4d6ceecf689b9eb78513f53a2b63a2",
+      "bytes": 629268
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/external-owner-AC-attempt1/external-exact-absence-after-tool-return.json",
+      "sha256": "121348d2ccd0af46a7c94f1a8c77565c47b3f4e37af1627ec1332866c8a51c70",
+      "bytes": 2274
+    },
+    {
+      "artifact": "source-manifest-v18-gdn-postconv-build2.json",
+      "sha256": "198750c027274fb50eb364416db0acd9becbbd4d2dc1484b3991fe76a200ed58",
+      "bytes": 2955
+    },
+    {
+      "artifact": "v18-stationary-micro-build1/SUMMARY-GPU.md",
+      "sha256": "e87650ae2509a0b0471ea7cc135cf8963442d90bd3bf90d3ffb151c6cdd2fbd3",
+      "bytes": 3507
+    },
+    {
+      "artifact": "v18-fullmodel-qual-build1/external-owner-attempt1-20261015T1201Z/fullmodel-final-receipt.json",
+      "sha256": "4f1e25014dc2c4c3e6439980a77ccfdbdf25cf189329b736ea5541ac79a38693",
+      "bytes": 12669
+    },
+    {
+      "artifact": "v18-fullmodel-qual-build1/external-owner-attempt1-20261015T1201Z/SUMMARY-GPU.md",
+      "sha256": "2aed4af40950db8ebbc03c73bd8dff713ea358668388f2cde3ce417be23ad700",
+      "bytes": 2445
+    }
+  ],
+  "raw_group_refs": [
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-warm-0.json",
+      "sha256": "08b6a3f70732d6db48129f4633d70a3f7d25d2d27c667e63a20206230284e863",
+      "bytes": 11073
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-warm-1.json",
+      "sha256": "d0b1a8527e7a67bc72746e7649c73ffaceb26bf069def70c492201a28df66132",
+      "bytes": 11063
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-warm-2.json",
+      "sha256": "9f98d2ae3c2d66a852f5ce8d0209fa83b59f16c109d1eff5282ce7ce64520711",
+      "bytes": 11063
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-measure-0.json",
+      "sha256": "1cf9a4f5a53bd09971f8fa215853f7f3ea6f672c385aea63e10c00e4dc1d6c4a",
+      "bytes": 11069
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-measure-1.json",
+      "sha256": "fa111e139d0d9e0ec5e0ea3005ee70aa049379c1a770464574b3c2797be4b8a3",
+      "bytes": 11084
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-A-off/C1-measure-2.json",
+      "sha256": "0cb54ee89018ff2bebbaf0b6602100c72f3d05744a7149abfa1e02e5cc98af14",
+      "bytes": 11070
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-warm-0.json",
+      "sha256": "26a6bb86e45d76a60e04f7651326db141ed22b40e3c05a12f21b555e555622e3",
+      "bytes": 11070
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-warm-1.json",
+      "sha256": "e1b44c034642aa7c278f97bc2cc996478d23ca8b6d85d41f91e0761ed5488446",
+      "bytes": 11068
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-warm-2.json",
+      "sha256": "b9ebc7fda265d8b1b2718ef1ef454a525f47060110045927cecc2c6f919ccc75",
+      "bytes": 11069
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-measure-0.json",
+      "sha256": "6b8bc771573d63456a4bcdf67dc828d5b7c1e0eca5737e1f5bb0ab0cfb18ff2d",
+      "bytes": 11075
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-measure-1.json",
+      "sha256": "ce950afe5d918dc85ae4740fd78bfa0eeb82024e694d46c7f757b625c6baa5ec",
+      "bytes": 11076
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair1-B-on/C1-measure-2.json",
+      "sha256": "caa3cdbf923d78675a892dca59ca290d100066124ff13b4bf0854f1bac8332c3",
+      "bytes": 11086
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-warm-0.json",
+      "sha256": "45cee2aa9b3fceda855ee11ee10fd8b00f28535e741bbb751d9e6f90196a161e",
+      "bytes": 11070
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-warm-1.json",
+      "sha256": "283244753dcbe5de58b0dbe71a6885b149b707c816046717015f3fd2b28b2954",
+      "bytes": 11042
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-warm-2.json",
+      "sha256": "8a16a46042316d46bd482b489dc33c029c529e59b0bf363cbd7c9e37c0e03d36",
+      "bytes": 11076
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-measure-0.json",
+      "sha256": "e938b2a781ff8822d05f1843878a8cb936561942e698618e9c755f952dc790c6",
+      "bytes": 11072
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-measure-1.json",
+      "sha256": "736678b40f567d3044bf91ce1ec25b97579ab803a51baa97f98df174336a189a",
+      "bytes": 11078
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-A-off/C1-measure-2.json",
+      "sha256": "b438563acbec8ff5a0480a0916b26c8fabe755a764ea74170dcf1a14b22472ce",
+      "bytes": 11076
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-warm-0.json",
+      "sha256": "3cb25c30f490207a2efad6bb612a36a8fe42491282a5a47d951a829c9d149787",
+      "bytes": 11054
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-warm-1.json",
+      "sha256": "818f9749615b7be4664005167df69b9e65329e625cdd96abf315c7f8271e21cc",
+      "bytes": 11074
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-warm-2.json",
+      "sha256": "b97aa351c308225bdf3ed090923c8be62030c8603edcabbfff5ede80e5a55c34",
+      "bytes": 11077
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-measure-0.json",
+      "sha256": "d8ca8a7823c3ca53cbe30d4b40640bbba87549df3b59c70bc492ea50ffba4d9c",
+      "bytes": 11079
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-measure-1.json",
+      "sha256": "dbe6b6e3103ecceda3daa7d269e3bb454550af2fb1201a15488a39a7222f0148",
+      "bytes": 11077
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair2-B-on/C1-measure-2.json",
+      "sha256": "756d51b42bf444a380b3d86d23e51341ee503a8ac376c2821c4770308583f930",
+      "bytes": 11087
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-warm-0.json",
+      "sha256": "dd6111e1a2b2c731c09be9edb60dee39314a7f3766a7ec3467dcf01508a958fb",
+      "bytes": 11065
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-warm-1.json",
+      "sha256": "28f2690ad8d0ba2be25f6b3023a8945631a31fb2cad0b1d98e1ee7727bb53a69",
+      "bytes": 11061
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-warm-2.json",
+      "sha256": "769e238d134767ae5ec2449c1e4f681729e33ab6d63f5d5478dfec2ab8bed8a2",
+      "bytes": 11076
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-measure-0.json",
+      "sha256": "c493d4233a1c07b2e3570b8456def63a4d6ecea402ab6864f94d62c210ccd4dd",
+      "bytes": 11079
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-measure-1.json",
+      "sha256": "b14b985f8023bb2d8127d3041fd2c231c66de25f465d725049d342d387272413",
+      "bytes": 11087
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-A-off/C1-measure-2.json",
+      "sha256": "9eda5a456867138e05c6c7f137bc83c6a18772d0cbeecfd855bf6d5de25e1cc4",
+      "bytes": 11073
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-warm-0.json",
+      "sha256": "eb94f99307a924e91099bcc1477be5fc7d9502fea1194a976041d5efabd7f667",
+      "bytes": 11071
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-warm-1.json",
+      "sha256": "80326fe8c1c9cc1c109d0f7a5bf10f0df47e6499f8d8f67d1e1af93d592458e3",
+      "bytes": 11065
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-warm-2.json",
+      "sha256": "bfb029e80c7ef4d70b11729179b0128cc0f80b507b9af7da1c31df0ee23b16aa",
+      "bytes": 11069
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-measure-0.json",
+      "sha256": "26b503d2e3731e5e6144ffe5815ea5f12a51f0408e1b6eaa88295e77689ce144",
+      "bytes": 11076
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-measure-1.json",
+      "sha256": "bc9853378884597c169e608c627ccf1a09db1970aabcd928201a96db05b9327f",
+      "bytes": 11067
+    },
+    {
+      "artifact": "v18-e2e-incremental-build1/gpu-e2e-AC-attempt1/pair3-B-on/C1-measure-2.json",
+      "sha256": "ccada288e45fd5857dd0682ff6a4a1e74985277b2a2f2164c52fc42da4096cab",
+      "bytes": 11075
+    }
+  ],
+  "raw_arrays_or_logs_embedded": false,
+  "CPU_derivation": "36 stored group files; raw start/first-text/DONE timestamps re-derived; process and aggregate medians match final receipt within 1e-12",
+  "limits": [
+    "local micro reduction is not fullmodel or E2E gain",
+    "all three y gains positive but aggregate below predeclared 1 percent: not adopted",
+    "TTFT aggregate regressed; no overall latency-win claim",
+    "no official oMLX/Lithos same-round challenge or victory",
+    "default OFF; experiment branch only; no model-reload or drafter qualification",
+    "new example not run on GPU"
+  ],
+  "local_versions": {
+    "base": "f976d6a547a9dc1946b52b1de6db376d799b34d7",
+    "source_commit": "33152a7ff0b0c9313568e84564bc24b2dc3d1ecf",
+    "source_tag": "tutorial-16-experiment-code",
+    "complete_chapter_tag_proposed": "tutorial-16-experiment-v1",
+    "documentation_status": "applied in experiment worktree; uncommitted pending independent review"
+  },
+  "source_identity": {
+    "manifest_artifact": "source-manifest-v18-gdn-postconv-build2.json",
+    "manifest_sha256": "198750c027274fb50eb364416db0acd9becbbd4d2dc1484b3991fe76a200ed58",
+    "source_count": 26,
+    "net_vs_accepted15_changed": [
+      "model/gdn.py",
+      "model/qwen3_5.py",
+      "kernels/gdn_postconv_metal.py"
+    ],
+    "net_vs_accepted15_unchanged": 23,
+    "file_sha256": {
+      "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+      "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+      "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+      "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+      "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+      "engine/llm_engine.py": "7e7e96c1a101193bfa6fa90e884b7f6008f8340c7a55c8146df54c86fb569620",
+      "engine/model_runner.py": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538",
+      "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+      "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+      "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+      "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+      "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+      "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+      "kernels/gdn_postconv_metal.py": "aa12ff8500194337c0b58f9621e01177272d382d5361f1071531db15d267c64f",
+      "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+      "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model/attention.py": "23b02cfac714d84155653781df5921cca438809b482b0932075e497be48f69c3",
+      "model/gdn.py": "755d6b002a9765b57e97083947183d12b74805941efbfb802b8eec741ad91290",
+      "model/layers.py": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411",
+      "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+      "model/qwen3_5.py": "d4eb76236aa86ea3a8561f45b4113c00381eea2095c791983211304da47b1185",
+      "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+      "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+      "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+      "spec/dflash2.py": "e80f5257ffacc80f86da849f45a4cc3d3ced714de26941fcec5d00f0d9a73255"
+    },
+    "default_off": true,
+    "independent_setter": "set_postconv_fusion(bool)",
+    "gates_compile_preserved": true
+  }
+}
