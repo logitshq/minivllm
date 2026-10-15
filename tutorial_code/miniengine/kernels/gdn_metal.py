@@ -13,8 +13,10 @@ def reset_dispatch_counts():
 # 每个 (序列, 头) 一个 threadgroup：Dv 列 × SPLIT 段。线程 (t, s) 管第 t 列、dk ∈ [s·Dk/SPLIT, (s+1)·Dk/SPLIT)。
 # 两次段间归约走 threadgroup 内存。B 小的时候线程数是瓶颈（B=1 只有 48 个头），拆段把线程数乘 SPLIT。
 SPLIT = 4
+VALUE_TILE = 32
 _SOURCE = """
-    uint dv = thread_position_in_threadgroup.x;
+    uint dv_local = thread_position_in_threadgroup.x;
+    uint dv = threadgroup_position_in_grid.x * VALUE_TILE + dv_local;
     uint sp = thread_position_in_threadgroup.y;
     uint h  = threadgroup_position_in_grid.y;
     uint b  = threadgroup_position_in_grid.z;
@@ -27,7 +29,7 @@ _SOURCE = """
     size_t base = (size_t)bh * Dk * Dv;
     const device float* qh = q + (size_t)bh * Dk;
     const device float* kh = k + (size_t)bh * Dk;
-    threadgroup float red[SPLIT * 128];
+    threadgroup float red[SPLIT * VALUE_TILE];
     float qn = 0.0f, kn = 0.0f;
     for (uint d = 0; d < Dk; d++) { qn += qh[d] * qh[d]; kn += kh[d] * kh[d]; }
     float qs = metal::rsqrt(qn + 1e-6f) * metal::rsqrt((float)Dk);   // L2 归一化 + Dk^-0.5
@@ -36,10 +38,10 @@ _SOURCE = """
     float be = beta[bh];
     float kv = 0.0f;
     for (uint d = d0; d < d0 + seg; d++) kv += ks * kh[d] * S[base + d * Dv + dv];
-    red[sp * Dv + dv] = kv;
+    red[sp * VALUE_TILE + dv_local] = kv;
     threadgroup_barrier(mem_flags::mem_threadgroup);
     kv = 0.0f;
-    for (uint i = 0; i < SPLIT; i++) kv += red[i * Dv + dv];
+    for (uint i = 0; i < SPLIT; i++) kv += red[i * VALUE_TILE + dv_local];
     float delta = (v[(size_t)bh * Dv + dv] - ex * kv) * be;
     float acc = 0.0f;
     for (uint d = d0; d < d0 + seg; d++) {
@@ -48,18 +50,31 @@ _SOURCE = """
         acc += qs * qh[d] * s;
     }
     threadgroup_barrier(mem_flags::mem_threadgroup);
-    red[sp * Dv + dv] = acc;
+    red[sp * VALUE_TILE + dv_local] = acc;
     threadgroup_barrier(mem_flags::mem_threadgroup);
     if (sp == 0) {
         acc = 0.0f;
-        for (uint i = 0; i < SPLIT; i++) acc += red[i * Dv + dv];
+        for (uint i = 0; i < SPLIT; i++) acc += red[i * VALUE_TILE + dv_local];
         o[(size_t)bh * Dv + dv] = acc;
     }
 """
 
 _kernel = mx.fast.metal_kernel(
     name="gdn_decode_step", input_names=["q", "k", "v", "g", "beta", "S"], output_names=["o", "S_new"],
-    source=_SOURCE.replace("SPLIT", str(SPLIT)),
+    source=_SOURCE.replace("SPLIT", str(SPLIT)).replace("VALUE_TILE", str(VALUE_TILE)),
+)
+
+# Retain the original interface for smaller/unusual value dimensions. The tiled
+# 128-dimensional workload uses independent columns without changing reductions.
+_legacy_source = _SOURCE.replace(
+    "uint dv_local = thread_position_in_threadgroup.x;\n    uint dv = threadgroup_position_in_grid.x * VALUE_TILE + dv_local;",
+    "uint dv = thread_position_in_threadgroup.x;",
+).replace("red[SPLIT * VALUE_TILE]", "red[SPLIT * 128]").replace(
+    "sp * VALUE_TILE + dv_local", "sp * Dv + dv"
+).replace("i * VALUE_TILE + dv_local", "i * Dv + dv")
+_legacy_kernel = mx.fast.metal_kernel(
+    name="gdn_decode_step_legacy", input_names=["q", "k", "v", "g", "beta", "S"], output_names=["o", "S_new"],
+    source=_legacy_source.replace("SPLIT", str(SPLIT)),
 )
 
 
@@ -70,9 +85,11 @@ def gated_delta_step_metal(q, k, v, g, beta, S):
     if Dk % SPLIT or Dv > 128 or Dv * SPLIT > 1024:
         raise ValueError("Metal GDN requires Dk divisible by 4 and Dv <= 128")
     DISPATCH_COUNTS["decode_step"] += 1
-    o, S_new = _kernel(
+    tiled = Dv % VALUE_TILE == 0
+    kernel = _kernel if tiled else _legacy_kernel
+    o, S_new = kernel(
         inputs=[q.astype(mx.float32), k.astype(mx.float32), v.astype(mx.float32), g.astype(mx.float32), beta.astype(mx.float32), S],
-        grid=(Dv, Hv * SPLIT, B), threadgroup=(Dv, SPLIT, 1),
+        grid=(Dv, Hv * SPLIT, B), threadgroup=(VALUE_TILE if tiled else Dv, SPLIT, 1),
         output_shapes=[(B, Hv, Dv), (B, Hv, Dk, Dv)], output_dtypes=[mx.float32, mx.float32],
     )
     return o, S_new
