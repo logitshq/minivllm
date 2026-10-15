@@ -158,16 +158,16 @@ python -m tutorial_code.chapter16_gdn_fusion --model-dir "$MODEL" --fusion on
 
 example核对并打印实际IDs，不是HTTP性能实验。正常EOS策略不代表第32个token就是EOS。配置和预期IDs见[JSON](../../tutorial_code/examples/chapter16-gdn-fusion.json)。checkpoint是 `mlx-community/Qwen3.8-27B-nvfp4`，精确snapshot为 `5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6`。
 
-本章分两步保存；第一步已固定真实受测源码：commit `33152a7ff0b0c9313568e84564bc24b2dc3d1ecf`，tag `tutorial-16-experiment-code`。第二步解释与结果待独立审查后commit；它们属于独立实验历史，主教程分支继续停留在第十五章核心：
+本章分两步保存；第一步已固定真实受测源码：commit `33152a7ff0b0c9313568e84564bc24b2dc3d1ecf`，tag `tutorial-16-experiment-code`。第二步解释与结果已另行提交保存，独立文档审查已通过；它们属于独立实验历史，主教程分支继续停留在第十五章核心：
 
-| 顺序 | 拟定tag | 只保存什么 |
+| 顺序 | tag | 只保存什么 |
 |---|---|---|
 | 1 | `tutorial-16-experiment-code` | 冻结source26中的gdn.py、qwen3_5.py与新kernel |
-| 2 | `tutorial-16-experiment-v1` | 本章、example、JSON、README及后续实际证据状态 |
+| 2 | `tutorial-16-experiment-v1` | 本章、example、JSON、README与已测结果索引 |
 
 步骤1必须按 `source-manifest-v18-gdn-postconv-build2.json` 逐byte应用；其SHA256为 `198750c027274fb50eb364416db0acd9becbbd4d2dc1484b3991fe76a200ed58`。26个核心文件中仅3个路径变化，其余23个保持原byte；精确的3个相对路径为 `model/gdn.py`、`model/qwen3_5.py`、`kernels/gdn_postconv_metal.py`。旧tag保留，不把本实验合并到当前教程核心。
 
-用以下命令逐步阅读；实验文档tag在独立审查后创建，源码tag先保存：
+用以下命令逐步阅读；表中的两个实验标签均已创建。此实验未采纳，不合并主线：
 
 ```bash
 git diff tutorial-15-v1 tutorial-16-experiment-code -- tutorial_code/miniengine
