@@ -4,7 +4,9 @@ import mlx.nn as nn
 
 from ..config import ModelConfig
 from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
-from .layers import GatedRMSNorm, Linear, prefill_linear
+from .layers import GatedRMSNorm, Linear, prefill_linear, prefill_batch_backend_supported
+from ..cache import BatchState
+from ..context import ForwardContext
 
 
 def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tuple[mx.array, mx.array]:
@@ -16,6 +18,12 @@ def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tu
     xp = mx.concatenate([mx.zeros((K - 1, x.shape[1]), x.dtype) if state is None else state.astype(x.dtype), x])
     y = sum(xp[j:j + T] * w[:, j] for j in range(K))
     return y, xp[T:]
+
+
+def _gates_explicit(b, a, A_log, dt_bias):
+    beta = mx.sigmoid(b.astype(mx.float32))
+    g = -mx.exp(A_log) * nn.softplus(a.astype(mx.float32) + dt_bias)
+    return beta, g
 
 
 class GatedDeltaNet(nn.Module):
@@ -35,18 +43,55 @@ class GatedDeltaNet(nn.Module):
         self.dt_bias = mx.zeros((self.Hv,), dtype=mx.float32)
         self.norm = GatedRMSNorm(self.Dv, cfg.rms_norm_eps)
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
+        self.set_gates_compile(False)
 
     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
         if ctx is not None and ctx.mode == "prefill_batch":
             return self._prefill_batch(x, ctx, layer_idx)
         if ctx is not None and ctx.mode == "decode":
-            return self._decode(x, ctx.caches[layer_idx])
+            allow_compile = (type(ctx) is ForwardContext and
+                             not any(getattr(ctx, key, False) for key in ("record", "capture", "speculative", "verify")))
+            return self._decode(x, ctx.caches[layer_idx], _compile_gates=allow_compile)
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
     def _gates(self, b, a):
         beta = mx.sigmoid(b.astype(mx.float32))
         g = -mx.exp(self.A_log) * nn.softplus(a.astype(mx.float32) + self.dt_bias)
         return beta, g
+
+    def set_gates_compile(self, enabled=True):
+        """Experimental opt-in only; private Python metadata adds no array parameters."""
+        if type(enabled) is not bool:
+            raise TypeError("enabled must be bool")
+        object.__setattr__(self, "_gates_compile_enabled", enabled)
+        object.__setattr__(self, "_compiled_decode_gates", None)
+
+    def _decode_gates(self, b, a, x, st):
+        # All weights are explicit inputs, so replacement cannot leave captured weights.
+        eligible = (object.__getattribute__(self, "_gates_compile_enabled")
+                    and type(st) is BatchState and not any(getattr(st, key, False) for key in ("record", "capture", "speculative", "verify"))
+                    and self.Hv == 48 and x.ndim == 2 and x.shape == (1, 5120)
+                    and x.dtype == mx.bfloat16
+                    and b.shape == a.shape == (1, 48) and b.dtype == a.dtype == mx.bfloat16
+                    and self.A_log.shape == self.dt_bias.shape == (48,)
+                    and self.A_log.dtype == self.dt_bias.dtype == mx.float32
+                    and prefill_batch_backend_supported())
+        if eligible:
+            for op in (self.in_proj_b, self.in_proj_a):
+                if not (type(op) is Linear and op.q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
+                        and op.in_features == 5120 and op.out_features == 48
+                        and op.weight.shape == (48, 640) and op.weight.dtype == mx.uint32
+                        and op.scales.shape == (48, 320) and op.scales.dtype == mx.uint8
+                        and getattr(op, "biases", None) is None):
+                    eligible = False
+                    break
+        if not eligible:
+            return self._gates(b, a)
+        fn = object.__getattribute__(self, "_compiled_decode_gates")
+        if fn is None:
+            fn = mx.compile(_gates_explicit, shapeless=False)
+            object.__setattr__(self, "_compiled_decode_gates", fn)
+        return fn(b, a, self.A_log, self.dt_bias)
 
     def _split_heads(self, qkv, n):
         q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
@@ -111,7 +156,7 @@ class GatedDeltaNet(nn.Module):
         return prefill_linear(self.out_proj, o.reshape(B * T, -1), (B, T))
 
 
-    def _decode(self, x: mx.array, st) -> mx.array:
+    def _decode(self, x: mx.array, st, *, _compile_gates=False) -> mx.array:
         """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
         B = x.shape[0]
         qkv = self.in_proj_qkv(x)                                   # [B, C]
@@ -120,7 +165,10 @@ class GatedDeltaNet(nn.Module):
         xp = mx.concatenate([st.conv.astype(qkv.dtype), qkv[:, None]], axis=1)   # [B, K, C]
         qkv = (xp * w.T[None]).sum(axis=1)                          # 因果卷积在最后一个位置的值
         q, k, v = self._split_heads(nn.silu(qkv), B)
-        beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        if _compile_gates and object.__getattribute__(self, "_gates_compile_enabled"):
+            beta, g = self._decode_gates(self.in_proj_b(x), self.in_proj_a(x), x, st)
+        else:
+            beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
         from ..kernels.gdn_metal import gated_delta_step_metal
         o, S = gated_delta_step_metal(q, k, v, g, beta, st.S)
         st.conv, st.S = xp[:, 1:], S
