@@ -1,31 +1,42 @@
 # V19：GDN norm reuse 独立实验状态
 
-本分支只保存已核验的实验源码和现有证据；V19 默认关闭（default OFF），尚未采用。
-它不是已完成的教程章节，也不赋予完整模型、E2E、默认启用或性能晋级资格。
-基线：教程 accepted15 `f976d6a547a9dc1946b52b1de6db376d799b34d7`。
-源码仅改 `model/gdn.py`、`model/qwen3_5.py`，新增 `kernels/gdn_norm_reuse_metal.py`；其余 23 个源码逐字不变。
+本分支保存实验源码和已核验的证据；V19 default OFF、未采用，教程章节尚未完成。
+未获得完整模型、E2E、默认启用或性能晋级资格；未证明模型收益或相对官方引擎胜出。
+accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提交 `b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6`。
+本次仅更新状态和结果 JSON；26 个实验源码逐字不变，不合入教程主分支。
 
 ## 已完成的局部核验
-- 独立 CPU source review：SOURCE_CPU_PASS；default OFF、严格布尔参数、normal eligibility 和原 fallback 已核验。
-- 纯算子 15 banks（9 real + 6 synthetic）严格数值 PASS；stationary 前、后、释放前数值审计及只读检查 PASS。
-- 固定 saved15 的局部 host-wall micro：A 148.959340 μs、B 129.099457 μs，降低 13.332419%；10/10 pairs 胜。
-- 以上只覆盖局部算子，不是模型加速或端到端吞吐结论。
 
-## 完整模型与 E2E 尚未通过
-- 完整模型资格测试唯一已执行的尝试：accepted15 在 load 后、model-ready 同步时 pressure=2，资源守卫 STOP。
-- 停止点在 token 0 之前，0 normal forwards/observations；candidate 尚未启动，未发生候选数值比较。
-- 这不是数值 FAIL，也不是完整模型 PASS；不重试、不改写该次 STOP。
-- V19 E2E 仅有 CPU harness 准备和审查，实际 E2E 未执行；后续 load-only diagnostic 不能替代资格测试。
-- 未证明完整模型收益或相对官方引擎的胜出（no official win）；保持独立实验、不采用，不合入教程主分支。
+- 独立 CPU source review：SOURCE_CPU_PASS；default OFF、严格布尔参数、normal eligibility 和 fallback 已核验。
+- 纯 kernel 15 banks（9 real + 6 synthetic）严格数值 PASS；前、后、释放前数值及只读审计 PASS。
+- saved15 局部 host-wall micro：A 148.959340 μs、B 129.099457 μs，降低 13.332419%，10/10 pairs 胜。
+- 上述 PASS 和 13.33% 只属于局部算子，不是完整模型收益或 E2E 吞吐结论。
 
-## 证据（本机原始工件）
-- Source manifest：`/private/tmp/minivllm-engine-optimization-20261014/v19-norm-reuse-engine-build1/source-manifest.json`
-  SHA256 `d86be282646c1fc9d26155ad54014cf461f608c8222e32cd66d11088e180a32e`（26 sources）。
-- Source review：`/private/tmp/minivllm-engine-optimization-20261014/v19-independent-review-build1/SOURCE-REVIEW.md`
-  SHA256 `251198e2c0d39c8e025c670492cf9cf2c3e8198c9c95b9356dcb5716b150f6d9`。
-- Operator/micro receipt：`/private/tmp/minivllm-engine-optimization-20261014/norm-reuse-stationary-micro-build1/norm-reuse-stationary-final-receipt.json`
-  SHA256 `999ced1e1d1c8facb1db1c61f97b062b66afabff8a1f774605360fb354cbdfd4`。
-- Fullmodel STOP receipt：`/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build1/external-owner-attempt1/fullmodel-final-receipt.json`
-  SHA256 `59dac27678206422a00e6ac8553e08b3479ce64b70fd584f36223175f917b070`。
-- Fullmodel freeze：`/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build1/frozen.json`
-  SHA256 `50dcc23ac7aa6a7058754082a79e9b001eda82d9f2dd0d9d4e555283c9e31bb1`。
+## 两次完整模型资格测试分别为 STOP
+
+- build1（旧 AC Power）：accepted load 完成并同步后，model-ready guard pressure=2，token 0 前 STOP；candidate 未启动。
+- build2（新 Battery Power，Chrome 正常退出后）：accepted load 1 次并完成同步，model-ready guard pressure=2、thermal=0，token 0 前 STOP。
+- build2 accepted normal forward=0、candidate 未启动/forward=0、comparison rounds=0；未开始数值或状态比较。
+- 这是资源守卫 STOP，不是 numeric FAIL，也不是 fullmodel PASS；两次电源域证据分开，不合并。
+- build2 独立原始证据审计 AUDIT PASS / QUAL STOP；原 owner/driver/worker STOP 与 `GPU_released=false` 保留。
+- build2 owner 58471、driver 58484、accepted 58498 均 wait/reap，exit=1；实际工具返回后外部 strict ps 均 rc=1、stdout/stderr 字面空。
+- 后续 GPU_RELEASED 由进程退出和三 PID strict absent 证明；不宣称进程内卸载成功。
+- accepted finally 的 pressure warning cleanup 保留，driver/owner cleanup errors 为空；首个 STOP 与 cleanup 分开。
+- 不重试；本次归档不授予新资源 GO，不执行 GPU、模型、benchmark 或应用操作。
+
+## Chrome 与 E2E 的边界
+
+- Chrome 已成功正常退出一次；观察到系统物理 free 增加、压缩器物理占用下降，不能全部归因于 Chrome。
+- RSS 降幅不等于回收物理 RAM；系统资源改善不保证 27B load 或稳态安全，最新资格仍 STOP。
+- E2E build2：CPU 27 checks、1421 frozen pins；仅 CPU_BIND_READY_QUAL_PENDING，尚未独立审查、实际 E2E=0，不可采用。
+- build2 结果审计只核验过 E2E gate 拒绝实际 fullqual STOP，不构成 E2E harness 的独立审查或执行。
+- 原 E2E 准备、load-only diagnostic 和原局部算子结果均不能替代完整模型资格 PASS。
+
+## 精简证据索引
+
+- [结果 JSON](17-gdn-norm-reuse-result.json) 保存必要 metadata、原始 proof 路径及 SHA256，不复制大 raw。
+- Source manifest SHA256 `d86be282646c1fc9d26155ad54014cf461f608c8222e32cd66d11088e180a32e`（26 sources）。
+- 原局部算子 receipt SHA256 `999ced1e1d1c8facb1db1c61f97b062b66afabff8a1f774605360fb354cbdfd4`。
+- build1 STOP receipt SHA256 `59dac27678206422a00e6ac8553e08b3479ce64b70fd584f36223175f917b070`。
+- build2 STOP receipt SHA256 `970d402bbbee0fabde5bc3b9f8b28effc2a6e56505bb53c171d80f72851dbafc`。
+- build2 release SHA256 `818e8ce9c0b4d146db6f93a699de2021137c5ad48e8e80b79d8eae46b804bfe8`。

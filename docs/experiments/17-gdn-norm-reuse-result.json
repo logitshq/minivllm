@@ -1,0 +1,28 @@
+{
+  "schema": "v19-resource-retest-status-v1",
+  "source_commit": "b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6",
+  "source_files_byte_exact": 26,
+  "state": {"default_off": true,"adopted": false,"tutorial_chapter_complete": false,"fullmodel_gain_proved": false,"official_engine_win_proved": false,"new_GO_granted": false,"retry_performed": false},
+  "local_operator_only": {"numeric": "PASS_15_BANKS","host_wall_reduction_percent": 13.332419,"pairs_won": 10,"pairs": 10,"fullmodel_or_E2E_claim": false,"proof": "operator_micro"},
+  "fullmodel_attempts": [{"build": 1,"power_domain": "AC Power","status": "STOP_FIRST_FAILURE","boundary": "accepted load completed and synchronized; model-ready resource guard before token0","pressure": 2,"normal_forward_calls": 0,"candidate_started": false,"proof": "fullqual_build1"},{"build": 2,"power_domain": "Battery Power","status": "STOP_FIRST_FAILURE","boundary": "accepted load completed and synchronized; model-ready resource guard before token0","pressure": 2,"thermal": 0,"accepted_loads": 1,"normal_forward_calls": 0,"candidate_started": false,"candidate_forward_calls": 0,"comparison_rounds": 0,"numeric_comparison_started": false,"proof": "fullqual_build2"}],
+  "build2_cleanup": {"status": "GPU_RELEASED","owner_pid": 58471,"driver_pid": 58484,"accepted_pid": 58498,"owner_tool_exit": 1,"driver_exit": 1,"accepted_exit": 1,"waited_reaped": true,"strict_absent_after_tool_return": true,"strict_ps_each": {"returncode": 1,"stdout": "","stderr": ""},"accepted_finally_warning": "Resource pressure warning: unload owned model and pause","driver_cleanup_errors": [],"owner_cleanup_errors": [],"inprocess_unload_success_claimed": false,"release_boundary": "process exit plus external strict absence","original_GPU_released_false_preserved": true,"proofs": ["build2_release","build2_tool_return","build2_strict_absence"]},
+  "build2_independent_result_audit": {"status": "AUDIT_PASS_QUAL_STOP","fullmodel_qualified": false,"proof": "build2_result_audit"},
+  "chrome": {"normal_quit_attempts": 1,"quit_confirmed": true,"domain": "Battery Power","system_resource_improvement_observed": true,"physical_RAM_reclaimed_not_equated_with_RSS": true,"model_load_or_steady_state_capacity_guaranteed": false,"proof": "chrome_quit"},
+  "e2e_build2": {"status": "CPU_BIND_READY_QUAL_PENDING","cpu_checks": 27,"frozen_pins": 1421,"independently_reviewed": false,"actual_runs": 0,"adoptable": false,"proofs": ["e2e_build2_cpu","e2e_build2_freeze"]},
+  "proofs": {
+    "source_manifest": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-norm-reuse-engine-build1/source-manifest.json","sha256": "d86be282646c1fc9d26155ad54014cf461f608c8222e32cd66d11088e180a32e"},
+    "source_review": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-independent-review-build1/SOURCE-REVIEW.md","sha256": "251198e2c0d39c8e025c670492cf9cf2c3e8198c9c95b9356dcb5716b150f6d9"},
+    "operator_micro": {"path": "/private/tmp/minivllm-engine-optimization-20261014/norm-reuse-stationary-micro-build1/norm-reuse-stationary-final-receipt.json","sha256": "999ced1e1d1c8facb1db1c61f97b062b66afabff8a1f774605360fb354cbdfd4"},
+    "fullqual_build1": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build1/external-owner-attempt1/fullmodel-final-receipt.json","sha256": "59dac27678206422a00e6ac8553e08b3479ce64b70fd584f36223175f917b070"},
+    "fullqual_build1_freeze": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build1/frozen.json","sha256": "50dcc23ac7aa6a7058754082a79e9b001eda82d9f2dd0d9d4e555283c9e31bb1"},
+    "chrome_quit": {"path": "/private/tmp/minivllm-engine-optimization-20261014/chrome-resource-resume-build1/receipt.json","sha256": "d2b78b8006f766f21337f672258ec74c8158954ce83f0c12694a738e499e53f8"},
+    "fullqual_build2": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build2/actual-owner-attempt1/fullmodel-final-receipt.json","sha256": "970d402bbbee0fabde5bc3b9f8b28effc2a6e56505bb53c171d80f72851dbafc"},
+    "fullqual_build2_freeze": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build2/frozen.json","sha256": "8a6ba639a4286b7c37ad0bca2ac291c169f676331c7f13662ade9a332dd00cee"},
+    "build2_release": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build2/actual-owner-attempt1/GPU-RELEASE.json","sha256": "818e8ce9c0b4d146db6f93a699de2021137c5ad48e8e80b79d8eae46b804bfe8"},
+    "build2_tool_return": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build2/actual-owner-attempt1/owner-tool-return.json","sha256": "28998e580eda4c91e5f29f7c881f71dc14d65dc8f42b564bf1e5a51cc7333c93"},
+    "build2_strict_absence": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-build2/actual-owner-attempt1/external-exact-absence-after-tool-return.json","sha256": "ad6004922cbcb7d1a1c9587e47e3ffee399b917d96f4c16f05c225ce3746f7fd"},
+    "build2_result_audit": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-fullmodel-qual-result-review-build2/REVIEW.md","sha256": "2dddb82edacfd3c0b58ee1f1050ce5dac5eb9196c137c72d254fd618e1c0cac2"},
+    "e2e_build2_cpu": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-incremental-build2/CPU-RESULT.json","sha256": "fd2204f439d25a62db13ca390689bf343e9d567fe959d474ed85e01c30e3fe5e"},
+    "e2e_build2_freeze": {"path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-incremental-build2/frozen.json","sha256": "14ee5e6a3f6abb62b7a86dedc62bf2662bac0fc2e7e8561cb2c812785274bb9a"}
+  }
+}
