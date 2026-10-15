@@ -44,14 +44,16 @@ class GatedDeltaNet(nn.Module):
         self.norm = GatedRMSNorm(self.Dv, cfg.rms_norm_eps)
         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
         self.set_gates_compile(False)
+        self.set_norm_reuse(False)
 
-    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _norm_reuse_normal=False) -> mx.array:
         if ctx is not None and ctx.mode == "prefill_batch":
             return self._prefill_batch(x, ctx, layer_idx)
         if ctx is not None and ctx.mode == "decode":
             allow_compile = (type(ctx) is ForwardContext and
                              not any(getattr(ctx, key, False) for key in ("record", "capture", "speculative", "verify")))
-            return self._decode(x, ctx.caches[layer_idx], _compile_gates=allow_compile)
+            return self._decode(x, ctx.caches[layer_idx], _compile_gates=allow_compile,
+                                _norm_reuse_normal=(_norm_reuse_normal is True and allow_compile))
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
     def _gates(self, b, a):
@@ -92,6 +94,26 @@ class GatedDeltaNet(nn.Module):
             fn = mx.compile(_gates_explicit, shapeless=False)
             object.__setattr__(self, "_compiled_decode_gates", fn)
         return fn(b, a, self.A_log, self.dt_bias)
+
+    def set_norm_reuse(self, enabled=True):
+        """Independent default-off experiment; metadata adds no MLX parameters."""
+        if type(enabled) is not bool:
+            raise TypeError("enabled must be bool")
+        object.__setattr__(self, "_norm_reuse_enabled", enabled)
+
+    def _norm_reuse_eligible(self, u, g, beta, x, st, normal):
+        # Every rejection precedes st.conv/st.S reassignment. Unknown metadata fails closed.
+        return (normal is True and type(self) is GatedDeltaNet
+                and object.__getattribute__(self, "_norm_reuse_enabled")
+                and type(st) is BatchState and set(vars(st)) == {"conv", "S"}
+                and (self.Hk, self.Hv, self.Dk, self.Dv, self.conv_dim) == (16, 48, 128, 128, 10240)
+                and x.shape == (1, 5120) and x.dtype == mx.bfloat16
+                and u.shape == (1, 10240) and u.dtype == mx.bfloat16
+                and self.conv1d_weight.shape == (10240, 4) and self.conv1d_weight.dtype == mx.bfloat16
+                and st.conv.shape == (1, 3, 10240) and st.conv.dtype == mx.bfloat16
+                and st.S.shape == (1, 48, 128, 128) and st.S.dtype == mx.float32
+                and g.shape == beta.shape == (1, 48) and g.dtype == beta.dtype == mx.float32
+                and prefill_batch_backend_supported())
 
     def _split_heads(self, qkv, n):
         q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
@@ -156,8 +178,21 @@ class GatedDeltaNet(nn.Module):
         return prefill_linear(self.out_proj, o.reshape(B * T, -1), (B, T))
 
 
-    def _decode(self, x: mx.array, st, *, _compile_gates=False) -> mx.array:
+    def _norm_reuse_initial_eligible(self, x, st, normal):
+        return (normal is True and type(self) is GatedDeltaNet
+                and object.__getattribute__(self, "_norm_reuse_enabled")
+                and type(st) is BatchState and set(vars(st)) == {"conv", "S"}
+                and (self.Hk, self.Hv, self.Dk, self.Dv, self.conv_dim) == (16, 48, 128, 128, 10240)
+                and x.shape == (1, 5120) and x.dtype == mx.bfloat16
+                and self.conv1d_weight.shape == (10240, 4) and self.conv1d_weight.dtype == mx.bfloat16
+                and st.conv.shape == (1, 3, 10240) and st.conv.dtype == mx.bfloat16
+                and st.S.shape == (1, 48, 128, 128) and st.S.dtype == mx.float32
+                and prefill_batch_backend_supported())
+
+    def _decode(self, x: mx.array, st, *, _compile_gates=False, _norm_reuse_normal=False) -> mx.array:
         """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
+        if self._norm_reuse_initial_eligible(x, st, _norm_reuse_normal):
+            return self._decode_norm_reuse(x, st, _compile_gates=_compile_gates, _norm_reuse_normal=True)
         B = x.shape[0]
         qkv = self.in_proj_qkv(x)                                   # [B, C]
         z = self.in_proj_z(x).reshape(B, self.Hv, self.Dv)
@@ -171,6 +206,29 @@ class GatedDeltaNet(nn.Module):
             beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
         from ..kernels.gdn_metal import gated_delta_step_metal
         o, S = gated_delta_step_metal(q, k, v, g, beta, st.S)
+        st.conv, st.S = xp[:, 1:], S
+        o = self.norm(o.astype(x.dtype), z)
+        return self.out_proj(o.reshape(B, -1))
+
+    def _decode_norm_reuse(self, x: mx.array, st, *, _compile_gates=False, _norm_reuse_normal=False) -> mx.array:
+        """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
+        B = x.shape[0]
+        qkv = self.in_proj_qkv(x)                                   # [B, C]
+        z = self.in_proj_z(x).reshape(B, self.Hv, self.Dv)
+        w = self.conv1d_weight.astype(qkv.dtype)                    # [C, K]
+        xp = mx.concatenate([st.conv.astype(qkv.dtype), qkv[:, None]], axis=1)   # [B, K, C]
+        qkv = (xp * w.T[None]).sum(axis=1)                          # 因果卷积在最后一个位置的值
+        if _compile_gates and object.__getattribute__(self, "_gates_compile_enabled"):
+            beta, g = self._decode_gates(self.in_proj_b(x), self.in_proj_a(x), x, st)
+        else:
+            beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+        if self._norm_reuse_eligible(qkv, g, beta, x, st, _norm_reuse_normal):
+            from ..kernels.gdn_norm_reuse_metal import gated_delta_step_norm_reuse_metal
+            o, S = gated_delta_step_norm_reuse_metal(qkv, g, beta, st.S)
+        else:
+            q, k, v = self._split_heads(nn.silu(qkv), B)
+            from ..kernels.gdn_metal import gated_delta_step_metal
+            o, S = gated_delta_step_metal(q, k, v, g, beta, st.S)
         st.conv, st.S = xp[:, 1:], S
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(B, -1))
