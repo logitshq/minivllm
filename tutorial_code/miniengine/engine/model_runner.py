@@ -7,7 +7,7 @@
 """
 import mlx.core as mx
 
-from ..cache import DecodeBatch, make_cache
+from ..cache import BatchKV, BatchState, DecodeBatch, make_cache
 from ..context import ForwardContext
 from ..sampler import sample
 from .request import Request
@@ -22,6 +22,9 @@ class ModelRunner:
         self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段，以及投机解码的 solo 模式）
         self.spec = None
         self.feats: dict[str, list] = {}            # req_id → 全部上下文特征（按块存；drafter 按需补吃）
+        # One target-only decode may be queued on the device while its predecessor
+        # is delivered. Keep its cache objects separate from committed batch state.
+        self._ahead = None
         if drafter is not None:
             from .spec_runner import SpecRunner
             self.spec = SpecRunner(model, drafter, spec_block)
@@ -49,21 +52,54 @@ class ModelRunner:
         if decode:
             self._sync_batch(decode)
             positions = [r.num_computed_tokens for r in decode]
-            tokens = mx.array([r.output_token_ids[-1] for r in decode])
-            ctx = ForwardContext("decode", self.batch.layers, positions=mx.array(positions),
-                                 lens=mx.array([p + 1 for p in positions]), max_len=max(positions) + 1)
-            if self.spec is not None:
-                logits, f = self.model(tokens, ctx, capture=self.spec.capture)
-                for i, r in enumerate(decode):
-                    self.feats.setdefault(r.req_id, []).append(f[i:i + 1])
-                to_eval.append(f)
+            sampling_key = tuple((r.sampling.temperature, r.sampling.top_p,
+                                  r.sampling.top_k, r.sampling.max_tokens,
+                                  r.sampling.ignore_eos, tuple(r.sampling.stop_token_ids))
+                                 for r in decode)
+            key = ([r.req_id for r in decode], positions, sampling_key,
+                   tuple(r.output_token_ids[-1] for r in decode))
+            if self._ahead is not None and self._ahead[0] == key:
+                _, toks, layers = self._ahead
+                self.batch.layers = layers
             else:
-                logits = self.model(tokens, ctx)
-            toks = sample(logits, [r.sampling for r in decode])
+                tokens = mx.array([r.output_token_ids[-1] for r in decode])
+                ctx = ForwardContext("decode", self.batch.layers, positions=mx.array(positions),
+                                     lens=mx.array([p + 1 for p in positions]), max_len=max(positions) + 1)
+                if self.spec is not None:
+                    logits, f = self.model(tokens, ctx, capture=self.spec.capture)
+                    for i, r in enumerate(decode):
+                        self.feats.setdefault(r.req_id, []).append(f[i:i + 1])
+                    to_eval.append(f)
+                else:
+                    logits = self.model(tokens, ctx)
+                toks = sample(logits, [r.sampling for r in decode])
+            self._ahead = None
+            if (self.spec is None and not out.prefill
+                    and all(r.sampling.temperature == 0 for r in decode)
+                    and all(len(r.output_token_ids) + 1 < r.sampling.max_tokens
+                            and r.num_tokens + 1 < self.max_len for r in decode)):
+                # Submit current arithmetic before constructing the successor.
+                # The successor consumes the device token, never a host roundtrip.
+                mx.async_eval(toks, *self.batch.arrays())
+                # __setitem__ replaces an mx.array object's graph in place. New
+                # view objects prevent a future KV write from changing the
+                # committed object's handle, while sharing its evaluated buffer.
+                layers = [BatchKV(l.K[:], l.V[:]) if isinstance(l, BatchKV)
+                          else BatchState(l.conv, l.S) for l in self.batch.layers]
+                next_pos = [p + 1 for p in positions]
+                next_ctx = ForwardContext("decode", layers, positions=mx.array(next_pos),
+                                          lens=mx.array([p + 1 for p in next_pos]), max_len=max(next_pos) + 1)
+                next_logits = self.model(toks.astype(mx.int32), next_ctx)
+                next_toks = sample(next_logits, [r.sampling for r in decode])
+                arrays = [a for l in layers for a in
+                          ((l.K, l.V) if isinstance(l, BatchKV) else (l.conv, l.S))]
+                mx.async_eval(next_toks, *arrays)
+                self._ahead = ((key[0], next_pos, sampling_key, None), next_toks, layers)
             to_eval.append(toks)
             decode_reqs = decode
             self.batch.lens = [p + 1 for p in positions]
         elif self.batch.size:
+            self._ahead = None
             self.batch.clear()                                  # 没人在 decode 了：释放批量 cache
         # ---- prefill ----
         prefill_toks = []
@@ -83,7 +119,11 @@ class ModelRunner:
                 to_eval.append(logits)                      # 让这一块的计算现在就执行
         mx.eval(*to_eval, *self.batch.arrays())
         if decode:
-            for r, t in zip(decode_reqs, toks.tolist()):
+            delivered = toks.tolist()
+            if self._ahead is not None:
+                ahead_key, ahead_toks, ahead_layers = self._ahead
+                self._ahead = (ahead_key[:3] + (tuple(delivered),), ahead_toks, ahead_layers)
+            for r, t in zip(decode_reqs, delivered):
                 sampled[r.req_id] = t
         for r, t in prefill_toks:
             sampled[r.req_id] = int(t.item())
@@ -93,6 +133,7 @@ class ModelRunner:
         """让 DecodeBatch 的行顺序 == decode 列表：保留还在的，追加新来的（从 staging 搬进来），丢掉结束的。"""
         if self.batch.req_ids == [r.req_id for r in decode]:
             return
+        self._ahead = None
         pos = {rid: i for i, rid in enumerate(self.batch.req_ids)}
         keep = [pos[r.req_id] for r in decode if r.req_id in pos]
         new = []
@@ -106,6 +147,7 @@ class ModelRunner:
         # 丢掉的行（结束的请求）不需要做任何事：它们的 staging 早已搬走，batch 里的行被 rebuild 过滤掉了
 
     def drop(self, req_id: str) -> None:
+        self._ahead = None
         self.staging.pop(req_id, None)
         self.feats.pop(req_id, None)
         if req_id in self.batch.req_ids:
