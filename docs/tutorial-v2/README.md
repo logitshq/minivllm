@@ -1,6 +1,6 @@
 # 一章一章写一个推理引擎
 
-从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—12 的代码与讲解放在同一教学分支，每章保存固定版本。
+从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—13 的代码与讲解放在同一教学分支，每章保存固定版本。
 
 教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原 `/Users/ryanli/code/minivllm` 保留在 `main`；完成版与旧教程仍可作为源码参照。
 
@@ -20,6 +20,7 @@
 | [10 投机解码](10-speculative.md) | DFlash2、verify、accept、bonus、回滚 | greedy 单流投机路径 | `tutorial-10` |
 | [11 Baseline 与实验](11-benchmark.md) | 重复测量、指标边界、同条件比较 | 核心与外部引擎各自报告 | `tutorial-11-v3` |
 | [12 执行过程优化](12-从同步到流水线再到算子融合.md) | 设备 token 流水线、GDN 列分组与 norm 表达式编译 | 普通 greedy decode 已接入；各步验证分列 | `tutorial-12-pipeline` → `tutorial-12-tiling` → `tutorial-12-v1` |
+| [13 单核 norm](13-把norm写成一个Metal核.md) | 保留归约拓扑、FP32舍入与BF16门控边界的Metal核 | norm接入完整模型；保留guard与旧表达式回退 | `tutorial-13-v1` |
 
 第二章初版 `tutorial-02` 只包含较少组件，阅读使用扩展版 `tutorial-02-v2`。第七章保留初版 `tutorial-07`，修正量化 Embedding 的激活 dtype 接口后使用 `tutorial-07-v2`；旧 tag 不覆盖。
 

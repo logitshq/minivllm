@@ -2,6 +2,7 @@
 import mlx.core as mx
 import mlx.nn as nn
 from functools import partial
+from ..kernels.norm_metal import norm as _metal_norm
 
 
 @partial(mx.compile, shapeless=True)
@@ -26,6 +27,10 @@ class RMSNorm(nn.Module):
         self.zero_centered = zero_centered
 
     def __call__(self, x: mx.array) -> mx.array:
+        if (x.dtype == mx.bfloat16 and x.ndim >= 2
+                and self.weight.shape == (x.shape[-1],)
+                and self.weight.dtype in (mx.bfloat16, mx.float16, mx.float32)):
+            return _metal_norm(x, self.weight, self.eps, zero_centered=self.zero_centered)
         w = 1.0 + self.weight if self.zero_centered else self.weight
         return _rms_norm_explicit(x, w, self.eps)
 
@@ -39,6 +44,11 @@ class GatedRMSNorm(nn.Module):
         self.eps = eps
 
     def __call__(self, x: mx.array, gate: mx.array) -> mx.array:
+        if (x.dtype == mx.bfloat16 and x.ndim >= 2 and gate.shape == x.shape
+                and self.weight.shape == (x.shape[-1],)
+                and self.weight.dtype in (mx.bfloat16, mx.float16, mx.float32)
+                and gate.dtype in (mx.bfloat16, mx.float16, mx.float32)):
+            return _metal_norm(x, self.weight, self.eps, gate=gate)
         return _gated_rms_norm_explicit(x, self.weight, gate, self.eps)
 
 
