@@ -3,6 +3,7 @@ import mlx.core as mx
 import mlx.nn as nn
 
 from ..config import ModelConfig
+from ..context import ForwardContext
 from .attention import Attention
 from .gdn import GatedDeltaNet
 from .layers import Embedding, Linear, RMSNorm, prefill_linear
@@ -37,9 +38,9 @@ class DecoderLayer(nn.Module):
         self.input_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
         self.post_attention_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
 
-    def __call__(self, x, ctx=None, layer_idx=0):
+    def __call__(self, x, ctx=None, layer_idx=0, *, _postconv_normal=False):
         h = self.input_layernorm(x)
-        x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx))
+        x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx, _postconv_normal=_postconv_normal))
         if ctx is not None and ctx.mode == "prefill_batch":
             return x + self.mlp._prefill_batch(self.post_attention_layernorm(x), ctx.prefill_shape)
         return x + self.mlp(self.post_attention_layernorm(x))
@@ -69,9 +70,15 @@ class Qwen3_5ForCausalLM(nn.Module):
             x = self.embed_tokens(input_ids.reshape(-1))
         else:
             x = self.embed_tokens(input_ids)
+        # Explicit per-call proof; never store transient eligibility on a module.
+        _postconv_normal = (
+            type(ctx) is ForwardContext and ctx.mode == "decode" and not capture
+            and set(vars(ctx)) == {"mode", "caches", "positions", "lens", "max_len", "prefill_shape"}
+            and ctx.prefill_shape is None
+        )
         feats = []
         for i, layer in enumerate(self.layers):
-            x = layer(x, ctx, i)
+            x = layer(x, ctx, i, _postconv_normal=_postconv_normal)
             if i in capture:
                 feats.append(x)
         if grouped and last_only:
