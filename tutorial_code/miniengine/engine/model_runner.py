@@ -10,6 +10,7 @@ import mlx.core as mx
 from ..cache import BatchKV, BatchState, DecodeBatch, make_cache
 from ..context import ForwardContext
 from ..sampler import sample
+from ..model.layers import prefill_batch_backend_supported
 from .request import Request
 from .scheduler import SchedulerOutput
 
@@ -103,7 +104,38 @@ class ModelRunner:
             self.batch.clear()                                  # 没人在 decode 了：释放批量 cache
         # ---- prefill ----
         prefill_toks = []
+        # Group compatible complete fresh prefills. No queue wait, prompt reuse,
+        # spec/capture path, recorded state, or continuing chunk enters this path.
+        grouped = set()
+        by_length = {}
+        if (self.spec is None and prefill_batch_backend_supported()
+                and self.model.cfg.quantization == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
+                and self.model.embed_tokens._output_dtype == mx.bfloat16):
+            for req, n in out.prefill:
+                caches = self.staging.get(req.req_id)
+                pristine = caches is None or all(
+                    c.offset == 0 and
+                    (getattr(c, "keys", None) is None and getattr(c, "values", None) is None) and
+                    getattr(c, "conv_state", None) is None and getattr(c, "S", None) is None and
+                    not getattr(c, "record", False) for c in caches)
+                if req.num_computed_tokens == 0 and n == req.num_prompt_tokens and pristine:
+                    by_length.setdefault(n, []).append(req)
+            for n, reqs in by_length.items():
+                if len(reqs) < 2:
+                    continue
+                caches = [self.staging.setdefault(r.req_id, make_cache(self.model)) for r in reqs]
+                layer_caches = [list(layer) for layer in zip(*caches)]
+                ids = mx.array([r.prompt_token_ids for r in reqs])
+                ctx = ForwardContext("prefill_batch", layer_caches, prefill_shape=(len(reqs), n))
+                logits = self.model(ids, ctx, last_only=True)
+                prefill_batch_toks = sample(logits, [r.sampling for r in reqs])
+                to_eval.append(prefill_batch_toks)
+                for row, r in enumerate(reqs):
+                    prefill_toks.append((r, prefill_batch_toks[row:row + 1]))
+                    grouped.add(r.req_id)
         for req, n in out.prefill:
+            if req.req_id in grouped:
+                continue
             caches = self.staging.setdefault(req.req_id, make_cache(self.model))
             start = req.num_computed_tokens
             ids = mx.array(req.all_token_ids[start:start + n])
@@ -117,6 +149,8 @@ class ModelRunner:
                 prefill_toks.append((req, t)); to_eval.append(t)
             else:
                 to_eval.append(logits)                      # 让这一块的计算现在就执行
+        prefill_order = {req.req_id: i for i, (req, _) in enumerate(out.prefill)}
+        prefill_toks.sort(key=lambda pair: prefill_order[pair[0].req_id])
         mx.eval(*to_eval, *self.batch.arrays())
         if decode:
             delivered = toks.tolist()
