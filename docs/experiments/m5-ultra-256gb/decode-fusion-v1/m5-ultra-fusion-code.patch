@@ -1,0 +1,382 @@
+diff --git a/tutorial_code/benchmark_core.py b/tutorial_code/benchmark_core.py
+index 06fadad..4cdb9d2 100644
+--- a/tutorial_code/benchmark_core.py
++++ b/tutorial_code/benchmark_core.py
+@@ -21,6 +21,7 @@ def main():
+     ap.add_argument('--max-new-tokens',type=int,default=128)
+     ap.add_argument('--repeat',type=int,default=3);ap.add_argument('--warmup-runs',type=int,default=1)
+     ap.add_argument('--ignore-eos',action='store_true',help='Fixed output-step experiment; report separately from normal EOS-stopping oMLX requests')
++    ap.add_argument('--fuse-decode',action='store_true',help='Opt-in B1 projection packing and GDN preparation fusion; requires --compile-decode')
+     ap.add_argument('--compile-decode',action='store_true',help='Opt-in bounded M5 Ultra decode graph reuse')
+     ap.add_argument('--cache-limit-gb',type=int,default=2,help='MLX allocator pool, not prompt/prefix caching')
+     ap.add_argument('--dtype',choices=['float32','bfloat16'],default='bfloat16');ap.add_argument('--out',type=Path)
+@@ -33,7 +34,7 @@ def main():
+     engine=LLMEngine(str(model_dir),max_seqs=1,max_len=len(prompt)+args.max_new_tokens+16,
+                      max_batched_tokens=max(512,len(prompt)),dtype=dtype,
+                      drafter_dir=str(args.drafter_dir) if args.drafter_dir else None,spec_block=args.spec_block,
+-                     compile_decode=args.compile_decode,cache_limit_gb=args.cache_limit_gb)
++                     compile_decode=args.compile_decode,fuse_decode=args.fuse_decode,cache_limit_gb=args.cache_limit_gb)
+     params=SamplingParams(max_tokens=args.max_new_tokens,temperature=0,ignore_eos=args.ignore_eos)
+     def run():
+         if hasattr(mx,'reset_peak_memory'):mx.reset_peak_memory()
+@@ -73,7 +74,7 @@ def main():
+             'memory_scope':'MLX allocator active and peak bytes; not process RSS or total unified-memory use',
+             'output_count_definition':'output_tokens counts every emitted ID, including a terminal EOS; logical_completion_tokens excludes a terminal EOS when EOS stopping is enabled. Rates use emitted-ID counts.',
+             'decode_rate_definition':'(output tokens minus first delivery tokens)/(end minus first delivery time); token ID delivery can be a speculative burst',
+-            'dtype':args.dtype,'compile_decode':args.compile_decode,'allocator_cache_limit_gb':args.cache_limit_gb,
++            'dtype':args.dtype,'compile_decode':args.compile_decode,'fuse_decode':args.fuse_decode,'allocator_cache_limit_gb':args.cache_limit_gb,
+             'drafter_dir':str(args.drafter_dir) if args.drafter_dir else None,
+             'request':{'prompt_ids':prompt,'prompt_tokens':len(prompt),'max_new_tokens':args.max_new_tokens,
+                        'ignore_eos':args.ignore_eos,'eos_token_ids':sorted(engine.eos_ids),'temperature':0,'concurrency':1},
+diff --git a/tutorial_code/miniengine/engine/compiled_decode.py b/tutorial_code/miniengine/engine/compiled_decode.py
+index 539f782..ee43fd6 100644
+--- a/tutorial_code/miniengine/engine/compiled_decode.py
++++ b/tutorial_code/miniengine/engine/compiled_decode.py
+@@ -12,9 +12,11 @@ from ..model.gdn import _m5_ultra_decode_identity
+ 
+ 
+ class CompiledDecode:
+-    def __init__(self, model):
++    def __init__(self, model, *, fuse_decode=False):
+         self.model = model
+         self._functions = {}
++        self._fuse_decode = fuse_decode
++        self._packed = None
+ 
+     def __call__(self, tokens, ctx):
+         model = self.model
+@@ -35,19 +37,37 @@ class CompiledDecode:
+         )
+         if not eligible:
+             return model(tokens, ctx)
++        fused = self._fuse_decode and tokens.shape == (1,) and all(
++            layer.is_attn or (
++                (layer.linear_attn.Hk, layer.linear_attn.Hv,
++                 layer.linear_attn.Dk, layer.linear_attn.Dv) == (16, 48, 128, 128)
++                and layer.linear_attn.conv1d_weight.shape == (10240, 4)
++                and layer.linear_attn.conv1d_weight.dtype == mx.bfloat16
++                and c.conv.shape == (1, 3, 10240) and c.conv.dtype == mx.bfloat16
++                and c.S.shape == (1, 48, 128, 128) and c.S.dtype == mx.float32)
++            for layer, c in zip(model.layers, ctx.caches))
++        if fused:
++            if self._packed is None:
++                from .packed_decode import PackedDecode
++                self._packed = PackedDecode(model)
++            if not self._packed.refresh():
++                return model(tokens, ctx)
+         # These Python options affect tracing, unlike array weights. A change
+         # selects another graph instead of silently retaining an old branch.
+-        key = tuple((layer.linear_attn._gates_compile_enabled,
++        key = (fused, tuple((layer.linear_attn._gates_compile_enabled,
+                      layer.linear_attn._norm_reuse_enabled)
+-                    for layer in model.layers if not layer.is_attn)
++                    for layer in model.layers if not layer.is_attn))
+         if key not in self._functions:
++            projections = self._packed.layers if fused else None
+             def forward(ids, positions, lens, states):
+                 layers = [BatchKV(s[0][:], s[1][:]) if layer.is_attn else BatchState(*s)
+                           for layer, s in zip(model.layers, states)]
+                 logits = model(ids, ForwardContext("decode", layers, positions=positions,
+-                                                  lens=lens, max_len=256))
++                                                  lens=lens, max_len=256),
++                               _decode_projections=projections)
+                 return logits, self._states(layers)
+-            self._functions[key] = mx.compile(forward, inputs=model)
++            inputs = [model, self._packed.arrays] if fused else model
++            self._functions[key] = mx.compile(forward, inputs=inputs)
+         logits, states = self._functions[key](tokens, ctx.positions, ctx.lens, self._states(ctx.caches))
+         for layer, state in zip(ctx.caches, states):
+             if isinstance(layer, BatchKV):
+diff --git a/tutorial_code/miniengine/engine/llm_engine.py b/tutorial_code/miniengine/engine/llm_engine.py
+index 5dfeb1e..66db7a6 100644
+--- a/tutorial_code/miniengine/engine/llm_engine.py
++++ b/tutorial_code/miniengine/engine/llm_engine.py
+@@ -13,7 +13,9 @@ from .scheduler import Scheduler
+ class LLMEngine:
+     def __init__(self, model_dir: str, max_seqs: int = 8, max_len: int = 4096, max_batched_tokens: int = 512,
+                  dtype=mx.bfloat16, cache_limit_gb: int = 2, drafter_dir: str | None = None, spec_block: int | None = None,
+-                 compile_decode: bool = False):
++                 compile_decode: bool = False, fuse_decode: bool = False):
++        if fuse_decode and not compile_decode:
++            raise ValueError("fuse_decode requires compile_decode=True")
+         # MLX 的 allocator 会把释放的 buffer 留着复用；decode 每步都在生成新的 K/V 拷贝，尺寸各不相同，
+         # 不限制的话几分钟就攒出 20 GB 的"缓存"，逼近 37 GB 工作集后系统开始压缩内存，整体变慢。
+         mx.set_cache_limit(cache_limit_gb << 30)
+@@ -24,7 +26,7 @@ class LLMEngine:
+         if drafter_dir:
+             from ..spec.dflash2 import load_drafter
+             drafter = load_drafter(drafter_dir)
+-        self.runner = ModelRunner(self.model, max_len, drafter, spec_block, compile_decode=compile_decode)
++        self.runner = ModelRunner(self.model, max_len, drafter, spec_block, compile_decode=compile_decode, fuse_decode=fuse_decode)
+         self.requests: dict[str, Request] = {}
+         self._counter = 0
+ 
+diff --git a/tutorial_code/miniengine/engine/model_runner.py b/tutorial_code/miniengine/engine/model_runner.py
+index bedd9fd..5897e80 100644
+--- a/tutorial_code/miniengine/engine/model_runner.py
++++ b/tutorial_code/miniengine/engine/model_runner.py
+@@ -16,12 +16,12 @@ from .scheduler import SchedulerOutput
+ 
+ 
+ class ModelRunner:
+-    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None, *, compile_decode=False):
++    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None, *, compile_decode=False, fuse_decode=False):
+         self.model = model
+         self.decode_model = model
+         if compile_decode:
+             from .compiled_decode import CompiledDecode
+-            self.decode_model = CompiledDecode(model)
++            self.decode_model = CompiledDecode(model, fuse_decode=fuse_decode)
+         self.max_len = max_len
+         self.batch = DecodeBatch(model)
+         self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段，以及投机解码的 solo 模式）
+diff --git a/tutorial_code/miniengine/engine/packed_decode.py b/tutorial_code/miniengine/engine/packed_decode.py
+new file mode 100644
+index 0000000..139dbe2
+--- /dev/null
++++ b/tutorial_code/miniengine/engine/packed_decode.py
+@@ -0,0 +1,65 @@
++"""Derived decode weights, owned by the runner rather than model parameters.
++
++Concatenate output rows once: the same NVFP4 dot products need fewer launches.
++Original parameter arrays stay intact; replacement refreshes the derived copy.
++"""
++import itertools
++
++import mlx.core as mx
++
++from ..model.layers import Linear
++
++
++class PackedProjection:
++    def __init__(self, *ops):
++        self.ops = ops
++        self.splits = list(itertools.accumulate(op.out_features for op in ops))[:-1]
++        self.arrays = []
++        self.sources = ()
++
++    def current_sources(self):
++        return tuple(a for op in self.ops for a in (op.weight, op.scales))
++
++    def supported(self):
++        return all(type(op) is Linear
++                   and op.q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
++                   and op.in_features == 5120 and op.out_features % 16 == 0
++                   and op.weight.shape == (op.out_features, 640) and op.weight.dtype == mx.uint32
++                   and op.scales.shape == (op.out_features, 320) and op.scales.dtype == mx.uint8
++                   and getattr(op, "biases", None) is None for op in self.ops)
++
++    def __call__(self, x):
++        y = mx.quantized_matmul(x, *self.arrays, transpose=True,
++                                group_size=16, bits=4, mode="nvfp4")
++        return mx.split(y, self.splits, axis=-1)
++
++
++class PackedDecode:
++    def __init__(self, model):
++        self.layers = []
++        for layer in model.layers:
++            mlp = PackedProjection(layer.mlp.gate_proj, layer.mlp.up_proj)
++            if layer.is_attn:
++                a = layer.self_attn
++                mixer = PackedProjection(a.q_proj, a.k_proj, a.v_proj)
++            else:
++                a = layer.linear_attn
++                mixer = PackedProjection(a.in_proj_qkv, a.in_proj_z, a.in_proj_b, a.in_proj_a)
++            self.layers.append((mlp, mixer))
++        self.groups = [p for layer in self.layers for p in layer]
++        # Keep this outer tree stable: mx.compile captures it as mutable inputs.
++        self.arrays = [p.arrays for p in self.groups]
++
++    def refresh(self):
++        changed = [(p, p.current_sources()) for p in self.groups]
++        changed = [(p, sources) for p, sources in changed
++                   if len(sources) != len(p.sources)
++                   or any(a is not b for a, b in zip(sources, p.sources))]
++        if any(not p.supported() for p, _ in changed):
++            return False
++        for p, sources in changed:
++            p.arrays[:] = [mx.concatenate(sources[::2]), mx.concatenate(sources[1::2])]
++            p.sources = sources
++        if changed:
++            mx.eval([p.arrays for p, _ in changed])
++        return True
+diff --git a/tutorial_code/miniengine/kernels/gdn_decode_fused.py b/tutorial_code/miniengine/kernels/gdn_decode_fused.py
+new file mode 100644
+index 0000000..852df80
+--- /dev/null
++++ b/tutorial_code/miniengine/kernels/gdn_decode_fused.py
+@@ -0,0 +1,43 @@
++"""B1 convolution, BF16 activation and serial GDN norms in one preparation pass.
++
++Keep BF16 rounding at every convolution addition, as in MLX's column sum.
++The existing norm-reuse state kernel retains the original reduction order.
++"""
++import mlx.core as mx
++from . import gdn_norm_reuse_metal as nr
++HEADER=nr.HEADER+r'''
++inline float prepared_column(uint c, const device bfloat16_t* raw,
++        const device bfloat16_t* conv, const device bfloat16_t* w,
++        device bfloat16_t* new_conv) {
++    bfloat16_t p0 = conv[c] * w[4*c];
++    bfloat16_t p1 = conv[10240+c] * w[4*c+1];
++    bfloat16_t p2 = conv[20480+c] * w[4*c+2];
++    bfloat16_t p3 = raw[c] * w[4*c+3];
++    bfloat16_t s = p0 + p1;
++    s += p2; s += p3;
++    bfloat16_t u = bfloat16_t(s);
++    new_conv[c] = conv[10240+c];
++    new_conv[10240+c] = conv[20480+c];
++    new_conv[20480+c] = raw[c];
++    return float(v18_bf16_activation(u).activated);
++}
++'''
++source=nr._PREWORK_SOURCE
++for index in ('h * 128 + lane','2048 + h * 128 + lane','4096 + h * 128 + lane'):
++    source=source.replace('float(v18_bf16_activation(u['+index+']).activated)',
++                          'prepared_column('+index+', raw, conv, w, new_conv)')
++assert 'u[' not in source
++kernel=mx.fast.metal_kernel(name='gdn_decode_conv_prework_bf16', input_names=['raw','conv','w'],
++    output_names=['q_ready','k_ready','v_ready','scales','new_conv'],source=source,header=HEADER,
++    compile_options=nr.COMPILE_OPTIONS)
++def fused(raw,conv,w,g,beta,S):
++    if not (raw.shape == (1,10240) and conv.shape == (1,3,10240) and w.shape == (10240,4)
++            and raw.dtype == conv.dtype == w.dtype == mx.bfloat16):
++        raise ValueError("fused GDN requires the qualified B1 BF16 convolution")
++    nr._validate_shapes(raw,g,beta,S)
++    nr._validate_dtypes(raw,g,beta,S,mx)
++    q,k,v,scales,new_conv=kernel(inputs=[raw,conv,w],grid=(64*128,1,1),threadgroup=(128,1,1),
++       output_shapes=[(1,16,128),(1,16,128),(1,48,128),(1,16,2),(1,3,10240)],
++       output_dtypes=[mx.float32]*4+[mx.bfloat16])
++    o,state=nr._state(q,k,v,scales,g,beta,S,mx)
++    return o,state,new_conv
+diff --git a/tutorial_code/miniengine/model/attention.py b/tutorial_code/miniengine/model/attention.py
+index db28f92..b4d4f2b 100644
+--- a/tutorial_code/miniengine/model/attention.py
++++ b/tutorial_code/miniengine/model/attention.py
+@@ -20,19 +20,20 @@ class Attention(nn.Module):
+         self.q_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
+         self.k_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
+ 
+-    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
++    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _projection=None) -> mx.array:
+         if ctx is not None and ctx.mode == "prefill_batch":
+             return self._prefill_batch(x, ctx, layer_idx)
+         if ctx is not None and ctx.mode == "decode":
+-            return self._decode(x, ctx, layer_idx)
++            return self._decode(x, ctx, layer_idx, _projection=_projection)
+         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
+ 
+-    def _project(self, x):
++    def _project(self, x, _projection=None):
+         T = x.shape[0]
+-        qg = self.q_proj(x).reshape(T, self.n_heads, 2 * self.head_dim)
++        qg, k, v = _projection(x) if _projection is not None else (self.q_proj(x), self.k_proj(x), self.v_proj(x))
++        qg = qg.reshape(T, self.n_heads, 2 * self.head_dim)
+         q, gate = mx.split(qg, 2, axis=-1)                       # 每个头：前 D 是 q，后 D 是门
+-        k = self.k_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
+-        v = self.v_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
++        k = k.reshape(T, self.n_kv_heads, self.head_dim)
++        v = v.reshape(T, self.n_kv_heads, self.head_dim)
+         return self.q_norm(q), self.k_norm(k), v, gate.reshape(T, -1)   # 按头做 RMSNorm（零中心）
+ 
+     def _prefill(self, x: mx.array, cache) -> mx.array:
+@@ -75,11 +76,11 @@ class Attention(nn.Module):
+         return prefill_linear(self.o_proj, o * mx.sigmoid(gate), (B, T))
+ 
+ 
+-    def _decode(self, x: mx.array, ctx, layer_idx: int) -> mx.array:
++    def _decode(self, x: mx.array, ctx, layer_idx: int, *, _projection=None) -> mx.array:
+         """批量：x [B, hidden]，每行一个新 token，位置各不相同。"""
+         B = x.shape[0]
+         kv = ctx.caches[layer_idx]
+-        q, k, v, gate = self._project(x)                         # [B, H, D], [B, Hkv, D]
++        q, k, v, gate = self._project(x, _projection)            # [B, H, D], [B, Hkv, D]
+         q = apply_rope(q[:, :, None], ctx.positions, self.rotary_dim, self.theta)   # [B, H, 1, D]，每行自己的位置
+         k = apply_rope(k[:, :, None], ctx.positions, self.rotary_dim, self.theta)[:, :, 0]
+         kv.write(k, v, ctx.positions)
+diff --git a/tutorial_code/miniengine/model/gdn.py b/tutorial_code/miniengine/model/gdn.py
+index f6d50b3..9be5f86 100644
+--- a/tutorial_code/miniengine/model/gdn.py
++++ b/tutorial_code/miniengine/model/gdn.py
+@@ -60,12 +60,14 @@ class GatedDeltaNet(nn.Module):
+         self.set_gates_compile(False)
+         self.set_norm_reuse(False)
+ 
+-    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _norm_reuse_normal=False) -> mx.array:
++    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _norm_reuse_normal=False, _projection=None) -> mx.array:
+         if ctx is not None and ctx.mode == "prefill_batch":
+             return self._prefill_batch(x, ctx, layer_idx)
+         if ctx is not None and ctx.mode == "decode":
+             allow_compile = (type(ctx) is ForwardContext and
+                              not any(getattr(ctx, key, False) for key in ("record", "capture", "speculative", "verify")))
++            if _projection is not None:
++                return self._decode_fused(x, ctx.caches[layer_idx], _projection, allow_compile)
+             return self._decode(x, ctx.caches[layer_idx], _compile_gates=allow_compile,
+                                 _norm_reuse_normal=(_norm_reuse_normal is True and allow_compile))
+         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
+@@ -246,3 +248,12 @@ class GatedDeltaNet(nn.Module):
+         st.conv, st.S = xp[:, 1:], S
+         o = self.norm(o.astype(x.dtype), z)
+         return self.out_proj(o.reshape(B, -1))
++
++    def _decode_fused(self, x, st, projection, compile_gates):
++        from ..kernels.gdn_decode_fused import fused
++        qkv, z, b, a = projection(x)
++        beta, g = self._decode_gates(b, a, x, st) if compile_gates else self._gates(b, a)
++        o, state, conv = fused(qkv, st.conv, self.conv1d_weight, g, beta, st.S)
++        st.conv, st.S = conv, state
++        z = z.reshape(1, self.Hv, self.Dv)
++        return self.out_proj(self.norm(o.astype(x.dtype), z).reshape(1, -1))
+diff --git a/tutorial_code/miniengine/model/qwen3_5.py b/tutorial_code/miniengine/model/qwen3_5.py
+index 0b7032f..c932d92 100644
+--- a/tutorial_code/miniengine/model/qwen3_5.py
++++ b/tutorial_code/miniengine/model/qwen3_5.py
+@@ -17,8 +17,9 @@ class MLP(nn.Module):
+         self.up_proj = Linear(cfg.hidden_size, cfg.intermediate_size, q)
+         self.down_proj = Linear(cfg.intermediate_size, cfg.hidden_size, q)
+ 
+-    def __call__(self, x):
+-        return self.down_proj(nn.silu(self.gate_proj(x)) * self.up_proj(x))
++    def __call__(self, x, *, _projection=None):
++        gate, up = _projection(x) if _projection is not None else (self.gate_proj(x), self.up_proj(x))
++        return self.down_proj(nn.silu(gate) * up)
+ 
+     def _prefill_batch(self, x, shape):
+         gate = prefill_linear(self.gate_proj, x, shape)
+@@ -38,12 +39,13 @@ class DecoderLayer(nn.Module):
+         self.input_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
+         self.post_attention_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
+ 
+-    def __call__(self, x, ctx=None, layer_idx=0, *, _norm_reuse_normal=False):
++    def __call__(self, x, ctx=None, layer_idx=0, *, _norm_reuse_normal=False, _decode_projections=None):
++        mlp, mixer = _decode_projections or (None, None)
+         h = self.input_layernorm(x)
+-        x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx, _norm_reuse_normal=_norm_reuse_normal))
++        x = x + (self.self_attn(h, ctx, layer_idx, _projection=mixer) if self.is_attn else self.linear_attn(h, ctx, layer_idx, _norm_reuse_normal=_norm_reuse_normal, _projection=mixer))
+         if ctx is not None and ctx.mode == "prefill_batch":
+             return x + self.mlp._prefill_batch(self.post_attention_layernorm(x), ctx.prefill_shape)
+-        return x + self.mlp(self.post_attention_layernorm(x))
++        return x + self.mlp(self.post_attention_layernorm(x), _projection=mlp)
+ 
+ 
+ class Qwen3_5ForCausalLM(nn.Module):
+@@ -56,7 +58,7 @@ class Qwen3_5ForCausalLM(nn.Module):
+         if not cfg.tie_word_embeddings:
+             self.lm_head = Linear(cfg.hidden_size, cfg.vocab_size, cfg.quantization)
+ 
+-    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = ()):
++    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = (), *, _decode_projections=None):
+         """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 为后续 cache/batch 接口（本章仅整句无 cache）。
+         last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。
+         capture=(5, 19, ...) 时额外返回这些层的输出拼起来的特征 [T, len(capture)·hidden]（DFlash2 drafter 的上下文）。"""
+@@ -78,7 +80,8 @@ class Qwen3_5ForCausalLM(nn.Module):
+         )
+         feats = []
+         for i, layer in enumerate(self.layers):
+-            x = layer(x, ctx, i, _norm_reuse_normal=_norm_reuse_normal)
++            x = layer(x, ctx, i, _norm_reuse_normal=_norm_reuse_normal,
++                      _decode_projections=None if _decode_projections is None else _decode_projections[i])
+             if i in capture:
+                 feats.append(x)
+         if grouped and last_only:
