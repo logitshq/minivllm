@@ -1,0 +1,106 @@
+{
+  "candidate": "V31 NVFP4 FP4 factor-fold R4",
+  "scope": {
+    "layer": 0,
+    "projection": "mlp.gate_proj",
+    "K": 5120,
+    "N": 17408,
+    "tensor_range_bytes": 50135040,
+    "extra_weight_bytes": 0,
+    "full_model": false
+  },
+  "math": {
+    "raw_fp4_half_times16384_removed": true,
+    "scale_times16384_dtype": "float32",
+    "qdot_body_and_fast_R4_unchanged": true,
+    "payload_layout_unchanged": true,
+    "no_math_policy_override": true,
+    "CPU_scalar_pairs": 4064,
+    "all_finite_activation_generic_equivalence": false,
+    "half_denormal_GPU_behavior": "UNKNOWN"
+  },
+  "numeric": {
+    "native_R4_vs_QMM": 9,
+    "folded_vs_QMM": 9,
+    "folded_vs_native_R4": 9,
+    "total": 27,
+    "readonly_pre_post": true,
+    "inputs": "8 fixed synthetic +1 historical L0 real",
+    "first_failure": "STOP before timing"
+  },
+  "timing": {
+    "A": "native mx.quantized_matmul",
+    "B": "factor-fold R4",
+    "prime": 2048,
+    "repeats": 512,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ],
+    "hashes": "only after both blocks",
+    "every_output_eval": true,
+    "timeout_s": 170
+  },
+  "resources": {
+    "power": "AC Power",
+    "thermal": [
+      0,
+      1
+    ],
+    "pressure": 1,
+    "raw_first": true,
+    "cache_limit_bytes": 2147483648,
+    "known_foreign_inference": 0,
+    "original_guard": true
+  },
+  "adopted": false,
+  "author_GPU": false
+}
