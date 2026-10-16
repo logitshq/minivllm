@@ -1,0 +1,71 @@
+M5 Ultra 256GB：目标模型单独解码的实测 Pareto 前沿
+
+代码：044a26332cda14c48bc07be7a0a44715422dc0d4（本地提交，未推送）
+改动：投影和 GDN 融合扩到 B1–B8；保留 B1 内核；大批次保留 eager。测试服务器连接队列从 5 扩到 128。
+同一 27B NVFP4；19 输入/32 输出；greedy、正常 EOS、无草稿模型或前缀缓存。
+运行版本：MLX0.32.3；oMLX0.7.1.dev1@328edc7（mlx-lm0.31.4.dev132+g94cdcae13）；Lithos5485ad6加本机M5配置2236580。
+C1 按事先写下的规则，使用包含 oMLX balanced/aggressive 的四配置复测；原 C1 数据完整保留在 earlier_C1_processes。C2–C64 使用原 sweep。
+另加 C64/B32 点：64 个 HTTP 请求全部完成，同时最多执行32条序列；三次新进程。官方 C64 数据来自紧邻的原 sweep，不宣称逐对配对。
+各点为三次独立进程中位数的中位数，每进程 3 次预热、3 次测量。
+x=首个文本块之后的客户端交付速率估计；y=完整并发请求窗口的总输出吞吐。单位 tok/s。
+
+C | 引擎 | x 每用户交付 | y 整机吞吐 | TTFT ms | 自身 Pareto 点
+1 | fused | 55.96 | 50.39 | 80.7 | True
+1 | omlx | 52.28 | 45.29 | 113.5 | True
+1 | omlx_aggressive | 51.37 | 44.48 | 114.7 | False
+1 | lithos | 55.22 | 47.36 | 114.6 | True
+2 | fused | 52.46 | 85.27 | 156.0 | True
+2 | omlx | 48.54 | 72.31 | 231.2 | True
+4 | fused | 44.00 | 131.29 | 251.3 | True
+4 | omlx | 40.16 | 104.17 | 421.6 | True
+8 | fused | 27.30 | 140.62 | 683.8 | True
+8 | fused_retired | 27.02 | 134.50 | 757.2 | False
+8 | omlx | 21.69 | 113.52 | 724.1 | True
+16 | fused | 13.47 | 139.27 | 1375.7 | False
+16 | omlx | 9.95 | 105.08 | 1454.2 | False
+32 | fused | 9.03 | 164.49 | 2428.6 | True
+32 | fused_retired | 8.80 | 169.33 | 2460.0 | True
+32 | omlx | 5.14 | 99.51 | 3249.4 | False
+64 | fused | 2.84 | 119.69 | 4827.9 | False
+64 | fused_capped | 8.58 | 159.85 | 4607.2 | False
+64 | fused_retired | 4.51 | 175.83 | 4735.6 | True
+64 | omlx | 3.34 | 92.46 | 8406.9 | False
+
+全部外部配置中位数被实测 minivllm 点覆盖：True
+同并发三轮逐对也全部双指标领先：False
+覆盖定义：存在一个真实测量点，其 x、y 均不低于对方，至少一项严格更高；不依赖插值。
+
+omlx C1: 原融合版本同并发 x +7.04%, y +11.25%; 覆盖它的 minivllm C=[1, 2]
+omlx_aggressive C1: 原融合版本同并发 x +8.94%, y +13.30%; 覆盖它的 minivllm C=[1, 2]
+lithos C1: 原融合版本同并发 x +1.35%, y +6.40%; 覆盖它的 minivllm C=[1]
+omlx C2: 原融合版本同并发 x +8.08%, y +17.93%; 覆盖它的 minivllm C=[2]
+omlx C4: 原融合版本同并发 x +9.58%, y +26.03%; 覆盖它的 minivllm C=[4]
+omlx C8: 原融合版本同并发 x +25.89%, y +23.87%; 覆盖它的 minivllm C=[4, 8, 8]
+omlx C16: 原融合版本同并发 x +35.42%, y +32.53%; 覆盖它的 minivllm C=[4, 8, 8, 16]
+omlx C32: 原融合版本同并发 x +75.64%, y +65.29%; 覆盖它的 minivllm C=[4, 8, 8, 16, 32, 32, 64]
+omlx C64: 原融合版本同并发 x -15.05%, y +29.44%; 覆盖它的 minivllm C=[4, 8, 8, 16, 32, 32, 64, 64]
+
+C64/B32 与未限批和官方 C64 的比较：{"fused": {"dominates_median": true, "x_gain_pct": 202.53485382538418, "y_gain_pct": 33.555677684242525, "TTFT_change_pct": -4.570930158898323, "paired": false}, "omlx": {"dominates_median": true, "x_gain_pct": 156.9988462863672, "y_gain_pct": 72.87781792715798, "TTFT_change_pct": -45.1974376695584, "paired": false}}
+
+后续简化：每步批量清理结束请求，最多一次压缩状态；全结束时直接释放。只改两个核心文件，不改算术。
+采用提交：dc745bc57efaba03fd5afae7d28b3ce0625f0e62
+完整状态检查：5 个场景逐步输出和全部剩余缓存签名一致；完整源码哈希保存在 results.json。
+新的 C8/C32/C64 测量，与之前基线未逐对配对：
+  C8 相对 fused: 交付速率 -1.02%，吞吐 -4.35%，TTFT +10.73%。
+  C8 相对 omlx: 交付速率 +24.61%，吞吐 +18.48%，TTFT +4.57%。
+  C32 相对 fused: 交付速率 -2.63%，吞吐 +2.95%，TTFT +1.29%。
+  C32 相对 omlx: 交付速率 +71.02%，吞吐 +70.16%，TTFT -24.29%。
+  C64 相对 fused: 交付速率 +59.22%，吞吐 +46.91%，TTFT -1.91%。
+  C64 相对 omlx: 交付速率 +35.25%，吞吐 +90.16%，TTFT -43.67%。
+步骤诊断：37个输出、剩11请求的步骤，中位耗时 3831.2 → 151.1 ms（各14个样本，含预热，非配对微基准；全部原始步骤保留）。
+
+正确性：190 组融合路径和 24 组仅编译路径的完整 logits/128 个缓存数组逐位一致，128 组融合算子测试，1349 个原始参数哈希未变。
+B1–B8、B16/B32/B64 同批次自由生成一致；交错请求插入、退出、lookahead、stop 检查通过。
+额外派生权重 8.714 GiB，默认关闭。3 轮预热后测量；测量期间若出现新批次形状编译，耗时原样保留。
+高批次融合探索被拒绝：B12 起合并投影会改变归约路径；修复后 B32 性能回退。
+第一轮旧 HTTP 入口 C8 发生连接重置，失败记录完整保留，不纳入正式结果。
+仅编译路径验证 v1 遇到内存压力后由保护逻辑终止；进程已回收。资源恢复后 v2 的24组检查通过，失败记录保留。
+限制：只覆盖本图采样并发和短请求；没有证明长上下文、其他工作负载或带投机解码的优势。
+Lithos 仅官方接口支持的 C1 点；官方引擎没有提供原始 token IDs。
+复算：{"status": "PASS", "processes_validated": 69, "processes_in_final_comparison": 60, "requests_including_warm": 7686, "measured_requests": 3843, "tokens_including_warm": 245952, "measured_tokens": 122976, "native_requests_with_raw_ids": 5328, "native_sequences_matching_one_qualified_reference": 5323, "pins_verified": 2653, "resources": {"snapshots": 1035, "pressure_levels": [1], "thermal_codes": [0], "swap_used_mib_max": 1646.56, "counter_ranges": {"Pageouts": [13992, 14960], "Swapouts": [4048, 290733]}}, "strict_cleanup": true}
+原始记录：/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/pareto-batch-frontier-v1

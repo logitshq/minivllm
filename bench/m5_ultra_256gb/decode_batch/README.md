@@ -42,3 +42,31 @@ subset. A comparison point is covered only when an actual measured minivllm
 point has both x and y at least as large, with one strict improvement. Lines
 between points are visual guides, not measurements. This workload does not
 establish a universal result for other prompt lengths, workloads or speculation.
+
+Final measurements also include the preplanned C1 retest with oMLX aggressive,
+and C64 with the original implementation capped at 32 active sequences. The
+earlier C1 results are retained separately; the selection rule predates the
+aggressive-mode results. `qualify_graph_only.py` covers all new batch sizes
+without enabling fusion. Its first resource-pressure abort is retained; the
+second attempt passed all 24 paired forwards.
+
+The subsequent `../retire_batch` experiment removes repeated state compaction
+when several requests finish in one engine step. It contributes distinct C8,
+C32 and C64 points, using three fresh processes each. These are unpaired with
+the earlier baseline. Median throughput changed by -4.35%, +2.95% and +46.91%,
+respectively; the C64 process range is 155.09–176.38 tokens/s. No result is
+discarded. The original fused implementation and the retirement implementation
+are separately identified in the figure and exact source manifests.
+
+`replay.py --retirement-frontier .artifacts/m5-ultra-256gb/retire-batch-frontier-v1
+--out OUTPUT` independently verifies timestamps, counts, source pins,
+qualification and cleanup. `plot.py --out OUTPUT` uses its results. The final
+replay covers 69 successful processes, 3,843 measured requests, and 2,653 pins.
+The plotted comparison keeps 60 processes after the predeclared C1 selection.
+All 9 external configuration medians are dominated by measured native
+configurations; this does not say every raw run or every same-C pair won.
+
+The final report, figure and evidence manifest are archived in
+`docs/experiments/m5-ultra-256gb/pareto-batch-v1`. Resource-pressure failure,
+connection-reset failure, rejected arithmetic candidates and earlier C1 runs
+are all retained locally under `.artifacts/m5-ultra-256gb`.

@@ -1,0 +1,66 @@
+diff --git a/tutorial_code/miniengine/engine/llm_engine.py b/tutorial_code/miniengine/engine/llm_engine.py
+index 66db7a6..9eaac92 100644
+--- a/tutorial_code/miniengine/engine/llm_engine.py
++++ b/tutorial_code/miniengine/engine/llm_engine.py
+@@ -49,22 +49,24 @@ class LLMEngine:
+     def step(self) -> list[tuple[str, int, bool]]:
+         """跑一步。返回这一步产出 token 的 (req_id, token, 是否结束)。"""
+         out = self.scheduler.schedule()
+-        for rid in out.finished_ids:
+-            self.runner.drop(rid)
++        self.runner.drop_many(out.finished_ids)
+         if out.is_empty:
+             return []
+         sampled = self.runner.run(out)
+         before = {rid: len(self.requests[rid].output_token_ids) for rid in sampled}
+         self.scheduler.update(out, sampled)          # 可能在 EOS / max_tokens 处截断投机解码多出来的 token
+         results = []
++        finished = []
+         for rid in sampled:
+             req = self.requests[rid]
+             toks = req.output_token_ids[before[rid]:]
+             for i, tok in enumerate(toks):
+                 results.append((rid, tok, req.is_finished and i == len(toks) - 1))
+             if req.is_finished:
+-                self.runner.drop(rid)  # Free the final request even if no next step runs.
++                finished.append(rid)
+                 self.requests.pop(rid)
++        # Free even the final batch now, without repeatedly copying surviving rows.
++        self.runner.drop_many(finished)
+         return results
+ 
+     def generate(self, prompts: list[list[int]], sampling: SamplingParams) -> list[list[int]]:
+diff --git a/tutorial_code/miniengine/engine/model_runner.py b/tutorial_code/miniengine/engine/model_runner.py
+index 5897e80..2042678 100644
+--- a/tutorial_code/miniengine/engine/model_runner.py
++++ b/tutorial_code/miniengine/engine/model_runner.py
+@@ -185,15 +185,24 @@ class ModelRunner:
+         # 丢掉的行（结束的请求）不需要做任何事：它们的 staging 早已搬走，batch 里的行被 rebuild 过滤掉了
+ 
+     def drop(self, req_id: str) -> None:
++        self.drop_many([req_id])
++
++    def drop_many(self, req_ids: list[str]) -> None:
++        """Retire one scheduler step's finished rows with at most one compaction."""
++        if not req_ids:
++            return
++        removed = set(req_ids)
+         self._ahead = None
+-        self.staging.pop(req_id, None)
+-        self.feats.pop(req_id, None)
+-        if req_id in self.batch.req_ids:
+-            keep = [i for i, rid in enumerate(self.batch.req_ids) if rid != req_id]
++        for req_id in removed:
++            self.staging.pop(req_id, None)
++            self.feats.pop(req_id, None)
++        if removed.intersection(self.batch.req_ids):
++            keep = [i for i, rid in enumerate(self.batch.req_ids) if rid not in removed]
+             if keep:
+                 self.batch.rebuild(keep, [])
+             else:
+                 self.batch.clear()
+         if self.spec is not None:
+-            self.spec.drop(req_id)
++            for req_id in req_ids:
++                self.spec.drop(req_id)
+             self.spec.drafter.reset()                       # drafter 的上下文 cache 只服务一个 solo 请求
