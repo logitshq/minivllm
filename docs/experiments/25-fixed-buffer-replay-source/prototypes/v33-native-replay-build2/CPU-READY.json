@@ -1,0 +1,30 @@
+{
+  "status": "CPU_COMPILE_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build2/replay.mm": "f596fe404acb6a014483d7a0ebd6bc350d3815ee7158ff51308330bc113ac732",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build2/libv33replay.dylib": "2b890177719f6fe837e6acd493a719f25c381893c1e1bb4540ef77d2ad659000",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build2/ABI.h": "a34b83a0734fc7f969da495aa2f149004bf55d284260ce0b5fe546ecb0a15833"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "parent": "v33-native-replay-build1 (preserved)",
+  "changes": [
+    "bounded interior output views in captured written allocation",
+    "strict noninterleaved CB encode then commit order",
+    "matched fence identity/order lowered to full-buffer barrier",
+    "pre-capture fence requires observed producer and completed same-queue commit proof via waitUntilCompleted",
+    "any writable allocation overlap with full pinned model range rejected"
+  ],
+  "scope": "single fixed L teacherforced two restored single-CB replays; not ICB/autoregressive/performance/E2E",
+  "unsupported_stop": [
+    "missing reflection or active binding bank",
+    "nonshared storage or mixed mutable resource options",
+    "large writable or unproven full model range mapping",
+    "multiple queues/devices or CB encode interleaving",
+    "unobserved/uncompleted external fence",
+    "blit/render/indirect/ICB/event/argument-resource-use",
+    "distinct MTLBuffers with overlapping host storage",
+    "missing output written-allocation mapping",
+    "incomplete encoder/CB or failed replay completion"
+  ]
+}

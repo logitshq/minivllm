@@ -1,0 +1,23 @@
+{
+  "status": "CPU_COMPILE_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build1/replay.mm": "718f51b1ce05dd425fb01fb0a38ac825693de881d4f5713371250c33fd4abd23",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build1/libv33replay.dylib": "80a3c2528eb4acd8459520311436d7f9637643e899713c4141663ff38b104bd9",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build1/ABI.h": "a34b83a0734fc7f969da495aa2f149004bf55d284260ce0b5fe546ecb0a15833"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "scope": "single fixed L teacherforced capture and two restored single-CB replays; not ICB/autoregressive/E2E",
+  "compile": "clang++ -std=c++17 -fno-objc-arc -Wno-deprecated-declarations -dynamiclib -framework Foundation -framework Metal replay.mm -o libv33replay.dylib",
+  "unsupported_stop": [
+    "missing reflection/buffer bank",
+    "nonshared storage or mixed mutable resource options",
+    "large writable or no full model parameter range containment",
+    "multiple queues/devices",
+    "blit/render/indirect/ICB/fence/event/argument-resource-use",
+    "distinct buffer objects overlapping host storage",
+    "missing writable output start mapping",
+    "incomplete encoder/failed replay completion"
+  ],
+  "pins": "provisional until actual binding; full parameter range must fit actual original MetalBuffer, with readonly reflection for every used large binding"
+}

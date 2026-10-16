@@ -1,0 +1,14 @@
+# V33 independent correctness review criteria (CPU only; source readiness pending)
+- Actual binder reference: v26-profile-build3/trace.mm:35 resets its metadata Args on PSO change; :37 records only small int32 setBytes summaries; :39 only length/offset. This trace cannot itself reconstruct original Metal bindings.
+- Retain exact original MTLBuffer identity, device, allocation length and byte offsets; one shadow object per original buffer must preserve every overlapping binding/alias, including zero-length/nil behavior and setBufferOffset updates.
+- Copy all setBytes payload bytes at call time, not pointer addresses or truncated/int32 summaries; preserve bindings across PSO switches according to Metal semantics.
+- First-bind snapshots need a synchronized capture boundary and lifetime retention; never snapshot an address after allocator reuse or mistake produced/intermediate data for an external input.
+- Large pinned weights may stay zero-copy only with explicit immutable identity/proof; size alone is insufficient because FP32 GDN S and KV buffers are also large. Hash/readonly validation belongs outside timing.
+- Mutable buffers and offsets must use alias-preserving shadows; validate full byte ranges against buffer lengths and preserve original storage/hazard mode or explicitly reject unsupported modes.
+- Retain exact original PSO and dispatch kind/grid/threadgroup, threadgroup-memory lengths and encoder state; no new shader math, geometry or guessed constants.
+- Preserve every original memoryBarrier/fence/wait/update/resource-use ordering and each original CB boundary; a single-CB experiment may not silently flatten dependencies or claim equivalence if boundaries cannot be represented.
+- Reject unknown blit/copy/fill/render/indirect/argument-buffer/event/queue operations rather than omitting them; capture/replay queue and device identity must be explicit.
+- Initializers may construct hooks but cannot submit GPU work; begin/end and failure paths must retain objects safely, restore hooks/capture flags, and reject incomplete encoders/CBs or completion errors.
+- Before repeated replay, restore the exact mutable initial contents with declared reset scope; ensure replay outputs cannot become the next iteration inputs or overwrite zero-copy original inputs.
+- Correctness requires original-vs-replay outputs, immutable original inputs and actual completion success; host encode/CB GPU envelope is diagnostic, not production speed, exclusive kernel time or E2E evidence.
+- Review actual ready source and CPU compile/inert evidence; no GPU/MLX import, broad test suite, extra authorization seal, or edits to author frozen files.

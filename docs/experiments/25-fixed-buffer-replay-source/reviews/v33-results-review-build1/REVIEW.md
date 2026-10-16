@@ -1,0 +1,15 @@
+# V33 fixed-seed result: independent CPU audit PASS
+- Actual receipt SHA256: `c6d34a20d8b526eff0f05afb58110a1768b35fc65cb96d4bb05a764a33998e85`; 42 source pins and 13 actual imported source paths match.
+- Rehashed every saved seed raw: 131 arrays / 170,721,292 bytes; every GT raw: 129 arrays / 171,217,920 bytes. Shapes, dtype byte widths and finite values agree.
+- Both replay records contain all 129 expected labels, exact byte sizes, finite=true and GT-identical hashes: 258 strict records total.
+- Verified five actual readonly records: seed after original capture, then seed and captured reference after each replay.
+- This audit replays saved raw SHA/metadata checks; replay bytes and readonly checks are the actual worker records, not an independent GPU recapture.
+- All 1,836 physical buffers are used; distinct host ranges do not overlap. All 1,576 mutable allocations have complete first-bind snapshots and disjoint, bounded, 256-byte-aligned arena ranges.
+- Snapshot bytes=3,751,344,869; allocated arena=3,751,369,216 bytes. Native restore source restores each entire mutable snapshot before either replay.
+- All 260 large zero-copy allocations (11,748,311,040 bytes) map to real pinned parameter ranges and reported readonly PSO arguments; no large allocation was snapshotted. Parameter readonly qualification is reflection-based, not a fresh 15GB weight hash.
+- All 129 output address/size mappings agree with worker arrays and mutable allocation bounds; 48 are interior convtail views at offset 20,480 bytes.
+- Native reports remain identical through replay counts 0/1/2. Actual capture has 2,005 dispatches and 85 unique same-queue commits: 83 compute CBs, one event-only CB, one proven-empty CB; no duplicate/nested/unknown-command commit.
+- Ordered fence records have 83 updates and one wait referring to its preceding producer; one captured event signal is lowered to a full-buffer barrier without re-signaling the original event.
+- Recomputed saved resource fields/deltas: 19 raw samples, AC / thermal0 / pressure1, minimum free42%, swap MB and Swapouts growth0; Pageouts increased30 and compression activity occurred.
+- Owner55571 waited/reaped child55580 with exit0; saved external strict absence records for both PIDs pass. No new live process or GPU operation was performed by this audit.
+- Scope: one fixed seed at L20, two independent snapshot resets, logits+128 cache outputs. Autoregressive feedback, ICB, service behavior and performance remain unqualified.

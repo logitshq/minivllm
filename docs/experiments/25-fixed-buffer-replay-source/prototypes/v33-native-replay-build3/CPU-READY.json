@@ -1,0 +1,31 @@
+{
+  "status": "CPU_COMPILE_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/replay.mm": "90053f57e453516d6e21c99454f1ced3845894745ec3798bae1c46cf1e1f803c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/libv33replay.dylib": "d60e6ef0519799a1e57f52eb1e5c7b69628a1c781dc845174bd5bd74b6c064e3",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/ABI.h": "a34b83a0734fc7f969da495aa2f149004bf55d284260ce0b5fe546ecb0a15833",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/actual-mlx-event-disassembly.txt": "a314b8b229c698207cb72e1a283da321cbea24caa92d47f6afadcd96013867ab"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "parent": "v33-native-replay-build2 preserved after actual tiny event STOP",
+  "changes": [
+    "record actual event identity/value/source CB/queue and producer",
+    "event-only CB participates in strict noninterleaved encode/commit order",
+    "captured same-queue prior producer allows wait lowering",
+    "prior producer requires observed same-queue commit plus completion proof",
+    "all native event signal/wait commands lower to full-buffer barriers; never signal or wait original event during replay"
+  ],
+  "completion_proof": [
+    "producer CB completed via waitUntilCompleted",
+    "or observed committed same-queue shared event producer value already signaled"
+  ],
+  "unsupported_stop": [
+    "unknown/future/foreign event producer",
+    "uncompleted pre-capture event producer",
+    "non-increasing captured original signal values",
+    "all build2 unsupported cases except matched event signal/wait"
+  ],
+  "ABI": "same 7 functions, ABI.h",
+  "scope": "fixed teacherforced single-step two restored native single-CB replays; no performance/autoregressive/ICB/E2E qualification"
+}

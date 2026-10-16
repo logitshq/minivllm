@@ -1,0 +1,11 @@
+# V34 direct fixedcap numerical result: independent CPU audit PASS
+- Actual receipt SHA256 `37d5a808dc4fd979f612d776d42f3e2f42913c66c6f4ae2662e8b675c7d3c5db` and all 37 source pins match.
+- The same accepted25 model has gates48 ON, conv/whole-functional OFF, MLX0.32.3 on M4 Max, allocator cache2GiB; only ForwardContext.max_len differs between A and B.
+- A exactL20..50 and B fixedL256 each advance independent state and greedy token chains. Both 32-ID streams equal the canonical continuation, with no early EOS.
+- All 31 steps contain one logits pair and 128 full cache pairs: 3,999 strict equal signature records with matching shape/dtype/finite/SHA fields.
+- Each retained-state before signature matches its preceding branch output, and all before/after readonly fields match: 62 state readonly records plus 31 token/position/lens records.
+- Independently rehashed and checked BF16 finite values for all 63 saved logits files (prefill plus 31 A/B pairs), 31,288,320 bytes. Full state/readonly results use the actual worker records, not a fresh GPU recapture.
+- Final128-cache signatures match the final step. Actual imported source paths/hashes remain pinned.
+- Recomputed raw resource fields/deltas across 25 samples: AC / thermal0 / pressure1, minimum free47%, swap MB growth0 and Swapouts growth0; owner Pageouts increased220.
+- Owner55951 waited/reaped child55960 exit0; both saved external strict PID absence records pass.
+- Scope is direct Python-model fixedcap numerical qualification on this one prompt. Native feedback replay, changed prompt/reset, engine integration, service lifecycle and performance remain unqualified.

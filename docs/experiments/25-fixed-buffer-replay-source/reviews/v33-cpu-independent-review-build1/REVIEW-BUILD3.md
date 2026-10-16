@@ -1,0 +1,16 @@
+# V33 native3 + worker2 independent CPU review
+- Verdict: no new source blocker for the root-owned fixed-L20/two-replay diagnostic; actual GPU correctness remains a separate gate.
+- Native source SHA90053f57e453516d6e21c99454f1ced3845894745ec3798bae1c46cf1e1f803c; library SHAd60e6ef0519799a1e57f52eb1e5c7b69628a1c781dc845174bd5bd74b6c064e3.
+- Worker SHA c0764c7331d8e6bbb0d059541b4d252a2d93b7fcc225c7d94f2661ff3cd35012;42actual pins match; Python parse/compile/inert PASS with no MLX/GPU.
+- Worker2 differs from reviewed worker1 only in default native library path build2→build3; bare manifest keys/import source pins and129-output mappings are fixed.
+- Native retains original buffers/PSOs, captures complete setBytes/bulk/offset/TG state, and preserves bindings across PSO changes.
+- One shadow subrange per original mutable buffer preserves views/aliases; distinct-buffer overlapping host ranges STOP. First-bind snapshots are taken after synchronized seed setup and restored before each replay.
+- Large zero-copy bindings require actual pinned parameter range inside original shared MTLBuffer and readonly reflection; any writable allocation overlapping a parameter STOPs. No15GB parameter copy/hash is introduced.
+- Interior output mapping uses actual address+full bounds in a written original allocation, allowing concat-tail views; two replay129-output strict bytes gates remain mandatory.
+- touchCB retains actual CB identity, enforces one device/queue and rejects encoding interleave/aftercommit; original encoder endings and commits become explicit full-buffer barriers.
+- Native3 records original event ID/value/actualCB/queue, retains event identity, rejects non-increasing captured signal values and unknown/foreign wait producers.
+- Pre-capture wait requires same-queue committed producer plus completed waitUntilCompleted sequence or observed SharedEvent value≥recorded producer value; captured producer must already occur in strict capture order.
+- Replay lowers recorded fence/event dependencies to full-buffer barriers and never re-signals original monotonic event values. This is bounded synchronous diagnostic semantics, not a general Metal event protocol.
+- Unknown blit/render/indirect/ICB/argument-resource-use still STOP; every replay checks actual completion/error. Original seed131arrays and captured reference129arrays stay byte-readonly.
+- Resource snapshots/ACthermal0or1/pressure1/original paging guards and root external wait/reap/absence remain active; no lifecycle, autoregressive, ICB, speed or E2E claim follows.
+- Native1 fence STOP and native2 event STOP remain unchanged. No author/old-evidence files were modified by this review.

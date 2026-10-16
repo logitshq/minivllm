@@ -1,0 +1,77 @@
+/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/lib/libmlx.dylib:
+(__TEXT,__text) section
+__ZN3mlx4core5metal14CommandEncoder12signal_eventENS0_5EventEy:
+0000000000cbab18	sub	sp, sp, #0x60
+0000000000cbab1c	stp	x22, x21, [sp, #0x30]
+0000000000cbab20	stp	x20, x19, [sp, #0x40]
+0000000000cbab24	stp	x29, x30, [sp, #0x50]
+0000000000cbab28	add	x29, sp, #0x50
+0000000000cbab2c	mov	x20, x2
+0000000000cbab30	mov	x21, x1
+0000000000cbab34	mov	x19, x0
+0000000000cbab38	bl	__ZN3mlx4core5metal14CommandEncoder12end_encodingEv
+0000000000cbab3c	ldr	x0, [x19, #0x18]
+0000000000cbab40	ldr	x8, [x21, #0x10]
+0000000000cbab44	ldr	x2, [x8, #0x8]
+0000000000cbab48	adrp	x8, 604 ; 0xf16000
+0000000000cbab4c	ldr	x1, [x8, #0x1e8]
+0000000000cbab50	mov	x3, x20
+0000000000cbab54	bl	0xd495fc ; Objc message: _objc_msgSend
+0000000000cbab58	ldr	x8, [x21]
+0000000000cbab5c	str	x8, [sp]
+0000000000cbab60	ldr	w8, [x21, #0x8]
+0000000000cbab64	str	w8, [sp, #0x8]
+0000000000cbab68	ldr	q0, [x21, #0x10]
+0000000000cbab6c	str	d0, [sp, #0x10]
+
+/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/lib/libmlx.dylib:
+(__TEXT,__text) section
+__ZN3mlx4core5metal14CommandEncoder10wait_eventENS0_5EventEy:
+0000000000cbac28	stp	x22, x21, [sp, #-0x30]!
+0000000000cbac2c	stp	x20, x19, [sp, #0x10]
+0000000000cbac30	stp	x29, x30, [sp, #0x20]
+0000000000cbac34	add	x29, sp, #0x20
+0000000000cbac38	mov	x21, x2
+0000000000cbac3c	mov	x20, x1
+0000000000cbac40	mov	x19, x0
+0000000000cbac44	bl	__ZN3mlx4core5metal14CommandEncoder12end_encodingEv
+0000000000cbac48	ldr	x0, [x19, #0x18]
+0000000000cbac4c	mov	x22, x20
+0000000000cbac50	ldr	x8, [x22, #0x10]!
+0000000000cbac54	ldr	x2, [x8, #0x8]
+0000000000cbac58	adrp	x8, 604 ; 0xf16000
+0000000000cbac5c	ldr	x1, [x8, #0x1f0]
+0000000000cbac60	mov	x3, x21
+0000000000cbac64	bl	0xd495fc ; Objc message: _objc_msgSend
+0000000000cbac68	ldp	x8, x9, [x19, #0x48]
+0000000000cbac6c	cmp	x8, x9
+0000000000cbac70	b.hs	0xcbacb0
+0000000000cbac74	ldr	x9, [x20]
+0000000000cbac78	ldr	w10, [x20, #0x8]
+0000000000cbac7c	str	w10, [x8, #0x8]
+
+/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/lib/libmlx.dylib:
+(__TEXT,__text) section
+__ZN3mlx4core5metal9EventImpl4waitEy:
+0000000000ccb7c4	mov	x2, x1
+0000000000ccb7c8	adrp	x8, 589 ; 0xf18000
+0000000000ccb7cc	add	x8, x8, #0x770
+0000000000ccb7d0	ldr	x0, [x0, #0x8]
+0000000000ccb7d4	ldr	x1, [x8]
+0000000000ccb7d8	mov	x3, #-0x1
+0000000000ccb7dc	b	0xd495fc ; Objc message: _objc_msgSend
+__ZN3mlx4core5metal9EventImpl6signalEy:
+0000000000ccb7e0	mov	x2, x1
+0000000000ccb7e4	ldr	x0, [x0, #0x8]
+0000000000ccb7e8	adrp	x8, 588 ; 0xf17000
+0000000000ccb7ec	add	x8, x8, #0xd98
+0000000000ccb7f0	ldr	x1, [x8]
+0000000000ccb7f4	b	0xd495fc ; Objc message: _objc_msgSend
+__ZN3mlx4core5EventC2ENS0_6StreamE:
+0000000000ccb7f8	sub	sp, sp, #0x40
+0000000000ccb7fc	stp	x22, x21, [sp, #0x10]
+0000000000ccb800	stp	x20, x19, [sp, #0x20]
+0000000000ccb804	stp	x29, x30, [sp, #0x30]
+0000000000ccb808	add	x29, sp, #0x30
+0000000000ccb80c	mov	x19, x0
+0000000000ccb810	str	x1, [sp]
