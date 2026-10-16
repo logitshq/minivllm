@@ -59,3 +59,5 @@ docs/              计划、教程、远程版的契约和 notes
 [28：把卷积、归一化复用和state保留接到真实ICB](docs/experiments/28-native-gdn-composition.md)记录V39/V40/V44完整严格资格、V40真实绑定失败及修复、独立B-only计时；34.699ms/步、28.820tok/s尚非HTTP或Pareto获胜结论。
 
 [29：把原生 decode 接进调度器，再测真实请求](docs/experiments/29-native-runner-http.md)验证 C1 排队、重置和回退；记录无屏障减少的负结果及真实 HTTP 电源变化 STOP，没有新的 Pareto 获胜结论。
+
+[30：提前提交一步](docs/experiments/30-native-ahead.md)保存 FIFO 输出所有权、提前停止丢弃、12,540 项完整模型检查与未完成 HTTP 结果；保留量化矩阵乘和屏障实验的负结果。

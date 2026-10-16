@@ -126,3 +126,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [28：把卷积、归一化复用和state保留接到真实ICB](../experiments/28-native-gdn-composition.md)保存V39/V40/V44的严格完整资格、V40绑定失败/修复与B-only计时；候选默认关闭，无HTTP/Pareto采用结论。
 
 [29：把原生 decode 接进调度器，再测真实请求](../experiments/29-native-runner-http.md)说明原生状态的生命周期与普通 runner 回退，保留 V42 负结果和 V45 未完成测试及全部原始证据。
+
+[30：提前提交一步](../experiments/30-native-ahead.md)对照同步 runner 与 depth2 FIFO，说明状态与输出的所有权、提前停止和实际数值范围；真实 HTTP 仍未超过已测前沿。

@@ -1,0 +1,241 @@
+--- V49/geometry.py
++++ V52/geometry.py
+@@ -1,11 +1,11 @@
+-"""V49 native R4, four independent SIMD groups per TG; backend injected, stdlib-only import."""
++"""V52 native R4, eight independent SIMD groups per TG; backend injected, stdlib-only import."""
+ from pathlib import Path
+ BASE = Path(__file__).resolve().parent
+ K, N = 5120, 17408  # Initial local screen target only.
+-ROWS, SIMD_GROUPS, THREADS = 4, 4, 128
++ROWS, SIMD_GROUPS, THREADS = 4, 8, 256
+ ELIGIBLE_SHAPES = frozenset([(48, 5120), (1024, 5120), (5120, 6144), (5120, 17408), (6144, 5120), (10240, 5120), (12288, 5120), (17408, 5120), (248320, 5120)])
+ 
+-class SG4QMV:
++class SG8QMV:
+     def __init__(self, mx, weight, scales, n, k):
+         self.mx, self.inputs, self.N, self.K = mx, (weight, scales), n, k
+         self.kernel = None
+@@ -16,9 +16,9 @@
+             raise ValueError("only declared BF16 normalB1 activation is eligible")
+         if self.kernel is None:
+             header = (BASE / "kernel_header.metal").read_text()
+-            header += f"\nconstant int v49_in_vec_size = {self.K};\nconstant int v49_out_vec_size = {self.N};\n"
++            header += f"\nconstant int v52_in_vec_size = {self.K};\nconstant int v52_out_vec_size = {self.N};\n"
+             self.kernel = mx.fast.metal_kernel(
+-                name=f"v49_nvfp4_r4_sg4_n{self.N}_k{self.K}",
++                name=f"v52_nvfp4_r4_sg8_n{self.N}_k{self.K}",
+                 input_names=["weight", "scales", "x"], output_names=["output"],
+                 source=(BASE / "kernel_body.metal").read_text(), header=header,
+                 ensure_row_contiguous=True)
+@@ -37,4 +37,4 @@
+         raise ValueError("only current-checkpoint complete-R4 shapes are source-eligible")
+     if scales.shape != (n, k // 16) or scales.dtype != mx.uint8:
+         raise ValueError("native U8 group16 scales required")
+-    return SG4QMV(mx, weight, scales, n, k)
++    return SG8QMV(mx, weight, scales, n, k)
+--- V49/micro.py
++++ V52/micro.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Root-only V49 fixed-shape compiled A/B QMV SG2-to-SG4 geometry exploration. CPU mode never imports MLX."""
++"""Root-only V52 fixed-shape compiled A/B QMV SG2-to-SG8 geometry exploration. CPU mode never imports MLX."""
+ import argparse
+ import copy
+ import gc
+@@ -24,7 +24,7 @@
+ spec = importlib.util.spec_from_file_location("v26_readonly_v22_support", OLD / "micro.py")
+ old = importlib.util.module_from_spec(spec)
+ spec.loader.exec_module(old)  # stdlib-only; __main__ guard prevents execution
+-helper_spec = importlib.util.spec_from_file_location("v49_local_geometry_helper", BASE / "geometry.py")
++helper_spec = importlib.util.spec_from_file_location("v52_local_geometry_helper", BASE / "geometry.py")
+ helper = importlib.util.module_from_spec(helper_spec)
+ helper_spec.loader.exec_module(helper)
+ prepare, K, N = helper.prepare, helper.K, helper.N
+@@ -65,7 +65,7 @@
+             "checkpoint": str(old.CHECKPOINT), "index_sha256": sha(index_path),
+             "config_sha256": sha(old.CHECKPOINT / "config.json"), "tensors": tensors,
+             "target_tensor_payload_bytes": sum(t["nbytes"] for t in tensors),
+-            "real_inputs": old.real_metadata(), "mechanism": "fixed-shape mx.compile A and B over identical immutable weights; B uses original R4 math with SG4 TG geometry only",
++            "real_inputs": old.real_metadata(), "mechanism": "fixed-shape mx.compile A and B over identical immutable weights; B uses original R4 math with SG8 TG geometry only",
+             "plan": {"prime": PRIME, "repeats": REPEATS, "schedule": SCHEDULE,
+                      "controls": CONTROLS, "power": power_domain, "qualify_only": qualify_only, "timeout_s": 170,
+                      "minimum_reduction": .05, "minimum_wins": 5, "full_model": False}}
+@@ -84,7 +84,7 @@
+     mx.set_cache_limit(2 << 30)
+     write(out / "runtime.json", {"mlx": mx.__file__, "version": "0.32.3", "device": device,
+           "controls": {k: os.environ[k] for k in CONTROLS}, "allocator_cache_limit_bytes": 2 << 30,
+-          "math_policy_override": False, "model_loaded": False, "rows_per_simd": 4, "scale_fold": False, "SIMD_groups_per_TG": 4, "threads_per_TG": 128, "both_arms_mx_compile": True, "shapeless": False})
++          "math_policy_override": False, "model_loaded": False, "rows_per_simd": 4, "scale_fold": False, "SIMD_groups_per_TG": 8, "threads_per_TG": 256, "both_arms_mx_compile": True, "shapeless": False})
+     resources, checks, startups, pairs, readonly = [], [], [], [], []
+ 
+     def probe(label):
+@@ -149,9 +149,9 @@
+             assert row["unchanged"], "input mutation"
+         before_prepare = probe("weight-ready-before-no-copy-prepare")
+         start = time.perf_counter_ns()
+-        sg4 = prepare(mx, weight, scales, runtime_version="0.32.3", device_name=device["device_name"], architecture=device["architecture"])
++        sg8 = prepare(mx, weight, scales, runtime_version="0.32.3", device_name=device["device_name"], architecture=device["architecture"])
+         host_end = time.perf_counter_ns(); mx.synchronize(); sync_end = time.perf_counter_ns()
+-        assert sg4.inputs[0] is weight and sg4.inputs[1] is scales
++        assert sg8.inputs[0] is weight and sg8.inputs[1] is scales
+         after_prepare = probe("prepared-without-weight-copy")
+         write(out / "prepare.json", {"host_call_ns": host_end-start, "synchronize_host_ns": sync_end-host_end,
+               "total_ns": sync_end-start, "expected_extra_weight_bytes": 0, "same_input_handles": True,
+@@ -172,7 +172,7 @@
+             return mx.quantized_matmul(x, weight, scales, transpose=True, **Q)
+         def b_fn(x):
+             traces["B"] += 1
+-            return sg4.project(x)
++            return sg8.project(x)
+         compiled = {}
+         for arm, fn in (("A", a_fn), ("B", b_fn)):
+             begin = time.perf_counter_ns(); compiled[arm] = mx.compile(fn, shapeless=False); factory_end = time.perf_counter_ns()
+@@ -192,10 +192,10 @@
+         assert traces == cold_traces, ("same-shape qualification unexpectedly retraced", traces, cold_traces)
+         check_readonly("all-compiled-qualification-inputs")
+         assert len(checks) == 36 and all(c["exact"] for c in checks)
+-        write(out / "qualification.json", {"status": "STRICT-SG2-R4-AND-COMPILED-SG4-QMV-BYTES-PASS", "checks": 36,
++        write(out / "qualification.json", {"status": "STRICT-SG2-R4-AND-COMPILED-SG8-QMV-BYTES-PASS", "checks": 36,
+               "readonly": True, "timing_allowed": not ident["plan"]["qualify_only"], "both_arms_mx_compile": True, "shapeless": False,
+               "trace_counts_after_cold": cold_traces, "trace_counts_after_qualification": dict(traces),
+-              "same_immutable_weight_handles": True, "unchanged_SG2_R4_bridge_checks": 9, "candidate_SG4_grid": [128, N // 16, 1], "candidate_threadgroup": [128, 1, 1], "scope": "8 fixed synthetic +1 real; no universal BF16 claim"})
++              "same_immutable_weight_handles": True, "unchanged_SG2_R4_bridge_checks": 9, "candidate_SG8_grid": [256, (N + 31) // 32, 1], "candidate_threadgroup": [256, 1, 1], "scope": "8 fixed synthetic +1 real; no universal BF16 claim"})
+         write(out / "compiled-boundary.json", {"both_arms": "mx.compile(fn, shapeless=False)",
+               "activation_input": [1, K], "captured_immutable_weight_id": id(weight), "captured_immutable_scale_id": id(scales),
+               "B_helper_same_handles": True, "trace_counts_before_timing": dict(traces), "Python_body_hook_on_compiled_hits": False})
+@@ -240,7 +240,7 @@
+                       "medians_ns": medians, "median_reduction": reduction, "wins": wins, "pairs": 6,
+                       "control_passed": control_ok, "control_slot2_div_slot1": controls,
+                       "minimum_reduction": .05, "minimum_wins": 5, "power_domain": ident["plan"]["power"] + " single-matrix exploration",
+-                      "scope": "L0 gate only; both fixed-shape mx.compile; A native QMM / B native R4 SG4 geometry; no model inference",
++                      "scope": "L0 gate only; both fixed-shape mx.compile; A native QMM / B native R4 SG8 geometry; no model inference",
+                       "target_tensor_payload_bytes": 50135040, "extra_weight_bytes": 0,
+                       "adopted": False, "full_model_qualified": False, "E2E_run": False, "AC_frontier_entry": False}
+             write(out / "result.json", result)
+@@ -281,7 +281,7 @@
+     sys.path.insert(0, str(P / "v25-c1-screen-build1"))
+     from support import identity as process_identity, process_parent, cleanup_owned
+     proc = None; birth = None; rc = 1
+-    def stop(sig, frame): raise KeyboardInterrupt("owned V49 supervisor interrupted")
++    def stop(sig, frame): raise KeyboardInterrupt("owned V52 supervisor interrupted")
+     previous = signal.signal(signal.SIGTERM, stop)
+     with (args.out / "child.log").open("w") as log:
+         try:
+@@ -298,7 +298,7 @@
+             if proc is not None:
+                 cleanup = cleanup_owned(proc, birth, args.out / "cleanup-identities.json"); write(args.out / "cleanup.json", cleanup)
+             signal.signal(signal.SIGTERM, previous)
+-    print(f"V49 child exit={rc}; exact owned child reaped; evidence={args.out}", flush=True)
++    print(f"V52 child exit={rc}; exact owned child reaped; evidence={args.out}", flush=True)
+     return rc
+ 
+ 
+--- V49/kernel_header.metal
++++ V52/kernel_header.metal
+@@ -253,7 +253,7 @@
+     uint simd_gid [[simdgroup_index_in_threadgroup]],
+     uint simd_lid [[thread_index_in_simdgroup]]) {
+   constexpr int packs_per_thread = 2;
+-  constexpr int num_simdgroups = 4;
++  constexpr int num_simdgroups = 8;
+   constexpr int pack_factor = get_pack_factor<32, bits>();
+   constexpr int bytes_per_pack = get_bytes_per_pack<32>();
+   constexpr int values_per_thread = pack_factor * packs_per_thread;
+--- V49/kernel_body.metal
++++ V52/kernel_body.metal
+@@ -1,4 +1,4 @@
+ uint local = thread_position_in_threadgroup.x;
+ uint3 tile = uint3(0, threadgroup_position_in_grid.y, 0);
+ fp_qmv_fast_impl<T, 16, 4, false, R>(weight, scales, nullptr, x, output,
+-    v49_in_vec_size, v49_out_vec_size, tile, local / 32, local % 32);
++    v52_in_vec_size, v52_out_vec_size, tile, local / 32, local % 32);
+--- V49/check_cpu.py
++++ V52/check_cpu.py
+@@ -6,7 +6,7 @@
+ import unittest
+ D=Path(__file__).resolve().parent
+ P=D.parent
+-spec=importlib.util.spec_from_file_location("v49_geometry_cpu",D/"geometry.py")
++spec=importlib.util.spec_from_file_location("v52_geometry_cpu",D/"geometry.py")
+ g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
+ class Array:
+     def __init__(self,shape,dtype):self.shape,self.dtype=shape,dtype
+@@ -22,7 +22,7 @@
+     def test_header_single_geometry_change_and_guard(self):
+         old=(P/"v22-nvfp4-qmv-r2-build1/kernel_header.metal").read_text().rsplit("\nconstant int v22_in_vec_size = 5120;",1)[0].rstrip()+"\n"
+         new=(D/"kernel_header.metal").read_text()
+-        restored=new.replace("constexpr int num_simdgroups = 4;","constexpr int num_simdgroups = 2;").replace("  if (out_row >= out_vec_size) return;  // Whole-SIMD padded-row guard; N is divisible by R4.\n","")
++        restored=new.replace("constexpr int num_simdgroups = 8;","constexpr int num_simdgroups = 2;").replace("  if (out_row >= out_vec_size) return;  // Whole-SIMD padded-row guard; N is divisible by R4.\n","")
+         self.assertEqual(restored,old)
+         self.assertNotIn("math_mode",(D/"geometry.py").read_text())
+         # Installed helper/state exact source segments, not a new arithmetic formulation.
+@@ -35,15 +35,15 @@
+             p=g.prepare(mx,w,s,runtime_version="0.32.3",device_name="Apple M4 Max",architecture="applegpu_g16s")
+             self.assertIs(p.inputs[0],w);self.assertIs(p.inputs[1],s);self.assertEqual(mx.factories,[])
+             self.assertEqual(p.project(Array((1,k),mx.bfloat16)),"sentinel-output")
+-            self.assertEqual(mx.calls[0]["grid"],(128,(n+15)//16,1));self.assertEqual(mx.calls[0]["threadgroup"],(128,1,1))
++            self.assertEqual(mx.calls[0]["grid"],(256,(n+31)//32,1));self.assertEqual(mx.calls[0]["threadgroup"],(256,1,1))
+             self.assertEqual(mx.calls[0]["template"],[("T",mx.bfloat16),("R",4)])
+             self.assertTrue(mx.factories[0]["ensure_row_contiguous"])
+     def test_row_ownership_and_padded_whole_simd_guard(self):
+         for n in [4,12,20,*[n for n,k in g.ELIGIBLE_SHAPES]]:
+             out=[]
+-            for tile in range((n+15)//16):
+-                for sg in range(4):
+-                    start=tile*16+sg*4
++            for tile in range((n+31)//32):
++                for sg in range(8):
++                    start=tile*32+sg*4
+                     if start>=n:continue
+                     out.extend(range(start,start+4))
+             self.assertEqual(out,list(range(n)))
+--- V49/protocol.json
++++ V52/protocol.json
+@@ -1,5 +1,5 @@
+ {
+-  "candidate": "V49 original NVFP4 R4 SG2 to SG4 geometry only",
++  "candidate": "V52 original NVFP4 R4 SG2 to SG8 geometry only",
+   "initial_scope": {
+     "layer": 0,
+     "projection": "mlp.gate_proj",
+@@ -11,15 +11,15 @@
+   },
+   "math": {
+     "R": 4,
+-    "SIMD_groups_per_TG": 4,
++    "SIMD_groups_per_TG": 8,
+     "threadgroup": [
+-      128,
++      256,
+       1,
+       1
+     ],
+     "grid": [
+-      128,
+-      1088,
++      256,
++      544,
+       1
+     ],
+     "K_step": 512,
+@@ -27,7 +27,7 @@
+     "weight_scale_layout_unchanged": true,
+     "scale_fold": false,
+     "math_policy_override": false,
+-    "padded_row_guard": "whole SIMD returns if out_row>=N; source eligibility N%4==0; all actual declared shapes N%16==0"
++    "padded_row_guard": "whole SIMD returns if out_row>=N; N%4==0; actualN48 source-eligible uses padded SIMD groups, not GPU-qualified"
+   },
+   "numeric": {
+     "unchanged_SG2_R4_vs_native_QMM": 9,
+@@ -123,5 +123,10 @@
+   "source_eligible_shapes_are_not_GPU_qualified": true,
+   "old_STOPs_preserved": true,
+   "adopted": false,
+-  "author_GPU": false
++  "author_GPU": false,
++  "prior_V49_STOP_preserved": {
++    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/kernel-micro-v49-attempt1/child-output/result.json",
++    "sha256": "d1d6467ce367994f5c0d9e82e65b1d4ed8e64a747f97800cb3d9a59275784441",
++    "status": "CONTROL_DRIFT_STOP"
++  }
+ }

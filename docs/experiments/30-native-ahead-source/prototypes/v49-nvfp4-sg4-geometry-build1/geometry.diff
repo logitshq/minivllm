@@ -1,0 +1,19 @@
+--- installed-selected-R4-SG2
++++ V49-R4-SG4
+@@ -253,7 +253,7 @@
+     uint simd_gid [[simdgroup_index_in_threadgroup]],
+     uint simd_lid [[thread_index_in_simdgroup]]) {
+   constexpr int packs_per_thread = 2;
+-  constexpr int num_simdgroups = 2;
++  constexpr int num_simdgroups = 4;
+   constexpr int pack_factor = get_pack_factor<32, bits>();
+   constexpr int bytes_per_pack = get_bytes_per_pack<32>();
+   constexpr int values_per_thread = pack_factor * packs_per_thread;
+@@ -271,6 +271,7 @@
+   const int in_vec_size_g = in_vec_size / group_size;
+   const int out_row = tid.y * (num_simdgroups * results_per_simdgroup) +
+       simd_gid * results_per_simdgroup;
++  if (out_row >= out_vec_size) return;  // Whole-SIMD padded-row guard; N is divisible by R4.
+ 
+   ws += out_row * in_vec_size_w + simd_lid * packs_per_thread * bytes_per_pack;
+   scales += out_row * in_vec_size_g + simd_lid / scale_step_per_thread;

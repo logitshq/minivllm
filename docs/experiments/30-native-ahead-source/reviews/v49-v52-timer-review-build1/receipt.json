@@ -1,0 +1,933 @@
+{
+  "GPU_used": false,
+  "conclusion": "No concrete compile/consumption/timing-boundary asymmetry found. mx.eval consumes each output; cold execution outside timing; Python tracing stable; pair probes/hashes outside both blocks. Startup/trend observations do not identify physical cause. Host-wall includes compiled API, allocation/eval/wait; no GPU-only timestamps/frequency/within-block subwindows. No threshold relaxation, rerun reclassification or performance/adoption claim.",
+  "cross_run_A_ratio_52_div49": 1.0688727826978752,
+  "cross_run_B_ratio_52_div49": 1.0229863577553933,
+  "observed": {
+    "49": {
+      "20_timed_and_20_prime_envelopes": [
+        {
+          "gap_since_previous_block_s": null,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 0,
+          "prime_seconds": 0.495060666,
+          "prime_us_per_call": 241.7288408203125,
+          "slot": 1,
+          "timed_seconds": 0.48119475,
+          "timed_us_per_call": 234.9583740234375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.6083e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 0,
+          "prime_seconds": 0.483229375,
+          "prime_us_per_call": 235.95184326171875,
+          "slot": 2,
+          "timed_seconds": 0.482494334,
+          "timed_us_per_call": 235.5929365234375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.19236975,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 1,
+          "prime_seconds": 0.492751791,
+          "prime_us_per_call": 240.60146044921876,
+          "slot": 1,
+          "timed_seconds": 0.462257416,
+          "timed_us_per_call": 225.71162890625,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.9167e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 1,
+          "prime_seconds": 0.410268042,
+          "prime_us_per_call": 200.3261923828125,
+          "slot": 2,
+          "timed_seconds": 0.414216583,
+          "timed_us_per_call": 202.25419091796874,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.192519209,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 2,
+          "prime_seconds": 0.431878708,
+          "prime_us_per_call": 210.878275390625,
+          "slot": 1,
+          "timed_seconds": 0.4186515,
+          "timed_us_per_call": 204.419677734375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 1.8542e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 2,
+          "prime_seconds": 0.413443083,
+          "prime_us_per_call": 201.87650537109374,
+          "slot": 2,
+          "timed_seconds": 0.41435275,
+          "timed_us_per_call": 202.3206787109375,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.191856916,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 3,
+          "prime_seconds": 0.49297525,
+          "prime_us_per_call": 240.7105712890625,
+          "slot": 1,
+          "timed_seconds": 0.485411667,
+          "timed_us_per_call": 237.01741552734376,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 1.7042e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 3,
+          "prime_seconds": 0.485417625,
+          "prime_us_per_call": 237.02032470703125,
+          "slot": 2,
+          "timed_seconds": 0.48349775,
+          "timed_us_per_call": 236.0828857421875,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.191892875,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 4,
+          "prime_seconds": 0.496847042,
+          "prime_us_per_call": 242.6010947265625,
+          "slot": 1,
+          "timed_seconds": 0.47329675,
+          "timed_us_per_call": 231.1019287109375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.1042e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 4,
+          "prime_seconds": 0.416203208,
+          "prime_us_per_call": 203.22422265625,
+          "slot": 2,
+          "timed_seconds": 0.415838667,
+          "timed_us_per_call": 203.04622412109376,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.200286208,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 5,
+          "prime_seconds": 0.43045725,
+          "prime_us_per_call": 210.1842041015625,
+          "slot": 1,
+          "timed_seconds": 0.416996333,
+          "timed_us_per_call": 203.61149072265624,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.0333e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 5,
+          "prime_seconds": 0.41785775,
+          "prime_us_per_call": 204.0321044921875,
+          "slot": 2,
+          "timed_seconds": 0.415531542,
+          "timed_us_per_call": 202.8962607421875,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.191314625,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 6,
+          "prime_seconds": 0.49057425,
+          "prime_us_per_call": 239.5382080078125,
+          "slot": 1,
+          "timed_seconds": 0.484612792,
+          "timed_us_per_call": 236.62733984375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 1.775e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 6,
+          "prime_seconds": 0.482851,
+          "prime_us_per_call": 235.76708984375,
+          "slot": 2,
+          "timed_seconds": 0.482863542,
+          "timed_us_per_call": 235.7732138671875,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.195047958,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 7,
+          "prime_seconds": 0.494946708,
+          "prime_us_per_call": 241.673197265625,
+          "slot": 1,
+          "timed_seconds": 0.465249833,
+          "timed_us_per_call": 227.17277001953124,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 1.8583e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 7,
+          "prime_seconds": 0.416561167,
+          "prime_us_per_call": 203.39900732421876,
+          "slot": 2,
+          "timed_seconds": 0.41688025,
+          "timed_us_per_call": 203.5548095703125,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.192862875,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 8,
+          "prime_seconds": 0.457161375,
+          "prime_us_per_call": 223.22332763671875,
+          "slot": 1,
+          "timed_seconds": 0.41819025,
+          "timed_us_per_call": 204.1944580078125,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.5125e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 8,
+          "prime_seconds": 0.418279792,
+          "prime_us_per_call": 204.2381796875,
+          "slot": 2,
+          "timed_seconds": 0.417864291,
+          "timed_us_per_call": 204.03529833984376,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.212011,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 9,
+          "prime_seconds": 0.430654417,
+          "prime_us_per_call": 210.28047705078126,
+          "slot": 1,
+          "timed_seconds": 0.417310333,
+          "timed_us_per_call": 203.76481103515624,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 1.9459e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 9,
+          "prime_seconds": 0.41517775,
+          "prime_us_per_call": 202.7235107421875,
+          "slot": 2,
+          "timed_seconds": 0.41605375,
+          "timed_us_per_call": 203.1512451171875,
+          "variant": "B"
+        }
+      ],
+      "cold_startup": [
+        {
+          "cold_eval_host_ns": 671334,
+          "cold_fncall_host_ns": 33916,
+          "factory_ns": 16542,
+          "factory_plus_cold_total_ns": 721834,
+          "scope": "cold compile/first shader execution outside timing; host walls",
+          "trace_counts": {
+            "A": 1,
+            "B": 0
+          },
+          "variant": "A"
+        },
+        {
+          "cold_eval_host_ns": 878542,
+          "cold_fncall_host_ns": 126375,
+          "factory_ns": 1917,
+          "factory_plus_cold_total_ns": 1006917,
+          "scope": "cold compile/first shader execution outside timing; host walls",
+          "trace_counts": {
+            "A": 1,
+            "B": 1
+          },
+          "variant": "B"
+        }
+      ],
+      "control_medians": {
+        "A": 1.0009606464436978,
+        "B": 0.9465311354785528
+      },
+      "control_passed": false,
+      "control_ratios": {
+        "A": [
+          1.002700744345195,
+          0.9992205485422005
+        ],
+        "B": [
+          0.8960734185387303,
+          0.9969888524183752
+        ]
+      },
+      "input_fingerprints": [
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 0,
+          "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 1,
+          "sha256": "6174f3eb65d248cadce0a5af1d0cec459e2c5d164b3a355c764d362f78d6e7b2",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 2,
+          "sha256": "f4ad9d481975df2f181efa55c17f3ebb7a3378124831cc698e2c9e2bd5872a50",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 3,
+          "sha256": "7295ac01dac1beba670811ca7db8faa607ba0075769ae1a2875932a2f5e729fd",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 4,
+          "sha256": "c495493d2e5c2c95a3f153b6cf9b0579991651ce77b5d84641fabfb6bbac8da2",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 5,
+          "sha256": "e6d3226515cdbefa92812f25cdcf4d0d98c9b343d6951bc856bb9b307dad823e",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 6,
+          "sha256": "13366a01602e227b322a9e5fa9f081e2c36cabd05139a9432beb4b44ac2cafec",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 7,
+          "sha256": "702b79073eec6d2416ff6deacbaaa2f3bab8dc4ce8ad907ba2ef69d9b5adad80",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": "historical-real-L0",
+          "sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": false
+        }
+      ],
+      "medians_ns": {
+        "A": 217760.80322265625,
+        "B": 215392.13037109375
+      },
+      "no_retrace": {
+        "all_captured_inputs_readonly": true,
+        "no_retrace": true,
+        "trace_counts_after_timing": {
+          "A": 1,
+          "B": 1
+        },
+        "trace_counts_before_timing": {
+          "A": 1,
+          "B": 1
+        }
+      },
+      "pairs_sha256": "9c1b826b7dc0ae060c7ca5c0e9d6a2c1cf05956eaf721888d1ee48f15c0fd63b",
+      "reduction": 0.01087740684507199,
+      "resource_samples": 25,
+      "resources_nominal": true,
+      "result_sha256": "d1d6467ce367994f5c0d9e82e65b1d4ed8e64a747f97800cb3d9a59275784441",
+      "source_driver_sha256": "56b875c805b89a5814d1f8833edf2960bb8306c61bf043cf4cb9817d70cd2dde",
+      "source_timer_line": 168,
+      "source_timer_sha256": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279",
+      "wins": 3
+    },
+    "52": {
+      "20_timed_and_20_prime_envelopes": [
+        {
+          "gap_since_previous_block_s": null,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 0,
+          "prime_seconds": 0.452509542,
+          "prime_us_per_call": 220.9519248046875,
+          "slot": 1,
+          "timed_seconds": 0.451689625,
+          "timed_us_per_call": 220.55157470703125,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 3.0875e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 0,
+          "prime_seconds": 0.455103917,
+          "prime_us_per_call": 222.21870947265626,
+          "slot": 2,
+          "timed_seconds": 0.440020667,
+          "timed_us_per_call": 214.85384130859376,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.189926958,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 1,
+          "prime_seconds": 0.465280167,
+          "prime_us_per_call": 227.18758154296876,
+          "slot": 1,
+          "timed_seconds": 0.41411825,
+          "timed_us_per_call": 202.2061767578125,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.7167e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 1,
+          "prime_seconds": 0.417439958,
+          "prime_us_per_call": 203.8281044921875,
+          "slot": 2,
+          "timed_seconds": 0.416137542,
+          "timed_us_per_call": 203.1921591796875,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.198869333,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 2,
+          "prime_seconds": 0.427363625,
+          "prime_us_per_call": 208.67364501953125,
+          "slot": 1,
+          "timed_seconds": 0.417500583,
+          "timed_us_per_call": 203.85770654296874,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.2167e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 2,
+          "prime_seconds": 0.418503792,
+          "prime_us_per_call": 204.3475546875,
+          "slot": 2,
+          "timed_seconds": 0.416614292,
+          "timed_us_per_call": 203.424947265625,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.191416875,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 3,
+          "prime_seconds": 0.500868083,
+          "prime_us_per_call": 244.56449365234374,
+          "slot": 1,
+          "timed_seconds": 0.48204275,
+          "timed_us_per_call": 235.3724365234375,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.775e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 3,
+          "prime_seconds": 0.490559334,
+          "prime_us_per_call": 239.5309248046875,
+          "slot": 2,
+          "timed_seconds": 0.490740542,
+          "timed_us_per_call": 239.6194052734375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.192121375,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 4,
+          "prime_seconds": 0.50430525,
+          "prime_us_per_call": 246.2427978515625,
+          "slot": 1,
+          "timed_seconds": 0.467016958,
+          "timed_us_per_call": 228.0356240234375,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.3542e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 4,
+          "prime_seconds": 0.41629475,
+          "prime_us_per_call": 203.2689208984375,
+          "slot": 2,
+          "timed_seconds": 0.420483042,
+          "timed_us_per_call": 205.3139853515625,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.189898333,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 5,
+          "prime_seconds": 0.468036333,
+          "prime_us_per_call": 228.53336572265624,
+          "slot": 1,
+          "timed_seconds": 0.420222875,
+          "timed_us_per_call": 205.18695068359375,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.3334e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 5,
+          "prime_seconds": 0.42102725,
+          "prime_us_per_call": 205.5797119140625,
+          "slot": 2,
+          "timed_seconds": 0.420921666,
+          "timed_us_per_call": 205.5281572265625,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.191595167,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 6,
+          "prime_seconds": 0.49994875,
+          "prime_us_per_call": 244.1156005859375,
+          "slot": 1,
+          "timed_seconds": 0.48636225,
+          "timed_us_per_call": 237.4815673828125,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.45e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 6,
+          "prime_seconds": 0.487351125,
+          "prime_us_per_call": 237.96441650390625,
+          "slot": 2,
+          "timed_seconds": 0.487319042,
+          "timed_us_per_call": 237.9487509765625,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 0.192188791,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 7,
+          "prime_seconds": 0.499242542,
+          "prime_us_per_call": 243.7707724609375,
+          "slot": 1,
+          "timed_seconds": 0.488514417,
+          "timed_us_per_call": 238.53243017578126,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.8667e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "AB",
+          "pair": 7,
+          "prime_seconds": 0.491875833,
+          "prime_us_per_call": 240.17374658203124,
+          "slot": 2,
+          "timed_seconds": 0.488878541,
+          "timed_us_per_call": 238.71022509765626,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.215521,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 8,
+          "prime_seconds": 0.480488959,
+          "prime_us_per_call": 234.61374951171874,
+          "slot": 1,
+          "timed_seconds": 0.427219042,
+          "timed_us_per_call": 208.6030478515625,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 2.6291e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 8,
+          "prime_seconds": 0.421100417,
+          "prime_us_per_call": 205.61543798828126,
+          "slot": 2,
+          "timed_seconds": 0.421066167,
+          "timed_us_per_call": 205.59871435546876,
+          "variant": "A"
+        },
+        {
+          "gap_since_previous_block_s": 0.19611875,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 9,
+          "prime_seconds": 0.435674416,
+          "prime_us_per_call": 212.7316484375,
+          "slot": 1,
+          "timed_seconds": 0.421369458,
+          "timed_us_per_call": 205.7468056640625,
+          "variant": "B"
+        },
+        {
+          "gap_since_previous_block_s": 2.8959e-05,
+          "hashes": [
+            "5de38b5a8969d6685ec797a7d69a5f497c267596dc12b96814d81e3b64a546ef"
+          ],
+          "kind": "position-control",
+          "pair": 9,
+          "prime_seconds": 0.419258625,
+          "prime_us_per_call": 204.71612548828125,
+          "slot": 2,
+          "timed_seconds": 0.41998675,
+          "timed_us_per_call": 205.0716552734375,
+          "variant": "B"
+        }
+      ],
+      "cold_startup": [
+        {
+          "cold_eval_host_ns": 598542,
+          "cold_fncall_host_ns": 30000,
+          "factory_ns": 17833,
+          "factory_plus_cold_total_ns": 646500,
+          "scope": "cold compile/first shader execution outside timing; host walls",
+          "trace_counts": {
+            "A": 1,
+            "B": 0
+          },
+          "variant": "A"
+        },
+        {
+          "cold_eval_host_ns": 83329875,
+          "cold_fncall_host_ns": 124000,
+          "factory_ns": 10667,
+          "factory_plus_cold_total_ns": 83464667,
+          "scope": "cold compile/first shader execution outside timing; host walls",
+          "trace_counts": {
+            "A": 1,
+            "B": 1
+          },
+          "variant": "B"
+        }
+      ],
+      "control_medians": {
+        "A": 0.9798819132305504,
+        "B": 1.000797330914346
+      },
+      "control_passed": false,
+      "control_ratios": {
+        "A": [
+          0.9741659817845052,
+          0.9855978446765956
+        ],
+        "B": [
+          1.0048761241505295,
+          0.9967185376781628
+        ]
+      },
+      "input_fingerprints": [
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 0,
+          "sha256": "84ff92691f909a05b224e1c56abb4864f01b4f8e3c854e4bb4c7baf1d3f6d652",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 1,
+          "sha256": "6174f3eb65d248cadce0a5af1d0cec459e2c5d164b3a355c764d362f78d6e7b2",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 2,
+          "sha256": "f4ad9d481975df2f181efa55c17f3ebb7a3378124831cc698e2c9e2bd5872a50",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 3,
+          "sha256": "7295ac01dac1beba670811ca7db8faa607ba0075769ae1a2875932a2f5e729fd",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 4,
+          "sha256": "c495493d2e5c2c95a3f153b6cf9b0579991651ce77b5d84641fabfb6bbac8da2",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 5,
+          "sha256": "e6d3226515cdbefa92812f25cdcf4d0d98c9b343d6951bc856bb9b307dad823e",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 6,
+          "sha256": "13366a01602e227b322a9e5fa9f081e2c36cabd05139a9432beb4b44ac2cafec",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": 7,
+          "sha256": "702b79073eec6d2416ff6deacbaaa2f3bab8dc4ce8ad907ba2ef69d9b5adad80",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": true
+        },
+        {
+          "bytes": 10240,
+          "dtype": "mlx.core.bfloat16",
+          "id": "historical-real-L0",
+          "sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66",
+          "shape": [
+            1,
+            5120
+          ],
+          "synthetic": false
+        }
+      ],
+      "medians_ns": {
+        "A": 232758.595703125,
+        "B": 220343.2109375
+      },
+      "no_retrace": {
+        "all_captured_inputs_readonly": true,
+        "no_retrace": true,
+        "trace_counts_after_timing": {
+          "A": 1,
+          "B": 1
+        },
+        "trace_counts_before_timing": {
+          "A": 1,
+          "B": 1
+        }
+      },
+      "pairs_sha256": "ae3be1eaa8da263496ef56e0b2e481153227ba0aa5a9a32b1c6da395ca8647aa",
+      "reduction": 0.053340177311691495,
+      "resource_samples": 25,
+      "resources_nominal": true,
+      "result_sha256": "0ffb5a6fc7d1b18d0a6d95510c8108678aa4d51614abcf7ba90ef74565d162a3",
+      "source_driver_sha256": "c6ab697dac029891f6260f37074a0353667041ad4b640c1cc9701b045cd997f5",
+      "source_timer_line": 168,
+      "source_timer_sha256": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279",
+      "wins": 5
+    }
+  },
+  "old_timer_contract": {
+    "block_lines": [
+      168,
+      186
+    ],
+    "control_arm_median": [
+      0.98,
+      1.02
+    ],
+    "control_lines": [
+      101,
+      103
+    ],
+    "each_control_ratio": [
+      0.95,
+      1.05
+    ],
+    "fixed_pool": 8,
+    "rows_per_simd": 4,
+    "same_prime_and_repeat": 2048,
+    "source_file": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/micro.py"
+  },
+  "status": "PASS_SAVED_TIMER_SOURCE_AND_CONTROL_ARITHMETIC_CPU_AUDIT"
+}

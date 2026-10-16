@@ -1,0 +1,56 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v45-native-http-screen-build1/server.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v58-native-http-screen-build1/server.py
+@@ -1,4 +1,4 @@
+-"""Explicit C1 native ICB benchmark adapter; ordinary token-ID engine prefill."""
++"""Explicit C1 depth2 async native ICB adapter; ordinary token-ID engine prefill."""
+ import argparse
+ import hashlib
+ import importlib.metadata
+@@ -52,6 +52,19 @@
+         json.dump(value, f, indent=2, allow_nan=False)
+ 
+ 
++def assert_pipeline(native, steps, resets):
++    p, f = native['pipeline'], native['feedback']
++    assert native['status'] == 'OK' and p['enabled'] and p['depth'] == 2
++    assert p['maximum_outstanding'] == 2 and p['inflight'] == 0 and p['pending'] == []
++    assert all(not x['busy'] for x in p['slots'])
++    assert p['total_submitted'] == p['total_completed'] == p['total_delivered'] == steps
++    assert p['total_discarded'] == p['total_failed'] == 0
++    assert p['request_submitted'] == p['request_completed'] == p['request_delivered'] == 31
++    assert p['request_discarded'] == p['request_failed'] == 0
++    assert f['total_steps'] == f['icb']['execution_count'] == steps and f['resets'] == resets
++    assert f['icb']['bank_executions'] == [16 * resets, 15 * resets]
++
++
+ def work():
+     global adapter
+     try:
+@@ -89,6 +102,7 @@
+             adapter_sha256=config['source_pins'][config['adapter_source']],
+             prior_fullqual_sha256=config['fullqual_receipt_sha256'], prefix_cache=0,
+             startup_ordinary_warm_requests=1, startup_ordinary_warm_tokens=32,
++            async_pipeline_depth=2, pipeline_native_library='native55build2',
+             client_warm_requests=3, measurement_hooks=False,
+             cache_policy='fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback')
+         write_new(a.run_dir / 'startup-metadata.json', runtime_identity)
+@@ -120,6 +134,8 @@
+                     assert f['total_steps'] == 93 and f['resets'] == 3
+                     assert f['icb']['execution_count'] == 93 and f['icb']['bank_executions'] == [48, 45]
+                     assert f['pingpong']['eligible_count'] == 48
++                    assert_pipeline(native, 93, 3)
++                    assert not adapter.pending and adapter.total_submitted == 93 and adapter.total_discarded == 0
+                     write_new(a.run_dir / 'warm-metadata-pending.json', {
+                         'completed_requests': 3, 'native_steps': 93, 'native': native,
+                         'parameter_tree_unchanged': True, 'terminal_cleanup': True,
+@@ -142,7 +158,9 @@
+  def do_GET(self):
+   if self.path=='/benchmark-state':
+    if not ready.is_set() or fail:self.send_error(503);return
+-   body=json.dumps({'native':adapter.report(),'native_steps':adapter.native_steps,'request_count':adapter.request_count,'active':adapter.active}).encode()
++   native=adapter.report();assert_pipeline(native,186,6)
++   assert adapter.active is None and not adapter.pending and adapter.total_submitted==186 and adapter.total_discarded==0
++   body=json.dumps({'native':native,'native_steps':adapter.native_steps,'request_count':adapter.request_count,'active':adapter.active}).encode()
+    self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body);return
+   if not ready.is_set() or fail:self.send_error(503);return
+   body=json.dumps({'data':[{'id':'tutorial-core'}],'benchmark_identity':runtime_identity}).encode();self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)

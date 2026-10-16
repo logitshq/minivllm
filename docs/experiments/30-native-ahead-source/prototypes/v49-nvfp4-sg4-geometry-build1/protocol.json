@@ -1,0 +1,127 @@
+{
+  "candidate": "V49 original NVFP4 R4 SG2 to SG4 geometry only",
+  "initial_scope": {
+    "layer": 0,
+    "projection": "mlp.gate_proj",
+    "N": 17408,
+    "K": 5120,
+    "tensor_range_bytes": 50135040,
+    "extra_weight_bytes": 0,
+    "full_model": false
+  },
+  "math": {
+    "R": 4,
+    "SIMD_groups_per_TG": 4,
+    "threadgroup": [
+      128,
+      1,
+      1
+    ],
+    "grid": [
+      128,
+      1088,
+      1
+    ],
+    "K_step": 512,
+    "native_decode_qdot_accum_simdsum_cast_unchanged": true,
+    "weight_scale_layout_unchanged": true,
+    "scale_fold": false,
+    "math_policy_override": false,
+    "padded_row_guard": "whole SIMD returns if out_row>=N; source eligibility N%4==0; all actual declared shapes N%16==0"
+  },
+  "numeric": {
+    "unchanged_SG2_R4_vs_native_QMM": 9,
+    "compiled_A_vs_native_QMM": 9,
+    "compiled_B_vs_native_QMM": 9,
+    "compiled_B_vs_A": 9,
+    "total": 36,
+    "inputs": "8fixedsynthetic+1historicalL0real; no new real capture",
+    "readonly_pre_post": true,
+    "first_failure": "STOP before timing",
+    "qualify_only_mode": "exit0 after36strict/readonly, no timing; explicitpowerdomain defaultsAC"
+  },
+  "timing": {
+    "A": "mx.compile(native mx.quantized_matmul,shapeless=False)",
+    "B": "mx.compile(same R4 math SG4 helper,shapeless=False)",
+    "prime": 2048,
+    "repeats": 2048,
+    "rotating_inputs": 8,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ],
+    "every_output_eval": true,
+    "hashes": "after both timed blocks only",
+    "timeout_s": 170
+  },
+  "resources": {
+    "AC": true,
+    "thermal": [
+      0,
+      1
+    ],
+    "pressure": 1,
+    "raw_first": true,
+    "original_guard": true,
+    "cache_limit_bytes": 2147483648,
+    "owned_direct_child_cleanup": true,
+    "power_domain": {
+      "default": "AC Power",
+      "explicit_exploratory_option": "Battery Power",
+      "must_remain_same_domain": "all probes exactly equal declared source",
+      "Battery_result_is_not_AC_frontier": true
+    }
+  },
+  "source_eligible_shapes_are_not_GPU_qualified": true,
+  "old_STOPs_preserved": true,
+  "adopted": false,
+  "author_GPU": false
+}

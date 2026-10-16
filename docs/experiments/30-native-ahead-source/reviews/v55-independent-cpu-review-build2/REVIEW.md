@@ -1,0 +1,17 @@
+# V55 build2 + V56 adapter independent CPU review
+- Status: STATIC_FIXES_CONFIRMED; NO_NEW_BLOCKING_FINDING in the reviewed single-scheduler-thread normal path. This is not a Metal/numerical/performance PASS.
+- V55 replay.mm SHA bf87911a64bf9ed971f1f03e30d690cabdf139b7158c65ba15438624bbebdb01; V56 native_runner.py SHA af252476a377e9624173a8dbb028650c283b56d5beb0248639b0f00c271dbd59; unchanged during review.
+- V55 prior P1 CLOSED: replay.mm:184 now takes S().lock before :185 canWriteSeed/written checks and :188 memcpy. Concurrent submit cannot interleave guard and input write.
+- V55 prior P2 CLOSED by explicit contract clarification at :368: empty drain retains last delivered result; nonempty drain discards. Behavior and report now agree. No core or ABI change from build1.
+- V55 diff has only those two fixes; build1 and V40 donor remain unchanged. Other native invariants/limitations remain as recorded in v55-independent-cpu-review-build1/REVIEW.md.
+- V56: the frozen V41 parent SHA is verified at import; parent implements full graph/131-input seed registration, fixed C1/capacity256, eligible fresh greedy request, and whole-request fallback before activation.
+- run():76–84 falls back before activation for ineligible request or non256 cache; once active, :85–91 assert continuity rather than using stale ordinary cache for a mid-request fallback. Native failure is fail-stop, not an invisible fallback.
+- Budget :72 is max_tokens minus already emitted outputs. With max_tokens32 and one prefill prediction it is31; :94 bounds total submitted to31, so the max-token tail submits no 32nd native step.
+- Refill :94–100 occurs only before the next wait and after the previous prediction was copied/consumed. At most2 native tickets exist; :102 waits oldest and :105 copies current delivered prediction, not the queued future slot.
+- Copying prediction consumes the native last result. The adapter does not access other outputs later, so next refill may safely overwrite the earlier S output bank under the depth2 contract.
+- Early EOS/drop :112–122 calls native drain before clearing pending/active and original_drop. A normal early stop has at most1 queued successor, discarded without exposing its prediction; native cache is not reused by the old runner.
+- Request reuse: begin() requires empty pending, resets native, uploads every exact input, refreshes active/submitted/budget; inherited C1 scheduler cannot consume stale cache from an active native request.
+- CPU check: AST-extracted run/drop only, 37 mocked control scenarios across budgets1/2/3/31 and every early stop, plus inactive whole fallback after drop, passed FIFO/maxdepth/consume/budget/drain-before-drop invariants. host-control-CPU.json records traces.
+- Mock checks intentionally do not load the module/parent/native dylib, MLX or NumPy and cannot establish actual Metal ordering, numerical equality, EOS model behavior, fullmodel capacity or performance.
+- ABI error paths propagate and retain fail-stop behavior; external owner still must drain/terminate safely on exceptions. No new fallback or exception-swallowing path was introduced.
+- No source, frozen evidence or other agent files were edited. Only this new review directory was written. Ready for root's separately authorized numerical qualification; no GO is granted here.

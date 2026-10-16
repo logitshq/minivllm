@@ -1,0 +1,212 @@
+{
+  "V56": {
+    "banks": [
+      84,
+      78
+    ],
+    "cleanup": {
+      "child": 75478,
+      "owner": 75469,
+      "reaped_exit0": true,
+      "saved_external_strict_absence": true
+    },
+    "completed_submitted": 162,
+    "core_steps_every132": 93,
+    "delivered": 161,
+    "discarded": 1,
+    "early_all132_checks": 0,
+    "other_full_checks": "postfallback final132; postearlystop final132",
+    "readonly": true,
+    "receipt_sha256": "3405239d749a876a09f896a3ef06fc1f6603a317f24ba87c7711b53782435089",
+    "resets": 6,
+    "resources": {
+      "AC": true,
+      "Swapouts_growth": 0,
+      "files": {
+        "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v56native-attempt1/child-output/resources-derived.json": {
+          "Pageouts_growth": 347,
+          "raw_manifest_sha256": "58589e6cc117689f437a7b59dc47d41ffef84e60dd24d046a2a9e3aa6e1fd557",
+          "samples": 8
+        },
+        "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v56native-attempt1/external-resource.json": {
+          "Pageouts_growth": 0,
+          "raw_manifest_sha256": "092335c031fd67ea661236e5419e4bba27c6f5d0fcb574b0789a3e4489f930ec",
+          "samples": 1
+        },
+        "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v56native-attempt1/resource-derived.json": {
+          "Pageouts_growth": 347,
+          "raw_manifest_sha256": "be6a1a348daaf0e623820f3e6c86608797c9d5d8e8f6b77fc0216c2b10d4708d",
+          "samples": 10
+        }
+      },
+      "minimum_free_percent": 47,
+      "pressure_levels": [
+        1
+      ],
+      "samples": 19,
+      "swap_MB_growth": 0,
+      "thermal_codes": [
+        0
+      ]
+    },
+    "source_pins": 79,
+    "strict_hashes": 12540
+  },
+  "V58": {
+    "completed2_descriptive": [
+      {
+        "E2E_s": 1.236875707982108,
+        "engine": "native",
+        "label": "C1-B1-native",
+        "ttft_s": 0.15899029199499637,
+        "x": 28.758411255456778,
+        "y": 25.87163754085378
+      },
+      {
+        "E2E_s": 1.2577460000175051,
+        "engine": "omlx",
+        "label": "C1-B1-omlx",
+        "ttft_s": 0.2145768750051502,
+        "x": 29.717137189650668,
+        "y": 25.44233891386228
+      }
+    ],
+    "controller_pins": 14,
+    "driver_exit": 1,
+    "external_all_server_aggregate_exists": false,
+    "first_bad_power": {
+      "arm": "C1-B1-lithos",
+      "label": "after-C1-measure-1",
+      "raw_file": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v58-attempt1/child-output/C1-B1-lithos/resources-12-raw.json",
+      "sha256": "d661ae356a107eb14a42279feb0e29c40120b7550cb64fa598e8d889f006323b"
+    },
+    "min_free_percent": 44,
+    "native_pipeline": {
+      "banks": [
+        96,
+        90
+      ],
+      "delivered_completed": 186,
+      "depth": 2,
+      "discarded": 0,
+      "resets": 6
+    },
+    "native_raw_ID_tokens": 192,
+    "owner_and_external_samples": [
+      {
+        "file": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v58-attempt1/child-output/owner-resources-00-raw.json",
+        "label": "before-campaign",
+        "power": "AC Power",
+        "sha256": "63ded79f9693081059ca8320e19e23588e462dd0c0d39055e4714f532b8fbec3"
+      },
+      {
+        "file": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v58-attempt1/child-output/owner-resources-01-raw.json",
+        "label": "after-campaign",
+        "power": "Battery Power",
+        "sha256": "477cd9ce7bce7f30479f5b564002e746d206f1b3e21c4b5a1142d52adc0830d9"
+      },
+      {
+        "file": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v58-attempt1/external-resource-00-raw.json",
+        "label": "external-release-native-http-v58-attempt1",
+        "power": "AC Power",
+        "sha256": "2bbf763f84cd67b6f9b1ea3cf1ce5e0fbdb732e6d9bcbd4e71004841a1404289"
+      }
+    ],
+    "owner_cleanup_exists": false,
+    "owner_driver_external_absence": [
+      {
+        "pid": 76107,
+        "returncode": 1,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "pid": 76108,
+        "returncode": 1,
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "per_arm_raw_resource_samples": 48,
+    "per_arm_swap_MB_and_SO_growth": 0,
+    "planned9_completed2": true,
+    "pressure_levels": [
+      1
+    ],
+    "runtime_source_pins": 83,
+    "saved_HTTP_groups": 17,
+    "saved_HTTP_tokens": 544,
+    "servers_perarm_wait_strict_absence_ports": [
+      {
+        "arm": "C1-B1-lithos",
+        "pid": 76519,
+        "port": 59701,
+        "saved_ECONNREFUSED": 61,
+        "saved_strict_absence": {
+          "absent": true,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "76519",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "pid": 76519,
+          "returncode": 1,
+          "stderr": "",
+          "stdout": ""
+        },
+        "waited_returncode": -15
+      },
+      {
+        "arm": "C1-B1-native",
+        "pid": 76127,
+        "port": 59645,
+        "saved_ECONNREFUSED": 61,
+        "saved_strict_absence": {
+          "absent": true,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "76127",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "pid": 76127,
+          "returncode": 1,
+          "stderr": "",
+          "stdout": ""
+        },
+        "waited_returncode": -15
+      },
+      {
+        "arm": "C1-B1-omlx",
+        "pid": 76309,
+        "port": 59679,
+        "saved_ECONNREFUSED": 61,
+        "saved_strict_absence": {
+          "absent": true,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "76309",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "pid": 76309,
+          "returncode": 1,
+          "stderr": "",
+          "stdout": ""
+        },
+        "waited_returncode": -15
+      }
+    ],
+    "source_pins_sha256": "6eabc41bbf3c444b8db4b70fb7f6aae0fe7f793bc0ca896c6042504e5c4af1ba",
+    "suite_complete_exists": false,
+    "thermal_codes": [
+      0
+    ]
+  },
+  "scope": "Saved hash/counter/source/stat/resource/absence evidence only; no independent GPU recomputation. V58 STOP remains unqualified; two complete AC arms descriptive only; incomplete Lithos arm has two measure files excluded; no pooled AC/Battery curve or adoption.",
+  "status": "PASS_SAVED_V56_NUMERIC_AND_V58_POWER_STOP_CPU_AUDIT"
+}

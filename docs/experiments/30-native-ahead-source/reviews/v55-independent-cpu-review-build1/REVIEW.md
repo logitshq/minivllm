@@ -1,0 +1,18 @@
+# V55 independent CPU source review
+- Verdict: STATIC_REVIEW_WITH_FINDINGS; no Metal/GPU qualification, runtime import, CPU compile, kernel/test execution, model load or resource probe performed.
+- Frozen identity confirmed: replay.mm 45c303302da2a67b28ac7eecc9b04df252e7a69aef728745dc04622dbbed20bc; core b3d3fcc398fad78900af83e6d0c85eea99517a0a90bc8e415ae1eee087bd6e1b.
+- Smoke identity: 9b423c26230669cffc94d1a4953234fa502756f8453a749b7ecd3e5b6619cd52; native/ABI/smoke hashes unchanged during review; donor read-only.
+- [P1, conditional on concurrent host ABI calls] replay.mm:183–187 checks canWriteSeed()/written before taking S().lock. Thread W can pass, thread S submit first GPU work, then W acquire lock and pass F.steps==0 while no ticket has been waited. W memcpy can race with GPU input reads.
+- Minimal fix: acquire the mutex before the async seed check. If ABI intentionally requires one host thread, document and enforce that restriction; current ABI.h does not state it. Sequential smoke/performance caller does not trigger this interleaving.
+- [P2] replay.mm:362 empty-pending drain does not clear lastValid; :367 advertises results readable only until drain. A delivered result remains readable after an empty drain.
+- Minimal fix: invalidate delivered result after any successful drain, or narrow the reported contract. No overwrite race follows solely from this mismatch.
+- FIFO: pipeline_core.h:13–28 caps pending at2, uses slot=requestSubmitted%2, verifies oldest ticket, and releases busy only after native wait observes completion/error.
+- Mapping: ticket1 readsA/writesB, ticket2 readsB/writesA. After wait1 CPU reads last.outputBank=B; queued ticket2 only readsB. Submission3 is blocked until consumption, then may overwriteB; APIs invalidate last result on submission.
+- Staged outputs use last.slot rather than global current slot; each slot remains busy until its oldest job is waited. State outputs bypass staging only through already-eligible whole-allocation pingpong mappings.
+- Fence chain: new graph waits previous ticket.feedbackDone; graphDone→capture→stageDone→feedback→feedbackDone is explicit. Slot0/1 fence ownership persists for process lifetime; no early fence release was found.
+- MTL command buffers are retained before commit, stored in jobs, waited synchronously, then released/erased once (:337–359). Completion/error checks precede release. Driver-level GPU failure/liveness cannot be proven statically.
+- Reset refuses pending work; routes through original restore only after no inflight; resets bank0, request counters and seed-upload set. After first submit seed writes are rejected in the single-host-thread path.
+- Drain ignores prior sticky errors only for discard wait, pops all retained jobs on completion/error and returns failure if sticky error remains; callers still need external process-lifetime ownership on failures.
+- OFF path donor diff: prior arithmetic, ICB mapping, synchronous encoders and feedback writes remain unchanged; added branches are gated by pipelineEnabled(), and pipelineRead() is a no-op when OFF. No OFF arithmetic regression identified.
+- Smoke exercises 3 requests×5 steps, depth2 FIFO, changed seeds, strict comparisons before refill and terminal empty drain. It does not establish concurrent-ABI safety or actual Metal correctness by source inspection.
+- No single-host-thread normal FIFO race was identified in this review; this is not a GPU PASS or permission to run. Native source, ABI and smoke were not edited.

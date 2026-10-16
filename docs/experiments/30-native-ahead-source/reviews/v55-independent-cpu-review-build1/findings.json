@@ -1,0 +1,25 @@
+{
+  "schema": "v55-independent-cpu-review-build1",
+  "status": "STATIC_REVIEW_WITH_FINDINGS_NO_METAL_EXECUTION",
+  "findings": [
+    {
+      "priority": 1,
+      "conditional": "concurrent host ABI callers; not triggered by sequential smoke.py",
+      "file": "/private/tmp/minivllm-engine-optimization-20261014/v55-native-async-build1/replay.mm",
+      "start": 183,
+      "end": 187,
+      "title": "Async seed guard is checked before acquiring the submission mutex",
+      "trigger": "Thread W passes canWriteSeed() before locking; thread S commits the first v55_submit_step and increments requestSubmitted while F.steps remains 0; W then acquires the lock, passes legacy F.steps==0 guard, and memcpy writes arena inputs while GPU may read them.",
+      "minimal_fix": "Acquire S().lock before the pipelineEnabled/canWriteSeed/written checks; alternatively explicitly restrict and enforce ABI calls to one host thread. The current ABI has no documented single-host-thread contract."
+    },
+    {
+      "priority": 2,
+      "file": "/private/tmp/minivllm-engine-optimization-20261014/v55-native-async-build1/replay.mm",
+      "start": 362,
+      "end": 367,
+      "title": "Empty drain leaves the delivered result readable despite report contract",
+      "trigger": "wait oldest -> copy/compare -> no pending -> v55_drain returns without clearing core.lastValid; resultBytes remains readable. Report explicitly says last result lasts only until next submit/reset/drain.",
+      "minimal_fix": "Clear lastValid/lastConsumed after successful drain, even when pending was initially empty, or revise the contract to explicitly retain the last delivered result on an empty drain."
+    }
+  ]
+}

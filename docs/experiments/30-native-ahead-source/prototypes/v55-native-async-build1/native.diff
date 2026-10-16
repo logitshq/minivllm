@@ -1,0 +1,151 @@
+--- frozen-native40build2/replay.mm
++++ V55-optional-async/replay.mm
+@@ -11,6 +11,8 @@
+ #include <cstdint>
+ #include <chrono>
+ #include <unordered_map>
++#include "pipeline_core.h"
++static bool pipelineEnabled();
+ 
+ // Single-child diagnostic only. No GPU dispatch in initialization.
+ struct Pin {uintptr_t addr; size_t size; std::string name;};
+@@ -107,8 +109,8 @@
+  for(auto a=S().buffers.begin();a!=S().buffers.end();++a)for(auto b=std::next(a);b!=S().buffers.end();++b){uintptr_t p=(uintptr_t)a->second.b.contents,q=(uintptr_t)b->second.b.contents;if(p&&q&&p<q+b->second.b.length&&q<p+a->second.b.length){fail("distinct MTLBuffer objects have overlapping host storage");return 1;}}
+  if(S().arenaBytes>S().device.maxBufferLength){fail("arena exceeds actual maxBufferLength");return 1;}S().arena=[S().device newBufferWithLength:S().arenaBytes options:S().arenaOptions];if(!S().arena){fail("owned fixed arena allocation failed");return 1;}S().built=true;return 0;}}
+ extern "C" int v33_register_output(uint64_t addr,uint64_t n,const char*name){std::lock_guard<std::recursive_mutex>l(S().lock);if(!S().built||!addr||!n){fail("output registration before arena");return 1;}for(auto&kv:S().buffers){auto&b=kv.second;uintptr_t base=(uintptr_t)b.b.contents;if(!b.zero&&!b.pinCandidate&&b.used&&base&&addr>=base&&n<=b.b.length&&addr-base<=b.b.length-n){uintptr_t writer=0;for(auto start:b.writeStarts)if(start<=addr&&start>=base)writer=start;if(writer){S().outputs.push_back({(uintptr_t)addr,(size_t)n,(size_t)(addr-base),kv.first,writer,name?name:"output"});return 0;}}}fail("output is not in-bounds in a captured written allocation after its writable binding offset");return 1;}
+-extern "C" int v33_restore_replay(){@autoreleasepool{std::lock_guard<std::recursive_mutex>l(S().lock);if(!S().built||!S().error.empty()||S().outputs.empty()){fail("replay requires valid arena and registered outputs");return 1;}for(auto&kv:S().buffers){auto&x=kv.second;if(x.used&&!x.zero)memcpy((char*)S().arena.contents+x.arena,x.initial.bytes,x.b.length);}id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];encodeGraph(e);[e endEncoding];[b commit];[b waitUntilCompleted];if(b.status!=MTLCommandBufferStatusCompleted||b.error){fail("native replay command buffer failed: "+text(b.error.localizedDescription));return 1;}++S().replays;return 0;}}
+-extern "C" int v33_copy_output(uint64_t addr,uint64_t n,void*dst){std::lock_guard<std::recursive_mutex>l(S().lock);if(!dst||!S().replays){fail("copy before replay");return 1;}for(auto&x:S().outputs)if(x.addr==addr&&x.size==n){auto&b=S().buffers.at(x.buffer);memcpy(dst,(char*)S().arena.contents+b.arena+x.offset,n);return 0;}fail("unregistered output copy");return 1;}
++extern "C" int v33_restore_replay(){@autoreleasepool{if(pipelineEnabled()){fail("legacy replay forbidden while async pipeline enabled");return 1;}std::lock_guard<std::recursive_mutex>l(S().lock);if(!S().built||!S().error.empty()||S().outputs.empty()){fail("replay requires valid arena and registered outputs");return 1;}for(auto&kv:S().buffers){auto&x=kv.second;if(x.used&&!x.zero)memcpy((char*)S().arena.contents+x.arena,x.initial.bytes,x.b.length);}id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];encodeGraph(e);[e endEncoding];[b commit];[b waitUntilCompleted];if(b.status!=MTLCommandBufferStatusCompleted||b.error){fail("native replay command buffer failed: "+text(b.error.localizedDescription));return 1;}++S().replays;return 0;}}
++extern "C" int v33_copy_output(uint64_t addr,uint64_t n,void*dst){if(pipelineEnabled()){fail("legacy output copy forbidden while async pipeline enabled");return 1;}std::lock_guard<std::recursive_mutex>l(S().lock);if(!dst||!S().replays){fail("copy before replay");return 1;}for(auto&x:S().outputs)if(x.addr==addr&&x.size==n){auto&b=S().buffers.at(x.buffer);memcpy(dst,(char*)S().arena.contents+b.arena+x.offset,n);return 0;}fail("unregistered output copy");return 1;}
+ extern "C" const char*v33_report_json(){@autoreleasepool{std::lock_guard<std::recursive_mutex>l(S().lock);NSMutableArray*buffers=[NSMutableArray array],*outputs=[NSMutableArray array],*fences=[NSMutableArray array],*events=[NSMutableArray array],*commits=[NSMutableArray array];for(auto&c:S().commitRecords)[commits addObject:@{@"CB_id":@(c.cb),@"CB_pointer":@(c.ptr),@"queue":@(c.queue),@"active_CB_id":@(c.active),@"active_CB_pointer":@(c.activePtr),@"parent_commit_CB_id":@(c.parent),@"parent_commit_CB_pointer":@(c.parentPtr),@"commit_depth":@(c.depth),@"duplicate":@(c.duplicate),@"proven_empty_same_queue":@(c.empty),@"lifetime_observed_compute_encoders":@(c.seen.compute),@"lifetime_observed_event_commands":@(c.seen.events),@"lifetime_observed_unknown_commands":@(c.seen.unknown)}];for(auto&c:S().commands)if(c.kind==7||c.kind==8)[events addObject:@{@"operation":c.kind==7?@"signal":@"wait",@"original_event":@(c.event),@"value":@(c.value),@"actual_CB_id":@(c.actualCB),@"actual_queue":@(c.actualQueue),@"producer_CB_id":@(c.producerCB),@"pre_capture":@(c.preCapture),@"completion_proof":[NSString stringWithUTF8String:c.completionProof.c_str()],@"native_lowering":@"full buffer barrier only; original event is never re-signaled"}];for(auto&c:S().commands)if(c.kind==5||c.kind==6)[fences addObject:@{@"operation":c.kind==5?@"update":@"wait",@"original_fence":@(c.fence),@"producer_CB_id":@(c.producerCB),@"pre_capture_completed_proof":@(c.preCapture),@"native_lowering":@"full buffer scope barrier"}];for(auto&kv:S().buffers){auto&b=kv.second;[buffers addObject:@{@"original_buffer":@(kv.first),@"original_contents":@((uintptr_t)b.b.contents),@"length":@(b.b.length),@"used":@(b.used),@"large":@(b.large),@"zero_copy":@(b.zero),@"pinned_parameter_candidate":@(b.pinCandidate),@"role":[NSString stringWithUTF8String:b.role.c_str()],@"arena_offset":@(b.arena),@"snapshot_bytes":@(b.initial.length),@"resource_options":@(b.b.resourceOptions),@"hazard_mode":@(b.b.hazardTrackingMode)}];}for(auto&o:S().outputs)[outputs addObject:@{@"label":[NSString stringWithUTF8String:o.name.c_str()],@"address":@(o.addr),@"bytes":@(o.size),@"original_buffer":@(o.buffer),@"original_offset":@(o.offset),@"captured_writable_binding_start":@(o.writtenStart),@"mapping_policy":@"bounded contiguous subrange in written original allocation; strict replay bytes gate"}];NSDictionary*r=@{@"status":S().error.empty()?@"OK":@"STOP",@"error":[NSString stringWithUTF8String:S().error.c_str()],@"dispatches":@(S().dispatches),@"original_CB_boundaries":@(S().boundaries),@"captured_CB_count":@(S().capturedCBs.size()),@"CB_encoding_order":@"strict noninterleaved; each committed before next CB encoding",@"commands":@(S().commands.size()),@"parameter_ranges_registered":@(S().pins.size()),@"parameter_pins_provisional_until_actual_binding":@YES,@"snapshot_bytes":@(S().snapshotBytes),@"arena_bytes":@(S().arenaBytes),@"zero_copy_buffer_bytes":@(S().zeroBytes),@"arena_built":@(S().built),@"native_replays":@(S().replays),@"buffers":buffers,@"outputs":outputs,@"fence_events":fences,@"event_commands":events,@"commit_records":commits,@"original_events_resignaled_during_replay":@NO,@"scope":@"one fixed-seed/L teacherforced single-CB replay; not ICB/autoregressive/performance"};NSData*data=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];S().report.assign((const char*)data.bytes,data.length);return S().report.c_str();}}
+ 
+ // V34: fixed-capacity feedback only. All arithmetic (including three scalar
+@@ -119,12 +121,21 @@
+ struct StepTiming {unsigned request,step;uint64_t graphEncode,feedbackEncode,encode,commit,wait,total;double gpuStart,gpuEnd;bool valid;};
+ struct Feedback {bool sealed=false,ready=false;unsigned stateCount=0,capacity=0,steps=0,resets=0,totalSteps=0;size_t stageBytes=0,seedUploadBytes=0,comparedBytes=0;id<MTLBuffer> stage=nil;id<MTLFence> graphDone=nil,stageDone=nil,feedbackDone=nil;std::vector<InputRange> inputs;std::vector<FeedbackLink> links;std::vector<StageRange> stages;std::set<uintptr_t> written;std::vector<StepTiming> timing;std::string timingReport,report;uintptr_t diffOutput=0;size_t diffOffset=0;unsigned diffActual=0,diffExpected=0;};
+ static Feedback&F(){static Feedback f;return f;}
++struct AsyncSlot {id<MTLBuffer> stage=nil;id<MTLFence> graphDone=nil,stageDone=nil,feedbackDone=nil;};
++struct AsyncJob {V55Ticket ticket;id<MTLCommandBuffer> cb=nil;uint64_t t0=0,graphEnd=0,encodeEnd=0,commitEnd=0;};
++struct AsyncTiming {V55Ticket ticket;unsigned request;uint64_t graphEncode,feedbackEncode,commit,hostWait,submittedToCompleted;double gpuStart,gpuEnd;bool success,discard;};
++struct AsyncPipeline {bool enabled=false,allowOldReset=false;unsigned depth=0,previousSlot=0;int32_t initialLength=0;V55Core core;AsyncSlot slots[2];std::map<uint64_t,AsyncJob> jobs;std::vector<AsyncTiming> timing;};
++static AsyncPipeline&A55(){static AsyncPipeline a;return a;}
++static bool pipelineEnabled(){return A55().enabled;}
++static NSDictionary*pipelineReport();
++static bool pipelineRead(){return !pipelineEnabled()||A55().core.read();}
++
+ static const InputRange*input(uintptr_t a,size_t n=0){for(auto&x:F().inputs)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const Output*output(uintptr_t a,size_t n=0){for(auto&x:S().outputs)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const StageRange*stage(uintptr_t a,size_t n=0){for(auto&x:F().stages)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const PingPair*pingOutput(uintptr_t a,size_t n=0){for(auto&p:PP().pairs)if(p.eligible&&p.output==a&&(!n||p.size==n))return &p;return nullptr;}
+ static unsigned eligiblePings(){unsigned n=0;for(auto&p:PP().pairs)n+=p.eligible;return n;}
+-static const unsigned char*resultBytes(uintptr_t a,size_t n){if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
++static const unsigned char*resultBytes(uintptr_t a,size_t n){if(pipelineEnabled()){auto&c=A55().core;if(!c.lastValid)return nullptr;if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(c.last.outputBank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)A55().slots[c.last.slot].stage.contents+x->offset;return nullptr;}if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
+ static uint64_t nowNS(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
+ static size_t arenaInput(const InputRange&x){return S().buffers.at(x.buffer).arena+x.offset;}
+ static size_t arenaOutput(const Output&x){return S().buffers.at(x.buffer).arena+x.offset;}
+@@ -164,16 +175,19 @@
+  F().timing.reserve(512);F().stateCount=states;F().capacity=capacity;F().sealed=true;return 0;
+ }}
+ extern "C" int v34_reset(){
++ if(pipelineEnabled()&&!A55().allowOldReset){fail("use v55_reset while async pipeline enabled");return 1;}
+  std::lock_guard<std::recursive_mutex>lock(S().lock);
+  if(!F().sealed||!S().error.empty()){fail("reset requires sealed valid feedback graph");return 1;}
+  restoreArena();PP().bank=0;F().steps=0;F().written.clear();F().ready=true;++F().resets;return 0;
+ }
+ extern "C" int v34_write_input(uint64_t addr,uint64_t n,const void*src){
++ if(pipelineEnabled()&&(!A55().core.canWriteSeed()||F().written.count(addr))){fail("async seed upload requires reset before submit, no inflight jobs and each range only once");return 1;}
+  std::lock_guard<std::recursive_mutex>lock(S().lock);auto*x=input(addr,n);
+  if(!F().ready||F().steps||!x||!src||!S().error.empty()){fail("request seed write must target exact registered input before first step");return 1;}
+  memcpy((char*)S().arena.contents+arenaInput(*x),src,n);F().written.insert(addr);F().seedUploadBytes+=n;return 0;
+ }
+ extern "C" int v34_replay_step(){@autoreleasepool{
++ if(pipelineEnabled()){fail("legacy synchronous replay forbidden while async pipeline enabled");return 1;}
+  std::lock_guard<std::recursive_mutex>lock(S().lock);
+  if(!F().sealed||!F().ready||!S().error.empty()||(!F().written.empty()&&F().written.size()!=F().inputs.size())){fail("feedback step requires reset and either full request seed upload or original captured seed");return 1;}
+  // This is a diagnostic host-synchronous API. Every preceding step completed.
+@@ -196,14 +210,14 @@
+ extern "C" int v34_copy_output(uint64_t addr,uint64_t n,void*dst){
+  std::lock_guard<std::recursive_mutex>lock(S().lock);auto*x=resultBytes(addr,n);
+  if(!x||!dst||!F().steps){fail("output copy requires exact staged output after step");return 1;}
+- memcpy(dst,x,n);return 0;
++ memcpy(dst,x,n);pipelineRead();return 0;
+ }
+ extern "C" int v34_compare_output(uint64_t addr,uint64_t n,const void*reference){
+  std::lock_guard<std::recursive_mutex>lock(S().lock);auto*x=resultBytes(addr,n);
+  if(!x||!reference||!F().steps||!S().error.empty()){fail("output compare requires exact staged output after step and live reference");return 1;}
+  auto*a=x;auto*r=(const unsigned char*)reference;
+  if(memcmp(a,r,n)){size_t i=0;while(i<n&&a[i]==r[i])++i;F().diffOutput=addr;F().diffOffset=i;F().diffActual=a[i];F().diffExpected=r[i];fail("strict native feedback output mismatch offset="+std::to_string(i));return 1;}
+- F().comparedBytes+=n;return 0;
++ F().comparedBytes+=n;pipelineRead();return 0;
+ }
+ extern "C" const char*v34_report_json(){@autoreleasepool{
+  std::lock_guard<std::recursive_mutex>lock(S().lock);
+@@ -215,6 +229,7 @@
+  for(auto&i:F().inputs)for(auto&o:S().outputs)if(overlap(arenaInput(i),i.size,arenaOutput(o),o.size))[aliases addObject:@{@"input":@(i.addr),@"output":@(o.addr),@"policy":@"all graph outputs staged before any feedback write; original buffer/offset topology preserved"}];
+  NSMutableArray*pairs=[NSMutableArray array];for(auto&p:PP().pairs){NSMutableArray*uses=[NSMutableArray array];for(auto&u:S().uses)if(u.buffer==p.a||u.buffer==p.b)[uses addObject:@{@"buffer":@(u.buffer),@"offset":@(u.offset),@"PSO":[NSString stringWithUTF8String:S().psos.at(key(u.p)).name.c_str()],@"argument":[NSString stringWithUTF8String:u.argument.c_str()],@"index":@(u.index),@"access":@(u.access),@"dispatch":@(u.dispatch)}];[pairs addObject:@{@"input":@(p.input),@"output":@(p.output),@"A_original_buffer":@(p.a),@"B_original_buffer":@(p.b),@"bytes":@(p.size),@"eligible":@(p.eligible),@"reason":[NSString stringWithUTF8String:p.reason.c_str()],@"actual_binding_uses":uses}];}
+  r[@"feedback"]=@{@"icb":icbReport(),@"pingpong":@{@"requested_count":@(PP().pairs.size()),@"eligible_count":@(eligiblePings()),@"staged_link_count":@(F().links.size()-eligiblePings()),@"bank":@(PP().bank),@"current_written_bank":PP().bank?@"B":@"A",@"pairs":pairs},@"sealed":@(F().sealed),@"input_count":@(F().inputs.size()),@"output_count":@(S().outputs.size()),@"link_count":@(F().links.size()),@"state_count":@(F().stateCount),@"capacity":@(F().capacity),@"request_steps":@(F().steps),@"total_steps":@(F().totalSteps),@"resets":@(F().resets),@"stage_bytes":@(F().stageBytes),@"request_seed_uploaded_ranges":@(F().written.size()),@"CPU_seed_upload_bytes_total":@(F().seedUploadBytes),@"CPU_output_compare_bytes_total":@(F().comparedBytes),@"CPU_full_state_restore_per_step":@NO,@"timing_records_stored":@(F().timing.size()),@"GPU_blit_bytes_per_step":@(([&](){size_t n=0;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;for(auto&l:F().links)if(!pingOutput(l.output,l.size))n+=l.size;return n;})()),@"arithmetic_policy":@"exact captured MLX graph including argmax/nextpos/nextlens; no new native shader",@"synchronization":@"owned graphDone/stageDone/feedbackDone fences across compute and two blit encoders; host waits completion each step",@"inputs":inputs,@"links":links,@"staged_outputs":stages,@"input_output_aliases":aliases,@"first_difference":@{@"output":@(F().diffOutput),@"offset":@(F().diffOffset),@"actual_byte":@(F().diffActual),@"expected_byte":@(F().diffExpected)}};
++ if(pipelineEnabled()){NSMutableDictionary*fb=[r[@"feedback"] mutableCopy];NSMutableDictionary*pp=[fb[@"pingpong"] mutableCopy];pp[@"bank_role"]=@"next-submit input bank, not a readable completed result";pp[@"current_written_bank"]=A55().core.lastValid?(A55().core.last.outputBank?@"B":@"A"):(id)[NSNull null];fb[@"pingpong"]=pp;[pp release];fb[@"synchronization"]=@"depth2 FIFO; explicit previous-ticket feedbackDone fence before graph; each slot graphDone/stageDone/feedbackDone; wait oldest before delivering";r[@"feedback"]=fb;[fb release];r[@"pipeline"]=pipelineReport();}
+  NSData*encoded=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];F().report.assign((const char*)encoded.bytes,encoded.length);[r release];return F().report.c_str();
+ }}
+ 
+@@ -295,3 +310,60 @@
+  for(unsigned i=0;i<2;++i)if(I().banks[i])[banks addObject:@{@"bank":@(i),@"ICB":@(key(I().banks[i])),@"commands":@(I().dispatches),@"S_binding_bank":@(i)}];
+  return @{@"enabled":@(I().enabled),@"banks":@(I().enabled?2:0),@"commands_per_bank":@(I().dispatches),@"dispatchThreads":@(I().threads),@"dispatchThreadgroups":@(I().groups),@"execution_count":@(I().executions),@"encoded_count":@(I().encoded),@"bank_executions":@[@(I().bankExecutions[0]),@(I().bankExecutions[1])],@"constant_bank_bytes":@(I().constantBytes),@"constant_bank_allocation":@(I().constants.length),@"setBytes_payload_count":@(I().constantOffsets.size()),@"constant_alignment":@256,@"original_barrier_count":@(I().originalBarriers),@"barrier_commands_per_bank":@(I().barriersPerBank),@"barrier_semantics":@"setBarrier on NEXT command before encoding; all prior ICB commands complete before it; adjacent barriers fold without intervening dispatch",@"trailing_barrier_via_graph_fence":@(I().trailingBarrier),@"unique_original_PSOs":@(I().psos.size()),@"recreated_PSOs":@(I().recreated),@"PSO_records":psos,@"ICB_records":banks,@"resources":@{@"read_only_count":@(I().readonlyResources.size()),@"read_only_parameter_buffers":@(I().readonlyResources.empty()?0:I().readonlyResources.size()-1),@"constant_bank_read_declarations_per_CB":@1,@"mutable_arena_count":@1,@"mutable_arena_usage":@"Read|Write",@"icb_read_declarations":@1,@"icb_read_declarations_unit":@"one selected even/odd ICB declared Read per replay CB; all RO parameter buffers and constant bank declared Read"}};
+ }
++
++
++// V55 optional depth2 FIFO. Original v34 host-synchronous OFF path above is retained.
++extern "C" int v55_enable_pipeline(uint32_t depth){@autoreleasepool{
++ std::lock_guard<std::recursive_mutex>lock(S().lock);auto&a=A55();
++ if(depth!=2||a.enabled||!I().enabled||!F().sealed||F().resets||F().steps||!S().error.empty()){fail("async enable requires depth2, sealed ICB2 fresh graph before reset");return 1;}
++ a.slots[0]={F().stage,F().graphDone,F().stageDone,F().feedbackDone};
++ auto&x=a.slots[1];x.stage=[S().device newBufferWithLength:F().stageBytes options:MTLResourceStorageModeShared|MTLResourceHazardTrackingModeTracked];x.graphDone=[S().device newFence];x.stageDone=[S().device newFence];x.feedbackDone=[S().device newFence];
++ if(!x.stage||!x.graphDone||!x.stageDone||!x.feedbackDone){fail("second async stage/fence allocation failed");return 1;}
++ a.depth=depth;a.enabled=true;a.timing.reserve(512);return 0;
++}}
++extern "C" int v55_reset(){
++ std::lock_guard<std::recursive_mutex>lock(S().lock);auto&a=A55();std::string why;
++ if(!a.enabled||!a.core.pending.empty()||!S().error.empty()){fail("async reset requires enabled valid pipeline and explicit drain/no inflight");return 1;}
++ a.allowOldReset=true;int rc=v34_reset();a.allowOldReset=false;if(rc)return rc;
++ if(!a.core.reset(why)){fail(why);return 1;}a.previousSlot=0;a.initialLength=0;return 0;
++}
++extern "C" int v55_submit_step(uint64_t*ticket_out){@autoreleasepool{
++ std::lock_guard<std::recursive_mutex>lock(S().lock);auto&a=A55();V55Ticket j;std::string why;
++ if(!a.enabled||!ticket_out||!F().sealed||!F().ready||!S().error.empty()||(!F().written.empty()&&F().written.size()!=F().inputs.size())){fail("async submit requires reset and complete/original seed upload");return 1;}
++ if(!a.core.plan(j,why)){fail(why);return 1;}
++ if(!a.core.requestSubmitted){int32_t token=-1,pos=-1,len=-1;for(auto&x:F().inputs){const char*p=(const char*)S().arena.contents+arenaInput(x);if(x.role==1)memcpy(&token,p,4);if(x.role==2)memcpy(&pos,p,4);if(x.role==3)memcpy(&len,p,4);}if(token<0||pos<0||len!=pos+1||len>(int)F().capacity){fail("async initial token/position/lens guard failed");return 1;}a.initialLength=len;}
++ if(uint64_t(a.initialLength)+a.core.requestSubmitted>F().capacity){fail("async projected position/lens exceeds fixed capacity");return 1;}
++ // Never read mutable arena scalars while earlier tickets are in flight.
++ uint64_t t0=nowNS();id<MTLCommandBuffer>b=[[S().queue commandBuffer] retain];if(!b){fail("async command buffer allocation failed");return 1;}
++ auto&slot=a.slots[j.slot];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];
++ if(!e){[b release];fail("async compute encoder allocation failed");return 1;}
++ if(a.core.requestSubmitted)[e waitForFence:a.slots[a.previousSlot].feedbackDone];
++ PP().bank=j.inputBank;encodeGraph(e);[e updateFence:slot.graphDone];[e endEncoding];uint64_t graphEnd=nowNS();
++ id<MTLBlitCommandEncoder>capture=[b blitCommandEncoder];if(!capture){[b release];fail("async stage encoder allocation failed");return 1;}[capture waitForFence:slot.graphDone];
++ for(auto&x:S().outputs){if(pingOutput(x.addr,x.size))continue;auto*t=stage(x.addr,x.size);[capture copyFromBuffer:S().arena sourceOffset:arenaOutput(x) toBuffer:slot.stage destinationOffset:t->offset size:x.size];}
++ [capture updateFence:slot.stageDone];[capture endEncoding];
++ id<MTLBlitCommandEncoder>feedback=[b blitCommandEncoder];if(!feedback){[b release];fail("async feedback encoder allocation failed");return 1;}[feedback waitForFence:slot.stageDone];
++ for(auto&x:F().links){if(pingOutput(x.output,x.size))continue;auto*i=input(x.input,x.size);auto*t=stage(x.output,x.size);[feedback copyFromBuffer:slot.stage sourceOffset:t->offset toBuffer:S().arena destinationOffset:arenaInput(*i) size:x.size];}
++ [feedback updateFence:slot.feedbackDone];[feedback endEncoding];uint64_t encodeEnd=nowNS();[b commit];uint64_t commitEnd=nowNS();
++ a.jobs.emplace(j.id,AsyncJob{j,b,t0,graphEnd,encodeEnd,commitEnd});a.core.submitted(j);a.previousSlot=j.slot;PP().bank=j.outputBank;*ticket_out=j.id;return 0;
++}}
++static int waitAsync(uint64_t ticket,bool discard){auto&a=A55();std::string why;
++ if(!discard&&!S().error.empty())return 1;
++ if(!a.enabled||!a.core.canWait(ticket,discard,why)){fail(why.empty()?"wait requires enabled pipeline":why);return 1;}
++ auto it=a.jobs.find(ticket);if(it==a.jobs.end()){fail("retained async job missing");return 1;}auto job=it->second;
++ uint64_t waitStart=nowNS();[job.cb waitUntilCompleted];uint64_t done=nowNS();bool ok=job.cb.status==MTLCommandBufferStatusCompleted&&!job.cb.error;double gs=job.cb.GPUStartTime,ge=job.cb.GPUEndTime;
++ a.timing.push_back({job.ticket,F().resets,job.graphEnd-job.t0,job.encodeEnd-job.graphEnd,job.commitEnd-job.encodeEnd,done-waitStart,done-job.t0,gs,ge,ok,discard});
++ a.core.finished(job.ticket,discard,ok);if(ok){++I().executions;++I().bankExecutions[job.ticket.inputBank];++F().steps;++F().totalSteps;++S().replays;F().timing.push_back({F().resets,unsigned(job.ticket.id),job.graphEnd-job.t0,job.encodeEnd-job.graphEnd,job.encodeEnd-job.t0,job.commitEnd-job.encodeEnd,done-waitStart,done-job.t0,gs,ge,gs>0&&ge>=gs});}
++ else fail("async command buffer failed: "+text(job.cb.error.localizedDescription));
++ // This is the only release of a submitted CB, after host completion/error was observed.
++ [job.cb release];a.jobs.erase(it);return ok?0:1;
++}
++extern "C" int v55_wait_step(uint64_t ticket){@autoreleasepool{std::lock_guard<std::recursive_mutex>lock(S().lock);return waitAsync(ticket,false);}}
++extern "C" int v55_drain(){@autoreleasepool{std::lock_guard<std::recursive_mutex>lock(S().lock);if(!A55().enabled){fail("drain requires enabled pipeline");return 1;}int result=0;while(!A55().core.pending.empty()){size_t before=A55().core.pending.size();uint64_t t=A55().core.pending.front().id;if(waitAsync(t,true))result=1;if(A55().core.pending.size()==before){fail("drain failed to consume retained oldest job");return 1;}}return result||!S().error.empty()?1:0;}}
++static NSDictionary*pipelineReport(){auto&a=A55();auto&c=a.core;NSMutableArray*pending=[NSMutableArray array],*slots=[NSMutableArray array],*timing=[NSMutableArray array];
++ for(auto&j:c.pending)[pending addObject:@{@"ticket":@(j.id),@"slot":@(j.slot),@"input_bank":@(j.inputBank),@"output_bank":@(j.outputBank)}];
++ for(unsigned i=0;i<2;++i){auto&x=a.slots[i];[slots addObject:@{@"slot":@(i),@"busy":@(c.busy[i]),@"stage_buffer":@(key(x.stage)),@"stage_bytes":@(x.stage.length),@"graphDone":@(key(x.graphDone)),@"stageDone":@(key(x.stageDone)),@"feedbackDone":@(key(x.feedbackDone))}];}
++ for(auto&t:a.timing)[timing addObject:@{@"request":@(t.request),@"ticket":@(t.ticket.id),@"slot":@(t.ticket.slot),@"input_bank":@(t.ticket.inputBank),@"output_bank":@(t.ticket.outputBank),@"graph_encode_ns":@(t.graphEncode),@"feedback_encode_ns":@(t.feedbackEncode),@"host_commit_ns":@(t.commit),@"host_wait_api_ns":@(t.hostWait),@"submit_to_wait_completed_ns":@(t.submittedToCompleted),@"CB_GPUStartTime_seconds":@(t.gpuStart),@"CB_GPUEndTime_seconds":@(t.gpuEnd),@"success":@(t.success),@"discarded":@(t.discard)}];
++ return @{@"enabled":@(a.enabled),@"depth":@(a.depth),@"request_submitted":@(c.requestSubmitted),@"request_completed":@(c.requestCompleted),@"request_delivered":@(c.requestDelivered),@"request_discarded":@(c.requestDiscarded),@"request_failed":@(c.requestFailed),@"total_submitted":@(c.totalSubmitted),@"total_completed":@(c.totalCompleted),@"total_delivered":@(c.totalDelivered),@"total_discarded":@(c.totalDiscarded),@"total_failed":@(c.totalFailed),@"inflight":@(c.pending.size()),@"maximum_outstanding":@(c.maxOutstanding),@"last_delivered_ticket":c.lastValid?@(c.last.id):(id)[NSNull null],@"last_result_readable":@(c.lastValid),@"last_result_consumed":@(c.lastConsumed),@"result_contract":@"last delivered stage and written S bank, readable until next submit/reset/drain; copy/compare consumes result before next submit",@"next_submit_bank":@(c.nextBank),@"pending":pending,@"slots":slots,@"timing_scope":@"async diagnostics only, not production/E2E; submit-to-completion includes external CPU interval and is not additive exclusive phase time",@"timing":timing};
++}
++extern "C" const char*v55_report_json(){return v34_report_json();}

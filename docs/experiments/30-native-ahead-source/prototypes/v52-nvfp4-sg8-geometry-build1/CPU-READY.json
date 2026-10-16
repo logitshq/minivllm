@@ -1,0 +1,47 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/micro.py": "c6ab697dac029891f6260f37074a0353667041ad4b640c1cc9701b045cd997f5",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/geometry.py": "ca8642b1a5d59c75337ffe4dc17718c243d6e7b186810f33d3fb3ec5c4f9affb",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/kernel_header.metal": "d9fc59bae8091194a411a9a332ca8708bfed8a26aa4b83a6b7d4af08e9f06ab5",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/kernel_body.metal": "31958fd225e1cefeeb9dffd4d5f2574a192a9066c38af826bcb8fa7ef09dfe0e",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/source-manifest.json": "1e79d3f81356a0e5faded1ac83a14cebf3cf5c51cf2648d86078fea8d79e5aab",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/source-pins.json": "7d5ab9412d95e5091f0a0ed632b215f6fdf57e92f3e21417e969763276e13a61",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/protocol.json": "45d7ab06111320eaa335d5f9ba79e6484e3fb16f3d2e07977bc0f3982a77976f",
+    "/private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/check_cpu.py": "4f850cd8f32af22dbec0f64ec8777352dcb253dc5f8af60a6fc74c24ade2c87d"
+  },
+  "GPU_executed": false,
+  "MLX_imported": false,
+  "CPU_tests": 5,
+  "default_power_domain": "AC Power",
+  "explicit_Battery_exploration_only": true,
+  "qualify_only_mode": true,
+  "numeric_strict_expected": 36,
+  "numeric_breakdown": {
+    "unchanged_SG2_R4_vs_native_QMM": 9,
+    "compiled_A_vs_native_QMM": 9,
+    "compiled_SG8_B_vs_native_QMM": 9,
+    "compiled_B_vs_compiled_A": 9
+  },
+  "threadgroup": [
+    256,
+    1,
+    1
+  ],
+  "initial_grid": [
+    256,
+    544,
+    1
+  ],
+  "rows_per_SIMD": 4,
+  "SIMD_groups": 8,
+  "source_eligible_shapes": 9,
+  "actual_GPU_qualified_shapes": 0,
+  "timed_invoke_and_schedule_AST_identical_to_V49_and_V32": true,
+  "weight_scale_copy_bytes": 0,
+  "math_change": "none;SGconstant2to8+samewholeSIMDguardonly",
+  "old_V49_STOP_sha256": "d1d6467ce367994f5c0d9e82e65b1d4ed8e64a747f97800cb3d9a59275784441",
+  "local_numeric_status": "UNKNOWN",
+  "performance_status": "UNKNOWN",
+  "adopted": false
+}

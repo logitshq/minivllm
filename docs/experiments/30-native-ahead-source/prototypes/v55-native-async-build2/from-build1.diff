@@ -1,0 +1,21 @@
+--- frozen55build1/replay.mm
++++ 55build2/replay.mm
+@@ -181,8 +181,9 @@
+  restoreArena();PP().bank=0;F().steps=0;F().written.clear();F().ready=true;++F().resets;return 0;
+ }
+ extern "C" int v34_write_input(uint64_t addr,uint64_t n,const void*src){
++ std::lock_guard<std::recursive_mutex>lock(S().lock);
+  if(pipelineEnabled()&&(!A55().core.canWriteSeed()||F().written.count(addr))){fail("async seed upload requires reset before submit, no inflight jobs and each range only once");return 1;}
+- std::lock_guard<std::recursive_mutex>lock(S().lock);auto*x=input(addr,n);
++ auto*x=input(addr,n);
+  if(!F().ready||F().steps||!x||!src||!S().error.empty()){fail("request seed write must target exact registered input before first step");return 1;}
+  memcpy((char*)S().arena.contents+arenaInput(*x),src,n);F().written.insert(addr);F().seedUploadBytes+=n;return 0;
+ }
+@@ -364,6 +365,6 @@
+  for(auto&j:c.pending)[pending addObject:@{@"ticket":@(j.id),@"slot":@(j.slot),@"input_bank":@(j.inputBank),@"output_bank":@(j.outputBank)}];
+  for(unsigned i=0;i<2;++i){auto&x=a.slots[i];[slots addObject:@{@"slot":@(i),@"busy":@(c.busy[i]),@"stage_buffer":@(key(x.stage)),@"stage_bytes":@(x.stage.length),@"graphDone":@(key(x.graphDone)),@"stageDone":@(key(x.stageDone)),@"feedbackDone":@(key(x.feedbackDone))}];}
+  for(auto&t:a.timing)[timing addObject:@{@"request":@(t.request),@"ticket":@(t.ticket.id),@"slot":@(t.ticket.slot),@"input_bank":@(t.ticket.inputBank),@"output_bank":@(t.ticket.outputBank),@"graph_encode_ns":@(t.graphEncode),@"feedback_encode_ns":@(t.feedbackEncode),@"host_commit_ns":@(t.commit),@"host_wait_api_ns":@(t.hostWait),@"submit_to_wait_completed_ns":@(t.submittedToCompleted),@"CB_GPUStartTime_seconds":@(t.gpuStart),@"CB_GPUEndTime_seconds":@(t.gpuEnd),@"success":@(t.success),@"discarded":@(t.discard)}];
+- return @{@"enabled":@(a.enabled),@"depth":@(a.depth),@"request_submitted":@(c.requestSubmitted),@"request_completed":@(c.requestCompleted),@"request_delivered":@(c.requestDelivered),@"request_discarded":@(c.requestDiscarded),@"request_failed":@(c.requestFailed),@"total_submitted":@(c.totalSubmitted),@"total_completed":@(c.totalCompleted),@"total_delivered":@(c.totalDelivered),@"total_discarded":@(c.totalDiscarded),@"total_failed":@(c.totalFailed),@"inflight":@(c.pending.size()),@"maximum_outstanding":@(c.maxOutstanding),@"last_delivered_ticket":c.lastValid?@(c.last.id):(id)[NSNull null],@"last_result_readable":@(c.lastValid),@"last_result_consumed":@(c.lastConsumed),@"result_contract":@"last delivered stage and written S bank, readable until next submit/reset/drain; copy/compare consumes result before next submit",@"next_submit_bank":@(c.nextBank),@"pending":pending,@"slots":slots,@"timing_scope":@"async diagnostics only, not production/E2E; submit-to-completion includes external CPU interval and is not additive exclusive phase time",@"timing":timing};
++ return @{@"enabled":@(a.enabled),@"depth":@(a.depth),@"request_submitted":@(c.requestSubmitted),@"request_completed":@(c.requestCompleted),@"request_delivered":@(c.requestDelivered),@"request_discarded":@(c.requestDiscarded),@"request_failed":@(c.requestFailed),@"total_submitted":@(c.totalSubmitted),@"total_completed":@(c.totalCompleted),@"total_delivered":@(c.totalDelivered),@"total_discarded":@(c.totalDiscarded),@"total_failed":@(c.totalFailed),@"inflight":@(c.pending.size()),@"maximum_outstanding":@(c.maxOutstanding),@"last_delivered_ticket":c.lastValid?@(c.last.id):(id)[NSNull null],@"last_result_readable":@(c.lastValid),@"last_result_consumed":@(c.lastConsumed),@"result_contract":@"last delivered stage and written S bank, readable until next submit/reset or nonempty drain; empty drain retains last delivered; copy/compare consumes result before next submit",@"next_submit_bank":@(c.nextBank),@"pending":pending,@"slots":slots,@"timing_scope":@"async diagnostics only, not production/E2E; submit-to-completion includes external CPU interval and is not additive exclusive phase time",@"timing":timing};
+ }
+ extern "C" const char*v55_report_json(){return v34_report_json();}

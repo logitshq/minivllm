@@ -1,0 +1,8 @@
+# V56 async C1 qualification (not a performance run)
+Candidate44/gates48/conv+activatednormreuse48,2GiB allocator,original50/50/20/0. Frozen V56 adapter subclasses original41; native55build2 actual tiny75strict PASS/release is bound. Tiny is no model proof.
+
+Original V46 core loop AST is exact:3 queued base/reset/changed requests,93 delivered native steps×132 immediate gold copies before the next e.step; all hashes/shape/dtype/bytes compare actual44 A. Max32 normal requests have31 submissions/deliveries/completions,no pending/discard. Whole-request nongreedy temp.7/topk1 and max1 prefill-only stay ordinary. Postfallback native32 checks final132 only. At this checkpoint:4 native requests,124 delivered/completed,12408 strict hashes,4resets,ICB[64,60].
+
+Static early stop uses unique prior canonical[6]=103725,max32,expectedfirst7 IDs. canonical[5]=220 is not used because it first appears atindex2. This case adds6 delivered native steps,7 completed,1 drained/discarded future; requires terminal pending0/drop/readonly and native last_result_readableFalse. No all132 checks for any of the six delivered early-stop steps; nonempty drain invalidates the result before e.step returns.
+
+One fresh normal32 request then proves reset/reentry IDs and final132 gold hashes. Final totals:6 native requests/resets,161 delivered,162 submitted/completed,1 discarded,ICB[84,78],12540 hashes=93×132+postfallback132+postearlystop132. Never call these162 completed steps all fully cache-qualified. Original seed/capture MLX owners stay readonly across all phases. No model/service/performance conclusion until root actual passes; no C2/C4/spec claim.
