@@ -1,9 +1,9 @@
 M5 Ultra 256GB：目标模型单独解码的实测 Pareto 前沿
 
-代码：044a26332cda14c48bc07be7a0a44715422dc0d4（本地提交，未推送）
+融合版本代码：044a26332cda14c48bc07be7a0a44715422dc0d4
 改动：投影和 GDN 融合扩到 B1–B8；保留 B1 内核；大批次保留 eager。测试服务器连接队列从 5 扩到 128。
 同一 27B NVFP4；19 输入/32 输出；greedy、正常 EOS、无草稿模型或前缀缓存。
-运行版本：MLX0.32.3；oMLX0.7.1.dev1@328edc7（mlx-lm0.31.4.dev132+g94cdcae13）；Lithos5485ad6加本机M5配置2236580。
+运行版本：MLX0.32.3；oMLX0.7.1.dev1官方wheel（VCS提交未知，安装文件哈希已固定；mlx-lm0.31.4.dev132+g94cdcae13）；Lithos5485ad6加本机M5配置2236580。
 C1 按事先写下的规则，使用包含 oMLX balanced/aggressive 的四配置复测；原 C1 数据完整保留在 earlier_C1_processes。C2–C64 使用原 sweep。
 另加 C64/B32 点：64 个 HTTP 请求全部完成，同时最多执行32条序列；三次新进程。官方 C64 数据来自紧邻的原 sweep，不宣称逐对配对。
 各点为三次独立进程中位数的中位数，每进程 3 次预热、3 次测量。

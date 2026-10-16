@@ -143,7 +143,7 @@ replay={'status':'PASS','processes_validated':len(all_rows),'processes_in_final_
         'resources':resources,'strict_cleanup':True}
 write(F/'replay.json',replay)
 result={'source_commit':frozen['source_commit'],'points':points,'all_processes':rows,'coverage':coverage,
-        'runtime_versions':{'native_mlx':'0.32.3','omlx':'0.7.1.dev1','omlx_commit':'328edc756010693e61f8bd4e47f00996e0758176','omlx_mlx_lm':'0.31.4.dev132+g94cdcae13','lithos_upstream':'5485ad6','lithos_local_profile_commit':'223658090ae549e59220bdec459957cbdad7926a'},
+        'runtime_versions':{'native_mlx':'0.32.3','omlx':'0.7.1.dev1','omlx_commit':None,'omlx_distribution':'https://github.com/jundot/omlx/releases/download/v0.7.1.dev1/omlx-0.7.1.dev1-cp313-cp313-macosx_15_0_universal2.whl','omlx_identity_note':'Official wheel; no proven VCS commit. Installed files are pinned. The separate source checkout is not the wheel identity.','omlx_mlx_lm':'0.31.4.dev132+g94cdcae13','lithos_upstream':'5485ad6','lithos_local_profile_commit':'223658090ae549e59220bdec459957cbdad7926a'},
         'earlier_C1_processes':earlier_c1,'all_validated_processes':all_rows,'C1_selection_plan':read(B/'pareto-mode-plan-v1.json'),
         'capped_C64_plan':read(B/'pareto-cap-plan-v1.json'),
         'all_comparator_medians_covered':all(c['covered_by_native_C'] for c in coverage),
@@ -173,7 +173,7 @@ if a.retirement_frontier:
     source=B/'retire-batch-source-v1'
     matches=all(digest(R/(R/Path(p)).resolve().relative_to(source.resolve()))==h for p,h in retirement_qual['source_files'].items())
     clean=subprocess.run(['git','diff','--quiet','HEAD','--','tutorial_code/miniengine'],cwd=R).returncode==0
-    result['retirement_adopted_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip() if matches and clean else None
+    result['retirement_adopted_commit']=subprocess.check_output(['git','log','-1','--format=%H','--','tutorial_code/miniengine'],cwd=R,text=True).strip() if matches and clean else None
     result['retirement_step_diagnostic']={}
     for label,root in (('original',F),('batched_retirement',a.retirement_frontier)):
         times=[]
@@ -194,10 +194,10 @@ if a.retirement_frontier:
     result['limits'].append('Batched-retirement measurements at C8/32/64 use a separately hashed implementation; original sweep baselines are unpaired and retained. No arithmetic changes.')
 write(O/'m5-ultra-pareto-results.json',result)
 lines=['M5 Ultra 256GB：目标模型单独解码的实测 Pareto 前沿','',
-       '代码：'+frozen['source_commit']+'（本地提交，未推送）',
+       '融合版本代码：'+frozen['source_commit'],
        '改动：投影和 GDN 融合扩到 B1–B8；保留 B1 内核；大批次保留 eager。测试服务器连接队列从 5 扩到 128。',
        '同一 27B NVFP4；19 输入/32 输出；greedy、正常 EOS、无草稿模型或前缀缓存。',
-       '运行版本：MLX0.32.3；oMLX0.7.1.dev1@328edc7（mlx-lm0.31.4.dev132+g94cdcae13）；Lithos5485ad6加本机M5配置2236580。',
+       '运行版本：MLX0.32.3；oMLX0.7.1.dev1官方wheel（VCS提交未知，安装文件哈希已固定；mlx-lm0.31.4.dev132+g94cdcae13）；Lithos5485ad6加本机M5配置2236580。',
        'C1 按事先写下的规则，使用包含 oMLX balanced/aggressive 的四配置复测；原 C1 数据完整保留在 earlier_C1_processes。C2–C64 使用原 sweep。',
        '另加 C64/B32 点：64 个 HTTP 请求全部完成，同时最多执行32条序列；三次新进程。官方 C64 数据来自紧邻的原 sweep，不宣称逐对配对。',
        '各点为三次独立进程中位数的中位数，每进程 3 次预热、3 次测量。',
