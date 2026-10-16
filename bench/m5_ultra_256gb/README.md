@@ -13,3 +13,15 @@ Before a run, execute the CPU suite with the selected domain and save stdout/std
 `replay.py OUTPUT` is a separate stdlib CPU verification of the recorded evidence, with explicit raw-logit byte comparisons in addition to signatures. A second human/agent review is not claimed. Performance is allowed only after the target's bounded correctness qualification and replay pass. Preserve the first failure and cleanup errors separately; do not overwrite or rerun an actual attempt to select a favorable result.
 
 Resource inventory recognizes the known local inference CLIs and records its scope. It cannot prove that arbitrary GUI apps have no GPU activity. No user applications are closed and no system memory settings are changed.
+
+## Target experiment revisions
+
+Build1 stopped after the accepted 32-token pass: the inherited decode eligibility used the prefill backend predicate, so compiled gates (and V19) could not dispatch on M5. This is preserved as a STOP, not a numerical failure or a qualified run.
+
+`prepare_m5_decode.py` creates independent build2 exports and a new frozen harness. Both accepted15 and V19 exports receive the same narrowly scoped M5 Ultra/MLX 0.32.3 decode predicate; the existing NAX batched-prefill exclusion remains unchanged. The accepted build2 round additionally compares every observation to build1's original, uncompiled 32-step output. This proves the gate-compilation change against the original path in this bounded workload before candidate OFF/ON/reset-OFF. Engine constructors still default both experiments OFF. `check_decode_gate.py` exercises six CPU backend eligibility cases.
+
+The build2 target fullmodel run and separate stdlib replay PASS: 128 raw logits, 16,384 state signatures, 18 fallbacks. Four process PIDs are absent after tool return. All resource records are retained under `.artifacts/m5-ultra-256gb/fullqual-build2`.
+
+E2E build1 stopped during preimport audit before model load because NumPy was not imported before its identity check. `prepare_e2e_v2.py` copies the unchanged protocol into a new immutable build2 directory and adds that import. Original failed source and artifacts remain intact. E2E build2 completed all six fresh processes and 36 exact raw-ID requests. Pair throughput changes: +1.5223%, +2.6309%, -2.7957%; aggregate median throughput +2.4593%, delivery proxy +2.2653%. Verdict: **DO_NOT_ADOPT**, because not all three throughput pairs are positive. No repeated trial was used to replace the negative pair.
+
+`frontier/` compares the experimental V19-on point to official oMLX 0.7.1.dev1, both on MLX/MLX-Metal 0.32.3, at C1/C2/C4 with three fresh pairs per C. These are additional exploratory reference points, not an override of the internal DO_NOT_ADOPT result. Only the native engine exposes raw IDs; official output is checked via usage and canonical text tokens. HTTP concurrency and actual GPU batch are distinct.

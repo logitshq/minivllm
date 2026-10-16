@@ -1,0 +1,43 @@
+M5 Ultra 256 GiB 实验记录
+
+结论：完整模型正确性 PASS；V19 的端到端结果 DO_NOT_ADOPT，继续默认关闭。
+C4 总吞吐在本次固定负载下领先 oMLX，但所有并发级别的客户端交付速度均落后，不能宣称整体胜出。
+
+机器：Apple M5 Ultra，80 GPU cores，256 GiB，macOS 27.0.1，AC Power。
+模型：mlx-community/Qwen3.8-27B-nvfp4 @ 5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6；BF16 activations。
+运行时：Python 3.13.16；MLX/MLX-Metal 0.32.3；官方 oMLX 0.7.1.dev1。
+源码：handoff 559ced1；M5 decode 实验 84c4659；本地分支 experiment/m5-ultra-256gb。
+
+正确性：accepted/OFF/ON/reset-OFF，4×32 输出，128 份 logits 原始文件逐字节一致，16,384 个状态签名严格相等，18 个 fallback 通过。
+accepted 的 compiled gates 也与原始未编译路径全部 32 步的 logits/状态严格一致。1,349 个参数的 key/shape/dtype 跨 worker 相等，object ID 仅进程内比较。
+
+V19 内部端到端：6 个新进程，顺序 OFF/ON/ON/OFF/OFF/ON，每进程 3 warm + 3 measured。
+三组吞吐变化：+1.5223%, +2.6309%, -2.7957%。
+aggregate y +2.4593%；aggregate x +2.2653%。第三组为负，未达到预先规定的全部三组正收益要求。
+
+官方对照：每个并发级别 3 组 fresh pair；18 个进程、252 个请求、8,064 个输出 token（包含 warm）。
+值为 median(3 process medians)，每个 process median 来自 3 个测量 group。
+并发   引擎                  x(tok/s/user)  y(tok/s/Mac)  TTFT(ms)
+C1     minivllm V19-on            42.84         39.60       84.67
+C1     oMLX balanced              53.34         46.39      109.50
+C2     minivllm V19-on            38.48         66.63      141.28
+C2     oMLX balanced              45.45         68.32      237.68
+C4     minivllm V19-on            32.28        103.12      253.29
+C4     oMLX balanced              37.94         99.20      439.88
+
+x=(实际输出token数−首个非空chunk的canonical token数)/(DONE−firstText)，是客户端交付代理。
+y=实际总输出token数/(last DONE−first POST)，包含排队、prefill 和 HTTP。并发数不等于真实 GPU batch。
+
+保留的失败：build1 因继承的 M4-only decode 条件停止；E2E build1 因测试程序导入顺序停止。两次均保留原始证据，未替换任何负性能结果。
+M5 变更仅拆分 decode 的支持条件；原有 NAX prefill 限制保留。没有开启默认优化或合并 main。
+
+Lithos：5485ad6 官方源码没有 Apple M5 Ultra 80c/Apple10 profile；未借用 M5 Max 配置，性能样本为零。
+资源：{"counts_by_domain": {"fullqual-build2": 22, "e2e-build2": 104, "frontier-v1": 270}, "pressure_values": [1], "thermal_values": [0], "swap_MB_range": [0.0, 0.0], "Pageouts_range": [0, 0], "Swapouts_range": [0, 0]}
+所有本次启动的 owner/worker/server 均已 wait/reap，工具返回后 PID 严格不存在。进程退出为卸载边界。
+
+局限：只有一个 19-token prompt/32-token 输出负载；未证明普遍性能。官方没有 raw IDs；GPU进程清单无法排除任意GUI负载。执行了独立进程CPU重放，没有声称第二个人或agent独立审查。
+
+原始证据：/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb
+完整数据：/Users/ryanli/Documents/Codex/2026-10-15/chec/outputs/m5-ultra-256gb-results.json
+Pareto 图：/Users/ryanli/Documents/Codex/2026-10-15/chec/outputs/m5-ultra-256gb-pareto.png
+下一步：优先研究 M5 decode 的单请求交付开销，或为 Lithos 建立真正的 M5 Ultra backend；现有负结果不重跑挑胜。

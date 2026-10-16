@@ -1,0 +1,995 @@
+{
+  "schema": "m5-ultra-256gb-experiment-results-v1",
+  "date_local": "2026-10-15",
+  "hardware": {
+    "device_name": "Apple M5 Ultra",
+    "max_recommended_working_set_size": 239143780352,
+    "memory_size": 274877906944,
+    "architecture": "applegpu_g17d",
+    "max_buffer_length": 179357827072,
+    "resource_limit": 499000,
+    "gpu_cores": 80,
+    "memory_GiB": 256,
+    "macOS": "27.0.1"
+  },
+  "source": {
+    "handoff_commit": "559ced1",
+    "baseline_upstream": "f976d6a547a9dc1946b52b1de6db376d799b34d7",
+    "V19_upstream": "b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6",
+    "M5_decode_commit": "84c4659",
+    "branch": "experiment/m5-ultra-256gb",
+    "exact_variant_source_files": {
+      "accepted": {
+        "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+        "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+        "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+        "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+        "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+        "engine/llm_engine.py": "7e7e96c1a101193bfa6fa90e884b7f6008f8340c7a55c8146df54c86fb569620",
+        "engine/model_runner.py": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538",
+        "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+        "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+        "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+        "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+        "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+        "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+        "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+        "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "model/attention.py": "23b02cfac714d84155653781df5921cca438809b482b0932075e497be48f69c3",
+        "model/gdn.py": "69b65fb373bf3de5291f797a355b2d86d8e88d31a5014ca2f34c0f8c2b6f677e",
+        "model/layers.py": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411",
+        "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+        "model/qwen3_5.py": "7c37fdde411bcb462910bbb34de09ecb014e6b2e43482820125351c5e09fbb7a",
+        "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+        "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+        "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+        "spec/dflash2.py": "e80f5257ffacc80f86da849f45a4cc3d3ced714de26941fcec5d00f0d9a73255"
+      },
+      "candidate": {
+        "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+        "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+        "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+        "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+        "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+        "engine/llm_engine.py": "7e7e96c1a101193bfa6fa90e884b7f6008f8340c7a55c8146df54c86fb569620",
+        "engine/model_runner.py": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538",
+        "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+        "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+        "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+        "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+        "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+        "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+        "kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+        "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+        "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "model/attention.py": "23b02cfac714d84155653781df5921cca438809b482b0932075e497be48f69c3",
+        "model/gdn.py": "2842e7a76f6fe58aa246c7c06e1d78b794e5c9c939da73764b99b5a5670ec374",
+        "model/layers.py": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411",
+        "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+        "model/qwen3_5.py": "49e35f3d515242951f5ef25b9e71298bc5cef3439dac8d7624f037a765ad82b5",
+        "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+        "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+        "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+        "spec/dflash2.py": "e80f5257ffacc80f86da849f45a4cc3d3ced714de26941fcec5d00f0d9a73255"
+      }
+    }
+  },
+  "environment": {
+    "python": "3.13.16 (main, Oct 14 2026, 00:55:38) [Clang 23.1.3 ]",
+    "versions": {
+      "httpx": "0.28.1",
+      "huggingface_hub": "2.2.0",
+      "mlx": "0.32.3",
+      "mlx-metal": "0.32.3",
+      "numpy": "2.5.4",
+      "tokenizers": "0.23.3"
+    },
+    "controls": {
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_METAL_FAST_SYNCH": "0"
+    },
+    "MLX_ENABLE_TF32": "unset; MLX default",
+    "official_versions": {
+      "omlx": "0.7.1.dev1",
+      "mlx": "0.32.3",
+      "mlx-metal": "0.32.3",
+      "mlx-lm": "0.31.4.dev132+g94cdcae13",
+      "mlx-vlm": "0.7.7"
+    }
+  },
+  "model": {
+    "repo": "mlx-community/Qwen3.8-27B-nvfp4",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "hash_audit": [
+      {
+        "name": "model-00001-of-00003.safetensors",
+        "actual_sha256": "a9de796bfb40fbe757ff3e567d83d5d100906d6dd231c8b11c431cd97d3dc288",
+        "hub_lfs_sha256": "a9de796bfb40fbe757ff3e567d83d5d100906d6dd231c8b11c431cd97d3dc288",
+        "blob": "136fd8e7ba4069c485592c166beea2d3b9c82bc98087e0114b7a1192f428634b",
+        "bytes": 5343250458,
+        "expected_bytes": 5343250458
+      },
+      {
+        "name": "model-00002-of-00003.safetensors",
+        "actual_sha256": "6020f10999fe3a1b052f80f1e838a4491ea35d40a3bb36897981c6ade1cb7a19",
+        "hub_lfs_sha256": "6020f10999fe3a1b052f80f1e838a4491ea35d40a3bb36897981c6ade1cb7a19",
+        "blob": "3827a6bc582e08d3ec936a976fc08d28193aaa316650c0246797cb2b68179baf",
+        "bytes": 5354159381,
+        "expected_bytes": 5354159381
+      },
+      {
+        "name": "model-00003-of-00003.safetensors",
+        "actual_sha256": "654cd2782dd2736c76d0bd6a139203bd944fd8de3ba84f4b38fbdcc49a8a41e5",
+        "hub_lfs_sha256": "654cd2782dd2736c76d0bd6a139203bd944fd8de3ba84f4b38fbdcc49a8a41e5",
+        "blob": "570822630579b6c06b35be1d4e48bedf27b85e0837ddca3ef6808a047acad3f8",
+        "bytes": 5357065565,
+        "expected_bytes": 5357065565
+      },
+      {
+        "name": "tokenizer.json",
+        "actual_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "hub_lfs_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+        "blob": "777bcaa63794fa47b8f53680be9d6d176f1fcbd7ba03cdc6c3bae2b3d76b323f",
+        "bytes": 19989325,
+        "expected_bytes": 19989325
+      }
+    ],
+    "activation": "BF16",
+    "quantization": "NVFP4 4 bits, group 16"
+  },
+  "fullqual": {
+    "verdict": "PASS_FULLMODEL_BOUNDED_SCOPE",
+    "frozen_sha256": "dc635b38628f08ec49d77f8327519cdd22f1bba0a277228b59c37834a43caba9",
+    "rounds": [
+      "accepted",
+      "candidate-off",
+      "candidate-on",
+      "candidate-reset-off"
+    ],
+    "raw_logits_files": 128,
+    "state_signatures": 16384,
+    "worker_raw_resources": 16,
+    "strict_full_state_hash_equality": true,
+    "full_state_raw_permanently_retained": false,
+    "all_actual_dispatch_counts_checked": true,
+    "fallbacks": 18,
+    "performance_E2E_default_on_reload_spec_inference_qualified": false,
+    "external_owner_reap_required": true
+  },
+  "original_uncompiled_reference_strict_equal": true,
+  "parameter_stable_fields_equal": 1349,
+  "e2e": {
+    "verdict": "DO_NOT_ADOPT",
+    "pair_y_percent": [
+      1.5223438229829966,
+      2.6308985336663593,
+      -2.7957183894783078
+    ],
+    "aggregate_percent": {
+      "x": 2.2652629977107486,
+      "y": 2.459292459312379,
+      "TTFT_s": -1.1320605800857697,
+      "E2E_s": -2.4002629730133895
+    },
+    "default_on": false,
+    "overall_baseline_win": false,
+    "scope": "M5 Ultra 256 GiB local V19 decode experiment only"
+  },
+  "e2e_processes": [
+    {
+      "config": "pair1-A-off",
+      "enabled": false,
+      "x": 45.05354741281958,
+      "y": 41.57007578093603,
+      "TTFT_s": 0.08225416700042842,
+      "E2E_s": 0.7697845000002417
+    },
+    {
+      "config": "pair1-B-on",
+      "enabled": true,
+      "x": 46.05968379355125,
+      "y": 42.202915261796456,
+      "TTFT_s": 0.08108237499982351,
+      "E2E_s": 0.7582414580010663
+    },
+    {
+      "config": "pair2-B-on",
+      "enabled": true,
+      "x": 45.898610540782684,
+      "y": 42.27359969110039,
+      "TTFT_s": 0.08132300000033865,
+      "E2E_s": 0.7569736250006827
+    },
+    {
+      "config": "pair2-A-off",
+      "enabled": false,
+      "x": 44.881917080495015,
+      "y": 41.18993431323534,
+      "TTFT_s": 0.08261987500009127,
+      "E2E_s": 0.7768888330010668
+    },
+    {
+      "config": "pair3-A-off",
+      "enabled": false,
+      "x": 43.47250158627992,
+      "y": 40.315413483190675,
+      "TTFT_s": 0.0807032499997149,
+      "E2E_s": 0.7937410839986114
+    },
+    {
+      "config": "pair3-B-on",
+      "enabled": true,
+      "x": 42.41873446558998,
+      "y": 39.188308054646896,
+      "TTFT_s": 0.0857609169997886,
+      "E2E_s": 0.8165700839999772
+    }
+  ],
+  "frontier": {
+    "status": "PASS_CPU_RAW_REPLAY",
+    "requests": 252,
+    "tokens": 8064,
+    "resources": 270,
+    "processes": [
+      {
+        "engine": "tutorial",
+        "C": 1,
+        "pair": 1,
+        "x": 45.56177482444238,
+        "y": 42.06293964948453,
+        "TTFT_s": 0.08063450000008743
+      },
+      {
+        "engine": "omlx",
+        "C": 1,
+        "pair": 1,
+        "x": 53.65326064203676,
+        "y": 46.68182202717029,
+        "TTFT_s": 0.10746241699962411
+      },
+      {
+        "engine": "omlx",
+        "C": 1,
+        "pair": 2,
+        "x": 53.3425488149824,
+        "y": 46.38650623959134,
+        "TTFT_s": 0.10950087499986694
+      },
+      {
+        "engine": "tutorial",
+        "C": 1,
+        "pair": 2,
+        "x": 42.83636378589424,
+        "y": 39.59761806325663,
+        "TTFT_s": 0.08467495900003996
+      },
+      {
+        "engine": "tutorial",
+        "C": 1,
+        "pair": 3,
+        "x": 42.26250983075874,
+        "y": 39.04718365641319,
+        "TTFT_s": 0.08601070800068555
+      },
+      {
+        "engine": "omlx",
+        "C": 1,
+        "pair": 3,
+        "x": 50.35540830951968,
+        "y": 43.89176633332613,
+        "TTFT_s": 0.11344208300033642
+      },
+      {
+        "engine": "tutorial",
+        "C": 2,
+        "pair": 1,
+        "x": 38.48167439384844,
+        "y": 66.62685829874404,
+        "TTFT_s": 0.1412802915001521
+      },
+      {
+        "engine": "omlx",
+        "C": 2,
+        "pair": 1,
+        "x": 45.36278799758507,
+        "y": 68.16873694980058,
+        "TTFT_s": 0.2391975000000457
+      },
+      {
+        "engine": "omlx",
+        "C": 2,
+        "pair": 2,
+        "x": 45.4615643731184,
+        "y": 68.37782771710762,
+        "TTFT_s": 0.23767704100009723
+      },
+      {
+        "engine": "tutorial",
+        "C": 2,
+        "pair": 2,
+        "x": 40.29126272227102,
+        "y": 68.17879783203796,
+        "TTFT_s": 0.16904508300012822
+      },
+      {
+        "engine": "tutorial",
+        "C": 2,
+        "pair": 3,
+        "x": 38.22608060212214,
+        "y": 66.22408626934322,
+        "TTFT_s": 0.14051668750107638
+      },
+      {
+        "engine": "omlx",
+        "C": 2,
+        "pair": 3,
+        "x": 45.44831197243105,
+        "y": 68.32376405278181,
+        "TTFT_s": 0.2336496244997761
+      },
+      {
+        "engine": "tutorial",
+        "C": 4,
+        "pair": 1,
+        "x": 31.94267397972449,
+        "y": 102.22191233716123,
+        "TTFT_s": 0.253288228999736
+      },
+      {
+        "engine": "omlx",
+        "C": 4,
+        "pair": 1,
+        "x": 38.203233379868706,
+        "y": 99.85730352329949,
+        "TTFT_s": 0.43792943749940605
+      },
+      {
+        "engine": "omlx",
+        "C": 4,
+        "pair": 2,
+        "x": 36.02042364168323,
+        "y": 93.8414330119613,
+        "TTFT_s": 0.4652695415006747
+      },
+      {
+        "engine": "tutorial",
+        "C": 4,
+        "pair": 2,
+        "x": 35.71729178442092,
+        "y": 104.31698457201784,
+        "TTFT_s": 0.35933043750083016
+      },
+      {
+        "engine": "tutorial",
+        "C": 4,
+        "pair": 3,
+        "x": 32.27865513662636,
+        "y": 103.11902487181138,
+        "TTFT_s": 0.253088687500167
+      },
+      {
+        "engine": "omlx",
+        "C": 4,
+        "pair": 3,
+        "x": 37.93635804896242,
+        "y": 99.197001512819,
+        "TTFT_s": 0.4398766250005792
+      }
+    ],
+    "points_median3_process_medians": [
+      {
+        "engine": "tutorial",
+        "C": 1,
+        "x": 42.83636378589424,
+        "y": 39.59761806325663,
+        "TTFT_s": 0.08467495900003996,
+        "pareto_nondominated": false
+      },
+      {
+        "engine": "omlx",
+        "C": 1,
+        "x": 53.3425488149824,
+        "y": 46.38650623959134,
+        "TTFT_s": 0.10950087499986694,
+        "pareto_nondominated": true
+      },
+      {
+        "engine": "tutorial",
+        "C": 2,
+        "x": 38.48167439384844,
+        "y": 66.62685829874404,
+        "TTFT_s": 0.1412802915001521,
+        "pareto_nondominated": false
+      },
+      {
+        "engine": "omlx",
+        "C": 2,
+        "x": 45.44831197243105,
+        "y": 68.32376405278181,
+        "TTFT_s": 0.23767704100009723,
+        "pareto_nondominated": true
+      },
+      {
+        "engine": "tutorial",
+        "C": 4,
+        "x": 32.27865513662636,
+        "y": 103.11902487181138,
+        "TTFT_s": 0.253288228999736,
+        "pareto_nondominated": true
+      },
+      {
+        "engine": "omlx",
+        "C": 4,
+        "x": 37.93635804896242,
+        "y": 99.197001512819,
+        "TTFT_s": 0.4398766250005792,
+        "pareto_nondominated": true
+      }
+    ],
+    "pairs_all_signs": [
+      {
+        "C": 1,
+        "pair": 1,
+        "native_vs_omlx_percent": {
+          "x": -15.081070042656064,
+          "y": -9.8943918148641,
+          "TTFT_s": -24.964929831822523
+        }
+      },
+      {
+        "C": 1,
+        "pair": 2,
+        "native_vs_omlx_percent": {
+          "x": -19.695693705092076,
+          "y": -14.635480717753058,
+          "TTFT_s": -22.67188823820553
+        }
+      },
+      {
+        "C": 1,
+        "pair": 3,
+        "native_vs_omlx_percent": {
+          "x": -16.07155765477326,
+          "y": -11.037565998419495,
+          "TTFT_s": -24.180951437192423
+        }
+      },
+      {
+        "C": 2,
+        "pair": 1,
+        "native_vs_omlx_percent": {
+          "x": -15.169071186945038,
+          "y": -2.2618559768709967,
+          "TTFT_s": -40.9357156742336
+        }
+      },
+      {
+        "C": 2,
+        "pair": 2,
+        "native_vs_omlx_percent": {
+          "x": -11.372907470611803,
+          "y": -0.2910737174820599,
+          "TTFT_s": -28.876141217165753
+        }
+      },
+      {
+        "C": 2,
+        "pair": 3,
+        "native_vs_omlx_percent": {
+          "x": -15.891088264598075,
+          "y": -3.0731295509663914,
+          "TTFT_s": -39.860084174365525
+        }
+      },
+      {
+        "C": 4,
+        "pair": 1,
+        "native_vs_omlx_percent": {
+          "x": -16.387511857682803,
+          "y": 2.367987849091091,
+          "TTFT_s": -42.162319471825974
+        }
+      },
+      {
+        "C": 4,
+        "pair": 2,
+        "native_vs_omlx_percent": {
+          "x": -0.8415555027274091,
+          "y": 11.16303451879439,
+          "TTFT_s": -22.769404517250337
+        }
+      },
+      {
+        "C": 4,
+        "pair": 3,
+        "native_vs_omlx_percent": {
+          "x": -14.913669111394313,
+          "y": 3.953772089054075,
+          "TTFT_s": -42.463710705283845
+        }
+      }
+    ],
+    "scope": "M5 Ultra 256 GiB AC; x is client delivery proxy, y includes queue/prefill/HTTP; official raw IDs and GPU batching are not asserted"
+  },
+  "native_batch_trace_summaries": {
+    "C1-pair3-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 180
+      },
+      "mlx_peak_bytes": 15491221491,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C1-pair2-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 180
+      },
+      "mlx_peak_bytes": 15489468399,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C2-pair2-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 8,
+        "2": 176
+      },
+      "mlx_peak_bytes": 15829068372,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C2-pair3-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 12,
+        "2": 174
+      },
+      "mlx_peak_bytes": 15829068372,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C4-pair3-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "3": 3,
+        "4": 174,
+        "1": 3,
+        "2": 6
+      },
+      "mlx_peak_bytes": 16523243180,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C4-pair2-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "2": 6,
+        "4": 174,
+        "3": 3,
+        "1": 3
+      },
+      "mlx_peak_bytes": 16523243180,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C1-pair1-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 180
+      },
+      "mlx_peak_bytes": 15490975731,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C4-pair1-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "2": 6,
+        "4": 174,
+        "3": 3,
+        "1": 3
+      },
+      "mlx_peak_bytes": 16523243180,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    },
+    "C2-pair1-tutorial": {
+      "post_step_active_batch_histogram": {
+        "0": 12,
+        "1": 8,
+        "2": 176
+      },
+      "mlx_peak_bytes": 15829068372,
+      "scope": "scheduler post-step occupancy; includes prefill and final empty state, not a per-kernel batch assertion"
+    }
+  },
+  "lithos": {
+    "status": "UNSUPPORTED_TARGET",
+    "source_commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "source_registry": "/Users/ryanli/code/lithos-metal/monolith/backends/metal/registry.py",
+    "registry_sha256": "bd93476a2948c4189f9254a02bef1661aed6ef9977e79b92ee7a6eaf4ace8764",
+    "target": {
+      "chip": "Apple M5 Ultra",
+      "gpu_cores": 80,
+      "apple_family": 10
+    },
+    "matched_profile": null,
+    "registered_profiles": [
+      "apple-m3-pro-18c",
+      "apple-m3-max-30c",
+      "apple-m3-ultra-60c",
+      "apple-m4-pro-16c",
+      "apple-m4-pro-20c",
+      "apple-m4-max-32c",
+      "apple-m4-max-40c",
+      "apple-m5-pro-20c",
+      "apple-m5-max-32c",
+      "apple-m5-max-40c"
+    ],
+    "gpu_device_created": false,
+    "model_loaded": false,
+    "performance_samples": 0
+  },
+  "resource_summary": {
+    "counts_by_domain": {
+      "fullqual-build2": 22,
+      "e2e-build2": 104,
+      "frontier-v1": 270
+    },
+    "pressure_values": [
+      1
+    ],
+    "thermal_values": [
+      0
+    ],
+    "swap_MB_range": [
+      0.0,
+      0.0
+    ],
+    "Pageouts_range": [
+      0,
+      0
+    ],
+    "Swapouts_range": [
+      0,
+      0
+    ]
+  },
+  "release": {
+    "fullqual-build1": {
+      "status": "GPU_RELEASED",
+      "qualification": "STOP_FIRST_FAILURE",
+      "tool_session": 21803,
+      "tool_returncode": 1,
+      "exact_pid_absence": [
+        {
+          "pid": 9322,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 9349,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 9362,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        }
+      ],
+      "cause": "M5 excluded from existing GDN decode eligibility by prefill_batch_backend_supported; 32 accepted observations retained, compiled gates dispatch=0, candidate not launched",
+      "raw_resources": [
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/resource-01-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/resource-00-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/owner/resource-01-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/owner/resource-00-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/accepted/resource-01-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/accepted/resource-00-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/accepted/resource-02-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        },
+        {
+          "path": ".artifacts/m5-ultra-256gb/fullqual-build1/gpu-fullmodel-run1/accepted/resource-03-raw.json",
+          "pressure": 1,
+          "thermal": 0,
+          "swap_mb": 0.0
+        }
+      ]
+    },
+    "fullqual-build2": {
+      "status": "GPU_RELEASED",
+      "tool_session": 95697,
+      "tool_returncode": 0,
+      "exact_pid_absence": [
+        {
+          "pid": 9547,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 9567,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 9578,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 9655,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        }
+      ],
+      "model_workers_serial": true,
+      "owner_waited_reaped_driver": true,
+      "driver_waited_reaped_workers": true,
+      "first_failure": null,
+      "cleanup_errors": []
+    },
+    "e2e-build1": {
+      "status": "GPU_RELEASED",
+      "tool_session": 77751,
+      "tool_returncode": 1,
+      "exact_pid_absence": [
+        {
+          "pid": 10056,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 10086,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        }
+      ],
+      "sample_count": 0,
+      "failure": "runtime identity required numpy module before child imported it; no model was loaded and no measured requests were made",
+      "parent_stopped_owned_failed_child": 10086
+    },
+    "e2e-build2": {
+      "status": "GPU_RELEASED",
+      "tool_session": 92961,
+      "tool_returncode": 0,
+      "exact_pid_absence": [
+        {
+          "pid": 10520,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 11649,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 11002,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 11422,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 10809,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 10557,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 11188,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        }
+      ],
+      "cleanup_errors": []
+    },
+    "frontier-v1": {
+      "status": "GPU_RELEASED",
+      "tool_session": 93923,
+      "tool_returncode": 0,
+      "exact_pid_absence": [
+        {
+          "pid": 11941,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13742,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12636,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12486,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 14073,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12120,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13273,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13441,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13592,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 14604,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 14412,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 11965,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13108,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 14765,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12286,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 13909,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12784,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 14242,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "pid": 12946,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": ""
+        }
+      ],
+      "all_owned_processes_reaped": true,
+      "owner_and_children_count": 19
+    }
+  },
+  "preserved_failures": [
+    "fullqual-build1: old backend eligibility blocked gates; 32 accepted observations retained; no V19 execution",
+    "e2e-build1: numpy absent during runtime audit; zero model/performance samples"
+  ],
+  "scope_limits": [
+    "Single fixed 19-token prompt, greedy normal EOS, 32 generated tokens, no draft/cache reuse",
+    "No pooled M4 or earlier smoke data",
+    "E2E and frontier are distinct sessions; do not pool their C1 points",
+    "x is client text-delivery proxy, not GPU token rate; y includes queue/prefill/HTTP",
+    "Official oMLX has usage/canonical text, not raw engine token IDs",
+    "Runtime process matcher cannot exclude arbitrary GUI or unrecognized GPU work",
+    "Separate stdlib replay was performed; no second human/agent review claimed",
+    "V19 remains default OFF, DO_NOT_ADOPT; no overall baseline win",
+    "Lithos has no measured score because the pinned official backend lacks this device"
+  ],
+  "native_runtime_crosscheck": {
+    "same_native_MLX_assets": true,
+    "files_sha256": {
+      "core.cpython-313-darwin.so": "963a14eefb170f27a0cf453b32687e2c55b9fa4ea4dde3f97360f60287dad5ef",
+      "libjaccl.dylib": "949e901df832d600a71ff2bc5f3738d55b010668102f36e071e1890807a965cd",
+      "libmlx.dylib": "ebc8a5f5465afb79d3d9c8f5b0929de1a9b277b7179db8672f92da77ae110a1e",
+      "mlx.metallib": "95974b7de464ec2be7833a914ca5a53d283a70789470fd84218738fc8fcea3e1"
+    }
+  },
+  "post_run_inventory_note": {
+    "last_frontier_postflight_UTC": "2026-10-16T06:15:28.059170+00:00",
+    "unowned_download_processes_started_local": "2026-10-15 23:15:31 America/Los_Angeles",
+    "scope": "New unowned download processes began after measured workload and postflight; left untouched."
+  }
+}
