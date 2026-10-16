@@ -1,0 +1,16 @@
+{
+  "status": "PASS_CPU_COMPILE_ONLY",
+  "GPU_used": false,
+  "native_loaded": false,
+  "builds": [
+    {
+      "command": "/usr/bin/clang++ -std=c++17 -O2 check_contract.cpp -o check_contract",
+      "exit_code": 0
+    },
+    {
+      "command": "/usr/bin/clang++ -std=c++17 -O2 -dynamiclib -fno-objc-arc replay.mm -framework Foundation -framework Metal -o libv81replay.dylib 2> build-native.stderr",
+      "exit_code": 0
+    }
+  ],
+  "warnings": "24 deprecated Metal reflection API warnings; full compiler stderr retained"
+}

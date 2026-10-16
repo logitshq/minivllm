@@ -1,0 +1,66 @@
+{
+  "parent_helper": "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py",
+  "parent_sha256": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952",
+  "parent_actual_local_receipt": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/numeric-v44-attempt1/child-output/receipt.json",
+  "parent_actual_local_receipt_sha256": "1c22f2e29c78b885600c1be4a06fac357154a7eaa2ee82aa31b284921ff12392",
+  "parent_actual_status": "PASS_V44_ACTIVATED_NORMREUSE_CACHE_STRICT_BYTES_9REAL_6SYNTHETIC",
+  "A": "V44 public activated norm-reuse cached helper; not accepted17 or a native engine",
+  "B": "V78 public scaled-ready helper",
+  "SPLIT": 4,
+  "VALUE_TILE": 32,
+  "held_values_per_split": 32,
+  "header_and_norm_body_byte_identical": true,
+  "prework_extra": [
+    "threadgroup float ready_scales[2]",
+    "lane0 stores qs/ks after original serial norm",
+    "uniform second barrier in group<16 branch",
+    "FP32 ready_scales[0]*rawQ and ready_scales[1]*rawK stores"
+  ],
+  "state_local_scale_loads_removed": true,
+  "state_replacements": {
+    "ks * kh[d] * held[j]": "kh[d] * held[j]",
+    "ex * held[j] + ks * kh[d] * delta": "ex * held[j] + kh[d] * delta",
+    "qs * qh[d] * s": "qh[d] * s"
+  },
+  "remaining_state_source_reverse_byte_proof": "check_cpu.py::test_exact_reverse_source_proof",
+  "wrapper_AST_proof": "check_cpu.py::test_wrapper_ast_is_unchanged_except_pso_names",
+  "compile_options": {
+    "math_mode": "safe"
+  },
+  "state_input_order": [
+    "q_ready",
+    "k_ready",
+    "v",
+    "scales",
+    "g",
+    "beta",
+    "S"
+  ],
+  "scales_binding_retained_but_unused_in_state": true,
+  "prework_PSO": "gdn_activated_scaled_ready_prework_v78_build1",
+  "state_PSO": "gdn_scaled_ready_cached_state_v78_build1",
+  "expected_S_Snew_slots": [
+    6,
+    9
+  ],
+  "slots_actual_GPU_observed": false,
+  "native_whitelist_changed": false,
+  "native_integrated": false,
+  "old_raw_norm_qualification_probe_removed": true,
+  "no_BF16_norm_rounding": true,
+  "activation": "externally materialized BF16; no candidate SiLU call",
+  "numeric_contract": {
+    "saved_real_banks": 9,
+    "saved_synthetic_banks": 6,
+    "strict_o_S_checks": 30,
+    "strict_q_k_ready_checks": 30,
+    "strict_v_scales_checks": 30,
+    "input_readonly_cases": 15,
+    "S_feedback": false,
+    "q_k_reference": "reference-scaled-ready-probe.metal uses original-order qs*rawq and ks*rawk with safe policy"
+  },
+  "risk": "moving FP32 materialization across dispatch may affect compiler contraction/FMA or intermediate rounding; source proof is not bit-exact proof",
+  "GPU_qualified": false,
+  "performance_prepared": false,
+  "fullmodel_qualified": false
+}

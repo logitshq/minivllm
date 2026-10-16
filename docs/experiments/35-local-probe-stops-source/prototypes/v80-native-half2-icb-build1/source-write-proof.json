@@ -1,0 +1,146 @@
+{
+  "status": "PASS_CPU_SOURCE_DERIVED_EXACT_OUTPUT_POLICY_EXPECTED_NOT_OBSERVED",
+  "actual_B_function_observed_by_author": false,
+  "expected_B_function": "custom_kernel_v79_nvfp4_half2_r4_sg2_n17408_k5120__bfloat16_t_4_uint32_t_uint8_t_bfloat16_t_bfloat16_t",
+  "expected_name_basis": "frozen79 literal name with N17408/K5120, template T=bfloat16/R=4, source input/output typed pointers; exact MLX0.32.3 naming pattern previously observed in72",
+  "B_output": {
+    "index": 3,
+    "name": "output",
+    "source_pointer_dtype": "bfloat16_t",
+    "reflection_RW_remains_RW": true,
+    "source_y_reads": 0,
+    "impl_lines": [
+      256,
+      323
+    ],
+    "impl_y_uses": [
+      "device T* y,",
+      "y += tid.x * out_vec_size + out_row;",
+      "y[row] = static_cast<T>(result[row] * inv_scale_enc);",
+      "y[row] = static_cast<T>(result[row]);"
+    ]
+  },
+  "B_sources": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v79-nvfp4-half2-decode-build1/geometry.py": "df2d6e4c005a464231c7f5f2e33efe15dd9baa2da49d52b0d63c2dcbbf5bb592",
+    "/private/tmp/minivllm-engine-optimization-20261014/v79-nvfp4-half2-decode-build1/kernel_header.metal": "f1d5948566fd97a379666e13d3b3edd3b023bf85b67a437d7400958943579fb5",
+    "/private/tmp/minivllm-engine-optimization-20261014/v79-nvfp4-half2-decode-build1/kernel_body.metal": "55bb5ab2e86a83f9fd62f6176db9d74d28d6464ac96d43e308f0fb21bb818212",
+    "/private/tmp/minivllm-engine-optimization-20261014/v79-nvfp4-half2-decode-build1/LICENSE-MLX.txt": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "/private/tmp/minivllm-engine-optimization-20261014/v79-nvfp4-half2-decode-build1/LICENSE-Lithos-Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "impl_body_exact_original_native": true,
+  "installed_impl": {
+    "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "lines": [
+      339,
+      406
+    ]
+  },
+  "A_observed_provenance": {
+    "proof": "/private/tmp/minivllm-engine-optimization-20261014/v72-native-range-icb-build2/source-write-proof.json",
+    "sha256": "cd8103c41d19a42581772969e44c452e98f0eea1db1f8b072d3b110b0736d372",
+    "8_records": [
+      {
+        "arm": 0,
+        "slot": 0,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 1,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 2,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 3,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 4,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 5,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 6,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      },
+      {
+        "arm": 0,
+        "slot": 7,
+        "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+        "output_index": 4,
+        "output_name": "y",
+        "reflection_access": 1,
+        "reflection_interpretation": "ReadWrite",
+        "source_inferred_access": "store-only output",
+        "full_allocation_bytes": 49152,
+        "logical_output_bytes": 34816
+      }
+    ]
+  },
+  "all_other_RW_or_unknown": "REJECT",
+  "runtime_required": "all16 exact functions + exact active buffer name/index/access/binding-kind schema + original full pin role ranges + exclusive output allocations + whole-allocation disjointness; actual mismatch STOP",
+  "element_dtype_limit": "source typed symbol plus runtime array metadata; no independent Metal buffer element-dtype reflection claim",
+  "GPU_used": false,
+  "native_loaded": false
+}

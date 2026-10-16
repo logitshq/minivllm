@@ -1,0 +1,127 @@
+{
+  "GPU_used": false,
+  "MLX_imported": false,
+  "checkpoint_payload_loaded": false,
+  "identity": {
+    "checkpoint": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "driver_sha256": "9dcb6cffb761ea4efa1fabe17fc9c272cbf7a6db5b28c384063b06e22161baed",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "mechanism": "fixed-shape mx.compile A and B over identical immutable weights; B uses original original qdot association/K order with paired exact FP4 half2 decode",
+    "plan": {
+      "controls": {
+        "MLX_BFS_MAX_WIDTH": "20",
+        "MLX_MAX_MB_PER_BUFFER": "50",
+        "MLX_MAX_OPS_PER_BUFFER": "50",
+        "MLX_METAL_FAST_SYNCH": "0"
+      },
+      "full_model": false,
+      "minimum_reduction": 0.05,
+      "minimum_wins": 5,
+      "power": "AC Power",
+      "prime": 2048,
+      "qualify_only": false,
+      "repeats": 8192,
+      "schedule": [
+        [
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A"
+        ],
+        [
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B"
+        ]
+      ],
+      "timeout_s": 170
+    },
+    "protocol_sha256": "8c371c0db84bdf16debe3bc76d0b5f0fae54de0edc6a3131145da328d68d8c8e",
+    "prototype_manifest_sha256": "c57dd329623b5e1136a61c6a072cf0b83734eb7e19b6e3b89c8eab8e106a0ba6",
+    "real_inputs": {
+      "capture_driver_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/check_swiglu_actual_micro_v1.py",
+      "capture_driver_sha256": "3aa3848568ce4d419f176af2f13770872805dfc06b27a8e2133c53bd28aa0126",
+      "inputs": {
+        "0": {
+          "capture": {
+            "capture_empty": true,
+            "first_normal_decode": true,
+            "input_object_id": 4455397632,
+            "mode": "decode"
+          },
+          "dtype": "mlx.core.bfloat16",
+          "nbytes": 10240,
+          "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L00-x.raw.le.bin",
+          "raw_sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66",
+          "shape": [
+            1,
+            5120
+          ]
+        }
+      },
+      "old_experiment_status": "STOP_BUILD1",
+      "receipt_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/receipt.json",
+      "receipt_sha256": "94a9f5ab7ae3780f306e66d71e4f3b0f2fb559eef4d5a89ae179ef63ef3355c8",
+      "source": "Historical first normal decode MLP input (after post_attention_layernorm), V17/gates ON; not newly captured"
+    },
+    "runtime_plan_sha256": "20cc406685d035ef484bf3f3fc2c4b1b39c5bb2af6eef884285b7b74fb6f47bc",
+    "target_tensor_payload_bytes": 50135040,
+    "tensors": [
+      {
+        "dtype": "U32",
+        "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7",
+        "key": "language_model.model.layers.0.mlp.gate_proj.weight",
+        "nbytes": 44564480,
+        "offset": 4163304826,
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00001-of-00003.safetensors",
+        "shape": [
+          17408,
+          640
+        ]
+      },
+      {
+        "dtype": "U8",
+        "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7",
+        "key": "language_model.model.layers.0.mlp.gate_proj.scales",
+        "nbytes": 5570560,
+        "offset": 4651489402,
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00001-of-00003.safetensors",
+        "shape": [
+          17408,
+          320
+        ]
+      }
+    ]
+  },
+  "status": "PASS_CPU_SOURCE_HEADER"
+}

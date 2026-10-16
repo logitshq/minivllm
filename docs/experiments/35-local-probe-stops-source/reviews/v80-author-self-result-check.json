@@ -1,0 +1,36 @@
+{
+  "status": "PASS_AUTHOR_SELF_RESULT_FIELD_CHECK_NOT_INDEPENDENT_IMPLEMENTATION_AUDIT",
+  "receipt": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/kernel-micro-v80-attempt1/child-output/receipt.json",
+    "sha256": "63c731a2be642da1dd4c5fdfafe8495961a57c78d4b3d307abac8fb75a82b18b"
+  },
+  "pairs_sha256": "f6c840950ef776476253fbb1b715d00ad040bc9aadf98b374bfda19af5b058b1",
+  "actual_status": "STOP_MICRO_GATE",
+  "medians_ns_per_dispatch": {
+    "A": 100684.4457397461,
+    "B": 166393.81915283203
+  },
+  "reduction": -0.6526268574088854,
+  "B_over_A_slowdown": 0.6526268574088854,
+  "wins": 0,
+  "controls": {
+    "A": [
+      0.9944374288632734,
+      1.0006946507932004
+    ],
+    "B": [
+      0.9997787210332489,
+      1.000016536624295
+    ]
+  },
+  "controls_PASS": true,
+  "timed_blocks": 20,
+  "terminal_saved_hash_matches": 160,
+  "MLX_checks": 72,
+  "native_qual_checks": 128,
+  "actual_exact_schema_matched": true,
+  "math": "B frozen79 R4/SG2 retains original qdot parenthesized four products, scale multiply, ascending K-block accumulation and simd_sum; only paired FP4-to-half2 decode changes. Strict results cover declared saved inputs, not universal proof.",
+  "execution_scope": "one FFI + encode/commit/wait for1024 groups\u00d78 independent dispatches; output hashes outside clocks",
+  "conclusion": "B is65.2626857% slower; controls PASS but0/6 wins, STOP/no integration/no retry. No GPU-causal attribution or E2E claim.",
+  "GPU_used_by_reviewer": false
+}

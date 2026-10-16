@@ -1,0 +1,126 @@
+{
+  "scope": "V81 local fixed15-bank two-kernel GDN ICB; no feedback/fullmodel/HTTP/adoption",
+  "A": "frozen V44 prework/state",
+  "B": "frozen V78 scaled-ready prework/state",
+  "prior_V78_actual_receipt_sha256": "f5d8fc89eb16ad29f0efed700b1a6a8200a975fb145b2db99a12b3632ec7807a",
+  "fixed_bank_count": 15,
+  "real": 9,
+  "synthetic": 6,
+  "S_payload_bytes": 47185920,
+  "working_set_units": "S payload is45MiB /47.18592MB; distinct 15 S arrays remain resident",
+  "capture_order": "A0.prework,A0.state,...A14.state,B0.prework,...B14.state",
+  "capture_dispatches": 60,
+  "ranges": [
+    [
+      0,
+      30
+    ],
+    [
+      30,
+      60
+    ]
+  ],
+  "dispatches_per_bank": 2,
+  "state_input": "same immutable original bank S for every group; no feedback",
+  "internal_barriers_per_range": 15,
+  "internal_barrier_policy": "setBarrier before each state; exact producer/consumer allocation mapping and original captured synchronization required",
+  "external_Buffers_barriers_per_group": 1,
+  "external_trailing_barrier": true,
+  "zero_copy_original_RO_pins": 60,
+  "mutable_registered_arrays": 180,
+  "native_donor": "frozen native40 capture/arena source; new independent V81 range implementation, not V72 dylib",
+  "RW_exception": "only exact function/index/name pinned stores-only output; reflection still reported RW; inputs/S RW forbidden",
+  "allocation_policy": "all registered arrays exclusive whole original allocations except shared A/B immutable originals; all packed arena extents disjoint; unknown or alias STOP",
+  "numeric_only": {
+    "public_AB_checks": 30,
+    "captured_manual_vs_public_A44_checks": 60,
+    "groups_per_arm": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      16
+    ],
+    "native_terminal_o_S_checks": 480,
+    "native_all_comparison_hashes_saved": true,
+    "native_final_terminal_raw_arrays_saved": 60,
+    "original_arrays_readonly": 255,
+    "readonly_checkpoints": 17,
+    "finite_FP32_raw_bytes": true,
+    "timing_run": false
+  },
+  "timing_plan_frozen_not_implemented": {
+    "requires_prior_actual_V81_numeric_receipt_and_SHA": true,
+    "prime_groups": 128,
+    "timed_groups": 1024,
+    "dispatches_per_timed_block": 30720,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "AB_BA_pairs": 6,
+    "AA_BB_control_pairs": 4,
+    "minimum_arm_median_reduction": 0.05,
+    "minimum_pair_wins": 5,
+    "each_control_ratio": [
+      0.95,
+      1.05
+    ],
+    "per_arm_control_median_ratio": [
+      0.98,
+      1.02
+    ],
+    "wall_scope": "oneffi native encode/commit/wait for30dispatches\u00d7groups; hashes/resources outside clocks",
+    "performance_entrypoint_enabled": false
+  },
+  "resources": {
+    "AC": true,
+    "thermal_code": 0,
+    "pressure": 1,
+    "swap_used_stable": true,
+    "Swapouts_stable": true,
+    "raw_before_derived": true,
+    "root_sole_GPU_owner": true
+  }
+}

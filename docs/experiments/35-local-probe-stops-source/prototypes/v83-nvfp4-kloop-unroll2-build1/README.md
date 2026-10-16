@@ -1,0 +1,5 @@
+# V83: original R4/SG2 FP4 QMV with K-loop unroll_count(2)
+
+Source-only hypothesis inspired by Lithos gemv_nvfp4_rows.metal's default NV_UNROLL=2 and outer K-loop pragma. This does not claim that shader is the selected M4 recipe. Original MLX fp4/fp8/qdot, per-row accumulation and ascending K steps, R4/SG2 geometry, scale placement, SIMD reduction and BF16 cast are untouched. Only a pragma is inserted before the outer K loop of the original66 header. No half2 decoder, factor folding, weight repack, extra X buffer or changed tolerance. The compiler may change instruction scheduling or contraction; actual strict numeric qualification is required.
+
+CPU-only by default. Explicit run requires --qualify-only, and per-call wall timing is prohibited by the inherited driver. Planned36 checks=9 uncompiled original-R4 bridge +27 compiled comparisons on8 fixed synthetic and1 historical actual vector at layer0 gate N17408 K5120; no full-model or universal numerical claim. Native ICB performance must be a later independent qualification and same-control protocol; no rerun of old49/52/53/69/72/79/80 configurations.

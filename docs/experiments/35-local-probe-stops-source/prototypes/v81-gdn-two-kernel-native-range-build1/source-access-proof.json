@@ -1,0 +1,177 @@
+{
+  "status": "PASS_CPU_PINNED_GDN_STORE_ONLY_SOURCE_PROOF",
+  "actual_reflection_observed": false,
+  "GPU_used": false,
+  "MLX_imported": false,
+  "policy": "exact four PSO names plus output index/name; RW retained as reflection and licensed only for pinned source-store-only outputs; all inputs and S require actual ReadOnly",
+  "source_entries": [
+    {
+      "arm": 0,
+      "stage": 0,
+      "helper": "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py",
+      "helper_sha256": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952",
+      "literal": "_PREWORK_SOURCE",
+      "literal_sha256": "29c9208ae28bec64fabd8d0c3f5b157c18e892ae552aacd68bc386d3dbe7266d",
+      "output_uses": {
+        "q_ready": {
+          "expected_index": 1,
+          "all_source_uses": [
+            "q_ready[h * 128 + lane] = qh[lane];"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "k_ready": {
+          "expected_index": 2,
+          "all_source_uses": [
+            "k_ready[h * 128 + lane] = kh[lane];"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "v_ready": {
+          "expected_index": 3,
+          "all_source_uses": [
+            "v_ready[h * 128 + lane] = float(activated[4096 + h * 128 + lane]);"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "scales": {
+          "expected_index": 4,
+          "all_source_uses": [
+            "scales[h * 2] = qs;",
+            "scales[h * 2 + 1] = ks;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        }
+      },
+      "S_input_requires_actual_ReadOnly": false,
+      "S_source_uses": []
+    },
+    {
+      "arm": 0,
+      "stage": 1,
+      "helper": "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py",
+      "helper_sha256": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952",
+      "literal": "_STATE_SOURCE",
+      "literal_sha256": "3d9ae74cd60321221ef494e1e5d2ccad4b7a4dff3aa133245d9c65c1c00d5504",
+      "output_uses": {
+        "o": {
+          "expected_index": 8,
+          "all_source_uses": [
+            "o[(size_t)bh * Dv + dv] = acc;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "S_new": {
+          "expected_index": 9,
+          "all_source_uses": [
+            "S_new[base + d * Dv + dv] = s;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        }
+      },
+      "S_input_requires_actual_ReadOnly": true,
+      "S_source_uses": [
+        "held[j] = S[base + d * Dv + dv];"
+      ]
+    },
+    {
+      "arm": 1,
+      "stage": 0,
+      "helper": "/private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1/gdn_activated_scaled_ready_metal.py",
+      "helper_sha256": "80fbf529f7cc087437d9ab8cf87f6320567e29ef31cc2007703fd622cadeb569",
+      "literal": "_PREWORK_SOURCE",
+      "literal_sha256": "07325e459b7390bc9aff10d3e80cc9f90acc2092c2c5db1c45c9d85463fc9a37",
+      "output_uses": {
+        "q_ready": {
+          "expected_index": 1,
+          "all_source_uses": [
+            "q_ready[h * 128 + lane] = ready_scales[0] * qh[lane];"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "k_ready": {
+          "expected_index": 2,
+          "all_source_uses": [
+            "k_ready[h * 128 + lane] = ready_scales[1] * kh[lane];"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "v_ready": {
+          "expected_index": 3,
+          "all_source_uses": [
+            "v_ready[h * 128 + lane] = float(activated[4096 + h * 128 + lane]);"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "scales": {
+          "expected_index": 4,
+          "all_source_uses": [
+            "scales[h * 2] = qs;",
+            "scales[h * 2 + 1] = ks;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        }
+      },
+      "S_input_requires_actual_ReadOnly": false,
+      "S_source_uses": []
+    },
+    {
+      "arm": 1,
+      "stage": 1,
+      "helper": "/private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1/gdn_activated_scaled_ready_metal.py",
+      "helper_sha256": "80fbf529f7cc087437d9ab8cf87f6320567e29ef31cc2007703fd622cadeb569",
+      "literal": "_STATE_SOURCE",
+      "literal_sha256": "54999cb60de8d056a15c5f2edc41ffa4c1d3734bea9e2d1c84918e8d8a4511cd",
+      "output_uses": {
+        "o": {
+          "expected_index": 8,
+          "all_source_uses": [
+            "o[(size_t)bh * Dv + dv] = acc;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        },
+        "S_new": {
+          "expected_index": 9,
+          "all_source_uses": [
+            "S_new[base + d * Dv + dv] = s;"
+          ],
+          "source_reads": 0,
+          "inferred_access": "store-only",
+          "reflection_access": "UNOBSERVED; actual WriteOnly or exact matching RW output only"
+        }
+      },
+      "S_input_requires_actual_ReadOnly": true,
+      "S_source_uses": [
+        "held[j] = S[base + d * Dv + dv];"
+      ]
+    }
+  ],
+  "not_proven": [
+    "actual PSO names/reflection/slots/geometry",
+    "ICB driver dependency correctness",
+    "terminal FP32 bytes; future actual numeric gate required"
+  ],
+  "no_binary_disassembly_claim": true
+}
