@@ -51,3 +51,5 @@ docs/              计划、教程、远程版的契约和 notes
 - [20：沿实际实现读三条执行路径](docs/experiments/20-donor-implementation-map.md)：oMLX预处理、已有ahead、Lithos ICB与allocator策略的源码证据；仅CPU阅读，无新增性能结论。
 
 - [21：把GDN真卷积、SiLU和原始tail合成一核](docs/experiments/21-gdn-conv-fusion.md)：synthetic严格数值与局部micro通过，host-wall中位减少12.21%；真实preconv、完整模型及E2E资格待做，原型未接入引擎。
+
+[实验22：融合和图复用的真实 HTTP 检查](docs/experiments/22-combined-decode-screen.md)保存组合版源码和完整结果；C1交互速度+1.54%、总吞吐+0.76%，尚未超过官方前沿，默认关闭。
