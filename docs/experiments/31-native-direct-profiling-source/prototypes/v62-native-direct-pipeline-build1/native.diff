@@ -1,0 +1,95 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v55-native-async-build2/replay.mm
++++ /private/tmp/minivllm-engine-optimization-20261014/v62-native-direct-pipeline-build1/replay.mm
+@@ -12,6 +12,8 @@
+ #include <chrono>
+ #include <unordered_map>
+ #include "pipeline_core.h"
++#include "feedback_plan.h"
++#include "direct_policy.h"
+ static bool pipelineEnabled();
+ 
+ // Single-child diagnostic only. No GPU dispatch in initialization.
+@@ -126,6 +128,11 @@
+ struct AsyncTiming {V55Ticket ticket;unsigned request;uint64_t graphEncode,feedbackEncode,commit,hostWait,submittedToCompleted;double gpuStart,gpuEnd;bool success,discard;};
+ struct AsyncPipeline {bool enabled=false,allowOldReset=false;unsigned depth=0,previousSlot=0;int32_t initialLength=0;V55Core core;AsyncSlot slots[2];std::map<uint64_t,AsyncJob> jobs;std::vector<AsyncTiming> timing;};
+ static AsyncPipeline&A55(){static AsyncPipeline a;return a;}
++struct DirectCopy62 {uintptr_t input,output;size_t source,destination,size;};
++struct DirectPipeline62 {bool enabled=false,diagnostic=false;uintptr_t prediction=0;size_t predictionSource=0,bytes=0,ioChecks=0,inputChecks=0,quiescentCopies=0,quiescentBytes=0;std::vector<DirectCopy62>copies;std::string rejection;};
++static DirectPipeline62&D62(){static DirectPipeline62 d;return d;}
++static NSDictionary*directPipelineReport62(){NSMutableArray*links=[NSMutableArray array];for(auto&x:D62().copies)[links addObject:@{@"input":@(x.input),@"output":@(x.output),@"source_arena_offset":@(x.source),@"destination_arena_offset":@(x.destination),@"bytes":@(x.size)}];return @{@"enabled":@(D62().enabled),@"diagnostic_snapshot":@(D62().diagnostic),@"mode_immutable_after_enable":@YES,@"banks_checked":@(D62().enabled?2:0),@"input_output_range_pairs_checked":@(D62().ioChecks),@"input_input_range_pairs_checked":@(D62().inputChecks),@"direct_links":@(D62().copies.size()),@"direct_feedback_bytes_per_step":@(D62().bytes),@"prediction_output_address":@(D62().prediction),@"prediction_slot_bytes":@(D62().enabled&&!D62().diagnostic?4:0),@"legacy_F_stage_allocation_bytes_retained":@(F().stage.length),@"legacy_F_stage_used":@(!D62().enabled||D62().diagnostic),@"ordinary_output_contract":D62().diagnostic?@"all outputs from last delivered non-S slot / S bank; finish all reads before next submit":@"ONLY last-delivered 4B prediction slot; no other output while pipelined",@"quiescent_output_contract":@"all jobs delivered, pending/jobs empty, last valid/newest, no request discard/failure; read final arena/current last-ticket S bank only",@"quiescent_output_copies":@(D62().quiescentCopies),@"quiescent_output_bytes":@(D62().quiescentBytes),@"rejection":[NSString stringWithUTF8String:D62().rejection.c_str()],@"copy_plan":links};}
++
+ static bool pipelineEnabled(){return A55().enabled;}
+ static NSDictionary*pipelineReport();
+ static bool pipelineRead(){return !pipelineEnabled()||A55().core.read();}
+@@ -135,7 +142,7 @@
+ static const StageRange*stage(uintptr_t a,size_t n=0){for(auto&x:F().stages)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const PingPair*pingOutput(uintptr_t a,size_t n=0){for(auto&p:PP().pairs)if(p.eligible&&p.output==a&&(!n||p.size==n))return &p;return nullptr;}
+ static unsigned eligiblePings(){unsigned n=0;for(auto&p:PP().pairs)n+=p.eligible;return n;}
+-static const unsigned char*resultBytes(uintptr_t a,size_t n){if(pipelineEnabled()){auto&c=A55().core;if(!c.lastValid)return nullptr;if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(c.last.outputBank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)A55().slots[c.last.slot].stage.contents+x->offset;return nullptr;}if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
++static const unsigned char*resultBytes(uintptr_t a,size_t n){if(pipelineEnabled()){auto&c=A55().core;if(!c.lastValid)return nullptr;if(D62().enabled&&!D62().diagnostic){if(!v62::ordinaryAllowed(false,a,n,D62().prediction))return nullptr;return (const unsigned char*)A55().slots[c.last.slot].stage.contents;}if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(c.last.outputBank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)A55().slots[c.last.slot].stage.contents+x->offset;return nullptr;}if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
+ static uint64_t nowNS(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
+ static size_t arenaInput(const InputRange&x){return S().buffers.at(x.buffer).arena+x.offset;}
+ static size_t arenaOutput(const Output&x){return S().buffers.at(x.buffer).arena+x.offset;}
+@@ -229,9 +236,9 @@
+  for(auto&x:F().stages)[stages addObject:@{@"output_address":@(x.addr),@"bytes":@(x.size),@"stage_offset":@(x.offset)}];
+  for(auto&i:F().inputs)for(auto&o:S().outputs)if(overlap(arenaInput(i),i.size,arenaOutput(o),o.size))[aliases addObject:@{@"input":@(i.addr),@"output":@(o.addr),@"policy":@"all graph outputs staged before any feedback write; original buffer/offset topology preserved"}];
+  NSMutableArray*pairs=[NSMutableArray array];for(auto&p:PP().pairs){NSMutableArray*uses=[NSMutableArray array];for(auto&u:S().uses)if(u.buffer==p.a||u.buffer==p.b)[uses addObject:@{@"buffer":@(u.buffer),@"offset":@(u.offset),@"PSO":[NSString stringWithUTF8String:S().psos.at(key(u.p)).name.c_str()],@"argument":[NSString stringWithUTF8String:u.argument.c_str()],@"index":@(u.index),@"access":@(u.access),@"dispatch":@(u.dispatch)}];[pairs addObject:@{@"input":@(p.input),@"output":@(p.output),@"A_original_buffer":@(p.a),@"B_original_buffer":@(p.b),@"bytes":@(p.size),@"eligible":@(p.eligible),@"reason":[NSString stringWithUTF8String:p.reason.c_str()],@"actual_binding_uses":uses}];}
+- r[@"feedback"]=@{@"icb":icbReport(),@"pingpong":@{@"requested_count":@(PP().pairs.size()),@"eligible_count":@(eligiblePings()),@"staged_link_count":@(F().links.size()-eligiblePings()),@"bank":@(PP().bank),@"current_written_bank":PP().bank?@"B":@"A",@"pairs":pairs},@"sealed":@(F().sealed),@"input_count":@(F().inputs.size()),@"output_count":@(S().outputs.size()),@"link_count":@(F().links.size()),@"state_count":@(F().stateCount),@"capacity":@(F().capacity),@"request_steps":@(F().steps),@"total_steps":@(F().totalSteps),@"resets":@(F().resets),@"stage_bytes":@(F().stageBytes),@"request_seed_uploaded_ranges":@(F().written.size()),@"CPU_seed_upload_bytes_total":@(F().seedUploadBytes),@"CPU_output_compare_bytes_total":@(F().comparedBytes),@"CPU_full_state_restore_per_step":@NO,@"timing_records_stored":@(F().timing.size()),@"GPU_blit_bytes_per_step":@(([&](){size_t n=0;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;for(auto&l:F().links)if(!pingOutput(l.output,l.size))n+=l.size;return n;})()),@"arithmetic_policy":@"exact captured MLX graph including argmax/nextpos/nextlens; no new native shader",@"synchronization":@"owned graphDone/stageDone/feedbackDone fences across compute and two blit encoders; host waits completion each step",@"inputs":inputs,@"links":links,@"staged_outputs":stages,@"input_output_aliases":aliases,@"first_difference":@{@"output":@(F().diffOutput),@"offset":@(F().diffOffset),@"actual_byte":@(F().diffActual),@"expected_byte":@(F().diffExpected)}};
++ r[@"feedback"]=@{@"icb":icbReport(),@"pingpong":@{@"requested_count":@(PP().pairs.size()),@"eligible_count":@(eligiblePings()),@"staged_link_count":@(F().links.size()-eligiblePings()),@"bank":@(PP().bank),@"current_written_bank":PP().bank?@"B":@"A",@"pairs":pairs},@"sealed":@(F().sealed),@"input_count":@(F().inputs.size()),@"output_count":@(S().outputs.size()),@"link_count":@(F().links.size()),@"state_count":@(F().stateCount),@"capacity":@(F().capacity),@"request_steps":@(F().steps),@"total_steps":@(F().totalSteps),@"resets":@(F().resets),@"stage_bytes":@(F().stageBytes),@"request_seed_uploaded_ranges":@(F().written.size()),@"CPU_seed_upload_bytes_total":@(F().seedUploadBytes),@"CPU_output_compare_bytes_total":@(F().comparedBytes),@"CPU_full_state_restore_per_step":@NO,@"timing_records_stored":@(F().timing.size()),@"GPU_blit_bytes_per_step":@(([&](){if(D62().enabled){size_t n=D62().bytes;if(!D62().diagnostic)return n+4;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;return n;}size_t n=0;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;for(auto&l:F().links)if(!pingOutput(l.output,l.size))n+=l.size;return n;})()),@"arithmetic_policy":@"exact captured MLX graph including argmax/nextpos/nextlens; no new native shader",@"synchronization":@"owned graphDone/stageDone/feedbackDone fences across compute and two blit encoders; host waits completion each step",@"inputs":inputs,@"links":links,@"staged_outputs":stages,@"input_output_aliases":aliases,@"first_difference":@{@"output":@(F().diffOutput),@"offset":@(F().diffOffset),@"actual_byte":@(F().diffActual),@"expected_byte":@(F().diffExpected)}};
+  if(pipelineEnabled()){NSMutableDictionary*fb=[r[@"feedback"] mutableCopy];NSMutableDictionary*pp=[fb[@"pingpong"] mutableCopy];pp[@"bank_role"]=@"next-submit input bank, not a readable completed result";pp[@"current_written_bank"]=A55().core.lastValid?(A55().core.last.outputBank?@"B":@"A"):(id)[NSNull null];fb[@"pingpong"]=pp;[pp release];fb[@"synchronization"]=@"depth2 FIFO; explicit previous-ticket feedbackDone fence before graph; each slot graphDone/stageDone/feedbackDone; wait oldest before delivering";r[@"feedback"]=fb;[fb release];r[@"pipeline"]=pipelineReport();}
+- NSData*encoded=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];F().report.assign((const char*)encoded.bytes,encoded.length);[r release];return F().report.c_str();
++ r[@"direct_pipeline"]=directPipelineReport62();NSData*encoded=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];F().report.assign((const char*)encoded.bytes,encoded.length);[r release];return F().report.c_str();
+ }}
+ 
+ // Eligibility is deliberately limited to the pinned accepted25 GDN source.
+@@ -341,10 +348,14 @@
+  if(a.core.requestSubmitted)[e waitForFence:a.slots[a.previousSlot].feedbackDone];
+  PP().bank=j.inputBank;encodeGraph(e);[e updateFence:slot.graphDone];[e endEncoding];uint64_t graphEnd=nowNS();
+  id<MTLBlitCommandEncoder>capture=[b blitCommandEncoder];if(!capture){[b release];fail("async stage encoder allocation failed");return 1;}[capture waitForFence:slot.graphDone];
++ if(D62().enabled&&!D62().diagnostic){[capture copyFromBuffer:S().arena sourceOffset:D62().predictionSource toBuffer:slot.stage destinationOffset:0 size:4];}else{
+  for(auto&x:S().outputs){if(pingOutput(x.addr,x.size))continue;auto*t=stage(x.addr,x.size);[capture copyFromBuffer:S().arena sourceOffset:arenaOutput(x) toBuffer:slot.stage destinationOffset:t->offset size:x.size];}
++ }
+  [capture updateFence:slot.stageDone];[capture endEncoding];
+  id<MTLBlitCommandEncoder>feedback=[b blitCommandEncoder];if(!feedback){[b release];fail("async feedback encoder allocation failed");return 1;}[feedback waitForFence:slot.stageDone];
++ if(D62().enabled){for(auto&x:D62().copies)[feedback copyFromBuffer:S().arena sourceOffset:x.source toBuffer:S().arena destinationOffset:x.destination size:x.size];}else{
+  for(auto&x:F().links){if(pingOutput(x.output,x.size))continue;auto*i=input(x.input,x.size);auto*t=stage(x.output,x.size);[feedback copyFromBuffer:slot.stage sourceOffset:t->offset toBuffer:S().arena destinationOffset:arenaInput(*i) size:x.size];}
++ }
+  [feedback updateFence:slot.feedbackDone];[feedback endEncoding];uint64_t encodeEnd=nowNS();[b commit];uint64_t commitEnd=nowNS();
+  a.jobs.emplace(j.id,AsyncJob{j,b,t0,graphEnd,encodeEnd,commitEnd});a.core.submitted(j);a.previousSlot=j.slot;PP().bank=j.outputBank;*ticket_out=j.id;return 0;
+ }}
+@@ -368,3 +379,35 @@
+  return @{@"enabled":@(a.enabled),@"depth":@(a.depth),@"request_submitted":@(c.requestSubmitted),@"request_completed":@(c.requestCompleted),@"request_delivered":@(c.requestDelivered),@"request_discarded":@(c.requestDiscarded),@"request_failed":@(c.requestFailed),@"total_submitted":@(c.totalSubmitted),@"total_completed":@(c.totalCompleted),@"total_delivered":@(c.totalDelivered),@"total_discarded":@(c.totalDiscarded),@"total_failed":@(c.totalFailed),@"inflight":@(c.pending.size()),@"maximum_outstanding":@(c.maxOutstanding),@"last_delivered_ticket":c.lastValid?@(c.last.id):(id)[NSNull null],@"last_result_readable":@(c.lastValid),@"last_result_consumed":@(c.lastConsumed),@"result_contract":@"last delivered stage and written S bank, readable until next submit/reset or nonempty drain; empty drain retains last delivered; copy/compare consumes result before next submit",@"next_submit_bank":@(c.nextBank),@"pending":pending,@"slots":slots,@"timing_scope":@"async diagnostics only, not production/E2E; submit-to-completion includes external CPU interval and is not additive exclusive phase time",@"timing":timing};
+ }
+ extern "C" const char*v55_report_json(){return v34_report_json();}
++
++extern "C" int v62_enable_direct_pipeline(uint32_t depth,uint32_t diagnostic){@autoreleasepool{
++ std::lock_guard<std::recursive_mutex>lock(S().lock);auto reject=[](const std::string&s){D62().rejection=s;return 1;};
++ if(depth!=2||diagnostic>1||D62().enabled||A55().enabled||!I().enabled||!F().sealed||F().resets||F().steps||S().replays||!S().error.empty())return reject("direct pipeline enable requires fresh depth2 sealed ICB graph, explicit immutable mode0/1, before any pipeline/reset/replay");
++ try{
++  std::vector<DirectCopy62>copies;size_t bytes=0,io=0,ii=0;uintptr_t pred=0;size_t predSource=0;
++  for(unsigned bank=0;bank<2;++bank){std::vector<v57::Range>inputs,outputs;
++   for(auto&i:F().inputs){uintptr_t buffer=i.buffer;for(auto&p:PP().pairs)if(p.eligible&&i.addr==p.input){if(i.offset||i.size!=p.size||i.buffer!=p.a)throw std::runtime_error("S input bank range mismatch");if(bank)buffer=p.b;}auto&b=S().buffers.at(buffer);if(b.zero)throw std::runtime_error("input is immutable parameter allocation");inputs.push_back({b.arena+i.offset,i.size});}
++   for(auto&o:S().outputs){uintptr_t buffer=o.buffer;if(auto*p=pingOutput(o.addr,o.size)){if(o.offset||o.buffer!=p->b)throw std::runtime_error("S output bank range mismatch");if(bank)buffer=p->a;}auto&b=S().buffers.at(buffer);if(b.zero)throw std::runtime_error("output is immutable parameter allocation");outputs.push_back({b.arena+o.offset,o.size});}
++   auto proof=v57::validate(inputs,outputs,S().arenaBytes);io+=proof.inputOutputPairs;ii+=proof.inputPairs;
++  }
++  size_t skipped=0;
++  for(auto&l:F().links){auto*i=input(l.input,l.size);auto*o=output(l.output,l.size);if(!i||!o)throw std::runtime_error("missing exact feedback range");if(auto*p=pingOutput(l.output,l.size)){if(p->input!=l.input||i->role!=0)throw std::runtime_error("S exclusion does not match eligible input");++skipped;continue;}
++   v57::Range source{arenaOutput(*o),l.size},destination{arenaInput(*i),l.size};v57::bounds(source,S().arenaBytes);v57::bounds(destination,S().arenaBytes);if(v57::overlaps(source,destination)||l.size>SIZE_MAX-bytes)throw std::runtime_error("overlapping direct link or payload overflow");copies.push_back({l.input,l.output,source.offset,destination.offset,l.size});bytes+=l.size;
++   if(i->role==1){if(pred||l.size!=4)throw std::runtime_error("prediction output must be one exact int32 role1 feedback");pred=o->addr;predSource=source.offset;}
++  }
++  if(!pred||skipped!=eligiblePings()||copies.size()+skipped!=F().links.size())throw std::runtime_error("missing prediction or incomplete direct/S links");
++  id<MTLBuffer>small[2]={nil,nil};if(!diagnostic){for(unsigned j=0;j<2;++j){small[j]=[S().device newBufferWithLength:4 options:MTLResourceStorageModeShared|MTLResourceHazardTrackingModeTracked];if(!small[j]){for(auto x:small)[x release];return reject("prediction slot allocation failed before enable");}}}
++  if(v55_enable_pipeline(depth)){for(auto x:small)[x release];return reject("base55 pipeline enable failed");}
++  if(!diagnostic){[A55().slots[1].stage release];A55().slots[0].stage=small[0];A55().slots[1].stage=small[1];} // F.stage is retained, unused in production.
++  D62().copies=std::move(copies);D62().bytes=bytes;D62().ioChecks=io;D62().inputChecks=ii;D62().prediction=pred;D62().predictionSource=predSource;D62().diagnostic=diagnostic!=0;D62().enabled=true;D62().rejection.clear();return 0;
++ }catch(const std::exception&e){return reject(e.what());}
++}}
++extern "C" int v62_copy_quiescent_output(uint64_t addr,uint64_t n,void*dst){
++ std::lock_guard<std::recursive_mutex>lock(S().lock);auto&a=A55();
++ if(!D62().enabled||D62().diagnostic||!dst||!v62::quiescent(a.core,a.jobs.size(),!S().error.empty())){fail("quiescent copy requires production mode, no pending/retained jobs, newest delivered result and no request discard/failure");return 1;}
++ const unsigned char*source=nullptr;
++ if(auto*p=pingOutput(addr,n)){auto&b=S().buffers.at(a.core.last.outputBank?p->b:p->a);source=(const unsigned char*)S().arena.contents+b.arena;}
++ else if(auto*o=output(addr,n))source=(const unsigned char*)S().arena.contents+arenaOutput(*o);
++ if(!source){fail("quiescent copy requires exact registered output");return 1;}
++ memcpy(dst,source,n);a.core.read();++D62().quiescentCopies;D62().quiescentBytes+=n;return 0;
++}

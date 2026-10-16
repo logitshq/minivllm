@@ -1,0 +1,5 @@
+ id<MTLBlitCommandEncoder>capture=[b blitCommandEncoder];[capture waitForFence:F().graphDone];
+ for(auto&x:S().outputs){if(pingOutput(x.addr,x.size))continue;auto*t=stage(x.addr,x.size);[capture copyFromBuffer:S().arena sourceOffset:arenaOutput(x) toBuffer:F().stage destinationOffset:t->offset size:x.size];}
+ [capture updateFence:F().stageDone];[capture endEncoding];
+ id<MTLBlitCommandEncoder>feedback=[b blitCommandEncoder];[feedback waitForFence:F().stageDone];
+ for(auto&x:F().links){if(pingOutput(x.output,x.size))continue;auto*i=input(x.input,x.size);auto*t=stage(x.output,x.size);[feedback copyFromBuffer:F().stage sourceOffset:t->offset toBuffer:S().arena destinationOffset:arenaInput(*i) size:x.size];}

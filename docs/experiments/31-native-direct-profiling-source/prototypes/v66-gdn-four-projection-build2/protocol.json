@@ -1,0 +1,36 @@
+{
+  "version": 66,
+  "status": "CPU_PROTOTYPE_NOT_GPU_QUALIFIED",
+  "integration": false,
+  "timing": false,
+  "shapes": {
+    "K": 5120,
+    "N": [
+      10240,
+      6144,
+      48,
+      48
+    ]
+  },
+  "math": "verbatim original fp_qmv_fast_impl R4,SG2,64threads,FP32 accumulation/simd_sum/finalBF16",
+  "expected_main_buffer_arguments": 13,
+  "MTL_limit": 31,
+  "selected_GDN_layers": [
+    0,
+    32,
+    62
+  ],
+  "synthetic_vectors": 8,
+  "generic_historical_MLP_vectors": 3,
+  "comparisons": 396,
+  "original_arrays_readonly": 35,
+  "model_loaded": false,
+  "packed_weight_bytes": 0,
+  "full_model_qualified": false,
+  "oldV16status": "STOP-MICRO-GATE",
+  "local_micro_protocol": "pending root declaration after actual numeric PASS",
+  "build": 2,
+  "X_layout": "B1 singleton row stride ignored; K stride exactly1",
+  "weight_scale_layout": "both dimensions>1 require exact canonical strides",
+  "prior_build1": "STOP before any projection comparison: valid synthetic1 X strides[0,1] incorrectly rejected; no shader qualification"
+}

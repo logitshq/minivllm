@@ -1,0 +1,29 @@
+{
+  "status": "READY_CPU_SOURCE_INERT_ONLY_BUILD2",
+  "prior_build1_receipt_sha256": "01f9d9809f99f795c0906bd22afd3f0def7221c21fc3c30912a7c99cee2ace44",
+  "prior_status": "STOP before ANY projection comparison, valid B1 stride[0,1] over-rejected, shader not qualified",
+  "MLX_imported": false,
+  "NumPy_imported": false,
+  "GPU_used": false,
+  "checkpoint_payload_loaded": false,
+  "changed_runtime_source": "exact inverse replacements recover both build1 helper and numeric bytes; only2Xguards+1derived-layout predicate differ",
+  "unchanged_files": {
+    "kernel_body.metal": "bbb31721705066fb19dab8fe74e3366d6aaad7992e4dba5a9de477888bd0a0c8",
+    "kernel_header.metal": "17759af8d59a7ba185040630de07af69dd3335538e19094bd1f541c2b1140c6b",
+    "control_body.metal": "f2c416a865e7416e5d3526c9acd83f258c9af9bd7606cfa5ab47e2a625c7f03b",
+    "layout_probe.metal": "880b0ea0d9d92b01c6c1d1188610761d470d77ae40a44c77a507cc0d4aa2f8c0",
+    "LICENSE-MLX.txt": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01"
+  },
+  "boundary_checks": [
+    "B1 Xstride[0,1] and[5120,1] accepted; same0..5119 address range",
+    "Kstride0/2 rejected",
+    "B>1 rejected",
+    "weight/scale rowstride0 rejected; bothdim>1 canonical unchanged"
+  ],
+  "source_pins_count": 61,
+  "source_pins_sha256": "aa525f9ca8435a69f9ab7283b318e559d938476f1b743297114290f5f2ebcf3b",
+  "helper_sha256": "7c52e9f44d2d4b6b67a2466b2a91f1d3643ba2d22794b3042a4db84e438ef2cd",
+  "numeric_sha256": "1406804a98f90206851247e2f58bead9a9274124c85ecb7514455a56679dff5d",
+  "source_diff_sha256": "121636d854bf52696ad618f0d12d8c78102dfcfef7bfc35ac3228ca8390be5b5",
+  "actual_numeric_pending": true
+}

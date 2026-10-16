@@ -1,0 +1,93 @@
+--- build1/four_projection.py
++++ build2/four_projection.py
+@@ -30,7 +30,7 @@
+ 
+     def project(self, x, *, x_strides):
+         mx = self.mx
+-        if x.shape != (1, K) or x.dtype != mx.bfloat16 or tuple(x_strides) != (K, 1):
++        if x.shape != (1, K) or x.dtype != mx.bfloat16 or (len(x_strides) != 2 or x_strides[1] != 1):
+             raise ValueError("requires observed contiguous BF16 B1 K5120 input")
+         if self.kernel is None:
+             self.kernel = mx.fast.metal_kernel(name="v66_gdn_four_original_pointers_r4",
+@@ -63,7 +63,7 @@
+     def __init__(self, mx): self.mx, self.kernels = mx, {}
+     def project(self, operands, x, *, x_strides):
+         mx = self.mx
+-        if x.shape != (1,K) or x.dtype != mx.bfloat16 or tuple(x_strides)!=(K,1):
++        if x.shape != (1,K) or x.dtype != mx.bfloat16 or (len(x_strides)!=2 or x_strides[1]!=1):
+             raise ValueError("observed contiguous B1 input required")
+         out=[]
+         for j,n in enumerate(ROWS):
+--- build1/numeric.py
++++ build2/numeric.py
+@@ -57,7 +57,7 @@
+  layout_probe=mx.fast.metal_kernel(name='v66_observed_operand_strides',input_names=['value'],output_names=['descriptor'],source=(D/'layout_probe.metal').read_text(),ensure_row_contiguous=False)
+  def layout(value,label):
+   desc,=layout_probe(inputs=[value],grid=(1,1,1),threadgroup=(1,1,1),output_shapes=[(4,)],output_dtypes=[mx.uint64]);mx.eval(desc);v=desc.tolist()
+-  assert v[:2]==list(value.shape);row={'label':label,'shape':v[:2],'observed_strides_elements':v[2:],'dtype':str(value.dtype),'ensure_row_contiguous':False,'row_contiguous_derived':v[2:]==[value.shape[1],1]};receipt['layouts'].append(row);save();assert row['row_contiguous_derived'];return tuple(v[2:])
++  assert v[:2]==list(value.shape);row={'label':label,'shape':v[:2],'observed_strides_elements':v[2:],'dtype':str(value.dtype),'ensure_row_contiguous':False,'row_contiguous_derived':v[3]==1 and (value.shape[0]==1 or v[2]==value.shape[1])};receipt['layouts'].append(row);save();assert row['row_contiguous_derived'];return tuple(v[2:])
+  def compare(a,b,n,label):
+   mx.eval(a,b);assert a.shape==b.shape==(1,n) and a.dtype==b.dtype==mx.bfloat16
+   am,ab=fingerprint(a);bm,bb=fingerprint(b);finite=bool(mx.all(mx.isfinite(a)).item() and mx.all(mx.isfinite(b)).item())
+--- build1/check_cpu.py
++++ build2/check_cpu.py
+@@ -36,6 +36,26 @@
+ try:f.project(A((2,5120),'BF16'),x_strides=(5120,1))
+ except ValueError:failures+=1
+ else:raise AssertionError('B2 accepted')
++# Singleton row stride does not participate in any B1 address. Evaluate the actual
++# two project guards only; never call a shader or manufacture numerical results.
++helper_tree=ast.parse((D/'four_projection.py').read_text())
++guards=[]
++for cls in helper_tree.body:
++ if isinstance(cls,ast.ClassDef) and cls.name in ('FourProjection','R4Controls'):
++  fn=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name=='project')
++  guards.append(compile(ast.Expression(body=next(n for n in fn.body if isinstance(n,ast.If)).test),'actual-project-guard','eval'))
++for guard in guards:
++ for row_stride in (0,5120):
++  assert not eval(guard,vars(h)|{'mx':mx,'x':A((1,5120),'BF16'),'x_strides':(row_stride,1)})
++  assert [0*row_stride+k for k in range(5120)]==list(range(5120))
++ for shape,stride in (((1,5120),(0,0)),((1,5120),(5120,2)),((2,5120),(0,1)),((2,5120),(5120,1)),((1,5120),(1,))):
++  assert eval(guard,vars(h)|{'mx':mx,'x':A(shape,'BF16'),'x_strides':stride})
++# Weight/scales dimensions >1 still require exact canonical row strides.
++for bad_strides in (((0,1),(320,1))*4,((640,1),(0,1))*4):
++ try:h.prepare(mx,ops,**(kw|{'observed_strides':bad_strides}))
++ except ValueError:pass
++ else:raise AssertionError('weight/scale singleton rule incorrectly generalized')
++
+ for p in D.glob('*.py'):compile(p.read_text(),str(p),'exec')
+ tree=ast.parse((D/'numeric.py').read_text());assert not any(isinstance(n,(ast.Import,ast.ImportFrom)) and any(a.name.startswith(('mlx','numpy')) for a in getattr(n,'names',[])) for n in tree.body)
+ assert not any(n=='numpy' or n=='mlx' or n.startswith('mlx.') for n in sys.modules)
+--- build1/README.md
++++ build2/README.md
+@@ -5,7 +5,7 @@
+ 
+ Source: exact pinned MLX0.32.3 fp4/fp8/helper/qdot/fp_qmv_fast_impl text, MIT license retained. R4/SG2/64threads/8rows unchanged; each TG picks one of four disjoint local-Y sections (1280/768/6/6 tiles). Four original U32 weights + four original U8 scales + one shared BF16 X, four separately allocated output arrays. No concat/slab/rebind/repack/weight copy. Declared main kernel13buffer arguments≤31; actual Metal reflection remains required before native graph adoption.
+ 
+-Only B1 K5120,N10240/6144/48/48, NVFP4group16bits4. Helper retains strong original handles. ensure_row_contiguous=False; numeric independently probes actual shape/strides before prepare, then verifies active allocation unchanged. Exact strides required; unknown views reject.
++Only B1 K5120,N10240/6144/48/48, NVFP4group16bits4. Helper retains strong original handles. ensure_row_contiguous=False; numeric independently probes actual shape/strides before prepare, then verifies active allocation unchanged. Singleton-aware contiguous layout: X[1,5120] ignores row stride and requires K-stride1 (including [0,1] and [5120,1]); weight/scales both dimensions>1 retain exact canonical strides. Unknown K-stride0/2 or B>1 rejects.
+ 
+ Numeric loads24 safetensors ranges for GDN layers0/32/62 only (142387200 bytes total). Eight deterministic synthetic BF16 vectors plus saved L0/32/62 MLP post_attention_layernorm BF16 vectors are generic tests, explicitly NOT GDN-origin or fresh captures. Every layer uses all11 vectors. Compare all4 outputs QMM↔same-R4 control↔four-pointer candidate:396 strict shape/dtype/finite/raw checks. All35 original W/scales/X retain exact metadata/address/SHA after every layer; output ranges must be distinct and not overlap inputs.
+ 
+@@ -14,7 +14,7 @@
+ ```sh
+ MLX_MAX_OPS_PER_BUFFER=50 MLX_MAX_MB_PER_BUFFER=50 MLX_BFS_MAX_WIDTH=20 MLX_METAL_FAST_SYNCH=0 \
+ /Users/ryanli/code/minivllm/.venv/bin/python -B \
+-/private/tmp/minivllm-engine-optimization-20261014/v66-gdn-four-projection-build1/numeric.py \
++/private/tmp/minivllm-engine-optimization-20261014/v66-gdn-four-projection-build2/numeric.py \
+ --run-gpu --out /private/tmp/minivllm-engine-optimization-20261014/ROOT-CHOOSE-NEW-V66-OUTPUT
+ ```
+ Expected local qualification seconds to tens of seconds; selected MLX weights136MiB plus small vectors/outputs. Allow additional runtime/compiler/RSS overhead; allocator cache cap2GiB is a cap, not resident allocation. Runner contains no child supervisor; root owns timeout/reap/release. No DYLD injection.
+--- build1/protocol.json
++++ build2/protocol.json
+@@ -28,5 +28,9 @@
+   "packed_weight_bytes": 0,
+   "full_model_qualified": false,
+   "oldV16status": "STOP-MICRO-GATE",
+-  "local_micro_protocol": "pending root declaration after actual numeric PASS"
++  "local_micro_protocol": "pending root declaration after actual numeric PASS",
++  "build": 2,
++  "X_layout": "B1 singleton row stride ignored; K stride exactly1",
++  "weight_scale_layout": "both dimensions>1 require exact canonical strides",
++  "prior_build1": "STOP before any projection comparison: valid synthetic1 X strides[0,1] incorrectly rejected; no shader qualification"
+ }

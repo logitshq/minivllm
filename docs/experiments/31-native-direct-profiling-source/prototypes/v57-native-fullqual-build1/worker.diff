@@ -1,0 +1,133 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v57-native-fullqual-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only sync direct-feedback conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -19,7 +19,13 @@
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
++LIB = P / "v57-native-direct-feedback-build1/libv57replay.dylib"
++TINY_RECEIPT = P / "v23-root-control-build1/fullmodel-v57smoke-attempt1/child-output/receipt.json"
++TINY_RECEIPT_SHA = "206f202ec908791f54fe530ec4db1fc5a047f689c1b7b922d5f496ab00c28a54"
++TINY_RELEASE = TINY_RECEIPT.parent.parent/"external-release.json"
++TINY_RELEASE_SHA = "003bf9974bfd613c3bf67eae9b9aa000f99c0e7445d43a21d69a62efff1c71ec"
++COMBO_QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++COMBO_QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -40,7 +46,7 @@
+     return value
+ 
+ 
+-def source_check(library):
++def source_check(library, *, allow_pending_tiny=False):
+     pins = json.loads((D / "source-pins.json").read_text())
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+     assert str(library) in pins, "unbound native library"
+@@ -50,8 +56,25 @@
+     package = ROOT / "tutorial_code/miniengine"
+     actual = {str(f.relative_to(package)): sha(f) for f in package.rglob("*.py")}
+     assert actual == expected and len(actual) == 27
+-    tiny=json.loads((P/"v23-root-control-build1/fullmodel-v40smoke-attempt2/child-output/receipt.json").read_text())
+-    assert tiny["status"]=="PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
++    assert sha(COMBO_QUAL)==COMBO_QUAL_SHA
++    combo=json.loads(COMBO_QUAL.read_text())
++    assert combo["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT" and combo["native_steps"]==93
++    engagement=combo["B_conv_normreuse_cache_capture_engagement"]
++    assert engagement["calls"]==engagement["distinct_GDN_objects"]==48 and engagement["counter_removed_after_capture"]
++    if TINY_RECEIPT_SHA is None:
++        assert allow_pending_tiny,"actual V57 tiny PASS not bound; model execution forbidden"
++    else:
++        assert sha(TINY_RECEIPT)==TINY_RECEIPT_SHA and str(TINY_RECEIPT) in pins
++        assert sha(TINY_RELEASE)==TINY_RELEASE_SHA and str(TINY_RELEASE) in pins
++        release=json.loads(TINY_RELEASE.read_text())
++        assert release["status"]=="PASS_EXTERNAL_RELEASE" and release["GPU_released"] is True and release["tool_exit"]==0
++        assert {x["pid"] for x in release["strict_absence"]}=={75924,75933}
++        assert all(x["returncode"]==1 and x["stdout"]=="" for x in release["strict_absence"])
++        tiny=json.loads(TINY_RECEIPT.read_text())
++        assert tiny["status"]=="PASS_TINY_V57_SYNC_DIRECT_FEEDBACK_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
++        direct=tiny["native"]["feedback"]["direct_feedback"]
++        assert direct["enabled"] and direct["last_result_valid"] and direct["direct_links"]==3 and direct["direct_bytes_per_step"]==12
++        assert direct["capture_stage_encoder_used"] is False and direct["capture_stage_bytes_per_step_when_enabled"]==0
+     local44_path=P/"v23-root-control-build1/numeric-v44-attempt1/child-output/receipt.json"
+     assert sha(local44_path)=="1c22f2e29c78b885600c1be4a06fac357154a7eaa2ee82aa31b284921ff12392"
+     local44=json.loads(local44_path.read_text())
+@@ -70,7 +93,7 @@
+                  "v34_link": [U, U, U], "v34_seal_feedback": [ctypes.c_uint32, ctypes.c_uint32],
+                  "v34_reset": [], "v34_write_input": [U, U, V], "v34_replay_step": [],
+                  "v34_compare_output": [U, U, V], "v34_copy_output": [U, U, V],
+-                 "v36_register_pingpong": [U, U, U], "v38_enable_icb": []}
++                 "v36_register_pingpong": [U, U, U], "v38_enable_icb": [], "v57_enable_direct_feedback": []}
+         for name, args in specs.items():
+             fn = getattr(self.lib, name); fn.argtypes = args; fn.restype = ctypes.c_int
+         self.lib.v34_report_json.argtypes = []
+@@ -128,6 +151,16 @@
+     assert icb["commands_per_bank"]>=report["dispatches"]>0
+     assert icb["constant_bank_bytes"]>0
+     assert icb["unique_original_PSOs"]>0 and len(icb["PSO_records"])==icb["unique_original_PSOs"]
++    direct=fb["direct_feedback"]
++    assert direct["enabled"] and direct["last_result_valid"]==(fb["request_steps"]>0)
++    assert direct["banks_checked"]==2 and direct["input_output_range_pairs_checked"]==2*131*132==34584
++    assert direct["input_input_range_pairs_checked"]==2*(131*130//2)==17030
++    assert direct["direct_links"]==83 and direct["direct_bytes_per_step"]==fb["GPU_blit_bytes_per_step"]==19726348
++    assert direct["capture_stage_encoder_used"] is False and direct["capture_stage_bytes_per_step_when_enabled"]==0
++    assert direct["legacy_stage_allocation_bytes_retained"]>0  # allocated, retained, unused; not a freed-memory claim
++    assert direct["rejection"]=="" and len(direct["copy_plan"])==83
++    assert sum(x["bytes"] for x in direct["copy_plan"])==19726348
++    assert fb["input_output_aliases"]==[]
+     resources=icb["resources"]
+     assert resources["read_only_count"]>0 and resources["mutable_arena_count"]==1
+     assert resources["icb_read_declarations"]>0
+@@ -137,7 +170,7 @@
+     ap = argparse.ArgumentParser(description=__doc__)
+     ap.add_argument("--out", type=Path); ap.add_argument("--tokens", type=int, default=32)
+     ap.add_argument("--native-library", type=Path, default=LIB); ap.add_argument("--inert", action="store_true")
+-    args = ap.parse_args(argv); library = args.native_library.resolve(); pins = source_check(library)
++    args = ap.parse_args(argv); library = args.native_library.resolve(); pins = source_check(library, allow_pending_tiny=args.inert)
+     w = json.loads((P / "workload.json").read_text())
+     assert args.tokens == 32 and len(w["prompt_ids"]) == 19 and len(w["continuation_ids"]) == 32
+     base_prompt = w["prompt_ids"]
+@@ -153,7 +186,7 @@
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+-                          "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
++                          "GPU_used": False, "actual_tiny_receipt_bound":TINY_RECEIPT_SHA is not None, "requests": [[n, len(p)] for n, p, _ in cases],
+                           "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+@@ -163,6 +196,10 @@
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+                "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
++               "actual_tiny_receipt":str(TINY_RECEIPT),"actual_tiny_receipt_sha256":TINY_RECEIPT_SHA,
++               "actual_tiny_external_release_sha256":TINY_RELEASE_SHA,
++               "qualified_candidate44_receipt_sha256":COMBO_QUAL_SHA,
++               "direct_feedback_scope":"sync completed-CB only; all outputs read directly from arena/current S bank; strict both-bank noalias; old stage allocation retained unused",
+                "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+@@ -318,6 +355,8 @@
+         receipt["pingpong_requested"]=pingpong_requested
+         native.call("v34_seal_feedback",128,CAP)
+         native.call("v38_enable_icb")
++        native.call("v57_enable_direct_feedback")
++        receipt["direct_feedback_enable_after_ICB_before_any_reset"]=True
+         receipt["ICB_enable_called_after_feedback_seal"]=True
+         output_baselines=[h.raw() for h in output_holders]  # once at capture only
+         receipt["capture"]={"inputs":[metadata_finite(np,h) for h in seed_holders],
+@@ -430,7 +469,7 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_NATIVE_SYNC_DIRECT_FEEDBACK_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

@@ -1,0 +1,15 @@
+{
+  "base_source": "/private/tmp/minivllm-engine-optimization-20261014/v40-native-icb-build2/replay.mm",
+  "base_sha256": "25d9ff0d1478d9737c18913757845297f2b588c13bbd58a3d96869184282852b",
+  "changes": [
+    "explicit optin v57_enable_direct_feedback after seal+ICB before any reset/replay",
+    "strict registered source/input range nonoverlap both S banks",
+    "sync direct83copy instead of84stage+83feedback",
+    "non-S output reads from arena only after completed CB; S from existing currentbank",
+    "last_result_valid cleared before reset/replay/legacy replay; set after success+bank update",
+    "default OFF old stage path unchanged"
+  ],
+  "no_shader_byte_extent_inference": true,
+  "parameter_zero_copy_and_math_unchanged": true,
+  "performance_claim": null
+}

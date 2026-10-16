@@ -1,0 +1,12 @@
+--- frozen60build1/numeric.py
++++ 60build2/numeric.py
+@@ -99,8 +99,7 @@
+         r["strict_exp_bank_checks"]=15
+         r.update(status="PASS_V60_EXP48_STRICT_BYTES_9REAL_6SYNTHETIC",GPU_numeric_run=True,strict_output_checks=30,fullmodel_qualified=False);return 0
+     except BaseException as error:
+-        assert all(x["exp_equality"]["strict_equal"] for x in r["cases"])
+-        r["strict_exp_bank_checks"]=15
++        r["strict_exp_bank_checks"]=sum(bool(case.get("exp_equality",{}).get("strict_equal",False)) for case in r["cases"])
+         r.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc());raise
+     finally:
+         r["wall_seconds"]=time.perf_counter()-start;save()

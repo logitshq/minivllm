@@ -54,12 +54,14 @@ docs/              计划、教程、远程版的契约和 notes
 
 [实验22：融合和图复用的真实 HTTP 检查](docs/experiments/22-combined-decode-screen.md)保存组合版源码和完整结果；C1交互速度+1.54%、总吞吐+0.76%，尚未超过官方前沿，默认关闭。
 
-[27：少搬 state，再把真实 Metal 命令留在 ICB 里](docs/experiments/27-native-icb-pingpong.md)记录V36 S轮换、V37独立克隆负结果与V38实际ICB；当前最快27.633tok/s仅属B-only探索，尚无HTTP/Pareto获胜结论。
+[27：少搬 state，再把真实 Metal 命令留在 ICB 里](docs/experiments/27-native-icb-pingpong.md)记录V36 S轮换、V37独立克隆负结果与V38实际ICB；该章当时测得的27.633tok/s仅属B-only探索，尚无HTTP/Pareto获胜结论。
 
 [28：把卷积、归一化复用和state保留接到真实ICB](docs/experiments/28-native-gdn-composition.md)记录V39/V40/V44完整严格资格、V40真实绑定失败及修复、独立B-only计时；34.699ms/步、28.820tok/s尚非HTTP或Pareto获胜结论。
 
 [29：把原生 decode 接进调度器，再测真实请求](docs/experiments/29-native-runner-http.md)验证 C1 排队、重置和回退；记录无屏障减少的负结果及真实 HTTP 电源变化 STOP，没有新的 Pareto 获胜结论。
 
 [30：提前提交一步](docs/experiments/30-native-ahead.md)保存 FIFO 输出所有权、提前停止丢弃、12,540 项完整模型检查与未完成 HTTP 结果；保留量化矩阵乘和屏障实验的负结果。
+
+[31：直接反馈、采样扰动与局部投影实验](docs/experiments/31-native-direct-profiling.md)区分逐步诊断与生产末尾状态证据，保存 GDN 局部负结果和 GPU 采样边界；28.826tok/s 为 B-only 引擎筛查，尚无新的 HTTP/Pareto 获胜结论。
 
 归档中引用的上游源码许可见 [Third-party source notices](THIRD_PARTY_NOTICES.md)。

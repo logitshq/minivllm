@@ -1,0 +1,20 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v62-native-direct-pipeline-build1/smoke.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v62-native-direct-pipeline-build2/smoke.py
+@@ -32,7 +32,7 @@
+ out=args.out;assert out.is_absolute();out.mkdir()
+ lib = ctypes.CDLL(None)
+ u, ptr, st = ctypes.c_uint64, ctypes.c_void_p, ctypes.c_char_p
+-for name, args in {
++for name, arg_types in {
+     'v33_pin': [u,u,st], 'v33_begin': [], 'v33_end_build': [],
+     'v33_register_output': [u,u,st], 'v34_register_input': [u,u,ctypes.c_uint32,st],
+     'v34_link': [u,u,u], 'v36_register_pingpong': [u,u,u], 'v38_enable_icb': [], 'v34_seal_feedback': [ctypes.c_uint32,ctypes.c_uint32],
+@@ -41,7 +41,7 @@
+     'v55_reset': [], 'v55_submit_step': [ctypes.POINTER(ctypes.c_uint64)], 'v55_wait_step': [u], 'v55_drain': [],
+     'v34_compare_output': [u,u,ptr], 'v34_copy_output': [u,u,ptr],
+ }.items():
+-    getattr(lib,name).argtypes=args;getattr(lib,name).restype=ctypes.c_int
++    getattr(lib,name).argtypes=arg_types;getattr(lib,name).restype=ctypes.c_int
+ lib.v34_report_json.argtypes=[];lib.v34_report_json.restype=st
+ 
+ def report(label):
