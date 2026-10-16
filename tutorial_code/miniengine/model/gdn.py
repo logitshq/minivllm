@@ -1,12 +1,26 @@
 """Chapter 06: keep convolution tail and GDN state across chunks and single-token steps."""
 import mlx.core as mx
 import mlx.nn as nn
+from functools import lru_cache
 
 from ..config import ModelConfig
 from ..kernels.gdn import gated_delta_rule_chunk, gated_delta_rule_recurrent, gated_delta_step_batch
-from .layers import GatedRMSNorm, Linear, prefill_linear, prefill_batch_backend_supported
+from .layers import GatedRMSNorm, Linear, prefill_linear, prefill_batch_backend_supported, _prefill_backend_identity
 from ..cache import BatchState
 from ..context import ForwardContext
+
+
+
+@lru_cache(maxsize=1)
+def _m5_ultra_decode_identity():
+    return (_prefill_backend_identity() == ("0.32.3", "applegpu_g17d")
+            and mx.device_info().get("device_name") == "Apple M5 Ultra")
+
+
+def gdn_decode_backend_supported():
+    """Opt-in decode qualification domain; does not enable NAX batched prefill."""
+    return (mx.default_device() == mx.gpu
+            and (prefill_batch_backend_supported() or _m5_ultra_decode_identity()))
 
 
 def causal_conv1d(x: mx.array, w: mx.array, state: mx.array | None = None) -> tuple[mx.array, mx.array]:
@@ -77,7 +91,7 @@ class GatedDeltaNet(nn.Module):
                     and b.shape == a.shape == (1, 48) and b.dtype == a.dtype == mx.bfloat16
                     and self.A_log.shape == self.dt_bias.shape == (48,)
                     and self.A_log.dtype == self.dt_bias.dtype == mx.float32
-                    and prefill_batch_backend_supported())
+                    and gdn_decode_backend_supported())
         if eligible:
             for op in (self.in_proj_b, self.in_proj_a):
                 if not (type(op) is Linear and op.q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
@@ -113,7 +127,7 @@ class GatedDeltaNet(nn.Module):
                 and st.conv.shape == (1, 3, 10240) and st.conv.dtype == mx.bfloat16
                 and st.S.shape == (1, 48, 128, 128) and st.S.dtype == mx.float32
                 and g.shape == beta.shape == (1, 48) and g.dtype == beta.dtype == mx.float32
-                and prefill_batch_backend_supported())
+                and gdn_decode_backend_supported())
 
     def _split_heads(self, qkv, n):
         q, k, v = mx.split(qkv, [self.Hk * self.Dk, 2 * self.Hk * self.Dk], axis=-1)
@@ -187,7 +201,7 @@ class GatedDeltaNet(nn.Module):
                 and self.conv1d_weight.shape == (10240, 4) and self.conv1d_weight.dtype == mx.bfloat16
                 and st.conv.shape == (1, 3, 10240) and st.conv.dtype == mx.bfloat16
                 and st.S.shape == (1, 48, 128, 128) and st.S.dtype == mx.float32
-                and prefill_batch_backend_supported())
+                and gdn_decode_backend_supported())
 
     def _decode(self, x: mx.array, st, *, _compile_gates=False, _norm_reuse_normal=False) -> mx.array:
         """批量：x [B, hidden]；st.conv [B, K-1, C]，st.S [B, Hv, Dk, Dv]，整体替换。"""
