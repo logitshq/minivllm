@@ -6,7 +6,7 @@ from tutorial_code.miniengine.engine.llm_engine import LLMEngine
 from tutorial_code.miniengine.engine.compiled_decode import CompiledDecode
 from tutorial_code.miniengine.sampling_params import SamplingParams
 b=Path('.artifacts/m5-ultra-256gb');w=json.loads((b/'fullqual-build2/workload.json').read_text())
-out=b/'qmv-free-generation-v1';out.mkdir()
+out=b/'qmv-r1-free-generation-v1';out.mkdir()
 engine=LLMEngine(w['model_dir'],max_seqs=4,max_len=2048)
 for l in engine.model.layers:
  if not l.is_attn:l.linear_attn.set_gates_compile(True)

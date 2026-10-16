@@ -21,6 +21,9 @@ class PackedProjection:
     def current_sources(self):
         return tuple(a for op in self.ops for a in (op.weight, op.scales))
 
+    def matches_sources(self, sources):
+        return len(sources) == len(self.sources) and all(a is b for a, b in zip(sources, self.sources))
+
     def supported(self):
         return all(type(op) is Linear
                    and op.q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
@@ -59,9 +62,7 @@ class PackedDecode:
 
     def refresh(self):
         changed = [(p, p.current_sources()) for p in self.groups]
-        changed = [(p, sources) for p, sources in changed
-                   if len(sources) != len(p.sources)
-                   or any(a is not b for a, b in zip(sources, p.sources))]
+        changed = [(p, sources) for p, sources in changed if not p.matches_sources(sources)]
         if any(not p.supported() for p, _ in changed):
             return False
         for p, sources in changed:
@@ -70,3 +71,6 @@ class PackedDecode:
         if changed:
             mx.eval([p.arrays for p, _ in changed])
         return True
+
+    def clean_groups(self):
+        return [p for p in self.groups if p.matches_sources(p.current_sources())]

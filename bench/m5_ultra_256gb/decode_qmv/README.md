@@ -1,12 +1,12 @@
-# B1 exact two-row NVFP4 vector kernel
+# B1 exact one-row NVFP4 vector kernel
 
 `LLMEngine(..., compile_decode=True, fuse_decode=True)` additionally concatenates
 MLP gate/up, attention Q/K/V, and GDN QKV/Z/B/A output rows. It uses the same
 NVFP4 dot products and the original parameter arrays remain model parameters.
 The derived copies live in the runner and refresh on array replacement.
-Recreate the engine after changing model topology or non-array configuration.
+Recreate the engine after changing model topology, non-array configuration, or editing weights in place; the derived cache tracks array replacement.
 
-The extra QMV kernel processes two output rows per SIMD group rather than four.
+The extra QMV kernel processes one output row per SIMD group rather than four.
 Its dot-product reduction order is unchanged. FP contraction is explicitly off;
 leaving it on produced one mismatched vocabulary-head value in the arithmetic
 probe. This is a pinned B1 path, not a change to prefill or NAX matrix multiplication.
@@ -24,7 +24,7 @@ other contexts retain eager execution. It does not change prefill, speculation,
 weights, prompts, or generated token counts. First use allocates derived weights
 and traces the graph; steady-state results explicitly exclude those cold costs.
 
-`qualify.py` checks 214 full forward pairs (logits and 128 cache arrays each),
+`qualify.py` checks 218 full forward pairs (logits and 128 cache arrays each),
 including four prompt contexts, mixed histories, B1/B2/B4, boundary fallbacks,
 12 packed weight/scale replacement and restoration cases, and unchanged original
 parameter keys, shapes, dtypes and content hashes. It also checks live scheduler insertion, removal,
@@ -34,7 +34,7 @@ and strided inputs directly against the original operator chain. It also checks
 
 `frontier.py --prepare` freezes current sources after qualification. Running
 without `--prepare` creates 24 sequential, fresh processes, three per condition:
-C1 previous accepted projection/conv fusion, new QMV, oMLX, Lithos; C2/C4 candidate and oMLX. Every
+C1 previous accepted two-row QMV, new one-row QMV, oMLX, Lithos; C2/C4 candidate and oMLX. Every
 process has three warm and three measured groups. The baseline comes from its
 frozen accepted source, and both native variants use the same 2 GiB allocator
 pool and 50/50/20/0 MLX controls. Compiled gates are on; the separate V19 toggle
@@ -46,3 +46,7 @@ probe and the FP32-convolution mismatch. Use ../lithos/guarded.py for standalone
 GPU qualification; frontier owns and reaps its own servers. Never overlap with
 the separate large-model benchmarking job. Record paging and swap deltas,
 including any pre-existing nonzero swap; do not claim that swap was always zero.
+
+Captured-array wrappers can change during graph tracing. Clean packed weights
+follow these aliases; parameters replaced before an unpacked B2 call remain dirty
+until the next packed call refreshes them. Qualification checks both transitions.

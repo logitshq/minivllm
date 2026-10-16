@@ -73,6 +73,16 @@ def main():
             check(label+'-'+field+'-replaced',copies(one.layers),copies(one.layers),[19],[79852])
             setattr(op,field,saved)
             check(label+'-'+field+'-restored',copies(one.layers),copies(one.layers),[19],[79852])
+    # Recompiling a non-packed batch may wrap parameters in new Python arrays.
+    # Clean packs follow those aliases, but replacements before B2 stay dirty.
+    two=DecodeBatch(model);two.rebuild([],[(str(i),caches,2048) for i in range(2)]);mx.eval(two.arrays())
+    op=model.layers[0].mlp.gate_proj;saved=op.weight
+    for label,weight in [('replaced',mx.roll(saved,1,axis=0)),('restored',saved)]:
+        op.weight=weight;mx.eval(weight)
+        check('B2-packed-weight-'+label,copies(two.layers),copies(two.layers),[19]*2,[79852]*2)
+        assert len(fast._packed.clean_groups()) < len(fast._packed.groups)
+        check('B1-after-B2-'+label,copies(one.layers),copies(one.layers),[19],[79852])
+        assert fast._packed.clean_groups() == fast._packed.groups
     # Check the B1 optimized limit and its first eager position, not just B4.
     for positions in ([254],[255],[256]):
         check('B1-boundary',copies(one.layers),copies(one.layers),positions,[79852])

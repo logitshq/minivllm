@@ -1,4 +1,4 @@
-"""Pinned B1 NVFP4 QMV: two output rows per SIMD group, original reduction order.
+"""Pinned B1 NVFP4 QMV: one output row per SIMD group, original reduction order.
 
 Arithmetic adapted from MLX 0.32.3 fp_qmv_fast_impl (MIT), Apple Inc.
 https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/kernels/fp_quantized.h
@@ -50,7 +50,7 @@ SOURCE='''
         if (lane == 0) out[row0 + r] = T(result[r]);
     }
 '''
-kernel=mx.fast.metal_kernel(name='m5_nvfp4_qmv_r2_exact',input_names=['x','w','scales'],output_names=['out'],source=SOURCE,header=HEADER,compile_options={'math_mode':'safe'})
+kernel=mx.fast.metal_kernel(name='m5_nvfp4_qmv_r1_exact',input_names=['x','w','scales'],output_names=['out'],source=SOURCE,header=HEADER,compile_options={'math_mode':'safe'})
 def supported(x, w, scales):
     return (x.ndim == 2 and x.shape[0] == 1 and x.dtype == mx.bfloat16
             and x.shape[1] % 512 == 0 and scales.ndim == 2 and scales.shape[0] % 4 == 0
@@ -62,6 +62,6 @@ def qmv(x, w, scales):
     if not supported(x, w, scales):
         return mx.quantized_matmul(x, w, scales, transpose=True, group_size=16, bits=4, mode='nvfp4')
     N = scales.shape[0]
-    return kernel(inputs=[x, w, scales], template=[('T', x.dtype), ('R', 2)],
-                  grid=(32, N // 2, 1), threadgroup=(32, 2, 1),
+    return kernel(inputs=[x, w, scales], template=[('T', x.dtype), ('R', 1)],
+                  grid=(32, N, 1), threadgroup=(32, 2, 1),
                   output_shapes=[(1, N)], output_dtypes=[x.dtype])[0]

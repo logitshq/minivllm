@@ -68,7 +68,15 @@ class CompiledDecode:
                 return logits, self._states(layers)
             inputs = [model, self._packed.arrays] if fused else model
             self._functions[key] = mx.compile(forward, inputs=inputs)
+        clean = (self._packed.groups if fused else self._packed.clean_groups()) if self._packed else []
+        marker = model.embed_tokens.weight
         logits, states = self._functions[key](tokens, ctx.positions, ctx.lens, self._states(ctx.caches))
+        # mx.compile may replace captured array wrappers when tracing another
+        # batch shape. This forward never writes parameters. Rebind only packs
+        # already current before the call; actual replacements must stay dirty.
+        if model.embed_tokens.weight is not marker:
+            for projection in clean:
+                projection.sources = projection.current_sources()
         for layer, state in zip(ctx.caches, states):
             if isinstance(layer, BatchKV):
                 layer.K, layer.V = state

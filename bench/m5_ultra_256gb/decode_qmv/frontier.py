@@ -1,7 +1,7 @@
 """Fresh-process validation of projection/conv fusion against the accepted graph and external baselines."""
 import argparse,hashlib,importlib.metadata,json,os,secrets,signal,socket,statistics,subprocess,sys,time,traceback
 from pathlib import Path
-D=Path(__file__).resolve().parent;REPO=D.parents[2];BASE=REPO/'.artifacts/m5-ultra-256gb';QUAL=BASE/'fullqual-build2';INPUTS=BASE/'qmv-inputs-v1';OUT=BASE/'qmv-frontier-v1'
+D=Path(__file__).resolve().parent;REPO=D.parents[2];BASE=REPO/'.artifacts/m5-ultra-256gb';QUAL=BASE/'fullqual-build2';INPUTS=BASE/'qmv-r1-inputs-v1';OUT=BASE/'qmv-r1-frontier-v1'
 HARNESS=BASE/'build2-harness';sys.path.insert(0,str(HARNESS))
 import resources
 from runtime import digest
@@ -11,9 +11,9 @@ import httpx
 from tokenizers import Tokenizer
 PYTHON=REPO/'.venv/bin/python';OMLX=REPO/'.artifacts/omlx-baseline/.venv/bin/omlx'
 ENV={'MLX_MAX_OPS_PER_BUFFER':'50','MLX_MAX_MB_PER_BUFFER':'50','MLX_BFS_MAX_WIDTH':'20','MLX_METAL_FAST_SYNCH':'0'}
-SOURCE=BASE/'qmv-source-v1'
-BASE_SOURCE=BASE/'fusion-source-v1'
-BASE_MANIFEST=BASE/'fusion-inputs-v1/source.json'
+SOURCE=BASE/'qmv-r1-source-v1'
+BASE_SOURCE=BASE/'qmv-source-v1'
+BASE_MANIFEST=BASE/'qmv-inputs-v1/source.json'
 LITHOS=Path('/Users/ryanli/code/lithos-metal')
 QUAL_LITHOS=BASE/'lithos-adaptation-v1/kernel-qualification.json'
 CONFIGS=[(1,p,e) for p,order in enumerate([['base','fused','omlx','lithos'],['lithos','omlx','fused','base'],['fused','base','lithos','omlx']],1) for e in order]+[(c,p,e) for c in (2,4) for p,order in enumerate([['fused','omlx'],['omlx','fused'],['fused','omlx']],1) for e in order]
@@ -35,8 +35,8 @@ def verify():
  return f
 def prepare():
  import shutil
- assert json.loads((BASE/'qmv-qual-v1/complete.json').read_text())['status']=='PASS'
- assert json.loads((BASE/'qmv-kernel-v1/complete.json').read_text())['status']=='PASS'
+ assert json.loads((BASE/'qmv-r1-qual-v2/complete.json').read_text())['status']=='PASS'
+ assert json.loads((BASE/'qmv-r1-kernel-v1/complete.json').read_text())['status']=='PASS'
  INPUTS.mkdir();SOURCE.mkdir()
  shutil.copytree(REPO/'tutorial_code/miniengine',SOURCE/'tutorial_code/miniengine',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
  source_files={str(p.relative_to(SOURCE/'tutorial_code/miniengine')):digest(p) for p in (SOURCE/'tutorial_code/miniengine').rglob('*.py')}
@@ -44,9 +44,9 @@ def prepare():
  # Reverify all prior official runtime/native assets; never repin modified baselines.
  old=json.loads((BASE/'lithos-inputs-v1/frozen.json').read_text())['files']
  for p,h in old.items():assert digest(p)==h,p
- files=list(D.glob('*.py'))+list(SOURCE.rglob('*.py'))+[INPUTS/'source.json',BASE/'qmv-qual-v1/complete.json',BASE/'qmv-qual-v1/checks.json',BASE/'qmv-qual-v1/scheduler.json']
- files += list((REPO/'tutorial_code/miniengine').rglob('*.py')) + list(BASE_SOURCE.rglob('*.py')) + [BASE_MANIFEST, BASE/'qmv-qual-v1/parameters.json',BASE/'qmv-qual-v1/parameters-before.json',BASE/'qmv-qual-v1/parameters-after.json',BASE/'qmv-kernel-v1/complete.json',BASE/'qmv-kernel-v1/checks.json',BASE/'qmv-free-generation-v1/complete.json',BASE/'qmv-kernel-v1/qmv-checks.json',REPO/'THIRD_PARTY_NOTICES/MLX.txt']
- frozen={'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),'files':dict(old,**{str(p):digest(p) for p in files}),'configs':CONFIGS,'environment':ENV,'scope':'two-row exact NVFP4 QMV vs accepted projection/conv fusion; both graph+fusion+pool2 and gates on; standalone V19 off; no prompt cache or draft; C1/C2/C4, first 256 positions only'}
+ files=list(D.glob('*.py'))+list(SOURCE.rglob('*.py'))+[INPUTS/'source.json',BASE/'qmv-r1-qual-v2/complete.json',BASE/'qmv-r1-qual-v2/checks.json',BASE/'qmv-r1-qual-v2/scheduler.json']
+ files += list((REPO/'tutorial_code/miniengine').rglob('*.py')) + list(BASE_SOURCE.rglob('*.py')) + [BASE_MANIFEST, BASE/'qmv-r1-qual-v2/parameters.json',BASE/'qmv-r1-qual-v2/parameters-before.json',BASE/'qmv-r1-qual-v2/parameters-after.json',BASE/'qmv-r1-kernel-v1/complete.json',BASE/'qmv-r1-kernel-v1/checks.json',BASE/'qmv-r1-free-generation-v1/complete.json',BASE/'qmv-r1-kernel-v1/qmv-checks.json',REPO/'THIRD_PARTY_NOTICES/MLX.txt']
+ frozen={'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),'files':dict(old,**{str(p):digest(p) for p in files}),'configs':CONFIGS,'environment':ENV,'scope':'one-row exact NVFP4 QMV and compile alias tracking vs accepted two-row QMV; both graph+fusion+pool2 and gates on; standalone V19 off; no prompt cache or draft; C1/C2/C4, first 256 positions only'}
  write(INPUTS/'frozen.json',frozen)
  print('PREPARED',len(frozen['files']))
 def run_one(c,pair,engine):
