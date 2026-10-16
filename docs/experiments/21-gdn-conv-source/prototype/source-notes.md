@@ -1,0 +1,22 @@
+# V23 source notes — CPU preparation only
+- Scope: standalone true conv4 + typed BF16 SiLU + raw tail update. No engine integration, gates, head repeat, norm or recurrence.
+- Only inputs raw[1,10240], old_tail[1,3,10240], w[10240,4], all BF16; two independent BF16 outputs act[1,10240], new_tail[1,3,10240].
+- One x-grid thread owns each channel; inputs are never written. new_tail=[old_tail[:,1], old_tail[:,2], raw].
+- sum_y is REQUIRED and must come from verified original product layout/flags and actual pipeline M or launch Y. No automatic choice; no selecting by outputs.
+- SUM_Y=1 local taps [0,1,2,3]; SUM_Y=2 [0,2]/[1,3]; SUM_Y=3 [0,3]/[1]/[2]; SUM_Y=4 [0]/[1]/[2]/[3].
+- Each local fold starts at BF16 +0, adds BF16 product as first operand; then merge partials in ascending y, starting at partial[0]. The kernel serializes these logical folds inside the unique channel owner.
+- Reference reduction contract: ../C1-GDN-CONV-REDUCTION-CONTRACT.md; original row-contiguous product/axis1 eligibility and M/Y remain unmeasured here.
+- Do not copy oMLX's FP32 conv accumulation. Every product and every local/merge add has a BF16 typed boundary; safe math requested, compiler behavior still unqualified.
+- native_activation.metal is BYTE-IDENTICAL to HEADER in the actual V18 build2 source, SHA aa12ff8500194337c0b58f9621e01177272d382d5361f1071531db15d267c64f.
+- The copied 662-byte header SHA256 is 963a9408cc963262146461b7dc23bf00ff7eb19bd95c19f661b850cd9ff1e026; no helper expression or name changed.
+- V18 primary record ../v18-activation-v3-GPU-readcheck-v1.json says PASS_ACTIVATION_ONLY over 65,280 input words. That is prior activation evidence, NOT V23 qualification.
+- Typed bodies derive from MLX 0.32.3 unary_ops.h:308–314 and binary_ops.h:208–213, Copyright © 2023 Apple Inc.; full MIT notice in LICENSE-MLX-MIT.
+- Reduction ordering derives from MLX reduce_col.h:25–86 and Sum<U> ops.h:145–148. V23 has no copied oMLX kernel implementation; oMLX only motivated true-conv fusion.
+- Python imports stdlib only; explicit backend injection prevents implicit MLX import. Merely importing it does not compile, create arrays or launch kernels.
+- metal_kernel ensure_row_contiguous=True concerns the prototype's input indexing. It does not prove the original product layout that selects reference reduction order.
+- CPU checks cover metadata rejection, explicit Y, ownership, tail indexing, source loop order and notices only. They cannot certify Metal parsing, rounding, denormals, aliasing or GPU outputs.
+- Before GPU qualification: record actual original product flags/strides and M/Y; freeze one branch from that evidence; validate native helper/header/runtime and compile options on the intended MLX build.
+- First numerical gate: original/candidate conv, SiLU and raw tail byte comparisons on synthetic cancellation/product-rounding/head-boundary and real zero/nonzero old-tail inputs; finite values checked explicitly.
+- Then unchanged recurrence must pass o/S and chained-step checks, followed by original logits/IDs, final cache and abort/filter/reuse lifecycle checks before any engine enablement or timing.
+- No test of real model data, MLX import, GPU compile/launch, model load or performance measurement occurred in this preparation. Root remains sole GPU owner.
+- CPU preview check: 12 stdlib metadata/source tests passed; run `python3 -B test_cpu_structure.py` from this directory. This is not GPU or model validation.

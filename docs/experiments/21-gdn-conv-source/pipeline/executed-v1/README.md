@@ -1,0 +1,1 @@
+Reconstructed pre-dladdr source and CPU-rebuilt binary. This is not a recovered original binary. See RESTORATION.json for equality to the authoritative root receipt. No executable was run in this restoration; root M/Y receipt stays independent and unchanged.

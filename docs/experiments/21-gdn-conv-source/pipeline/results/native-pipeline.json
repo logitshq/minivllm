@@ -1,0 +1,20 @@
+{
+  "schema": "v23-native-reduction-pipeline-v1",
+  "mlx_version": "0.32.3",
+  "device": "Apple M4 Max",
+  "architecture": "applegpu_g16s",
+  "kernel": "col_reduce_small_1_reduce_sumbfloat16",
+  "factory": "native-nojit get_reduce_kernel -> Device.get_kernel",
+  "native_library_compile_options_overridden": false,
+  "max_total_threads_per_threadgroup": 1024,
+  "thread_execution_width": 32,
+  "static_threadgroup_memory_bytes": 2048,
+  "selector_assumptions": {"dtype":"bfloat16","shape":[1,4,10240],"strides":[40960,10240,1],"row_contiguous":true,"axis":1,"ndim_template":1,"index_type":"int"},
+  "assumptions_observed_by_this_tool": false,
+  "n_reads": 4,
+  "threadgroup": [32,4,1],
+  "grid_threadgroups": [80,1,1],
+  "sum_y_derived_from_measured_pipeline": 4,
+  "actual_reduce_dispatch_observed": false,
+  "dispatches_submitted_by_tool": 0
+}

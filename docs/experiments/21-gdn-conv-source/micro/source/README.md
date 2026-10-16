@@ -1,0 +1,20 @@
+# V23 local conv micro — CPU prepared; no GPU execution by author
+- Root-only argv: `/Users/ryanli/code/minivllm/.venv/bin/python3 -B /private/tmp/minivllm-engine-optimization-20261014/v23-conv-micro-build1/micro.py run --out /private/tmp/minivllm-engine-optimization-20261014/v23-conv-micro-build1/gpu-micro-run1`
+- Set the four predeclared child controls before launch: MLX_MAX_OPS_PER_BUFFER=50, MLX_MAX_MB_PER_BUFFER=50, MLX_BFS_MAX_WIDTH=20, MLX_METAL_FAST_SYNCH=0. Runtime rejects mismatch.
+- Eligibility hard-binds actual numeric PASS receipt SHA f4eb0d3a39af3358b1b5b1b5e2bdd887681fd0b1c414602ed89504ff65c45020, matching source pins,6cases+8chain/Y4. No alternate output-based branch selection.
+- A=AST-extracted accepted15 BF16 concat/product/sum/nn.silu/tail view. B=immutable V23 fused conv+SiLU and independent raw-tail output. BOTH outputs mx.eval on EVERY call.
+- No conv/QK/gates/norm/recurrence/full-model work is added to timing. This is local Python/build/eval/sync host wall, not GPU kernel time or serving performance.
+- Reuses V21 stationary block timing operations, source SHA c42c704ce1709e5e4f71d5cf3610a2436f8a47fbc95d8d537bc3efb38dee6961. Metadata changes to1group/2segments only.
+- Fixed prime128/repeat4096 per block. Repeat count is predeclared8× V21's512 because one lightweight conv group otherwise risks too-short blocks; no timing-dependent warm/repeat adjustment.
+- Eight fixed seed20261016023 raw/tail banks: zero, alternating-tail, random amp1/16, amp1, amp16, head boundaries, zero-tail/nonzero-raw, small nonzero-tail. Unique input-pair hashes required.
+- One real L0 BF16 conv weight range81,920B is read via numeric helper; no shard/model load. Synthetic timing inputs do not establish genuine preconv/model qualification.
+- Schedule: AA,BB,AB,BA,AB,BA,AB,BA,AA,BB. Six balanced cross-variant pairs, four same-variant position controls; both blocks always identical prime/repeat/bank order.
+- No CPU hash, resource probe or JSON write occurs between the two blocks. Resource and full-input hashes are collected before/after each COMPLETE pair; output hashes only after both blocks.
+- All8 banks get strict shape/dtype/finite raw-byte act/tail comparison and input-readonly checks before/after timing; before/after exact output signatures must also match.
+- Gate copied from tight V21: each A/B position-control median slot2/slot1 within[.98,1.02], every ratio within[.95,1.05]; control failure always CONTROL_DRIFT_STOP.
+- Local gate: median reduction>=5%, wins>=5of6. EXPLORATORY-PASS is local only: adopted=false, model_qualified=false, E2E_run=false. No E2E/Pareto win is inferred.
+- Power domain fixed AC Power (explicit difference from historical V21 battery run); thermal0,pressure1,no Swapouts/swapMB growth,known-inference count0 and exact ownPID guards at pair boundaries.
+- Root external wrapper owns sole GPU access, pre/post resource checks, bounded timeout and terminate/kill/wait/strict-PID-absence cleanup. This runner has no child supervisor or background workers.
+- Expected small-array live storage<16MiB; fixed allocator pool64MiB and MLX memory limit512MiB. Compiler/process RSS is additional. Estimated cold run30–120s, unmeasured; root may bound at170s.
+- CPU checks: `python3 -B test_cpu.py`; CPU source-only identity: `python3 -B micro.py cpu`. Neither imports MLX or executes resource probes.
+- Prototype/native helper and complete Apple MIT notices remain in original immutable prototype dependency; numeric-ready and old raw records are never edited.

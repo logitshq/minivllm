@@ -1,0 +1,13 @@
+# V23 selected experiment archive
+- prototype/: original untouched conv+SiLU+raw-tail prototype, exact V18 typed activation header, tests and full MLX MIT notice.
+- pipeline/executed-v1/: reconstructed pre-dladdr query source and its build recipe; RESTORATION.json states CPU rebuilt binary matched the root receipt. This is not a recovered original executable. Executables are intentionally omitted.
+- pipeline/results/: actual root native-PSO metadata, query completion/reap record and before/after resource snapshots. No query dispatches were submitted.
+- reference/: original BF16 reduction contract and frozen accepted15 source excerpts as full files; these are audit copies, not engine replacements.
+- numeric/source/ and micro/source/: exact ready source, tests, README and historical source pins. Historical absolute /private/tmp paths remain intact; these audit snapshots are not turnkey relocated launchers.
+- numeric/results/ and micro/results/: original child receipts, resource samples, owner receipts and saved post-tool external PID absence records. No large tensor raw blobs or model files are included.
+- numeric/review/ and micro/review/: existing independent CPU source/receipt replay reports and machine-readable summaries. These are not fresh GPU raw-blob recaptures.
+- path-review/: independent source/geometry/traffic reasoning. It predates numeric/micro results and its scope has not been rewritten.
+- archive-recalculation.json: new archive-author CPU arithmetic from the existing receipts; explicitly not an independent GPU tensor replay.
+- ARCHIVE-MANIFEST.json maps each copied artifact to its original path, bytes and SHA256; SHA256SUMS additionally covers the selected archive files. Root binary hash stays in its original receipt even though that executable is omitted.
+- This archive does not enable V23, qualify a full model, change prior records, or alter the26 engine Python files. Read ../21-gdn-conv-fusion.md for stage boundaries.
+- pipeline/executed-v1/SHA256SUMS is the historical list and still names the omitted executable; the archive-top SHA256SUMS covers only files actually included here.
