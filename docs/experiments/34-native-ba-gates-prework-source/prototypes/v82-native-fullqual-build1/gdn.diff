@@ -1,0 +1,81 @@
+--- frozen44/gdn.py
++++ candidate82/gdn.py
+@@ -45,6 +45,8 @@
+         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
+         self.set_gates_compile(False)
+         self.set_conv_norm_reuse_cache(False)
++        self.set_ba_gates_prework(False)
++        object.__setattr__(self, "_ba_gates_prework_helper", None)
+ 
+     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+         if ctx is not None and ctx.mode == "prefill_batch":
+@@ -196,6 +198,8 @@
+         if eligible:
+             from ..kernels.gdn_conv_silu_metal import backend_supported
+             if backend_supported():
++                if self._ba_gates_prework_eligible(x):
++                    return self._decode_ba_gates_prework(x, st, _compile_gates=_compile_gates)
+                 return self._decode_conv_norm_reuse_cache(x, st, _compile_gates=_compile_gates)
+         return self._decode(x, st, _compile_gates=_compile_gates)
+ 
+@@ -217,3 +221,60 @@
+         o = self.norm(o.astype(x.dtype), z)
+         return self.out_proj(o.reshape(B, -1))
+ 
++
++
++    def set_ba_gates_prework(self, enabled=True):
++        """Default OFF; only a separately prepared normal-B1 producer is eligible."""
++        if type(enabled) is not bool:
++            raise TypeError("enabled must be bool")
++        object.__setattr__(self, "_ba_gates_prework_enabled", enabled)
++
++    def _ba_gates_prework_operands(self):
++        return (self.in_proj_b.weight, self.in_proj_b.scales,
++                self.in_proj_a.weight, self.in_proj_a.scales, self.A_log, self.dt_bias)
++
++    def _ba_gates_prework_ops_valid(self):
++        expected = {"group_size": 16, "bits": 4, "mode": "nvfp4"}
++        return all(type(op) is Linear and type(op.q) is dict and op.q == expected
++                   and op.in_features == 5120 and op.out_features == 48
++                   and not hasattr(op, "bias") and not hasattr(op, "biases")
++                   and op.weight.shape == (48,640) and op.weight.dtype == mx.uint32
++                   and op.scales.shape == (48,320) and op.scales.dtype == mx.uint8
++                   for op in (self.in_proj_b, self.in_proj_a)) and (
++                   self.A_log.shape == self.dt_bias.shape == (48,)
++                   and self.A_log.dtype == self.dt_bias.dtype == mx.float32)
++
++    def prepare_ba_gates_prework(self, **observations):
++        """Pure metadata preparation after independent live GPU stride/range probes."""
++        if not self._ba_gates_prework_ops_valid():
++            raise ValueError("original NVFP4 BA and FP32 gate parameters required")
++        from .gdn_ba_prework import prepare
++        helper = prepare(mx, self._ba_gates_prework_operands(), **observations)
++        object.__setattr__(self, "_ba_gates_prework_helper", helper)
++
++    def _ba_gates_prework_eligible(self, x):
++        if (not object.__getattribute__(self, "_ba_gates_prework_enabled")
++                or object.__getattribute__(self, "_gates_compile_enabled") is not True):
++            return False
++        helper = object.__getattribute__(self, "_ba_gates_prework_helper")
++        if helper is None or x.shape != (1,5120) or x.dtype != mx.bfloat16:
++            return False
++        valid = self._ba_gates_prework_ops_valid() and all(
++            a is b for a,b in zip(helper.operands, self._ba_gates_prework_operands()))
++        if not valid:
++            object.__setattr__(self, "_ba_gates_prework_helper", None)
++        return valid
++
++    def _decode_ba_gates_prework(self, x, st, *, _compile_gates=False):
++        B = x.shape[0]
++        helper = object.__getattribute__(self, "_ba_gates_prework_helper")
++        qkv = self.in_proj_qkv(x)
++        z = self.in_proj_z(x).reshape(B, self.Hv, self.Dv)
++        w = self.conv1d_weight.astype(qkv.dtype)
++        from ..kernels.gdn_conv_silu_metal import conv_silu_raw_tail
++        activated, new_tail = conv_silu_raw_tail(qkv, st.conv, w)
++        prepared = helper.prework(activated, x)
++        o, S = helper.state(prepared, st.S)
++        st.conv, st.S = new_tail, S
++        o = self.norm(o.astype(x.dtype), z)
++        return self.out_proj(o.reshape(B, -1))

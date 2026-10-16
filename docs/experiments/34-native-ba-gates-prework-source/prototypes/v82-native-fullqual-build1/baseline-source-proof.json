@@ -1,0 +1,25 @@
+{
+  "baseline_GDN": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py",
+  "baseline_sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+  "candidate_GDN": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v82-ba-gates-prework-build1-root/tutorial_code/miniengine/model/gdn.py",
+  "parent_unchanged_method_AST": {
+    "__call__": true,
+    "_decode": true,
+    "_decode_conv_norm_reuse_cache": true,
+    "_prefill": true,
+    "_prefill_batch": true,
+    "_gates": true,
+    "_decode_gates": true
+  },
+  "unrelated26_parent_py_files_byte_exact": true,
+  "qwen_model_byte_exact_to44_no_carry_or_four": true,
+  "kernel76_all4files_byte_exact": true,
+  "B_wiring": "normalB1 dispatch + prepared BA flag; original qkv/z -> conv23 -> production76 six outputs -> exact state40 -> original tail/norm/out",
+  "A_method": "BA/conv/gates OFF + old accepted25 _decode AST binds both dispatch entries, finally restore all flags/functions; actualV38/V44 dual132 gold",
+  "preparation": "one extra qualified44 ordinary decode stores actual48 original normX/conv23activation; independent GPU shape/stride and original parameter range probes outside capture; puremetadata preparation retains same6parameter objects; no pertoken probes",
+  "production_declared_buffers": 14,
+  "individual_argument_reflection": "PENDING native40 does not export per-argument table; no observed count claim",
+  "state_input6_output9": "state source/name/HEADER/options unchanged, native40 whitelist untouched; actual replay still required",
+  "CPU_only": true,
+  "GPU_used": false
+}

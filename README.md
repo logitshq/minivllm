@@ -69,3 +69,5 @@ docs/              计划、教程、远程版的契约和 notes
 归档中引用的上游源码许可见 [Third-party source notices](THIRD_PARTY_NOTICES.md)。
 
 [33：ICB范围与整步编译](docs/experiments/33-native-range-compiled-step.md)保留 R8 在原生 ICB 下慢0.52%的结果，以及整步编译的数值资格和 B-only 筛查；没有新的 HTTP 或 Pareto 胜出。
+
+[34：BA小投影与门控融合](docs/experiments/34-native-ba-gates-prework.md)记录720项局部检查、12,276项整模检查，以及28.693tok/s的B-only筛查；减少192条dispatch仍没有证明提速，候选默认关闭。
