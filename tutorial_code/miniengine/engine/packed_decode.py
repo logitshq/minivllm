@@ -8,6 +8,7 @@ import itertools
 import mlx.core as mx
 
 from ..model.layers import Linear
+from ..kernels.nvfp4_qmv import qmv
 
 
 class PackedProjection:
@@ -29,9 +30,15 @@ class PackedProjection:
                    and getattr(op, "biases", None) is None for op in self.ops)
 
     def __call__(self, x):
-        y = mx.quantized_matmul(x, *self.arrays, transpose=True,
-                                group_size=16, bits=4, mode="nvfp4")
+        y = qmv(x, *self.arrays)
         return mx.split(y, self.splits, axis=-1)
+
+    @staticmethod
+    def linear(op, x):
+        if (type(op) is Linear and op.q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
+                and getattr(op, "biases", None) is None):
+            return qmv(x, op.weight, op.scales)
+        return op(x)
 
 
 class PackedDecode:

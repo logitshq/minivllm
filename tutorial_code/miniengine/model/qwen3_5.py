@@ -19,7 +19,8 @@ class MLP(nn.Module):
 
     def __call__(self, x, *, _projection=None):
         gate, up = _projection(x) if _projection is not None else (self.gate_proj(x), self.up_proj(x))
-        return self.down_proj(nn.silu(gate) * up)
+        activated = nn.silu(gate) * up
+        return _projection.linear(self.down_proj, activated) if _projection is not None else self.down_proj(activated)
 
     def _prefill_batch(self, x, shape):
         gate = prefill_linear(self.gate_proj, x, shape)
@@ -93,7 +94,12 @@ class Qwen3_5ForCausalLM(nn.Module):
             output = self.embed_tokens.as_linear if self.cfg.tie_word_embeddings else self.lm_head
             logits = prefill_linear(output, x, (B, 1 if last_only else T))
         else:
-            logits = self.embed_tokens.as_linear(x) if self.cfg.tie_word_embeddings else self.lm_head(x)
+            if self.cfg.tie_word_embeddings:
+                logits = self.embed_tokens.as_linear(x)
+            elif _decode_projections is not None:
+                logits = _decode_projections[0][0].linear(self.lm_head, x)
+            else:
+                logits = self.lm_head(x)
         if capture:
             return logits, mx.concatenate(feats, axis=-1)
         return logits.reshape(B, T, -1) if grouped and not last_only else logits

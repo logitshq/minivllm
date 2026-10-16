@@ -89,4 +89,5 @@ class Attention(nn.Module):
         mask = (mx.arange(L)[None, :] < ctx.lens[:, None])[:, None, None, :]        # 每行只看自己的历史
         o = mx.fast.scaled_dot_product_attention(q, K, V, scale=self.scale, mask=mask)
         o = o[:, :, 0].reshape(B, -1)
-        return self.o_proj(o * mx.sigmoid(gate))
+        activated = o * mx.sigmoid(gate)
+        return _projection.linear(self.o_proj, activated) if _projection is not None else self.o_proj(activated)
