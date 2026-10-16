@@ -1,7 +1,7 @@
 # V19：GDN norm reuse 独立实验状态
 
 本分支保存实验源码和已核验的证据；V19 default OFF、未采用，教程章节尚未完成。
-本机 build3 已独立核验 FULLMODEL_QUAL_PASS；E2E actual=0、待测，未获得默认启用或性能晋级资格，未证明模型收益或相对官方引擎胜出。
+本机 build3 已独立核验 FULLMODEL_QUAL_PASS；E2E 唯一实际 attempt 已执行 6 fresh、末尾资源 STOP，正式 E2E 未通过，未获得默认启用或性能晋级资格，未证明模型收益或相对官方引擎胜出。
 完整模型资格测试的 accepted15 基线 `f976d6a547a9dc1946b52b1de6db376d799b34d7`；实验源码提交 `b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6`。
 本次更新状态、结果 JSON 和 256GB Mac 交接包；26 个实验源码逐字不变，不合入教程主分支。
 
@@ -33,7 +33,15 @@
 - 22 份原始资源快照均 AC、pressure=1、thermal=0、swap=7571.62MB，Swapouts delta=0；Pageouts 63979→64543（+564），原 guard 未要求零 Pageouts。
 - owner/driver/worker 8222/8236/8249/8407 在实际工具返回后严格 PID absent；driver 和两个 worker wait/reap exit=0。原 owner/driver GPU_released=false 保留，外部 GPU_RELEASED 是单独释放边界。
 - 独立结果审查 FULLMODEL_QUAL_PASS；[审查文本](../handoffs/256gb-mac/FULLQUAL-BUILD3-REVIEW.md) SHA256 `dfc5c77df0f28c45d178de45c64b744235538440a6f2cf6eb2fe52c0c41533cb`；[审查收据](../handoffs/256gb-mac/FULLQUAL-BUILD3-REVIEW-RECEIPT.json) SHA256 `af7b23397e16d615d19f8de4704d5c57d038797940d37bc3597c3056d6b78177`。
-- 这只证明本次有限 fullmodel 正确性；E2E actual=0、待测，整体 win=0，default OFF、不采用、不合并 main。
+- 这只证明本次有限 fullmodel 正确性；E2E 唯一实际 attempt 已执行 6 fresh、末尾资源 STOP，正式 E2E 未通过，整体 win=0，default OFF、不采用、不合并 main。
+
+## E2E 唯一实际 attempt：末尾资源 STOP
+
+- 6 个 fresh process 均已运行，原始 36 个请求/1,152 tokens 完整；driver `completed_configs=5`。第六个 `pair3-B-on` 的 6 请求已完成，但在 `after-measurement-before-unload` guard 因 `Sustained Swapouts`（最近两次 delta>0）首次失败。
+- 第六个 `result.json` 和 `suite-complete.json` 均不存在；owner 的 STOP 是真实资源守卫失败，不能解释为 metadata bug，也不能把完整请求 raw 当作正式成功 suite。
+- 实际工具 session85451 exit=1，driver11742 wait/reap rc=1；六 server 均 wait_completed=true、rc=-15。工具返回后 owner11727/driver11742/server11762、11937、12115、12328、12515、12708 的 strict ps 全部 rc=1、stdout/stderr 字面空；外部已释放边界与原 owner `GPU_released=false` 分别保留，不声称进程内 unload 成功。
+- fullqual build3 PASS 保留；本轮不具正式 E2E、性能、采纳或整体胜出资格。无新有效加速百分比或 Pareto win；不重跑同 latch、不放宽 guard、default OFF、不合并 main。
+- [精简原始收据索引](../handoffs/256gb-mac/E2E-RESOURCE-STOP.json) 固定 owner/tool-return/posttool-absence 原路径与 SHA；不复制请求 raw。256GB 目标机须重建 harness、重新冻结并在同机复测。
 
 ## Chrome 与 E2E 的边界
 

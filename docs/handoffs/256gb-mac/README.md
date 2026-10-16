@@ -1,6 +1,6 @@
 # 256GB Mac 交接包
 
-先将 [HANDOFF.md](HANDOFF.md) 交给目标机 agent。clone 实验分支或 `tutorial-17-handoff-v1` 后进入本目录，先核验再展开：
+先将 [HANDOFF.md](HANDOFF.md) 交给目标机 agent。clone 实验分支或 `tutorial-17-e2e-resource-stop-v1` 后进入本目录，先核验再展开：
 
 ```sh
 shasum -a 256 -c SHA256SUMS
@@ -16,6 +16,6 @@ tar -xzf "$TASK_ARCHIVE" -C "$TASK_ROOT"
 - [FULLQUAL-BUILD3-REVIEW.md](FULLQUAL-BUILD3-REVIEW.md) / [收据](FULLQUAL-BUILD3-REVIEW-RECEIPT.json)：独立严格正确性审查；历史绝对路径仅为源机证据索引。
 - `SHA256SUMS`：本目录交付文件校验；压缩包内另有`PAYLOAD-SHA256SUMS`。
 
-本机build3 FULLMODEL_QUAL_PASS；E2E actual=0、待测，无整体胜出，V19默认OFF。旧两次STOP永久保留。
+本机 48GiB 的 fullqual build3 已独立 FULLMODEL_QUAL_PASS；随后唯一一次 E2E actual attempt 已执行 6 fresh，末尾因 Sustained Swapouts 资源守卫 STOP，未获正式 E2E/性能/采纳资格，整体 win=0，default OFF。 详情见 [E2E原始证据索引](E2E-RESOURCE-STOP.json)。旧两次STOP永久保留。
 有真实可用引擎源码；完整目标机harness尚需迁移、重建、冻结和审核。目标机必须重新执行完整模型资格与官方baseline对照。
 本包不含模型、大raw、用户check_layers.py改动、旧GO或latch。历史SHA和路径不是目标机授权；解包目录没有.git，完整Git历史由实验分支及相应source/static/numeric tags提供。
