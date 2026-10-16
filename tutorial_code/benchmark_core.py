@@ -21,6 +21,8 @@ def main():
     ap.add_argument('--max-new-tokens',type=int,default=128)
     ap.add_argument('--repeat',type=int,default=3);ap.add_argument('--warmup-runs',type=int,default=1)
     ap.add_argument('--ignore-eos',action='store_true',help='Fixed output-step experiment; report separately from normal EOS-stopping oMLX requests')
+    ap.add_argument('--compile-decode',action='store_true',help='Opt-in bounded M5 Ultra decode graph reuse')
+    ap.add_argument('--cache-limit-gb',type=int,default=2,help='MLX allocator pool, not prompt/prefix caching')
     ap.add_argument('--dtype',choices=['float32','bfloat16'],default='bfloat16');ap.add_argument('--out',type=Path)
     args=ap.parse_args()
     if args.repeat<1 or args.warmup_runs<1 or args.max_new_tokens<2:ap.error('need repeat>=1, warmup-runs>=1, max-new-tokens>=2')
@@ -30,7 +32,8 @@ def main():
     mx.random.seed(42)
     engine=LLMEngine(str(model_dir),max_seqs=1,max_len=len(prompt)+args.max_new_tokens+16,
                      max_batched_tokens=max(512,len(prompt)),dtype=dtype,
-                     drafter_dir=str(args.drafter_dir) if args.drafter_dir else None,spec_block=args.spec_block)
+                     drafter_dir=str(args.drafter_dir) if args.drafter_dir else None,spec_block=args.spec_block,
+                     compile_decode=args.compile_decode,cache_limit_gb=args.cache_limit_gb)
     params=SamplingParams(max_tokens=args.max_new_tokens,temperature=0,ignore_eos=args.ignore_eos)
     def run():
         if hasattr(mx,'reset_peak_memory'):mx.reset_peak_memory()
@@ -70,7 +73,8 @@ def main():
             'memory_scope':'MLX allocator active and peak bytes; not process RSS or total unified-memory use',
             'output_count_definition':'output_tokens counts every emitted ID, including a terminal EOS; logical_completion_tokens excludes a terminal EOS when EOS stopping is enabled. Rates use emitted-ID counts.',
             'decode_rate_definition':'(output tokens minus first delivery tokens)/(end minus first delivery time); token ID delivery can be a speculative burst',
-            'dtype':args.dtype,'drafter_dir':str(args.drafter_dir) if args.drafter_dir else None,
+            'dtype':args.dtype,'compile_decode':args.compile_decode,'allocator_cache_limit_gb':args.cache_limit_gb,
+            'drafter_dir':str(args.drafter_dir) if args.drafter_dir else None,
             'request':{'prompt_ids':prompt,'prompt_tokens':len(prompt),'max_new_tokens':args.max_new_tokens,
                        'ignore_eos':args.ignore_eos,'eos_token_ids':sorted(engine.eos_ids),'temperature':0,'concurrency':1},
             'warmup_runs':args.warmup_runs,'repeat':args.repeat,'runs':runs,

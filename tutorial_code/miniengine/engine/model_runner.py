@@ -16,8 +16,12 @@ from .scheduler import SchedulerOutput
 
 
 class ModelRunner:
-    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None):
+    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None, *, compile_decode=False):
         self.model = model
+        self.decode_model = model
+        if compile_decode:
+            from .compiled_decode import CompiledDecode
+            self.decode_model = CompiledDecode(model)
         self.max_len = max_len
         self.batch = DecodeBatch(model)
         self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段，以及投机解码的 solo 模式）
@@ -72,7 +76,7 @@ class ModelRunner:
                         self.feats.setdefault(r.req_id, []).append(f[i:i + 1])
                     to_eval.append(f)
                 else:
-                    logits = self.model(tokens, ctx)
+                    logits = self.decode_model(tokens, ctx)
                 toks = sample(logits, [r.sampling for r in decode])
             self._ahead = None
             if (self.spec is None and not out.prefill
@@ -90,7 +94,7 @@ class ModelRunner:
                 next_pos = [p + 1 for p in positions]
                 next_ctx = ForwardContext("decode", layers, positions=mx.array(next_pos),
                                           lens=mx.array([p + 1 for p in next_pos]), max_len=max(next_pos) + 1)
-                next_logits = self.model(toks.astype(mx.int32), next_ctx)
+                next_logits = self.decode_model(toks.astype(mx.int32), next_ctx)
                 next_toks = sample(next_logits, [r.sampling for r in decode])
                 arrays = [a for l in layers for a in
                           ((l.K, l.V) if isinstance(l, BatchKV) else (l.conv, l.S))]
