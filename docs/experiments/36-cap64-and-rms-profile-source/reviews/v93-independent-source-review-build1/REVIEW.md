@@ -1,0 +1,15 @@
+# V93 independent CPU source review
+- Verdict: no concrete forward/lifecycle blocker found in frozen V93 worker `38b06b3c…f0e9c`; 133 pins independently rehashed.
+- This reviews V20's harness; reviewer authored its V92 dependency. No GPU, model, native-library loading, or numerical/performance claim.
+- Three A/B prefills are separately constructed; each131 physical seed arrays and final logits are strictly compared, finite, and retained independently (339–389).
+- Raw-gamma A context includes prefill graph/rebuild/eval/sync/Shared and every decode graph/eval/sync; V92 restores the class method in finally (294–300,339–354,503–513).
+- A retains current44 gates+conv+normreuse, with no legacy GDN override; B uses its own prefill seed and uploads131 ranges only at each request reset (252–267,478–495).
+- Each93 replay compares all132 physical outputs against live A bytes, shape/dtype/extent; all96 old cohort IDs are hard assertions (517–573,606–609).
+- Old38/44 output hashes are diagnostics only; independently confirmed the two archived references already agree on12276 output records and96 IDs.
+- Gamma161 pairs require different objects and disjoint full address ranges, equal shape/dtype/finite/bytes;322 owners have once-only baselines and request/final Cmemcmp (272–291,582–588,610).
+- All1349 original parameter identities persist. B additionally pins161 cached gammas, requires actual used zero-copy full-range readonly native roles, and excludes A raw gammas from B pins (400–405,459–465,603–604).
+- Capture proves161 distinct enabled plain norms and48 current44 GDN calls, then removes both hooks in finally before replay (301–327,416–425).
+- Native89 is pinned, extends exact40 capacity guards to64/256, and retains exact PSO S6/S_new9 eligibility; runtime requires48 eligible S swaps and83 staged links (430–473).
+- Physical KV capacity64 is checked; all32 KV tails must be zero beyond actual L, then CPU-only per-head padding produces canonical256. No padded256 tensor is uploaded (124–141,341–373,525–549).
+- ICB execution totals/banks, resets, seed-upload and compare byte totals are asserted. Input/captured/reference states and prefills are checked readonly; CAP class metadata is restored in finally.
+- CPU-only replay of `--inert` passed133pins and author6 source tests passed; those checks establish source boundaries only. Actual reference/native numerical qualification remains pending.

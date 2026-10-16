@@ -1,0 +1,199 @@
+--- frozen93/fullqual.py
++++ new97/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only V93 vendor plainRMS profile physicalCAP64; independent raw-gamma A vs native B; old gold diagnostic only; inert never imports MLX."""
++"""Root-only V97 diagnostic: vendor plainRMS A/B strict; old IDs/hashes observed only. V93 FAIL preserved; no adoption/performance qualification."""
+ import argparse
+ from contextlib import contextmanager, nullcontext
+ import ctypes
+@@ -21,6 +21,8 @@
+ VENDOR_MANIFEST = P / "v92-vendor-rms-leaf-build1/candidate-manifest.json"
+ VENDOR_FACTORY = P / "v92-vendor-rms-leaf-build1/vendor_reference.py"
+ VENDOR_PINS = P / "v92-vendor-rms-leaf-build1/source-pins.json"
++DONOR_VISIBLE_PATH = P / "m4-final-native15-official-attempt2/output/C1-block1-omlx/C1-measure-0.json"
++PRESERVED93 = P / "v23-root-control-build1/fullmodel-v93native-attempt1/child-output/receipt.json"
+ CAP = 64
+ CANONICAL_CAP = 256
+ ACTUAL44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+@@ -74,7 +76,25 @@
+     assert sha(release)=="ea7cd3efd15404a89829be54368becb54cd65e17327e16232adf401ff2a50fdc"
+     r=json.loads(release.read_text());assert r["GPU_released"] and r["tool_exit"]==0
+     assert all(row["returncode"]==1 and row["stdout"]==row["stderr"]=="" for row in r["strict_absence"])
++    donor = json.loads(DONOR_VISIBLE_PATH.read_text())["requests"][0]
++    assert donor["output_ids_when_available"] is None and len(donor["visible_roundtrip_ids"]) == 32
++    assert donor["usage"]["prompt_tokens"] == 19 and donor["usage"]["completion_tokens"] == 32
++    preserved = json.loads(PRESERVED93.read_text())
++    assert sha(PRESERVED93) == "0cb2058cb050b0c82f14ff67e2ee636ea17843fa814b6f136f2d84e00ddcc575"
++    assert preserved["status"] == "FAIL_STOP" and preserved["independent_prefill_qualifications"] == []
++    assert "line 394" in preserved["traceback"] and 'warm_ids == w["continuation_ids"]' in preserved["traceback"]
+     return pins
++
++
++def id_difference(observed, reference):
++    """Saved-list diagnostics only; never a donor raw-ID claim or gate."""
++    observed, reference = list(observed), list(reference)
++    positions = [{"index0": i, "observed": a, "reference": b}
++                 for i, (a, b) in enumerate(zip(observed, reference)) if a != b]
++    first = positions[0]["index0"] if positions else (min(len(observed), len(reference)) if len(observed) != len(reference) else None)
++    return {"equal": observed == reference, "observed_count": len(observed), "reference_count": len(reference),
++            "different_aligned_positions": len(positions), "first_difference_index0": first,
++            "differences": positions, "reference_ids": reference, "gate": False}
+ 
+ 
+ class Native:
+@@ -194,10 +214,13 @@
+     assert all(len(r["A_ids"])==32 and r["A_ids"]==r["B_ids"]==archive44[name]["A_ids"]==archive44[name]["B_ids"] for name,r in archived_cases.items())
+     assert max(len(prompt)+31 for _,prompt,_ in cases)<=CAP
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
++    assert all(archive44[n]["A_ids"] == archived_cases[n]["A_ids"] for n,_,_ in cases)
++    donor_request = json.loads(DONOR_VISIBLE_PATH.read_text())["requests"][0]
++    donor_visible = donor_request["visible_roundtrip_ids"]
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+-                          "GPU_used": False, "numerical_profile":"vendor RMSNorm leaf rounding", "old_profile_pass":False, "requests": [[n, len(p)] for n, p, _ in cases],
++                          "GPU_used": False, "numerical_profile":"vendor RMSNorm leaf rounding", "diagnostic_only":True, "old_profile_pass":False, "requests": [[n, len(p)] for n, p, _ in cases],
+                           "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2, "physical_KV_capacity": CAP, "CPU_canonical_KV_capacity":CANONICAL_CAP}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+@@ -205,12 +228,14 @@
+     receipt = {"status": "STARTED", "stage": "beforeload", "pid": os.getpid(), "model_loads": 0,
+                "source_pins": pins, "native_library": str(library), "fixed_cap": CAP, "requests": [], "numerical_profile":"vendor RMSNorm leaf rounding", "old_profile_pass":False,
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+-               "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
++               "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "diagnostic_only": True, "V93_original_FAIL_preserved": True, "old_ID_equality_required": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
+                "old_profile_ID_and_hash_diagnostic_receipt":str(OLD_PROFILE_QUAL),"old_profile_ID_and_hash_diagnostic_receipt_sha256":OLD_PROFILE_QUAL_SHA,
+                "actual44_gold_sha256":ACTUAL44_SHA,"canonical_capacity":CANONICAL_CAP,
+                "canonicalization":"CPU raw BF16 per-head append-zero only after physical64 readback; no MLX padded256 input/state",
+-               "scope":"sync fixedCAP64 numerical only, no async/service/performance/adoption"}
++               "scope":"new diagnostic only: live A/B bytes strict, old IDs/hashes observed; no old/new adoption/service/performance qualification",
++               "preserved_V93_failure_receipt":str(PRESERVED93),"preserved_V93_failure_sha256":sha(PRESERVED93),
++               "donor_visible_reference":{"path":str(DONOR_VISIBLE_PATH),"sha256":sha(DONOR_VISIBLE_PATH),"ids":donor_visible,"source_kind":"visible text tokenizer roundtrip, NOT internal raw generation IDs","applies_to_base_reset_prompt_only":True}}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+     parameter_holders, seed_holders, output_holders = [], [], []
+@@ -260,7 +285,7 @@
+         assert all(type(g) is GDN and g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         candidate_decode,candidate_norm=GDN._decode_dispatch,GDN._decode_conv_norm_reuse_cache
+         # Only plain RMSNorm changes profile; GatedRMSNorm/GDN math stays current44 in BOTH arms.
+-        vendor=module("v93_vendor_reference",P/"v92-vendor-rms-leaf-build1/vendor_reference.py")
++        vendor=module("v97_vendor_reference",P/"v92-vendor-rms-leaf-build1/vendor_reference.py")
+         profile=vendor.prepare_model(model,mx=mx,np=np,nn=nn,device_info=info,expected_parameter_count=1349)
+         assert len(profile.entries)==161
+         profile.validate_current_bindings()
+@@ -317,7 +342,7 @@
+                 GDN._decode_conv_norm_reuse_cache=candidate_norm;PlainRMSNorm.__call__=candidate_plain
+         receipt["A_reference_profile"]={"method":"independent checkpoint rawgamma nn.RMSNorm factory/context",
+                                        "GDN_math":"same current44 conv+gates+normreuse in A/B; no legacy dispatch binding",
+-                                       "old_gold_scope":"all96 IDs hard gate; canonical132 hashes diagnostic equality/difference only"}
++                                       "old_gold_scope":"old96 IDs and canonical132 hashes diagnostic equality/difference only; all96 new A/B IDs mutually strict/noEOS"}
+ 
+         eos = read_eos_ids(w["model_dir"]); receipt["eos_ids"] = sorted(eos)
+         receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, whole_functional_off=True)
+@@ -341,7 +366,7 @@
+             with raw_gamma_reference() if reference else nullcontext():
+                 caches=make_cache(model)
+                 logits=model(mx.array(prompt,mx.int32),ForwardContext("prefill",caches),last_only=True)
+-                batch=DecodeBatch(model);batch.rebuild([],[("v93",caches,len(prompt)+32)])
++                batch=DecodeBatch(model);batch.rebuild([],[("v97",caches,len(prompt)+32)])
+                 flat=tuple(v[:] for v in batch.arrays());assert len(flat)==128
+                 mx.eval(logits,*flat);first=int(mx.argmax(logits,axis=-1).item())
+                 assert all(v.shape==(1,4,CAP,256) and v.dtype==mx.bfloat16 for i,v in enumerate(flat) if i in kv_state_indices)
+@@ -376,10 +401,10 @@
+                 (args.out/"first-failure-prefill-B.bin").write_bytes(bh.raw())
+                 write(args.out/"first-failure-prefill.json",{"request":name,"label":"last_logits","A":ah.meta,"B":bh.meta})
+                 raise AssertionError(("independent prefill logits differ",name))
+-            assert A["first"]==B["first"]==archived_cases[name]["A_ids"][0]
++            assert A["first"]==B["first"] and A["first"] not in eos
+             event={"name":name,"prompt_ids":prompt,"A":"independent rawgamma nn.RMSNorm reference_context through eval","B":"preparedgamma normal candidate path",
+                    "seed131":checks,"seed131_strict_bytes_equal":True,"A_B_states_retained_separately":True,"B_seed_origin":"own B prefill only",
+-                   "last_logits":{"A":metadata_finite(np,ah),"B":metadata_finite(np,bh),"strict_bytes_equal":True},"first_token":A["first"],"first_token_matches_old_ID":True}
++                   "last_logits":{"A":metadata_finite(np,ah),"B":metadata_finite(np,bh),"strict_bytes_equal":True},"first_token":A["first"],"first_token_matches_old_ID":A["first"]==archived_cases[name]["A_ids"][0],"old_first_ID_gate":False}
+             receipt["independent_prefill_qualifications"].append(event);save()
+             return {"A":A,"B":B,"proof":event}
+         # One ordinary32 warm request: no native capture or feedback.
+@@ -391,11 +416,17 @@
+             logits = model(mx.array([warm_token], mx.int32), ctx); warm_flat = state_of(ctx)
+             pred = mx.argmax(logits,axis=-1); mx.eval(pred,*warm_flat)
+             warm_token = int(pred.item()); warm_ids.append(warm_token)
+-        assert warm_ids == w["continuation_ids"]
++        receipt["ordinary_warm32_diagnostic"]={"new_B_ids":list(warm_ids),"count":len(warm_ids),
++            "old_workload":id_difference(warm_ids,w["continuation_ids"]),
++            "saved_donor_visible":id_difference(warm_ids,donor_visible),
++            "donor_reference_is_raw_generation_ids":False,"contains_EOS":any(t in eos for t in warm_ids),
++            "outside_native93_step_span":True,"used_as_B_future_feedback":False}
++        write(args.out/"ordinary-warm32-ids-diagnostic.json",receipt["ordinary_warm32_diagnostic"]);save()
++        assert len(warm_ids)==32 and all(t not in eos for t in warm_ids),"warm32 noEOS diagnostic boundary"
+         del warm, warm_flat, warm_record, ctx, logits, pred
+         mx.synchronize(); resources.sample("after-warm32", loaded=True, mx=mx)
+         capture_pair=independent_prefill_pair(base_prompt,"base")
+-        capture_seed,first=capture_pair["B"]["seed"],capture_pair["B"]["first"];assert first==w["continuation_ids"][0]
++        capture_seed,first=capture_pair["B"]["seed"],capture_pair["B"]["first"];assert first==capture_pair["A"]["first"] and first not in eos
+         mx.eval(*capture_seed); mx.synchronize()
+         for name, value in tree_flatten(model.parameters()):
+             h = shared(value, "parameter." + name); parameter_holders.append(h)
+@@ -495,7 +526,7 @@
+                   "seed_upload_calls":131,"seed_arrays":131,"steps":[],"first_token":first,
+                   "changed_seed_inputs_vs_capture":changed_inputs,"independent_prefill_proof":name,"B_seed_source":"own independent B prefill"}
+             receipt["requests"].append(case); receipt["stage"]={"request":name,"phase":"seed-loaded"}; save()
+-            assert first==archived_cases[name]["A_ids"][0] and first not in eos
++            assert first==seed_pair["A"]["first"] and first not in eos
+             a_flat=tuple(v[:] for v in a_seed_values[3:]);a_token=seed_pair["A"]["first"]
+             for step in range(1,32):
+                 if a_token in eos: break  # Changed prompt honors actual greedy EOS.
+@@ -552,7 +583,7 @@
+                 native.call("v34_copy_output",output_holders[129].address,4,ctypes.byref(target))
+                 a_token=int(expected_values[129].item()); b_token=int(target.value)
+                 assert a_token==b_token
+-                assert a_token==archived_cases[name]["A_ids"][step] and a_token not in eos
++                assert a_token not in eos and b_token not in eos
+                 ids_a.append(a_token);ids_b.append(b_token);a_flat=a_state
+                 ro={"seed":originals_readonly(native,seed_holders,seed_baselines,name+".capture-seed"),
+                     "capture_outputs":originals_readonly(native,output_holders,output_baselines,name+".capture-output"),
+@@ -561,14 +592,24 @@
+                 event={"step":step,"A_exact_L":length,"B_fixed_L":CAP,"A_token":a_token,"B_token":b_token,
+                        "outputs":equal,"originals_readonly":ro,"reference_input_digest_readonly":True,
+                        "native_prediction_copied_bytes":4,"numerical_KV_canonical_readback_bytes":4194304,"seed_uploads_this_step":0,
+-                       "oldV38_canonical_hash_diagnostic_comparisons":132,"oldV44_canonical_hash_diagnostic_comparisons":132,"canonical132_new_A_B_strict_checks":132,"KV_physical64_tail_zero_checks":32}
++                       "oldV38_canonical_hash_diagnostic_comparisons":132,"oldV44_canonical_hash_diagnostic_comparisons":132,"canonical132_new_A_B_strict_checks":132,"KV_physical64_tail_zero_checks":32,
++                       "old38_ID_diagnostic":{"A_equal":a_token==archived_cases[name]["A_ids"][step],"B_equal":b_token==archived_cases[name]["A_ids"][step],"old_ID":archived_cases[name]["A_ids"][step],"gate":False},
++                       "old44_ID_diagnostic":{"A_equal":a_token==archive44[name]["A_ids"][step],"B_equal":b_token==archive44[name]["A_ids"][step],"old_ID":archive44[name]["A_ids"][step],"gate":False}}
+                 if step%4==0:
+                     event["resources"]=resources.sample(name+f"-decode-{step:02d}",loaded=True,mx=mx)
+                 case["steps"].append(event);receipt["stage"]={"request":name,"step":step};save()
+                 print(json.dumps({"event":"NATIVE_DECODE_EQUAL","request":name,"step":step}),flush=True)
+             assert ids_a==ids_b
+-            assert ids_a==archived_cases[name]["A_ids"] and len(case["steps"])==31
+-            case.update(status="PASS_REQUEST_STRICT",terminated_by_EOS=ids_a[-1] in eos,
++            assert len(ids_a)==len(ids_b)==32 and len(case["steps"])==31
++            assert all(t not in eos for t in ids_a+ids_b)
++            case["ID_diagnostics"]={"new_A_B_mutually_strict":ids_a==ids_b,"all32_no_EOS":True,
++                "old38_A":id_difference(ids_a,archived_cases[name]["A_ids"]),"old38_B":id_difference(ids_b,archived_cases[name]["A_ids"]),
++                "old44_A":id_difference(ids_a,archive44[name]["A_ids"]),"old44_B":id_difference(ids_b,archive44[name]["A_ids"]),
++                "donor_visible_comparable_same_prompt":canonical,
++                "donor_visible_A":id_difference(ids_a,donor_visible) if canonical else None,
++                "donor_visible_B":id_difference(ids_b,donor_visible) if canonical else None,
++                "donor_reference_is_raw_generation_ids":False}
++            case.update(status="DIAGNOSTIC_REQUEST_NEW_A_B_STRICT",terminated_by_EOS=ids_a[-1] in eos,
+                         native=native.report("native-after-"+name))
+             assert_icb(case["native"],[len(r["steps"]) for r in receipt["requests"]])
+             fb=case["native"]["feedback"]
+@@ -603,14 +644,14 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         assert len(receipt["independent_prefill_qualifications"])==3
+-        receipt["independent_prefill_summary"]={"requests":3,"seed131_strict_checks":393,"last_logits_strict_checks":3,"firsttoken_oldID_checks":3,"separate_A_B_prefill":True,"B_seeded_from_own_prefill_only":True}
++        receipt["independent_prefill_summary"]={"requests":3,"seed131_strict_checks":393,"last_logits_strict_checks":3,"firsttoken_new_A_B_strict_checks":3,"oldfirsttoken_diagnostic_comparecount":3,"oldfirsttoken_diagnostic_equalcount":sum(r["first_token_matches_old_ID"] for r in receipt["independent_prefill_qualifications"]),"separate_A_B_prefill":True,"B_seeded_from_own_prefill_only":True}
+         assert old_gold_counts["equal"]+old_gold_counts["different"]==12276
+         assert sum(len(r["A_ids"]) for r in receipt["requests"])==sum(len(r["B_ids"]) for r in receipt["requests"])==96
+-        receipt["new_profile_reference"]={"A":"independent raw checkpoint gamma NN.RMSNorm","B":"prepared cachedgamma MXfast.rms_norm","physical132_strict_checks":12276,"old96IDs_hard_gate":True,"old_canonical_gold":"diagnostic only; no oldprofilePASS assertion"}
++        receipt["new_profile_reference"]={"A":"independent raw checkpoint gamma NN.RMSNorm","B":"prepared cachedgamma MXfast.rms_norm","physical132_strict_checks":12276,"new96IDs_mutually_strict_noEOS":True,"old96IDs_hard_gate":False,"old_canonical_gold":"IDs and hashes diagnostic only; no oldprofilePASS assertion"}
+         receipt["gamma322_readonly_final"]=originals_readonly(native,gamma_holders,gamma_baselines,"final.raw-and-cached-gamma")
+         profile.validate_current_bindings();receipt["vendor_rms_profile_final_snapshot"]=profile.snapshot()
+         source_check(library)
+-        receipt.update(status="PASS_V93_VENDOR_PLAIN_RMS_CAP64_NATIVE_ICB_VS_INDEPENDENT_RAW_GAMMA_STRICT_96_OLD_IDS",stage="complete",native_steps=total_steps,
++        receipt.update(status="DIAGNOSTIC_COMPLETED_NEW_REFERENCE_STRICT_NO_ADOPTION",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48,strict_output_checks=12276,canonical_KV_tail_zero_checks=2976)
+         save();return 0
+     except BaseException as error:

@@ -1,0 +1,39 @@
+{
+  "status": "CPU_READY_NEW_DIAGNOSTIC_NOT_GPU_EXECUTED",
+  "terminal_status_if_every_new_strict_check_completes": "DIAGNOSTIC_COMPLETED_NEW_REFERENCE_STRICT_NO_ADOPTION",
+  "preserved_failure": {
+    "source": "/private/tmp/minivllm-engine-optimization-20261014/v93-vendor-rms-cap64-fullqual-build1/fullqual.py",
+    "source_sha256": "38b06b3ca55b356c3a55aff127cfa7d8f3f0536295dc45bc27a56dea159f0e9c",
+    "receipt": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v93native-attempt1/child-output/receipt.json",
+    "receipt_sha256": "0cb2058cb050b0c82f14ff67e2ee636ea17843fa814b6f136f2d84e00ddcc575",
+    "status": "FAIL_STOP",
+    "unchanged": true
+  },
+  "purpose": "record full new-reference outputs and compare saved old/donor streams; not repair V93 or establish adoption/performance qualification",
+  "math": "exact frozen92 candidate/factory, only plain RMSNorm vendor-leaf rounding; other current44 math unchanged; not whole oMLX semantics",
+  "unchanged_strict_gates": [
+    "161 independent checkpoint A gamma vs derived B cache: BF16 bytes/shape/dtype/finite/separate objects/disjoint ranges",
+    "1349 original parameter identities; extra161 B cached readonly native pins",
+    "three independent A/B prefill131 seeds and final logits strictly equal, first token mutually equal",
+    "93 native replay steps x132 physical output bytes/shape/dtype/finite equal live independent A",
+    "all96 newly observed A/B IDs mutually equal, each request32 and noEOS",
+    "322 gamma owners/request+final readonly; seed/captured/A retained states+prefill logits readonly",
+    "native89 CAP64 with48 exact-S eligible pairs/83 staged links; ICB2banks[48,45]/3resets",
+    "KV physical64 tailzero and CPU-only canonical256 A/B strict; no padded GPU upload",
+    "B own131seed upload only at reset; no future CPU token/state feeding"
+  ],
+  "new_diagnostics": [
+    "save complete warm32 B IDs before any old comparison/control-flow decision",
+    "oldworkload and saved donor visible32 equal/different with full mismatch records",
+    "eachrequest complete new A/B32 IDs, old38/44 IDs equal/different, old132hash equal/different",
+    "only same19ID base/reset prompt compared to saved donor visible stream; changedprompt donor unknown"
+  ],
+  "donor_ID_scope": "official HTTP visible text tokenizer re-encoding; no saved internal raw generation IDs",
+  "old_ID_equality_gate": false,
+  "old_hash_equality_gate": false,
+  "new_A_B_byte_and_ID_gates": true,
+  "numerical_tolerance": null,
+  "performance_point": false,
+  "adopted": false,
+  "GPU_executed_by_author": false
+}

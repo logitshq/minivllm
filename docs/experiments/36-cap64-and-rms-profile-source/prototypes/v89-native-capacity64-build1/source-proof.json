@@ -1,0 +1,40 @@
+{
+  "status": "CPU_SOURCE_EXACT_INVERSE_PATCH_PASS",
+  "original_source": "/private/tmp/minivllm-engine-optimization-20261014/v40-native-icb-build2/replay.mm",
+  "original_source_sha256": "25d9ff0d1478d9737c18913757845297f2b588c13bbd58a3d96869184282852b",
+  "new_source_sha256": "2036f51e0cbf6078010562a67f69bd8d6c811ca275943edbae283e7b92eddec4",
+  "inverse_patch_exact_frozen40": true,
+  "allowed_capacities": [
+    64,
+    256
+  ],
+  "rejected_capacities": [
+    0,
+    1,
+    32,
+    63,
+    65,
+    128,
+    257,
+    4294967295
+  ],
+  "uint32_overflow": "fullqual Native.call rejects outside[0,UINT32_MAX] before ctypes conversion; raw C ABI is uint32",
+  "compiled_only": true,
+  "GPU_executed": false,
+  "library_sha256": "ae5cfa2db175ed951fee6bf0b75b8c9fd04fd0149374c49b530076a58b256774",
+  "compile_argv": [
+    "/usr/bin/clang++",
+    "-std=c++17",
+    "-O2",
+    "-fno-objc-arc",
+    "-dynamiclib",
+    "-framework",
+    "Foundation",
+    "-framework",
+    "Metal",
+    "/private/tmp/minivllm-engine-optimization-20261014/v89-native-capacity64-build1/replay.mm",
+    "-o",
+    "/private/tmp/minivllm-engine-optimization-20261014/v89-native-capacity64-build1/libv89replay.dylib"
+  ],
+  "compile_note": "first ARC CPU compile rejected existing explicit retain; correct frozen source uses manual retain/release; MRC compile exit0, no source adjustment"
+}

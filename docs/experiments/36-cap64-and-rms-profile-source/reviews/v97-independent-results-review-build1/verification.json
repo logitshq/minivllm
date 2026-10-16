@@ -1,0 +1,79 @@
+{
+  "status": "PASS_INDEPENDENT_SAVED_RESULT_AUDIT_NO_ADOPTION",
+  "receipt_SHA256": "6c9621109e8f23e20b88244324b7b104e7672ca67a89342af52c4ebfe0b65947",
+  "CPU_only": true,
+  "GPU_or_resource_probe_executed": false,
+  "MLX_or_numpy_imported": false,
+  "source_pin_count_verified": 142,
+  "actual_imported_source_count_verified": 17,
+  "counts_recomputed": {
+    "steps": 93,
+    "strict_outputs": 12276,
+    "canonical_KV_tail_records": 2976,
+    "old_equal": 241,
+    "old_different": 12035,
+    "reference_input_readonly_steps": 93,
+    "saved_readonly_array_checks": 48825,
+    "seed_upload_calls": 393
+  },
+  "prefill_seed_checks": 393,
+  "prefill_logits_checks": 3,
+  "gamma_pair_checks": 161,
+  "gamma_readonly_arrays": 322,
+  "native_cached_gamma_fullrange_readonly": 161,
+  "true_physical_KV_CAP": 64,
+  "CPU_canonical_CAP": 256,
+  "CPU_signed_zero_and_tail_guard_checks": true,
+  "ICB": {
+    "banks": 2,
+    "GDN_S_pingpong": 48,
+    "staged_links": 83,
+    "total_executions": 93,
+    "CPU_step_uploads": 0
+  },
+  "ids": {
+    "base": {
+      "new_A_B_equal": true,
+      "old38_44_equal": false,
+      "old_aligned_differences": 19,
+      "donor_visible_same_prompt_equal": true
+    },
+    "reset-base": {
+      "new_A_B_equal": true,
+      "old38_44_equal": false,
+      "old_aligned_differences": 19,
+      "donor_visible_same_prompt_equal": true
+    },
+    "changed-prefill": {
+      "new_A_B_equal": true,
+      "old38_44_equal": true,
+      "old_aligned_differences": 0,
+      "donor_visible_same_prompt_equal": null
+    }
+  },
+  "V93_FAIL_preserved": true,
+  "old_profile_PASS": false,
+  "resource_samples": {
+    "outer": 22,
+    "child": 34,
+    "external": 1,
+    "pressure": 1,
+    "swap_MB_constant": 5006.88,
+    "Swapouts_constant": 17460761,
+    "AC_percent": 100,
+    "thermal": "nominal"
+  },
+  "owner_pid": 1104,
+  "child_pid": 1119,
+  "reaped_rc": 0,
+  "external_release": "PASS",
+  "source_scope": "161 plain RMSNorm leaves only; all five GDN source files and GatedRMSNorm AST equal44",
+  "B_only_exploratory_timing_support": "YES, separately declared new leaf profile and same qualified scope; no adoption, old-profile equivalence, whole-oMLX math or broad quality claim",
+  "limitations": [
+    "saved receipts/hash metadata rechecked; no raw tensor corpus retained to rerun native memcmp independently",
+    "visible donor reference is tokenizer roundtrip of visible text, not captured internal raw generation IDs",
+    "three prompts and32 tokens only; actual timing/protocol/control validation still unrun",
+    "top-level native scope string is inherited teacherforced wording; actual feedback.ICB evidence was checked instead",
+    "resource inventory covers known processes and point samples; unrelated GUI/unknown runtimes not proven absent"
+  ]
+}

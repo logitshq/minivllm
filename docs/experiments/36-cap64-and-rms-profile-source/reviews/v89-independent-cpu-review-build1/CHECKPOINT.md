@@ -1,0 +1,1 @@
+COMPLETE. Independent CPU source + saved-result audit; no new89-scope blocker. Inherited INT32_MAX pos overflow documented, unrelated to current19..50 valid positions. No GPU/probe/rerun/source edits.

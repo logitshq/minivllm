@@ -1,0 +1,93 @@
+{
+  "status": "SOURCE_AUDIT_ONLY",
+  "MLX_imported": false,
+  "GPU_used": false,
+  "source_pins": {
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/cache.py": "b715008771817eb4fe05d8591e537bef30b827104950d65eea01a8abf0f2a3b0",
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/generate/ar.py": "6f60faefc70bc7dec60e8fdec8f11fe9609eee4966f8240617cbcaf101046e19",
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/language.py": "bdeb2cb3e01338b9cfdb2a5fac7f021265dda62d81d75b952136d38839d4b953",
+    "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/attention.py": "23b02cfac714d84155653781df5921cca438809b482b0932075e497be48f69c3",
+    "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+    "/private/tmp/minivllm-engine-optimization-20261014/v24-fullmodel-qual-build1/fullqual.py": "464ac0978223efbf3c0e51f5dd5b112d0cb16358ede181c44723993b10bc81de",
+    "/private/tmp/minivllm-engine-optimization-20261014/v24-warm-qual-build1/fullqual.py": "160ab4231a7c82c638fc55b808e92f7a76f0b8934bcb032a63c404e0e901c7e2",
+    "/private/tmp/minivllm-engine-optimization-20261014/v34-fixedcap-qualification-build1/fullqual.py": "fdabb11305b28033318fbd27bb64f300f439aa383fd7706e34d19f2ed1214251",
+    "/private/tmp/minivllm-engine-optimization-20261014/v43-native-runner-build1/fullqual.py": "895c06708604b82ecac18f1f8500d0b425b2d3039d22532a55ab5815eb4f2cb5",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/sdpa_vector.h": "f52c8da21f2c31f3f77168d326a49815fc29bde4b573883896a8eb3298f11508"
+  },
+  "saved_actual_receipts": [
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v24-attempt1/child-output/receipt.json",
+      "sha256": "b81788d9bef0f6ce297bc6d84fb6eabfbb3e80406078fc07870c8031b3c901ac",
+      "status": "PASS_32_GREEDY_FULLMODEL_NUMERICAL_ONLY"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/warm-v24-attempt1/child-output/receipt.json",
+      "sha256": "7ef6b7b0d2f5e59b1bd8c4e9dcdd007c22098c7f5a47f5ac9b19ffc4660cb5f5",
+      "status": "PASS_SAME_L_WARM_FULLMODEL_NUMERICAL_ONLY"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v34-attempt1/child-output/receipt.json",
+      "sha256": "37d5a808dc4fd979f612d776d42f3e2f42913c66c6f4ae2662e8b675c7d3c5db",
+      "status": "PASS_FIXEDCAP256_32_GREEDY_STRICT_NUMERICAL_ONLY"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v34native-attempt1/child-output/receipt.json",
+      "sha256": "ff67fbc7669244ec061d0203540caafcc9d9bcffb1789b1f6e412431980730d5",
+      "status": "PASS_NATIVE_FIXEDCAP_FEEDBACK_BASE_RESET_CHANGED_STRICT"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v43native-attempt1/child-output/receipt.json",
+      "sha256": "a2917ad070f574a5c61b550d8076129a896195b2beaf734ada58512346550301",
+      "status": "PASS_NATIVE_RUNNER_C1_QUEUED_RESET_FALLBACK_STRICT"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v82native-attempt1/child-output/receipt.json",
+      "sha256": "6553eae93b7f79bed92753749cb04b156bd4343db422ec88043a75c8072265af",
+      "status": "PASS_V82_BA_FP32_GATES_PREWORK_GDN_FULL_ICB_BASE_RESET_CHANGED_STRICT"
+    }
+  ],
+  "request_lengths": {
+    "base_prompt": 19,
+    "generated_IDs": 32,
+    "decode_calls": 31,
+    "base_write_positions": [
+      19,
+      49
+    ],
+    "base_valid_lengths": [
+      20,
+      50
+    ],
+    "changed_prompt": 20,
+    "changed_write_positions": [
+      20,
+      50
+    ],
+    "changed_valid_lengths": [
+      21,
+      51
+    ],
+    "CAP64_headroom_tokens_after_changed": 13
+  },
+  "KV_bytes_32_arrays": {
+    "CAP256": 16777216,
+    "CAP128": 8388608,
+    "CAP64": 4194304
+  },
+  "CAP64_vs256_KV_payload_saved_bytes": 12582912,
+  "two_stage_blits_read_plus_write_traffic_saved_per_step_bytes": 50331648,
+  "performance_bound": "Traffic arithmetic only; not measured bandwidth/time or production kernel shares; attention masked-false arithmetic already skipped.",
+  "native_guard": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v40-native-icb-build2/replay.mm",
+    "sha256": "25d9ff0d1478d9737c18913757845297f2b588c13bbd58a3d96869184282852b",
+    "line": 153,
+    "old_allows": [
+      256
+    ],
+    "root_authorized_new_allows": [
+      64,
+      256
+    ],
+    "other_source_unchanged_required": true
+  }
+}

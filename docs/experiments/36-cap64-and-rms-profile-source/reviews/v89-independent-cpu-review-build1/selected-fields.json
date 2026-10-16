@@ -1,0 +1,38 @@
+{
+  "status": "PASS_INDEPENDENT_CPU_REVIEW_DECLARED89_SCOPE",
+  "checks": 25501,
+  "new_CAP64_scope_blockers": [],
+  "inherited_out_of_scope_finding": {
+    "file": "/private/tmp/minivllm-engine-optimization-20261014/v89-native-capacity64-build1/replay.mm",
+    "line": 183,
+    "issue": "int32 pos+1 overflow before an explicit pos<capacity check for arbitrary INT32_MAX seed",
+    "CPU_UBSan_reproduced": true,
+    "current19to50_positions_affected": false,
+    "recommendation": "new future version: reject pos>=capacity before computing pos+1; preserve frozen89 evidence"
+  },
+  "source_pins": 71,
+  "worker_SHA": "d1669d1bf0a0610af243764c0820d329ce63edcd479719e6be0c7355902c789c",
+  "library_SHA": "ae5cfa2db175ed951fee6bf0b75b8c9fd04fd0149374c49b530076a58b256774",
+  "actual_receipt_SHA": "40428c19e12c69c80209885f58246b585d0c0659c3890ae2396f5f7310143e86",
+  "canonical_dual_gold_array_records": 12276,
+  "physical_AB_C_memcmp_recorded_bytes": 14753056860,
+  "paired_KV_tailzero_records": 2976,
+  "individual_A_plus_B_tail_checks_from_source": 5952,
+  "requests": 3,
+  "steps": 93,
+  "IDs_per_case": 32,
+  "actual_capacity": 64,
+  "canonical_capacity_CPU_only": 256,
+  "model_files_unchanged": 27,
+  "resource_samples": 33,
+  "resource_inventory_note": "Raw matcher has no model match; loaded-worker derived records explicitly supplement exact ownedPID96714 as explicit-loaded-v24-fullmodel, separately verified; not relabeled as raw matcher observation",
+  "swap_used_MB_values": [
+    5006.88
+  ],
+  "Swapouts_values": [
+    17460761
+  ],
+  "saved_release_PASS": true,
+  "GPU_or_probe_executed_by_reviewer": false,
+  "evidence_limit": "No per-step A/B KV raw files are saved. This independently crosschecks all recorded canonical hashes against both immutable golds and native strict-compare byte counters/source; physical bytes and tail checks are source-bound execution evidence, not a fresh raw re-read."
+}

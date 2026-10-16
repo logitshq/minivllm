@@ -1,0 +1,23 @@
+Official MLX v0.32.3 GPU primary-source excerpts, read with the web tool.
+These are rendered source excerpts, not wheel-shipped source or a byte-exact full-file download.
+Hashing THIS file identifies only these saved excerpts. Actual historical norm PSO, launch and result rounding were NOT captured.
+
+https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/kernels/rms_norm.metal
+One-based source lines55-56 and63-65:
+      local_inv_mean[0] = metal::precise::rsqrt(acc / axis_size + eps);
+      out[i] =
+          w[w_stride * i] * static_cast<T>(thread_x[i] * local_inv_mean[0]);
+Looped lines134-136:
+        out[r + i] = w[w_stride * (i + r)] *
+            static_cast<T>(x[r + i] * local_inv_mean[0]);
+
+https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/normalization.cpp
+One-based lines53-56:
+  if (axis_size > looped_limit) {
+    op_name += "_looped";
+  }
+  op_name += type_to_name(out);
+One-based lines62-65 and70-73 select roundup32(ceil(axis_size/4)) for nonlooped, otherwise kernel->maxTotalThreadsPerThreadgroup().
+The wheel's installed defines.h gives RMS_N_READS=4 and RMS_LOOPED_LIMIT=4096.
+Source-derived expected BF16 symbols: rmsbfloat16 (D128/TG32, D256/TG64), rms_loopedbfloat16 (D5120/PSO maximum UNKNOWN).
+Actual selected PSO name/geometry/compile flags/FMA contraction/output bits: NOT_OBSERVED in historical official run.

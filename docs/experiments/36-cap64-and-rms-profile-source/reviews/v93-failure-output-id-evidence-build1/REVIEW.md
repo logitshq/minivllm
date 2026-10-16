@@ -1,0 +1,16 @@
+# V93 failure and saved output-ID evidence
+- V93 remains **FAIL_STOP** at `fullqual.py:394`, ordinary warm32 `warm_ids == workload.continuation_ids`; exact failed receipt SHA `0cb2058c…cc575`.
+- Actual preparation passed161 independently raw/cached BF16 gamma byte/finite/disjoint-owner checks and1349 original parameter identities. No request-level A/B prefill pair ran.
+- Native report records0 captures/dispatches/pins/replays, no arena/ICB. No native numerical mismatch was observed; no12276-check or gamma-final-readonly claim is earned.
+- Warm32 IDs/logits were not saved before the assertion. The first differing token, full new stream, and equality to either donor stream are **UNKNOWN**.
+- Historical final-native15 official attempt2 C1 has18 native requests: all native raw32IDs equal workload, with visible roundtrip confirming them.
+- Its18 oMLX and18 Lithos requests each preserve one stable visible32-ID stream, identical to each other, different from workload at index4 (the5th token): donor100606 vs native60277.
+- Native text begins `KV Cache 是 Transformer 模型…`; donor text begins `KV Cache 是大型语言模型…`. This is a real saved text difference, beyond tokenization ambiguity.
+- oMLX/Lithos `output_ids_when_available` is null in every audited group. Their32IDs are tokenizer re-encodings of visible text, **not saved internal raw generation IDs**.
+- Client source explicitly pins workload only for native C1 (`client.py:19–22,132–135`). Official arms require19 prompt/32 completion usage, visible32, normal length and uncached behavior (`:97–107`), without cross-engine token equality.
+- Native/oMLX completions use the roundtripped19-ID prompt (`:44–46,77`); Lithos uses a chat user message (`:78`) and reported19-token usage. Internal Lithos rendered prompt IDs are not exported by these files.
+- Later preserved V45 raw groups reproduce the same split: native6/workload, oMLX12/donor, Lithos11/donor. V58: native6/workload, oMLX6/donor, Lithos5/donor. STOP/partial groups are retained only as ID evidence; no performance pooling or status repair.
+- V92 is deliberately a **mixed leaf profile**: vendor plain RMSNorm, with current44 GatedRMSNorm/GDN/conv/qk/gates/state math retained. V87 source evidence documents remaining donor differences; the profile does not implement whole oMLX semantics.
+- Therefore old workload IDs are a native regression contract, not an established donor-equivalence target. V93 failed its predeclared contract; nothing here relaxes that gate or relabels old failures.
+- Whether V93's new stream matches donor, and which remaining math difference determines a token, cannot be inferred from this unsaved warm trace. No new GPU, diagnostic harness, shader, or V96 execution was performed.
+- Owner99854/child99869 rc1 were reaped; saved external proof asserts both strictly absent and GPU released. Originals remain unchanged.

@@ -1,0 +1,58 @@
+{
+  "command": [
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/official_entry.py",
+    "--engine",
+    "omlx",
+    "--receipt",
+    "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/C1-block1-omlx/official-preimport.json",
+    "--",
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/bin/omlx",
+    "serve",
+    "--model-dir",
+    "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/C1-block1-omlx/models",
+    "--base-path",
+    "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/C1-block1-omlx/state",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "55502",
+    "--api-key",
+    "<api-key>",
+    "--headless",
+    "--no-hf-cache",
+    "--no-cache",
+    "--max-concurrent-requests",
+    "1",
+    "--sse-keepalive-mode",
+    "off"
+  ],
+  "environment": {
+    "knobs": {
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_METAL_FAST_SYNCH": "0"
+    },
+    "other_mlx_key_value_sha256": {},
+    "gpu_arch_is_unset": true,
+    "scope": "Only the four validated variables accepted; any other MLX override stops before launch. No secret environment values recorded."
+  },
+  "engine": "omlx",
+  "config": "omlx",
+  "selected_environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0",
+    "MLX_MAX_MB_PER_BUFFER": "50"
+  },
+  "gates_compile_enabled": false,
+  "only_treatment": "seven fixed points; native15 gates ON; original batch eligibility",
+  "timed_instrumentation": false,
+  "instrumentation_scope": "official source unchanged; no added measurement or warm hooks"
+}

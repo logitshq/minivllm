@@ -73,3 +73,5 @@ docs/              计划、教程、远程版的契约和 notes
 [34：BA小投影与门控融合](docs/experiments/34-native-ba-gates-prework.md)记录720项局部检查、12,276项整模检查，以及28.693tok/s的B-only筛查；减少192条dispatch仍没有证明提速，候选默认关闭。
 
 [35：局部优化的采用门槛](docs/experiments/35-local-probe-stops.md)保留 half2、unroll2 与 scaled-ready GDN 的数值检查和负结果；三个 micro 均未过预设提速门槛。
+
+[36：CAP64与RMS舍入版本](docs/experiments/36-cap64-and-rms-profile.md)验证真实CAP64缓存，并保留RMS舍入差异、旧序列检查失败与新参考诊断；原生RMS版本的速度未显示提升。

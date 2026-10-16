@@ -1,0 +1,52 @@
+--- candidate44/tutorial_code/miniengine/model/layers.py
++++ candidate92/tutorial_code/miniengine/model/layers.py
+@@ -27,8 +27,49 @@
+         self.weight = mx.zeros((dim,)) if zero_centered else mx.ones((dim,))
+         self.eps = eps
+         self.zero_centered = zero_centered
++        object.__setattr__(self, "_vendor_rms_leaf_enabled", False)
++        object.__setattr__(self, "_vendor_rms_leaf_gamma", None)
++        object.__setattr__(self, "_vendor_rms_leaf_weight", None)
++        object.__setattr__(self, "_vendor_rms_leaf_signature", None)
++
++    def set_vendor_rms_leaf(self, enabled=True):
++        if type(enabled) is not bool:
++            raise TypeError("vendor RMS leaf switch requires strict bool")
++        object.__setattr__(self, "_vendor_rms_leaf_enabled", enabled)
++
++    def prepare_vendor_rms_leaf(self, *, runtime_version, device_name, architecture):
++        if ((runtime_version, device_name, architecture) !=
++                ("0.32.3", "Apple M4 Max", "applegpu_g16s") or mx.default_device() != mx.gpu):
++            raise ValueError("vendor RMS leaf runtime/device is not declared")
++        if (self.zero_centered is not True or self.weight.dtype != mx.bfloat16
++                or self.weight.ndim != 1 or self.weight.shape[0] not in (256, 5120)):
++            raise ValueError("vendor RMS leaf prepares current zero-centered BF16 norms only")
++        gamma = (self.weight.astype(mx.float32) + 1.0).astype(mx.bfloat16)
++        mx.eval(gamma)
++        object.__setattr__(self, "_vendor_rms_leaf_gamma", gamma)
++        object.__setattr__(self, "_vendor_rms_leaf_weight", self.weight)
++        object.__setattr__(self, "_vendor_rms_leaf_signature",
++                           (self.weight.shape, self.weight.dtype, self.eps, self.zero_centered))
++        return gamma
++
++    def _vendor_rms_leaf_current(self):
++        weight = object.__getattribute__(self, "_vendor_rms_leaf_weight")
++        signature = object.__getattribute__(self, "_vendor_rms_leaf_signature")
++        current = (weight is self.weight and signature is not None
++                   and signature == (self.weight.shape, self.weight.dtype, self.eps, self.zero_centered))
++        if not current:
++            object.__setattr__(self, "_vendor_rms_leaf_gamma", None)
++            object.__setattr__(self, "_vendor_rms_leaf_weight", None)
++            object.__setattr__(self, "_vendor_rms_leaf_signature", None)
++        return current
+ 
+     def __call__(self, x: mx.array) -> mx.array:
++        if (object.__getattribute__(self, "_vendor_rms_leaf_enabled")
++                and self._vendor_rms_leaf_current()
++                and x.dtype == mx.bfloat16 and x.ndim >= 1
++                and self.weight.shape == (x.shape[-1],)):
++            return mx.fast.rms_norm(
++                x, object.__getattribute__(self, "_vendor_rms_leaf_gamma"), self.eps)
+         if (x.dtype == mx.bfloat16 and x.ndim >= 2
+                 and self.weight.shape == (x.shape[-1],)
+                 and self.weight.dtype in (mx.bfloat16, mx.float16, mx.float32)):

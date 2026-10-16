@@ -1,0 +1,11 @@
+--- frozen40build2/replay.mm
++++ v89/replay.mm
+@@ -150,7 +150,7 @@
+ }
+ extern "C" int v34_seal_feedback(uint32_t states,uint32_t capacity){@autoreleasepool{
+  std::lock_guard<std::recursive_mutex>lock(S().lock);
+- if(!S().built||!S().error.empty()||F().sealed||!states||states>128||capacity!=256||F().inputs.size()!=states+3||S().outputs.size()!=states+4||F().links.size()!=states+3){fail("feedback seal requires declared state count, fixed capacity256 and complete input/output/link counts");return 1;}
++ if(!S().built||!S().error.empty()||F().sealed||!states||states>128||(capacity!=64&&capacity!=256)||F().inputs.size()!=states+3||S().outputs.size()!=states+4||F().links.size()!=states+3){fail("feedback seal requires declared state count, fixed capacity64-or256 and complete input/output/link counts");return 1;}
+  unsigned counts[4]={};for(auto&x:F().inputs)++counts[x.role];
+  if(counts[0]!=states||counts[1]!=1||counts[2]!=1||counts[3]!=1){fail("feedback input roles incomplete");return 1;}
+  for(size_t i=0;i<F().inputs.size();++i)for(size_t j=i+1;j<F().inputs.size();++j){auto&a=F().inputs[i];auto&b=F().inputs[j];if(overlap(arenaInput(a),a.size,arenaInput(b),b.size)){fail("feedback input ranges overlap");return 1;}}
