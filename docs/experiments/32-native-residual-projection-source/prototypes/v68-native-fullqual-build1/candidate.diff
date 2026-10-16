@@ -1,0 +1,103 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/gdn.py
++++ /private/tmp/minivllm-engine-optimization-20261014/candidate-v68-four-projection-build1-root/tutorial_code/miniengine/model/gdn.py
+@@ -45,6 +45,9 @@
+         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
+         self.set_gates_compile(False)
+         self.set_conv_norm_reuse_cache(False)
++        self.set_four_projection(False)
++        object.__setattr__(self, "_four_projection_helper", None)
++        object.__setattr__(self, "_four_projection_x_strides", None)
+ 
+     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+         if ctx is not None and ctx.mode == "prefill_batch":
+@@ -196,6 +199,8 @@
+         if eligible:
+             from ..kernels.gdn_conv_silu_metal import backend_supported
+             if backend_supported():
++                if self._four_projection_eligible(x):
++                    return self._decode_conv_norm_reuse_four_projection(x, st, _compile_gates=_compile_gates)
+                 return self._decode_conv_norm_reuse_cache(x, st, _compile_gates=_compile_gates)
+         return self._decode(x, st, _compile_gates=_compile_gates)
+ 
+@@ -217,3 +222,81 @@
+         o = self.norm(o.astype(x.dtype), z)
+         return self.out_proj(o.reshape(B, -1))
+ 
++
++    def set_four_projection(self, enabled=True):
++        """Default-OFF, restricted to the qualified original input-layernorm decode path."""
++        if type(enabled) is not bool:
++            raise TypeError("enabled must be bool")
++        object.__setattr__(self, "_four_projection_enabled", enabled)
++
++    def _four_projection_ops(self):
++        return (self.in_proj_qkv, self.in_proj_z, self.in_proj_b, self.in_proj_a)
++
++    def prepare_four_projection(self, *, observed_weight_scale_strides, observed_x_strides,
++                                runtime_version, device_name, architecture, input_layout_contract):
++        """Caller independently probes live operands and one actual norm output first.
++
++        This is preparation, outside capture/replay/timing. Subsequent engine X
++        comes from the unchanged original input-layernorm row-major output kernel;
++        arbitrary caller-supplied arrays are outside this explicitly qualified API.
++        """
++        if (input_layout_contract != "qualified-original-input-layernorm-B1"
++                or len(observed_x_strides) != 2 or observed_x_strides[1] != 1):
++            raise ValueError("observed B1 unit-K-stride input-layernorm output required")
++        ops = self._four_projection_ops()
++        expected = {"group_size":16, "bits":4, "mode":"nvfp4"}
++        if any(type(op) is not Linear or type(op.q) is not dict or op.q != expected
++               or op.in_features != 5120 or op.out_features != n
++               or hasattr(op, "bias") or hasattr(op, "biases")
++               for op,n in zip(ops, (10240,6144,48,48))):
++            raise ValueError("original four NVFP4 Linear operators required")
++        from ..kernels.v66_four_projection.four_projection import prepare
++        operands = tuple(v for op in ops for v in (op.weight, op.scales))
++        helper = prepare(mx, operands, observed_strides=observed_weight_scale_strides,
++                         runtime_version=runtime_version, device_name=device_name,
++                         architecture=architecture)
++        object.__setattr__(self, "_four_projection_helper", helper)
++        object.__setattr__(self, "_four_projection_x_strides", tuple(observed_x_strides))
++
++    def _four_projection_eligible(self, x):
++        if not object.__getattribute__(self, "_four_projection_enabled"):
++            return False
++        helper = object.__getattribute__(self, "_four_projection_helper")
++        if helper is None or x.shape != (1,5120) or x.dtype != mx.bfloat16:
++            return False
++        ops = self._four_projection_ops()
++        expected = {"group_size":16, "bits":4, "mode":"nvfp4"}
++        valid = True
++        for j,(op,n) in enumerate(zip(ops,(10240,6144,48,48))):
++            if (type(op) is not Linear or type(op.q) is not dict or op.q != expected
++                    or op.in_features != 5120 or op.out_features != n
++                    or hasattr(op,"bias") or hasattr(op,"biases")
++                    or op.weight is not helper.operands[2*j]
++                    or op.scales is not helper.operands[2*j+1]
++                    or op.weight.shape != (n,640) or op.weight.dtype != mx.uint32
++                    or op.scales.shape != (n,320) or op.scales.dtype != mx.uint8):
++                valid = False
++                break
++        if not valid:
++            # Drop stale owners after replacement/reload; fallback uses current arrays.
++            object.__setattr__(self, "_four_projection_helper", None)
++            object.__setattr__(self, "_four_projection_x_strides", None)
++        return valid
++
++    def _decode_conv_norm_reuse_four_projection(self, x, st, *, _compile_gates=False):
++        B = x.shape[0]
++        helper = object.__getattribute__(self, "_four_projection_helper")
++        qkv,z,b,a = helper.project(x, x_strides=object.__getattribute__(self, "_four_projection_x_strides"))
++        z = z.reshape(B,self.Hv,self.Dv)
++        w = self.conv1d_weight.astype(qkv.dtype)
++        from ..kernels.gdn_conv_silu_metal import conv_silu_raw_tail
++        activated,new_tail = conv_silu_raw_tail(qkv,st.conv,w)
++        if _compile_gates and object.__getattribute__(self,"_gates_compile_enabled"):
++            beta,g = self._decode_gates(b,a,x,st)
++        else:
++            beta,g = self._gates(b,a)
++        from ..kernels.gdn_activated_norm_reuse_cached_metal import gated_delta_step_activated_norm_reuse_metal
++        o,S = gated_delta_step_activated_norm_reuse_metal(activated,g,beta,st.S)
++        st.conv,st.S = new_tail,S
++        o = self.norm(o.astype(x.dtype),z)
++        return self.out_proj(o.reshape(B,-1))

@@ -1,0 +1,275 @@
+{
+  "article_sha256": "7194db8de7a529cf9dd8111f93b71a88b2b9aa15cf1b98b56dfc32fa4483e92a",
+  "facts": {
+    "V65": {
+      "A_carry_OFF": true,
+      "capture_residual_calls": 128,
+      "hashes_independently_checked_vs_gold38": 12276,
+      "hashes_independently_checked_vs_gold44": 12276,
+      "live_norm_metadata_before_any_token": 129,
+      "model_loads": 1,
+      "parameter_identities_preserved": 1349,
+      "scope": "saved numerical/hash metadata, no fresh GPU recomputation",
+      "strict_output_records": 12276
+    },
+    "V68": {
+      "actual_layout_descriptors": 432,
+      "declared_source_pointer_ABI": 13,
+      "extra_packed_weight_bytes": 0,
+      "hashes_independently_checked_vs_gold38": 12276,
+      "hashes_independently_checked_vs_gold44": 12276,
+      "individual_argument_reflection": "NOT_OBSERVED",
+      "model_loads": 1,
+      "original_target_ranges": 384,
+      "parameter_identities_preserved": 1349,
+      "scope": "saved numerical/hash metadata, no fresh GPU recomputation",
+      "strict_output_records": 12276,
+      "target_payload_bytes": 2278195200
+    },
+    "V69": {
+      "comparison_pairs": 6,
+      "control_passed": true,
+      "medians_ns_recomputed": {
+        "A": 239515.5258178711,
+        "B": 237009.20611572266
+      },
+      "micro_qualification_checks": 36,
+      "minimum_reduction": 0.05,
+      "minimum_wins": 5,
+      "prime_intervals": 20,
+      "ratio_of_arm_medians_reduction": 0.010464122079727911,
+      "same_arm_controls": {
+        "A": [
+          0.9959856644701717,
+          1.0055729343849553
+        ],
+        "B": [
+          1.003990478554811,
+          0.9851263153329641
+        ]
+      },
+      "status": "STOP-MICRO-GATE_NO_ADOPT",
+      "strict_numeric_rows_rechecked": 36,
+      "timed_intervals_recomputed": 20,
+      "wins": 6
+    },
+    "V70": {
+      "diagnostic": {
+        "completed_submitted": 162,
+        "delivered_IDs": 161,
+        "discarded": 1,
+        "perstep_full_state_scope": true,
+        "quiescent_terminal_requests": 0,
+        "resets": 6,
+        "saved_hashes_rechecked_vs_gold44": 12540
+      },
+      "production": {
+        "completed_submitted": 162,
+        "delivered_IDs": 161,
+        "discarded": 1,
+        "perstep_full_state_scope": false,
+        "quiescent_terminal_requests": 5,
+        "resets": 6,
+        "saved_hashes_rechecked_vs_gold44": 660
+      }
+    },
+    "V71_V73_distinct_clocks": {
+      "71": {
+        "clock": "engine t1 after first prefill token, includes reset/131seed setup",
+        "comparable_to_other_screen_by_subtraction": false,
+        "native_delivered_steps": 186,
+        "paired_HTTP_Pareto_or_adoption_claim": false,
+        "request_ID_sequences": 6,
+        "resource_boundary_hash_refs_rechecked": 12,
+        "saved_final_hashes_vs_gold44": 792,
+        "summary_recomputed": {
+          "median_decode31_tokens_per_s": 28.82671659201049,
+          "median_post_first_token_decode_ns_per_step_including_seed": 34690041.67741936,
+          "median_whole32_tokens_per_s": 25.92958138767647,
+          "n": 3,
+          "scope": "B-only engine absolute; includes native seed setup; no HTTP/paired performance win"
+        }
+      },
+      "73": {
+        "clock": "raw native t1 after seed uploads",
+        "comparable_to_other_screen_by_subtraction": false,
+        "native_delivered_steps": 186,
+        "paired_HTTP_Pareto_or_adoption_claim": false,
+        "request_ID_sequences": 6,
+        "resource_boundary_hash_refs_rechecked": 12,
+        "saved_final_hashes_vs_gold44": 792,
+        "summary_recomputed": {
+          "median_decode31_tokens_per_s": 28.697577780577138,
+          "median_decode_ns_per_step": 34846146.51612903,
+          "median_whole32_tokens_per_s": 25.360245094976328,
+          "n": 3,
+          "scope": "B-only exploratory absolute timing; not HTTP/Pareto or an A/B performance win"
+        }
+      }
+    },
+    "all_saved_releases": [
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "fullmodel-v65native-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "fullmodel-v68native-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "numeric-v69-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 2,
+        "run": "kernel-micro-v69-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "fullmodel-v70diag-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "fullmodel-v70prod-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "native-decode-v71-attempt1",
+        "waited_reaped": true
+      },
+      {
+        "external_strict_absent_GPU_released_saved_evidence": true,
+        "returncode": 0,
+        "run": "native-decode-v73-attempt1",
+        "waited_reaped": true
+      }
+    ],
+    "archive": {
+      "all_source_and_raw_text_bytes_exact": true,
+      "deterministic_gzip_reconstructed_equal": true,
+      "explicit_pins_rehashed": 305,
+      "external_binary_or_tensor_identities": 13,
+      "prototype_binary_identities_only": 0,
+      "resolved_text_dependencies": 292,
+      "source_rows": 147,
+      "tar_text_members": 334,
+      "text_bytes": 79668122
+    },
+    "captured_graph_counts": {
+      "V65": {
+        "barriers": 918,
+        "dispatches": 1497,
+        "recreated_PSOs": 30
+      },
+      "V68": {
+        "barriers": 1046,
+        "dispatches": 1481,
+        "recreated_PSOs": 31
+      },
+      "historical44": {
+        "barriers": 1046,
+        "dispatches": 1625,
+        "recreated_PSOs": 30
+      }
+    },
+    "historical_preparation": {
+      "historical_pending_current_binding_differences": 3,
+      "policy": "not runtime binding pins; original pending bytes kept exact",
+      "preserved_manifest_files": 2
+    }
+  },
+  "gzip_sha256": "8d29152aeac1e5fc5b12f44e80f04d9908f2e0d2ef5563850d0467341d17575e",
+  "scope": "Exact saved text bytes, binding identities, historical pending separation, old-gold hash metadata, integer timestamp/control arithmetic and saved lifecycle proof only. No archived module/MLX/native/model/GPU executed; no new timing/adoption verdict.",
+  "status": "PASS_CPU_EXACT_ARCHIVE_AND_SAVED_RESULT_REVIEW",
+  "validated_links": [
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/README.md"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/provenance.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/prototypes/v65-residual-carry-source-build1/qwen.diff"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/prototypes/v70-residual-direct-async-fullqual-build1/fullqual.py"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/prototypes/v68-native-fullqual-build1/candidate.diff"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/prototypes/v69-nvfp4-r8-reuse-build1/geometry.py"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/historical-preparation-manifests.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/verification.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/manifest.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection.md",
+      "target": "32-native-residual-projection-source/source-map.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "../32-native-residual-projection.md"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "provenance.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "source-map.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "dependency-map.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "evidence-index.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "evidence.tar.gz"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "historical-preparation-manifests.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "verification.json"
+    },
+    {
+      "source": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/32-native-residual-projection-source/README.md",
+      "target": "manifest.json"
+    }
+  ]
+}

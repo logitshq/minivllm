@@ -1,0 +1,31 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/qwen3_5.py
++++ /private/tmp/minivllm-engine-optimization-20261014/candidate-v65-residual-carry-build1-root/tutorial_code/miniengine/model/qwen3_5.py
+@@ -49,16 +49,28 @@
+     def __init__(self, cfg: ModelConfig):
+         super().__init__()
+         self.cfg = cfg
++        self.set_residual_carry(False)
+         self.embed_tokens = Embedding(cfg.vocab_size, cfg.hidden_size, cfg.quantization)
+         self.layers = [DecoderLayer(cfg, t) for t in cfg.layer_types]
+         self.norm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
+         if not cfg.tie_word_embeddings:
+             self.lm_head = Linear(cfg.hidden_size, cfg.vocab_size, cfg.quantization)
+ 
++    def set_residual_carry(self, enabled=True):
++        """Experimental normal-B1 decode only; private bool adds no parameters."""
++        if type(enabled) is not bool:
++            raise TypeError("enabled must be bool")
++        object.__setattr__(self, "_residual_carry_enabled", enabled)
++
+     def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = ()):
+         """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 为后续 cache/batch 接口（本章仅整句无 cache）。
+         last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。
+         capture=(5, 19, ...) 时额外返回这些层的输出拼起来的特征 [T, len(capture)·hidden]（DFlash2 drafter 的上下文）。"""
++        if object.__getattribute__(self, "_residual_carry_enabled"):
++            from .residual_carry import try_residual_carry
++            carried = try_residual_carry(self, input_ids, ctx, last_only, capture)
++            if carried is not None:
++                return carried
+         grouped = ctx is not None and ctx.mode == "prefill_batch"
+         if grouped:
+             if capture:

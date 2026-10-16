@@ -64,4 +64,6 @@ docs/              计划、教程、远程版的契约和 notes
 
 [31：直接反馈、采样扰动与局部投影实验](docs/experiments/31-native-direct-profiling.md)区分逐步诊断与生产末尾状态证据，保存 GDN 局部负结果和 GPU 采样边界；28.826tok/s 为 B-only 引擎筛查，尚无新的 HTTP/Pareto 获胜结论。
 
+[32：残差 carry 与四投影](docs/experiments/32-native-residual-projection.md)记录严格数值通过后的 B-only 筛查，以及 R8 的 6/6 胜却未过 5% 门槛；这些路径仍未采用，没有新的 Pareto 胜出。
+
 归档中引用的上游源码许可见 [Third-party source notices](THIRD_PARTY_NOTICES.md)。
