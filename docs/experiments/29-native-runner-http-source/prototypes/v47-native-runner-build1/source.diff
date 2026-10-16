@@ -1,0 +1,91 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v46-native-runner-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v47-native-runner-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only conv plus normreuse-cache C1 lifecycle qualification with unchanged qualified V41 adapter."""
++"""Root-only dependency-ICB conv plus normreuse-cache C1 lifecycle qualification with unchanged qualified V41 adapter."""
+ import argparse
+ import ctypes
+ import hashlib
+@@ -13,10 +13,12 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-LIB_SHA = "8ef20b52e80cd0798e80abf2037c98211f13437dbf5ea4ddb47dce1b00ff471b"
++LIB = P / "v42-native-dependency-icb-build1/libv42replay.dylib"
++LIB_SHA = "d19c89fa78953aef9a36f37006894aea70259cce9dc1d85d4112d8e3c67d8280"
+ QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+ QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
++NATIVE_QUAL = P / "v23-root-control-build1/fullmodel-v42native-attempt1/child-output/receipt.json"
++NATIVE_QUAL_SHA = None  # Draft: root must confirm final actual42 PASS receipt before freeze.
+ 
+ 
+ def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+@@ -29,6 +31,26 @@
+     spec = importlib.util.spec_from_file_location(name, p)
+     value = importlib.util.module_from_spec(spec); sys.modules[name] = value
+     spec.loader.exec_module(value); return value
++
++
++def assert_dependency(icb):
++    dep=icb["dependency_barriers"]
++    assert dep["enabled"] is True
++    proof=dep["proof"]
++    assert proof["both_banks_all_conflict_edges_covered"] is True and proof["bank_plans_equal"] is True
++    assert proof["unknown_scope_access_alias_policy"]=="STOP"
++    assert proof["validated_disjoint_original_allocations"]>0 and proof["active_MTLBuffer_binding_occurrences"]>0
++    assert dep["original_boundary_entries"]==dep["forced_boundary_entries"]+dep["candidate_Buffers_scope_entries"]
++    assert dep["original_boundary_entries"]==sum(dep["origin_counts"].values())
++    assert dep["candidate_Buffers_scope_entries"]==sum(dep[k] for k in (
++        "candidate_retained_at_original_next_dispatch","candidate_deferred_to_later_dispatch",
++        "candidate_covered_by_unchanged_graphDone_completion"))
++    rows=dep["dispatch_accesses_bank0"]
++    assert len(rows)==icb["commands_per_bank"] and rows[0]["barrier_before"] is True
++    assert all(not r["forced_boundary_before"] or r["barrier_before"] for r in rows)
++    assert sum(r["barrier_before"] for r in rows)==icb["barrier_commands_per_bank"]==dep["planned_barrier_locations"]
++    assert sum(r["original_barrier_before"] for r in rows)==dep["original_collapsed_barrier_locations"]
++    assert dep["net_reduction_barrier_locations"]==dep["original_collapsed_barrier_locations"]-dep["planned_barrier_locations"]
+ 
+ 
+ def main():
+@@ -43,6 +65,14 @@
+     actual_source = {str(f.relative_to(source_package)): sha(f) for f in source_package.rglob("*.py")}
+     assert actual_source == expected_source and len(actual_source) == 27
+     assert sha(QUAL) == QUAL_SHA and sha(LIB) == LIB_SHA
++    assert NATIVE_QUAL_SHA is not None, "V42 final actual PASS receipt not bound; execution forbidden"
++    assert sha(NATIVE_QUAL) == NATIVE_QUAL_SHA
++    native_qualified = json.loads(NATIVE_QUAL.read_text())
++    assert native_qualified["status"] == "PASS_NATIVE_DEPENDENCY_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    assert native_qualified["native_library"] == str(LIB)
++    assert native_qualified["source_pins"][str(LIB)] == LIB_SHA
++    assert native_qualified["native_steps"] == 93 and len(native_qualified["requests"]) == 3
++    assert_dependency(native_qualified["requests"][-1]["native"]["feedback"]["icb"])
+     qualified = json.loads(QUAL.read_text())
+     assert qualified["status"] == "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     expected = qualified["requests"]
+@@ -56,7 +86,8 @@
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir()
+     r = {"status": "STARTED", "stage": "beforeload", "pid": os.getpid(), "model_loads": 0,
+-         "source_pins": pins, "prior_qualification_sha256": QUAL_SHA, "requests": [],
++         "source_pins": pins, "prior_qualification_sha256": QUAL_SHA,
++         "native_prior_qualification_sha256": NATIVE_QUAL_SHA, "requests": [],
+          "performance_point": False, "adopted": False, "scheduler_max_seqs": 1}
+     save = lambda: write(args.out / "receipt.json", r)
+     save(); loaded = False; mx = None; resources = None
+@@ -156,6 +187,7 @@
+         assert native["status"] == "OK" and f["resets"] == 3 and f["total_steps"] == 93
+         assert f["icb"]["execution_count"] == 93 and f["icb"]["bank_executions"] == [48, 45]
+         assert f["pingpong"]["eligible_count"] == 48
++        assert_dependency(f["icb"])
+         r["core_native_after_three_queued_requests"] = native
+         # Exercise whole-request fallback and a prefill-only completion, then
+         # prove another native request resets correctly after both paths.
+@@ -183,6 +215,7 @@
+         native = adapter.report(); f = native["feedback"]
+         assert native["status"] == "OK" and f["resets"] == 4 and f["total_steps"] == 124
+         assert f["icb"]["execution_count"] == 124 and f["icb"]["bank_executions"] == [64, 60]
++        assert_dependency(f["icb"])
+         r.update(status="PASS_NATIVE_RUNNER_C1_QUEUED_RESET_FALLBACK_STRICT", stage="complete",
+                  strict_output_checks=checks+132, core_all132_steps=93, first_prefill_tokens=first_tokens,
+                  native_steps=124, request_count=4, ordinary_warm_tokens=32,

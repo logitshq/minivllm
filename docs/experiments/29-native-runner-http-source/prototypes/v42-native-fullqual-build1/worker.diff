@@ -1,0 +1,116 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v40-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v42-native-fullqual-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only RAWu normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only dependency-barrier normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -19,7 +19,9 @@
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
++LIB = P / "v42-native-dependency-icb-build1/libv42replay.dylib"
++TINY_RECEIPT = P / "v23-root-control-build1/fullmodel-v42smoke-attempt1/child-output/receipt.json"
++TINY_RECEIPT_SHA = "fbd928cbf9cf837c368596c35a7af828facece145b59682dda540323422f7c84"  # Actual tiny PASS, root executed and reaped.
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -40,7 +42,7 @@
+     return value
+ 
+ 
+-def source_check(library):
++def source_check(library, *, allow_pending_tiny=False):
+     pins = json.loads((D / "source-pins.json").read_text())
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+     assert str(library) in pins, "unbound native library"
+@@ -50,8 +52,13 @@
+     package = ROOT / "tutorial_code/miniengine"
+     actual = {str(f.relative_to(package)): sha(f) for f in package.rglob("*.py")}
+     assert actual == expected and len(actual) == 26
+-    tiny=json.loads((P/"v23-root-control-build1/fullmodel-v40smoke-attempt2/child-output/receipt.json").read_text())
+-    assert tiny["status"]=="PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
++    if TINY_RECEIPT_SHA is None:
++        assert allow_pending_tiny, "V42 actual tiny receipt not bound; full model execution forbidden"
++    else:
++        assert sha(TINY_RECEIPT)==TINY_RECEIPT_SHA and str(TINY_RECEIPT) in pins
++        tiny=json.loads(TINY_RECEIPT.read_text())
++        assert tiny["status"]=="PASS_TINY_V42_DEPENDENCY_ICB_NORMREUSE_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
++        assert_dependency(tiny["native"]["feedback"]["icb"])
+     return pins
+ 
+ 
+@@ -114,6 +121,27 @@
+             "bytes": sum(h.nbytes for h in holders), "method": "C memcmp of pinned original and once-only raw snapshot"}
+ 
+ 
++def assert_dependency(icb):
++    dep=icb["dependency_barriers"]
++    assert dep["enabled"] is True
++    proof=dep["proof"]
++    assert proof["both_banks_all_conflict_edges_covered"] is True and proof["bank_plans_equal"] is True
++    assert proof["unknown_scope_access_alias_policy"]=="STOP"
++    assert proof["validated_disjoint_original_allocations"]>0 and proof["active_MTLBuffer_binding_occurrences"]>0
++    assert dep["original_boundary_entries"]==dep["forced_boundary_entries"]+dep["candidate_Buffers_scope_entries"]
++    assert dep["original_boundary_entries"]==sum(dep["origin_counts"].values())
++    assert dep["candidate_Buffers_scope_entries"]==sum(dep[k] for k in (
++        "candidate_retained_at_original_next_dispatch","candidate_deferred_to_later_dispatch",
++        "candidate_covered_by_unchanged_graphDone_completion"))
++    rows=dep["dispatch_accesses_bank0"]
++    assert len(rows)==icb["commands_per_bank"] and rows[0]["barrier_before"] is True
++    assert all(not r["forced_boundary_before"] or r["barrier_before"] for r in rows)
++    assert sum(r["barrier_before"] for r in rows)==icb["barrier_commands_per_bank"]==dep["planned_barrier_locations"]
++    assert sum(r["original_barrier_before"] for r in rows)==dep["original_collapsed_barrier_locations"]
++    assert dep["net_reduction_barrier_locations"]==dep["original_collapsed_barrier_locations"]-dep["planned_barrier_locations"]
++    # A zero or negative reduction is valid numerical evidence; no benefit gate here.
++
++
+ def assert_icb(report, request_lengths):
+     fb=report["feedback"];icb=fb["icb"]
+     total=sum(request_lengths)
+@@ -124,6 +152,7 @@
+     assert icb["commands_per_bank"]>=report["dispatches"]>0
+     assert icb["constant_bank_bytes"]>0
+     assert icb["unique_original_PSOs"]>0 and len(icb["PSO_records"])==icb["unique_original_PSOs"]
++    assert_dependency(icb)
+     resources=icb["resources"]
+     assert resources["read_only_count"]>0 and resources["mutable_arena_count"]==1
+     assert resources["icb_read_declarations"]>0
+@@ -133,7 +162,7 @@
+     ap = argparse.ArgumentParser(description=__doc__)
+     ap.add_argument("--out", type=Path); ap.add_argument("--tokens", type=int, default=32)
+     ap.add_argument("--native-library", type=Path, default=LIB); ap.add_argument("--inert", action="store_true")
+-    args = ap.parse_args(argv); library = args.native_library.resolve(); pins = source_check(library)
++    args = ap.parse_args(argv); library = args.native_library.resolve(); pins = source_check(library, allow_pending_tiny=args.inert)
+     w = json.loads((P / "workload.json").read_text())
+     assert args.tokens == 32 and len(w["prompt_ids"]) == 19 and len(w["continuation_ids"]) == 32
+     base_prompt = w["prompt_ids"]
+@@ -149,7 +178,7 @@
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+-                          "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
++                          "GPU_used": False, "actual_tiny_receipt_bound": TINY_RECEIPT_SHA is not None, "requests": [[n, len(p)] for n, p, _ in cases],
+                           "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+@@ -159,6 +188,8 @@
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+                "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
++               "actual_tiny_receipt":str(TINY_RECEIPT),"actual_tiny_receipt_sha256":TINY_RECEIPT_SHA,
++               "dependency_barrier_scope":"only exact original Buffers scope movable; every forced boundary and all RAW/WAR/WAW conflict edges covered; no reduction assumed",
+                "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+@@ -426,7 +457,7 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_NATIVE_DEPENDENCY_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

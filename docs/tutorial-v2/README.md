@@ -124,3 +124,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [27：少搬 state，再把真实 Metal 命令留在 ICB 里](../experiments/27-native-icb-pingpong.md)保存48层S轮换、独立buffer克隆负结果、实际双bank Metal ICB及全数值/B-only计时证据；36.188ms/步、27.633tok/s未作服务或Pareto获胜声明。
 
 [28：把卷积、归一化复用和state保留接到真实ICB](../experiments/28-native-gdn-composition.md)保存V39/V40/V44的严格完整资格、V40绑定失败/修复与B-only计时；候选默认关闭，无HTTP/Pareto采用结论。
+
+[29：把原生 decode 接进调度器，再测真实请求](../experiments/29-native-runner-http.md)说明原生状态的生命周期与普通 runner 回退，保留 V42 负结果和 V45 未完成测试及全部原始证据。

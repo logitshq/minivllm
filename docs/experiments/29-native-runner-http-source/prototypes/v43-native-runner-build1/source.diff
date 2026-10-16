@@ -1,0 +1,56 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v41-native-runner-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v43-native-runner-build1/fullqual.py
+@@ -1,3 +1,3 @@
+-"""Root-only C1 runner lifecycle qualification against frozen actual A hashes."""
++"""Root-only normreuse-cache C1 lifecycle qualification with unchanged qualified V41 adapter."""
+ import argparse
+ import ctypes
+@@ -13,9 +13,9 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v39-conv-build1-root"
+-LIB = P / "v38-native-icb-build1/libv38replay.dylib"
+-LIB_SHA = "9274227bdfdc968e6849500ea3f84060b08448250367de5068815113c1c9387f"
+-QUAL = P / "v23-root-control-build1/fullmodel-v39native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "33870a3a417135c5824f3252f60dbbb82e9f96f726c19038fe34f2c5734caf53"
++ROOT = P / "candidate-v40-normreuse-cache-build1-root"
++LIB = P / "v40-native-icb-build2/libv40replay.dylib"
++LIB_SHA = "8ef20b52e80cd0798e80abf2037c98211f13437dbf5ea4ddb47dce1b00ff471b"
++QUAL = P / "v23-root-control-build1/fullmodel-v40native-attempt1/child-output/receipt.json"
++QUAL_SHA = "32e478d684b653093b5bd93b11e9b7e69094c67746f37220ef60ca6214b27133"
+ 
+ 
+@@ -38,7 +38,12 @@
+     pins = json.loads((D / "source-pins.json").read_text())
+     for path, digest in pins.items(): assert sha(path) == digest, path
++    manifest = json.loads((P / "v40-native-fullqual-build1/candidate-manifest.json").read_text())
++    source_package = ROOT / "tutorial_code/miniengine"
++    expected_source = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in manifest["files"].items()}
++    actual_source = {str(f.relative_to(source_package)): sha(f) for f in source_package.rglob("*.py")}
++    assert actual_source == expected_source and len(actual_source) == 26
+     assert sha(QUAL) == QUAL_SHA and sha(LIB) == LIB_SHA
+     qualified = json.loads(QUAL.read_text())
+-    assert qualified["status"] == "PASS_NATIVE_CONV_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    assert qualified["status"] == "PASS_NATIVE_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     expected = qualified["requests"]
+     assert [c["name"] for c in expected] == ["base", "reset-base", "changed-prefill"]
+@@ -73,6 +78,10 @@
+         gdns = [l.linear_attn for l in e.model.layers if not l.is_attn]
+         assert len(gdns) == 48
+-        for g in gdns: g.set_gates_compile(True); g.set_conv_silu(True)
+-        assert e.runner._functional_decode_helper is None
++        for g in gdns: g.set_gates_compile(True); g.set_norm_reuse_cache(True)
++        assert getattr(e.runner, "_functional_decode_helper", None) is None
++        assert all(g._gates_compile_enabled is True and g._norm_reuse_cache_enabled is True for g in gdns)
++        r.update(source_root=str(ROOT), gates_on=48, normreuse_cache_on=48, conv_off=True,
++                 whole_functional_off=True, adapter_source=str(P / "v41-native-runner-build1/native_runner.py"),
++                 adapter_sha256=sha(P / "v41-native-runner-build1/native_runner.py"))
+         sampling = SamplingParams(max_tokens=32, temperature=0, ignore_eos=False)
+         ordinary = e.generate([w["prompt_ids"]], sampling)
+@@ -80,5 +89,5 @@
+         assert e.runner._ahead is None and e.runner.batch.size == 0 and not e.requests
+         resources.sample("after-ordinary-warm", loaded=True, mx=mx)
+-        runtime = module("v41_adapter", D / "native_runner.py")
++        runtime = module("v41_adapter", P / "v41-native-runner-build1/native_runner.py")
+         adapter = runtime.install(e, LIB, LIB_SHA)
+         captured_originals = {}

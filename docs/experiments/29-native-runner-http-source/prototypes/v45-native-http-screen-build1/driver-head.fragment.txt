@@ -1,0 +1,103 @@
+"""C1 serial NOL/OLN/LNO screen using the frozen official client definitions."""
+import argparse
+import ast
+import concurrent.futures
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import secrets
+import signal
+import socket
+import statistics
+import subprocess
+import sys
+import threading
+import time
+import traceback
+
+P = Path('/private/tmp/minivllm-engine-optimization-20261014')
+D = Path(__file__).resolve().parent
+OLD = P / 'm4-final-native15-official-attempt2'
+sys.path.insert(0, str(OLD))
+import common as controls
+spec = importlib.util.spec_from_file_location('v45_official_client', OLD / 'client.py')
+official = importlib.util.module_from_spec(spec); spec.loader.exec_module(official)
+import httpx
+from tokenizers import Tokenizer
+
+
+def write_new(path, value): controls.write_new(path, value)
+
+
+def run_arm(item, output, config, previous_env):
+    engine = item['engine']; label = item['label']; batch = 1
+    run_dir = output / label; run_dir.mkdir()
+    model = Path(config['model_dir'])
+    w = json.loads((P / 'workload.json').read_text())
+    assert str(model) == w['model_dir']
+    tok = Tokenizer.from_file(str(model / 'tokenizer.json'))
+    prompt = tok.decode(w['prompt_ids'], skip_special_tokens=False)
+    assert tok.encode(prompt, add_special_tokens=False).ids == w['prompt_ids']
+    with socket.socket() as s:
+        s.bind(('127.0.0.1', 0)); port = s.getsockname()[1]
+    key = 'benchmark-' + secrets.token_urlsafe(24)
+    env = controls.child_environment(os.environ)
+    if previous_env:
+        assert env == previous_env
+    else:
+        previous_env.update(env)
+    if engine == 'native':
+        env['DYLD_INSERT_LIBRARIES'] = config['native_library']
+        command = [sys.executable, '-B', str(D / 'server.py'), '--config', str(D / 'runtime-config.json'),
+                   '--model', str(model), '--port', str(port), '--trace', str(run_dir / 'engine-trace.json'),
+                   '--run-dir', str(run_dir), '--owner-pid', str(os.getpid())]
+    else:
+        command = official.official_command(engine, batch, run_dir, port, key, model, env)
+    samples = []; proc = None; birth = None; lf = None; error = None; cleanup = None
+    result = None
+    def sample(name):
+        raw = controls.probe(samples, run_dir / 'resources.json', name, 'AC', proc.pid if proc else None)
+        assert samples[-1]['processinfo_thermal_metadata']['code'] == 0, 'nominal thermal required'
+        return raw
+    try:
+        sample('before-model-launch')
+        write_new(run_dir / 'launch.json', {
+            'engine': engine, 'command': ['<api-key>' if x == key else x for x in command],
+            'environment': controls.boot.environment_record(env), 'source_config_sha256': controls.sha(D / 'runtime-config.json'),
+            'selected_environment': {k: v for k, v in env.items() if k.startswith(('MLX_', 'DYLD_', 'MONOLITH_'))},
+            'native_treatment': 'qualified native C1 adapter; native DYLD only; ordinary extra startup warm explicitly recorded'})
+        lf = (run_dir / 'server.log').open('x')
+        started = time.perf_counter()
+        proc = subprocess.Popen(command, stdout=lf, stderr=subprocess.STDOUT, env=env)
+        birth = controls.identity(proc.pid); assert birth is not None
+        write_new(run_dir / 'owned-pid.json', {'pid': proc.pid, 'ppid': os.getpid()})
+        write_new(run_dir / 'owned-birth.json', {'identity': birth})
+        base = f'http://127.0.0.1:{port}'; headers = {'Authorization': 'Bearer ' + key}
+        with httpx.Client(headers=headers, trust_env=False, timeout=180) as client:
+            while True:
+                if proc.poll() is not None: raise RuntimeError('owned server exited before ready')
+                try:
+                    response = client.get(base + '/v1/models', timeout=1)
+                    if response.status_code == 200: break
+                except httpx.HTTPError: pass
+                if time.perf_counter() - started > 180: raise TimeoutError('server readiness')
+                time.sleep(0.2)
+        controls.exact_listener(proc.pid, port, run_dir / 'server-ready-exact-listener.json')
+        birth = controls.lock_owned_identity(proc, birth, engine, run_dir, 'ready')
+        runtime_identity = response.json().get('benchmark_identity')
+        if engine == 'native':
+            assert runtime_identity['manifest_all_sources_match'] and runtime_identity['measurement_hooks'] is False
+            assert runtime_identity['startup_ordinary_warm_requests'] == 1
+            assert runtime_identity['prior_fullqual_sha256'] == config['fullqual_receipt_sha256']
+        name = response.json()['data'][0]['id']
+        sample('server-ready-before-warmup')
+        path = '/v1/completions'
+        body = {'model': name, 'prompt': prompt, 'temperature': 0, 'repetition_penalty': 1.0, 'max_tokens': 32}
+        if engine == 'lithos':
+            path = '/v1/chat/completions'
+            body = {'model': name, 'messages': [{'role': 'user', 'content': '用一句话解释什么是 KV cache。'}],
+                    'temperature': 0, 'top_p': 1, 'max_completion_tokens': 32}
+        a = argparse.Namespace(engine='tutorial' if engine == 'native' else engine)
+        # Frozen SSE request and group functions are inserted with identical AST.
