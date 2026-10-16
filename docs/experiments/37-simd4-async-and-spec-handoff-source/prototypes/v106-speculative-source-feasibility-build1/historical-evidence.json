@@ -1,0 +1,78 @@
+{
+  "status": "SAVED_HISTORY_READ_ONLY_NOT_NEW_MEASUREMENT",
+  "tutorial_actual_same_target_DFlash2": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/examples/chapter10-checks.json",
+    "sha256": "1952958923e943345bfb47b2ed72a5c42823592f302a71718cbe43222e0d6240",
+    "same_target_same_draft_metadata": true,
+    "raw_IDs_equal": 16,
+    "raw_IDs_match_current_workload_first16": true,
+    "finished_stats": {
+      "req-2": [
+        7,
+        8
+      ]
+    },
+    "gdn_replay_checks": [
+      {
+        "kept_verify_tokens": 0,
+        "state_max_abs": 0.0
+      },
+      {
+        "kept_verify_tokens": 1,
+        "state_max_abs": 2.9802322387695312e-08
+      },
+      {
+        "kept_verify_tokens": 3,
+        "state_max_abs": 5.960464477539063e-08
+      },
+      {
+        "kept_verify_tokens": 5,
+        "state_max_abs": 0.0
+      }
+    ],
+    "limitation": "one prompt16 IDs; nonzero GDN replay differences mean no bitexact state proof/current99 native qualification"
+  },
+  "original_bench_logs": {
+    "spec_check_v3.txt": {
+      "plain_tok_s": [
+        25.3,
+        25.4,
+        25.4
+      ],
+      "block5_tok_s": [
+        26.6,
+        56.5,
+        62.3
+      ],
+      "matched_ID_counts": [
+        45,
+        128,
+        128
+      ],
+      "scope": "saved text claims decode-only and ID prefix parity; oldsource/workload128 ignoreEOS math/code, no current sealed controller/resources or HTTP comparison"
+    },
+    "spec_check_adaptive.txt": {
+      "tok_s": [
+        29.3,
+        54.8
+      ],
+      "scope": "saved old adaptive rerun only"
+    },
+    "dflash-mlx-3prompts.txt": {
+      "scope": "saved separate dflash-mlx summaries, not oMLX MTP or current request qualification"
+    }
+  },
+  "current_P_final_baseline": {
+    "actual_omlx_point": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/C1-block1-omlx/result.json",
+    "sampling": {
+      "temperature": 0,
+      "EOS": "normal",
+      "draft": null
+    },
+    "mode": "balanced",
+    "scope": "declared C1/C2/C4 seven fixed points only; not global optimality across speculative configurations"
+  },
+  "local_MTP_actual_saved_receipt_found_in_inspected_history": false,
+  "history_search_scope": "known tutorial examples, original minivllm bench/results, current P final baseline registry/result; no claim that every unindexed artifact on disk was searched",
+  "fairness_rule": "future speculative speed comparison must permit actual oMLX externalMTP and DFlash2 strongest validated available configs, not rank vs only draftNone balanced.03; eligible Lithos draft configuration also may be tested if its own compatible weights exist"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "COMPLETE_PLAN_ONLY",
+  "installed_site_packages": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages",
+  "target": "VLMBatchedEngine -> qwen3_5 -> generic SIMD T1 GDN",
+  "GPU_used": false,
+  "MLX_imported": false,
+  "new_shader_written": false,
+  "benchmark_run": false,
+  "version_reserved": false,
+  "facts": [
+    "installedmlx_vlm0.7.7 T1 uses generic SIMD; packed route requires T>1",
+    "vendorstatephysical[B,Hv,Dv,Dk], fourFP32registervalues/lane; current44physical[B,Hv,Dk,Dv],held32/thread",
+    "both source logical state reads/writes6MiB per layer,288MiB per48-layer step",
+    "V27 already had persistenttransposedstate+SIMD held4; layoutalone isnotnew",
+    "potentialnew scope: exactvendor RMS/BF16 normalization plus decay-before-dot and compact sharedprework; profile differsoldgold"
+  ],
+  "unknowns": [
+    "actualdispatch/reflection/compiler default and performance unobserved",
+    "exactinstalledfastRMS/scalar rounding boundaries needsource verification",
+    "runtimecachelayout and dtype materialization mustlaterbe observed"
+  ],
+  "primary": "held32 oldmath4spx8dv shuffle mapping, follow-on95 separately authorized",
+  "vendor_profile": "explicit independent math profile deferred, no adoption, no oldgold relaxation"
+}

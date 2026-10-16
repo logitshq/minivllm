@@ -1,0 +1,97 @@
+"""CPU-only V105 binding of actual103 both-mode lifecycle results. Never launches anything."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+D=Path(__file__).resolve().parent;P=D.parent
+BINDINGS={
+ 'diagnostic': {'receipt':P/'v23-root-control-build1/fullmodel-v103diag-attempt1/child-output/receipt.json','sha256':'f39f01aaa9e085cf263adb664fe8ba89fe5de5c4a4bee864c3ac2f856cad5b36','release':P/'v23-root-control-build1/fullmodel-v103diag-attempt1/external-release.json','release_sha256':'9eac037e6f233b198f639613444cd7168e0cdd37591e009766d9d45928f469aa','status':'PASS_V103_CAP64_DIRECT_ASYNC_DIAGNOSTIC_161_DELIVERED_21252_OUTPUT_HASHES'},
+ 'production': {'receipt':P/'v23-root-control-build1/fullmodel-v103prod-attempt1/child-output/receipt.json','sha256':'551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1','release':P/'v23-root-control-build1/fullmodel-v103prod-attempt1/external-release.json','release_sha256':'69daff6914389a01e5ddc2dd374006467351aafa43978f789b840d70bc64625c','status':'PASS_V103_CAP64_DIRECT_ASYNC_PRODUCTION_161_IDS_660_FINAL_OUTPUT_HASHES'}}
+LIB=P/'v101-native-cap64-direct-async-build1/libv101replay.dylib'
+LIB_SHA='bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf'
+ADAPTER=P/'v102-native-cap64-direct-async-runner-build1/native_runner.py'
+ADAPTER_SHA='e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270'
+QUAL_DIR=P/'v103-native-cap64-direct-async-qual-build1'
+
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def write_new(path,value):
+ with Path(path).open('x') as f:json.dump(value,f,indent=2,allow_nan=False)
+
+
+def main():
+ ap=argparse.ArgumentParser(description=__doc__)
+ ap.add_argument('--receipt',type=Path,required=True);ap.add_argument('--receipt-sha256',required=True)
+ ap.add_argument('--qual-dir',type=Path,required=True);ap.add_argument('--candidate',type=Path,required=True)
+ ap.add_argument('--library',type=Path,required=True);ap.add_argument('--library-sha256',required=True)
+ ap.add_argument('--mode',choices=('conv_normreuse_cache',),required=True)
+ args=ap.parse_args()
+ assert not (D/'attempt.consumed.json').exists()
+ prod=BINDINGS['production']
+ assert args.receipt==prod['receipt'] and args.receipt_sha256==prod['sha256']
+ assert args.qual_dir==QUAL_DIR and args.candidate==P/'candidate-v44-conv-normreuse-build1-root'
+ assert args.library==LIB and args.library_sha256==LIB_SHA and sha(LIB)==LIB_SHA
+ assert sha(ADAPTER)==ADAPTER_SHA and args.mode=='conv_normreuse_cache'
+ assert sha(QUAL_DIR/'fullqual.py')=='2f4eb25d8c728868e908516f747917fecbb9714b83f1fa058f178939bdec2426'
+ source_pins=json.loads((QUAL_DIR/'source-pins.json').read_text())
+ qualification_source_pins=dict(source_pins)
+ for path,digest in source_pins.items():assert sha(path)==digest,path
+ summaries={}
+ for mode,b in BINDINGS.items():
+  # Missing/failed production prevents config creation; never falls back to old64/58 qualification.
+  assert sha(b['receipt'])==b['sha256'] and sha(b['release'])==b['release_sha256']
+  q=json.loads(b['receipt'].read_text());released=json.loads(b['release'].read_text())
+  assert q['status']==b['status'] and q['mode']==mode
+  assert q['model_loads']==1 and q['terminal_cleanup'] and q['captured_originals_readonly']
+  assert q['same1349_parameter_identities_preserved'] and q['physical_capacity']==64 and q['CPU_canonical_capacity']==256
+  assert q['allocation_bucket']['configured_before_engine_construction_and_ANYtoken'] and q['allocation_bucket_restored_finally']
+  assert q['allocation_bucket']['effective_steps']==[64,64]
+  assert q['native_steps']==161 and q['request_count']==6
+  assert q['native_completed_steps']==q['total_submitted_steps']==162 and q['total_discarded_steps']==1
+  assert q['native_delivered_prediction_ID_checks']==161 and q['discarded_future_all132_tensor_checks']==0
+  assert q['strict_output_checks']==(21252 if mode=='diagnostic' else 660)
+  assert q['diagnostic_all132_delivered_steps']==(161 if mode=='diagnostic' else 0)
+  assert q['quiescent_final132_requests']==(0 if mode=='diagnostic' else 5)
+  assert q['early_stop']['all132_output_checks']==(792 if mode=='diagnostic' else 0)
+  assert q['early_stop']['native_delivered_delta']==6 and q['early_stop']['native_completed_delta']==7 and q['early_stop']['discarded_delta']==1
+  assert q['source_pins']==qualification_source_pins
+  f,p,d=q['native']['feedback'],q['native']['pipeline'],q['native']['direct_pipeline']
+  assert f['capacity']==64 and f['icb']['execution_count']==162 and f['icb']['bank_executions']==[84,78]
+  assert (f['pingpong']['eligible_count'],f['pingpong']['staged_link_count'])==(48,83)
+  assert p['enabled'] and p['depth']==2 and p['maximum_outstanding']==2
+  assert p['total_submitted']==p['total_completed']==162 and p['total_delivered']==161
+  assert p['total_discarded']==1 and p['total_failed']==0 and p['inflight']==0 and p['pending']==[]
+  assert d['enabled'] and d['diagnostic_snapshot'] is (mode=='diagnostic') and d['direct_links']==83
+  assert d['prediction_slot_bytes']==(0 if mode=='diagnostic' else 4)
+  assert released['status']=='PASS_EXTERNAL_RELEASE' and released['GPU_released'] and released['tool_exit']==0
+  assert all(r['returncode']==1 and r['stdout']==r['stderr']=='' for r in released['strict_absence'])
+  for key,digest_key in [('receipt','sha256'),('release','release_sha256')]:source_pins[str(b[key])]=b[digest_key]
+  summaries[mode]={'receipt':str(b['receipt']),'receipt_sha256':b['sha256'],'release':str(b['release']),'release_sha256':b['release_sha256'],'status':q['status'],'strict_output_checks':q['strict_output_checks']}
+ source_pins[str(QUAL_DIR/'source-pins.json')]=sha(QUAL_DIR/'source-pins.json')
+ source_pins[str(QUAL_DIR/'CPU-READY.json')]=sha(QUAL_DIR/'CPU-READY.json')
+ package=args.candidate/'tutorial_code/miniengine';files={str(p.relative_to(package)):sha(p) for p in package.rglob('*.py')}
+ assert len(files)==27
+ for name,digest in files.items():assert source_pins[str(package/name)]==digest
+ assert source_pins[str(ADAPTER)]==ADAPTER_SHA and source_pins[str(LIB)]==LIB_SHA
+ prior=P/'m4-final-native15-official-attempt2'
+ old_pins=json.loads((prior/'pins.json').read_text())
+ for path,digest in old_pins['native_binaries'].items():assert sha(path)==digest;source_pins[path]=digest
+ for p in D.glob('*.py'):source_pins[str(p)]=sha(p)
+ config={'mode':args.mode,'model_dir':json.loads((P/'workload.json').read_text())['model_dir'],
+         'package_root':str(args.candidate),'package_sources':files,'native_library':str(LIB),'native_library_sha256':LIB_SHA,
+         'adapter_source':str(ADAPTER),'scheduler_max_seqs':1,'fixed_cap':64,'direct_production':True,
+         'startup_cache_configuration':'102.configure_physical_cap64(enabled=True) before engine construction/ANYtoken',
+         'fullqual_receipt':str(prod['receipt']),'fullqual_receipt_sha256':prod['sha256'],'fullqual_status':prod['status'],
+         'both_mode_actual_qualifications':summaries,'source_pins':source_pins,
+         'scope':'fresh C1 only NOL/OLN/LNO, old44 math; official bestTESTED balanced0.03/Lithos launch unchanged; no global-best/full-frontier/adoption claim'}
+ write_new(D/'runtime-config.json',config)
+ controls={str(p):sha(p) for p in D.glob('*.py')};controls[str(D/'runtime-config.json')]=sha(D/'runtime-config.json')
+ for name in ('common.py','client.py','official_entry.py','registry.json','pins.json'):controls[str(prior/name)]=sha(prior/name)
+ for name in ('metal_buffer_bootstrap_v1.py','power_paired_support_v1.py','resource_snapshot_power_v1.py','resource_snapshot_precise_v1.py','workload.json'):controls[str(P/name)]=sha(P/name)
+ for name in ('protocol.json','README.md'):controls[str(D/name)]=sha(D/name)
+ write_new(D/'pins.json',{'files':controls,'runtime_config_sha256':sha(D/'runtime-config.json'),'scope':'V105 fresh9arm C1; untouched58 STOP; no fullcurve/Pareto victory'})
+ print(json.dumps({'status':'PASS_CPU_CONFIG_BOUND','pins_sha256':sha(D/'pins.json'),'source_pins':len(source_pins),'controller_pins':len(controls),'GPU_used':False}))
+
+
+if __name__=='__main__':main()

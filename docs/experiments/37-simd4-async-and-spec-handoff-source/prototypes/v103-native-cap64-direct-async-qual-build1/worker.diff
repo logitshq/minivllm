@@ -1,0 +1,329 @@
+--- frozen64/fullqual.py
++++ new103/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only fixed-mode direct async C1 lifecycle qualification; diagnostic perstep outputs versus production quiescent-final outputs."""
++"""Root-only V103 old44-math trueCAP64 direct FIFO C1 lifecycle qualification:161 delivered diagnostic steps versus5 production quiescent finals."""
+ import argparse
+ import ctypes
+ import hashlib
+@@ -13,12 +13,19 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+-LIB = P / "v62-native-direct-pipeline-build2/libv62replay.dylib"
+-LIB_SHA = "35aa6e0d0297c12d3978caf2e70a7082ecbbf60b85e1525133d4b8b0effdc83f"
+-QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+-ADAPTER_SHA = "acd59a4d817cb73fba07f6757b3a170a057e3c78ea707710624dda0a65e4bc07"
+-TINY_QUALIFICATIONS = {'diagnostic': {'receipt': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62diag2-attempt1/child-output/receipt.json', 'receipt_sha256': '669a42415f2627df64db9e509f6377f63f210a5420d13ff263ccb070dbc77acb', 'release': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62diag2-attempt1/external-release.json', 'release_sha256': '58dd5ec7696aa35c202f7b01fab8e50e8c7678818eb2931ad2385c3e76a1b0b8'}, 'production': {'receipt': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62prod2-attempt1/child-output/receipt.json', 'receipt_sha256': '06961e1c660fb92658b106435f2112923d5860ac141f7177fb75e04cc25c8ed4', 'release': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62prod2-attempt1/external-release.json', 'release_sha256': '8514ec9e510cf44e4616aeac3f99f27a37af1f7a7db0ad7127fca173626fe52c'}}  # Actual build2 tiny PASS/released; one immutable mode per process.
++LIB = P / "v101-native-cap64-direct-async-build1/libv101replay.dylib"
++LIB_SHA = "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf"
++QUAL = P / "v23-root-control-build1/fullmodel-v89native-attempt1/child-output/receipt.json"
++QUAL_SHA = "40428c19e12c69c80209885f58246b585d0c0659c3890ae2396f5f7310143e86"
++ADAPTER = P / "v102-native-cap64-direct-async-runner-build1/native_runner.py"
++ADAPTER_SHA = "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270"
++CAP = 64
++GOLD38 = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
++GOLD44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++TINY_QUALIFICATIONS = {
++    "diagnostic": {"receipt": str(P/"v23-root-control-build1/fullmodel-v101diag-attempt1/child-output/receipt.json"), "receipt_sha256": "98489937d4bcddb93db83c84de09bb89017a0b4ce328272e0509bd99595a9d7d", "release": str(P/"v23-root-control-build1/fullmodel-v101diag-attempt1/external-release.json"), "release_sha256": "7fa116180945207b7a1177a55045cd90c00ae7c76694553d6e761ecc97722484"},
++    "production": {"receipt": str(P/"v23-root-control-build1/fullmodel-v101prod-attempt1/child-output/receipt.json"), "receipt_sha256": "0ffe1ad5626a012ca2069b8163efcfc2cd91d98ec712a50c17f2631d93605f78", "release": str(P/"v23-root-control-build1/fullmodel-v101prod-attempt1/external-release.json"), "release_sha256": "4338ecc71ad3a78ba7a400f412c3e62f6a61d356891f1c1e45c0e35ee3da3c57"}}
++
+ 
+ 
+ 
+@@ -49,32 +56,60 @@
+     assert p["last_result_readable"] is last_readable
+     assert f["total_steps"] == f["icb"]["execution_count"] == f["icb"]["encoded_count"] == completed
+     assert f["resets"] == requests and f["icb"]["bank_executions"] == banks
+-    assert f["pingpong"]["eligible_count"] == 48
++    assert f["capacity"] == CAP
++    assert (f["pingpong"]["eligible_count"],f["pingpong"]["staged_link_count"]) == (48,83)
+     d = native["direct_pipeline"]
+     assert d["enabled"] and d["diagnostic_snapshot"] is diagnostic and d["mode_immutable_after_enable"]
+     assert d["banks_checked"] == 2 and d["input_output_range_pairs_checked"] == 34584 and d["input_input_range_pairs_checked"] == 17030
+-    assert d["direct_links"] == 83 and d["direct_feedback_bytes_per_step"] == 19726348
++    assert d["direct_links"] == 83 and d["direct_feedback_bytes_per_step"] == 7143436
+     assert f["input_output_aliases"] == []
+     assert d["legacy_F_stage_allocation_bytes_retained"] > 0
+     assert d["legacy_F_stage_used"] is diagnostic  # retained allocation; no freed-memory claim
+-    assert f["GPU_blit_bytes_per_step"] == (39949336 if diagnostic else 19726352)
++    assert f["GPU_blit_bytes_per_step"] == (14783512 if diagnostic else 7143440)
+     assert all(x["stage_bytes"] == (f["stage_bytes"] if diagnostic else 4) for x in p["slots"])
+     assert d["prediction_slot_bytes"] == (0 if diagnostic else 4)
+ 
+ 
+ 
+-def snapshot_rows(adapter, gold, *, api, context):
++def canonical_output(raw, shape, dtype, is_kv, valid_length):
++    # Identical physical64 tail guard/canonical bytes to frozen89; no GPU padding.
++    raw=bytes(raw);shape=list(shape)
++    if not is_kv:return raw,shape
++    assert shape==[1,4,CAP,256] and dtype=="mlx.core.bfloat16"
++    assert isinstance(valid_length,int) and 0<valid_length<=CAP
++    element_bytes=2;head_bytes=CAP*256*element_bytes;valid_bytes=valid_length*256*element_bytes
++    assert len(raw)==4*head_bytes
++    padding=bytes((256-CAP)*256*element_bytes)
++    heads=[]
++    for head in range(4):
++        current=raw[head*head_bytes:(head+1)*head_bytes]
++        assert current[valid_bytes:]==bytes(head_bytes-valid_bytes),("physical KV tail nonzero",head,valid_length)
++        heads.append(current+padding)
++    result=b"".join(heads)
++    assert len(result)==1*4*256*256*element_bytes
++    return result,[1,4,256,256]
++
++
++def snapshot_rows(adapter, gold, *, api, context, valid_length):
+     rows=[]
+     for h,prior in zip(adapter.outputs,gold):
+-        assert h.label==prior["label"] and h.nbytes==prior["bytes"]
+-        assert list(h.shape)==prior["shape"] and str(h.dtype)==prior["dtype"]
++        assert h.label==prior["label"] and h.nbytes==prior["physical_bytes"]
++        assert list(h.shape)==prior["physical_shape"] and str(h.dtype)==prior["dtype"]
+         dest=ctypes.create_string_buffer(h.nbytes)
+         adapter.call(api,h.address,h.nbytes,dest)
+-        digest=hashlib.sha256(dest.raw).hexdigest()
+-        assert digest==prior["A_sha256"],(context,h.label)
+-        rows.append({"label":h.label,"shape":list(h.shape),"dtype":str(h.dtype),"bytes":h.nbytes,
+-                     "sha256":digest,"qualified_A_sha256":prior["A_sha256"]})
+-    assert len(rows)==132
++        physical=dest.raw;physical_digest=hashlib.sha256(physical).hexdigest()
++        is_kv=list(h.shape)==[1,4,CAP,256] and str(h.dtype)=="mlx.core.bfloat16"
++        canonical,shape=canonical_output(physical,list(h.shape),str(h.dtype),is_kv,valid_length)
++        digest=hashlib.sha256(canonical).hexdigest() if is_kv else physical_digest
++        assert shape==prior["shape"] and len(canonical)==prior["bytes"]
++        assert digest==prior["A_sha256"] and physical_digest==prior["physical_A_sha256"],(context,h.label)
++        assert prior["finite"] is True
++        rows.append({"label":h.label,"shape":shape,"dtype":str(h.dtype),"bytes":len(canonical),
++                     "sha256":digest,"qualified_A_sha256":prior["A_sha256"],"physical_shape":list(h.shape),
++                     "physical_bytes":h.nbytes,"physical_sha256":physical_digest,"finite":True,
++                     "finite_basis":"exact bytes/hash equals saved actual89 finite reference",
++                     "physical_tail_zero_checked":is_kv,"CPU_canonical_zero_fill":is_kv})
++    assert len(rows)==132 and sum(v["physical_tail_zero_checked"] for v in rows)==32
+     return rows
+ 
+ 
+@@ -94,22 +129,31 @@
+     actual_source = {str(f.relative_to(source_package)): sha(f) for f in source_package.rglob("*.py")}
+     assert actual_source == expected_source and len(actual_source) == 27
+     assert sha(QUAL) == QUAL_SHA and sha(LIB) == LIB_SHA
+-    assert sha(D / "native_runner.py") == ADAPTER_SHA
++    assert sha(ADAPTER) == ADAPTER_SHA
+     if tiny_binding["receipt_sha256"] is None:
+-        assert args.inert,"actual62 selected-mode tiny receipt is not bound; model execution forbidden"
++        assert args.inert,"actual101 selected-mode tiny receipt is not bound; model execution forbidden"
+     else:
+         assert sha(tiny_binding["receipt"])==tiny_binding["receipt_sha256"] and sha(tiny_binding["release"])==tiny_binding["release_sha256"]
+         assert str(tiny_binding["receipt"]) in pins and str(tiny_binding["release"]) in pins
+         tiny,released=json.loads(Path(tiny_binding["receipt"]).read_text()),json.loads(Path(tiny_binding["release"]).read_text())
+-        expected_status="PASS_TINY_V62_DIAGNOSTIC_75_PERSTEP_STRICT" if diagnostic else "PASS_TINY_V62_PRODUCTION_15_PREDICTION_15_FINAL_STRICT"
+-        assert tiny["status"]==expected_status and tiny["mode"]==mode
++        expected_status="PASS_TINY_V101_CAP64_DIAGNOSTIC_75_PERSTEP_STRICT" if diagnostic else "PASS_TINY_V101_CAP64_PRODUCTION_15_PREDICTION_15_FINAL_STRICT"
++        assert tiny["status"]==expected_status and tiny["mode"]==mode and tiny["physical_capacity"]==64
+         assert (tiny["perstep_all_output_checks"],tiny["prediction_only_checks"],tiny["quiescent_final_output_checks"])==((75,0,0) if diagnostic else (0,15,15))
+         assert tiny["native"]["pipeline"]["depth"]==2 and tiny["native"]["pipeline"]["total_completed"]==tiny["native"]["pipeline"]["total_delivered"]==15
+         assert tiny["native"]["direct_pipeline"]["diagnostic_snapshot"] is diagnostic
+         assert released["status"]=="PASS_EXTERNAL_RELEASE" and released["GPU_released"] and released["tool_exit"]==0
+         assert all(x["returncode"]==1 and x["stdout"]==x["stderr"]=="" for x in released["strict_absence"])
+     qualified = json.loads(QUAL.read_text())
+-    assert qualified["status"] == "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    assert qualified["status"] == "PASS_V89_PHYSICAL_CAP64_CANONICAL256_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT"
++    assert qualified["fixed_cap"]==CAP and qualified["canonical_capacity"]==256
++    old38=json.loads(GOLD38.read_text());old44=json.loads(GOLD44.read_text())
++    assert sha(GOLD38)=="c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
++    assert sha(GOLD44)=="1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
++    for actual,a,b in zip(qualified["requests"],old38["requests"],old44["requests"]):
++        assert actual["name"]==a["name"]==b["name"] and actual["A_ids"]==a["A_ids"]==b["A_ids"]
++        for real,aa,bb in zip(actual["steps"],a["steps"],b["steps"]):
++            for x,y,z in zip(real["outputs"],aa["outputs"],bb["outputs"]):
++                assert all(x[k]==y[k]==z[k] for k in ("label","shape","dtype","bytes","A_sha256"))
+     expected = qualified["requests"]
+     assert [c["name"] for c in expected] == ["base", "reset-base", "changed-prefill"]
+     w = json.loads((P / "workload.json").read_text())
+@@ -117,8 +161,8 @@
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "GPU_used": False,
+                           "mode":mode,"actual_tiny_bound":tiny_binding["receipt_sha256"] is not None,
+-                          "qualification_scope":"diagnostic12540 fulloutputhashes; production161 deliveredIDs+660 quiescent fulloutputhashes",
+-                          "expected_full_output_hash_checks":12540 if diagnostic else 660}))
++                          "qualification_scope":"diagnostic161delivered x132=21252 fulloutputhashes; production161 deliveredIDs+660 quiescent fulloutputhashes",
++                          "expected_full_output_hash_checks":21252 if diagnostic else 660}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir()
+@@ -130,6 +174,7 @@
+          "performance_point": False, "adopted": False, "scheduler_max_seqs": 1}
+     save = lambda: write(args.out / "receipt.json", r)
+     save(); loaded = False; mx = None; resources = None
++    allocation_classes=None;original_allocation_steps=None
+     try:
+         assert os.environ.get("DYLD_INSERT_LIBRARIES") == str(LIB)
+         support = module("v41_resources", P / "v24-fullmodel-qual-build1/fullqual.py")
+@@ -138,9 +183,17 @@
+         import mlx.core as mx
+         from tutorial_code.miniengine.engine.llm_engine import LLMEngine
+         from tutorial_code.miniengine.sampling_params import SamplingParams
++        runtime = module("v103_adapter", ADAPTER)
++        allocation=runtime.configure_physical_cap64(enabled=True)
++        from tutorial_code.miniengine.cache import AttnCache,DecodeBatch
++        allocation_classes=(AttnCache,DecodeBatch);original_allocation_steps=allocation["original_steps"]
++        assert original_allocation_steps==[256,256] and (AttnCache.step,DecodeBatch.step)==(64,64)
++        r["allocation_bucket"]={**allocation,"configured_before_engine_construction_and_ANYtoken":True}
+         e = LLMEngine(w["model_dir"], max_seqs=1, max_len=2048, max_batched_tokens=512,
+                       dtype=mx.bfloat16, cache_limit_gb=2)
+         loaded = True; r["model_loads"] = 1; mx.synchronize()
++        from mlx.utils import tree_flatten
++        initial_parameters=[(n,id(v)) for n,v in tree_flatten(e.model.parameters())];assert len(initial_parameters)==1349
+         r["afterload"] = resources.sample("afterload-before-token", loaded=True, mx=mx)
+         r["stage"] = "ready"
+         write(args.out / "model-ready.json", {"pid": os.getpid(), "model_loads": 1, "token_executed": False})
+@@ -152,14 +205,13 @@
+         assert all(g._gates_compile_enabled is True and g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         r.update(source_root=str(ROOT), gates_on=48, conv_on=48, normreuse_cache_on=48,
+                  conv_normreuse_cache_on=48, conv_off=False,
+-                 whole_functional_off=True, adapter_source=str(P / "v64-native-direct-async-runner-build1/native_runner.py"),
+-                 adapter_sha256=sha(P / "v64-native-direct-async-runner-build1/native_runner.py"))
++                 whole_functional_off=True, adapter_source=str(ADAPTER),
++                 adapter_sha256=sha(ADAPTER))
+         sampling = SamplingParams(max_tokens=32, temperature=0, ignore_eos=False)
+         ordinary = e.generate([w["prompt_ids"]], sampling)
+         assert ordinary == [w["continuation_ids"]]
+         assert e.runner._ahead is None and e.runner.batch.size == 0 and not e.requests
+         resources.sample("after-ordinary-warm", loaded=True, mx=mx)
+-        runtime = module("v56_adapter", P / "v64-native-direct-async-runner-build1/native_runner.py")
+         adapter = runtime.install(e, LIB, LIB_SHA, diagnostic=diagnostic)
+         captured_originals = {}
+         original_build = adapter.build
+@@ -172,6 +224,30 @@
+             captured_originals["before_any_native_replay"] = before + [bytes(h.bytes_view) for h in adapter.outputs]
+             r["build_input131_readonly"] = True
+         adapter.build = observe_build
++        diagnostic_events=[]
++        diagnostic_by_request={}
++        original_adapter_run=adapter.run
++        if diagnostic:
++            def observe_delivered_run(out):
++                before=adapter.native_steps
++                result=original_adapter_run(out)
++                if adapter.native_steps!=before:
++                    assert adapter.native_steps==before+1 and len(out.decode)==1 and not out.prefill
++                    request=out.decode[0];step=len(request.output_token_ids)
++                    assert 1<=step<=31 and list(result)==[request.req_id]
++                    case=next(v for v in expected if v["prompt_ids"]==request.prompt_token_ids)
++                    reference=case["steps"][step-1];assert reference["step"]==step
++                    assert result[request.req_id]==case["A_ids"][step]
++                    rows=snapshot_rows(adapter,reference["outputs"],api="v34_copy_output",
++                                       context=(request.req_id,step,"after-wait-before-drop"),valid_length=reference["A_exact_L"])
++                    event={"request_id":request.req_id,"prompt_ids":list(request.prompt_token_ids),"step":step,
++                           "prediction_id":result[request.req_id],"checks":rows,"strict_output_checks":132,
++                           "copy_phase":"after wait returns; before engine scheduler update/drop or next native run",
++                           "before_engine_drop":True,"future_CPU_token_feeding":False}
++                    diagnostic_events.append(event);diagnostic_by_request.setdefault(request.req_id,[]).append(event)
++                return result
++            adapter.run=observe_delivered_run
++        r["diagnostic_delivered_step_checks"]=diagnostic_events
+         requests = {}
+         # Queue all three before the next schedule; this tests FCFS handoff and reset.
+         for case in expected:
+@@ -195,7 +271,7 @@
+                 reference = case["steps"][ordinal-2]
+                 assert reference["step"] == ordinal-1
+                 if diagnostic:
+-                    output_rows=snapshot_rows(adapter,reference["outputs"],api="v34_copy_output",context=(item["name"],ordinal))
++                    output_rows=diagnostic_by_request[rid][-1]["checks"];assert diagnostic_by_request[rid][-1]["step"]==ordinal-1
+                     checks+=132;item["steps"].append({"step":ordinal-1,"checks":output_rows,"scope":"perstep all132"})
+                 else:
+                     item["steps"].append({"step":ordinal-1,"prediction_id":token,"full_output_hash_checks":0,"scope":"prediction only; final fullstate checked after empty drop"})
+@@ -207,7 +283,7 @@
+                 assert rid not in e.requests and rid not in e.runner.staging
+                 assert baseline_originals is not None
+                 if not diagnostic:
+-                    item["final132"]=snapshot_rows(adapter,case["steps"][-1]["outputs"],api="v62_copy_quiescent_output",context=(item["name"],"quiescent-final31"))
++                    item["final132"]=snapshot_rows(adapter,case["steps"][-1]["outputs"],api="v62_copy_quiescent_output",context=(item["name"],"quiescent-final31"),valid_length=case["steps"][-1]["A_exact_L"])
+                     item["final132_native_step"]=31;checks+=132
+                 for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+                     assert bytes(h.bytes_view) == original, ("captured MLX owner mutated", h.label)
+@@ -221,7 +297,8 @@
+         native = adapter.report(); f = native["feedback"]
+         assert native["status"] == "OK" and f["resets"] == 3 and f["total_steps"] == 93
+         assert f["icb"]["execution_count"] == 93 and f["icb"]["bank_executions"] == [48, 45]
+-        assert f["pingpong"]["eligible_count"] == 48
++        assert f["capacity"] == CAP
++        assert (f["pingpong"]["eligible_count"],f["pingpong"]["staged_link_count"]) == (48,83)
+         assert_pipeline(native, diagnostic=diagnostic, delivered=93, completed=93, requests=3, discarded=0, banks=[48, 45])
+         assert adapter.total_submitted == 93 and adapter.total_discarded == 0
+         assert all(x["submitted"] == 31 and x["discarded"] == 0 for x in adapter.drops)
+@@ -235,7 +312,7 @@
+         assert prefill_only == [w["continuation_ids"][:1]] and adapter.native_steps == 93
+         final_request = e.generate([w["prompt_ids"]], sampling)
+         assert final_request == [w["continuation_ids"]] and adapter.native_steps == 124
+-        final_checks=snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v34_copy_output" if diagnostic else "v62_copy_quiescent_output",context="post-fallback-final31")
++        final_checks=diagnostic_events[-1]["checks"] if diagnostic else snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v62_copy_quiescent_output",context="post-fallback-final31",valid_length=expected[0]["steps"][-1]["A_exact_L"])
+         assert len(final_checks) == 132 and adapter.request_count == 4
+         assert adapter.active is None and not e.requests and not e.runner.staging
+         assert e.runner.batch.size == 0 and e.runner._ahead is None
+@@ -247,7 +324,7 @@
+         assert_pipeline(native, diagnostic=diagnostic, delivered=124, completed=124, requests=4, discarded=0, banks=[64, 60])
+         assert not adapter.pending and adapter.total_submitted == 124 and adapter.total_discarded == 0
+         assert len(adapter.drops) == 4 and all(x["submitted"] == 31 and x["discarded"] == 0 for x in adapter.drops)
+-        r.update(stage="normal-four-complete", normal_strict_output_checks=checks+132,
++        r.update(stage="normal-four-complete", normal_strict_output_checks=(124*132 if diagnostic else checks+132),
+                  normal_native_delivered=124, normal_native_completed=124,
+                  core_all132_steps=93 if diagnostic else 3, first_prefill_tokens=first_tokens, ordinary_warm_tokens=32,
+                  whole_request_fallback_ids=fallback, prefill_only_ids=prefill_only,
+@@ -275,7 +352,7 @@
+         r["early_stop"] = {"stop_token_index": stop_index, "stop_token_id": stop_token,
+             "max_tokens": 32, "ids": early, "native_delivered_delta": 6,
+             "native_completed_delta": 7, "discarded_delta": 1,
+-            "all132_output_checks": 0, "scope": "IDs plus FIFO/drain/drop/readonly proof only; no full-cache comparison for these six delivered steps",
++            "all132_output_checks": 6*132 if diagnostic else 0, "discarded_future_tensor_checks":0, "scope": "diagnostic six delivered steps copied before drop; discarded future lifecycle only; production early IDs/drop only",
+             "native": early_native, "drop": adapter.drops[-1], "captured_originals_readonly": True}
+         resources.sample("after-early-stop-drain", loaded=True, mx=mx); save()
+         post_early = e.generate([w["prompt_ids"]], sampling)
+@@ -283,22 +360,31 @@
+         assert adapter.total_submitted == 162 and adapter.total_discarded == 1 and adapter.request_count == 6
+         assert not adapter.pending and adapter.active is None and not e.requests and not e.runner.staging
+         assert e.runner.batch.size == 0 and e.runner._ahead is None
+-        post_early_checks=snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v34_copy_output" if diagnostic else "v62_copy_quiescent_output",context="post-early-final31")
++        post_early_checks=diagnostic_events[-1]["checks"] if diagnostic else snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v62_copy_quiescent_output",context="post-early-final31",valid_length=expected[0]["steps"][-1]["A_exact_L"])
+         assert len(post_early_checks) == 132
+         for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+             assert bytes(h.bytes_view) == original, ("post-early-stop owner mutated", h.label)
+         native = adapter.report()
+         assert_pipeline(native, diagnostic=diagnostic, delivered=161, completed=162, requests=6, discarded=1, banks=[84, 78])
+         assert len(adapter.drops) == 6 and adapter.drops[-1]["submitted"] == 31 and adapter.drops[-1]["discarded"] == 0
+-        r.update(status="PASS_DIRECT_ASYNC_RUNNER_DIAGNOSTIC_12540_OUTPUT_HASHES" if diagnostic else "PASS_DIRECT_ASYNC_RUNNER_PRODUCTION_161_IDS_660_FINAL_OUTPUT_HASHES", stage="complete",
+-                 strict_output_checks=checks+264, normal_strict_output_checks=checks+132,
++        r.update(status="PASS_V103_CAP64_DIRECT_ASYNC_DIAGNOSTIC_161_DELIVERED_21252_OUTPUT_HASHES" if diagnostic else "PASS_V103_CAP64_DIRECT_ASYNC_PRODUCTION_161_IDS_660_FINAL_OUTPUT_HASHES", stage="complete",
++                 strict_output_checks=(len(diagnostic_events)*132 if diagnostic else checks+264), normal_strict_output_checks=(124*132 if diagnostic else checks+132),
+                  native_delivered_prediction_ID_checks=161,quiescent_final132_requests=0 if diagnostic else 5,
+                  native_steps=161, native_steps_definition="adapter delivered steps; native feedback/ICB completed includes one discarded future",
+                  native_completed_steps=162, total_submitted_steps=162, total_discarded_steps=1,
+                  request_count=6, resets=6, post_early_stop_ids=post_early,
+                  post_early_stop_final132=post_early_checks, terminal_cleanup=True,
+                  captured_originals_readonly=True, all_drop_records=list(adapter.drops), native=native)
+-        assert r["strict_output_checks"] == (12540 if diagnostic else 660)
++        assert r["strict_output_checks"] == (21252 if diagnostic else 660)
++        assert len(diagnostic_events)==(161 if diagnostic else 0)
++        if diagnostic:
++            assert sorted(len(v) for v in diagnostic_by_request.values())==[6,31,31,31,31,31]
++            assert sum(e["strict_output_checks"] for e in diagnostic_events)==21252
++        assert initial_parameters==[(n,id(v)) for n,v in tree_flatten(e.model.parameters())]
++        r["same1349_parameter_identities_preserved"]=True
++        r["diagnostic_all132_delivered_steps"]=len(diagnostic_events)
++        r["discarded_future_all132_tensor_checks"]=0
++        r["physical_capacity"]=CAP;r["CPU_canonical_capacity"]=256
+         assert native["direct_pipeline"]["quiescent_output_copies"]==(0 if diagnostic else 660)
+         assert r["core_all132_steps"]==(93 if diagnostic else 3)
+         save(); return 0
+@@ -307,6 +393,9 @@
+                                                          "traceback": traceback.format_exc()})
+         save(); traceback.print_exc(); return 1
+     finally:
++        if allocation_classes is not None:
++            for cls,step in zip(allocation_classes,original_allocation_steps):cls.step=step
++            r["allocation_bucket_restored_finally"]=True
+         if resources is not None:
+             r["finally_resource"] = resources.sample("finally", loaded=loaded, mx=mx)
+             save()

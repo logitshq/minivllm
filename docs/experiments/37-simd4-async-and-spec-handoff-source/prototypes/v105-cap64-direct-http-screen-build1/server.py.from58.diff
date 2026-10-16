@@ -1,0 +1,70 @@
+--- frozen58/server.py
++++ new105/server.py
+@@ -1,4 +1,4 @@
+-"""Explicit C1 depth2 async native ICB adapter; ordinary token-ID engine prefill."""
++"""Explicit C1 physicalCAP64 direct production FIFO adapter; unchanged HTTP/token-ID boundaries."""
+ import argparse
+ import hashlib
+ import importlib.metadata
+@@ -63,6 +63,14 @@
+     assert p['request_discarded'] == p['request_failed'] == 0
+     assert f['total_steps'] == f['icb']['execution_count'] == steps and f['resets'] == resets
+     assert f['icb']['bank_executions'] == [16 * resets, 15 * resets]
++    assert f['capacity'] == 64 and f['CPU_full_state_restore_per_step'] is False
++    assert (f['pingpong']['eligible_count'], f['pingpong']['staged_link_count']) == (48, 83)
++    d = native['direct_pipeline']
++    assert d['enabled'] and d['diagnostic_snapshot'] is False and d['mode_immutable_after_enable']
++    assert d['direct_links'] == 83 and d['direct_feedback_bytes_per_step'] == 7143436
++    assert d['legacy_F_stage_used'] is False and d['prediction_slot_bytes'] == 4
++    assert d['quiescent_output_copies'] == 0 and all(x['stage_bytes'] == 4 for x in p['slots'])
++    assert p['total_failed'] == p['request_failed'] == 0
+ 
+ 
+ def work():
+@@ -74,6 +82,12 @@
+         from tutorial_code.miniengine.sampling_params import SamplingParams
+         import tutorial_code.miniengine as actual_package
+         assert Path(actual_package.__file__).resolve().parent == package
++        spec = importlib.util.spec_from_file_location('qualified_cap64_native_runner', config['adapter_source'])
++        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
++        allocation = module.configure_physical_cap64(enabled=True)
++        from tutorial_code.miniengine.cache import AttnCache, DecodeBatch
++        assert allocation['original_steps'] == [256, 256] and (AttnCache.step, DecodeBatch.step) == (64, 64)
++        assert config['fixed_cap'] == 64 and config['mode'] == 'conv_normreuse_cache'
+         e = LLMEngine(a.model, max_seqs=1, max_len=2048, max_batched_tokens=512,
+                       dtype=mx.bfloat16, cache_limit_gb=2)
+         def parameter_metadata():
+@@ -92,17 +106,28 @@
+         warm = e.generate([w['prompt_ids']], SamplingParams(max_tokens=32, temperature=0, ignore_eos=False))
+         assert warm == [w['continuation_ids']]
+         assert e.runner.batch.size == 0 and not e.requests and e.runner._ahead is None
+-        spec = importlib.util.spec_from_file_location('qualified_native_runner', config['adapter_source'])
+-        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+-        adapter = module.install(e, config['native_library'], config['native_library_sha256'])
++        adapter = module.install(e, config['native_library'], config['native_library_sha256'], diagnostic=False)
++        imported_sources = {}
++        for name, imported in tuple(sys.modules.items()):
++            if name.startswith('tutorial_code.miniengine') and getattr(imported, '__file__', None):
++                path = str(Path(imported.__file__).resolve())
++                assert config['source_pins'].get(path) == hashlib.sha256(Path(path).read_bytes()).hexdigest()
++                imported_sources[name] = path
++        adapter_sources = [str(Path(m.__file__).resolve()) for m in (module, module.old, module.old.old, module.old.old.old)]
++        assert len(adapter_sources) == 4
++        for path in adapter_sources:
++            assert config['source_pins'].get(path) == hashlib.sha256(Path(path).read_bytes()).hexdigest()
+         runtime_identity.update(package_file=str(Path(actual_package.__file__).resolve()),
+             manifest_all_sources_match=True, mode=config['mode'], scheduler_max_seqs=1,
+             model_loads=1, parameter_count=1349, parameter_tree_unchanged=True,
+-            gates_on=48, fixed_cap=256, native_library_sha256=config['native_library_sha256'],
++            gates_on=48, fixed_cap=64, native_library_sha256=config['native_library_sha256'],
+             adapter_sha256=config['source_pins'][config['adapter_source']],
+             prior_fullqual_sha256=config['fullqual_receipt_sha256'], prefix_cache=0,
+             startup_ordinary_warm_requests=1, startup_ordinary_warm_tokens=32,
+-            async_pipeline_depth=2, pipeline_native_library='native55build2',
++            async_pipeline_depth=2, pipeline_native_library='native101_CAP64_directproduction',
++            direct_production=True, startup_allocation=allocation, physical_CAP64_before_engine_and_ANYtoken=True,
++            cache_allocation_steps=[AttnCache.step, DecodeBatch.step],
++            actual_imported_sources=imported_sources, actual_adapter_chain_sources=adapter_sources,
+             client_warm_requests=3, measurement_hooks=False,
+             cache_policy='fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback')
+         write_new(a.run_dir / 'startup-metadata.json', runtime_identity)

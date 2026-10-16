@@ -1,0 +1,217 @@
+--- v90/screen.py
++++ v104/screen.py
+@@ -1,4 +1,4 @@
+-"""Root-only V90 physicalCAP64 B-only raw-native exploratory timing; inert never imports MLX."""
++"""Root-only V104 SIMD4 physicalCAP64 B-only raw-native exploratory timing; inert never imports MLX."""
+ import argparse
+ from contextlib import contextmanager
+ import ctypes
+@@ -16,13 +16,14 @@
+ sys.dont_write_bytecode = True
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+-LIB = P / "v89-native-capacity64-build1/libv89replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v89native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "40428c19e12c69c80209885f58246b585d0c0659c3890ae2396f5f7310143e86"
++ROOT = P / "candidate-v99-simd4-segment-build1-root"
++LIB = P / "v99-native-simd4-cap64-build1/libv99replay.dylib"
++QUAL = P / "v23-root-control-build1/fullmodel-v99native-attempt1/child-output/receipt.json"
++BINDING = json.loads((D / "qualification-binding.json").read_text())
++QUAL_SHA = BINDING["receipt_sha256"]
+ CAP = 64
+-RELEASE = P / "v23-root-control-build1/fullmodel-v89native-attempt1/external-release.json"
+-RELEASE_SHA = "ea7cd3efd15404a89829be54368becb54cd65e17327e16232adf401ff2a50fdc"
++RELEASE = P / "v23-root-control-build1/fullmodel-v99native-attempt1/external-release.json"
++RELEASE_SHA = BINDING["release_sha256"]
+ OLD44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+ OLD44_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+@@ -40,47 +41,77 @@
+     sys.modules[name]=value; spec.loader.exec_module(value); return value
+ 
+ 
+-def source_check():
++def source_check(allow_hold=False):
+     pins=json.loads((D/"source-pins.json").read_text())
+     for path,digest in pins.items():assert sha(path)==digest,("source changed",path)
++    if BINDING["status"]!="BOUND_ACTUAL_PASS_RELEASE":
++        assert allow_hold,"HOLD: actual V99 PASS + external release not bound; GPU execution refused"
++        return pins,None,None
+     assert sha(QUAL)==QUAL_SHA and sha(RELEASE)==RELEASE_SHA and sha(OLD44)==OLD44_SHA
+     q=json.loads(QUAL.read_text());release=json.loads(RELEASE.read_text())
+-    assert q["status"]=="PASS_V89_PHYSICAL_CAP64_CANONICAL256_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT"
++    assert q["status"]=="PASS_V99_SIMD4_SEGMENT_CAP64_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT"
+     assert q["native_steps"]==93 and q["strict_output_checks"]==12276 and q["canonical_KV_tail_zero_checks"]==2976
+     assert q["fixed_cap"]==64 and q["canonical_capacity"]==256 and q["allocation_bucket_restored_finally"]
+-    assert q["same_parameter_identity_count"]==1349 and q["same_parameter_identity_preserved"]
++    assert q["same_parameter_identity_count"]==1349 and q["same_parameter_identity_preserved"] and q["SIMD4_segment_ON"]==48
+     assert release["status"]=="PASS_EXTERNAL_RELEASE" and release["GPU_released"] and release["tool_exit"]==0
+     assert all(x["returncode"]==1 and x["stdout"]==x["stderr"]=="" for x in release["strict_absence"])
+     prior_pins=json.loads((D/"qualification-source-pins.json").read_text())
+-    assert q["source_pins"]==prior_pins and len(prior_pins)==71
++    assert q["source_pins"]==prior_pins and len(prior_pins)==153
+     assert all(pins[path]==digest for path,digest in prior_pins.items())
+-    engagement=q["B_conv_normreuse_cache_capture_engagement"]
+-    assert engagement["calls"]==engagement["distinct_GDN_objects"]==48 and engagement["counter_removed_after_capture"] is True
+-    base,reset=q["requests"][:2]
+-    assert base["name"]=="base" and reset["name"]=="reset-base" and len(base["steps"])==len(reset["steps"])==31
+-    expected=base["steps"][-1]["outputs"];assert len(expected)==132
++    engagement=q["B_state95_capture_engagement"]
++    assert engagement["calls"]==engagement["helper_calls"]==engagement["distinct_GDN_objects"]==48
++    assert engagement["all48enabled"] and engagement["hooks_removed_before_replay"]
++    conv=q["B_conv_normreuse_cache_capture_engagement"]
++    assert conv["calls"]==conv["distinct_GDN_objects"]==48 and conv["counter_removed_after_capture"]
++    assert_state95_capture(q["capture"]["native"],q["state95_actual_reflection"])
++    archives=[json.loads(Path(path).read_text()) for path in BINDING["old_gold_receipts"]]
++    byold=[{r["name"]:r for r in a["requests"]} for a in archives]
++    assert len(byold)==3 and [r["name"] for r in q["requests"]]==["base","reset-base","changed-prefill"]
++    for case in q["requests"]:
++        assert case["A_ids"]==case["B_ids"] and len(case["A_ids"])==32 and len(case["steps"])==31
++        assert all(case["A_ids"]==a[case["name"]]["A_ids"]==a[case["name"]]["B_ids"] for a in byold)
++    expected=q["requests"][0]["steps"][-1]["outputs"];assert len(expected)==132
+     assert all(x["strict_bytes_equal"] and x["finite"] and x["canonical_B_sha256"]==x["A_sha256"] for x in expected)
+     assert sum(x["physical_tail_zero_checked"] for x in expected)==32
+-    old=json.loads(OLD44.read_text())["requests"][0]["steps"][-1]["outputs"]
+-    for x,y in zip(expected,old):
+-        assert all(x[k]==y[k] for k in ("label","shape","dtype","bytes","A_sha256"))
+-    assert [(x["label"],x["A_sha256"]) for x in expected]==[(x["label"],x["A_sha256"]) for x in reset["steps"][-1]["outputs"]]
++    for case in q["requests"][:2]:
++        for x,y in zip(expected,case["steps"][-1]["outputs"]):
++            assert all(x[k]==y[k] for k in ("label","shape","dtype","bytes","A_sha256"))
++    for archive in byold:
++        gold=archive["base"]["steps"][-1]["outputs"];assert len(gold)==132
++        for x,y in zip(expected,gold):
++            assert all(x[k]==y[k] for k in ("label","shape","dtype","bytes","A_sha256"))
+     assert q["native_library"]==str(LIB) and q["source_pins"][str(LIB)]==pins[str(LIB)]
+-    manifest=json.loads((P/"v44-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
++    manifest=json.loads((P/"v99-simd4-cap64-fullqual-build1/candidate-manifest.json").read_text())["files"]
+     expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
+     package=ROOT/"tutorial_code/miniengine"
+-    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==27
++    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==28
+     return pins,q,expected
++
++
++def assert_state95_capture(report,qualified):
++    predicted=json.loads((P/"v99-native-simd4-cap64-build1/predicted-schema.json").read_text())
++    rows=[r for r in report["feedback"]["icb"]["PSO_records"] if r["function"]==predicted["function"]]
++    assert len(rows)==1 and rows[0]["argument_reflection_observed"] is True
++    actual=sorted(rows[0]["active_arguments"],key=lambda r:r["index"])
++    assert actual==predicted["active_arguments"]==qualified["active_arguments"]
++    assert qualified["status"]=="OBSERVED_FULL_SCHEMA_MATCH" and qualified["function"]==predicted["function"]
++    pairs=report["feedback"]["pingpong"]["pairs"];assert len(pairs)==48
++    for pair in pairs:
++        uses=pair["actual_binding_uses"];assert pair["eligible"] and len(uses)==2
++        byname={r["argument"]:r for r in uses};assert set(byname)=={"S","S_new"}
++        assert byname["S"]["index"]==6 and byname["S"]["access"]==0 and byname["S_new"]["index"]==9 and byname["S_new"]["access"]==1
++        assert all(r["PSO"]==predicted["function"] and r["offset"]==0 for r in uses)
++    return {"status":"OBSERVED_FULL_SCHEMA_MATCH","function":predicted["function"],"active_arguments":actual,"pingpong_pairs_checked":48,"matches_actual99":True}
+ 
+ 
+ def main(argv=None):
+     ap=argparse.ArgumentParser(description=__doc__)
+     ap.add_argument("--out",type=Path);ap.add_argument("--tokens",type=int,default=32);ap.add_argument("--inert",action="store_true")
+-    args=ap.parse_args(argv);pins,qualification,expected_final=source_check()
++    args=ap.parse_args(argv);pins,qualification,expected_final=source_check(allow_hold=args.inert)
+     w=json.loads((P/"workload.json").read_text());assert args.tokens==32 and len(w["prompt_ids"])==19
+     if args.inert:
+         assert not any(n=="mlx" or n.startswith("mlx.") for n in sys.modules)
+-        print(json.dumps({"status":"PASS_CPU_INERT","pins":len(pins),"MLX_imported":False,"GPU_used":False,
++        print(json.dumps({"status":"PASS_CPU_INERT" if qualification is not None else "HOLD_CPU_SCAFFOLD_INERT","pins":len(pins),"MLX_imported":False,"GPU_used":False,
+                           "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA}));return 0
+     assert args.out is not None and args.out.is_absolute();args.out.mkdir(exist_ok=False)
+     receipt={"status":"STARTED","stage":"beforeload","pid":os.getpid(),"model_loads":0,"source_pins":pins,
+@@ -102,7 +133,7 @@
+         versions={n:importlib.metadata.version(n) for n in ("mlx","mlx-metal")}
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v89-cap64-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v99-simd4-cap64-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)
+         def sample(label):
+@@ -140,19 +171,29 @@
+         for g in gdns:
+             g.set_gates_compile(True)
+             g.set_conv_norm_reuse_cache(True)
++            assert g._simd4_segment_enabled is False
++            g.set_simd4_segment(True)
+         from tutorial_code.miniengine.model.gdn import GatedDeltaNet as GDN
+         candidate_norm=GDN._decode_conv_norm_reuse_cache
+-        norm_capture_calls=[]
++        norm_capture_calls=[];helper_capture_calls=[];active_gdn=[]
++        from tutorial_code.miniengine.kernels import gdn_activated_simd4_segment_metal as state95
++        candidate_helper=state95.gated_delta_step_activated_norm_reuse_metal
+         @contextmanager
+         def capture_norm_engagement():
+-            assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+-            def counted(self,*args,**kwargs):
+-                norm_capture_calls.append(id(self))
+-                return candidate_norm(self,*args,**kwargs)
+-            GDN._decode_conv_norm_reuse_cache=counted
+-            try: yield
+-            finally: GDN._decode_conv_norm_reuse_cache=candidate_norm
+-        receipt.update(stage="ready",gates_on=48,conv_on=48,conv_off=False,normreuse_cache_on=48,whole_functional_off=True)
++            assert GDN._decode_conv_norm_reuse_cache is candidate_norm and state95.gated_delta_step_activated_norm_reuse_metal is candidate_helper
++            def counted(self,*a,**kw):
++                assert self._simd4_segment_enabled is True
++                norm_capture_calls.append(id(self));active_gdn.append(id(self))
++                try:return candidate_norm(self,*a,**kw)
++                finally:active_gdn.pop()
++            def helper_counted(*a,**kw):
++                assert len(active_gdn)==1
++                helper_capture_calls.append(active_gdn[0]);return candidate_helper(*a,**kw)
++            GDN._decode_conv_norm_reuse_cache=counted;state95.gated_delta_step_activated_norm_reuse_metal=helper_counted
++            try:yield
++            finally:
++                GDN._decode_conv_norm_reuse_cache=candidate_norm;state95.gated_delta_step_activated_norm_reuse_metal=candidate_helper
++        receipt.update(stage="ready",gates_on=48,conv_on=48,conv_off=False,normreuse_cache_on=48,whole_functional_off=True,simd4_segment_ON=48)
+         write(args.out/"model-ready.json",{"pid":os.getpid(),"token_executed":False,"model_loads":1});save()
+         print(json.dumps({"event":"MODEL_READY","pid":os.getpid()}),flush=True)
+         def shared(v,label):return prior.Shared(mx,np,v,label)
+@@ -193,6 +234,9 @@
+         native.call("v33_end_build");armed=False
+         assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
+         assert GDN._decode_conv_norm_reuse_cache is candidate_norm
++        assert helper_capture_calls==norm_capture_calls and not active_gdn
++        assert state95.gated_delta_step_activated_norm_reuse_metal is candidate_helper
++        receipt["B_state95_capture_engagement"]={"calls":48,"helper_calls":48,"distinct_GDN_objects":48,"all48enabled":all(g._simd4_segment_enabled for g in gdns),"hooks_removed_before_replay":True}
+         receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"counter_removed_after_capture":True,"activated_helper":True,"conv_fusion_ON":True,"no_double_SiLU":True}
+         assert len(captured)==132
+         for v,label in zip(captured,output_labels):
+@@ -217,6 +261,7 @@
+         native.call("v38_enable_icb")
+         receipt["capture_native"]=native.report("native-sealed")
+         base.assert_icb(receipt["capture_native"],[])
++        receipt["state95_actual_reflection"]=assert_state95_capture(receipt["capture_native"],qualification["state95_actual_reflection"])
+         f=receipt["capture_native"]["feedback"];assert f["sealed"] and f["input_count"]==131 and f["output_count"]==132 and f["link_count"]==131 and f["capacity"]==CAP
+         pp=f["pingpong"];assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+         for h,expected in zip(output_holders,expected_final):
+@@ -259,7 +304,7 @@
+                 canonical,canonical_shape=base.canonical_output(physical,h.meta["shape"],h.meta["dtype"],h.label in kv_output_labels,50)
+                 digest=hashlib.sha256(canonical).hexdigest()
+                 assert canonical_shape==expected["shape"] and len(canonical)==expected["bytes"]
+-                assert digest==expected["A_sha256"],("canonical256 final output differs from actual89/old44A",h.label)
++                assert digest==expected["A_sha256"],("canonical256 final output differs from actual99/old38+44+89A",h.label)
+                 checks.append({"label":h.label,"shape":canonical_shape,"dtype":h.meta["dtype"],"bytes":len(canonical),"sha256":digest,"qualified_A_sha256":expected["A_sha256"],"physical_shape":h.meta["shape"],"physical_bytes":h.nbytes,"physical_sha256":hashlib.sha256(physical).hexdigest(),"physical_tail_zero_checked":h.label in kv_output_labels,"CPU_canonical_zero_fill":h.label in kv_output_labels})
+             assert len(checks)==132 and sum(v["physical_tail_zero_checked"] for v in checks)==32
+             owners_readonly={"capture_seed":base.originals_readonly(native,seed_holders,seed_baselines,f"request{index+1}.capture_seed"),"captured_reference":base.originals_readonly(native,output_holders,output_baselines,f"request{index+1}.captured_reference")}
+@@ -297,6 +342,8 @@
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+         assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         assert GDN._decode_conv_norm_reuse_cache is candidate_norm
++        assert state95.gated_delta_step_activated_norm_reuse_metal is candidate_helper and not active_gdn
++        assert all(g._simd4_segment_enabled is True for g in gdns)
+         for name,mod in tuple(sys.modules.items()):
+             if name.startswith("tutorial_code.miniengine") and getattr(mod,"__file__",None):
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+@@ -304,7 +351,7 @@
+         receipt["same1349_parameter_owners_final"]=True
+         receipt["terminal_canonical_hash_checks"]=sum(len(r["final132_hash_checks"]) for r in receipt["requests"])
+         assert receipt["terminal_canonical_hash_checks"]==792
+-        source_check();receipt.update(status="PASS_V90_PHYSICAL_CAP64_CANONICAL256_NATIVE_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
++        source_check();receipt.update(status="PASS_V104_SIMD4_PHYSICAL_CAP64_CANONICAL256_NATIVE_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+         if native is not None:

@@ -1,0 +1,29 @@
+--- frozen62build2/replay.mm
++++ new101/replay.mm
+@@ -168,7 +168,7 @@
+ }
+ extern "C" int v34_seal_feedback(uint32_t states,uint32_t capacity){@autoreleasepool{
+  std::lock_guard<std::recursive_mutex>lock(S().lock);
+- if(!S().built||!S().error.empty()||F().sealed||!states||states>128||capacity!=256||F().inputs.size()!=states+3||S().outputs.size()!=states+4||F().links.size()!=states+3){fail("feedback seal requires declared state count, fixed capacity256 and complete input/output/link counts");return 1;}
++ if(!S().built||!S().error.empty()||F().sealed||!states||states>128||(capacity!=64&&capacity!=256)||F().inputs.size()!=states+3||S().outputs.size()!=states+4||F().links.size()!=states+3){fail("feedback seal requires declared state count, fixed capacity64-or256 and complete input/output/link counts");return 1;}
+  unsigned counts[4]={};for(auto&x:F().inputs)++counts[x.role];
+  if(counts[0]!=states||counts[1]!=1||counts[2]!=1||counts[3]!=1){fail("feedback input roles incomplete");return 1;}
+  for(size_t i=0;i<F().inputs.size();++i)for(size_t j=i+1;j<F().inputs.size();++j){auto&a=F().inputs[i];auto&b=F().inputs[j];if(overlap(arenaInput(a),a.size,arenaInput(b),b.size)){fail("feedback input ranges overlap");return 1;}}
+@@ -202,7 +202,7 @@
+  // Device scalar values are inspected only as bounds guards, never as feedback.
+  int32_t token=-1,pos=-1,len=-1;
+  for(auto&x:F().inputs){auto*p=(const char*)S().arena.contents+arenaInput(x);if(x.role==1)memcpy(&token,p,4);if(x.role==2)memcpy(&pos,p,4);if(x.role==3)memcpy(&len,p,4);}
+- if(token<0||pos<0||len!=pos+1||len>(int)F().capacity){fail("feedback token/position/lens bounds guard failed");return 1;}
++ if(token<0||pos<0||pos>=(int)F().capacity||len!=pos+1||len>(int)F().capacity){fail("feedback token/position/lens bounds guard failed");return 1;}
+  uint64_t t0=nowNS();id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];
+  if(F().steps)[e waitForFence:F().feedbackDone];
+  encodeGraph(e);[e updateFence:F().graphDone];[e endEncoding];uint64_t tGraph=nowNS();
+@@ -339,7 +339,7 @@
+  std::lock_guard<std::recursive_mutex>lock(S().lock);auto&a=A55();V55Ticket j;std::string why;
+  if(!a.enabled||!ticket_out||!F().sealed||!F().ready||!S().error.empty()||(!F().written.empty()&&F().written.size()!=F().inputs.size())){fail("async submit requires reset and complete/original seed upload");return 1;}
+  if(!a.core.plan(j,why)){fail(why);return 1;}
+- if(!a.core.requestSubmitted){int32_t token=-1,pos=-1,len=-1;for(auto&x:F().inputs){const char*p=(const char*)S().arena.contents+arenaInput(x);if(x.role==1)memcpy(&token,p,4);if(x.role==2)memcpy(&pos,p,4);if(x.role==3)memcpy(&len,p,4);}if(token<0||pos<0||len!=pos+1||len>(int)F().capacity){fail("async initial token/position/lens guard failed");return 1;}a.initialLength=len;}
++ if(!a.core.requestSubmitted){int32_t token=-1,pos=-1,len=-1;for(auto&x:F().inputs){const char*p=(const char*)S().arena.contents+arenaInput(x);if(x.role==1)memcpy(&token,p,4);if(x.role==2)memcpy(&pos,p,4);if(x.role==3)memcpy(&len,p,4);}if(token<0||pos<0||pos>=(int)F().capacity||len!=pos+1||len>(int)F().capacity){fail("async initial token/position/lens guard failed");return 1;}a.initialLength=len;}
+  if(uint64_t(a.initialLength)+a.core.requestSubmitted>F().capacity){fail("async projected position/lens exceeds fixed capacity");return 1;}
+  // Never read mutable arena scalars while earlier tickets are in flight.
+  uint64_t t0=nowNS();id<MTLCommandBuffer>b=[[S().queue commandBuffer] retain];if(!b){fail("async command buffer allocation failed");return 1;}

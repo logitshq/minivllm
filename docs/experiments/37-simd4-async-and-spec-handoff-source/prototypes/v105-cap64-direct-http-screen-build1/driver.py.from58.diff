@@ -1,0 +1,44 @@
+--- frozen58/driver.py
++++ new105/driver.py
+@@ -1,4 +1,4 @@
+-"""C1 async native NOL/OLN/LNO screen using unchanged frozen official client definitions."""
++"""C1 CAP64 direct-production native NOL/OLN/LNO screen; original58 HTTP protocol and official definitions."""
+ import argparse
+ import ast
+ import concurrent.futures
+@@ -22,7 +22,7 @@
+ OLD = P / 'm4-final-native15-official-attempt2'
+ sys.path.insert(0, str(OLD))
+ import common as controls
+-spec = importlib.util.spec_from_file_location('v58_official_client', OLD / 'client.py')
++spec = importlib.util.spec_from_file_location('v105_official_client', OLD / 'client.py')
+ official = importlib.util.module_from_spec(spec); spec.loader.exec_module(official)
+ import httpx
+ from tokenizers import Tokenizer
+@@ -42,6 +42,14 @@
+     assert p['request_discarded'] == p['request_failed'] == 0
+     assert f['total_steps'] == f['icb']['execution_count'] == steps and f['resets'] == resets
+     assert f['icb']['bank_executions'] == [16 * resets, 15 * resets]
++    assert f['capacity'] == 64 and f['CPU_full_state_restore_per_step'] is False
++    assert (f['pingpong']['eligible_count'], f['pingpong']['staged_link_count']) == (48, 83)
++    d = native['direct_pipeline']
++    assert d['enabled'] and d['diagnostic_snapshot'] is False and d['mode_immutable_after_enable']
++    assert d['direct_links'] == 83 and d['direct_feedback_bytes_per_step'] == 7143436
++    assert d['legacy_F_stage_used'] is False and d['prediction_slot_bytes'] == 4
++    assert d['quiescent_output_copies'] == 0 and all(x['stage_bytes'] == 4 for x in p['slots'])
++    assert p['total_failed'] == p['request_failed'] == 0
+ 
+ 
+ def run_arm(item, output, config, previous_env):
+@@ -104,6 +112,11 @@
+             assert runtime_identity['manifest_all_sources_match'] and runtime_identity['measurement_hooks'] is False
+             assert runtime_identity['startup_ordinary_warm_requests'] == 1
+             assert runtime_identity['prior_fullqual_sha256'] == config['fullqual_receipt_sha256']
++            assert runtime_identity['fixed_cap'] == 64 and runtime_identity['direct_production']
++            assert runtime_identity['physical_CAP64_before_engine_and_ANYtoken'] and runtime_identity['cache_allocation_steps'] == [64, 64]
++            assert len(runtime_identity['actual_adapter_chain_sources']) == 4
++            for path in [*runtime_identity['actual_imported_sources'].values(), *runtime_identity['actual_adapter_chain_sources']]:
++                assert config['source_pins'].get(path) == controls.sha(path)
+         name = response.json()['data'][0]['id']
+         sample('server-ready-before-warmup')
+         path = '/v1/completions'

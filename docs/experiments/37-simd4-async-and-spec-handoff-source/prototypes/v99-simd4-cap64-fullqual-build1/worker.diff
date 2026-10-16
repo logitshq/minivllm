@@ -1,0 +1,191 @@
+--- frozen89/fullqual.py
++++ v99/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only physicalCAP64 original44-model/native ICB versus canonical oldCAP256 gold; inert never imports MLX."""
++"""Root-only V99 strict V95state integration, physicalCAP64 canonical256 old38/44 gold; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -15,11 +15,11 @@
+ sys.dont_write_bytecode = True
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v44-conv-normreuse-build1-root"
++ROOT = P / "candidate-v99-simd4-segment-build1-root"
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-LIB = P / "v89-native-capacity64-build1/libv89replay.dylib"
++LIB = P / "v99-native-simd4-cap64-build1/libv99replay.dylib"
+ CAP = 64
+ CANONICAL_CAP = 256
+ ACTUAL44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+@@ -46,16 +46,29 @@
+ def source_check(library):
+     pins = json.loads((D / "source-pins.json").read_text())
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+-    assert str(library) in pins, "unbound native library"
++    assert library==LIB and str(library) in pins,"unbound native library"
+     assert sha(BASELINE_QUAL)==BASELINE_QUAL_SHA and sha(ACTUAL44)==ACTUAL44_SHA
+     assert json.loads(ACTUAL44.read_text())["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+-    proof=json.loads((P/"v89-native-capacity64-build1/source-proof.json").read_text())
+-    assert proof["inverse_patch_exact_frozen40"] is True and proof["allowed_capacities"]==[64,256]
++    proof=json.loads((D/"source-proof.json").read_text())
++    assert proof["candidate_reverse_patch_exact44"] and proof["native_inverse_patch_exact89"]
++    local95=P/"v23-root-control-build1/numeric-v95-attempt1/child-output/receipt.json"
++    assert sha(local95)=="5e4cb9b849d7628dd1f1b799651e51c51c4bdf4825b16659ea8e15224ec4675e"
++    q95=json.loads(local95.read_text())
++    assert q95["status"]=="PASS_V95_SIMD4_SEGMENT_HELD32_LOCAL_STRICT_9REAL_6SYNTHETIC" and q95["strict_output_checks"]==30 and q95["input_readonly_cases"]==15
++    assert q95["threadmap_probe"]["strict_integer_equal"] and len(q95["threadmap_probe"]["rows"])==128
++    assert len(q95["cases"])==15 and all(r["input_readonly"] and len(r["outputs"])==2 and all(v["strict_equal"] for v in r["outputs"]) for r in q95["cases"])
++    assert all(pins[path]==digest for path,digest in q95["pins"].items())
++    release95=P/"v23-root-control-build1/numeric-v95-attempt1/external-release.json"
++    assert sha(release95)=="31d9252e5195555bd9d4ea53b3b8a8b9552db34810731163937837e6a90e0dfa"
++    rel=json.loads(release95.read_text());assert rel["GPU_released"] and rel["tool_exit"]==0
++    assert all(r["returncode"]==1 and r["stdout"]==r["stderr"]=="" for r in rel["strict_absence"])
++    candidate_helper=ROOT/"tutorial_code/miniengine/kernels/gdn_activated_simd4_segment_metal.py"
++    assert sha(candidate_helper)=="7f2d0136301079436839fbdee494a5c8849ffdd1f8861c9f78be05029819c5a6"
+     expected = json.loads((D / "candidate-manifest.json").read_text())["files"]
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+     actual = {str(f.relative_to(package)): sha(f) for f in package.rglob("*.py")}
+-    assert actual == expected and len(actual) == 27
++    assert actual == expected and len(actual) == 28
+     tiny=json.loads((P/"v23-root-control-build1/fullmodel-v40smoke-attempt2/child-output/receipt.json").read_text())
+     assert tiny["status"]=="PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
+     local44_path=P/"v23-root-control-build1/numeric-v44-attempt1/child-output/receipt.json"
+@@ -179,6 +192,7 @@
+     archived_cases={r["name"]:r for r in baseline_qualification["requests"]}
+     gold44=json.loads(ACTUAL44.read_text());archive44={r["name"]:r for r in gold44["requests"]}
+     assert gold44["declared_prompts"]==baseline_qualification["declared_prompts"]
++    assert all(len(r["A_ids"])==32 and r["A_ids"]==r["B_ids"]==archive44[name]["A_ids"]==archive44[name]["B_ids"] for name,r in archived_cases.items())
+     assert max(len(prompt)+31 for _,prompt,_ in cases)<=CAP
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
+     if args.inert:
+@@ -241,6 +255,8 @@
+         for g in gdns:
+             g.set_gates_compile(True)
+             g.set_conv_norm_reuse_cache(True)
++            assert g._simd4_segment_enabled is False
++            g.set_simd4_segment(True)
+         from tutorial_code.miniengine.model import gdn as gdn_module
+         GDN=gdn_module.GatedDeltaNet
+         assert all(type(g) is GDN and g._conv_norm_reuse_cache_enabled is True for g in gdns)
+@@ -255,23 +271,34 @@
+         @contextmanager
+         def baseline_decode():
+             assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
++            saved_flags=[g._simd4_segment_enabled for g in gdns]
++            for g in gdns:g.set_simd4_segment(False)
+             GDN._decode_dispatch=legacy_decode;GDN._decode_conv_norm_reuse_cache=legacy_decode
+-            baseline_calls.append("oldaccepted25_decode_AST")
++            baseline_calls.append("oldaccepted25_decode_AST_new95OFF")
+             try: yield
+             finally:
+                 GDN._decode_dispatch=candidate_decode;GDN._decode_conv_norm_reuse_cache=candidate_norm
++                for g,flag in zip(gdns,saved_flags):g.set_simd4_segment(flag)
++                assert [g._simd4_segment_enabled for g in gdns]==saved_flags
+                 assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
+-        norm_capture_calls=[]
++        norm_capture_calls=[];helper_capture_calls=[];active_gdn=[]
++        from tutorial_code.miniengine.kernels import gdn_activated_simd4_segment_metal as state95
++        candidate_helper=state95.gated_delta_step_activated_norm_reuse_metal
+         @contextmanager
+         def capture_norm_engagement():
+-            assert GDN._decode_conv_norm_reuse_cache is candidate_norm
++            assert GDN._decode_conv_norm_reuse_cache is candidate_norm and state95.gated_delta_step_activated_norm_reuse_metal is candidate_helper
+             def counted(self,*a,**kw):
+-                norm_capture_calls.append(id(self))
+-                return candidate_norm(self,*a,**kw)
+-            GDN._decode_conv_norm_reuse_cache=counted
+-            try: yield
++                assert self._simd4_segment_enabled is True
++                norm_capture_calls.append(id(self));active_gdn.append(id(self))
++                try:return candidate_norm(self,*a,**kw)
++                finally:active_gdn.pop()
++            def helper_counted(*a,**kw):
++                assert len(active_gdn)==1
++                helper_capture_calls.append(active_gdn[0]);return candidate_helper(*a,**kw)
++            GDN._decode_conv_norm_reuse_cache=counted;state95.gated_delta_step_activated_norm_reuse_metal=helper_counted
++            try:yield
+             finally:
+-                GDN._decode_conv_norm_reuse_cache=candidate_norm
++                GDN._decode_conv_norm_reuse_cache=candidate_norm;state95.gated_delta_step_activated_norm_reuse_metal=candidate_helper
+         receipt["A_baseline_source"]={"path":str(BASELINE_GDN),"sha256":sha(BASELINE_GDN),
+                                       "method":"_decode AST compiled into actualcandidate namespace; temporaryclassbinddispatchandnormreuseentry;finallyrestore",
+                                       "source_proof":json.loads((D/"baseline-source-proof.json").read_text()),"same_weights_load":True}
+@@ -335,6 +362,9 @@
+             mx.eval(*captured); mx.synchronize()
+         native.call("v33_end_build"); armed = False
+         assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
++        assert helper_capture_calls==norm_capture_calls and not active_gdn
++        assert state95.gated_delta_step_activated_norm_reuse_metal is candidate_helper
++        receipt["B_state95_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"helper_calls":48,"all48enabled":all(g._simd4_segment_enabled for g in gdns),"hooks_removed_before_replay":True}
+         receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"normreuse_cache_ON_metadata":True,
+                                                "counter_removed_after_capture":GDN._decode_conv_norm_reuse_cache is candidate_norm}
+         for value,label in zip(captured,labels_out):
+@@ -370,6 +400,17 @@
+                             "outputs":[metadata_finite(np,h) for h in output_holders],
+                             "native":native.report("native-sealed"),"parameter_arrays":len(parameter_holders)}
+         assert receipt["capture"]["native"]["status"] == "OK"
++        predicted=json.loads((P/"v99-native-simd4-cap64-build1/predicted-schema.json").read_text())
++        pso_rows=[r for r in receipt["capture"]["native"]["feedback"]["icb"]["PSO_records"] if r["function"]==predicted["function"]]
++        assert len(pso_rows)==1 and pso_rows[0]["argument_reflection_observed"] is True
++        actual_schema=sorted(pso_rows[0]["active_arguments"],key=lambda r:r["index"])
++        assert actual_schema==predicted["active_arguments"],("V95 actual fullschema differs",actual_schema,predicted)
++        for pair in receipt["capture"]["native"]["feedback"]["pingpong"]["pairs"]:
++            uses=pair["actual_binding_uses"];assert pair["eligible"] and len(uses)==2
++            byname={r["argument"]:r for r in uses};assert set(byname)=={"S","S_new"}
++            assert byname["S"]["index"]==6 and byname["S"]["access"]==0 and byname["S_new"]["index"]==9 and byname["S_new"]["access"]==1
++            assert all(r["PSO"]==predicted["function"] and r["offset"]==0 for r in uses)
++        receipt["state95_actual_reflection"]={"status":"OBSERVED_FULL_SCHEMA_MATCH","function":predicted["function"],"active_arguments":actual_schema,"source_S_new_store_only":True,"reflection_S_new_access":"ReadWrite1, not WriteOnly2","pingpong_pairs_checked":48}
+         assert_icb(receipt["capture"]["native"],[])
+         fb = receipt["capture"]["native"]["feedback"]
+         assert fb["sealed"] and (fb["input_count"],fb["output_count"],fb["link_count"],fb["state_count"],fb["capacity"]) == (131,132,131,128,CAP)
+@@ -399,7 +440,7 @@
+                   "seed_upload_calls":131,"seed_arrays":131,"steps":[],"first_token":first,
+                   "changed_seed_inputs_vs_capture":changed_inputs}
+             receipt["requests"].append(case); receipt["stage"]={"request":name,"phase":"seed-loaded"}; save()
+-            if canonical: assert first==w["continuation_ids"][0] and first not in eos
++            assert first==archived_cases[name]["A_ids"][0] and first not in eos
+             a_flat=tuple(v[:] for v in seed_values[3:]); a_token=first
+             for step in range(1,32):
+                 if a_token in eos: break  # Changed prompt honors actual greedy EOS.
+@@ -456,7 +497,7 @@
+                 native.call("v34_copy_output",output_holders[129].address,4,ctypes.byref(target))
+                 a_token=int(expected_values[129].item()); b_token=int(target.value)
+                 assert a_token==b_token
+-                if canonical: assert a_token==w["continuation_ids"][step] and a_token not in eos
++                assert a_token==archived_cases[name]["A_ids"][step] and a_token not in eos
+                 ids_a.append(a_token);ids_b.append(b_token);a_flat=a_state
+                 ro={"seed":originals_readonly(native,seed_holders,seed_baselines,name+".capture-seed"),
+                     "capture_outputs":originals_readonly(native,output_holders,output_baselines,name+".capture-output"),
+@@ -470,7 +511,7 @@
+                 case["steps"].append(event);receipt["stage"]={"request":name,"step":step};save()
+                 print(json.dumps({"event":"NATIVE_DECODE_EQUAL","request":name,"step":step}),flush=True)
+             assert ids_a==ids_b
+-            if canonical: assert ids_a==w["continuation_ids"] and len(case["steps"])==31
++            assert ids_a==archived_cases[name]["A_ids"] and len(case["steps"])==31
+             case.update(status="PASS_REQUEST_STRICT",terminated_by_EOS=ids_a[-1] in eos,
+                         native=native.report("native-after-"+name))
+             assert_icb(case["native"],[len(r["steps"]) for r in receipt["requests"]])
+@@ -484,6 +525,7 @@
+             assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+             resources.sample("after-"+name,loaded=True,mx=mx);save()
+         assert total_steps==93 and all(len(r["steps"])==31 for r in receipt["requests"])
++        assert sum(len(r["A_ids"]) for r in receipt["requests"])==sum(len(r["B_ids"]) for r in receipt["requests"])==96
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+         assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
+@@ -497,8 +539,10 @@
+         assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(model.parameters())]
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
++        assert all(g._simd4_segment_enabled for g in gdns)
++        receipt["SIMD4_segment_ON"]=48
+         source_check(library)
+-        receipt.update(status="PASS_V89_PHYSICAL_CAP64_CANONICAL256_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_V99_SIMD4_SEGMENT_CAP64_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48,strict_output_checks=12276,canonical_KV_tail_zero_checks=2976)
+         save();return 0
+     except BaseException as error:

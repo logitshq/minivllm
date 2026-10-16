@@ -1,0 +1,55 @@
+{
+  "kernels/gdn.py": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/kernels/gdn.py",
+    "sha256": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+    "line_matches": {
+      "def gated_delta_rule_chunk(": [
+        43
+      ],
+      "for i in range(nc):": [
+        73
+      ],
+      "return o.transpose(1, 0, 2), S": [
+        78
+      ]
+    }
+  },
+  "cache.py": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/cache.py",
+    "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+    "line_matches": {
+      "def rollback(self, n: int):": [
+        17,
+        56
+      ],
+      "_, self.S = gated_delta_rule_chunk(": [
+        70
+      ]
+    }
+  },
+  "model/gdn.py": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/gdn.py",
+    "sha256": "27f0cab3edffccabed0b5fb648f3512066e0ab17a307f7b8a4eb5c15b27eb948",
+    "line_matches": {
+      "chunk = 64 if T > 32 else (16 if T > 8 else 8)": [
+        121,
+        150
+      ]
+    }
+  },
+  "engine/spec_runner.py": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/engine/spec_runner.py",
+    "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+    "line_matches": {
+      "logits, new_feats = self.model(": [
+        53
+      ],
+      "c.rollback(n + 1)": [
+        59
+      ],
+      "return produced, new_feats[: n + 1]": [
+        62
+      ]
+    }
+  }
+}

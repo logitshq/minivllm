@@ -1,0 +1,103 @@
+{
+  "hardened_spec": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/miniengine/engine/spec_runner.py",
+    "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+    "lines": {
+      "greedy_only": 38,
+      "block_target_verify": 53,
+      "accept_prefix": 70,
+      "rollback_anchor_plus_accepted": 59
+    }
+  },
+  "GDN_rollback": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/miniengine/cache.py",
+    "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+    "lines": {
+      "snapshot": 39,
+      "tape_chunk_replay": 70
+    }
+  },
+  "current_GDN_prefill": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v99-simd4-segment-build1-root/tutorial_code/miniengine/model/gdn.py",
+    "sha256": "ed2766ff1a99345da852bb1d41a2a961a40ff38a81c4c051a6b9303ada5e6c54",
+    "lines": {
+      "prefill": 106,
+      "chunk_math_boundary": 123
+    }
+  },
+  "DFlash2_loader": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/tutorial_code/miniengine/spec/dflash2.py",
+    "sha256": "e80f5257ffacc80f86da849f45a4cc3d3ced714de26941fcec5d00f0d9a73255",
+    "lines": {
+      "config": 23,
+      "target_embedding_head_draft": 142,
+      "loader_default_affine": 172
+    }
+  },
+  "omlx_settings": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/model_settings.py",
+    "sha256": "5efa473dc4dcfbcec48d7db968a43005f2445dfbf84f8ebd7306cc5e0f9e66b0",
+    "lines": {
+      "processor_conflicts": 121,
+      "DFlash_defaults": 423,
+      "embeddedMTP_default": 456,
+      "externalMTP_default": 474
+    }
+  },
+  "omlx_engagement": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/engine_pool.py",
+    "sha256": "48e326e94cfc5e84fa1ab8da96ff2c50de68c912a71119e046420d3df3f192aa",
+    "lines": {
+      "externalMTP_gate": 3979,
+      "attach_MTP": 4004,
+      "DFlash_batched_gate": 3915
+    }
+  },
+  "omlx_externalMTP_loader": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/speculative/vlm_mtp.py",
+    "sha256": "0bb7874ed06edb2e3b3c51db918b6648c512e53777b5d00883c3fa8bb3327080",
+    "lines": {
+      "load_failsoft": 210
+    }
+  },
+  "vendor_greedy_walk": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/common.py",
+    "sha256": "e3d3c0294a6d6fc915a32e96460370bfe57baef19539c5a290d4254525717cf1",
+    "lines": {
+      "accept_prefix_bonus": 173
+    }
+  },
+  "vendor_batch_invariant": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/speculative_verifier.py",
+    "sha256": "32b632f3ade3bcdfdab61d280ac3c219edc3b7b54881a2fba8b06415396302e9",
+    "lines": {
+      "class": 26,
+      "transaction": 31
+    }
+  },
+  "vendor_MTP_model": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/drafters/qwen3_5_mtp/qwen3_5_mtp.py",
+    "sha256": "3b2cf5cf0e83393a331fdd95394b812cda749d207a96b9bd4905bc025df85876",
+    "lines": {
+      "architecture": 16,
+      "shared_embedding_head": 67,
+      "commit_and_trim": 246
+    }
+  },
+  "Lithos_serving": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/serve.py",
+    "sha256": "9759ee14c4860ed43218118d6a3eafbb680e9e722e3ddad72bae52473579f419",
+    "lines": {
+      "DSpark_only_CLI": 736,
+      "no_draft": 735
+    }
+  },
+  "Lithos_pair_catalog": {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/models/catalog.py",
+    "sha256": "23e228af167ad1f83ba32621988ead3888ab9472ddef5b4cdd530f97f4b9ca92",
+    "lines": {
+      "explicit_pair": 17,
+      "unknown_requires_explicit": 28
+    }
+  }
+}

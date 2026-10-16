@@ -75,3 +75,5 @@ docs/              计划、教程、远程版的契约和 notes
 [35：局部优化的采用门槛](docs/experiments/35-local-probe-stops.md)保留 half2、unroll2 与 scaled-ready GDN 的数值检查和负结果；三个 micro 均未过预设提速门槛。
 
 [36：CAP64与RMS舍入版本](docs/experiments/36-cap64-and-rms-profile.md)验证真实CAP64缓存，并保留RMS舍入差异、旧序列检查失败与新参考诊断；原生RMS版本的速度未显示提升。
+
+[37：SIMD4、异步提交与投机解码接手](docs/experiments/37-simd4-async-and-spec-handoff.md)记录新版源码、完整正确性资格与HTTP热状态中止；整体尚未胜出。
