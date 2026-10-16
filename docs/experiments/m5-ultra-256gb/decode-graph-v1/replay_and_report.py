@@ -74,7 +74,7 @@ lines=['M5 Ultra 256GB：解码图复用实验','', '代码：2612e68（本地�
 for s in summary:lines.append(f"{s['C']} | {s['engine']} | {s['y']:.2f} | {1000*s['TTFT_s']:.2f} | {s['x']:.2f}")
 lines+=['',f'组合方案对eager/pool0：C1总吞吐 +{y_gain:.2f}%，交付速率 +{x_gain:.2f}%。','三对总吞吐变化：'+', '.join(format(p['y_pct'],'+.2f')+'%' for p in pairs),f'有界采用检查：{adopt}（不代表全面胜过外部引擎）。','', '探索记录：分层编译有小幅收益；整步编译保留。扩大发送buffer只作探索，正式比较仍用50/50/20/0。','矩阵padding切换路径没有稳定收益且出现数值差异；自制窄QMV词表投影出现1项差异，均未采用。','内存池收益和图复用收益来自独立因子screen；不可把全部加速归因于编译。','预热请求完整保留；稳定态结果不包含首次建图成本。','本次仍是单个19-token prompt、32-token输出的短请求，不推广到长上下文或全部任务。','不同batch的MLX数值路径可能不同；已独立验证B1/B2/B4自由生成与同batch原版一致，并覆盖全部HTTP原始IDs。','Lithos是本地M5 Ultra适配配置；其OpenAI接口仅C1。','后台另一个chat持续下载大模型；没有同时进行它的GPU benchmark。',f'资源：{json.dumps(resources,ensure_ascii=False)}','所有24个服务和owner均退出并核实PID不存在。','', '原始证据：'+str(F)]
 (O/'m5-ultra-graph-report.txt').write_text('\n'.join(lines)+'\n')
-archive=R/'docs/experiments/m5-ultra-256gb/decode-graph-v1';archive.mkdir(parents=True)
+archive=R/'docs/experiments/m5-ultra-256gb/decode-graph-v1';archive.mkdir(parents=True,exist_ok=True)
 for name in ('m5-ultra-graph-results.json','m5-ultra-graph-report.txt'):shutil.copyfile(O/name,archive/name)
 paths=[]
 for name in ('graph-frontier-v1','graph-qual-v1','graph-qual-v1-owner','graph-factor-v1','graph-factor-v1-owner','graph-factor-wide-v1','graph-factor-wide-v1-owner','compile-probe-v1','whole-probe-v1','matrix-probe-v1','narrow-probe-v1','graph-exploration-source-v1','graph-inputs-v1','graph-source-v1','graph-free-generation-v1','graph-free-generation-v1-owner'):
