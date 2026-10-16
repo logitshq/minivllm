@@ -49,22 +49,24 @@ class LLMEngine:
     def step(self) -> list[tuple[str, int, bool]]:
         """跑一步。返回这一步产出 token 的 (req_id, token, 是否结束)。"""
         out = self.scheduler.schedule()
-        for rid in out.finished_ids:
-            self.runner.drop(rid)
+        self.runner.drop_many(out.finished_ids)
         if out.is_empty:
             return []
         sampled = self.runner.run(out)
         before = {rid: len(self.requests[rid].output_token_ids) for rid in sampled}
         self.scheduler.update(out, sampled)          # 可能在 EOS / max_tokens 处截断投机解码多出来的 token
         results = []
+        finished = []
         for rid in sampled:
             req = self.requests[rid]
             toks = req.output_token_ids[before[rid]:]
             for i, tok in enumerate(toks):
                 results.append((rid, tok, req.is_finished and i == len(toks) - 1))
             if req.is_finished:
-                self.runner.drop(rid)  # Free the final request even if no next step runs.
+                finished.append(rid)
                 self.requests.pop(rid)
+        # Free even the final batch now, without repeatedly copying surviving rows.
+        self.runner.drop_many(finished)
         return results
 
     def generate(self, prompts: list[list[int]], sampling: SamplingParams) -> list[list[int]]:

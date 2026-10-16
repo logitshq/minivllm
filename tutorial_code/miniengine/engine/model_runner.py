@@ -185,15 +185,24 @@ class ModelRunner:
         # 丢掉的行（结束的请求）不需要做任何事：它们的 staging 早已搬走，batch 里的行被 rebuild 过滤掉了
 
     def drop(self, req_id: str) -> None:
+        self.drop_many([req_id])
+
+    def drop_many(self, req_ids: list[str]) -> None:
+        """Retire one scheduler step's finished rows with at most one compaction."""
+        if not req_ids:
+            return
+        removed = set(req_ids)
         self._ahead = None
-        self.staging.pop(req_id, None)
-        self.feats.pop(req_id, None)
-        if req_id in self.batch.req_ids:
-            keep = [i for i, rid in enumerate(self.batch.req_ids) if rid != req_id]
+        for req_id in removed:
+            self.staging.pop(req_id, None)
+            self.feats.pop(req_id, None)
+        if removed.intersection(self.batch.req_ids):
+            keep = [i for i, rid in enumerate(self.batch.req_ids) if rid not in removed]
             if keep:
                 self.batch.rebuild(keep, [])
             else:
                 self.batch.clear()
         if self.spec is not None:
-            self.spec.drop(req_id)
+            for req_id in req_ids:
+                self.spec.drop(req_id)
             self.spec.drafter.reset()                       # drafter 的上下文 cache 只服务一个 solo 请求
