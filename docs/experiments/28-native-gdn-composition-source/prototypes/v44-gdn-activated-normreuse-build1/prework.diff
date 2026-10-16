@@ -1,0 +1,20 @@
+--- V40-rawu-prework
++++ V44-activated-prework
+@@ -8,8 +8,8 @@
+         uint Dk = 128;
+         const threadgroup float* qh = q_storage;
+         const threadgroup float* kh = k_storage;
+-        q_storage[lane] = float(v18_bf16_activation(u[h * 128 + lane]).activated);
+-        k_storage[lane] = float(v18_bf16_activation(u[2048 + h * 128 + lane]).activated);
++        q_storage[lane] = float(activated[h * 128 + lane]);
++        k_storage[lane] = float(activated[2048 + h * 128 + lane]);
+         threadgroup_barrier(mem_flags::mem_threadgroup);
+         if (lane == 0) {
+     float qn = 0.0f, kn = 0.0f;
+@@ -23,5 +23,5 @@
+         k_ready[h * 128 + lane] = kh[lane];
+     } else {
+         uint h = group - 16;
+-        v_ready[h * 128 + lane] = float(v18_bf16_activation(u[4096 + h * 128 + lane]).activated);
++        v_ready[h * 128 + lane] = float(activated[4096 + h * 128 + lane]);
+     }

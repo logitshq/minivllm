@@ -55,3 +55,5 @@ docs/              计划、教程、远程版的契约和 notes
 [实验22：融合和图复用的真实 HTTP 检查](docs/experiments/22-combined-decode-screen.md)保存组合版源码和完整结果；C1交互速度+1.54%、总吞吐+0.76%，尚未超过官方前沿，默认关闭。
 
 [27：少搬 state，再把真实 Metal 命令留在 ICB 里](docs/experiments/27-native-icb-pingpong.md)记录V36 S轮换、V37独立克隆负结果与V38实际ICB；当前最快27.633tok/s仅属B-only探索，尚无HTTP/Pareto获胜结论。
+
+[28：把卷积、归一化复用和state保留接到真实ICB](docs/experiments/28-native-gdn-composition.md)记录V39/V40/V44完整严格资格、V40真实绑定失败及修复、独立B-only计时；34.699ms/步、28.820tok/s尚非HTTP或Pareto获胜结论。

@@ -1,0 +1,20 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v40-native-gdn-smoke-build1/smoke.py": "e7102f1916af12af7d4c1b197bf5a638ee440dd642d5344037af1d5f690fc0a1",
+    "/private/tmp/minivllm-engine-optimization-20261014/v40-native-gdn-smoke-build1/source-pins.json": "9f2180756dc930fe0a9cbc38b17f90f8d1ea077722dc2025af000af6e92c31f9"
+  },
+  "GPU_executed": false,
+  "MLX_imported_by_author": false,
+  "source_AUDIT": "V40_STATE_SOURCE S_new occurs once as store; canonical index unchanged, held32 reads FP32 S in original ascending order",
+  "expected_V40_PSO": "custom_kernel_gdn_norm_reuse_cached_state_v40_build1_float_float_float_float_float_float_float_float_float",
+  "expected_indices": {
+    "S": 6,
+    "S_new": 8
+  },
+  "actual_metadata_pending_root_tiny": true,
+  "eligibility": "all original unique-binding/whole-allocation/offset0/3145728B/readonlyS/nonreadonlyS_new/registered-alias checks retained; original PSO still accepted",
+  "scope": "new helper candidate vs original25 reference; model-free 3requests/15steps/75strict pending",
+  "parent38_unchanged": true,
+  "local_numeric_receipt_sha256": "0fedf5166637b213d7f0d10a5bc5e4a483d4486599d3c8f107cb9995841230dc"
+}

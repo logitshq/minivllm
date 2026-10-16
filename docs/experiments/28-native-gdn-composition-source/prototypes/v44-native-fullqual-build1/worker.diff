@@ -1,0 +1,128 @@
+--- qualified40/fullqual.py
++++ V44/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only RAWu normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -15,7 +15,7 @@
+ sys.dont_write_bytecode = True
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v40-normreuse-cache-build1-root"
++ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+@@ -49,9 +49,13 @@
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+     actual = {str(f.relative_to(package)): sha(f) for f in package.rglob("*.py")}
+-    assert actual == expected and len(actual) == 26
++    assert actual == expected and len(actual) == 27
+     tiny=json.loads((P/"v23-root-control-build1/fullmodel-v40smoke-attempt2/child-output/receipt.json").read_text())
+     assert tiny["status"]=="PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
++    local44_path=P/"v23-root-control-build1/numeric-v44-attempt1/child-output/receipt.json"
++    assert sha(local44_path)=="1c22f2e29c78b885600c1be4a06fac357154a7eaa2ee82aa31b284921ff12392"
++    local44=json.loads(local44_path.read_text())
++    assert local44["status"]=="PASS_V44_ACTIVATED_NORMREUSE_CACHE_STRICT_BYTES_9REAL_6SYNTHETIC" and local44["strict_output_checks"]==30
+     return pins
+ 
+ 
+@@ -194,44 +198,44 @@
+         assert len(model.layers) == 64 and len(gdns) == 48
+         for g in gdns:
+             g.set_gates_compile(True)
+-            g.set_norm_reuse_cache(True)
++            g.set_conv_norm_reuse_cache(True)
+         from tutorial_code.miniengine.model import gdn as gdn_module
+         GDN=gdn_module.GatedDeltaNet
+-        assert all(type(g) is GDN and g._norm_reuse_cache_enabled is True for g in gdns)
++        assert all(type(g) is GDN and g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         old_tree=ast.parse(BASELINE_GDN.read_text())
+         old_class=next(n for n in old_tree.body if isinstance(n,ast.ClassDef) and n.name=="GatedDeltaNet")
+         old_decode=next(n for n in old_class.body if isinstance(n,ast.FunctionDef) and n.name=="_decode")
+         legacy_namespace={}
+         exec(compile(ast.Module(body=[old_decode],type_ignores=[]),str(BASELINE_GDN),"exec"),vars(gdn_module),legacy_namespace)
+         legacy_decode=legacy_namespace["_decode"]
+-        candidate_decode,candidate_norm=GDN._decode_dispatch,GDN._decode_norm_reuse_cache
++        candidate_decode,candidate_norm=GDN._decode_dispatch,GDN._decode_conv_norm_reuse_cache
+         baseline_calls=[]
+         @contextmanager
+         def baseline_decode():
+-            assert GDN._decode_dispatch is candidate_decode and GDN._decode_norm_reuse_cache is candidate_norm
+-            GDN._decode_dispatch=legacy_decode;GDN._decode_norm_reuse_cache=legacy_decode
++            assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
++            GDN._decode_dispatch=legacy_decode;GDN._decode_conv_norm_reuse_cache=legacy_decode
+             baseline_calls.append("oldaccepted25_decode_AST")
+             try: yield
+             finally:
+-                GDN._decode_dispatch=candidate_decode;GDN._decode_norm_reuse_cache=candidate_norm
+-                assert GDN._decode_dispatch is candidate_decode and GDN._decode_norm_reuse_cache is candidate_norm
++                GDN._decode_dispatch=candidate_decode;GDN._decode_conv_norm_reuse_cache=candidate_norm
++                assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
+         norm_capture_calls=[]
+         @contextmanager
+         def capture_norm_engagement():
+-            assert GDN._decode_norm_reuse_cache is candidate_norm
++            assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+             def counted(self,*a,**kw):
+                 norm_capture_calls.append(id(self))
+                 return candidate_norm(self,*a,**kw)
+-            GDN._decode_norm_reuse_cache=counted
++            GDN._decode_conv_norm_reuse_cache=counted
+             try: yield
+             finally:
+-                GDN._decode_norm_reuse_cache=candidate_norm
++                GDN._decode_conv_norm_reuse_cache=candidate_norm
+         receipt["A_baseline_source"]={"path":str(BASELINE_GDN),"sha256":sha(BASELINE_GDN),
+                                       "method":"_decode AST compiled into actualcandidate namespace; temporaryclassbinddispatchandnormreuseentry;finallyrestore",
+                                       "source_proof":json.loads((D/"baseline-source-proof.json").read_text()),"same_weights_load":True}
+ 
+         eos = read_eos_ids(w["model_dir"]); receipt["eos_ids"] = sorted(eos)
+-        receipt.update(stage="ready", gates_on=48, conv_on=0, conv_off=True, normreuse_cache_on=48, whole_functional_off=True)
++        receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, whole_functional_off=True)
+         write(args.out / "model-ready.json", {"pid": os.getpid(), "token_executed": False, "model_loads": 1})
+         save(); print(json.dumps({"event": "MODEL_READY", "pid": os.getpid()}), flush=True)
+ 
+@@ -287,8 +291,8 @@
+             mx.eval(*captured); mx.synchronize()
+         native.call("v33_end_build"); armed = False
+         assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
+-        receipt["B_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"normreuse_cache_ON_metadata":True,
+-                                               "counter_removed_after_capture":GDN._decode_norm_reuse_cache is candidate_norm}
++        receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"normreuse_cache_ON_metadata":True,
++                                               "counter_removed_after_capture":GDN._decode_conv_norm_reuse_cache is candidate_norm}
+         for value,label in zip(captured,labels_out):
+             h = shared(value,label); output_holders.append(h)
+             native.call("v33_register_output",h.address,h.nbytes,label.encode())
+@@ -362,7 +366,7 @@
+                     logits_a=model(mx.array([a_token],mx.int32),ctx)
+                     a_state=state_of(ctx); expected_values=outputs(logits_a,a_state,positions,lens)
+                     mx.eval(*expected_values); mx.synchronize()
+-                assert GDN._decode_norm_reuse_cache is candidate_norm
++                assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+                 assert before==[hashlib.sha256(h.bytes_view).hexdigest() for h in retained], "reference retained state changed"
+                 expected=[shared(v,n) for v,n in zip(expected_values,labels_out)]
+                 native.call("v34_replay_step"); total_steps+=1
+@@ -413,8 +417,8 @@
+             assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+             resources.sample("after-"+name,loaded=True,mx=mx);save()
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+-        assert all(g._norm_reuse_cache_enabled is True for g in gdns)
+-        assert GDN._decode_dispatch is candidate_decode and GDN._decode_norm_reuse_cache is candidate_norm
++        assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
++        assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
+         receipt["A_baseline_temporary_bind_calls"]=len(baseline_calls)
+         receipt["A_baseline_restore_final"]=True
+         receipt["actual_imported_sources"]={}
+@@ -426,7 +430,7 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

@@ -122,3 +122,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [23：继续拆解 kernel 与真实 GPU 诊断](../experiments/23-kernel-tests-and-gpu-diagnostics.md)记录权重重排、SIMD递推、真gate/up融合的严格结果、负结果及整模失败；解释为什么 Metal buffer 时间戳不能直接作为单算子占比。
 
 [27：少搬 state，再把真实 Metal 命令留在 ICB 里](../experiments/27-native-icb-pingpong.md)保存48层S轮换、独立buffer克隆负结果、实际双bank Metal ICB及全数值/B-only计时证据；36.188ms/步、27.633tok/s未作服务或Pareto获胜声明。
+
+[28：把卷积、归一化复用和state保留接到真实ICB](../experiments/28-native-gdn-composition.md)保存V39/V40/V44的严格完整资格、V40绑定失败/修复与B-only计时；候选默认关闭，无HTTP/Pareto采用结论。

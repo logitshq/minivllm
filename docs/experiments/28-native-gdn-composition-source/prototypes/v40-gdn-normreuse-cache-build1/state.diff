@@ -1,0 +1,29 @@
+--- qualified-V19-state
++++ V40-held32-state
+@@ -19,15 +19,23 @@
+     float ex = metal::exp(g[bh]);
+     float be = beta[bh];
+     float kv = 0.0f;
+-    for (uint d = d0; d < d0 + seg; d++) kv += ks * kh[d] * S[base + d * Dv + dv];
++    float held[32];
++    #pragma unroll 32
++    for (uint j = 0; j < 32; j++) {
++        uint d = d0 + j;
++        held[j] = S[base + d * Dv + dv];
++        kv += ks * kh[d] * held[j];
++    }
+     red[sp * VALUE_TILE + dv_local] = kv;
+     threadgroup_barrier(mem_flags::mem_threadgroup);
+     kv = 0.0f;
+     for (uint i = 0; i < SPLIT; i++) kv += red[i * VALUE_TILE + dv_local];
+     float delta = (v[(size_t)bh * Dv + dv] - ex * kv) * be;
+     float acc = 0.0f;
+-    for (uint d = d0; d < d0 + seg; d++) {
+-        float s = ex * S[base + d * Dv + dv] + ks * kh[d] * delta;
++    #pragma unroll 32
++    for (uint j = 0; j < 32; j++) {
++        uint d = d0 + j;
++        float s = ex * held[j] + ks * kh[d] * delta;
+         S_new[base + d * Dv + dv] = s;
+         acc += qs * qh[d] * s;
+     }

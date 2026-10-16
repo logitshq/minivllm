@@ -1,0 +1,25 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/numeric.py": "7ed12450716efee4537cc843ddcf2ec55ecebca49292bc9b16630a7ecc383ab2",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/cached-state.metal": "3d9ae74cd60321221ef494e1e5d2ccad4b7a4dff3aa133245d9c65c1c00d5504",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/check_cpu.py": "8f678501535e2efeb17f6fb83b2f6bba35a47895ddc181a10db003cae9342c20",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/source-pins.json": "bfd2ea1efeec4143b83c5f9b2cf8b124a546cec2639b8a768f64861077bfff61",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/prework.diff": "7b98c55641875d7ed794062a1a26bcd33a8d2fb0b1198f3e803cfaa41789f388",
+    "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/LICENSE-MLX-MIT": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01"
+  },
+  "CPU_tests": 3,
+  "CPU_saved_bank_provenance": "PASS9 historical real+6saved synthetic SHA",
+  "GPU_executed": false,
+  "model_loaded": false,
+  "engine_connected": false,
+  "prework": "already-activated BF16 only; no SiLU invocation in prework source",
+  "V40_state_body_and_factory_name_exact": true,
+  "compile_policy": "V40/V19 unchanged math_mode=safe",
+  "native_whitelist_change_required": false,
+  "expected_native": "v40-native-icb-build2; actual combined eligibility/fullqualification still pending",
+  "strict_numeric": "candidate nn.silu(savedRAWu) as external activated input vs accepted25 nn.silu/repeat/GDN;30 o/S_new checks + inputreadonly, firstfailurestop",
+  "conv_fusion_numeric_claim": false,
+  "performance_claim": false
+}

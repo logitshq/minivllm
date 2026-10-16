@@ -1,0 +1,14 @@
+--- qualified-native38
++++ native40-literal-whitelist
+@@ -239,7 +239,10 @@
+  if(au.size()!=1||bu.size()!=1)return reject("selected allocation has missing or additional captured binding uses");
+  auto&ar=*au[0];auto&br=*bu[0];
+  const std::string expected="custom_kernel_gdn_decode_step_float_float_float_float_float_float_float_float";
+- if(ar.p!=br.p||ar.dispatch!=br.dispatch||S().psos.at(key(ar.p)).name!=expected)return reject("input/output are not one dispatch of the exact accepted GDN PSO function");
++ const std::string expected_v40="custom_kernel_gdn_norm_reuse_cached_state_v40_build1_float_float_float_float_float_float_float_float_float";
++ const auto&actual=S().psos.at(key(ar.p)).name;
++ const bool known=actual==expected||(actual==expected_v40&&ar.index==6&&br.index==8);
++ if(ar.p!=br.p||ar.dispatch!=br.dispatch||!known)return reject("input/output are not one dispatch of an exact pinned stores-only GDN PSO function/index pair");
+  if(ar.offset||br.offset||ar.argument!="S"||br.argument!="S_new"||ar.access!=MTLArgumentAccessReadOnly||br.access==MTLArgumentAccessReadOnly)return reject("actual S/S_new argument name, offset or access policy mismatch");
+  PP().swaps[p.a]=p.b;PP().swaps[p.b]=p.a;p.eligible=true;p.reason="whole FP32 allocation; unique same-dispatch accepted GDN S readonly / S_new stores-only source; no other binding or registered range aliases";PP().pairs.push_back(p);return 0;
+ }
