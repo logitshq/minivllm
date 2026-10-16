@@ -1,0 +1,158 @@
+{
+  "lithos_commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+  "mechanism": [
+    "common/gemv_nvfp4_rows.metal:70-97,100-146",
+    "compiler/emit.py:552-575,662-688"
+  ],
+  "mlx_compiled_source": {
+    "url": "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/compiled.cpp#L191",
+    "lines": [
+      191,
+      207
+    ],
+    "remote_primary_read": true,
+    "installed_binary_JIT_identity_not_inferred_from_tag": true
+  },
+  "installed_typed_source": {
+    "Sigmoid": "unary_ops.h:295-300",
+    "Multiply": "binary_ops.h:208-213"
+  },
+  "historical_reference": "SwiGLU BF16/FP32 16banks plain vs compiled pass; does not qualify new typed kernel",
+  "M4_eligible": true,
+  "exact_Lithos_recipe_engagement": "UNKNOWN",
+  "references": {
+    "v22_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/micro.py",
+      "sha256": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279"
+    },
+    "v22_native_header": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/kernel_header.metal",
+      "sha256": "7373cccf7ee7cf6bec4242502b725529c7906835fe6216bbf53631dfd60b508a"
+    },
+    "v22_native_body": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/kernel_body.metal",
+      "sha256": "6d60381de86ab832d29f873ccfcc65b6f3952cbc2254e6e6f3c10f2127b59cb3"
+    },
+    "v22_results_review": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/INDEPENDENT-RESULTS-REVIEW.md",
+      "sha256": "c388d224943250c6768edaaa5ccdaeb84a4a373f3035ec6fb42b42313dd85b6e"
+    },
+    "resource_wrapper": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_power_v1.py",
+      "sha256": "f4624d7dd8e977759865e11c4b7d3ed0489d1fd55b496e60c29fc087b7d9eb42"
+    },
+    "resource_native": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_precise_v1.py",
+      "sha256": "d0aaa466e1cee70e109dbd4d02e4d457edda2a5e535dafab1b17d9dd6654538f"
+    },
+    "owned_cleanup": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v25-c1-screen-build1/support.py",
+      "sha256": "8063f9b386c9853b3d5ab0b1f7f895b71408cbf7169a13a1dea4cb25182f7d9c"
+    },
+    "bootstrap": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/metal_buffer_bootstrap_v1.py",
+      "sha256": "d7faae6c7b24e43dbbeba7a91a88c7cacae08d4c0ae5b6b4c9e4c4a67ecf48f1"
+    },
+    "power_support": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/power_paired_support_v1.py",
+      "sha256": "cefe1b28e179561b9176a715e86e45ddcf821ec8260fc02ced12379b65c2f5a3"
+    },
+    "runtime_plan": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v18-activation-runtime-identity-build3.json",
+      "sha256": "20cc406685d035ef484bf3f3fc2c4b1b39c5bb2af6eef884285b7b74fb6f47bc"
+    },
+    "real_bank_receipt": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/receipt.json",
+      "sha256": "94a9f5ab7ae3780f306e66d71e4f3b0f2fb559eef4d5a89ae179ef63ef3355c8"
+    },
+    "real_bank_x": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L00-x.raw.le.bin",
+      "sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66"
+    },
+    "lithos_blm": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/formats/blm.py",
+      "sha256": "b94975d4cf3958cd19b954fe3ccfb0c19dedaf79140a3f4d73a5995dc9b1364e"
+    },
+    "lithos_emit": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/emit.py",
+      "sha256": "aeb9a9007d1bd54cb5f897d116d0173f125999f90c0b02c774b6599b74064483"
+    },
+    "lithos_rows": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_nvfp4_rows.metal",
+      "sha256": "850769ed91ee1d9222e58eba23a12b80f3445929855a4f351361733e0bbf26c0"
+    },
+    "lithos_apple9": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/kernels.py",
+      "sha256": "49611d7de627b358e29ef9b4c0eba16a19c20c6afad6307b656923381c595964"
+    },
+    "lithos_m4": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/backends/metal/m4_max/config-40c.json",
+      "sha256": "fcaff96a27d691a4eb4daa2123c3025d61d22be3bee8a09e3c3e7d1194c04504"
+    },
+    "own_linear": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v25-combined-build1-root/tutorial_code/miniengine/model/layers.py",
+      "sha256": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411"
+    },
+    "accepted25_manifest": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/source-manifest-v17-gdn-gates-build1.json",
+      "sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c"
+    },
+    "combined27_manifest": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v25-combined-source-build1/manifest.json",
+      "sha256": "54f76862eb05d7ef8a28ad877afa43b4b08a1bb400c4347af18318c3767e06af"
+    },
+    "profile_replay": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/independent-c1-profile-results-replay-v1.json",
+      "sha256": "e8a8713383e259dfbb2247c9a3bf0501743643ecb0126abcb5b0f15e185fbe91"
+    },
+    "v26_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v26-nvfp4-rowblock-layout-build1/micro.py",
+      "sha256": "0137ee4f41a2c4b229c57922addc20e7253af07ad4374a497c6662a37fbfad67"
+    },
+    "swiglu_bank_generator": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-boundary-build2/check_swiglu_boundary_numeric_v2.py",
+      "sha256": "3d156db4397595702a6541bb375b668229e05b4124177cbbb7519f2bac51c2cc"
+    },
+    "swiglu_helper": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-boundary-build2/swiglu_boundary_v1.py",
+      "sha256": "63205d1ad006de62c038da87bdfc429376f92163dad138217c02ade2a828de27"
+    },
+    "swiglu_old_numeric": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-boundary-build2/swiglu-numeric-v2-final-receipt.json",
+      "sha256": "98547446389bf7eca4db17f13bb995cec2c7d626ffebee9c3a799a8155765857"
+    },
+    "nn_activations": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/nn/layers/activations.py",
+      "sha256": "153660ac19d4fe93d6ca15f67ad8527ed03b0e860e36192f3815e1d3daf73ed1"
+    },
+    "installed_unary_ops.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/unary_ops.h",
+      "sha256": "af710925f066b029f67289a0bbe4edd0ba6c5e7f51c9df609abb111216fa963f"
+    },
+    "installed_binary_ops.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/binary_ops.h",
+      "sha256": "6dbe789faafbf7259f411c7fab7c0fcdd192df47a78f8f0bd408228f7a30e5c7"
+    },
+    "installed_bf16.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/bf16.h",
+      "sha256": "abd87446a310b77ac530ef52a324feae5cb285d03ec9613e3a88ebb71410fdcb"
+    },
+    "installed_bf16_math.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/bf16_math.h",
+      "sha256": "1f374f8380f756eb89acf6a847741cb8fecbe642945e159fb6208d804cc06496"
+    }
+  },
+  "build_directory": "/private/tmp/minivllm-engine-optimization-20261014/v28-gateup-epilogue-build2",
+  "parent_unexecuted_build": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v28-gateup-epilogue-build1",
+    "manifest_sha256": "15e39bc9aa0385706868839d7e2523eb7bda91de9b78ce0e7682204b1c506d4f"
+  },
+  "pre_execution_prime_change": {
+    "from_build": "/private/tmp/minivllm-engine-optimization-20261014/v28-gateup-epilogue-build1",
+    "from_prime": 128,
+    "to_prime": 2048,
+    "reason": "Independent V26/V27 first-slot control slowing following resource/hash idle boundaries; longer warmup preset before any V28 execution",
+    "changed_thresholds": false,
+    "old_evidence_unchanged": true
+  }
+}

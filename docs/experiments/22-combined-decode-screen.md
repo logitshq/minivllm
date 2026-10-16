@@ -26,10 +26,10 @@ st.conv = new_tail
 
 ```python
 # 原来：每步由 Python 重新构造模型计算图
-logits = self.model(tokens, positions, context)
+logits = self.model(tokens, ctx)
 
 # 实验：普通 B1 greedy decode 复用编译图，缓存张量是显式输入和输出
-logits = self._normal_decode_forward(tokens, positions, context, sampling)
+logits = self._normal_decode_forward(tokens, ctx, [r.sampling for r in decode])
 ```
 
 helper 根据长度、容量和输入形状等信息缓存最多64张图。每次把所有 KV/GDN 状态传入，返回 logits 和新状态；不捕获某个请求的旧缓存。不同长度仍需首次编译，因此本轮三个相同长度 warmup 后，实测每进程31次 miss、62次 hit、31个 entry。**这是 MLX 计算图复用；还不是 Lithos 的 Metal ICB，也没有消除 Metal 编码和缓冲分配。**
