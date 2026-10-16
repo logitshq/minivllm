@@ -61,3 +61,5 @@ docs/              计划、教程、远程版的契约和 notes
 [29：把原生 decode 接进调度器，再测真实请求](docs/experiments/29-native-runner-http.md)验证 C1 排队、重置和回退；记录无屏障减少的负结果及真实 HTTP 电源变化 STOP，没有新的 Pareto 获胜结论。
 
 [30：提前提交一步](docs/experiments/30-native-ahead.md)保存 FIFO 输出所有权、提前停止丢弃、12,540 项完整模型检查与未完成 HTTP 结果；保留量化矩阵乘和屏障实验的负结果。
+
+归档中引用的上游源码许可见 [Third-party source notices](THIRD_PARTY_NOTICES.md)。
