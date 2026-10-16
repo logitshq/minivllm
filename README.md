@@ -67,3 +67,5 @@ docs/              计划、教程、远程版的契约和 notes
 [32：残差 carry 与四投影](docs/experiments/32-native-residual-projection.md)记录严格数值通过后的 B-only 筛查，以及 R8 的 6/6 胜却未过 5% 门槛；这些路径仍未采用，没有新的 Pareto 胜出。
 
 归档中引用的上游源码许可见 [Third-party source notices](THIRD_PARTY_NOTICES.md)。
+
+[33：ICB范围与整步编译](docs/experiments/33-native-range-compiled-step.md)保留 R8 在原生 ICB 下慢0.52%的结果，以及整步编译的数值资格和 B-only 筛查；没有新的 HTTP 或 Pareto 胜出。

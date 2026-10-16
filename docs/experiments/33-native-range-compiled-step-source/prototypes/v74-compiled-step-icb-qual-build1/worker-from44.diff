@@ -1,0 +1,157 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v74-compiled-step-icb-qual-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only V74 independently hypothesized compiled pure131-to132 step then native ICB strict qualification; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -20,6 +20,8 @@
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+ LIB = P / "v40-native-icb-build2/libv40replay.dylib"
++ACTUAL44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++ACTUAL44_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -45,6 +47,8 @@
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+     assert str(library) in pins, "unbound native library"
+     assert sha(BASELINE_QUAL)==BASELINE_QUAL_SHA
++    assert sha(ACTUAL44)==ACTUAL44_SHA
++    assert json.loads(ACTUAL44.read_text())["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     expected = json.loads((D / "candidate-manifest.json").read_text())["files"]
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+@@ -150,6 +154,10 @@
+     assert baseline_qualification["declared_prompts"]=={n:p for n,p,_ in cases}
+     archived_cases={r["name"]:r for r in baseline_qualification["requests"]}
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
++    actual44=json.loads(ACTUAL44.read_text())
++    actual44_cases={r["name"]:r for r in actual44["requests"]}
++    allowed_state_PSOs={u["PSO"] for p in actual44["capture"]["native"]["feedback"]["pingpong"]["pairs"] for u in p["actual_binding_uses"]}
++    assert len(allowed_state_PSOs)==1 and all(len(r["steps"])==31 for r in actual44_cases.values())
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+@@ -161,9 +169,11 @@
+     receipt = {"status": "STARTED", "stage": "beforeload", "pid": os.getpid(), "model_loads": 0,
+                "source_pins": pins, "native_library": str(library), "fixed_cap": CAP, "requests": [],
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+-               "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
++               "ICB_scope": "whole pure functional decode mx.compile(shapeless=False),cold eval outsidecapture then warm compiled_fn invocation captured as native ICB", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
+-               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
++               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA,
++               "actual44_gold_sha256":ACTUAL44_SHA,"origin":"independent current-task hypothesis; installed oMLX GenerationBatch._step has NO whole-step mx.compile",
++               "numeric_policy":"strict originalshape/dtype/finite/Cmemcmp93x132; first cold mismatch STOP, no tolerance widening"}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+     parameter_holders, seed_holders, output_holders = [], [], []
+@@ -235,7 +245,7 @@
+                                       "source_proof":json.loads((D/"baseline-source-proof.json").read_text()),"same_weights_load":True}
+ 
+         eos = read_eos_ids(w["model_dir"]); receipt["eos_ids"] = sorted(eos)
+-        receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, whole_functional_off=True)
++        receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, whole_functional_off=False, external_compiled_pure_step=True)
+         write(args.out / "model-ready.json", {"pid": os.getpid(), "token_executed": False, "model_loads": 1})
+         save(); print(json.dumps({"event": "MODEL_READY", "pid": os.getpid()}), flush=True)
+ 
+@@ -281,18 +291,47 @@
+         labels_out = ("logits",) + tuple(f"state.{i}" for i in range(128)) + ("prediction", "next_positions", "next_lens")
+         seed_holders = [shared(v,n) for v,n in zip(capture_seed,labels_in)]
+         seed_baselines = [h.raw() for h in seed_holders]  # once at capture, never per-step
+-        capture_ctx = ForwardContext("decode", ctx_layers(capture_seed[3:]), positions=capture_seed[1], lens=capture_seed[2], max_len=CAP)
+-        mx.eval(*(v for cache,layer in zip(capture_ctx.caches,model.layers) for v in ((cache.K,cache.V) if layer.is_attn else (cache.conv,cache.S))))
+-        mx.synchronize(); resources.sample("seed-ready-before-capture", loaded=True, mx=mx)
+-        native.call("v33_begin"); armed = True
++        # Compile/evaluate outside native capture using only explicit131 seed arrays.
++        pure_module=module("v74_functional_step",D/"functional_step.py")
++        trace_counts={"pure_body":0}
++        def observed_trace():trace_counts["pure_body"]+=1
++        pure,detach_trace=pure_module.make_pure(model,backend=mx,kv_type=BatchKV,state_type=BatchState,context_type=ForwardContext,max_len=CAP,on_trace=observed_trace)
++        forbidden_closures={"capture_seed","tokens","positions","lens","flat","ctx","capture_ctx","seed_holders"}
++        assert not forbidden_closures.intersection(pure.__code__.co_freevars)
++        compiled_fn=mx.compile(pure,shapeless=False)
+         with capture_norm_engagement():
+-            logits = model(capture_seed[0], capture_ctx)
+-            captured = outputs(logits, state_of(capture_ctx), capture_seed[1], capture_seed[2]); assert len(captured) == 132
+-            mx.eval(*captured); mx.synchronize()
+-        native.call("v33_end_build"); armed = False
+-        assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
+-        receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"normreuse_cache_ON_metadata":True,
+-                                               "counter_removed_after_capture":GDN._decode_conv_norm_reuse_cache is candidate_norm}
++            cold_outputs=tuple(compiled_fn(*capture_seed));assert len(cold_outputs)==132
++            mx.eval(*cold_outputs);mx.synchronize()
++        cold_traces=trace_counts["pure_body"];cold_GDN_calls=len(norm_capture_calls)
++        assert cold_traces>=1 and cold_GDN_calls==48*cold_traces and set(norm_capture_calls)==set(map(id,gdns))
++        receipt["compiled_cold"]={"status":"CHECKING","inputs":131,"outputs":132,"shapeless":False,"fixed_cap":CAP,"trace_count":cold_traces,"GDN_python_calls":cold_GDN_calls,"pure_closure_names":list(pure.__code__.co_freevars),"seed_originals_readonly":originals_readonly(native,seed_holders,seed_baselines,"after-cold-compile-eval"),"outputs_checked":[],"scope":"additionalcoldqualification outside nativecapture/93steps/timing"}
++        save()
++        cold_holders=[shared(v,label) for v,label in zip(cold_outputs,labels_out)]
++        cold_gold=actual44_cases["base"]["steps"][0]["outputs"]
++        for index,(holder,gold) in enumerate(zip(cold_holders,cold_gold)):
++            try:sig=metadata_finite(np,holder)
++            except BaseException:
++                (args.out/"cold-first-failure.raw").write_bytes(bytes(holder.bytes_view))
++                write(args.out/"cold-first-failure.json",{"index":index,"label":holder.label,"reason":"nonfinite/metadata validation","actual":holder.meta,"expected_actual44":gold});raise
++            exact=(sig["label"]==gold["label"] and sig["shape"]==gold["shape"] and sig["dtype"]==gold["dtype"] and sig["nbytes"]==gold["bytes"] and sig["sha256"]==gold["A_sha256"])
++            row={"index":index,"actual":sig,"expected_actual44":gold,"strict_raw_SHA_match":exact}
++            receipt["compiled_cold"]["outputs_checked"].append(row);save()
++            if not exact:
++                (args.out/"cold-first-failure.raw").write_bytes(bytes(holder.bytes_view));write(args.out/"cold-first-failure.json",row)
++                raise AssertionError(("FIRST_COLD_NUMERIC_FAIL_STOP",index,holder.label))
++        receipt["compiled_cold"]["status"]="PASS_ALL132_SAVED_ACTUAL44_A_RAW_HASHES_AND131_READONLY"
++        # Release cold output owners before warm compiled invocation is captured.
++        del cold_outputs,cold_holders,holder
++        mx.synchronize();resources.sample("compiled-cold-all132-pass-before-capture",loaded=True,mx=mx);save()
++        native.call("v33_begin");armed=True
++        with capture_norm_engagement():
++            captured=tuple(compiled_fn(*capture_seed));assert len(captured)==132
++            mx.eval(*captured);mx.synchronize()
++        native.call("v33_end_build");armed=False
++        assert trace_counts["pure_body"]==cold_traces and len(norm_capture_calls)==cold_GDN_calls,"capture unexpectedly retraced Python; STOP"
++        detach_trace()
++        receipt["B_compiled_step_capture_engagement"]={"compiled_function_inputs":131,"compiled_function_outputs":132,"cold_trace_count":cold_traces,"capture_trace_delta":trace_counts["pure_body"]-cold_traces,"cold_GDN_python_calls":cold_GDN_calls,"capture_GDN_python_calls":len(norm_capture_calls)-cold_GDN_calls,"trace_observer_detached_before_native_replay":True,"GDN_observer_removed":GDN._decode_conv_norm_reuse_cache is candidate_norm,"nativeS48_actual_binding_eligibility_required":True,"no_new_S_whitelist":True}
++        assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+         for value,label in zip(captured,labels_out):
+             h = shared(value,label); output_holders.append(h)
+             native.call("v33_register_output",h.address,h.nbytes,label.encode())
+@@ -330,6 +369,13 @@
+         assert fb["CPU_full_state_restore_per_step"] is False
+         pp=fb["pingpong"]
+         assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
++        assert len(pp["pairs"])==48
++        for pair in pp["pairs"]:
++            uses=pair["actual_binding_uses"];assert pair["eligible"] and pair["bytes"]==3145728 and len(uses)==2
++            assert {u["PSO"] for u in uses}==allowed_state_PSOs and len({u["dispatch"] for u in uses})==1
++            oldS=next(u for u in uses if u["argument"]=="S");newS=next(u for u in uses if u["argument"]=="S_new")
++            assert oldS["index"]==6 and oldS["access"]==0 and newS["index"]==9 and newS["access"]!=0
++        receipt["compiled_capture_S_actual_proof"]={"pairs":48,"S_index":6,"S_new_index":9,"exact_old40_PSO_functions":sorted(allowed_state_PSOs),"actual_eligible":48,"new_whitelist":False}
+         resources.sample("after-capture-seal",loaded=True,mx=mx); save()
+         total_steps = 0
+         for name,prompt,canonical in cases:
+@@ -381,6 +427,8 @@
+                     archived=archived_outputs[reference.label]
+                     assert sig["shape"]==archived["shape"] and sig["dtype"]==archived["dtype"] and sig["nbytes"]==archived["bytes"]
+                     assert sig["sha256"]==archived["A_sha256"],("A differs from actualsavedV38 oldbaseline",name,step,reference.label)
++                    gold44=actual44_cases[name]["steps"][step-1]["outputs"][len(equal)]
++                    assert gold44["label"]==reference.label and gold44["shape"]==sig["shape"] and gold44["dtype"]==sig["dtype"] and gold44["bytes"]==sig["nbytes"] and gold44["A_sha256"]==sig["sha256"],("A differs from actual44",name,step,reference.label)
+                     native.call("v34_compare_output",original.address,original.nbytes,ctypes.c_void_p(reference.address))
+                     equal.append({"label":reference.label,"shape":sig["shape"],"dtype":sig["dtype"],
+                                   "bytes":sig["nbytes"],"finite":True,"strict_bytes_equal":True,"A_sha256":sig["sha256"]})
+@@ -429,9 +477,12 @@
+         assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(model.parameters())]
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
++        assert total_steps==93 and all(len(r["steps"])==31 and r["A_ids"]==actual44_cases[r["name"]]["A_ids"] for r in receipt["requests"])
++        assert trace_counts["pure_body"]==cold_traces
++        receipt["compiled_trace_count_after_native_replay"]=trace_counts["pure_body"]
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+-                       source_pins_verified_final=True,gates_callable_count=48)
++        receipt.update(status="PASS_V74_COMPILED_PURE_STEP_NATIVE_ICB_93X132_STRICT",stage="complete",native_steps=total_steps,
++                       source_pins_verified_final=True,gates_callable_count=48,strict_output_checks=93*132,additional_cold_hash_checks=132)
+         save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)

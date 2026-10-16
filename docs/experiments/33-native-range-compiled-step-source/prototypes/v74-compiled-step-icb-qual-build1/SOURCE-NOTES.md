@@ -1,0 +1,12 @@
+V74 is an independent hypothesis authorized by root, not an oMLX whole-step compile transplant.
+Actual installed donor: omlx0.7.1.dev1 + mlx-lm0.31.4.dev132+g94cdcae13 (METADATA files pinned).
+mlx_lm/generate.py:1355–1367 GenerationBatch._step has no compile decorator and directly calls self.model;:1403–1405 assigns/async_eval next results;:1410–1414 evals and returns current token results.
+omlx/scheduler.py:773–794 wrapper realigns sampler/grammar then calls original_step;:798 installs wrapper;:14085–14086 drives next_generated. This path contains no whole-generation-step mx.compile.
+mlx_lm/models/gated_delta.py:18–20 compute_g and:23–30 lower-bound gate are compiled leaves;:631–633 selects these in gated_delta_update. :384 decorates _gated_delta_step_ops, the ops-based reference fallback, not a compiled whole generation step. Do not label it prework or prove it engaged merely from presence.
+Our frozen41adapter native_runner.py:108–126 builds Context then directmodel→132outputs→eval inside v33 capture; no whole-step compile. :56 rejects an installed functional helper.
+Historical24 functional_decode.py:125–140 constructs pure(logits+128state),:153 uses compile(shapeless=False). Actual24cold31miss and same-L1miss3hits numerical PASS; no nativeICB there.
+Historical25 fullqual.py:319–323 and:386–390 invoke helper.functional; no Native class/capture. Actualcombined25 numericPASS946fdf41… and separateC1screen7932b94e… did not qualify a wholecompiledstep→native40ICB.
+Historical23 conv qualification is a conv/silu prototype, not compiledstepICB. Original34 and44 native qualification capture directmodel. This known qualified lineage does not cover V74's boundary.
+V74 keeps candidate44/defaults/native40 exact. It adds external pure131→132 fixedL256 compile, includes original argmax/nextpos/nextlens inside pure; coldcompile/eval and first132 old44 A hashes+seedreadonly outsidecapture.
+B capture calls only warmed compiled_fn(*seed), evals all132. No PythonGDNcall engagement requirement on compiled hits; cold/capture trace/GDN observers detached before native replay. Actual48S eligibility must remain exact qualifiedold40 PSO with S6RO/S_new9store and same-dispatch uses; no new inferred whitelist.
+93×132 strict originalA/runtimeCmemcmp and old44/V38A hashes,32IDs/readonly/oldfeedback/reset remain required. First cold/full numeric mismatch FAIL_STOP; no tolerance widening, no performance/adoption claim.
