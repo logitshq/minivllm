@@ -2,8 +2,8 @@
 
 2026-10-16。共享仓库 `logitshq/minivllm`；M5 分支为
 `experiment/m5-ultra-256gb`。本分支已合入 M4 分支
-`tutorial/18-gdn-projection-packing` 的 `1363d9f`（截至2026-10-16再次fetch），
-包含第22–36章原生执行、投影/归一化、CAP64及失败记录。此次合并没有改变
+`tutorial/18-gdn-projection-packing` 的 `0ed8df8`（2026-10-16最终fetch），
+包含第22–37章原生执行、投影/归一化、CAP64、SIMD4及失败记录。此次合并没有改变
 M5 已测量的引擎源码；M4 的原型仍是未接入状态。
 
 ## 先看这些提交和结果
@@ -69,19 +69,33 @@ VCS提交；本地源码checkout的SHA不代表被测wheel。已纠正报告中�
 M5新实验E007（独立大batch GDN融合）、E008（allocator 2/16 GiB配对）、
 E009（线程内状态读取复用）均未过预声明收益门，保留原型和证据，未改生产引擎。
 E008有12个新HTTP进程、1,170条正式请求，C64配对吞吐几何平均仅+0.131%；
-更大池多占约14 GiB空闲buffer，不采用。下一项E010计划检查M5成组prefill/NAX，
-不能直接删除旧backend guard。
+更大池多占约14 GiB空闲buffer，不采用。随后E010已完成M5成组prefill/NAX资格，
+见下文；没有直接删除旧backend guard。
 
 M4的`17bd7be`[卷积融合报告](../experiments/21-gdn-conv-fusion.md)已合入：局部micro下降12.21%是继续做模型资格的
 依据，不是HTTP收益；与这里大batch的E007/E009不是同一个实验，不能互相替代。
 
-## E010进行中：M5保留M=T的NAX分组
+## E010已过采用门：M5保留M=T的NAX分组
 
 29组模型正确性、448层级检查和16步真实调度通过。核心候选只改layers及runner，
 用广播packed weight保留单序列的NAX tile；旧split-K投影仍逐行。M4继续使用原legacy
 路径，不能移除硬件/版本guard套用M5结论。
 
 初筛完整prefill约1.26–1.42×，但HTTP发现另一活跃`omlx-server`被旧matcher漏识别，
-计时受干扰。因此本提交是**资格中的候选**，不是新HTTP/Pareto胜出；受干扰数据完整
-保留，正在用可执行名探针、用户授权暂停/恢复服务和最终核心源码重跑。
-请以[实验账本E010](../optimization-guide/experiments.md)的后续采用结论为准。
+计时受干扰。该阶段的受干扰数据完整保留；随后使用可执行名探针、用户授权暂停/恢复服务，
+直接对最终核心完成24进程配对和独立重算。C8/C32/C64吞吐几何平均分别
++14.68%/+12.30%/+14.54%，TTFT −26.29%/−24.42%/−23.02%；通过预声明门，
+采用核心`b33b282`。C64最后一对增益仅6.73%，保留所有样本。
+C2/C4/C16另外各三新进程补齐当前前沿；外部对照沿用归档并明确标注历史来源。
+[实验账本E010](../optimization-guide/experiments.md)和[NAX设计攻略](../optimization-guide/prefill-design.md)包含范围与复现边界。
+
+[最终报告与33进程证据](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md)及
+[当前前沿图](../experiments/m5-ultra-256gb/prefill-nax-v2/current-native-frontier.png)已保存。
+当前native C1/2/4/8/32组成联合前沿，覆盖9/9历史非spec外部配置中位数；
+仅适用于此19→32短负载，不声称覆盖MTP/DFlash2或Lithos DSpark。
+外部oMLX服务已恢复，同一PID/start身份通过，`/v1/models`返回HTTP200。
+
+已阅读M4的[最新交接](256gb-mac/PROGRESS-20261016.md)，并运行第37章stdlib verifier：
+258源码身份、566文本成员、797依赖绑定通过。V105 thermal STOP及V107 HOLD保持原样；
+这些归档不构成M5上CAP64/SIMD4/投机路径的运行资格。M5本轮继续target-only，
+没有与M4正在进行的V108/V109混合，也没有将两机数据pool。

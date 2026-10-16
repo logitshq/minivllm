@@ -5,7 +5,9 @@
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
+[NAX prefill设计](prefill-design.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
+[最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
 
 ## 1. 先算每个 token 为哪些字节和等待付钱
@@ -122,7 +124,9 @@ ID / 日期 / 基线commit / 论文或源码来源
 | 长上下文 | 8192/128，先确认内存 | 1、4、8 | KV流量、TTFT、峰值内存 |
 | 混合到达 | 不同prompt/输出长度，固定到达trace | 逐级增压 | p95排队、尾延迟、公平性 |
 
-本轮allocator配对未过收益门，保持2 GiB。下一项优先测M5成组prefill/NAX，
-其余固定buffer/设备执行计划、自适应投机按实际成本占比排序。
+allocator配对未过收益门，保持2 GiB。E010的M5成组prefill/NAX已过采用门：
+C8/C32/C64配对吞吐约+14.7%/+12.3%/+14.5%，只改两个核心文件。
+下一项先测真实混合长度/到达trace与长度分桶；其余固定buffer/设备执行计划、
+自适应投机按实际成本占比排序。
 对可能带来数量级变化的方案大胆建小原型；对
 不足以影响端到端结果的小kernel变化及时止损。
