@@ -1,0 +1,54 @@
+{
+  "status": "PASS_INDEPENDENT_CPU_SOURCE_REVIEW_NOT_GPU_QUALIFICATION",
+  "reviewer_scope": "author of old65/99, not author of new101/102/103",
+  "sets": {
+    "v101-native-cap64-direct-async-build1": {
+      "count": 81,
+      "pins_sha256": "5736e3bd646115620ea37d64acf0a86b75133ae7f01c05f66a3146059d297a38",
+      "READY_sha256": "89d9f398246461cba2882f61b958597ee3869b4340b4aa949cca73b41ef8e544"
+    },
+    "v102-native-cap64-direct-async-runner-build1": {
+      "count": 39,
+      "pins_sha256": "58e15faf6aef88fc3123a762e535ffe7b5503dfa47a01113435e2dc663633466",
+      "READY_sha256": "519bf378fa364b7e175f9f828d84fb25927be0e17976baa74ea16bd827ab205c"
+    },
+    "v103-native-cap64-direct-async-qual-build1": {
+      "count": 189,
+      "pins_sha256": "f68aa8621ddde8a16b92547da6a2c43250e816bf1cb150488ab4418ee3d97766",
+      "READY_sha256": "13f9c530de8a0a084fe87c85249d874fd243351145f6dcaf31703de451485057"
+    }
+  },
+  "native101_inverse_exact62": true,
+  "headers_exact62": true,
+  "worker103_sha256": "2f4eb25d8c728868e908516f747917fecbb9714b83f1fa058f178939bdec2426",
+  "checks": {
+    "102tests": {
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "84ff24306afcf5e19892adf32493aa9bc9dbc8db16870c6155e8e03c23864a33"
+    },
+    "103tests": {
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e19a86747084065fc6026e9e5463e2291a2e56061843e8a27e0424f4fed284be"
+    },
+    "103inert-diagnostic": {
+      "returncode": 0,
+      "stdout_sha256": "ad704549749970b9685739d9de71a1ad9f2f0ad0cfa1a7ae5441cf75df7b81f3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "103inert-production": {
+      "returncode": 0,
+      "stdout_sha256": "4b09d0a33e03425c0114f76f98b97bd3b99d7d508588d6cbcdec6bcafe571a11",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "GPU_used": false,
+  "MLX_imported": false,
+  "NumPy_imported": false,
+  "native_library_loaded": false,
+  "authors_sources_modified": false,
+  "report_sha256": "5ae8bdd36896f3a58b641a0e4236cf5aa766649b4238e1e8fcf7deb363c5e6f3",
+  "conclusion": "No concrete source blocker; root actual103diag/prod still required",
+  "report_lines": 16
+}

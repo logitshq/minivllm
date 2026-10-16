@@ -1,0 +1,35 @@
+{
+  "status": "PASS_CPU_COMPILE_SOURCE_INVERSE_AND_UBSAN_GUARDS",
+  "parent": "/private/tmp/minivllm-engine-optimization-20261014/v62-native-direct-pipeline-build2/replay.mm",
+  "parent_sha256": "91089b497647bcbb19c5219a385c9b3854847690aa60f3780f2dd66862124b9e",
+  "new_source_sha256": "2ce55831e1f2b02aa102cab5985553e25d72bdf9bd2482d53ec5535284a22687",
+  "inverse_patch_exact_parent": true,
+  "changes": "seal accepts64/256; two sync/async pos guards short-circuit p>=capacity before p+1; diagnostic message only",
+  "headers_exact_parent": {
+    "pipeline_core.h": true,
+    "feedback_plan.h": true,
+    "direct_policy.h": true,
+    "ABI.h": true
+  },
+  "GPU_used": false,
+  "dylib_loaded": false,
+  "CPU_native_compile_exit": 0,
+  "CPU_UBSan_boundary_checks": 802,
+  "sync_async_actual_predicates_identical": true,
+  "boundary_CPP_uses_actual_predicate_except_F_capacity_name": true,
+  "library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+  "compile_argv": [
+    "/usr/bin/clang++",
+    "-std=c++17",
+    "-O2",
+    "-fno-objc-arc",
+    "-dynamiclib",
+    "-framework",
+    "Foundation",
+    "-framework",
+    "Metal",
+    "/private/tmp/minivllm-engine-optimization-20261014/v101-native-cap64-direct-async-build1/replay.mm",
+    "-o",
+    "/private/tmp/minivllm-engine-optimization-20261014/v101-native-cap64-direct-async-build1/libv101replay.dylib"
+  ]
+}

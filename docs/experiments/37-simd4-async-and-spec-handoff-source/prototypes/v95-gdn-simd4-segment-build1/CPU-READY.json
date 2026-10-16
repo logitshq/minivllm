@@ -1,0 +1,43 @@
+{
+  "status": "CPU_READY_GPU_UNRUN",
+  "GPU_executed": false,
+  "MLX_imported": false,
+  "native_library_loaded": false,
+  "model_loaded": false,
+  "benchmark_run": false,
+  "performance_driver_provided": false,
+  "native_or_engine_integrated": false,
+  "cpu_tests_passed": 6,
+  "CPU_identity_cli_rc": 0,
+  "saved_banks_verified": 15,
+  "saved_binary_files_verified": 60,
+  "source_pins": 34,
+  "old_V44_pin_subset_preserved": true,
+  "A": "V44 unchanged public two-kernel",
+  "B": "V95 held32 4sp x8dv per SIMD; canonical physical S",
+  "expected_numeric_checks": {
+    "lane_probe_rows": 128,
+    "strict_o_S_checks": 30,
+    "readonly_cases": 15
+  },
+  "actual_PSO_reflection_observed": false,
+  "expected_state_PSO": "gdn_simd4_segment_cached_state_v95_build1",
+  "source_hashes": {
+    "gdn_activated_simd4_segment_metal.py": "7f2d0136301079436839fbdee494a5c8849ffdd1f8861c9f78be05029819c5a6",
+    "numeric.py": "a810e589d87f5d4d0ecffeb0418820ad5ec5fd1ebab7380db333d1e4d2834980",
+    "check_cpu.py": "443f85d48ab6ce347324d75ce6fef922417bb2aa5822d01b3128fea9055ab542",
+    "source-proof.json": "fdad154e299718872be2bc8b7a625437a70454cce0a897e4af287593baaedca8",
+    "source-pins.json": "d1bdea4f0754058fb90ec13a062e8b53bfa6c344c8bb71a316a4d8ce040373ec",
+    "helper.diff": "ae653853e26da9020e19c06812704239b35837c930af64080acc1012ec48d1cc",
+    "cpu-check.log": "46f2d84bfe093b26b7bcf5ac58897d67f9784fc95a0494869930d59b5496eced",
+    "cpu-identity.log": "c961065f3160bfcbad8c63487a9fce578b572899326862748ecbcd97eb8d5067",
+    "README.md": "17e934c397ed2a3a25bab6c2277c638d53fd1092cf880287654afa35591ee629"
+  },
+  "cpu_cli": [
+    "python3 -B /private/tmp/minivllm-engine-optimization-20261014/v95-gdn-simd4-segment-build1/check_cpu.py",
+    "python3 -B /private/tmp/minivllm-engine-optimization-20261014/v95-gdn-simd4-segment-build1/numeric.py"
+  ],
+  "root_gpu_cli": "env MLX_MAX_OPS_PER_BUFFER=50 MLX_MAX_MB_PER_BUFFER=50 MLX_BFS_MAX_WIDTH=20 MLX_METAL_FAST_SYNCH=0 /Users/ryanli/code/minivllm/.venv/bin/python -B /private/tmp/minivllm-engine-optimization-20261014/v95-gdn-simd4-segment-build1/numeric.py --execute-gpu --out ABSOLUTE_NEW_OUTPUT_DIRECTORY",
+  "active_child_processes": 0,
+  "authoring_frozen": true
+}

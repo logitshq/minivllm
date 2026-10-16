@@ -1,5 +1,7 @@
 # 256GB Mac 交接包
 
+**最新进展先读 [2026-10-16补记](PROGRESS-20261016.md)**：V99完整资格、V103诊断/生产资格，以及V105 HTTP thermal STOP；整体尚未胜出。
+
 先将 [HANDOFF.md](HANDOFF.md) 交给目标机 agent。clone 实验分支或 `m4-max-final-tests-20261015-v1` 后进入本目录，先核验再展开：
 
 ```sh

@@ -1,0 +1,73 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v95-gdn-simd4-segment-build1/gdn_activated_simd4_segment_metal.py
+@@ -1,7 +1,6 @@
+-"""V44 already-activated BF16 norm-reuse + held32 candidate; GPU unqualified.
+-V40 state body/name, serial norm, header and safe compile policy stay exact.
+-Prework only loads already-activated BF16 values; it never applies SiLU.
+-Import is inert; no engine connection or performance claim.
++"""V95 held32 four-segment SIMD transport candidate; GPU unqualified.
++V44 activated prework, norm, physical state, local expressions and safe policy stay exact.
++Only state lane mapping and four-part transport change; no engine or timing connection.
+ """
+ 
+ SPLIT = 4
+@@ -79,9 +78,11 @@
+ '''
+ 
+ _STATE_SOURCE = r'''
+-    uint dv_local = thread_position_in_threadgroup.x;
++    uint lane = thread_index_in_simdgroup;
++    uint dv_in_simd = lane % 8;
++    uint dv_local = thread_position_in_threadgroup.y * 8 + dv_in_simd;
+     uint dv = threadgroup_position_in_grid.x * VALUE_TILE + dv_local;
+-    uint sp = thread_position_in_threadgroup.y;
++    uint sp = lane / 8;
+     uint h  = threadgroup_position_in_grid.y;
+     uint b  = threadgroup_position_in_grid.z;
+     uint Hv = S_shape[1];
+@@ -93,7 +94,6 @@
+     size_t base = (size_t)bh * Dk * Dv;
+     const device float* qh = q_ready + (size_t)(h / 3) * Dk;
+     const device float* kh = k_ready + (size_t)(h / 3) * Dk;
+-    threadgroup float red[SPLIT * VALUE_TILE];
+     float qs = scales[(h / 3) * 2];
+     float ks = scales[(h / 3) * 2 + 1];
+     float ex = metal::exp(g[bh]);
+@@ -106,10 +106,9 @@
+         held[j] = S[base + d * Dv + dv];
+         kv += ks * kh[d] * held[j];
+     }
+-    red[sp * VALUE_TILE + dv_local] = kv;
+-    threadgroup_barrier(mem_flags::mem_threadgroup);
++    float kv_part = kv;
+     kv = 0.0f;
+-    for (uint i = 0; i < SPLIT; i++) kv += red[i * VALUE_TILE + dv_local];
++    for (uint i = 0; i < SPLIT; i++) kv += simd_shuffle(kv_part, dv_in_simd + i * 8);
+     float delta = (v[(size_t)bh * Dv + dv] - ex * kv) * be;
+     float acc = 0.0f;
+     #pragma unroll 32
+@@ -119,12 +118,10 @@
+         S_new[base + d * Dv + dv] = s;
+         acc += qs * qh[d] * s;
+     }
+-    threadgroup_barrier(mem_flags::mem_threadgroup);
+-    red[sp * VALUE_TILE + dv_local] = acc;
+-    threadgroup_barrier(mem_flags::mem_threadgroup);
++    float acc_part = acc;
++    acc = 0.0f;
++    for (uint i = 0; i < SPLIT; i++) acc += simd_shuffle(acc_part, dv_in_simd + i * 8);
+     if (sp == 0) {
+-        acc = 0.0f;
+-        for (uint i = 0; i < SPLIT; i++) acc += red[i * VALUE_TILE + dv_local];
+         o[(size_t)bh * Dv + dv] = acc;
+     }
+ '''
+@@ -191,7 +188,7 @@
+     global _state_kernel
+     if _state_kernel is None:
+         _state_kernel = _make_kernel(
+-            mx, "gdn_norm_reuse_cached_state_v40_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
++            mx, "gdn_simd4_segment_cached_state_v95_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
+             ["o", "S_new"], _STATE_SOURCE.replace("SPLIT", str(SPLIT)).replace("VALUE_TILE", str(VALUE_TILE)),
+         )
+     return tuple(_state_kernel(

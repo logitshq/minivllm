@@ -1,0 +1,69 @@
+{
+  "status": "CPU_SOURCE_EQUIVALENCE_INTENT_NOT_GPU_PROOF",
+  "A": "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py",
+  "B": "/private/tmp/minivllm-engine-optimization-20261014/v95-gdn-simd4-segment-build1/gdn_activated_simd4_segment_metal.py",
+  "unchanged_bytes": [
+    "HEADER",
+    "_NORM_BODY",
+    "_PREWORK_SOURCE",
+    "_NORM_PROBE_SOURCE",
+    "held32 local kv accumulation loop",
+    "held32 update and local acc loop"
+  ],
+  "wrapper_AST_change_only": "state PSO name gdn_norm_reuse_cached_state_v40_build1 -> gdn_simd4_segment_cached_state_v95_build1",
+  "state_physical_layout": "[B,Hv,Dk,Dv], base+d*Dv+dv unchanged",
+  "TG": [
+    32,
+    4,
+    1
+  ],
+  "grid": [
+    128,
+    192,
+    1
+  ],
+  "mapping_expected": {
+    "lane": "thread_index_in_simdgroup (actual integer probe must equal TG.x)",
+    "sp": "lane/8",
+    "dv_local": "TG.y*8+lane%8",
+    "d0": "sp*32",
+    "each_SIMD": "4 K segments x 8 dv, all32 lanes active",
+    "each_TG": "4 SIMDs cover32 dv and128 K"
+  },
+  "transport_changes_only": [
+    "remove red[4*32] threadgroup array",
+    "remove three state threadgroup barriers",
+    "kv_part and acc_part register copies preserve per-segment held32 sums",
+    "each merge initializes +0.0f and serially adds sp0,sp1,sp2,sp3 via uniform simd_shuffle at lane%8+i*8",
+    "only sp0 writes o after all shuffle loops complete"
+  ],
+  "source_loop_counts": {
+    "local32_term_loops": 2,
+    "serial4_part_merge_loops": 2,
+    "shuffle_call_sites": 2,
+    "state_TG_barriers": 0,
+    "prework_TG_barriers": 1
+  },
+  "not_old27": "no held4, transposed state or simd_sum",
+  "not_old29": "no per-term shuffle; held32 local chains retained; four part transports per reduction",
+  "memory_tradeoff": "one SIMD S load/store instruction touches four separated32B spans rather than old contiguous128B; same total canonical state bytes; hardware coalescing/cache effect unknown",
+  "qualify_next": "root GPU-only observation: lane probe + 15 fixed saved banks, finiteF32 raw o/S strict30, readonly15; fail-stop; no feedback",
+  "actual_PSO_reflection_observed": false,
+  "expected_ABI_only": {
+    "input_names": [
+      "q_ready",
+      "k_ready",
+      "v",
+      "scales",
+      "g",
+      "beta",
+      "S"
+    ],
+    "S_input_slot": 6,
+    "S_output_slot": 9
+  },
+  "math_equivalence_caveat": "source fold order is retained; safe compiler register allocation/FMA/contraction and generated SIMD code still require actual numerical validation",
+  "performance_claim": false,
+  "native_integration": false,
+  "model_integration": false
+}

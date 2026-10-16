@@ -1,0 +1,12 @@
+{
+  "target_loader": "load_model(model_dir,dtype=mx.bfloat16)->(Qwen3_5ForCausalLM,ModelConfig)",
+  "single_target_engine": "LLMEngine(model_dir,max_seqs=1,max_len=64,max_batched_tokens=512,dtype=mx.bfloat16,cache_limit_gb=2,drafter_dir=externalDFlash2,spec_block=5)",
+  "draft_loader": "load_drafter(model_dir,quantize={group_size:64,bits:4,mode:affine}); actual loaded draft parameter count and memory must be observed",
+  "spec_step": "SpecRunner.step(req,caches,history)->(produced_token_IDs,new_feats[:accepted+1])",
+  "chunk_forward": "gated_delta_rule_chunk(...,state=None,chunk=64)->(o,last_S); S advances once per chunk, not per token",
+  "GDN_snapshot": "_snap=(conv_state,S,offset); record=True",
+  "GDN_tape": "(raw_qkv,q,k,v,g,beta), no per-token S trajectory",
+  "GDN_rollback": "rollback(n) calls gated_delta_rule_chunk(prefix,S0) without chunk keyword; current default64",
+  "verify_geometry": "GDN._prefill selects chunk8 for T<=8; spec_block5 therefore one chunk8, no materialized intermediate prefix S",
+  "attention_rollback": "offset only; rejected future K/V columns remain physically written and need an explicit byte-span/tail policy for any exact cache claim"
+}

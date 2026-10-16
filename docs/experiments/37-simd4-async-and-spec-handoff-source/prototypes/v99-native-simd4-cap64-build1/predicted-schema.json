@@ -1,0 +1,76 @@
+{
+  "status": "PREDICTED_NOT_OBSERVED",
+  "function": "custom_kernel_gdn_simd4_segment_cached_state_v95_build1_float_float_float_float_float_float_float_float_float",
+  "active_arguments": [
+    {
+      "index": 0,
+      "name": "q_ready",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 1,
+      "name": "k_ready",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 2,
+      "name": "v",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 3,
+      "name": "scales",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 4,
+      "name": "g",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 5,
+      "name": "beta",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 6,
+      "name": "S",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 7,
+      "name": "S_shape",
+      "type": 0,
+      "access": 0
+    },
+    {
+      "index": 8,
+      "name": "o",
+      "type": 0,
+      "access": 1
+    },
+    {
+      "index": 9,
+      "name": "S_new",
+      "type": 0,
+      "access": 1
+    }
+  ],
+  "source95_helper_sha256": "7f2d0136301079436839fbdee494a5c8849ffdd1f8861c9f78be05029819c5a6",
+  "basis": "same44 templates/inputs/outputs/S_shape runtime metadata; only kernel.name differs; actual fullschema hard-gated before native replay",
+  "S_input_slot": 6,
+  "S_output_slot": 9,
+  "state_store_only": "S_new only appears as store lhs; o only appears as store lhs",
+  "existing_alias_rules_unchanged": true,
+  "donor_actual_schema_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v81num-attempt1/child-output/native-built.json",
+  "donor_actual_schema_sha256": "dc1ca21e190cbe8a266df28f56098a80aee417bc2a505885ded43f797c4bb2c5",
+  "donor_actual_function": "custom_kernel_gdn_norm_reuse_cached_state_v40_build1_float_float_float_float_float_float_float_float_float",
+  "access_enum": "MTLArgumentAccessReadOnly=0, ReadWrite=1, WriteOnly=2; donoroutputs8/9 actuallyReadWrite1, sourceknownstoresonly"
+}

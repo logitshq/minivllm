@@ -1,0 +1,81 @@
+{
+  "status": "PASS_CPU_SAVED_V99_INTEGRATION_RESULTS_AUDIT",
+  "reviewer_relationship": "V95 author; independent99 integration savedresult review, not independent95 math implementation",
+  "actual_receipt_SHA256": "11654508130ba3d880a29075ae608db2d5aa97c33763d69ff5b69f1bbb1ae2f5",
+  "pins_verified": 153,
+  "actual_imported_sources": 18,
+  "actual_full10_schema_observed": true,
+  "S_input_access": "slot6 RO0",
+  "S_new_output_access": "slot9 RW1",
+  "helper_engagement": {
+    "calls": 48,
+    "distinct_GDN_objects": 48,
+    "helper_calls": 48,
+    "all48enabled": true,
+    "hooks_removed_before_replay": true
+  },
+  "counts_recomputed": {
+    "steps": 93,
+    "strict_outputs": 12276,
+    "old38_hash_equal": 12276,
+    "old44_hash_equal": 12276,
+    "KV_tail_records": 2976,
+    "readonly_array_checks": 36642,
+    "readonly_input_steps": 93,
+    "B_step_upload_calls": 0,
+    "seed_upload_calls": 393,
+    "IDs_each_arm": 96
+  },
+  "requests": [
+    {
+      "name": "base",
+      "steps": 31,
+      "old38_44_A_B_all32_IDs_equal": true,
+      "changed_seed_ranges": 0
+    },
+    {
+      "name": "reset-base",
+      "steps": 31,
+      "old38_44_A_B_all32_IDs_equal": true,
+      "changed_seed_ranges": 0
+    },
+    {
+      "name": "changed-prefill",
+      "steps": 31,
+      "old38_44_A_B_all32_IDs_equal": true,
+      "changed_seed_ranges": 129
+    }
+  ],
+  "parameter_identity_preserved": 1349,
+  "ICB": {
+    "banks": 2,
+    "GDN_S_pairs": 48,
+    "staged_links": 83,
+    "commands_per_bank": 1625,
+    "executions": 93
+  },
+  "physical_CAP": 64,
+  "CPU_canonical_CAP": 256,
+  "resources": {
+    "outer": 22,
+    "child": 33,
+    "external": 1,
+    "pressure": 1,
+    "swap_MB": 5006.88,
+    "Swapouts": 17460761,
+    "AC_percent": 100,
+    "thermal": "nominal"
+  },
+  "lifecycle": {
+    "owner": 4088,
+    "child": 4103,
+    "rc": 0,
+    "reaped": true,
+    "external_release": "PASS"
+  },
+  "GPU_used": false,
+  "MLX_imported": false,
+  "frozen_source_modified": false,
+  "performance_or_adoption_qualified": false,
+  "limitations": "saved hashes/counts/native memcmp assertions audited; full tensor raw corpus not retained; resource inventories and snapshots have their original scope"
+}

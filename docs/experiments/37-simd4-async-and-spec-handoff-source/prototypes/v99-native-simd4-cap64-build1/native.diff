@@ -1,0 +1,31 @@
+--- frozen89/replay.mm
++++ native99/replay.mm
+@@ -180,7 +180,7 @@
+  // Device scalar values are inspected only as bounds guards, never as feedback.
+  int32_t token=-1,pos=-1,len=-1;
+  for(auto&x:F().inputs){auto*p=(const char*)S().arena.contents+arenaInput(x);if(x.role==1)memcpy(&token,p,4);if(x.role==2)memcpy(&pos,p,4);if(x.role==3)memcpy(&len,p,4);}
+- if(token<0||pos<0||len!=pos+1||len>(int)F().capacity){fail("feedback token/position/lens bounds guard failed");return 1;}
++ if(token<0||pos<0||pos>=(int)F().capacity||len!=pos+1||len>(int)F().capacity){fail("feedback token/position/lens bounds guard failed");return 1;}
+  uint64_t t0=nowNS();id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];
+  if(F().steps)[e waitForFence:F().feedbackDone];
+  encodeGraph(e);[e updateFence:F().graphDone];[e endEncoding];uint64_t tGraph=nowNS();
+@@ -240,8 +240,9 @@
+  auto&ar=*au[0];auto&br=*bu[0];
+  const std::string expected="custom_kernel_gdn_decode_step_float_float_float_float_float_float_float_float";
+  const std::string expected_v40="custom_kernel_gdn_norm_reuse_cached_state_v40_build1_float_float_float_float_float_float_float_float_float";
++ const std::string expected_v95="custom_kernel_gdn_simd4_segment_cached_state_v95_build1_float_float_float_float_float_float_float_float_float";
+  const auto&actual=S().psos.at(key(ar.p)).name;
+- const bool known=actual==expected||(actual==expected_v40&&ar.index==6&&br.index==9);
++ const bool known=actual==expected||((actual==expected_v40||actual==expected_v95)&&ar.index==6&&br.index==9);
+  if(ar.p!=br.p||ar.dispatch!=br.dispatch||!known)return reject("input/output are not one dispatch of an exact pinned stores-only GDN PSO function/index pair");
+  if(ar.offset||br.offset||ar.argument!="S"||br.argument!="S_new"||ar.access!=MTLArgumentAccessReadOnly||br.access==MTLArgumentAccessReadOnly)return reject("actual S/S_new argument name, offset or access policy mismatch");
+  PP().swaps[p.a]=p.b;PP().swaps[p.b]=p.a;p.eligible=true;p.reason="whole FP32 allocation; unique same-dispatch accepted GDN S readonly / S_new stores-only source; no other binding or registered range aliases";PP().pairs.push_back(p);return 0;
+@@ -291,7 +292,7 @@
+ }}
+ static NSDictionary*icbReport(){
+  NSMutableArray*psos=[NSMutableArray array],*banks=[NSMutableArray array];
+- for(auto&x:I().psos){auto&original=S().psos.at(x.first);[psos addObject:@{@"original_PSO":@(x.first),@"ICB_PSO":@(key(x.second)),@"function":[NSString stringWithUTF8String:original.name.c_str()],@"resolved_original_function":@(key(original.function)),@"original_descriptor":@(key(original.descriptor)),@"original_creation":[NSString stringWithUTF8String:original.creation.c_str()],@"original_supports_ICB":@(original.p.supportIndirectCommandBuffers),@"actual_supports_ICB":@(x.second.supportIndirectCommandBuffers),@"recreated":@(original.p!=x.second),@"descriptor_change":original.p!=x.second?@"only supportIndirectCommandBuffers=YES; same retained resolved function and copied descriptor/options":@"original PSO reused"}];}
++ for(auto&x:I().psos){auto&original=S().psos.at(x.first);NSMutableArray*args=[NSMutableArray array];for(auto&a:original.args)[args addObject:@{@"index":@(a.index),@"name":[NSString stringWithUTF8String:a.name.c_str()],@"type":@(a.type),@"access":@(a.access)}];[psos addObject:@{@"argument_reflection_observed":@(original.reflection),@"active_arguments":args,@"original_PSO":@(x.first),@"ICB_PSO":@(key(x.second)),@"function":[NSString stringWithUTF8String:original.name.c_str()],@"resolved_original_function":@(key(original.function)),@"original_descriptor":@(key(original.descriptor)),@"original_creation":[NSString stringWithUTF8String:original.creation.c_str()],@"original_supports_ICB":@(original.p.supportIndirectCommandBuffers),@"actual_supports_ICB":@(x.second.supportIndirectCommandBuffers),@"recreated":@(original.p!=x.second),@"descriptor_change":original.p!=x.second?@"only supportIndirectCommandBuffers=YES; same retained resolved function and copied descriptor/options":@"original PSO reused"}];}
+  for(unsigned i=0;i<2;++i)if(I().banks[i])[banks addObject:@{@"bank":@(i),@"ICB":@(key(I().banks[i])),@"commands":@(I().dispatches),@"S_binding_bank":@(i)}];
+  return @{@"enabled":@(I().enabled),@"banks":@(I().enabled?2:0),@"commands_per_bank":@(I().dispatches),@"dispatchThreads":@(I().threads),@"dispatchThreadgroups":@(I().groups),@"execution_count":@(I().executions),@"encoded_count":@(I().encoded),@"bank_executions":@[@(I().bankExecutions[0]),@(I().bankExecutions[1])],@"constant_bank_bytes":@(I().constantBytes),@"constant_bank_allocation":@(I().constants.length),@"setBytes_payload_count":@(I().constantOffsets.size()),@"constant_alignment":@256,@"original_barrier_count":@(I().originalBarriers),@"barrier_commands_per_bank":@(I().barriersPerBank),@"barrier_semantics":@"setBarrier on NEXT command before encoding; all prior ICB commands complete before it; adjacent barriers fold without intervening dispatch",@"trailing_barrier_via_graph_fence":@(I().trailingBarrier),@"unique_original_PSOs":@(I().psos.size()),@"recreated_PSOs":@(I().recreated),@"PSO_records":psos,@"ICB_records":banks,@"resources":@{@"read_only_count":@(I().readonlyResources.size()),@"read_only_parameter_buffers":@(I().readonlyResources.empty()?0:I().readonlyResources.size()-1),@"constant_bank_read_declarations_per_CB":@1,@"mutable_arena_count":@1,@"mutable_arena_usage":@"Read|Write",@"icb_read_declarations":@1,@"icb_read_declarations_unit":@"one selected even/odd ICB declared Read per replay CB; all RO parameter buffers and constant bank declared Read"}};
+ }

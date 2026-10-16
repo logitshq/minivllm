@@ -1,0 +1,44 @@
+{
+  "status": "HOLD_MISSING_SAME_VERIFY_PREFIX_CACHE_WITNESS",
+  "numeric_ready": false,
+  "performance_prepared": false,
+  "model_loads": 0,
+  "GPU_runs": 0,
+  "target_model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "candidate_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root",
+  "draft_snapshot": "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+  "draft_source_file_bytes": 3848817896,
+  "draft_raw_BF16_tensor_count": 81,
+  "additional_draft_resources_required": "track actual quantized residents, source/quantization temporary peaks, featurehistory, draftKV, verifier scratch and rollback state; raw3.848GB is not loaded RSS",
+  "requests": [
+    "base",
+    "reset-base",
+    "changed-prefill"
+  ],
+  "tokens_each": 32,
+  "hard_gates_not_run": {
+    "old38_44_89_all_greedy_IDs": 96,
+    "target_parameter_identity_and_readonly_arrays": 1349,
+    "fresh_request_reset_and_changed_no_contamination": true,
+    "earlybudget_and_first_middle_full_accept": true,
+    "rollback_equal_same_verify_materialized_prefix_rawbytes": true
+  },
+  "gold_policy": "read assertion-gold only after actual output emission; never draft or B feedback; no saved future continuation input",
+  "mathematical_limit": "multirowqmm/GDNchunk may differ T1; old tensor gold stays strict failure or separately labelled diagnostic, never tolerance=>samevalue",
+  "blocking_evidence": {
+    "target_loader": "load_model(model_dir,dtype=mx.bfloat16)->(Qwen3_5ForCausalLM,ModelConfig)",
+    "single_target_engine": "LLMEngine(model_dir,max_seqs=1,max_len=64,max_batched_tokens=512,dtype=mx.bfloat16,cache_limit_gb=2,drafter_dir=externalDFlash2,spec_block=5)",
+    "draft_loader": "load_drafter(model_dir,quantize={group_size:64,bits:4,mode:affine}); actual loaded draft parameter count and memory must be observed",
+    "spec_step": "SpecRunner.step(req,caches,history)->(produced_token_IDs,new_feats[:accepted+1])",
+    "chunk_forward": "gated_delta_rule_chunk(...,state=None,chunk=64)->(o,last_S); S advances once per chunk, not per token",
+    "GDN_snapshot": "_snap=(conv_state,S,offset); record=True",
+    "GDN_tape": "(raw_qkv,q,k,v,g,beta), no per-token S trajectory",
+    "GDN_rollback": "rollback(n) calls gated_delta_rule_chunk(prefix,S0) without chunk keyword; current default64",
+    "verify_geometry": "GDN._prefill selects chunk8 for T<=8; spec_block5 therefore one chunk8, no materialized intermediate prefix S",
+    "attention_rollback": "offset only; rejected future K/V columns remain physically written and need an explicit byte-span/tail policy for any exact cache claim"
+  },
+  "required_before_any_GPU_qual": "producer must expose authoritative intermediate prefix cache bytes from the SAME verify invocation/geometry. Fresh smaller prefill or replay of tape with another chunk shape cannot be that witness. ExistingAPI does not expose such states.",
+  "geometry_followup_only": "108 may investigate recording actual chunk8 geometry instead of rollback default64; matching geometry alone is not an already observed same-invocation witness or strict proof",
+  "baseline_policy": "future performance must permit validated oMLX MTP/DFlash2 strongconfigs and extra draft resources; draftNone balanced.03 is not globalbest",
+  "runtime_actions_implemented": false
+}

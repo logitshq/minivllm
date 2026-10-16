@@ -1,0 +1,32 @@
+--- frozen44/model/gdn.py
++++ candidate99/model/gdn.py
+@@ -45,6 +45,7 @@
+         self.out_proj = Linear(value_dim, cfg.hidden_size, q)
+         self.set_gates_compile(False)
+         self.set_conv_norm_reuse_cache(False)
++        self.set_simd4_segment(False)
+ 
+     def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+         if ctx is not None and ctx.mode == "prefill_batch":
+@@ -183,6 +184,12 @@
+             raise TypeError("enabled must be bool")
+         object.__setattr__(self, "_conv_norm_reuse_cache_enabled", enabled)
+ 
++    def set_simd4_segment(self, enabled=True):
++        """Default-OFF V95 state transport; no new array parameters."""
++        if type(enabled) is not bool:
++            raise TypeError("enabled must be bool")
++        object.__setattr__(self, "_simd4_segment_enabled", enabled)
++
+     def _decode_dispatch(self, x, st, *, _compile_gates=False):
+         eligible = (_compile_gates is True and type(self) is GatedDeltaNet
+                     and object.__getattribute__(self, "_conv_norm_reuse_cache_enabled")
+@@ -212,6 +219,8 @@
+         else:
+             beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
+         from ..kernels.gdn_activated_norm_reuse_cached_metal import gated_delta_step_activated_norm_reuse_metal
++        if object.__getattribute__(self, "_simd4_segment_enabled"):
++            from ..kernels.gdn_activated_simd4_segment_metal import gated_delta_step_activated_norm_reuse_metal
+         o, S = gated_delta_step_activated_norm_reuse_metal(activated, g, beta, st.S)
+         st.conv, st.S = new_tail, S
+         o = self.norm(o.astype(x.dtype), z)
