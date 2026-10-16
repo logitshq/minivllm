@@ -1,0 +1,47 @@
+M5 Ultra 256 GiB：Lithos 本地配置适配与同场 C1 对照
+
+已跑通。原先限制是缺少 M5 Ultra 设备登记；新增真实 Apple M5 Ultra / Apple10 / 80 GPU 核配置后，原生服务可正常运行。
+这是本地适配版本，不是官方已调优的 M5 Ultra profile。未冒用 M5 Max 身份，也未关闭设备校验。
+
+配置与验证
+- Lithos upstream：5485ad6bac0a5649d66a347f3e01a655ea29d937。
+- 本地适配提交：223658090ae549e59220bdec459957cbdad7926a，分支 experiment/m5-ultra-80c。
+- 原生 runtime 从该源码以 CMake Release 在本机编译，Python 3.12.15。
+- 新增 apple-m5-ultra-80c 配置及独立 backend/cache 身份，使用通用 Apple10 kernels。
+- Profile 保持 unmeasured；此次用上游 MONOLITH_ACCELERATOR=on 显式开启张量加速。
+- 未继承 M5 Max 的性能表、融合配方或带宽数字，未改 kernel 数学。
+- 48 项 CPU 配置测试、64 项 GPU 数值/布局/量化矩阵检查通过；聊天模板的 19 个输入 IDs 与原基准严格相同。
+
+同场测试：Qwen3.8-27B NVFP4，revision 5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6。
+单并发、19-token prompt、32-token 输出、greedy、正常 EOS、无 draft、cache=0。
+各 3 个独立进程，每进程 3 次预热 + 3 次测量。顺序为 Lithos/native/oMLX、native/oMLX/Lithos、oMLX/Lithos/native。
+全部 54 请求/1728 tokens；正式 27 请求/864 tokens。结果是 3 个进程中位数的中位数。
+
+引擎                          总吞吐 y      客户端交付 x       TTFT
+Lithos 本地 M5 Ultra 配置            48.59 tok/s      56.98 tok/s/user   114.39 ms
+oMLX 0.7.1.dev1 balanced         46.74 tok/s      53.86 tok/s/user   108.79 ms
+minivllm V19-on 实验版              40.00 tok/s      43.37 tok/s/user    92.01 ms
+
+Lithos 相对 oMLX 总吞吐 +3.95%；我们相对 Lithos -17.67%，相对 oMLX -14.42%。
+我们 TTFT 更低，但完整请求吞吐和首个文本后的客户端交付速率均低于另两者。
+此次结论仅适用于该短请求 C1 工作负载。V19 之前的内部 DO_NOT_ADOPT 不变。
+
+复核与资源
+- 单独的 stdlib CPU replay 重算每次请求时间、组统计和进程中位数，通过。
+- 136 份基准资源快照：pressure=[1]，thermal=[0]，swap_MB=[0.0]。
+- Pageouts 范围 [0, 44]，Swapouts 范围 [0, 0]。
+- native 第 2 轮第 2 个测量请求期间，系统 Pageouts 增加 44。原样保留，未重跑；未达到全程 pageout 稳定，结果作为本轮观测而非完全隔离的性能资格。
+- 所有 9 个服务进程均 wait/reap；工具返回后 owner + 9 个服务 PID 严格不存在。
+- 另一聊天正在下载大模型；采样期间未开始 GPU 基准，不宣称绝对 GPU 独占。
+
+限制
+- Lithos OpenAI handler 会对同时到达的请求返回 429，因此没有填写 Lithos C2/C4 分数。
+- 小 kernel 数值检查不等于跨引擎完整模型 bitwise 等价；官方接口只有 usage/文本。
+- Lithos prefix cache 实现仍存在；本负载 native metrics 每次 cached_prompt_tokens=0、verify_tokens=1。
+- 测量阶段 setup_ms=0。预热和模型 pack 创建时间不计入测量，但完整请求包含 prefill/HTTP/排队。
+- x 是客户端文本交付速率代理，不是 GPU 每 token 速率；y 是实际输出 tokens / (最后 DONE - 最早 POST)。
+
+复现启动脚本：run-lithos-m5.sh（localhost:8002，首次请求支付编译/加载成本）。
+原始证据目录：/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-frontier-v1
+旧 UNSUPPORTED_TARGET 记录作为未适配官方源码的历史结果保留，未覆盖。
+本地提交尚未推送远端。

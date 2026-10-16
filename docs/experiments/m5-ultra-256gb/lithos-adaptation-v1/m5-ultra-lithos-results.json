@@ -1,0 +1,321 @@
+{
+  "schema": "m5-ultra-lithos-adaptation-v1",
+  "hardware": "Apple M5 Ultra, 80 GPU cores, 256 GiB",
+  "model": "mlx-community/Qwen3.8-27B-nvfp4",
+  "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "local_lithos_source": {
+    "upstream_commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "local_commit": "2236580",
+    "profile": "apple-m5-ultra-80c",
+    "cpu_contract_tests": {
+      "passed": 48,
+      "command": "python -m pytest tests/contract/test_metal_backends.py tests/contract/test_profiles.py"
+    },
+    "files_sha256": {
+      "/Users/ryanli/code/lithos-metal/monolith/backends/metal/m5_ultra_80c/backend.py": "dbf7510c655e76e5db9f83e98b546b9d442a179221c75b72a0124c2ba98bd8b3",
+      "/Users/ryanli/code/lithos-metal/monolith/backends/metal/m5_ultra_80c/config.json": "1ac3ab812ed90ba2124d8bda082b21adcb99e2c7469e2d6840728c2d76f3ae58",
+      "/Users/ryanli/code/lithos-metal/monolith/backends/metal/m5_ultra_80c/__init__.py": "172ba09aa592b2980e240c040d8e9e437c3339e9ddf7acd97c6b27846aaea5ff",
+      "/Users/ryanli/code/lithos-metal/monolith/backends/metal/registry.py": "890389cac95df096362d3b1e13fb6fd9d8fd456e5d9cefe9bde65b90c03f8c47"
+    }
+  },
+  "runtime": {
+    "python": "3.12.15 (main, Oct 14 2026, 00:55:37) [Clang 23.1.3 ]",
+    "packages": {
+      "lithos-metal": "0.1.2",
+      "numpy": "2.5.3",
+      "transformers": "5.18.0",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "pytest": "9.1.1",
+      "fastapi": "0.142.2",
+      "uvicorn": "0.54.0"
+    },
+    "native_module": "/Users/ryanli/code/lithos-metal/monolith/runtime/_native.cpython-312-darwin.so",
+    "native_sha256": "a1932813e5a9769edc2281b3070da7e84de6e02169ac5b3749e857492767e99f",
+    "build": "uv pip install --no-deps -e .; local source CMake Release build",
+    "source_commit": "223658090ae549e59220bdec459957cbdad7926a"
+  },
+  "qualification": {
+    "status": "PASS_DEVICE_KERNELS_TEMPLATE",
+    "device": {
+      "name": "Apple M5 Ultra",
+      "gpu_cores": 80,
+      "apple_family": 10,
+      "recommended_working_set": 239143780352
+    },
+    "profile": {
+      "name": "apple-m5-ultra-80c",
+      "backend": "m5_ultra_80c",
+      "chip": "Apple M5 Ultra",
+      "gpu_family": "Apple10",
+      "gpu_cores": 80,
+      "memory_gib": 256,
+      "nominal_gbps": 0,
+      "validation": "unmeasured",
+      "note": "Local native Apple10 configuration. Device identity verified on a 256 GiB Mac Studio; no inherited Max measurements, fusion recipes, or bandwidth claims. MONOLITH_ACCELERATOR=on explicitly selects the shared tensor path for validation/benchmarks.",
+      "engine": {
+        "family": "Apple10",
+        "lane_order": "interleaved16",
+        "scale_placement": "block",
+        "threadgroups_per_core": 1,
+        "sibling_order": "either",
+        "max_cb_ms": 16,
+        "attention": "v1",
+        "attention_rows": 4,
+        "accelerator": "off",
+        "accelerator_min_t": {},
+        "cost_T": {},
+        "gdn_mixer_fusion": {}
+      }
+    },
+    "native_module": "/Users/ryanli/code/lithos-metal/monolith/runtime/_native.cpython-312-darwin.so",
+    "pytest_exit": 0,
+    "tests": [
+      "tests/kernels/test_nvfp4_scale_decode.py",
+      "tests/kernels/test_gemm_tile.py::test_cooperative_layout_matches_the_fill_formula",
+      "tests/kernels/test_gemm_tile.py::test_gemm_tile_matches_oracle",
+      "tests/kernels/test_gemm_tile.py::test_gemm_tile_bf16_output_and_k2048",
+      "tests/kernels/test_gemm_tile.py::test_gemm_tile_block_scale_placement"
+    ],
+    "prompt_ids": [
+      248045,
+      846,
+      198,
+      95826,
+      110827,
+      98682,
+      108829,
+      81726,
+      6297,
+      1710,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "scope": "Upstream finite-scale, Apple10 tensor layout, quantized GEMM oracle and BF16/block-scale checks. Full-model bitwise equivalence to other engines is not claimed."
+  },
+  "kernel_test_cases": 64,
+  "cpu_contract_test_cases": 48,
+  "benchmark": {
+    "status": "PASS_CPU_RAW_REPLAY",
+    "counts": {
+      "requests": 54,
+      "measured_requests": 27,
+      "tokens": 1728,
+      "resources": 136
+    },
+    "processes": [
+      {
+        "engine": "lithos",
+        "pair": 1,
+        "x": 57.10690000703786,
+        "y": 48.62047323223879,
+        "TTFT_s": 0.11439049999898998
+      },
+      {
+        "engine": "tutorial",
+        "pair": 1,
+        "x": 41.541776118575775,
+        "y": 38.174966239544325,
+        "TTFT_s": 0.09200891599903116
+      },
+      {
+        "engine": "omlx",
+        "pair": 1,
+        "x": 53.85559360915557,
+        "y": 46.79286116405855,
+        "TTFT_s": 0.10879341700092482
+      },
+      {
+        "engine": "tutorial",
+        "pair": 2,
+        "x": 43.36710853733999,
+        "y": 40.0030481322143,
+        "TTFT_s": 0.09227350000037404
+      },
+      {
+        "engine": "omlx",
+        "pair": 2,
+        "x": 53.943877423380854,
+        "y": 46.74459221972245,
+        "TTFT_s": 0.10851308300152596
+      },
+      {
+        "engine": "lithos",
+        "pair": 2,
+        "x": 56.98066349601428,
+        "y": 48.59072959885732,
+        "TTFT_s": 0.11400591700112273
+      },
+      {
+        "engine": "omlx",
+        "pair": 3,
+        "x": 53.44688974462713,
+        "y": 46.25104280916553,
+        "TTFT_s": 0.11186125000131142
+      },
+      {
+        "engine": "lithos",
+        "pair": 3,
+        "x": 56.350197661178186,
+        "y": 48.15431652659195,
+        "TTFT_s": 0.11490300000150455
+      },
+      {
+        "engine": "tutorial",
+        "pair": 3,
+        "x": 44.87578001927064,
+        "y": 41.43481647853161,
+        "TTFT_s": 0.08150158300122712
+      }
+    ],
+    "summary": [
+      {
+        "engine": "tutorial",
+        "x": 43.36710853733999,
+        "y": 40.0030481322143,
+        "TTFT_s": 0.09200891599903116
+      },
+      {
+        "engine": "omlx",
+        "x": 53.85559360915557,
+        "y": 46.74459221972245,
+        "TTFT_s": 0.10879341700092482
+      },
+      {
+        "engine": "lithos",
+        "x": 56.98066349601428,
+        "y": 48.59072959885732,
+        "TTFT_s": 0.11439049999898998
+      }
+    ],
+    "scope": "M5 Ultra C1, local Lithos native adaptation with accelerator on. No cross-engine exact-ID or full-model numerical-equivalence claim."
+  },
+  "comparisons_percent": {
+    "lithos_vs_omlx": {
+      "x": 5.802683950599774,
+      "y": 3.949413806964297,
+      "TTFT_s": 5.14468903758909,
+      "pair_y_percent": [
+        3.905749771899014,
+        3.949413806964297,
+        4.115093632114264
+      ]
+    },
+    "tutorial_vs_lithos": {
+      "x": -23.891534642495948,
+      "y": -17.673497676488825,
+      "TTFT_s": -19.56594647296449,
+      "pair_y_percent": [
+        -21.48376249404409,
+        -17.673497676488825,
+        -13.954097021291279
+      ]
+    },
+    "tutorial_vs_omlx": {
+      "x": -19.475200938148262,
+      "y": -14.422083426933307,
+      "TTFT_s": -15.427864538670555,
+      "pair_y_percent": [
+        -18.417114726751528,
+        -14.422083426933307,
+        -10.413227547119208
+      ]
+    }
+  },
+  "resources": {
+    "samples": 136,
+    "pressure": [
+      1
+    ],
+    "thermal": [
+      0
+    ],
+    "swap_MB": [
+      0.0
+    ],
+    "Pageouts": [
+      0,
+      44
+    ],
+    "Swapouts": [
+      0,
+      0
+    ]
+  },
+  "process_release": {
+    "status": "PASS",
+    "processes": [
+      {
+        "pid": 18253,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 19844,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 18905,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 19605,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 18276,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 18671,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 19257,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 18495,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 19094,
+        "returncode": 1,
+        "stdout": ""
+      },
+      {
+        "pid": 19441,
+        "returncode": 1,
+        "stdout": ""
+      }
+    ]
+  },
+  "frozen_inputs_sha256": "bfa8d20db92368268defd69a06baa75596c33a4bc67935f63c6ab390bd49ca91",
+  "limitations": [
+    "Local native Apple10 profile and source build, not an official M5 Ultra release or tuned optimum.",
+    "Default profile remains unmeasured, accelerator off; this experiment explicitly sets MONOLITH_ACCELERATOR=on.",
+    "No M5 Max device spoofing, validation bypass, copied measured cost tables, or borrowed Max megakernel recipes.",
+    "C1 only: this Lithos OpenAI endpoint rejects simultaneous requests with HTTP 429. No C2/C4 score claimed.",
+    "Same 19 prompt IDs, 32 actual outputs, greedy/normal EOS/noDraft/cache0. Each engine: three fresh processes, three warm and three measured requests per process.",
+    "Bars/table summary is median of three process medians. x is client text-delivery proxy, y is complete POST-through-DONE throughput.",
+    "The three-engine run is separate from the historical oMLX frontier. No historical/current samples pooled.",
+    "Native candidate remains V19-on experimental; prior internal DO_NOT_ADOPT remains valid and defaults stay off.",
+    "Kernel oracle checks do not establish full-model bitwise equivalence. Official APIs expose usage/text, not raw generated IDs.",
+    "Another chat was downloading large models during the run; its GPU benchmark had not started. Resource snapshots do not prove exclusive GPU use.",
+    "System Pageouts increased by 44 during native pair2 measured request2. Retained without rerun; this is an observed C1 comparison, not a fully paging-stable qualification."
+  ]
+}
