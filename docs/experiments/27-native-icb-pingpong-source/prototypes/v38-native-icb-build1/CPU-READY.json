@@ -1,0 +1,21 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v38-native-icb-build1/replay.mm": "ca14f8711d0f666e3367a00b418e0ed0f2988ab3757007eae831e02afda80e7f",
+    "/private/tmp/minivllm-engine-optimization-20261014/v38-native-icb-build1/libv38replay.dylib": "9274227bdfdc968e6849500ea3f84060b08448250367de5068815113c1c9387f",
+    "/private/tmp/minivllm-engine-optimization-20261014/v38-native-icb-build1/ABI.h": "72f1b1b7208bf2e531b855e538081a1d13e28be9901b02bd9212b2f0a9e8e5f9",
+    "/private/tmp/minivllm-engine-optimization-20261014/v38-native-icb-build1/test_cpu.py": "4f0a48c2c319c4c53a68537154c6cb67f07f2567ff8eb8e5e63b16024a0335d1"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "CPU_tests": 2,
+  "native36_unchanged": true,
+  "API": "v38_enable_icb() after v34_seal_feedback before any reset; all existing APIs preserved",
+  "ICB": "two immutable even/odd S-bank graphs; exact original dispatch kind/grid/threadgroup/TG memory; all setBytes full payloads packed at256-byte aligned immutable constant offsets",
+  "PSO": "actual original supportIndirectCommandBuffers queried; reuse if true; otherwise copy retained complete descriptor/resolved MTLFunction/options and change only supportIndirectCommandBuffers=YES, explicitly reported. No shader/library/name lookup/math policy changes",
+  "barriers": "every captured barrier/fence/event/fullscope marks NEXT command barrier before geometry encoding; adjacent pending barriers fold; trailing graph barrier retained by owned graphDone fence",
+  "barrier_primary_source": "https://developer.apple.com/documentation/metal/mtlindirectcomputecommand/setbarrier()",
+  "barrier_local_reference": "/private/tmp/minivllm-remaining-20261014/lithos-source/runtime/src/metal_core.mm:138 and233",
+  "resources": "all actual used zero-copy parameters and constant bank Read, mutable arena Read|Write, chosen ICB Read per replay encoder; original feedback fences/staging83links preserved",
+  "pending": "root tiny then same three-request/93step strict numeric qualification then B-only screen; no performance/adoption claim"
+}

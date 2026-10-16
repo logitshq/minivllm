@@ -1,0 +1,18 @@
+# V25 C1 independent CPU replay
+- Actual input: /private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/c1-v25-attempt1.
+- Verdict: PASS for the fixed C1 screen and release scope; no promotion claim.
+- Recomputed three paired medians: X +1.544470167%; Y +0.756317053%; 3/3 wins for both.
+- Pair1 AB: X +0.665597076%; Y +0.438378633%.
+- Pair2 BA: X +1.632303573%; Y +0.756317053%.
+- Pair3 AB: X +1.544470167%; Y +1.038186836%.
+- Replayed all36 requests/1152IDs, including18 measured requests/576IDs; tokenizer actual text IDs = raw IDs = pinned continuation32.
+- Recomputed POST→DONE, first nonempty text, first-chunk token count, original X/Y and three-run medians; no timing-boundary discrepancy.
+- All requests:19 prompt, greedy32, length completion, cached_tokens0; startup source A25/B27 and allocator2GiB preserved.
+- B warm metadata:31miss/62hit/31entry,48 gates callables,48conv flags; no hooks; parameter identities unchanged.
+- Replayed 102 immutable per-arm raw resource samples through original paging/power guard: AC, thermal[0], pressure1, free[50, 82]%.
+- Swapout counters [17428090, 17428090]; swap usedMB [5535.31, 5535.31]; no increase.
+- Every server cleanup exact birth/wait/reap/strict absence and port-refusal receipt passed; external release proves8PID absence/6ports and tool exit0.
+- Referenced actual combo numerical and latest lifecycle PASS receipts were hash-checked; no older failed lifecycle substituted.
+- Both gains are small; this does not establish Pareto victory or a new comparison against historical oMLX.
+- Replay uses existing receipts/raw resources plus independent CPU tokenization; it is not a fresh GPU capture.
+- No GPU, model load, source mutation, Git operation, or old-evidence edit performed.

@@ -1,0 +1,15 @@
+# V33 native4 + worker3 focused independent CPU review
+- Verdict: no new source blocker for root-owned fixed-L20/two-replay27B diagnostic; source review alone gives no GPU numerical/performance qualification.
+- Native source SHAf7136ffd3b802ebbdef2d3606148166fde364e4ec5dffb188d710b4f7de9bcc1; library SHAc984dc6addb82374e85b05346f828887156d79bf7840a8fea9f9c04254a89637.
+- Worker3 SHAde2ac8d81a542f5c6b9e0cd6b01210b00539cf7aadb2021e919df231a0269deb;42actual source/library pins match, Python parse/compile PASS.
+- Worker3 differs from reviewed worker2 only in default native path build3→build4. Root/author inert42pins PASS is reported separately; reviewer did not load dylib/MLX/GPU.
+- Native4 attach observes compute-encoder creation throughout each actual CB lifetime; event calls and unsupported encoder kinds also increment lifetime activity.
+- Proven-empty commit requires no active CB, fresh uncommitted actual CB ID, zero lifetime compute/event/unknown activity and the known same queue.
+- Nonempty commit must match active CB and ended encoders; duplicates/nested commits and nonempty CB interleave still STOP. Committed identities use stable CB IDs rather than reused pointer values.
+- Commit records contain actual CB ID/pointer, active CB ID/pointer, queue, parent commit ID/pointer, depth, duplicate flag and lifetime counters.
+- Native3 event dependency checks are retained: actual ID/value/queue/CB, prior samequeue producer, completed pre-capture proof and no original-event re-signal during replay.
+- All original buffer identities/offsets/aliases, full bytes/bulk/TG bindings, actual parameter pins/readonlylarge proof, snapshot restore and bounded interior output mapping remain as reviewed in build3.
+- Samequeue fence/events and original encoder/CB boundaries lower to full-buffer barriers; unknown blit/render/resource/indirect paths reject. This is a synchronous fixed-seed diagnostic, not a general Metal capture system.
+- Worker retains shared parameter views, immutable131seed inputs, independent KV[:] holders,129GT outputs, exact address/range mappings, and two restored129-output finite/raw-byte comparisons plus seed/GT readonly.
+- Root actual tiny4PASS is external evidence reported by root; it is not a27B replay proof. Full worker must actually pass its original resource/strict gates before any numerical claim.
+- No new authorization/freeze ladder, broad test suite, author edits or old-result changes. No autoregressive, ICB, lifecycle, exclusive GPU-time, E2E or adoption claim.

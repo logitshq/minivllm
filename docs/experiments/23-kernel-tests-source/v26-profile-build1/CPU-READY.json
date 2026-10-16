@@ -1,0 +1,58 @@
+{
+  "status": "CPU_READY_ONLY",
+  "GPU_model_executed": false,
+  "native_compiled": true,
+  "source_count": 25,
+  "default_target": "accepted25/V17 gatesON",
+  "warm_requests": 3,
+  "warm_outputs_each": 32,
+  "measured_B1_forwards_max": 4,
+  "dispatch_counter_supported": false,
+  "stage_counter_supported": true,
+  "fallback": "actual command-buffer GPUStart/End + members; mixed never apportioned",
+  "files": {
+    "runner.py": "c4636266d24baaafa9e15a310358bc9eae7009baaf1e64854dca8d003ab1cb4e",
+    "trace.mm": "6eb03b2cdd9997880058b2e2638171d5b73bb0d714dbfb512828e940bee7726b",
+    "libv26trace.dylib": "4696f3c385922a1991868b9bfad1b2d9bd2246a24baff8d1841e467332fbd527",
+    "summarize.py": "f2ae5996b82b767f7c163a24d1a52bed347599c360699e1e70b89fee63ab87d9",
+    "query.mm": "29db27176e0c9145d7c7ffd4407c836068f0000fffe60ef04a64de2c1e7f3c32",
+    "query": "c0c9ebeb316a4f121bfe75b99298aa4589ee984f56628b79d6634d9fdc4a8daf"
+  },
+  "results": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build1/runner.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: runner.py [-h] [--package-root PACKAGE_ROOT]\n                 [--source-manifest SOURCE_MANIFEST] [--out OUT]\n                 [--measured MEASURED] [--execute-gpu]\n\nDiagnostic B1 decode profile. CPU --inert default; root owns actual GPU child.\n\noptions:\n  -h, --help            show this help message and exit\n  --package-root PACKAGE_ROOT\n  --source-manifest SOURCE_MANIFEST\n  --out OUT\n  --measured MEASURED\n  --execute-gpu\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build1/runner.py"
+      ],
+      "returncode": 0,
+      "stdout": "{\"status\": \"CPU_READY_ONLY\", \"GPU_executed\": false, \"identity\": {\"package_root\": \"/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root\", \"manifest\": \"/private/tmp/minivllm-engine-optimization-20261014/source-manifest-v17-gdn-gates-build1.json\", \"manifest_sha256\": \"31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c\", \"source_count\": 25, \"driver_sha256\": \"c4636266d24baaafa9e15a310358bc9eae7009baaf1e64854dca8d003ab1cb4e\", \"native_source_sha256\": \"6eb03b2cdd9997880058b2e2638171d5b73bb0d714dbfb512828e940bee7726b\", \"native_library_sha256\": \"4696f3c385922a1991868b9bfad1b2d9bd2246a24baff8d1841e467332fbd527\", \"workload_sha256\": \"65be876cac2397bf9afa76105c8e3fcce23de5e6c8652a28cb1b5f39640c153c\"}, \"warm_requests\": 3, \"measured_B1_forwards\": 4}\n",
+      "stderr": ""
+    }
+  ],
+  "requires_root_owner": true,
+  "actual_child_argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build1/runner.py",
+    "--out",
+    "NEW_ABSOLUTE_DIR",
+    "--measured",
+    "4",
+    "--execute-gpu"
+  ],
+  "child_extra_env": {
+    "DYLD_INSERT_LIBRARIES": "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build1/libv26trace.dylib"
+  }
+}

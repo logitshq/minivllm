@@ -1,0 +1,107 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-native-decode-screen-build1/screen.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v51-native-decode-screen-build1/screen.py
+@@ -1,4 +1,4 @@
+-"""Root-only B-only native exploratory timing; inert never imports MLX."""
++"""Root-only B-only previous-op-hoist native exploratory timing; inert never imports MLX."""
+ import argparse
+ from contextlib import contextmanager
+ import ctypes
+@@ -17,9 +17,11 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
++LIB = P / "v51-native-barrier-hoist-build1/libv51replay.dylib"
++QUAL = P / "v23-root-control-build1/fullmodel-v51native-attempt1/child-output/receipt.json"
++QUAL_SHA = "6823e0fa31ca823d542cffbeb19bc07e84b49cddb1e4d1427d6367c9d16ca088"
++EXTERNAL_RELEASE = QUAL.parent.parent/"external-release.json"
++EXTERNAL_RELEASE_SHA = "8852e4f9f326174ce48adb67e5fa3c3b1e3d39a2a40cf291eb7454d6ab9e8b7e"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+ 
+@@ -35,11 +37,23 @@
+     sys.modules[name]=value; spec.loader.exec_module(value); return value
+ 
+ 
+-def source_check():
++def source_check(*, allow_pending_qualification=False):
+     pins=json.loads((D/"source-pins.json").read_text())
+     for path,digest in pins.items(): assert sha(path)==digest,("source changed",path)
+-    assert sha(QUAL)==QUAL_SHA
+-    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    manifest=json.loads((P/"v51-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
++    expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
++    package=ROOT/"tutorial_code/miniengine"
++    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==27
++    if QUAL_SHA is None:
++        assert allow_pending_qualification,"actual V51 full qualification not bound; execution forbidden"
++        return pins,None,None
++    assert sha(QUAL)==QUAL_SHA and str(QUAL) in pins
++    assert sha(EXTERNAL_RELEASE)==EXTERNAL_RELEASE_SHA and str(EXTERNAL_RELEASE) in pins
++    release=json.loads(EXTERNAL_RELEASE.read_text())
++    assert release["status"]=="PASS_EXTERNAL_RELEASE" and release["GPU_released"] is True and release["tool_exit"]==0
++    assert {x["pid"] for x in release["strict_absence"]}=={73088,73097}
++    assert all(x["returncode"]==1 and x["stdout"]=="" for x in release["strict_absence"])
++    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_PREVIOUS_OP_HOIST_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     assert q["native_steps"]==93 and len(q["requests"])==3
+     assert q["A_saved_baseline_receipt_sha256"]=="c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+     engagement=q["B_conv_normreuse_cache_capture_engagement"]
+@@ -50,25 +64,32 @@
+     assert all(x["strict_bytes_equal"] and x["finite"] for x in expected)
+     assert [(x["label"],x["A_sha256"]) for x in expected]==[(x["label"],x["A_sha256"]) for x in reset["steps"][-1]["outputs"]]
+     assert q["native_library"]==str(LIB) and q["source_pins"][str(LIB)]==pins[str(LIB)]
+-    manifest=json.loads((P/"v44-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
+-    expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
+-    package=ROOT/"tutorial_code/miniengine"
+-    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==27
++    assert sum(len(r["steps"]) for r in q["requests"])==93
++    assert sum(len(step["outputs"]) for r in q["requests"] for step in r["steps"])==12276
++    assert sum(step["A_saved_V38_hash_checks"] for r in q["requests"] for step in r["steps"])==12276
++    assert q["source_pins"][str(P/"v51-native-fullqual-build1/fullqual.py")]==pins[str(P/"v51-native-fullqual-build1/fullqual.py")]
++    for r in q["requests"]:
++        dep=r["native"]["feedback"]["icb"]["dependency_barriers"]
++        assert dep["proof"]["both_banks_all_conflict_edges_covered"] and dep["proof"]["bank_plans_equal"]
++        assert dep["previous_op_hoist"]["every_trial_checks_all_conflict_edges"]
++    # Fresh screen capture invokes this same fullworker's complete dynamic proof;
++    # actual motion counts are never replaced by the static simulation's129.
+     return pins,q,expected
+ 
+ 
+ def main(argv=None):
+     ap=argparse.ArgumentParser(description=__doc__)
+     ap.add_argument("--out",type=Path);ap.add_argument("--tokens",type=int,default=32);ap.add_argument("--inert",action="store_true")
+-    args=ap.parse_args(argv);pins,qualification,expected_final=source_check()
++    args=ap.parse_args(argv);pins,qualification,expected_final=source_check(allow_pending_qualification=args.inert)
+     w=json.loads((P/"workload.json").read_text());assert args.tokens==32 and len(w["prompt_ids"])==19
+     if args.inert:
+         assert not any(n=="mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status":"PASS_CPU_INERT","pins":len(pins),"MLX_imported":False,"GPU_used":False,
+-                          "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA}));return 0
++                          "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA,"actual_qualification_bound":QUAL_SHA is not None}));return 0
+     assert args.out is not None and args.out.is_absolute();args.out.mkdir(exist_ok=False)
+     receipt={"status":"STARTED","stage":"beforeload","pid":os.getpid(),"model_loads":0,"source_pins":pins,
+              "qualification_receipt":str(QUAL),"qualification_sha256":QUAL_SHA,"requests":[],
++             "qualification_external_release":str(EXTERNAL_RELEASE),"qualification_external_release_sha256":EXTERNAL_RELEASE_SHA,
+              "scope":"B-only exploratory native timing; no HTTP/Pareto/fair A comparison/adoption",
+              "schedule":["warm"]*3+["measure"]*3,"fixed_cap":256,"expected_decode_steps":31,
+              "timing_definition":{"t0":"immediately before fresh prefill",
+@@ -85,7 +106,7 @@
+         versions={n:importlib.metadata.version(n) for n in ("mlx","mlx-metal")}
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v44-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v51-native-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)
+         def sample(label):
+@@ -266,7 +287,7 @@
+         for name,mod in tuple(sys.modules.items()):
+             if name.startswith("tutorial_code.miniengine") and getattr(mod,"__file__",None):
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+-        source_check();receipt.update(status="PASS_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
++        source_check();receipt.update(status="PASS_PREVIOUS_OP_HOIST_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+         if native is not None:

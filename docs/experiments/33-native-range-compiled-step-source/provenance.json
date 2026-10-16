@@ -1,0 +1,77 @@
+{
+  "runs": [
+    {
+      "run": "fullmodel-v72num-attempt1",
+      "status": "FAIL_STOP",
+      "result_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v72num-attempt1/child-output/receipt.json",
+      "result_sha256": "b4159e4d4758fa1ffd20f11165c6428e7301975b14178f7a88fba7722be27c20",
+      "owner_pid": 87943,
+      "child_pid": 87952,
+      "waited_returncode": 1,
+      "waited_reaped": true,
+      "external_release": "evidence.tar.gz::fullmodel-v72num-attempt1/external-release.json"
+    },
+    {
+      "run": "fullmodel-v72num2-attempt1",
+      "status": "PASS_V72_72_MLX_128_NATIVE_STRICT_NO_TIMING",
+      "result_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v72num2-attempt1/child-output/receipt.json",
+      "result_sha256": "d1356c8915ca2dc5c07537e024154d60411a55ce0a23bd3778cdea2fa6916967",
+      "owner_pid": 89414,
+      "child_pid": 89423,
+      "waited_returncode": 0,
+      "waited_reaped": true,
+      "external_release": "evidence.tar.gz::fullmodel-v72num2-attempt1/external-release.json"
+    },
+    {
+      "run": "kernel-micro-v72b2-attempt1",
+      "status": "STOP_MICRO_GATE",
+      "result_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/kernel-micro-v72b2-attempt1/child-output/receipt.json",
+      "result_sha256": "f7eeff33a9e5d2f3af8a6a46d1d66a00913953f8b26960696a0f50e9a2f46744",
+      "owner_pid": 89790,
+      "child_pid": 89791,
+      "waited_returncode": 2,
+      "waited_reaped": true,
+      "external_release": "evidence.tar.gz::kernel-micro-v72b2-attempt1/external-release.json"
+    },
+    {
+      "run": "fullmodel-v74native-attempt1",
+      "status": "PASS_V74_COMPILED_PURE_STEP_NATIVE_ICB_93X132_STRICT",
+      "result_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v74native-attempt1/child-output/receipt.json",
+      "result_sha256": "3ac28207286e645e6453cd2680115b6adac7fc70bd270e2bc3cc09a1ad045a51",
+      "owner_pid": 88311,
+      "child_pid": 88320,
+      "waited_returncode": 0,
+      "waited_reaped": true,
+      "external_release": "evidence.tar.gz::fullmodel-v74native-attempt1/external-release.json"
+    },
+    {
+      "run": "native-decode-v77-attempt1",
+      "status": "PASS_V77_COMPILED_PURE_STEP_RAW_NATIVE_B_ONLY_EXPLORATORY_SCREEN",
+      "result_path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-decode-v77-attempt1/child-output/receipt.json",
+      "result_sha256": "7d4e7c37bd6e1e70ee19fab4101b3b5535868de6375ecb730a949099b8d30292",
+      "owner_pid": 89558,
+      "child_pid": 89559,
+      "waited_returncode": 0,
+      "waited_reaped": true,
+      "external_release": "evidence.tar.gz::native-decode-v77-attempt1/external-release.json"
+    }
+  ],
+  "scope_versions": [
+    72,
+    74,
+    77
+  ],
+  "excluded_later_versions": [
+    76,
+    78,
+    79
+  ],
+  "V72build1": "FAIL_STOP before native loops because outputreflectionRW was rejected;72 savedMLX rows are not nativequalification",
+  "V72build2": "two exact observed outputRW exceptions with frozen source-store-only proof; reflection staysRW;72MLX+128native terminalraw checks qualify finite workload only",
+  "V72perf": "oneffi/oneCB per8192encodeddispatches; buffersbarrier after each group8; final8slots per loop/block only, no perdispatch statecheck; controlsPASS but-0.516558867percent/0wins =>STOP/noadopt",
+  "V74": "independent pure131explicitinputs to132outputs fixedL256 compiledstep; not installedoMLX whole-generationcompile;132cold+12276core oldgold qualification",
+  "V77": "Bonlyrawnative t1afterreset/all131seeduploads;28.8845183decode/25.5202831whole, no paired/HTTP/Pareto win; distinct from67/71engineclocks",
+  "historical_preparation_status": "CPU_READY/PENDING and earlier proof wording remain exact historicalbytes; build2output-access-policy supersedes only original RWrejection, protocol remainsbyteexact",
+  "scope": "existing savedresults only; no adoption, benchmarkrerun or new GPU use",
+  "portable_scope": "offline archive-only checks validate text/hash/statistics; rawtensor/native/runtime externalfixtures are identity-only and optional original-path verification is required for bytelevel tensorreplay"
+}

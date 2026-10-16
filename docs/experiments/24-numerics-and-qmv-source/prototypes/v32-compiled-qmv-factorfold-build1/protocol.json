@@ -1,0 +1,102 @@
+{
+  "candidate": "V32 compiled-boundary NVFP4 factor fold",
+  "scope": {
+    "K": 5120,
+    "N": 17408,
+    "layer": 0,
+    "projection": "mlp.gate_proj",
+    "weight_scale_bytes": 50135040,
+    "extra_weight_bytes": 0,
+    "source_helper": "frozen V31",
+    "full_model": false
+  },
+  "boundary": {
+    "A": "mx.compile(native QMM fn,shapeless=False)",
+    "B": "mx.compile(frozen V31 helper.project fn,shapeless=False)",
+    "capture": "same immutable weight/scales handles; x explicit argument",
+    "cold": "factory/fncall/eval host walls separately outside timing",
+    "trace_metadata": "body counters outside device graph; assert unchanged across same-shape qualification and measurement"
+  },
+  "numeric": {
+    "V31_prior_strict": 27,
+    "new_compiled_A_vs_native_QMM": 9,
+    "new_compiled_B_vs_native_QMM": 9,
+    "new_compiled_B_vs_A": 9,
+    "total_new": 27,
+    "readonly_pre_post": true,
+    "failure": "first strict finite/byte/shape/dtype/readonly failure STOP before timing"
+  },
+  "timing": {
+    "prime": 2048,
+    "repeats": 2048,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ],
+    "every_output_eval": true,
+    "hashes": "after both blocks only",
+    "child_timeout_s": 170
+  },
+  "resources": {
+    "AC": true,
+    "thermal": [
+      0,
+      1
+    ],
+    "pressure": 1,
+    "original_guard": true,
+    "raw_first": true,
+    "allocator_cache_limit_bytes": 2147483648
+  },
+  "not_reanalysis_of_old_uncompiled_API_micro": true,
+  "adopted": false,
+  "author_GPU": false
+}

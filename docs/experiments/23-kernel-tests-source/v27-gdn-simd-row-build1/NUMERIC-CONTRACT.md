@@ -1,0 +1,12 @@
+# V27 initial local numeric contract — fixed before first GPU execution
+- Compact BF16 q/k[1,16,128], v[1,48,128]; FP32 log-g, beta, logical S[1,48,128,128]. No engine adapter.
+- Each SIMD owns one value row, each lane4 key values/state registers. q/k norm and dots now use4 sequential terms then simd_sum; decay stays outside key dot, and update/readout expressions retain original order.
+- Single-step maxabs error bound2^-16*max(1, reference maxabs), separately for full FP32 o and S. Fixed16-step changed-real-bank chain bound2^-12*max(1,reference maxabs) at EVERY step.
+- Basis: FP32 unit roundoff2^-24 and gamma128≈7.63e-6. Single bound is about2gamma;16×2^-16=2^-12. These are predeclared practical screen bounds, not universal cancellation/propagation proofs; any failure stops this build without tolerance adjustment.
+- All outputs finite; all inputs readonly by canonical byte hashes. Signedzero equivalence may differ; no bitwise equality promise.
+- Numeric covers all15 existing real/synthetic postconv-u banks,9real L0/32/62×D1/16/31 plus6synthetic. It does not capture new preconv/model data.
+- Both original row-contiguous and transposed physical state are compared to accepted25 recurrence. Actual GPU descriptor probe with ensure_row_contiguous=False must observe strides[786432,16384,128,1] and[786432,16384,1,128]. Every candidate output must keep second form.
+- Original state uses logical Dk×Dv; kernel reads every input using actual array strides. Physical next state is Dv×Dk, returned through swapaxes only; stable recurrence does not call contiguous/copy. Numeric one-time alternate input construction is outside candidate.
+- Source actual installed mlx_vlm/models/qwen3_5/gated_delta.py:35–102,311–355; itsT1generic register-state/SIMD algorithm, not itsT>1packed kernel. Our implementation retains tutorial FP32 normalize/decay order and supports both state layouts by explicit strides.
+- API evidence: native MLX0.32.3 core/fast.pyi:184–210 documents ensure_row_contiguous=False; prior executed V23 layout_probe.metal directly used generated product_strides. This runner independently observes S_strides; no CPU assertion proves actual GPU layout.
+- CPU preparation/imports are inert. Root owns external resources/deadline/ownedPID cleanup. Local PASS does not qualify engine, 32greedy IDs, cache lifecycle, speed or E2E; full32greedy equality is mandatory before E2E.

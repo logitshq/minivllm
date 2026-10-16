@@ -1,0 +1,92 @@
+{
+  "review_type": "AUTHOR_SELF_AUDIT_NOT_INDEPENDENT",
+  "status": "PASS_SAVED_EVIDENCE_AUDIT_STOP_UNCHANGED",
+  "actual_receipt_SHA": "83adff180b95e13e1aa9ba006399d7ab37e7a2d135c40abf8e4eba0cd7d6c083",
+  "checks": 3169,
+  "pins": 64,
+  "old_pins_unchanged_subset": 56,
+  "numeric_strict_counts": [
+    30,
+    60,
+    480
+  ],
+  "timed_terminal_strict_checks": 600,
+  "timed_blocks": 20,
+  "dispatch_counts": {
+    "numeric": 2760,
+    "prime": 76800,
+    "timed": 614400,
+    "total": 693960
+  },
+  "wall_medians_ns_per_dispatch": {
+    "A": 9481.083154296875,
+    "B": 9165.873209635416
+  },
+  "wall_medians_us_per_bank": {
+    "A": 18.96216630859375,
+    "B": 18.331746419270832
+  },
+  "wall_median_reduction": 0.03324619555927055,
+  "wins": 6,
+  "controls": {
+    "A": [
+      0.9956037872176712,
+      1.000554721908203
+    ],
+    "B": [
+      0.9996796039937725,
+      1.0000848792180368
+    ]
+  },
+  "control_medians": {
+    "A": 0.9980792545629371,
+    "B": 0.9998822416059047
+  },
+  "control_passed": true,
+  "official_micro_CB_envelope_medians_ns_per_dispatch": {
+    "A": 9456.055365812213,
+    "B": 9140.046522778295
+  },
+  "CB_timestamps_all20_valid": true,
+  "GPU_envelope_is_not_exclusive_kernel_time_or_gate_statistic": true,
+  "resource_samples": 24,
+  "swap_used_MB_unchanged": 5006.88,
+  "Swapouts_unchanged": 17460761,
+  "owner": 95238,
+  "driver": 95239,
+  "returncode": 2,
+  "reaped_and_external_release": true,
+  "full_reference": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-decode-v71-attempt1/child-output/receipt.json",
+    "SHA": "db712cea0abf3b89968662af2a7a0d06a7cab0745c5b9b18e8fd1d2b8387d21c",
+    "engine_ns_per_step": 34690041.67741936,
+    "timing_definition": {
+      "t0": "before fresh engine.add_request and prefill",
+      "t1": "after engine.step first prefill token observed",
+      "t2": "after remaining31 engine.step calls, final delivered token and drop/empty drain",
+      "decode": "post_first_token_decode31_including_seed;31/(t2-t1)",
+      "included_decode": "native begin/reset/all131 seed uploads and engine scheduling; first warm additionally includes capture/readonly baselines",
+      "whole": "32/(t2-t0)",
+      "excluded": "per-request resource probes, native reports,132 final hashes, readonly checks and file writes",
+      "comparison_limit": "different scope from raw57 pure loop whose t1 was after seed uploads; no direct paired comparison"
+    },
+    "same_workload_or_clock_as_micro": false
+  },
+  "conditional_scaling_NOT_a_fullmodel_bound": {
+    "assumptions": "48 fullmodel GDN banks have identical amortized local cost and all other work unchanged; unproven",
+    "layers": 48,
+    "wall_A_scaled_ms": 0.9101839828125001,
+    "micro_CB_A_scaled_ms": 0.9077813151179724,
+    "wall_scaled_fraction_of_reference": 0.026237615719123288,
+    "actual_local_AB_gain_scaled_saved_us": 30.260154687500094,
+    "actual_local_AB_gain_scaled_fraction": 0.0008723009032069629
+  },
+  "source_logical_S_bytes_not_DRAM": {
+    "one_layer_read_plus_write": 6291456,
+    "48_layer_read_plus_write": 301989888,
+    "local_S_working_set": 47185920,
+    "48_layer_S_working_set": 150994944
+  },
+  "GPU_or_resource_probe_executed_by_reviewer": false,
+  "rerun_or_integration": false
+}

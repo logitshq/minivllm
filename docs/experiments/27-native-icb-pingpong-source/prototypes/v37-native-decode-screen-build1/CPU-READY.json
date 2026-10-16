@@ -1,0 +1,25 @@
+{
+  "status": "CPU_READY_ONLY",
+  "parent_screen_sha256": "1c77c595d00523359247cc39ccad2d9365a17fa71d28d884bdfe100adb3841a2",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-decode-screen-build1/screen.py": "6f0ccdf93f5e8a6d20a2446162e75fe0a5b38f4952c632d42e095f08e73a7798",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-decode-screen-build1/source-pins.json": "a36257f01b4546d452224c9cfc05e97b15e4899d092447596b6b818725e9782c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-decode-screen-build1/source.diff": "1706ae230b4141a4a541ca543e4ba9f76cd3cf4503c47d9913320d49854aa9ce",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/replay.mm": "7f9ea4c4f210da57445a9d745eb6da1e122c666f1aaedd61f3790f0f249b34fd",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/libv37replay.dylib": "6b560a6046087e010fc0aba031771b5493a250fbb6b93269c55f8580f8829d13",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-fullqual-build1/fullqual.py": "6904958e3815a0845900f84564421641a06e5e1f7358ccc1f917fa4fa260517c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v37native-attempt1/child-output/receipt.json": "00c7f81e0d48ab49284c50cbceb043bdead206c06dcfc41ec11d85e5dddfa7be"
+  },
+  "only_source_changes": "default native library, qualification path/SHA and support-worker path; timing/capture/request/stat/guard boundaries byte-identical after those substitutions",
+  "source_pins": 46,
+  "qualification": "actual V37 3requests93steps12276strict PASS",
+  "final132_expected_outputs_equal_qualified_V34": true,
+  "actual_resource_barrier_count": 0,
+  "actual_resource_barrier_mappings": [],
+  "actual_scope_barriers_encoded": 1239,
+  "actual_adjacent_scope_barriers_coalesced": 177,
+  "hypothesis_note": "Common-arena mapping can widen resource barriers in source, but actual captured resource-specific barrier count is zero. It is not the actual cause shown by this capture; no performance inference.",
+  "MLX_imported": false,
+  "GPU_executed": false,
+  "protocol": "same V35 B-only: 6fresh requests,3warm+3measure,19prompt32greedy,31step loop only native step+4B prediction observation; final132hash/resources outside timed decode; no HTTP/Pareto/A-B/adoption claim"
+}

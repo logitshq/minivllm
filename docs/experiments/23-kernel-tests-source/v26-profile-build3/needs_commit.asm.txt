@@ -1,0 +1,14 @@
+__ZNK3mlx4core5metal14CommandEncoder12needs_commitEv:
+0000000000cbacd0	ldr	x8, [x0]
+0000000000cbacd4	add	x8, x8, #0x27c
+0000000000cbacd8	ldr	x8, [x8]
+0000000000cbacdc	ldr	w9, [x0, #0x20]
+0000000000cbace0	cmp	w9, w8
+0000000000cbace4	b.le	0xcbacf0
+0000000000cbace8	mov	w0, #0x1
+0000000000cbacec	ret
+0000000000cbacf0	ldr	x9, [x0, #0x28]
+0000000000cbacf4	lsr	x9, x9, #20
+0000000000cbacf8	cmp	x9, x8, asr #32
+0000000000cbacfc	cset	w0, hi
+0000000000cbad00	ret

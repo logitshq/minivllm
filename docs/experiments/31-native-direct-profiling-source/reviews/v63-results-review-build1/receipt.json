@@ -1,0 +1,414 @@
+{
+  "QMV_csv_sha256": "7bb92d968887abe0927301fca8be60aa12cd77246a60c010c2122e3b6d6f93ce",
+  "cleanup": {
+    "child": 79055,
+    "owner": 79046,
+    "reaped_exit0": true,
+    "saved_external_strict_absence": true
+  },
+  "original_readonly_records": 279,
+  "profiles": {
+    "base": {
+      "CB_GPU_envelope_ms": 68.94583333632909,
+      "GDN_groups_same_x": 48,
+      "QMV_decoded": 497,
+      "raw_sha256": "05f9e24bafae8c5a4817f24af63ee694d6921150ce0753b60875a95963f312a9",
+      "sampled": false,
+      "segments": 1625,
+      "unknown_QMV": 0,
+      "valid_rows": 0
+    },
+    "changed-prefill": {
+      "CB_GPU_envelope_ms": 124.894749984378,
+      "GDN_groups_same_x": 48,
+      "QMV_decoded": 497,
+      "adjacent_overlaps": 0,
+      "between_encoder_gaps_raw": 81682004,
+      "category_raw_delta": [
+        {
+          "category": "other",
+          "commands": 759,
+          "sum_raw_delta": 4574825
+        },
+        {
+          "category": "norm",
+          "commands": 209,
+          "sum_raw_delta": 1879217
+        },
+        {
+          "category": "NVFP4-QMV",
+          "commands": 497,
+          "sum_raw_delta": 34935333
+        },
+        {
+          "category": "GDN-conv-SiLU",
+          "commands": 48,
+          "sum_raw_delta": 267710
+        },
+        {
+          "category": "GDN-prework",
+          "commands": 48,
+          "sum_raw_delta": 300414
+        },
+        {
+          "category": "GDN-state",
+          "commands": 48,
+          "sum_raw_delta": 871666
+        },
+        {
+          "category": "SDPA",
+          "commands": 16,
+          "sum_raw_delta": 277581
+        }
+      ],
+      "raw_sha256": "3d725f175c711136d805de6cbcf80c064e1b18ca5334d125c23754cd472da4e8",
+      "roles_ranked": [
+        {
+          "commands": 64,
+          "role": "mlp.up_proj",
+          "sum_raw_delta": 7416999
+        },
+        {
+          "commands": 64,
+          "role": "mlp.down_proj",
+          "sum_raw_delta": 7174170
+        },
+        {
+          "commands": 64,
+          "role": "mlp.gate_proj",
+          "sum_raw_delta": 7134037
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_qkv",
+          "sum_raw_delta": 3313249
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.out_proj",
+          "sum_raw_delta": 2215538
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_z",
+          "sum_raw_delta": 2113629
+        },
+        {
+          "commands": 1,
+          "role": "lm_head",
+          "sum_raw_delta": 1416541
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.q_proj",
+          "sum_raw_delta": 1275126
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_b",
+          "sum_raw_delta": 766003
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.o_proj",
+          "sum_raw_delta": 725790
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_a",
+          "sum_raw_delta": 640582
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.v_proj",
+          "sum_raw_delta": 466460
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.k_proj",
+          "sum_raw_delta": 277209
+        }
+      ],
+      "sampled": true,
+      "segments": 1625,
+      "shapes_ranked": [
+        {
+          "K": 5120,
+          "N": 17408,
+          "commands": 128,
+          "sum_raw_delta": 14551036
+        },
+        {
+          "K": 17408,
+          "N": 5120,
+          "commands": 64,
+          "sum_raw_delta": 7174170
+        },
+        {
+          "K": 5120,
+          "N": 10240,
+          "commands": 48,
+          "sum_raw_delta": 3313249
+        },
+        {
+          "K": 6144,
+          "N": 5120,
+          "commands": 64,
+          "sum_raw_delta": 2941328
+        },
+        {
+          "K": 5120,
+          "N": 6144,
+          "commands": 48,
+          "sum_raw_delta": 2113629
+        },
+        {
+          "K": 5120,
+          "N": 248320,
+          "commands": 1,
+          "sum_raw_delta": 1416541
+        },
+        {
+          "K": 5120,
+          "N": 48,
+          "commands": 96,
+          "sum_raw_delta": 1406585
+        },
+        {
+          "K": 5120,
+          "N": 12288,
+          "commands": 16,
+          "sum_raw_delta": 1275126
+        },
+        {
+          "K": 5120,
+          "N": 1024,
+          "commands": 32,
+          "sum_raw_delta": 743669
+        }
+      ],
+      "span_raw": 124788750,
+      "sum_raw_delta": 43106746,
+      "unknown_QMV": 0,
+      "valid_rows": 1625
+    },
+    "reset-base": {
+      "CB_GPU_envelope_ms": 101.53866666951217,
+      "GDN_groups_same_x": 48,
+      "QMV_decoded": 497,
+      "adjacent_overlaps": 0,
+      "between_encoder_gaps_raw": 58213481,
+      "category_raw_delta": [
+        {
+          "category": "other",
+          "commands": 759,
+          "sum_raw_delta": 5165039
+        },
+        {
+          "category": "norm",
+          "commands": 209,
+          "sum_raw_delta": 1878703
+        },
+        {
+          "category": "NVFP4-QMV",
+          "commands": 497,
+          "sum_raw_delta": 34454870
+        },
+        {
+          "category": "GDN-conv-SiLU",
+          "commands": 48,
+          "sum_raw_delta": 268122
+        },
+        {
+          "category": "GDN-prework",
+          "commands": 48,
+          "sum_raw_delta": 303581
+        },
+        {
+          "category": "GDN-state",
+          "commands": 48,
+          "sum_raw_delta": 866664
+        },
+        {
+          "category": "SDPA",
+          "commands": 16,
+          "sum_raw_delta": 280248
+        }
+      ],
+      "raw_sha256": "d24f69d48f28cf43f5cb7ab6f671a53705cc31699474042ee277cb116b3ad16b",
+      "roles_ranked": [
+        {
+          "commands": 64,
+          "role": "mlp.down_proj",
+          "sum_raw_delta": 7198248
+        },
+        {
+          "commands": 64,
+          "role": "mlp.up_proj",
+          "sum_raw_delta": 7195167
+        },
+        {
+          "commands": 64,
+          "role": "mlp.gate_proj",
+          "sum_raw_delta": 7101457
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_qkv",
+          "sum_raw_delta": 3311206
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.out_proj",
+          "sum_raw_delta": 2193497
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_z",
+          "sum_raw_delta": 2120089
+        },
+        {
+          "commands": 1,
+          "role": "lm_head",
+          "sum_raw_delta": 1427667
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.q_proj",
+          "sum_raw_delta": 1274040
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_b",
+          "sum_raw_delta": 762999
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.o_proj",
+          "sum_raw_delta": 725126
+        },
+        {
+          "commands": 48,
+          "role": "linear_attn.in_proj_a",
+          "sum_raw_delta": 635083
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.k_proj",
+          "sum_raw_delta": 279499
+        },
+        {
+          "commands": 16,
+          "role": "self_attn.v_proj",
+          "sum_raw_delta": 230792
+        }
+      ],
+      "sampled": true,
+      "segments": 1625,
+      "shapes_ranked": [
+        {
+          "K": 5120,
+          "N": 17408,
+          "commands": 128,
+          "sum_raw_delta": 14296624
+        },
+        {
+          "K": 17408,
+          "N": 5120,
+          "commands": 64,
+          "sum_raw_delta": 7198248
+        },
+        {
+          "K": 5120,
+          "N": 10240,
+          "commands": 48,
+          "sum_raw_delta": 3311206
+        },
+        {
+          "K": 6144,
+          "N": 5120,
+          "commands": 64,
+          "sum_raw_delta": 2918623
+        },
+        {
+          "K": 5120,
+          "N": 6144,
+          "commands": 48,
+          "sum_raw_delta": 2120089
+        },
+        {
+          "K": 5120,
+          "N": 248320,
+          "commands": 1,
+          "sum_raw_delta": 1427667
+        },
+        {
+          "K": 5120,
+          "N": 48,
+          "commands": 96,
+          "sum_raw_delta": 1398082
+        },
+        {
+          "K": 5120,
+          "N": 12288,
+          "commands": 16,
+          "sum_raw_delta": 1274040
+        },
+        {
+          "K": 5120,
+          "N": 1024,
+          "commands": 32,
+          "sum_raw_delta": 510291
+        }
+      ],
+      "span_raw": 101430708,
+      "sum_raw_delta": 43217227,
+      "unknown_QMV": 0,
+      "valid_rows": 1625
+    }
+  },
+  "receipt_sha256": "a4459b8841b605eb76b70fc29afd570bcc0902fbd8da1095b8d9735db5ecd4e5",
+  "reference_readonly_records": 93,
+  "resources": {
+    "AC": true,
+    "Swapouts_growth": 0,
+    "files": {
+      "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v63native-attempt1/child-output/resources-derived.json": {
+        "Pageouts_growth": 230,
+        "raw_manifest_sha256": "52b35ca455f5e341b7284fecce77a71f4dc7e43e04783fda8360b8ed37d60e00",
+        "samples": 33
+      },
+      "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v63native-attempt1/external-resource.json": {
+        "Pageouts_growth": 0,
+        "raw_manifest_sha256": "73fb4e50d2767ff75ddb9a631956b9b7102af700f4a4559337ed95c98f4850f1",
+        "samples": 1
+      },
+      "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v63native-attempt1/resource-derived.json": {
+        "Pageouts_growth": 230,
+        "raw_manifest_sha256": "69da67b8b518a9af1eec4db8409d64eb5daa49344fd03081d97514db61a86564",
+        "samples": 19
+      }
+    },
+    "minimum_free_percent": 46,
+    "pressure_levels": [
+      1
+    ],
+    "samples": 53,
+    "swap_MB_growth": 0,
+    "thermal_codes": [
+      0
+    ]
+  },
+  "scope": "Saved source/A hashes/Cmemcmp/timestamps/resource/PID evidence replay; no independent GPU recomputation or production time-share conversion.",
+  "source_pins": 69,
+  "sources": {
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "/private/tmp/minivllm-engine-optimization-20261014/DESIGN-GDN-PROJECTION-PROTOTYPE.md": "5cec2325f6490f7ba228e39dc07ee70fb13a63b47498945781d0da21b0f1c702",
+    "/private/tmp/minivllm-engine-optimization-20261014/SUMMARY-GDN-PROJECTION-MICRO-ATTEMPT2.md": "35f06ef3f568ad16f0b257c0476f5c9fd2ee026495bd53f9b3197730e8dec161",
+    "/private/tmp/minivllm-engine-optimization-20261014/v63-native-stage-profile-build1/fullqual.py": "dffddebfa8eb169a2e64d12e16a23481636659fcf7731cb971b5982e3201e007",
+    "/private/tmp/minivllm-engine-optimization-20261014/v63-native-stage-profile-build1/profile.mm": "f1916332b6ce3c3213882ef3a3885f256af8330e71c6e0ee5602da8bf0b12e38"
+  },
+  "status": "PASS_SAVED_V63_NUMERIC_AND_ALL_RAW_TIMESTAMP_CPU_AUDIT",
+  "strict_output_records": 12276,
+  "timestamp_units": "Unconverted raw uint64 counter values; SDK MTLCounters timestamp field has no numeric unit, capture contains no sampleTimestamps calibration or frequency query. CB GPUStartTime/EndTime are documented host seconds."
+}

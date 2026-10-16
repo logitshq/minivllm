@@ -1,0 +1,52 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v45-native-http-screen-build1/driver.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v58-native-http-screen-build1/driver.py
+@@ -1,4 +1,4 @@
+-"""C1 serial NOL/OLN/LNO screen using the frozen official client definitions."""
++"""C1 async native NOL/OLN/LNO screen using unchanged frozen official client definitions."""
+ import argparse
+ import ast
+ import concurrent.futures
+@@ -22,13 +22,26 @@
+ OLD = P / 'm4-final-native15-official-attempt2'
+ sys.path.insert(0, str(OLD))
+ import common as controls
+-spec = importlib.util.spec_from_file_location('v45_official_client', OLD / 'client.py')
++spec = importlib.util.spec_from_file_location('v58_official_client', OLD / 'client.py')
+ official = importlib.util.module_from_spec(spec); spec.loader.exec_module(official)
+ import httpx
+ from tokenizers import Tokenizer
+ 
+ 
+ def write_new(path, value): controls.write_new(path, value)
++
++
++def assert_pipeline(native, steps, resets):
++    p, f = native['pipeline'], native['feedback']
++    assert native['status'] == 'OK' and p['enabled'] and p['depth'] == 2
++    assert p['maximum_outstanding'] == 2 and p['inflight'] == 0 and p['pending'] == []
++    assert all(not x['busy'] for x in p['slots'])
++    assert p['total_submitted'] == p['total_completed'] == p['total_delivered'] == steps
++    assert p['total_discarded'] == p['total_failed'] == 0
++    assert p['request_submitted'] == p['request_completed'] == p['request_delivered'] == 31
++    assert p['request_discarded'] == p['request_failed'] == 0
++    assert f['total_steps'] == f['icb']['execution_count'] == steps and f['resets'] == resets
++    assert f['icb']['bank_executions'] == [16 * resets, 15 * resets]
+ 
+ 
+ def run_arm(item, output, config, previous_env):
+@@ -156,6 +169,7 @@
+                 assert warm_metadata['native_steps'] == 93 and warm_metadata['completed_requests'] == 3
+                 assert warm_metadata['parameter_tree_unchanged'] and warm_metadata['terminal_cleanup']
+                 assert warm_metadata['measurement_hooks'] is False
++                assert_pipeline(warm_metadata['native'], 93, 3)
+             if phase == 'warm': sample('after-three-warm-before-measure')
+         sample('after-measure-before-unload')
+         requests = [q for phase in ('warm', 'measure') for g in groups[phase] for q in g['requests']]
+@@ -171,6 +185,7 @@
+             assert final_native['native']['status'] == 'OK' and f['total_steps'] == 186 and f['resets'] == 6
+             assert f['icb']['execution_count'] == 186 and f['icb']['bank_executions'] == [96, 90]
+             assert f['pingpong']['eligible_count'] == 48
++            assert_pipeline(final_native['native'], 186, 6)
+             write_new(run_dir / 'native-final-metadata.json', final_native)
+         if engine == 'lithos':
+             text = (run_dir / 'server.log').read_text()

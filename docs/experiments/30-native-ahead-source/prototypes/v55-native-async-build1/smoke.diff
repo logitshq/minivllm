@@ -1,0 +1,92 @@
+--- qualified40tiny/smoke.py
++++ V55tiny/smoke.py
+@@ -10,7 +10,7 @@
+ 
+ D=Path(__file__).resolve().parent
+ P=D.parent
+-LIB=P/'v40-native-icb-build2/libv40replay.dylib'
++LIB=P/'v55-native-async-build1/libv55replay.dylib'
+ pins=json.loads((D/'source-pins.json').read_text())
+ for path,digest in pins.items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest,path
+ local=json.loads((P/'v23-root-control-build1/numeric-v40-attempt1/child-output/receipt.json').read_text())
+@@ -28,7 +28,8 @@
+     'v33_pin': [u,u,st], 'v33_begin': [], 'v33_end_build': [],
+     'v33_register_output': [u,u,st], 'v34_register_input': [u,u,ctypes.c_uint32,st],
+     'v34_link': [u,u,u], 'v36_register_pingpong': [u,u,u], 'v38_enable_icb': [], 'v34_seal_feedback': [ctypes.c_uint32,ctypes.c_uint32],
+-    'v34_reset': [], 'v34_write_input': [u,u,ptr], 'v34_replay_step': [],
++    'v34_write_input': [u,u,ptr], 'v55_enable_pipeline': [ctypes.c_uint32],
++    'v55_reset': [], 'v55_submit_step': [ctypes.POINTER(ctypes.c_uint64)], 'v55_wait_step': [u], 'v55_drain': [],
+     'v34_compare_output': [u,u,ptr], 'v34_copy_output': [u,u,ptr],
+ }.items():
+     getattr(lib,name).argtypes=args;getattr(lib,name).restype=ctypes.c_int
+@@ -86,28 +87,51 @@
+ call('v36_register_pingpong',inputs[0].address,outputs[1].address,inputs[0].nbytes)
+ call('v34_seal_feedback',1,256)
+ call('v38_enable_icb')
++call('v55_enable_pipeline',2)
+ pp=report('native-sealed')['feedback']['pingpong']
+ assert pp['eligible_count']==1 and pp['staged_link_count']==3, pp
+ icb=report('icb-enabled')['feedback']['icb']
+ assert icb['enabled'] and icb['banks']==2, icb
+ requests=[]
+ for request in range(3):
+-    call('v34_reset')
+     reference=seeds
+     seed_overrides=[]
+     if request==2:
+         reference=(seeds[0]+2,mx.array([7],mx.int32),mx.array([8],mx.int32),mx.array([9],mx.int32))
+         seed_overrides=[Shared(v) for v in reference]
+-        for target,source in zip(inputs,seed_overrides):call('v34_write_input',target.address,target.nbytes,ctypes.c_void_p(source.address))
+-    tokens=[]
++    # Prepare independent accepted25 references before submitting native work.
++    # Native consumes its own GPU predictions; no reference tokens/states are fed back.
++    expected_steps=[]
+     for step in range(5):
+         expected=graph(*reference,candidate=False);mx.eval(*expected)
+-        refs=[Shared(v) for v in expected]
+-        call('v34_replay_step')
+-        for original,actual in zip(outputs,refs):call('v34_compare_output',original.address,original.nbytes,ctypes.c_void_p(actual.address))
++        expected_steps.append([Shared(v) for v in expected])
++        reference=(expected[1],expected[2],expected[3],expected[4])
++    mx.synchronize()
++    call('v55_reset')
++    for target,source in zip(inputs,seed_overrides):
++        call('v34_write_input',target.address,target.nbytes,ctypes.c_void_p(source.address))
++    submitted=0
++    def submit_one():
++        global submitted
++        ticket=ctypes.c_uint64()
++        call('v55_submit_step',ctypes.byref(ticket));submitted+=1
++        assert ticket.value==submitted
++    submit_one();submit_one()
++    tokens=[]
++    for step,refs in enumerate(expected_steps,1):
++        call('v55_wait_step',step)
++        # S bank is LAST_DELIVERED's written bank; the one queued successor only reads it.
++        # Finish all5 strict comparisons before next submit may reuse/overwrite it.
++        for original,actual in zip(outputs,refs):
++            call('v34_compare_output',original.address,original.nbytes,ctypes.c_void_p(actual.address))
+         token=ctypes.c_int32();call('v34_copy_output',outputs[2].address,4,ctypes.byref(token))
+-        assert token.value==int(expected[2].item());tokens.append(token.value)
+-        reference=(expected[1],expected[2],expected[3],expected[4])
++        assert token.value==ctypes.c_int32.from_buffer_copy(bytes(refs[2].raw)).value
++        tokens.append(token.value)
++        if submitted<5:submit_one()
++    call('v55_drain')
++    current=report('native-request-'+str(request))['pipeline']
++    assert current['inflight']==0 and current['request_submitted']==current['request_completed']==current['request_delivered']==5
++    assert current['request_discarded']==current['request_failed']==0 and current['maximum_outstanding']==2
+     assert [bytes(h.raw) for h in weights+inputs]==unchanged
+     assert [bytes(h.raw) for h in outputs]==captured_raw
+     requests.append(tokens)
+@@ -115,7 +139,9 @@
+ native=report('native-final')
+ assert native['feedback']['icb']['execution_count']==15
+ assert native['feedback']['icb']['bank_executions']==[9,6]
+-r={'status':'PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS',
++assert native['pipeline']['total_submitted']==native['pipeline']['total_completed']==native['pipeline']['total_delivered']==15
++assert native['pipeline']['total_discarded']==native['pipeline']['total_failed']==native['pipeline']['inflight']==0
++r={'status':'PASS_TINY_V55_ASYNC_DEPTH2_FIFO_3REQUESTS_15STEPS_75STRICT',
+    'tokens':requests,'strict_output_checks':75,'model_loads':0,'performance_point':False,
+    'perstep_CPU_seed_writes':0,'requests':3,'changed_seed':True,'native':native}
+ (out/'receipt.json').write_text(json.dumps(r,indent=2)+'\n')

@@ -1,0 +1,37 @@
+{
+  "status": "CPU_SOURCE_AST_AND_SYMBOLIC_ONLY",
+  "parent_source_count": 27,
+  "new_source_count": 29,
+  "changed_parent_files": [
+    "model/qwen3_5.py"
+  ],
+  "byte_identical_parent_files": 26,
+  "added_source_files": [
+    "kernels/residual_norm_metal.py",
+    "model/residual_carry.py"
+  ],
+  "qualified_residual_kernel_sha256": "b53e4b88cb118b2ee05b293e6b4ba4446ae9716e8c7dd9e678a359089d21413c",
+  "original_kernel_copy_exact": true,
+  "old_DecoderLayer_call_AST_sha256": "3f3e282d468fa46d1b33495aebc3c68506166aa3a74ae5d4acdb9e60fb42c240",
+  "new_DecoderLayer_call_AST_sha256": "3f3e282d468fa46d1b33495aebc3c68506166aa3a74ae5d4acdb9e60fb42c240",
+  "old_model_call_AST_sha256": "f9ee2419019ffa62a0dd82bd557b91f1b65c6acdb996fe13b66519e114f2f4fa",
+  "new_fallback_after_removing_only_entry_guard_AST_sha256": "f9ee2419019ffa62a0dd82bd557b91f1b65c6acdb996fe13b66519e114f2f4fa",
+  "old_lm_head_fn_AST_sha256": "6bd8c10327aff99112f0ad741e7864eb86e7f5baed995f2a6a1eedef767b24af",
+  "new_lm_head_fn_AST_sha256": "6bd8c10327aff99112f0ad741e7864eb86e7f5baed995f2a6a1eedef767b24af",
+  "conceptual_fusions_per_normal_B1_forward": 128,
+  "conceptual_fusion_breakdown": {
+    "attention_add_postnorm": 64,
+    "MLP_add_next_inputnorm": 63,
+    "final_MLP_add_modelnorm": 1
+  },
+  "actual_GPU_engagement_observed": false,
+  "tests": {
+    "passed": 6,
+    "runtime": "CPU stdlib only; symbolic tensors, no mlx import or GPU",
+    "both_head_branches_symbolically_equal_to_original_order": true,
+    "default_off_strict_bool_no_array_metadata": true,
+    "fallback_checked_before_mixer_calls": true
+  },
+  "old_residual_micro_build1_and_build2": "FAIL_STOP control drift; unchanged and not rerun",
+  "no_speed_or_model_equivalence_claim": true
+}

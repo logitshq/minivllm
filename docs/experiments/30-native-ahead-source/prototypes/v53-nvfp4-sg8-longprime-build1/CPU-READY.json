@@ -1,0 +1,49 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/micro.py": "4812dfe259929d38c8ea7e22777a789c1952e91b5ba873de5a5d6a2e91617fd9",
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/source-manifest.json": "3f3eb37ab687a4f8c4da7774d0352a414bbcb30e35de9531267bfffb20919d8c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/protocol.json": "2149a86ac1f573863d5cfb65aba8bd8d6284a6cd5311ab6a28798f5b92290ec7",
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/check_cpu.py": "14d7678135b58c6614fcc101ff0bfb5b5ca357777086c5b3cbd044ea4112495e",
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/from52.diff": "a693ded9df478e98269df033574d5225da2ecec8e285848f266e53efa1f6186a",
+    "/private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/cpu-inert/cpu.json": "e9ac460409a3632264ec0ac7d5c7683cfcc56121ae60497673f57b64fa51817f"
+  },
+  "source_manifest_files": 12,
+  "source_checks": 4,
+  "source_checks_passed": true,
+  "CPU_inert": "PASS_CPU_SOURCE_HEADER",
+  "MLX_imported": false,
+  "GPU_used": false,
+  "checkpoint_payload_loaded": false,
+  "kernel_geometry_and_Metal_exact_V52": true,
+  "original36numeric_and_readonly_protocol_preserved": true,
+  "measured_loop_AST_exact_old": true,
+  "schedule_pair_body_AST_preserved_after_declared_block_call_rename": true,
+  "fixed_prime_calls_per_slot": 8192,
+  "prime_chunks": 4,
+  "calls_per_prime_chunk": 2048,
+  "measured_calls_per_slot": 2048,
+  "chunk_writes": "only after both blocks via existing pairs.json write",
+  "control_gate": {
+    "each": [
+      0.95,
+      1.05
+    ],
+    "arm_median": [
+      0.98,
+      1.02
+    ]
+  },
+  "gain_gate": {
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "pairs": 6
+  },
+  "physical_drift_cause": "unknown; longer-prime protocol exploration only",
+  "expected_wall_seconds": [
+    45,
+    55
+  ],
+  "unchanged_child_timeout_seconds": 170,
+  "actual_run": "root only; fresh output; original controls and external resource/owned cleanup required"
+}

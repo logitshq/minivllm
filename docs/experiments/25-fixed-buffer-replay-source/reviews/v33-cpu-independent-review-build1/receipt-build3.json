@@ -1,0 +1,43 @@
+{
+  "status": "CPU_SOURCE_REVIEW_NO_NEW_BLOCKER_FOR_BOUNDED_DIAGNOSTIC",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/replay.mm": "90053f57e453516d6e21c99454f1ced3845894745ec3798bae1c46cf1e1f803c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/libv33replay.dylib": "d60e6ef0519799a1e57f52eb1e5c7b69628a1c781dc845174bd5bd74b6c064e3",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/ABI.h": "a34b83a0734fc7f969da495aa2f149004bf55d284260ce0b5fe546ecb0a15833",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-native-replay-build3/CPU-READY.json": "8bc4d0b7ac4849894e2558299a1b27cb26999a839727f12fae63483c0758ad71",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-fixed-buffer-replay-worker-build2/fullqual.py": "c0764c7331d8e6bbb0d059541b4d252a2d93b7fcc225c7d94f2661ff3cd35012",
+    "/private/tmp/minivllm-engine-optimization-20261014/v33-fixed-buffer-replay-worker-build2/source-pins.json": "592cc4f97977cc010d0248d8cbb63eed6e0754fd0b587865fb6a68119554284d"
+  },
+  "worker_inert": {
+    "status": "PASS_CPU_INERT",
+    "MLX_imported": false,
+    "GPU_used": false,
+    "pins": 42,
+    "scope": "one fixed L20 capture and two seed restores"
+  },
+  "all42pins_match": true,
+  "native_compile_receipt_checked": true,
+  "focused_source_lines": {
+    "static void touchCB": [
+      29
+    ],
+    "static void eventW": [
+      66
+    ],
+    "static void eventS": [
+      67
+    ],
+    "v33_register_output": [
+      87
+    ],
+    "v33_restore_replay": [
+      88
+    ],
+    "v33_report_json": [
+      90
+    ]
+  },
+  "GPU_or_MLX_run_by_reviewer": false,
+  "actual_GPU_correctness_qualified_by_this_review": false,
+  "report_sha256": "8ffbcf9d34d5914a464b805d2ad3eeb99409bbae85faf3fdc416a9d5d37af6fd"
+}

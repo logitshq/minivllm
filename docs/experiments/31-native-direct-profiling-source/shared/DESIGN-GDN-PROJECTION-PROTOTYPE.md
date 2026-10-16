@@ -1,0 +1,12 @@
+# GDN projection prototype build1: CPU design before code
+- Frozen parent: pureaccepted14, 25/25 source SHA match manifest 2a990456522fdd00d0f331011964be4e9b755e47b2b6eeccd293b1a8c435baad.
+- Build1 only GDN qkv,z,b,a 4→1. Generic row packing permits variable N/group length; no attention/MLP.
+- New non-Module group keeps slab outside parameter registration; original Linear objects retain exact keys and hold continuous row views.
+- Only explicit post-load activation creates groups. load_model must return first; pack each group, eval slabs/views, then publish all four rebindings together.
+- Unknown metadata/dtype/backend reject. Runtime additionally requires actual GPU, MLX0.32.3 legacy architecture, BF16 2D (1,K), normal decode, no capture/record.
+- Default off; direct GDN._decode defaults off. Qwen→Decoder passes permission only for decode and empty capture. All other paths preserve original projection order and calls.
+- Invalidating/disabling drops slab refs; re-enabling first invalidates old group. Native model.load_weights and explicit API reload invalidate before strict load; arbitrary external replacement is detected on the next eligible packed call.
+- Transaction failure before publish leaves original tensors untouched. Plain Linear assignments are audited Module setters; publish rollback covers assignment error.
+- CPU tests use source-loaded modules and array/Module doubles (no MLX import), explicit event order, row-byte preservation, metadata refusal, split boundaries, view fallback, identity invalidation and real Qwen→Decoder→GDN routing.
+- CPU ownership tests observe loader frame/dict/items/closures gone before packing, group eval before publish, original arrays weakrefs released after publish; no Python id inference about allocator storage.
+- GPU later must prove view allocation sharing, memory peak/residency, BF16 byte identity, 5-pair micro threshold and full model/cache/lifecycle/E2E qualification.

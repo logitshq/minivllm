@@ -1,0 +1,93 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/micro.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v53-nvfp4-sg8-longprime-build1/micro.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Root-only V52 fixed-shape compiled A/B QMV SG2-to-SG8 geometry exploration. CPU mode never imports MLX."""
++"""Root-only V53 fixed-prime8192 SG8 measurement-stability exploration. CPU mode never imports MLX."""
+ import argparse
+ import copy
+ import gc
+@@ -24,16 +24,46 @@
+ spec = importlib.util.spec_from_file_location("v26_readonly_v22_support", OLD / "micro.py")
+ old = importlib.util.module_from_spec(spec)
+ spec.loader.exec_module(old)  # stdlib-only; __main__ guard prevents execution
+-helper_spec = importlib.util.spec_from_file_location("v52_local_geometry_helper", BASE / "geometry.py")
++helper_spec = importlib.util.spec_from_file_location("v53_local_geometry_helper", BASE / "geometry.py")
+ helper = importlib.util.module_from_spec(helper_spec)
+ helper_spec.loader.exec_module(helper)
+ prepare, K, N = helper.prepare, helper.K, helper.N
+ 
+ Q, SCHEDULE = old.Q, old.SCHEDULE
+-PRIME, REPEATS = 2048, 2048
++PRIME, REPEATS = 8192, 2048
++PRIME_CHUNKS, PRIME_CHUNK_REPEATS = 4, 2048
+ old.PRIME, old.REPEATS = PRIME, REPEATS  # private module only; frozen source unchanged
+ CONTROLS = old.CONTROLS
+ sha, write = old.sha, old.write
++
++
++def longprime_block(mx, invoke, variant):
++    """Fixed four chunks; records stay in memory until the enclosing pair ends."""
++    assert PRIME == PRIME_CHUNKS * PRIME_CHUNK_REPEATS == 8192
++    prime_utc, prime_begin = old.utc(), time.perf_counter_ns()
++    chunks = []
++    for chunk in range(PRIME_CHUNKS):
++        chunk_begin = time.perf_counter_ns()
++        for j in range(PRIME_CHUNK_REPEATS):
++            result = invoke(variant, chunk * PRIME_CHUNK_REPEATS + j)
++        chunk_end = time.perf_counter_ns()
++        chunks.append({"chunk": chunk, "start_ns": chunk_begin, "end_ns": chunk_end,
++                       "total_ns": chunk_end-chunk_begin, "repeats": PRIME_CHUNK_REPEATS})
++    mx.synchronize()
++    prime_end = time.perf_counter_ns()
++    start_utc = old.utc()
++    begin = time.perf_counter_ns()
++    for j in range(REPEATS):
++        result = invoke(variant, j)
++    mx.synchronize()
++    end = time.perf_counter_ns()
++    return {"variant": variant, "prime_start_utc": prime_utc,
++            "prime_start_ns": prime_begin, "prime_end_ns": prime_end,
++            "prime_repeats": PRIME, "prime_chunks": chunks,
++            "start_utc": start_utc, "end_utc": old.utc(),
++            "start_ns": begin, "end_ns": end, "total_ns": end - begin,
++            "ns_per_call": (end - begin) / REPEATS, "repeats": REPEATS,
++            "groups_per_call": len(old.LAYERS), "segments_per_call": old.SEGMENTS}, result
+ 
+ 
+ def identity(power_domain="AC Power", qualify_only=False):
+@@ -67,6 +97,7 @@
+             "target_tensor_payload_bytes": sum(t["nbytes"] for t in tensors),
+             "real_inputs": old.real_metadata(), "mechanism": "fixed-shape mx.compile A and B over identical immutable weights; B uses original R4 math with SG8 TG geometry only",
+             "plan": {"prime": PRIME, "repeats": REPEATS, "schedule": SCHEDULE,
++                     "prime_chunks": PRIME_CHUNKS, "prime_chunk_repeats": PRIME_CHUNK_REPEATS,
+                      "controls": CONTROLS, "power": power_domain, "qualify_only": qualify_only, "timeout_s": 170,
+                      "minimum_reduction": .05, "minimum_wins": 5, "full_model": False}}
+ 
+@@ -214,7 +245,7 @@
+                 return [value]
+             for index, order in enumerate(SCHEDULE):
+                 probe(f"pair{index}-before")
+-                a, ao = old.block(mx, invoke, order[0]); b, bo = old.block(mx, invoke, order[1])
++                a, ao = longprime_block(mx, invoke, order[0]); b, bo = longprime_block(mx, invoke, order[1])
+                 for rec, values in ((a, ao), (b, bo)):
+                     rec["hashes"] = [hashlib.sha256(raw(v)).hexdigest() for v in values]
+                 assert a["hashes"] == b["hashes"], "paired output mismatch"
+@@ -281,7 +312,7 @@
+     sys.path.insert(0, str(P / "v25-c1-screen-build1"))
+     from support import identity as process_identity, process_parent, cleanup_owned
+     proc = None; birth = None; rc = 1
+-    def stop(sig, frame): raise KeyboardInterrupt("owned V52 supervisor interrupted")
++    def stop(sig, frame): raise KeyboardInterrupt("owned V53 supervisor interrupted")
+     previous = signal.signal(signal.SIGTERM, stop)
+     with (args.out / "child.log").open("w") as log:
+         try:
+@@ -298,7 +329,7 @@
+             if proc is not None:
+                 cleanup = cleanup_owned(proc, birth, args.out / "cleanup-identities.json"); write(args.out / "cleanup.json", cleanup)
+             signal.signal(signal.SIGTERM, previous)
+-    print(f"V52 child exit={rc}; exact owned child reaped; evidence={args.out}", flush=True)
++    print(f"V53 child exit={rc}; exact owned child reaped; evidence={args.out}", flush=True)
+     return rc
+ 
+ 

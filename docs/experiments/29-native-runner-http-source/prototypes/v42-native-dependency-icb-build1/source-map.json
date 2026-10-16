@@ -1,0 +1,24 @@
+{
+  "parent": "/private/tmp/minivllm-engine-optimization-20261014/v40-native-icb-build2",
+  "parent_source_sha256": "25d9ff0d1478d9737c18913757845297f2b588c13bbd58a3d96869184282852b",
+  "donor": {
+    "commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+    "path": "monolith/compiler/barriers.py",
+    "lines": [
+      3,
+      17,
+      38,
+      74
+    ],
+    "mechanism": "whole-base allocation RAW/WAR/WAW open group; V42 omits previous-op motion and mutually-exclusive variant exception",
+    "local_repository": "/private/tmp/minivllm-remaining-20261014/lithos-source"
+  },
+  "differences": [
+    "Command.origin capture provenance",
+    "strict access/scope/whole-allocation/bank-bijection validation",
+    "explicit Buffers scope deferral with first/forced/frontier barriers",
+    "independent all-conflict-edge proof for both banks",
+    "barrier diagnostics only; both GDN PSO names/indices and all feedback math unchanged"
+  ],
+  "scope": "CPU preparation; no actual M4 engagement or speed claim"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "NUMERIC_DIAGNOSTIC_ONLY_NO_OLDGOLD_PASS_OR_PERFORMANCE",
+  "K": 5120,
+  "eps": 1e-06,
+  "gammas": "raw checkpoint BF16 L0 input/post +final, unchanged; B uses FP32 subtract1 thenBF16 loader offset",
+  "cases": 27,
+  "outputs": "all BF16[1,5120], finite and readonly infrastructure strict; save all108 raw arrays; unequal outputs do not stop or claim previous qualification",
+  "vectors": "eight fixed synthetic values from numeric.synthetic; ninth historical postnorm OUTPUT used as generic input only",
+  "A": {
+    "formula": "mx.fast.rms_norm(x,raw_gamma,eps)",
+    "context": "actual GPU public builtin; no mx.compile wrapper or compile_options control; actual kernel/FMA mode not inferred from CPU fallback"
+  },
+  "B": {
+    "formula": "frozen44 norm_metal.norm(x,loader_offset,eps,zero_centered=True)",
+    "context": "unmodified custom kernel, header #pragma clang fp contract(off); compile_options absent exactly as frozen source, backend defaults not labeled safe"
+  },
+  "C": {
+    "formula": "xf=FP32(x); n=xf*rsqrt(mean(xf*xf)+eps); nB=BF16(n); out=nB*raw_gamma",
+    "context": "eager GPU ops, no mx.compile; mx.eval(nB) diagnostic materialization. Emulates official fast.cpp fallback formula; does NOT run CPU fallback"
+  },
+  "D": {
+    "formula": "xf=FP32(x); y=xf*rsqrt(mean(xf*xf)+eps); out=BF16(y*raw_gamma)",
+    "context": "AST-exact original44 _rms_norm_explicit including @partial(mx.compile,shapeless=True); default MLX compiled context, not assumed equal to B compile mode"
+  },
+  "metrics": "all six unordered pairs/case: exact raw bytes/different elements/max BF16 ordered-bit ULP/maxabs/signed zero bit differences. -0/+0 adjacent and distinct in ordered encoding. No tolerance/adoption threshold.",
+  "input_readonly": "15 arrays:3 rawgamma+3offset+9X; compare all15 SHA after each case",
+  "memory_limit_bytes": 536870912,
+  "cache_limit_bytes": 67108864,
+  "resources": "raw before derived; AC Power, thermal0, pressure1, swap-used/Swapouts unchanged; root-owned cleanup outside worker",
+  "source_formula_refs": [
+    "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/fast.cpp#L82",
+    "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/kernels/rms_norm.metal#L63"
+  ],
+  "future_only": "root sole GPU execution after CPU ready, no timing"
+}

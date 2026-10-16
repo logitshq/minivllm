@@ -1,0 +1,40 @@
+{
+  "status": "CPU_READY_ONLY",
+  "GPU_executed": false,
+  "driver_sha256": "526afb074d6ab5653b69a9dd6f6c76bb951bc7389a11b7e3506e83fe28349a06",
+  "native_binary_sha256": "4696f3c385922a1991868b9bfad1b2d9bd2246a24baff8d1841e467332fbd527",
+  "native_source_and_binary_unchanged": true,
+  "OPS_PER_BUFFER": 0,
+  "MB_PER_BUFFER": 50,
+  "BFS_MAX_WIDTH": 20,
+  "FAST_SYNCH": 0,
+  "model_loads_planned": 1,
+  "warm_requests": 1,
+  "warm_outputs_each": 32,
+  "measured_B1_forwards": 1,
+  "actual_OPS1_dispatch_count_distribution": {
+    "1": 3,
+    "2": 912,
+    "3": 49
+  },
+  "single_dispatch_CB_not_guaranteed_until_actual_capture": true,
+  "diagnostic_only_not_exclusive_kernel_time_or_production_shares": true,
+  "AST_compile_inert": "PASS_NO_MLX_IMPORT",
+  "actual_child_argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build3/runner.py",
+    "--execute-gpu",
+    "--measured",
+    "1",
+    "--out",
+    "NEW_ABSOLUTE_DIR"
+  ],
+  "child_env": {
+    "MLX_MAX_OPS_PER_BUFFER": "0",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0",
+    "DYLD_INSERT_LIBRARIES": "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build3/libv26trace.dylib"
+  }
+}

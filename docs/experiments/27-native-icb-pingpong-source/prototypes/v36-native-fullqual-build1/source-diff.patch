@@ -1,0 +1,84 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v34-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v36-native-fullqual-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only fixed-cap native feedback qualification; inert never imports MLX."""
++"""Root-only GDN S pingpong native feedback qualification; inert never imports MLX."""
+ import argparse
+ import ctypes
+ import hashlib
+@@ -14,7 +14,7 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v17-gdn-gates-build1-root"
+-LIB = P / "v34-native-replay-build1/libv34replay.dylib"
++LIB = P / "v36-native-pingpong-build1/libv36replay.dylib"
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -57,7 +57,8 @@
+                  "v34_register_input": [U, U, ctypes.c_uint32, S],
+                  "v34_link": [U, U, U], "v34_seal_feedback": [ctypes.c_uint32, ctypes.c_uint32],
+                  "v34_reset": [], "v34_write_input": [U, U, V], "v34_replay_step": [],
+-                 "v34_compare_output": [U, U, V], "v34_copy_output": [U, U, V]}
++                 "v34_compare_output": [U, U, V], "v34_copy_output": [U, U, V],
++                 "v36_register_pingpong": [U, U, U]}
+         for name, args in specs.items():
+             fn = getattr(self.lib, name); fn.argtypes = args; fn.restype = ctypes.c_int
+         self.lib.v34_report_json.argtypes = []
+@@ -121,7 +122,7 @@
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+                           "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
+-                          "inputs": 131, "outputs": 132, "feedback_links": 131}))
++                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir(exist_ok=False)
+@@ -223,6 +224,20 @@
+             output_index = (129,130,131)[i] if i<3 else i-2
+             other=output_holders[output_index]; assert h.nbytes==other.nbytes
+             native.call("v34_link",h.address,other.address,h.nbytes)
++        pingpong_requested=[]
++        for layer_index,layer in enumerate(model.layers):
++            if layer.is_attn: continue
++            input_state=seed_holders[4+2*layer_index]
++            output_state=output_holders[2+2*layer_index]
++            assert input_state.meta["shape"]==output_state.meta["shape"]==[1,48,128,128]
++            assert input_state.meta["dtype"]==output_state.meta["dtype"]=="mlx.core.float32"
++            assert input_state.nbytes==output_state.nbytes==3145728
++            native.call("v36_register_pingpong",input_state.address,output_state.address,input_state.nbytes)
++            pingpong_requested.append({"layer":layer_index,"input_label":input_state.label,
++                                       "output_label":output_state.label,"input_address":input_state.address,
++                                       "output_address":output_state.address,"bytes":input_state.nbytes})
++        assert len(pingpong_requested)==48
++        receipt["pingpong_requested"]=pingpong_requested
+         native.call("v34_seal_feedback",128,CAP)
+         output_baselines=[h.raw() for h in output_holders]  # once at capture only
+         receipt["capture"]={"inputs":[metadata_finite(np,h) for h in seed_holders],
+@@ -232,6 +247,8 @@
+         fb = receipt["capture"]["native"]["feedback"]
+         assert fb["sealed"] and (fb["input_count"],fb["output_count"],fb["link_count"],fb["state_count"],fb["capacity"]) == (131,132,131,128,CAP)
+         assert fb["CPU_full_state_restore_per_step"] is False
++        pp=fb["pingpong"]
++        assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+         resources.sample("after-capture-seal",loaded=True,mx=mx); save()
+         total_steps = 0
+         for name,prompt,canonical in cases:
+@@ -304,6 +321,8 @@
+             assert fb["CPU_seed_upload_bytes_total"]==sum(h.nbytes for h in seed_holders)*len(receipt["requests"])
+             assert fb["CPU_output_compare_bytes_total"]==sum(h.nbytes for h in output_holders)*total_steps
+             assert fb["CPU_full_state_restore_per_step"] is False
++            pp=fb["pingpong"]
++            assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+             resources.sample("after-"+name,loaded=True,mx=mx);save()
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+         receipt["actual_imported_sources"]={}
+@@ -312,7 +331,7 @@
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+                 receipt["actual_imported_sources"][name]=path
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_FIXEDCAP_FEEDBACK_BASE_RESET_CHANGED_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_NATIVE_S_PINGPONG_BASE_RESET_CHANGED_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

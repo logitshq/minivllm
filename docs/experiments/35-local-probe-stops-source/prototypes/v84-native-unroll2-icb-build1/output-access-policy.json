@@ -1,0 +1,31 @@
+{
+  "status": "SOURCE_DERIVED_EXACT_EXPECTED_OUTPUT_RW_POLICY",
+  "A": {
+    "function": "nvfp4_qmv_fast_bfloat16_t_gs_16_b_4_batch_0",
+    "index": 4,
+    "name": "y",
+    "basis": "actual frozen72 A plus installed source"
+  },
+  "B": {
+    "function": "custom_kernel_v83_nvfp4_unroll2_r4_sg2_n17408_k5120__bfloat16_t_4_uint32_t_uint8_t_bfloat16_t_bfloat16_t",
+    "index": 3,
+    "name": "output",
+    "basis": "frozen83 name/template/inferred pointer dtypes; EXPECTED_NOT_OBSERVED"
+  },
+  "reflection_access_allowed": [
+    1,
+    2
+  ],
+  "RW_remains_RW": true,
+  "all_other_RW_or_unknown": "REJECT",
+  "pointer_dtype_source": [
+    "uint32_t",
+    "uint8_t",
+    "bfloat16_t",
+    "bfloat16_t"
+  ],
+  "runtime_dtype_metadata_required": true,
+  "actual_complete_argument_schema_required": true,
+  "output_base_offset": 0,
+  "whole_allocation_disjoint": true
+}

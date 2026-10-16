@@ -1,0 +1,122 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v40-native-icb-build2/replay.mm
++++ /private/tmp/minivllm-engine-optimization-20261014/v57-native-direct-feedback-build1/replay.mm
+@@ -11,6 +11,12 @@
+ #include <cstdint>
+ #include <chrono>
+ #include <unordered_map>
++#include "feedback_plan.h"
++struct DirectCopy57 {uintptr_t input,output;size_t source,destination,size;};
++struct DirectFeedback57 {bool enabled=false,lastResultValid=false;std::string rejection;std::vector<DirectCopy57>copies;size_t bytes=0,inputOutputChecks=0,inputChecks=0;unsigned banks=0;};
++static DirectFeedback57&DF57(){static DirectFeedback57 d;return d;}
++
++extern "C" int v34_copy_output(uint64_t,uint64_t,void*);
+ 
+ // Single-child diagnostic only. No GPU dispatch in initialization.
+ struct Pin {uintptr_t addr; size_t size; std::string name;};
+@@ -107,8 +113,8 @@
+  for(auto a=S().buffers.begin();a!=S().buffers.end();++a)for(auto b=std::next(a);b!=S().buffers.end();++b){uintptr_t p=(uintptr_t)a->second.b.contents,q=(uintptr_t)b->second.b.contents;if(p&&q&&p<q+b->second.b.length&&q<p+a->second.b.length){fail("distinct MTLBuffer objects have overlapping host storage");return 1;}}
+  if(S().arenaBytes>S().device.maxBufferLength){fail("arena exceeds actual maxBufferLength");return 1;}S().arena=[S().device newBufferWithLength:S().arenaBytes options:S().arenaOptions];if(!S().arena){fail("owned fixed arena allocation failed");return 1;}S().built=true;return 0;}}
+ extern "C" int v33_register_output(uint64_t addr,uint64_t n,const char*name){std::lock_guard<std::recursive_mutex>l(S().lock);if(!S().built||!addr||!n){fail("output registration before arena");return 1;}for(auto&kv:S().buffers){auto&b=kv.second;uintptr_t base=(uintptr_t)b.b.contents;if(!b.zero&&!b.pinCandidate&&b.used&&base&&addr>=base&&n<=b.b.length&&addr-base<=b.b.length-n){uintptr_t writer=0;for(auto start:b.writeStarts)if(start<=addr&&start>=base)writer=start;if(writer){S().outputs.push_back({(uintptr_t)addr,(size_t)n,(size_t)(addr-base),kv.first,writer,name?name:"output"});return 0;}}}fail("output is not in-bounds in a captured written allocation after its writable binding offset");return 1;}
+-extern "C" int v33_restore_replay(){@autoreleasepool{std::lock_guard<std::recursive_mutex>l(S().lock);if(!S().built||!S().error.empty()||S().outputs.empty()){fail("replay requires valid arena and registered outputs");return 1;}for(auto&kv:S().buffers){auto&x=kv.second;if(x.used&&!x.zero)memcpy((char*)S().arena.contents+x.arena,x.initial.bytes,x.b.length);}id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];encodeGraph(e);[e endEncoding];[b commit];[b waitUntilCompleted];if(b.status!=MTLCommandBufferStatusCompleted||b.error){fail("native replay command buffer failed: "+text(b.error.localizedDescription));return 1;}++S().replays;return 0;}}
+-extern "C" int v33_copy_output(uint64_t addr,uint64_t n,void*dst){std::lock_guard<std::recursive_mutex>l(S().lock);if(!dst||!S().replays){fail("copy before replay");return 1;}for(auto&x:S().outputs)if(x.addr==addr&&x.size==n){auto&b=S().buffers.at(x.buffer);memcpy(dst,(char*)S().arena.contents+b.arena+x.offset,n);return 0;}fail("unregistered output copy");return 1;}
++extern "C" int v33_restore_replay(){@autoreleasepool{std::lock_guard<std::recursive_mutex>l(S().lock);if(DF57().enabled){DF57().lastResultValid=false;fail("V57 requires synchronous v34 reset/replay API; legacy restore replay unsupported");return 1;}if(!S().built||!S().error.empty()||S().outputs.empty()){fail("replay requires valid arena and registered outputs");return 1;}for(auto&kv:S().buffers){auto&x=kv.second;if(x.used&&!x.zero)memcpy((char*)S().arena.contents+x.arena,x.initial.bytes,x.b.length);}id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];encodeGraph(e);[e endEncoding];[b commit];[b waitUntilCompleted];if(b.status!=MTLCommandBufferStatusCompleted||b.error){fail("native replay command buffer failed: "+text(b.error.localizedDescription));return 1;}++S().replays;return 0;}}
++extern "C" int v33_copy_output(uint64_t addr,uint64_t n,void*dst){std::lock_guard<std::recursive_mutex>l(S().lock);if(DF57().enabled)return v34_copy_output(addr,n,dst);if(!dst||!S().replays){fail("copy before replay");return 1;}for(auto&x:S().outputs)if(x.addr==addr&&x.size==n){auto&b=S().buffers.at(x.buffer);memcpy(dst,(char*)S().arena.contents+b.arena+x.offset,n);return 0;}fail("unregistered output copy");return 1;}
+ extern "C" const char*v33_report_json(){@autoreleasepool{std::lock_guard<std::recursive_mutex>l(S().lock);NSMutableArray*buffers=[NSMutableArray array],*outputs=[NSMutableArray array],*fences=[NSMutableArray array],*events=[NSMutableArray array],*commits=[NSMutableArray array];for(auto&c:S().commitRecords)[commits addObject:@{@"CB_id":@(c.cb),@"CB_pointer":@(c.ptr),@"queue":@(c.queue),@"active_CB_id":@(c.active),@"active_CB_pointer":@(c.activePtr),@"parent_commit_CB_id":@(c.parent),@"parent_commit_CB_pointer":@(c.parentPtr),@"commit_depth":@(c.depth),@"duplicate":@(c.duplicate),@"proven_empty_same_queue":@(c.empty),@"lifetime_observed_compute_encoders":@(c.seen.compute),@"lifetime_observed_event_commands":@(c.seen.events),@"lifetime_observed_unknown_commands":@(c.seen.unknown)}];for(auto&c:S().commands)if(c.kind==7||c.kind==8)[events addObject:@{@"operation":c.kind==7?@"signal":@"wait",@"original_event":@(c.event),@"value":@(c.value),@"actual_CB_id":@(c.actualCB),@"actual_queue":@(c.actualQueue),@"producer_CB_id":@(c.producerCB),@"pre_capture":@(c.preCapture),@"completion_proof":[NSString stringWithUTF8String:c.completionProof.c_str()],@"native_lowering":@"full buffer barrier only; original event is never re-signaled"}];for(auto&c:S().commands)if(c.kind==5||c.kind==6)[fences addObject:@{@"operation":c.kind==5?@"update":@"wait",@"original_fence":@(c.fence),@"producer_CB_id":@(c.producerCB),@"pre_capture_completed_proof":@(c.preCapture),@"native_lowering":@"full buffer scope barrier"}];for(auto&kv:S().buffers){auto&b=kv.second;[buffers addObject:@{@"original_buffer":@(kv.first),@"original_contents":@((uintptr_t)b.b.contents),@"length":@(b.b.length),@"used":@(b.used),@"large":@(b.large),@"zero_copy":@(b.zero),@"pinned_parameter_candidate":@(b.pinCandidate),@"role":[NSString stringWithUTF8String:b.role.c_str()],@"arena_offset":@(b.arena),@"snapshot_bytes":@(b.initial.length),@"resource_options":@(b.b.resourceOptions),@"hazard_mode":@(b.b.hazardTrackingMode)}];}for(auto&o:S().outputs)[outputs addObject:@{@"label":[NSString stringWithUTF8String:o.name.c_str()],@"address":@(o.addr),@"bytes":@(o.size),@"original_buffer":@(o.buffer),@"original_offset":@(o.offset),@"captured_writable_binding_start":@(o.writtenStart),@"mapping_policy":@"bounded contiguous subrange in written original allocation; strict replay bytes gate"}];NSDictionary*r=@{@"status":S().error.empty()?@"OK":@"STOP",@"error":[NSString stringWithUTF8String:S().error.c_str()],@"dispatches":@(S().dispatches),@"original_CB_boundaries":@(S().boundaries),@"captured_CB_count":@(S().capturedCBs.size()),@"CB_encoding_order":@"strict noninterleaved; each committed before next CB encoding",@"commands":@(S().commands.size()),@"parameter_ranges_registered":@(S().pins.size()),@"parameter_pins_provisional_until_actual_binding":@YES,@"snapshot_bytes":@(S().snapshotBytes),@"arena_bytes":@(S().arenaBytes),@"zero_copy_buffer_bytes":@(S().zeroBytes),@"arena_built":@(S().built),@"native_replays":@(S().replays),@"buffers":buffers,@"outputs":outputs,@"fence_events":fences,@"event_commands":events,@"commit_records":commits,@"original_events_resignaled_during_replay":@NO,@"scope":@"one fixed-seed/L teacherforced single-CB replay; not ICB/autoregressive/performance"};NSData*data=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];S().report.assign((const char*)data.bytes,data.length);return S().report.c_str();}}
+ 
+ // V34: fixed-capacity feedback only. All arithmetic (including three scalar
+@@ -119,12 +125,18 @@
+ struct StepTiming {unsigned request,step;uint64_t graphEncode,feedbackEncode,encode,commit,wait,total;double gpuStart,gpuEnd;bool valid;};
+ struct Feedback {bool sealed=false,ready=false;unsigned stateCount=0,capacity=0,steps=0,resets=0,totalSteps=0;size_t stageBytes=0,seedUploadBytes=0,comparedBytes=0;id<MTLBuffer> stage=nil;id<MTLFence> graphDone=nil,stageDone=nil,feedbackDone=nil;std::vector<InputRange> inputs;std::vector<FeedbackLink> links;std::vector<StageRange> stages;std::set<uintptr_t> written;std::vector<StepTiming> timing;std::string timingReport,report;uintptr_t diffOutput=0;size_t diffOffset=0;unsigned diffActual=0,diffExpected=0;};
+ static Feedback&F(){static Feedback f;return f;}
++// V57 opt-in: synchronous direct feedback only. Old OFF path is preserved.
++static NSDictionary*directFeedbackReport57(){
++ NSMutableArray*links=[NSMutableArray array];for(auto&c:DF57().copies)[links addObject:@{@"input":@(c.input),@"output":@(c.output),@"source_arena_offset":@(c.source),@"destination_arena_offset":@(c.destination),@"bytes":@(c.size)}];
++ return @{@"enabled":@(DF57().enabled),@"last_result_valid":@(DF57().lastResultValid),@"rejection":[NSString stringWithUTF8String:DF57().rejection.c_str()],@"scope":@"synchronous completed-CB only; results valid until next replay/reset; all outputs directly readable from owned arena or current S bank",@"bounds_and_no_alias_policy":@"strict ALL registered output ranges vs ALL registered input ranges for both S banks; any overlap or unknown extent rejects before enable",@"banks_checked":@(DF57().banks),@"input_output_range_pairs_checked":@(DF57().inputOutputChecks),@"input_input_range_pairs_checked":@(DF57().inputChecks),@"direct_links":@(DF57().copies.size()),@"direct_bytes_per_step":@(DF57().bytes),@"capture_stage_encoder_used":@(!DF57().enabled),@"capture_stage_bytes_per_step_when_enabled":@0,@"legacy_stage_allocation_bytes_retained":@(F().stage.length),@"copy_plan":links};
++}
++
+ static const InputRange*input(uintptr_t a,size_t n=0){for(auto&x:F().inputs)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const Output*output(uintptr_t a,size_t n=0){for(auto&x:S().outputs)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const StageRange*stage(uintptr_t a,size_t n=0){for(auto&x:F().stages)if(x.addr==a&&(!n||x.size==n))return &x;return nullptr;}
+ static const PingPair*pingOutput(uintptr_t a,size_t n=0){for(auto&p:PP().pairs)if(p.eligible&&p.output==a&&(!n||p.size==n))return &p;return nullptr;}
+ static unsigned eligiblePings(){unsigned n=0;for(auto&p:PP().pairs)n+=p.eligible;return n;}
+-static const unsigned char*resultBytes(uintptr_t a,size_t n){if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
++static const unsigned char*resultBytes(uintptr_t a,size_t n){if(DF57().enabled){if(!DF57().lastResultValid)return nullptr;if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=output(a,n)){auto&b=S().buffers.at(x->buffer);return (const unsigned char*)S().arena.contents+b.arena+x->offset;}return nullptr;}if(auto*p=pingOutput(a,n)){auto&b=S().buffers.at(PP().bank?p->b:p->a);return (const unsigned char*)S().arena.contents+b.arena;}if(auto*x=stage(a,n))return (const unsigned char*)F().stage.contents+x->offset;return nullptr;}
+ static uint64_t nowNS(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
+ static size_t arenaInput(const InputRange&x){return S().buffers.at(x.buffer).arena+x.offset;}
+ static size_t arenaOutput(const Output&x){return S().buffers.at(x.buffer).arena+x.offset;}
+@@ -164,7 +176,7 @@
+  F().timing.reserve(512);F().stateCount=states;F().capacity=capacity;F().sealed=true;return 0;
+ }}
+ extern "C" int v34_reset(){
+- std::lock_guard<std::recursive_mutex>lock(S().lock);
++ std::lock_guard<std::recursive_mutex>lock(S().lock);if(DF57().enabled)DF57().lastResultValid=false;
+  if(!F().sealed||!S().error.empty()){fail("reset requires sealed valid feedback graph");return 1;}
+  restoreArena();PP().bank=0;F().steps=0;F().written.clear();F().ready=true;++F().resets;return 0;
+ }
+@@ -174,7 +186,7 @@
+  memcpy((char*)S().arena.contents+arenaInput(*x),src,n);F().written.insert(addr);F().seedUploadBytes+=n;return 0;
+ }
+ extern "C" int v34_replay_step(){@autoreleasepool{
+- std::lock_guard<std::recursive_mutex>lock(S().lock);
++ std::lock_guard<std::recursive_mutex>lock(S().lock);if(DF57().enabled)DF57().lastResultValid=false;
+  if(!F().sealed||!F().ready||!S().error.empty()||(!F().written.empty()&&F().written.size()!=F().inputs.size())){fail("feedback step requires reset and either full request seed upload or original captured seed");return 1;}
+  // This is a diagnostic host-synchronous API. Every preceding step completed.
+  // Device scalar values are inspected only as bounds guards, never as feedback.
+@@ -184,14 +196,20 @@
+  uint64_t t0=nowNS();id<MTLCommandBuffer>b=[S().queue commandBuffer];id<MTLComputeCommandEncoder>e=[b computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent];
+  if(F().steps)[e waitForFence:F().feedbackDone];
+  encodeGraph(e);[e updateFence:F().graphDone];[e endEncoding];uint64_t tGraph=nowNS();
++ id<MTLBlitCommandEncoder>feedback=nil;
++ if(DF57().enabled){
++  feedback=[b blitCommandEncoder];[feedback waitForFence:F().graphDone];
++  for(auto&c:DF57().copies)[feedback copyFromBuffer:S().arena sourceOffset:c.source toBuffer:S().arena destinationOffset:c.destination size:c.size];
++ }else{
+  id<MTLBlitCommandEncoder>capture=[b blitCommandEncoder];[capture waitForFence:F().graphDone];
+  for(auto&x:S().outputs){if(pingOutput(x.addr,x.size))continue;auto*t=stage(x.addr,x.size);[capture copyFromBuffer:S().arena sourceOffset:arenaOutput(x) toBuffer:F().stage destinationOffset:t->offset size:x.size];}
+  [capture updateFence:F().stageDone];[capture endEncoding];
+- id<MTLBlitCommandEncoder>feedback=[b blitCommandEncoder];[feedback waitForFence:F().stageDone];
++ feedback=[b blitCommandEncoder];[feedback waitForFence:F().stageDone];
+  for(auto&x:F().links){if(pingOutput(x.output,x.size))continue;auto*i=input(x.input,x.size);auto*t=stage(x.output,x.size);[feedback copyFromBuffer:F().stage sourceOffset:t->offset toBuffer:S().arena destinationOffset:arenaInput(*i) size:x.size];}
++ }
+  [feedback updateFence:F().feedbackDone];[feedback endEncoding];uint64_t tEncode=nowNS();[b commit];uint64_t tCommit=nowNS();[b waitUntilCompleted];uint64_t tWait=nowNS();double gs=b.GPUStartTime,ge=b.GPUEndTime;F().timing.push_back({F().resets,F().steps+1,tGraph-t0,tEncode-tGraph,tEncode-t0,tCommit-tEncode,tWait-tCommit,tWait-t0,gs,ge,gs>0&&ge>=gs});
+  if(b.status!=MTLCommandBufferStatusCompleted||b.error){fail("feedback command buffer failed: "+text(b.error.localizedDescription));return 1;}
+- if(I().enabled){++I().executions;++I().bankExecutions[PP().bank];}PP().bank^=1;++F().steps;++F().totalSteps;++S().replays;return 0;
++ if(I().enabled){++I().executions;++I().bankExecutions[PP().bank];}PP().bank^=1;++F().steps;++F().totalSteps;++S().replays;if(DF57().enabled)DF57().lastResultValid=true;return 0;
+ }}
+ extern "C" int v34_copy_output(uint64_t addr,uint64_t n,void*dst){
+  std::lock_guard<std::recursive_mutex>lock(S().lock);auto*x=resultBytes(addr,n);
+@@ -214,7 +232,7 @@
+  for(auto&x:F().stages)[stages addObject:@{@"output_address":@(x.addr),@"bytes":@(x.size),@"stage_offset":@(x.offset)}];
+  for(auto&i:F().inputs)for(auto&o:S().outputs)if(overlap(arenaInput(i),i.size,arenaOutput(o),o.size))[aliases addObject:@{@"input":@(i.addr),@"output":@(o.addr),@"policy":@"all graph outputs staged before any feedback write; original buffer/offset topology preserved"}];
+  NSMutableArray*pairs=[NSMutableArray array];for(auto&p:PP().pairs){NSMutableArray*uses=[NSMutableArray array];for(auto&u:S().uses)if(u.buffer==p.a||u.buffer==p.b)[uses addObject:@{@"buffer":@(u.buffer),@"offset":@(u.offset),@"PSO":[NSString stringWithUTF8String:S().psos.at(key(u.p)).name.c_str()],@"argument":[NSString stringWithUTF8String:u.argument.c_str()],@"index":@(u.index),@"access":@(u.access),@"dispatch":@(u.dispatch)}];[pairs addObject:@{@"input":@(p.input),@"output":@(p.output),@"A_original_buffer":@(p.a),@"B_original_buffer":@(p.b),@"bytes":@(p.size),@"eligible":@(p.eligible),@"reason":[NSString stringWithUTF8String:p.reason.c_str()],@"actual_binding_uses":uses}];}
+- r[@"feedback"]=@{@"icb":icbReport(),@"pingpong":@{@"requested_count":@(PP().pairs.size()),@"eligible_count":@(eligiblePings()),@"staged_link_count":@(F().links.size()-eligiblePings()),@"bank":@(PP().bank),@"current_written_bank":PP().bank?@"B":@"A",@"pairs":pairs},@"sealed":@(F().sealed),@"input_count":@(F().inputs.size()),@"output_count":@(S().outputs.size()),@"link_count":@(F().links.size()),@"state_count":@(F().stateCount),@"capacity":@(F().capacity),@"request_steps":@(F().steps),@"total_steps":@(F().totalSteps),@"resets":@(F().resets),@"stage_bytes":@(F().stageBytes),@"request_seed_uploaded_ranges":@(F().written.size()),@"CPU_seed_upload_bytes_total":@(F().seedUploadBytes),@"CPU_output_compare_bytes_total":@(F().comparedBytes),@"CPU_full_state_restore_per_step":@NO,@"timing_records_stored":@(F().timing.size()),@"GPU_blit_bytes_per_step":@(([&](){size_t n=0;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;for(auto&l:F().links)if(!pingOutput(l.output,l.size))n+=l.size;return n;})()),@"arithmetic_policy":@"exact captured MLX graph including argmax/nextpos/nextlens; no new native shader",@"synchronization":@"owned graphDone/stageDone/feedbackDone fences across compute and two blit encoders; host waits completion each step",@"inputs":inputs,@"links":links,@"staged_outputs":stages,@"input_output_aliases":aliases,@"first_difference":@{@"output":@(F().diffOutput),@"offset":@(F().diffOffset),@"actual_byte":@(F().diffActual),@"expected_byte":@(F().diffExpected)}};
++ r[@"feedback"]=@{@"direct_feedback":directFeedbackReport57(),@"icb":icbReport(),@"pingpong":@{@"requested_count":@(PP().pairs.size()),@"eligible_count":@(eligiblePings()),@"staged_link_count":@(F().links.size()-eligiblePings()),@"bank":@(PP().bank),@"current_written_bank":PP().bank?@"B":@"A",@"pairs":pairs},@"sealed":@(F().sealed),@"input_count":@(F().inputs.size()),@"output_count":@(S().outputs.size()),@"link_count":@(F().links.size()),@"state_count":@(F().stateCount),@"capacity":@(F().capacity),@"request_steps":@(F().steps),@"total_steps":@(F().totalSteps),@"resets":@(F().resets),@"stage_bytes":@(F().stageBytes),@"request_seed_uploaded_ranges":@(F().written.size()),@"CPU_seed_upload_bytes_total":@(F().seedUploadBytes),@"CPU_output_compare_bytes_total":@(F().comparedBytes),@"CPU_full_state_restore_per_step":@NO,@"timing_records_stored":@(F().timing.size()),@"GPU_blit_bytes_per_step":@(([&](){if(DF57().enabled)return DF57().bytes;size_t n=0;for(auto&o:S().outputs)if(!pingOutput(o.addr,o.size))n+=o.size;for(auto&l:F().links)if(!pingOutput(l.output,l.size))n+=l.size;return n;})()),@"arithmetic_policy":@"exact captured MLX graph including argmax/nextpos/nextlens; no new native shader",@"synchronization":DF57().enabled?@"owned graphDone/feedbackDone fences across compute and one direct-feedback blit encoder; host waits completion before all output reads":@"owned graphDone/stageDone/feedbackDone fences across compute and two blit encoders; host waits completion each step",@"inputs":inputs,@"links":links,@"staged_outputs":stages,@"input_output_aliases":aliases,@"first_difference":@{@"output":@(F().diffOutput),@"offset":@(F().diffOffset),@"actual_byte":@(F().diffActual),@"expected_byte":@(F().diffExpected)}};
+  NSData*encoded=[NSJSONSerialization dataWithJSONObject:r options:0 error:nil];F().report.assign((const char*)encoded.bytes,encoded.length);[r release];return F().report.c_str();
+ }}
+ 
+@@ -295,3 +313,25 @@
+  for(unsigned i=0;i<2;++i)if(I().banks[i])[banks addObject:@{@"bank":@(i),@"ICB":@(key(I().banks[i])),@"commands":@(I().dispatches),@"S_binding_bank":@(i)}];
+  return @{@"enabled":@(I().enabled),@"banks":@(I().enabled?2:0),@"commands_per_bank":@(I().dispatches),@"dispatchThreads":@(I().threads),@"dispatchThreadgroups":@(I().groups),@"execution_count":@(I().executions),@"encoded_count":@(I().encoded),@"bank_executions":@[@(I().bankExecutions[0]),@(I().bankExecutions[1])],@"constant_bank_bytes":@(I().constantBytes),@"constant_bank_allocation":@(I().constants.length),@"setBytes_payload_count":@(I().constantOffsets.size()),@"constant_alignment":@256,@"original_barrier_count":@(I().originalBarriers),@"barrier_commands_per_bank":@(I().barriersPerBank),@"barrier_semantics":@"setBarrier on NEXT command before encoding; all prior ICB commands complete before it; adjacent barriers fold without intervening dispatch",@"trailing_barrier_via_graph_fence":@(I().trailingBarrier),@"unique_original_PSOs":@(I().psos.size()),@"recreated_PSOs":@(I().recreated),@"PSO_records":psos,@"ICB_records":banks,@"resources":@{@"read_only_count":@(I().readonlyResources.size()),@"read_only_parameter_buffers":@(I().readonlyResources.empty()?0:I().readonlyResources.size()-1),@"constant_bank_read_declarations_per_CB":@1,@"mutable_arena_count":@1,@"mutable_arena_usage":@"Read|Write",@"icb_read_declarations":@1,@"icb_read_declarations_unit":@"one selected even/odd ICB declared Read per replay CB; all RO parameter buffers and constant bank declared Read"}};
+ }
++
++// No GPU work/allocation in enable. Opt-in is one-way for this immutable graph.
++extern "C" int v57_enable_direct_feedback(){
++ std::lock_guard<std::recursive_mutex>lock(S().lock);
++ auto reject=[](const std::string&s){DF57().rejection=s;return 1;};
++ if(DF57().enabled||!F().sealed||!I().enabled||F().resets||F().steps||S().replays||!S().error.empty())return reject("enable requires one valid sealed ICB graph before any reset/replay");
++ try{
++  std::vector<DirectCopy57>copies;size_t bytes=0,ioChecks=0,inputChecks=0;
++  for(unsigned bank=0;bank<2;++bank){std::vector<v57::Range>inputs,outputs;
++   for(auto&i:F().inputs){uintptr_t buffer=i.buffer;for(auto&p:PP().pairs)if(p.eligible&&i.addr==p.input){if(i.offset||i.size!=p.size||i.buffer!=p.a)throw std::runtime_error("S input is not exact eligible whole bank range");if(bank)buffer=p.b;}
++    auto&b=S().buffers.at(buffer);if(b.zero)throw std::runtime_error("feedback input would target immutable parameter allocation");inputs.push_back({b.arena+i.offset,i.size});}
++   for(auto&o:S().outputs){uintptr_t buffer=o.buffer;if(auto*p=pingOutput(o.addr,o.size)){if(o.offset||o.buffer!=p->b)throw std::runtime_error("S output is not exact eligible whole bank range");if(bank)buffer=p->a;}
++    auto&b=S().buffers.at(buffer);if(b.zero)throw std::runtime_error("captured output belongs to immutable parameter allocation");outputs.push_back({b.arena+o.offset,o.size});}
++   auto proof=v57::validate(inputs,outputs,S().arenaBytes);ioChecks+=proof.inputOutputPairs;inputChecks+=proof.inputPairs;
++  }
++  size_t skipped=0;
++  for(auto&l:F().links){auto*i=input(l.input,l.size);auto*o=output(l.output,l.size);if(!i||!o)throw std::runtime_error("missing exact feedback input/output registration");if(auto*p=pingOutput(l.output,l.size)){if(p->input!=l.input||i->role!=0)throw std::runtime_error("skipped S link does not match exact pingpong input");++skipped;continue;}
++   v57::Range source{arenaOutput(*o),l.size},destination{arenaInput(*i),l.size};v57::bounds(source,S().arenaBytes);v57::bounds(destination,S().arenaBytes);if(v57::overlaps(source,destination))throw std::runtime_error("direct same-buffer blit ranges overlap");if(l.size>SIZE_MAX-bytes)throw std::runtime_error("feedback payload size overflow");bytes+=l.size;copies.push_back({l.input,l.output,source.offset,destination.offset,l.size});}
++  if(skipped!=eligiblePings()||copies.size()+skipped!=F().links.size())throw std::runtime_error("complete feedback/S exclusion count mismatch");
++  DF57().copies=std::move(copies);DF57().bytes=bytes;DF57().inputOutputChecks=ioChecks;DF57().inputChecks=inputChecks;DF57().banks=2;DF57().lastResultValid=false;DF57().rejection.clear();DF57().enabled=true;return 0;
++ }catch(const std::exception&e){return reject(e.what());}
++}

@@ -1,0 +1,11 @@
+# V34 native feedback: focused CPU source review
+- Frozen replay.mm SHA256 `da7df9ceee5d042bbac73489bfa309cbd4188cb4ba1be8f4628ffb4f21438a93`; no concrete blocker found for the declared worker/tiny path. No library load or GPU operation here.
+- Lines34/53/94: small pinned candidates omit first-snapshots, but every active argument binding must still resolve to a contained real parameter range with readonly reflection; any writable parameter-overlapping allocation stops. Successful zero-copy buffers route to original addresses.
+- Lines88–99: all remaining physical buffers retain original alias/offset topology and complete first-snapshots; original captured command/barrier/CB/fence/event checks remain in encodeGraph.
+- Lines116–143: inputs require bounded captured mutable read allocations, four-byte alignment and scalar width; seal checks complete roles/counts, input nonoverlap, exact unique links and unique output starts.
+- Lines141–147: each output receives its own bounded aligned staging range and one owned tracked staging buffer; intended model counts are 128 states +3 inputs, 128 states +4 outputs, 131 links.
+- Lines168–176: compute completes through graphDone before all132 outputs are staged; stageDone precedes all131 feedback writes. Staging every output first handles overlapping input/output allocation ranges.
+- Lines150–166: reset restores the full mutable snapshot once per request; optional seed writes must cover every input. Each replay step uses the existing arena without CPU full-state restore; CPU reads three scalars solely for bounds checks.
+- Lines169–177: subsequent compute waits feedbackDone; three owned fences order compute→stage-blit→feedback-blit; each API step commits and waits completion, then checks command-buffer success.
+- Lines185–190: strict comparisons use staged output bytes, memcmp, and first differing byte; no new arithmetic shader, native argmax, ICB or tolerance policy is introduced.
+- Scope: static source review only. Actual tiny behavior, full greedy/state feedback chains, new request/reset behavior, engine lifecycle and performance need their own execution evidence.

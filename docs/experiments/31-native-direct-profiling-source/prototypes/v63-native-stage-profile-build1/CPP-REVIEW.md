@@ -1,0 +1,12 @@
+V63 independent CPU review; no dylib load, MLX import, GPU, or numerical claim.
+- Original40 included source is SHA25d9ff0d…; the source file was not changed.
+- Each captured dispatch ordinal uses its original selected-bank ICB command and retained resource union.
+- Every successive encoder waits the chain fence; final encoder signals graphDone before the original two fenced blits.
+- Sampled0 is an explicitly unsampled segmented control; reset-base and changed-prefill are sampled1.
+- Counters resolve only after completed CB; all 1625 rows are preserved before worker validation.
+- Native returns success with invalid timestamp rows; worker explicitly stops on any invalid sampled1 row.
+- SDK start/end-of-encoder samples measure perturbed encoder envelopes, including the new synchronization conditions.
+- Raw timestamp units remain unconverted; category totals are command counts, not production timing shares.
+- Every altered step still compares all132 outputs against accepted25 reference and actual44/V38 saved A hashes.
+- Other90 steps use the unchanged synchronous original40 API; seed upload remains once/request, no future CPU token feeding.
+- Stage samples are diagnostic only; this qualification does not establish autoregressive service performance or adoption.

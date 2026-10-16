@@ -1,0 +1,15 @@
+# V36/V37 native B-only screens: independent CPU evidence audit PASS
+- Verified actual receipt SHA/source/qualification pins: V36 `3d932f11…d1989` (49 pins), V37 `ba321f24…50600` (46 pins); neither is an HTTP or paired A/B result.
+- Each run has one model load and six fresh requests:3 warm+3 measured,19 prompt IDs,32 canonical greedy IDs/request,31 native steps/request. Gates48 ON, conv/whole-functional OFF, allocator2GiB, MLX0.32.3/M4 Max.
+- All792 final132-output hash checks per run equal that version's frozen full-qualification A hashes, with matching labels/byte sizes. Full outputs are copied/hashed outside timed decode.
+- Recomputed every t0/t1/t2 difference and rate; V36 measured median=39.283341ms/step,25.456083 decode tok/s,22.832610 whole-request tok/s.
+- V37 measured median=40.239988ms/step,24.850902 decode tok/s,22.486079 whole-request tok/s.
+- Timed31-step loop and resource guard AST are identical between these sources. Loop contains native replay,4B prediction observation,append/error checks; no A/model/hash/resource/log/file/seed-write work inside it.
+- All request counters agree: resets1..6,total31..186 steps,131 seed ranges uploaded once/request, zero native C output comparisons and no CPU full-state restore per step.
+- V36 actual48 S pairs are eligible and83 links remain staged; GPU blit accounting=39,949,336B/step. V37=341,939,224B/step.
+- Verified cumulative timing raw SHA/prefix/counts through186 V36 records;93 measured-step medians:host encode3.417583ms,commit0.006958ms,wait35.918000ms,total39.219167ms,CB GPU envelope35.317667ms.
+- Every timing row satisfies encode=graph+feedback and total=encode+commit+wait; GPU envelope equals GPUEndTime−GPUStartTime. GPU envelope overlaps host wait; these are not exclusive kernel durations, and component medians need not sum.
+- V37 capture has0 resource-specific barriers and empty resource mappings. The source-level common-arena resource-barrier widening hypothesis is not observed in this capture.
+- Each run's19 raw resource samples replay to AC/thermal0/pressure1/minfree47%; swap MB and Swapouts growth0. Pageouts grew214 (V36) and81 (V37).
+- Owner/child60569/60570 (V36) and60339/60340 (V37) exit0/waited/reaped, with saved external strict absence PASS for all4 PIDs. CPU audit did not load MLX/native libraries or use GPU.
+- Scope: saved final-hash/source/counter/time/resource evidence replay. Separate B-only exploratory absolute timings establish no paired improvement, serving/Pareto win, ICB result or adoption.

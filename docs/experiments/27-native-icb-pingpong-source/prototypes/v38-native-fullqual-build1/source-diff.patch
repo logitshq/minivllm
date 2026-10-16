@@ -1,0 +1,97 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v36-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v38-native-fullqual-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only GDN S pingpong native feedback qualification; inert never imports MLX."""
++"""Root-only ICB and GDN S pingpong native feedback qualification; inert never imports MLX."""
+ import argparse
+ import ctypes
+ import hashlib
+@@ -14,7 +14,7 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v17-gdn-gates-build1-root"
+-LIB = P / "v36-native-pingpong-build1/libv36replay.dylib"
++LIB = P / "v38-native-icb-build1/libv38replay.dylib"
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -58,7 +58,7 @@
+                  "v34_link": [U, U, U], "v34_seal_feedback": [ctypes.c_uint32, ctypes.c_uint32],
+                  "v34_reset": [], "v34_write_input": [U, U, V], "v34_replay_step": [],
+                  "v34_compare_output": [U, U, V], "v34_copy_output": [U, U, V],
+-                 "v36_register_pingpong": [U, U, U]}
++                 "v36_register_pingpong": [U, U, U], "v38_enable_icb": []}
+         for name, args in specs.items():
+             fn = getattr(self.lib, name); fn.argtypes = args; fn.restype = ctypes.c_int
+         self.lib.v34_report_json.argtypes = []
+@@ -104,6 +104,21 @@
+         assert native.same(h, baseline), ("original changed", label, h.label)
+     return {"label": label, "arrays": len(holders), "strict_bytes_equal": True,
+             "bytes": sum(h.nbytes for h in holders), "method": "C memcmp of pinned original and once-only raw snapshot"}
++
++
++def assert_icb(report, request_lengths):
++    fb=report["feedback"];icb=fb["icb"]
++    total=sum(request_lengths)
++    expected_banks=[sum((n+1)//2 for n in request_lengths),sum(n//2 for n in request_lengths)]
++    assert icb["enabled"] is True and icb["banks"]==2
++    assert icb["execution_count"]==fb["total_steps"]==total
++    assert icb["bank_executions"]==expected_banks
++    assert icb["commands_per_bank"]>=report["dispatches"]>0
++    assert icb["constant_bank_bytes"]>0
++    assert icb["unique_original_PSOs"]>0 and len(icb["PSO_records"])==icb["unique_original_PSOs"]
++    resources=icb["resources"]
++    assert resources["read_only_count"]>0 and resources["mutable_arena_count"]==1
++    assert resources["icb_read_declarations"]>0
+ 
+ 
+ def main(argv=None):
+@@ -122,14 +137,14 @@
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+                           "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
+-                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83}))
++                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir(exist_ok=False)
+     receipt = {"status": "STARTED", "stage": "beforeload", "pid": os.getpid(), "model_loads": 0,
+                "source_pins": pins, "native_library": str(library), "fixed_cap": CAP, "requests": [],
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+-               "ICB_claim": False, "adopted": False, "input_upload_scope": "all131 once per request only",
++               "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding"}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+@@ -239,11 +254,14 @@
+         assert len(pingpong_requested)==48
+         receipt["pingpong_requested"]=pingpong_requested
+         native.call("v34_seal_feedback",128,CAP)
++        native.call("v38_enable_icb")
++        receipt["ICB_enable_called_after_feedback_seal"]=True
+         output_baselines=[h.raw() for h in output_holders]  # once at capture only
+         receipt["capture"]={"inputs":[metadata_finite(np,h) for h in seed_holders],
+                             "outputs":[metadata_finite(np,h) for h in output_holders],
+                             "native":native.report("native-sealed"),"parameter_arrays":len(parameter_holders)}
+         assert receipt["capture"]["native"]["status"] == "OK"
++        assert_icb(receipt["capture"]["native"],[])
+         fb = receipt["capture"]["native"]["feedback"]
+         assert fb["sealed"] and (fb["input_count"],fb["output_count"],fb["link_count"],fb["state_count"],fb["capacity"]) == (131,132,131,128,CAP)
+         assert fb["CPU_full_state_restore_per_step"] is False
+@@ -315,6 +333,7 @@
+             if canonical: assert ids_a==w["continuation_ids"] and len(case["steps"])==31
+             case.update(status="PASS_REQUEST_STRICT",terminated_by_EOS=ids_a[-1] in eos,
+                         native=native.report("native-after-"+name))
++            assert_icb(case["native"],[len(r["steps"]) for r in receipt["requests"]])
+             fb=case["native"]["feedback"]
+             assert fb["sealed"] and fb["request_steps"]==len(case["steps"]) and fb["total_steps"]==total_steps
+             assert fb["resets"]==len(receipt["requests"]) and fb["request_seed_uploaded_ranges"]==131
+@@ -331,7 +350,7 @@
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+                 receipt["actual_imported_sources"][name]=path
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_S_PINGPONG_BASE_RESET_CHANGED_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_NATIVE_ICB_S_PINGPONG_BASE_RESET_CHANGED_STRICT",stage="complete",native_steps=total_steps,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

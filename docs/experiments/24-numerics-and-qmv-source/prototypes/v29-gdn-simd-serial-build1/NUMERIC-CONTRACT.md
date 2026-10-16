@@ -1,0 +1,13 @@
+# V29 register-state recurrence with original reduction order
+- Independent new directory; V27 kernel, failed fullmodel data and CONTROL_DRIFT_STOP are immutable. No GPU during preparation.
+- Same ABI as V27: compact q/k Hk16, Hv48, FP32 log-g/beta/state, logical state[B,Hv,Dk,Dv]. Explicit input strides; output physical Dv×Dk returned through swapaxes.
+- Each SIMD owns a value row; each lane retains4rawstate values. Lane0 computes the original serial d=0..Dk-1 qn/kn loop and rsqrt/scales, then allactive shuffle broadcasts lane0 values. Dk comes from S_shape like the original kernel, avoiding a new constantfold of rsqrt(128).
+- Every lane executes raw-k/raw-state shuffles for each offset0..31. Lanes0..3 accumulate original32term segment expressions in order; allactive shuffles then add segment0,1,2,3 ascending. Readout likewise shuffles raw-q/updated-state and uses the original expression order.
+- Shuffles always occur outside lane-conditional blocks; every source lane is0..31 and initialized. No pre-rounded product crosses a shuffle, preserving original multiply/add contraction opportunities.
+- Same safe Metal compile policy as original/default and V27; no fast-math override, no fp-contract change, no in-place S/tail writes.
+- SAME fixed local gates as V27: full o/S one-step maxabs≤2^-16*max(1,reference maxabs); every step of16-step chain≤2^-12*max(1,reference maxabs). All finite, all inputs byte-readonly. No new tolerance or failure-driven relaxation.
+-15 existing banks (9real L0/32/62×D1/16/31 plus6synthetic), each canonical and persistent input layout; actual GPU metadata must show both input strides and persistent output strides. Saved u is postconv, not new model/preconv capture.
+- Intent is closer original arithmetic, not a CPU proof of bitwise equality. Source memory→register migration/shuffles can still change compiler decisions; receipt retains exact hashes and error values even on pass.
+- Added shuffles and leader serial work may cost performance. Root GPU profile put original GDN48singleCB envelope near1.738ms, not a demonstrated exclusive production budget; this experiment promises neither2ms nor an E2E win.
+- Fullmodel gates remain logits maxabs≤1/16, canonicalcache normalizedL2≤2^-10, all32greedy IDs equal/finite/readonly/shape+strides. They are not run or weakened here.
+- Root owns actual GPU/resources/deadline/ownedPID cleanup. Native MLX/mlx-metal0.32.3 M4Max only; limits512MiB memory and64MiB allocatorcache; no model load.

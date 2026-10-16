@@ -1,0 +1,107 @@
+{
+  "candidate": "V26 address-only rowblock R4 NVFP4",
+  "scope": {
+    "layer": 0,
+    "projection": "mlp.gate_proj",
+    "K": 5120,
+    "N": 17408,
+    "payload_bytes": 50135040,
+    "extra_packed_bytes": 50135040,
+    "all_model_loaded": false
+  },
+  "numeric": {
+    "inputs": 8,
+    "historical_real_inputs": 1,
+    "comparisons": 27,
+    "order": [
+      "all native R4 vs QMM",
+      "one prepare + actual inverse packing byte check",
+      "packed vs QMM + packed vs R4"
+    ],
+    "readonly": [
+      "original payload",
+      "original scales",
+      "all9 activation inputs",
+      "packed payload",
+      "packed scales"
+    ],
+    "failure": "strict bytes/finite/shape/dtype/readonly first failure STOP, no timing"
+  },
+  "timing": {
+    "A": "native mx.quantized_matmul",
+    "B": "rowblock packed R4",
+    "prime": 128,
+    "repeats": 512,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_median_reduction": 0.05,
+    "minimum_wins": 5,
+    "position_control_median_bounds": [
+      0.98,
+      1.02
+    ],
+    "position_control_each_bounds": [
+      0.95,
+      1.05
+    ],
+    "output_consumption": "mx.eval every invocation",
+    "hashes": "after both blocks only",
+    "packing": "once outside timing; host+eval+allocator+RSS separately saved",
+    "timeout_s": 170
+  },
+  "resources": {
+    "power": "AC Power",
+    "thermal_code": [
+      0,
+      1
+    ],
+    "pressure": 1,
+    "raw_before_derived": true,
+    "cache_limit_bytes": 2147483648,
+    "known_foreign_inference": 0,
+    "original_guard": true
+  },
+  "adopted": false,
+  "full_model_qualified": false,
+  "performance_status": "UNKNOWN"
+}

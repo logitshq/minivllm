@@ -1,0 +1,1231 @@
+{
+  "status": "CPU_SOURCE_FEASIBLE_NOT_MODEL_OR_SPEED_QUALIFIED",
+  "CPU_stdlib_only": true,
+  "MLX_imported": false,
+  "GPU_dispatches": 0,
+  "source_or_original_evidence_modified": false,
+  "pins": {
+    "/private/tmp/minivllm-engine-optimization-20261014/residual-norm-pure-build1/residual_norm_metal.py": "b53e4b88cb118b2ee05b293e6b4ba4446ae9716e8c7dd9e678a359089d21413c",
+    "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+    "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/qwen3_5.py": "7c37fdde411bcb462910bbb34de09ecb014e6b2e43482820125351c5e09fbb7a",
+    "/private/tmp/minivllm-engine-optimization-20261014/candidate-v44-conv-normreuse-build1-root/tutorial_code/miniengine/model/layers.py": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v33-attempt1/child-output/receipt.json": "c6d34a20d8b526eff0f05afb58110a1768b35fc65cb96d4bb05a764a33998e85",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v63native-attempt1/child-output/native-sealed.json": "dd44355027507ccd87d915f7c3a1955cb8307b444eece388f62e2294f8a88bc7",
+    "/private/tmp/minivllm-engine-optimization-20261014/residual-norm-numeric-result-review-build1/receipt.json": "ed3188388685fd1098c5452fba71cf8723cd4f280db5906b06d01db5d535521b"
+  },
+  "norm_SOURCE_exact_after_reversing_only_typed_Add_loads_and_residual_store": true,
+  "historical_V33_dtype_evidence": {
+    "key": "parameter_ranges",
+    "count": 129,
+    "dtype": "mlx.core.bfloat16",
+    "shape": [
+      5120
+    ],
+    "nbytes": 10240,
+    "scope": "Historical runtime Shared.meta, not current V63/V65 direct mx.dtype observation",
+    "parameters": [
+      {
+        "label": "parameter.layers.0.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.0.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.1.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.1.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.2.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.2.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.3.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.3.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.4.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.4.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.5.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.5.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.6.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.6.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.7.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.7.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.8.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.8.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.9.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.9.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.10.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.10.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.11.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.11.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.12.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.12.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.13.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.13.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.14.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.14.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.15.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.15.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.16.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.16.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.17.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.17.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.18.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.18.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.19.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.19.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.20.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.20.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.21.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.21.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.22.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.22.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.23.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.23.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.24.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.24.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.25.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.25.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.26.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.26.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.27.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.27.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.28.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.28.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.29.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.29.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.30.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.30.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.31.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.31.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.32.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.32.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.33.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.33.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.34.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.34.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.35.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.35.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.36.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.36.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.37.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.37.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.38.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.38.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.39.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.39.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.40.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.40.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.41.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.41.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.42.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.42.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.43.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.43.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.44.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.44.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.45.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.45.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.46.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.46.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.47.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.47.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.48.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.48.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.49.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.49.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.50.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.50.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.51.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.51.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.52.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.52.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.53.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.53.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.54.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.54.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.55.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.55.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.56.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.56.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.57.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.57.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.58.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.58.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.59.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.59.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.60.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.60.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.61.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.61.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.62.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.62.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.63.input_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.layers.63.post_attention_layernorm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      },
+      {
+        "label": "parameter.norm.weight",
+        "shape": [
+          5120
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "memoryview_c_contiguous": true
+      }
+    ]
+  },
+  "V63_actual_PSO_and_binding_evidence": {
+    "function": "custom_kernel_explicit_norm_row__bfloat16_t_bfloat16_t_1024_1_0_bfloat16_t_bfloat16_t_bfloat16_t_floatc_bfloat16_t",
+    "template_order": [
+      "T",
+      "W",
+      "TG",
+      "ZERO_CENTERED",
+      "GATED"
+    ],
+    "resolved_weight_roles": 129,
+    "range_bytes_each": 10240,
+    "sample_role": "parameter.layers.49.input_layernorm.weight full-range=4412080128+10240 binding-delta=0 readonly:custom_kernel_explicit_norm_row__bfloat16_t_bfloat16_t_1024_1_0_bfloat16_t_bfloat16_t_bfloat16_t_floatc_bfloat16_t/weight",
+    "scope": "Actual specialization and binding-role metadata; no direct mx.dtype field"
+  },
+  "old_micro_STOP_preserved": [
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/residual-norm-stationary-micro-build1/micro-attempt1/receipt.json",
+      "sha256": "6056663e624ff1df98a32eb663ede8ff6e253a79ba44e9c41ff6bcffb3a63f75",
+      "status": "FAIL_STOP",
+      "first_AA_ratio": 1.0515306296126339,
+      "candidate_pairs": 0,
+      "error": "control drift; STOP no retry"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/residual-norm-stationary-micro-build2/micro-attempt1/receipt.json",
+      "sha256": "243886d642af2c426414b60bcaf9eb02c181659428996be2c06af26d8beb26b0",
+      "status": "FAIL_STOP",
+      "first_AA_ratio": 1.0571011745253887,
+      "candidate_pairs": 0,
+      "error": "control drift; STOP no retry"
+    }
+  ],
+  "proposal_fusions": {
+    "attention_Add_postnorm": 64,
+    "MLP_Add_next_inputnorm": 63,
+    "final_Add_modelnorm": 1,
+    "total": 128,
+    "first_inputnorm_unchanged": true
+  },
+  "current_model_gate": "afterload-before-any-token dump and assert all129 hiddennorm shapes/dtypes/zero_centered/eps; then all93x132 vs old gold; root only GPU",
+  "performance_claim": false
+}

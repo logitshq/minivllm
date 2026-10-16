@@ -1,0 +1,22 @@
+{
+  "profile": "vendor RMSNorm leaf rounding",
+  "status": "CPU_READY_NOT_NUMERICALLY_QUALIFIED",
+  "base": "candidate44 gates/conv/normreuse current math; GatedRMSNorm and GDN unchanged",
+  "A": "161 separate nn.RMSNorm instances, independent checkpoint raw BF16 gamma; actual mx.fast.rms_norm; context spans construction/eval/synchronize",
+  "B": "mx.fast.rms_norm with 161 independently offset-derived cached BF16 gamma; ((live_offset.astype(float32)+1).astype(bfloat16)) prepared before any token",
+  "preparation_gates": [
+    "MLX and mlx-metal 0.32.3 / Apple M4 Max applegpu_g16s",
+    "161 raw ranges header+payload hash",
+    "Araw and Bcached shape/dtype/finite/bytes equality but distinct Python objects",
+    "1349 original parameter identities/shapes/dtypes unchanged",
+    "no new registered arrays; hidden cached gamma via object.__setattr__"
+  ],
+  "invalidation": "plain norm weight identity/shape/dtype/eps/zero_centered change invalidates cache; original path fallback until prepare again",
+  "future_qualification": "V93 independent A/B prefill+132 state/logit/control outputs strict; fixed old cohort IDs unchanged; old38/44 hash differences diagnostics only",
+  "old_thresholds_changed": false,
+  "old_failures_relabelled": false,
+  "whole_omlx_semantics": false,
+  "GPU_executed_by_author": false,
+  "adopted": false,
+  "V91_observation": "27 diagnostic cases108 finite outputs: A==C and B==D all27; A/B differ21. Not a performance or wholemodel proof."
+}

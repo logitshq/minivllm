@@ -1,0 +1,134 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1/gdn_activated_scaled_ready_metal.py
+@@ -1,7 +1,7 @@
+-"""V44 already-activated BF16 norm-reuse + held32 candidate; GPU unqualified.
+-V40 state body/name, serial norm, header and safe compile policy stay exact.
+-Prework only loads already-activated BF16 values; it never applies SiLU.
+-Import is inert; no engine connection or performance claim.
++"""V78 already-activated BF16 -> FP32 scaled-Q/K-ready + held32 probe.
++V44 serial norm and safe policy remain exact; only scale multiplication moves.
++GPU unqualified: FP32 materialization can change compiler contraction behavior.
++No native integration, model connection, or performance claim. Import is inert.
+ """
+ 
+ SPLIT = 4
+@@ -54,6 +54,7 @@
+     uint group = threadgroup_position_in_grid.x;
+     threadgroup float q_storage[128];
+     threadgroup float k_storage[128];
++    threadgroup float ready_scales[2];
+     if (group < 16) {
+         uint h = group;
+         uint Dk = 128;
+@@ -69,9 +70,12 @@
+     float ks = metal::rsqrt(kn + 1e-6f);
+             scales[h * 2] = qs;
+             scales[h * 2 + 1] = ks;
++            ready_scales[0] = qs;
++            ready_scales[1] = ks;
+         }
+-        q_ready[h * 128 + lane] = qh[lane];
+-        k_ready[h * 128 + lane] = kh[lane];
++        threadgroup_barrier(mem_flags::mem_threadgroup);
++        q_ready[h * 128 + lane] = ready_scales[0] * qh[lane];
++        k_ready[h * 128 + lane] = ready_scales[1] * kh[lane];
+     } else {
+         uint h = group - 16;
+         v_ready[h * 128 + lane] = float(activated[4096 + h * 128 + lane]);
+@@ -94,8 +98,6 @@
+     const device float* qh = q_ready + (size_t)(h / 3) * Dk;
+     const device float* kh = k_ready + (size_t)(h / 3) * Dk;
+     threadgroup float red[SPLIT * VALUE_TILE];
+-    float qs = scales[(h / 3) * 2];
+-    float ks = scales[(h / 3) * 2 + 1];
+     float ex = metal::exp(g[bh]);
+     float be = beta[bh];
+     float kv = 0.0f;
+@@ -104,7 +106,7 @@
+     for (uint j = 0; j < 32; j++) {
+         uint d = d0 + j;
+         held[j] = S[base + d * Dv + dv];
+-        kv += ks * kh[d] * held[j];
++        kv += kh[d] * held[j];
+     }
+     red[sp * VALUE_TILE + dv_local] = kv;
+     threadgroup_barrier(mem_flags::mem_threadgroup);
+@@ -115,9 +117,9 @@
+     #pragma unroll 32
+     for (uint j = 0; j < 32; j++) {
+         uint d = d0 + j;
+-        float s = ex * held[j] + ks * kh[d] * delta;
++        float s = ex * held[j] + kh[d] * delta;
+         S_new[base + d * Dv + dv] = s;
+-        acc += qs * qh[d] * s;
++        acc += qh[d] * s;
+     }
+     threadgroup_barrier(mem_flags::mem_threadgroup);
+     red[sp * VALUE_TILE + dv_local] = acc;
+@@ -129,24 +131,8 @@
+     }
+ '''
+ 
+-_NORM_PROBE_SOURCE = r'''
+-    uint h = thread_position_in_grid.x;
+-    uint Dk = 128;
+-    const device float* qh = q_ready + (size_t)h * Dk;
+-    const device float* kh = k_ready + (size_t)h * Dk;
+-    float qn = 0.0f, kn = 0.0f;
+-    for (uint d = 0; d < Dk; d++) { qn += qh[d] * qh[d]; kn += kh[d] * kh[d]; }
+-    float qs = metal::rsqrt(qn + 1e-6f) * metal::rsqrt((float)Dk);   // L2 归一化 + Dk^-0.5
+-    float ks = metal::rsqrt(kn + 1e-6f);
+-    norm_stats[h * 4] = qn;
+-    norm_stats[h * 4 + 1] = kn;
+-    norm_stats[h * 4 + 2] = qs;
+-    norm_stats[h * 4 + 3] = ks;
+-'''
+-
+ _prework_kernel = None
+ _state_kernel = None
+-_norm_probe_kernel = None
+ 
+ 
+ def _runtime():
+@@ -177,7 +163,7 @@
+     global _prework_kernel
+     if _prework_kernel is None:
+         _prework_kernel = _make_kernel(
+-            mx, "gdn_activated_norm_reuse_prework_v44_build1", ["activated"],
++            mx, "gdn_activated_scaled_ready_prework_v78_build1", ["activated"],
+             ["q_ready", "k_ready", "v_ready", "scales"], _PREWORK_SOURCE,
+         )
+     return tuple(_prework_kernel(
+@@ -188,10 +174,12 @@
+ 
+ 
+ def _state(q_ready, k_ready, v_ready, scales, g, beta, S, mx):
++    # Retain the diagnostic scales binding: declared S/S_new slots stay 6/9.
++    # This new PSO is not in any native whitelist; slots are not GPU-observed.
+     global _state_kernel
+     if _state_kernel is None:
+         _state_kernel = _make_kernel(
+-            mx, "gdn_norm_reuse_cached_state_v40_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
++            mx, "gdn_scaled_ready_cached_state_v78_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
+             ["o", "S_new"], _STATE_SOURCE.replace("SPLIT", str(SPLIT)).replace("VALUE_TILE", str(VALUE_TILE)),
+         )
+     return tuple(_state_kernel(
+@@ -210,18 +198,3 @@
+     q_ready, k_ready, v_ready, scales = _prepare(activated, mx)
+     return _state(q_ready, k_ready, v_ready, scales, g, beta, S, mx)
+ 
+-
+-def _norm_probe(q_ready, k_ready, mx):
+-    """Qualification only: old serial norm body, outputs qn/kn/qs/ks per head."""
+-    if not (q_ready.shape == k_ready.shape == (1, 16, 128)
+-            and q_ready.dtype == k_ready.dtype == mx.float32):
+-        raise ValueError("norm probe requires FP32 Q/K[1,16,128]")
+-    global _norm_probe_kernel
+-    if _norm_probe_kernel is None:
+-        _norm_probe_kernel = _make_kernel(
+-            mx, "gdn_norm_reuse_serial_norm_probe_build1", ["q_ready", "k_ready"], ["norm_stats"], _NORM_PROBE_SOURCE,
+-        )
+-    return tuple(_norm_probe_kernel(
+-        inputs=[q_ready, k_ready], grid=(16, 1, 1), threadgroup=(16, 1, 1),
+-        output_shapes=[(1, 16, 4)], output_dtypes=[mx.float32],
+-    ))[0]

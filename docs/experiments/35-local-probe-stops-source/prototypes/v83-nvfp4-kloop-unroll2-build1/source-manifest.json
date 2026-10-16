@@ -1,0 +1,139 @@
+{
+  "experiment": "V83 original FP4 R4/SG2 K-loop unroll_count2 numeric-only",
+  "files": {
+    "LICENSE-Lithos-Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "LICENSE-MLX.txt": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "README.md": "d5d5d14c24cb62d1677c6e6c76e2b680f038abca514cbd70e345fd44c47f4bc7",
+    "check_cpu.py": "0e27082234b55645446d6e28aee30d71d2bdb9c67c3b06941af2c56da6a25f22",
+    "checkpoint-headers.json": "f6abdf029f43a45f68230c3a79e8922b7e49925605f64299cce7a36719120a71",
+    "geometry.py": "9cc8fdf8170b4780cdd8fd54b0ac539095e6f25d88c80a9ca7f7e1718a1e5991",
+    "kernel_body.metal": "c58aa6023dd63b9314f10859084aec4ea1822b9331a3fd0c736c1d11a49933dc",
+    "kernel_header.metal": "2d2bb122f495677f64dc6d9c571c3d1647f2c93e25808d1e0271fb6ec574ad56",
+    "micro.py": "d70788542b11c484032395c58f50f0ed6939498fe49cf17fa8e3a775a5b954ab",
+    "protocol.json": "d261c0e5a0432204536650f99434fee16bd5e80fc784ee321bb64c53ab3fd491"
+  },
+  "upstream_sources": {
+    "v22_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/micro.py",
+      "sha256": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279"
+    },
+    "v22_native_header": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/kernel_header.metal",
+      "sha256": "7373cccf7ee7cf6bec4242502b725529c7906835fe6216bbf53631dfd60b508a"
+    },
+    "v22_native_body": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v22-nvfp4-qmv-r2-build1/kernel_body.metal",
+      "sha256": "6d60381de86ab832d29f873ccfcc65b6f3952cbc2254e6e6f3c10f2127b59cb3"
+    },
+    "resource_wrapper": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_power_v1.py",
+      "sha256": "f4624d7dd8e977759865e11c4b7d3ed0489d1fd55b496e60c29fc087b7d9eb42"
+    },
+    "resource_native": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_precise_v1.py",
+      "sha256": "d0aaa466e1cee70e109dbd4d02e4d457edda2a5e535dafab1b17d9dd6654538f"
+    },
+    "owned_cleanup": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v25-c1-screen-build1/support.py",
+      "sha256": "8063f9b386c9853b3d5ab0b1f7f895b71408cbf7169a13a1dea4cb25182f7d9c"
+    },
+    "bootstrap": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/metal_buffer_bootstrap_v1.py",
+      "sha256": "d7faae6c7b24e43dbbeba7a91a88c7cacae08d4c0ae5b6b4c9e4c4a67ecf48f1"
+    },
+    "power_support": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/power_paired_support_v1.py",
+      "sha256": "cefe1b28e179561b9176a715e86e45ddcf821ec8260fc02ced12379b65c2f5a3"
+    },
+    "runtime_plan": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v18-activation-runtime-identity-build3.json",
+      "sha256": "20cc406685d035ef484bf3f3fc2c4b1b39c5bb2af6eef884285b7b74fb6f47bc"
+    },
+    "real_bank_receipt": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/receipt.json",
+      "sha256": "94a9f5ab7ae3780f306e66d71e4f3b0f2fb559eef4d5a89ae179ef63ef3355c8"
+    },
+    "real_bank_x": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L00-x.raw.le.bin",
+      "sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66"
+    },
+    "own_linear": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v25-combined-build1-root/tutorial_code/miniengine/model/layers.py",
+      "sha256": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411"
+    },
+    "accepted25_manifest": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/source-manifest-v17-gdn-gates-build1.json",
+      "sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c"
+    },
+    "combined27_manifest": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v25-combined-source-build1/manifest.json",
+      "sha256": "54f76862eb05d7ef8a28ad877afa43b4b08a1bb400c4347af18318c3767e06af"
+    },
+    "installed_fp4.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp4.h",
+      "sha256": "e3159945d7e5ae24f7a1ca9c4875b2a5d15cfb6952405df24a0df1bb2622a93a"
+    },
+    "installed_fp8.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp8.h",
+      "sha256": "9a9d77a6295f66b4ada4311c3b855b6ecb7a2b38f28623109e3c61d2e17e81ae"
+    },
+    "installed_fp_quantized.h": {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h",
+      "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f"
+    },
+    "lithos_nvfp4": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/formats/nvfp4.py",
+      "sha256": "5f4a6954a4ec1c9b45e6b9f9b15f152e6a9ea37a1addbb51ed32cce638126559"
+    },
+    "long_prime_precedent": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v28-gateup-epilogue-build2/protocol.json",
+      "sha256": "96d0266b77914837d51f40f1ad21145190f0099ae18e51370b99e763b5a661a2"
+    },
+    "v32_stationary_timer": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v32-compiled-qmv-factorfold-build1/micro.py",
+      "sha256": "dab0c7060631880f7f2148a6c7e1914f948f190fc66d541b89e317588fbd8e05"
+    },
+    "v32_actual_STOP_preserved": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/compiled-factorfold-v32-attempt1/child-output/result.json",
+      "sha256": "6ccb43b6db4fcf8abbb296bd49ec31d3e909d65378e7440daf18307d8ac61446"
+    },
+    "lithos_regroup": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/gemv_tuning.py",
+      "sha256": "c396d22d81ea1b186e74994244d67eaa14c8472e33fa2ba57ae8bccc6651894e"
+    },
+    "actual_shape_audit": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/qmv-next-source-review-build1/EVIDENCE.json",
+      "sha256": "5c231c4b7926fa8ae5a0a5c602a3cfb208730d3a4ddedaac52461bd43072dbc6"
+    },
+    "parent49_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v49-nvfp4-sg4-geometry-build1/micro.py",
+      "sha256": "56b875c805b89a5814d1f8833edf2960bb8306c61bf043cf4cb9817d70cd2dde"
+    },
+    "original_r4_header": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v66-gdn-four-projection-build2/kernel_header.metal",
+      "sha256": "17759af8d59a7ba185040630de07af69dd3335538e19094bd1f541c2b1140c6b"
+    },
+    "lithos_gemv_T": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_T.metal",
+      "sha256": "aacc9ddf17fae15bd124330d034e76ebf996967ce96309c146e24671e5128ae8"
+    },
+    "parent69_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v69-nvfp4-r8-reuse-build1/micro.py",
+      "sha256": "23c9dafa519e8c4f975d42a078a2150a9e03ae38bfec9f59a2f73c3e88b82f60"
+    },
+    "native72_actual_STOP": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/kernel-micro-v72b2-attempt1/child-output/receipt.json",
+      "sha256": "f7eeff33a9e5d2f3af8a6a46d1d66a00913953f8b26960696a0f50e9a2f46744"
+    },
+    "lithos_nvrows": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_nvfp4_rows.metal",
+      "sha256": "850769ed91ee1d9222e58eba23a12b80f3445929855a4f351361733e0bbf26c0"
+    },
+    "half2_native_actual_STOP": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/kernel-micro-v80-attempt1/child-output/receipt.json",
+      "sha256": "63c731a2be642da1dd4c5fdfafe8495961a57c78d4b3d307abac8fb75a82b18b"
+    }
+  },
+  "old_sources_changed": false,
+  "GPU_by_author": false
+}

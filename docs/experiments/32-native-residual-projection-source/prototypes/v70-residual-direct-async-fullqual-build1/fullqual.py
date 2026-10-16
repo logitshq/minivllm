@@ -1,0 +1,397 @@
+"""Root-only residual-carry model + unchanged V64 direct async lifecycle; diagnostic perstep versus production quiescent-final outputs."""
+import argparse
+import ctypes
+import hashlib
+import importlib.util
+import json
+import math
+import os
+from pathlib import Path
+import sys
+import traceback
+
+sys.dont_write_bytecode = True
+D = Path(__file__).resolve().parent
+P = D.parent
+ROOT = P / "candidate-v65-residual-carry-build1-root"
+CARRY_QUAL_BINDING = D / "v65-qualification.json"
+LIB = P / "v62-native-direct-pipeline-build2/libv62replay.dylib"
+LIB_SHA = "35aa6e0d0297c12d3978caf2e70a7082ecbbf60b85e1525133d4b8b0effdc83f"
+QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ADAPTER_SHA = "acd59a4d817cb73fba07f6757b3a170a057e3c78ea707710624dda0a65e4bc07"
+TINY_QUALIFICATIONS = {'diagnostic': {'receipt': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62diag2-attempt1/child-output/receipt.json', 'receipt_sha256': '669a42415f2627df64db9e509f6377f63f210a5420d13ff263ccb070dbc77acb', 'release': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62diag2-attempt1/external-release.json', 'release_sha256': '58dd5ec7696aa35c202f7b01fab8e50e8c7678818eb2931ad2385c3e76a1b0b8'}, 'production': {'receipt': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62prod2-attempt1/child-output/receipt.json', 'receipt_sha256': '06961e1c660fb92658b106435f2112923d5860ac141f7177fb75e04cc25c8ed4', 'release': '/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v62prod2-attempt1/external-release.json', 'release_sha256': '8514ec9e510cf44e4616aeac3f99f27a37af1f7a7db0ad7127fca173626fe52c'}}  # Actual build2 tiny PASS/released; one immutable mode per process.
+
+
+
+def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def write(p, v): Path(p).write_text(json.dumps(v, indent=2, allow_nan=False) + "\n")
+
+
+def module(name, p):
+    spec = importlib.util.spec_from_file_location(name, p)
+    value = importlib.util.module_from_spec(spec); sys.modules[name] = value
+    spec.loader.exec_module(value); return value
+
+
+def assert_pipeline(native, *, diagnostic, delivered, completed, requests, discarded, banks,
+                    request_delivered=31, request_completed=31, request_discarded=0,
+                    last_readable=True):
+    f, p = native["feedback"], native["pipeline"]
+    assert native["status"] == "OK" and not native["error"]
+    assert p["enabled"] and p["depth"] == 2 and p["maximum_outstanding"] == 2
+    assert p["total_submitted"] == p["total_completed"] == completed
+    assert p["total_delivered"] == delivered and p["total_discarded"] == discarded
+    assert p["total_failed"] == p["request_failed"] == 0
+    assert p["request_submitted"] == p["request_completed"] == request_completed
+    assert p["request_delivered"] == request_delivered and p["request_discarded"] == request_discarded
+    assert p["inflight"] == 0 and p["pending"] == [] and all(not x["busy"] for x in p["slots"])
+    assert p["last_result_readable"] is last_readable
+    assert f["total_steps"] == f["icb"]["execution_count"] == f["icb"]["encoded_count"] == completed
+    assert f["resets"] == requests and f["icb"]["bank_executions"] == banks
+    assert f["pingpong"]["eligible_count"] == 48
+    d = native["direct_pipeline"]
+    assert d["enabled"] and d["diagnostic_snapshot"] is diagnostic and d["mode_immutable_after_enable"]
+    assert d["banks_checked"] == 2 and d["input_output_range_pairs_checked"] == 34584 and d["input_input_range_pairs_checked"] == 17030
+    assert d["direct_links"] == 83 and d["direct_feedback_bytes_per_step"] == 19726348
+    assert f["input_output_aliases"] == []
+    assert d["legacy_F_stage_allocation_bytes_retained"] > 0
+    assert d["legacy_F_stage_used"] is diagnostic  # retained allocation; no freed-memory claim
+    assert f["GPU_blit_bytes_per_step"] == (39949336 if diagnostic else 19726352)
+    assert all(x["stage_bytes"] == (f["stage_bytes"] if diagnostic else 4) for x in p["slots"])
+    assert d["prediction_slot_bytes"] == (0 if diagnostic else 4)
+
+
+
+def snapshot_rows(adapter, gold, *, api, context):
+    rows=[]
+    for h,prior in zip(adapter.outputs,gold):
+        assert h.label==prior["label"] and h.nbytes==prior["bytes"]
+        assert list(h.shape)==prior["shape"] and str(h.dtype)==prior["dtype"]
+        dest=ctypes.create_string_buffer(h.nbytes)
+        adapter.call(api,h.address,h.nbytes,dest)
+        digest=hashlib.sha256(dest.raw).hexdigest()
+        assert digest==prior["A_sha256"],(context,h.label)
+        rows.append({"label":h.label,"shape":list(h.shape),"dtype":str(h.dtype),"bytes":h.nbytes,
+                     "sha256":digest,"qualified_A_sha256":prior["A_sha256"]})
+    assert len(rows)==132
+    return rows
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", type=Path); ap.add_argument("--inert", action="store_true")
+    ap.add_argument("--mode", choices=["diagnostic", "production"])
+    args = ap.parse_args()
+    assert args.mode in TINY_QUALIFICATIONS or args.inert
+    mode=args.mode or "diagnostic";diagnostic=mode=="diagnostic"
+    tiny_binding=TINY_QUALIFICATIONS[mode]
+    pins = json.loads((D / "source-pins.json").read_text())
+    for path, digest in pins.items(): assert sha(path) == digest, path
+    manifest = json.loads((P / "v65-residual-carry-fullqual-build1/candidate-manifest.json").read_text())
+    source_package = ROOT / "tutorial_code/miniengine"
+    expected_source = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in manifest["files"].items()}
+    actual_source = {str(f.relative_to(source_package)): sha(f) for f in source_package.rglob("*.py")}
+    assert actual_source == expected_source and len(actual_source) == 29
+    carry_binding=json.loads(CARRY_QUAL_BINDING.read_text())
+    if carry_binding["status"] != "PASS_BOUND":
+        assert args.inert,"V65 qualification pending: model execution forbidden"
+    else:
+        for key in ("receipt","release"):
+            assert carry_binding[key] in pins and sha(carry_binding[key]) == carry_binding[key+"_sha256"]
+        carry_qualified=json.loads(Path(carry_binding["receipt"]).read_text())
+        carry_release=json.loads(Path(carry_binding["release"]).read_text())
+        assert carry_qualified["status"] == "PASS_NATIVE_RESIDUAL_CARRY_CONV_NORMREUSE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+        assert (carry_qualified["native_steps"],carry_qualified["strict_output_checks"],carry_qualified["hidden_norm_metadata_qualified"],carry_qualified["same_parameter_identity_count"]) == (93,12276,129,1349)
+        assert carry_qualified["B_residual_carry_capture_engagement"]["calls"] == 128
+        assert carry_qualified["B_residual_carry_capture_engagement"]["counter_removed_after_capture"] is True
+        assert carry_qualified["A_carry_OFF_all_reference_forwards"] is True
+        assert carry_qualified["A_saved_V44_receipt_sha256"] == QUAL_SHA
+        assert carry_release["status"] == "PASS_EXTERNAL_RELEASE" and carry_release["GPU_released"] and carry_release["tool_exit"] == 0
+        assert all(x["returncode"]==1 and x["stdout"]==x["stderr"]=="" for x in carry_release["strict_absence"])
+    assert sha(QUAL) == QUAL_SHA and sha(LIB) == LIB_SHA
+    assert sha(D / "native_runner.py") == ADAPTER_SHA
+    if tiny_binding["receipt_sha256"] is None:
+        assert args.inert,"actual62 selected-mode tiny receipt is not bound; model execution forbidden"
+    else:
+        assert sha(tiny_binding["receipt"])==tiny_binding["receipt_sha256"] and sha(tiny_binding["release"])==tiny_binding["release_sha256"]
+        assert str(tiny_binding["receipt"]) in pins and str(tiny_binding["release"]) in pins
+        tiny,released=json.loads(Path(tiny_binding["receipt"]).read_text()),json.loads(Path(tiny_binding["release"]).read_text())
+        expected_status="PASS_TINY_V62_DIAGNOSTIC_75_PERSTEP_STRICT" if diagnostic else "PASS_TINY_V62_PRODUCTION_15_PREDICTION_15_FINAL_STRICT"
+        assert tiny["status"]==expected_status and tiny["mode"]==mode
+        assert (tiny["perstep_all_output_checks"],tiny["prediction_only_checks"],tiny["quiescent_final_output_checks"])==((75,0,0) if diagnostic else (0,15,15))
+        assert tiny["native"]["pipeline"]["depth"]==2 and tiny["native"]["pipeline"]["total_completed"]==tiny["native"]["pipeline"]["total_delivered"]==15
+        assert tiny["native"]["direct_pipeline"]["diagnostic_snapshot"] is diagnostic
+        assert released["status"]=="PASS_EXTERNAL_RELEASE" and released["GPU_released"] and released["tool_exit"]==0
+        assert all(x["returncode"]==1 and x["stdout"]==x["stderr"]=="" for x in released["strict_absence"])
+    qualified = json.loads(QUAL.read_text())
+    assert qualified["status"] == "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+    expected = qualified["requests"]
+    assert [c["name"] for c in expected] == ["base", "reset-base", "changed-prefill"]
+    w = json.loads((P / "workload.json").read_text())
+    if args.inert:
+        assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+        print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "GPU_used": False,
+                          "mode":mode,"actual_tiny_bound":tiny_binding["receipt_sha256"] is not None,
+                          "qualification_scope":"diagnostic12540 fulloutputhashes; production161 deliveredIDs+660 quiescent fulloutputhashes",
+                          "expected_full_output_hash_checks":12540 if diagnostic else 660, "carry_qualification_status":carry_binding["status"], "live_hidden_norms_required":129,"B_capture_fusions_required":128,"candidate_source_count":29}))
+        return 0
+    assert args.out is not None and args.out.is_absolute()
+    args.out.mkdir()
+    r = {"status": "STARTED", "stage": "beforeload", "pid": os.getpid(), "model_loads": 0,
+         "source_pins": pins, "prior_qualification_sha256": QUAL_SHA,
+         "mode":mode,"diagnostic_snapshot":diagnostic,
+         "tiny_qualification_sha256": tiny_binding["receipt_sha256"], "tiny_release_sha256": tiny_binding["release_sha256"], "requests": [],
+         "perstep_full_state_claim":diagnostic,"production_scope":"delivered prediction IDs and five quiescent terminal132 snapshots only; no perstep all-state claim",
+         "performance_point": False, "adopted": False, "scheduler_max_seqs": 1,
+         "V65_qualification":carry_binding,"A_reference_scope":"actual original accepted25 A outputs from immutable qualified44; never V65 self-reference"}
+    save = lambda: write(args.out / "receipt.json", r)
+    save(); loaded = False; mx = None; resources = None
+    try:
+        assert os.environ.get("DYLD_INSERT_LIBRARIES") == str(LIB)
+        support = module("v41_resources", P / "v24-fullmodel-qual-build1/fullqual.py")
+        resources = support.Resources(args.out); resources.sample("beforeload", loaded=False)
+        sys.path.insert(0, str(ROOT))
+        import mlx.core as mx
+        from tutorial_code.miniengine.engine.llm_engine import LLMEngine
+        from tutorial_code.miniengine.sampling_params import SamplingParams
+        e = LLMEngine(w["model_dir"], max_seqs=1, max_len=2048, max_batched_tokens=512,
+                      dtype=mx.bfloat16, cache_limit_gb=2)
+        loaded = True; r["model_loads"] = 1; mx.synchronize()
+        r["afterload"] = resources.sample("afterload-before-token", loaded=True, mx=mx)
+        from mlx.utils import tree_flatten
+        from tutorial_code.miniengine.model.layers import RMSNorm
+        live_parameters=tree_flatten(e.model.parameters())
+        initial_parameter_identity=[(name,id(value)) for name,value in live_parameters]
+        assert len(live_parameters)==1349 and len(set(name for name,_ in live_parameters))==1349
+        assert e.model._residual_carry_enabled is False
+        parameter_by_name=dict(live_parameters)
+        hidden_norms=[(f"layers.{i}.{key}",getattr(layer,key)) for i,layer in enumerate(e.model.layers)
+                      for key in ("input_layernorm","post_attention_layernorm")]+[("norm",e.model.norm)]
+        hidden_metadata=[]
+        for label,norm in hidden_norms:
+            eps=getattr(norm,"eps",None);weight=getattr(norm,"weight",None)
+            row={"name":label,"weight_parameter":label+".weight","norm_type":type(norm).__name__,
+                 "shape":list(getattr(weight,"shape",())),"dtype":str(getattr(weight,"dtype",None)),
+                 "eps":eps if type(eps) is float and math.isfinite(eps) else None,"eps_repr":repr(eps),
+                 "zero_centered":getattr(norm,"zero_centered",None),
+                 "parameter_object_identity_match":parameter_by_name.get(label+".weight") is weight}
+            row["fusion_eligible"]=(type(norm) is RMSNorm and weight is not None and weight.shape==(5120,)
+                and weight.dtype in (mx.bfloat16,mx.float32) and norm.zero_centered is True
+                and type(eps) is float and math.isfinite(eps) and 0.0<eps<1.0 and row["parameter_object_identity_match"])
+            hidden_metadata.append(row)
+        r["hidden_norm_metadata_before_any_token"]={"token_executed":False,"array_parameters":1349,
+            "count":len(hidden_metadata),"source":"actual loaded objects", "rows":hidden_metadata}
+        write(args.out/"hidden-norm-metadata-before-any-token.json",r["hidden_norm_metadata_before_any_token"]);save()
+        assert len(hidden_metadata)==129 and all(row["fusion_eligible"] for row in hidden_metadata)
+        e.model.set_residual_carry(True)
+        gdns = [l.linear_attn for l in e.model.layers if not l.is_attn]
+        assert len(gdns) == 48
+        for g in gdns: g.set_gates_compile(True); g.set_conv_norm_reuse_cache(True)
+        assert getattr(e.runner, "_functional_decode_helper", None) is None
+        assert all(g._gates_compile_enabled is True and g._conv_norm_reuse_cache_enabled is True for g in gdns)
+        r.update(source_root=str(ROOT), gates_on=48, conv_on=48, normreuse_cache_on=48,
+                 conv_normreuse_cache_on=48, conv_off=False,
+                 whole_functional_off=True, adapter_source=str(P / "v64-native-direct-async-runner-build1/native_runner.py"),
+                 adapter_sha256=sha(P / "v64-native-direct-async-runner-build1/native_runner.py"))
+        assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(e.model.parameters())]
+        r["array_parameter_identity_before_any_token"]={"count":1349,"unchanged_after_setters":True}
+        r["carry_on"]=True;r["hidden_norm_metadata_qualified"]=129;r["stage"]="ready"
+        write(args.out/"model-ready.json",{"pid":os.getpid(),"model_loads":1,"token_executed":False})
+        save();print(json.dumps({"event":"MODEL_READY","pid":os.getpid()}),flush=True)
+        sampling = SamplingParams(max_tokens=32, temperature=0, ignore_eos=False)
+        ordinary = e.generate([w["prompt_ids"]], sampling)
+        assert ordinary == [w["continuation_ids"]]
+        assert e.runner._ahead is None and e.runner.batch.size == 0 and not e.requests
+        resources.sample("after-ordinary-warm", loaded=True, mx=mx)
+        runtime = module("v56_adapter", P / "v64-native-direct-async-runner-build1/native_runner.py")
+        adapter = runtime.install(e, LIB, LIB_SHA, diagnostic=diagnostic)
+        captured_originals = {}
+        original_build = adapter.build
+        from tutorial_code.miniengine.kernels import residual_norm_metal as residual_module
+        from tutorial_code.miniengine.model.gdn import GatedDeltaNet
+        original_residual=residual_module.residual_norm
+        original_conv=GatedDeltaNet._decode_conv_norm_reuse_cache
+        norm_labels={id(norm.weight):label+".weight" for label,norm in hidden_norms}
+        fusion_calls=[];conv_calls=[]
+        assert len(norm_labels)==129
+
+        def observe_build(values):
+            before = [bytes(adapter.shared(v, str(i)).bytes_view) for i, v in enumerate(values)]
+            assert e.model._residual_carry_enabled is True and not fusion_calls and not conv_calls
+            assert residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv
+            def counted_residual(left,delta,weight,eps):
+                fusion_calls.append(norm_labels[id(weight)])
+                return original_residual(left,delta,weight,eps)
+            def counted_conv(self,*a,**kw):
+                conv_calls.append(id(self));return original_conv(self,*a,**kw)
+            residual_module.residual_norm=counted_residual
+            GatedDeltaNet._decode_conv_norm_reuse_cache=counted_conv
+            try:
+                original_build(values)
+            finally:
+                residual_module.residual_norm=original_residual
+                GatedDeltaNet._decode_conv_norm_reuse_cache=original_conv
+                r["B_capture_engagement"]={"residual_calls":len(fusion_calls),"norm_weight_order":list(fusion_calls),
+                    "conv_calls":len(conv_calls),"distinct_GDN_objects":len(set(conv_calls)),
+                    "counter_removed_after_build":residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv}
+            expected_fusions=[name for i in range(64) for name in
+                (f"layers.{i}.post_attention_layernorm.weight",f"layers.{i+1}.input_layernorm.weight" if i<63 else "norm.weight")]
+            assert fusion_calls==expected_fusions and len(fusion_calls)==128
+            assert len(conv_calls)==48 and set(conv_calls)==set(map(id,gdns))
+            assert r["B_capture_engagement"]["counter_removed_after_build"] is True
+            assert len(before) == len(adapter.inputs) == 131
+            for h, original in zip(adapter.inputs, before):
+                assert bytes(h.bytes_view) == original, ("build changed input", h.label)
+            captured_originals["before_any_native_replay"] = before + [bytes(h.bytes_view) for h in adapter.outputs]
+            r["build_input131_readonly"] = True
+        adapter.build = observe_build
+        requests = {}
+        # Queue all three before the next schedule; this tests FCFS handoff and reset.
+        for case in expected:
+            rid = e.add_request(case["prompt_ids"], sampling)
+            item = {"name": case["name"], "request_id": rid, "B_ids": [], "steps": []}
+            r["requests"].append(item); requests[rid] = (case, item)
+        baseline_originals = None; checks = 0; first_tokens = 0; schedules = 0
+        while e.has_work():
+            schedules += 1; assert schedules <= 200
+            before = adapter.native_steps
+            results = e.step()
+            assert len(results) == 1, "C1 whole prompts must deliver exactly one token per step"
+            rid, token, done = results[0]; case, item = requests[rid]
+            item["B_ids"].append(token); ordinal = len(item["B_ids"])
+            assert token == case["A_ids"][ordinal-1]
+            if ordinal == 1:
+                assert adapter.native_steps == before
+                first_tokens += 1
+            else:
+                assert adapter.native_steps == before + 1
+                reference = case["steps"][ordinal-2]
+                assert reference["step"] == ordinal-1
+                if diagnostic:
+                    output_rows=snapshot_rows(adapter,reference["outputs"],api="v34_copy_output",context=(item["name"],ordinal))
+                    checks+=132;item["steps"].append({"step":ordinal-1,"checks":output_rows,"scope":"perstep all132"})
+                else:
+                    item["steps"].append({"step":ordinal-1,"prediction_id":token,"full_output_hash_checks":0,"scope":"prediction only; final fullstate checked after empty drop"})
+                if baseline_originals is None:
+                    baseline_originals = captured_originals["before_any_native_replay"]
+            if done:
+                assert ordinal == 32 and item["B_ids"] == case["A_ids"]
+                assert adapter.active is None and e.runner.batch.size == 0 and e.runner._ahead is None
+                assert rid not in e.requests and rid not in e.runner.staging
+                assert baseline_originals is not None
+                if not diagnostic:
+                    item["final132"]=snapshot_rows(adapter,case["steps"][-1]["outputs"],api="v62_copy_quiescent_output",context=(item["name"],"quiescent-final31"))
+                    item["final132_native_step"]=31;checks+=132
+                for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+                    assert bytes(h.bytes_view) == original, ("captured MLX owner mutated", h.label)
+                item["captured_originals_readonly"] = True
+                item["status"] = "PASS_32_GREEDY_AND_DROP"
+                resources.sample("after-request-" + item["name"], loaded=True, mx=mx)
+                print(json.dumps({"event": "RUNNER_REQUEST_STRICT_PASS", "name": item["name"], "steps": 31}), flush=True)
+                save()
+        assert checks == (12276 if diagnostic else 396) and first_tokens == 3 and adapter.native_steps == 93
+        assert adapter.request_count == 3 and not e.requests and not e.runner.staging
+        native = adapter.report(); f = native["feedback"]
+        assert native["status"] == "OK" and f["resets"] == 3 and f["total_steps"] == 93
+        assert f["icb"]["execution_count"] == 93 and f["icb"]["bank_executions"] == [48, 45]
+        assert f["pingpong"]["eligible_count"] == 48
+        assert_pipeline(native, diagnostic=diagnostic, delivered=93, completed=93, requests=3, discarded=0, banks=[48, 45])
+        assert adapter.total_submitted == 93 and adapter.total_discarded == 0
+        assert all(x["submitted"] == 31 and x["discarded"] == 0 for x in adapter.drops)
+        r["core_native_after_three_queued_requests"] = native
+        # Exercise whole-request fallback and a prefill-only completion, then
+        # prove another native request resets correctly after both paths.
+        fallback = e.generate([w["prompt_ids"]], SamplingParams(
+            max_tokens=2, temperature=0.7, top_k=1, ignore_eos=False))
+        assert fallback == [w["continuation_ids"][:2]] and adapter.native_steps == 93
+        prefill_only = e.generate([w["prompt_ids"]], SamplingParams(max_tokens=1, temperature=0))
+        assert prefill_only == [w["continuation_ids"][:1]] and adapter.native_steps == 93
+        final_request = e.generate([w["prompt_ids"]], sampling)
+        assert final_request == [w["continuation_ids"]] and adapter.native_steps == 124
+        final_checks=snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v34_copy_output" if diagnostic else "v62_copy_quiescent_output",context="post-fallback-final31")
+        assert len(final_checks) == 132 and adapter.request_count == 4
+        assert adapter.active is None and not e.requests and not e.runner.staging
+        assert e.runner.batch.size == 0 and e.runner._ahead is None
+        for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+            assert bytes(h.bytes_view) == original, ("post-fallback owner mutated", h.label)
+        native = adapter.report(); f = native["feedback"]
+        assert native["status"] == "OK" and f["resets"] == 4 and f["total_steps"] == 124
+        assert f["icb"]["execution_count"] == 124 and f["icb"]["bank_executions"] == [64, 60]
+        assert_pipeline(native, diagnostic=diagnostic, delivered=124, completed=124, requests=4, discarded=0, banks=[64, 60])
+        assert not adapter.pending and adapter.total_submitted == 124 and adapter.total_discarded == 0
+        assert len(adapter.drops) == 4 and all(x["submitted"] == 31 and x["discarded"] == 0 for x in adapter.drops)
+        r.update(stage="normal-four-complete", normal_strict_output_checks=checks+132,
+                 normal_native_delivered=124, normal_native_completed=124,
+                 core_all132_steps=93 if diagnostic else 3, first_prefill_tokens=first_tokens, ordinary_warm_tokens=32,
+                 whole_request_fallback_ids=fallback, prefill_only_ids=prefill_only,
+                 post_fallback_final132=final_checks, post_fallback_ids=final_request,
+                 normal_four_native=native)
+        save()
+        # Static stop token index6=103725 is unique in the preceding canonical prefix.
+        # Index5=220 would stop earlier at index2 and is deliberately not used.
+        stop_index = 6; stop_token = w["continuation_ids"][stop_index]
+        assert stop_token == 103725 and stop_token not in w["continuation_ids"][:stop_index]
+        early = e.generate([w["prompt_ids"]], SamplingParams(
+            max_tokens=32, temperature=0, ignore_eos=False, stop_token_ids=[stop_token]))
+        assert early == [w["continuation_ids"][:7]]
+        assert adapter.native_steps == 130 and adapter.total_submitted == 131 and adapter.total_discarded == 1
+        assert adapter.request_count == 5 and not adapter.pending and adapter.active is None
+        assert not e.requests and not e.runner.staging and e.runner.batch.size == 0 and e.runner._ahead is None
+        early_native = adapter.report()
+        assert_pipeline(early_native, diagnostic=diagnostic, delivered=130, completed=131, requests=5, discarded=1,
+                        banks=[68, 63], request_delivered=6, request_completed=7,
+                        request_discarded=1, last_readable=False)
+        assert len(adapter.drops) == 5 and adapter.drops[-1]["submitted"] == 7 and adapter.drops[-1]["discarded"] == 1
+        for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+            assert bytes(h.bytes_view) == original, ("early-stop owner mutated", h.label)
+        # Nonempty drain invalidates the previous result. No old132 copy/claim here.
+        r["early_stop"] = {"stop_token_index": stop_index, "stop_token_id": stop_token,
+            "max_tokens": 32, "ids": early, "native_delivered_delta": 6,
+            "native_completed_delta": 7, "discarded_delta": 1,
+            "all132_output_checks": 0, "scope": "IDs plus FIFO/drain/drop/readonly proof only; no full-cache comparison for these six delivered steps",
+            "native": early_native, "drop": adapter.drops[-1], "captured_originals_readonly": True}
+        resources.sample("after-early-stop-drain", loaded=True, mx=mx); save()
+        post_early = e.generate([w["prompt_ids"]], sampling)
+        assert post_early == [w["continuation_ids"]] and adapter.native_steps == 161
+        assert adapter.total_submitted == 162 and adapter.total_discarded == 1 and adapter.request_count == 6
+        assert not adapter.pending and adapter.active is None and not e.requests and not e.runner.staging
+        assert e.runner.batch.size == 0 and e.runner._ahead is None
+        post_early_checks=snapshot_rows(adapter,expected[0]["steps"][-1]["outputs"],api="v34_copy_output" if diagnostic else "v62_copy_quiescent_output",context="post-early-final31")
+        assert len(post_early_checks) == 132
+        for h, original in zip(adapter.inputs + adapter.outputs, baseline_originals):
+            assert bytes(h.bytes_view) == original, ("post-early-stop owner mutated", h.label)
+        native = adapter.report()
+        assert_pipeline(native, diagnostic=diagnostic, delivered=161, completed=162, requests=6, discarded=1, banks=[84, 78])
+        assert len(adapter.drops) == 6 and adapter.drops[-1]["submitted"] == 31 and adapter.drops[-1]["discarded"] == 0
+        r.update(status="PASS_V70_RESIDUAL_DIRECT_ASYNC_DIAGNOSTIC_12540_OUTPUT_HASHES" if diagnostic else "PASS_V70_RESIDUAL_DIRECT_ASYNC_PRODUCTION_161_IDS_660_FINAL_OUTPUT_HASHES", stage="complete",
+                 strict_output_checks=checks+264, normal_strict_output_checks=checks+132,
+                 native_delivered_prediction_ID_checks=161,quiescent_final132_requests=0 if diagnostic else 5,
+                 native_steps=161, native_steps_definition="adapter delivered steps; native feedback/ICB completed includes one discarded future",
+                 native_completed_steps=162, total_submitted_steps=162, total_discarded_steps=1,
+                 request_count=6, resets=6, post_early_stop_ids=post_early,
+                 post_early_stop_final132=post_early_checks, terminal_cleanup=True,
+                 captured_originals_readonly=True, all_drop_records=list(adapter.drops), native=native)
+        assert r["strict_output_checks"] == (12540 if diagnostic else 660)
+        assert native["direct_pipeline"]["quiescent_output_copies"]==(0 if diagnostic else 660)
+        assert r["core_all132_steps"]==(93 if diagnostic else 3)
+        assert len(fusion_calls)==128 and len(conv_calls)==48
+        assert residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv
+        assert e.model._residual_carry_enabled is True
+        assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(e.model.parameters())]
+        r["same_parameter_identity_count"]=1349;r["same_parameter_identity_preserved"]=True
+        r["V65_capture_hooks_removed_final"]=True
+        save(); return 0
+    except BaseException as error:
+        r.update(status="FAIL", stage="exception", error={"type": type(error).__name__, "message": str(error),
+                                                         "traceback": traceback.format_exc()})
+        save(); traceback.print_exc(); return 1
+    finally:
+        if resources is not None:
+            r["finally_resource"] = resources.sample("finally", loaded=loaded, mx=mx)
+            save()
+
+
+if __name__ == "__main__": raise SystemExit(main())

@@ -1,0 +1,169 @@
+{
+  "scope": "V84 independent native ICB test of frozen83 original R4/SG2 outer K-loop unroll_count2; old72 R8 and80 half2 STOP unchanged",
+  "weights": {
+    "layers": [
+      0,
+      8,
+      16,
+      24,
+      32,
+      40,
+      48,
+      56
+    ],
+    "projection": "mlp.gate_proj",
+    "N": 17408,
+    "K": 5120,
+    "payload_bytes": 401080320,
+    "packed_or_reordered_weight_bytes": 0
+  },
+  "capture": {
+    "once": true,
+    "dispatches": 16,
+    "order": "A0..A7 then B0..B7",
+    "A": "8 fixed-shape compiled native QMM originalR4",
+    "B": "8 fixed-shape compiled frozen83 original-decode R4/SG2 outer K-loop unroll_count2",
+    "inputs": "same original immutable per-layer W/scales/realX",
+    "output_slots": 16,
+    "output_slots_per_arm": 8,
+    "feedback": false,
+    "legacy_API_unchanged": true
+  },
+  "proof": {
+    "active_reflection_only": true,
+    "unused_arguments_not_guessed": true,
+    "one_writeonly_allocation_per_dispatch": true,
+    "all16_output_allocations_distinct": true,
+    "whole_allocation_read_write_disjoint": true,
+    "W_scale_X_full_pin_resolution": 48,
+    "unique_pinned_original_ranges": 24,
+    "unknown_rejected": true,
+    "output_RW_exception": "exact source-derived expected function/name/index/store-only proof only; actual full schema must match or STOP",
+    "B_symbol_CPU_status": "EXPECTED_NOT_OBSERVED",
+    "operand_type_proof": "frozen typed symbol + source ABI + runtime shape/dtype; reflection argument type Buffer, not an independent buffer element-dtype probe"
+  },
+  "native": {
+    "one_ICB_commands": 16,
+    "ranges": [
+      [
+        0,
+        8
+      ],
+      [
+        8,
+        16
+      ]
+    ],
+    "constant_bank": "original setBytes immutable payloads",
+    "PSO_change": "only supportsIndirectCommandBuffers=YES using original resolved function/descriptor/options",
+    "math_geometry_bindings": "exact original",
+    "internal_ICB_barriers": 0,
+    "Buffers_barriers_per_group": 1,
+    "trailing_group_barrier": true,
+    "arena_restore": "once at build before first prime, no per-block400MB restore",
+    "loop": "oneffi/oneCB/commitwait;8dispatches per group",
+    "GPU_times": "official CBGPUStartTime/EndTime seconds; envelope only"
+  },
+  "qualification": {
+    "separate_qualify_only_marker": true,
+    "MLX_strict_checks": 72,
+    "vectors_per_bank": 3,
+    "vectors": [
+      "actual per-layer realX",
+      "zero",
+      "fixed random"
+    ],
+    "comparisons_per_vector": [
+      "eager nativeQMM vscompiledA",
+      "eager nativeQMM vscompiledB",
+      "A vsB"
+    ],
+    "native_repeat_groups_per_arm": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      16
+    ],
+    "native_output_checks": 128,
+    "native_raw_outputs_saved": true,
+    "all_original_inputs_outputs_readonly": true,
+    "timing_run": false
+  },
+  "timing": {
+    "requires_prior_actual_qualified_receipt_and_SHA": true,
+    "fresh_output_marker": true,
+    "prime_groups": 128,
+    "timed_groups": 1024,
+    "dispatches_per_timed_block": 8192,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ],
+    "wall_scope": "oneffi+hostencode+commitwait divided8192; no per-kernel Python/eval",
+    "hashes_resources_readonly": "outside clocks",
+    "no_HTTP_E2E_or_adoption_claim": true
+  },
+  "resources": {
+    "AC": true,
+    "thermal_code": 0,
+    "pressure": 1,
+    "swap_used_stable": true,
+    "Swapouts_stable": true,
+    "raw_before_derived": true,
+    "cache_limit_bytes": 2147483648,
+    "root_sole_GPU_owner": true
+  },
+  "source_identity": "Prior83 actual identity+source manifest+owner+36checks+readonly+release bound; generic result SHA alone is insufficient"
+}

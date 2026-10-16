@@ -1,0 +1,271 @@
+--- qualified-v44/fullqual.py
++++ v65/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only carried-residual+conv+activated normreuse ICB versus original accepted25; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -7,6 +7,7 @@
+ import importlib.metadata
+ import importlib.util
+ import json
++import math
+ import os
+ from pathlib import Path
+ import sys
+@@ -15,7 +16,10 @@
+ sys.dont_write_bytecode = True
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v44-conv-normreuse-build1-root"
++ROOT = P / "candidate-v65-residual-carry-build1-root"
++PARENT_ROOT = P / "candidate-v44-conv-normreuse-build1-root"
++BASELINE_44_QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++BASELINE_44_QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+@@ -49,7 +53,21 @@
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+     actual = {str(f.relative_to(package)): sha(f) for f in package.rglob("*.py")}
+-    assert actual == expected and len(actual) == 27
++    assert actual == expected and len(actual) == 29
++    parent_manifest = json.loads((P / "v44-native-fullqual-build1/candidate-manifest.json").read_text())
++    parent_files = {k.removeprefix("tutorial_code/miniengine/"): v for k,v in parent_manifest["files"].items()}
++    parent_package = PARENT_ROOT / "tutorial_code/miniengine"
++    parent_actual = {str(f.relative_to(parent_package)):sha(f) for f in parent_package.rglob("*.py")}
++    assert parent_actual == parent_files and len(parent_actual) == 27
++    assert {k for k in parent_files if actual[k] != parent_files[k]} == {"model/qwen3_5.py"}
++    assert set(actual)-set(parent_files) == {"model/residual_carry.py", "kernels/residual_norm_metal.py"}
++    assert actual["kernels/residual_norm_metal.py"] == "b53e4b88cb118b2ee05b293e6b4ba4446ae9716e8c7dd9e678a359089d21413c"
++    proof = json.loads((D / "candidate-source-proof.json").read_text())
++    assert proof["old_DecoderLayer_call_AST_sha256"] == proof["new_DecoderLayer_call_AST_sha256"]
++    assert proof["old_model_call_AST_sha256"] == proof["new_fallback_after_removing_only_entry_guard_AST_sha256"]
++    assert sha(BASELINE_44_QUAL) == BASELINE_44_QUAL_SHA
++    residual330 = json.loads((P / "residual-norm-numeric-result-review-build1/receipt.json").read_text())
++    assert residual330["status"] == "PASS_ACTUAL_RAW_REPLAY_330_OF_330" and residual330["cases"] == 330
+     tiny=json.loads((P/"v23-root-control-build1/fullmodel-v40smoke-attempt2/child-output/receipt.json").read_text())
+     assert tiny["status"]=="PASS_TINY_V40_NORMREUSE_CACHE_ICB_PINGPONG_3REQUESTS_15STEPS" and tiny["strict_output_checks"]==75
+     local44_path=P/"v23-root-control-build1/numeric-v44-attempt1/child-output/receipt.json"
+@@ -150,11 +168,16 @@
+     assert baseline_qualification["declared_prompts"]=={n:p for n,p,_ in cases}
+     archived_cases={r["name"]:r for r in baseline_qualification["requests"]}
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
++    baseline44 = json.loads(BASELINE_44_QUAL.read_text())
++    assert baseline44["status"] == "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    assert baseline44["native_steps"] == 93 and baseline44["declared_prompts"] == {n:p for n,p,_ in cases}
++    archived44_cases = {r["name"]:r for r in baseline44["requests"]}
++    assert all(len(r["steps"])==31 for r in archived44_cases.values())
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+                           "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
+-                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2}))
++                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2, "candidate_source_count":29, "parent_source_count":27, "hidden_norm_metadata_before_any_token":129, "B_capture_residual_calls_required":128, "A_carry_OFF_required":True}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir(exist_ok=False)
+@@ -163,7 +186,8 @@
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+                "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
+-               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
++               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA,
++               "A_saved_V44_receipt":str(BASELINE_44_QUAL),"A_saved_V44_receipt_sha256":BASELINE_44_QUAL_SHA}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+     parameter_holders, seed_holders, output_holders = [], [], []
+@@ -193,7 +217,36 @@
+         model, cfg = load_model(w["model_dir"], dtype=mx.bfloat16)
+         loaded = True; receipt["model_loads"] = 1; mx.synchronize()
+         receipt["afterload"] = resources.sample("afterload-before-any-token", loaded=True, mx=mx)
+-        initial_parameter_identity=[(name,id(value)) for name,value in tree_flatten(model.parameters())]
++        live_parameters = tree_flatten(model.parameters())
++        initial_parameter_identity=[(name,id(value)) for name,value in live_parameters]
++        assert len(live_parameters) == 1349 and len(set(name for name,_ in live_parameters)) == 1349
++        assert model._residual_carry_enabled is False
++        from tutorial_code.miniengine.model.layers import RMSNorm
++        # Save the live observations even on unsupported metadata; no token has run.
++        hidden_norms = [(f"layers.{i}.{key}", getattr(layer,key)) for i,layer in enumerate(model.layers)
++                        for key in ("input_layernorm", "post_attention_layernorm")] + [("norm",model.norm)]
++        hidden_metadata = []
++        parameter_by_name = dict(live_parameters)
++        for label,norm in hidden_norms:
++            eps = getattr(norm,"eps",None); weight = getattr(norm,"weight",None)
++            row = {"name":label,"norm_type":type(norm).__name__,"weight_parameter":label+".weight",
++                   "shape":list(getattr(weight,"shape",())),"dtype":str(getattr(weight,"dtype",None)),
++                   "eps":eps if type(eps) is float and math.isfinite(eps) else None,
++                   "eps_repr":repr(eps),"zero_centered":getattr(norm,"zero_centered",None),
++                   "parameter_object_identity_match":parameter_by_name.get(label+".weight") is weight}
++            row["fusion_eligible"] = (type(norm) is RMSNorm and weight is not None
++                and weight.shape == (5120,) and weight.dtype in (mx.bfloat16,mx.float32)
++                and norm.zero_centered is True and type(eps) is float
++                and math.isfinite(eps) and 0.0 < eps < 1.0
++                and row["parameter_object_identity_match"])
++            hidden_metadata.append(row)
++        receipt["hidden_norm_metadata_before_any_token"] = {"source":"live loaded objects; no tensor-value read or separate model probe",
++            "token_executed":False,"array_parameters":len(live_parameters),"count":len(hidden_metadata),"rows":hidden_metadata}
++        write(args.out/"hidden-norm-metadata-before-any-token.json",receipt["hidden_norm_metadata_before_any_token"])
++        save()
++        assert len(hidden_metadata) == 129 and all(row["fusion_eligible"] for row in hidden_metadata)
++        model.set_residual_carry(True)
++        assert initial_parameter_identity == [(name,id(value)) for name,value in tree_flatten(model.parameters())]
+         gdns = [l.linear_attn for l in model.layers if not l.is_attn]
+         assert len(model.layers) == 64 and len(gdns) == 48
+         for g in gdns:
+@@ -209,16 +262,31 @@
+         exec(compile(ast.Module(body=[old_decode],type_ignores=[]),str(BASELINE_GDN),"exec"),vars(gdn_module),legacy_namespace)
+         legacy_decode=legacy_namespace["_decode"]
+         candidate_decode,candidate_norm=GDN._decode_dispatch,GDN._decode_conv_norm_reuse_cache
++        from tutorial_code.miniengine.kernels import residual_norm_metal as residual_module
++        from tutorial_code.miniengine.model import residual_carry as carry_module
++        candidate_residual = residual_module.residual_norm
++        residual_capture_calls=[]
++        norm_labels={id(norm.weight):label+".weight" for label,norm in hidden_norms}
++        assert len(norm_labels)==129
+         baseline_calls=[]
+         @contextmanager
+         def baseline_decode():
+             assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
++            previous_carry = model._residual_carry_enabled
++            assert type(previous_carry) is bool and residual_module.residual_norm is candidate_residual
++            model.set_residual_carry(False)
++            assert model._residual_carry_enabled is False
+             GDN._decode_dispatch=legacy_decode;GDN._decode_conv_norm_reuse_cache=legacy_decode
+-            baseline_calls.append("oldaccepted25_decode_AST")
++            event={"method":"oldaccepted25_decode_AST","carry_during":False,
++                   "residual_counter_installed":False,"residual_calls_basis":"carryOFF prevents preserved entry guard; no A counter is installed"}
++            baseline_calls.append(event)
+             try: yield
+             finally:
+                 GDN._decode_dispatch=candidate_decode;GDN._decode_conv_norm_reuse_cache=candidate_norm
++                model.set_residual_carry(previous_carry)
++                event["carry_restored"]=model._residual_carry_enabled is previous_carry
+                 assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
++                assert event["carry_restored"] and residual_module.residual_norm is candidate_residual
+         norm_capture_calls=[]
+         @contextmanager
+         def capture_norm_engagement():
+@@ -230,12 +298,28 @@
+             try: yield
+             finally:
+                 GDN._decode_conv_norm_reuse_cache=candidate_norm
++        @contextmanager
++        def capture_residual_engagement():
++            assert model._residual_carry_enabled is True
++            assert residual_module.residual_norm is candidate_residual
++            def counted(left,delta,weight,eps):
++                residual_capture_calls.append({"weight":norm_labels[id(weight)],
++                    "left_shape":list(left.shape),"left_dtype":str(left.dtype),
++                    "delta_shape":list(delta.shape),"delta_dtype":str(delta.dtype)})
++                return candidate_residual(left,delta,weight,eps)
++            residual_module.residual_norm=counted
++            try: yield
++            finally:
++                residual_module.residual_norm=candidate_residual
++                assert residual_module.residual_norm is candidate_residual
+         receipt["A_baseline_source"]={"path":str(BASELINE_GDN),"sha256":sha(BASELINE_GDN),
+-                                      "method":"_decode AST compiled into actualcandidate namespace; temporaryclassbinddispatchandnormreuseentry;finallyrestore",
++                                      "method":"carryOFF + _decode AST compiled into actualcandidate namespace; temporaryclassbinddispatchandnormreuseentry;finallyrestoreall",
+                                       "source_proof":json.loads((D/"baseline-source-proof.json").read_text()),"same_weights_load":True}
+ 
+         eos = read_eos_ids(w["model_dir"]); receipt["eos_ids"] = sorted(eos)
+-        receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, whole_functional_off=True)
++        assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(model.parameters())]
++        receipt["array_parameter_identity_before_any_token"]={"count":1349,"unchanged_after_all_feature_setters":True}
++        receipt.update(stage="ready", gates_on=48, conv_on=48, conv_off=False, normreuse_cache_on=48, carry_on=True, whole_functional_off=True)
+         write(args.out / "model-ready.json", {"pid": os.getpid(), "token_executed": False, "model_loads": 1})
+         save(); print(json.dumps({"event": "MODEL_READY", "pid": os.getpid()}), flush=True)
+ 
+@@ -284,13 +368,23 @@
+         capture_ctx = ForwardContext("decode", ctx_layers(capture_seed[3:]), positions=capture_seed[1], lens=capture_seed[2], max_len=CAP)
+         mx.eval(*(v for cache,layer in zip(capture_ctx.caches,model.layers) for v in ((cache.K,cache.V) if layer.is_attn else (cache.conv,cache.S))))
+         mx.synchronize(); resources.sample("seed-ready-before-capture", loaded=True, mx=mx)
++        assert model._residual_carry_enabled is True
++        assert carry_module._eligible(model,capture_seed[0],capture_ctx,False,()), "V65 capture did not qualify before cache mutation"
+         native.call("v33_begin"); armed = True
+-        with capture_norm_engagement():
++        with capture_norm_engagement(), capture_residual_engagement():
+             logits = model(capture_seed[0], capture_ctx)
+             captured = outputs(logits, state_of(capture_ctx), capture_seed[1], capture_seed[2]); assert len(captured) == 132
+             mx.eval(*captured); mx.synchronize()
+         native.call("v33_end_build"); armed = False
+         assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
++        expected_fusion_order=[name for i in range(64) for name in
++            (f"layers.{i}.post_attention_layernorm.weight",f"layers.{i+1}.input_layernorm.weight" if i<63 else "norm.weight")]
++        assert len(residual_capture_calls)==128 and [row["weight"] for row in residual_capture_calls]==expected_fusion_order
++        assert residual_module.residual_norm is candidate_residual
++        receipt["B_residual_carry_capture_engagement"]={"calls":128,"rows":residual_capture_calls,
++            "carry_ON_metadata":True,"counter_installed_only_for_B_capture":True,
++            "counter_removed_after_capture":residual_module.residual_norm is candidate_residual,
++            "A_calls":0,"A_zero_basis":"actual carryOFF in every baseline context + preserved source entryguard; A counter not installed"}
+         receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"normreuse_cache_ON_metadata":True,
+                                                "counter_removed_after_capture":GDN._decode_conv_norm_reuse_cache is candidate_norm}
+         for value,label in zip(captured,labels_out):
+@@ -374,13 +468,19 @@
+                 archived_step=archived_cases[name]["steps"][step-1]
+                 assert archived_step["step"]==step and archived_step["A_exact_L"]==length
+                 archived_outputs={r["label"]:r for r in archived_step["outputs"]}
+-                assert len(archived_outputs)==132
++                archived44_step=archived44_cases[name]["steps"][step-1]
++                assert archived44_step["step"]==step and archived44_step["A_exact_L"]==length
++                archived44_outputs={r["label"]:r for r in archived44_step["outputs"]}
++                assert len(archived_outputs)==len(archived44_outputs)==132
+                 for original,reference in zip(output_holders,expected):
+                     assert original.meta["shape"]==reference.meta["shape"] and original.meta["dtype"]==reference.meta["dtype"] and original.nbytes==reference.nbytes
+                     sig=metadata_finite(np,reference)
+                     archived=archived_outputs[reference.label]
+                     assert sig["shape"]==archived["shape"] and sig["dtype"]==archived["dtype"] and sig["nbytes"]==archived["bytes"]
+                     assert sig["sha256"]==archived["A_sha256"],("A differs from actualsavedV38 oldbaseline",name,step,reference.label)
++                    archived44=archived44_outputs[reference.label]
++                    assert sig["shape"]==archived44["shape"] and sig["dtype"]==archived44["dtype"] and sig["nbytes"]==archived44["bytes"]
++                    assert sig["sha256"]==archived44["A_sha256"],("A differs from actualsavedV44 oldbaseline",name,step,reference.label)
+                     native.call("v34_compare_output",original.address,original.nbytes,ctypes.c_void_p(reference.address))
+                     equal.append({"label":reference.label,"shape":sig["shape"],"dtype":sig["dtype"],
+                                   "bytes":sig["nbytes"],"finite":True,"strict_bytes_equal":True,"A_sha256":sig["sha256"]})
+@@ -397,13 +497,15 @@
+                 event={"step":step,"A_exact_L":length,"B_fixed_L":CAP,"A_token":a_token,"B_token":b_token,
+                        "outputs":equal,"originals_readonly":ro,"reference_input_digest_readonly":True,
+                        "native_prediction_copied_bytes":4,"seed_uploads_this_step":0,
+-                       "A_saved_V38_hash_checks":132}
++                       "A_saved_V38_hash_checks":132,"A_saved_V44_hash_checks":132,
++                       "A_carry_OFF_during_forward":baseline_calls[-1]["carry_during"] is False,
++                       "B_residual_counter_removed":residual_module.residual_norm is candidate_residual}
+                 if step%4==0:
+                     event["resources"]=resources.sample(name+f"-decode-{step:02d}",loaded=True,mx=mx)
+                 case["steps"].append(event);receipt["stage"]={"request":name,"step":step};save()
+                 print(json.dumps({"event":"NATIVE_DECODE_EQUAL","request":name,"step":step}),flush=True)
+-            assert ids_a==ids_b
+-            if canonical: assert ids_a==w["continuation_ids"] and len(case["steps"])==31
++            assert ids_a==ids_b and len(ids_a)==32 and len(case["steps"])==31
++            if canonical: assert ids_a==w["continuation_ids"]
+             case.update(status="PASS_REQUEST_STRICT",terminated_by_EOS=ids_a[-1] in eos,
+                         native=native.report("native-after-"+name))
+             assert_icb(case["native"],[len(r["steps"]) for r in receipt["requests"]])
+@@ -419,7 +521,12 @@
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+         assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
++        assert model._residual_carry_enabled is True and residual_module.residual_norm is candidate_residual
++        assert len(residual_capture_calls)==128
++        assert total_steps==93 and all(e["carry_during"] is False and e["carry_restored"] for e in baseline_calls)
+         receipt["A_baseline_temporary_bind_calls"]=len(baseline_calls)
++        receipt["A_baseline_context_events"]=baseline_calls
++        receipt["A_carry_OFF_all_reference_forwards"]=True
+         receipt["A_baseline_restore_final"]=True
+         receipt["actual_imported_sources"]={}
+         for name,mod in tuple(sys.modules.items()):
+@@ -430,8 +537,9 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+-                       source_pins_verified_final=True,gates_callable_count=48)
++        receipt.update(status="PASS_NATIVE_RESIDUAL_CARRY_CONV_NORMREUSE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
++                       strict_output_checks=total_steps*132,source_pins_verified_final=True,gates_callable_count=48,
++                       carry_on_final=True,hidden_norm_metadata_qualified=129,residual_fusion_calls_capture=128)
+         save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)

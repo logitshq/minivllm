@@ -1,0 +1,12 @@
+# V41 C1 runner adapter: source review and actual evidence audit PASS
+- Actual receipt306d56d5…3a49 matches;83 source pins and frozen adapterbf7bea08…fea0 / worker8822c32d…804d independently rehashed. No concrete forward/lifecycle blocker found within the declared fixed C1 scope.
+- Install requires idle runner, scheduler max_seqs1, no spec/ahead/functional helper and48 gates ON. Real DecodeBatch.layers_len API exists; only a256-capacity fresh greedy request enters native ownership.
+- Native active position/token matches Scheduler.update's +1 accounting. Returned prediction updates ordinary request metadata, while the actual next token/state stays in native GPU feedback; per-step run contains no seed write or CPU state feed.
+- Ordinary batch.layers intentionally retains the seed. max_seqs1 and no active fallback prevent stale cache extraction/rebuild; terminal LLMEngine.step calls wrapped drop immediately, clearing native active and ordinary batch/staging before next prefill.
+- Each request reset uploads131 exact ranges once; KV holder views isolate retained input handles. Native build checks132 outputs,48 S pairs/83 staged links and actual two ICB banks.
+- Actual queued base/reset/changed requests each produce32 prior-A IDs. All93 core native steps have132 final-output hashes equal the frozen V39 qualification:12,276 checks.
+- Full-request temperature.7/top_k1 fallback returns2 IDs with no native steps; max_tokens1 completes on prefill with no native steps. A later native request returns32 IDs and matches all132 final output hashes.
+- Total native steps124,requests/resets4,successful ICB executions124,banks[64,60]; total strict output hashes12,408=93×132+132. Fourth-request intermediate states were not all132-checked each step; its IDs and final132 were checked.
+- All131 seed arrays are checked readonly across original capture; retained131 inputs+132 captured outputs remain byte-identical at native request completion, including after fallback/re-entry. Ordinary terminal batch/staging/ahead cleanup passes.
+- Replayed18 saved raw resource samples:AC/thermal0/pressure1,minfree47%,swap MB/Swapouts growth0; Pageouts grew170. Owner65862 waited/reaped child65871 exit0; both external strict absence records pass.
+- Scope is one fixed-capacity C1 adapter/native graph, not C2/spec/live cache handoff or HTTP/performance/adoption qualification. Saved hash/readonly records were audited without native library load, MLX import or independent GPU recapture.

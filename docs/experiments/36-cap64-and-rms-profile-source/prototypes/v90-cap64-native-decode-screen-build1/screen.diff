@@ -1,0 +1,192 @@
+--- frozen44/screen.py
++++ v90/screen.py
+@@ -1,4 +1,4 @@
+-"""Root-only B-only native exploratory timing; inert never imports MLX."""
++"""Root-only V90 physicalCAP64 B-only raw-native exploratory timing; inert never imports MLX."""
+ import argparse
+ from contextlib import contextmanager
+ import ctypes
+@@ -17,9 +17,14 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
++LIB = P / "v89-native-capacity64-build1/libv89replay.dylib"
++QUAL = P / "v23-root-control-build1/fullmodel-v89native-attempt1/child-output/receipt.json"
++QUAL_SHA = "40428c19e12c69c80209885f58246b585d0c0659c3890ae2396f5f7310143e86"
++CAP = 64
++RELEASE = P / "v23-root-control-build1/fullmodel-v89native-attempt1/external-release.json"
++RELEASE_SHA = "ea7cd3efd15404a89829be54368becb54cd65e17327e16232adf401ff2a50fdc"
++OLD44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++OLD44_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+ 
+@@ -37,17 +42,28 @@
+ 
+ def source_check():
+     pins=json.loads((D/"source-pins.json").read_text())
+-    for path,digest in pins.items(): assert sha(path)==digest,("source changed",path)
+-    assert sha(QUAL)==QUAL_SHA
+-    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+-    assert q["native_steps"]==93 and len(q["requests"])==3
+-    assert q["A_saved_baseline_receipt_sha256"]=="c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
++    for path,digest in pins.items():assert sha(path)==digest,("source changed",path)
++    assert sha(QUAL)==QUAL_SHA and sha(RELEASE)==RELEASE_SHA and sha(OLD44)==OLD44_SHA
++    q=json.loads(QUAL.read_text());release=json.loads(RELEASE.read_text())
++    assert q["status"]=="PASS_V89_PHYSICAL_CAP64_CANONICAL256_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT"
++    assert q["native_steps"]==93 and q["strict_output_checks"]==12276 and q["canonical_KV_tail_zero_checks"]==2976
++    assert q["fixed_cap"]==64 and q["canonical_capacity"]==256 and q["allocation_bucket_restored_finally"]
++    assert q["same_parameter_identity_count"]==1349 and q["same_parameter_identity_preserved"]
++    assert release["status"]=="PASS_EXTERNAL_RELEASE" and release["GPU_released"] and release["tool_exit"]==0
++    assert all(x["returncode"]==1 and x["stdout"]==x["stderr"]=="" for x in release["strict_absence"])
++    prior_pins=json.loads((D/"qualification-source-pins.json").read_text())
++    assert q["source_pins"]==prior_pins and len(prior_pins)==71
++    assert all(pins[path]==digest for path,digest in prior_pins.items())
+     engagement=q["B_conv_normreuse_cache_capture_engagement"]
+     assert engagement["calls"]==engagement["distinct_GDN_objects"]==48 and engagement["counter_removed_after_capture"] is True
+     base,reset=q["requests"][:2]
+     assert base["name"]=="base" and reset["name"]=="reset-base" and len(base["steps"])==len(reset["steps"])==31
+-    expected=base["steps"][-1]["outputs"]; assert len(expected)==132
+-    assert all(x["strict_bytes_equal"] and x["finite"] for x in expected)
++    expected=base["steps"][-1]["outputs"];assert len(expected)==132
++    assert all(x["strict_bytes_equal"] and x["finite"] and x["canonical_B_sha256"]==x["A_sha256"] for x in expected)
++    assert sum(x["physical_tail_zero_checked"] for x in expected)==32
++    old=json.loads(OLD44.read_text())["requests"][0]["steps"][-1]["outputs"]
++    for x,y in zip(expected,old):
++        assert all(x[k]==y[k] for k in ("label","shape","dtype","bytes","A_sha256"))
+     assert [(x["label"],x["A_sha256"]) for x in expected]==[(x["label"],x["A_sha256"]) for x in reset["steps"][-1]["outputs"]]
+     assert q["native_library"]==str(LIB) and q["source_pins"][str(LIB)]==pins[str(LIB)]
+     manifest=json.loads((P/"v44-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
+@@ -68,9 +84,9 @@
+                           "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA}));return 0
+     assert args.out is not None and args.out.is_absolute();args.out.mkdir(exist_ok=False)
+     receipt={"status":"STARTED","stage":"beforeload","pid":os.getpid(),"model_loads":0,"source_pins":pins,
+-             "qualification_receipt":str(QUAL),"qualification_sha256":QUAL_SHA,"requests":[],
++             "qualification_receipt":str(QUAL),"qualification_sha256":QUAL_SHA,"qualification_release_sha256":RELEASE_SHA,"old44_A_gold_sha256":OLD44_SHA,"requests":[],
+              "scope":"B-only exploratory native timing; no HTTP/Pareto/fair A comparison/adoption",
+-             "schedule":["warm"]*3+["measure"]*3,"fixed_cap":256,"expected_decode_steps":31,
++             "schedule":["warm"]*3+["measure"]*3,"fixed_cap":CAP,"CPU_canonical_cap":256,"expected_decode_steps":31,
+              "timing_definition":{"t0":"immediately before fresh prefill",
+                                   "t1":"after prefill first-token/flat-seed eval, native reset and all131 seed uploads",
+                                   "t2":"after31 native decode steps and4B prediction observation per step",
+@@ -79,13 +95,14 @@
+     save=lambda:write(args.out/"receipt.json",receipt)
+     save();mx=None;resources=None;loaded=False;native=None;armed=False
+     parameter_holders=[];seed_holders=[];output_holders=[]
++    allocation_classes=None;original_allocation_steps=None
+     try:
+         assert os.environ.get("DYLD_INSERT_LIBRARIES")==str(LIB)
+         assert all(os.environ.get(k)==v for k,v in CONTROLS.items())
+         versions={n:importlib.metadata.version(n) for n in ("mlx","mlx-metal")}
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v44-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v89-cap64-native-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)
+         def sample(label):
+@@ -108,10 +125,17 @@
+         receipt["runtime"]={"versions":versions,"device":info,"cache_limit_bytes":2<<30,"environment":{**CONTROLS,"DYLD_INSERT_LIBRARIES":str(LIB)}}
+         sys.path.insert(0,str(ROOT))
+         from tutorial_code.miniengine.model.loader import load_model
+-        from tutorial_code.miniengine.cache import BatchKV,BatchState,DecodeBatch,make_cache
++        from tutorial_code.miniengine.cache import AttnCache,BatchKV,BatchState,DecodeBatch,make_cache
+         from tutorial_code.miniengine.context import ForwardContext
+         model,cfg=load_model(w["model_dir"],dtype=mx.bfloat16);loaded=True;receipt["model_loads"]=1;mx.synchronize()
+         receipt["afterload"]=sample("afterload-before-any-token")
++        initial_parameter_identity=[(name,id(v)) for name,v in tree_flatten(model.parameters())]
++        allocation_classes=(AttnCache,DecodeBatch);original_allocation_steps=(AttnCache.step,DecodeBatch.step)
++        assert original_allocation_steps==(256,256)
++        AttnCache.step=CAP;DecodeBatch.step=CAP
++        kv_state_indices={2*i+j for i,layer in enumerate(model.layers) if layer.is_attn for j in (0,1)}
++        kv_output_labels={f"state.{i}" for i in kv_state_indices};assert len(kv_output_labels)==32
++        receipt["allocation_bucket"]={"original":list(original_allocation_steps),"effective":[64,64],"before_any_token":True,"source_files_unchanged":True}
+         gdns=[l.linear_attn for l in model.layers if not l.is_attn];assert len(model.layers)==64 and len(gdns)==48
+         for g in gdns:
+             g.set_gates_compile(True)
+@@ -158,7 +182,7 @@
+         input_labels=("tokens","positions","lens")+tuple(f"state.{i}" for i in range(128))
+         output_labels=("logits",)+tuple(f"state.{i}" for i in range(128))+("prediction","next_positions","next_lens")
+         seed_holders=[shared(v,n) for v,n in zip(capture_seed,input_labels)]
+-        ctx=ForwardContext("decode",layers(capture_seed[3:]),positions=capture_seed[1],lens=capture_seed[2],max_len=256)
++        ctx=ForwardContext("decode",layers(capture_seed[3:]),positions=capture_seed[1],lens=capture_seed[2],max_len=CAP)
+         mx.eval(*(v for c,l in zip(ctx.caches,model.layers) for v in ((c.K,c.V) if l.is_attn else (c.conv,c.S))))
+         mx.synchronize();sample("before-capture")
+         native.call("v33_begin");armed=True
+@@ -189,15 +213,20 @@
+             pingpong_requested.append(layer_index)
+         assert len(pingpong_requested)==48
+         receipt["pingpong_layers_requested"]=pingpong_requested
+-        native.call("v34_seal_feedback",128,256)
++        native.call("v34_seal_feedback",128,CAP)
+         native.call("v38_enable_icb")
+         receipt["capture_native"]=native.report("native-sealed")
+         base.assert_icb(receipt["capture_native"],[])
+-        f=receipt["capture_native"]["feedback"];assert f["sealed"] and f["input_count"]==131 and f["output_count"]==132 and f["link_count"]==131
++        f=receipt["capture_native"]["feedback"];assert f["sealed"] and f["input_count"]==131 and f["output_count"]==132 and f["link_count"]==131 and f["capacity"]==CAP
+         pp=f["pingpong"];assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+         for h,expected in zip(output_holders,expected_final):
+-            assert h.label==expected["label"] and h.meta["shape"]==expected["shape"] and h.meta["dtype"]==expected["dtype"] and h.nbytes==expected["bytes"]
++            assert h.label==expected["label"] and h.meta["shape"]==expected["physical_shape"] and h.meta["dtype"]==expected["dtype"] and h.nbytes==expected["physical_bytes"]
++        assert all(h.meta["shape"]==[1,4,CAP,256] for i,h in enumerate(seed_holders[3:]) if i in kv_state_indices)
++        assert all(h.meta["shape"]==[1,4,CAP,256] for h in output_holders if h.label in kv_output_labels)
+         sample("after-capture");save()
++        seed_baselines=[h.raw() for h in seed_holders]
++        output_baselines=[h.raw() for h in output_holders]
++        receipt["captured263_original_owners_readonly_baselines"]={"seed_arrays":131,"captured_outputs":132,"physical_KV_capacity":CAP,"bytes":sum(map(len,seed_baselines))+sum(map(len,output_baselines)),"scope":"once-only backups of true64 owners outside all clocks"}
+         step_fn=native.lib.v34_replay_step;copy_fn=native.lib.v34_copy_output
+         timing_fn=native.lib.v36_timing_json;timing_fn.argtypes=[];timing_fn.restype=ctypes.c_char_p
+         prediction=ctypes.c_int32();prediction_ptr=ctypes.byref(prediction);prediction_address=output_holders[129].address
+@@ -226,9 +255,14 @@
+             for h,expected in zip(output_holders,expected_final):
+                 target=ctypes.create_string_buffer(h.nbytes)
+                 native.call("v34_copy_output",h.address,h.nbytes,ctypes.cast(target,ctypes.c_void_p))
+-                digest=hashlib.sha256(memoryview(target).cast("B")).hexdigest()
+-                assert digest==expected["A_sha256"],("final staged output differs from strict qualification",h.label)
+-                checks.append({"label":h.label,"bytes":h.nbytes,"sha256":digest,"qualified_A_sha256":expected["A_sha256"]})
++                physical=memoryview(target).cast("B")
++                canonical,canonical_shape=base.canonical_output(physical,h.meta["shape"],h.meta["dtype"],h.label in kv_output_labels,50)
++                digest=hashlib.sha256(canonical).hexdigest()
++                assert canonical_shape==expected["shape"] and len(canonical)==expected["bytes"]
++                assert digest==expected["A_sha256"],("canonical256 final output differs from actual89/old44A",h.label)
++                checks.append({"label":h.label,"shape":canonical_shape,"dtype":h.meta["dtype"],"bytes":len(canonical),"sha256":digest,"qualified_A_sha256":expected["A_sha256"],"physical_shape":h.meta["shape"],"physical_bytes":h.nbytes,"physical_sha256":hashlib.sha256(physical).hexdigest(),"physical_tail_zero_checked":h.label in kv_output_labels,"CPU_canonical_zero_fill":h.label in kv_output_labels})
++            assert len(checks)==132 and sum(v["physical_tail_zero_checked"] for v in checks)==32
++            owners_readonly={"capture_seed":base.originals_readonly(native,seed_holders,seed_baselines,f"request{index+1}.capture_seed"),"captured_reference":base.originals_readonly(native,output_holders,output_baselines,f"request{index+1}.captured_reference")}
+             report=native.report(f"native-request-{index+1}");f=report["feedback"]
+             base.assert_icb(report,[31]*(index+1))
+             assert f["request_steps"]==31 and f["total_steps"]==(index+1)*31 and f["resets"]==index+1
+@@ -247,7 +281,7 @@
+                  "prefill_seed_ready_ns":t1-t0,"decode31_ns":t2-t1,"whole32_ns":t2-t0,
+                  "decode_ns_per_step":(t2-t1)/31,"decode31_tokens_per_s":31e9/(t2-t1),"whole32_tokens_per_s":32e9/(t2-t0),
+                  "resources":{"before":before,"after":after},"final132_hash_checks":checks,
+-                 "final_hash_cpu_copy_bytes_outside_timing":sum(h.nbytes for h in output_holders),"native":report,
++                 "final_hash_cpu_copy_bytes_outside_timing":sum(h.nbytes for h in output_holders),"native":report,"captured263_original_owners_readonly":owners_readonly,
+                  "native_timing":{"raw_file":timing_path.name,"raw_sha256":sha(timing_path),
+                                   "current_request_records":31,"total_records":timing_data["record_count"],
+                                   "scope":"request-after native spans and whole CB GPU envelope; not exclusive kernels"}}
+@@ -266,7 +300,11 @@
+         for name,mod in tuple(sys.modules.items()):
+             if name.startswith("tutorial_code.miniengine") and getattr(mod,"__file__",None):
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+-        source_check();receipt.update(status="PASS_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
++        assert initial_parameter_identity==[(name,id(v)) for name,v in tree_flatten(model.parameters())] and len(initial_parameter_identity)==1349
++        receipt["same1349_parameter_owners_final"]=True
++        receipt["terminal_canonical_hash_checks"]=sum(len(r["final132_hash_checks"]) for r in receipt["requests"])
++        assert receipt["terminal_canonical_hash_checks"]==792
++        source_check();receipt.update(status="PASS_V90_PHYSICAL_CAP64_CANONICAL256_NATIVE_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+         if native is not None:
+@@ -274,6 +312,9 @@
+             except BaseException as report_error:receipt["native_report_error"]=repr(report_error)
+         save();raise
+     finally:
++        if allocation_classes is not None:
++            for klass,old_step in zip(allocation_classes,original_allocation_steps):klass.step=old_step
++            receipt["allocation_bucket_restored_finally"]=True
+         try:
+             if mx is not None:mx.synchronize()
+             if resources is not None:receipt["finally_resource"]=sample("finally-before-exit")

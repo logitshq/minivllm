@@ -1,0 +1,40 @@
+{
+  "status": "CPU_READY_FROZEN_DIAGNOSTIC_ONLY_PENDING_ROOT_EXECUTION",
+  "CPU_AST_source_metric_checks": "PASS",
+  "D_AST_exact_original44_including_compile_decorator": true,
+  "inert": "PASS_NO_MLX_NUMPY_OR_NATIVE_LOAD",
+  "GPU_used": false,
+  "pins": 31,
+  "source_pins_sha256": "82688d98037f40045749925ee4d8909dfcfe23c8044ab0806d40851f411fb500",
+  "numeric_sha256": "5b908182255e462f7e0b87d3c07969e4069aa3e7c48e31e7431646e04985b6a6",
+  "protocol_sha256": "f026535a1474fa27e4d77f4c51a2d4233ffcab08632f73f1e4e6a239ff4f56c3",
+  "explicit_reference_sha256": "3c1efbb1fab3cbaea769d6983c120b8a3ac5aca6d456bace49522dfe66f32d65",
+  "runtime_binary_identity_sha256": "b077118521b2353d868aa5c2b4422da2b82c93f304075b528e3b43e7216d55f4",
+  "cases": 27,
+  "outputs": 108,
+  "pairwise_comparisons": 162,
+  "input_originals_readonly": 15,
+  "memory_limit_bytes": 536870912,
+  "cache_limit_bytes": 67108864,
+  "model_loaded": false,
+  "timing_run": false,
+  "adopted": false,
+  "actual_output_relationships": "NOT_OBSERVED; A/B/C/D may differ without a qualification PASS claim",
+  "success_status": "DIAGNOSTIC_COMPLETED_NO_ADOPTION",
+  "required_env": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "forbidden_env": "DYLD_*,METAL_*,other MLX_*",
+  "argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v91-norm-rounding-diagnostic-build1/numeric.py",
+    "--execute-gpu",
+    "--out",
+    "ABSOLUTE_NEW_MARKER"
+  ],
+  "cleanup": "root external owned supervisor; worker owns no subprocess"
+}

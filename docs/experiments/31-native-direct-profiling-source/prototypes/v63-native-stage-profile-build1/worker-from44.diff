@@ -1,0 +1,180 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v44-native-fullqual-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v63-native-stage-profile-build1/fullqual.py
+@@ -1,5 +1,6 @@
+-"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only perturbed segmented Metal-stage diagnostic numerical qualification; inert never imports MLX."""
+ import argparse
++import base64
+ import ast
+ from contextlib import contextmanager
+ import ctypes
+@@ -19,7 +20,9 @@
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
++LIB = P / "v63-native-stage-profile-build1/libv63replay.dylib"
++ACTUAL44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++ACTUAL44_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CAP = 256
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -45,6 +48,8 @@
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+     assert str(library) in pins, "unbound native library"
+     assert sha(BASELINE_QUAL)==BASELINE_QUAL_SHA
++    assert sha(ACTUAL44) == ACTUAL44_SHA
++    assert json.loads(ACTUAL44.read_text())["status"] == "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     expected = json.loads((D / "candidate-manifest.json").read_text())["files"]
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+@@ -70,11 +75,14 @@
+                  "v34_link": [U, U, U], "v34_seal_feedback": [ctypes.c_uint32, ctypes.c_uint32],
+                  "v34_reset": [], "v34_write_input": [U, U, V], "v34_replay_step": [],
+                  "v34_compare_output": [U, U, V], "v34_copy_output": [U, U, V],
+-                 "v36_register_pingpong": [U, U, U], "v38_enable_icb": []}
++                 "v36_register_pingpong": [U, U, U], "v38_enable_icb": [],
++                 "v63_profile_step": [ctypes.c_uint32]}
+         for name, args in specs.items():
+             fn = getattr(self.lib, name); fn.argtypes = args; fn.restype = ctypes.c_int
+         self.lib.v34_report_json.argtypes = []
+         self.lib.v34_report_json.restype = S
++        self.lib.v63_profile_json.argtypes = []
++        self.lib.v63_profile_json.restype = S
+         self.lib.memcmp.argtypes = [V, V, ctypes.c_size_t]
+         self.lib.memcmp.restype = ctypes.c_int
+ 
+@@ -131,6 +139,53 @@
+     resources=icb["resources"]
+     assert resources["read_only_count"]>0 and resources["mutable_arena_count"]==1
+     assert resources["icb_read_declarations"]>0
++
++
++def category(name):
++    for fragment, label in (("nvfp4_qmv", "NVFP4-QMV"),
++                            ("gdn_norm_reuse_cached_state", "GDN-state"),
++                            ("gdn_activated_norm_reuse_prework", "GDN-prework"),
++                            ("gdn_conv_silu", "GDN-conv-SiLU"),
++                            ("explicit_norm", "norm"), ("sdpa_", "SDPA")):
++        if fragment in name: return label
++    return "other"
++
++
++def export_profile(native, out, name, sampled, request_index, reference_map):
++    raw = native.lib.v63_profile_json()
++    assert raw, "missing native profile JSON"
++    path = out / ("raw-profile-" + name + ".json")
++    path.write_bytes(raw)  # Preserve every row before validating; never filter invalid samples.
++    value = json.loads(raw)
++    assert value["sampled"] == sampled and value["request"] == request_index and value["step"] == 1
++    assert value["segments"] == len(value["rows"]) == 1625
++    assert value["CB_GPUStartTime_seconds"] > 0 and value["CB_GPUEndTime_seconds"] >= value["CB_GPUStartTime_seconds"]
++    pso_names = {r["function"] for r in native.report("native-profile-" + name)["feedback"]["icb"]["PSO_records"]}
++    ordinal_map, counts = [], {}
++    for j, row in enumerate(value["rows"]):
++        assert row["ICB_ordinal"] == j and row["PSO"] in pso_names and row["sampled"] == sampled
++        assert row["category"] == category(row["PSO"])
++        assert isinstance(row["bindings"], list) and len({b["index"] for b in row["bindings"]}) == len(row["bindings"])
++        for b in row["bindings"]:
++            assert b["index"] >= 0 and b["original_buffer"] >= 0 and b["offset"] >= 0
++            base64.b64decode(b["bytes_payload_base64"], validate=True)
++        if sampled:
++            assert row["valid"] is True, ("invalid sampled row; STOP, raw preserved", name, j, row)
++            assert row["raw_start"] > 0 and row["raw_end"] >= row["raw_start"]
++            assert row["raw_delta"] == row["raw_end"] - row["raw_start"]
++        else:
++            assert row["valid"] is False and row["raw_start"] == row["raw_end"] == 0 and row["raw_delta"] is None
++        ordinal_map.append({k: row[k] for k in ("ICB_ordinal", "PSO", "category", "bindings")})
++        counts[row["category"]] = counts.get(row["category"], 0) + 1
++    if reference_map is None: reference_map = ordinal_map
++    else: assert ordinal_map == reference_map, "actual captured command/binding map changed between requests"
++    return {"request": name, "step": 1, "sampled": bool(sampled),
++            "status": "SAMPLED_ALL1625_VALID" if sampled else "SEGMENTED_CONTROL_UNSAMPLED_ALL1625_PRESENT",
++            "segments": 1625, "valid_sampled_rows": 1625 if sampled else 0,
++            "invalid_sampled_rows": 0, "unsampled_control_rows": 0 if sampled else 1625,
++            "raw_file": path.name, "raw_sha256": sha(path), "category_command_counts": counts,
++            "ordinal_map_sha256": hashlib.sha256(json.dumps(ordinal_map, sort_keys=True).encode()).hexdigest(),
++            "scope": "perturbed stage encoder envelopes include added synchronization; not production exclusive kernel times/shares; raw counter units unconverted"}, reference_map
+ 
+ 
+ def main(argv=None):
+@@ -150,6 +205,8 @@
+     assert baseline_qualification["declared_prompts"]=={n:p for n,p,_ in cases}
+     archived_cases={r["name"]:r for r in baseline_qualification["requests"]}
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
++    actual44_cases = {r["name"]: r for r in json.loads(ACTUAL44.read_text())["requests"]}
++    assert all(len(r["steps"]) == 31 for r in actual44_cases.values())
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+@@ -163,7 +220,9 @@
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+                "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
+-               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
++               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA,
++               "actual44_gold_sha256": ACTUAL44_SHA, "profile_plan": {"base": 0, "reset-base": 1, "changed-prefill": 1},
++               "profiles": [], "profile_scope": "perturbed one original ICB command per encoder with chain fences; diagnostic only, not production shares/performance"}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+     parameter_holders, seed_holders, output_holders = [], [], []
+@@ -331,7 +390,7 @@
+         pp=fb["pingpong"]
+         assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+         resources.sample("after-capture-seal",loaded=True,mx=mx); save()
+-        total_steps = 0
++        total_steps = 0; profile_map = None; ordinary_steps = 0
+         for name,prompt,canonical in cases:
+             seed_values,first = (capture_seed,first) if name=="base" else setup(prompt)
+             mx.eval(*seed_values); mx.synchronize()
+@@ -369,7 +428,15 @@
+                 assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+                 assert before==[hashlib.sha256(h.bytes_view).hexdigest() for h in retained], "reference retained state changed"
+                 expected=[shared(v,n) for v,n in zip(expected_values,labels_out)]
+-                native.call("v34_replay_step"); total_steps+=1
++                profile = None
++                if step == 1:
++                    sampled = 0 if name == "base" else 1
++                    native.call("v63_profile_step", sampled)
++                    profile, profile_map = export_profile(native, args.out, name, sampled,
++                                                          len(receipt["requests"]), profile_map)
++                else:
++                    native.call("v34_replay_step"); ordinary_steps += 1
++                total_steps += 1
+                 equal=[]
+                 archived_step=archived_cases[name]["steps"][step-1]
+                 assert archived_step["step"]==step and archived_step["A_exact_L"]==length
+@@ -381,6 +448,9 @@
+                     archived=archived_outputs[reference.label]
+                     assert sig["shape"]==archived["shape"] and sig["dtype"]==archived["dtype"] and sig["nbytes"]==archived["bytes"]
+                     assert sig["sha256"]==archived["A_sha256"],("A differs from actualsavedV38 oldbaseline",name,step,reference.label)
++                    gold44 = actual44_cases[name]["steps"][step-1]["outputs"][len(equal)]
++                    assert gold44["label"] == reference.label and gold44["shape"] == sig["shape"] and gold44["dtype"] == sig["dtype"] and gold44["bytes"] == sig["nbytes"]
++                    assert gold44["A_sha256"] == sig["sha256"], ("A differs from actual44 gold", name, step, reference.label)
+                     native.call("v34_compare_output",original.address,original.nbytes,ctypes.c_void_p(reference.address))
+                     equal.append({"label":reference.label,"shape":sig["shape"],"dtype":sig["dtype"],
+                                   "bytes":sig["nbytes"],"finite":True,"strict_bytes_equal":True,"A_sha256":sig["sha256"]})
+@@ -400,6 +470,9 @@
+                        "A_saved_V38_hash_checks":132}
+                 if step%4==0:
+                     event["resources"]=resources.sample(name+f"-decode-{step:02d}",loaded=True,mx=mx)
++                if profile is not None:
++                    profile["strict_output_checks"] = len(equal)
++                    receipt["profiles"].append(profile); event["profile"] = profile
+                 case["steps"].append(event);receipt["stage"]={"request":name,"step":step};save()
+                 print(json.dumps({"event":"NATIVE_DECODE_EQUAL","request":name,"step":step}),flush=True)
+             assert ids_a==ids_b
+@@ -429,8 +502,12 @@
+         assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(model.parameters())]
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
++        assert total_steps == 93 and ordinary_steps == 90 and len(receipt["profiles"]) == 3
++        assert all(len(r["steps"]) == 31 and r["A_ids"] == actual44_cases[r["name"]]["A_ids"] for r in receipt["requests"])
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
++        receipt.update(status="PASS_V63_PERTURBED_STAGE_PROFILE_93STEP_12276STRICT",stage="complete",native_steps=total_steps,
++                       strict_output_checks=12276, profiled_steps=3, ordinary_steps=ordinary_steps,
++                       sampled_profile_steps=2, unsampled_segmented_control_steps=1, invalid_sampled_rows=0,
+                        source_pins_verified_final=True,gates_callable_count=48)
+         save();return 0
+     except BaseException as error:

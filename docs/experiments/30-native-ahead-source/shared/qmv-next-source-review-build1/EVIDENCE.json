@@ -1,0 +1,394 @@
+{
+  "scope": "CPU source/header/raw replay only; no MLX/GPU; source hypotheses not performance results",
+  "current_checkpoint_header_evidence": [
+    {
+      "file": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00001-of-00003.safetensors",
+      "header_bytes": 86450,
+      "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7"
+    },
+    {
+      "file": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00002-of-00003.safetensors",
+      "header_bytes": 68557,
+      "header_sha256": "8f93becf8c7619733122018894d054a4c3e7decf382ce8cf4df86237ed2988ab"
+    },
+    {
+      "file": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00003-of-00003.safetensors",
+      "header_bytes": 58133,
+      "header_sha256": "910ede76e14d0da40deb3bca75126c4a4989641e2f664c927adf58473e2cc249"
+    }
+  ],
+  "current_projection_groups": {
+    "in_proj_a": {
+      "projections": 48,
+      "weight_scale_bytes": 6635520,
+      "N_K": [
+        [
+          48,
+          5120
+        ]
+      ]
+    },
+    "in_proj_b": {
+      "projections": 48,
+      "weight_scale_bytes": 6635520,
+      "N_K": [
+        [
+          48,
+          5120
+        ]
+      ]
+    },
+    "in_proj_qkv": {
+      "projections": 48,
+      "weight_scale_bytes": 1415577600,
+      "N_K": [
+        [
+          10240,
+          5120
+        ]
+      ]
+    },
+    "in_proj_z": {
+      "projections": 48,
+      "weight_scale_bytes": 849346560,
+      "N_K": [
+        [
+          6144,
+          5120
+        ]
+      ]
+    },
+    "out_proj": {
+      "projections": 48,
+      "weight_scale_bytes": 849346560,
+      "N_K": [
+        [
+          5120,
+          6144
+        ]
+      ]
+    },
+    "down_proj": {
+      "projections": 64,
+      "weight_scale_bytes": 3208642560,
+      "N_K": [
+        [
+          5120,
+          17408
+        ]
+      ]
+    },
+    "gate_proj": {
+      "projections": 64,
+      "weight_scale_bytes": 3208642560,
+      "N_K": [
+        [
+          17408,
+          5120
+        ]
+      ]
+    },
+    "up_proj": {
+      "projections": 64,
+      "weight_scale_bytes": 3208642560,
+      "N_K": [
+        [
+          17408,
+          5120
+        ]
+      ]
+    },
+    "k_proj": {
+      "projections": 16,
+      "weight_scale_bytes": 47185920,
+      "N_K": [
+        [
+          1024,
+          5120
+        ]
+      ]
+    },
+    "o_proj": {
+      "projections": 16,
+      "weight_scale_bytes": 283115520,
+      "N_K": [
+        [
+          5120,
+          6144
+        ]
+      ]
+    },
+    "q_proj": {
+      "projections": 16,
+      "weight_scale_bytes": 566231040,
+      "N_K": [
+        [
+          12288,
+          5120
+        ]
+      ]
+    },
+    "v_proj": {
+      "projections": 16,
+      "weight_scale_bytes": 47185920,
+      "N_K": [
+        [
+          1024,
+          5120
+        ]
+      ]
+    },
+    "lm_head": {
+      "projections": 1,
+      "weight_scale_bytes": 715161600,
+      "N_K": [
+        [
+          248320,
+          5120
+        ]
+      ]
+    }
+  },
+  "quantized_linear_stream_bytes_per_decode_excluding_embedding": 14412349440,
+  "gate_up_bytes": 6417285120,
+  "all_MLP_bytes": 9625927680,
+  "old_experiments": [
+    {
+      "name": "rowblock-v26-attempt1",
+      "result_sha256": "e56ec5ca9b672e148631af963258d8d4f638925f4690de71c2136ad629e36ea3",
+      "pairs_sha256": "b6c47e7d1da2e8a4d73b942952d59bf0e5df004c534f0a60453ffe6ebed87c92",
+      "status": "CONTROL_DRIFT_STOP",
+      "control_passed": false,
+      "median_reduction": 0.0012490831264119207,
+      "median_ns": {
+        "A": 223438.1103515625,
+        "B": 223159.017578125
+      },
+      "wins": 6,
+      "measured_N_K": [
+        17408,
+        5120
+      ],
+      "paired_gate_up": false,
+      "pairs": [
+        {
+          "order": "AB",
+          "A_ns": 223083.087890625,
+          "B_ns": 222902.751953125,
+          "reduction": 0.0008083801385626588
+        },
+        {
+          "order": "BA",
+          "A_ns": 228511.150390625,
+          "B_ns": 224092.365234375,
+          "reduction": 0.019337284630077667
+        },
+        {
+          "order": "AB",
+          "A_ns": 223793.1328125,
+          "B_ns": 223415.283203125,
+          "reduction": 0.0016883878634987859
+        },
+        {
+          "order": "BA",
+          "A_ns": 246656.087890625,
+          "B_ns": 225024.494140625,
+          "reduction": 0.08769941149635085
+        },
+        {
+          "order": "AB",
+          "A_ns": 217233.88671875,
+          "B_ns": 209113.525390625,
+          "reduction": 0.037380730284673924
+        },
+        {
+          "order": "BA",
+          "A_ns": 212046.875,
+          "B_ns": 204422.607421875,
+          "reduction": 0.03595557622872303
+        }
+      ]
+    },
+    {
+      "name": "gateup-v28-build2-attempt1",
+      "result_sha256": "705e1c53e28dd73407134d32f54180f63839ab2ae657202acb414d82dfde1222",
+      "pairs_sha256": "cd44f161b82d459086367078760f47d2ace209071802d78e03319ff6d5f8503a",
+      "status": "CONTROL_DRIFT_STOP",
+      "control_passed": false,
+      "median_reduction": -0.007683995114282416,
+      "median_ns": {
+        "A": 348746.9072265625,
+        "B": 351426.6767578125
+      },
+      "wins": 1,
+      "measured_N_K": [
+        17408,
+        5120
+      ],
+      "paired_gate_up": true,
+      "pairs": [
+        {
+          "order": "AB",
+          "A_ns": 349652.994140625,
+          "B_ns": 350776.53125,
+          "reduction": -0.003213291829908149
+        },
+        {
+          "order": "BA",
+          "A_ns": 457382.162109375,
+          "B_ns": 324970.376953125,
+          "reduction": 0.28949923308243497
+        },
+        {
+          "order": "AB",
+          "A_ns": 349965.16796875,
+          "B_ns": 352343.912109375,
+          "reduction": -0.006797088277189278
+        },
+        {
+          "order": "BA",
+          "A_ns": 325470.62109375,
+          "B_ns": 330295.818359375,
+          "reduction": -0.014825292831069703
+        },
+        {
+          "order": "AB",
+          "A_ns": 318320.23046875,
+          "B_ns": 352076.822265625,
+          "reduction": -0.10604601456579088
+        },
+        {
+          "order": "BA",
+          "A_ns": 347840.8203125,
+          "B_ns": 352715.087890625,
+          "reduction": -0.014012925722018288
+        }
+      ]
+    },
+    {
+      "name": "factorfold-v31-attempt1",
+      "result_sha256": "fbe200ac378976f36ea6f2f1864e456318d07eb562dc70221a2e1fac66e3a10b",
+      "pairs_sha256": "aa1899cb55b803df16f407f8369c50f12bbd864873adb54247647ea74ad9d80a",
+      "status": "CONTROL_DRIFT_STOP",
+      "control_passed": false,
+      "median_reduction": -0.010541934244812978,
+      "median_ns": {
+        "A": 205254.3935546875,
+        "B": 207418.171875
+      },
+      "wins": 1,
+      "measured_N_K": [
+        17408,
+        5120
+      ],
+      "paired_gate_up": false,
+      "pairs": [
+        {
+          "order": "AB",
+          "A_ns": 204129.4765625,
+          "B_ns": 207346.109375,
+          "reduction": -0.015757806597398227
+        },
+        {
+          "order": "BA",
+          "A_ns": 204005.533203125,
+          "B_ns": 209865.15234375,
+          "reduction": -0.028722844173009188
+        },
+        {
+          "order": "AB",
+          "A_ns": 239994.791015625,
+          "B_ns": 240814.779296875,
+          "reduction": -0.003416691994771792
+        },
+        {
+          "order": "BA",
+          "A_ns": 205804.443359375,
+          "B_ns": 204168.9453125,
+          "reduction": 0.007946854888934984
+        },
+        {
+          "order": "AB",
+          "A_ns": 205513.01953125,
+          "B_ns": 205819.173828125,
+          "reduction": -0.0014897075502724455
+        },
+        {
+          "order": "BA",
+          "A_ns": 204995.767578125,
+          "B_ns": 207490.234375,
+          "reduction": -0.012168381944394735
+        }
+      ]
+    },
+    {
+      "name": "compiled-factorfold-v32-attempt1",
+      "result_sha256": "6ccb43b6db4fcf8abbb296bd49ec31d3e909d65378e7440daf18307d8ac61446",
+      "pairs_sha256": "ca4d2c7e5df2ca47b4c71ee701bbd24772ec1be5b2786035d0eb666d5dcf04bd",
+      "status": "STOP-MICRO-GATE",
+      "control_passed": true,
+      "median_reduction": -0.030616865856897046,
+      "median_ns": {
+        "A": 205267.17138671875,
+        "B": 211551.80883789062
+      },
+      "wins": 4,
+      "measured_N_K": [
+        17408,
+        5120
+      ],
+      "paired_gate_up": false,
+      "pairs": [
+        {
+          "order": "AB",
+          "A_ns": 234207.3974609375,
+          "B_ns": 217847.4326171875,
+          "reduction": 0.06985246845791282
+        },
+        {
+          "order": "BA",
+          "A_ns": 204560.302734375,
+          "B_ns": 204555.23681640625,
+          "reduction": 2.4764912356034507e-05
+        },
+        {
+          "order": "AB",
+          "A_ns": 204807.8818359375,
+          "B_ns": 203128.23486328125,
+          "reduction": 0.00820108561057109
+        },
+        {
+          "order": "BA",
+          "A_ns": 205726.4609375,
+          "B_ns": 234364.990234375,
+          "reduction": -0.1392068339987409
+        },
+        {
+          "order": "AB",
+          "A_ns": 204471.822265625,
+          "B_ns": 205256.18505859375,
+          "reduction": -0.003836043442454473
+        },
+        {
+          "order": "BA",
+          "A_ns": 238120.60546875,
+          "B_ns": 232645.162109375,
+          "reduction": 0.022994412216432836
+        }
+      ]
+    }
+  ],
+  "direct_half_bit_contract": {
+    "all16_codes_including_signedzero": true,
+    "packed256_pairs": true,
+    "does_not_prove_GPU_QMV": true
+  },
+  "sources": {
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp4.h": "e3159945d7e5ae24f7a1ca9c4875b2a5d15cfb6952405df24a0df1bb2622a93a",
+    "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/gemv_tuning.py": "c396d22d81ea1b186e74994244d67eaa14c8472e33fa2ba57ae8bccc6651894e",
+    "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/formats/nvfp4.py": "5f4a6954a4ec1c9b45e6b9f9b15f152e6a9ea37a1addbb51ed32cce638126559",
+    "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_T.metal": "aacc9ddf17fae15bd124330d034e76ebf996967ce96309c146e24671e5128ae8",
+    "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_nvfp4_rows.metal": "850769ed91ee1d9222e58eba23a12b80f3445929855a4f351361733e0bbf26c0"
+  }
+}

@@ -1,0 +1,107 @@
+--- qualified44/helper.py
++++ V60/helper.py
+@@ -1,5 +1,5 @@
+ """V44 already-activated BF16 norm-reuse + held32 candidate; GPU unqualified.
+-V40 state body/name, serial norm, header and safe compile policy stay exact.
++V60 exp48: same scalar metal::exp/safe computed once per head in existing prework; no extra production dispatch.
+ Prework only loads already-activated BF16 values; it never applies SiLU.
+ Import is inert; no engine connection or performance claim.
+ """
+@@ -74,6 +74,7 @@
+         k_ready[h * 128 + lane] = kh[lane];
+     } else {
+         uint h = group - 16;
++        if (lane == 0) exp_ready[h] = metal::exp(g[h]);
+         v_ready[h * 128 + lane] = float(activated[4096 + h * 128 + lane]);
+     }
+ '''
+@@ -96,7 +97,7 @@
+     threadgroup float red[SPLIT * VALUE_TILE];
+     float qs = scales[(h / 3) * 2];
+     float ks = scales[(h / 3) * 2 + 1];
+-    float ex = metal::exp(g[bh]);
++    float ex = exp_ready[bh];
+     float be = beta[bh];
+     float kv = 0.0f;
+     float held[32];
+@@ -147,6 +148,7 @@
+ _prework_kernel = None
+ _state_kernel = None
+ _norm_probe_kernel = None
++_exp_probe_kernel = None
+ 
+ 
+ def _runtime():
+@@ -173,29 +175,29 @@
+     )
+ 
+ 
+-def _prepare(activated, mx):
++def _prepare(activated, g, mx):
+     global _prework_kernel
+     if _prework_kernel is None:
+         _prework_kernel = _make_kernel(
+-            mx, "gdn_activated_norm_reuse_prework_v44_build1", ["activated"],
+-            ["q_ready", "k_ready", "v_ready", "scales"], _PREWORK_SOURCE,
++            mx, "gdn_activated_exp48_prework_v60_build1", ["activated", "g"],
++            ["q_ready", "k_ready", "v_ready", "scales", "exp_ready"], _PREWORK_SOURCE,
+         )
+     return tuple(_prework_kernel(
+-        inputs=[activated], grid=(64 * 128, 1, 1), threadgroup=(128, 1, 1),
+-        output_shapes=[(1, 16, 128), (1, 16, 128), (1, 48, 128), (1, 16, 2)],
+-        output_dtypes=[mx.float32] * 4,
++        inputs=[activated, g], grid=(64 * 128, 1, 1), threadgroup=(128, 1, 1),
++        output_shapes=[(1, 16, 128), (1, 16, 128), (1, 48, 128), (1, 16, 2), (1, 48)],
++        output_dtypes=[mx.float32] * 5,
+     ))
+ 
+ 
+-def _state(q_ready, k_ready, v_ready, scales, g, beta, S, mx):
++def _state(q_ready, k_ready, v_ready, scales, exp_ready, beta, S, mx):
+     global _state_kernel
+     if _state_kernel is None:
+         _state_kernel = _make_kernel(
+-            mx, "gdn_norm_reuse_cached_state_v40_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
++            mx, "gdn_exp48_norm_reuse_cached_state_v60_build1", ["q_ready", "k_ready", "v", "scales", "exp_ready", "beta", "S"],
+             ["o", "S_new"], _STATE_SOURCE.replace("SPLIT", str(SPLIT)).replace("VALUE_TILE", str(VALUE_TILE)),
+         )
+     return tuple(_state_kernel(
+-        inputs=[q_ready, k_ready, v_ready, scales, g, beta, S],
++        inputs=[q_ready, k_ready, v_ready, scales, exp_ready, beta, S],
+         grid=(128, 48 * SPLIT, 1), threadgroup=(VALUE_TILE, SPLIT, 1),
+         output_shapes=[(1, 48, 128), (1, 48, 128, 128)],
+         output_dtypes=[mx.float32, mx.float32],
+@@ -207,8 +209,8 @@
+     _validate_shapes(activated, g, beta, S)
+     mx = _runtime()
+     _validate_dtypes(activated, g, beta, S, mx)
+-    q_ready, k_ready, v_ready, scales = _prepare(activated, mx)
+-    return _state(q_ready, k_ready, v_ready, scales, g, beta, S, mx)
++    q_ready, k_ready, v_ready, scales, exp_ready = _prepare(activated, g, mx)
++    return _state(q_ready, k_ready, v_ready, scales, exp_ready, beta, S, mx)
+ 
+ 
+ def _norm_probe(q_ready, k_ready, mx):
+@@ -225,3 +227,22 @@
+         inputs=[q_ready, k_ready], grid=(16, 1, 1), threadgroup=(16, 1, 1),
+         output_shapes=[(1, 16, 4)], output_dtypes=[mx.float32],
+     ))[0]
++
++
++_EXP_REFERENCE_PROBE_SOURCE = r"""
++    uint dv_local = thread_position_in_threadgroup.x;
++    uint dv = threadgroup_position_in_grid.x * 32 + dv_local;
++    uint sp = thread_position_in_threadgroup.y;
++    uint bh = threadgroup_position_in_grid.y;
++    float ex = metal::exp(g[bh]);
++    original_exp[((size_t)bh * 128 + dv) * 4 + sp] = ex;
++"""
++def _exp_reference_probe(g, mx):
++    """Qualification-only old expression with original state thread geometry, all512 replicas/head."""
++    global _exp_probe_kernel
++    if g.shape != (1, 48) or g.dtype != mx.float32:
++        raise ValueError("exp probe requires FP32 g[1,48]")
++    if _exp_probe_kernel is None:
++        _exp_probe_kernel = _make_kernel(mx, "v60_old_state_exp_reference_probe", ["g"], ["original_exp"], _EXP_REFERENCE_PROBE_SOURCE)
++    return _exp_probe_kernel(inputs=[g], grid=(128, 192, 1), threadgroup=(32, 4, 1),
++                             output_shapes=[(1, 48, 128, 4)], output_dtypes=[mx.float32])[0]

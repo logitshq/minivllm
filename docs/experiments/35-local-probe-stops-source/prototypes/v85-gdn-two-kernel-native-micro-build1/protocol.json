@@ -1,0 +1,69 @@
+{
+  "requires_prior_actual_V81_numeric_receipt_and_SHA": true,
+  "prime_groups": 128,
+  "timed_groups": 1024,
+  "dispatches_per_timed_block": 30720,
+  "schedule": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "B",
+      "B"
+    ],
+    [
+      "A",
+      "B"
+    ],
+    [
+      "B",
+      "A"
+    ],
+    [
+      "A",
+      "B"
+    ],
+    [
+      "B",
+      "A"
+    ],
+    [
+      "A",
+      "B"
+    ],
+    [
+      "B",
+      "A"
+    ],
+    [
+      "A",
+      "A"
+    ],
+    [
+      "B",
+      "B"
+    ]
+  ],
+  "AB_BA_pairs": 6,
+  "AA_BB_control_pairs": 4,
+  "minimum_arm_median_reduction": 0.05,
+  "minimum_pair_wins": 5,
+  "each_control_ratio": [
+    0.95,
+    1.05
+  ],
+  "per_arm_control_median_ratio": [
+    0.98,
+    1.02
+  ],
+  "wall_scope": "oneffi native encode/commit/wait for30dispatches\u00d7groups; hashes/resources outside clocks",
+  "performance_entrypoint_enabled": true,
+  "gate_prior_receipt": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v81num-attempt1/child-output/receipt.json",
+  "gate_prior_receipt_SHA": "bd8e1b359462f210a5f539f0922a571b4f101eba730748b3a838b771f0f42f26",
+  "numeric_repeated_in_same_process_before_timing": true,
+  "timed_terminal_checks": 600,
+  "terminal_checks_scope": "only final15banks\u00d7o/S for each of20timed blocks; not every dispatch",
+  "native_math_and_banks_changed": false,
+  "original_pins_subset_required": 56
+}

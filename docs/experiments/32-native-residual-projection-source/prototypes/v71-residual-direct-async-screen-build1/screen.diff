@@ -1,0 +1,153 @@
+--- frozen67/screen.py
++++ v71/screen.py
+@@ -4,6 +4,7 @@
+ import hashlib
+ import importlib.util
+ import json
++import math
+ import os
+ from pathlib import Path
+ import statistics
+@@ -14,28 +15,34 @@
+ sys.dont_write_bytecode=True
+ D=Path(__file__).resolve().parent
+ P=D.parent
+-ROOT=P/'candidate-v44-conv-normreuse-build1-root'
++ROOT=P/'candidate-v65-residual-carry-build1-root'
+ LIB=P/'v62-native-direct-pipeline-build2/libv62replay.dylib'
+ LIB_SHA='35aa6e0d0297c12d3978caf2e70a7082ecbbf60b85e1525133d4b8b0effdc83f'
+ ADAPTER=P/'v64-native-direct-async-runner-build1/native_runner.py'
+ ADAPTER_SHA='acd59a4d817cb73fba07f6757b3a170a057e3c78ea707710624dda0a65e4bc07'
+ GOLD=P/'v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json'
+ GOLD_SHA='1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d'
+-QUALS={
+- 'diagnostic':{'receipt':P/'v23-root-control-build1/fullmodel-v64diag-attempt1/child-output/receipt.json','sha256':'86930ab760f361ae38204d3c79f4c101819289054720528765f62954e256276a','release_sha256':'84940faa8d396700ac867cc2f89ce862d42c866f46f6f4368c5ae25bb7f1c690','checks':12540,'status':'PASS_DIRECT_ASYNC_RUNNER_DIAGNOSTIC_12540_OUTPUT_HASHES'},
+- 'production':{'receipt':P/'v23-root-control-build1/fullmodel-v64prod-attempt1/child-output/receipt.json','sha256':'7bb39bf79ac1f31c66a2cbb25bcbcd3e480e3be9737b3c2ffc1f886afe82bb63','release_sha256':'ed9e3c4682957ddb6d9ed0a70e33bced52061359f5ecce0d9171ee166c2e60a5','checks':660,'status':'PASS_DIRECT_ASYNC_RUNNER_PRODUCTION_161_IDS_660_FINAL_OUTPUT_HASHES'},
+-}
++QUALS=json.loads((D/'qualifications.json').read_text())
++for binding in QUALS.values():
++ if binding['receipt'] is not None:binding['receipt']=Path(binding['receipt'])
+ CONTROLS={'MLX_MAX_OPS_PER_BUFFER':'50','MLX_MAX_MB_PER_BUFFER':'50','MLX_BFS_MAX_WIDTH':'20','MLX_METAL_FAST_SYNCH':'0'}
+ sha=lambda f:hashlib.sha256(Path(f).read_bytes()).hexdigest()
+ def write(path,value):Path(path).write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
+ def module(name,path):
+  spec=importlib.util.spec_from_file_location(name,path);value=importlib.util.module_from_spec(spec);sys.modules[name]=value;spec.loader.exec_module(value);return value
+ 
+-def source_check():
+- pins=json.loads((D/'source-pins.json').read_text())
++def source_check(*,allow_pending=False):
++ pin_path=D/'source-pins.json'
++ if not pin_path.exists():
++  assert allow_pending,'final source pins/dual-mode V70 qualification not ready'
++  pin_path=D/'source-pins.pending.json'
++ pins=json.loads(pin_path.read_text())
+  for path,digest in pins.items():assert sha(path)==digest,path
+  assert sha(LIB)==LIB_SHA and sha(ADAPTER)==ADAPTER_SHA and sha(GOLD)==GOLD_SHA
+  for mode,b in QUALS.items():
++  if b['binding_status']!='PASS_BOUND':
++   assert allow_pending,'V70 dual-mode qualification pending: performance forbidden'
++   continue
+   assert sha(b['receipt'])==b['sha256'];r=json.loads(b['receipt'].read_text());release=b['receipt'].parent.parent/'external-release.json'
+   assert sha(release)==b['release_sha256'];x=json.loads(release.read_text())
+   assert x['status']=='PASS_EXTERNAL_RELEASE' and x['GPU_released'] and x['tool_exit']==0 and all(v['returncode']==1 and v['stdout']==v['stderr']=='' for v in x['strict_absence'])
+@@ -44,17 +51,20 @@
+   assert r['build_input131_readonly'] and r['captured_originals_readonly']
+   assert r['native']['feedback']['icb']['bank_executions']==[84,78]
+   assert r['source_pins'][str(LIB)]==pins[str(LIB)] and r['adapter_sha256']==ADAPTER_SHA
+- package=ROOT/'tutorial_code/miniengine';manifest=json.loads((P/'v44-native-fullqual-build1/candidate-manifest.json').read_text())['files'];expected={k.removeprefix('tutorial_code/miniengine/'):v for k,v in manifest.items()}
+- assert {str(f.relative_to(package)):sha(f) for f in package.rglob('*.py')}==expected and len(expected)==27
++  assert r['hidden_norm_metadata_qualified']==129 and r['same_parameter_identity_count']==1349 and r['same_parameter_identity_preserved']
++  assert r['B_capture_engagement']['residual_calls']==128 and r['B_capture_engagement']['counter_removed_after_build']
++  assert r['V65_capture_hooks_removed_final'] and r['carry_on'] is True
++ package=ROOT/'tutorial_code/miniengine';manifest=json.loads((P/'v65-residual-carry-fullqual-build1/candidate-manifest.json').read_text())['files'];expected={k.removeprefix('tutorial_code/miniengine/'):v for k,v in manifest.items()}
++ assert {str(f.relative_to(package)):sha(f) for f in package.rglob('*.py')}==expected and len(expected)==29
+  gold=json.loads(GOLD.read_text());last=gold['requests'][0]['steps'][-1]['outputs'];assert len(last)==132 and all(v['strict_bytes_equal'] and v['finite'] for v in last)
+  return pins,last
+ 
+ def main():
+  ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--out',type=Path);ap.add_argument('--tokens',type=int,default=32);ap.add_argument('--inert',action='store_true');args=ap.parse_args()
+- pins,gold=source_check();w=json.loads((P/'workload.json').read_text());assert args.tokens==32 and len(w['prompt_ids'])==19 and len(w['continuation_ids'])==32
++ pins,gold=source_check(allow_pending=args.inert);w=json.loads((P/'workload.json').read_text());assert args.tokens==32 and len(w['prompt_ids'])==19 and len(w['continuation_ids'])==32
+  if args.inert:
+   assert not any(n=='mlx' or n.startswith(('mlx.','numpy')) for n in sys.modules)
+-  print(json.dumps({'status':'PASS_CPU_INERT','pins':len(pins),'warm':3,'measure':3,'decode_steps_per_request':31,'expected_completed':186,'expected_resets':6,'expected_banks':[96,90],'GPU_used':False}));return 0
++  print(json.dumps({'status':'PASS_CPU_INERT','pins':len(pins),'warm':3,'measure':3,'decode_steps_per_request':31,'expected_completed':186,'expected_resets':6,'expected_banks':[96,90],'GPU_used':False,'qualifications_pending':[m for m,b in QUALS.items() if b['binding_status']!='PASS_BOUND'],'candidate_source_count':29}));return 0
+  assert args.out is not None and args.out.is_absolute();args.out.mkdir()
+  r={'status':'STARTED','stage':'beforeload','pid':os.getpid(),'model_loads':0,'source_pins':pins,'requests':[],
+     'scope':'production B-only engine exploratory timing; no HTTP/Pareto/paired comparison/adoption claim',
+@@ -86,19 +96,61 @@
+   from tutorial_code.miniengine.sampling_params import SamplingParams
+   e=LLMEngine(w['model_dir'],max_seqs=1,max_len=2048,max_batched_tokens=512,dtype=mx.bfloat16,cache_limit_gb=2)
+   loaded=True;r['model_loads']=1;mx.synchronize();r['afterload']=sample('afterload-before-any-token')
+-  r['stage']='ready';write(args.out/'model-ready.json',{'pid':os.getpid(),'model_loads':1,'token_executed':False});save();print(json.dumps({'event':'MODEL_READY','pid':os.getpid()}),flush=True)
++  from mlx.utils import tree_flatten
++  from tutorial_code.miniengine.model.layers import RMSNorm
++  live_parameters=tree_flatten(e.model.parameters());initial_parameter_identity=[(name,id(value)) for name,value in live_parameters]
++  assert len(live_parameters)==1349 and len(set(name for name,_ in live_parameters))==1349 and e.model._residual_carry_enabled is False
++  parameter_by_name=dict(live_parameters)
++  hidden_norms=[(f'layers.{i}.{key}',getattr(layer,key)) for i,layer in enumerate(e.model.layers) for key in ('input_layernorm','post_attention_layernorm')]+[('norm',e.model.norm)]
++  hidden_metadata=[]
++  for label,norm in hidden_norms:
++   weight=getattr(norm,'weight',None);eps=getattr(norm,'eps',None)
++   row={'name':label,'shape':list(getattr(weight,'shape',())),'dtype':str(getattr(weight,'dtype',None)),
++        'eps':eps if type(eps) is float and math.isfinite(eps) else None,'eps_repr':repr(eps),'zero_centered':getattr(norm,'zero_centered',None),
++        'parameter_object_identity_match':parameter_by_name.get(label+'.weight') is weight}
++   row['fusion_eligible']=(type(norm) is RMSNorm and weight is not None and weight.shape==(5120,) and weight.dtype in (mx.bfloat16,mx.float32)
++       and norm.zero_centered is True and type(eps) is float and math.isfinite(eps) and 0.0<eps<1.0 and row['parameter_object_identity_match'])
++   hidden_metadata.append(row)
++  r['hidden_norm_metadata_before_any_token']={'count':len(hidden_metadata),'rows':hidden_metadata,'token_executed':False,'array_parameters':1349}
++  write(args.out/'hidden-norm-metadata-before-any-token.json',r['hidden_norm_metadata_before_any_token']);save()
++  assert len(hidden_metadata)==129 and all(row['fusion_eligible'] for row in hidden_metadata)
++  e.model.set_residual_carry(True)
+   gdns=[l.linear_attn for l in e.model.layers if not l.is_attn];assert len(gdns)==48
+   for g in gdns:g.set_gates_compile(True);g.set_conv_norm_reuse_cache(True)
+   assert getattr(e.runner,'_functional_decode_helper',None) is None
++  assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(e.model.parameters())]
++  r['carry_on']=True;r['hidden_norm_metadata_qualified']=129
++  r['stage']='ready';write(args.out/'model-ready.json',{'pid':os.getpid(),'model_loads':1,'token_executed':False});save();print(json.dumps({'event':'MODEL_READY','pid':os.getpid()}),flush=True)
+   sampling=SamplingParams(max_tokens=32,temperature=0,ignore_eos=False)
+   ordinary=e.generate([w['prompt_ids']],sampling);assert ordinary==[w['continuation_ids']] and not e.has_work() and e.runner.batch.size==0 and e.runner._ahead is None
+   sample('after-ordinary-warm32');adapter=runtime.install(e,LIB,LIB_SHA,diagnostic=False)
+   original_build=adapter.build;capture={};baseline=[]
++  from tutorial_code.miniengine.kernels import residual_norm_metal as residual_module
++  from tutorial_code.miniengine.model.gdn import GatedDeltaNet
++  original_residual=residual_module.residual_norm;original_conv=GatedDeltaNet._decode_conv_norm_reuse_cache
++  norm_labels={id(norm.weight):label+'.weight' for label,norm in hidden_norms};fusion_calls=[];conv_calls=[]
++  assert len(norm_labels)==129
+   def observe_first_build(values):
+    # First warm only: snapshot BEFORE build, then original outputs BEFORE replay.
+    # This is not a backend API recorder and is removed before any measured run.
+    before=[bytes(adapter.shared(v,str(i)).bytes_view) for i,v in enumerate(values)]
+-   original_build(values);assert len(before)==len(adapter.inputs)==131
++   assert not fusion_calls and not conv_calls and e.model._residual_carry_enabled is True
++   assert residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv
++   def counted_residual(left,delta,weight,eps):
++    fusion_calls.append(norm_labels[id(weight)]);return original_residual(left,delta,weight,eps)
++   def counted_conv(self,*a,**kw):
++    conv_calls.append(id(self));return original_conv(self,*a,**kw)
++   residual_module.residual_norm=counted_residual;GatedDeltaNet._decode_conv_norm_reuse_cache=counted_conv
++   try:original_build(values)
++   finally:
++    residual_module.residual_norm=original_residual;GatedDeltaNet._decode_conv_norm_reuse_cache=original_conv
++    r['B_first_warm_capture_engagement']={'residual_calls':len(fusion_calls),'norm_weight_order':list(fusion_calls),
++        'conv_calls':len(conv_calls),'distinct_GDN_objects':len(set(conv_calls)),
++        'counter_removed_after_build':residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv}
++   expected_fusions=[name for i in range(64) for name in (f'layers.{i}.post_attention_layernorm.weight',f'layers.{i+1}.input_layernorm.weight' if i<63 else 'norm.weight')]
++   assert fusion_calls==expected_fusions and len(fusion_calls)==128 and len(conv_calls)==48 and set(conv_calls)==set(map(id,gdns))
++   assert r['B_first_warm_capture_engagement']['counter_removed_after_build'] is True
++   assert len(before)==len(adapter.inputs)==131
+    assert all(bytes(h.bytes_view)==b for h,b in zip(adapter.inputs,before))
+    baseline.extend(before+[bytes(h.bytes_view) for h in adapter.outputs]);assert len(baseline)==263
+    capture.update(build_input131_readonly=True,baseline_before_first_replay=True)
+@@ -140,7 +192,10 @@
+     'median_decode31_tokens_per_s':statistics.median(x['decode31_tokens_per_s'] for x in measured),'median_whole32_tokens_per_s':statistics.median(x['whole32_tokens_per_s'] for x in measured),
+     'scope':'B-only engine absolute; includes native seed setup; no HTTP/paired performance win'}
+   assert capture=={'build_input131_readonly':True,'baseline_before_first_replay':True}
+-  r.update(status='PASS_PRODUCTION_DIRECT_ASYNC_B_ONLY_ENGINE_EXPLORATORY_SCREEN',stage='complete',ordinary_warm_tokens=32,
++  assert residual_module.residual_norm is original_residual and GatedDeltaNet._decode_conv_norm_reuse_cache is original_conv and len(fusion_calls)==128
++  assert initial_parameter_identity==[(name,id(value)) for name,value in tree_flatten(e.model.parameters())]
++  r['same_parameter_identity_count']=1349;r['same_parameter_identity_preserved']=True
++  r.update(status='PASS_V71_RESIDUAL_DIRECT_ASYNC_B_ONLY_ENGINE_EXPLORATORY_SCREEN',stage='complete',ordinary_warm_tokens=32,
+     native_delivered=186,native_completed=186,discarded=0,resets=6,ICB_banks=[96,90],final_output_hash_checks=792,
+     capture=capture,backend_API_recording_wrappers=False,readonly_capture_snapshot_first_warm_only=True,source_pins_final_verified=True)
+   source_check();save();return 0

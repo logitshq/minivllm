@@ -1,0 +1,105 @@
+--- qualified40/screen.py
++++ V44/screen.py
+@@ -16,10 +16,10 @@
+ sys.dont_write_bytecode = True
+ D = Path(__file__).resolve().parent
+ P = D.parent
+-ROOT = P / "candidate-v40-normreuse-cache-build1-root"
++ROOT = P / "candidate-v44-conv-normreuse-build1-root"
+ LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v40native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "32e478d684b653093b5bd93b11e9b7e69094c67746f37220ef60ca6214b27133"
++QUAL = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++QUAL_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+ 
+@@ -39,10 +39,10 @@
+     pins=json.loads((D/"source-pins.json").read_text())
+     for path,digest in pins.items(): assert sha(path)==digest,("source changed",path)
+     assert sha(QUAL)==QUAL_SHA
+-    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     assert q["native_steps"]==93 and len(q["requests"])==3
+     assert q["A_saved_baseline_receipt_sha256"]=="c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-    engagement=q["B_normreuse_cache_capture_engagement"]
++    engagement=q["B_conv_normreuse_cache_capture_engagement"]
+     assert engagement["calls"]==engagement["distinct_GDN_objects"]==48 and engagement["counter_removed_after_capture"] is True
+     base,reset=q["requests"][:2]
+     assert base["name"]=="base" and reset["name"]=="reset-base" and len(base["steps"])==len(reset["steps"])==31
+@@ -50,10 +50,10 @@
+     assert all(x["strict_bytes_equal"] and x["finite"] for x in expected)
+     assert [(x["label"],x["A_sha256"]) for x in expected]==[(x["label"],x["A_sha256"]) for x in reset["steps"][-1]["outputs"]]
+     assert q["native_library"]==str(LIB) and q["source_pins"][str(LIB)]==pins[str(LIB)]
+-    manifest=json.loads((P/"v40-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
++    manifest=json.loads((P/"v44-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
+     expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
+     package=ROOT/"tutorial_code/miniengine"
+-    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==26
++    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==27
+     return pins,q,expected
+ 
+ 
+@@ -85,7 +85,7 @@
+         versions={n:importlib.metadata.version(n) for n in ("mlx","mlx-metal")}
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v40-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v44-native-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)
+         def sample(label):
+@@ -115,20 +115,20 @@
+         gdns=[l.linear_attn for l in model.layers if not l.is_attn];assert len(model.layers)==64 and len(gdns)==48
+         for g in gdns:
+             g.set_gates_compile(True)
+-            g.set_norm_reuse_cache(True)
++            g.set_conv_norm_reuse_cache(True)
+         from tutorial_code.miniengine.model.gdn import GatedDeltaNet as GDN
+-        candidate_norm=GDN._decode_norm_reuse_cache
++        candidate_norm=GDN._decode_conv_norm_reuse_cache
+         norm_capture_calls=[]
+         @contextmanager
+         def capture_norm_engagement():
+-            assert GDN._decode_norm_reuse_cache is candidate_norm
++            assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+             def counted(self,*args,**kwargs):
+                 norm_capture_calls.append(id(self))
+                 return candidate_norm(self,*args,**kwargs)
+-            GDN._decode_norm_reuse_cache=counted
++            GDN._decode_conv_norm_reuse_cache=counted
+             try: yield
+-            finally: GDN._decode_norm_reuse_cache=candidate_norm
+-        receipt.update(stage="ready",gates_on=48,conv_off=True,normreuse_cache_on=48,whole_functional_off=True)
++            finally: GDN._decode_conv_norm_reuse_cache=candidate_norm
++        receipt.update(stage="ready",gates_on=48,conv_on=48,conv_off=False,normreuse_cache_on=48,whole_functional_off=True)
+         write(args.out/"model-ready.json",{"pid":os.getpid(),"token_executed":False,"model_loads":1});save()
+         print(json.dumps({"event":"MODEL_READY","pid":os.getpid()}),flush=True)
+         def shared(v,label):return prior.Shared(mx,np,v,label)
+@@ -168,8 +168,8 @@
+             mx.eval(*captured);mx.synchronize()
+         native.call("v33_end_build");armed=False
+         assert len(norm_capture_calls)==48 and set(norm_capture_calls)==set(map(id,gdns))
+-        assert GDN._decode_norm_reuse_cache is candidate_norm
+-        receipt["B_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"counter_removed_after_capture":True,"RAWu_helper":True,"conv_fusion_OFF":True}
++        assert GDN._decode_conv_norm_reuse_cache is candidate_norm
++        receipt["B_conv_normreuse_cache_capture_engagement"]={"calls":48,"distinct_GDN_objects":48,"counter_removed_after_capture":True,"activated_helper":True,"conv_fusion_ON":True,"no_double_SiLU":True}
+         assert len(captured)==132
+         for v,label in zip(captured,output_labels):
+             h=shared(v,label);output_holders.append(h);native.call("v33_register_output",h.address,h.nbytes,label.encode())
+@@ -261,12 +261,12 @@
+                                      "median_whole32_tokens_per_s":statistics.median(r["whole32_tokens_per_s"] for r in measured),
+                                      "scope":"B-only exploratory absolute timing; not HTTP/Pareto or an A/B performance win"}
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+-        assert all(g._norm_reuse_cache_enabled is True for g in gdns)
+-        assert GDN._decode_norm_reuse_cache is candidate_norm
++        assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
++        assert GDN._decode_conv_norm_reuse_cache is candidate_norm
+         for name,mod in tuple(sys.modules.items()):
+             if name.startswith("tutorial_code.miniengine") and getattr(mod,"__file__",None):
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+-        source_check();receipt.update(status="PASS_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
++        source_check();receipt.update(status="PASS_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+         if native is not None:

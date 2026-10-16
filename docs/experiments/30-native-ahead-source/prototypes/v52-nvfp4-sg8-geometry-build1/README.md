@@ -1,0 +1,10 @@
+# V52 SG2→SG8 geometry, CPU ready only
+Independent new experiment; V49 source/CONTROL_DRIFT_STOP evidence remain untouched. Only R4's num_simdgroups2→8,threadgroup256,grid(256,ceil(N/32),1),plus the same whole-SIMD rowguard. FP4/FP8decode,qdot/scale placement/ascendingK512/simd_sum/BF16cast/weightlayout/defaultmathpolicy are unchanged. No scale folding,weightreorder/copy,SG4/SG8 selection or new arithmetic.
+Eight SIMD groups retain private x_thread values; this groups independent SIMD work and may benefit scheduling/cache reuse. There is no threadgroup-shared-x allocation or proven gain. All nine currentcheckpoint(N,K) geometries are source-eligible only; N48 uses whole-SIMD padded guards. First GPU test remains onlyL0gate N17408/K5120 with544TG×8SG×4rows =17408rows,256threads/TG.
+Only50,135,040B selectedrealweight/scales ranges load,notmodel/shard. Eightfixedsynthetic+onehistoricalrealBF16x. Strict36:9unchangedSG2R4-vs-directnativeQMM,9compiledA-vs-directnativeQMM,9compiledSG8B-vs-directnativeQMM,9compiledB-vs-compiledA; allshape/dtype/finite/rawbytes+readonly. FailSTOPbeforetimer. Other shapes remain GPUunqualified.
+Stationary timer retains V49/V32 exact invoke andscheduleAST: prime2048/repeat2048,8inputrotation,6balancedAB/BA+4AA/BB,controlsmedian[.98,1.02]/each[.95,1.05],local>=5%/5of6. Hashpairafter,evaleachcall,no retrace. PowerdefaultAC,explicitBatteryexplorationonly; resources/170sownedchildcleanup unchanged.
+Root only, underexternalowner,standard50/50/20/0 andfreshout:
+```sh
+/Users/ryanli/code/minivllm/.venv/bin/python -B /private/tmp/minivllm-engine-optimization-20261014/v52-nvfp4-sg8-geometry-build1/micro.py run --out NEW_ABSOLUTE_DIR --power-domain 'AC Power'
+```
+This automatically performsstrict36thenmicro; no separatequalify-only run is required. Optional--qualify-only is retained; Batteryrequiresliteral'Battery Power',neverACfrontier. CPU:check_cpu.py or micro.py cpu --out NEW_CPU_DIR. No authorMLX/GPU; numeric/performance/fullmodel/E2E/adoption allUNKNOWN.

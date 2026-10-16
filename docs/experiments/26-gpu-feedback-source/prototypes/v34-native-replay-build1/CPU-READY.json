@@ -1,0 +1,19 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v34-native-replay-build1/replay.mm": "da7df9ceee5d042bbac73489bfa309cbd4188cb4ba1be8f4628ffb4f21438a93",
+    "/private/tmp/minivllm-engine-optimization-20261014/v34-native-replay-build1/libv34replay.dylib": "7810a7b1dcc3a3c559208499671ed65825bd326a4a308d1d6fb7573241e4ab36",
+    "/private/tmp/minivllm-engine-optimization-20261014/v34-native-replay-build1/ABI.h": "a51478a5d73a0bfc7deec56211c8bc9100424e1822bfad9e44ceb3e49a0a07b9",
+    "/private/tmp/minivllm-engine-optimization-20261014/v34-native-replay-build1/test_cpu.py": "839e584469452121a22419ea7502fe960c892735939625894e7a1db038dd0bc6"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "CPU_tests": 2,
+  "native4_source_unchanged": true,
+  "graph": "fixedcap256; outputs=logits+stateN+pred+nextpos+nextlens; inputs=stateN+token+position+lens; actual MLX arithmetic only",
+  "zero_copy": "all actual pinned parameter candidates omit first-bind CPU snapshot; every active binding must resolve full pin inside actual allocation and be readonly, any overlapping writable allocation or unresolved binding STOP",
+  "feedback": "all graph outputs stage by exact original buffer/offset/range before any writes; then every state/scalar input receives exact linked staged output; pairwise overlapping input destinations STOP",
+  "sync": "owned graphDone/stageDone/feedbackDone fences across compute/blit-stage/blit-feedback; command buffer completed before CPU compare or next step",
+  "reset": "once per request mutable initial-arena restore; optional exact full-input seed upload before first step; no perstep CPU full-state restore/copy",
+  "scope": "numeric tiny then 27B autoregressive qualification pending; no performance/ICB/production adoption claim"
+}

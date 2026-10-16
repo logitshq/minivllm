@@ -1,0 +1,100 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v40-native-decode-screen-build1/screen.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v42-native-decode-screen-build1/screen.py
+@@ -1,4 +1,4 @@
+-"""Root-only B-only native exploratory timing; inert never imports MLX."""
++"""Root-only B-only dependency-barrier native exploratory timing; inert never imports MLX."""
+ import argparse
+ from contextlib import contextmanager
+ import ctypes
+@@ -17,9 +17,10 @@
+ D = Path(__file__).resolve().parent
+ P = D.parent
+ ROOT = P / "candidate-v40-normreuse-cache-build1-root"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v40native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "32e478d684b653093b5bd93b11e9b7e69094c67746f37220ef60ca6214b27133"
++LIB = P / "v42-native-dependency-icb-build1/libv42replay.dylib"
++QUAL = P / "v23-root-control-build1/fullmodel-v42native-attempt1/child-output/receipt.json"
++QUAL_SHA = "0f4df3331bdf958132992b7086ef22a174685dd9147ce45c6e5c0a1a07bd8032"  # Actual full qualification PASS.
++SCREEN_DECISION = "SKIP_NO_REDUCTION"  # No actual performance run requested.
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+ 
+@@ -35,11 +36,18 @@
+     sys.modules[name]=value; spec.loader.exec_module(value); return value
+ 
+ 
+-def source_check():
++def source_check(*, allow_pending_qualification=False):
+     pins=json.loads((D/"source-pins.json").read_text())
+     for path,digest in pins.items(): assert sha(path)==digest,("source changed",path)
+-    assert sha(QUAL)==QUAL_SHA
+-    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    manifest=json.loads((P/"v42-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
++    expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
++    package=ROOT/"tutorial_code/miniengine"
++    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==26
++    if QUAL_SHA is None:
++        assert allow_pending_qualification,"V42 actual full-model qualification not bound; execution forbidden"
++        return pins,None,None
++    assert sha(QUAL)==QUAL_SHA and str(QUAL) in pins
++    q=json.loads(QUAL.read_text()); assert q["status"]=="PASS_NATIVE_DEPENDENCY_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+     assert q["native_steps"]==93 and len(q["requests"])==3
+     assert q["A_saved_baseline_receipt_sha256"]=="c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+     engagement=q["B_normreuse_cache_capture_engagement"]
+@@ -50,25 +58,31 @@
+     assert all(x["strict_bytes_equal"] and x["finite"] for x in expected)
+     assert [(x["label"],x["A_sha256"]) for x in expected]==[(x["label"],x["A_sha256"]) for x in reset["steps"][-1]["outputs"]]
+     assert q["native_library"]==str(LIB) and q["source_pins"][str(LIB)]==pins[str(LIB)]
+-    manifest=json.loads((P/"v40-native-fullqual-build1/candidate-manifest.json").read_text())["files"]
+-    expected_source={k.removeprefix("tutorial_code/miniengine/"):v for k,v in manifest.items()}
+-    package=ROOT/"tutorial_code/miniengine"
+-    assert {str(f.relative_to(package)):sha(f) for f in package.rglob("*.py")}==expected_source and len(expected_source)==26
++    assert sum(len(r["steps"]) for r in q["requests"])==93
++    assert sum(len(step["outputs"]) for r in q["requests"] for step in r["steps"])==12276
++    assert sum(step["A_saved_V38_hash_checks"] for r in q["requests"] for step in r["steps"])==12276
++    assert q["source_pins"][str(P/"v42-native-fullqual-build1/fullqual.py")]==pins[str(P/"v42-native-fullqual-build1/fullqual.py")]
++    # Each fresh process proves its own exact physical-allocation dependency plan;
++    # no claimed reduction or expected performance win is a qualification condition.
++    for r in q["requests"]:
++        dep=r["native"]["feedback"]["icb"]["dependency_barriers"]
++        assert dep["enabled"] and dep["proof"]["both_banks_all_conflict_edges_covered"] and dep["proof"]["bank_plans_equal"]
+     return pins,q,expected
+ 
+ 
+ def main(argv=None):
+     ap=argparse.ArgumentParser(description=__doc__)
+     ap.add_argument("--out",type=Path);ap.add_argument("--tokens",type=int,default=32);ap.add_argument("--inert",action="store_true")
+-    args=ap.parse_args(argv);pins,qualification,expected_final=source_check()
++    args=ap.parse_args(argv);pins,qualification,expected_final=source_check(allow_pending_qualification=args.inert)
+     w=json.loads((P/"workload.json").read_text());assert args.tokens==32 and len(w["prompt_ids"])==19
+     if args.inert:
+         assert not any(n=="mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status":"PASS_CPU_INERT","pins":len(pins),"MLX_imported":False,"GPU_used":False,
+-                          "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA}));return 0
++                          "requests":6,"warm":3,"measure":3,"qualification_sha256":QUAL_SHA,"actual_qualification_bound":QUAL_SHA is not None,"screen_decision":SCREEN_DECISION}));return 0
+     assert args.out is not None and args.out.is_absolute();args.out.mkdir(exist_ok=False)
+     receipt={"status":"STARTED","stage":"beforeload","pid":os.getpid(),"model_loads":0,"source_pins":pins,
+              "qualification_receipt":str(QUAL),"qualification_sha256":QUAL_SHA,"requests":[],
++             "predeclared_screen_decision":SCREEN_DECISION,
+              "scope":"B-only exploratory native timing; no HTTP/Pareto/fair A comparison/adoption",
+              "schedule":["warm"]*3+["measure"]*3,"fixed_cap":256,"expected_decode_steps":31,
+              "timing_definition":{"t0":"immediately before fresh prefill",
+@@ -85,7 +99,7 @@
+         versions={n:importlib.metadata.version(n) for n in ("mlx","mlx-metal")}
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v40-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v42-native-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)
+         def sample(label):
+@@ -266,7 +280,7 @@
+         for name,mod in tuple(sys.modules.items()):
+             if name.startswith("tutorial_code.miniengine") and getattr(mod,"__file__",None):
+                 path=str(Path(mod.__file__).resolve());assert path in pins and sha(path)==pins[path]
+-        source_check();receipt.update(status="PASS_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
++        source_check();receipt.update(status="PASS_DEPENDENCY_NORMREUSE_CACHE_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",stage="complete");save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+         if native is not None:

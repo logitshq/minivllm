@@ -1,0 +1,221 @@
+--- frozen44/fullqual.py
++++ v89/fullqual.py
+@@ -1,4 +1,4 @@
+-"""Root-only conv-SiLU to already-activated normreuse+held32 ICB versus original accepted25 GDN numerical qualification; inert never imports MLX."""
++"""Root-only physicalCAP64 original44-model/native ICB versus canonical oldCAP256 gold; inert never imports MLX."""
+ import argparse
+ import ast
+ from contextlib import contextmanager
+@@ -19,8 +19,11 @@
+ BASELINE_GDN = P / "candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py"
+ BASELINE_QUAL = P / "v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json"
+ BASELINE_QUAL_SHA = "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a"
+-LIB = P / "v40-native-icb-build2/libv40replay.dylib"
+-CAP = 256
++LIB = P / "v89-native-capacity64-build1/libv89replay.dylib"
++CAP = 64
++CANONICAL_CAP = 256
++ACTUAL44 = P / "v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json"
++ACTUAL44_SHA = "1dcfc41e7779c575602bd6c73bae4e4800664db42e1ee87e75414335bdc45b6d"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+ 
+@@ -44,7 +47,10 @@
+     pins = json.loads((D / "source-pins.json").read_text())
+     for path, digest in pins.items(): assert sha(path) == digest, ("source changed", path)
+     assert str(library) in pins, "unbound native library"
+-    assert sha(BASELINE_QUAL)==BASELINE_QUAL_SHA
++    assert sha(BASELINE_QUAL)==BASELINE_QUAL_SHA and sha(ACTUAL44)==ACTUAL44_SHA
++    assert json.loads(ACTUAL44.read_text())["status"]=="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
++    proof=json.loads((P/"v89-native-capacity64-build1/source-proof.json").read_text())
++    assert proof["inverse_patch_exact_frozen40"] is True and proof["allowed_capacities"]==[64,256]
+     expected = json.loads((D / "candidate-manifest.json").read_text())["files"]
+     expected = {k.removeprefix("tutorial_code/miniengine/"): v for k, v in expected.items()}
+     package = ROOT / "tutorial_code/miniengine"
+@@ -84,6 +90,9 @@
+         return value
+ 
+     def call(self, name, *args):
++        if name=="v34_seal_feedback":
++            assert len(args)==2 and all(type(v) is int and 0<=v<=0xffffffff for v in args),"uint32 ABI overflow/type rejected before ctypes narrowing"
++            assert args[1] in (64,256),"unknown capacity rejected before ctypes narrowing"
+         rc = getattr(self.lib, name)(*args)
+         if rc:
+             self.report("native-first-failure")
+@@ -108,6 +117,25 @@
+         raise RuntimeError("unexpected dtype: " + dtype)
+     assert finite, ("nonfinite", holder.label)
+     return {**holder.meta, "finite": finite, "sha256": hashlib.sha256(holder.bytes_view).hexdigest()}
++
++
++def canonical_output(raw, shape, dtype, is_kv, valid_length):
++    """CPU-only byte canonicalization. Never creates/pads an MLX tensor."""
++    raw=bytes(raw);shape=list(shape)
++    if not is_kv:return raw,shape
++    assert shape==[1,4,CAP,256] and dtype=="mlx.core.bfloat16"
++    assert isinstance(valid_length,int) and 0<valid_length<=CAP
++    element_bytes=2;head_bytes=CAP*256*element_bytes;valid_bytes=valid_length*256*element_bytes
++    assert len(raw)==4*head_bytes
++    padding=bytes((CANONICAL_CAP-CAP)*256*element_bytes)
++    heads=[]
++    for head in range(4):
++        current=raw[head*head_bytes:(head+1)*head_bytes]
++        assert current[valid_bytes:]==bytes(head_bytes-valid_bytes),("physical KV tail nonzero",head,valid_length)
++        heads.append(current+padding)
++    result=b"".join(heads)
++    assert len(result)==1*4*CANONICAL_CAP*256*element_bytes
++    return result,[1,4,CANONICAL_CAP,256]
+ 
+ 
+ def originals_readonly(native, holders, baselines, label):
+@@ -149,12 +177,15 @@
+     assert baseline_qualification["status"]=="PASS_NATIVE_ICB_S_PINGPONG_BASE_RESET_CHANGED_STRICT"
+     assert baseline_qualification["declared_prompts"]=={n:p for n,p,_ in cases}
+     archived_cases={r["name"]:r for r in baseline_qualification["requests"]}
++    gold44=json.loads(ACTUAL44.read_text());archive44={r["name"]:r for r in gold44["requests"]}
++    assert gold44["declared_prompts"]==baseline_qualification["declared_prompts"]
++    assert max(len(prompt)+31 for _,prompt,_ in cases)<=CAP
+     assert all(len(r["steps"])==31 for r in archived_cases.values())
+     if args.inert:
+         assert not any(n == "mlx" or n.startswith("mlx.") for n in sys.modules)
+         print(json.dumps({"status": "PASS_CPU_INERT", "pins": len(pins), "MLX_imported": False,
+                           "GPU_used": False, "requests": [[n, len(p)] for n, p, _ in cases],
+-                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2}))
++                          "inputs": 131, "outputs": 132, "feedback_links": 131, "GDN_S_pingpong_requested": 48, "staged_links_required": 83, "required_actual_ICB_banks": 2, "physical_KV_capacity": CAP, "CPU_canonical_KV_capacity":CANONICAL_CAP}))
+         return 0
+     assert args.out is not None and args.out.is_absolute()
+     args.out.mkdir(exist_ok=False)
+@@ -163,10 +194,14 @@
+                "declared_prompts": {n: p for n, p, _ in cases}, "performance_point": False,
+                "ICB_scope": "actual native ICB qualification; unrelated to mx.compile", "adopted": False, "input_upload_scope": "all131 once per request only",
+                "B_token_feedback": "captured MLX argmax -> staged GPU blit; no CPU/saved-continuation feeding",
+-               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA}
++               "A_saved_baseline_receipt":str(BASELINE_QUAL),"A_saved_baseline_receipt_sha256":BASELINE_QUAL_SHA,
++               "actual44_gold_sha256":ACTUAL44_SHA,"canonical_capacity":CANONICAL_CAP,
++               "canonicalization":"CPU raw BF16 per-head append-zero only after physical64 readback; no MLX padded256 input/state",
++               "scope":"sync fixedCAP64 numerical only, no async/service/performance/adoption"}
+     save = lambda: write(args.out / "receipt.json", receipt)
+     save(); mx = None; resources = None; native = None; loaded = False; armed = False
+     parameter_holders, seed_holders, output_holders = [], [], []
++    allocation_classes = None; original_allocation_steps = None
+     try:
+         assert os.environ.get("DYLD_INSERT_LIBRARIES") == str(library)
+         assert all(os.environ.get(k) == v for k, v in CONTROLS.items())
+@@ -187,13 +222,20 @@
+                               "previous_cache_limit_bytes": previous_limit, "environment": {**CONTROLS, "DYLD_INSERT_LIBRARIES": str(library)}}
+         sys.path.insert(0, str(ROOT))
+         from tutorial_code.miniengine.model.loader import load_model
+-        from tutorial_code.miniengine.cache import BatchKV, BatchState, DecodeBatch, make_cache
++        from tutorial_code.miniengine.cache import AttnCache, BatchKV, BatchState, DecodeBatch, make_cache
+         from tutorial_code.miniengine.context import ForwardContext
+         from tutorial_code.miniengine.eos import read_eos_ids
+         model, cfg = load_model(w["model_dir"], dtype=mx.bfloat16)
+         loaded = True; receipt["model_loads"] = 1; mx.synchronize()
+         receipt["afterload"] = resources.sample("afterload-before-any-token", loaded=True, mx=mx)
+         initial_parameter_identity=[(name,id(value)) for name,value in tree_flatten(model.parameters())]
++        # Allocation metadata only; model/cache source stays frozen. Set BEFORE any token.
++        allocation_classes=(AttnCache,DecodeBatch);original_allocation_steps=(AttnCache.step,DecodeBatch.step)
++        assert original_allocation_steps==(256,256)
++        AttnCache.step=CAP;DecodeBatch.step=CAP
++        kv_state_indices={2*i+j for i,layer in enumerate(model.layers) if layer.is_attn for j in (0,1)}
++        kv_output_labels={f"state.{i}" for i in kv_state_indices};assert len(kv_output_labels)==32
++        receipt["allocation_bucket"]={"original":list(original_allocation_steps),"effective":[AttnCache.step,DecodeBatch.step],"before_any_token":True,"source_files_unchanged":True}
+         gdns = [l.linear_attn for l in model.layers if not l.is_attn]
+         assert len(model.layers) == 64 and len(gdns) == 48
+         for g in gdns:
+@@ -255,6 +297,8 @@
+             batch = DecodeBatch(model); batch.rebuild([], [("v34", caches, len(prompt) + 32)])
+             flat = tuple(v[:] for v in batch.arrays()); assert len(flat) == 128
+             mx.eval(logits, *flat)
++            assert all(value.shape==(1,4,CAP,256) and value.dtype==mx.bfloat16 for i,value in enumerate(flat) if i in kv_state_indices)
++            assert all(cache.keys.shape[2]==CAP and cache.values.shape[2]==CAP for layer,cache in zip(model.layers,caches) if layer.is_attn)
+             first = int(mx.argmax(logits, axis=-1).item())
+             return (mx.array([first], mx.int32), mx.array([len(prompt)], mx.int32),
+                     mx.array([len(prompt)+1], mx.int32), *flat), first
+@@ -320,6 +364,8 @@
+         native.call("v38_enable_icb")
+         receipt["ICB_enable_called_after_feedback_seal"]=True
+         output_baselines=[h.raw() for h in output_holders]  # once at capture only
++        assert all(h.meta["shape"]==[1,4,CAP,256] for i,h in enumerate(seed_holders[3:]) if i in kv_state_indices)
++        assert all(h.meta["shape"]==[1,4,CAP,256] for h in output_holders if h.label in kv_output_labels)
+         receipt["capture"]={"inputs":[metadata_finite(np,h) for h in seed_holders],
+                             "outputs":[metadata_finite(np,h) for h in output_holders],
+                             "native":native.report("native-sealed"),"parameter_arrays":len(parameter_holders)}
+@@ -378,12 +424,33 @@
+                 for original,reference in zip(output_holders,expected):
+                     assert original.meta["shape"]==reference.meta["shape"] and original.meta["dtype"]==reference.meta["dtype"] and original.nbytes==reference.nbytes
+                     sig=metadata_finite(np,reference)
++                    is_kv=reference.label in kv_output_labels
++                    a_canonical,canonical_shape=canonical_output(reference.bytes_view,sig["shape"],sig["dtype"],is_kv,length)
++                    canonical_digest=hashlib.sha256(a_canonical).hexdigest()
+                     archived=archived_outputs[reference.label]
+-                    assert sig["shape"]==archived["shape"] and sig["dtype"]==archived["dtype"] and sig["nbytes"]==archived["bytes"]
+-                    assert sig["sha256"]==archived["A_sha256"],("A differs from actualsavedV38 oldbaseline",name,step,reference.label)
++                    archived44=next(v for v in archive44[name]["steps"][step-1]["outputs"] if v["label"]==reference.label)
++                    assert archived44==archived,("old gold disagreement",name,step,reference.label)
++                    assert canonical_shape==archived["shape"] and sig["dtype"]==archived["dtype"] and len(a_canonical)==archived["bytes"]
++                    if canonical_digest!=archived["A_sha256"]:
++                        (args.out/"first-failure-A-canonical.bin").write_bytes(a_canonical)
++                        write(args.out/"first-failure-archive.json",archived)
++                        raise AssertionError(("A CAP64 canonical differs from actualsavedV38/44 oldCAP256",name,step,reference.label))
++                    # First compare EVERY physical output byte against live independent A.
+                     native.call("v34_compare_output",original.address,original.nbytes,ctypes.c_void_p(reference.address))
+-                    equal.append({"label":reference.label,"shape":sig["shape"],"dtype":sig["dtype"],
+-                                  "bytes":sig["nbytes"],"finite":True,"strict_bytes_equal":True,"A_sha256":sig["sha256"]})
++                    if is_kv:
++                        # CPU-only canonicalization; never upload old256 state into native arena.
++                        target=ctypes.create_string_buffer(original.nbytes)
++                        native.call("v34_copy_output",original.address,original.nbytes,ctypes.cast(target,ctypes.c_void_p))
++                        b_canonical,b_shape=canonical_output(target.raw,original.meta["shape"],original.meta["dtype"],True,length)
++                        if b_shape!=canonical_shape or b_canonical!=a_canonical:
++                            (args.out/"first-failure-A-canonical.bin").write_bytes(a_canonical)
++                            (args.out/"first-failure-B-canonical.bin").write_bytes(b_canonical)
++                            raise AssertionError(("B canonical CAP256 bytes differ",name,step,reference.label))
++                    equal.append({"label":reference.label,"shape":canonical_shape,"dtype":sig["dtype"],
++                                  "bytes":len(a_canonical),"finite":True,"strict_bytes_equal":True,"A_sha256":canonical_digest,
++                                  "physical_shape":sig["shape"],"physical_bytes":sig["nbytes"],
++                                  "physical_A_sha256":sig["sha256"],"canonical_B_sha256":canonical_digest,
++                                  "physical_tail_zero_checked":is_kv,"canonical_CPU_zero_fill":is_kv})
+                 # Only 4B prediction is copied; it is observed, never uploaded to B.
+                 target=ctypes.c_int32()
+                 native.call("v34_copy_output",output_holders[129].address,4,ctypes.byref(target))
+@@ -396,8 +463,8 @@
+                     "request_seed":originals_readonly(native,case_holders,case_baselines,name+".request-seed")}
+                 event={"step":step,"A_exact_L":length,"B_fixed_L":CAP,"A_token":a_token,"B_token":b_token,
+                        "outputs":equal,"originals_readonly":ro,"reference_input_digest_readonly":True,
+-                       "native_prediction_copied_bytes":4,"seed_uploads_this_step":0,
+-                       "A_saved_V38_hash_checks":132}
++                       "native_prediction_copied_bytes":4,"numerical_KV_canonical_readback_bytes":4194304,"seed_uploads_this_step":0,
++                       "A_saved_V38_hash_checks":132,"A_saved_V44_hash_checks":132,"canonical132_oldCAP256_hash_checks":132,"KV_physical64_tail_zero_checks":32}
+                 if step%4==0:
+                     event["resources"]=resources.sample(name+f"-decode-{step:02d}",loaded=True,mx=mx)
+                 case["steps"].append(event);receipt["stage"]={"request":name,"step":step};save()
+@@ -416,6 +483,7 @@
+             pp=fb["pingpong"]
+             assert (pp["requested_count"],pp["eligible_count"],pp["staged_link_count"])==(48,48,83)
+             resources.sample("after-"+name,loaded=True,mx=mx);save()
++        assert total_steps==93 and all(len(r["steps"])==31 for r in receipt["requests"])
+         assert all(g._gates_compile_enabled and callable(g._compiled_decode_gates) for g in gdns)
+         assert all(g._conv_norm_reuse_cache_enabled is True for g in gdns)
+         assert GDN._decode_dispatch is candidate_decode and GDN._decode_conv_norm_reuse_cache is candidate_norm
+@@ -430,8 +498,8 @@
+         receipt["same_parameter_identity_count"]=len(initial_parameter_identity)
+         receipt["same_parameter_identity_preserved"]=True
+         source_check(library)
+-        receipt.update(status="PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT",stage="complete",native_steps=total_steps,
+-                       source_pins_verified_final=True,gates_callable_count=48)
++        receipt.update(status="PASS_V89_PHYSICAL_CAP64_CANONICAL256_NATIVE_ICB_BASE_RESET_CHANGED_OLD38_44_STRICT",stage="complete",native_steps=total_steps,
++                       source_pins_verified_final=True,gates_callable_count=48,strict_output_checks=12276,canonical_KV_tail_zero_checks=2976)
+         save();return 0
+     except BaseException as error:
+         receipt.update(status="FAIL_STOP",error=repr(error),traceback=traceback.format_exc(),capture_armed=armed)
+@@ -440,6 +508,9 @@
+             except BaseException as report_error:receipt["native_report_error"]=repr(report_error)
+         save();raise
+     finally:
++        if allocation_classes is not None:
++            for klass,old_step in zip(allocation_classes,original_allocation_steps):klass.step=old_step
++            receipt["allocation_bucket_restored_finally"]=True
+         try:
+             if mx is not None:mx.synchronize()
+             if resources is not None:resources.sample("finally-before-exit",loaded=loaded,mx=mx)

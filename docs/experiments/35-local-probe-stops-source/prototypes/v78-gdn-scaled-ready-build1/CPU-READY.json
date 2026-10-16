@@ -1,0 +1,58 @@
+{
+  "status": "CPU_READY_ONLY_GPU_NUMERIC_UNRUN",
+  "directory": "/private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1",
+  "parent": "/private/tmp/minivllm-engine-optimization-20261014/v44-gdn-activated-normreuse-build1/gdn_activated_norm_reuse_cached_metal.py",
+  "parent_sha256": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952",
+  "source_pins_sha256": "c9fe811200033057b967d2b02be1791f24bd17e631f5f430faa355fb9a504161",
+  "pinned_file_count": 33,
+  "CPU_checks": [
+    {
+      "command": "python3 -B check_cpu.py",
+      "exit_code": 0,
+      "tests": 6,
+      "output": "/private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1/cpu-check.log"
+    },
+    {
+      "command": "python3 -B numeric.py",
+      "exit_code": 0,
+      "output": "/private/tmp/minivllm-engine-optimization-20261014/v78-gdn-scaled-ready-build1/cpu-identity.json",
+      "saved_real_banks": 9,
+      "saved_synthetic_banks": 6,
+      "input_binary_SHA_verified": true
+    }
+  ],
+  "GPU_executed": false,
+  "MLX_imported_by_CPU_checks": false,
+  "NumPy_imported_by_CPU_checks": false,
+  "Metal_compiled": false,
+  "native_whitelist_changed": false,
+  "engine_connected": false,
+  "performance_prepared": false,
+  "fullmodel_qualified": false,
+  "pending_numeric_gate": {
+    "saved_real_banks": 9,
+    "saved_synthetic_banks": 6,
+    "strict_o_S_checks": 30,
+    "strict_q_k_ready_checks": 30,
+    "strict_v_scales_checks": 30,
+    "input_readonly_cases": 15,
+    "S_feedback": false,
+    "q_k_reference": "reference-scaled-ready-probe.metal uses original-order qs*rawq and ks*rawk with safe policy"
+  },
+  "compiler_risk": "moving FP32 materialization across dispatch may affect compiler contraction/FMA or intermediate rounding; source proof is not bit-exact proof",
+  "artifacts": {
+    "LICENSE-MLX-MIT": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "README.md": "42ed98713a77750e0d5495c5f2f790e84b5be2a77f6fbbbac46ca7dc8f052740",
+    "check_cpu.py": "1b7c341ff3f6a1f62375cdab0fc8eb55f3f477bfdd35126f691818fdc5a759a9",
+    "cpu-check.log": "484819fc6115ded4f95980c301dc1cb3bd42b75d97061c070633332d47142c79",
+    "cpu-identity.json": "b35ec50d76359e2e0f5a404b0dfdad95d1c445450de081c0353581415b712fd6",
+    "gdn_activated_scaled_ready_metal.py": "80fbf529f7cc087437d9ab8cf87f6320567e29ef31cc2007703fd622cadeb569",
+    "helper.diff": "b9b661f6ef45cdfed243e0b2a25db3bd978628a0b1780e9e8b21a2a44796c812",
+    "numeric.py": "e41ae4b3dd1a683b61e2754836c3e387c5a32dfb4ee86d7f3fc57476c31f5756",
+    "reference-scaled-ready-probe.metal": "817dc3556f260555f4f911e27a1506817425ce0e43501c3be1a6e8457a5a0716",
+    "scaled-prework.metal": "07325e459b7390bc9aff10d3e80cc9f90acc2092c2c5db1c45c9d85463fc9a37",
+    "scaled-state.metal": "54999cb60de8d056a15c5f2edc41ffa4c1d3734bea9e2d1c84918e8d8a4511cd",
+    "source-pins.json": "c9fe811200033057b967d2b02be1791f24bd17e631f5f430faa355fb9a504161",
+    "source-proof.json": "e0439d9927ae88eafe4d24d6fb3646b41ce22ded95963775b9f56198d06ce49f"
+  }
+}

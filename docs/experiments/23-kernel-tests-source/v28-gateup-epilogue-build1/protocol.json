@@ -1,0 +1,100 @@
+{
+  "candidate": "V28 gate/up QMV R4 + typed epilogue",
+  "scope": {
+    "layer": 0,
+    "K": 5120,
+    "N": 17408,
+    "projections": [
+      "gate_proj",
+      "up_proj"
+    ],
+    "tensor_range_bytes": 100270080,
+    "extra_weight_bytes": 0,
+    "full_model": false
+  },
+  "numeric": {
+    "pointwise_checks": 16,
+    "native_R4_checks": 18,
+    "debug_checks": 27,
+    "production_checks": 9,
+    "total": 70,
+    "readonly": true,
+    "failure": "STOP on first byte/nonfinite/shape/dtype/readonly failure, no timing",
+    "no_adaptive_formula": true
+  },
+  "timing": {
+    "A": "2 native QMM + installed nn.silu(gate)*up",
+    "B": "one production fused R4 kernel",
+    "prime": 128,
+    "repeats": 512,
+    "schedule": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "A",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ],
+    "every_output_eval": true,
+    "hashes": "after both blocks",
+    "timeout_s": 170
+  },
+  "resources": {
+    "power": "AC Power",
+    "thermal": [
+      0,
+      1
+    ],
+    "pressure": 1,
+    "raw_first": true,
+    "original_guard": true,
+    "cache_limit_bytes": 2147483648,
+    "known_foreign_inference": 0
+  },
+  "GPU_run_by_author": false,
+  "adopted": false
+}

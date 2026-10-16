@@ -1,0 +1,156 @@
+        groups = {}; warm_metadata = None
+        for phase in ('warm', 'measure'):
+            groups[phase] = []
+            for i in range(3):
+                gid = f'C1-{phase}-{i}'
+                sample('before-' + gid)
+                group_result = group(batch, gid)
+                write_new(run_dir / (gid + '.json'), group_result)
+                groups[phase].append(group_result)
+                sample('after-' + gid)
+            if phase == 'warm' and engine == 'native':
+                deadline = time.monotonic() + 30
+                while not (run_dir / 'warm-metadata.json').exists():
+                    assert proc.poll() is None
+                    if time.monotonic() > deadline: raise TimeoutError('warm metadata')
+                    time.sleep(0.01)
+                warm_metadata = json.loads((run_dir / 'warm-metadata.json').read_text())
+                assert warm_metadata['native_steps'] == 93 and warm_metadata['completed_requests'] == 3
+                assert warm_metadata['parameter_tree_unchanged'] and warm_metadata['terminal_cleanup']
+                assert warm_metadata['measurement_hooks'] is False
+            if phase == 'warm': sample('after-three-warm-before-measure')
+        sample('after-measure-before-unload')
+        requests = [q for phase in ('warm', 'measure') for g in groups[phase] for q in g['requests']]
+        final_native = None; lithos_proof = None
+        if engine == 'native':
+            assert all(q['output_ids_when_available'] == w['continuation_ids'] for q in requests)
+            with httpx.Client(headers=headers, trust_env=False, timeout=30) as client:
+                response = client.get(base + '/benchmark-state'); response.raise_for_status()
+                final_native = response.json()
+            assert final_native['active'] is None and final_native['native_steps'] == 186
+            assert final_native['request_count'] == 6
+            f = final_native['native']['feedback']
+            assert final_native['native']['status'] == 'OK' and f['total_steps'] == 186 and f['resets'] == 6
+            assert f['icb']['execution_count'] == 186 and f['icb']['bank_executions'] == [96, 90]
+            assert f['pingpong']['eligible_count'] == 48
+            write_new(run_dir / 'native-final-metadata.json', final_native)
+        if engine == 'lithos':
+            text = (run_dir / 'server.log').read_text()
+            assert 'Serving backend=m4_max,' in text and 'draft=None' in text and 'backend=m5' not in text
+            native_metrics = [ast.literal_eval(line.split('Generation: ', 1)[1])
+                              for line in text.splitlines() if 'Generation: ' in line]
+            assert len(native_metrics) >= 6 and all(v['cached_prompt_tokens'] == 0 for v in native_metrics)
+            lithos_proof = {'backend': 'm4_max', 'draft': None, 'metrics': native_metrics,
+                            'precleanup_server_log_sha256': controls.sha(run_dir / 'server.log')}
+        result = {'engine': engine, 'label': label, 'concurrency': 1,
+                  'warmups': groups['warm'], 'runs': groups['measure'],
+                  'runtime_identity': runtime_identity, 'warm_metadata': warm_metadata,
+                  'final_native_metadata': final_native, 'lithos_proof': lithos_proof,
+                  'x': statistics.median(g['x_client_estimated_interactivity_tok_s_user'] for g in groups['measure']),
+                  'y': statistics.median(g['y_total_output_throughput_tok_s_mac'] for g in groups['measure']),
+                  'ttft_s': statistics.median(q['client_ttft_text_s'] for g in groups['measure'] for q in g['requests']),
+                  'E2E_s': statistics.median(q['client_total_s'] for g in groups['measure'] for q in g['requests']),
+                  'source_config_sha256': controls.sha(D / 'runtime-config.json'),
+                  'sampling': {'greedy': True, 'output_cap': 32, 'EOS': 'normal', 'draft': None, 'prefix_cache': 0},
+                  'scope': 'fresh same-campaign C1 screen only; no C2/C4 or full-frontier conclusion'}
+    except BaseException as exc:
+        error = exc
+        write_new(run_dir / 'first-failure.json', {'type': type(exc).__name__, 'message': str(exc),
+                                                   'traceback': traceback.format_exc(), 'raw_preserved': True})
+    finally:
+        cleanup_errors = []
+        if proc is not None:
+            try:
+                birth = controls.lock_owned_identity(proc, birth, engine, run_dir, 'pre-cleanup')
+                cleanup = controls.cleanup_owned(proc, birth, run_dir / 'cleanup-signal-identities.json')
+                write_new(run_dir / 'owned-process-exit.json', cleanup)
+            except BaseException as exc:
+                cleanup_errors.append({'phase': 'owned-process', 'type': type(exc).__name__, 'message': str(exc)})
+        try: write_new(run_dir / 'port-absence.json', controls.wait_port_absence(port))
+        except BaseException as exc:
+            cleanup_errors.append({'phase': 'port', 'type': type(exc).__name__, 'message': str(exc)})
+        try:
+            controls.probe(samples, run_dir / 'resources.json', 'after-owned-unload', 'AC')
+            assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+        except BaseException as exc:
+            cleanup_errors.append({'phase': 'resource', 'type': type(exc).__name__, 'message': str(exc)})
+        if lf is not None: lf.close()
+        write_new(run_dir / 'cleanup.json', {'error': None if error is None else str(error),
+                                            'cleanup_errors': cleanup_errors, 'owned_exit': cleanup})
+    if error is not None: raise error
+    if cleanup_errors: raise RuntimeError('cleanup/postflight failed: ' + str(cleanup_errors))
+    assert result is not None
+    result.update(resource_snapshots=samples, owned_exit=cleanup)
+    write_new(run_dir / 'result.json', result)
+    return {k: result[k] for k in ('label', 'engine', 'x', 'y', 'ttft_s', 'E2E_s')}
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    mode = ap.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--cpu-dry-run', action='store_true'); mode.add_argument('--run', action='store_true')
+    ap.add_argument('--out', type=Path); ap.add_argument('--pins-sha256', required=True)
+    args = ap.parse_args()
+    assert controls.sha(D / 'pins.json') == args.pins_sha256
+    pins = json.loads((D / 'pins.json').read_text())
+    for path, digest in pins['files'].items(): assert controls.sha(path) == digest, path
+    config = json.loads((D / 'runtime-config.json').read_text())
+    for path, digest in config['source_pins'].items(): assert controls.sha(path) == digest, path
+    q = json.loads(Path(config['fullqual_receipt']).read_text())
+    assert q['status'] == config['fullqual_status'] and q['terminal_cleanup']
+    assert controls.sha(config['fullqual_receipt']) == config['fullqual_receipt_sha256']
+    assert not any(n == 'mlx' or n.startswith('mlx.') for n in sys.modules)
+    assert not controls.selected(os.environ)
+    assert sys.executable == controls.PYTHON
+    plan = [{'block': b, 'label': f'C1-B{b}-{name}', 'engine': name}
+            for b, order in enumerate((('native', 'omlx', 'lithos'), ('omlx', 'lithos', 'native'),
+                                       ('lithos', 'native', 'omlx')), 1) for name in order]
+    if args.cpu_dry_run:
+        print(json.dumps({'status': 'PASS_CPU_DRY_RUN', 'plan': plan, 'fresh_loads': 9,
+                          'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
+                          'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+                          'total_executed_requests': 57, 'total_executed_tokens': 1824, 'GPU_used': False}))
+        return 0
+    assert args.out is not None and args.out.is_absolute(); args.out.mkdir()
+    write_new(D / 'attempt.consumed.json', {'pid': os.getpid(), 'pins_sha256': args.pins_sha256})
+    completed = []; previous_env = {}; samples = []; error = None; completion = None
+    def stop_owned_driver(sig, frame):
+        raise KeyboardInterrupt('owned driver signal ' + str(sig))
+    previous_term = signal.signal(signal.SIGTERM, stop_owned_driver)
+    try:
+        controls.probe(samples, args.out / 'owner-resources.json', 'before-campaign', 'AC')
+        assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+        for item in plan:
+            print(json.dumps({'event': 'ARM_STARTED', **item}), flush=True)
+            completed.append(run_arm(item, args.out, config, previous_env))
+            print(json.dumps({'event': 'ARM_COMPLETED', 'completed': len(completed), 'total': 9,
+                              **completed[-1]}), flush=True)
+        for path, digest in pins['files'].items(): assert controls.sha(path) == digest, path
+        assert len(completed) == 9
+        medians = {engine: {key: statistics.median(r[key] for r in completed if r['engine'] == engine)
+                            for key in ('x', 'y', 'ttft_s', 'E2E_s')}
+                   for engine in ('native', 'omlx', 'lithos')}
+        completion = {'status': 'PASS_C1_SCREEN', 'arms': completed,
+            'medians': medians, 'all_negative_pairs_retained': True, 'full_frontier_win': False,
+            'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
+            'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+            'total_executed_requests': 57, 'total_executed_tokens': 1824,
+            'measured_requests': 27, 'measured_tokens': 864}
+    except BaseException as exc:
+        error = {'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()}
+        write_new(args.out / 'suite-failure.json', {'error': error, 'completed': completed, 'raw_preserved': True})
+        traceback.print_exc(); return 1
+    finally:
+        signal.signal(signal.SIGTERM, previous_term)
+        controls.probe(samples, args.out / 'owner-resources.json', 'after-campaign', 'AC')
+        assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+        write_new(args.out / 'owner-cleanup.json', {'pid': os.getpid(), 'completed_arms': len(completed),
+                                                 'error': error, 'GPU_released': False})
+    assert completion is not None and error is None
+    write_new(args.out / 'suite-complete.json', completion)
+    print(json.dumps({'event': 'SUITE_COMPLETE', 'medians': completion['medians'],
+                      'full_frontier_win': False}), flush=True)
+    return 0
+
+
+if __name__ == '__main__': raise SystemExit(main())

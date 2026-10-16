@@ -1,0 +1,29 @@
+{
+  "status": "PASS_CPU_SCALAR_AND_TWO_EDIT_CONTRACT",
+  "nibble_scale_pairs": 4064,
+  "finite_scale_codes": 254,
+  "excluded_nonfinite_scale_codes": [
+    127,
+    255
+  ],
+  "zero_pairs_with_sign_preserved": 536,
+  "raw_fp4_min_nonzero": 3.0517578125e-05,
+  "folded_scale_min_nonzero": 32,
+  "folded_scale_max_abs": 7340032,
+  "FP32_scale_required": true,
+  "header_only_two_edits": true,
+  "R4_body_unchanged": true,
+  "generic_all_finite_activation_lossless_claim": false,
+  "overflow_counterexample": {
+    "activation_BF16_hex": "7f7f",
+    "fp4_nibble": 4,
+    "scale_code": 1,
+    "native_intermediate": "Infinity",
+    "native_final": "Infinity",
+    "folded_final_FP32_hex_le": "00007f7b"
+  },
+  "half_denormal_gpu_conversion_and_FTZ": "UNKNOWN until actual strict GPU gate",
+  "MLX_imported": false,
+  "GPU_used": false,
+  "numeric_gpu_and_performance": "UNKNOWN"
+}

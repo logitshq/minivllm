@@ -1,0 +1,55 @@
+{
+  "accepted25_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine",
+  "accepted_gdn_source_sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+  "candidate_gdn_source_sha256": "50e86427604455719b8da0da669dd4f2cf1eaef04a23077e9e59b64cb03da354",
+  "existing_method_proof": [
+    {
+      "method": "_gates",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "39658159f0d9ef928ce43ef8fa004cab7578b903c0335e02bdc81d1f5b4bbbcb"
+    },
+    {
+      "method": "set_gates_compile",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "9729a515ad2cc80f6d84295aafe77bbbdfd2fc77a7228a08721f578c03952ead"
+    },
+    {
+      "method": "_decode_gates",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "435a645dec140873bcf6ebb47c55eaaa4382381765318139ce9aa8c50f38a761"
+    },
+    {
+      "method": "_split_heads",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "268f01f4dd0fc36caeae8f933ad015f8b76f3bd51d89b1f16acf776a590eeb9c"
+    },
+    {
+      "method": "_prefill",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "c5084d3f57bd21abff8db5056dd3ed3fa31200c7dcadc01fe612a0c2a573478c"
+    },
+    {
+      "method": "_prefill_batch",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "115a2090acce58ed583b5b0966079e44057f32cf91efa7ab038138679d642694"
+    },
+    {
+      "method": "_decode",
+      "literal_source_equal": true,
+      "AST_equal": true,
+      "method_source_sha256": "8ff7b51cd1b3d3ccc0b50fe4f9c363d4d14d2ea4d068409d536d6a2460a23f7d"
+    }
+  ],
+  "gdn_whole_AST_equal_after_removing_optin_methods_and_restoring_legacy_call": true,
+  "qwen_whole_AST_equal_after_removing_CPU_normal_flag_forwarding": true,
+  "native_gdn_metal_byte_equal": true,
+  "A_binding": "ASTextract original _decode; temporaryclass _decode AND _decode_conv_silu bind onlyinsideAforward,finallyrestore;weightsonecopy",
+  "MLX_imported": false,
+  "GPU_used": false
+}

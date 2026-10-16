@@ -1,0 +1,99 @@
+{
+  "status": "CPU_SOURCE_CHECKS_ONLY_NOT_METAL_COMPILED",
+  "state_source_exact_SHA256": "3d9ae74cd60321221ef494e1e5d2ccad4b7a4dff3aa133245d9c65c1c00d5504",
+  "state_SOURCE_byte_exact_to44": true,
+  "state_HEADER_byte_exact_to44": true,
+  "state_name": "gdn_norm_reuse_cached_state_v40_build1",
+  "state_input_order": [
+    "q_ready",
+    "k_ready",
+    "v",
+    "scales",
+    "g",
+    "beta",
+    "S"
+  ],
+  "S_input_index": 6,
+  "state_and_make_kernel_AST_exact": true,
+  "QK_branch_bytes_exact_to44": true,
+  "qmv_header_exact_to66build2": true,
+  "production_input_count": 8,
+  "production_output_count": 6,
+  "declared_production_buffer_count": 14,
+  "diagnostic_output_count": 8,
+  "declared_diagnostic_buffer_count": 16,
+  "actual_Metal_argument_reflection_observed": false,
+  "prework_grid": [
+    8192,
+    1,
+    1
+  ],
+  "prework_threadgroup": [
+    128,
+    1,
+    1
+  ],
+  "QK_groups": 16,
+  "V_BA_groups": 48,
+  "BA_active_lanes_per_group": 32,
+  "BA_values_per_lane_per_K_step": 16,
+  "K_steps": 10,
+  "accumulation": "qdot<float,16,4> per original K512 order -> simd_sum -> BF16 -> FP32 gatefunctors",
+  "FP32_functors": {
+    "unary_ops.h": {
+      "Exp": [
+        177,
+        181
+      ],
+      "Sigmoid": [
+        308,
+        314
+      ],
+      "Negative": [
+        285,
+        289
+      ]
+    },
+    "binary_ops.h": {
+      "Add": [
+        10,
+        15
+      ],
+      "Multiply": [
+        208,
+        213
+      ],
+      "LogAddExp": [
+        129,
+        141
+      ]
+    },
+    "utils.h": {
+      "float_log1p": [
+        315,
+        325
+      ],
+      "Limits_float_max_is_infinity": [
+        55,
+        71
+      ]
+    }
+  },
+  "functor_changes": "unique identifier renaming only; float Limits max alias retains infinity; exact bodies verified by CPUtests",
+  "compiled_gate_reference": "original _gates_explicit AST; mx.compile(shapeless=False); FP32 a/b cast and FP32 A_log/dt_bias",
+  "math_risk": "BA and gates now share V44 safe prework compile context; nativeQMV/JIT contraction scheduling is not proven from source. Strict BA,production gate,probe ando/S failure STOP; no tolerance change.",
+  "oMLX_actual_donor": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/omlx-upstream-pr-20261016/repo/omlx/patches/qwen35_gdn_prework.py",
+    "actual_Q35_decode_lines": [
+      2054,
+      2100
+    ],
+    "Qwen4_gate_source_lines": [
+      300,
+      322
+    ],
+    "distinction": "actualQ35 prework excludes gates/recurrence; Qwen4 BF16softplus+outerexp is not copied"
+  },
+  "CPU_tests_passed": 4,
+  "no_engine_or_timing_authoring": true
+}

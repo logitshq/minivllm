@@ -1,0 +1,65 @@
+{
+  "status": "CPU_READY_FROZEN_V80_PENDING_ROOT_NUMERIC",
+  "GPU_used": false,
+  "MLX_imported": false,
+  "native_loaded": false,
+  "base": "frozen72build2 protocol/native40 + frozen79 paired-half2 math/helper",
+  "CPU_clang": "PASS",
+  "CPU_contract": "PASS_6_ACCESS_10_LOOP_15_EXACT_RW_PLUS_COMPLETE_SCHEMA_CASES",
+  "CPU_AST": "PASS_EXACT72_TIMING_BLOCK_AND_GUARDS",
+  "CPU_inert": "PASS_57PINS_8BANKS_NO_MLX_NUMPY_NATIVE_LOAD",
+  "B_function_provenance": "SOURCE_DERIVED_EXPECTED_NOT_OBSERVED",
+  "B_function": "custom_kernel_v79_nvfp4_half2_r4_sg2_n17408_k5120__bfloat16_t_4_uint32_t_uint8_t_bfloat16_t_bfloat16_t",
+  "runtime_mismatch": "STOP; no broad RW exception",
+  "source_pins_sha256": "9887a4d6f5eb75aff106b9c3a09a49b7504fcc73c76f1bdfdda3f58bc6f41a40",
+  "pins": 57,
+  "micro_sha256": "eacf50d2774092e903949956718ac18919a56e5a4129b93d01e2f731e0aba32a",
+  "native_source_sha256": "594aae9c4b360c0ad212cb79b515de348a4ed27ee0c06445281d9a10a4cb2533",
+  "library_sha256": "c5e674a70420b97ec2158851c32858d43900f7ad40cd4e1c1b2ef045b30ac921",
+  "numeric_gate": {
+    "MLX72_strict": 72,
+    "native_terminal_strict": 128,
+    "three_vectors_per_bank": [
+      "real",
+      "zero",
+      "fixedrandom"
+    ],
+    "original_input_arrays_readonly": 40,
+    "original_captured_outputs_readonly": 16
+  },
+  "timing": "NOT RUN; future distinct marker requires actual successful V80 qualification receipt+SHA with identical57pins",
+  "timing_protocol": {
+    "prime_groups": 128,
+    "timed_groups": 1024,
+    "dispatches": 8192,
+    "ABBA_pairs": 6,
+    "controls": 4,
+    "minimum_reduction": 0.05,
+    "minimum_wins": 5,
+    "control_each": [
+      0.95,
+      1.05
+    ],
+    "control_median": [
+      0.98,
+      1.02
+    ]
+  },
+  "supervisor": "ROOT external owner timeout/reap/external absence; frontend does not claim child cleanup",
+  "qualification_argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v80-native-half2-icb-build1/micro.py",
+    "--qualify-only",
+    "--out",
+    "ABSOLUTE_NEW_NUMERIC_MARKER"
+  ],
+  "required_env": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0",
+    "DYLD_INSERT_LIBRARIES": "/private/tmp/minivllm-engine-optimization-20261014/v80-native-half2-icb-build1/libv80replay.dylib"
+  },
+  "old_sources_untouched": true
+}

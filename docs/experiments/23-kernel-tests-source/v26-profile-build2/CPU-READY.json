@@ -1,0 +1,61 @@
+{
+  "status": "CPU_READY_ONLY",
+  "GPU_executed": false,
+  "driver_sha256": "903694b2936dee159dc74c86c9e0e002d46597135df9fc0320be06f3dc5e8fd4",
+  "native_source_sha256": "6eb03b2cdd9997880058b2e2638171d5b73bb0d714dbfb512828e940bee7726b",
+  "native_binary_sha256": "4696f3c385922a1991868b9bfad1b2d9bd2246a24baff8d1841e467332fbd527",
+  "summary_sha256": "3cd9e85acce8463c9426f6d0448a009daf6e5daf949a610f07d3abb1463db5f5",
+  "native_source_and_binary_identical_to_build1": true,
+  "OPS_PER_BUFFER": 1,
+  "MB_PER_BUFFER": 50,
+  "BFS_MAX_WIDTH": 20,
+  "FAST_SYNCH": 0,
+  "model_loads_planned": 1,
+  "warm_requests": 3,
+  "warm_outputs_each": 32,
+  "measured_B1_forwards": 1,
+  "single_dispatch_per_CB_promised": false,
+  "OPS0_used": false,
+  "instrumented_perturbed_diagnostic_not_production_shares": true,
+  "summary_stdout": "compact status and top5 only; full summary.json saved",
+  "results": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build2/runner.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: runner.py [-h] [--package-root PACKAGE_ROOT]\n                 [--source-manifest SOURCE_MANIFEST] [--out OUT]\n                 [--measured MEASURED] [--execute-gpu]\n\nDiagnostic B1 decode profile. CPU --inert default; root owns actual GPU child.\n\noptions:\n  -h, --help            show this help message and exit\n  --package-root PACKAGE_ROOT\n  --source-manifest SOURCE_MANIFEST\n  --out OUT\n  --measured MEASURED\n  --execute-gpu\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build2/runner.py"
+      ],
+      "returncode": 0,
+      "stdout": "{\"status\": \"CPU_READY_ONLY\", \"GPU_executed\": false, \"identity\": {\"package_root\": \"/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root\", \"manifest\": \"/private/tmp/minivllm-engine-optimization-20261014/source-manifest-v17-gdn-gates-build1.json\", \"manifest_sha256\": \"31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c\", \"source_count\": 25, \"driver_sha256\": \"903694b2936dee159dc74c86c9e0e002d46597135df9fc0320be06f3dc5e8fd4\", \"native_source_sha256\": \"6eb03b2cdd9997880058b2e2638171d5b73bb0d714dbfb512828e940bee7726b\", \"native_library_sha256\": \"4696f3c385922a1991868b9bfad1b2d9bd2246a24baff8d1841e467332fbd527\", \"workload_sha256\": \"65be876cac2397bf9afa76105c8e3fcce23de5e6c8652a28cb1b5f39640c153c\"}, \"warm_requests\": 3, \"measured_B1_forwards\": 1}\n",
+      "stderr": ""
+    }
+  ],
+  "actual_child_argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build2/runner.py",
+    "--execute-gpu",
+    "--measured",
+    "1",
+    "--out",
+    "NEW_ABSOLUTE_DIR"
+  ],
+  "child_env": {
+    "MLX_MAX_OPS_PER_BUFFER": "1",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0",
+    "DYLD_INSERT_LIBRARIES": "/private/tmp/minivllm-engine-optimization-20261014/v26-profile-build2/libv26trace.dylib"
+  }
+}

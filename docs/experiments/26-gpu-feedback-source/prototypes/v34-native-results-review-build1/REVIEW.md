@@ -1,0 +1,17 @@
+# V34 native feedback actual result: independent CPU audit PASS
+- Receipt SHA256 `ff67fbc7669244ec061d0203540caafcc9d9bcffb1789b1f6e412431980730d5`; all43 source pins and actual imported accepted25 paths match frozen worker24b6eb/native da7df9/library7810a7.
+- Actual base19, reset-base19 and declared changed20 prompt each generate32 IDs through31 decode steps: 3 requests / 96 IDs / 93 steps. A/B IDs agree; canonical assertions apply only to base/reset.
+- Each step compares132 outputs (logits,128 full states, argmax prediction, next position/lens): 12,276 finite strict Cmemcmp records. A hashes/shape/dtype/bytes are consistent; scalar hashes independently match recorded prediction/position/lens integers.
+- Reset-base reproduces every base output signature. Changed prefill differs in129 of131 seed arrays and its first logits hash changes; the changed input is a real20-ID prefill, not a forced decode token.
+- All279 original seed/captured-output/request-seed readonly records pass, together with93 A retained-state digest checks.
+- Source inner decode loop calls replay/compare/copy only: no seed write/reset/restore. Each request uploads131 ranges once, 512,163,876 bytes total; all93 per-step upload counters are0.
+- B prediction is captured MLX argmax and fed by native GPU links. CPU copies4B only to observe/assert each prediction (372B total); it never supplies B's next token/state.
+- Verified131 exact input mappings,132 output/staging mappings and131 exact feedback links, bounds/alignment/disjoint input/staging ranges. This actual capture has0 overlapping input/output ranges.
+- Native counters show reset1/2/3 and total steps31/62/93, no per-step CPU full-state restore, and15,923,267,676 C comparison bytes; no first difference.
+- All1,349 parameter allocations are zero-copy readonly roles (including1,089 small ones), totaling15,133,597,696 bytes. Mutable505 allocations retain366,067,053 snapshot bytes; arena366,085,632B, staging171,217,956B.
+- Source and reported byte accounting agree: stage all132 outputs, then GPU-copy131 links;341,939,224 GPU blit bytes/step. Owned fences order compute→staging→feedback, with host completion each step.
+- Capture retains2,009 dispatches,85 same-queue ordered commits,84 fence updates/10 waits with matching prior producers, and one event signal lowered without re-signaling.
+- Recomputed54 saved raw resource samples: AC/thermal0/pressure1, minimum free46%, swap MB/Swapouts growth0; owner Pageouts increased395.
+- Owner56896 waited/reaped child56905 exit0; both saved external strict PID absence records pass. Audit used CPU/std library only, no library load/MLX/GPU execution.
+- Saved evidence contains A hashes and actual Cmemcmp records, not persisted full B output blobs. This is not an independent GPU recomputation.
+- Scope: this diagnostic native feedback graph on base/reset/changed prompts. Engine integration, service lifecycle, ICB and performance remain unqualified.

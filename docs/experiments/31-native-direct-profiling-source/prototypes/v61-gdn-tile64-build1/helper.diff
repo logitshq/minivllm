@@ -1,0 +1,25 @@
+--- qualified44/helper.py
++++ V61/helper.py
+@@ -1,11 +1,11 @@
+ """V44 already-activated BF16 norm-reuse + held32 candidate; GPU unqualified.
+-V40 state body/name, serial norm, header and safe compile policy stay exact.
++V61 tile64 only: state strings, SPLIT4, held32/serial order and safe policy stay exact.
+ Prework only loads already-activated BF16 values; it never applies SiLU.
+ Import is inert; no engine connection or performance claim.
+ """
+ 
+ SPLIT = 4
+-VALUE_TILE = 32
++VALUE_TILE = 64
+ COMPILE_OPTIONS = {"math_mode": "safe"}
+ 
+ HEADER = r'''// Typed bodies pinned to MLX 0.32.3 unary_ops.h and binary_ops.h.
+@@ -191,7 +191,7 @@
+     global _state_kernel
+     if _state_kernel is None:
+         _state_kernel = _make_kernel(
+-            mx, "gdn_norm_reuse_cached_state_v40_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
++            mx, "gdn_tile64_norm_reuse_cached_state_v61_build1", ["q_ready", "k_ready", "v", "scales", "g", "beta", "S"],
+             ["o", "S_new"], _STATE_SOURCE.replace("SPLIT", str(SPLIT)).replace("VALUE_TILE", str(VALUE_TILE)),
+         )
+     return tuple(_state_kernel(

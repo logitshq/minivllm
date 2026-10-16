@@ -1,0 +1,38 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v58-native-http-screen-build1/driver.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v59-native-http-battery-screen-build1/driver.py
+@@ -71,7 +71,7 @@
+     samples = []; proc = None; birth = None; lf = None; error = None; cleanup = None
+     result = None
+     def sample(name):
+-        raw = controls.probe(samples, run_dir / 'resources.json', name, 'AC', proc.pid if proc else None)
++        raw = controls.probe(samples, run_dir / 'resources.json', name, 'Battery', proc.pid if proc else None)
+         assert samples[-1]['processinfo_thermal_metadata']['code'] == 0, 'nominal thermal required'
+         return raw
+     try:
+@@ -223,7 +223,7 @@
+         except BaseException as exc:
+             cleanup_errors.append({'phase': 'port', 'type': type(exc).__name__, 'message': str(exc)})
+         try:
+-            controls.probe(samples, run_dir / 'resources.json', 'after-owned-unload', 'AC')
++            controls.probe(samples, run_dir / 'resources.json', 'after-owned-unload', 'Battery')
+             assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+         except BaseException as exc:
+             cleanup_errors.append({'phase': 'resource', 'type': type(exc).__name__, 'message': str(exc)})
+@@ -271,7 +271,7 @@
+         raise KeyboardInterrupt('owned driver signal ' + str(sig))
+     previous_term = signal.signal(signal.SIGTERM, stop_owned_driver)
+     try:
+-        controls.probe(samples, args.out / 'owner-resources.json', 'before-campaign', 'AC')
++        controls.probe(samples, args.out / 'owner-resources.json', 'before-campaign', 'Battery')
+         assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+         for item in plan:
+             print(json.dumps({'event': 'ARM_STARTED', **item}), flush=True)
+@@ -295,7 +295,7 @@
+         traceback.print_exc(); return 1
+     finally:
+         signal.signal(signal.SIGTERM, previous_term)
+-        controls.probe(samples, args.out / 'owner-resources.json', 'after-campaign', 'AC')
++        controls.probe(samples, args.out / 'owner-resources.json', 'after-campaign', 'Battery')
+         assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+         write_new(args.out / 'owner-cleanup.json', {'pid': os.getpid(), 'completed_arms': len(completed),
+                                                  'error': error, 'GPU_released': False})
