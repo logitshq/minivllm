@@ -1,0 +1,279 @@
+{
+  "schema": "donor-read-omlx-20261016-v1",
+  "scope": "CPU stdlib source/log read; no imports of MLX, no GPU or tests, no engine/git edits",
+  "installed_version": "0.7.1.dev1",
+  "installed_root": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages",
+  "upstream_current_used": false,
+  "candidate": "true-conv4-silu-tail-fp32-gates-prep",
+  "candidate_engaged": false,
+  "candidate_speedup_measured": false,
+  "sources": [
+    {
+      "id": "installed_scheduler",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/scheduler.py",
+      "sha256": "88bf4d988934a60e268d4205f30a86aae3012eefaef4b1f9672a0b86b412b083",
+      "line_regions": [
+        [
+          3405,
+          3432
+        ],
+        [
+          14075,
+          14099
+        ]
+      ],
+      "bytes": 688352
+    },
+    {
+      "id": "installed_batch",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_lm/generate.py",
+      "sha256": "4a3bf57f5679dac73791f069268866ab5b9336e58582d436b31133984e4b6971",
+      "line_regions": [
+        [
+          1355,
+          1414
+        ],
+        [
+          1439,
+          1449
+        ],
+        [
+          1535,
+          1547
+        ],
+        [
+          1872,
+          1884
+        ]
+      ],
+      "bytes": 76672
+    },
+    {
+      "id": "installed_prework",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/patches/qwen35_gdn_prework.py",
+      "sha256": "bfcd1225ac8c8dc4390d9cdf11068c68d7a5f0d8a900080a4cf4280776b58f94",
+      "line_regions": [
+        [
+          90,
+          196
+        ],
+        [
+          243,
+          324
+        ],
+        [
+          757,
+          803
+        ],
+        [
+          1864,
+          1897
+        ],
+        [
+          2037,
+          2099
+        ]
+      ],
+      "bytes": 88786
+    },
+    {
+      "id": "installed_engine",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/engine_core.py",
+      "sha256": "c9b37d06a462b0fbc253c2087b6bd1a74884a22ced16c55ac059344c76e39a1e",
+      "line_regions": [
+        [
+          348,
+          364
+        ]
+      ],
+      "bytes": 62020
+    },
+    {
+      "id": "actual_engagement_log",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/freshscreens-ac-frontier-attempt1/omlx-balanced-c1/server.log",
+      "sha256": "c136b9b36d187cccef64d6e694361365504f55340906435500434822ab15d8f2",
+      "line_regions": [
+        [
+          42,
+          60
+        ]
+      ],
+      "bytes": 10500
+    },
+    {
+      "id": "accepted_gdn",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py",
+      "sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+      "line_regions": [
+        [
+          62,
+          94
+        ],
+        [
+          159,
+          176
+        ]
+      ],
+      "bytes": 10037
+    },
+    {
+      "id": "accepted_recurrence",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/kernels/gdn_metal.py",
+      "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+      "line_regions": [
+        [
+          17,
+          99
+        ]
+      ],
+      "bytes": 6277
+    },
+    {
+      "id": "accepted_runner",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/engine/model_runner.py",
+      "sha256": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538",
+      "line_regions": [
+        [
+          54,
+          98
+        ],
+        [
+          154,
+          164
+        ]
+      ],
+      "bytes": 11390
+    },
+    {
+      "id": "v18_postconv",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v18-gdn-postconv-build2-root/tutorial_code/miniengine/model/gdn.py",
+      "sha256": "755d6b002a9765b57e97083947183d12b74805941efbfb802b8eec741ad91290",
+      "line_regions": [
+        [
+          181,
+          234
+        ]
+      ],
+      "bytes": 13956
+    },
+    {
+      "id": "current_worktree_gdn",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/tutorial_code/miniengine/model/gdn.py",
+      "sha256": "e3dc3b05faaf5747dc104adb640486fddbbf2f517e24ce676f2a4fbf85d3e781",
+      "line_regions": [],
+      "bytes": 13965
+    },
+    {
+      "id": "http_shim",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/core_http_precise_v1.py",
+      "sha256": "152e7ec2ef39498f3fe9fecf5a815d8e5e8478f54f85b666db6fae22c60998f4",
+      "line_regions": [
+        [
+          24,
+          38
+        ]
+      ],
+      "bytes": 4845
+    },
+    {
+      "id": "conv_reduction_contract",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/C1-GDN-CONV-REDUCTION-CONTRACT.md",
+      "sha256": "ca4208edd97024e6ffd4ac29ee6424ef2df8468f898bf05d43b144401bef1b63",
+      "line_regions": [],
+      "bytes": 6062
+    },
+    {
+      "id": "prior_study",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/UPSTREAM-KERNEL-STUDY.md",
+      "sha256": "34976731312ffdbc92e8114ef8c2583116bb29cc2a3cf1e5bf7cc20263751092",
+      "line_regions": [],
+      "bytes": 15840
+    },
+    {
+      "id": "prior_pipeline",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/C1-PIPELINE-OVERHEAD-PROPOSAL.md",
+      "sha256": "919d446b41c5992eb0f2730883970cd091a72e3f6018dc8fac19b3323df3b495",
+      "line_regions": [],
+      "bytes": 9394
+    },
+    {
+      "id": "allocator_followup_registry.json",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/registry.json",
+      "sha256": "408b29704657afd1146ee3f3d7d1b11faacaf4bed37f9271280cb765722aa03a",
+      "bytes": 620091,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_pins.json",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/pins.json",
+      "sha256": "5718e96cff5a8fd5bb8a1faa5614209cf64552ac715f25ea7acdd73e17e0c691",
+      "bytes": 621238,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_client.py",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/client.py",
+      "sha256": "dc142d4fb6dbbd3872a1b181a37dfe9451362f4f63b6daae03ae759c18f829d8",
+      "bytes": 16571,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_cli.py",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/cli.py",
+      "sha256": "721b4012d5bd9b8e3b67e8fc321020e4271a2396661ebd795c12ff007d2c5ce3",
+      "bytes": 59972,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_server.py",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/server.py",
+      "sha256": "b05c1388278db419082220ede5aa2e3e13569857a256f3f3ec3d60b800d708c4",
+      "bytes": 361243,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_llm_engine.py",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/engine/llm_engine.py",
+      "sha256": "7e7e96c1a101193bfa6fa90e884b7f6008f8340c7a55c8146df54c86fb569620",
+      "bytes": 3459,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_followup_server_metrics.py",
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/server_metrics.py",
+      "sha256": "b3a4665b927d962ec8f1fb89f761e8ac62841270a48c70401bc0ad0461d75b99",
+      "bytes": 16270,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_final_child.py",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/child.py",
+      "sha256": "6ba54460c97e370fc7cc370efb63e7b36837c0d4e325c0ff9a0c79770378d8cc",
+      "bytes": 11598,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_final_official_entry.py",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/official_entry.py",
+      "sha256": "90ced5405d263610c2f6cb406fb95055d96b0f37df32ded4d38a16eebfe3fd3a",
+      "bytes": 1732,
+      "line_regions": []
+    },
+    {
+      "id": "allocator_final_allocator-source-observations.json",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/donor-read-omlx-20261016/allocator-source-observations.json",
+      "sha256": "525e2124834b8427051574fd00882f22bfef867a919abcebd4674535c1abfaa2",
+      "bytes": 11716,
+      "line_regions": []
+    }
+  ],
+  "report_sha256": "1e0322c38dc98c8772b7fa9a324e86baec0f43bf0ddaf8f3a327bfcb5f26f2e9",
+  "followup_scope": "Two additional CPU-only rounds authorized by root allocator-cache request",
+  "allocator_conclusion": {
+    "native_final_attempt_limit_bytes": 2147483648,
+    "native_source": "child.py:35 omits parameter; accepted engine/llm_engine.py:15 default=2, :18 set_cache_limit",
+    "omlx_final_attempt_policy": "total_mem if > 0; actual CLI set_cache_limit",
+    "actual_pool_bytes_observed": false,
+    "performance_cause_measured": false
+  }
+}

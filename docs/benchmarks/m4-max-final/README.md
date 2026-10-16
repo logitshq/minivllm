@@ -18,6 +18,8 @@ C1 native相对oMLX aggregate x−5.718581%/y−1.046646%；C2/C4 aggregate y分
 
 oMLX为0.7.1.dev1 balanced默认.03：已试C2/C4最佳，C1 balanced/aggressive历史近并列，不能称全配置最优。Lithos为真实m4_max/noDraft/acceleratorON、保守apple-m4-max-40c profile；当前OpenAI服务single admission，仅C1。旧aggressive screen不混入本轮正式点。
 
+缓存口径补充（2026-10-16源码复核）：无跨请求前缀复用与MLX allocator缓冲池是两件事，不能把旧摘要的`cache0`读成allocator上限为0。本轮实际`child.py:35`未传`cache_limit_gb`，采用引擎默认2GiB；oMLX实际CLI在`total_mem>0`时将上限设为`total_mem`。这些是调用代码中的策略，不是实际池内字节、复用率或速度因果的测量；本轮未记录这些allocator指标。原分数和raw不变，详见[实现对照](../../experiments/20-donor-implementation-map.md)。
+
 前8 arms均nominal(0)，包括第8个已经变慢的native C1 block3；第9个oMLX C1 block3才变fair(1)，全部C2/C4均fair。359份原始资源均AC/pressure1，Swapouts总delta0；thermal0/1都符合原guard。不能把变慢因果归为热/降频：本轮没有频率、温度或功率telemetry，也不能称单一稳定热域Pareto。
 
 [跨campaign静态审计](CROSS-CAMPAIGN-SANITY.md)未找到具体源码分母、barrier、pipeline、scheduler或cache bug；旧actual MLX controls为UNKNOWN，新controls显式50/50/20/FAST_SYNCH0，probe cadence由5变17。旧nominal campaign约两倍快的绝对速度差异原因仍UNKNOWN；不同campaign不pool，不事后按热状态筛行。

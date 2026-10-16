@@ -75,6 +75,8 @@ saved15 参考在 `reference/v18-recurrent-numeric-build1/gpu-recurrent-numeric-
 ## 5. 端到端协议与采纳门槛
 
 固定19-token prompt，greedy/temperature0、max_new_tokens32、正常EOS（不能强关）、cache0、noDraft；原prompt正常生成32，无EOS时按实际32计。调度batch4不代表实际GPU batch4。
+
+缓存必须分开记录：跨请求prefix复用开关、MLX allocator上限与实际池内字节不是同一指标。上面的简写不能用来推断所有历史harness都设allocator=0；最终七点矩阵的native实际采用默认2GiB，oMLX启动代码设为`total_mem`。不同资格/E2E harness仍按其冻结源码逐项复现，不能把最终矩阵的默认值追溯套到旧实验。目标机新测试须显式记录allocator limit/active/cache，见[源码复核说明](../../experiments/20-donor-implementation-map.md)。
 每个 fresh process 3 warm + 3 measured；6个fresh依次 off/on/on/off/off/on，构成3 paired，gates编译两臂都ON，只切换V19 norm reuse；32 raw IDs每请求严格一致，warm route检查后恢复hook，measure无新增hook。
 客户端 x=`(实际N−首非空chunk的canonical token数)/(incoming DONE−firstText)`，先request→group median→process median3；它是stream delivery proxy，不是GPU token/s。
 y=`实际总tokens/(last DONE−first POST)`，包括HTTP queue/prefill/服务开销；保留完整POST/firstText/DONE时间戳、TTFT和所有正负pair。
