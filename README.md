@@ -4,6 +4,7 @@
 设计跟 vLLM V1（统一调度、paged KV、continuous batching），后端是 MLX。远程还有一份 CUDA/Triton 版，接口契约相同。
 
 - **逐章重写教程**：[从第一章开始](docs/tutorial-v2/README.md)，每章一个 commit/tag，教学代码在 `tutorial_code/`。
+- **系统优化攻略（M5 Ultra）**：[瓶颈、近期论文、实验账本](docs/optimization-guide/README.md)，记录采用与拒绝的方案、复现命令和跨机器边界。
 - 原计划和实验记录：`docs/PLAN.md`、`docs/tutorial/`
 - 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
 

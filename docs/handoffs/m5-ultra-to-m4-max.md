@@ -59,3 +59,18 @@ python -B bench/m5_ultra_256gb/retire_batch/test_retirement.py
 本次同步还核对了安装来源：M5的oMLX是官方0.7.1.dev1 wheel，无法证明其
 VCS提交；本地源码checkout的SHA不代表被测wheel。已纠正报告中的这一
 元数据归属，原始计时和性能数字未变。
+
+## 系统优化攻略与后续实验（2026-10-16）
+
+新增[攻略入口](../optimization-guide/README.md)、[论文笔记](../optimization-guide/papers.md)
+和[实验账本](../optimization-guide/experiments.md)。后续每项优化先落盘计划，
+再追加正确性、全部计时、资源、失败和取舍；生产热路径保持小。
+
+M5新实验E007（独立大batch GDN融合）、E008（allocator 2/16 GiB配对）、
+E009（线程内状态读取复用）均未过预声明收益门，保留原型和证据，未改生产引擎。
+E008有12个新HTTP进程、1,170条正式请求，C64配对吞吐几何平均仅+0.131%；
+更大池多占约14 GiB空闲buffer，不采用。下一项E010计划检查M5成组prefill/NAX，
+不能直接删除旧backend guard。
+
+M4的`17bd7be`卷积融合报告已查阅：局部micro下降12.21%是继续做模型资格的
+依据，不是HTTP收益；与这里大batch的E007/E009不是同一个实验，不能互相替代。
