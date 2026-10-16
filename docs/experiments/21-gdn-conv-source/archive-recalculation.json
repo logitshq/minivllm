@@ -1,0 +1,35 @@
+{
+  "scope": "archive author CPU stdlib recalculation from existing receipts only; no MLX/GPU/test execution; not an independent replay of GPU tensors",
+  "numeric": {
+    "cases": 6,
+    "chain_steps": 8,
+    "strict_checks": 84,
+    "strict_bytes": 46678016,
+    "status": "PASS_CONV_NUMERIC_SYNTHETIC_ONLY"
+  },
+  "micro": {
+    "status": "EXPLORATORY-PASS",
+    "medians_ns": {
+      "A": 115489.93933105469,
+      "B": 101392.16613769531
+    },
+    "median_reduction": 0.12206927525477151,
+    "wins": 6,
+    "controls": {
+      "A": [
+        1.0323180158275935,
+        0.9882839290731393
+      ],
+      "B": [
+        1.0209191845539576,
+        1.006247410212859
+      ]
+    },
+    "control_medians": {
+      "A": 1.0103009724503664,
+      "B": 1.0135832973834082
+    },
+    "resource_samples": 23,
+    "no_E2E_model_adoption": true
+  }
+}

@@ -50,3 +50,5 @@ docs/              计划、教程、远程版的契约和 notes
 - [19：把量化矩阵乘拆开看](docs/tutorial-v2/19-把量化矩阵乘拆开看.md)：原QMM→手写R4控制→R2几何实验，27项数值通过但未过5%收益门，STOP、未采用。
 
 - [20：沿实际实现读三条执行路径](docs/experiments/20-donor-implementation-map.md)：oMLX预处理、已有ahead、Lithos ICB与allocator策略的源码证据；仅CPU阅读，无新增性能结论。
+
+- [21：把GDN真卷积、SiLU和原始tail合成一核](docs/experiments/21-gdn-conv-fusion.md)：synthetic严格数值与局部micro通过，host-wall中位减少12.21%；真实preconv、完整模型及E2E资格待做，原型未接入引擎。

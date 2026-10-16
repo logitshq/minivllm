@@ -1,0 +1,104 @@
+{
+  "cases": 6,
+  "chain_state_tail_linkage_verified": true,
+  "chain_steps": 8,
+  "current_runner_sha256": "efa9c2c58987f14606310852d555094947b77b2058245e03a6e4bbc3f20a6c5f",
+  "input_readonly_all14": true,
+  "internal_flags_observed": false,
+  "no_engine_fullmodel_performance_qualification": true,
+  "no_real_preconv": true,
+  "observed_product_strides": [
+    40960,
+    10240,
+    1
+  ],
+  "owner": {
+    "child": 39086,
+    "child_absence_strict": true,
+    "external_owner_and_child_absence": "Root reported both exact PID checks rc1/literal empty; not re-polled or independently present as raw file",
+    "pid": 39075,
+    "returncode": 0,
+    "wait_reaped": true
+  },
+  "product_shape": [
+    1,
+    4,
+    10240
+  ],
+  "raw_seals": {
+    "child-output/receipt.json": {
+      "bytes": 60247,
+      "sha256": "f4eb0d3a39af3358b1b5b1b5e2bdd887681fd0b1c414602ed89504ff65c45020"
+    },
+    "owner-receipt.json": {
+      "bytes": 2041,
+      "sha256": "e065704f1bd75c36e8169a813042848c3c39857c8a816e1e487ba12f15894295"
+    },
+    "resource-00.json": {
+      "bytes": 4905,
+      "sha256": "7e94e8dfa69700369d47d3e3232b047a356fd695362ddc73b7a2c651adb35842"
+    },
+    "resource-01.json": {
+      "bytes": 4911,
+      "sha256": "49aad389dbdf8dbb41a4e6b3121706ca2ecff509991eee64ea17df4330c28922"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "resources": {
+    "AC": true,
+    "VM_deltas": {
+      "Compressions": 0,
+      "Decompressions": 0,
+      "Pageouts": 0,
+      "Swapins": 0,
+      "Swapouts": 0
+    },
+    "pressure": 1,
+    "samples": 2,
+    "swap_mb_first_last": [
+      5727.31,
+      5727.31
+    ],
+    "thermal": 0
+  },
+  "root_wrapper_sha256": "e73a159af83ac8bccfb1b71770518860408cb2350e42f41ec5ee667aeb060e9f",
+  "runtime_sources_sha256": {
+    "banks.py": "af09748f937576720d451786ee43ae2cbd973d0c8a60354395c928be5505640f",
+    "check_cpu.py": "73da9eb908bcf6f8fe9a094d9e0da8c5d04f64f5c084565eae74b5be3b85df14",
+    "conv_probe.metal": "e872b08c6d0116e7b600cc9d0556928e0f7b9a17ecb607b03fde7c9bc3cc5ace",
+    "layout_probe.metal": "9284559062ed0e1052ce170bc2aa40138b3450715135cd7720a4ada4ccded8f2",
+    "reference.py": "cd668b5bd45fe00154aa658d81e348d4182dec20ced7dbe2aa902a781281c88e",
+    "runner.py": "efa9c2c58987f14606310852d555094947b77b2058245e03a6e4bbc3f20a6c5f"
+  },
+  "runtime_versions": {
+    "mlx": "0.32.3",
+    "mlx-metal": "0.32.3"
+  },
+  "scope": "CPU stdlib source/result/hash/raw resource replay; no MLX/GPU/new tests or process commands",
+  "status": "PASS_REPLAY_SYNTHETIC_NUMERIC_ONLY",
+  "strict_bytes": 46678016,
+  "strict_checks": 84,
+  "sum_y": 4,
+  "weight_provenance": {
+    "header_bytes": 86450,
+    "index": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model.safetensors.index.json",
+    "key": "language_model.model.layers.0.linear_attn.conv1d.weight",
+    "kind": "real_checkpoint_conv_only",
+    "mapping": "reshape(C,-1), identical to accepted15 loader.py:39-40; no shard/model load",
+    "shard": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00001-of-00003.safetensors",
+    "stored_shape": [
+      10240,
+      4,
+      1
+    ],
+    "tensor_bytes_read": 81920,
+    "tensor_sha256": "803a2591c4f5e7b1c2a7bdbbad78bbd0b68acdd0deab9552933ee7c337489dad"
+  }
+}

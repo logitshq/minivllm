@@ -114,3 +114,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [19：把量化矩阵乘拆开看](19-把量化矩阵乘拆开看.md)记录独立NVFP4 QMV几何实验：原QMM→R4数值控制→每SIMD行数4→2；严格数值通过、性能STOP，未接入引擎。
 
 [20：沿实际实现读三条执行路径](../experiments/20-donor-implementation-map.md)对照实际版本的oMLX、手搓引擎与Lithos，区分已具备ahead、待验证conv预处理、ICB运行时工程及allocator未知项；仅源码阅读，无新增收益结论。
+
+[21：把GDN真卷积、SiLU和原始tail合成一核](../experiments/21-gdn-conv-fusion.md)记录V23的Y4证据、synthetic严格数值与局部micro；host-wall中位减少12.21%，尚未接入引擎，真实preconv与完整模型/E2E资格仍待完成。

@@ -1,0 +1,196 @@
+{
+  "C1_budget_example": {
+    "current_effective_decode_ms_example": 35,
+    "gap_in_x_fraction": 0.06,
+    "latency_drop_fraction_to_raise_x_by6percent": 0.05660377358490576,
+    "saving_ms_per_token": 1.9811320754717014,
+    "saving_us_per_layer": 41.27358490566045,
+    "scope": "Conditional arithmetic budget; not prediction, matched-domain measurement, or Amdahl share proof"
+  },
+  "actual_PSO_evidence": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-pipeline.json",
+    "record": {
+      "actual_reduce_dispatch_observed": false,
+      "architecture": "applegpu_g16s",
+      "assumptions_observed_by_this_tool": false,
+      "device": "Apple M4 Max",
+      "dispatches_submitted_by_tool": 0,
+      "factory": "native-nojit get_reduce_kernel -> Device.get_kernel",
+      "grid_threadgroups": [
+        80,
+        1,
+        1
+      ],
+      "kernel": "col_reduce_small_1_reduce_sumbfloat16",
+      "max_total_threads_per_threadgroup": 1024,
+      "mlx_version": "0.32.3",
+      "n_reads": 4,
+      "native_library_compile_options_overridden": false,
+      "schema": "v23-native-reduction-pipeline-v1",
+      "selector_assumptions": {
+        "axis": 1,
+        "dtype": "bfloat16",
+        "index_type": "int",
+        "ndim_template": 1,
+        "row_contiguous": true,
+        "shape": [
+          1,
+          4,
+          10240
+        ],
+        "strides": [
+          40960,
+          10240,
+          1
+        ]
+      },
+      "static_threadgroup_memory_bytes": 2048,
+      "sum_y_derived_from_measured_pipeline": 4,
+      "thread_execution_width": 32,
+      "threadgroup": [
+        32,
+        4,
+        1
+      ]
+    },
+    "scope": "Actual native no-JIT PSO queried by root; no dispatch; Y4 conditional on runner observing product selector assumptions",
+    "sha256": "dd231cdefba1588b7cea0fbeb06371b6bbbb9d2717694b691fac320696b67498"
+  },
+  "baseline_decode_lines": {
+    "W": [
+      192,
+      211
+    ],
+    "accepted15": [
+      159,
+      176
+    ]
+  },
+  "call_counts": {
+    "GDN_layers": 48,
+    "potential_V23_calls_per_32_output_request": 1488,
+    "typical_profile_decode_model_forwards": 31
+  },
+  "decision": "Continue with actual layout/M-Y characterization and isolated numeric runner; true-conv has distinct mechanism from V18 postconv, magnitude UNKNOWN; no fullmodel investment/GPU launch authorized by this static review",
+  "float_risks": [
+    "typed BF16 product must materialize semantic round before any sum",
+    "each y starts BF16+0; product-first fold; ascending-y merge; SUM_Y not auto-chosen",
+    "PSO M1024/width32 supports Y4 under required product layout; actual flags/strides and dispatch selection must be matched before using Y4",
+    "safe math requested, not a proof of compilation/denormal/FMA behavior",
+    "finite byte gate required for conv/act/raw tail and immutable old inputs before recurrence/fullmodel"
+  ],
+  "logical_compute_primitives": {
+    "baseline": [
+      "Multiply",
+      "Sum(axis=1)",
+      "compiled SiLU"
+    ],
+    "candidate": [
+      "V23 conv+SiLU+tail"
+    ],
+    "concat_copy_dispatches": "unmeasured; tail slice itself is a view",
+    "removed_compute_boundaries_per_decode_if_one_kernel_each": 96
+  },
+  "logical_payload_bytes_per_layer": {
+    "act": 20480,
+    "baseline_tail_backing_if_xp_view": 81920,
+    "conv": 20480,
+    "old_tail": 61440,
+    "product": 81920,
+    "raw": 20480,
+    "w": 81920,
+    "xp": 81920
+  },
+  "scope": "CPU stdlib read-only static analysis; no MLX/GPU/model/Git",
+  "shape_and_expected_stride_elements": {
+    "product_expected_dense": {
+      "shape": [
+        1,
+        4,
+        10240
+      ],
+      "stride": [
+        40960,
+        10240,
+        1
+      ]
+    },
+    "tail": {
+      "logical_row_contiguous_for_B1": true,
+      "physical_strides_from_xp": [
+        40960,
+        10240,
+        1
+      ],
+      "shape": [
+        1,
+        3,
+        10240
+      ],
+      "view_offset_elements": 10240
+    },
+    "w": {
+      "shape": [
+        10240,
+        4
+      ],
+      "stride_if_dense": [
+        4,
+        1
+      ]
+    },
+    "w_T_None_broadcast": {
+      "effective_stride": [
+        0,
+        1,
+        4
+      ],
+      "shape": [
+        1,
+        4,
+        10240
+      ]
+    },
+    "xp": {
+      "shape": [
+        1,
+        4,
+        10240
+      ],
+      "stride_if_dense": [
+        40960,
+        10240,
+        1
+      ]
+    }
+  },
+  "sources_sha256": {
+    "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/common/binary.h": "ee3e8dafc49d87dabe0edded9f617ca09682a3f5ef49310b71ca2fcbb65dc83c",
+    "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/bf16.h": "abd87446a310b77ac530ef52a324feae5cb285d03ec9613e3a88ebb71410fdcb",
+    "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/binary.h": "9a367967a48907ac6792be685bab4cc062f3ad916cccacb441c627d87a4b7898",
+    "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/reduction/reduce_col.h": "800868c1eafbf2b85980731a6303942d2d1061023f6d465f2b996642126cdc62",
+    "/private/tmp/minivllm-engine-optimization-20261014/C1-GDN-CONV-REDUCTION-CONTRACT.md": "ca4208edd97024e6ffd4ac29ee6424ef2df8468f898bf05d43b144401bef1b63",
+    "/private/tmp/minivllm-engine-optimization-20261014/SUMMARY-C1-PIPELINE-PROFILE-GPU.md": "ddb6a27b74cde740e1b741384577507bda2b14fae0f9749662751be64a5fb158",
+    "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/tutorial_code/miniengine/model/gdn.py": "e3dc3b05faaf5747dc104adb640486fddbbf2f517e24ce676f2a4fbf85d3e781",
+    "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/tutorial_code/miniengine/model/qwen3_5.py": "49e35f3d515242951f5ef25b9e71298bc5cef3439dac8d7624f037a765ad82b5",
+    "/private/tmp/minivllm-engine-optimization-20261014/handoff-256gb-mac/payload/accepted15/tutorial_code/miniengine/model/gdn.py": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-gdn-conv-silu-prototype/conv_silu_raw_tail.metal": "59278c8a2bc16810088fb1f69b7a690500a215f2d422c0f6982bd5a51cb6648a",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-gdn-conv-silu-prototype/conv_silu_raw_tail.py": "06f293fbe0077ed3fdf3e71fd2d165264adef9f9861d8c579f8ed55ba6bee951",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-gdn-conv-silu-prototype/native_activation.metal": "963a9408cc963262146461b7dc23bf00ff7eb19bd95c19f661b850cd9ff1e026"
+  },
+  "static_selector": "common/binary.h General branch: dense row xp versus dense col w.T; only row-contiguous same-size donations or default dense out; runtime flags still required",
+  "traffic_limit": "Logical buffer transfers only; cache/donation/contiguity copies/register reuse may change physical traffic; not DRAM evidence",
+  "traffic_model_bytes_per_layer": {
+    "V23_body_source_load_model": 307200,
+    "V23_unique_load_lower_bound": 245760,
+    "baseline": 552960,
+    "saved_range": [
+      245760,
+      307200
+    ]
+  },
+  "traffic_saved_range_48layers_bytes": [
+    11796480,
+    14745600
+  ]
+}

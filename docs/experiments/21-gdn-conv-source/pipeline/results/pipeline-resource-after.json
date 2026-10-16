@@ -1,0 +1,111 @@
+{
+  "label": "v23-native-pipeline-after",
+  "recorded_at": "2026-10-16T15:11:55.612505+00:00",
+  "monotonic_s": 175713.028955666,
+  "owned_model_pid": 38499,
+  "memory_pressure": {
+    "returncode": 0,
+    "text": "The system has 51539607552 (3145728 pages with a page size of 16384).\nSystem-wide memory free percentage: 87%",
+    "error": ""
+  },
+  "pressure_level": {
+    "returncode": 0,
+    "text": "1",
+    "error": ""
+  },
+  "swap": {
+    "returncode": 0,
+    "text": "vm.swapusage: total = 7168.00M  used = 5727.31M  free = 1440.69M  (encrypted)",
+    "error": ""
+  },
+  "vm_stat": {
+    "returncode": 0,
+    "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   574040.\nPages active:                                1043717.\nPages inactive:                               782599.\nPages speculative:                            297185.\nPages throttled:                                   0.\nPages wired down:                             297308.\nPages purgeable:                               61893.\n\"Translation faults\":                     1286157698.\nPages copy-on-write:                        53425464.\nPages zero filled:                        2805043505.\nPages reactivated:                         103571225.\nPages purged:                               79272573.\nFile-backed pages:                            990010.\nAnonymous pages:                             1133491.\nPages stored in compressor:                   183121.\nPages occupied by compressor:                  92571.\nDecompressions:                            403094606.\nCompressions:                              452979564.\nPageins:                                   232468787.\nPageouts:                                      66964.\nSwapins:                                    15661403.\nSwapouts:                                   17428090.",
+    "error": ""
+  },
+  "thermal": {
+    "returncode": 0,
+    "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+    "error": ""
+  },
+  "free_percent": 87,
+  "swap_used_mb": 5727.31,
+  "pressure_level_value": 1,
+  "vm_counters": {
+    "Swapouts": 17428090,
+    "Swapins": 15661403,
+    "Pageouts": 66964,
+    "Compressions": 452979564,
+    "Decompressions": 403094606
+  },
+  "process_inventory_ok": true,
+  "known_inference_processes": [],
+  "known_inference_process_count": 0,
+  "only_owned_known_inference_processes": true,
+  "exactly_one_owned_known_model": false,
+  "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+  "owned_pid_rss_kib": 22384,
+  "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+  "power_metadata": {
+    "status": "known",
+    "percent": 25,
+    "source": "AC Power",
+    "state_text": "AC attached",
+    "raw": {
+      "command": [
+        "/usr/bin/pmset",
+        "-g",
+        "batt"
+      ],
+      "returncode": 0,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t25%; AC attached; not charging present: true",
+      "stderr": ""
+    }
+  },
+  "processinfo_thermal_metadata": {
+    "status": "known",
+    "code": 0,
+    "name": "nominal",
+    "raw": {
+      "command": [
+        "/usr/bin/osascript",
+        "-l",
+        "JavaScript",
+        "-e",
+        "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+      ],
+      "returncode": 0,
+      "stdout": "0",
+      "stderr": ""
+    },
+    "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+  },
+  "exact_owned_pid_metadata": {
+    "status": "known",
+    "pid": 38499,
+    "raw": {
+      "command": [
+        "/bin/ps",
+        "-p",
+        "38499",
+        "-o",
+        "pid=,ppid=,rss=,comm="
+      ],
+      "returncode": 0,
+      "stdout": "38499 58328  22400 /Users/ryanli/code/minivllm/.venv/bin/python",
+      "stderr": ""
+    },
+    "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+    "ppid": 58328,
+    "rss_kib": 22400,
+    "executable": "/Users/ryanli/code/minivllm/.venv/bin/python"
+  },
+  "power_wrapper_identity": {
+    "source_identity_path": "/private/tmp/minivllm-engine-optimization-20261014/precise-v2-source-identity.json",
+    "base_probe_path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_precise_v1.py",
+    "base_probe_sha256": "d0aaa466e1cee70e109dbd4d02e4d457edda2a5e535dafab1b17d9dd6654538f",
+    "wrapper_path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_power_v1.py",
+    "wrapper_sha256": "f4624d7dd8e977759865e11c4b7d3ed0489d1fd55b496e60c29fc087b7d9eb42",
+    "scope": "Metadata-only wrapper; base matcher/inventory/guard semantics unchanged; unavailable values explicit unknown"
+  }
+}

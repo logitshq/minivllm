@@ -1,0 +1,72 @@
+{
+  "GPU_authorization": "Not conferred by CPU review",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v23-conv-numeric-build1/check_cpu.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "/private/tmp/minivllm-engine-optimization-20261014/v23-conv-numeric-build1/runner.py",
+        "--help"
+      ],
+      "returncode": 0
+    }
+  ],
+  "expected_sha256": {
+    "check_cpu.py": "73da9eb908bcf6f8fe9a094d9e0da8c5d04f64f5c084565eae74b5be3b85df14",
+    "runner.py": "efa9c2c58987f14606310852d555094947b77b2058245e03a6e4bbc3f20a6c5f",
+    "source-pins.json": "b0d867a66c626c10b51e27fcb7084034670e12f00d317a594955352413a95f2f"
+  },
+  "internal_product_flags_still_pending": true,
+  "local_files_sha256": {
+    "LICENSE-MLX-MIT": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "README.md": "33db9a8c1210e44d79e47ca3756d52d1a5d0582db4f5db25122cf318e7a192dd",
+    "banks.py": "af09748f937576720d451786ee43ae2cbd973d0c8a60354395c928be5505640f",
+    "check_cpu.py": "73da9eb908bcf6f8fe9a094d9e0da8c5d04f64f5c084565eae74b5be3b85df14",
+    "conv_probe.metal": "e872b08c6d0116e7b600cc9d0556928e0f7b9a17ecb607b03fde7c9bc3cc5ace",
+    "layout_probe.metal": "9284559062ed0e1052ce170bc2aa40138b3450715135cd7720a4ada4ccded8f2",
+    "reference.py": "cd668b5bd45fe00154aa658d81e348d4182dec20ced7dbe2aa902a781281c88e",
+    "runner.py": "efa9c2c58987f14606310852d555094947b77b2058245e03a6e4bbc3f20a6c5f",
+    "source-pins.json": "b0d867a66c626c10b51e27fcb7084034670e12f00d317a594955352413a95f2f"
+  },
+  "no_MLX_GPU_model_Git": true,
+  "owner_scope": "Root independently controls resource guards/180s timeout/Popen wait-reap/strict absence; runner itself has no supervisor or timing",
+  "reference_AST_equivalence_verified": true,
+  "root_external_owner": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/numeric_owner.py",
+  "saved_state_metadata_hash_verified": {
+    "S": {
+      "bytes": 3145728,
+      "sha256": "a0e75e6bf8f22132176c3943edd69adef0c56c0eb09cb80fc06e64a9974f50c4",
+      "shape": [
+        1,
+        48,
+        128,
+        128
+      ]
+    },
+    "beta": {
+      "bytes": 192,
+      "sha256": "0e49440da82843b8c949925650e1c4242f6b0e68dd38a8bbc2f6ac96093ee16c",
+      "shape": [
+        1,
+        48
+      ]
+    },
+    "g": {
+      "bytes": 192,
+      "sha256": "8c97ee82cbe1f0e1346740a867a7f6d56794910bd9e2e3221658bb5388f81241",
+      "shape": [
+        1,
+        48
+      ]
+    }
+  },
+  "status": "PASS_CPU_REVIEW_NUMERIC_SCOPE_ONLY"
+}
