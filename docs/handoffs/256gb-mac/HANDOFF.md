@@ -104,3 +104,11 @@ V18曾fullqual PASS，但E2E aggregate y+.632032%低于1%门槛，DO_NOT_ADOPT�
 最终先报告：目标硬件/环境、源码hash、fullqual verdict、E2E三pair/aggregate x/y、官方对照与Pareto、已保存负结果、下一步；未完成项直说，不能用局部micro代替全模型胜出。
 
 本机48GiB结论：fullqual已独立PASS，但6fresh E2E末尾Swapouts resource STOP；完整请求raw不能代替成功suite。目标256GB须重建harness、重新冻结并同机重测，不重跑源机同latch或放宽guard。精简索引见 `E2E-RESOURCE-STOP.json`。
+
+## M4 Max 最终七点测试补记（独立审查完成）
+
+accepted15/官方矩阵attempt2实际21/21完成：7点×3fresh，总270请求/8640tokens，仅测量135请求/4320tokens。固定协议、359份AC/pressure1资源守卫（Swapouts总delta0）与生命周期独立PASS；根session57621 exit0，21server wait/reap(-15)，返回后22PID严格absent、21portsECONNREFUSED。Native准确标签f976+gatesON显式opt-in/V19OFF，代码默认仍gatesOFF；oMLX balanced默认.03，Lithos真实M4 C1/noDraft。七点、三repeat范围、全部12 signed对照、TTFT和原proof SHA见 [M4最终测试归档](../../benchmarks/m4-max-final/README.md)。
+
+前8arms nominal(0)，包括已慢的第8个native C1block3；第9个OM C1block3起fair(1)，全部C2/C4 fair。原guard允许0/1；没有频率/温度/功率telemetry，不能归因热降频或称稳定thermal Pareto。跨campaign静态审计未找到具体源码分母等bug；旧actual controls UNKNOWN，新显式50/50/20/FAST_SYNCH0，cadence5→17，不pool旧点、不事后筛热态。C1 aggregate x/y落后OM；C2/C4 y+11.448102%/+12.892845%，但C2pair3 x负、Lithos C1block3 y负，因此无稳定双轴整体win；稳定热态性能仍未解决。
+
+独立结果receipt SHA `ef5b41a3c4d63ea3e75bbb3f081dde25bf06e0a1f0dccc51cdcb68458b7c695c`、seal SHA `aea07cc9eaccda23fa576925da9dc38a5db0564fcb7cd011243f5b568e2ffc9b`；外部release SHA `8ea17e7f94b4de364b89c88bcf10da63ecba2deac5001dae00667e15a1b663b8`。V19资源STOP/DO_NOT_ADOPT、旧负结果及矩阵attempt1标题cleanup STOP/OMwait缺失均不改。新343408字节静态reference包仅供adapt/refreeze，历史key脱敏；原4MB包字节不变。目标256GB仍须重建/重冻结/完整资格/同机重测。

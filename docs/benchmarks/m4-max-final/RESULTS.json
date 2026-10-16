@@ -1,0 +1,1933 @@
+{
+  "schema": "m4-final-native15-official-archive-v1",
+  "review_state": "COMPLETE_FIXED_PROTOCOL_WITH_MATERIAL_PERFORMANCE_CAVEATS",
+  "source_of_values": "Independent actual-raw statistics reconcile exactly with original driver replay; no old campaign values pooled.",
+  "native_configuration": {
+    "source_commit": "f976d6a547a9dc1946b52b1de6db376d799b34d7",
+    "source_count": 25,
+    "gates_compile": "explicit ON in this experiment",
+    "code_default_gates_compile": false,
+    "V19_norm_reuse": false,
+    "previous_internal_C1_gates_y_gain_percent": 0.9355577749380339,
+    "default_on_adoption_qualified": false
+  },
+  "official_configuration": {
+    "omlx": "0.7.1.dev1 balanced/default multi-budget .03; best tried C2/C4; C1 balanced/aggressive historical near tie, not globally optimal",
+    "lithos": "5485ad6bac0a5649d66a347f3e01a655ea29d937; m4_max/apple-m4-max-40c conservative profile; accelerator ON/noDraft; OpenAI single admission, C1 only"
+  },
+  "actual_execution": {
+    "tool_session": 57621,
+    "tool_exit_code": 0,
+    "fresh_loads": 21,
+    "points": 7,
+    "fresh_replicas_per_point": 3,
+    "all_requests": 270,
+    "all_output_tokens": 8640,
+    "warm_requests": 135,
+    "warm_output_tokens": 4320,
+    "measured_requests": 135,
+    "measured_output_tokens": 4320,
+    "server_waits": 21,
+    "server_returncodes": [
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15,
+      -15
+    ],
+    "posttool_exact_absent_PIDs": 22,
+    "posttool_refused_ports": 21,
+    "GPU_RELEASED_external": true,
+    "raw_suite_GPU_released_false_preserved": true
+  },
+  "plan": {
+    "schema": "m4-final-native15-official-plan-v1",
+    "configs": [
+      {
+        "label": "C1-block1-native",
+        "engine": "native",
+        "batch": 1,
+        "replica": 1
+      },
+      {
+        "label": "C1-block1-omlx",
+        "engine": "omlx",
+        "batch": 1,
+        "replica": 1
+      },
+      {
+        "label": "C1-block1-lithos",
+        "engine": "lithos",
+        "batch": 1,
+        "replica": 1
+      },
+      {
+        "label": "C1-block2-omlx",
+        "engine": "omlx",
+        "batch": 1,
+        "replica": 2
+      },
+      {
+        "label": "C1-block2-lithos",
+        "engine": "lithos",
+        "batch": 1,
+        "replica": 2
+      },
+      {
+        "label": "C1-block2-native",
+        "engine": "native",
+        "batch": 1,
+        "replica": 2
+      },
+      {
+        "label": "C1-block3-lithos",
+        "engine": "lithos",
+        "batch": 1,
+        "replica": 3
+      },
+      {
+        "label": "C1-block3-native",
+        "engine": "native",
+        "batch": 1,
+        "replica": 3
+      },
+      {
+        "label": "C1-block3-omlx",
+        "engine": "omlx",
+        "batch": 1,
+        "replica": 3
+      },
+      {
+        "label": "C2-pair1-native",
+        "engine": "native",
+        "batch": 2,
+        "replica": 1
+      },
+      {
+        "label": "C2-pair1-omlx",
+        "engine": "omlx",
+        "batch": 2,
+        "replica": 1
+      },
+      {
+        "label": "C2-pair2-omlx",
+        "engine": "omlx",
+        "batch": 2,
+        "replica": 2
+      },
+      {
+        "label": "C2-pair2-native",
+        "engine": "native",
+        "batch": 2,
+        "replica": 2
+      },
+      {
+        "label": "C2-pair3-native",
+        "engine": "native",
+        "batch": 2,
+        "replica": 3
+      },
+      {
+        "label": "C2-pair3-omlx",
+        "engine": "omlx",
+        "batch": 2,
+        "replica": 3
+      },
+      {
+        "label": "C4-pair1-native",
+        "engine": "native",
+        "batch": 4,
+        "replica": 1
+      },
+      {
+        "label": "C4-pair1-omlx",
+        "engine": "omlx",
+        "batch": 4,
+        "replica": 1
+      },
+      {
+        "label": "C4-pair2-omlx",
+        "engine": "omlx",
+        "batch": 4,
+        "replica": 2
+      },
+      {
+        "label": "C4-pair2-native",
+        "engine": "native",
+        "batch": 4,
+        "replica": 2
+      },
+      {
+        "label": "C4-pair3-native",
+        "engine": "native",
+        "batch": 4,
+        "replica": 3
+      },
+      {
+        "label": "C4-pair3-omlx",
+        "engine": "omlx",
+        "batch": 4,
+        "replica": 3
+      }
+    ],
+    "fresh_loads": 21,
+    "warm_groups_per_process": 3,
+    "measure_groups_per_process": 3,
+    "actual_requests": 270,
+    "actual_tokens": 8640,
+    "measured_requests": 135,
+    "measured_tokens": 4320,
+    "power": "AC",
+    "native_gates": "48 setters ON; original batch1 eligibility; original batch>1 fallback",
+    "official_omlx": "balanced default burst_multi_budget_s .03; unchanged source",
+    "lithos": "actual m4_max/noDraft/accelerator on; C1 only",
+    "sampling": "19prompt/32greedy/normalEOS/cache0/noDraft",
+    "aggregation": "median3 groups per process then median3 fresh process medians per point; signed pair/block comparisons retained",
+    "no_retry": true
+  },
+  "seven_points": [
+    {
+      "engine": "native",
+      "batch": 1,
+      "x": 27.951540885988983,
+      "y": 25.13560462307365,
+      "TTFT_s": 0.16149254099582322,
+      "E2E_s": 1.2730945000075735,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C1-block1-native",
+          "engine": "native",
+          "batch": 1,
+          "replica": 1,
+          "x": 27.951540885988983,
+          "y": 25.17622949534523,
+          "TTFT_s": 0.16149254099582322,
+          "E2E_s": 1.2710402090160642
+        },
+        {
+          "label": "C1-block2-native",
+          "engine": "native",
+          "batch": 1,
+          "replica": 2,
+          "x": 28.001903811453396,
+          "y": 25.13560462307365,
+          "TTFT_s": 0.16130379101377912,
+          "E2E_s": 1.2730945000075735
+        },
+        {
+          "label": "C1-block3-native",
+          "engine": "native",
+          "batch": 1,
+          "replica": 3,
+          "x": 22.66171186308861,
+          "y": 19.59715245821743,
+          "TTFT_s": 0.2649442080000881,
+          "E2E_s": 1.6328902920067776
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 22.66171186308861,
+          "max": 28.001903811453396
+        },
+        "y": {
+          "min": 19.59715245821743,
+          "max": 25.17622949534523
+        },
+        "TTFT_s": {
+          "min": 0.16130379101377912,
+          "max": 0.2649442080000881
+        },
+        "E2E_s": {
+          "min": 1.2710402090160642,
+          "max": 1.6328902920067776
+        }
+      }
+    },
+    {
+      "engine": "omlx",
+      "batch": 1,
+      "x": 29.64692424911186,
+      "y": 25.401468059319964,
+      "TTFT_s": 0.21413004098576494,
+      "E2E_s": 1.2597697080054786,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C1-block1-omlx",
+          "engine": "omlx",
+          "batch": 1,
+          "replica": 1,
+          "x": 29.64692424911186,
+          "y": 25.401468059319964,
+          "TTFT_s": 0.21413004098576494,
+          "E2E_s": 1.2597697080054786
+        },
+        {
+          "label": "C1-block2-omlx",
+          "engine": "omlx",
+          "batch": 1,
+          "replica": 2,
+          "x": 29.670229762300703,
+          "y": 25.427212772398615,
+          "TTFT_s": 0.21367587501299568,
+          "E2E_s": 1.2584942080138717
+        },
+        {
+          "label": "C1-block3-omlx",
+          "engine": "omlx",
+          "batch": 1,
+          "replica": 3,
+          "x": 17.690134889397445,
+          "y": 15.01619343946848,
+          "TTFT_s": 0.378643625008408,
+          "E2E_s": 2.1310327500104904
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 17.690134889397445,
+          "max": 29.670229762300703
+        },
+        "y": {
+          "min": 15.01619343946848,
+          "max": 25.427212772398615
+        },
+        "TTFT_s": {
+          "min": 0.21367587501299568,
+          "max": 0.378643625008408
+        },
+        "E2E_s": {
+          "min": 1.2584942080138717,
+          "max": 2.1310327500104904
+        }
+      }
+    },
+    {
+      "engine": "lithos",
+      "batch": 1,
+      "x": 29.488618620243457,
+      "y": 21.76604780519756,
+      "TTFT_s": 0.4203939999861177,
+      "E2E_s": 1.4701796250010375,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C1-block1-lithos",
+          "engine": "lithos",
+          "batch": 1,
+          "replica": 1,
+          "x": 29.488618620243457,
+          "y": 21.76604780519756,
+          "TTFT_s": 0.4203640000196174,
+          "E2E_s": 1.4701796250010375
+        },
+        {
+          "label": "C1-block2-lithos",
+          "engine": "lithos",
+          "batch": 1,
+          "replica": 2,
+          "x": 29.45148394356078,
+          "y": 21.705266341121842,
+          "TTFT_s": 0.42171804199460894,
+          "E2E_s": 1.474296583008254
+        },
+        {
+          "label": "C1-block3-lithos",
+          "engine": "lithos",
+          "batch": 1,
+          "replica": 3,
+          "x": 29.560460976327636,
+          "y": 21.7994503879616,
+          "TTFT_s": 0.4203939999861177,
+          "E2E_s": 1.467926916986471
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 29.45148394356078,
+          "max": 29.560460976327636
+        },
+        "y": {
+          "min": 21.705266341121842,
+          "max": 21.7994503879616
+        },
+        "TTFT_s": {
+          "min": 0.4203640000196174,
+          "max": 0.42171804199460894
+        },
+        "E2E_s": {
+          "min": 1.467926916986471,
+          "max": 1.474296583008254
+        }
+      }
+    },
+    {
+      "engine": "native",
+      "batch": 2,
+      "x": 13.487014674313762,
+      "y": 22.628166356601444,
+      "TTFT_s": 0.4916817710036412,
+      "E2E_s": 2.799683687000652,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C2-pair1-native",
+          "engine": "native",
+          "batch": 2,
+          "replica": 1,
+          "x": 11.87229493510479,
+          "y": 20.2136772535762,
+          "TTFT_s": 0.5141509999957634,
+          "E2E_s": 3.1341111044894205
+        },
+        {
+          "label": "C2-pair2-native",
+          "engine": "native",
+          "batch": 2,
+          "replica": 2,
+          "x": 13.487014674313762,
+          "y": 22.628166356601444,
+          "TTFT_s": 0.4916817710036412,
+          "E2E_s": 2.799683687000652
+        },
+        {
+          "label": "C2-pair3-native",
+          "engine": "native",
+          "batch": 2,
+          "replica": 3,
+          "x": 13.934762175818408,
+          "y": 23.97997896869342,
+          "TTFT_s": 0.45861024950863793,
+          "E2E_s": 2.6410156869969796
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 11.87229493510479,
+          "max": 13.934762175818408
+        },
+        "y": {
+          "min": 20.2136772535762,
+          "max": 23.97997896869342
+        },
+        "TTFT_s": {
+          "min": 0.45861024950863793,
+          "max": 0.5141509999957634
+        },
+        "E2E_s": {
+          "min": 2.6410156869969796,
+          "max": 3.1341111044894205
+        }
+      }
+    },
+    {
+      "engine": "omlx",
+      "batch": 2,
+      "x": 13.156233459010798,
+      "y": 20.303770039787274,
+      "TTFT_s": 0.7620535835012561,
+      "E2E_s": 3.115389791986672,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C2-pair1-omlx",
+          "engine": "omlx",
+          "batch": 2,
+          "replica": 1,
+          "x": 10.888295865483295,
+          "y": 17.308252565141505,
+          "TTFT_s": 0.763974062007037,
+          "E2E_s": 3.662383853996289
+        },
+        {
+          "label": "C2-pair2-omlx",
+          "engine": "omlx",
+          "batch": 2,
+          "replica": 2,
+          "x": 13.156233459010798,
+          "y": 20.303770039787274,
+          "TTFT_s": 0.7620535835012561,
+          "E2E_s": 3.115389791986672
+        },
+        {
+          "label": "C2-pair3-omlx",
+          "engine": "omlx",
+          "batch": 2,
+          "replica": 3,
+          "x": 15.643898879781329,
+          "y": 23.78680223642115,
+          "TTFT_s": 0.677554895504727,
+          "E2E_s": 2.659171604012954
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 10.888295865483295,
+          "max": 15.643898879781329
+        },
+        "y": {
+          "min": 17.308252565141505,
+          "max": 23.78680223642115
+        },
+        "TTFT_s": {
+          "min": 0.677554895504727,
+          "max": 0.763974062007037
+        },
+        "E2E_s": {
+          "min": 2.659171604012954,
+          "max": 3.662383853996289
+        }
+      }
+    },
+    {
+      "engine": "native",
+      "batch": 4,
+      "x": 12.200735241051921,
+      "y": 38.88648794562105,
+      "TTFT_s": 0.7314061249926453,
+      "E2E_s": 3.2910859164985595,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C4-pair1-native",
+          "engine": "native",
+          "batch": 4,
+          "replica": 1,
+          "x": 11.756468742638473,
+          "y": 37.44723651477657,
+          "TTFT_s": 0.7314061249926453,
+          "E2E_s": 3.3898338539875112
+        },
+        {
+          "label": "C4-pair2-native",
+          "engine": "native",
+          "batch": 4,
+          "replica": 2,
+          "x": 12.818091868659375,
+          "y": 39.08420167965301,
+          "TTFT_s": 0.7768999789986992,
+          "E2E_s": 3.274478499995894
+        },
+        {
+          "label": "C4-pair3-native",
+          "engine": "native",
+          "batch": 4,
+          "replica": 3,
+          "x": 12.200735241051921,
+          "y": 38.88648794562105,
+          "TTFT_s": 0.7171386250120122,
+          "E2E_s": 3.2910859164985595
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 11.756468742638473,
+          "max": 12.818091868659375
+        },
+        "y": {
+          "min": 37.44723651477657,
+          "max": 39.08420167965301
+        },
+        "TTFT_s": {
+          "min": 0.7171386250120122,
+          "max": 0.7768999789986992
+        },
+        "E2E_s": {
+          "min": 3.274478499995894,
+          "max": 3.3898338539875112
+        }
+      }
+    },
+    {
+      "engine": "omlx",
+      "batch": 4,
+      "x": 11.623696890195703,
+      "y": 34.445484829310764,
+      "TTFT_s": 1.0277286874916172,
+      "E2E_s": 3.6405600830039475,
+      "fresh_processes": 3,
+      "per_process_group_medians": [
+        {
+          "label": "C4-pair1-omlx",
+          "engine": "omlx",
+          "batch": 4,
+          "replica": 1,
+          "x": 11.490358707991152,
+          "y": 34.445484829310764,
+          "TTFT_s": 0.9366986874956638,
+          "E2E_s": 3.6355322914896533
+        },
+        {
+          "label": "C4-pair2-omlx",
+          "engine": "omlx",
+          "batch": 4,
+          "replica": 2,
+          "x": 11.879736523715703,
+          "y": 34.45093303989395,
+          "TTFT_s": 1.0459443330037175,
+          "E2E_s": 3.6405600830039475
+        },
+        {
+          "label": "C4-pair3-omlx",
+          "engine": "omlx",
+          "batch": 4,
+          "replica": 3,
+          "x": 11.623696890195703,
+          "y": 33.683407221293756,
+          "TTFT_s": 1.0277286874916172,
+          "E2E_s": 3.7205733959999634
+        }
+      ],
+      "fresh_process_ranges": {
+        "x": {
+          "min": 11.490358707991152,
+          "max": 11.879736523715703
+        },
+        "y": {
+          "min": 33.683407221293756,
+          "max": 34.45093303989395
+        },
+        "TTFT_s": {
+          "min": 0.9366986874956638,
+          "max": 1.0459443330037175
+        },
+        "E2E_s": {
+          "min": 3.6355322914896533,
+          "max": 3.7205733959999634
+        }
+      }
+    }
+  ],
+  "all_12_signed_comparisons": [
+    {
+      "batch": 1,
+      "replica": 1,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": -5.718580952537311,
+        "y": -0.8867147499063255,
+        "TTFT_s": -24.582024898337817,
+        "E2E_s": 0.8946477232278927
+      }
+    },
+    {
+      "batch": 1,
+      "replica": 1,
+      "baseline": "lithos",
+      "native_vs_baseline_percent": {
+        "x": -5.212444007802031,
+        "y": 15.667436370020948,
+        "TTFT_s": -61.58269000478472,
+        "E2E_s": -13.545243900712666
+      }
+    },
+    {
+      "batch": 1,
+      "replica": 2,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": -5.622895286665763,
+        "y": -1.146834896672222,
+        "TTFT_s": -24.51005945150865,
+        "E2E_s": 1.1601397845718786
+      }
+    },
+    {
+      "batch": 1,
+      "replica": 2,
+      "baseline": "lithos",
+      "native_vs_baseline_percent": {
+        "x": -4.921925614632128,
+        "y": 15.804175023887357,
+        "TTFT_s": -61.75079675252757,
+        "E2E_s": -13.647327499744598
+      }
+    },
+    {
+      "batch": 1,
+      "replica": 3,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 28.103669105829553,
+        "y": 30.506792798156024,
+        "TTFT_s": -30.028081683877584,
+        "E2E_s": -23.375635968112675
+      }
+    },
+    {
+      "batch": 1,
+      "replica": 3,
+      "baseline": "lithos",
+      "native_vs_baseline_percent": {
+        "x": -23.337758902892702,
+        "y": -10.102538782172022,
+        "TTFT_s": -36.97716713158676,
+        "E2E_s": 11.237846592455858
+      }
+    },
+    {
+      "batch": 2,
+      "replica": 1,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 9.03721832854345,
+        "y": 16.78635481831463,
+        "TTFT_s": -32.700463855404095,
+        "E2E_s": -14.424286764218675
+      }
+    },
+    {
+      "batch": 2,
+      "replica": 2,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 2.514254678845118,
+        "y": 11.448102063110843,
+        "TTFT_s": -35.47937026362258,
+        "E2E_s": -10.13375937091634
+      }
+    },
+    {
+      "batch": 2,
+      "replica": 3,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": -10.925260493545274,
+        "y": 0.81211728399746,
+        "TTFT_s": -32.313934627096444,
+        "E2E_s": -0.6827659030570032
+      }
+    },
+    {
+      "batch": 4,
+      "replica": 1,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 2.3159419249657587,
+        "y": 8.714499738762616,
+        "TTFT_s": -21.91660618761877,
+        "E2E_s": -6.758252101825435
+      }
+    },
+    {
+      "batch": 4,
+      "replica": 2,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 7.898789195117395,
+        "y": 13.448891600102009,
+        "TTFT_s": -25.722626483608668,
+        "E2E_s": -10.055639095674195
+      }
+    },
+    {
+      "batch": 4,
+      "replica": 3,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 4.9643272386338255,
+        "y": 15.447014282563565,
+        "TTFT_s": -30.22101710886983,
+        "E2E_s": -11.543583039193672
+      }
+    }
+  ],
+  "aggregate_signed_comparisons": [
+    {
+      "batch": 1,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": -5.718580952537311,
+        "y": -1.0466459482792234,
+        "TTFT_s": -24.582024898337817,
+        "E2E_s": 1.057716495119676
+      }
+    },
+    {
+      "batch": 1,
+      "baseline": "lithos",
+      "native_vs_baseline_percent": {
+        "x": -5.212444007802031,
+        "y": 15.480793059139874,
+        "TTFT_s": -61.58543152348606,
+        "E2E_s": -13.40551328844085
+      }
+    },
+    {
+      "batch": 2,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 2.514254678845118,
+        "y": 11.448102063110843,
+        "TTFT_s": -35.47937026362258,
+        "E2E_s": -10.13375937091634
+      }
+    },
+    {
+      "batch": 4,
+      "baseline": "omlx",
+      "native_vs_baseline_percent": {
+        "x": 4.9643272386338255,
+        "y": 12.892845428993049,
+        "TTFT_s": -28.83276161359355,
+        "E2E_s": -9.599461581115431
+      }
+    }
+  ],
+  "scope": {
+    "x": "request (32-first chunk canonical count)/(incoming DONE-first text), group median then process median3 then fresh median3; stream delivery proxy, not GPU tokens/s",
+    "y": "actual C*32/(last incoming DONE-first POST); includes queue/prefill/HTTP",
+    "TTFT_s": "median request firstText-POST within group, then median3 groups, then median3 fresh processes",
+    "warmups_excluded_from_scores": true,
+    "C1": "Latin shared blocks N/O/L, O/L/N, L/N/O; shared native points, not independent two-arm trials",
+    "C2_C4": "Native/oMLX AB/BA/AB; own raw32=own canonical per request, no cross-batch or official raw-ID equality claim",
+    "old_campaigns_pooled": false,
+    "performance_adoption_or_overall_win_qualified": false,
+    "cross_campaign_absolute_speed_gap_investigation": "Static sanity COMPLETE: no concrete source denominator/barrier/pipeline/scheduler/cache bug found; old actual MLX controls UNKNOWN versus new explicit50/50/20/FAST_SYNCH0; probe cadence5 versus17. Causal absolute-rate change UNKNOWN; campaigns not pooled.",
+    "thermal_guard": "Original frozen guard permits nominal0/fair1. Campaign completed under original guard; all medians/ranges retained without thermal-state filtering.",
+    "thermal_campaign_boundary": "First8 arms nominal0, including already-slower native C1block3 (arm8); oMLX C1block3 (arm9) and every C2/C4 arm fair1. Both states allowed by original guard. No clock/temperature/power telemetry; cannot assign causal slowdown or claim a stable thermal-domain Pareto.",
+    "current_descriptive_comparison": "C1 aggregate x/y below oMLX balanced; C2/C4 aggregate y+11.448102%/+12.892845%, but C2pair3 x negative and Lithos C1block3 y negative; no stable dual-axis overall win.",
+    "final_conclusion_authority": "Independent results review COMPLETE; fixed-protocol/resource/lifecycle PASS with material performance caveats; NO stable overall dual-axis win."
+  },
+  "V19_status": "FULLMODEL_QUAL_PASS; unique E2E actual attempt resource STOP/DO_NOT_ADOPT; default OFF, unchanged",
+  "negative_history": [
+    "old fullqual AC/Battery token0 pressure2 STOPs preserved",
+    "V19 E2E terminal sustained Swapouts STOP preserved",
+    "matrix attempt1 oMLX process-title cleanup STOP and missing OM wait preserved; external release not retroactive formal success"
+  ],
+  "proofs": {
+    "plan.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/plan.json",
+      "sha256": "fdb9c48d3beaf57786505b89f6d7c2f048387e913e3f7acb00ccdcad5c3838f9"
+    },
+    "pins.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/pins.json",
+      "sha256": "5718e96cff5a8fd5bb8a1faa5614209cf64552ac715f25ea7acdd73e17e0c691"
+    },
+    "output/cpu-raw-replay.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/cpu-raw-replay.json",
+      "sha256": "e9dd77ac483b848036f64cad2a0e8004642d5445e7756a0f43cc4be67ffefbe3"
+    },
+    "output/suite-complete.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/output/suite-complete.json",
+      "sha256": "7767faaa392f1801234e4fedc76b741858e17523bd90ad2991b5f90bf42c124d"
+    },
+    "posttool/GPU-RELEASE.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/posttool/GPU-RELEASE.json",
+      "sha256": "8ea17e7f94b4de364b89c88bcf10da63ecba2deac5001dae00667e15a1b663b8"
+    },
+    "posttool/external-absence.json": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/posttool/external-absence.json",
+      "sha256": "7ef80835b162937b966f2f0ddd771a289428dadf0f5e4985c3b521b1e40f2b59"
+    },
+    "attempt1_stop_release": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt1/posttool/GPU-RELEASE.json",
+      "sha256": "dfabe8f1c4239cf31a2ee9c2c6b8a1cbc099a445d43ddd07129da63942ad6de8"
+    },
+    "independent_review": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-independent-results-attempt2/REVIEW.md",
+      "sha256": "37b0b5a520aa11a1696050612f2b70f72f67b19e510aebfd16022a8f9fa0f36f"
+    },
+    "independent_receipt": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-independent-results-attempt2/receipt.json",
+      "sha256": "ef5b41a3c4d63ea3e75bbb3f081dde25bf06e0a1f0dccc51cdcb68458b7c695c"
+    },
+    "independent_seal": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-independent-results-attempt2/seal.json",
+      "sha256": "aea07cc9eaccda23fa576925da9dc38a5db0564fcb7cd011243f5b568e2ffc9b"
+    },
+    "independent_stats": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-independent-results-attempt2/stats.json",
+      "sha256": "8e0142a47ba11b535020aebe0c6b3764aa925b235a41eed7c5c4c7374d5f5df5"
+    },
+    "independent_comparisons": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-independent-results-attempt2/comparisons.csv",
+      "sha256": "a99dbfb1094d4e385f56a6f0f099c9c96701b28c644b6355dcc86fd48f4da3c2"
+    },
+    "cross_campaign_summary": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-cross-campaign-sanity-build1/SUMMARY.md",
+      "sha256": "76e6ca9a71bda87b0777809ba8babeca222477e8b6834a43627a64aaa75e4ccf"
+    },
+    "cross_campaign_details": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-cross-campaign-sanity-build1/details.json",
+      "sha256": "ea79b4b931df76b66f24b80e31e671d3b399aaeb13086bc2b7df996ee06e4ab7"
+    },
+    "cross_campaign_manifest": {
+      "source_path": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-cross-campaign-sanity-build1/manifest.json",
+      "sha256": "bc53001b2615759d295f669a89d126cdb2c22e1051d8ae692e56ea98150173cb"
+    }
+  },
+  "sampled_thermal_by_actual_arm": [
+    {
+      "label": "C1-block1-native",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "3684a1b8e502b172e6e5a525a8f807690d15d1e3ac278883eb1b2e88218e87ba"
+    },
+    {
+      "label": "C1-block1-omlx",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "0fa06ce24f69d207c10eaaa3c83bcf4bc19e7bad7ba907767657b08cd42e1692"
+    },
+    {
+      "label": "C1-block1-lithos",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "6ca3858e0b8eebc07de8af89d0baea794a03471676048f2a1ee67d60b75d0f99"
+    },
+    {
+      "label": "C1-block2-omlx",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "971eb6252b53459d4c020ec5ad234c0f2531c36002310b1d89dfd7a63c3f7205"
+    },
+    {
+      "label": "C1-block2-lithos",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "4e84153990020e8340dfb3416a85b18318c48d198f7819668c2e32365a891e28"
+    },
+    {
+      "label": "C1-block2-native",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "23d4277b0db5f3eed7fd1db0744ec4e19e90d0249dbb740cdd3b5975565d3100"
+    },
+    {
+      "label": "C1-block3-lithos",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "44e32182c665ad72165e715fa583bbc7d39d7ce38e47033064780daf5a1c52eb"
+    },
+    {
+      "label": "C1-block3-native",
+      "all_sampled_thermal_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 0
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 0
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 0
+        }
+      ],
+      "source_result_sha256": "3250ee0f24a15a327a224084b67211cdab0f72894211cb5b12553b329e000472"
+    },
+    {
+      "label": "C1-block3-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C1-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C1-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C1-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C1-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C1-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C1-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "a07e1f18d1942de41a5e3df94e14ef1065c5f8604b5069d13be46f6c9430bc81"
+    },
+    {
+      "label": "C2-pair1-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "82bf6b93bca1362d7ad9d71da81911dfd8a969c2eab076f689b593aa5b0b54c4"
+    },
+    {
+      "label": "C2-pair1-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "27f202562994f963d738ba0802882dd72616897c9ab1665f9e04ef59a3cf1dd5"
+    },
+    {
+      "label": "C2-pair2-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "c7fb0015e9a7e281fbf56a9c7a9f75c63b73882b62c78ed0fe6cbb6b6b6ee973"
+    },
+    {
+      "label": "C2-pair2-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "8eb493cac4c5797d58610b8dc417e5c3dbd48217fe5d722405b29c3c1862a2ca"
+    },
+    {
+      "label": "C2-pair3-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "5cfba76aa1a07847a25bf53e6369656c31b623160b37aef3459a08179577595e"
+    },
+    {
+      "label": "C2-pair3-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C2-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C2-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "bd922fd6327b10f0c5943e93a6f3ffc15e3176ef5ba60f98f415f9c103daac61"
+    },
+    {
+      "label": "C4-pair1-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "e6547d891c23ece51136eb05946b66f9b814753aae1f221e2c8b136f4097760e"
+    },
+    {
+      "label": "C4-pair1-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "315e7234e7450cde565893ee74d16be9147f425af583f98c33e63825f788ab26"
+    },
+    {
+      "label": "C4-pair2-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "3eaa867abf3b876e96e5fef99be3a0c41e00d18538c528ebb28a961b74106abb"
+    },
+    {
+      "label": "C4-pair2-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "0ee155a997df2935110dd4f2815afb563cbc742788a016b5dd9cff097e7a8e25"
+    },
+    {
+      "label": "C4-pair3-native",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "0ff0b111e5f036d09073b167581609715406d40851e46cc57f86f3cb86ba8e93"
+    },
+    {
+      "label": "C4-pair3-omlx",
+      "all_sampled_thermal_codes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "measured_phase_thermal_samples": [
+        {
+          "label": "before-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-0",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-1",
+          "code": 1
+        },
+        {
+          "label": "before-C4-measure-2",
+          "code": 1
+        },
+        {
+          "label": "after-C4-measure-2",
+          "code": 1
+        }
+      ],
+      "source_result_sha256": "a192e88278240d93b792762ef9b0181e70b140114723ff18c21675dfa2d04213"
+    }
+  ],
+  "independent_verdict": {
+    "recorded_fixed_protocol_validated": true,
+    "resource_guards_validated": true,
+    "lifecycle_and_external_release_validated": true,
+    "stable_thermal_performance_qualified": false,
+    "overall_dual_axis_win": false,
+    "TTFT_all12_signed_and4aggregates_faster": true,
+    "verification_errors": []
+  },
+  "resource_summary": {
+    "raw_resource_snapshots": 359,
+    "all_AC": true,
+    "all_pressure1": true,
+    "allowed_thermal_codes": [
+      0,
+      1
+    ],
+    "Swapouts_total_delta": 0,
+    "first8_arms_thermal0": true,
+    "ninth_and_all_C2_C4_thermal1": true,
+    "all_samples_and_ranges_retained": true,
+    "frequency_temperature_power_causal_measurements": false
+  },
+  "sampled_thermal_by_actual_arm_note": "Exact sampled codes retained without filtering; index8 NativeC1block3 remains nominal despite slowdown, index9 oMLXC1block3 first fair."
+}
