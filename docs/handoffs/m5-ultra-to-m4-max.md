@@ -2,8 +2,8 @@
 
 2026-10-16。共享仓库 `logitshq/minivllm`；M5 分支为
 `experiment/m5-ultra-256gb`。本分支已合入 M4 分支
-`tutorial/18-gdn-projection-packing` 的 `036184d`，包含 M4 最终对照、
-v20/v21 打包、v22 QMV、v23 卷积原型及 donor 设计记录。此次合并没有改变
+`tutorial/18-gdn-projection-packing` 的 `17bd7be`，包含 M4 最终对照、
+v20/v21 打包、v22 QMV、v23 卷积数值/micro实验及 donor 设计记录。此次合并没有改变
 M5 已测量的引擎源码；M4 的原型仍是未接入状态。
 
 ## 先看这些提交和结果
@@ -72,5 +72,5 @@ E008有12个新HTTP进程、1,170条正式请求，C64配对吞吐几何平均�
 更大池多占约14 GiB空闲buffer，不采用。下一项E010计划检查M5成组prefill/NAX，
 不能直接删除旧backend guard。
 
-M4的`17bd7be`卷积融合报告已查阅：局部micro下降12.21%是继续做模型资格的
+M4的`17bd7be`[卷积融合报告](../experiments/21-gdn-conv-fusion.md)已合入：局部micro下降12.21%是继续做模型资格的
 依据，不是HTTP收益；与这里大batch的E007/E009不是同一个实验，不能互相替代。
