@@ -1,0 +1,38 @@
+M5 Ultra 256GB：窄 NVFP4 矩阵向量 kernel
+
+代码：cabcbbd231d821343a878a841ee8eb653ddb5c24（本地提交，未推送）。
+方案：在投影/卷积融合之上，NVFP4每个SIMD处理两行，关闭乘加收缩，保留原归约顺序。
+原始量化权重保持不变；追加派生权重 8.714 GiB，参数替换时刷新。
+精确范围：MLX0.32.3、M5 Ultra、27B NVFP4/BF16、B1、used length<=256。B2/B4保留原图路径；其余回退。
+默认关闭；首次pack和编译成本保留在warm记录，不计入稳定态中位数。
+
+正确性：214组完整前向，每组logits及128个状态数组逐位相同；16个GDN案例及771个QMV案例；参数内容哈希不变。
+覆盖4个提示词上下文、权重/scale替换恢复、边界、批次变化、stop和lookahead。
+自由生成：B1/B2/B4同batch原版逐token相同，另3组提示词的B1自由生成相同。
+正式测量：288次请求（含预热），144次计时请求；144次native原始IDs校验通过。
+
+每格是3个新进程各自3次计时中位数的中位数：
+C | 引擎 | 完整请求吞吐 tok/s | 首字延迟 ms | 客户端交付速率估计 tok/s
+1 | base | 48.81 | 77.95 | 53.64
+1 | fused | 51.04 | 77.97 | 56.44
+1 | omlx | 47.11 | 107.29 | 54.25
+1 | lithos | 49.18 | 111.41 | 57.62
+2 | fused | 80.61 | 129.52 | 47.46
+2 | omlx | 73.71 | 225.44 | 49.39
+4 | fused | 125.18 | 248.68 | 41.72
+4 | omlx | 105.18 | 419.98 | 40.67
+
+对上一版投影/卷积融合：C1完整请求吞吐 +4.58%，交付速率 +5.22%。
+三对完整请求吞吐变化：+4.71%, +4.58%, +4.51%
+有界采用检查：True。
+C1相对omlx：完整请求吞吐 +8.36%，交付速率 +4.05%。
+C1相对lithos：完整请求吞吐 +3.80%，交付速率 -2.04%。
+
+性能范围是单个19-token prompt、32-token输出，不是长上下文或广泛工作负载排名。
+C为HTTP并发数；官方实际GPU batch未知。Lithos使用本地M5 Ultra适配profile，其OpenAI接口仅支持C1。
+oMLX/Lithos官方没有暴露原始IDs；二者检查visible roundtrip、usage、缓存和正常EOS。
+所有配置相同MLX控制50/50/20/0；两个native版本均graph+2GiB分配池；无prompt cache、无draft。
+QMV探索：启用FP收缩时词表头有1项差异，关闭后单算子及完整模型对照一致；所有探索均保留。
+资源：{"snapshots": 360, "pressure_levels": [1], "thermal_codes": [0], "swap_used_mb_max": 31.25, "counter_ranges": {"Pageouts": [13992, 13992], "Swapouts": [4048, 4048]}}
+24个服务及owner退出后均核实PID不存在。
+原始证据：/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/qmv-frontier-v1
