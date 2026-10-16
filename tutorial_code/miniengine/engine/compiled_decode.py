@@ -3,6 +3,7 @@
 The first 256 positions share one masked attention shape. State is explicit in
 and out, so graph reuse never owns a request's cache. Weights are captured as
 inputs (not constants), including when an array parameter is replaced.
+The qualified batch range is 1..8; larger batches retain eager execution.
 """
 import mlx.core as mx
 
@@ -23,7 +24,7 @@ class CompiledDecode:
         eligible = (
             type(ctx) is ForwardContext and ctx.mode == "decode"
             and set(vars(ctx)) == {"mode", "caches", "positions", "lens", "max_len", "prefill_shape"}
-            and ctx.prefill_shape is None and tokens.shape in ((1,), (2,), (4,))
+            and ctx.prefill_shape is None and tokens.ndim == 1 and 1 <= tokens.shape[0] <= 8
             and 0 < ctx.max_len <= 256
             and model.cfg.hidden_size == 5120 and len(model.layers) == 64
             and model.cfg.quantization == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
@@ -37,14 +38,14 @@ class CompiledDecode:
         )
         if not eligible:
             return model(tokens, ctx)
-        fused = self._fuse_decode and tokens.shape == (1,) and all(
+        fused = self._fuse_decode and all(
             layer.is_attn or (
                 (layer.linear_attn.Hk, layer.linear_attn.Hv,
                  layer.linear_attn.Dk, layer.linear_attn.Dv) == (16, 48, 128, 128)
                 and layer.linear_attn.conv1d_weight.shape == (10240, 4)
                 and layer.linear_attn.conv1d_weight.dtype == mx.bfloat16
-                and c.conv.shape == (1, 3, 10240) and c.conv.dtype == mx.bfloat16
-                and c.S.shape == (1, 48, 128, 128) and c.S.dtype == mx.float32)
+                and c.conv.shape == (tokens.shape[0], 3, 10240) and c.conv.dtype == mx.bfloat16
+                and c.S.shape == (tokens.shape[0], 48, 128, 128) and c.S.dtype == mx.float32)
             for layer, c in zip(model.layers, ctx.caches))
         if fused:
             if self._packed is None:

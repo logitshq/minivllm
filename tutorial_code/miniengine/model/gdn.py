@@ -255,5 +255,5 @@ class GatedDeltaNet(nn.Module):
         beta, g = self._decode_gates(b, a, x, st) if compile_gates else self._gates(b, a)
         o, state, conv = fused(qkv, st.conv, self.conv1d_weight, g, beta, st.S)
         st.conv, st.S = conv, state
-        z = z.reshape(1, self.Hv, self.Dv)
-        return projection.linear(self.out_proj, self.norm(o.astype(x.dtype), z).reshape(1, -1))
+        z = z.reshape(x.shape[0], self.Hv, self.Dv)
+        return projection.linear(self.out_proj, self.norm(o.astype(x.dtype), z).reshape(x.shape[0], -1))
