@@ -125,7 +125,7 @@ class ModelRunner:
                 if req.num_computed_tokens == 0 and n == req.num_prompt_tokens and pristine:
                     by_length.setdefault(n, []).append(req)
             for n, reqs in by_length.items():
-                if len(reqs) < 2:
+                if len(reqs) < 2 or not prefill_batch_backend_supported((len(reqs), n)):
                     continue
                 caches = [self.staging.setdefault(r.req_id, make_cache(self.model)) for r in reqs]
                 layer_caches = [list(layer) for layer in zip(*caches)]

@@ -124,14 +124,22 @@ def _prefill_backend_identity():
         return None, None
 
 
-def prefill_batch_backend_supported():
-    # Pinned legacy Metal QMM uses BM32. NAX (architecture generation>=17)
-    # has a different M-dependent tile choice and is intentionally excluded.
+@lru_cache(maxsize=1)
+def _prefill_nax_identity():
+    return (_prefill_backend_identity() == ("0.32.3", "applegpu_g17d")
+            and mx.device_info().get("device_name") == "Apple M5 Ultra")
+
+
+def prefill_batch_backend_supported(shape=None):
+    # Legacy QMM may flatten rows. Qualified M5 NAX keeps M=T instead.
     if mx.default_device() != mx.gpu:
         return False
     ver, arch = _prefill_backend_identity()
     match = re.fullmatch(r"applegpu_g(\d+)[a-z]*", arch or "")
-    return ver == "0.32.3" and match is not None and int(match[1]) < 17
+    if ver == "0.32.3" and match is not None and int(match[1]) < 17:
+        return True
+    return (_prefill_nax_identity() and (shape is None or
+            (2 <= shape[0] <= 32 and 1 <= shape[1] <= 512 and shape[0] * shape[1] <= 4096)))
 
 
 def prefill_linear(op, x, shape):
@@ -140,13 +148,14 @@ def prefill_linear(op, x, shape):
     MLX0.32.3 quantized.cpp:1081-1191 stores splitK partials in BF16.
     Changing M can change both the partition and its rounding. The product
     below>256 proves floor(512/(ceil(N/32)*ceil(M/32)))<=1 before K adjustment.
-    K>4096 and T>=14 also conservatively stay above every legacy qmv limit.
-    Unknown runtime, metadata, dtype, or shape keeps each original M=T call.
+    K>4096 and T>=14 also stay above the qualified devices' qmv limits.
+    M5 NAX changes BM at M=32: broadcast weights to retain M=T and the
+    original reduction tile. Unknown metadata/shape keeps per-row calls.
     """
     B, T = shape
     q = getattr(op, "q", None)
     K, N = getattr(op, "in_features", 0), getattr(op, "out_features", 0)
-    if (prefill_batch_backend_supported() and x.dtype == mx.bfloat16 and x.ndim == 2
+    if (prefill_batch_backend_supported(shape) and x.dtype == mx.bfloat16 and x.ndim == 2
             and x.shape == (B * T, K) and B >= 2 and T >= 14 and K > 4096
             and K % 32 == 0 and N > 0 and N % 32 == 0
             and q == {"group_size": 16, "bits": 4, "mode": "nvfp4"}
@@ -154,5 +163,12 @@ def prefill_linear(op, x, shape):
             and op.scales.dtype == mx.uint8
             and ((N + 31) // 32) * ((T + 31) // 32) > 256
             and ((N + 31) // 32) * ((B * T + 31) // 32) > 256):
-        return op(mx.contiguous(x))
+        if _prefill_nax_identity():
+            if K % 64 == 0:
+                weight = mx.broadcast_to(op.weight, (B,) + op.weight.shape)
+                scales = mx.broadcast_to(op.scales, (B,) + op.scales.shape)
+                return mx.quantized_matmul(x.reshape(B, T, K), weight, scales,
+                                           transpose=True, **q).reshape(B * T, N)
+        else:
+            return op(mx.contiguous(x))
     return mx.concatenate([op(row) for row in x.reshape(B, T, -1)], axis=0)

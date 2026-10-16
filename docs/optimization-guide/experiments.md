@@ -126,17 +126,38 @@ C64活跃内存峰值都约43.43 GiB；实际记录的最大空闲缓存从约2.
 [全部结果](../experiments/m5-ultra-256gb/systematic-v1/E009/complete.json)与
 [局部原始计时](../experiments/m5-ultra-256gb/systematic-v1/E009/kernel-timing.json)均归档。
 
-## E010 · 待开工 · M5成组prefill/NAX
+## E010 · 2026-10-16 · M5成组prefill/NAX · 隔离HTTP资格进行中
 
-源码证据：`model/layers.py:prefill_batch_backend_supported`明确排除generation≥17，
-因为NAX的M-dependent tile/归约与legacy不同；`model_runner.py`因此在M5对prefill
-逐请求调用。E008 C64的TTFT约4.7秒，说明端到端仍有明显的首字阶段成本，
-但TTFT也含排队，不能全算成GPU prefill时间。
+**设计。** MLX0.32.3的单请求QMM可能先走split-K；改变M会改变分区及BF16
+舍入。M5 NAX还在M=32处切换BM。直接拼成B×T并不满足旧路径的逐位合同。
+本轮用广播的三维packed weight保留每条序列的M=T，只共享独立batch维；仅在
+原单序列已是splitK1、K满足NAX约束时启用，其余投影保持逐请求调用。
+[实现](../../bench/m5_ultra_256gb/prefill_nax/candidate.py)与
+[MLX固定版本源码](https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/quantized.cpp)
+可复核；广播不是已测得的DRAM读取次数保证。
 
-下一轮先捕获这段实际耗时和NAX矩阵路径，检查是否能保留每序列T维和归约，
-仅共享batch/权重读取。小原型覆盖T19/128/512、B1/8/32，先做逐层logits、GDN
-时间轴和cache检查，再做TTFT/完整窗口配对。不能只删掉现有硬件guard。
-若必须改变归约，提前定义数值误差和留出任务质量门；与exact实验分别记录。
+**预声明门。** 所有logits与cache逐位一致，B26/T19完整prefill耗时下降至少10%，
+再测HTTP。HTTP要求C64三对吞吐全部提高、配对几何平均≥1.05，TTFT比值≤0.90；
+C1控制及C8/C32吞吐不能回退超过3%。三对新进程按AB/BA/AB，三组预热和三组正式
+测量，不删除慢样本。所有门和源SHA已在运行前写入plan。
 
-原生固定buffer/设备执行计划、自适应投机、长KV路线继续在[攻略](README.md)
-中保留，但按实测成本决定次序。E010此处只有设计和源码证据，尚未运行。
+**数值结果。** 初始7组：B2/8/26/32×T19、B2/8×T128、B2×T512；448个层级
+检查覆盖输出及每行cache，末logits及后续三步decode严格。另22组全模型边界
+检查覆盖T1、7/8/9、13/14/16、31/32/33、63/64/65、129、257，B3/7/15/25/31，
+以及B8×T512和B32×T128。调度16步涵盖C64、512预算分块、首token停止、交错结束、
+混合长度601及迟到请求，输出和全部存活cache签名一致。
+
+初筛prefill加速B8/T19=1.2859×，B26/T19=1.2700×，B32/T19=1.2584×，
+B8/T128=1.4197×。**这些计时仍是临时观测**：后续HTTP发现本机已有改名为
+`omlx-server`的服务活跃，原命令行matcher漏识别，C1从约56降至37 tok/s。
+HTTP v1已中止并保留全部完成/未完成数据，不能用于收益门或新Pareto图；
+初筛也不据此声称隔离性能。数值一致性结果仍然有效。
+
+**修正。** 新`resources_v2.py`同时检查可执行进程名；保留v1探针与证据原样。
+用户已明确授权临时暂停外部服务并在结束后恢复。新版实验带SIGCONT恢复和看门狗，
+将先复核最终核心实现，再跑隔离的C1/8/32/64 HTTP配对。
+本分支的核心候选仅限MLX0.32.3/Apple M5 Ultra、B2–32、T1–512且B×T≤4096；
+未知环境及超范围退回原路径。**HTTP采用结论待定，尚未更新Pareto胜出声明。**
+
+[阶段证据](../experiments/m5-ultra-256gb/prefill-nax-v1/)记录计划、逐层结果、
+原始计时及所有本机raw文件哈希；后续隔离结果追加，不覆盖本轮受干扰记录。

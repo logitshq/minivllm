@@ -2,8 +2,8 @@
 
 2026-10-16。共享仓库 `logitshq/minivllm`；M5 分支为
 `experiment/m5-ultra-256gb`。本分支已合入 M4 分支
-`tutorial/18-gdn-projection-packing` 的 `17bd7be`，包含 M4 最终对照、
-v20/v21 打包、v22 QMV、v23 卷积数值/micro实验及 donor 设计记录。此次合并没有改变
+`tutorial/18-gdn-projection-packing` 的 `1363d9f`（截至2026-10-16再次fetch），
+包含第22–36章原生执行、投影/归一化、CAP64及失败记录。此次合并没有改变
 M5 已测量的引擎源码；M4 的原型仍是未接入状态。
 
 ## 先看这些提交和结果
@@ -74,3 +74,14 @@ E008有12个新HTTP进程、1,170条正式请求，C64配对吞吐几何平均�
 
 M4的`17bd7be`[卷积融合报告](../experiments/21-gdn-conv-fusion.md)已合入：局部micro下降12.21%是继续做模型资格的
 依据，不是HTTP收益；与这里大batch的E007/E009不是同一个实验，不能互相替代。
+
+## E010进行中：M5保留M=T的NAX分组
+
+29组模型正确性、448层级检查和16步真实调度通过。核心候选只改layers及runner，
+用广播packed weight保留单序列的NAX tile；旧split-K投影仍逐行。M4继续使用原legacy
+路径，不能移除硬件/版本guard套用M5结论。
+
+初筛完整prefill约1.26–1.42×，但HTTP发现另一活跃`omlx-server`被旧matcher漏识别，
+计时受干扰。因此本提交是**资格中的候选**，不是新HTTP/Pareto胜出；受干扰数据完整
+保留，正在用可执行名探针、用户授权暂停/恢复服务和最终核心源码重跑。
+请以[实验账本E010](../optimization-guide/experiments.md)的后续采用结论为准。
