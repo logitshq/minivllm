@@ -106,3 +106,7 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 用户解锁后关闭空闲应用、保留正在执行的远端 CUDA 工作与 Codex，随后独占 GPU 串行运行。0.8B/27B 的 smoke 与三次重复测量均已完成，报告标记为真实 target-only 本机测量；`tutorial-11-v2` 保存扩展结果。原 `tutorial-11` 和 `baseline-lithos-setup-v1` 的资格/CPU 准备记录保留，不覆盖旧 tag。
 
 本机 M4 官方 accelerator-on 的独立实验已记录，见 [实验说明](../../tutorial_code/baselines/m4-accelerator-README.md)；完整 M5 配置被官方设备检查拒绝，未绕过验证。推荐第十一章阅读版本为 `tutorial-11-v3`，默认 profile/off 与原 `tutorial-11-v2` 记录保留。
+
+## 独立实验阅读（未采用）
+
+[18：先确认优化真的更快](18-先确认优化真的更快.md)记录GDN四投影与MLP两投影的输出行拼接。两条路线均未通过收益门，当前26个引擎源码及V19 default OFF保持不变；章节编号只作实验阅读索引，不表示已集成的新能力。
