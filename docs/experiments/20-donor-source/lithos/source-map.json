@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "lithos_head": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+  "scope": "CPU standard library + primary source reads only; no execution/tests/engine/git mutation",
+  "actual_recipe_engagement": "UNKNOWN",
+  "new_measured_candidate": false,
+  "mechanism": "fixed buffers + pre-encoded ICB + device StepState multi-step replay",
+  "sources": [
+    {
+      "id": "serving",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/generate.py",
+      "lines": [
+        [
+          632,
+          655
+        ]
+      ],
+      "sha256": "434ac1398c6010b37fa44f138505d5ca1757f4e7b747bc6b582d386e2e3ba3b4",
+      "evidence": "source-path-confirmed; invocation-config supplied by parent"
+    },
+    {
+      "id": "allocation_pipeline_icb",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/runtime/engine.py",
+      "lines": [
+        [
+          31,
+          43
+        ],
+        [
+          58,
+          107
+        ]
+      ],
+      "sha256": "98e35f39c6e2338c8c4514b81286e8fc5d67527c3ab9222f3c6164e9f1c38b16",
+      "evidence": "source-path-confirmed"
+    },
+    {
+      "id": "metal_replay_resources_fences",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/runtime/src/metal_core.mm",
+      "lines": [
+        [
+          16,
+          27
+        ],
+        [
+          224,
+          299
+        ],
+        [
+          310,
+          378
+        ]
+      ],
+      "sha256": "8635515b22d459cc1a583070965546a9bbbbf856b3685cfbb94170858b6983ad",
+      "evidence": "source-path-confirmed"
+    },
+    {
+      "id": "barriers",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/barriers.py",
+      "lines": [
+        [
+          3,
+          17
+        ],
+        [
+          38,
+          74
+        ]
+      ],
+      "sha256": "e124b33fcce6e1f3628bcb838a626f72b8a057e966efe4c8d2c555958a8c77cc",
+      "evidence": "source-path-confirmed"
+    },
+    {
+      "id": "gpu_advance",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/advance.metal",
+      "lines": [
+        [
+          15,
+          36
+        ]
+      ],
+      "sha256": "52ffdb8af98aa8979bb855966fd5ed924b965fe420198dcacb2bf93db3ec693e",
+      "evidence": "source-path-confirmed"
+    },
+    {
+      "id": "gpu_argmax",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/argmax.metal",
+      "lines": [
+        [
+          77,
+          98
+        ]
+      ],
+      "sha256": "8ba4726ff346fc146cd990d29ea538759d15c793b57645a909375a8a865525df",
+      "evidence": "source-path-confirmed"
+    },
+    {
+      "id": "m4_fallback",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/backends/metal/m4_max/config-40c.json",
+      "lines": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256": "fcaff96a27d691a4eb4daa2123c3025d61d22be3bee8a09e3c3e7d1194c04504",
+      "evidence": "native-Apple9-unmeasured"
+    },
+    {
+      "id": "m5_exclusion",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/backends/metal/m5_max_40c/scheduling.py",
+      "lines": [
+        [
+          12,
+          18
+        ]
+      ],
+      "sha256": "a2406ff47778cba90b1d4084d851622edf886810789c0f03bf41327d3978f64b",
+      "evidence": "Apple10-only"
+    },
+    {
+      "id": "epilogue_emission",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/emit.py",
+      "lines": [
+        [
+          350,
+          411
+        ],
+        [
+          613,
+          659
+        ],
+        [
+          1440,
+          1459
+        ]
+      ],
+      "sha256": "aeb9a9007d1bd54cb5f897d116d0173f125999f90c0b02c774b6599b74064483",
+      "evidence": "static; actual-recipe-engagement UNKNOWN"
+    },
+    {
+      "id": "nvfp4_epilogue",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_nvfp4_rows.metal",
+      "lines": [
+        [
+          18,
+          19
+        ],
+        [
+          100,
+          157
+        ]
+      ],
+      "sha256": "850769ed91ee1d9222e58eba23a12b80f3445929855a4f351361733e0bbf26c0",
+      "evidence": "static; actual-selection UNKNOWN"
+    },
+    {
+      "id": "rounding",
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/activation_math.metal",
+      "lines": [
+        [
+          18,
+          30
+        ]
+      ],
+      "sha256": "a08c20dbe9ed8ab895f9623cf7c94cb66546eeb37327d838d3f6160122a190bb",
+      "evidence": "donor-arithmetic-not-bit-equivalent"
+    },
+    {
+      "id": "own_pipeline",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/engine/model_runner.py",
+      "lines": [
+        [
+          78,
+          98
+        ]
+      ],
+      "sha256": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538",
+      "evidence": "accepted15+gates source root"
+    },
+    {
+      "id": "own_conv",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/gdn.py",
+      "lines": [
+        [
+          90,
+          108
+        ],
+        [
+          159,
+          176
+        ]
+      ],
+      "sha256": "ef11dffb7043c0f0a2c78a67c129eff5e195e74d2d0c85dee42d681ad6695db8",
+      "evidence": "faithful conv fusion absent"
+    },
+    {
+      "id": "own_layers",
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/layers.py",
+      "lines": [
+        [
+          10,
+          21
+        ],
+        [
+          79,
+          85
+        ]
+      ],
+      "sha256": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411",
+      "evidence": "compile scope and quantized matmul"
+    }
+  ]
+}

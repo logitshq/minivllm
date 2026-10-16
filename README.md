@@ -40,3 +40,12 @@ tests/             pytest；tests/make_refs.py 用 HF 生成参考答案到 test
 bench/             跑分 client（复刻 vllm bench serve）、基线脚本、结果
 docs/              计划、教程、远程版的契约和 notes
 ```
+
+## 独立实验与未采用结果
+
+- [18：先确认优化真的更快](docs/tutorial-v2/18-先确认优化真的更快.md)：GDN/MLP输出行拼接的独立评估，两方向均STOP、未采用；没有修改当前26个引擎源码或V19 default OFF。
+- [投影拼接证据与评估](docs/experiments/18-projection-packing-evaluation.md)：旧AC顺序混杂、新Battery局部配对和控制、原始SHA及独立审查收据；不列为已实现能力。
+
+- [19：把量化矩阵乘拆开看](docs/tutorial-v2/19-把量化矩阵乘拆开看.md)：原QMM→手写R4控制→R2几何实验，27项数值通过但未过5%收益门，STOP、未采用。
+
+- [20：沿实际实现读三条执行路径](docs/experiments/20-donor-implementation-map.md)：oMLX预处理、已有ahead、Lithos ICB与allocator策略的源码证据；仅CPU阅读，无新增性能结论。

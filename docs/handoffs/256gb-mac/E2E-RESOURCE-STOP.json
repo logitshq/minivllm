@@ -1,0 +1,73 @@
+{
+  "schema": "v19-e2e-resource-stop-metadata-v1",
+  "status": "STOP_FIRST_FAILURE",
+  "actual_attempts": 1,
+  "fresh_processes_executed": 6,
+  "completed_configs": 5,
+  "raw_requests_completed": 36,
+  "raw_tokens_retained": 1152,
+  "first_failure": {
+    "config": "pair3-B-on",
+    "boundary": "after-measurement-before-unload",
+    "all_six_requests_finished": true,
+    "guard": "Sustained Swapouts",
+    "condition": "last two Swapouts deltas > 0"
+  },
+  "sixth_result_json_present": false,
+  "suite_complete_present": false,
+  "metadata_bug": false,
+  "formal_E2E_qualified": false,
+  "performance_or_adoption_qualified": false,
+  "overall_win_count": 0,
+  "default_off": true,
+  "same_latch_retry_allowed": false,
+  "guard_relaxed": false,
+  "independent_raw_data_review": "pending at this documentation snapshot; no valid speed or Pareto claim",
+  "original_owner_GPU_released": false,
+  "external_release_boundary": "actual tool returned/reaped then strict supplied-PID absence; no claim of successful in-process unload",
+  "owner_tool_session": 85451,
+  "owner_pid": 11727,
+  "driver_pid": 11742,
+  "driver_returncode": 1,
+  "driver_waited_reaped": true,
+  "server_pids": [
+    11762,
+    11937,
+    12115,
+    12328,
+    12515,
+    12708
+  ],
+  "server_wait_completed": true,
+  "server_returncodes": [
+    -15,
+    -15,
+    -15,
+    -15,
+    -15,
+    -15
+  ],
+  "posttool_strict_absence_all_8_pids": true,
+  "proofs": {
+    "owner_tool_return": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-external-owner-build3/ROOT-TOOL-RETURN-EVIDENCE.json",
+      "sha256": "248a0d5b87cd620fabc9b874023de91483e9ddf0a2737f7dcc7c052b6c6abc86"
+    },
+    "owner_receipt": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-external-owner-build3/external-owner-attempt1/external-owner-receipt.json",
+      "sha256": "d3e307560c423ec05ab14aae1e9b8073657b633cf4b5288b6f6cea49dece56fe"
+    },
+    "posttool_strict_absence": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-external-owner-build3/posttool-attempt1/external-exact-absence-after-tool-return.json",
+      "sha256": "b9349047d3c6a662e80d8e9494121e4d709f1903589e8bb5cc17b46b2badc399"
+    },
+    "driver_suite_failure": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-external-owner-build3/gpu-e2e-AC-attempt1/suite-failure.json",
+      "sha256": "2517b4aad783066395145a6ad7705b8b0e138b3fa950b8f0805653a3f7ca9a62"
+    },
+    "driver_owner_cleanup": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v19-e2e-external-owner-build3/gpu-e2e-AC-attempt1/owner-cleanup.json",
+      "sha256": "21ca122ac40570dd4ab549ccb029e9fadd3ff6738c1f7ada9c21ae6e3aea936c"
+    }
+  }
+}

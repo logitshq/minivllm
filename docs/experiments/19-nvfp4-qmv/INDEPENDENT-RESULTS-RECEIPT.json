@@ -1,0 +1,360 @@
+{
+  "adopted": false,
+  "all_27_byte_metadata_and_hashes_verified": true,
+  "all_nine_threeway_output_hashes_match": true,
+  "cleanup": {
+    "child_pid": 31181,
+    "controller_and_root_absence_strict": true,
+    "recorded_wait_rc": 2,
+    "supervisor_pid": 31180
+  },
+  "control_medians": {
+    "A": 1.0064783506350754,
+    "B": 1.0052614616057753
+  },
+  "control_passed": true,
+  "control_ratios": {
+    "A": [
+      0.9991560801790937,
+      1.013800621091057
+    ],
+    "B": [
+      1.006487403029785,
+      1.0040355201817655
+    ]
+  },
+  "driver_sha256": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279",
+  "full_model_and_E2E": false,
+  "historical_input_provenance": {
+    "capture_driver_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/check_swiglu_actual_micro_v1.py",
+    "capture_driver_sha256": "3aa3848568ce4d419f176af2f13770872805dfc06b27a8e2133c53bd28aa0126",
+    "inputs": {
+      "0": {
+        "capture": {
+          "capture_empty": true,
+          "first_normal_decode": true,
+          "input_object_id": 4455397632,
+          "mode": "decode"
+        },
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L00-x.raw.le.bin",
+        "raw_sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66",
+        "shape": [
+          1,
+          5120
+        ]
+      }
+    },
+    "old_experiment_status": "STOP_BUILD1",
+    "receipt_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/receipt.json",
+    "receipt_sha256": "94a9f5ab7ae3780f306e66d71e4f3b0f2fb559eef4d5a89ae179ef63ef3355c8",
+    "source": "Historical first normal decode MLP input (after post_attention_layernorm), V17/gates ON; not newly captured"
+  },
+  "median_gate_passed": false,
+  "medians_ns": {
+    "A": 231091.267578125,
+    "B": 230599.8125
+  },
+  "pairs": 6,
+  "protocol_sha256": "4631124cb8632e9bbaf470b659c148bc3f38e0acf400121073494e612ff2806d",
+  "prototype_manifest_sha256": "b007644922d50634bee67575917a70e651bbd0e2409c2ba07a7c6fa07b277e37",
+  "qualification": {
+    "checks": 27,
+    "status": "STRICT-R4-R2-BYTES-PASS",
+    "timing_allowed": true
+  },
+  "qualification_label_order_verified": [
+    "R4-QMM.synthetic0",
+    "R4-QMM.synthetic1",
+    "R4-QMM.synthetic2",
+    "R4-QMM.synthetic3",
+    "R4-QMM.synthetic4",
+    "R4-QMM.synthetic5",
+    "R4-QMM.synthetic6",
+    "R4-QMM.synthetic7",
+    "R4-QMM.historical-real-L0",
+    "R2-QMM.synthetic0",
+    "R2-R4.synthetic0",
+    "R2-QMM.synthetic1",
+    "R2-R4.synthetic1",
+    "R2-QMM.synthetic2",
+    "R2-R4.synthetic2",
+    "R2-QMM.synthetic3",
+    "R2-R4.synthetic3",
+    "R2-QMM.synthetic4",
+    "R2-R4.synthetic4",
+    "R2-QMM.synthetic5",
+    "R2-R4.synthetic5",
+    "R2-QMM.synthetic6",
+    "R2-R4.synthetic6",
+    "R2-QMM.synthetic7",
+    "R2-R4.synthetic7",
+    "R2-QMM.historical-real-L0",
+    "R2-R4.historical-real-L0"
+  ],
+  "raw_seals": {
+    "bytes.json": {
+      "bytes": 10278,
+      "sha256": "c076b09d0d6e79b21aa6ade018c3f71150ea0cf4efbe63a8a3cfd8b2cada4ccd"
+    },
+    "child-finally.json": {
+      "bytes": 83,
+      "sha256": "c7bcf9de7bf30b6847ab4ffe430f488f90b5c4aaf786711e43dc19d7d389304e"
+    },
+    "child.json": {
+      "bytes": 355,
+      "sha256": "1199bb78af09a32cda6a0bdb9d6d9a64bebcb552372d98ad571d087bb256d6e3"
+    },
+    "child.log": {
+      "bytes": 104,
+      "sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1"
+    },
+    "cleanup.json": {
+      "bytes": 125,
+      "sha256": "c8f78c9b06f59d5fb05034761e7e1b1c296859a9c82c0f440e477bff333af6d9"
+    },
+    "identity.json": {
+      "bytes": 5218,
+      "sha256": "2e06cf824be3edec2ce98d51f8918a829c3a570ec4ead556346701df11147a9e"
+    },
+    "inputs.json": {
+      "bytes": 1877,
+      "sha256": "99dcb6a41913eef49e71b687a02787e1c8d943668d0e547e19a8dac14fb92043"
+    },
+    "pairs.json": {
+      "bytes": 15096,
+      "sha256": "07802da0a147d7e60be275d18adf5e278898d2c7bddd2080c57a3f57d835b478"
+    },
+    "qualification.json": {
+      "bytes": 84,
+      "sha256": "165e66db4f06635a3f59cce743ce2945622a1e0f077af3b2827287c8dd0cf266"
+    },
+    "resources.json": {
+      "bytes": 129651,
+      "sha256": "f0c66fe62c808d044fd44c21081cc2fa0043cffb6df783fb3d6ab8bef1afef6b"
+    },
+    "result.json": {
+      "bytes": 758,
+      "sha256": "4ccde986a67cd128b968faa4591c5e0c4f65df27882a74d027ec75fa030cca36"
+    },
+    "root-posttool-absence.json": {
+      "bytes": 107,
+      "sha256": "5101d30d30c81ace1e322ea11c303a799982053e9841cc340a4218c8eebe0d65"
+    },
+    "root-tool-return.json": {
+      "bytes": 543,
+      "sha256": "8ad227ae1d82019f1837fbe0257192d2c86472f1bdbb54fc53246d2ba3038537"
+    },
+    "runtime.json": {
+      "bytes": 635,
+      "sha256": "77c46568c4521c7c803b263f56a9cbcb5629e5b3e77076385f0453433498a800"
+    },
+    "startup.json": {
+      "bytes": 189,
+      "sha256": "c190f9f200f2f7b8ab428bdaf500df16c0aeb7253fa712f5fd068ffc8e03aa76"
+    }
+  },
+  "recomputed_status": "STOP-MICRO-GATE",
+  "reduction_fraction": 0.0021266709178392462,
+  "reduction_percent": 0.21266709178392462,
+  "resources": {
+    "battery_percent_values": [
+      26
+    ],
+    "peak_mlx_bytes": 50571536,
+    "power": "Battery",
+    "pressure": 1,
+    "samples": 24,
+    "swap_mb_first_last": [
+      4719.56,
+      4719.56
+    ],
+    "thermal_code": 0,
+    "vm_deltas": {
+      "Compressions": 0,
+      "Decompressions": 5,
+      "Pageouts": 0,
+      "Swapins": 0,
+      "Swapouts": 0
+    }
+  },
+  "scope": "CPU stdlib source/hash/metadata/stat/raw resource replay only; no MLX/GPU/model/new tests/process/resource commands; original tensor outputs not retained",
+  "source_files_verified": {
+    "LICENSE-MLX.txt": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "README.md": "38e75d9441e3bf6154bc05514a931c721f223e5344192cb2fed124afb7bee8a3",
+    "kernel_body.metal": "6d60381de86ab832d29f873ccfcc65b6f3952cbc2254e6e6f3c10f2127b59cb3",
+    "kernel_header.metal": "7373cccf7ee7cf6bec4242502b725529c7906835fe6216bbf53631dfd60b508a",
+    "micro.py": "dd071185991c93b41a9c01997912f4baae1bb20c7e9a4a72d6c3ffa8d5d5c279",
+    "protocol.json": "4631124cb8632e9bbaf470b659c148bc3f38e0acf400121073494e612ff2806d",
+    "test_cpu.py": "d87c62f92c80273eded3782a4102ce1c0f5b10d40b6ad85523f9d155258ba7c3"
+  },
+  "startup": [
+    {
+      "first_call_ns": 5483916,
+      "variant": "original"
+    },
+    {
+      "first_call_ns": 122476541,
+      "variant": "R4"
+    },
+    {
+      "first_call_ns": 44466667,
+      "variant": "R2"
+    }
+  ],
+  "status": "PASS_REPLAY_STOP_RETAINED",
+  "target_tensor_payload_bytes": 50135040,
+  "timing_replay": [
+    {
+      "block_times_ns": [
+        239822.1015625,
+        239619.7109375
+      ],
+      "order": [
+        "A",
+        "A"
+      ],
+      "pair": 0,
+      "slot2_div_slot1": 0.9991560801790937
+    },
+    {
+      "block_times_ns": [
+        239935.546875,
+        241492.10546875
+      ],
+      "order": [
+        "B",
+        "B"
+      ],
+      "pair": 1,
+      "slot2_div_slot1": 1.006487403029785
+    },
+    {
+      "block_times_ns": [
+        241925.619140625,
+        241118.24609375
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 2,
+      "reduction": 0.0033372780019865766,
+      "slot2_div_slot1": 0.9966627219980134
+    },
+    {
+      "block_times_ns": [
+        241182.046875,
+        240009.765625
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 3,
+      "reduction": -0.004884306465394506,
+      "slot2_div_slot1": 0.9951394340284061
+    },
+    {
+      "block_times_ns": [
+        221749.755859375,
+        220114.419921875
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 4,
+      "reduction": 0.007374691039286008,
+      "slot2_div_slot1": 0.992625308960714
+    },
+    {
+      "block_times_ns": [
+        219326.82421875,
+        221978.02734375
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 5,
+      "reduction": 0.011943538541742238,
+      "slot2_div_slot1": 1.0120879109723295
+    },
+    {
+      "block_times_ns": [
+        222172.76953125,
+        218162.43359375
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 6,
+      "reduction": 0.018050528631214258,
+      "slot2_div_slot1": 0.9819494713687857
+    },
+    {
+      "block_times_ns": [
+        241085.205078125,
+        241406.087890625
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 7,
+      "reduction": 0.0013292241935728422,
+      "slot2_div_slot1": 1.001330993382178
+    },
+    {
+      "block_times_ns": [
+        238616.12890625,
+        241909.1796875
+      ],
+      "order": [
+        "A",
+        "A"
+      ],
+      "pair": 8,
+      "slot2_div_slot1": 1.013800621091057
+    },
+    {
+      "block_times_ns": [
+        240821.939453125,
+        241793.78125
+      ],
+      "order": [
+        "B",
+        "B"
+      ],
+      "pair": 9,
+      "slot2_div_slot1": 1.0040355201817655
+    }
+  ],
+  "upstream_sources_verified": {
+    "fp4.h": {
+      "path": "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/fp4.h",
+      "sha256": "e3159945d7e5ae24f7a1ca9c4875b2a5d15cfb6952405df24a0df1bb2622a93a"
+    },
+    "fp8.h": {
+      "path": "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/fp8.h",
+      "sha256": "9a9d77a6295f66b4ada4311c3b855b6ecb7a2b38f28623109e3c61d2e17e81ae"
+    },
+    "fp_quantized.h": {
+      "path": "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/fp_quantized.h",
+      "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f"
+    },
+    "resource_wrapper": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/resource_snapshot_power_v1.py",
+      "sha256": "f4624d7dd8e977759865e11c4b7d3ed0489d1fd55b496e60c29fc087b7d9eb42"
+    },
+    "v21_micro": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v21-mlp-projection-micro-build1/micro.py",
+      "sha256": "c42c704ce1709e5e4f71d5cf3610a2436f8a47fbc95d8d537bc3efb38dee6961"
+    }
+  },
+  "wins": 5,
+  "wins_gate_passed": true
+}

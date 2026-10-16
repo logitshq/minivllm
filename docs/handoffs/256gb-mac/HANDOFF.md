@@ -10,7 +10,7 @@
 |---|---|---|
 | accepted15 | `f976d6a547a9dc1946b52b1de6db376d799b34d7` | 已接受的教程基线；引擎25文件，GDN compiled gates 显式 opt-in |
 | V19 code | `b158c0fbf95b84fb3567e0039b0ab1ffb1a46bb6` | 从 accepted15 分出的默认关闭 norm reuse；引擎26文件 |
-| 最新V19 docs | `8aba03941634c73e0847c23d42a6051d43549525` | 仅修正讲解/证据身份；引擎与 b158c0f 逐字相同 |
+| V19原始静态docs | `8aba03941634c73e0847c23d42a6051d43549525` | 仅修正讲解/证据身份；引擎与 b158c0f 逐字相同 |
 | numeric archive | `abcbe74a1f54ce1db24d921d790ef462accf63f2` | 独立残差norm kernel + 数值结果文档/JSON；没有集成进引擎 |
 
 `SOURCE-VERSIONS.json` 给出每个源码相对路径和 SHA；accepted25 原 manifest=`31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c`，V19 26=`d86be282646c1fc9d26155ad54014cf461f608c8222e32cd66d11088e180a32e`。
@@ -75,6 +75,8 @@ saved15 参考在 `reference/v18-recurrent-numeric-build1/gpu-recurrent-numeric-
 ## 5. 端到端协议与采纳门槛
 
 固定19-token prompt，greedy/temperature0、max_new_tokens32、正常EOS（不能强关）、cache0、noDraft；原prompt正常生成32，无EOS时按实际32计。调度batch4不代表实际GPU batch4。
+
+缓存必须分开记录：跨请求prefix复用开关、MLX allocator上限与实际池内字节不是同一指标。上面的简写不能用来推断所有历史harness都设allocator=0；最终七点矩阵的native实际采用默认2GiB，oMLX启动代码设为`total_mem`。不同资格/E2E harness仍按其冻结源码逐项复现，不能把最终矩阵的默认值追溯套到旧实验。目标机新测试须显式记录allocator limit/active/cache，见[源码复核说明](../../experiments/20-donor-implementation-map.md)。
 每个 fresh process 3 warm + 3 measured；6个fresh依次 off/on/on/off/off/on，构成3 paired，gates编译两臂都ON，只切换V19 norm reuse；32 raw IDs每请求严格一致，warm route检查后恢复hook，measure无新增hook。
 客户端 x=`(实际N−首非空chunk的canonical token数)/(incoming DONE−firstText)`，先request→group median→process median3；它是stream delivery proxy，不是GPU token/s。
 y=`实际总tokens/(last DONE−first POST)`，包括HTTP queue/prefill/服务开销；保留完整POST/firstText/DONE时间戳、TTFT和所有正负pair。
@@ -99,6 +101,16 @@ fullqual build1（AC）和build2（Battery）均accepted load+sync后pressure2�
 残差330 banks与mask352 banks仅synthetic数值PASS；3次微测controls无效、0 AB/BA有效比较，没有可采纳性能结果；abcbe74只归档，不默认集成。
 V18曾fullqual PASS，但E2E aggregate y+.632032%低于1%门槛，DO_NOT_ADOPT；其他packedproj/SiLU等负结果同样保留。当前**整体baseline win=0**。
 加载静态审计未证明harness长期额外保留多GiB；active/cache/peak与系统compressor不是进程物理footprint，不能断言CPU两份+GPU一份。
-截至本交接快照：用户已明确恢复本机测试。fullqual build3 已在实际 AC Power 完成 accepted/OFF/ON/reset-OFF 四轮并通过独立 FULLMODEL_QUAL_PASS 审查；128 FP32 logits逐字比较、16,384 state signatures、18 fallback 严格通过，ON六条真实生产路径每路1,488调用，22份资源快照pressure1/thermal0，owner/driver/worker共4 PID工具返回后strict absent。跨worker参数key/shape/dtype稳定字段一致，object_id只在各worker内部稳定；receipt无参数raw-byte hash，不能声称全权重bytehash比较通过。审查SHA=`dfc5c77df0f28c45d178de45c64b744235538440a6f2cf6eb2fe52c0c41533cb`，审查收据SHA=`af7b23397e16d615d19f8de4704d5c57d038797940d37bc3597c3056d6b78177`，详见同目录审查文件与LOCAL-RESULT-ADDENDUM.md。E2E actual=0、待测，无整体win；默认OFF、不采用、不合并main。旧两次STOP保留，旧暂停已被明确恢复撤销；后续读取最新STATE，本快照不是新运行许可。
+截至本交接快照：用户已明确恢复本机测试。fullqual build3 已在实际 AC Power 完成 accepted/OFF/ON/reset-OFF 四轮并通过独立 FULLMODEL_QUAL_PASS 审查；128 FP32 logits逐字比较、16,384 state signatures、18 fallback 严格通过，ON六条真实生产路径每路1,488调用，22份资源快照pressure1/thermal0，owner/driver/worker共4 PID工具返回后strict absent。跨worker参数key/shape/dtype稳定字段一致，object_id只在各worker内部稳定；receipt无参数raw-byte hash，不能声称全权重bytehash比较通过。审查SHA=`dfc5c77df0f28c45d178de45c64b744235538440a6f2cf6eb2fe52c0c41533cb`，审查收据SHA=`af7b23397e16d615d19f8de4704d5c57d038797940d37bc3597c3056d6b78177`，详见同目录审查文件与LOCAL-RESULT-ADDENDUM.md。E2E 唯一实际 attempt 的6 fresh已运行，36请求/1,152 tokens原始记录完整；第6个pair3-B-on请求完成后的after-measurement-before-unload因Sustained Swapouts（最近两delta>0）资源STOP，driver completed_configs=5，第6result.json与suite-complete.json缺失，不是metadata bug。8个实际owner/driver/server PID工具返回后strict absent，外部已释放；原owner GPU_released=false保留。无正式E2E/性能/采纳资格，无整体win；默认OFF、不采用、不合并main。旧两次STOP保留，旧暂停已被明确恢复撤销；后续读取最新STATE，本快照不是新运行许可。
 本机普通app退出授权不自动转移到目标机；目标用户允许后才正常quit，拒绝保存/取消则停；禁止forcekill/discard，不碰Codex/Claude/editor/terminal、远程compute及未保存Excel面板。
 最终先报告：目标硬件/环境、源码hash、fullqual verdict、E2E三pair/aggregate x/y、官方对照与Pareto、已保存负结果、下一步；未完成项直说，不能用局部micro代替全模型胜出。
+
+本机48GiB结论：fullqual已独立PASS，但6fresh E2E末尾Swapouts resource STOP；完整请求raw不能代替成功suite。目标256GB须重建harness、重新冻结并同机重测，不重跑源机同latch或放宽guard。精简索引见 `E2E-RESOURCE-STOP.json`。
+
+## M4 Max 最终七点测试补记（独立审查完成）
+
+accepted15/官方矩阵attempt2实际21/21完成：7点×3fresh，总270请求/8640tokens，仅测量135请求/4320tokens。固定协议、359份AC/pressure1资源守卫（Swapouts总delta0）与生命周期独立PASS；根session57621 exit0，21server wait/reap(-15)，返回后22PID严格absent、21portsECONNREFUSED。Native准确标签f976+gatesON显式opt-in/V19OFF，代码默认仍gatesOFF；oMLX balanced默认.03，Lithos真实M4 C1/noDraft。七点、三repeat范围、全部12 signed对照、TTFT和原proof SHA见 [M4最终测试归档](../../benchmarks/m4-max-final/README.md)。
+
+前8arms nominal(0)，包括已慢的第8个native C1block3；第9个OM C1block3起fair(1)，全部C2/C4 fair。原guard允许0/1；没有频率/温度/功率telemetry，不能归因热降频或称稳定thermal Pareto。跨campaign静态审计未找到具体源码分母等bug；旧actual controls UNKNOWN，新显式50/50/20/FAST_SYNCH0，cadence5→17，不pool旧点、不事后筛热态。C1 aggregate x/y落后OM；C2/C4 y+11.448102%/+12.892845%，但C2pair3 x负、Lithos C1block3 y负，因此无稳定双轴整体win；稳定热态性能仍未解决。
+
+独立结果receipt SHA `ef5b41a3c4d63ea3e75bbb3f081dde25bf06e0a1f0dccc51cdcb68458b7c695c`、seal SHA `aea07cc9eaccda23fa576925da9dc38a5db0564fcb7cd011243f5b568e2ffc9b`；外部release SHA `8ea17e7f94b4de364b89c88bcf10da63ecba2deac5001dae00667e15a1b663b8`。V19资源STOP/DO_NOT_ADOPT、旧负结果及矩阵attempt1标题cleanup STOP/OMwait缺失均不改。新343408字节静态reference包仅供adapt/refreeze，历史key脱敏；原4MB包字节不变。目标256GB仍须重建/重冻结/完整资格/同机重测。

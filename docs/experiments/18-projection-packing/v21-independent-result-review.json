@@ -1,0 +1,315 @@
+{
+  "byte_coverage": "3 layers x (8 synthetic + historical real + B2/B4) x gate/up",
+  "byte_records_verified": 66,
+  "cleanup": {
+    "cleanup_and_root_absence_strict": true,
+    "pid": 29827,
+    "recorded_wait_rc": 2
+  },
+  "control_medians": {
+    "A": 1.0020763786423772,
+    "B": 0.9951523932960731
+  },
+  "control_ratios": {
+    "A": [
+      1.0037577707143444,
+      1.0003949865704103
+    ],
+    "B": [
+      0.995424729301152,
+      0.9948800572909942
+    ]
+  },
+  "controls_passed": true,
+  "driver_sha256": "c42c704ce1709e5e4f71d5cf3610a2436f8a47fbc95d8d537bc3efb38dee6961",
+  "full_model_and_E2E": false,
+  "historical_real_provenance_verified": {
+    "capture_driver_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/check_swiglu_actual_micro_v1.py",
+    "capture_driver_sha256": "3aa3848568ce4d419f176af2f13770872805dfc06b27a8e2133c53bd28aa0126",
+    "inputs": {
+      "0": {
+        "capture": {
+          "capture_empty": true,
+          "first_normal_decode": true,
+          "input_object_id": 4455397632,
+          "mode": "decode"
+        },
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L00-x.raw.le.bin",
+        "raw_sha256": "19cfb81b00e61bf8e103dc1913117d94a829025d52f45e9482f2b8ff312c2e66",
+        "shape": [
+          1,
+          5120
+        ]
+      },
+      "32": {
+        "capture": {
+          "capture_empty": true,
+          "first_normal_decode": true,
+          "input_object_id": 4455394624,
+          "mode": "decode"
+        },
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L32-x.raw.le.bin",
+        "raw_sha256": "59c65ad8a6e0da48f3ac54782f085f55c2d3445ad2cf84747ed4eb8c4961fff2",
+        "shape": [
+          1,
+          5120
+        ]
+      },
+      "63": {
+        "capture": {
+          "capture_empty": true,
+          "first_normal_decode": true,
+          "input_object_id": 4455391808,
+          "mode": "decode"
+        },
+        "dtype": "mlx.core.bfloat16",
+        "nbytes": 10240,
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/L63-x.raw.le.bin",
+        "raw_sha256": "4f861060569ca7a5c8445773c62038911d2d2c24301fd8cd73bf62e7e0ce5b02",
+        "shape": [
+          1,
+          5120
+        ]
+      }
+    },
+    "old_experiment_status": "STOP_BUILD1",
+    "receipt_path": "/private/tmp/minivllm-engine-optimization-20261014/swiglu-actual-micro-build1/gpu-actual-micro-run1/receipt.json",
+    "receipt_sha256": "94a9f5ab7ae3780f306e66d71e4f3b0f2fb559eef4d5a89ae179ef63ef3355c8",
+    "source": "Historical first normal decode MLP input (after post_attention_layernorm), V17/gates ON; not newly captured"
+  },
+  "inputs_unique_synthetic": 8,
+  "medians_ns": {
+    "A": 761211.58984375,
+    "B": 762147.6240234375
+  },
+  "memory": {
+    "active_after": 300922880,
+    "active_before": 601733120,
+    "active_drop": 300810240,
+    "after_cache": 302891149,
+    "physical_release_certified": false,
+    "reference_payload_deleted": 300810240
+  },
+  "no_adoption": true,
+  "order_wins": {
+    "AB": 3,
+    "BA": 0
+  },
+  "pairs": 6,
+  "raw_seals": {
+    "bytes.json": {
+      "bytes": 25493,
+      "sha256": "5904617225f8173046e055eb0990910459effe3706b36b3f4aef9aefbe62cd6c"
+    },
+    "child-finally.json": {
+      "bytes": 83,
+      "sha256": "b39ba628b7399eabdbd3c19b8ad8398b2f7c62cdf2445683bf51baff02fa619c"
+    },
+    "child.json": {
+      "bytes": 339,
+      "sha256": "e93b16e3b0f184850a9f6d3e0881d866f19feb2b06a1af0264636e4f0568cea7"
+    },
+    "child.log": {
+      "bytes": 104,
+      "sha256": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1"
+    },
+    "cleanup.json": {
+      "bytes": 125,
+      "sha256": "1e08f3b0d5f987bac21a2b03f7706cdd644e4482a0d18917b1d9b64ab365b696"
+    },
+    "identity.json": {
+      "bytes": 11261,
+      "sha256": "7e99a6ccd1bb18e82a524461dc5a098a1e414f0d6ad11376966bbe4a12ed81d8"
+    },
+    "inputs.json": {
+      "bytes": 1651,
+      "sha256": "4ef8f53fcdf6a34dc7017125a55a2e153c6d0c488733f9f612e87cf6c8ae3c6e"
+    },
+    "pairs.json": {
+      "bytes": 22917,
+      "sha256": "792debb1dc7b7633a374c648b8da62193f48665825dc25454e24b64d859332d8"
+    },
+    "resources.json": {
+      "bytes": 145997,
+      "sha256": "5298284d6716f6d043839b074fc4150d32e3d5fa329e556683fda0d28a35cff8"
+    },
+    "result.json": {
+      "bytes": 920,
+      "sha256": "75cdd31dddf903374e1c022a1ef55f019512b33e9a35a8f1aaef4a5b5131edf8"
+    },
+    "root-posttool-absence.json": {
+      "bytes": 107,
+      "sha256": "35b1b97b2488b98a4436ac6dc64460d4bbacd6407c5d9467861ddc9d5c74b9e2"
+    },
+    "root-tool-return.json": {
+      "bytes": 522,
+      "sha256": "e6e11e753b66e8b7d5f77e3c61739228ba2185ef8530bb69b01b10bee9d342b8"
+    },
+    "runtime.json": {
+      "bytes": 1264,
+      "sha256": "6d8d0070197960552a6bc37c5c5cf2b741aa74e4d9327c5d5c304df0aedf43ec"
+    },
+    "startup.json": {
+      "bytes": 344,
+      "sha256": "76382b52ccd24ced29a646fd596cdf8769aa6a4c8b6b050237709329e2f98d53"
+    }
+  },
+  "recomputed_status": "STOP-MICRO-GATE",
+  "reduction_fraction": -0.0012296635944279988,
+  "reduction_percent": -0.12296635944279988,
+  "resources": {
+    "peak_mlx_bytes": 602617996,
+    "power": "Battery",
+    "pressure": 1,
+    "samples": 27,
+    "swap_mb_first_last": [
+      4719.56,
+      4719.56
+    ],
+    "thermal": 0,
+    "vm_deltas": {
+      "Compressions": 0,
+      "Decompressions": 24,
+      "Pageouts": 0,
+      "Swapins": 0,
+      "Swapouts": 0
+    }
+  },
+  "scope": "CPU stdlib replay only; no MLX/GPU/model/resource/process commands; tensor outputs not retained, byte record metadata/hashes replayed",
+  "source_files_sha_verified": 26,
+  "status": "PASS_REPLAY_STOP_RETAINED",
+  "target_tensor_payload_bytes": 300810240,
+  "timing_pairs": [
+    {
+      "block_times_ns": [
+        753278.646484375,
+        756109.294921875
+      ],
+      "order": [
+        "A",
+        "A"
+      ],
+      "pair": 0,
+      "slot2_div_slot1": 1.0037577707143444
+    },
+    {
+      "block_times_ns": [
+        762492.025390625,
+        759003.41796875
+      ],
+      "order": [
+        "B",
+        "B"
+      ],
+      "pair": 1,
+      "slot2_div_slot1": 0.995424729301152
+    },
+    {
+      "block_times_ns": [
+        757515.869140625,
+        757459.87890625
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 2,
+      "reduction": 7.39129523960047e-05,
+      "slot2_div_slot1": 0.999926087047604
+    },
+    {
+      "block_times_ns": [
+        765708.08984375,
+        762983.806640625
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 3,
+      "reduction": -0.0035705649050663535,
+      "slot2_div_slot1": 0.9964421386697365
+    },
+    {
+      "block_times_ns": [
+        757609.5390625,
+        757530.923828125
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 4,
+      "reduction": 0.00010376748222085119,
+      "slot2_div_slot1": 0.9998962325177791
+    },
+    {
+      "block_times_ns": [
+        768911.5390625,
+        764011.962890625
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 5,
+      "reduction": -0.006412957401003894,
+      "slot2_div_slot1": 0.9936279065627642
+    },
+    {
+      "block_times_ns": [
+        759439.373046875,
+        758587.158203125
+      ],
+      "order": [
+        "A",
+        "B"
+      ],
+      "pair": 6,
+      "reduction": 0.0011221631034625812,
+      "slot2_div_slot1": 0.9988778368965374
+    },
+    {
+      "block_times_ns": [
+        766156.412109375,
+        764309.408203125
+      ],
+      "order": [
+        "B",
+        "A"
+      ],
+      "pair": 7,
+      "reduction": -0.002416565708110552,
+      "slot2_div_slot1": 0.9975892600034961
+    },
+    {
+      "block_times_ns": [
+        757581.13671875,
+        757880.37109375
+      ],
+      "order": [
+        "A",
+        "A"
+      ],
+      "pair": 8,
+      "slot2_div_slot1": 1.0003949865704103
+    },
+    {
+      "block_times_ns": [
+        767223.55078125,
+        763295.41015625
+      ],
+      "order": [
+        "B",
+        "B"
+      ],
+      "pair": 9,
+      "slot2_div_slot1": 0.9948800572909942
+    }
+  ],
+  "wins": 3
+}

@@ -1,0 +1,86 @@
+{
+  "status": "EXECUTABLE_SOURCE_HYPOTHESIS",
+  "performance": "UNKNOWN",
+  "numerical_equivalence": "UNKNOWN",
+  "executed_performance": false,
+  "source_changes": false,
+  "candidate": {
+    "name": "nvfp4-fast-qmv-r2",
+    "M": 1,
+    "K": 5120,
+    "N": 17408,
+    "group_size": 16,
+    "bits": 4,
+    "dtype": "bfloat16",
+    "r_baseline": 4,
+    "r_candidate": 2,
+    "sg_per_tg": 2,
+    "groups_baseline": 2176,
+    "groups_candidate": 4352,
+    "admission": "B1/T1 only; contiguous 2D weights/scales; no biases/global scale; original fallback otherwise"
+  },
+  "sources": {
+    "mlx_header": {
+      "path": "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx/include/mlx/backend/metal/kernels/fp_quantized.h",
+      "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+      "local_lines": {
+        "scale_and_qdot": "30-107",
+        "fast_impl": "333-405",
+        "wrapper": "1240-1299"
+      }
+    },
+    "mlx_metadata": {
+      "path": "/Users/ryanli/.cache/uv/archive-v0/Sem-IC1OzaFhY02e/mlx_metal-0.32.3.dist-info/METADATA",
+      "sha256": "37393bd4e135313460a5b2ffafe346170a67bfcdec2d784d9e8d0d7585acc332"
+    },
+    "lithos_kernel": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/kernels/common/gemv_nvfp4_rows.metal",
+      "sha256": "850769ed91ee1d9222e58eba23a12b80f3445929855a4f351361733e0bbf26c0",
+      "lines": "7-20,55-110"
+    },
+    "lithos_emit": {
+      "path": "/private/tmp/minivllm-remaining-20261014/lithos-source/monolith/compiler/emit.py",
+      "sha256": "aeb9a9007d1bd54cb5f897d116d0173f125999f90c0b02c774b6599b74064483",
+      "lines": "434-436,628-652"
+    },
+    "upstream_study": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/UPSTREAM-KERNEL-STUDY.md",
+      "sha256": "34976731312ffdbc92e8114ef8c2583116bb29cc2a3cf1e5bf7cc20263751092"
+    },
+    "profile": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/STATE-C1-PROFILE-RESULTS.md",
+      "sha256": "f73e42511dd34626221e7699fb0a8705c08b6e5ee1ec80a5d12bc190386c57bf"
+    },
+    "v21_identity": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v21-mlp-projection-micro-build1/battery-attempt1/identity.json",
+      "sha256": "7e99a6ccd1bb18e82a524461dc5a098a1e414f0d6ad11376966bbe4a12ed81d8"
+    },
+    "accepted_layers": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/layers.py",
+      "sha256": "0c4afa842bf2a7ad23205ced9b7123e9fdc99e9e84c0ed445221fc411d99a411"
+    }
+  },
+  "official": {
+    "S1": {
+      "url": "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/quantized.cpp#L435-L503",
+      "tag": "v0.32.3",
+      "claims": "fast alignment, default4; M5 Max narrow2; geometry and specialization"
+    },
+    "S2": {
+      "url": "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/kernels/fp_quantized.h#L310-L383",
+      "tag": "v0.32.3",
+      "claims": "per-row arithmetic independent of results_per_simdgroup; helper qdot must remain equivalent"
+    },
+    "S3": {
+      "url": "https://github.com/lithos-ai/lithos-metal/blob/5485ad6bac0a5649d66a347f3e01a655ea29d937/kernels/common/gemv_nvfp4_rows.metal",
+      "commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+      "claims": "row geometry precedent only; pack/math incompatible for direct transplant"
+    }
+  },
+  "limits": [
+    "M5 donor is not M4 performance evidence",
+    "No GPU, model, tests or benchmark executed",
+    "Rejected row packing/launch merging not repeated",
+    "r4 control must pass exact bytes before r2 comparison"
+  ]
+}

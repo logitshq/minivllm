@@ -106,3 +106,11 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 用户解锁后关闭空闲应用、保留正在执行的远端 CUDA 工作与 Codex，随后独占 GPU 串行运行。0.8B/27B 的 smoke 与三次重复测量均已完成，报告标记为真实 target-only 本机测量；`tutorial-11-v2` 保存扩展结果。原 `tutorial-11` 和 `baseline-lithos-setup-v1` 的资格/CPU 准备记录保留，不覆盖旧 tag。
 
 本机 M4 官方 accelerator-on 的独立实验已记录，见 [实验说明](../../tutorial_code/baselines/m4-accelerator-README.md)；完整 M5 配置被官方设备检查拒绝，未绕过验证。推荐第十一章阅读版本为 `tutorial-11-v3`，默认 profile/off 与原 `tutorial-11-v2` 记录保留。
+
+## 独立实验阅读（未采用）
+
+[18：先确认优化真的更快](18-先确认优化真的更快.md)记录GDN四投影与MLP两投影的输出行拼接。两条路线均未通过收益门，当前26个引擎源码及V19 default OFF保持不变；章节编号只作实验阅读索引，不表示已集成的新能力。
+
+[19：把量化矩阵乘拆开看](19-把量化矩阵乘拆开看.md)记录独立NVFP4 QMV几何实验：原QMM→R4数值控制→每SIMD行数4→2；严格数值通过、性能STOP，未接入引擎。
+
+[20：沿实际实现读三条执行路径](../experiments/20-donor-implementation-map.md)对照实际版本的oMLX、手搓引擎与Lithos，区分已具备ahead、待验证conv预处理、ICB运行时工程及allocator未知项；仅源码阅读，无新增收益结论。
