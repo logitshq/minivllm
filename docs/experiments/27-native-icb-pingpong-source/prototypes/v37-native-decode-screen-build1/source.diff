@@ -1,0 +1,20 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v35-native-decode-screen-build1/screen.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v37-native-decode-screen-build1/screen.py
+@@ -17,7 +17,7 @@
+ P = D.parent
+ ROOT = P / "candidate-v17-gdn-gates-build1-root"
+-LIB = P / "v34-native-replay-build1/libv34replay.dylib"
+-QUAL = P / "v23-root-control-build1/fullmodel-v34native-attempt1/child-output/receipt.json"
+-QUAL_SHA = "ff67fbc7669244ec061d0203540caafcc9d9bcffb1789b1f6e412431980730d5"
++LIB = P / "v37-native-resource-clones-build1/libv37replay.dylib"
++QUAL = P / "v23-root-control-build1/fullmodel-v37native-attempt1/child-output/receipt.json"
++QUAL_SHA = "00c7f81e0d48ab49284c50cbceb043bdead206c06dcfc41ec11d85e5dddfa7be"
+ CONTROLS = {"MLX_MAX_OPS_PER_BUFFER": "50", "MLX_MAX_MB_PER_BUFFER": "50",
+             "MLX_BFS_MAX_WIDTH": "20", "MLX_METAL_FAST_SYNCH": "0"}
+@@ -82,5 +82,5 @@
+         assert versions=={"mlx":"0.32.3","mlx-metal":"0.32.3"}
+         support=module("v35_resources",P/"v24-fullmodel-qual-build1/fullqual.py")
+-        base=module("v35_native_support",P/"v34-native-fullqual-build1/fullqual.py")
++        base=module("v35_native_support",P/"v37-native-fullqual-build1/fullqual.py")
+         prior=module("v35_shared",P/"v33-fixed-buffer-replay-worker-build3/fullqual.py")
+         resources=support.Resources(args.out)

@@ -1,0 +1,25 @@
+{
+  "status": "CPU_READY_ONLY",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v36-native-pingpong-build1/replay.mm": "394bee43eca7024f2c32fc39eff223c9a4cd1e750de130e8a1ba04a81a0b62ff",
+    "/private/tmp/minivllm-engine-optimization-20261014/v36-native-pingpong-build1/libv36replay.dylib": "1723e29e0cc624b704d8aa72ed1da035d2f982334e1bb7d2542ae2fe23da4d30",
+    "/private/tmp/minivllm-engine-optimization-20261014/v36-native-pingpong-build1/ABI.h": "bedb67858cd6e979951e95a8881e234519fd06ad3cde9164daf13a55e86a1d13",
+    "/private/tmp/minivllm-engine-optimization-20261014/v36-native-pingpong-build1/test_cpu.py": "8c8083c47686016c4af7493ca7068bb794f731991b35863846da5d64474f78b6"
+  },
+  "GPU_dispatched": false,
+  "library_loaded_by_author": false,
+  "CPU_tests": 2,
+  "qualified_native1_source_unchanged": true,
+  "accepted_GDN_source": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/kernels/gdn_metal.py",
+    "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+    "PSO": "custom_kernel_gdn_decode_step_float_float_float_float_float_float_float_float",
+    "S_new_policy": "the pinned _SOURCE only stores S_new; ReadWrite reflection accepted only for this exact PSO/argument and isolated whole allocation"
+  },
+  "eligibility": "whole distinct 3145728B allocations offset0; exactly one active binding use each in same exact GDN dispatch; S readonly and S_new non-readonly; no other registered range aliases; exact semantic state feedback link. Ineligible pairs retain staged fallback and reason; claiming optimization requires actual eligible count",
+  "banks": "reset A; first step reads A writes B; next reads B writes A. Compare/copy logical S_new accesses current written bank after GPU completion",
+  "traffic": "48 eligible pairs remove 301989888 copied bytes/step (603979776 read+write memory traffic bytes); no performance claim",
+  "timing": "stored native per-step graph/feedback encode, commit, wait, total and actual CB GPUStart/End vector; explicit v36_timing_json export after request only",
+  "API": "existing 16 exports plus v36_register_pingpong and v36_timing_json",
+  "pending": "root accepted-GDN tiny plus same three-request/93-step all132-output strict qualification before performance"
+}

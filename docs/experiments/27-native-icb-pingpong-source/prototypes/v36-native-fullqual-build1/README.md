@@ -1,0 +1,7 @@
+# V36 GDN S ping-pong full numerical qualification
+
+Derived from frozen, actual-qualified V34 fullworker1. Same source25/gates48ON/conv+whole-functionalOFF, one model, fixedcap256; same base19/reset19/changed20 three-request protocol,131seedinputs,132outputs and131semanticfeedbacklinks. V36 adds48GDN FP32S registrations (each[1,48,128,128],3145728bytes) after all131links and beforeseal. Native actualreflection/range/use eligibility must prove all48, and83remaining stagedlinks. Ineligible fallback is rejected by this qualification worker.
+
+Native odd/even S banks replace only the staged-copy path for eligibleS; all132outputs are still compared to original-model exactL references with Cmemcmp every step, alongside all originalseed/capturedoutput/requestseed strict readonly checks and132-output finite/shape/dtype gates. B consumes its own GPUargmax/positions/lens/statefeedback,131seeduploads once/request only; canonical32IDs asserted base/reset and changedprefill computes independentgreedy/EOS. Existing resourceguards/counters preserved.
+
+Root CLI: `.venv/bin/python fullqual.py --out NEW_ABSOLUTE_DIRECTORY --tokens 32`, exact newnative36 DYLDinjection+50/50/20/0. OriginalV34/native1 remain frozen. This is correctness qualification only, no performance/ICB/adoption claim. CPU preparation never imports MLX or runs GPU. Native36 finalsource/library are pinned; CPU AST and inert checks only. Actual tiny/fullmodel qualification remains root-owned.

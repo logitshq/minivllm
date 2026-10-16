@@ -1,0 +1,13 @@
+# V38 actual ICB source: focused independent CPU review
+- Native replay.mm `ca14f8711d0f666e3367a00b418e0ed0f2988ab3757007eae831e02afda80e7f`, library9274227b…, workerfbcc6078… match frozen artifacts. No concrete source blocker found for the declared tiny/three-request path.
+- Lines42–48 retain the actual resolved MTLFunction, full descriptor copy or function-overload defaults, options and original PSO; no function-name lookup or new shader/library compilation is introduced.
+- Lines267–270 inspect actual supportIndirectCommandBuffers; recreate only if needed using that descriptor/function/options, changing the support flag, then require actual support and original threadgroup geometry within the chosen PSO limit.
+- Lines265/275–282 allocate immutable256-byte-aligned storage for every retained full setBytes payload and bind it by exact offset; max kernel-buffer/TG bind counts include the highest captured index.
+- Lines279–285 build two retained ICBs with explicit pipelines/buffers and exact captured dispatch kind/grid/threadgroup/TG memory; PP bank mapping is fixed at construction and restored to0 afterwards.
+- Every original scope/resource/fence/event marker sets the next dispatch's barrier before geometry is encoded; only adjacent markers without an intervening dispatch fold. Trailing ordering is supplied by the outer graphDone fence.
+- Local Metal SDK declarations match these ICB descriptor/compute APIs. The donor metal_core.mm:138/233 uses the same next-command waiting policy; this review is source evidence, not a new GPU proof of ordering.
+- Line100 declares the mutable arena Read|Write, the union of all actual used readonly weight buffers plus constants Read, and the selected ICB Read before executeCommandsInBuffer.
+- Lines185–194 preserve prior feedbackDone wait, graphDone→stageDone→feedbackDone fences,83 staged feedback links, commit/wait/error check; completed ICB/per-bank execution counts increment only after successful completion and before the PP bank flips.
+- Worker calls enable after feedback seal and before any reset, checks actual two banks/execution/per-bank counters, and preserves the qualified V36 step loop's AST (all132 strict comparisons, readonly and actual GPU feedback).
+- All47 worker pins were independently rehashed; no source edit, native load, MLX import or GPU execution was performed by this review.
+- Scope: no concrete source blocker; tiny/full numerical qualification and actual performance remain execution gates. A recreated ICB-capable PSO is not claimed to have independently verified identical machine code or numerical results before those checks.

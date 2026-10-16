@@ -1,0 +1,23 @@
+{
+  "status": "CPU_READY_ONLY",
+  "parent_native_source_sha256": "da7df9ceee5d042bbac73489bfa309cbd4188cb4ba1be8f4628ffb4f21438a93",
+  "parent_native_library_sha256": "7810a7b1dcc3a3c559208499671ed65825bd326a4a308d1d6fb7573241e4ab36",
+  "parent_worker_sha256": "24b6eb77669daf7513f464d2961817e14df9ceb442b4ec704e538b08f6415996",
+  "files": {
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/replay.mm": "7f9ea4c4f210da57445a9d745eb6da1e122c666f1aaedd61f3790f0f249b34fd",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/libv37replay.dylib": "6b560a6046087e010fc0aba031771b5493a250fbb6b93269c55f8580f8829d13",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/ABI.h": "a51478a5d73a0bfc7deec56211c8bc9100424e1822bfad9e44ceb3e49a0a07b9",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-resource-clones-build1/source.diff": "5b292315d45da316bbd268c02b39072d798d5fe5fb8b5e40c48d6b1421eae215",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-fullqual-build1/fullqual.py": "6904958e3815a0845900f84564421641a06e5e1f7358ccc1f917fa4fa260517c",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-fullqual-build1/source-pins.json": "4c2ba3e134c43b66198138bc73fe518cb3f7edc123a9351761a125b6e0f91163",
+    "/private/tmp/minivllm-engine-optimization-20261014/v37-native-fullqual-build1/source.diff": "773e30de3b2099a95b49a9e92dc25bf4c86b975702640483204cb4fe1967d3f7"
+  },
+  "ABI_unchanged": true,
+  "worker_AST_equal_except_default_library": true,
+  "capture_hooks_and_pin_API_source_unchanged": true,
+  "GPU_executed": false,
+  "library_loaded": false,
+  "clone_policy": "one owned clone per used mutable original MTLBuffer, same length/resourceOptions and local offsets; read-only pinned weights remain zero-copy",
+  "barriers": "exact original resource identities map to exact clones/original readonly weights; all original full-scope dependencies retained; only directly adjacent full-buffer barriers coalesced",
+  "qualification": "root tinyfeedback ABI-compatible, then qualified 3-request/96-token worker cloned with one default-library line changed; no numerical/performance claim yet"
+}

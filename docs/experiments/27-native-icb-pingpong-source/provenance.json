@@ -1,0 +1,120 @@
+{
+  "reference_package": "reference/accepted25/tutorial_code/miniengine",
+  "reference_manifest_sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c",
+  "versions": [
+    {
+      "version": "V36",
+      "parent": "V34 native1",
+      "native_source": "prototypes/v36-native-pingpong-build1/replay.mm",
+      "runs": [
+        {
+          "run": "fullmodel-v36smoke-attempt1",
+          "status": "PASS_TINY_GDN_PINGPONG_3REQUESTS_15STEPS",
+          "receipt_sha256": "ee00d499c6177b34cda03e89bfe89537dfd59bfba9926bd98d90f14781817cde",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v36-native-gdn-smoke-build1/smoke.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v36smoke-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v36smoke-attempt1/external-release.json"
+        },
+        {
+          "run": "fullmodel-v36native-attempt1",
+          "status": "PASS_NATIVE_S_PINGPONG_BASE_RESET_CHANGED_STRICT",
+          "receipt_sha256": "e8b59f62f3b8d565c0126a6b19d06277260f937fab7e3e102d8f9af1fd94fba9",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v36-native-fullqual-build1/fullqual.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v36native-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v36native-attempt1/external-release.json"
+        },
+        {
+          "run": "native-decode-v36-attempt1",
+          "status": "PASS_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",
+          "receipt_sha256": "3d932f1118e2d47c17bc08897f54a930958699b3968f89488b86de6b320d1989",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v36-native-decode-screen-build1/screen.py",
+          "owner_receipt": "evidence.tar.gz::native-decode-v36-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::native-decode-v36-attempt1/external-release.json",
+          "B_only_measured_summary": {
+            "n": 3,
+            "median_decode_ns_per_step": 39283341.41935484,
+            "median_decode31_tokens_per_s": 25.456083007931234,
+            "median_whole32_tokens_per_s": 22.832610033112637,
+            "scope": "B-only exploratory absolute timing; not HTTP/Pareto or an A/B performance win"
+          }
+        }
+      ]
+    },
+    {
+      "version": "V37",
+      "parent": "V34 native1",
+      "native_source": "prototypes/v37-native-resource-clones-build1/replay.mm",
+      "runs": [
+        {
+          "run": "fullmodel-v37smoke-attempt1",
+          "status": "PASS_TINY_TRUE_GPU_FEEDBACK_3REQUESTS_15STEPS",
+          "receipt_sha256": "c3f3d6d8e1f4c48b2a472f11a1ad41ed910cbcb6c35d82feb82e88e72f5e4312",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v34-native-smoke-build1/smoke.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v37smoke-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v37smoke-attempt1/external-release.json"
+        },
+        {
+          "run": "fullmodel-v37native-attempt1",
+          "status": "PASS_NATIVE_FIXEDCAP_FEEDBACK_BASE_RESET_CHANGED_STRICT",
+          "receipt_sha256": "00c7f81e0d48ab49284c50cbceb043bdead206c06dcfc41ec11d85e5dddfa7be",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v37-native-fullqual-build1/fullqual.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v37native-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v37native-attempt1/external-release.json"
+        },
+        {
+          "run": "native-decode-v37-attempt1",
+          "status": "PASS_B_ONLY_EXPLORATORY_SCREEN",
+          "receipt_sha256": "ba321f243513d4f5f70ca66d4b75b0682bb6586459e4dda5588b2c4bbdc50600",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v37-native-decode-screen-build1/screen.py",
+          "owner_receipt": "evidence.tar.gz::native-decode-v37-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::native-decode-v37-attempt1/external-release.json",
+          "B_only_measured_summary": {
+            "n": 3,
+            "median_decode_ns_per_step": 40239987.90322581,
+            "median_decode31_tokens_per_s": 24.85090210277712,
+            "median_whole32_tokens_per_s": 22.48607904238063,
+            "scope": "B-only exploratory absolute timing; not HTTP/Pareto or an A/B performance win"
+          }
+        }
+      ]
+    },
+    {
+      "version": "V38",
+      "parent": "V36 qualified S-pingpong",
+      "native_source": "prototypes/v38-native-icb-build1/replay.mm",
+      "runs": [
+        {
+          "run": "fullmodel-v38smoke-attempt1",
+          "status": "PASS_TINY_GDN_ICB_PINGPONG_3REQUESTS_15STEPS",
+          "receipt_sha256": "c8acd6344b76d35b4203c9b7f6c13c9d5e0f5bc436c73f595bfa8a20e14b8d5f",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v38-native-gdn-smoke-build1/smoke.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v38smoke-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v38smoke-attempt1/external-release.json"
+        },
+        {
+          "run": "fullmodel-v38native-attempt1",
+          "status": "PASS_NATIVE_ICB_S_PINGPONG_BASE_RESET_CHANGED_STRICT",
+          "receipt_sha256": "c57e7625baa5a4ce450fc7306233e766f1efd71636713080d748780624542c8a",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v38-native-fullqual-build1/fullqual.py",
+          "owner_receipt": "evidence.tar.gz::fullmodel-v38native-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::fullmodel-v38native-attempt1/external-release.json"
+        },
+        {
+          "run": "native-decode-v38-attempt1",
+          "status": "PASS_ICB_S_PINGPONG_B_ONLY_EXPLORATORY_SCREEN",
+          "receipt_sha256": "abc40171167e180a6c9d8cc559d2fb15113e6908861debc3d390a3a76e0b1755",
+          "owner_script": "/private/tmp/minivllm-engine-optimization-20261014/v38-native-decode-screen-build1/screen.py",
+          "owner_receipt": "evidence.tar.gz::native-decode-v38-attempt1/owner-receipt.json",
+          "external_release": "evidence.tar.gz::native-decode-v38-attempt1/external-release.json",
+          "B_only_measured_summary": {
+            "n": 3,
+            "median_decode_ns_per_step": 36188481.19354839,
+            "median_decode31_tokens_per_s": 27.633102219782522,
+            "median_whole32_tokens_per_s": 24.503709749857954,
+            "scope": "B-only exploratory absolute timing; not HTTP/Pareto or an A/B performance win"
+          }
+        }
+      ]
+    }
+  ]
+}

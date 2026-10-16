@@ -1,0 +1,15 @@
+# V38 ICB actual full qualification + B-only screen: CPU evidence audit PASS
+- Frozen actual receipts match: fullqual `c57e7625…42c8a`, screen `abc40171…b1755`; independently rehashed47/51 source pins and imported accepted25 paths. A reference manifest remains31fa0539…cb41c.
+- Fullqual has base19/reset19/changed20:3 requests,96 generated IDs,93 decode steps,12,276 finite strict output comparisons,279 original readonly and93 A retained-state digest records.
+- Base/reset every output signature matches; changed prefill alters129 seed arrays and the first logits hash. No per-step B seed writes; B state/token feedback stays GPU-native, with4B prediction observed only.
+- Actual ICBs are two distinct retained banks with2,009 commands each (1,448 dispatchThreads +561 dispatchThreadgroups),1,238 barrier commands/bank and a trailing graph fence.
+- All33 retained-function PSOs were recreated with ICB support and actually report support=true;1350 readonly resources cover1349 parameter buffers plus constants, with mutable arena RW and selected ICB Read.
+- Completed fullqual ICB executions=93,encoded=93,bank executions[48,45]; reset counters1/2/3, all131 seed ranges once/request and strict stage comparisons agree.
+- Screen uses six fresh requests,3warm+3measure,132 final outputs each: all792 final hashes equal the fullqual base reference. Final hash copies/resources remain outside timed decode.
+- Recomputed each t0/t1/t2 difference/rate and three measured medians:36.188481ms/step,27.633102 decode tok/s,24.503710 whole-request tok/s.
+- Screen completed186 ICB executions/banks[96,90]; cumulative timing files have exact prefixes/SHA/counts and93 measured rows.
+- Measured-step span medians: graph encode0.070292ms,feedback encode0.172167ms,all encode0.246958ms,commit0.005792ms,wait35.869166ms,host total36.128291ms,CB GPU envelope35.586375ms.
+- Every row satisfies encode=graph+feedback and host total=encode+commit+wait. GPU timestamps reproduce the envelope; it overlaps host wait, and the component medians are not additive.
+- Recomputed53 fullqual and19 screen raw resource samples: AC/thermal0/pressure1,minfree46%,swap MB/Swapouts growth0. Saved Pageouts increases remain visible in the audit receipt.
+- Fullqual owner/child61323/61332 and screen62070/62071 exit0/waited/reaped with saved external strict absence PASS. This CPU audit loaded no native library/MLX and used no GPU.
+- Evidence scope is actual A hashes/Cmemcmp records and final B hashes, not independent GPU recapture of full output blobs. This B-only absolute timing is no paired A/B, HTTP, service/Pareto or adoption result.

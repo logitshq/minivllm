@@ -53,3 +53,5 @@ docs/              计划、教程、远程版的契约和 notes
 - [21：把GDN真卷积、SiLU和原始tail合成一核](docs/experiments/21-gdn-conv-fusion.md)：synthetic严格数值与局部micro通过，host-wall中位减少12.21%；真实preconv、完整模型及E2E资格待做，原型未接入引擎。
 
 [实验22：融合和图复用的真实 HTTP 检查](docs/experiments/22-combined-decode-screen.md)保存组合版源码和完整结果；C1交互速度+1.54%、总吞吐+0.76%，尚未超过官方前沿，默认关闭。
+
+[27：少搬 state，再把真实 Metal 命令留在 ICB 里](docs/experiments/27-native-icb-pingpong.md)记录V36 S轮换、V37独立克隆负结果与V38实际ICB；当前最快27.633tok/s仅属B-only探索，尚无HTTP/Pareto获胜结论。
