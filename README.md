@@ -45,3 +45,5 @@ docs/              计划、教程、远程版的契约和 notes
 
 - [18：先确认优化真的更快](docs/tutorial-v2/18-先确认优化真的更快.md)：GDN/MLP输出行拼接的独立评估，两方向均STOP、未采用；没有修改当前26个引擎源码或V19 default OFF。
 - [投影拼接证据与评估](docs/experiments/18-projection-packing-evaluation.md)：旧AC顺序混杂、新Battery局部配对和控制、原始SHA及独立审查收据；不列为已实现能力。
+
+- [19：把量化矩阵乘拆开看](docs/tutorial-v2/19-把量化矩阵乘拆开看.md)：原QMM→手写R4控制→R2几何实验，27项数值通过但未过5%收益门，STOP、未采用。
