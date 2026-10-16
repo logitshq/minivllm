@@ -16,12 +16,12 @@ from .scheduler import SchedulerOutput
 
 
 class ModelRunner:
-    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None, *, compile_decode=False):
+    def __init__(self, model, max_len: int, drafter=None, spec_block: int | None = None, *, compile_decode=False, fuse_decode=False):
         self.model = model
         self.decode_model = model
         if compile_decode:
             from .compiled_decode import CompiledDecode
-            self.decode_model = CompiledDecode(model)
+            self.decode_model = CompiledDecode(model, fuse_decode=fuse_decode)
         self.max_len = max_len
         self.batch = DecodeBatch(model)
         self.staging: dict[str, list] = {}          # req_id → 单序列 cache（prefill 阶段，以及投机解码的 solo 模式）

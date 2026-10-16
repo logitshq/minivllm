@@ -17,8 +17,9 @@ class MLP(nn.Module):
         self.up_proj = Linear(cfg.hidden_size, cfg.intermediate_size, q)
         self.down_proj = Linear(cfg.intermediate_size, cfg.hidden_size, q)
 
-    def __call__(self, x):
-        return self.down_proj(nn.silu(self.gate_proj(x)) * self.up_proj(x))
+    def __call__(self, x, *, _projection=None):
+        gate, up = _projection(x) if _projection is not None else (self.gate_proj(x), self.up_proj(x))
+        return self.down_proj(nn.silu(gate) * up)
 
     def _prefill_batch(self, x, shape):
         gate = prefill_linear(self.gate_proj, x, shape)
@@ -38,12 +39,13 @@ class DecoderLayer(nn.Module):
         self.input_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
         self.post_attention_layernorm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps)
 
-    def __call__(self, x, ctx=None, layer_idx=0, *, _norm_reuse_normal=False):
+    def __call__(self, x, ctx=None, layer_idx=0, *, _norm_reuse_normal=False, _decode_projections=None):
+        mlp, mixer = _decode_projections or (None, None)
         h = self.input_layernorm(x)
-        x = x + (self.self_attn(h, ctx, layer_idx) if self.is_attn else self.linear_attn(h, ctx, layer_idx, _norm_reuse_normal=_norm_reuse_normal))
+        x = x + (self.self_attn(h, ctx, layer_idx, _projection=mixer) if self.is_attn else self.linear_attn(h, ctx, layer_idx, _norm_reuse_normal=_norm_reuse_normal, _projection=mixer))
         if ctx is not None and ctx.mode == "prefill_batch":
             return x + self.mlp._prefill_batch(self.post_attention_layernorm(x), ctx.prefill_shape)
-        return x + self.mlp(self.post_attention_layernorm(x))
+        return x + self.mlp(self.post_attention_layernorm(x), _projection=mlp)
 
 
 class Qwen3_5ForCausalLM(nn.Module):
@@ -56,7 +58,7 @@ class Qwen3_5ForCausalLM(nn.Module):
         if not cfg.tie_word_embeddings:
             self.lm_head = Linear(cfg.hidden_size, cfg.vocab_size, cfg.quantization)
 
-    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = ()):
+    def __call__(self, input_ids: mx.array, ctx=None, last_only: bool = False, capture: tuple[int, ...] = (), *, _decode_projections=None):
         """input_ids: prefill 时 [T] 个 token，decode 时 [B] 个（每个序列一个）。ctx 为后续 cache/batch 接口（本章仅整句无 cache）。
         last_only=True 时只对最后一个位置算 lm_head（prefill 只需要最后一个位置的 logits，省 1 GB 的 2048×vocab）。
         capture=(5, 19, ...) 时额外返回这些层的输出拼起来的特征 [T, len(capture)·hidden]（DFlash2 drafter 的上下文）。"""
@@ -78,7 +80,8 @@ class Qwen3_5ForCausalLM(nn.Module):
         )
         feats = []
         for i, layer in enumerate(self.layers):
-            x = layer(x, ctx, i, _norm_reuse_normal=_norm_reuse_normal)
+            x = layer(x, ctx, i, _norm_reuse_normal=_norm_reuse_normal,
+                      _decode_projections=None if _decode_projections is None else _decode_projections[i])
             if i in capture:
                 feats.append(x)
         if grouped and last_only:

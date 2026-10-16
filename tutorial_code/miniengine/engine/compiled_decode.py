@@ -12,9 +12,11 @@ from ..model.gdn import _m5_ultra_decode_identity
 
 
 class CompiledDecode:
-    def __init__(self, model):
+    def __init__(self, model, *, fuse_decode=False):
         self.model = model
         self._functions = {}
+        self._fuse_decode = fuse_decode
+        self._packed = None
 
     def __call__(self, tokens, ctx):
         model = self.model
@@ -35,19 +37,37 @@ class CompiledDecode:
         )
         if not eligible:
             return model(tokens, ctx)
+        fused = self._fuse_decode and tokens.shape == (1,) and all(
+            layer.is_attn or (
+                (layer.linear_attn.Hk, layer.linear_attn.Hv,
+                 layer.linear_attn.Dk, layer.linear_attn.Dv) == (16, 48, 128, 128)
+                and layer.linear_attn.conv1d_weight.shape == (10240, 4)
+                and layer.linear_attn.conv1d_weight.dtype == mx.bfloat16
+                and c.conv.shape == (1, 3, 10240) and c.conv.dtype == mx.bfloat16
+                and c.S.shape == (1, 48, 128, 128) and c.S.dtype == mx.float32)
+            for layer, c in zip(model.layers, ctx.caches))
+        if fused:
+            if self._packed is None:
+                from .packed_decode import PackedDecode
+                self._packed = PackedDecode(model)
+            if not self._packed.refresh():
+                return model(tokens, ctx)
         # These Python options affect tracing, unlike array weights. A change
         # selects another graph instead of silently retaining an old branch.
-        key = tuple((layer.linear_attn._gates_compile_enabled,
+        key = (fused, tuple((layer.linear_attn._gates_compile_enabled,
                      layer.linear_attn._norm_reuse_enabled)
-                    for layer in model.layers if not layer.is_attn)
+                    for layer in model.layers if not layer.is_attn))
         if key not in self._functions:
+            projections = self._packed.layers if fused else None
             def forward(ids, positions, lens, states):
                 layers = [BatchKV(s[0][:], s[1][:]) if layer.is_attn else BatchState(*s)
                           for layer, s in zip(model.layers, states)]
                 logits = model(ids, ForwardContext("decode", layers, positions=positions,
-                                                  lens=lens, max_len=256))
+                                                  lens=lens, max_len=256),
+                               _decode_projections=projections)
                 return logits, self._states(layers)
-            self._functions[key] = mx.compile(forward, inputs=model)
+            inputs = [model, self._packed.arrays] if fused else model
+            self._functions[key] = mx.compile(forward, inputs=inputs)
         logits, states = self._functions[key](tokens, ctx.positions, ctx.lens, self._states(ctx.caches))
         for layer, state in zip(ctx.caches, states):
             if isinstance(layer, BatchKV):

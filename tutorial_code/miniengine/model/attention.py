@@ -20,19 +20,20 @@ class Attention(nn.Module):
         self.q_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
         self.k_norm = RMSNorm(self.head_dim, cfg.rms_norm_eps)
 
-    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0) -> mx.array:
+    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _projection=None) -> mx.array:
         if ctx is not None and ctx.mode == "prefill_batch":
             return self._prefill_batch(x, ctx, layer_idx)
         if ctx is not None and ctx.mode == "decode":
-            return self._decode(x, ctx, layer_idx)
+            return self._decode(x, ctx, layer_idx, _projection=_projection)
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
 
-    def _project(self, x):
+    def _project(self, x, _projection=None):
         T = x.shape[0]
-        qg = self.q_proj(x).reshape(T, self.n_heads, 2 * self.head_dim)
+        qg, k, v = _projection(x) if _projection is not None else (self.q_proj(x), self.k_proj(x), self.v_proj(x))
+        qg = qg.reshape(T, self.n_heads, 2 * self.head_dim)
         q, gate = mx.split(qg, 2, axis=-1)                       # 每个头：前 D 是 q，后 D 是门
-        k = self.k_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
-        v = self.v_proj(x).reshape(T, self.n_kv_heads, self.head_dim)
+        k = k.reshape(T, self.n_kv_heads, self.head_dim)
+        v = v.reshape(T, self.n_kv_heads, self.head_dim)
         return self.q_norm(q), self.k_norm(k), v, gate.reshape(T, -1)   # 按头做 RMSNorm（零中心）
 
     def _prefill(self, x: mx.array, cache) -> mx.array:
@@ -75,11 +76,11 @@ class Attention(nn.Module):
         return prefill_linear(self.o_proj, o * mx.sigmoid(gate), (B, T))
 
 
-    def _decode(self, x: mx.array, ctx, layer_idx: int) -> mx.array:
+    def _decode(self, x: mx.array, ctx, layer_idx: int, *, _projection=None) -> mx.array:
         """批量：x [B, hidden]，每行一个新 token，位置各不相同。"""
         B = x.shape[0]
         kv = ctx.caches[layer_idx]
-        q, k, v, gate = self._project(x)                         # [B, H, D], [B, Hkv, D]
+        q, k, v, gate = self._project(x, _projection)            # [B, H, D], [B, Hkv, D]
         q = apply_rope(q[:, :, None], ctx.positions, self.rotary_dim, self.theta)   # [B, H, 1, D]，每行自己的位置
         k = apply_rope(k[:, :, None], ctx.positions, self.rotary_dim, self.theta)[:, :, 0]
         kv.write(k, v, ctx.positions)

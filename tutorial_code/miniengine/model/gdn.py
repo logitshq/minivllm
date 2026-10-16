@@ -60,12 +60,14 @@ class GatedDeltaNet(nn.Module):
         self.set_gates_compile(False)
         self.set_norm_reuse(False)
 
-    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _norm_reuse_normal=False) -> mx.array:
+    def __call__(self, x: mx.array, ctx=None, layer_idx: int = 0, *, _norm_reuse_normal=False, _projection=None) -> mx.array:
         if ctx is not None and ctx.mode == "prefill_batch":
             return self._prefill_batch(x, ctx, layer_idx)
         if ctx is not None and ctx.mode == "decode":
             allow_compile = (type(ctx) is ForwardContext and
                              not any(getattr(ctx, key, False) for key in ("record", "capture", "speculative", "verify")))
+            if _projection is not None:
+                return self._decode_fused(x, ctx.caches[layer_idx], _projection, allow_compile)
             return self._decode(x, ctx.caches[layer_idx], _compile_gates=allow_compile,
                                 _norm_reuse_normal=(_norm_reuse_normal is True and allow_compile))
         return self._prefill(x, ctx.caches[layer_idx] if ctx is not None else None)
@@ -246,3 +248,12 @@ class GatedDeltaNet(nn.Module):
         st.conv, st.S = xp[:, 1:], S
         o = self.norm(o.astype(x.dtype), z)
         return self.out_proj(o.reshape(B, -1))
+
+    def _decode_fused(self, x, st, projection, compile_gates):
+        from ..kernels.gdn_decode_fused import fused
+        qkv, z, b, a = projection(x)
+        beta, g = self._decode_gates(b, a, x, st) if compile_gates else self._gates(b, a)
+        o, state, conv = fused(qkv, st.conv, self.conv1d_weight, g, beta, st.S)
+        st.conv, st.S = conv, state
+        z = z.reshape(1, self.Hv, self.Dv)
+        return self.out_proj(self.norm(o.astype(x.dtype), z).reshape(1, -1))
