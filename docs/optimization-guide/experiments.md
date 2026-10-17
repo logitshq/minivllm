@@ -420,3 +420,8 @@ child TERM(-15)、reap与独立PID absence通过，外部服务同identity T→S
 
 仅T19的GDN z、MLP down与out三形状，保持原split2/2/3与BF16中间舍入，尝试官方MLX NAX helper代替SIMD部分乘法。默认OFF、独立模块，其余形状回原QMM；重建SIMD归约必须先逐位等于官方QMM，然后才能运行候选。root复核10项CPU tests通过；未编译Metal、未运行GPU、未获得数值或性能资格。
 [源码、来源、推导与严格执行顺序](../../bench/m5_ultra_256gb/prefill_nax_same_split/README.md)。
+
+## E026 · 2026-10-17 · GDN卷积尾状态独立存储 · CPU准备
+
+已从MLX0.32.3官方源码证实小slice共享整块prefill父buffer；默认OFF的uint16 contiguous复制仅保留最后3行，不改模型算术，立即eval另设开关。root复核7项CPU checks通过；未运行GPU、不归因E023中止、无性能点。先做无权重buffer ownership实测，再做完整引擎资格和吞吐/延迟配对。
+[教程](tutorials/026-conv-tail-ownership.md)。

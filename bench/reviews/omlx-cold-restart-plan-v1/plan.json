@@ -1,0 +1,98 @@
+{
+  "schema": "omlx-cold-restart-proposal-v1",
+  "status": "PROPOSAL_REQUIRES_EXPLICIT_RECOVERY_CONTRACT",
+  "approved": false,
+  "executable": false,
+  "mutator_implemented": false,
+  "no_execute_instruction": "These command arrays are review data, not permission or a runnable controller.",
+  "original": {
+    "pid": 74384,
+    "start": "Fri Oct 16 08:01:58 2026",
+    "job": "gui/501/local.omlx.server",
+    "domain": "gui/501",
+    "plist": "/Users/ryanli/Library/LaunchAgents/local.omlx.server.plist",
+    "plist_sha256": "6cfa472c4ae61ac8290f39f447d00d7d1e025c4dd7d35b8faf63b13d1fc76bdb",
+    "port": 8001,
+    "host": "127.0.0.1",
+    "version": "0.7.0",
+    "physical_loaded_set": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "model_path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp"
+  },
+  "minimal_restore_contract": {
+    "same_original_pid": false,
+    "new_pid_expected": true,
+    "preserved": [
+      "on-disk checkpoint",
+      "on-disk service plist",
+      "authentication configuration",
+      "persisted model settings"
+    ],
+    "verify": [
+      "same launchd label and plist",
+      "healthy 127.0.0.1:8001 listener owned by replacement PID",
+      "runtime oMLX 0.7.0",
+      "exact original physical loaded set and path",
+      "VLM qwen4_exp engine",
+      "Lightning MTP enabled",
+      "resident PLE confirmed in new load log window",
+      "default and pinned state match preflight",
+      "no loading or active/waiting requests at completion"
+    ],
+    "not_claimed": [
+      "hidden EngineEntry.runtime_settings_signature exactness",
+      "unrecorded transient profile/depth exactness",
+      "warm KV/request state",
+      "successful completion of every SSD cache write before exit",
+      "identical process footprint or peak"
+    ]
+  },
+  "review_only_actions": [
+    {
+      "phase": "remove_single_job",
+      "argv": [
+        "/bin/launchctl",
+        "bootout",
+        "gui/501/local.omlx.server"
+      ]
+    },
+    {
+      "phase": "restore_single_job_after_experiment_reap",
+      "argv": [
+        "/bin/launchctl",
+        "bootstrap",
+        "gui/501",
+        "/Users/ryanli/Library/LaunchAgents/local.omlx.server.plist"
+      ]
+    },
+    {
+      "phase": "load_original_physical_model",
+      "method": "POST",
+      "url": "http://127.0.0.1:8001/v1/models/Qwen3.8-Flash-Next-oQ6e-mtp/load",
+      "body": null,
+      "auth_changes": false
+    }
+  ],
+  "no_actions": [
+    "disable/enable persisted launchd state",
+    "bootout gui/501 domain",
+    "kickstart -k",
+    "config or plist write",
+    "auth setup/login/session forgery",
+    "model deletion",
+    "forced PLE/precision/offload change"
+  ],
+  "approval_needed": [
+    "accept cold restart and explicitly bounded persisted-visible recovery rather than original-PID suspend/resume",
+    "accept loss of in-flight/warm memory state and possible incomplete SSD cache flush",
+    "authorize exact three review-only actions plus bounded read-only verification"
+  ],
+  "remaining_unknowns": [
+    "current service identity/residency must be refreshed just before mutation",
+    "full old transient runtime variant is not exposed",
+    "resident-mode reload can be rejected or forced SSD by changed physical memory",
+    "GLM initialization peak remains independently unqualified"
+  ],
+  "failure_policy": "No GLM while pressure is elevated or service removal/reclaim is unproven. Reap experiment before recovery. Any unexpected loaded set, PID/port owner, config drift, POST unknown outcome or SSD PLE produces recovery-incomplete, never silent success."
+}

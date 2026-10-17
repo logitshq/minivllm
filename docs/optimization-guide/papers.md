@@ -141,3 +141,14 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
 2026-10-17追加检索10月Apple Silicon/GDN/persistent inference/continuous batching，未筛出
 比已记录ReaDy等更直接适用的10月系统方案；EAGLE-ASR是语音模型专用训练头，未纳入本轮。
 上述7月和9月条目是本轮新阅读，不称为本月新发表。
+
+
+2026-10-17后续检索补入确切的10月官方资料：
+- [Apple MLX/RDMA on Mac Studio](https://machinelearning.apple.com/research/mlx-distributed-inference)，2026-10-15。
+  单机Qwen3.8为BF16/512GB/8192或65536输入，并非本机NVFP4/256GB HTTP合同；不直接排速度名次。
+  可借prefill算力与decode带宽分开分析；多机RDMA/pipeline收益不归给单机，实验性FAST_SYNCH
+  没有独立单机消融，暂不默认启用。GLM5.3未覆盖。
+- [TreeWY v1](https://arxiv.org/html/2608.20961v1)，2026-08-21。生产实现按BF16容差验证，
+  token轨迹不逐位相同，因此不直接接入其状态重建算术。本仓已有单checkpoint+tape而非
+  store_all，不能套其状态节省倍数。可借鉴缩短已核对snapshot的存活期，并区分准入收益与每步成本。
+  [独立阅读笔记与候选切点](../../bench/reviews/2026-10-17-apple-mlx-research.md)保留来源和适用边界。

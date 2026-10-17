@@ -1,0 +1,65 @@
+{
+  "schema": "conv-tail-source-review-v1",
+  "mlx_version": "0.32.3",
+  "sources": {
+    "mlx/array.cpp": {
+      "copy": "sources/mlx/array.cpp",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/array.cpp",
+      "sha256": "92d0e3d686eee37ead527e92aa4fc2d9fd893a8c039e7d4f18c404edc2ffbfac"
+    },
+    "mlx/array.h": {
+      "copy": "sources/mlx/array.h",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/array.h",
+      "sha256": "543d9096f3ea52870087059db5f793925dfb5e00097638776bc52b01e6189c3b"
+    },
+    "mlx/backend/metal/copy.cpp": {
+      "copy": "sources/mlx/backend/metal/copy.cpp",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/copy.cpp",
+      "sha256": "35570b10905afb07f59ea16bf7abf840d290435fedbf716ca83cc7c51691e5d8"
+    },
+    "mlx/backend/gpu/primitives.cpp": {
+      "copy": "sources/mlx/backend/gpu/primitives.cpp",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/gpu/primitives.cpp",
+      "sha256": "5a796463969b675181111b42a7aeadce8243a9d793ec7a00a30051d325bffe86"
+    },
+    "mlx/backend/gpu/slicing.cpp": {
+      "copy": "sources/mlx/backend/gpu/slicing.cpp",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/gpu/slicing.cpp",
+      "sha256": "6b010670e215a0016dd2707ab2101ddc256583243bc501a44b7be3ea4de513f4"
+    },
+    "mlx/backend/common/slicing.cpp": {
+      "copy": "sources/mlx/backend/common/slicing.cpp",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/common/slicing.cpp",
+      "sha256": "ac82dd8972605a46dd4eab0c04303ed6758b273065bd9bde696d4591f914b1a2"
+    },
+    "mlx/backend/common/copy.h": {
+      "copy": "sources/mlx/backend/common/copy.h",
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/common/copy.h",
+      "sha256": "2caa44885b43327747e53460f317e3107b9a0c012759a3c8f3d44095d1819ef0"
+    },
+    "mlx/backend/metal/kernels/copy.h": {
+      "copy": "sources/mlx/backend/metal/kernels/copy.h",
+      "url": "https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/kernels/copy.h",
+      "sha256": "a9fad1b262ffc25f4ccda4e09d0c76821cd580f12871acd2a0daa98151e1587c",
+      "origin": "installed MLX 0.32.3 header"
+    },
+    "installed-memory-api-excerpt": {
+      "copy": "sources/installed-memory-api.pyi.txt",
+      "installed_path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/core/__init__.pyi",
+      "installed_sha256": "bfa3c09f0f1e3edb925bf92e021f3121f0b953959f43ffd91cfa13895a41e8ce",
+      "lines": [
+        823,
+        849
+      ],
+      "sha256": "dabb8b3a947609aaae67ba60c42866d10c952c45e5a382aeb5935566cbf780b7"
+    }
+  },
+  "scope": "Static source evidence; GPU allocator behavior has not been measured.",
+  "review_inputs": {
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+    "bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf"
+  }
+}

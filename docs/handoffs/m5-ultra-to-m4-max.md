@@ -318,3 +318,16 @@ E023 v1已终止并完整归档：C1完成8请求/4096 IDs；C8最后step515，�
 [完整归档](../experiments/m5-ultra-256gb/E023-realistic-qualification-v1/README.md)保存332成员，压缩7.8MB的xz保留原1.4GB JSONL。E024仍冻结未运行，当前资源压力仍2，先查buffer ownership。E025已准备独立、默认OFF的T19 same-split NAX部分乘法诊断，root10项CPU tests通过，未编译Metal/加载GPU，不接入core。
 
 最新可报告的仍是[v5吞吐/完整延迟图](../optimization-guide/progress/2026-10-17-v5/qualified-throughput-latency.png)：历史C2–64与受控E020 C1分开；正确性是入场门，不作可交换轴。C1 oMLX仍领先，不能宣称全面前沿获胜。
+
+
+## 2026-10-17 E026默认OFF状态所有权候选
+
+E023失败完整归档与E025独立NAX诊断已push `6968805`。新的E026源码审查证实MLX0.32.3的
+GDN `xp[T:]`保留整块concat buffer；只把最后3行用uint16 contiguous复制，可避开修改算术。
+复制与立即materialize分别开关，root7项CPU检查通过，尚未GPU资格/接core/产生性能点。
+[教程](../optimization-guide/tutorials/026-conv-tail-ownership.md)与容量推导均保留；约3.46GiB是
+step515两arm的名义多余backing引用量，不是实测节省或E023根因。独立无权重buffer诊断正在准备。
+
+Apple10月15日MLX文章已读，Qwen3.8数据为BF16/512GB/长上下文，不能混入当前Pareto；
+TreeWY生产实现未承诺逐位轨迹，且本仓早已单checkpoint+tape，不直接移植其算术或套store_all倍数。
+服务pressure2仍在；仅SIGSTOP不释放143GiB，coldrestart具体恢复方案已准备，用户明确授权待回复。
