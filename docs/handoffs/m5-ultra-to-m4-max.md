@@ -173,8 +173,9 @@ V112定位同输入Linear的shape差异，以及V113全部497个broadcast-M1与c
 literal GDN状态驻留，与M4的V114事务资格分工。V111官方MTP负收益也保留，不移植成M5结论。
 
 M5 E017实际Lithos native M5 Ultra、empty recipe普通/DSpark六请求192raw IDs完全相等；
-真实gamma7生成与日志已落盘，正在独立审计。它与E015一样只有插桩engine数值/路由资格，
-没有HTTP速度结论。target相同但本机Lithos第4位置ID100606、oMLX ID60277，跨框架不混oracle。
+真实gamma7生成与日志已独立审计：每请求14轮/98verified/17accepted/31decode committed，
+另有prefill的1 token；327项归档SHA核验通过。它与E015一样只有插桩engine数值/路由资格，
+没有HTTP速度结论。target相同但本机Lithos index4为100606、oMLX为60277，跨框架不混oracle。
 
 用户要求常画图，已保存[第一版进展快照](../optimization-guide/progress/2026-10-17-v1/README.md)：
 7张PNG+SVG、840条正式样本和逐源SHA。保留E014全部4进程与短点FAIL；HTTP和模块分图。

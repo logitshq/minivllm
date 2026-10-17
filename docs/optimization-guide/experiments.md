@@ -275,7 +275,9 @@ fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16�
 完整最后GPU块可多提交，必须记录真实accepted/committed并与返回前32IDs分开。
 9项CPU腐败/CLI检查通过；两进程六请求192个raw IDs严格相等，实际DSpark路由已运行。
 首个分歧位置的普通/DSpark同机控制均为ID100606，不能混用oMLX的60277作为oracle。
-原始记录正在独立审计归档；本轮不作HTTP/全状态或速度结论。
+独立审计每DSpark请求14轮/98verified/17accepted/31decode committed，另加prefill的1 token。
+全部327归档成员逐SHA通过，19资源快照稳定，子进程reap、服务恢复通过。
+[完整证据](../experiments/m5-ultra-256gb/E017-lithos-dspark-v1/README.md)；不作HTTP/全状态或速度结论。
 [教程](tutorials/017-lithos-dspark.md)。
 
 ## E016 · 2026-10-17 · draft backbone图复用 · 拒绝
@@ -294,3 +296,7 @@ fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16�
 任何T需≥0.97×。6项CPU接口测试与双人源码检查已过，尚待唯一GPU队列。
 不以单层结果替代整模事务、projection几何或HTTP资格。
 [教程](tutorials/018-persistent-gdn-verify.md)。
+
+v1单进程165严格比较通过，T1/3/5/8为0.982453/1.199745/1.219095/1.578766×，
+短块几何平均1.321746×，初筛过门。固定再跑相同源码三个fresh process；
+每次单独满足原门才继续，不与初筛池化或挑选补跑。核心尚不使用。

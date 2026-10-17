@@ -165,3 +165,32 @@ owned-lifecycle ≥1.10×，32/2048 各点 ≥0.97×；8192 仍只报告。2 GiB
 短点每个≥0.97×，所有数值通过；2 GiB兼容性单独列出。失败也保留，不追加挑选重跑。
 仍然只授予模块资格。6项新接口与2项旧selector测试通过；最初误用test_interface模式
 搜索旧selector目录导致0 tests/exit5，已纠正为test_switch并保存该尝试。
+
+### 实际核心接入实测：数值通过，采用门未过
+
+四个进程的 2,944 个严格检查全部通过，四组合与四进程的 raw IDs、全部数值字段一致。
+但实际模块的三个 16 GiB fresh process 速度门为 **PASS / FAIL / PASS**，
+第 2 个进程 N32/block3 为 **0.946272×**，低于 0.97×。因此整体 adoption=false，
+仍保留默认 OFF 实验模块，不授予全面采用，也不以原型 v2 的 PASS 代替本阶段结果。
+
+| 进程 | 池 | 短点最低 | 长点最低 | 结果 |
+|---:|---:|---:|---:|---|
+| 1 | 16 GiB | 0.979995× | 1.204565× | PASS |
+| 2 | 16 GiB | 0.946272× | 1.215939× | FAIL |
+| 3 | 16 GiB | 0.970806× | 1.198261× | PASS |
+| 4 | 2 GiB | 0.971258× | 1.213625× | 兼容性 PASS |
+
+固定四进程按计划跑完，没有追加挑选重跑。全部 480 正式、160 warm、80 首样本的
+prepare/draft/teardown 与 ABBA 顺序已独立核算。28 个资源样本均正常，swap 使用量、
+Swapins/Swapouts/Pageouts 不变；四个 child 回收、absent 与原服务 T→S 恢复核实。
+绝对时间有变化，例如 run3 N32/B3 的两臂正式样本随轮次下降，全部原样保存，
+不把资源采样正常解释为已经知道变化原因。
+
+[242 文件归档](../../experiments/m5-ultra-256gb/E014-draft-window-integrated-v1/README.md)
+保存每进程 36 个冻结源、旧 attention oracle、完整检查/计时/资源/owner/lease，逐成员 SHA 验证。
+[进展图快照](../progress/2026-10-17-v1/README.md) 同时展示 prototype v1/v2 的独立条件、
+实际 core 四进程的绝对 ms 与 speedup，以及失败门点。图保留每个进程，不合并出一个隐藏失败的中位数。
+
+这一步说明长历史复制可以明显减少，但短历史成本仍需稳定满足预注册门。
+下一步应预先声明新的因果比较再试，而不是放宽本轮门。仍不将 synthetic KV replay
+称为实际长生成，不把应用层引用释放当 allocator 回收，不将模块倍数外推或乘到 HTTP 性能上。

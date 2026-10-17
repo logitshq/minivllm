@@ -1,7 +1,7 @@
 # E017：给 Lithos 加上真实 DSpark 强对照
 
-2026-10-17；状态：CPU metadata 已通过并保存于 `bench/m5_ultra_256gb/lithos_spec/metadata-v1/`，
-尚未下载草稿权重、pack 或运行 GPU。
+2026-10-17；状态：下载、原生 pack、两臂实际 engine 短请求资格与独立 CPU 审计均通过。
+下面保留准备阶段的设计与扩展计划，已执行的范围及结果见文末；尚未形成性能排名。
 
 此前 Lithos 对照使用 `--no-draft`。要判断最快单用户推理，必须再测它实际支持的投机路径。
 这里固定同一个 target checkpoint，显式选择 DSpark；已有 DFlash2 权重不能替代 DSpark。
@@ -63,7 +63,7 @@ cd /Users/ryanli/code/minivllm
   --out bench/m5_ultra_256gb/lithos_spec/metadata-v1
 ```
 
-下一轮独立下载固定 revision（本轮尚未执行），保留所有 shard/config/index SHA。
+准备阶段的固定 revision 下载命令如下；实际执行已由 `download.py` 完成，保留全部 shard/config/index SHA。
 只需 JSON 和 safetensors，不需要 remote Python code：
 
 ```sh
@@ -135,3 +135,36 @@ DSpark固定gamma7；正常EOS、prefix_cache=False、无自动Max recipe。两�
 rawIDs。最后一个GPU块可能多提交，不能把它当作返回的输出数；全部实际工作照样记录。
 释放session engines/引用并由guard wait/reap证明进程结束。9项CPU腐败/CLI检查通过。
 此阶段只证明实际engine路由和短输入输出一致，不证明全部状态、HTTP或性能。
+
+
+## E017 实际结果与独立归档
+
+[不可变证据包](../../experiments/m5-ultra-256gb/E017-lithos-dspark-v1/README.md) 的 CPU 审计通过：
+两个 fresh process（none / DSpark）各运行三次同一个 19→32 raw prompt，六次共 **192 个 raw token IDs**
+完全一致。这是同 Lithos 普通 greedy 的短请求资格，尚未覆盖上文规划的三任务、长输出或全状态。
+
+每次 DSpark 实际 14 个 decode rounds，共验证 98 proposals、接受 17、提交 31 decode tokens；
+prefill 另产出 1 token，返回数为 32。每次接受分布为 0×7、1×2、2×4、7×1，已有零接受、
+部分拒绝与全接受；本样本没有 EOS，也没有最后一块超预算，不能宣称这两个分支已覆盖。
+普通臂每次为 31 decode rounds。减少轮数不是端到端加速结论。
+
+实际 Program 独立重建的结构为普通 decode 535 ops、bound 1；DSpark decode 586 ops、
+dynamic bound 8、43 个 draft ops，包括五层 backbone、Markov W2、verify_select、accept_scan。
+四份完整 Program 与所有 kernel source SHA/macros、accept/conf 原始二进制日志均重新解析验证。
+EOS 宏实际为 `(tok==248044||tok==248046)`，与 model config 一致，没有禁用 EOS。
+
+原生 Apple M5 Ultra 80 cores / Apple10、`m5_ultra_80c`、空 recipes 保持不变。
+target packs capacity 为 2048 / 2054，draft pack 为 2054，Program 有效 target context 均为 2048。
+两个 target packs 都有 258 个 NVFP4 slabs；draft pack 为 27 个 NVFP4 + 1 个 BF16 slab，
+这是合并后的 packed slabs，不能与 checkpoint 的矩阵个数混为一谈。未请求 requantization，
+实际 layout 为 interleaved16/block。config/index/非权重 metadata 与 pack manifest 已独立复核；
+模型/pack 大 payload 的前后 SHA 由运行记录保存，审计没有再次读取三十余 GiB 权重。
+
+19 个资源快照均 pressure=1、thermal=0，swap=268.81 MiB、Swapouts=303419 稳定。
+两个模型子进程 exit 0，guard wait/reap 与严格不存在检查通过；授权暂停的 omlx-server PID 74384
+身份匹配并恢复至 S。session engines、buffers 和 last-engine 引用均释放。
+
+归档含完整 run/owner/lease/jobs/download/comparison/metadata、221 个实际 Lithos source/native binary、
+3 个被测 harness、模型 metadata 和原始 pack manifest；327 个 archive members 的大小与 SHA 全部通过。
+这些资格请求有观察器、哈希、Program 序列化与新 pack 创建，不用于速度或 Pareto 排名。
+下一步应运行独立的无观察器官方 HTTP/engine 性能流程，并继续补足质量与状态覆盖。
