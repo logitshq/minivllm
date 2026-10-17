@@ -151,3 +151,24 @@ resident PLE独立验证通过；21个资源样本pressure1、thermal0、swap增
 [前向诊断图和可重画源码](../progress/2026-10-17-v7/README.md)。
 下一优先级是补齐Lithos同任务D512 C1/C8，再继续参数替换、ahead、scheduler和HTTP门。
 原native D512 Pareto两点保持不变；本次不能用来宣称超过Lithos或oMLX。
+
+
+## Next serving boundary: one existing decode call site
+
+The forward screen does not require a new scheduler. Both normal decode and
+ahead call `runner.decode_model`; an initially default-OFF per-instance adapter
+can reuse that point, preserving the existing short-context decoder as fallback.
+The remaining device gates are changed-value parameter replacement, real
+ahead consumption/discard and retirement, then C1/C8 HTTP capture and replay.
+Existing ahead keys do not include a weight version, so idle parameter tests
+cannot establish safe hot reload while a future is outstanding. Keep weights
+fixed through a serving run and record this boundary explicitly.
+
+The tested physical KV capacity is1536. The candidate accepts larger capacity,
+but that wider domain still needs evidence before production support is claimed.
+The first D512 workload fits1536. Retain bounds1023/1536 so compilation does not
+change the attention reduction route already isolated in the failed experiment.
+
+[Source-backed integration plan](../../../bench/reviews/route-graph-serving-plan.md)
+records the minimal adapter and missing gates. It is a design, not an implemented
+or qualified HTTP optimization; the feature remains OFF.

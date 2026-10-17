@@ -24,3 +24,8 @@ The subsequent [route-preserving matrix](../../../experiments/m5-ultra-256gb/E02
 The [subsequent eight-configuration forward timing](../2026-10-17-v7/README.md)
 passes its diagnostic bit checks and measures lower graph forward medians. It
 excludes the serving lifecycle and contributes no HTTP Pareto point here.
+
+
+Lithos D512 corrected-request C1/C8 qualification now passes24 observed requests
+and separate resource/restoration audits. Observers were ON; no formal point is
+added to this figure. [Evidence](../../../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/README.md).

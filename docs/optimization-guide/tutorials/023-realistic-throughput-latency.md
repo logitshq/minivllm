@@ -240,3 +240,26 @@ qualification/resource auditors reject this incomplete two-phase cycle before
 full evidence inspection; their FAIL status is not a finding of resource pressure.
 
 [Complete failure evidence](../../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v1/README.md).
+
+
+## Lithos D512 retry: actual C1/C8 qualification PASS (2026-10-17)
+
+The two-line original-message correction was preregistered and pushed as418281d.
+Actual C1 eight/C8 sixteen requests pass the original full prompt-ID, route,
+raw-token count, decoded-text and zero-cache gates. Independent post-restoration
+qualification/resource/restoration audits each ran once and all PASS. Total
+12,288 raw/committed tokens, all cap512; early-EOS coverage remains zero. C8 is
+concurrent HTTP with official FIFO GPU execution. No full-state cross-framework
+equality or formal performance point is granted.
+
+All70 resource samples pass: pressure1, swap growth0MiB, Swapouts/Pageouts0;
+Swapins+12, Decompressions+1634. Owner26867 and servers26920/27564 reaped.
+oMLX restored asPID28531 with original model/config and fresh MTP/resident PLE;
+warm KV/hidden state not restored. Archive603members,1,562,748bytes, all member
+hashes and source trees rechecked. Failed v1 stays preserved separately.
+
+Next: observer-OFF8warm+64formal per process, repeated C1/C8, preserving actual
+committed throughput and full POST→DONE latency. The existing native n=1 points
+and D512 graph are unchanged; Lithos/oMLX formal D512 points remain pending.
+
+[Complete qualification evidence](../../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/README.md).

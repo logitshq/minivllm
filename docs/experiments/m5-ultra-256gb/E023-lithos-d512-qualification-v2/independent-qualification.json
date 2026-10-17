@@ -1,0 +1,95 @@
+{
+  "schema": "E023-lithos-D512-qualification-audit-v1",
+  "status": "PASS",
+  "qualified": true,
+  "route_count_text_qualified": true,
+  "full_state_qualified": false,
+  "performance_qualified": false,
+  "independent_resource_verified": false,
+  "restoration_verified": false,
+  "raw_requests_opened": true,
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+  "audit_source_sha256": "a932583f5a5234b0aff434d9b967a004fcdea05ff9b1c03a1d5d34fe86f6df08",
+  "owner_source_sha256": "97b0f596b8369e36b71fef838f4e290ae4f63b6a02cb47f13e01aa9e14c8f2af",
+  "scope": "Closed observed C1/C8 raw route/count/text/cache only; separate resource/restoration audits required.",
+  "phases": [
+    {
+      "concurrency": 1,
+      "requests": 8,
+      "pid": 26920,
+      "raw_join": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c1/trial/raw-join.json",
+        "sha256": "1c3e1d7c52b8392f87541b0b95f7bbacffba07c2bf9939a01ea4a402a2f89b62"
+      },
+      "observer": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c1/trial/probe/observer.jsonl",
+        "sha256": "0efe639e08411e1f099ab0de2728fa774a0181342ffdb4a02e161b4f72e4dac0"
+      },
+      "group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c1/trial/group.json",
+        "sha256": "d3f831f398ba14ed02a09cb004a3e97e12b0bb9ec6433f98daf6609d09bbeaa4"
+      },
+      "trial_complete": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c1/trial/complete.json",
+        "sha256": "2a4b2ce2d5dc097c5eb6f522078f59d26111d15b7ac34c80cf0a581568a83b39"
+      },
+      "log_check": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c1/trial/generation-log-check.json",
+        "sha256": "9ea0d1de9b1fe30f92f25e4117a872d0ee9e0ef0ef11965354a6ba18d8ad4013"
+      },
+      "observed_eos": 0,
+      "raw_output_count": 4096,
+      "committed_output_count": 4096,
+      "max_http_outstanding": 1
+    },
+    {
+      "concurrency": 8,
+      "requests": 16,
+      "pid": 27564,
+      "raw_join": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c8/trial/raw-join.json",
+        "sha256": "34f974e82a18d84d0c51b00c08de6fba01591c8c5b264558718125f0b151851a"
+      },
+      "observer": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c8/trial/probe/observer.jsonl",
+        "sha256": "5b52fc0390612dd3b94390fcb271959df6dfedb7fb5e45dc373b3db1eaf8c5fb"
+      },
+      "group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c8/trial/group.json",
+        "sha256": "81da312b9c33c0b6ea6cd5baae38d56f165861962df9e0d98741b5d41b0dff53"
+      },
+      "trial_complete": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c8/trial/complete.json",
+        "sha256": "6b04732bfc0add5f7a5a4c8a94cc675573b7415db8d48c40bc956c78e599a658"
+      },
+      "log_check": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/phases/lithos-c8/trial/generation-log-check.json",
+        "sha256": "9ab33277fbfc5c2f11e7cad5aea26a81f7747bd1d975c93c601ada56b414c2e9"
+      },
+      "observed_eos": 0,
+      "raw_output_count": 8192,
+      "committed_output_count": 8192,
+      "max_http_outstanding": 8
+    }
+  ],
+  "requests": 24,
+  "preparation": {
+    "groups": {
+      "lithos_runtime": 2975,
+      "lithos_source": 221,
+      "outer_runtime": 4309,
+      "pack": 2,
+      "target_model": 13
+    },
+    "preflight_postflight_identical": true,
+    "model_weights_rehashed": false,
+    "pack_payload_rehashed": false,
+    "scope": "Source-pinned producer full-hash/stat receipts; no independent model/pack payload rehash."
+  },
+  "owner_plan_sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354",
+  "owner_complete_sha256": "a6c0cfd71d03b2b089fb8a6953d2ac6b802f00c62fc76a5e40edfd705fce620d",
+  "outer_runtime_rehashed": true,
+  "tokenizer_payloads_rehashed": true,
+  "model_weights_rehashed": false,
+  "pack_payload_rehashed": false
+}
