@@ -1,0 +1,28 @@
+{
+  "schema": "E023-http-baseline-v1-failure-summary",
+  "status": "REJECTED_BEFORE_HTTP_REQUESTS",
+  "owner_plan_sha256": "d641a95b7a454ce45ea01c3f3b3b0bc59f08ec71de0f0d5c79973315f7861429",
+  "owner_pid": 81158,
+  "inference_http_requests_started": 0,
+  "observed_server_children": 1,
+  "server_pid": 81230,
+  "server_returncode": -15,
+  "server_waited_reaped": true,
+  "server_strict_absence": true,
+  "failure": "v1 exact lsof field sequence rejected the implicit f4 descriptor at readiness",
+  "listener_sha256": "5f8c8c5a0a539ac5cd247cffe62fd35306d17f5276983d246d9b8b94bc8bd73b",
+  "numerical_qualified": false,
+  "performance_qualified": false,
+  "restoration_status": "RESTORED",
+  "restored_identity": {
+    "pid": 81337,
+    "ppid": 1,
+    "start": "Sat Oct 17 08:12:37 2026",
+    "comm": "omlx-server"
+  },
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "restoration_journal_sha256": "7dbd5db50a02219db9cd7087a7baaa3524df68b350b51411d7a1b00fbc992e1e",
+  "restoration_audit_sha256": "25926b0d2c708a6bdf3168415a5ddf5ffe42a722a4bfbc9736517ef063b649b0",
+  "scope": "Failure evidence only. Zero inference requests, no replay or numerical/performance conclusion."
+}

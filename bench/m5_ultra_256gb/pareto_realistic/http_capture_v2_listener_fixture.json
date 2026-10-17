@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/usr/sbin/lsof",
+    "-nP",
+    "-a",
+    "-p",
+    "81230",
+    "-iTCP:18023",
+    "-sTCP:LISTEN",
+    "-Fpn"
+  ],
+  "returncode": 0,
+  "stdout": "p81230\nf4\nn127.0.0.1:18023\n",
+  "stderr": ""
+}

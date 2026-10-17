@@ -117,3 +117,29 @@ Native HTTP raw SSE/UUID/scheduler join、独立双引擎实际调度回放及�
 用户现已明确授权“允许停止、实验后恢复”。接下来按冻结E028 model v1执行冷停→完整
 37请求→回收→恢复原oMLX模型，并核新日志中的MTP/resident PLE。先前pending记录是历史
 快照，当前不再等待同一授权；失败也执行恢复。M4分支53d4906已在本分支祖先中。
+
+
+## HTTP baseline v1 readiness failure and v2 retry (2026-10-17)
+
+Actual v1 cold stop succeeded, but the first capture rejected the owned listener
+before any HTTP request. macOS `lsof -Fpn` returned the valid three fields
+`p81230`, `f4`, `n127.0.0.1:18023`; the old parser required exactly two fields.
+This is a harness readiness failure, with zero requests and no numerical result.
+Child81230 was terminated, waited/reaped and strictly absent; the original oMLX
+was restored as PID81337 with its original model and fresh MTP/resident PLE logs.
+A separate offline restoration audit PASS independently checks raw physical/log
+and child-absence evidence. Warm KV and exact hidden runtime state are not restored.
+All original sources and failed artifacts remain unchanged.
+
+The separate v2 capture permits one optional ASCII decimal descriptor field while
+still requiring exactly the owned PID and localhost endpoint. V2 owner changes only
+the capture source binding. Root28 capture/owner tests and12 restoration-audit tests
+PASS; independent source reviews found no remaining blocker. V2 retains exactly
+the D workload, C1 eight/C8 sixteen requests, normal EOS, cap512, model/precision,
+resource limits and numerical contract. E028 remains OFF for this baseline.
+
+[Complete failed-v1 evidence](../../experiments/m5-ultra-256gb/E023-http-baseline-v1/README.md)
+and [registered v2 retry](../../../bench/m5_ultra_256gb/pareto_realistic/prereg-http-baseline-v2/README.md)
+separate the historical failure, restored predecessor and next attempt. No new
+Pareto point follows from this retry preparation; only independently qualified,
+separate production timing can update throughput vs POST→DONE p50.
