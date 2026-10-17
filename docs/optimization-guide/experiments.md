@@ -473,3 +473,19 @@ exit0/reaped/strictabsence，原服务74384 sameidentity T→S恢复。原始证
 E027独立审计追加：PASS；576个pins、33cases/66comparisons、319个raw文件，
 以及physical/resource/reap/lease证据均复核通过。审计器6项CPU测试覆盖篡改拒绝。
 资格仍限局部矩阵，整模型与HTTP待验证。
+
+E027 native-route bridge追加：先提交28b67d0，再实际执行。当前M5 Linear直接提交multirow QMM，
+T2/4/5在g17d走已共享权重的fp_qmv_wide；先前M1逐行oracle不是当前原生路由。
+第19案synthetic-N10240-random-T2发现5/20,480个BF16差异；18case完整通过，
+56比较=55PASS+1FAIL，其余14case未运行。失败案尚未调用shared，不称原生错误，
+拒绝整个三几何直接替换。无放宽误差/forced-M1重设基线/挑前18案入生产。
+独立audit与root重跑逐字相同，六种篡改拒绝；580pins、203raw tensor/descriptor文件、
+39physical phases、3资源快照核实。child52256 exit1/reaped/strictabsence，服务74384
+原identity T→S。942成员原件完整归档31,005,640B，逐成员复读SHA；保留早停缺失项。
+[失败归档](../experiments/m5-ultra-256gb/E027-native-bridge-v1/README.md)。无新Pareto点。
+
+Cold恢复v2与service-absent owner已通过root46项CPU tests（16+30），独立审查未发现
+错误放行；另诊断API9项通过。真实只读prepare v1与v2两次self sysFootprint接口通过，
+后者pressure2、systemphysical约164.6–164.7GiB，绝非cold资源准入。原服务仍同identity S。
+新的独立数值/lifecycle审计与运行注册还需完成，停服/重载授权仍待答；未执行cold mutation。
+[CPU与只读证据](../../bench/reviews/omlx-controller-v2-cpu-v1/README.md)。

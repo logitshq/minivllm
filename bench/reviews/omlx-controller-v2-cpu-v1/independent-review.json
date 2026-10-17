@@ -1,0 +1,75 @@
+{
+  "schema": "omlx-controller-v2-independent-static-review-v1",
+  "reviewed_at_utc": "2026-10-17T12:17:30.029966+00:00",
+  "reviewer": "/root/official_mtp",
+  "result": "NO_NEW_BLOCKER_FOUND_WITHIN_REVIEWED_SCOPE",
+  "cpu_only": true,
+  "source_pins": {
+    "bench/m5_ultra_256gb/omlx_cold_restart/controller_v2.py": "f06d0ba60e0966fe83741f9c5e60b74404a84154242760d005170a47327496be",
+    "bench/m5_ultra_256gb/omlx_cold_restart/test_v2_cpu.py": "553954a81e80e8c6197d0513f912928826994f6858dba02c1bf0d94299bc1da9",
+    "bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "bench/m5_ultra_256gb/pareto_realistic/test_qualify_absent_owner_cpu.py": "e643bfb26e7aad617d52ee9c2572deed7296085e7ee910c716d4d17dd38ab5a2"
+  },
+  "previous_owner_review_sha256": "8b0df97319e56782aceeeae0b8f8abf85a48c8f361a22b94b6572c8ab4eeb124",
+  "final_delta_review": [
+    "absence_probes is initialized separately from resource samples; every returned absence proof is appended before its guard.",
+    "absence-NNN.json uses len(absence_probes)-1 and exclusive durable creation, so failed preflight with no resource sample cannot be overwritten by postflight.",
+    "resource_index_if_sampled links a proof to the prospective resource sample index without reusing it as the proof filename.",
+    "complete.json reports absence_probes count; the new negative test checks separate before-prepare and postflight files after port-present failure.",
+    "Docstring now states SIGKILL/power-loss/unknown-spawn reconciliation limits without changing recovery admission."
+  ],
+  "protocol_review_scope": [
+    "Common nonblocking journal lock around STOPPED snapshot plus durable attempt, and around final absence check plus spawn intent plus Popen.",
+    "Source/plan/runtime journal binding and actual owner-produced NO_CHILD_STARTED or child release receipts accepted by controller fake tests.",
+    "Recovery requires both owner and any spawned child absent; no-experiment cannot bypass an existing owner directory.",
+    "POST monitor owns only its HTTP client worker; terminating/reaping it does not cancel or prove termination of the server-side loader.",
+    "Unknown load/bootstrap outcomes preserve durable intent and forbid blind duplicate mutation."
+  ],
+  "validation": {
+    "final_delta_tests_rerun_by_reviewer": false,
+    "reason": "Parent requested review of final delta only and supplied frozen CPU test logs.",
+    "parent_final_cpu_evidence": {
+      "receipt": "bench/reviews/omlx-controller-v2-cpu-v1/receipt.json",
+      "receipt_sha256": "749dd5c33d78d123b139a313826fcdeb40616bc0f27d2bb2c6b100bb04ab9639",
+      "controller_tests": 16,
+      "absent_owner_tests": 30,
+      "returncodes": 0,
+      "logs": {
+        "bench/reviews/omlx-controller-v2-cpu-v1/controller.stdout.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "bench/reviews/omlx-controller-v2-cpu-v1/controller.stderr.txt": {
+          "sha256": "dfc4eb47e42a6e888c6b5d380de61e7b5034d0857b043e656b66b05e16b49bd5",
+          "bytes": 2497
+        },
+        "bench/reviews/omlx-controller-v2-cpu-v1/absent-owner.stdout.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "bench/reviews/omlx-controller-v2-cpu-v1/absent-owner.stderr.txt": {
+          "sha256": "f3b0a0d1627b2eb969dce4de2d05e7cc3d585845fcd668e1c263e3b56fae61e9",
+          "bytes": 4389
+        }
+      }
+    },
+    "previous_independent_cpu_run": {
+      "controller_tests": 16,
+      "absent_owner_tests": 29,
+      "result": "PASS",
+      "owner_sha256": "8b0df97319e56782aceeeae0b8f8abf85a48c8f361a22b94b6572c8ab4eeb124"
+    },
+    "real_backend_executed": false,
+    "service_mutation": false,
+    "http_request": false,
+    "gpu_or_model_import": false
+  },
+  "known_limits": [
+    "A SIGKILL/power loss after durable attempt but before an explicit NO_CHILD_STARTED terminal stays unresolved; missing intent alone is not proof. Manual reconciliation is required.",
+    "Unknown spawn after durable intent also requires reconciliation; no automatic recovery may fabricate a child/reap receipt.",
+    "Physical monitoring is sampled observation, not an OS memory hard cap. HTTP cancellation may leave the service-side loader active.",
+    "No real cold restart, model restoration, runtime variant restoration or device numerical qualification was performed by this review.",
+    "This is a targeted independent static and CPU-protocol review, not a proof against every OS failure or adversarial file modification."
+  ],
+  "source_files_modified_by_reviewer": []
+}

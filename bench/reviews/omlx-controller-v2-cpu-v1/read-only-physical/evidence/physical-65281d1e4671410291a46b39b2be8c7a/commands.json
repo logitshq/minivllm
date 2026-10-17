@@ -1,0 +1,51 @@
+[
+  {
+    "command": [
+      "/usr/bin/footprint",
+      "-p",
+      "52994",
+      "--noCategories",
+      "--sysFootprint",
+      "-f",
+      "bytes",
+      "-j",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-v2-readonly-physical-v1/evidence/physical-65281d1e4671410291a46b39b2be8c7a/footprint.raw.json"
+    ],
+    "returncode": 0,
+    "stdout": "======================================================================\npython [52994]: 64-bit    Footprint: 18088464 B (16384 bytes per page)\n======================================================================\n\nAuxiliary data:\n    phys_footprint: 18088464 B\n    phys_footprint_peak: 18088464 B\n\n\nSystem auxiliary data:\n    boot_carveout:         929120256 B\n    sys_wired:            6326059008 B\n    sys_unwired:        169580494848 B\n    ---------------------------------------\n    sys_footprint:      176835674112 B\n\n",
+    "stderr": "",
+    "elapsed_s": 0.03322745900368318
+  },
+  {
+    "command": [
+      "/usr/sbin/sysctl",
+      "-n",
+      "kern.memorystatus_vm_pressure_level"
+    ],
+    "returncode": 0,
+    "stdout": "2\n",
+    "stderr": "",
+    "elapsed_s": 0.003628000005846843
+  },
+  {
+    "command": [
+      "/usr/sbin/sysctl",
+      "vm.swapusage"
+    ],
+    "returncode": 0,
+    "stdout": "vm.swapusage: total = 1024.00M  used = 445.06M  free = 578.94M  (encrypted)\n",
+    "stderr": "",
+    "elapsed_s": 0.002848415999324061
+  },
+  {
+    "command": [
+      "/usr/sbin/sysctl",
+      "-n",
+      "hw.memsize"
+    ],
+    "returncode": 0,
+    "stdout": "274877906944\n",
+    "stderr": "",
+    "elapsed_s": 0.0023565410083392635
+  }
+]

@@ -379,3 +379,19 @@ Prepared对象每bank一次callable构造、三次lazygraph返回，无X/Y缓存
 [教程](../optimization-guide/tutorials/027-shared-weight-m1.md)。E026另新增默认OFF的
 staged_integration.py：在runner现有统一eval加入ownedtail，13CPUtestsPASS，
 无GPU整模型结果。两条实验可分别开关，不修改M4冻结源码或生产默认。
+
+## E027 native bridge: exact substitution rejected on M5
+
+当前M5实际Linear是完整multirow QMM，并非M4 per-row M1路由。MLX0.32.3/g17d
+T2/4/5进fp_qmv_wide，本身已复用权重。新独立prereg28b67d0后实跑，N10240随机T2
+在第19案nativeMultirow vs M1有5/20,480个BF16不同，首个−56.75 vs−57.0。
+前18案通过但整个直接替换拒绝；失败案shared没运行，不称原生错误，也不把M1
+强制替换为性能baseline。原M1局部PASS仍有效，不能当M5原生路由已获资格。
+
+[完整失败](../experiments/m5-ultra-256gb/E027-native-bridge-v1/README.md)，
+942成员/SHA逐一复核，root和独立audit相同，服务恢复与child reap通过。无新M5性能点。
+默认OFF的3entry诊断API9CPU tests通过；engine安装显式拒绝。状态内存所有权路线仍
+独立推进。请M4评估时也核实际当前route，勿从“M1一致”推断多行原生自动一致或速度收益。
+
+Cold controller v2/service-absent owner root46CPU tests与只读物理schema通过，尚无实际
+冷重启；相关独立审计/固定注册仍需完成，原有待授权事项不视为已获批准。

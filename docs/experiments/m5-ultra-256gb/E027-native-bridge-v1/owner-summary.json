@@ -1,0 +1,17 @@
+{
+  "schema": "E027-native-bridge-owner-v1",
+  "status": "FAIL",
+  "owner_pid": 52238,
+  "failures": [
+    {
+      "stage": "execution",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/shared_w_m1/native_bridge_owner.py\", line 95, in run\n    checks.need(child.returncode == 0, 'numerical child failed')\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/conv_tail_owned_copy/layer_owner.py\", line 47, in need\n    raise RuntimeError(message)\nRuntimeError: numerical child failed\n"
+    }
+  ],
+  "samples": 3,
+  "physical_samples": 1,
+  "elapsed_wall_s": 1.6121274580073077,
+  "performance_qualified": false,
+  "raw_audit": "PENDING",
+  "service_restoration": "outer lease"
+}

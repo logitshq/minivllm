@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "scope": "CPU mocks and static source checks only; no real backend, service mutation, model load or GPU qualification",
+  "source_pins": {
+    "bench/m5_ultra_256gb/shared_w_m1/integration.py": "863defa718b26573f25a37e14af8c049d5a47a200cdadbf038559bff0ac1fcb7",
+    "bench/m5_ultra_256gb/shared_w_m1/test_integration_cpu.py": "1b00c8164b48deeb8cf7d41d97c4b01ada23402a3fc553b343db536c7b96c0de",
+    "bench/m5_ultra_256gb/omlx_cold_restart/controller_v2.py": "f06d0ba60e0966fe83741f9c5e60b74404a84154242760d005170a47327496be",
+    "bench/m5_ultra_256gb/omlx_cold_restart/test_v2_cpu.py": "553954a81e80e8c6197d0513f912928826994f6858dba02c1bf0d94299bc1da9",
+    "bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "bench/m5_ultra_256gb/pareto_realistic/test_qualify_absent_owner_cpu.py": "e643bfb26e7aad617d52ee9c2572deed7296085e7ee910c716d4d17dd38ab5a2"
+  },
+  "tests": [
+    {
+      "suite": "bridge",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "bench/m5_ultra_256gb/shared_w_m1",
+        "-p",
+        "test_integration_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ef089b94d8d672534012f193acc5d963682111af27a07d517bb543d100925a44"
+    },
+    {
+      "suite": "controller",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "bench/m5_ultra_256gb/omlx_cold_restart",
+        "-p",
+        "test_v2_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "dfc4eb47e42a6e888c6b5d380de61e7b5034d0857b043e656b66b05e16b49bd5"
+    },
+    {
+      "suite": "absent-owner",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_qualify_absent_owner_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f3b0a0d1627b2eb969dce4de2d05e7cc3d585845fcd668e1c263e3b56fae61e9"
+    }
+  ]
+}

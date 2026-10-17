@@ -5,6 +5,12 @@
 The independent raw audit also passes. These are numerical diagnostic results;
 whole-model correctness and HTTP performance remain unqualified.
 
+**Follow-up: direct native-route replacement is rejected.** The separate
+native bridge stopped at case 19 with five BF16 differences between independent
+M1 and the current native multirow call. The passing result above remains a
+local M1 qualification, not permission to replace the production multirow path.
+See the [complete failed-run archive](../../experiments/m5-ultra-256gb/E027-native-bridge-v1/README.md).
+
 For several activation rows, independent matrix-vector calls revisit the same
 packed weight words and scales. A narrow alternative keeps those operands in
 registers while processing two, four or five rows. Each row still follows the
@@ -119,3 +125,40 @@ is PASS; its implementation and six corruption-oriented CPU tests are saved
 alongside the candidate. Root separately compared all saved matrix bytes.
 [Full archived evidence](../../experiments/m5-ultra-256gb/E027-shared-w-m1-v1/README.md)
 retains successful outputs, resources and source identities.
+
+## Why the native-route bridge changed the decision
+
+First-principles analysis starts with the operation actually executed. Current
+and frozen M5 `Linear.__call__` both submit the full T-row matrix to MLX. For
+T2/4/5 and K5120, the pinned g17d dispatch enters `fp_qmv_wide`; that kernel
+already shares weight operands across rows. The original E027 oracle used
+independent M1 calls. Its equality proof is useful but does not bridge these
+two native accumulation paths, and its baseline is not a valid performance
+substitute for the current engine.
+
+We therefore preregistered a 33-case, 99-comparison bridge before running it:
+original-expression control versus M1, native multirow versus M1, then shared
+versus M1. The first difference stopped the test, as planned. After 18 complete
+cases, `synthetic-N10240-random-T2` differed at five of 20,480 BF16 elements;
+the first was −56.75 versus −57.0. The shared call in that case was not reached.
+Neither native operation is thereby proven mathematically wrong. The observed
+difference is sufficient to reject a claimed exact drop-in route replacement.
+We retained the complete passing prefix and failure; no tolerance relaxation,
+forced-M1 rebaseline or production promotion of only the passing shapes followed.
+
+The independently audited archive contains all 942 saved evidence members.
+The failed child was reaped, resources remained inside this numerical screen's
+registered observation limits, and the original external service was restored.
+The failed screen does not complete its final child lifecycle checks and does
+not create a throughput–latency point. A minimal default-OFF
+[diagnostic API](../../../bench/m5_ultra_256gb/shared_w_m1/integration.py)
+keeps native multirow, row-M1 and shared calls explicit; nine CPU tests pass,
+and engine installation is deliberately unavailable.
+
+The design lesson is specific: remove overhead only after identifying the real
+native launch and arithmetic path. A smaller implementation that preserves a
+convenient alternate oracle can still change the model's executed arithmetic.
+The next useful kernel hypothesis must target the native wide route itself;
+state-buffer ownership remains an independent candidate because it leaves the
+projection arithmetic unchanged. All production candidates still need full
+logits, output IDs and state qualification before paired HTTP measurements.
