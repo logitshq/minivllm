@@ -1,0 +1,16 @@
+{
+  "schema": "E023-http-independent-audit-cpu-v1",
+  "status": "CPU_PASS",
+  "scope": "Synthetic descriptors and raw-wire corruption tests only; no actual model result or service qualification",
+  "command": ".venv/bin/python -B -m unittest bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu -v",
+  "result": {
+    "chunk_id": "a77671",
+    "wall_time_seconds": 0.456698375,
+    "exit_code": 0,
+    "original_token_count": 368,
+    "output": "test_full64_array_coverage_c1_c8_and_terminal_eos (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_full64_array_coverage_c1_c8_and_terminal_eos) ... ok\ntest_incomplete_or_failed_producer_never_opens_ledger_or_tokenizer (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_incomplete_or_failed_producer_never_opens_ledger_or_tokenizer) ... ok\ntest_missing_bit_finite_layer_vocabulary_and_slot_rejected (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_missing_bit_finite_layer_vocabulary_and_slot_rejected) ... ok\ntest_raw_sse_and_trace_rejoin_reject_not_derived_receipts (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_raw_sse_and_trace_rejoin_reject_not_derived_receipts) ... ok\ntest_recorded_uuid_schedule_raw_and_actual_candidate_schedule_rejected (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_recorded_uuid_schedule_raw_and_actual_candidate_schedule_rejected) ... ok\ntest_release_sequence_and_complete_claim_are_required (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_release_sequence_and_complete_claim_are_required) ... ok\ntest_terminal_pass_still_reconstructs_all_rows (bench.m5_ultra_256gb.pareto_realistic.test_audit_http_replay_cpu.Tests.test_terminal_pass_still_reconstructs_all_rows) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.522s\n\nOK\n"
+  },
+  "source_sha256": "1e26e35bdde5cf7b81da37101326a4ef6f87ef7db2775c6324b56d053645c995",
+  "test_sha256": "7669c64883af9da662c34f35605a35487464491123120bba82b8f764ca82f4ee",
+  "independent_review": "No remaining blocker: actual arrivals with independent FCFS/slots/ahead checks, full raw SSE and full-state/logit comparisons, original 37-request gate retained."
+}

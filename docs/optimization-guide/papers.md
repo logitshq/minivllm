@@ -246,3 +246,19 @@ GPU graph reuse and measure verification width on this machine before considerin
 another execution backend. Do not assume using another compute unit increases
 memory bandwidth. This read adds no local performance point or ANE implementation;
 HTTP capture/replay remains the next experiment.
+
+
+### 2026-10-17: shape adaptation is not permission to change arithmetic
+
+Read October 5 [DynaCore v1](https://arxiv.org/html/2610.07443v1), §§7–8. Its
+batch-dependent mapping uses offline profiling and a small runtime lookup. The
+reported platform is synthesized/custom hardware with cycle-accurate simulation,
+not an Apple GPU; it also changes prefill/decode quantization. Those speed ratios
+and accuracy results do not establish an optimization for our NVFP4 contract.
+
+Our inference: profile actual M/N/K and select among independently qualified
+implementations outside the timed loop. Preserve reduction/scale semantics; the
+prior E025/E027 numerical failures remain failures. Reusing a bounded long-context
+graph (E024) is still a more direct local next test than importing a Split-K or
+phase-quantization change. No new kernel, quality relaxation, or performance point
+is introduced by this reading. Full-request latency remains the Pareto x-axis.
