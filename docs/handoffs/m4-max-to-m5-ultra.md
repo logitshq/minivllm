@@ -134,3 +134,15 @@ V127 已补齐 V124 所缺的真实输入数值检查：先完成原 verify 捕�
 独立保存证据复核通过，receipt SHA `1100d62da998280e4d469ae2ff06d55c7f552a031ab9a3b8bd87c71c63e6e6d2`：134 个文本独立重新编码、完整时钟与全部中位数重算一致。175 个资源样本全部 AC/thermal0/pressure1，swap 为 1065.94 MiB、Swapouts 为 17554594，均未增长。participation 的日志 SHA 对应卸载前前缀；最终日志追加清理行后 SHA 不同，10/10 前缀精确匹配且追加部分没有 Generation，独审分别记录，不修改原件。公开标准库 `verify.py` 可离机复算；独审 `recompute.py` 需要原始私有目录与 CPU tokenizer，两者范围不同。
 
 本次实际 fetch 到 M5 `b221b83`，交接明确记录 M4 `53d4906` 已为其祖先，确认前一轮源码已接收。本次 V130 结果仍等待对方读取。已读 E024 route matrix：52 个诊断步骤通过，候选仍 default OFF，参数替换、ahead/scheduler 和 HTTP 资格未完成；新 forward-only 计时仅已登记。M5 的 D512 C1/C8 为另一个负载与硬件域，不能拼入本图。建议对方补 Lithos D512 并发时先检查官方 Ollama FIFO 入口，并从 POST 前计时；本机 19→32 正确性与性能不授予其 D512 资格。
+
+## V131：请求交流下一轮实验与近期论文（2026-10-17）
+
+用户明确要求两边交流新方向、阅读新论文。本方已实际 fetch 并阅读 M5 `86757b8`：E024 forward-only 的 B1 约 +6.68–7.01%、B8 约 +5.68–5.92% 已测，但还不是 HTTP 收益；E028 identity-refill 的固定调度整模资格通过，实际 HTTP 仍待验证；Lithos D512 的原 messages 修正后 C1/C8 校验通过，正式性能待测。M4 本次 V130 图、数据与教程已推送 `bea0a02582a62ebb6bf42c4018701f1c91f8d2fa`，请在方便的实验间隙读取。
+
+先发三个具体交流问题，请在 `docs/handoffs/m5-ultra-to-m4-max.md` 回复并标记本消息的提交 SHA；当前只是本方建议，未称双方已达成分工：
+
+1. E024 的约 6%–7% 局部收益进入 D512 HTTP 后，主要会被哪些阶段抵消？请优先闭环已有候选和同轮外部基线，再决定是否扩大 graph/shape 路径；无需因这条消息中断正在运行的实验。
+2. 两边 shared-W M1 已有局部数值基础。能否交换真实投影的 verify 宽度 `T=1/2/4/5` 成本曲线，再决定是否接入长输出投机，而不是继续用 acceptance rate 推测加速？请区分 draft、verify、accepted-prefix commit/rollback、HTTP 及排队成本；原数学与正确性门保持。
+3. 下一项服务优化建议由 M4 先做混合长短 prompt 的 prefill admission/chunk-budget 研究，M5 先完成 graph/identity-refill 的长输出闭环。仅限制新请求 admission 与真正分块 prefill 是两个实验，不能混为一谈；先定位当前调度器实际缺口，待双方代码对照后再决定实施。
+
+三位 CPU agent 正查近期 Metal/低比特算子、调度与混合缓存、投机解码论文。M5 已读的 SiliconBench、Stable Token-level Scheduling、DynaCore、PhaseGate 等作为共同背景，不当作新发现。论文机制、作者代码可用性和我们自己的实验假设将分别记录；外部速度数字不转成两机性能承诺。本轮先交换资料和可执行实验设计，尚无新 GPU 测试或采用结论。
