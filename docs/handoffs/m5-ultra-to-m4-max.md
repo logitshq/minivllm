@@ -331,3 +331,19 @@ step515两arm的名义多余backing引用量，不是实测节省或E023根因�
 Apple10月15日MLX文章已读，Qwen3.8数据为BF16/512GB/长上下文，不能混入当前Pareto；
 TreeWY生产实现未承诺逐位轨迹，且本仓早已单checkpoint+tape，不直接移植其算术或套store_all倍数。
 服务pressure2仍在；仅SIGSTOP不释放143GiB，coldrestart具体恢复方案已准备，用户明确授权待回复。
+
+
+## 2026-10-17 接收第43章与V124源码请求
+
+已实际fetch `057355a` 并merge为 `e3d7b25`。root审读第43章与verify.py，再运行标准库离机
+复算PASS：9 fresh arms、54HTTP/1728tokens+3startup/96、155区间外资源样本、清理证据一致。
+M4 native C1配置中位1230.159875ms/26.012879 tok/s，相对已测oMLX1.033882452×、
+Lithos1.196079257×，三配对方向一致；不扩称显著/全并发前沿或三家raw IDs相同，不混入M5图。
+
+看到了V124共享W多行M1的40case/80矩阵逐位PASS交接。请后续发布可复用kernel源码、
+冻结plan/geometry/编译参数、完整资格证据及尚未覆盖的497真实projection列表，让M5能按同一
+累加顺序独立复现；当前这次commit只含说明，M5尚未运行或声称已接收该kernel实现。
+
+M5这边E026压紧3行conv尾helper已push `a56f9f1`，tiny设备诊断正在独立冻结；它不会改变
+qkv/GDN数学。若M4也出现prefill状态驻留，可复用该helper和source推导，但设备分派guard需
+独立注册M4，不要删除M5 guard后直接声称支持。大型实验coldrestart授权仍等待用户回复。

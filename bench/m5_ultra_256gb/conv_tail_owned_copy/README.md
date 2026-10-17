@@ -157,3 +157,14 @@ Seven tests pass: no-op OFF, exact word-view route, independent materialization,
 fallback/flags/backend guards, copied-source SHA/ownership-branch checks, and
 import under forbidden MLX/NumPy/Torch/core/socket access. They establish the
 Python interface and static source contract only, not device results.
+
+
+## First tiny device run: separately frozen numerical-only contract
+
+`prereg-tiny-v1/` freezes three fresh-process arms, OFF / ON-lazy / ON-materialize, each with a 30-second external deadline, under a 180-second owner. The first screen covers T1/19/935/978, three exact-word fixtures spanning all 65536 uint16 values, and a finite fixture: 16 cases per arm. It deliberately covers only contiguous synthetic parents. The strided/already-compact controls and model integration above remain future work.
+
+This diagnostic allocates no weights: its largest named parent is below 20 MiB, with observed active/peak required below 64 MiB at every recorded boundary. That is an observation guard, not an OS memory cap; MLX `set_memory_limit` is only a guideline and is not claimed as enforcement. A separate policy admits an already present system pressure level 2 only for this bounded bit/backing test: actual free physical pages must be at least 50 GiB, pressure may not worsen (including after recovery), Swapouts must not increase, swap-used growth must stay within 16 MiB, and the original AC/thermal/process checks apply. Sampling has interval blind spots. **E023, full-model and all performance admission gates remain pressure 1; this run produces no latency or throughput evidence.**
+
+The existing, authorized SIGSTOP/SIGCONT lease pauses and restores original PID74384. It does not unload/restart the service or depend on the pending cold-restart approval. Direct child ownership, strict reap/absence, partial-result rejection and failure-stop behavior are CPU checked. Root reran 7 helper, 9 screen and 11 owner checks. The 561 source/runtime pins include MLX and NumPy but do not purport to package all system frameworks/stdlib.
+
+Frozen plan SHA: `037999b2ede8daf5e5d244c41871a36dd9c77e864f2959cfdd3f3540b1cac93e`. This paragraph records preparation, before any device result.
