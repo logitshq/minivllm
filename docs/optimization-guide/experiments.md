@@ -439,3 +439,22 @@ E026 layer v1 was aborted before its first case because the footprint parser inc
 E026 layer v2 is separately preregistered to correct OS footprint observation handling and cancellation reporting, with the original 1 GiB MLX / 2 GiB physical budgets and model math unchanged. Root32 CPU tests and auditor47 negative checks pass; device execution pending. [Plan](../../bench/m5_ultra_256gb/conv_tail_owned_copy/prereg-layer-v2/README.md).
 
 E026 layer v2 real-device PASS after preregistration aba84a5: 3 fresh arms,24 cases,204 phases; root/independent receipts identical,168 full cross-arm array comparisons/655,616,512 bytes exact. T978 state23,248,896→3,211,264B in both ON arms; active/unique each save20,037,632B. All pins/resources/reap/service restoration pass. Single-layer numerical/state qualification only, no new Pareto point. [Full archive](../experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md).
+
+## E027 · 2026-10-17 · M5 多行共享原始 NVFP4 权重
+
+**预注册前状态：UNRUN，默认 OFF。** 从 M4 第44章保留的原始 shader 建立独立
+M5 adapter；不删除 M4 guard，也不把 M4 的局部资格当作 M5 结果。目标是在
+2/4/5 行间复用 packed weight/scale 的源码读取，保持每行 K 遍历、qdot 表达式、
+SIMD 归约和 BF16 store。准备对象持有原 W/scales，lazy callable 可复用，不缓存 X/Y。
+
+本轮只做数值筛选：27 synthetic +6 real-weight/synthetic-input cases，分别与
+独立 native M1 和原表达式控制核比较，共66次完整 BF16 字节比较。固定三个
+(N,K)、三个输入/权重bank、三种行数；真实权重只覆盖 N48/N10240。实际 GPU
+shape/stride descriptor 独立读取，原输入与所有输出全量保存，第一处不等立即停止。
+
+小型数值实验复用 E026 的独立资源合同（120s child、1GiB MLX观察、2GiB physical
+观察，稳定既有 pressure2 可准入），不是修改整模型/性能的 pressure1 门槛。
+原 omlx-server74384 只通过用户已授权的暂停/恢复 lease 控制。
+[代码与计划](../../bench/m5_ultra_256gb/shared_w_m1/README.md)；运行前另存确切计划、
+源码/runtime/bundle SHA 和命令，并先 commit。数值PASS之后仍需整模型和HTTP资格；
+寄存器占用、缓存与调度开销可能抵消读取复用，没有预先宣称速度或新增 Pareto 点。

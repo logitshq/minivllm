@@ -156,3 +156,16 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
 ### 2026-10-17: GDN ownership, structural prefill, and fused-scale audits
 
 Read the July [MSInfer technical report](https://arxiv.org/html/2607.16831v1) and September [NVFP4 GDN study](https://arxiv.org/html/2609.04098v1). Selected lessons: distinguish dispatch costs from chunked prefill structure, retain strong same-environment baselines, and verify original per-projection scale semantics before fusion. No numerical relaxation or NVIDIA speed factor is imported. Local oMLX/Lithos source checks independently support explicit small-state ownership. [Detailed bounded review and source hashes](../../bench/reviews/2026-10-17-gdn-ownership-and-fusion-research.md).
+
+### 2026-10-17: workload-conditioned Pareto interpretation
+
+[Scaling LLM Inference via Parallelism v1](https://arxiv.org/html/2610.19405v1),
+2026-10-14; read introduction and §§2–2.2. The paper defines workload-conditioned
+frontiers and separates prefill/decode costs; its experiment is Qwen2.5-14B BF16
+on eight H200 GPUs. This supports keeping workload and hardware fixed while
+comparing configurations. It does not establish a single-Mac kernel speedup.
+Our inference: retain throughput vs **complete-request latency** as requested,
+and use TTFT/ITL only for diagnosis. Do not copy the paper's TTFT–ITL axes or
+multi-GPU TP/PP recommendation into our M5 plot. E027 tests weight reuse with
+unchanged per-row arithmetic; it is our local candidate, not a reproduction of
+this paper or a new Pareto measurement.

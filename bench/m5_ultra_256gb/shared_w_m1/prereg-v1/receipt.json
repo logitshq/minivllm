@@ -1,0 +1,28 @@
+{
+  "status": "PREREGISTERED_UNRUN",
+  "plan_sha256": "840b1eb0a4e6127bf6fb5e322fdca82d34fabcd7f92712b429b25e596f0f2351",
+  "jobs_sha256": "1d06b77198576fe2b7e87d96d395f3af78465358296ab9ae1e19d72921579c0a",
+  "pins": 576,
+  "expected_cases": 33,
+  "expected_comparisons": 66,
+  "resource_policy": {
+    "real_free_min_bytes": 53687091200,
+    "allowed_initial_pressure": [
+      1,
+      2
+    ],
+    "pressure_must_never_increase": true,
+    "swapouts_delta_max": 0,
+    "swap_used_growth_max_mib": 16,
+    "child_physical_max_bytes": 2147483648,
+    "mlx_boundary_max_bytes": 1073741824,
+    "mlx_cache_limit_bytes": 0,
+    "power": "AC Power",
+    "thermal_codes": [
+      0,
+      1
+    ],
+    "terminal_footprint_policy": "raw-error+exit0+strict-reap+child-self-peak-proof",
+    "physical_reading_semantics": "separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current"
+  }
+}
