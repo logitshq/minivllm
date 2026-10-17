@@ -1,0 +1,76 @@
+{
+  "status": "PASS_EXTERNAL_RELEASE_COMPLETED_C1_SCREEN",
+  "tool_session": 98654,
+  "tool_exit_code": 0,
+  "strict_absence": [
+    {
+      "pid": 43923,
+      "command": [
+        "/bin/ps",
+        "-p",
+        "43923",
+        "-o",
+        "pid=,ppid=,rss=,comm="
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "absent": true
+    },
+    {
+      "pid": 43932,
+      "command": [
+        "/bin/ps",
+        "-p",
+        "43932",
+        "-o",
+        "pid=,ppid=,rss=,comm="
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "absent": true
+    },
+    {
+      "pid": 44214,
+      "command": [
+        "/bin/ps",
+        "-p",
+        "44214",
+        "-o",
+        "pid=,ppid=,rss=,comm="
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "absent": true
+    }
+  ],
+  "ports": [
+    {
+      "port": 57288,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 216794.765983583,
+          "connect_ex": 61
+        }
+      ]
+    },
+    {
+      "port": 57378,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 216794.766722583,
+          "connect_ex": 61
+        }
+      ]
+    }
+  ],
+  "GPU_released": true,
+  "owner_receipt_sha256": "7d5cea5057c929727789cd667d79f80e96463b808def2b8bb014534f03b254c1",
+  "scope": "one fresh speculative and one fresh ordinary; no repeated or external frontier claim"
+}

@@ -88,3 +88,5 @@ docs/              计划、教程、远程版的契约和 notes
 [40：整模通过后再测吞吐和延迟](docs/experiments/40-m1-verify-and-bounded-loader.md)保存 V117 实际正确性结果、V120/V122 资源中止及代码；当前主图为 [M4 throughput–latency Pareto](docs/progress/2026-10-17-m4-pareto/README.md)。
 
 [41：HTTP 传输选项的首对负结果](docs/experiments/41-native-http-nodelay-pilot.md)保留 TCP_NODELAY OFF/ON 的真实请求、吞吐—延迟图和代码差异；ON 吞吐比 0.997538，未采用，当前三家 Pareto 前沿不变。
+
+[42：短请求跑通后的投机解码负结果](docs/experiments/42-startup-warm-short-request.md)记录同一次新配对的完整请求延迟与吞吐：spec 2555.93 ms / 12.52 tok/s，ordinary 1247.41 ms / 25.65 tok/s；全部原始输出通过，短请求尚无性能收益。
