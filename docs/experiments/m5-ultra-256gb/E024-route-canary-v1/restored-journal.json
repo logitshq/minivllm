@@ -1,0 +1,611 @@
+{
+  "schema": "omlx-cold-restart-journal-v7",
+  "id": "453c6415-6d74-4831-bd60-c937a1037889",
+  "state": "RESTORED",
+  "plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+  "controller_sha256": "c30aaffc4157e606b2027c98933cb97d0602aa5db6a614338ae0631dce70a1ab",
+  "support_sha256": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+  "original": {
+    "pid": 11548,
+    "ppid": 1,
+    "start": "Sat Oct 17 09:43:01 2026",
+    "comm": "omlx-server"
+  },
+  "original_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "global_settings_stat": {
+    "dev": 16777231,
+    "ino": 816826,
+    "size": 3516,
+    "mtime_ns": 1792162741806656607
+  },
+  "model_metadata": {
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/config.json": "237c4cda786207d2bebe2d8a1cf157419bec5cc01bbd03b4ed41e888dc1e5af7",
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/model.safetensors.index.json": "380e393bb71519d6f9dc6eb1c3d681b0ca16986285640784fbd33a45bb0ec298"
+  },
+  "log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 160915,
+    "mtime_ns": 1792255411097568974
+  },
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner",
+  "owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-canary-v1/owner-plan.json",
+    "sha256": "3c6cea36b7faf5e8f5272c649766e678ad238e6febd4bfcab848afeb6b77c193"
+  },
+  "owner_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/cold_owner.py",
+    "sha256": "4d850e3bc46478c4c22572e71bb377bc0bf1e6a5b04ceffdcca0379c863f0c96"
+  },
+  "trials": [
+    "e024-route-canary"
+  ],
+  "predecessor": {
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/restored-journal.json",
+    "sha256": "728b94fd9dddbafc3ee48036dd2f6b0cdb462acc8a135b7c2768949f04333ba8",
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/restoration-audit.json",
+      "sha256": "84c043df25ec2e1f4b51a790dfd38b8a5a96f768d7caf0d7132cc51bc1653755"
+    }
+  },
+  "predecessor_copies": {
+    "predecessor.json": "728b94fd9dddbafc3ee48036dd2f6b0cdb462acc8a135b7c2768949f04333ba8",
+    "predecessor-audit.json": "84c043df25ec2e1f4b51a790dfd38b8a5a96f768d7caf0d7132cc51bc1653755"
+  },
+  "resource_samples": [
+    {
+      "time": 1792256627.022007,
+      "system_footprint": 23283499008,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-3d5fdfad4e56462d905acaf24fbae760/footprint.raw.json",
+        "sha256": "f5a986067c7909c89dccb3e6b8c693ad498cb99ac71cbb8d070977e272a352f7",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-3d5fdfad4e56462d905acaf24fbae760/commands.json",
+        "commands_sha256": "fce8b8b89516b8ad1e62f4765f927f291f9d5413ba95e14f19e1e4644dbb2d20"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792256632.082411,
+      "system_footprint": 23337959424,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-1a32a4711240479e87f8e3762c8687fb/footprint.raw.json",
+        "sha256": "0b5ba7074b79ee3775cffa1319a69e4a648bacf3d34d10647f064345cad08dbd",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-1a32a4711240479e87f8e3762c8687fb/commands.json",
+        "commands_sha256": "629a4b94599811ce87a85d34b1d5cc2688a61163e9f941106a8d189a7bb228f9"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792256634.413711,
+      "system_footprint": 23473127424,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-8e7a2a7c70f44811819a7b57cefddfa3/footprint.raw.json",
+        "sha256": "feae47a8ff1dde009b6193c8d7d9cf9ec89c948841174cad5240e7873add487a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-8e7a2a7c70f44811819a7b57cefddfa3/commands.json",
+        "commands_sha256": "dcab96559251302c83cdef630d1160dd4428764a5aab0a9b618c80814118f4de"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792256639.4740229,
+      "system_footprint": 23463510016,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-f3d7ec46c94346c7880a5b4fb4ffdb14/footprint.raw.json",
+        "sha256": "e7438d6cb84b54c42fa3a227c4f41656d28f5c1ec49d387bf4cd7d7f62e7bff9",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-f3d7ec46c94346c7880a5b4fb4ffdb14/commands.json",
+        "commands_sha256": "1a7c9c26beed18a4615b34d8c9adf276a223238f8649617238416148dd92eec7"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792256639.5826519,
+      "system_footprint": 23477846016,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-d1d03e7e1aa54986af6bbd40b5526e6a/footprint.raw.json",
+        "sha256": "f1fdd9031a455d4e4a8c54a079afa29e264aa6c4afbf793352da5a6fa13eb89c",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-d1d03e7e1aa54986af6bbd40b5526e6a/commands.json",
+        "commands_sha256": "147812a709b5b02673578ac4e45391f69d1f857bdc61cf225e9c8900737e5ff5"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256641.6885839,
+      "system_footprint": 44309315584,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-43bffa11b5bd4f11bae6cd0510ea0f2b/footprint.raw.json",
+        "sha256": "1654a6f2f2018313089245ed23547dcc51393fedb26ffb73c5ef4dd7ca1be848",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-43bffa11b5bd4f11bae6cd0510ea0f2b/commands.json",
+        "commands_sha256": "3c42be4a26cddeec6e920833907b3692f9c3dfc00fca9b9169e50d5fdd2fe24e"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256643.802421,
+      "system_footprint": 68826136576,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-cc6c457a076145bf93f66fe9f27e6b21/footprint.raw.json",
+        "sha256": "ea8014ac9433f76ae5f37ea6451d2c49d5220efbf8890bffb647ce5cc82f123c",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-cc6c457a076145bf93f66fe9f27e6b21/commands.json",
+        "commands_sha256": "90ccb57be64d67db102abc50d5d516f8464636090306da36327b87bd000fd825"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256645.90364,
+      "system_footprint": 77964017664,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-9494cae832b74e12a141ffe3df231fc4/footprint.raw.json",
+        "sha256": "18fcbbff97345b0d8f26bad6ac04afa500139d6b74132ee148780db257469720",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-9494cae832b74e12a141ffe3df231fc4/commands.json",
+        "commands_sha256": "9e6f2e0385de7c53ba0822d01785ee6ea5b6c6111778dde5a9246d813820c26f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256648.017524,
+      "system_footprint": 99287498752,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-cd9a4da26c8e42dfba8b4c13e84fe151/footprint.raw.json",
+        "sha256": "f24683a148ead5b032030098dc6716f89893a37a5e3d51154a7451cd7a244fe7",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-cd9a4da26c8e42dfba8b4c13e84fe151/commands.json",
+        "commands_sha256": "9e4900913a8d09718fb699fa81e6e1350d8a823114a607cb9fcfe9e66412f223"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256650.13268,
+      "system_footprint": 120589828096,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-7295ca9b1fdc4a1b9e00a353a814d2ce/footprint.raw.json",
+        "sha256": "7187bdbf2c9a1f2f69bed79c39c4063131abec60854a7a09b58dfcf51d5a370a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-7295ca9b1fdc4a1b9e00a353a814d2ce/commands.json",
+        "commands_sha256": "3446403544dd6e505faf6bf78ce65b4df7847804978ed516866fc9aa1b49629f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256652.2542238,
+      "system_footprint": 135740112896,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-c3816dfa9bb64f539e86f54075681379/footprint.raw.json",
+        "sha256": "008572df2ffe74a4521aed6cbe8b050cdf60d8d2c498d1ec5a2dd469923cb4ec",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-c3816dfa9bb64f539e86f54075681379/commands.json",
+        "commands_sha256": "0ee1e2e5cf4526ad608f1c09cf170d34aca0e7b33de1a61b45356b05cbf2091d"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256654.374605,
+      "system_footprint": 140796362752,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-040a7f68322446e7884b2db906655560/footprint.raw.json",
+        "sha256": "22fe3823483a37d7de334e284cc13e0ac869c11ab4f2c5871f95591247f3d089",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-040a7f68322446e7884b2db906655560/commands.json",
+        "commands_sha256": "9b9c6e94bd5c14e4f1884863d918a371d5a278ad996b06b9089d389f4a78f18c"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256656.500538,
+      "system_footprint": 161126531072,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-688fdd6b6c974de1bdd95eb22cf19f7b/footprint.raw.json",
+        "sha256": "9277b9d24e9d15faba3f31e22355623e1e66f427fc4d7914cce8fee6957d16c4",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-688fdd6b6c974de1bdd95eb22cf19f7b/commands.json",
+        "commands_sha256": "358ebfe23f3e59208e4dbbfe9bbf77da68a9e9a6c8bc65ce4e5bc80ca35407c8"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256658.621332,
+      "system_footprint": 175844769792,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-4a8d4d03d50d485b8c9ee650a5f16f0f/footprint.raw.json",
+        "sha256": "d1758a2c64154d5bbae1cd5947150b72132711b43216a28d88a90eab0db119a7",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-4a8d4d03d50d485b8c9ee650a5f16f0f/commands.json",
+        "commands_sha256": "e61244a57c17deeaea22d54128baa7eb752dcebae959877cc6b1d76aac116fa7"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256660.738246,
+      "system_footprint": 176035233792,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-366fe09812f644e196d5746d7ffd7bc9/footprint.raw.json",
+        "sha256": "80900939494084a46d81cedf7a5f3a9b2c12848bc1783fbc08cf07a25922e0c5",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-366fe09812f644e196d5746d7ffd7bc9/commands.json",
+        "commands_sha256": "a76494c155e28cf952951ab0f6fb3d51553e2f4abe2776c4acb689d501c41d71"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256662.8660932,
+      "system_footprint": 174851735552,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-bbd360859b404976a83f74c432ed5b62/footprint.raw.json",
+        "sha256": "02974085f56e6401109bddc6c305f0c6aea1eb2df4b1d17569f3970a4465af4c",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-bbd360859b404976a83f74c432ed5b62/commands.json",
+        "commands_sha256": "78424fb32415f596e7fe4b00995b6c9eb1912cf2dad9a39c679db66beeb71b31"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792256662.9641159,
+      "system_footprint": 174851637248,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-47da987e784e47b4ad3342cfd6a42974/footprint.raw.json",
+        "sha256": "6e2c5cccf93668b9ba1b0506e8f09e81d18d6650e594297e04c9214bc9fa6e9f",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-47da987e784e47b4ad3342cfd6a42974/commands.json",
+        "commands_sha256": "336d2da45ab83237012f68fcefa6cc8971cdfce89f2a5c320e7c55e9a72ea811"
+      },
+      "label": "load-reconciliation"
+    },
+    {
+      "time": 1792256663.059454,
+      "system_footprint": 174850736128,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-b2d0ae4b75964d4a88923691640eec58/footprint.raw.json",
+        "sha256": "b3ccfb950b946a429823b6b0e89be0ea47c9b380245d92316339d506f3c759fc",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-b2d0ae4b75964d4a88923691640eec58/commands.json",
+        "commands_sha256": "35d6fb662cc3b14d2a47a05e60ed5a17543bacfc75823b4267c0286746b5c1e6"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792256668.1242208,
+      "system_footprint": 174849900544,
+      "pressure": 1,
+      "swap_bytes": 449902019,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-83fc9d62e3f64efeab133126a8399ce7/footprint.raw.json",
+        "sha256": "9ac35f15411964c0712a7eccf858be5277c78e1d35b31085cf26e4dcedf7dc28",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/physical-83fc9d62e3f64efeab133126a8399ce7/commands.json",
+        "commands_sha256": "f45988966239917c0bc2799585926b3c981d59dfa76305b09d24955fa822d831"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "events": [
+    {
+      "event": "prepared_v7_read_only",
+      "time": 1792256541.2242198,
+      "monotonic": 133860.988619708
+    },
+    {
+      "event": "bootout_intent",
+      "time": 1792256588.746169,
+      "monotonic": 133908.5104635
+    },
+    {
+      "event": "bootout_returned",
+      "time": 1792256588.750135,
+      "monotonic": 133908.51442925
+    },
+    {
+      "event": "service_absent",
+      "time": 1792256590.859772,
+      "monotonic": 133910.624061291
+    },
+    {
+      "event": "experiment_terminal_checked",
+      "time": 1792256626.9319522,
+      "monotonic": 133946.696161166
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256627.022372,
+      "monotonic": 133946.786580791
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256632.082741,
+      "monotonic": 133951.846939
+    },
+    {
+      "event": "bootstrap_intent",
+      "time": 1792256632.160704,
+      "monotonic": 133951.924901916
+    },
+    {
+      "event": "bootstrap_returned",
+      "time": 1792256632.165168,
+      "monotonic": 133951.929365875
+    },
+    {
+      "event": "job_reconciled",
+      "time": 1792256634.3131468,
+      "monotonic": 133954.0773395
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256634.413993,
+      "monotonic": 133954.178185958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256639.4743261,
+      "monotonic": 133959.238508041
+    },
+    {
+      "event": "load_intent_monitored",
+      "time": 1792256639.556351,
+      "monotonic": 133959.320532541
+    },
+    {
+      "event": "post_worker_started",
+      "time": 1792256639.558379,
+      "monotonic": 133959.322559791
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256639.582858,
+      "monotonic": 133959.347039583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256641.688874,
+      "monotonic": 133961.453050291
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256643.8026319,
+      "monotonic": 133963.566803541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256645.9038851,
+      "monotonic": 133965.668052333
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256648.0177689,
+      "monotonic": 133967.781931166
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256650.1329181,
+      "monotonic": 133969.897075458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256652.254486,
+      "monotonic": 133972.018638625
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256654.3748631,
+      "monotonic": 133974.139011875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256656.501996,
+      "monotonic": 133976.266139666
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256658.621721,
+      "monotonic": 133978.38585975
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256660.738517,
+      "monotonic": 133980.502651458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256662.866344,
+      "monotonic": 133982.630473291
+    },
+    {
+      "event": "post_worker_returned",
+      "time": 1792256662.936697,
+      "monotonic": 133982.700826375
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256662.964372,
+      "monotonic": 133982.728501083
+    },
+    {
+      "event": "raw_log_window_retained",
+      "time": 1792256663.037653,
+      "monotonic": 133982.80178225
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256663.059697,
+      "monotonic": 133982.823826291
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792256668.12451,
+      "monotonic": 133987.888628166
+    },
+    {
+      "event": "restored_persisted_visible_variant",
+      "time": 1792256668.2034318,
+      "monotonic": 133987.967549791
+    }
+  ],
+  "approved_contract": "cold-restart-persisted-visible-v1",
+  "bootout_returncode": 0,
+  "removed_at": 1792256590.859765,
+  "reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 13596,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/attempt.json",
+        "sha256": "49e5f5a4eed08358b7b0d0425cdbb23c7cf81e6969d1c288564ee1e6cac77049"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/stopped-journal.json",
+        "sha256": "a9a93a9a73ff5d086f246c4246a483b3b091ed4827704d4add0546d67dd41c73"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/spawn-intent.json",
+        "sha256": "f14e0f9653fc3e9c480e4debfd7d1750cf005cf1159e67a1637fe1aeb93fd604"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/children.json",
+        "sha256": "3766e4d947e4d54a93e6ccb157ea4814fcb6c1380944f6818d2bd08bd496770a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/release.json",
+        "sha256": "554763f40c32a007581c6f0d06fa9b0339a27d69060ef12779e84d2be9aa1789"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/phases/e024-route-canary/intent.json",
+        "sha256": "f14e0f9653fc3e9c480e4debfd7d1750cf005cf1159e67a1637fe1aeb93fd604"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/phases/e024-route-canary/child.json",
+        "sha256": "dda1aee165b8c333601be9be1cfbaa167a9ef0da977a4cae147ebc94c59be275"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/phases/e024-route-canary/release.json",
+        "sha256": "08c0c7109ff86d5d5164e371f73073d2c272474a469ce5a1ed39ae7a9f787fa2"
+      }
+    ]
+  },
+  "recovery_log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 162435,
+    "mtime_ns": 1792256589888132027
+  },
+  "bootstrap_returncode": 0,
+  "replacement": {
+    "pid": 13908,
+    "ppid": 1,
+    "start": "Sat Oct 17 10:03:52 2026",
+    "comm": "omlx-server"
+  },
+  "load_baseline_swap_bytes": 449902019,
+  "load_worker": {
+    "nonce": "cdb372fa9aa0482aa91e333f3bce3ef2",
+    "directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/load-worker",
+    "parent_identity": {
+      "pid": 13869,
+      "ppid": 13572,
+      "start": "Sat Oct 17 10:03:46 2026",
+      "comm": "/Users/ryanli/code/minivllm/.venv/bin/python"
+    }
+  },
+  "post_worker_pid": 13943,
+  "post_result": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/load-worker/result.json",
+    "sha256": "bb62e4b82d7d020977a877ddb15f82dea46bc2b1f8242917442b859963e43128"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cold-journal/evidence/log-a0c8e7a8d93a41a0aee7b005c21c485e/window.raw.log",
+    "sha256": "81dd56ea259474f373fc4e3dbfac2a9da469e3c64e9dc4b63b585f6f55c2a605",
+    "bytes": 11301,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 162435,
+      "mtime_ns": 1792256589888132027
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 173736,
+      "mtime_ns": 1792256661905903622
+    },
+    "start_offset": 162435,
+    "end_offset": 173736
+  },
+  "final_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "monitoring_scope": "observed physical bounds; no OS hard cap; HTTP cancellation does not cancel server loader"
+}

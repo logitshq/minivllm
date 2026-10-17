@@ -1,8 +1,11 @@
 # E024 route-preserving graph canary
 
-This is a new default-OFF experiment. The old rejected graph and the four-arm
-isolation remain unchanged. No device qualification or performance result is
-claimed by the source/CPU tests in this directory.
+Update2026-10-17: the B1/used257 canary passed on the actual device and the
+independent original-byte audit: all129 outputs exact, both131 inputs unchanged.
+[Execution evidence and limits](../../../docs/experiments/m5-ultra-256gb/E024-route-canary-v1/README.md).
+The candidate remains default OFF; higher-bucket/matrix/lifecycle/HTTP correctness
+and performance are still unqualified. The old rejected graph and four-arm
+isolation remain unchanged. Below is the source and pre-registered CPU contract.
 
 `RoutePreservingDecode(model, enabled=False)` calls the original model. When
 explicitly enabled, only the original pinned M5 Ultra/MLX0.32.3 NVFP4/BF16 model

@@ -1,0 +1,2037 @@
+{
+  "schema": "E024-route-canary-raw-audit-v1",
+  "status": "PASS",
+  "diagnostic_complete": true,
+  "canary_qualified": true,
+  "full_model_qualified": false,
+  "performance_qualified": false,
+  "audit_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_raw.py",
+    "sha256": "f58ed9abbb2c184dda2eac49fc9b66411b786300a7cfdaf1bcd2d101072c0855"
+  },
+  "raw_reader_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/audit_raw.py",
+    "sha256": "b3bffc7bd261b9b347b5d299d965273ff2406a92c27576747867aa515be62261"
+  },
+  "producer_status": "PASS",
+  "producer_error": null,
+  "complete_receipt": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-owner/phases/e024-route-canary/qualification/complete.json",
+    "sha256": "8b2032baba6d9671b3d874a82f78b489c77b03aae494d319cdf37cc6aea8d3f2"
+  },
+  "plan_sha256": "44ad5ff024e857430f761df6b5baa4cafb9219a717fab11d37eb11f284459cc2",
+  "numerical_equal": true,
+  "inputs": {
+    "A": {
+      "tensors": 131,
+      "canonical_bit_equal": true,
+      "after_bit_equal": true,
+      "greedy_ids": [
+        1559
+      ]
+    },
+    "C": {
+      "tensors": 131,
+      "canonical_bit_equal": true,
+      "after_bit_equal": true,
+      "greedy_ids": [
+        1559
+      ]
+    }
+  },
+  "contrast": {
+    "bit_equal": true,
+    "tensor_count": 129,
+    "differing_tensors": 0,
+    "differing_words": 0,
+    "differing_bytes": 0,
+    "tensors": [
+      {
+        "name": "root/logits",
+        "shape": [
+          1,
+          248320
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 248320,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/0/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/0/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/1/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/1/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/10/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/10/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/11/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/11/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/12/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/12/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/13/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/13/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/14/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/14/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/15/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/15/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/16/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/16/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/17/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/17/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/18/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/18/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/19/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/19/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/2/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/2/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/20/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/20/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/21/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/21/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/22/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/22/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/23/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/23/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/24/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/24/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/25/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/25/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/26/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/26/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/27/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/27/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/28/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/28/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/29/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/29/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/3/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/3/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/30/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/30/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/31/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/31/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/32/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/32/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/33/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/33/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/34/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/34/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/35/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/35/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/36/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/36/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/37/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/37/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/38/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/38/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/39/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/39/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/4/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/4/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/40/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/40/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/41/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/41/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/42/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/42/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/43/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/43/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/44/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/44/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/45/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/45/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/46/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/46/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/47/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/47/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/48/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/48/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/49/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/49/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/5/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/5/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/50/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/50/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/51/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/51/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/52/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/52/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/53/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/53/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/54/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/54/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/55/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/55/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/56/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/56/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/57/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/57/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/58/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/58/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/59/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/59/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/6/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/6/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/60/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/60/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/61/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/61/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/62/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/62/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/63/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/63/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/7/K",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/7/V",
+        "shape": [
+          1,
+          4,
+          1536,
+          256
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 1572864,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/8/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/8/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/9/S",
+        "shape": [
+          1,
+          48,
+          128,
+          128
+        ],
+        "encoding": "F32",
+        "bit_equal": true,
+        "elements": 786432,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      },
+      {
+        "name": "root/state/9/conv",
+        "shape": [
+          1,
+          3,
+          10240
+        ],
+        "encoding": "BF16",
+        "bit_equal": true,
+        "elements": 30720,
+        "differing_words": 0,
+        "differing_bytes": 0,
+        "first_difference": null
+      }
+    ]
+  },
+  "prefix_evidence": {
+    "initial_weight_checks": 1349,
+    "prefill_array_checks": 129,
+    "scope": "Device-recorded equality/finite flags; successful initial weight/prefill payloads were not saved and are not independently recomputed."
+  },
+  "graph_witness": {
+    "event": "graph-call",
+    "phase": "C-compiled1023",
+    "batch": 1,
+    "used": 257,
+    "positions": [
+      256
+    ],
+    "lens": [
+      257
+    ],
+    "tokens": [
+      524
+    ],
+    "KV_backing_lengths": [
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ]
+    ],
+    "status": "SUBMITTED",
+    "invocation": 1,
+    "compiled_function_count": 1,
+    "actual_compile_objects": [
+      {
+        "key": "(1023, ((False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False)))",
+        "type": "gc_func",
+        "id": 4410974400
+      }
+    ],
+    "elapsed_wall_s": 24.06522537500132
+  },
+  "parameter_count": 1349,
+  "parameter_evidence_scope": "Original-dtype SHA/finite/shape value receipts unchanged before/after prefill and each arm; handle IDs recorded only. Weight payloads were not saved and are not independently rehashed.",
+  "input_evidence_scope": "All131 original tensors per arm equal canonical and their after snapshots. Buffer disjointness is device-reported evidence bound to source, not inferred from safetensors.",
+  "scope": "Only B1/used257 eager257 versus new compiled1023 canary. No40point matrix, boundary/batch transitions, parameter replacement, ahead lifecycle, gates-ON HTTP, SDPA runtime trace or performance qualification."
+}

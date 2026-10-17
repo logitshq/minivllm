@@ -759,3 +759,25 @@ committed hashes/paths. Next source-backed hypothesis uses1023/1536 bounds to
 preserve the native reduction route; it still needs40 boundary points and lifecycle.
 
 [Result and evidence](../experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/README.md) · [Tutorial](tutorials/024-decode-graph-dispatch.md).
+
+
+## Route-preserving graph canary passes (2026-10-17)
+
+The new default-OFF two-bound candidate passes its first B1/used257 point.
+Independent original-byte audit: eager257 versus compiled1023 all129 outputs
+equal (89,803,264 elements/255,104,000B each), both131-array inputs unchanged,
+actual compiled key1023/invocation1. All finite;1349 parameter value receipts
+unchanged. The successful initial weight/prefill payloads were not independently
+recomputed. No higher-bucket, full matrix/lifecycle/HTTP or speed qualification.
+
+Child13629/owner13596 were reaped; service restored asPID13908 at17:04:28 UTC,
+independently audited with original model and fresh MTP/resident PLE evidence.
+Warm KV/exact hidden state are not restored. Ten samples pressure1/zero swap
+growth. The seven full-state tensor files (1,783,330,137B) remain local;677 small
+evidence files and exact local hashes are archived. Candidate gates remain OFF.
+
+NEXT: 40 fixed batch/length points, actual cross-boundary/mixed-row/batch reuse,
+then parameter replacement/ahead lifecycle and gates-ON D512/HTTP. No new Pareto
+point; external D512 baselines remain pending. M4 tip53d4906 is already an ancestor.
+
+[Evidence and limits](../experiments/m5-ultra-256gb/E024-route-canary-v1/README.md).
