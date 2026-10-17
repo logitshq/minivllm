@@ -300,3 +300,21 @@ Local inference: a future GLM prefix-cache adapter must bind checkpoint position
 attention state and recurrent state together, and qualify replay after restore.
 Keep the first GLM load uncached. The fixed 189.982 GiB Flash checkpoint is already
 downloaded; this reading adds neither a model download nor a qualified GLM point.
+
+
+### 2026-10-17: separate batching, KV layout and mixed-phase scheduling
+
+Read [SiliconBench v1](https://arxiv.org/html/2609.19169v1), §§3.1–3.2,6.1,7–8.
+It distinguishes packed query rows, active-KV allocation and whether prefill and
+decode share a pass. These are independent design decisions. Its M5 Pro audit
+finds different scaling even among engines sharing these features; the larger
+model follow-up uses different builds/quantization. Fidelity is a classification
+task, not full-state bit equivalence, and formal run variance is not reported.
+These measurements cannot be inserted into our same-machine D512 chart.
+
+Local inference: after graph reuse, isolate admission/prefill chunk scheduling
+from cache layout, then measure full POST→DONE latency alongside committed-token
+throughput. A packed implementation needs explicit recurrent-state row ownership;
+removing padding must not alter valid attention reductions. Keep each mechanism
+default OFF until separately qualified. This reading adds no measured local point
+or reason to adopt a broad serving framework.

@@ -106,3 +106,64 @@ the thirteenth test uses the saved original E020 line to cover both prefixes.
 The two additional interval tests reject serial C8, excess overlap and zero
 duration, and verify the tied-endpoint boundary. All 15 CPU tests passed; no
 Lithos D512 device qualification or performance run was executed.
+
+## Single fresh qualification trial
+
+`trial.py` adds the bounded direct-process runner. It does not alter the frozen
+probe, join, client, official package, model or pack. Prepare one spec per new
+output directory and execute C1 and C8 sequentially through the external owner:
+
+```python
+launch = serve_probe.specification(out, C, port, key, observed=True)
+spec = trial.prepare(out, C, port, key, deadlines=deadlines,
+                     environment=registered_environment)
+result = await trial.run(spec, out, checkpoint)
+```
+
+`registered_environment` must contain the exact flags/API key from
+`launch['environment']`. Only explicitly recorded PATH/HOME/TMPDIR/LANG/LC_ALL/
+USER/LOGNAME additions are allowed. The fixed command uses the original local
+target and existing 2048 pack, with `cwd` equal to the Lithos repository; no pack
+conversion occurs. `deadlines` contains positive seconds for `ready`, `request`,
+`group`, `close`, `term`, `kill`, `overall`, and `resource_interval`. TERM and KILL
+are 15 seconds each; the probe interval is at most 5 seconds and overall covers
+ready plus group. The outer owner must bind these limits in its own budget.
+
+The runner sends the same `Authorization: Bearer <key>` to official `/v1/models`
+and the frozen Lithos client. It validates the actual served model/capacity and
+the direct PID's localhost listener, then issues only 8/C1 or 16/C8 qualification
+requests. There is no warmup inference, formal group, prior fabricated count
+receipt or performance point. After client EOF/response/client close, it sends
+TERM, escalates to KILL if necessary, waits, and requires raw PID and port absence.
+Repeated caller cancellation cannot cancel the independent cleanup task.
+An unresolved cleanup remains FAIL and names the child in `cleanup-incomplete`;
+an unknown Popen outcome retains its intent without a false release.
+
+`checkpoint(label, pid)` is mandatory and can be async. Labels are `pre-spawn`,
+`spawned`, `starting`, `ready`, `qualification`, `after-qualification`, and
+`after-reap` or `cleanup-incomplete`. The outer owner must settle any in-flight
+resource probe before propagating cancellation, retain its direct child handle
+for cleanup reconciliation, enforce exclusive device/service absence and full
+runtime/weight/pack pins, then restore the service. This runner never controls
+launchd or certifies those outer conditions.
+
+Only after actual reap does it invoke the frozen full raw join, decode IDs with
+official `AutoTokenizer` semantics, and check all official Generation log entries
+for cache=0 with the imported `monolith.serve` logger. Qualification permits first
+setup cost; this is not the later formal setup=0 gate. Logs, observer bytes,
+partial client results, launch/readiness, intent/identity/release, joins and all
+artifact hashes remain in the new directory. Trial PASS means this observed
+route/count/text contract passed; full-state and performance fields stay false.
+
+`trial.py --spec PATH --spec-sha256 SHA --out NEW_PREPARATION_DIRECTORY` validates
+a saved spec without starting a process. The real trial requires the explicit
+outer-owned `run` call. CPU tests use `httpx.MockTransport` with the real frozen
+client and join; no model/server/service is exercised:
+
+```text
+.artifacts/omlx-baseline/.venv/bin/python -B -m unittest bench.m5_ultra_256gb.lithos_d512.test_trial_cpu -v
+```
+
+Ten tests passed, including C1/C8 raw flows, authenticated requests, missing seal,
+wrong readiness/identity, unknown spawn, TERM failure followed by KILL, resource
+cancellation, repeated cancellation during reap, and surviving PID rejection.
