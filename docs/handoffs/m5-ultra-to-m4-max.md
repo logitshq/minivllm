@@ -863,3 +863,13 @@ records MLX compile semantics, PR4556 exception cleanup, and MTPLX issue544;
 no new directly applicable October paper was verified. Our runner already
 submits current/ahead state, so the external event-retention issue does not
 establish a local leak or justify adding a synchronization fence.
+
+### 已读 M4 cdb0649：当前 Lithos 正式计时与新研究（2026-10-17 15:38 PDT）
+
+已实际 fetch `origin/tutorial/18-gdn-projection-packing` 到 `cdb0649`，阅读 `7ffe424` 的第46章/研究分工和最新回执；本次计时期间未 merge，冻结源码不变。当前 M5 六 fresh Lithos D512 正式周期已完成 r1-c1/r1-c8，r2-c8 进行中。第一对 producer 原始点：C1 44.910185 tok/s、POST→DONE p50 11.404540s；C8 44.883987 tok/s、p50 91.252783s。每点64请求/32768 committed，官方FIFO、normal EOS且本次全部触cap。**整轮仍运行，两个点的performance_qualified=false；等待重复、资源、清理和原服务恢复审计，尚未发布Pareto。** 原服务PID28531按已有授权冷停，当前owner负责最终恢复。
+
+第46章 decoded-W hoist 提议已对照：相对 M4 V124/本方 E027 自定义 packed-W kernel 是新delta；但 M5当前 MLX 0.32.3原生 `fp_qmv_wide` 已先解码 `w4[nf4]` 再遍历token复用（`fp_quantized.h:621–651`），不能当成M5 native新权重复用。E027第19case失败位于 native multirow vs per-row M1 bridge，失败case并未调用shared候选；因此不能说hoist已被实验否定。M4可先针对原qualified shared-W路径做只移decode位置的精确局部AB，保留原scale/qdot/reduction；M5若移植须先解决native原生oracle的域，而非套用M4 PASS。源机guard仍保留。
+
+本方新增[AgSpec与state研究笔记](../optimization-guide/research/2026-10-17-retrieval-and-state.md)：AgSpec v2（10月6日）可借鉴request/session文本草稿与成本控制，但其Blackwell generation-only吞吐不对应我们的POST→DONE。先交换 T1/2/4/5 真成本和完整精确检查；最小候选只用本请求已见prompt/committed输出，绝不将同fixture上一重复答案注入后续formal请求。KVBuffer/DAMP提供状态IO分析，但重排递推/低精度state不能继承当前逐位资格。
+
+已准备 E024 fresh-runner default-OFF adapter、原37请求+42参数替换/恢复诊断及离线审计源码；当前不运行CPU测试以避免干扰计时。原37请求的候选ahead discard在既有E028中实际为0，因此只报告真实覆盖，不强制一个不可保证发生的计数；取消/sampling-key失效另列独立诊断。oMLX D512 observer/trial与GLM官方冷load短请求probe也在CPU源码准备阶段，未声称device资格。高C按[新计划](../../bench/reviews/d512-high-concurrency-plan.md)从C16递进，新的N128/256/512不池化旧N64。
