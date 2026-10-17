@@ -1,0 +1,58 @@
+{
+  "status": "FAIL",
+  "qualified": false,
+  "classification": "RESOURCE_OBSERVER_EQUALITY_REJECTION_BEFORE_FIRST_CASE",
+  "completed_cases": 0,
+  "completed_arms": 0,
+  "numerical_comparisons": 0,
+  "physical_budget_exceeded": false,
+  "raw_footprint": {
+    "top": 65389240,
+    "aux_current": 65323704,
+    "aux_peak": 65323704,
+    "budget": 2147483648
+  },
+  "owner_pid": 39583,
+  "child_pid": 39604,
+  "child_reaped": true,
+  "strict_absence": true,
+  "child_returncode": 1,
+  "owner_returncode": 1,
+  "resource_samples": 4,
+  "resource_labels": [
+    "preflight",
+    "off/before",
+    "off/running",
+    "postflight"
+  ],
+  "pressure_values": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "swapouts_growth": 0,
+  "swap_used_mib": [
+    445.06,
+    445.06,
+    445.06,
+    445.06
+  ],
+  "free_bytes": [
+    69588484096,
+    69586370560,
+    69581406208,
+    69584699392
+  ],
+  "service_identity": "Fri Oct 16 08:01:58 2026     omlx-server",
+  "service_restore": {
+    "identity_match": true,
+    "state_before": "T",
+    "state_after": "S",
+    "time": 1792236540.188106
+  },
+  "audit_source_sha256": "d775c6b8a833e4341dddec396fc6cdc0d82ab9e3fe234fa56de7d474d1d711b3",
+  "failure_receipt_sha256": "d6f93f2618ef9d7aad41c98ce22c1d8559a8e6170e96a3d9d4b2d54cd5291c68",
+  "scope": "Independent CPU reading of preserved v1 failure, resources and lifecycle; no numerical or performance qualification",
+  "note": "Child uses the same TimeoutError text for SIGTERM and alarm; elapsed 0.124s does not demonstrate 120s deadline exhaustion. Raw resource values independently parsed: running probe aborts before resource-derived fields are populated."
+}

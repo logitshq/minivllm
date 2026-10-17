@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "qualified": false,
+  "error_type": "ValueError",
+  "error": "owner did not complete numerical resource/lifecycle contract",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/conv_tail_owned_copy/audit_layer.py\", line 811, in main\n    result = audit(args.owner.resolve(), args.lease.resolve(), args.plan_sha256, progress)\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/conv_tail_owned_copy/audit_layer.py\", line 596, in audit\n    need(complete['schema'] == 'E026-layer-owner-result-v1' and complete['status'] == 'PASS'\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         and complete['errors'] == [] and 0 < complete['elapsed_wall_s'] <= 480 and complete['pins_rechecked'] is True,\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         'owner did not complete numerical resource/lifecycle contract')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/conv_tail_owned_copy/audit_layer.py\", line 78, in need\n    raise ValueError(message)\nValueError: owner did not complete numerical resource/lifecycle contract\n",
+  "partial": {
+    "recorded_owner_status": "FAIL",
+    "recorded_arm_statuses": []
+  },
+  "audit_source_sha256": "d775c6b8a833e4341dddec396fc6cdc0d82ab9e3fe234fa56de7d474d1d711b3",
+  "performance_qualified": false,
+  "full_model_qualified": false
+}

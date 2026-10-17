@@ -53,3 +53,5 @@ are three distinct interventions and require separate qualification.
 ## Freeze a real-weight test before measuring performance
 
 The [layer-v1 registration](../../../bench/m5_ultra_256gb/conv_tail_owned_copy/prereg-layer-v1/README.md) now pins the real 14-tensor bundle, original GDN computation, three switch configurations, eight input/state cases per configuration, and resource/deadline rules. Root passed 27 CPU tests; an independent auditor passed 31 negative checks. Full original output, convolution output and both states must compare exactly. This remains a numerical/state diagnostic, with no HTTP timing or new Pareto point.
+
+The first real-weight attempt stopped before a case: an overly strict equality check on two OS footprint readouts rejected a 64 KiB discrepancy, although each was below 2 GiB. [Its failure evidence is preserved](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v1/README.md). Bound each raw observation independently; do not increase the budget to fix a parser assumption.
