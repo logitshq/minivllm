@@ -1,0 +1,13 @@
+V130 CPU/source conclusion: official queued-load entry is available, generation numerics/performance still GPU-unrun.
+- Actual installed lithos-metal0.1.2 / commit5485ad6bac0a5649d66a347f3e01a655ea29d937, not newer upstream.
+- `monolith/serve.py:482–508`: `arrived` before admission; only `protocol=='ollama'` may use blocking lock acquire; other busy adapters raise429/model_busy.
+- `serve.py:662–668`: official POST `/api/chat` converts via `ollama_request`, dispatches to same Backend.complete; no wrapper queue is needed.
+- `serving/lifecycle.py:26–46`: sequence tickets under Condition, blocking wait until serving; order is assigned-ticket order, not a promise about network POST arrival/FastAPI fairness.
+- `serving/protocol.py:450–490`: same messages→ChatRequest; num_predict→max_tokens32, temperature0/top_p1/top_k0/seed0. Original OpenAI uses max_completion_tokens32.
+- `serving/events.py:80–86,141–151,206–209`: Ollama NDJSON counts/done_reason terminal, final content empty; accumulate earlier deltas. Server total_duration includes queue, but metric uses client POST-before→received done:true.
+- `serve.py:524–551,606–607`: worker finally releases admission; consumer cancellation does not remove an already blocked synchronous queue waiter. Root-owned termination/reap remains required after errors.
+- Independently saved CPU source audit `v130-lithos-concurrency-source-audit-build1/receipt.json`1c2050f7… verifies196 installed identities/8checkout equal, template19/greedy32, real FifoLock4-ticket behavior; not actualGPU output/cache0.
+- Prior OpenAI429 references found in chapter11 qualification contract and gap-audit are source statements. No original request-level429 raw response found in this audit; no observed rejection distribution is claimed.
+- Reuse original `m4-final-native15-official-attempt2/official_entry.py`, official_command('lithos',1), common ownership/resource helpers, fixed19→32 chat fixture. The launch1 selects old server configuration; HTTP loadC is independent.
+- Qualify fresh1: OpenAI C1→Ollama C1/C2/C4,8HTTP256, actual visible-gold/19/32/length/allPOSTt0-before-firstterminal/Generation8cache0+prefixNone gates.
+- Subsequent driver only afterqual+release:9fresh/126HTTP/63formal,8fixed60s unloaded gaps, globally fixed explicitAC orBattery; no retry/newcustomqueue/GPUbatch or cross-domain Pareto claim.

@@ -4,9 +4,10 @@
 
 每个有实际结果的检查点保存：教程的前后代码对比、代码版本及SHA、全部正负结果、当前进度台账和适用的图。通过源码审查、局部数值、整模数值及端到端性能是不同阶段，不用一个“完成百分比”代替。
 
-已有的日期快照保持原样；同日后续结果另存检查点，Git commit保留演进。每次显著数值／性能结果之后commit/push、fetch M5交接，并更新本方交接。性能图只使用同机、同权重、同负载与相符资源条件的结果；M4/M5、局部/整模、不同电源和不同轮次分开。
+已有的日期快照保持原样；同日后续结果另存检查点，Git commit保留演进。每次显著数值／性能结果之后commit/push、fetch M5交接，并更新本方交接。性能图只使用同机、同权重、同负载与相符资源条件的结果；M4/M5、局部/整模、不同电源分开。不同轮次保留独立数据与来源；同条件的跨轮图只能作描述性比较，不能计算配对增益或宣称同轮验证。
 
-- [最新 M4 完整吞吐—延迟前沿](../experiments/44-fresh-full-throughput-latency.md)：21 次独立加载、7 个配置，同轮 C1/C2/C4 本方点组成联合前沿，覆盖本轮 oMLX/Lithos 已测点。仅限 Qwen3.8-27B NVFP4 的 19→32 短负载。
+- [最新三家各 C1/C2/C4 对比图](../experiments/45-lithos-queued-concurrency.md)：新增 Lithos 官方 FIFO 排队接口的九次独立加载，吞吐约 21 tok/s，延迟随并发增加。native/oMLX 为 V128，Lithos 为 V130；两轮同机、同模型、19→32、AC，明确标注跨轮描述性比较。
+- [此前同轮 M4 完整吞吐—延迟前沿](../experiments/44-fresh-full-throughput-latency.md)：21 次独立加载、7 个配置，同轮 C1/C2/C4 本方点组成联合前沿，覆盖本轮 oMLX/Lithos 已测点。仅限 Qwen3.8-27B NVFP4 的 19→32 短负载。
 - [此前 M4 三家 C1 吞吐—延迟图](../experiments/43-fresh-c1-throughput-latency.md)：九次 fresh 加载的 C1 切面，独立保留，不与其他批次拼接。
 - [此前完整 M4 throughput–latency Pareto 图](2026-10-17-m4-pareto/README.md)：正确性为先决条件；联合前沿、各家前沿与被支配配置均标明。
 - [M4此前完整三家对照的延迟—吞吐图](2026-10-17-native15/README.md)：旧轮次重新核算真实HTTP完整请求时长，保留21个arm、22份聚合原件与全部白名单时钟；不是新候选跑分。

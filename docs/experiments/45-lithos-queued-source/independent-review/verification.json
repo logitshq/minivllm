@@ -1,0 +1,115 @@
+{
+  "status": "PASS_SAVED_EVIDENCE_REPLAY_WITH_SCOPE_LIMITS",
+  "performance": {
+    "fresh_arms": 9,
+    "groups": 54,
+    "HTTP_requests": 126,
+    "output_tokens": 4032,
+    "formal_groups": 27,
+    "formal_requests": 63,
+    "formal_tokens": 2016
+  },
+  "qualification": {
+    "groups": 4,
+    "HTTP_requests": 8,
+    "output_tokens": 256,
+    "OpenAI_requests": 1,
+    "Ollama_requests": 7
+  },
+  "resources": {
+    "counts": {
+      "performance_arm": 135,
+      "performance_campaign": 27,
+      "performance_release": 1,
+      "qualification_arm": 11,
+      "qualification_release": 1
+    },
+    "total": 175,
+    "power": "AC Power",
+    "thermal": 0,
+    "pressure": 1,
+    "Swapouts": 17554594,
+    "swap_used_mb": 1065.94,
+    "all_outside_HTTP_windows": true,
+    "continuous_monitoring_claim": false
+  },
+  "cooling": {
+    "fixed_gaps": 8,
+    "minimum_seconds": 60,
+    "outside_HTTP_windows": true
+  },
+  "participation": {
+    "Generation_records": 134,
+    "performance_cached0_prefixNone": 126,
+    "qualification_cached0_prefixNone": 8,
+    "preimport_files_checked_each": 196,
+    "source_pins_count": 218,
+    "source_pins_sha256": "ee894ddd3a116089f4372cd1c8d2c2b2c23d02cad78a5812c6b350252e026679",
+    "source_full_tree_reaudit": false
+  },
+  "config_medians": {
+    "1": {
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318
+    },
+    "2": {
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357
+    },
+    "4": {
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997
+    }
+  },
+  "releases": [
+    {
+      "kind": "performance",
+      "sha256": "e889f12091588f30abd8b3d729883375208722e3febc56d7746fc92452f02a47",
+      "pids": [
+        68547,
+        68548,
+        68575,
+        68854,
+        69067,
+        69318,
+        69538,
+        69773,
+        69995,
+        70303,
+        70525
+      ],
+      "ports": [
+        53926,
+        53970,
+        54004,
+        54059,
+        54109,
+        54166,
+        54203,
+        54556,
+        54607
+      ],
+      "reuse_saved_root_live_proof": true
+    },
+    {
+      "kind": "qualification",
+      "sha256": "edb43e2a7b87e73d8c9beb199cb8986c7161baa7e3e5eaf8ff0fb0943455a391",
+      "pids": [
+        68270,
+        68271,
+        68282
+      ],
+      "ports": [
+        53847
+      ],
+      "reuse_saved_root_live_proof": true
+    }
+  ],
+  "limits": [
+    "Visible re-tokenized IDs and usage are checked; no internal raw token IDs.",
+    "Pre-POST t0 is not wire arrival; queue wait included, exact queue duration unknown; no GPU batching claim.",
+    "AC snapshots do not prove no transient between samples.",
+    "Separate V128/V130 campaigns are descriptive comparison, not paired gain.",
+    "Per-arm no_new_performance_point=true is inherited qualification metadata; actual formal group clocks are verified."
+  ]
+}

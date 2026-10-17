@@ -1,0 +1,709 @@
+{
+  "scope": "Descriptive comparison of two separate AC campaigns: V128 native/oMLX six configurations + V130 official Ollama Lithos three. Not a new paired three-engine27-load campaign. Old V128 LithosChatC1 excluded.",
+  "hardware_workload": "Apple M4 Max40GPU/48GiB; Qwen3.8-27B NVFP4;19 input→32greedy output",
+  "metric_definitions": {
+    "latency": "1000*median_3fresh(median_3formal_groups(median_requests(DONE-POST)))",
+    "throughput": "median_3fresh(median_3formal_groups(sum_completion_tokens/(last_DONE-earliest_POST)))"
+  },
+  "arms": [
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block1-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1225.1395829953253,
+      "throughput_tok_s": 26.11947278836888,
+      "aux_interactivity_tok_s": 29.10153814010473,
+      "aux_ttft_ms": 159.59320901311003,
+      "static_native_profile": "direct_c1",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block1-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1270.64450000762,
+      "throughput_tok_s": 25.184069973787395,
+      "aux_interactivity_tok_s": 29.336640584097353,
+      "aux_ttft_ms": 214.84920801594853,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block2-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "aux_interactivity_tok_s": 29.27190272103201,
+      "aux_ttft_ms": 214.4730419968255,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block2-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1226.7349169997033,
+      "throughput_tok_s": 26.08550515401017,
+      "aux_interactivity_tok_s": 29.05961219215834,
+      "aux_ttft_ms": 159.64575001271442,
+      "static_native_profile": "direct_c1",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block3-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "aux_interactivity_tok_s": 29.073370724182585,
+      "aux_ttft_ms": 159.78033299325034,
+      "static_native_profile": "direct_c1",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block3-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1274.8399169940967,
+      "throughput_tok_s": 25.10119080319649,
+      "aux_interactivity_tok_s": 29.258069623577754,
+      "aux_ttft_ms": 215.3031670022756,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair1-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "aux_interactivity_tok_s": 26.49017760633071,
+      "aux_ttft_ms": 300.51752099825535,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_ms": 1563.9626880001742,
+      "throughput_tok_s": 40.325468519603966,
+      "aux_interactivity_tok_s": 27.53768548188051,
+      "aux_ttft_ms": 437.5054789998103,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "aux_interactivity_tok_s": 27.444266059287973,
+      "aux_ttft_ms": 437.84145850804634,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair2-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_ms": 1474.7431665018667,
+      "throughput_tok_s": 43.390364930199155,
+      "aux_interactivity_tok_s": 26.47358800826533,
+      "aux_ttft_ms": 302.87772849260364,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair3-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_ms": 1469.3178745219484,
+      "throughput_tok_s": 43.5504961716812,
+      "aux_interactivity_tok_s": 26.530494064726113,
+      "aux_ttft_ms": 300.8123954932671,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_ms": 1573.2442084990907,
+      "throughput_tok_s": 40.07718929282176,
+      "aux_interactivity_tok_s": 27.401455400766324,
+      "aux_ttft_ms": 438.88139601040166,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair1-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_ms": 2069.811541499803,
+      "throughput_tok_s": 61.185567161005935,
+      "aux_interactivity_tok_s": 19.646587231102625,
+      "aux_ttft_ms": 571.7172704898985,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_ms": 2291.8524380074814,
+      "throughput_tok_s": 54.7451733282908,
+      "aux_interactivity_tok_s": 20.741168223286365,
+      "aux_ttft_ms": 791.1226665164577,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "aux_interactivity_tok_s": 20.670999691506097,
+      "aux_ttft_ms": 796.5071664948482,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair2-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_ms": 1986.3544374966295,
+      "throughput_tok_s": 63.37899542713181,
+      "aux_interactivity_tok_s": 19.70336209749585,
+      "aux_ttft_ms": 505.77799999155104,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair3-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.60924705924159,
+      "aux_interactivity_tok_s": 20.88492460949272,
+      "aux_ttft_ms": 504.7272709925892,
+      "static_native_profile": "legacy_batched",
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_ms": 2310.1315414969577,
+      "throughput_tok_s": 54.285159526429986,
+      "aux_interactivity_tok_s": 20.661262342457192,
+      "aux_ttft_ms": 792.521333496552,
+      "static_native_profile": null,
+      "campaign": "V128",
+      "wire": "SSE",
+      "source_plot_data_sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920"
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V130-block1-C1",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1511.1249999899883,
+      "throughput_tok_s": 21.176275953486318,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C2",
+      "arm": "V130-block1-C2",
+      "engine": "lithos",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_ms": 2326.1144584976137,
+      "throughput_tok_s": 20.75437898024357,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C4",
+      "arm": "V130-block1-C4",
+      "engine": "lithos",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_ms": 3713.353520492092,
+      "throughput_tok_s": 21.48744276261209,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C2",
+      "arm": "V130-block2-C2",
+      "engine": "lithos",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_ms": 2251.56358302047,
+      "throughput_tok_s": 21.33804845154775,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C4",
+      "arm": "V130-block2-C4",
+      "engine": "lithos",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_ms": 3801.7626460059546,
+      "throughput_tok_s": 20.963392348546392,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V130-block2-C1",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1513.7338339991402,
+      "throughput_tok_s": 21.13977984852136,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C4",
+      "arm": "V130-block3-C4",
+      "engine": "lithos",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_ms": 3797.9672709916485,
+      "throughput_tok_s": 21.10082481118997,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V130-block3-C1",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1489.0947499952745,
+      "throughput_tok_s": 21.48956606025342,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C2",
+      "arm": "V130-block3-C2",
+      "engine": "lithos",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_ms": 2341.6946459910832,
+      "throughput_tok_s": 20.47889659704138,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "static_native_profile": null
+    }
+  ],
+  "configurations": [
+    {
+      "config": "native:C1",
+      "engine": "native",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "static_native_profile": "direct_c1",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "native:C2",
+      "engine": "native",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "static_native_profile": "legacy_batched",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "native:C4",
+      "engine": "native",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.37899542713181,
+      "static_native_profile": "legacy_batched",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "omlx:C1",
+      "engine": "omlx",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "omlx:C2",
+      "engine": "omlx",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C2"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "omlx:C4",
+      "engine": "omlx",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C4"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "campaign": "V128",
+      "wire": "SSE"
+    },
+    {
+      "config": "lithos:C1",
+      "engine": "lithos",
+      "concurrency": 1,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "fresh_arms": 3,
+      "latency_ms": 1511.1249999899883,
+      "throughput_tok_s": 21.176275953486318,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1",
+        "native:C2",
+        "omlx:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "lithos:C2",
+      "engine": "lithos",
+      "concurrency": 2,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "fresh_arms": 3,
+      "latency_ms": 2326.1144584976137,
+      "throughput_tok_s": 20.75437898024357,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1",
+        "native:C2",
+        "native:C4",
+        "omlx:C1",
+        "omlx:C2",
+        "omlx:C4",
+        "lithos:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": false
+    },
+    {
+      "config": "lithos:C4",
+      "engine": "lithos",
+      "concurrency": 4,
+      "campaign": "V130",
+      "wire": "Ollama NDJSON",
+      "fresh_arms": 3,
+      "latency_ms": 3797.9672709916485,
+      "throughput_tok_s": 21.10082481118997,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1",
+        "native:C2",
+        "native:C4",
+        "omlx:C1",
+        "omlx:C2",
+        "omlx:C4",
+        "lithos:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": false
+    }
+  ],
+  "joint_frontier_descriptive": [
+    "native:C1",
+    "native:C2",
+    "native:C4"
+  ],
+  "independent_campaigns": [
+    "V128",
+    "V130"
+  ],
+  "cross_campaign_signed_pairs_or_speedup_claim": false,
+  "connections": "Dashed lines connect observed C1/C2/C4 for each engine; black joins observed descriptive non-dominated points. Neither establishes interpolated feasibility.",
+  "uncertainty": "27 small fresh-arm marks are observations, not confidence intervals; no statistical significance claim.",
+  "sources": [
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/chapter18-gdn-projection-packing-worktree/docs/experiments/44-fresh-full-source/plot-data.json",
+      "repository_path": "docs/experiments/44-fresh-full-source/plot-data.json",
+      "sha256": "c5a5822d4a4b20a4cb9c66c59d64329e6356d59210e0a4b7708d8134bd908920",
+      "scope": "V128 six native/oMLX configurations and their18 fresh arms; old LithosChatC1 excluded"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/suite-complete.json",
+      "sha256": "31ee70f078a70b13db44dfd9de7433b0b764d43a97d1e366e4bf9e459da4874d",
+      "scope": "V130 nine Ollama fresh arms; formal group clocks independently recomputed below"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C1/C1-measure-0.json",
+      "sha256": "baed0a0a1240557e1a8f05f5358cc34d4e18fc21a29cc0aac736f40a3636260f",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C1/C1-measure-1.json",
+      "sha256": "e7c012a726c48949bae7a6f764135a20c8e1db20d69a35d3e63ffcacd1c01cc2",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C1/C1-measure-2.json",
+      "sha256": "836f9460914922303d26072872e754cbceeaf9595bbc4996ce8937cf9c6e528e",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C2/C2-measure-0.json",
+      "sha256": "1db41045f13070380a4b88204fc26c10ed1d896a02a1fdcbb4a1b4ba696a6096",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C2/C2-measure-1.json",
+      "sha256": "05c90c5a49fd62c3ce4f6bdc174ad2797be8c76cab9ae0cc86633847c5f24623",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C2/C2-measure-2.json",
+      "sha256": "d3c63b070c376a978335f8c59c50d3532949e9a3466649012594ee9ca4d9cb7d",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C4/C4-measure-0.json",
+      "sha256": "e893374a969b963e4a94169fb557719d1b6b99b0554b6312802ebd894b1ebec8",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C4/C4-measure-1.json",
+      "sha256": "8a00716a7697604c22353090055234cca9c50f695be264f4965a11c108d6efe3",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block1-C4/C4-measure-2.json",
+      "sha256": "c6e2284669723efa1f0df4222e275098991137c7df12d5850749abbadbccd6ae",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C2/C2-measure-0.json",
+      "sha256": "839acca0a5d4924e55ad5c46024ac87b94715e0e57170ec62f26fa3abdb39c19",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C2/C2-measure-1.json",
+      "sha256": "2bd2db1bca2ab5b05a19df9eed1612c02fbedd78b49e888a3068302fbd2f36fe",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C2/C2-measure-2.json",
+      "sha256": "9bcc9b7575c66ebab862989f4766ae00d797eeff5ebbde6177db24d4178ff43a",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C4/C4-measure-0.json",
+      "sha256": "2262021cb5903ba8e041f9a1a70c3b1ad53d8938f59d8e05c94c41bcb7523e94",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C4/C4-measure-1.json",
+      "sha256": "54093370f4176b7cbe537cd1bf5ac1890ec0514021c93758ffbcefa186d722c6",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C4/C4-measure-2.json",
+      "sha256": "14a5301e44a26283a9252f62899a6f7addb40f3944f9b94f958de9846a7221a8",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C1/C1-measure-0.json",
+      "sha256": "d42cc5abecb5a62f21db4aeefb2908ea0b2873a0324ed67dd73b1a23efc29fae",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C1/C1-measure-1.json",
+      "sha256": "5f155c0126b09b93b8d01210d06d6888f7cbd16c80fe9c5ada6501f67ed4620c",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block2-C1/C1-measure-2.json",
+      "sha256": "aaf48218afd635a1eef20e5e83fc120d6323dfffdc22039bd0bc1f1866d97eac",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C4/C4-measure-0.json",
+      "sha256": "dc85ca6fd55a7dde9dafebe1cf201e5ae4ca6044e09cc6f99b377aad5e1a618f",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C4/C4-measure-1.json",
+      "sha256": "973719e69cc485d333ede8a6609ea21e6454a7e1125bf9bb99bfd295eab5fa90",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C4/C4-measure-2.json",
+      "sha256": "c5da5c73ff87249bb4aa02f9a725aa536a936ac2ba0f3ea5bf419b9670d1786c",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C1/C1-measure-0.json",
+      "sha256": "e4626de13978a3e495cf9537fa86774d0aea2960404429866800b8ad12b0ca15",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C1/C1-measure-1.json",
+      "sha256": "1fd1951b73ecd21bcf6648ac317644fcb1c725d6d4bde0fbce1356e37b6f9fa7",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C1/C1-measure-2.json",
+      "sha256": "ebba194b4348d5fdff1f9358c8ae31c92e9e92397547936140055f0c273777f8",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C2/C2-measure-0.json",
+      "sha256": "d9da88f5fdc82d8e17f4ca72b637c6f6f3870ee9d90c7e2504af566f98c89a5e",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C2/C2-measure-1.json",
+      "sha256": "f84bf8ff856e1499854f432433634c0e165cd22f4ec6ad86452d4418ab6442d1",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130perf-attempt1/driver-output/V130-block3-C2/C2-measure-2.json",
+      "sha256": "bae545bf837b4b43ce35ffb8a4eeeafcdf3a01fcc5d5730b49cd0e01ba3cfb8f",
+      "scope": "V130 formal group raw clocks; no launch/environment/auth payload copied"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v45-lithos-queued-publication-build1/45-lithos-queued-source/lithos-perf-data.json",
+      "repository_path": "docs/experiments/45-lithos-queued-source/lithos-perf-data.json",
+      "sha256": "d74a7de6150492d9ae06e0442bc439959e303424b413be6d25a05b0cdb4254a6",
+      "scope": "safe V1309arm3median rows; independently agrees with original formal group clocks"
+    }
+  ],
+  "old44_unchanged": true
+}

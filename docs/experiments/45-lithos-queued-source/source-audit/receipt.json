@@ -1,0 +1,52 @@
+{
+  "status": "PASS_CPU_SOURCE_AUDIT_PINNED_OFFICIAL_OLLAMA_FIFO_ENTRY_AVAILABLE",
+  "pinned_commit": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+  "installed_registry_files_verified": 196,
+  "critical_installed_vs_checkout_files_equal": 8,
+  "conclusion": "Measure freshC1/C2/C4 client concurrency via official POST /api/chat; singleGPU generation serialized FIFO; no server patch/new version needed",
+  "not_observed": [
+    "newOllama actualGPU generation correctness32",
+    "newC2/C4 performance or memory peak",
+    "independent multi-Session GPU/thread safety",
+    "true batch2/4 model generation"
+  ],
+  "CPU_proof": {
+    "status": "PASS_CPU_PINNED_PROTOCOL_TEMPLATE19_FIFO4_NDJSON",
+    "template_inputs_equal": true,
+    "prompt_ids_equal_saved_workload": true,
+    "prompt_tokens": 19,
+    "token_limit": 32,
+    "sampling_equal_greedy": true,
+    "FIFO_ticket_order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "busy_nonblocking_rejected_with_holder_or_waiters": true,
+    "NDJSON_done_counts": {
+      "prompt_eval_count": 19,
+      "eval_count": 32,
+      "done_reason": "length"
+    },
+    "GPU_or_model_generation_executed": false,
+    "MLX_imported": false,
+    "actual_Ollama_output32_or_cache0_qualified": false,
+    "source_inference_only_on_generation_numerics": true
+  },
+  "reproduce": [
+    "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/bin/python -B /private/tmp/minivllm-engine-optimization-20261014/v130-lithos-concurrency-source-audit-build1/check_cpu.py"
+  ],
+  "source_map_sha256": "4324115f6bd5dfaea2a48c62f19c7e872c9bf1c04cd6bc9e83e9d5fd0e1a6101",
+  "launch_plan_sha256": "41cc32f58220699c818b0edab1c284432e8928f15f0fe74dbb9afd2e1753724c",
+  "GPU_services_or_live_probes_started": false,
+  "frozen_W_Git_or_prior_results_modified": false,
+  "artifacts": {
+    "REVIEW.md": "684ef0141a95a92cb06b267d60f1b6a5d78cde096ea12fcc54a333c87ff24cf1",
+    "check_cpu.py": "174842ffd0895bb204143d0d79441da9d952dd7b80c06b86c0a4ac4933cc216d",
+    "cpu-result.json": "1b81cb56d0fc62823c0b8cce5b0f3c948ba92212ae1856331ae928fdc03153a2",
+    "launch-plan.json": "41cc32f58220699c818b0edab1c284432e8928f15f0fe74dbb9afd2e1753724c",
+    "request-template.json": "d353187af6c2c62dfca9e6223845a6fd488cbd935535b20dcc821c9716dd1d4b",
+    "source-map.json": "4324115f6bd5dfaea2a48c62f19c7e872c9bf1c04cd6bc9e83e9d5fd0e1a6101"
+  }
+}

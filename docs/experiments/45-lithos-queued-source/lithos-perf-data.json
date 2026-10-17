@@ -1,0 +1,101 @@
+{
+  "scope": "one separate fresh V130 official Ollama queued-load slice, not paired/pool with old V128",
+  "fixed_power": "AC",
+  "arms": [
+    {
+      "label": "V130-block1-C1",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318
+    },
+    {
+      "label": "V130-block1-C2",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357
+    },
+    {
+      "label": "V130-block1-C4",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_p50_ms": 3713.353520492092,
+      "total_throughput_tok_s": 21.48744276261209
+    },
+    {
+      "label": "V130-block2-C2",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_p50_ms": 2251.56358302047,
+      "total_throughput_tok_s": 21.33804845154775
+    },
+    {
+      "label": "V130-block2-C4",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_p50_ms": 3801.7626460059546,
+      "total_throughput_tok_s": 20.963392348546392
+    },
+    {
+      "label": "V130-block2-C1",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_p50_ms": 1513.7338339991402,
+      "total_throughput_tok_s": 21.13977984852136
+    },
+    {
+      "label": "V130-block3-C4",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997
+    },
+    {
+      "label": "V130-block3-C1",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_p50_ms": 1489.0947499952745,
+      "total_throughput_tok_s": 21.48956606025342
+    },
+    {
+      "label": "V130-block3-C2",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_p50_ms": 2341.6946459910832,
+      "total_throughput_tok_s": 20.47889659704138
+    }
+  ],
+  "configurations": [
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318
+    },
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357
+    },
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997
+    }
+  ],
+  "formal_requests": 63,
+  "formal_tokens": 2016,
+  "qualification_or_warm_ranked": false,
+  "GPU_batch_claim": false,
+  "HTTP_arrival_fairness_claim": false,
+  "cross_campaign_pooled": false
+}
