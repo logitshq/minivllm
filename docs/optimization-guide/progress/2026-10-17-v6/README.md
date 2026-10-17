@@ -14,3 +14,5 @@ Each point has eight warm requests and 64 measured requests in one fresh server 
 Correctness scope: independent full-logit/state replay of representative C1/C8 recorded HTTP histories, plus raw fixture/UUID/text/EOS/count checks on every new measured request. It is not a replay of every formal schedule. The independent cycle audit also checks source/runtime/model receipts, observed resources, child reaping and service restoration.
 
 Source audit SHA256: `b669350e95ef07f4da5cac3a5cf6fb6fdaf2aea57e886d3ba60b9afd15e950bd`. See [audit](independent-audit.json), [data](chartdata.json), [render source](render.py), [PNG](native-D512-throughput-latency.png), [SVG](native-D512-throughput-latency.svg).
+
+Subsequent E024 long decode graph qualification failed exact logits at its first point. It contributes no chart point; the two native baseline observations above remain unchanged. See the [retained failed experiment](../../../experiments/m5-ultra-256gb/E024-long-decode-cold-v1/README.md).

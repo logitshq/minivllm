@@ -1,0 +1,258 @@
+{
+  "schema": "E024-first-matrix-failure-audit-v1",
+  "status": "PASS",
+  "candidate_qualified": false,
+  "numerical_qualified": false,
+  "performance_qualified": false,
+  "conclusion": "REJECT exact graph substitution at the first registered point; native eager is not declared erroneous.",
+  "audit_source": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-analysis/audit-first-failure.py",
+    "sha256": "6e7f2a566b10fb94f64ebc4ae0b72a7f8e9bf35eb55c0e690dbd470a720a2a0a",
+    "bytes": 10549
+  },
+  "parser_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/audit_failure_v2.py",
+    "sha256": "994c3f1a138b8246f3b858403a56a8c11751da98377d3e54ef1c40a4cce08223",
+    "bytes": 20196
+  },
+  "qualifier_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py",
+    "sha256": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "bytes": 24275
+  },
+  "candidate_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py",
+    "sha256": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "bytes": 7077
+  },
+  "comparator_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py",
+    "sha256": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "bytes": 32756
+  },
+  "raw_inputs": {
+    "complete.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/complete.json",
+      "sha256": "bb5cda8aaa0f3cf0a287e7345ecfa706e2c0970d43802c56b3a501b48d4c9de1",
+      "bytes": 5119
+    },
+    "diagnostic-inputs.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/diagnostic-inputs.json",
+      "sha256": "ba0dfecfcda5ae92114e3950bccc296ff1ccaebdfab01753251298cd051840dc",
+      "bytes": 220202
+    },
+    "events.jsonl": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/events.jsonl",
+      "sha256": "5c7b552516e7d39961d7f97599968999b37cf48334cf2cb85936818137df7c29",
+      "bytes": 478254
+    },
+    "failure-arrays.safetensors": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/failure-arrays.safetensors",
+      "sha256": "9c7070379c6a3f1cf85d9feffc9aba88c48ef76a5ed347b5fdbab499bf65d320",
+      "bytes": 993462
+    },
+    "failure.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/failure.json",
+      "sha256": "854fa16f671ac900a3473a52fbde00fc60820530ca02eb7f290fd8446721262c",
+      "bytes": 398
+    },
+    "inherited-plan.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/inherited-plan.json",
+      "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb",
+      "bytes": 22310
+    },
+    "plan.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-owner/phases/e024-diagnostic/qualification/plan.json",
+      "sha256": "5025d37768a5fa74d6e3e256a96ff8b8e4e92b31837183d5ffe031d9473e7123",
+      "bytes": 784
+    }
+  },
+  "tensor_pair": {
+    "shape": [
+      1,
+      248320
+    ],
+    "dtype": "BF16",
+    "finite": true,
+    "elements": 248320,
+    "reference": {
+      "shape": [
+        1,
+        248320
+      ],
+      "dtype": "BF16",
+      "bytes": 496640,
+      "sha256": "92c43e44ab17bcd84fdb7145ed5666d55275dacafbb2f6af312d63f00cb3b7e2",
+      "finite": true
+    },
+    "candidate": {
+      "shape": [
+        1,
+        248320
+      ],
+      "dtype": "BF16",
+      "bytes": 496640,
+      "sha256": "3d046514ac50c8b5fca32297560437312fe676198c5f4504c21ab3c203c39c06",
+      "finite": true
+    },
+    "differing_elements": 228516,
+    "differing_bytes": 238679,
+    "first_differing_byte_index": 2,
+    "first_difference": {
+      "element_index": 1,
+      "coordinates": [
+        0,
+        1
+      ],
+      "reference_word_hex": "403e",
+      "candidate_word_hex": "4037",
+      "xor_word_hex": "0009",
+      "different_bit_positions_lsb0": [
+        0,
+        3
+      ],
+      "reference_value": 2.96875,
+      "candidate_value": 2.859375,
+      "absolute_difference": 0.109375
+    },
+    "maximum_difference": {
+      "element_index": 1759,
+      "coordinates": [
+        0,
+        1759
+      ],
+      "reference_word_hex": "40a4",
+      "candidate_word_hex": "409b",
+      "xor_word_hex": "003f",
+      "different_bit_positions_lsb0": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reference_value": 5.125,
+      "candidate_value": 4.84375,
+      "absolute_difference": 0.28125
+    },
+    "mismatch_element_indices_sha256": "9e6b622bc145c847f3c702843c64a68fba52c078fd26b7d1add0902b21d26dd0"
+  },
+  "graph_witness": {
+    "event": "graph-call",
+    "phase": "matrix-B1-used257",
+    "batch": 1,
+    "used": 257,
+    "positions": [
+      256
+    ],
+    "lens": [
+      257
+    ],
+    "tokens": [
+      524
+    ],
+    "KV_backing_lengths": [
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ],
+      [
+        1536,
+        1536
+      ]
+    ],
+    "status": "SUBMITTED",
+    "invocation": 1,
+    "compiled_function_count": 1,
+    "actual_compile_objects": [
+      {
+        "key": "(1536, ((False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False), (False, False)))",
+        "type": "gc_func",
+        "id": 536972108048
+      }
+    ],
+    "elapsed_wall_s": 10.095488042017678
+  },
+  "graph_witness_scope": "Actual compiled callable invoked once; SUBMITTED is not a passing graph point. Saved compared output is materialized.",
+  "prefix": {
+    "recorded_weight_array_checks": 1349,
+    "prefill_requests": 8,
+    "prefill_tokens_each": 256,
+    "prefill_array_checks": 1032,
+    "total_recorded_pass_array_checks": 2381,
+    "note": "Earlier successful tensors were not saved; flags, names/shapes/dtypes and complete128cache coverage audited, not independently recomputed."
+  },
+  "coverage": {
+    "matrix_points_passed": 0,
+    "matrix_points_registered": 32,
+    "parameter_decode_calls_executed": 0,
+    "parameter_decode_calls_registered": 21,
+    "parameter_replacements_passed": 0,
+    "lifecycle_started": false,
+    "all_cache_after_failed_graph_checked": false,
+    "source_model_postrecheck_executed": false,
+    "full_D512_HTTP_qualified": false
+  },
+  "limits": [
+    "Failure precedes logits argmax and post-graph cache comparison. No layer-level numerical root cause is established.",
+    "No final model/source recheck happened in failed child; current small source SHA verification does not replace it.",
+    "No performance measurement, owner/resource/restoration qualification, or GPU execution is performed by this audit."
+  ]
+}

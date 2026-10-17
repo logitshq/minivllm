@@ -705,3 +705,25 @@ asPID 98702 with fresh MTP/resident PLE evidence; warm KV/exact hidden state are
 restored. Both actual experiment children were strictly reaped.
 
 [Complete 935-member evidence](../experiments/m5-ultra-256gb/E023-native-formal-v1/README.md) · [New D512 chart](progress/2026-10-17-v6/README.md).
+
+
+## E024 long decode graph rejected at its first point (2026-10-17)
+
+The unchanged candidate failed exact BF16 full-vocabulary logits at B1/used257:
+228,516/248,320 finite elements differ, maximum absolute difference 0.28125.
+Independent raw safetensors audit and root rerun agree. Zero of 32 matrix points
+passed; later argmax/cache/parameter/lifecycle and final source/model rechecks
+were not reached. No speed or Pareto point is awarded; no tolerance was relaxed.
+
+The original service recovered as PID 832 with fresh MTP/resident PLE evidence;
+independent recovery audit PASS. Five resource samples had pressure 1, zero swap
+growth and zero Swapouts/Swapins/Pageouts. Warm KV/exact hidden state are not restored.
+
+The first-principles lesson is to isolate tensor shape from compilation. E024
+changed attention length from 257 to 1536 as well as compiling the forward pass.
+Matching MLX 0.32.3 source predicts different SDPA reduction paths on g17d across
+K=1024. This is a hypothesis about the failure, not a measured cause. The next
+separate diagnostic compares eager/compiled at each length from identical state.
+Original evidence and the default-OFF candidate remain frozen.
+
+[Complete 637-member failed-attempt evidence](../experiments/m5-ultra-256gb/E024-long-decode-cold-v1/README.md).

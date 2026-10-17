@@ -1,0 +1,56 @@
+{
+  "schema": "cold-service-restoration-audit-v1",
+  "status": "PASS",
+  "qualified": true,
+  "performance_qualified": false,
+  "numerical_qualified": false,
+  "ledger_opened": false,
+  "scope": "Independent raw restoration evidence and fixed E024-cold-owner reap protocol only; no numerical or performance qualification, no current live observation.",
+  "audit_source_sha256": "9039af520fc095982d85d07cf1712010cec62f672786dc2b04f871db08891ee3",
+  "frozen_v4_audit_source_sha256": "af46699fcea1065c4fcf69a85225a916987fba484098d53ef2acb905eb4ae3a8",
+  "journal_sha256": "ee68e6e9d2e0362064a4c35a8314cee87ac052ff1a1c0e1d8fdf07ea5c84ed39",
+  "owner_plan_sha256": "8e508928672abddec6a2c06680635dd26e1c8fb1a8456a3b092628cd4e800f2d",
+  "service_restore": {
+    "status": "PERSISTED_VISIBLE_RECEIPTS_CONSISTENT",
+    "physical_samples": 19,
+    "max_recorded_system_footprint_bytes": 176108027904,
+    "raw_log_bytes": 11299,
+    "raw_log_sha256": "9cd607c346aa59e8ce925e1cd2c6bd4c4de200e25be59512e855a43610ef26d5",
+    "replacement": {
+      "pid": 832,
+      "ppid": 1,
+      "start": "Sat Oct 17 09:20:39 2026",
+      "comm": "omlx-server"
+    },
+    "http_worker_returncode": 0,
+    "exact_runtime_signature_restored": false,
+    "warm_kv_restored": false,
+    "scope": "Raw physical/log checks independent; final HTTP status and PID/job/listener observations exist only as pinned-controller receipts."
+  },
+  "owner_reap": {
+    "status": "ALL_OBSERVED_CHILDREN_REAPED",
+    "owner_status": "FAIL",
+    "owner_pid": 665,
+    "children": [
+      {
+        "phase": "e024-diagnostic",
+        "pid": 700
+      }
+    ],
+    "scope": "Phase intents/releases and retained child ps bytes checked; owner absence at restoration is a pinned-controller receipt."
+  },
+  "controller_sha256": "6f61d28450d9c44401c2e5a4e6f8945ce82ec9430f56456476c7eda0cd4cd578",
+  "raw_auditor_sha256": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/cold_owner.py": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/test_cold_owner_cpu.py": "962ec5981a1af5db34e56358f4eecbe3ea5dc0202f14082cd0e12eead479ea7c"
+  },
+  "weight_shards_rehashed": false,
+  "adapter_scope": "Frozen raw audit identity predicate uses current original PID; no source-path spoof or evidence rewriting."
+}
