@@ -844,3 +844,22 @@ exchange exact mechanisms, code availability and concrete next experiments via
 this Git handoff. No claim of whole-frontier dominance or maximum concurrency:
 old cap32 reaches C64, while the new cap512 qualification/timing currently
 reaches C8 only. Native cap512 still has one fresh process per C.
+
+### Live formal-cycle handoff, 2026-10-17 15:19 PDT
+
+Registration3078d7b was pushed before stop at15:02:43 PDT. Six-process Lithos
+formal cycle is now actually running; first r1-c1 closed with eight warm and64
+formal requests, per-trial count/log/cleanup checks PASS. r1-c8 is now in formal
+requests. These are producer checks only; full-cycle resource/restoration audit
+has not run and no new Pareto point is published yet. Root owns the GPU and
+service recovery. Do not launch another GPU experiment on this machine.
+
+During timing, CPU agents prepared the next default-OFF single-instance decoder
+adapter plus the same37-request state/ahead qualification and a42-call idle
+changed-parameter diagnostic. These new files remain untested and unregistered;
+no HTTP gain is claimed. The matching serving setting is gates ON/norm OFF.
+The new [research follow-up](../optimization-guide/research/2026-10-17-graph-state-followup.md)
+records MLX compile semantics, PR4556 exception cleanup, and MTPLX issue544;
+no new directly applicable October paper was verified. Our runner already
+submits current/ahead state, so the external event-retention issue does not
+establish a local leak or justify adding a synchronization fence.
