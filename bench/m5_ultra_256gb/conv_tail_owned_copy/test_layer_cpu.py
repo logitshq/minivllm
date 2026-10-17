@@ -4,7 +4,9 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
+import signal
 import struct
 import subprocess
 import sys
@@ -14,6 +16,10 @@ import unittest
 from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
+# Exact saved v1 footprint-002.raw.json, embedded so CPU tests do not depend on
+# ignored experiment directories. This is source data, not a reconstructed mock.
+SAVED_FOOTPRINT = b'{"unit":"byte","bytes per unit":1,"start_time":{"mach_absolute_time_ns":113859773479833,"mach_continuous_time_ns":113859773479833,"wall_time_s":813929339.914852,"date":"2026-10-17T04:28:59.915-07:00"},"processes":[{"name":"python","pid":39604,"translated":false,"page size":16384,"footprint":65389240,"auxiliary":{"phys_footprint_peak":65323704,"phys_footprint":65323704}}],"errors":[],"warnings":[],"summary":{"total":{"dirty":65389240,"swapped":0,"clean":12861440,"reclaimable":0,"wired":590520,"regions":2949}},"total footprint":65389240,"shared":[],"end_time":{"mach_absolute_time_ns":113859780958583,"mach_continuous_time_ns":113859780958583,"wall_time_s":813929339.922330,"date":"2026-10-17T04:28:59.922-07:00"},"page size":16384}'
+SAVED_FOOTPRINT_SHA = '6f730b9674ba1363082dd49bef2a24362620268f3353ebddcd8df6501e214ea7'
 
 
 def load(name, path):
@@ -173,6 +179,9 @@ raise SystemExit(m.main(sys.argv[2:]))
 class LayerScreenReview(unittest.TestCase):
     def test_contract_and_default_cli_no_runtime_or_files(self):
         contract=s.contract('on-lazy')
+        self.assertEqual(contract['schema'],'E026-real-weight-layer-v2')
+        self.assertEqual(contract['physical_reading_semantics'],
+            'separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current')
         self.assertEqual(contract['case_ids'],[f'T{t}-{kind}' for t in (1,19,935,978) for kind in ('fresh','continuing')])
         self.assertEqual(contract['phase_count'],4+8*len(contract['case_phases']))
         self.assertEqual(contract['continuing_offset'],7)
@@ -208,10 +217,61 @@ raise SystemExit(m.main(sys.argv[2:]))
             if bad=='errors':item['errors']=['failure']
             if bad=='peak':item['processes'][0]['auxiliary']['phys_footprint_peak']=(1<<31)+1
             if bad=='negative':item['processes'][0]['auxiliary']['phys_footprint_peak']=-1
-            if bad=='inconsistent':item['processes'][0]['auxiliary']['phys_footprint']=101
+            if bad=='inconsistent':item['processes'][0]['auxiliary']['phys_footprint_peak']=99
             with self.assertRaises(ValueError,msg=bad):s.parse_footprint(item,123)
         item=copy.deepcopy(raw);item['processes'][0]['pid']=True
         with self.assertRaises(ValueError):s.parse_footprint(item,1)
+
+    def test_saved_footprint_separate_bounds_and_derived_values(self):
+        self.assertEqual(hashlib.sha256(SAVED_FOOTPRINT).hexdigest(),SAVED_FOOTPRINT_SHA)
+        raw=json.loads(SAVED_FOOTPRINT); before=copy.deepcopy(raw)
+        self.assertEqual(s.parse_footprint(raw,39604),(65389240,65389240))
+        self.assertEqual(raw,before)
+        # Each raw measurement is bounded independently; disagreement is legal.
+        for field in ('footprint','phys_footprint','phys_footprint_peak'):
+            for invalid in (True,-1,(2<<30)+1):
+                item=copy.deepcopy(raw); process=item['processes'][0]
+                target=process if field=='footprint' else process['auxiliary']
+                target[field]=invalid
+                with self.subTest(field=field,invalid=invalid):
+                    with self.assertRaises(ValueError):s.parse_footprint(item,39604)
+        for top,current,peak,expected in (
+            (90,100,110,(100,110)), (2<<30,100,110,(2<<30,2<<30)),
+            (0,2<<30,2<<30,(2<<30,2<<30)), (0,0,0,(0,0))):
+            item=copy.deepcopy(raw); process=item['processes'][0]
+            process['footprint']=top
+            process['auxiliary'].update(phys_footprint=current,phys_footprint_peak=peak)
+            self.assertEqual(s.parse_footprint(item,39604),expected)
+
+    def test_phase_keeps_all_raw_physical_readings(self):
+        raw=json.loads(SAVED_FOOTPRINT);raw['processes'][0]['pid']=os.getpid()
+        encoded=json.dumps(raw).encode()
+        mx=NS(get_active_memory=lambda:0,get_peak_memory=lambda:0,
+              get_cache_memory=lambda:0,get_array_buffer_size=lambda *args:0)
+        with tempfile.TemporaryDirectory() as tmp:
+            out=Path(tmp);result={'physical_receipts':[]}
+            def probe(command,**kwargs):
+                Path(command[-1]).write_bytes(encoded)
+                return NS(returncode=0,stdout='',stderr='')
+            with patch.object(s.subprocess,'run',side_effect=probe):
+                row=s.Ledger(out,result,mx,0).phase('after_layer_release',{})
+            self.assertEqual(row['physical_top_bytes'],65389240)
+            self.assertEqual(row['physical_aux_current_bytes'],65323704)
+            self.assertEqual(row['physical_aux_peak_bytes'],65323704)
+            self.assertEqual(row['physical_current_bytes'],65389240)
+            self.assertEqual(row['physical_peak_bytes'],65389240)
+            self.assertEqual((out/'physical-000.raw.json').read_bytes(),encoded)
+            self.assertEqual(result['physical_receipts'][0]['sha256'],s.digest(encoded))
+            self.assertEqual(json.loads((out/'phases.jsonl').read_text()),row)
+
+    def test_alarm_and_owner_cancellation_have_distinct_failures(self):
+        with self.assertRaisesRegex(TimeoutError,'120s child SIGALRM deadline'):
+            s.stop_signal(signal.SIGALRM)
+        for signum in (signal.SIGTERM,signal.SIGINT):
+            with self.assertRaises(InterruptedError) as caught:s.stop_signal(signum)
+            self.assertIn(signal.Signals(signum).name,str(caught.exception))
+            self.assertNotIn('120s',str(caught.exception))
+            self.assertNotIsInstance(caught.exception,TimeoutError)
 
     def test_memory_observation_budget_not_tiny_budget(self):
         row=dict(active_bytes=(1<<30)-1,cache_bytes=1,peak_bytes=1<<30,unique_buffer_bytes=100)

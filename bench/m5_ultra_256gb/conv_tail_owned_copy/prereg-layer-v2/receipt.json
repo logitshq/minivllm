@@ -1,0 +1,21 @@
+{
+  "status": "CPU_PREPARED_NOT_DEVICE_QUALIFIED",
+  "plan_sha256": "313384a618fe1ddf4724ff2fafb8c5e07fbd6f923bb04fe5f5654fd4caf2eef2",
+  "jobs_sha256": "8edf0ecaf837cbd501b04edb0ef3850e10a4252ffc7101f45e0888e051ab64ed",
+  "execution_pin_count": 608,
+  "source_sha256": {
+    "layer_weights.py": "8ee0ebd9df9385ec35baf6d0a0ae80bf780cf80a5e255b34d6fe2fed560df77a",
+    "layer_screen.py": "a0423d0648b19236f972598ce5acb5e8e9cdd617fadb2646f1c7fef01d9ec302",
+    "layer_owner.py": "99aa100d715a6bd4075d50d1d61394fde9cce7c57aac0f0f8f7744a3a54a3195",
+    "test_layer_cpu.py": "a7be247ab7d518b61730c4e2ae642e93800ab5a6ccb455661bf10cb884521aad",
+    "test_layer_owner_cpu.py": "763257648890dc85143dca391865a9018c481dc047fc923274730c44a22661bb",
+    "audit_layer.py": "8796ad0296860763fdf0a2ca3c23dcd92d61aceb25aae1d04b4fbc123785d96f",
+    "integration.py": "906dcfece0ce249d3fc06e968ec552d0ae20b665086e5812c54453fa47780ad1"
+  },
+  "root_cpu_tests": 32,
+  "cpu_prepare": "owner.prepare with all real frozen source/runtime/bundle pins; no runtime imports or device run",
+  "root_auditor_selftest": "PASS stdlib mechanisms and 47 corruption rejections; synthetic fixtures only, no device run",
+  "runtime_scope": "Python executable, MLX/package files, NumPy sources/binaries/metadata and pyvenv config pinned; OS frameworks and Python standard library not separately packaged",
+  "numerical_scope": "real layer-0 weights and deterministic synthetic inputs only; no full-model or HTTP performance qualification",
+  "service": "authorized temporary SIGSTOP/SIGCONT of original PID74384 via existing outer lease; no cold restart"
+}

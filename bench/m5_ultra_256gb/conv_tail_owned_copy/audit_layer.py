@@ -44,15 +44,16 @@ SUPPORT_PINS = {
     'integration.py': '906dcfece0ce249d3fc06e968ec552d0ae20b665086e5812c54453fa47780ad1',
     'candidate.py': '4d9658d34734e3c252375c4b76fcb2eccf83555121d7eb51d7f3e81eb2c48ccc'}
 CORE_MANIFEST_SHA = '93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050'
-SCREEN_SHA = '5629475dc5c167af9edb0fa131fe922280d4ccdf1ce16d2a558b057cacbc1549'
-OWNER_SHA = 'd7a31ca2f326d036659ea5fdd33a4ba81525b212901c45ad87621f89b2fdb6c9'
+SCREEN_SHA = 'a0423d0648b19236f972598ce5acb5e8e9cdd617fadb2646f1c7fef01d9ec302'
+OWNER_SHA = '99aa100d715a6bd4075d50d1d61394fde9cce7c57aac0f0f8f7744a3a54a3195'
 ENV = {'MLX_MAX_OPS_PER_BUFFER': '50', 'MLX_MAX_MB_PER_BUFFER': '50',
        'MLX_BFS_MAX_WIDTH': '20', 'MLX_METAL_FAST_SYNCH': '0'}
 POLICY = {'real_free_min_bytes': 50 << 30, 'allowed_initial_pressure': [1, 2],
     'pressure_must_never_increase': True, 'swapouts_delta_max': 0, 'swap_used_growth_max_mib': 16,
     'child_physical_max_bytes': 2 << 30, 'mlx_boundary_max_bytes': 1 << 30, 'mlx_cache_limit_bytes': 0,
     'power': 'AC Power', 'thermal_codes': [0, 1],
-    'terminal_footprint_policy': 'raw-error+exit0+strict-reap+child-self-peak-proof'}
+    'terminal_footprint_policy': 'raw-error+exit0+strict-reap+child-self-peak-proof',
+    'physical_reading_semantics': 'separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current'}
 
 
 def same(a, b):
@@ -270,10 +271,12 @@ def physical_values(raw, pid):
     need(raw['errors'] == [] and raw['warnings'] == [], 'physical footprint errors/warnings')
     need(len(raw['processes']) == 1 and raw['processes'][0]['pid'] == pid, 'physical footprint PID ambiguity')
     p = raw['processes'][0]
-    current, peak = p['auxiliary']['phys_footprint'], p['auxiliary']['phys_footprint_peak']
-    need(type(current) is int and type(peak) is int and 0 <= current == p['footprint'] <= peak <= 2 << 30,
-         'physical footprint current/peak violates diagnostic bound')
-    return {'pid': pid, 'current_bytes': current, 'peak_bytes': peak}
+    top, current, peak = p['footprint'], p['auxiliary']['phys_footprint'], p['auxiliary']['phys_footprint_peak']
+    need(all(type(v) is int and 0 <= v <= 2 << 30 for v in (top, current, peak)) and peak >= current,
+         'physical footprint raw readings violate diagnostic bound/order')
+    # Raw top-level and auxiliary readings differed in v1. Do not infer why.
+    return {'pid': pid, 'current_bytes': max(top, current), 'peak_bytes': max(top, peak),
+            'top_bytes': top, 'aux_current_bytes': current, 'aux_peak_bytes': peak}
 
 
 def owner_footprint(owner, record, pid, owner_pid):
@@ -462,11 +465,15 @@ def audit_phases(out, result, pid, owner_pid, arm_window=None):
         receipt = dict(path=raw.name, sha256=sha(raw), pid=pid, case=pair[0], phase=pair[1])
         need(same(row['physical_receipt'], receipt) and same(result['physical_receipts'][index], receipt), 'self physical raw identity')
         physical = physical_values(read_json(raw), pid)
-        need(same([row['physical_current_bytes'], row['physical_peak_bytes']], [physical['current_bytes'], physical['peak_bytes']])
-             and physical['peak_bytes'] >= previous_physical, 'self physical historical peak')
-        previous_physical = physical['peak_bytes']
+        need(same([row['physical_current_bytes'], row['physical_peak_bytes'], row['physical_top_bytes'],
+                   row['physical_aux_current_bytes'], row['physical_aux_peak_bytes']],
+                  [physical['current_bytes'], physical['peak_bytes'], physical['top_bytes'],
+                   physical['aux_current_bytes'], physical['aux_peak_bytes']])
+             and physical['aux_peak_bytes'] >= previous_physical, 'self physical raw/derived readings or auxiliary historical peak')
+        previous_physical = physical['aux_peak_bytes']
         chart.append({key: row[key] for key in ('index', 'case', 'phase', 'active_bytes', 'peak_bytes', 'cache_bytes',
-            'unique_buffer_bytes', 'group_buffer_bytes', 'physical_current_bytes', 'physical_peak_bytes')})
+            'unique_buffer_bytes', 'group_buffer_bytes', 'physical_current_bytes', 'physical_peak_bytes',
+            'physical_top_bytes', 'physical_aux_current_bytes', 'physical_aux_peak_bytes')})
     release = result['release']
     need(release['layer_weakref_dead'] is True and type(result['initial_active_bytes']) is int
          and 0 <= result['initial_active_bytes'] <= 1 << 30
@@ -485,11 +492,11 @@ def audit_child(out, arm, pid, owner_pid, plan, parameters, progress, arm_window
          and result['performance_qualified'] is False and result['cross_arm_equality'] == 'PENDING_INDEPENDENT_RAW_AUDIT',
          'child final recheck/limited claim')
     need(type(result['elapsed_wall_s']) in (int, float) and 0 < result['elapsed_wall_s'] <= 120, 'child observed deadline')
-    required = dict(schema='E026-real-weight-layer-v1', arm=arm, layer_index=0, lengths=list(LENGTHS),
+    required = dict(schema='E026-real-weight-layer-v2', arm=arm, layer_index=0, lengths=list(LENGTHS),
         cache_kinds=list(MODES), cases=8, case_ids=list(CASE_IDS), cache_limit_bytes=0,
         mlx_observation_budget_bytes=1 << 30, physical_observation_budget_bytes=2 << 30,
         child_alarm_seconds=120, phase_count=68, case_phases=list(CASE_PHASES), continuing_offset=7,
-        continuing_prefix_forward=False)
+        continuing_prefix_forward=False, physical_reading_semantics=POLICY['physical_reading_semantics'])
     need(same({k: result['contract'][k] for k in required}, required), 'fixed child contract')
     pins = plan['execution']['pins']; package = Path(plan['package_root'])
     manifest_path = package.parent / 'native-source.json'
@@ -593,11 +600,11 @@ def audit(owner, lease, plan_sha256, progress):
     progress['recorded_arm_statuses'] = [{k: r.get(k) for k in ('arm', 'pid', 'status', 'cases')} for r in complete['arms']]
     if not lease_data['closed']:
         return dict(status='INCOMPLETE', qualified=False, reason='external service lease not closed')
-    need(complete['schema'] == 'E026-layer-owner-result-v1' and complete['status'] == 'PASS'
+    need(complete['schema'] == 'E026-layer-owner-result-v2' and complete['status'] == 'PASS'
          and complete['errors'] == [] and 0 < complete['elapsed_wall_s'] <= 480 and complete['pins_rechecked'] is True,
          'owner did not complete numerical resource/lifecycle contract')
     owner_pid = complete['owner_pid']; plan = read_json(owner / 'plan.json')
-    need(sha(owner / 'plan.json') == plan_sha256 and plan['schema'] == 'E026-layer-plan-v1'
+    need(sha(owner / 'plan.json') == plan_sha256 and plan['schema'] == 'E026-layer-plan-v2'
          and same([plan[k] for k in ('arms', 'arm_seconds', 'work_seconds', 'cleanup_seconds', 'total_seconds')],
                   [list(ARMS), 120, 450, 30, 480]) and same(plan['resource_policy'], POLICY)
          and same(plan['execution']['environment'], ENV), 'fixed plan identity/budgets/resource policy/environment')
@@ -739,7 +746,8 @@ def self_test():
             phases.append(dict(index=i, case=case, phase=phase, pid=23, ppid=22, monotonic_s=100+i/100,
                 elapsed_s=i/100, active_bytes=100, peak_bytes=100, cache_bytes=0, groups_are_evaluated=True,
                 unique_buffer_bytes=100, group_buffer_bytes={k: 100 for k in names}, physical_receipt=receipt,
-                physical_current_bytes=200, physical_peak_bytes=300))
+                physical_current_bytes=200, physical_peak_bytes=300, physical_top_bytes=200,
+                physical_aux_current_bytes=200, physical_aux_peak_bytes=300))
         complete = dict(elapsed_wall_s=1, physical_receipts=receipts, initial_active_bytes=0,
             release=dict(layer_weakref_dead=True, initial_active_bytes=0, final_active_bytes=100,
                          active_delta_bytes=100, known_persistent_buffer_bytes=100))
@@ -747,6 +755,14 @@ def self_test():
             (root / 'phases.jsonl').write_text(''.join(json.dumps(v) + '\n' for v in values))
             return audit_phases(root, final, 23, 22)
         need(len(phase_check(phases)) == 68, 'synthetic phase fixture invalid')
+        # Derived max(top, aux-peak) is not itself a historical peak: top may
+        # fall while the actual auxiliary historical peak stays unchanged.
+        first_raw = root / 'physical-000.raw.json'
+        value = read_json(first_raw); value['processes'][0]['footprint'] = 400; dump(first_raw, value)
+        phases[0]['physical_top_bytes'] = phases[0]['physical_current_bytes'] = phases[0]['physical_peak_bytes'] = 400
+        phases[0]['physical_receipt']['sha256'] = sha(first_raw)
+        complete['physical_receipts'][0]['sha256'] = sha(first_raw)
+        need(len(phase_check(phases)) == 68, 'derived peak decrease falsely rejected')
         for change in ('missing', 'order', 'peak', 'group', 'pid', 'time', 'release'):
             changed, final = copy.deepcopy(phases), copy.deepcopy(complete)
             if change == 'missing': changed.pop()
@@ -768,6 +784,19 @@ def self_test():
             elif change == 'pid': bad['processes'][0]['pid'] = 24
             else: bad['processes'][0]['auxiliary']['phys_footprint_peak'] = (2 << 30) + 1
             rejected(lambda value=bad: physical_values(value, 23))
+        for top, current, peak in ((65389240, 65323704, 65323704), (100, 200, 300), (400, 200, 300)):
+            accepted = copy.deepcopy(physical); p = accepted['processes'][0]
+            p['footprint'] = top; p['auxiliary'].update(phys_footprint=current, phys_footprint_peak=peak)
+            need(physical_values(accepted, 23) == dict(pid=23, current_bytes=max(top, current), peak_bytes=max(top, peak),
+                top_bytes=top, aux_current_bytes=current, aux_peak_bytes=peak), 'unequal raw readings not retained/bounded')
+        for field in ('top', 'current', 'peak'):
+            for invalid in ((2 << 30) + 1, -1, True, 1.5, '200'):
+                bad = copy.deepcopy(physical); p = bad['processes'][0]
+                if field == 'top': p['footprint'] = invalid
+                else: p['auxiliary']['phys_footprint' if field == 'current' else 'phys_footprint_peak'] = invalid
+                rejected(lambda value=bad: physical_values(value, 23))
+        bad = copy.deepcopy(physical); bad['processes'][0]['auxiliary']['phys_footprint_peak'] = 199
+        rejected(lambda: physical_values(bad, 23))
         # Raw cross-arm differences preserve original BF16 element and bits.
         a, b = root / 'lhs', root / 'rhs'; a.write_bytes(b'\0\0\0\0'); b.write_bytes(b'\0\0\1\0')
         partial = {}
@@ -812,7 +841,8 @@ def main(argv=None):
     except Exception as error:
         result = dict(status='FAIL', qualified=False, error_type=type(error).__name__, error=str(error),
             traceback=traceback.format_exc(), partial=progress)
-    result.update(audit_source_sha256=sha(__file__), performance_qualified=False, full_model_qualified=False)
+    result.update(audit_schema='E026-layer-independent-audit-v2', audit_source_sha256=sha(__file__),
+                  performance_qualified=False, full_model_qualified=False)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open('x') as stream:
         json.dump(result, stream, indent=2, allow_nan=False); stream.write('\n')

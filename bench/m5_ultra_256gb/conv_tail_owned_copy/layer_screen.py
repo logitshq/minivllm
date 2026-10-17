@@ -29,6 +29,7 @@ KINDS = ('fresh', 'continuing')
 CASE_PHASES = ('before_prefill', 'after_hook', 'after_prefill_build', 'after_normal_product_eval',
                'after_common_validation_eval', 'after_raw_artifacts', 'after_drop_observer_refs', 'after_case_release')
 MEMORY_BYTES, FOOTPRINT_BYTES = 1 << 30, 2 << 30
+PHYSICAL_READING_SEMANTICS = 'separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current'
 WEIGHTS_SHA = '8ee0ebd9df9385ec35baf6d0a0ae80bf780cf80a5e255b34d6fe2fed560df77a'
 INTEGRATION_SHA = '906dcfece0ce249d3fc06e968ec552d0ae20b665086e5812c54453fa47780ad1'
 CANDIDATE_SHA = '4d9658d34734e3c252375c4b76fcb2eccf83555121d7eb51d7f3e81eb2c48ccc'
@@ -62,11 +63,12 @@ def load_file(name, path):
 
 
 def contract(arm=None):
-    return dict(schema='E026-real-weight-layer-v1', arm=arm, layer_index=0,
+    return dict(schema='E026-real-weight-layer-v2', arm=arm, layer_index=0,
         lengths=list(LENGTHS), cache_kinds=list(KINDS), cases=8,
         case_ids=[f'T{t}-{kind}' for t in LENGTHS for kind in KINDS],
         cache_limit_bytes=0, mlx_observation_budget_bytes=MEMORY_BYTES,
         physical_observation_budget_bytes=FOOTPRINT_BYTES, child_alarm_seconds=120,
+        physical_reading_semantics=PHYSICAL_READING_SEMANTICS,
         phase_count=68, case_phases=list(CASE_PHASES),
         x_words='uint16: 0x3c00 | ((17*i+11)&127) | (((i+11)&1)<<15)',
         conv_seed_words='uint16: 0x3b00 | ((17*i+23)&127) | (((i+23)&1)<<15)',
@@ -111,8 +113,14 @@ def parse_footprint(raw, pid):
     row = rows[0]; aux = row.get('auxiliary', {})
     values = (row.get('footprint'), aux.get('phys_footprint'), aux.get('phys_footprint_peak'))
     need(all(type(v) is int and 0 <= v <= FOOTPRINT_BYTES for v in values), 'physical current/peak >2GiB or invalid')
-    need(values[0] == values[1] and values[2] >= values[1], 'physical current/peak inconsistent')
-    return values[1], values[2]
+    need(values[2] >= values[1], 'auxiliary peak below auxiliary current')
+    return max(values[0], values[1]), max(values[0], values[2])
+
+
+def stop_signal(signum, frame=None):
+    if signum == signal.SIGALRM:
+        raise TimeoutError('120s child SIGALRM deadline; owner enforces hard wall bound')
+    raise InterruptedError('child cancellation received ' + signal.Signals(signum).name)
 
 
 def memory_guard(row):
@@ -146,8 +154,13 @@ class Ledger:
             need(probe.returncode == 0 and raw_path.is_file(), 'self footprint command failed')
             receipt['sha256'] = file_sha(raw_path)
             self.result['physical_receipts'].append(receipt)
-            current, peak = parse_footprint(json.loads(raw_path.read_text()), os.getpid())
-            row.update(physical_receipt=receipt, physical_current_bytes=current, physical_peak_bytes=peak)
+            physical = json.loads(raw_path.read_text())
+            current, peak = parse_footprint(physical, os.getpid())
+            process = physical['processes'][0]
+            row.update(physical_receipt=receipt, physical_current_bytes=current, physical_peak_bytes=peak,
+                       physical_top_bytes=process['footprint'],
+                       physical_aux_current_bytes=process['auxiliary']['phys_footprint'],
+                       physical_aux_peak_bytes=process['auxiliary']['phys_footprint_peak'])
             memory_guard(row)
         except BaseException as error:
             row.update(status='FAIL',error_type=type(error).__name__,error=str(error))
@@ -337,9 +350,8 @@ def execute(args):
     result = dict(status='INCOMPLETE',arm=args.arm,pid=os.getpid(),ppid=os.getppid(),device_run=True,
                   contract=contract(args.arm),cases=[],physical_receipts=[])
     def save(): write(args.out/'complete.json',result)
-    def stop(*unused): raise TimeoutError('120s child deadline; owner enforces hard wall bound')
     need(signal.getitimer(signal.ITIMER_REAL)==(0.0,0.0),'existing alarm unsupported')
-    previous = {sig:signal.signal(sig,stop) for sig in (signal.SIGALRM,signal.SIGTERM,signal.SIGINT)}
+    previous = {sig:signal.signal(sig,stop_signal) for sig in (signal.SIGALRM,signal.SIGTERM,signal.SIGINT)}
     signal.setitimer(signal.ITIMER_REAL,120); save()
     try:
         result['sources']=verify_sources(args.package_root)

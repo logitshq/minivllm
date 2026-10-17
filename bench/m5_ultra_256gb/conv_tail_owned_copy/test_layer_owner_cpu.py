@@ -104,12 +104,37 @@ class OwnerTests(unittest.TestCase):
             if edit=='units': row['unit']='MiB'
             if edit=='boolunit': row['bytes per unit']=True
             if edit=='pid': row['processes'][0]['pid'] += 1
-            if edit=='current': row['processes'][0]['footprint'] += 1
+            if edit=='current': row['processes'][0]['auxiliary']['phys_footprint'] = (80 << 20) + 1
             if edit=='peak': row['processes'][0]['auxiliary']['phys_footprint_peak']=2*o.GIB+1
             if edit=='errors': row['errors']=['failure']
             if edit=='warnings': row['warnings']=['partial']
             if edit=='missing': row['processes']=[]
             with self.subTest(edit=edit), self.assertRaises(RuntimeError): o.parse_footprint(row,12345)
+
+    def test_unequal_os_readings_preserved_with_conservative_derived_values(self):
+        # Values from the failed v1 probe; fixture only, no OS command is run.
+        row=physical(current=65323704,peak=65323704)
+        row['processes'][0]['footprint']=65389240
+        parsed=o.parse_footprint(row,12345)
+        self.assertEqual(parsed,dict(pid=12345,current_bytes=65389240,peak_bytes=65389240,
+            top_bytes=65389240,aux_current_bytes=65323704,aux_peak_bytes=65323704))
+        lower=physical(current=1024,peak=2048);lower['processes'][0]['footprint']=512
+        self.assertEqual(o.parse_footprint(lower,12345)['current_bytes'],1024)
+        self.assertEqual(o.parse_footprint(lower,12345)['peak_bytes'],2048)
+        for field in ('top','current','peak'):
+            for bad in (-1,True,2*o.GIB+1,1.0):
+                corrupt=copy.deepcopy(row)
+                if field=='top':corrupt['processes'][0]['footprint']=bad
+                else:corrupt['processes'][0]['auxiliary']['phys_footprint'+('_peak' if field=='peak' else '')]=bad
+                with self.subTest(field=field,bad=bad),self.assertRaises(RuntimeError):o.parse_footprint(corrupt,12345)
+        with tempfile.TemporaryDirectory() as tmp:
+            out=Path(tmp)
+            def successful_unequal(cmd,**kw):
+                Path(cmd[-1]).write_text(json.dumps(row));return NS(returncode=0,stdout='unequal OS fixture',stderr='')
+            with patch.object(o.subprocess,'run',side_effect=successful_unequal):receipt=o.footprint(FakeChild(),out,0)
+            self.assertEqual(receipt['status'],'measured')
+            self.assertEqual(receipt['parsed'],parsed)
+            self.assertEqual(json.loads((out/'footprint-000.raw.json').read_text()),row)
 
     def test_physical_probe_raw_preserved_and_live_error_aborts(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -147,7 +172,7 @@ class OwnerTests(unittest.TestCase):
         evidence=here/'source-pins.json';evidence.write_text('{"sources":{}}');files.append(evidence)
         files.append(Path(o.__file__).resolve())
         pins={str(p):o.sha(p) for p in files}
-        plan={'schema':'E026-layer-plan-v1','arms':o.ARMS,'arm_seconds':120,'work_seconds':450,'cleanup_seconds':30,'total_seconds':480,
+        plan={'schema':'E026-layer-plan-v2','arms':o.ARMS,'arm_seconds':120,'work_seconds':450,'cleanup_seconds':30,'total_seconds':480,
               'resource_policy':o.POLICY,'package_root':str(package),'bundle':{'path':str(manifest),'sha256':o.sha(manifest)},
               'execution':{'python':str(python),'screen':{'path':str(here/'layer_screen.py'),'sha256':pins[str(here/'layer_screen.py')]},'pins':pins,'environment':o.ENV}}
         p=root/'plan.json';p.write_text(json.dumps(plan));out=root/'out';out.mkdir()
@@ -193,7 +218,7 @@ class OwnerTests(unittest.TestCase):
         bundle={'bundle':{'sha256':'c'*64},'tensors':[{'parameter':f'p{i}','dtype':'BF16','shape':[1]} for i in range(14)]}
         manifest=root/'manifest.json';manifest.write_text(json.dumps(bundle))
         plan={'package_root':str(package),'bundle':{'path':str(manifest),'sha256':o.sha(manifest)},'execution':{'pins':pins}}
-        contract=dict(schema='E026-real-weight-layer-v1',arm=arm,layer_index=0,lengths=o.LENGTHS,cache_kinds=['fresh','continuing'],cases=8,case_ids=o.CASES,
+        contract=dict(schema='E026-real-weight-layer-v2',arm=arm,layer_index=0,lengths=o.LENGTHS,cache_kinds=['fresh','continuing'],cases=8,case_ids=o.CASES,
                       cache_limit_bytes=0,mlx_observation_budget_bytes=o.GIB,physical_observation_budget_bytes=2*o.GIB,child_alarm_seconds=120,
                       phase_count=68,case_phases=o.CASE_PHASES,continuing_offset=7,continuing_prefix_forward=False)
         params={f'p{i}':self.descriptor([1],file=f'p{i}.bin') for i in range(14)}
@@ -229,7 +254,8 @@ class OwnerTests(unittest.TestCase):
             receipt=dict(path=raw.name,sha256=o.sha(raw),pid=12345,case=case,phase=phase);result['physical_receipts'].append(receipt)
             phases.append(dict(index=index,case=case,phase=phase,pid=12345,ppid=os.getpid(),groups_are_evaluated=True,monotonic_s=index,elapsed_s=index,
                 active_bytes=1024,peak_bytes=1024,cache_bytes=0,unique_buffer_bytes=4,group_buffer_bytes={'persistent':4},physical_receipt=receipt,
-                physical_current_bytes=64<<20,physical_peak_bytes=80<<20))
+                physical_current_bytes=64<<20,physical_peak_bytes=80<<20,
+                physical_top_bytes=64<<20,physical_aux_current_bytes=64<<20,physical_aux_peak_bytes=80<<20))
         (out/'phases.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in phases));o.write(out,'complete.json',result)
         return out,plan,result,phases
 
@@ -250,6 +276,24 @@ class OwnerTests(unittest.TestCase):
                     if change=='none': self.assertEqual(o.validate_child(out,'off',12345,plan)['physical_phases'],68)
                     else:
                         with self.assertRaises(RuntimeError): o.validate_child(out,'off',12345,plan)
+
+    def test_derived_peak_may_fall_but_auxiliary_historical_peak_may_not(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out,plan,result,phases=self.synthetic_child(Path(tmp))
+            def replace_physical(index,top,current,peak):
+                raw=physical(current=current,peak=peak);raw['processes'][0]['footprint']=top
+                path=out/f'physical-{index:03d}.raw.json';path.write_text(json.dumps(raw))
+                phases[index]['physical_receipt']['sha256']=o.sha(path)
+                result['physical_receipts'][index]=copy.deepcopy(phases[index]['physical_receipt'])
+                phases[index].update(physical_top_bytes=top,physical_aux_current_bytes=current,physical_aux_peak_bytes=peak,
+                                     physical_current_bytes=max(top,current),physical_peak_bytes=max(top,peak))
+                (out/'phases.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in phases));o.write(out,'complete.json',result)
+            replace_physical(0,90<<20,64<<20,80<<20)
+            with patch.object(o,'raw_record',return_value=out/'unused'):
+                self.assertEqual(o.validate_child(out,'off',12345,plan)['physical_phases'],68)
+                replace_physical(1,64<<20,64<<20,79<<20)
+                with self.assertRaisesRegex(RuntimeError,'auxiliary peak history'):
+                    o.validate_child(out,'off',12345,plan)
 
     def test_actual_raw_bytes_sha_shape_and_path_gate(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,299 @@
+{
+  "schema": "E026-layer-weights-v1",
+  "source": {
+    "model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "shard": "model-00001-of-00003.safetensors",
+    "shard_sha256": "a9de796bfb40fbe757ff3e567d83d5d100906d6dd231c8b11c431cd97d3dc288",
+    "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7",
+    "header_bytes": 86450,
+    "fully_hashed_before_extract": true,
+    "fd_before": {
+      "st_dev": 16777231,
+      "st_ino": 628231,
+      "st_size": 5343250458,
+      "st_mtime_ns": 1792128548075854683,
+      "st_ctime_ns": 1792128548153293749
+    },
+    "fd_after": {
+      "st_dev": 16777231,
+      "st_ino": 628231,
+      "st_size": 5343250458,
+      "st_mtime_ns": 1792128548075854683,
+      "st_ctime_ns": 1792128548153293749
+    }
+  },
+  "bundle": {
+    "filename": "weights.bin",
+    "bytes": 65239488,
+    "sha256": "224cfdf30bc04ee8b01e39fc8fee4746aae2bda2828202dc56006aa0ac525cf5"
+  },
+  "tensors": [
+    {
+      "key": "language_model.model.layers.0.linear_attn.A_log",
+      "parameter": "A_log",
+      "dtype": "BF16",
+      "shape": [
+        48
+      ],
+      "source_offsets": [
+        3164064448,
+        3164064544
+      ],
+      "bundle_offsets": [
+        0,
+        96
+      ],
+      "bytes": 96,
+      "sha256": "429d53cd15ec0ea1a2d638100c3bbdf8d53505e69110fb17ee09d055c1fdbd34"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.conv1d.weight",
+      "parameter": "conv1d_weight",
+      "dtype": "BF16",
+      "shape": [
+        10240,
+        4,
+        1
+      ],
+      "source_offsets": [
+        2268569984,
+        2268651904
+      ],
+      "bundle_offsets": [
+        96,
+        82016
+      ],
+      "bytes": 81920,
+      "sha256": "803a2591c4f5e7b1c2a7bdbbad78bbd0b68acdd0deab9552933ee7c337489dad"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.dt_bias",
+      "parameter": "dt_bias",
+      "dtype": "BF16",
+      "shape": [
+        48
+      ],
+      "source_offsets": [
+        2216994336,
+        2216994432
+      ],
+      "bundle_offsets": [
+        82016,
+        82112
+      ],
+      "bytes": 96,
+      "sha256": "969ce6b2149d20f0c365373fd89613167e373905c15f0e1cf5af62adf52228de"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_a.scales",
+      "parameter": "in_proj_a.scales",
+      "dtype": "U8",
+      "shape": [
+        48,
+        320
+      ],
+      "source_offsets": [
+        3665864576,
+        3665879936
+      ],
+      "bundle_offsets": [
+        82112,
+        97472
+      ],
+      "bytes": 15360,
+      "sha256": "775e646b6cabc258eda555ac4ef9a670bb1fbb9970af5e68d82e5018632644e3"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_a.weight",
+      "parameter": "in_proj_a.weight",
+      "dtype": "U32",
+      "shape": [
+        48,
+        640
+      ],
+      "source_offsets": [
+        2216994432,
+        2217117312
+      ],
+      "bundle_offsets": [
+        97472,
+        220352
+      ],
+      "bytes": 122880,
+      "sha256": "26b03f2efbce6f547301057c93df5f6727e78cf892a5df88906b3837acc72f31"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_b.scales",
+      "parameter": "in_proj_b.scales",
+      "dtype": "U8",
+      "shape": [
+        48,
+        320
+      ],
+      "source_offsets": [
+        2032936640,
+        2032952000
+      ],
+      "bundle_offsets": [
+        220352,
+        235712
+      ],
+      "bytes": 15360,
+      "sha256": "6982b8b88e176c89a250f2387d34ea35ee507c7954983bf5bcf684901086cd76"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_b.weight",
+      "parameter": "in_proj_b.weight",
+      "dtype": "U32",
+      "shape": [
+        48,
+        640
+      ],
+      "source_offsets": [
+        5276869472,
+        5276992352
+      ],
+      "bundle_offsets": [
+        235712,
+        358592
+      ],
+      "bytes": 122880,
+      "sha256": "0d6b094fd85ee2ffe6e003ee2717bf987df1335fba3dcc0f145c7c4256212c5e"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_qkv.scales",
+      "parameter": "in_proj_qkv.scales",
+      "dtype": "U8",
+      "shape": [
+        10240,
+        320
+      ],
+      "source_offsets": [
+        5329961568,
+        5333238368
+      ],
+      "bundle_offsets": [
+        358592,
+        3635392
+      ],
+      "bytes": 3276800,
+      "sha256": "5027f877de22c3d0967febd7e8b12dad350f07e40a2363933e04548d0d6763d0"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_qkv.weight",
+      "parameter": "in_proj_qkv.weight",
+      "dtype": "U32",
+      "shape": [
+        10240,
+        640
+      ],
+      "source_offsets": [
+        2242355584,
+        2268569984
+      ],
+      "bundle_offsets": [
+        3635392,
+        29849792
+      ],
+      "bytes": 26214400,
+      "sha256": "4aedc4d36fe401118c6e043a97841f9147110fd45371859419b25218d0b95dac"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_z.scales",
+      "parameter": "in_proj_z.scales",
+      "dtype": "U8",
+      "shape": [
+        6144,
+        320
+      ],
+      "source_offsets": [
+        2217117312,
+        2219083392
+      ],
+      "bundle_offsets": [
+        29849792,
+        31815872
+      ],
+      "bytes": 1966080,
+      "sha256": "a2e05d5767d91219fbd2a4673e2d795a469beab9d284748f769b4e0ab83cf3a6"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.in_proj_z.weight",
+      "parameter": "in_proj_z.weight",
+      "dtype": "U32",
+      "shape": [
+        6144,
+        640
+      ],
+      "source_offsets": [
+        2219083392,
+        2234812032
+      ],
+      "bundle_offsets": [
+        31815872,
+        47544512
+      ],
+      "bytes": 15728640,
+      "sha256": "82fc30e7b8b17a43f1851335bf1ef88dbf30d85bfa593b0c9316f93d0f672442"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.norm.weight",
+      "parameter": "norm.weight",
+      "dtype": "BF16",
+      "shape": [
+        128
+      ],
+      "source_offsets": [
+        2211423520,
+        2211423776
+      ],
+      "bundle_offsets": [
+        47544512,
+        47544768
+      ],
+      "bytes": 256,
+      "sha256": "70d11f294923a94aac97bedd27e596dbf496746c6b9e3b2b7c38798a0d2522cc"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.out_proj.scales",
+      "parameter": "out_proj.scales",
+      "dtype": "U8",
+      "shape": [
+        5120,
+        384
+      ],
+      "source_offsets": [
+        2193728800,
+        2195694880
+      ],
+      "bundle_offsets": [
+        47544768,
+        49510848
+      ],
+      "bytes": 1966080,
+      "sha256": "44baecf10342c2eae067afcaaf11255a7d29d5fee1a6da75abc2c93c34fd3ced"
+    },
+    {
+      "key": "language_model.model.layers.0.linear_attn.out_proj.weight",
+      "parameter": "out_proj.weight",
+      "dtype": "U32",
+      "shape": [
+        5120,
+        768
+      ],
+      "source_offsets": [
+        2195694880,
+        2211423520
+      ],
+      "bundle_offsets": [
+        49510848,
+        65239488
+      ],
+      "bytes": 15728640,
+      "sha256": "66d8d47b9050b078cc81c5c49070845fa0e3e581bee73fa6bc06abcaa8d5fa7d"
+    }
+  ]
+}

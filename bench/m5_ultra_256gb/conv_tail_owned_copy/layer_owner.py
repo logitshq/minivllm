@@ -1,4 +1,4 @@
-"""E026-layer-v1: three fresh, bounded real-weight single-GDN diagnostics.
+"""E026-layer-v2: three fresh, bounded real-weight single-GDN diagnostics.
 
 Stdlib import/help only. No service control: the outer suspended_service lease
 alone stops/restores 74384. This exception permits existing pressure 2 only for
@@ -34,7 +34,8 @@ POLICY = {'real_free_min_bytes': 50 * GIB, 'allowed_initial_pressure': [1, 2],
           'swap_used_growth_max_mib': 16, 'child_physical_max_bytes': 2 * GIB,
           'mlx_boundary_max_bytes': GIB, 'mlx_cache_limit_bytes': 0,
           'power': 'AC Power', 'thermal_codes': [0, 1],
-          'terminal_footprint_policy': 'raw-error+exit0+strict-reap+child-self-peak-proof'}
+          'terminal_footprint_policy': 'raw-error+exit0+strict-reap+child-self-peak-proof',
+          'physical_reading_semantics': 'separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current'}
 REASON = ('Existing pressure 2 is permitted only for this isolated, real-weight '
           'single-GDN numerical diagnostic with 1GiB MLX boundaries/cache0 and '
           '2GiB observed process current/peak. Never full-model/performance admission; '
@@ -130,7 +131,7 @@ def prepare(args, check):
     plan = json.loads(args.plan.read_text())
     expected = {'schema', 'arms', 'arm_seconds', 'work_seconds', 'cleanup_seconds', 'total_seconds',
                 'execution', 'package_root', 'bundle', 'resource_policy'}
-    need(set(plan) == expected and plan['schema'] == 'E026-layer-plan-v1', 'independent layer plan required')
+    need(set(plan) == expected and plan['schema'] == 'E026-layer-plan-v2', 'independent layer plan required')
     need(equal({k: plan[k] for k in ('arms', 'arm_seconds', 'work_seconds', 'cleanup_seconds', 'total_seconds')},
                {'arms': ARMS, 'arm_seconds': 120, 'work_seconds': 450, 'cleanup_seconds': 30, 'total_seconds': 480})
          and equal(plan['resource_policy'], POLICY), 'unregistered budgets/policy')
@@ -181,10 +182,13 @@ def parse_footprint(value, pid):
     processes = value.get('processes')
     need(type(processes) is list and len(processes) == 1 and type(processes[0].get('pid')) is int and processes[0]['pid'] == pid, 'footprint exact child PID required')
     p = processes[0]
-    current, peak = p['auxiliary']['phys_footprint'], p['auxiliary']['phys_footprint_peak']
-    need(type(current) is int and type(peak) is int and type(p.get('footprint')) is int
-         and 0 <= current == p['footprint'] <= peak <= 2 * GIB, 'child physical current/peak exceeds 2GiB or is unknown')
-    return {'pid': pid, 'current_bytes': current, 'peak_bytes': peak}
+    top, current, peak = p.get('footprint'), p['auxiliary']['phys_footprint'], p['auxiliary']['phys_footprint_peak']
+    need(all(type(v) is int and 0 <= v <= 2 * GIB for v in (top, current, peak))
+         and peak >= current, 'child physical current/peak exceeds 2GiB or is unknown')
+    # The actual OS output contained unequal top-level and auxiliary readings.
+    # Their difference is unexplained. Preserve and bound all three separately.
+    return {'pid': pid, 'current_bytes': max(top, current), 'peak_bytes': max(top, peak),
+            'top_bytes': top, 'aux_current_bytes': current, 'aux_peak_bytes': peak}
 
 
 def footprint(child, out, index):
@@ -325,7 +329,7 @@ def validate_child(out, arm, pid, plan, check=lambda: None):
     elapsed = result.get('elapsed_wall_s')
     need(type(elapsed) in (int, float) and math.isfinite(elapsed) and 0 < elapsed <= 120, 'child elapsed budget')
     contract = result['contract']
-    required_contract = dict(schema='E026-real-weight-layer-v1', arm=arm, layer_index=0,
+    required_contract = dict(schema='E026-real-weight-layer-v2', arm=arm, layer_index=0,
         lengths=LENGTHS, cache_kinds=['fresh', 'continuing'], cases=8, case_ids=CASES,
         cache_limit_bytes=0, mlx_observation_budget_bytes=GIB, physical_observation_budget_bytes=2*GIB,
         child_alarm_seconds=120, phase_count=68, case_phases=CASE_PHASES,
@@ -415,10 +419,14 @@ def validate_child(out, arm, pid, plan, check=lambda: None):
              and command['returncode'] == 0 and type(command['stdout']) is str and type(command['stderr']) is str, 'self footprint command failed/differs')
         required_receipt = dict(path=raw.name, sha256=sha(raw, check), pid=pid, case=pair[0], phase=pair[1])
         need(equal(receipt, required_receipt) and equal(phase['physical_receipt'], receipt), 'physical receipt mismatch')
-        parsed = parse_footprint(json.loads(raw.read_text()), pid)
+        raw_value = json.loads(raw.read_text())
+        parsed = parse_footprint(raw_value, pid)
+        auxiliary_peak = raw_value['processes'][0]['auxiliary']['phys_footprint_peak']
         need(equal([phase['physical_current_bytes'], phase['physical_peak_bytes']], [parsed['current_bytes'], parsed['peak_bytes']])
-             and parsed['peak_bytes'] >= previous_physical_peak, 'physical values/peak history differ')
-        previous_physical_peak = parsed['peak_bytes']
+             and equal([phase['physical_top_bytes'], phase['physical_aux_current_bytes'], phase['physical_aux_peak_bytes']],
+                       [parsed['top_bytes'], parsed['aux_current_bytes'], parsed['aux_peak_bytes']])
+             and auxiliary_peak >= previous_physical_peak, 'physical values/auxiliary peak history differ')
+        previous_physical_peak = auxiliary_peak
     release = result['release']
     need(release['layer_weakref_dead'] is True and type(result['initial_active_bytes']) is int
          and equal(release['initial_active_bytes'], result['initial_active_bytes'])
@@ -572,7 +580,7 @@ def run(args, resources=None):
             for sig, handler in previous.items(): signal.signal(sig, handler)
         write(args.out, 'resources.json', samples)
         passed = not errors and len(arms) == 3 and time.monotonic() <= budget.total_end
-        write(args.out, 'complete.json', {'schema': 'E026-layer-owner-result-v1', 'status': 'PASS' if passed else 'FAIL',
+        write(args.out, 'complete.json', {'schema': 'E026-layer-owner-result-v2', 'status': 'PASS' if passed else 'FAIL',
               'owner_pid': os.getpid(), 'arms': arms, 'errors': errors, 'samples': len(samples),
               'physical_samples': len(physical), 'elapsed_wall_s': time.monotonic() - budget.start,
               'pins_rechecked': (args.out / 'pins-after.json').exists(), 'pressure_policy_reason': REASON,
