@@ -1,0 +1,62 @@
+test_exact_qualification_pair_and_formal_on_without_observers (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_exact_qualification_pair_and_formal_on_without_observers) ... ok
+test_failed_observer_constructor_restores_partial_methods_and_witness (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_failed_observer_constructor_restores_partial_methods_and_witness) ... ok
+test_failed_witness_constructor_restores_its_partial_function_dict (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_failed_witness_constructor_restores_its_partial_function_dict) ... ok
+test_foreign_runner_or_graph_observer_is_not_overwritten (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_foreign_runner_or_graph_observer_is_not_overwritten) ... ok
+test_identity_reports_real_sources_observation_not_future_hits (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_identity_reports_real_sources_observation_not_future_hits) ... ok
+test_import_and_default_off_do_not_import_model_or_load_sources (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_import_and_default_off_do_not_import_model_or_load_sources) ... ok
+test_main_reuses_handler_and_worker_and_keeps_cleanup_on_worker (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_main_reuses_handler_and_worker_and_keeps_cleanup_on_worker) ... ok
+test_missing_mixed_observers_shared_path_and_changed_settings_rejected (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_missing_mixed_observers_shared_path_and_changed_settings_rejected) ... ok
+test_qualification_off_only_uses_scheduling_observer (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_qualification_off_only_uses_scheduling_observer) ... ok
+test_real_donor_worker_trace_and_uuid_delivery_remain_unmodified (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_real_donor_worker_trace_and_uuid_delivery_remain_unmodified) ... ok
+test_restore_order_releases_observer_then_witness_then_installation (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_restore_order_releases_observer_then_witness_then_installation) ... ok
+test_witness_counts_actual_calls_and_preserves_same_step_ahead_order (bench.m5_ultra_256gb.route_decode_graph.test_http_server_cpu.Tests.test_witness_counts_actual_calls_and_preserves_same_step_ahead_order) ... ok
+test_capture_keeps_separate_sidecars_and_reaps_without_qualification (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_capture_keeps_separate_sidecars_and_reaps_without_qualification) ... FAIL
+test_changed_argv_source_identity_or_body_cannot_reuse_spec (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_changed_argv_source_identity_or_body_cannot_reuse_spec) ... ok
+test_failed_strict_absence_cannot_pass_or_emit_release (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_failed_strict_absence_cannot_pass_or_emit_release) ... ok
+test_guard_failure_preserves_partial_group_and_reaps (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_guard_failure_preserves_partial_group_and_reaps) ... ok
+test_missing_or_misbound_route_sidecar_rejects_after_reap (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_missing_or_misbound_route_sidecar_rejects_after_reap) ... ok
+test_postflight_pin_failure_does_not_become_success (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_postflight_pin_failure_does_not_become_success) ... ok
+test_pre_spawn_checkpoint_failure_never_creates_a_child (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_pre_spawn_checkpoint_failure_never_creates_a_child) ... ok
+test_prepare_real_entry_sources_identity_and_original_jobs (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_prepare_real_entry_sources_identity_and_original_jobs) ... ok
+test_repeated_cancel_cannot_skip_owned_kill_wait (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_repeated_cancel_cannot_skip_owned_kill_wait) ... ok
+test_wrong_readiness_stops_before_http_and_still_reaps (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_wrong_readiness_stops_before_http_and_still_reaps) ... ok
+test_lifecycle_control_flow_is_frozen_capture_with_only_local_bindings (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.SourceBoundaryTests.test_lifecycle_control_flow_is_frozen_capture_with_only_local_bindings) ... ok
+
+======================================================================
+FAIL: test_capture_keeps_separate_sidecars_and_reaps_without_qualification (bench.m5_ultra_256gb.route_decode_graph.test_http_capture_cpu.CaptureTests.test_capture_keeps_separate_sidecars_and_reaps_without_qualification)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/test_http_capture_cpu.py", line 98, in test_capture_keeps_separate_sidecars_and_reaps_without_qualification
+    self.assertEqual(json.loads((self.out/'launch.json').read_text())['command'][-4:],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     ['--qualification-trace', str(self.out/'trace.jsonl'),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      '--route-events', str(self.out/'route-events.jsonl')])
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['--q[18 chars]', '/private/var/folders/mq/q8ktrhz157lcgq5h6s[160 chars]onl'] != ['--q[18 chars]', '/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr00[144 chars]onl']
+
+First differing element 1:
+'/private/var/folders/mq/q8ktrhz157lcgq5h6s[42 chars]sonl'
+'/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr00[34 chars]sonl'
+
+  ['--qualification-trace',
+-  '/private/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/tmpi3gt_al5/capture/trace.jsonl',
+?   --------
+
++  '/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/tmpi3gt_al5/capture/trace.jsonl',
+   '--route-events',
+-  '/private/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/tmpi3gt_al5/capture/route-events.jsonl']
+?   --------
+
++  '/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/tmpi3gt_al5/capture/route-events.jsonl']
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.235s
+
+FAILED (failures=1)

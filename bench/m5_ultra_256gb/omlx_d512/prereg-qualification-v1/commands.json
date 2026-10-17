@@ -1,0 +1,128 @@
+{
+  "cpu_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/owner.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+    "--plan-sha256",
+    "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cpu-prepare",
+    "--prepare-only"
+  ],
+  "create_analysis_directory": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; Path('/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-analysis').mkdir()"
+  ],
+  "execute_after_receipt_and_commit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/execute.py",
+    "--run"
+  ],
+  "owner": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/owner.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+    "--plan-sha256",
+    "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner"
+  ],
+  "qualification_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/audit_qualification.py",
+    "--owner",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-analysis/independent-qualification.json"
+  ],
+  "readonly_service_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/controller.py",
+    "prepare",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--owner-directory",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+    "--owner-plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+    "--owner-plan-sha256",
+    "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+  ],
+  "recover": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/controller.py",
+    "recover",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1"
+  ],
+  "recover_no_experiment_only_if_owner_never_launched": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/controller.py",
+    "recover",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1",
+    "--no-experiment"
+  ],
+  "resource_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/audit_resources.py",
+    "--owner",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-analysis/resource-summary.json"
+  ],
+  "restoration_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/audit_restore.py",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-analysis/restoration-audit.json"
+  ],
+  "stop": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/controller.py",
+    "stop",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1"
+  ]
+}

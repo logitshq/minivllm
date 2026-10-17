@@ -1,0 +1,11 @@
+--- v1/test_http_capture_cpu.py
++++ v2/test_http_capture_cpu.py
+@@ -45,7 +45,7 @@
+ class CaptureTests(unittest.IsolatedAsyncioTestCase):
+     def setUp(self):
+         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
+-        self.out = Path(self.temp.name) / 'capture'; self.checks = []
++        self.out = Path(self.temp.name).resolve() / 'capture'; self.checks = []
+         self.plan = m.donor.HERE / 'prereg-qualification-v1/plan.json'
+         numeric = json.loads(self.plan.read_text())
+         self.inputs = dict(python=numeric['execution']['python'], environment=numeric['execution']['environment'],
