@@ -660,3 +660,17 @@ separate diagnostic compares eager/compiled at each length from identical state.
 Original evidence and the default-OFF candidate remain frozen.
 
 [Complete 637-member failed-attempt evidence](../experiments/m5-ultra-256gb/E024-long-decode-cold-v1/README.md).
+
+
+## Lithos D512 qualification preparation (2026-10-17)
+
+The official FIFO server now has qualification-only taps and a raw NDJSON join.
+Actual returned IDs, full prompt, terminal EOS/count/text, cache miss and route
+are bound through original wire lines; response completion order is never used
+as identity. Actual POST→DONE interval scanning rejects serial histories labelled
+C8. Observer-OFF timing will use separately bounded original log windows for
+cache=0/setup=0; logs have no per-request wire IDs. Root and author each passed
+15 focused CPU tests. This prepares request/route/count qualification; it does
+not grant full-state correctness or a performance point.
+
+[Implementation, limits and recorded preparation attempts](../../bench/m5_ultra_256gb/lithos_d512/README.md).
