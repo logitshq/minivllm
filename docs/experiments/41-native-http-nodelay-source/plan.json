@@ -1,0 +1,56 @@
+{
+  "status": "FROZEN_BEFORE_GPU",
+  "baseline": "V105 native-only qualified CAP64/direct101, no draft; old105 campaign thermalSTOP preserved",
+  "factor": "accepted-socket TCP_NODELAY only; defaultOFF",
+  "arms": [
+    {
+      "pair": 1,
+      "engine": "native",
+      "label": "C1-P1-off",
+      "tcp_nodelay": "off"
+    },
+    {
+      "pair": 1,
+      "engine": "native",
+      "label": "C1-P1-on",
+      "tcp_nodelay": "on"
+    },
+    {
+      "pair": 2,
+      "engine": "native",
+      "label": "C1-P2-on",
+      "tcp_nodelay": "on"
+    },
+    {
+      "pair": 2,
+      "engine": "native",
+      "label": "C1-P2-off",
+      "tcp_nodelay": "off"
+    },
+    {
+      "pair": 3,
+      "engine": "native",
+      "label": "C1-P3-off",
+      "tcp_nodelay": "off"
+    },
+    {
+      "pair": 3,
+      "engine": "native",
+      "label": "C1-P3-on",
+      "tcp_nodelay": "on"
+    }
+  ],
+  "warm": 3,
+  "measure": 3,
+  "first_startup_ordinary_warm_per_server": 1,
+  "early_stop": "after first valid OFF/ON pair, STOP and retain two arms if ON median POST\u2192DONE is not faster; otherwise complete all six. No replacement runs.",
+  "gate": {
+    "complete_pairs": 3,
+    "every_paired_E2E_speedup_gt": 1.0,
+    "E2E_geomean_min": 1.05,
+    "every_paired_TTFT_speedup_min": 0.97
+  },
+  "resources": "exact105 AC nominal0, pressure1, paging guards/probes outside timing, owned-child reap/port absence; root final external release",
+  "clock": "unchanged105 POST-before\u2192DONE; exact SSE/raw32IDs/native186steps/6resets inherited; old per-step trace retained equally",
+  "performance_claim_before_actual": false
+}

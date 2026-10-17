@@ -1,0 +1,103 @@
+{
+  "status": "PASS_INDEPENDENT_REPLAY_OF_COMPLETE_NEGATIVE_V123_PILOT",
+  "arms": [
+    {
+      "mode": "speculative",
+      "latency_p50_ms": 2555.9262080059852,
+      "total_output_tok_s": 12.519923266863369,
+      "TTFT_p50_ms": 160.49725000630133,
+      "HTTP_requests": 6,
+      "outputs": 192,
+      "startup_requests": 1,
+      "startup_outputs": 32,
+      "startup_ready_allocator": {
+        "label": "server_ready",
+        "get_active_memory": 16399485452,
+        "get_cache_memory": 44564968,
+        "get_peak_memory": 16399485452
+      },
+      "resources": {
+        "owner": {
+          "samples": 7,
+          "swap_growth_MB": 0,
+          "Swapouts_delta": 0,
+          "sample_timestamps_outside_all_request_windows": true
+        },
+        "client": {
+          "samples": 12,
+          "swap_growth_MB": 0,
+          "Swapouts_delta": 0,
+          "sample_timestamps_outside_all_request_windows": true
+        }
+      },
+      "draft_loads": 1,
+      "draft_calls": null,
+      "verify_rounds": null,
+      "accepted_tokens": null,
+      "counter_scope": "Only actual startup draft-load configuration is saved. Per-request draft/verify/acceptance counters are not exported; no counts inferred from timing/chunks.",
+      "owned_pid": 43932,
+      "port": 57288
+    },
+    {
+      "mode": "ordinary",
+      "latency_p50_ms": 1247.4141659913585,
+      "total_output_tok_s": 25.653067659824604,
+      "TTFT_p50_ms": 162.90670799207874,
+      "HTTP_requests": 6,
+      "outputs": 192,
+      "startup_requests": 1,
+      "startup_outputs": 32,
+      "startup_ready_allocator": {
+        "label": "server_ready",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69881606,
+        "get_peak_memory": 15480145903
+      },
+      "resources": {
+        "owner": {
+          "samples": 7,
+          "swap_growth_MB": 0,
+          "Swapouts_delta": 0,
+          "sample_timestamps_outside_all_request_windows": true
+        },
+        "client": {
+          "samples": 12,
+          "swap_growth_MB": 0,
+          "Swapouts_delta": 0,
+          "sample_timestamps_outside_all_request_windows": true
+        }
+      },
+      "draft_loads": 0,
+      "draft_calls": null,
+      "verify_rounds": null,
+      "accepted_tokens": null,
+      "counter_scope": "Only actual startup draft-load configuration is saved. Per-request draft/verify/acceptance counters are not exported; no counts inferred from timing/chunks.",
+      "owned_pid": 44214,
+      "port": 57378
+    }
+  ],
+  "HTTP_requests": 12,
+  "HTTP_output_tokens": 384,
+  "formal_requests": 6,
+  "formal_output_tokens": 192,
+  "additional_startup_requests": 2,
+  "additional_startup_outputs": 64,
+  "all_model_requests": 14,
+  "all_model_outputs": 448,
+  "actual_raw_ID_arrays_checked": 14,
+  "resource_samples": 38,
+  "speculative_throughput_ratio_vs_ordinary": 0.48804780125656794,
+  "speculative_throughput_change_pct": -51.19521987434321,
+  "speculative_latency_change_pct": 104.89796233592648,
+  "source_pins": {
+    "actual_owner_python": 6,
+    "frozen_external": 51,
+    "all_hashes_match": true
+  },
+  "external_release_sha256": "aca5e24883a8dead67e1a68edf4bd95d0f4af9b9d9e4e328d6f36abddda689b1",
+  "cleanup": "Saved child birth-bound waits+literal absence and root real-time3PID/2port release reused; no live ps/socket attempted",
+  "draft_verify_acceptance_counts": "NOT_SAVED; no invented counts or bottleneck inference",
+  "scope": "One complete spec\u2192ordinary pilot, not balanced confirmation/HTTP frontier or adoption. Original120/122 resource STOPs remain separate.",
+  "GPU_W_Git_or_original_mutation": false,
+  "adopted": false
+}

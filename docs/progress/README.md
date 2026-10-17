@@ -16,3 +16,7 @@
 [40：整模通过后再测端到端性能](../experiments/40-m1-verify-and-bounded-loader.md)记录 V117 严格整模通过、V120 两次加载资源中止与 V122 小缓存诊断。普通路径单组测到 1250.37 ms / 25.59 tok/s，投机路径尚无请求性能；不混入旧前沿，完整 Pareto 胜出尚未成立。
 
 native15快照README保留作者在源机运行的命令。其`collect_rows.py`依赖未公开的完整arm报告与原目录布局，离机不能把这条命令当作完整采证重放。公开时间戳白名单和聚合表足够复算图中延迟与吞吐；重新绘图先复制快照到新目录，并准备Matplotlib及适用中文字体。`generate_figure.py`从脚本所在目录读数据、写图，当前字体路径为macOS STHeiti；不要直接在冻结快照中覆盖原图。
+
+[41：TCP_NODELAY HTTP 对照](../experiments/41-native-http-nodelay-pilot.md)新增首对负结果：OFF 为 1227.177 ms / 26.0761 tok/s，ON 为 1230.205 ms / 26.0119 tok/s。按冻结计划停止，未采用；两臂同机 AC、thermal 0、pressure 1。该内部单因素筛查单独保存，不替换上面的三家对照前沿。
+
+[42：投机与普通路径的新短请求对照](../experiments/42-startup-warm-short-request.md)：V123 两臂完成，raw32 与资源检查通过；spec 吞吐为 ordinary 的 48.805%，不采用。新图和负结果单独归档，不与旧三家前沿混合。

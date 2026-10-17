@@ -1,0 +1,203 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v122-startup-diagnostic-build1/adapter.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v123-startup-ordinary-warm-build1/adapter.py
+@@ -1,4 +1,4 @@
+-"""V122 startup-only allocator diagnostic; explicit fixed cache policy, same qualified math."""
++"""V123 one ordinary startup warm before bounded draftload; same low64 math/resources."""
+ import argparse
+ import hashlib
+ import importlib.metadata
+@@ -46,7 +46,7 @@
+     return b
+ 
+ 
+-def assemble(engine, mode, *, ModelRunner, load_drafter, draft_path, startup_callback=None):
++def assemble(engine, mode, *, ModelRunner, load_drafter, draft_path, startup_callback=None, startup_warm=None):
+     """Dependency injection permits CPU checks; production receives original classes."""
+     if mode not in ('ordinary', 'speculative'):
+         raise ValueError('mode must be ordinary or speculative')
+@@ -58,6 +58,8 @@
+         g.set_conv_norm_reuse_cache(True)
+     if engine.runner.spec is not None:
+         raise RuntimeError('factory requires a fresh ordinary engine')
++    if startup_warm is not None:
++        startup_warm(engine)
+     if mode == 'speculative':
+         if startup_callback is not None:
+             startup_callback('before_draft_load')
+@@ -70,6 +72,40 @@
+         if len(engine.runner.spec._verify_m1_ops114) != 497:
+             raise RuntimeError('all497 qualified target Linears required')
+     return engine
++
++
++def ordinary_startup_warm(engine, SamplingParams, workload, stage=None):
++    """One real ordinary request before attach; raw IDs/cleanup, no array hashes."""
++    if engine.runner.spec is not None or engine.has_work() or engine.requests:
++        raise RuntimeError('startup warm requires an idle ordinary engine')
++    prompt, expected = workload['prompt_ids'], workload['continuation_ids']
++    if len(prompt) != 19 or len(expected) != 32:
++        raise ValueError('old19-to32 raw fixture required')
++    if stage is not None:
++        stage('before_startup_ordinary_warm')
++    rid = engine.add_request(list(prompt), SamplingParams(max_tokens=32, temperature=0, ignore_eos=False),
++                             req_id='V123.startup.ordinary32')
++    emitted = []
++    while engine.has_work():
++        for current, token, done in engine.step():
++            if current != rid:
++                raise RuntimeError('startup warm received foreign delivery')
++            emitted.append(token)
++    if emitted != expected:
++        raise RuntimeError('startup ordinary raw32 differs from oldfixture')
++    runner = engine.runner
++    if (engine.requests or engine.has_work() or runner.spec is not None or runner.staging
++            or runner.batch.size or runner.batch.req_ids or runner.batch.lens
++            or any(value is not None for value in runner.batch.layers)
++            or runner._ahead is not None or runner.feats):
++        raise RuntimeError('startup ordinary request did not fully clear runner/cache/ahead')
++    if stage is not None:
++        stage('after_startup_ordinary_warm')
++    return {'status': 'STARTUP_ORDINARY32_RAW_IDS_AND_CLEANUP_STRICT', 'requests': 1,
++            'prompt_tokens': 19, 'output_tokens': len(emitted), 'raw_output_ids': emitted,
++            'raw32_equal_old_fixture': True, 'runner_idle_before_attach': True,
++            'drafter_absent_during_warm': True, 'outside_HTTP_timing': True,
++            'cause_of_resource_change_claimed': False}
+ 
+ 
+ def cache_config(name):
+@@ -130,13 +166,20 @@
+     before = [(n, id(v)) for n, v in tree_flatten(e.model.parameters())]
+     if len(before) != 1349:
+         raise RuntimeError('1349 original target parameter identities required')
+-    assemble(e, mode, ModelRunner=ModelRunner, load_drafter=load_drafter, draft_path=protocol['draft_snapshot'], startup_callback=stage)
++    workload = json.loads((P / 'workload.json').read_text())
++    warm_records = []
++    def startup_warm(engine):
++        warm_records.append(ordinary_startup_warm(engine, SamplingParams, workload, stage))
++    assemble(e, mode, ModelRunner=ModelRunner, load_drafter=load_drafter, draft_path=protocol['draft_snapshot'], startup_callback=stage, startup_warm=startup_warm)
++    if len(warm_records) != 1:
++        raise RuntimeError('exactly one startup ordinary warm required for either mode')
+     mx.synchronize()
+     stage('after_mx_synchronize')
+     if before != [(n, id(v)) for n, v in tree_flatten(e.model.parameters())]:
+         raise RuntimeError('target parameter identity changed')
+     return e, SamplingParams, {'mode': mode, 'model_loads': 1, 'draft_loads': int(mode == 'speculative'),
+         'cache_policy': cache_policy, **cache, 'startup_allocator_stages': stages,
++        'startup_ordinary_warm': warm_records[0], 'startup_warm_before_bounded_draft_load': True,
+         'bounded_load': mode == 'speculative', 'spec_block': 5 if mode == 'speculative' else None,
+         'capacity': 64, 'cache_allocation_step': 64, 'target_parameter_count': 1349,
+         'ordinary_ahead_retained': mode == 'ordinary', 'qualification_observer_callbacks': False,
+@@ -148,7 +191,7 @@
+     ap = argparse.ArgumentParser(description=__doc__)
+     ap.add_argument('--inert', action='store_true')
+     args = ap.parse_args()
+-    print(json.dumps({'status': 'CPU_READY_V122_STARTUP_DIAGNOSTIC_GPU_UNRUN', 'GPU_used': False,
++    print(json.dumps({'status': 'CPU_READY_V123_STARTUP_ORDINARY_WARM_GPU_UNRUN', 'GPU_used': False,
+         'thin_factory': str(D / 'adapter.py'), 'HTTP_draft': str(D / 'server.py'),
+         'qualification_bound': True, 'ordinary_ahead_retained': True}))
+ 
+--- /private/tmp/minivllm-engine-optimization-20261014/v122-startup-diagnostic-build1/server.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v123-startup-ordinary-warm-build1/server.py
+@@ -1,4 +1,4 @@
+-"""V122 short-C1 startup allocator diagnostic. Root owns timeout/resources/PID cleanup. Inert by default."""
++"""V123 short-C1 with one ordinary startup warm before bounded draftload. Root owns timeout/resources/PID cleanup. Inert by default."""
+ import argparse
+ import json
+ import os
+@@ -23,7 +23,7 @@
+     a = ap.parse_args(argv)
+     if not a.execute_gpu:
+         assert not any(n == 'mlx' or n.startswith(('mlx.', 'numpy')) for n in sys.modules)
+-        print(json.dumps({'status': 'CPU_READY_V122_STARTUP_DIAGNOSTIC_GPU_UNRUN', 'GPU_used': False, 'mode': a.mode}))
++        print(json.dumps({'status': 'CPU_READY_V123_STARTUP_ORDINARY_WARM_GPU_UNRUN', 'GPU_used': False, 'mode': a.mode}))
+         return 0
+     qualification(a.qualification_binding)  # HOLD is checked before importing tokenizer or MLX.
+     if not (a.owner_pid == os.getppid() and a.port and 1024 <= a.port <= 65535 and a.run_dir and a.run_dir.is_absolute()):
+--- /private/tmp/minivllm-engine-optimization-20261014/v122-startup-diagnostic-build1/protocol.json
++++ /private/tmp/minivllm-engine-optimization-20261014/v123-startup-ordinary-warm-build1/protocol.json
+@@ -1,5 +1,5 @@
+ {
+-  "status": "CPU_READY_STARTUP_DIAGNOSTIC_GPU_UNRUN",
++  "status": "CPU_READY_V123_GPU_UNRUN",
+   "default_cache_policy": "original2g",
+   "alternative_separate_resource_configuration": "low64",
+   "controls": "unchanged50/50/20/0,noDYLD,34GiBmemorylimit",
+@@ -8,5 +8,18 @@
+   "output": "server run-dir/startup-allocator-stages.json incrementally saved even if later build fails; startup-metadata.json includes policy/counters; no per-step counters",
+   "guards": "V120/root owned pressure1/nominalAC/paging gates unchanged. pressureSTOP never silently retry/fallback to another pool",
+   "modes": "ordinary and speculative must use same preregistered cache-policy in any comparison",
+-  "performance": "Only after successful startup guard;3warm3measure originalclient exact. Startup counter JSON is outside request clocks; original2g vs low64 results are separate resource configurations."
++  "performance": "Only after successful startup guard;3warm3measure originalclient exact. Startup counter JSON is outside request clocks; original2g vs low64 results are separate resource configurations.",
++  "actual_owner_cache_policy": "low64",
++  "startup_addition": "Exactlyoneordinary19-to32rawID request BEFORE optionalboundedDFlashload, inbothordinary/speculativearm. GDNflagsON/freshordinaryrunner; fullrequest/runner/batch/ahead cleanup asserted beforeattach.",
++  "startup_warm_per_fresh_server": 1,
++  "HTTP_timing_unchanged": true,
++  "HTTP_request_warmups": 3,
++  "HTTP_request_measures": 3,
++  "driver_order": [
++    "speculative",
++    "ordinary"
++  ],
++  "retry_policy": "Exactlyonefreshpairplan; firstresourcepressureSTOPabortsnorestarthandoff; noautomaticfallback/cacheretry.",
++  "delay_policy": "No newstartupdelays/clear_cache/hashscans. Existing122owner20sinter-armcoolgap/polling remainsoutsideclocks.",
++  "causal_scope": "Mirrors117 successfulordinaryA-beforeDFlashloadordering; no causalattribution or expectedgain."
+ }
+--- /private/tmp/minivllm-engine-optimization-20261014/v122-startup-diagnostic-build1/check_cpu.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v123-startup-ordinary-warm-build1/check_cpu.py
+@@ -94,5 +94,56 @@
+         self.assertTrue(any("mx.set_cache_limit(cache['runtime_cache_limit_bytes'])"==c for c in calls))
+         self.assertIn("stage('target_ready')", calls);self.assertIn("stage('after_mx_synchronize')",calls)
+ 
++
++class V123StartupOrder(unittest.TestCase):
++    def test_warm_callback_exactly_once_before_optional_loader(self):
++        for mode in ('ordinary','speculative'):
++            engine,c,runner,loader=CPU().fake();events=[]
++            def warm(e):
++                self.assertIs(e,engine);self.assertIsNone(e.runner.spec);events.append('ordinary_warm')
++            def load(*a,**kw):
++                self.assertEqual(events,['ordinary_warm']);events.append('bounded_load');return loader(*a,**kw)
++            adapter.assemble(engine,mode,ModelRunner=runner,load_drafter=load,draft_path='draft',startup_warm=warm)
++            self.assertEqual(events,['ordinary_warm']+(['bounded_load']if mode=='speculative'else[]))
++    def test_minimal_inverse_and_real_warm_contract_source(self):
++        old=P/'v122-startup-diagnostic-build1'
++        tree=ast.parse((D/'adapter.py').read_text())
++        fn={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}
++        warm=fn['ordinary_startup_warm'];calls=[ast.unparse(n.func)for n in ast.walk(warm)if isinstance(n,ast.Call)]
++        self.assertEqual(calls.count('engine.add_request'),1)
++        self.assertIn('engine.step',calls)
++        for bad in ('sleep','time.sleep','sha','mx.eval','mx.clear_cache'):self.assertNotIn(bad,calls)
++        text=ast.get_source_segment((D/'adapter.py').read_text(),warm)
++        self.assertIn("workload['continuation_ids']",text);self.assertIn('emitted != expected',text)
++        self.assertIn('runner.batch.layers',text);self.assertIn('runner._ahead is not None',text)
++        class Inverse(ast.NodeTransformer):
++            def visit_FunctionDef(self,n):
++                if n.name in ('ordinary_startup_warm','startup_warm'):return None
++                if n.name=='assemble':
++                    keep=[i for i,a in enumerate(n.args.kwonlyargs)if a.arg!='startup_warm']
++                    n.args.kwonlyargs=[n.args.kwonlyargs[i]for i in keep];n.args.kw_defaults=[n.args.kw_defaults[i]for i in keep]
++                return self.generic_visit(n)
++            def visit_Assign(self,n):
++                if any(isinstance(x,ast.Name)and x.id in ('workload','warm_records')for x in n.targets):return None
++                return self.generic_visit(n)
++            def visit_If(self,n):
++                if ast.unparse(n.test)in ('startup_warm is not None','len(warm_records) != 1'):return None
++                return self.generic_visit(n)
++            def visit_Call(self,n):
++                if isinstance(n.func,ast.Name)and n.func.id=='assemble':n.keywords=[k for k in n.keywords if k.arg!='startup_warm']
++                return self.generic_visit(n)
++            def visit_Dict(self,n):
++                keep=[i for i,k in enumerate(n.keys)if not(isinstance(k,ast.Constant)and k.value in ('startup_ordinary_warm','startup_warm_before_bounded_draft_load'))]
++                n.keys=[n.keys[i]for i in keep];n.values=[n.values[i]for i in keep];return self.generic_visit(n)
++            def visit_Constant(self,n):
++                if isinstance(n.value,str):
++                    n.value=n.value.replace('V123 one ordinary startup warm before bounded draftload; same low64 math/resources.','V122 startup-only allocator diagnostic; explicit fixed cache policy, same qualified math.').replace('CPU_READY_V123_STARTUP_ORDINARY_WARM_GPU_UNRUN','CPU_READY_V122_STARTUP_DIAGNOSTIC_GPU_UNRUN')
++                return n
++        self.assertEqual(ast.dump(Inverse().visit(tree),include_attributes=False),ast.dump(ast.parse((old/'adapter.py').read_text()),include_attributes=False))
++        owner=(D/'owner.py').read_text()
++        self.assertIn("default=['speculative','ordinary']",owner);self.assertIn("assert a.modes==['speculative','ordinary']",owner)
++        self.assertEqual(owner.count('for index,mode in enumerate(a.modes):'),1)
++        self.assertNotIn('retry(',owner);self.assertEqual((D/'client.py').read_bytes(),(old/'client.py').read_bytes())
++
+ if __name__=='__main__':unittest.main()
+ 

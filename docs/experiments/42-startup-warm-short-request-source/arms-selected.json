@@ -1,0 +1,406 @@
+[
+  {
+    "mode": "speculative",
+    "source": {
+      "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/v123-startup-warm-c1-attempt1/00-speculative/client/result.json",
+      "sha256": "1df0c4f5b57e86ef691339b0850b159efa130380110f2b69bc409d45a090ba62",
+      "bytes": 55421
+    },
+    "summary": {
+      "status": "C1_SINGLE_ARM_COMPLETED_NO_ADOPTION",
+      "mode": "speculative",
+      "all_raw32_match_old_fixture": true,
+      "latency_p50_ms": 2555.9262080059852,
+      "total_output_tok_s": 12.519923266863369,
+      "ttft_p50_ms": 160.49725000630133,
+      "scope": "One fresh C1 arm, not paired proof or HTTP/full-frontier win",
+      "power_domain": "AC Power"
+    },
+    "startup_metadata": {
+      "mode": "speculative",
+      "model_loads": 1,
+      "draft_loads": 1,
+      "cache_policy": "low64",
+      "engine_cache_limit_gb": 0,
+      "runtime_cache_limit_bytes": 67108864,
+      "startup_allocator_stages": [
+        {
+          "label": "target_ready",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15134031856
+        },
+        {
+          "label": "runtime_cache_policy_set",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15134031856
+        },
+        {
+          "label": "before_startup_ordinary_warm",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15134031856
+        },
+        {
+          "label": "after_startup_ordinary_warm",
+          "get_active_memory": 15133597708,
+          "get_cache_memory": 69897990,
+          "get_peak_memory": 15480145903
+        },
+        {
+          "label": "before_draft_load",
+          "get_active_memory": 15133597708,
+          "get_cache_memory": 69897990,
+          "get_peak_memory": 15480145903
+        },
+        {
+          "label": "after_draft_load",
+          "get_active_memory": 16399485452,
+          "get_cache_memory": 44564968,
+          "get_peak_memory": 16399485452
+        },
+        {
+          "label": "after_mx_synchronize",
+          "get_active_memory": 16399485452,
+          "get_cache_memory": 44564968,
+          "get_peak_memory": 16399485452
+        }
+      ],
+      "startup_ordinary_warm": {
+        "status": "STARTUP_ORDINARY32_RAW_IDS_AND_CLEANUP_STRICT",
+        "requests": 1,
+        "prompt_tokens": 19,
+        "output_tokens": 32,
+        "raw_output_ids": [
+          79852,
+          18887,
+          220,
+          95761,
+          60277,
+          220,
+          103725,
+          95772,
+          103910,
+          109120,
+          95865,
+          3709,
+          111734,
+          96221,
+          97792,
+          100658,
+          5141,
+          220,
+          95793,
+          4997,
+          220,
+          117888,
+          3709,
+          120718,
+          108695,
+          97792,
+          96671,
+          129933,
+          3709,
+          99131,
+          146502,
+          111892
+        ],
+        "raw32_equal_old_fixture": true,
+        "runner_idle_before_attach": true,
+        "drafter_absent_during_warm": true,
+        "outside_HTTP_timing": true,
+        "cause_of_resource_change_claimed": false
+      },
+      "startup_warm_before_bounded_draft_load": true,
+      "bounded_load": true,
+      "spec_block": 5,
+      "capacity": 64,
+      "cache_allocation_step": 64,
+      "target_parameter_count": 1349,
+      "ordinary_ahead_retained": false,
+      "qualification_observer_callbacks": false,
+      "intrinsic_candidate_transaction_metadata_retained": true,
+      "qualification_receipt_sha256": "bbc2067380d4ecac328427411a92853c8587a0a16ea11cf12bb8da2b370491e5",
+      "numerical_kernel_changes": false
+    },
+    "startup_allocator_stages": [
+      {
+        "label": "target_ready",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15134031856
+      },
+      {
+        "label": "runtime_cache_policy_set",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15134031856
+      },
+      {
+        "label": "before_startup_ordinary_warm",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15134031856
+      },
+      {
+        "label": "after_startup_ordinary_warm",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69897990,
+        "get_peak_memory": 15480145903
+      },
+      {
+        "label": "before_draft_load",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69897990,
+        "get_peak_memory": 15480145903
+      },
+      {
+        "label": "after_draft_load",
+        "get_active_memory": 16399485452,
+        "get_cache_memory": 44564968,
+        "get_peak_memory": 16399485452
+      },
+      {
+        "label": "after_mx_synchronize",
+        "get_active_memory": 16399485452,
+        "get_cache_memory": 44564968,
+        "get_peak_memory": 16399485452
+      },
+      {
+        "label": "server_ready",
+        "get_active_memory": 16399485452,
+        "get_cache_memory": 44564968,
+        "get_peak_memory": 16399485452
+      }
+    ],
+    "owned_exit": {
+      "pid": 43932,
+      "wait_completed": true,
+      "returncode": -15,
+      "exact_pid_absence": {
+        "pid": 43932,
+        "command": [
+          "/bin/ps",
+          "-p",
+          "43932",
+          "-o",
+          "pid=,ppid=,rss=,comm="
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "",
+        "absent": true
+      },
+      "recorded_birth_identity_sha256": "9f3174f058798f0a0581d4acddadb1d829197ae9766aaf4b3bdf8e0f46505666",
+      "signal_identity_decisions": [
+        {
+          "signal": 15,
+          "current_identity_sha256": "9f3174f058798f0a0581d4acddadb1d829197ae9766aaf4b3bdf8e0f46505666",
+          "decision": "SAME_IDENTITY_SIGNAL"
+        }
+      ]
+    },
+    "port_absence": {
+      "port": 57288,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 216732.479936041,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "mode": "ordinary",
+    "source": {
+      "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/v123-startup-warm-c1-attempt1/01-ordinary/client/result.json",
+      "sha256": "b274492643b71512a573e57d9fdcbbfd3c8fdf7b341c4170c79e2a6e92135064",
+      "bytes": 55036
+    },
+    "summary": {
+      "status": "C1_SINGLE_ARM_COMPLETED_NO_ADOPTION",
+      "mode": "ordinary",
+      "all_raw32_match_old_fixture": true,
+      "latency_p50_ms": 1247.4141659913585,
+      "total_output_tok_s": 25.653067659824604,
+      "ttft_p50_ms": 162.90670799207874,
+      "scope": "One fresh C1 arm, not paired proof or HTTP/full-frontier win",
+      "power_domain": "AC Power"
+    },
+    "startup_metadata": {
+      "mode": "ordinary",
+      "model_loads": 1,
+      "draft_loads": 0,
+      "cache_policy": "low64",
+      "engine_cache_limit_gb": 0,
+      "runtime_cache_limit_bytes": 67108864,
+      "startup_allocator_stages": [
+        {
+          "label": "target_ready",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15133945640
+        },
+        {
+          "label": "runtime_cache_policy_set",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15133945640
+        },
+        {
+          "label": "before_startup_ordinary_warm",
+          "get_active_memory": 15133597696,
+          "get_cache_memory": 0,
+          "get_peak_memory": 15133945640
+        },
+        {
+          "label": "after_startup_ordinary_warm",
+          "get_active_memory": 15133597708,
+          "get_cache_memory": 69881606,
+          "get_peak_memory": 15480145903
+        },
+        {
+          "label": "after_mx_synchronize",
+          "get_active_memory": 15133597708,
+          "get_cache_memory": 69881606,
+          "get_peak_memory": 15480145903
+        }
+      ],
+      "startup_ordinary_warm": {
+        "status": "STARTUP_ORDINARY32_RAW_IDS_AND_CLEANUP_STRICT",
+        "requests": 1,
+        "prompt_tokens": 19,
+        "output_tokens": 32,
+        "raw_output_ids": [
+          79852,
+          18887,
+          220,
+          95761,
+          60277,
+          220,
+          103725,
+          95772,
+          103910,
+          109120,
+          95865,
+          3709,
+          111734,
+          96221,
+          97792,
+          100658,
+          5141,
+          220,
+          95793,
+          4997,
+          220,
+          117888,
+          3709,
+          120718,
+          108695,
+          97792,
+          96671,
+          129933,
+          3709,
+          99131,
+          146502,
+          111892
+        ],
+        "raw32_equal_old_fixture": true,
+        "runner_idle_before_attach": true,
+        "drafter_absent_during_warm": true,
+        "outside_HTTP_timing": true,
+        "cause_of_resource_change_claimed": false
+      },
+      "startup_warm_before_bounded_draft_load": true,
+      "bounded_load": false,
+      "spec_block": null,
+      "capacity": 64,
+      "cache_allocation_step": 64,
+      "target_parameter_count": 1349,
+      "ordinary_ahead_retained": true,
+      "qualification_observer_callbacks": false,
+      "intrinsic_candidate_transaction_metadata_retained": false,
+      "qualification_receipt_sha256": "bbc2067380d4ecac328427411a92853c8587a0a16ea11cf12bb8da2b370491e5",
+      "numerical_kernel_changes": false
+    },
+    "startup_allocator_stages": [
+      {
+        "label": "target_ready",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15133945640
+      },
+      {
+        "label": "runtime_cache_policy_set",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15133945640
+      },
+      {
+        "label": "before_startup_ordinary_warm",
+        "get_active_memory": 15133597696,
+        "get_cache_memory": 0,
+        "get_peak_memory": 15133945640
+      },
+      {
+        "label": "after_startup_ordinary_warm",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69881606,
+        "get_peak_memory": 15480145903
+      },
+      {
+        "label": "after_mx_synchronize",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69881606,
+        "get_peak_memory": 15480145903
+      },
+      {
+        "label": "server_ready",
+        "get_active_memory": 15133597708,
+        "get_cache_memory": 69881606,
+        "get_peak_memory": 15480145903
+      }
+    ],
+    "owned_exit": {
+      "pid": 44214,
+      "wait_completed": true,
+      "returncode": -15,
+      "exact_pid_absence": {
+        "pid": 44214,
+        "command": [
+          "/bin/ps",
+          "-p",
+          "44214",
+          "-o",
+          "pid=,ppid=,rss=,comm="
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "",
+        "absent": true
+      },
+      "recorded_birth_identity_sha256": "00c57dd02385520311c40ea177f4cfe9450f281a54fb3ffbc0dd346c0545c6ca",
+      "signal_identity_decisions": [
+        {
+          "signal": 15,
+          "current_identity_sha256": "00c57dd02385520311c40ea177f4cfe9450f281a54fb3ffbc0dd346c0545c6ca",
+          "decision": "SAME_IDENTITY_SIGNAL"
+        }
+      ]
+    },
+    "port_absence": {
+      "port": 57378,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 216767.50676475,
+          "connect_ex": 61
+        }
+      ]
+    }
+  }
+]

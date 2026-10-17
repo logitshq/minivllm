@@ -68,7 +68,7 @@ tab.text(0,.077,'HTTP 429 边界；没有零值点。',fontsize=10,color='#64717
 tab.set_xlim(0,1);tab.set_ylim(0,1)
 fig.text(.045,.18,'实心大点：联合非支配；空心大点：联合被支配；小点：全部 21 个 fresh arm。',fontsize=11.5)
 fig.text(.045,.124,'粗虚线连接联合前沿的两个实测配置；细线为各家前沿。连接不代表插值、可行的新配置或统计显著性。',fontsize=10.5,color='#596771')
-fig.text(.045,.075,'正确性为入图先决约束；未过整模资格的最新 spec 候选不入图。旧轮次有 thermal 0/1 混合与重复波动。',fontsize=10.5,color='#596771')
+fig.text(.045,.075,'正确性为准入条件；最新 spec 短请求未获性能收益，新旧轮次不混合；旧轮次有 thermal 0/1 混合与重复波动。',fontsize=10.5,color='#596771')
 fig.text(.045,.032,'证据：m4-final-native15-official-attempt2 · 270 HTTP / 135 measured / 4,320 measured tokens · 快照 2026-10-17',fontsize=10,color='#6C7780')
 for ext in ('png','svg'):
     meta={'Creator':'CPU Matplotlib; replayed saved start-to-DONE HTTP timing'} if ext=='svg' else {'Software':'CPU Matplotlib'}

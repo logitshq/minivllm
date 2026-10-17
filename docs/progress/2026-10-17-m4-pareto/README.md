@@ -6,7 +6,7 @@
 
 每家已测前沿：native15 C1/C4；oMLX C1/C4；Lithos仅C1。7个配置中位点和全部21fresh-arm小点保留。粗虚线为联合前沿；细线为各家已测前沿；连接只标出实测端点关系，不代表可行插值或额外实测配置。Lithos C2/C4因已记录429边界N/A，无零值点。
 
-latency来自真实client POST start→SSE DONE：每measure group request p50→每arm3group中位→每配置3fresh-arm中位。throughput为组B×32/(最晚DONE−最早POSTstart)，按同样层次取中位。Qwen3.8-27B NVFP4 g16/b4，M4Max48GiB，19→32，旧轮次thermal0/1混合且有重复波动；不声称统计显著性、最新候选胜出或完整frontier覆盖。未过整模资格的最新spec候选不入图；未混M5/GLM数字。
+latency来自真实client POST start→SSE DONE：每measure group request p50→每arm3group中位→每配置3fresh-arm中位。throughput为组B×32/(最晚DONE−最早POSTstart)，按同样层次取中位。Qwen3.8-27B NVFP4 g16/b4，M4Max48GiB，19→32，旧轮次thermal0/1混合且有重复波动；不声称统计显著性、最新候选胜出或完整frontier覆盖。正确性为准入条件；最新 spec（V123）短请求未获性能收益，新旧轮次不混合，因此本图不添点。V120/V122 的资源 STOP 保留；未混 M5/GLM 数字。
 
 输入input-reviewed-rows.json为前一冻结快照原字节副本；pareto.json保留每点联合/本家支配者和非支配判定。generate_figure.py重算并assert联合/各家前沿与每点支配关系，使用Matplotlib3.11.2/Agg，中文SVG嵌字形路径。正确性资格沿用历史campaign验证，本图不新增跨引擎逐字节等价证明。
 

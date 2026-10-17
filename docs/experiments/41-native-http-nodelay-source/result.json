@@ -1,0 +1,58 @@
+{
+  "status": "STOP_FIRST_PAIR_NO_E2E_GAIN",
+  "complete_pairs": 1,
+  "reason": "predeclared first OFF/ON pair has no E2E benefit; four remaining arms not run",
+  "arms": [
+    {
+      "label": "C1-P1-off",
+      "engine": "native",
+      "x": 29.03693955277564,
+      "y": 26.076108881379138,
+      "ttft_s": 0.15901145900716074,
+      "E2E_s": 1.2271769590151962,
+      "pair": 1,
+      "tcp_nodelay": "off",
+      "socket": {
+        "status": "V121_FIRST_ACCEPTED_SOCKET",
+        "pid": 42550,
+        "scope": "first accepted connection; every connection is read back",
+        "tcp_nodelay_requested": false,
+        "tcp_nodelay_actual": 0,
+        "tcp_nodelay_enabled": false,
+        "wbufsize": 0,
+        "rbufsize": -1
+      }
+    },
+    {
+      "label": "C1-P1-on",
+      "engine": "native",
+      "x": 28.949276665268837,
+      "y": 26.011918688589667,
+      "ttft_s": 0.1593667910201475,
+      "E2E_s": 1.2302052910090424,
+      "pair": 1,
+      "tcp_nodelay": "on",
+      "socket": {
+        "status": "V121_FIRST_ACCEPTED_SOCKET",
+        "pid": 42731,
+        "scope": "first accepted connection; every connection is read back",
+        "tcp_nodelay_requested": true,
+        "tcp_nodelay_actual": 4,
+        "tcp_nodelay_enabled": true,
+        "wbufsize": 0,
+        "rbufsize": -1
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "E2E_speedup": 0.9975383523254381,
+      "throughput_ratio": 0.9975383523254381,
+      "TTFT_speedup": 0.9977703509576105
+    }
+  ],
+  "GPU_released": false,
+  "HTTP_or_model_frontier_win": false,
+  "scope": "transport-only frozen105 C1; no DFlash, no kernel speed claim, external release still required"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "CPU_READY_V123_GPU_UNRUN",
+  "default_cache_policy": "original2g",
+  "alternative_separate_resource_configuration": "low64",
+  "controls": "unchanged50/50/20/0,noDYLD,34GiBmemorylimit",
+  "qualification": "same actual117 binding; actual HTTP raw32 must still pass in every arm, including low64",
+  "scope": "Startup allocator counters and explicit pool configuration only; no new numerical algorithm, no performance/adoption claim",
+  "output": "server run-dir/startup-allocator-stages.json incrementally saved even if later build fails; startup-metadata.json includes policy/counters; no per-step counters",
+  "guards": "V120/root owned pressure1/nominalAC/paging gates unchanged. pressureSTOP never silently retry/fallback to another pool",
+  "modes": "ordinary and speculative must use same preregistered cache-policy in any comparison",
+  "performance": "Only after successful startup guard;3warm3measure originalclient exact. Startup counter JSON is outside request clocks; original2g vs low64 results are separate resource configurations.",
+  "actual_owner_cache_policy": "low64",
+  "startup_addition": "Exactlyoneordinary19-to32rawID request BEFORE optionalboundedDFlashload, inbothordinary/speculativearm. GDNflagsON/freshordinaryrunner; fullrequest/runner/batch/ahead cleanup asserted beforeattach.",
+  "startup_warm_per_fresh_server": 1,
+  "HTTP_timing_unchanged": true,
+  "HTTP_request_warmups": 3,
+  "HTTP_request_measures": 3,
+  "driver_order": [
+    "speculative",
+    "ordinary"
+  ],
+  "retry_policy": "Exactlyonefreshpairplan; firstresourcepressureSTOPabortsnorestarthandoff; noautomaticfallback/cacheretry.",
+  "delay_policy": "No newstartupdelays/clear_cache/hashscans. Existing122owner20sinter-armcoolgap/polling remainsoutsideclocks.",
+  "causal_scope": "Mirrors117 successfulordinaryA-beforeDFlashloadordering; no causalattribution or expectedgain."
+}

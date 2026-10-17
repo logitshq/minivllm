@@ -1,0 +1,125 @@
+--- V105/driver.py
++++ V121/driver.py
+@@ -73,7 +73,7 @@
+         env['DYLD_INSERT_LIBRARIES'] = config['native_library']
+         command = [sys.executable, '-B', str(D / 'server.py'), '--config', str(D / 'runtime-config.json'),
+                    '--model', str(model), '--port', str(port), '--trace', str(run_dir / 'engine-trace.json'),
+-                   '--run-dir', str(run_dir), '--owner-pid', str(os.getpid())]
++                   '--run-dir', str(run_dir), '--owner-pid', str(os.getpid()), '--tcp-nodelay', item['tcp_nodelay']]
+     else:
+         command = official.official_command(engine, batch, run_dir, port, key, model, env)
+     samples = []; proc = None; birth = None; lf = None; error = None; cleanup = None
+@@ -251,8 +251,10 @@
+     return {k: result[k] for k in ('label', 'engine', 'x', 'y', 'ttft_s', 'E2E_s')}
+ 
+ 
++
++# V121 thin controller follows; frozen105 run_arm differs only by one launch keyword.
+ def main():
+-    ap = argparse.ArgumentParser(description=__doc__)
++    ap = argparse.ArgumentParser(description='V121 frozen105 native-only accepted-socket OFF/ON screen')
+     mode = ap.add_mutually_exclusive_group(required=True)
+     mode.add_argument('--cpu-dry-run', action='store_true'); mode.add_argument('--run', action='store_true')
+     ap.add_argument('--out', type=Path); ap.add_argument('--pins-sha256', required=True)
+@@ -265,43 +267,54 @@
+     q = json.loads(Path(config['fullqual_receipt']).read_text())
+     assert q['status'] == config['fullqual_status'] and q['terminal_cleanup']
+     assert controls.sha(config['fullqual_receipt']) == config['fullqual_receipt_sha256']
+-    assert not any(n == 'mlx' or n.startswith('mlx.') for n in sys.modules)
+-    assert not controls.selected(os.environ)
+-    assert sys.executable == controls.PYTHON
+-    plan = [{'block': b, 'label': f'C1-B{b}-{name}', 'engine': name}
+-            for b, order in enumerate((('native', 'omlx', 'lithos'), ('omlx', 'lithos', 'native'),
+-                                       ('lithos', 'native', 'omlx')), 1) for name in order]
++    plan = json.loads((D / 'plan.json').read_text())
+     if args.cpu_dry_run:
+-        print(json.dumps({'status': 'PASS_CPU_DRY_RUN', 'plan': plan, 'fresh_loads': 9,
+-                          'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
+-                          'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+-                          'total_executed_requests': 57, 'total_executed_tokens': 1824, 'GPU_used': False}))
+-        return 0
+-    assert args.out is not None and args.out.is_absolute(); args.out.mkdir()
++        assert not any(n == 'mlx' or n.startswith(('mlx.', 'numpy')) for n in sys.modules)
++        print(json.dumps({'status': 'CPU_READY_V121', 'GPU_used': False, 'plan': plan['arms'],
++                          'early_stop': plan['early_stop'], 'fresh_servers_max': 6})); return 0
++    assert sys.executable == controls.PYTHON and not controls.selected(os.environ)
++    assert args.out and args.out.is_absolute(); args.out.mkdir(exist_ok=False)
+     write_new(D / 'attempt.consumed.json', {'pid': os.getpid(), 'pins_sha256': args.pins_sha256})
+-    completed = []; previous_env = {}; samples = []; error = None; completion = None
+-    def stop_owned_driver(sig, frame):
+-        raise KeyboardInterrupt('owned driver signal ' + str(sig))
+-    previous_term = signal.signal(signal.SIGTERM, stop_owned_driver)
++    completed = []; previous_env = {}; samples = []; error = None; outcome = None
++    def interrupted(sig, frame): raise KeyboardInterrupt('V121 owned driver signal ' + str(sig))
++    previous_term = signal.signal(signal.SIGTERM, interrupted)
+     try:
+         controls.probe(samples, args.out / 'owner-resources.json', 'before-campaign', 'AC')
+         assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+-        for item in plan:
++        for item in plan['arms']:
+             print(json.dumps({'event': 'ARM_STARTED', **item}), flush=True)
+-            completed.append(run_arm(item, args.out, config, previous_env))
+-            print(json.dumps({'event': 'ARM_COMPLETED', 'completed': len(completed), 'total': 9,
+-                              **completed[-1]}), flush=True)
++            value = run_arm(item, args.out, config, previous_env)
++            arm_dir = args.out / item['label']
++            assert not (arm_dir / 'socket-failure.json').exists()
++            sock = json.loads((arm_dir / 'socket-first.json').read_text())
++            assert sock['tcp_nodelay_requested'] == (item['tcp_nodelay'] == 'on')
++            assert sock['tcp_nodelay_enabled'] == (item['tcp_nodelay'] == 'on')
++            assert bool(sock['tcp_nodelay_actual']) == sock['tcp_nodelay_enabled'] and sock['wbufsize'] == 0
++            owned = json.loads((arm_dir / 'owned-pid.json').read_text()); assert sock['pid'] == owned['pid']
++            value.update(pair=item['pair'], tcp_nodelay=item['tcp_nodelay'], socket=sock)
++            completed.append(value); write_new(args.out / ('arm-%d.json' % len(completed)), value)
++            print(json.dumps({'event': 'ARM_COMPLETED', **value}), flush=True)
++            if len(completed) == 2 and completed[0]['E2E_s'] <= completed[1]['E2E_s']:
++                outcome = {'status': 'STOP_FIRST_PAIR_NO_E2E_GAIN', 'complete_pairs': 1,
++                           'reason': 'predeclared first OFF/ON pair has no E2E benefit; four remaining arms not run'}
++                break
++        pairs = []
++        for number in sorted({x['pair'] for x in completed}):
++            pair = {x['tcp_nodelay']: x for x in completed if x['pair'] == number}
++            if set(pair) != {'off', 'on'}: continue
++            pairs.append({'pair': number, 'E2E_speedup': pair['off']['E2E_s'] / pair['on']['E2E_s'],
++                          'throughput_ratio': pair['on']['y'] / pair['off']['y'],
++                          'TTFT_speedup': pair['off']['ttft_s'] / pair['on']['ttft_s']})
++        if outcome is None:
++            assert len(completed) == 6 and len(pairs) == 3
++            geomean = __import__('math').prod(x['E2E_speedup'] for x in pairs) ** (1 / 3)
++            passed = geomean >= 1.05 and all(x['E2E_speedup'] > 1 and x['TTFT_speedup'] >= .97 for x in pairs)
++            outcome = {'status': 'PASS_V121_TRANSPORT_SCREEN' if passed else 'STOP_TRANSPORT_GATE',
++                       'complete_pairs': 3, 'E2E_speedup_geomean': geomean, 'gate_passed': passed}
++        outcome.update(arms=completed, pairs=pairs, GPU_released=False, HTTP_or_model_frontier_win=False,
++                       scope='transport-only frozen105 C1; no DFlash, no kernel speed claim, external release still required')
++        write_new(args.out / 'result.json', outcome)
+         for path, digest in pins['files'].items(): assert controls.sha(path) == digest, path
+-        assert len(completed) == 9
+-        medians = {engine: {key: statistics.median(r[key] for r in completed if r['engine'] == engine)
+-                            for key in ('x', 'y', 'ttft_s', 'E2E_s')}
+-                   for engine in ('native', 'omlx', 'lithos')}
+-        completion = {'status': 'PASS_C1_SCREEN', 'arms': completed,
+-            'medians': medians, 'all_negative_pairs_retained': True, 'full_frontier_win': False,
+-            'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
+-            'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+-            'total_executed_requests': 57, 'total_executed_tokens': 1824,
+-            'measured_requests': 27, 'measured_tokens': 864}
+     except BaseException as exc:
+         error = {'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()}
+         write_new(args.out / 'suite-failure.json', {'error': error, 'completed': completed, 'raw_preserved': True})
+@@ -310,13 +323,8 @@
+         signal.signal(signal.SIGTERM, previous_term)
+         controls.probe(samples, args.out / 'owner-resources.json', 'after-campaign', 'AC')
+         assert samples[-1]['processinfo_thermal_metadata']['code'] == 0
+-        write_new(args.out / 'owner-cleanup.json', {'pid': os.getpid(), 'completed_arms': len(completed),
+-                                                 'error': error, 'GPU_released': False})
+-    assert completion is not None and error is None
+-    write_new(args.out / 'suite-complete.json', completion)
+-    print(json.dumps({'event': 'SUITE_COMPLETE', 'medians': completion['medians'],
+-                      'full_frontier_win': False}), flush=True)
+-    return 0
+-
++        write_new(args.out / 'owner-cleanup.json', {'pid': os.getpid(), 'completed_arms': len(completed), 'error': error, 'GPU_released': False})
++    print(json.dumps(outcome), flush=True)
++    return 0 if outcome['status'] == 'PASS_V121_TRANSPORT_SCREEN' else 2
+ 
+ if __name__ == '__main__': raise SystemExit(main())

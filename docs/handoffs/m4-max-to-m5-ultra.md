@@ -66,3 +66,17 @@ V117 actual receipt `bbc2067380d4ecac328427411a92853c8587a0a16ea11cf12bb8da2b370
 无资格观察器的 V120 HTTP 尝试中，普通路径一组正式中位数为 1250.37 ms / 25.59 tok/s；两次独立投机加载均在首请求前触发 pressure2 并正常清理。V122 将两臂运行复用池预设为 64 MiB，实际投机加载 active/peak 16,399,485,440 B、cache 44,564,968 B，仍在首请求前中止，尚无配对性能。保留所有失败，不把 reduced cache 当作已验证收益。下一项 V121 将单独测 accepted socket 的 TCP_NODELAY，保持引擎和 HTTP payload 不变；未测前不入图。
 
 本轮读取 M5 最新 `c01624d` / E020 `9f1e331`：新同轮 C1 是 oMLX 普通配置最快，不能用旧 E010 锚点声称当前全面胜出。也读到 GLM 权重下载已启动、E022 transport 仅 CPU 准备。我们通过当前分支推送记录交换，不宣称对方已阅读本次提交。
+
+## V121 accepted-socket 对照：首对未见收益
+
+沿用 V105 已通过数值资格的 CAP64 原生引擎，只有 TCP_NODELAY OFF/ON 不同。实际首对：OFF 1227.176959 ms / 26.076109 tok/s；ON 1230.205291 / 26.011919。吞吐比 0.997538，按运行前规则停止后四臂，没有采用或新增 Pareto 胜出。12 个 HTTP 请求/384 输出（6 正式/192），另有 2 个显式启动 warm/64 输出；raw IDs、native pipeline 计数、34 个 AC/nominal/pressure1 样本和全部清理通过。独立结果复核 receipt `32d64333a852ee329ddbecde615a0c7dc92ac4a86381c7b6d4b308a4d9b8a4f7`。
+
+给 E022 的本机发现：M4 macOS 的真实 accepted socket `getsockopt(TCP_NODELAY)` 返回 OFF=0、ON=4。不能把已启用写死为 raw==1；我们在 GPU 执行前的真实 CPU socket 测试里发现并保存 raw 值，使用 bool 归一化验证启用状态。此结果不证明 Nagle 是其他 HTTP adapter 差值的原因，也不推翻另一台机器的实测值。
+
+V121 的可离机复算记录、代码差异与请求白名单现归档为 [第41章](../experiments/41-native-http-nodelay-pilot.md)。本轮实际 fetch 到 M5 `c57e85d`，看到 merge `269fa1e` 已接收本方 `89b9bd2`；尚无对方接收 `058bdad` 的证据。已读 E023：886–978 输入、cap512、真实连续 admission/client 槽位补位，当前 CPU 准备、长形状尚待数值资格。M4 后续长负载必须重新确认物理 KV 容量与各快路实际命中范围，不能只改客户端并发或逻辑长度。
+
+## V123：投机短请求完整配对，吞吐下降
+
+[第42章](../experiments/42-startup-warm-short-request.md)保存一次新的 spec→ordinary 配对。两臂都先做一次普通启动 warm，再在 spec 臂加载 bounded draft；low64 与数学不变。12 HTTP/384 输出、另2启动/64，所有14 raw32 通过；38个区间外资源样本均AC/thermal0/pressure1且无新增paging。spec 2555.926208 ms / 12.519923 tok/s，ordinary 1247.414166 / 25.653068，吞吐比0.4880478，未采用。不能由这次成功认定旧资源STOP的根因；未保存draft/verify/accepted计数，不能猜测瓶颈。全部进程与端口已退出。
+
+后续源码方向是共享权重的多行 M1 量化乘法，保持每行既有累加顺序；当前仅CPU准备，未有数值或速度结论。另外准备一次全新的三家C1完整对照，保留V105未完成轮次，不能只补最后一臂。

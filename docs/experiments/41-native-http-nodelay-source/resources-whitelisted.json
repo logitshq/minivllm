@@ -1,0 +1,1637 @@
+{
+  "samples": [
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-00-raw.json",
+        "sha256": "fd0e91c62080a9b57e28d9d3cf699f138800b8e2d27bc56b236a1467511d0d4a"
+      },
+      "label": "before-model-launch",
+      "recorded_at": "2026-10-17T09:38:38.999272+00:00",
+      "monotonic_s": 215892.851838958,
+      "owned_model_pid": null,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-01-raw.json",
+        "sha256": "1e90eeef0bb44479e4c41bfae73b8f717f37cdfe4d27f384245d0cb01a05ab8a"
+      },
+      "label": "server-ready-before-warmup",
+      "recorded_at": "2026-10-17T09:38:44.661938+00:00",
+      "monotonic_s": 215898.514507291,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-02-raw.json",
+        "sha256": "ae9427c1009008f9af3cdcca80528d2170c66e9251a8e2dd67b7c929c0670f9d"
+      },
+      "label": "before-C1-warm-0",
+      "recorded_at": "2026-10-17T09:38:44.771992+00:00",
+      "monotonic_s": 215898.624559125,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-03-raw.json",
+        "sha256": "384c69123895257f3799d3d4d0bdd8a5719c8ca059f1a47c1b01cbf2489b4295"
+      },
+      "label": "after-C1-warm-0",
+      "recorded_at": "2026-10-17T09:38:46.280152+00:00",
+      "monotonic_s": 215900.132720916,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-04-raw.json",
+        "sha256": "48875829b82b5d63bb425e2dfa7532a0407c33e73861c5432f813293d049da2b"
+      },
+      "label": "before-C1-warm-1",
+      "recorded_at": "2026-10-17T09:38:46.374745+00:00",
+      "monotonic_s": 215900.227311625,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-05-raw.json",
+        "sha256": "0f859afe5927b131949ae4a1e75291034f72e729d1aec02b8eeda87e0704b773"
+      },
+      "label": "after-C1-warm-1",
+      "recorded_at": "2026-10-17T09:38:47.716735+00:00",
+      "monotonic_s": 215901.56930175,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-06-raw.json",
+        "sha256": "b02ba12cc00205c694336db5fdbe6184717d957d55727d4d797d25d19409c779"
+      },
+      "label": "before-C1-warm-2",
+      "recorded_at": "2026-10-17T09:38:47.810057+00:00",
+      "monotonic_s": 215901.662623958,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-07-raw.json",
+        "sha256": "8247e286c25707164abd84f566e0e6c7fe042f0e48cfdb280bdf903e01599fe4"
+      },
+      "label": "after-C1-warm-2",
+      "recorded_at": "2026-10-17T09:38:49.137201+00:00",
+      "monotonic_s": 215902.989769541,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-08-raw.json",
+        "sha256": "ead5de803fab354828a519db39c4785392f6c7dd3aa211f694b0209d14a14214"
+      },
+      "label": "after-three-warm-before-measure",
+      "recorded_at": "2026-10-17T09:38:49.235518+00:00",
+      "monotonic_s": 215903.08808575,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-09-raw.json",
+        "sha256": "7c67f21118f64ea5f8b9c42a38126a9972e6cce7ae0877e7ffa76a9f8c8b61aa"
+      },
+      "label": "before-C1-measure-0",
+      "recorded_at": "2026-10-17T09:38:49.328199+00:00",
+      "monotonic_s": 215903.18076725,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-10-raw.json",
+        "sha256": "00714b6e0387195c6d7501376d8c7fbcdfe4e6df696153ff515fe1ea99c4ed08"
+      },
+      "label": "after-C1-measure-0",
+      "recorded_at": "2026-10-17T09:38:50.648554+00:00",
+      "monotonic_s": 215904.50112025,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-11-raw.json",
+        "sha256": "73087f83f1a368ac21eaf6dd9f30eabfce0ea73ab10eaa21bde4e7a0ced33ee8"
+      },
+      "label": "before-C1-measure-1",
+      "recorded_at": "2026-10-17T09:38:50.744003+00:00",
+      "monotonic_s": 215904.596571,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-12-raw.json",
+        "sha256": "50bb5dd95d755ab7be39cceca2f0876a4e64bc07037f5b5a906cb9d4e8e0afa4"
+      },
+      "label": "after-C1-measure-1",
+      "recorded_at": "2026-10-17T09:38:52.068705+00:00",
+      "monotonic_s": 215905.921274166,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-13-raw.json",
+        "sha256": "64b6b922b8cd9f850d7dd978d2a36f5384891ce0841e481c3427a384638beeb7"
+      },
+      "label": "before-C1-measure-2",
+      "recorded_at": "2026-10-17T09:38:52.162593+00:00",
+      "monotonic_s": 215906.015161,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-14-raw.json",
+        "sha256": "c68eae7c729973732a770b835301f45462736e467f526602b8096086ce54ee92"
+      },
+      "label": "after-C1-measure-2",
+      "recorded_at": "2026-10-17T09:38:53.487898+00:00",
+      "monotonic_s": 215907.340465791,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-15-raw.json",
+        "sha256": "220759fe7be6d4c01791ea62f84dba734798f370b9790d2575ec2ef66df27369"
+      },
+      "label": "after-measure-before-unload",
+      "recorded_at": "2026-10-17T09:38:53.586201+00:00",
+      "monotonic_s": 215907.438768041,
+      "owned_model_pid": 42550,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "off",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/resources-16-raw.json",
+        "sha256": "f986b323e6f5625453a573146d414455366823540edfb96c558770d075aebecc"
+      },
+      "label": "after-owned-unload",
+      "recorded_at": "2026-10-17T09:38:53.860855+00:00",
+      "monotonic_s": 215907.713422375,
+      "owned_model_pid": null,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-00-raw.json",
+        "sha256": "581b4d9bd039ea871440fa03504f2073feb2fbb83293c179222b984d48ab7cb2"
+      },
+      "label": "before-model-launch",
+      "recorded_at": "2026-10-17T09:38:54.139947+00:00",
+      "monotonic_s": 215907.992517958,
+      "owned_model_pid": null,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-01-raw.json",
+        "sha256": "429521192407ec27d624fc765fae2760bb4afe5f6ad78f8af41509faedeba993"
+      },
+      "label": "server-ready-before-warmup",
+      "recorded_at": "2026-10-17T09:38:59.804923+00:00",
+      "monotonic_s": 215913.657493958,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-02-raw.json",
+        "sha256": "574a61902f0eb20128a6c7eda6244328d0b280b4ceb6bd451f4088bf1cd8784c"
+      },
+      "label": "before-C1-warm-0",
+      "recorded_at": "2026-10-17T09:38:59.915761+00:00",
+      "monotonic_s": 215913.768333625,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-03-raw.json",
+        "sha256": "f00f73b1ff585547374c60ad19b5737b92e58182a422402f686e127f05c2b7d9"
+      },
+      "label": "after-C1-warm-0",
+      "recorded_at": "2026-10-17T09:39:01.502595+00:00",
+      "monotonic_s": 215915.35516825,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-04-raw.json",
+        "sha256": "dfb058460813c00e479fa8eff9a16dd30a3369ab0387794b06d644e1df68b175"
+      },
+      "label": "before-C1-warm-1",
+      "recorded_at": "2026-10-17T09:39:01.625727+00:00",
+      "monotonic_s": 215915.478298708,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-05-raw.json",
+        "sha256": "f906f367819fe6d898b74965a6652ab623f3a7ee8f42022652df1cd90f403ff1"
+      },
+      "label": "after-C1-warm-1",
+      "recorded_at": "2026-10-17T09:39:03.011350+00:00",
+      "monotonic_s": 215916.863921291,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-06-raw.json",
+        "sha256": "16bf5b59bf22f798ae1945062e756d2f82e9a1dc7d1f53e62d24eb16c04f42d5"
+      },
+      "label": "before-C1-warm-2",
+      "recorded_at": "2026-10-17T09:39:03.121725+00:00",
+      "monotonic_s": 215916.974296,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-07-raw.json",
+        "sha256": "cb9a383f3a98a39189964e868894ef6e6f38b4f4b145e1a5dec8f4513e79b88f"
+      },
+      "label": "after-C1-warm-2",
+      "recorded_at": "2026-10-17T09:39:04.484514+00:00",
+      "monotonic_s": 215918.337082541,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-08-raw.json",
+        "sha256": "fcdeba1520a5b971a1e17c616779b242c1bcbfc074cdc7ea0066ac5c894218df"
+      },
+      "label": "after-three-warm-before-measure",
+      "recorded_at": "2026-10-17T09:39:04.609313+00:00",
+      "monotonic_s": 215918.461887166,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-09-raw.json",
+        "sha256": "4263c8fe94c7ca2653a358dc5cf2b46c861b0f18445ccb5d36276f3ee49b5698"
+      },
+      "label": "before-C1-measure-0",
+      "recorded_at": "2026-10-17T09:39:04.722258+00:00",
+      "monotonic_s": 215918.574828333,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-10-raw.json",
+        "sha256": "3fc91a17721c13690d101a7aa821435110dacbf82a0b6af3fb8238d994d6af86"
+      },
+      "label": "after-C1-measure-0",
+      "recorded_at": "2026-10-17T09:39:06.057979+00:00",
+      "monotonic_s": 215919.910548541,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-11-raw.json",
+        "sha256": "ae29f7004918f032c2efde402392f038d8f436db13efe409cb08bc2d7f144f6e"
+      },
+      "label": "before-C1-measure-1",
+      "recorded_at": "2026-10-17T09:39:06.158535+00:00",
+      "monotonic_s": 215920.011106625,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-12-raw.json",
+        "sha256": "7dc6e3d5a4e24f8978aae3f67cfd2bcc869b5f9746cdd12fb7da95aafa084ecf"
+      },
+      "label": "after-C1-measure-1",
+      "recorded_at": "2026-10-17T09:39:07.490429+00:00",
+      "monotonic_s": 215921.342998333,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-13-raw.json",
+        "sha256": "a91fb19c109ff1f6d1c5ef069037e0f69c66466d7f9d7ece496f7c1be126de33"
+      },
+      "label": "before-C1-measure-2",
+      "recorded_at": "2026-10-17T09:39:07.590747+00:00",
+      "monotonic_s": 215921.443317625,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-14-raw.json",
+        "sha256": "01cd394e473551f07396e567893b15f9a450bad7165ea891a4b9e27e9a15793b"
+      },
+      "label": "after-C1-measure-2",
+      "recorded_at": "2026-10-17T09:39:08.922641+00:00",
+      "monotonic_s": 215922.775211041,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-15-raw.json",
+        "sha256": "00b8244313246fca62c116c15febf9deb07c11cc304e64cdab85bef730c2aa54"
+      },
+      "label": "after-measure-before-unload",
+      "recorded_at": "2026-10-17T09:39:09.025084+00:00",
+      "monotonic_s": 215922.877654625,
+      "owned_model_pid": 42731,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    },
+    {
+      "arm": "on",
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/resources-16-raw.json",
+        "sha256": "b28be3ab2edbffae7e16644381f1a1a4bb7b64c59ebdf606b06d9cfff4e1303d"
+      },
+      "label": "after-owned-unload",
+      "recorded_at": "2026-10-17T09:39:09.367703+00:00",
+      "monotonic_s": 215923.220275625,
+      "owned_model_pid": null,
+      "pressure_level_value": 1,
+      "swap_used_mb": 5054.06,
+      "Swapouts": 17519593,
+      "power_metadata": {
+        "status": "known",
+        "percent": 100,
+        "source": "AC Power",
+        "state_text": "charged",
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22478947)\t100%; charged; 0:00 remaining present: true",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      }
+    }
+  ],
+  "scope": "17 original outside-request probes per arm; raw power/thermal metadata retained; inventory/environment omitted"
+}
