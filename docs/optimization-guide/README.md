@@ -1,10 +1,12 @@
 # 从瓶颈到实现：M5 Ultra 推理优化攻略
 
 更新：2026-10-17。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
-为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`。代码在
+主线为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`，第二重点为 GLM-5.3-Flash；后者尚未完成本机资格。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
+[Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
+[当前 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
 [NAX prefill设计](prefill-design.md) ·
 [E011逐次实验教程](tutorials/011-large-batch-graphs.md) ·
 [E012设备端草稿选路](tutorials/012-device-draft-selector.md) ·
@@ -40,6 +42,10 @@ T_step ≳ max(实际读取字节 / 有效带宽, 实际运算 / 有效算力)
 模型权重和 attention KV。batch 可摊薄权重读取，却不能摊薄每条序列的状态。
 因此“batch越大越快”和“decode永远只受权重带宽限制”都不成立。
 
+正确性是候选进入性能比较的硬前提，不是可与速度交换的优化轴。主 Pareto 固定为
+**横轴完整请求延迟（ms，越低越好）、纵轴整机输出吞吐（tok/s，越高越好）**。
+同模型、同量化、同负载分别画图；不把局部 kernel 倍数或 GLM 与 Qwen 的点混成一条前沿。
+延迟直接从 HTTP request start 到 SSE DONE 重算，不能用旧交付速率取倒数代替。
 用户看到的成本还包括排队和prefill。HTTP实验同时保存：
 
 - TTFT、完整请求耗时、完整并发组窗口和实际输出数。
@@ -59,7 +65,7 @@ T_step ≳ max(实际读取字节 / 有效带宽, 实际运算 / 有效算力)
 | prefill | 长prompt矩阵计算、串行小prefill | 分块预算、兼容长度批处理、NAX GEMM | TTFT或prefill占主要时间 |
 | 投机解码 | 每个接受token重读目标权重 | 先自适应现有draft长度，再考虑批量verify | 草稿+验证成本低于节省 |
 | 长上下文 | 无效KV扫描/容量搬运 | 有界长度分桶、split-KV、再评估paged布局 | 长上下文实测由KV主导 |
-| 近似压缩 | 实际权重/状态读取量 | 单独的剪枝或量化实验线 | 同时接受质量与速度评估 |
+| 近似压缩（主线之外） | 实际权重/状态读取量 | 单独的剪枝或量化实验线 | 不进入本轮同权重无损 Pareto |
 
 一次只改一个主因。微基准快而模型不快，先用 Amdahl 定律解释：
 若优化部分占比为 `f`、局部加速 `s`，整体上限约 `1/(1-f+f/s)`。
@@ -141,7 +147,7 @@ ID / 日期 / 基线commit / 论文或源码来源
 
 按2026-10-17的用户要求，每轮形成新的性能结论、通过接入资格或否决重要方向时，
 刷新并保存静态进展图。图、机器可读数据、生成脚本、来源hash和对应commit一并归档；
-旧版本保留。优先画同条件性能曲线、各fresh process的实际点，以及采用/拒绝/待验证时间线。
+旧版本保留。优先画同条件 throughput–latency Pareto、各fresh process的实际点，以及采用/拒绝/待验证时间线。
 模块加速与HTTP收益分开，不能乘加为虚构的整体加速；数值资格没有速度时显示“未计时”。
 点的范围是观察到的波动，不能冒充置信区间。新图必须渲染检查后再展示。
 图集保存在`progress/`，新增结果从这里链接到对应版本。

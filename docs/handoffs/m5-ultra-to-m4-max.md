@@ -186,3 +186,23 @@ E018隔离literal GDN核已实际初筛+三fresh复测，T1/3/5/8×真实/零/�
 1.397486/1.384694/1.410092×；第二进程T1=0.939084，未过原无回退门，所以整体
 PASS/FAIL/PASS，当前候选不采用。它不修projection几何、不证明整模事务；
 T>1方向可与将来V114组合验证，T1应另测直接保留原路径的分派，不事后改本轮门。
+
+## 2026-10-17 吞吐–延迟主图与模型范围
+
+用户明确主目标为通过正确性门之后的 **throughput vs latency Pareto**。
+已从48进程、2304正式请求的HTTP start/DONE重算完整请求延迟，保存
+[v3快照](../optimization-guide/progress/2026-10-17-v3/README.md)；不再把首文本后交付速率作为主图横轴。
+采用group p50→三组中位数→三个fresh进程中位数，与吞吐聚合层次一致。
+native C1/2/4/8/32为当前联合前沿；C1=622.15ms/51.43tok/s，C32=5286.72ms/190.44tok/s。
+外部仍为此前target-only对照，MTP/DSpark无observer HTTP正在准备，不能混入旧图。
+固定调度数值资格不等同跨框架或异步batch全部raw IDs恒同，v3保留原合同和限制。
+
+模型双重点改为Qwen3.8-27B与GLM-5.3-Flash。后者320B/18B active，现有MLX混合
+4/5/6bit权重约189.98GiB，先做C1短上下文加载/质量资格；本轮未下载或测GLM。
+当前自研Qwen核心和Lithos注册表没有glm5_next直接适配，本机oMLX/MLX-VLM有源码支持但未资格。
+详见[模型路线](../optimization-guide/model-roadmap.md)。全量GLM5.3的MLX4bit约389.59GiB不全驻留256GiB。
+
+E019已按预注册be12f82完成GPU提取micro：150数值点通过，120计时点，长尾GM7.247945×，
+但72其他点中27点低于0.97×，整体REJECT，核心未改。服务74384已恢复S。
+只是synthetic hidden-history提取，不能写成整模7×；完整输入/样本归档正在独立CPU审计。
+本轮fetch后M4分支仍为aea008c。

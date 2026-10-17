@@ -1,6 +1,6 @@
 # 新论文 → 机制 → 我们的实验
 
-检索和核对日期：2026-10-16。下列日期是arXiv首次公开或修订日期，不等于
+检索和核对日期：2026-10-16至2026-10-17。下列日期是arXiv首次公开或修订日期，不等于
 同行评审发表日期。只用作者论文/官方实现作技术依据；论文自报速度不视为
 本机复现。以下“落地点”是我们的推论与计划。
 
@@ -92,3 +92,17 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   该方法需要reader训练与drafter适配，当前DFlash2权重不能加一个读取开关就复现。
   我们的推论：下一轮保持committed-state ownership明确，并优先消除已有状态的重复搬运；
   E018只研究原始递归数学的短T驻留kernel，不是ReaDy复现，也不先移植其训练头。
+
+- [Tree Exit Verification v1](https://arxiv.org/html/2610.11750v1)，2026-10-08；
+  读§2、§3.2、§4、§6.1。固定草稿树下，达到上界的精确验证器有相同输出块长度分布；
+  TEV用一次exit-node及bonus采样组织并行计算，ExitTrain则训练更好的树覆盖。
+  §6.1交叉实验中，固定drafter只换TEV的端到端收益为0.4%/0.7%，不能把组合系统约14%
+  归给验证器替换。本机推论：优先减少实测主要成本；E012选路、E018状态核和E019历史提取
+  分别量完整draft/verify影响。当前是greedy线性块，尚无本文的树与训练头，不引入树框架。
+- [MacPaw Apple Silicon优化评估](https://research.macpaw.com/publications/llm-optimizations-apple-silicon)，
+  作者页日期2026-09-30；读[论文](https://research.macpaw.com/publications/llm-optimizations-apple-silicon/Evaluating_the_Applicability_of_LLM_Inference_Optimizations_on_Apple_Silicon__NeurIPS_ODI_2026.pdf)
+  摘要、附录B.3–B.6及C.1。主要投机比较是M2 Pro/M3 Ultra的4B/8B、C1聊天负载，
+  不能代表本机27B/M5；附录也保留特定配置正收益，不能概括为Apple投机必慢。
+  本机推论：E020要测无观察器的完整HTTP，分别记TTFT、实际产出与总时长；
+  19→32只作首个可比较点，后续长输出/不同任务须新资格，不能据此宣称完整前沿。
+  接受长度增大只有在draft+verify+commit总成本低于被替换普通步骤时才有意义。

@@ -17,4 +17,6 @@
 
 本实验只比较同一 literal GDN helper 的串行链与一个 kernel 内的串行链。CPU 审计核查设备比较记录，不重新执行 GPU 数值运算。不证明 chunk-WY 数学等价、整模 rollback/事务正确性、长生成或 HTTP 速度；核心默认未采用。
 
-审计程序的首次尝试对 safetensors 的 `__metadata__: null` 作了错误假设；修正为同时接受省略/null/空对象后完成上述审计。它没有改动 GPU 输入或结果。归档只含修正后的审计源码，此次解析失败的旧源码及完整 stderr 未单独归档；本条保留该记录缺口。
+## 审计程序格式兼容修复
+
+CPU 审计第一次运行把 safetensors header 的全部键当作 tensor，遇到 MLX 写出的 `__metadata__: null` 后触发断言。审计程序随后允许并移除这个可选 metadata 键，再核对六个 tensor 的 shape、dtype、offset 与数据 SHA；完整审计和归档通过。第一次失败没有单独保存旧源码 SHA 或磁盘日志，此处不补造这些证据。四次 GPU 原始数据没有修改，这不是设备数值资格失败。
