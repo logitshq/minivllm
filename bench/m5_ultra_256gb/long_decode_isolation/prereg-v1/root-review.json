@@ -1,0 +1,41 @@
+{
+  "schema": "E024-isolation-prereg-root-review-v1",
+  "status": "PASS",
+  "source_read": "Complete new numerical implementation and independent byte audit; complete owner/controller/restore diffs versus reviewed v5",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/cold_owner.py": "894ff341af58a10223c2782aa2b7a9e0c69d1bc4bf817e36d0b4f62517cafe48",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/test_cold_owner_cpu.py": "4865ecc3a812c835acc93b565a32a86be7a5e9e1cf288ac9b1866fe7700f1aad",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v6.py": "9680bcfde32f80b03dc5ee887096678ff9ebba8b8b2a49b8d8580f95d6a77a92",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/audit_restore_v6.py": "d11f9eb7757b12251d794e01c52c3aa76f6843d373f112b39af5cabfb60abffd",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/prereg-v1/execute.py": "ab2a09ac4d6160c03bd9f3ba0967ca0687ff13c75733f7aeae4e6996843d0268",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/prereg-v1/prepare-plan.py": "db4a00f758e32a3a1e4f71fd98a2f7d84e4f1737a90a3665ce318a380891c228",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/test_cpu.py": "5861234ce9ce778bfb1aad703f163e00ad51e76d2f94588f65a2812c4b23cd78",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_v6_cpu.py": "81a41dc4f0dca6408b240087c7b87bc7d0e0b0d883188bbfcfb0a98840a42732",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_audit_restore_v6_cpu.py": "a2fc3b3465e9cf75becc368a12d217e0dfbfa9abb64c19c1113178491edf47df"
+  },
+  "numeric_cpu_tests": 10,
+  "raw_audit_cpu_tests_initial": 6,
+  "numeric_raw_tool_chunk": "8bfb51",
+  "lifecycle_cpu_tests": 27,
+  "lifecycle_cpu_s": 0.423,
+  "lifecycle_tool_chunk": "002097",
+  "cpu_prepare_tool_chunk": "247266",
+  "readonly_service_prepare_tool_chunk": "80a6d9",
+  "reviewers": [
+    "root",
+    "draft_window",
+    "draft_graph",
+    "official_mtp"
+  ],
+  "scope": "CPU/source/read-only service preparation only; independent numerical audit may be finalized separately before analyzing actual data",
+  "gpu_executed": false,
+  "numerical_qualified": false,
+  "performance_qualified": false
+}

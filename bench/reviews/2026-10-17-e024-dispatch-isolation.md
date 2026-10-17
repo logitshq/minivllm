@@ -28,13 +28,18 @@ about the implementation, not a claim that this note rebuilt those binaries.
 
 ## Concrete dispatch hypothesis
 
-The official tagged [Metal SDPA source, lines 893–957](https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/scaled_dot_product_attention.cpp#L893-L957)
+The official tagged [Metal SDPA source, lines 951–1019](https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/backend/metal/scaled_dot_product_attention.cpp#L951-L1019)
 routes query length <=8 through the vector path. Within it, an architecture
 suffix `d` or `s` and K length >=1024 selects `sdpa_vector_2pass`; otherwise the
 single-pass vector function is selected, unless the separate GQA >=4096 rule
 applies. Thus on the registered M5 Ultra `g17d`, one-query K257 and K1536 select
 different reductions despite identical visible tokens and a padding mask.
-Lines 529–568 also make the two-pass block count architecture dependent.
+Lines 1014–1019 contain the K1024 routing condition; lines569–597 make the
+two-pass block count architecture dependent. These line references were
+corrected against the complete downloaded tagged source, rather than a
+browser's truncated rendering. The exact [raw URL](https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/scaled_dot_product_attention.cpp)
+is retained as [a local source copy](sources/mlx-v0.32.3-scaled_dot_product_attention.cpp),
+SHA256 `4eaca28cbe1d192a3137a970b2f4d7cdecaba67a1f448b0b0b5f0309b6b3961e`.
 
 This is a **testable mechanism**, not the established cause of the observed
 logits difference. The next run must retain the actual device architecture,
