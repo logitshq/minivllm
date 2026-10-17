@@ -128,3 +128,9 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [29：把原生 decode 接进调度器，再测真实请求](../experiments/29-native-runner-http.md)说明原生状态的生命周期与普通 runner 回退，保留 V42 负结果和 V45 未完成测试及全部原始证据。
 
 [30：提前提交一步](../experiments/30-native-ahead.md)对照同步 runner 与 depth2 FIFO，说明状态与输出的所有权、提前停止和实际数值范围；真实 HTTP 仍未超过已测前沿。
+
+## 当前继续阅读
+
+[38：投机事务与量化乘法](../experiments/38-spec-transaction-and-qmm.md)保留整模旧序列失败、官方MTP较慢的配对结果及逐算子诊断。
+
+[39：保留逐行量化乘法的结果](../experiments/39-verify-broadcast-m1.md)从旧代码到广播M1逐步对照，附固定候选与diff；局部497项通过，整模仍待新资格。[进展图与台账](../progress/README.md)保存已验证结果和负结果，章节持续迭代。

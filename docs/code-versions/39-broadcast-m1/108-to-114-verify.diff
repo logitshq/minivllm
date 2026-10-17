@@ -1,0 +1,47 @@
+--- candidate-v108-dflash2-transaction-build1-root/engine/spec_runner.py
++++ candidate-v114-verify-broadcast-m1-build1-root/engine/spec_runner.py
+@@ -73,8 +73,20 @@
+         self._transaction_observer = observer
+         self.transaction_rounds = []
+ 
++
++    def set_verify_broadcast_m1(self, enabled=False, *, logits_observer=None):
++        """Explicit V114 opt-in, only inside the active V108 target verify call."""
++        from ..spec.verify_broadcast_m1 import prepare_verify_m1
++        if type(enabled) is not bool or (logits_observer is not None and not callable(logits_observer)):
++            raise TypeError("strict bool and optional callable observer required")
++        self._verify_m1_ops114 = prepare_verify_m1(self.model, mx) if enabled else ()
++        self._verify_m1_enabled114 = enabled
++        self._verify_m1_logits_observer114 = logits_observer
++        self.verify_m1_rounds114 = []
++
+     def _step_transaction108(self, req, caches, history):
+         from ..spec.transaction import VerifyTransaction, select_delivery
++        from ..spec.verify_broadcast_m1 import verify_m1_context
+         if req.sampling.temperature != 0:
+             raise ValueError("V108 greedy only")
+         remaining = req.sampling.max_tokens - len(req.output_token_ids)
+@@ -98,7 +110,8 @@
+             observer = self._transaction_observer
+             if observer is not None:
+                 observer("begin", transaction, {"request": req.req_id, "start": start})
+-            logits, new_feats = self.model(mx.array([anchor] + drafts), ForwardContext("prefill", caches), capture=self.capture)
++            with verify_m1_context(self, caches) as m1_scope114:
++                logits, new_feats = self.model(mx.array([anchor] + drafts), ForwardContext("prefill", caches), capture=self.capture)
+             posterior = mx.argmax(logits, axis=-1)
+             mx.eval(posterior, new_feats, *transaction.eval_arrays())
+             post = posterior.tolist()
+@@ -108,6 +121,13 @@
+                     "draft_calls": int(bs > 1), "drafted_tokens": len(drafts), "accepted_before_clip": accepted,
+                     "delivered": len(produced), "committed_inputs": keep, "next_anchor": produced[-1],
+                     "next_frontier": start + keep, "GDN_helper_calls": sum(t.updates for t in transaction.traces if t.kind == "gdn")}
++            if m1_scope114 is not None:
++                metadata114 = m1_scope114.metadata()
++                self.verify_m1_rounds114.append(metadata114)
++                info["verify_broadcast_m1_114"] = metadata114
++                callback114 = getattr(self, "_verify_m1_logits_observer114", None)
++                if callback114 is not None:
++                    callback114(logits, transaction, info)
+             if observer is not None:
+                 observer("before_commit", transaction, info)
+             transaction.commit(keep)

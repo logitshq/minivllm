@@ -28,6 +28,33 @@ V111无观察hook的原官方none/MTP(default block3) C1计时已完成：三对
 
 M5的E012选路与M4的事务/verify数学诊断互补。请继续保留独立模块开关、源机guard及原样负结果；将来组合需新资格。本方V113研究E010广播思路的另一用法：batch=T、M=1以保留单token QMM数学，官方0.32.3源码支持该形状推断。
 
-**归档冻结后的新检查点，尚未包含在38的源码/证据包中：** V113第一次加载期间pressure2中止、SIGTERM/reap，原始记录保留；正常退出已获授权的后台应用后，第二次同一冻结源码实际通过。全部497个同输入broadcast-M1逐字节等于concat-M1，1,491项三路比较；原112的全部497输入/batch/M1 hashes重现，keep0恢复128缓存、1349参数只读。receipt SHA `910f31995c14065f1d99360ff93652350a580b6a73896646c590d5b261c025f7`。两次进程均已外部释放；第二次为Battery数值探针，不提供计时资格。独立结果审查通过，receipt SHA `daaa2d8077cf2f6d895dac0c3fd96f438092f79f19e868b8d182c5f89e90c72e`；尚无实际PSO、完整96 IDs修复、速度或adoption结论。下一版V114仅在实际target verify范围启用该形状，完整序列及同提交frontier缓存/logits须新严格验证，当前GPU未运行。
+**归档冻结后的新检查点，尚未包含在38的源码/证据包中：** V113第一次加载期间pressure2中止、SIGTERM/reap，原始记录保留；正常退出已获授权的后台应用后，第二次同一冻结源码实际通过。全部497个同输入broadcast-M1逐字节等于concat-M1，1,491项三路比较；原112的全部497输入/batch/M1 hashes重现，keep0恢复128缓存、1349参数只读。receipt SHA `910f31995c14065f1d99360ff93652350a580b6a73896646c590d5b261c025f7`。两次进程均已外部释放；第二次为Battery数值探针，不提供计时资格。独立结果审查通过，receipt SHA `daaa2d8077cf2f6d895dac0c3fd96f438092f79f19e868b8d182c5f89e90c72e`；尚无实际PSO、完整96 IDs修复、速度或adoption结论。该V113检查点时，计划中的V114仅在实际target verify范围启用该形状，完整序列及同提交frontier缓存/logits待新严格验证，GPU尚未运行；V114后续实际结果见下文。
 
 两机的硬件、浮点profile、电源和计时域分开；同模型19输入/32输出只是可比负载条件，不是跨机pool结果的依据。M4完整Pareto胜出仍未成立，持续目标保持。
+
+## 后续接收、图与模型主线
+
+第38章安全公开版本 `aea008cb6f781c94486088a4e598da0df7033380` 已实际push，并独立核对远端相同SHA。首次未发布版本因localhost临时key字段被自动审批拒绝；随后替换该本地提交，公开32项脱敏view与417项原字节证据，原件留在源机。未将含凭据版本推入远端历史。只以Git实际可见为同步依据，没有声称聊天送达或M5已读本次提交。
+
+推送后实际fetch到M5 `05d75cf` 并阅读新交接：E014有界KV与E016图复用分别保留通过/拒绝边界；交接报告E015本机官方MTP资格为16 verify/31 proposed/15 accepted/32 delivered，不能与M4的17/34混计。其DSpark `b169bc4`是HF草稿权重revision；M5引擎 `2236580`、upstream `5485ad6` 是另一组身份，Session资格仍按实际记录。没有把它们误记成M4已运行。
+
+用户新增要求：持续迭代教程，经常画图并保存进步。现在保存[图、已审数据与复现脚本](../progress/2026-10-17/README.md)、[当前模型计划](../progress/MODEL-PLAN.md)和[第39章前后代码对照](../experiments/39-verify-broadcast-m1.md)。每个检查点固定代码、结果、图与scope，已保存快照不覆盖；局部数值进展不冒充性能。
+
+**本次代码交换快照可供M5阅读：** [candidate116完整Python代码及三份diff](../code-versions/39-broadcast-m1/README.md)，31个源码/许可文件有原SHA校验。保留默认OFF的target-verify broadcast-M1与bounded draftloader；不是M5运行资格，也未修改生产引擎。完整本轮私有运行原件未在此代码快照中打包。
+
+V114整模首试：普通A三请求96旧IDs通过，加载DFlash时pressure2中止，B/独立同frontier对照均未到达。进程已SIGTERM/reap及外部释放，保留RESOURCE_STOP。V116新加载器草稿单独资格实际PASS：175参数与旧加载器严格相同、A175只读、350独立输出对象、47量化分支；receipt SHA `fcfa4cc5b78bc197c20b1d1c6f1c0c2098ca8994d0694087e3882b1f10aad059`，独审receipt `8f56ce1f36acd3f679faa860472cfb21f6fbba557f4e9c903e580a06848c4b1a`。不宣称物理内存下降或完整投机通过。V117复用该loader做新的整模硬资格，CPU已准备，actual另记；原114保持原判。
+
+V115正移植M5 E012选路核心，已CPU冻结但GPU未运行，不与117混用。V118源码审计确认GDN已统一末尾eval，不能发明“删除每token eval”的新收益；资格观察器大量hash同步也不算生产成本。
+
+**模型分工调整：** M4继续Qwen3.8-27B的正确性、内存峰值和速度；M5优先并行准备GLM-5.3-Flash baseline与架构，Qwen3.8-Flash-Next为Qwen扩展候选。请先核本机缓存、磁盘/内存、固定checkpoint及oMLX真实模型路由，再记录加载、输出和资源资格。GLM约190GiB的混合量化权重不适用M4 48GiB全驻留；256GB仍需KV/workspace余量，未实测不画点。
+
+M4本机固定oMLX的glm5_next发现/兼容/vendor路径存在，实际GLM UNRUN；固定Lithos5485的注册表没有GLM/Qwen4-Exp入口，记该版本N/A，不外推最新版。我们尚未实现GLM的KDA、DSA/MLA、MoE、mHC和复合cache；本轮Qwen结果不转授GLM。详细源码矩阵和官方来源见模型计划。
+
+本次状态同步再次实际fetch到M5 `390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad`，已读新交接与模型路线。对方明确已阅读并合入本方`aea008c`，这是Git中可验证的接收事实；本次第39章快照尚无对方接收记录。已读E017 Lithos DSpark数值资格、E018三fresh中T1回退而未采用，以及E019提取micro的整体REJECT；均不混入M4收益。本方读取并显示对方v3吞吐—完整HTTP请求延迟图，CPU复算公开chartdata的48进程/2304请求聚合及前沿支配关系通过；没有在M4重跑其GPU或独立重审全部M5原始timestamps。M5已有9个历史非spec外部点被覆盖的短负载结果，MTP/DSpark HTTP、GLM和长上下文仍待各自实测。双方主线已一致为Qwen3.8-27B及GLM-5.3-Flash；后续主性能图采用真实请求起点至DONE延迟与总吞吐，TTFT另列。
+
+
+## 用户再次明确的共同目标
+
+用户要求优化并展示**正确性成立条件下的throughput vs latency Pareto**。正确性作为入图硬条件，数值诊断本身不计性能进步。两机主图采用实际完整HTTP请求延迟与总吞吐，仅让通过相应输出/缓存/调度检查的配置进入；新投机候选整模未通过时不画性能点。M4旧轮次的联合非支配中位点为oMLX C1和native C4；native C2被native C1支配，所以同并发横比变快并不自动是Pareto改善。后续优化以推进前沿为验收目标，性能测试要有正确性前提和可比的完整请求工作负载。
+
+本方已将旧M4配置重画为[明确显示联合前沿的Pareto图](../progress/2026-10-17-m4-pareto/README.md)，保留7配置和21重复点；旧快照不覆盖。

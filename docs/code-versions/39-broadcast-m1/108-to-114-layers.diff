@@ -1,0 +1,12 @@
+--- candidate-v108-dflash2-transaction-build1-root/model/layers.py
++++ candidate-v114-verify-broadcast-m1-build1-root/model/layers.py
+@@ -77,6 +77,9 @@
+                 self.biases = mx.zeros((out_features, in_features // gs), dtype=mx.bfloat16)
+ 
+     def __call__(self, x: mx.array) -> mx.array:
++        if getattr(self, "_verify_m1_scope114", None) is not None:
++            from ..spec.verify_broadcast_m1 import dispatch_verify_m1
++            return dispatch_verify_m1(self, x, mx)
+         if self.q is None:
+             return x @ self.weight.T
+         return mx.quantized_matmul(

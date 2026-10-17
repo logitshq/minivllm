@@ -1,0 +1,61 @@
+--- candidate-v114-verify-broadcast-m1-build1-root/spec/dflash2.py
++++ candidate-v116-bounded-draftloader-build1-root/spec/dflash2.py
+@@ -169,8 +169,14 @@
+         return path
+ 
+ 
+-def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}) -> DFlash2Drafter:
++def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}, *, bounded_load: bool = False, stage_observer=None) -> DFlash2Drafter:
+     """读 bf16 的 safetensors；quantize 不为 None 时把大的 Linear 在加载时量化（默认 affine 4bit，和 dflash-mlx 一样）。"""
++    if type(bounded_load) is not bool or (stage_observer is not None and not callable(stage_observer)):
++        raise TypeError("strict bool and optional callable stage observer required")
++    if bounded_load:
++        return _load_drafter_bounded116(model_dir, quantize, stage_observer)
++    if stage_observer is not None:
++        raise ValueError("stage observer is supported only with bounded_load=True")
+     cfg = DraftConfig.from_dir(model_dir)
+     model = DFlash2Drafter(cfg, quantize)
+     weights = {}
+@@ -188,3 +194,42 @@
+     model.load_weights(list(out.items()), strict=True)
+     mx.eval(model.parameters())
+     return model
++
++
++def _load_drafter_bounded116(model_dir, quantize, stage_observer):
++    """Same per-tensor quantization; bound live materialized source lifetime.
++
++    mx.load returns lazy arrays. Keep only string keys for traversal, pop each
++    source owner, evaluate all quantized siblings together, then release it.
++    Required unquantized norm/codebook owners remain in out unchanged.
++    """
++    cfg = DraftConfig.from_dir(model_dir)
++    model = DFlash2Drafter(cfg, quantize)
++    weights = mx.load(str(Path(model_dir) / "model.safetensors"))
++    out = {}
++    if stage_observer is not None:
++        stage_observer("lazy_header_loaded", {"source_tensors": len(weights)})
++    for index, original_key in enumerate(tuple(weights)):
++        v = weights.pop(original_key)
++        k = original_key.replace("candidate_selector.hidden_projection", "selector_proj").replace("candidate_selector.", "")
++        is_quantized = quantize is not None and k.endswith(".weight") and v.ndim == 2 and ("proj" in k or k.startswith("fc.") or "mlp." in k)
++        if is_quantized:
++            w, scales, biases = mx.quantize(v, group_size=quantize["group_size"], bits=quantize["bits"], mode=quantize["mode"])
++            mx.eval(w, scales, biases)
++            base = k[: -len(".weight")]
++            out[k], out[base + ".scales"], out[base + ".biases"] = w, scales, biases
++        else:
++            out[k] = v
++        source_metadata = {"index": index, "original_key": original_key, "name": k,
++                           "source_shape": list(v.shape), "source_dtype": str(v.dtype),
++                           "quantized": is_quantized, "unprocessed_lazy_sources": len(weights)}
++        del v
++        if stage_observer is not None:
++            stage_observer("source_released_after_triple_eval", source_metadata)
++    if weights:
++        raise RuntimeError("bounded loader left source owners unprocessed")
++    model.load_weights(list(out.items()), strict=True)
++    mx.eval(model.parameters())
++    if stage_observer is not None:
++        stage_observer("strict_model_loaded_eval", {"source_tensors": 81, "output_parameters": len(out)})
++    return model
