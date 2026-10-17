@@ -1,0 +1,56 @@
+{
+  "schema": "cold-single-child-run-plan-v1",
+  "lifecycle": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json",
+    "sha256": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8"
+  },
+  "predecessor": {
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-matrix-v1/restored-journal.json",
+    "sha256": "1f38a830c84aa4b4a2539e4280d41627e5da89399144acadaa0ae72fd60597f8",
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-matrix-v1/restoration-audit.json",
+      "sha256": "74f89234ef944396f1f68310e993ac67ad5565d8bba653dc86f05eb97baf2329"
+    }
+  },
+  "experiment": {
+    "phase": "e024-route-timing",
+    "qualifier": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualifier_timing.py",
+      "sha256": "d87457b559a876187c43b7096dfb9bb09c97f8d79655563e0b459011fc543190"
+    },
+    "plan": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-timing-v1/route-plan.json",
+      "sha256": "0ea97bd4b450e81698d33da6ccdd9b00af49c46e615967d24d6ee0374441e350"
+    },
+    "source_pins": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualifier_timing.py": "d87457b559a876187c43b7096dfb9bb09c97f8d79655563e0b459011fc543190",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualifier_matrix.py": "6130d948450c825302d9857450204f8503c0dab449050a1bb59eaa51b77920e3",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualify.py": "fe8e1c044e97885ec7c97fddce04a6e34f5b9067be4d982c5f6ad1071c59c801",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller.py": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+      "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-matrix-v1/independent-numerical.json": "12ae408150d99873fea27375c0f1489e50067f5fdb2b1012e56eac00fbf58f4b"
+    }
+  },
+  "inherited_owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-v1/owner-plan.json",
+    "sha256": "4dff5f46d0b35d038ffbb0e32ebb6197b047f4da6e847b3160f3ae8685caf6a4"
+  },
+  "outputs": {
+    "journal": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-timing-v1-cold-journal",
+    "out": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-timing-v1-owner"
+  },
+  "budgets": {
+    "work_seconds": 1830,
+    "child_seconds": 1800,
+    "term_seconds": 15,
+    "kill_seconds": 15
+  }
+}
