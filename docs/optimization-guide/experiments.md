@@ -813,3 +813,29 @@ integration. NativeD512 C1/C8 remains45.372/167.399 outputtok/s at p50
 dominance is established.
 
 [Matrix evidence and limits](../experiments/m5-ultra-256gb/E024-route-matrix-v1/README.md).
+
+
+## Route-preserving forward timing passes (2026-10-17)
+
+Preregistered in b221b83, eight B1/B8 × used1023/1024 × gates OFF/ON
+configurations complete all32 warm/96 formal samples. Each arm has six formal
+samples in three ACCA blocks. All full original-bit checks pass. Compiled median
+forward-rate gain is5.44–10.67%; gates ON: B1 6.68–7.01%, B8 5.68–5.92%.
+All24 block ratios are positive observations within one process, not confidence
+intervals. No HTTP throughput/latency qualification and no competitor comparison.
+
+Frozen numerical auditor ran once:1548 qualification outputs,2096 inputs,
+3096 prefill checks,33280 sample checks,1349 parameter receipts. Successful raw
+payloads were not saved; device/hash receipts only. Resource21 samples pressure1,
+thermal0, zero swap growth/Swapins/Swapouts/Pageouts;Decompressions+264. Child
+90.565s includes loading/checks. MLX diagnostic peak56,450,814,156B.
+Owner19484/child19518 reaped; service restored as19870 with fresh MTP/resident
+PLE and original model/config; independent restoration passes. WarmKV not restored.
+706 small files archived at800,396B with complete manifest/hash verification.
+
+NEXT: actual Lithos D512 C1/C8 qualification then formal timing. Graph remains
+OFF pending parameter replacement, ahead/scheduler and HTTP. Native D512 points
+remain45.372/167.399 outputtok/s at p50 11.283/24.432s, n=1 each.
+
+[Results and evidence](../experiments/m5-ultra-256gb/E024-route-timing-v1/README.md) ·
+[Forward-only figure](progress/2026-10-17-v7/README.md).

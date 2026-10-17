@@ -746,3 +746,19 @@ integration. NativeD512 C1/C8 remains45.372/167.399 outputtok/s at p50
 dominance is established.
 
 [Matrix evidence and limits](../experiments/m5-ultra-256gb/E024-route-matrix-v1/README.md).
+
+
+## 2026-10-17 · E024 forward screen complete; Lithos D512 next
+
+M5 route-preserving bounds1023/1536 pass52 exact matrix steps and the separate
+8-configuration OFF/ON forward screen (32warm/96formal). Gates ON median
+forward-rate gain over our eager: B1 6.68–7.01%, B8 5.68–5.92%. One process,
+not HTTP/Pareto eligibility. Keep defaultOFF; parameter replacement, ahead and
+scheduler/HTTP gates still pending. M4 must qualify its own reduction route.
+See [result/evidence](../experiments/m5-ultra-256gb/E024-route-timing-v1/README.md)
+and [figure](../optimization-guide/progress/2026-10-17-v7/README.md).
+Original M5 oMLX restored asPID19870 with independently verified MTP/resident PLE;
+warmKV not restored. Next rootGPU work: actual Lithos D512 C1/C8 qualification,
+then observer-free formal comparison, using the existing pack and direct-owned
+server trial. Older cap32 observations do not supply D512 competitor points.
+Latest fetched M4 tip53d4906 is already merged; this update is shared via Git.

@@ -1,0 +1,2093 @@
+{
+  "schema": "E024-route-timing-audit-v1",
+  "status": "PASS",
+  "diagnostic_complete": true,
+  "full_model_qualified": false,
+  "performance_qualified": false,
+  "http_qualified": false,
+  "pareto_eligible": false,
+  "numerical_scope": "Source-pinned device original-bit checks/hash receipts; no success raw tensor snapshots independently recomputed.",
+  "timing_scope": "Forward+eval all129 products+sync only. Copies, qualification, verification and teardown excluded. A_over_C is a diagnostic speedup, not HTTP throughput or latency.",
+  "owner_resources_audited": false,
+  "audit_source_sha256": "896be8aeadb7305860bb66061b86a9f2aad17af932a7bd3f49ea411d29f73975",
+  "producer_status": "PASS",
+  "complete_sha256": "4594a3e9acf64b3ae8363dbfc03ceaf5873112c7240dc702f3b853ecf4d3649c",
+  "plan_sha256": "0ea97bd4b450e81698d33da6ccdd9b00af49c46e615967d24d6ee0374441e350",
+  "matrix_audit_sha256": "12ae408150d99873fea27375c0f1489e50067f5fdb2b1012e56eac00fbf58f4b",
+  "parameter_count": 1349,
+  "model_payload_rehashed": false,
+  "configs": [
+    {
+      "name": "B1-used1023-gatesOFF",
+      "B": 1,
+      "used": 1023,
+      "gates": false,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 24.8738335,
+          "teardown_ms": 3.8465,
+          "owned_lifecycle_ms": 28.5719585,
+          "diagnostic_tokens_per_second": 40.20422686629422
+        },
+        "C": {
+          "forward_ms": 22.475250000000003,
+          "teardown_ms": 3.792187,
+          "owned_lifecycle_ms": 26.272208,
+          "diagnostic_tokens_per_second": 44.4936311047068
+        }
+      },
+      "median_forward_speedup": 1.1067211043258693,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            24.730417,
+            22.416542,
+            22.422625,
+            24.578625
+          ],
+          "A_mean_ms": 24.654521,
+          "C_mean_ms": 22.4195835,
+          "A_over_C": 1.0996868429781488
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            24.335083,
+            22.527875,
+            22.375458,
+            26.658792
+          ],
+          "A_mean_ms": 25.4969375,
+          "C_mean_ms": 22.4516665,
+          "A_over_C": 1.1356367466085424
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            25.854041,
+            23.515917,
+            23.004375,
+            25.01725
+          ],
+          "A_mean_ms": 25.4356455,
+          "C_mean_ms": 23.260146,
+          "A_over_C": 1.0935290560944888
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.680042,
+          "diagnostic_tokens_per_second": 40.51856961993825,
+          "teardown_ms": 4.040458,
+          "owned_lifecycle_ms": 28.7205
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 28.274958,
+          "diagnostic_tokens_per_second": 35.36698445316877,
+          "teardown_ms": 4.002459,
+          "owned_lifecycle_ms": 32.277417
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.486042,
+          "diagnostic_tokens_per_second": 44.472032917131436,
+          "teardown_ms": 3.953542,
+          "owned_lifecycle_ms": 26.439584
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.332125,
+          "diagnostic_tokens_per_second": 41.09793123288656,
+          "teardown_ms": 3.894916,
+          "owned_lifecycle_ms": 28.227041
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.730417,
+          "diagnostic_tokens_per_second": 40.43603470171975,
+          "teardown_ms": 3.888375,
+          "owned_lifecycle_ms": 28.618792
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.416542,
+          "diagnostic_tokens_per_second": 44.609913518329456,
+          "teardown_ms": 3.801458,
+          "owned_lifecycle_ms": 26.218
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.422625,
+          "diagnostic_tokens_per_second": 44.59781136240739,
+          "teardown_ms": 3.811,
+          "owned_lifecycle_ms": 26.233625
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.578625,
+          "diagnostic_tokens_per_second": 40.68575845882347,
+          "teardown_ms": 3.804625,
+          "owned_lifecycle_ms": 28.38325
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.335083,
+          "diagnostic_tokens_per_second": 41.09293566000987,
+          "teardown_ms": 3.765583,
+          "owned_lifecycle_ms": 28.100666
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.527875,
+          "diagnostic_tokens_per_second": 44.38945084700621,
+          "teardown_ms": 3.782916,
+          "owned_lifecycle_ms": 26.310791000000002
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.375458,
+          "diagnostic_tokens_per_second": 44.6918226210163,
+          "teardown_ms": 3.847959,
+          "owned_lifecycle_ms": 26.223416999999998
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 26.658792,
+          "diagnostic_tokens_per_second": 37.511077021044315,
+          "teardown_ms": 4.067209,
+          "owned_lifecycle_ms": 30.726000999999997
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 25.854041,
+          "diagnostic_tokens_per_second": 38.67867309408228,
+          "teardown_ms": 4.066708,
+          "owned_lifecycle_ms": 29.920749
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.515917,
+          "diagnostic_tokens_per_second": 42.52438890645855,
+          "teardown_ms": 3.61375,
+          "owned_lifecycle_ms": 27.129667
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.004375,
+          "diagnostic_tokens_per_second": 43.46999212106393,
+          "teardown_ms": 3.557083,
+          "owned_lifecycle_ms": 26.561458
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesOFF",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 25.01725,
+          "diagnostic_tokens_per_second": 39.9724190308687,
+          "teardown_ms": 3.507875,
+          "owned_lifecycle_ms": 28.525125
+        }
+      ]
+    },
+    {
+      "name": "B1-used1023-gatesON",
+      "B": 1,
+      "used": 1023,
+      "gates": true,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 23.6796875,
+          "teardown_ms": 2.6382085,
+          "owned_lifecycle_ms": 26.287104499999998,
+          "diagnostic_tokens_per_second": 42.23030175221024
+        },
+        "C": {
+          "forward_ms": 22.196792000000002,
+          "teardown_ms": 2.630396,
+          "owned_lifecycle_ms": 24.827188,
+          "diagnostic_tokens_per_second": 45.051559519607
+        }
+      },
+      "median_forward_speedup": 1.0668067484706798,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.921375,
+            22.229459,
+            22.206041,
+            23.820833
+          ],
+          "A_mean_ms": 23.871104000000003,
+          "C_mean_ms": 22.21775,
+          "A_over_C": 1.0744159062011231
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.693667,
+            22.189917,
+            22.203667,
+            23.585458
+          ],
+          "A_mean_ms": 23.6395625,
+          "C_mean_ms": 22.196792000000002,
+          "A_over_C": 1.0649990548183719
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.665708,
+            22.047334,
+            22.114875,
+            23.509375
+          ],
+          "A_mean_ms": 23.5875415,
+          "C_mean_ms": 22.081104500000002,
+          "A_over_C": 1.0682229007158586
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.091792,
+          "diagnostic_tokens_per_second": 41.507912736420764,
+          "teardown_ms": 3.1945,
+          "owned_lifecycle_ms": 27.286292000000003
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.223541,
+          "diagnostic_tokens_per_second": 44.9973296334729,
+          "teardown_ms": 3.030084,
+          "owned_lifecycle_ms": 25.253625
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.290042,
+          "diagnostic_tokens_per_second": 44.86308280621454,
+          "teardown_ms": 3.014416,
+          "owned_lifecycle_ms": 25.304458
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 23.719042,
+          "diagnostic_tokens_per_second": 42.16021878118011,
+          "teardown_ms": 2.988333,
+          "owned_lifecycle_ms": 26.707375000000003
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.921375,
+          "diagnostic_tokens_per_second": 41.80361705796594,
+          "teardown_ms": 2.962542,
+          "owned_lifecycle_ms": 26.883917
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.229459,
+          "diagnostic_tokens_per_second": 44.98535029574944,
+          "teardown_ms": 2.922875,
+          "owned_lifecycle_ms": 25.152334
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.206041,
+          "diagnostic_tokens_per_second": 45.03279085182271,
+          "teardown_ms": 2.801333,
+          "owned_lifecycle_ms": 25.007374
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.820833,
+          "diagnostic_tokens_per_second": 41.98006005919272,
+          "teardown_ms": 2.792167,
+          "owned_lifecycle_ms": 26.613
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.693667,
+          "diagnostic_tokens_per_second": 42.205370743161026,
+          "teardown_ms": 2.763625,
+          "owned_lifecycle_ms": 26.457292000000002
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.189917,
+          "diagnostic_tokens_per_second": 45.06551331399752,
+          "teardown_ms": 2.701875,
+          "owned_lifecycle_ms": 24.891792000000002
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.203667,
+          "diagnostic_tokens_per_second": 45.03760572521647,
+          "teardown_ms": 2.558917,
+          "owned_lifecycle_ms": 24.762584
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.585458,
+          "diagnostic_tokens_per_second": 42.399007049174116,
+          "teardown_ms": 2.512792,
+          "owned_lifecycle_ms": 26.09825
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.665708,
+          "diagnostic_tokens_per_second": 42.25523276125946,
+          "teardown_ms": 2.451209,
+          "owned_lifecycle_ms": 26.116916999999997
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.047334,
+          "diagnostic_tokens_per_second": 45.356957897948114,
+          "teardown_ms": 2.488208,
+          "owned_lifecycle_ms": 24.535542
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.114875,
+          "diagnostic_tokens_per_second": 45.218433294332435,
+          "teardown_ms": 2.481833,
+          "owned_lifecycle_ms": 24.596708
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1023-gatesON",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.509375,
+          "diagnostic_tokens_per_second": 42.53622225176127,
+          "teardown_ms": 2.387416,
+          "owned_lifecycle_ms": 25.896791
+        }
+      ]
+    },
+    {
+      "name": "B8-used1023-gatesOFF",
+      "B": 8,
+      "used": 1023,
+      "gates": false,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 40.623979500000004,
+          "teardown_ms": 8.990479,
+          "owned_lifecycle_ms": 49.6243335,
+          "diagnostic_tokens_per_second": 196.92802375922878
+        },
+        "C": {
+          "forward_ms": 38.5275205,
+          "teardown_ms": 9.076438,
+          "owned_lifecycle_ms": 47.600291999999996,
+          "diagnostic_tokens_per_second": 207.64378025298436
+        }
+      },
+      "median_forward_speedup": 1.0544145839854917,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.624167,
+            38.466292,
+            38.520458,
+            40.643542
+          ],
+          "A_mean_ms": 40.6338545,
+          "C_mean_ms": 38.493375,
+          "A_over_C": 1.055606438770308
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.547666,
+            38.644083,
+            38.52725,
+            40.693208
+          ],
+          "A_mean_ms": 40.620436999999995,
+          "C_mean_ms": 38.5856665,
+          "A_over_C": 1.0527338435374698
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.623792,
+            38.534958,
+            38.527791,
+            40.561959
+          ],
+          "A_mean_ms": 40.592875500000005,
+          "C_mean_ms": 38.5313745,
+          "A_over_C": 1.053501880655724
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 94.200959,
+          "diagnostic_tokens_per_second": 84.92482544684073,
+          "teardown_ms": 9.49175,
+          "owned_lifecycle_ms": 103.692709
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 90.981708,
+          "diagnostic_tokens_per_second": 87.92976276066393,
+          "teardown_ms": 9.795084,
+          "owned_lifecycle_ms": 100.776792
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 38.540667,
+          "diagnostic_tokens_per_second": 207.57295144892018,
+          "teardown_ms": 9.113167,
+          "owned_lifecycle_ms": 47.653834
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 40.695417,
+          "diagnostic_tokens_per_second": 196.58233260025324,
+          "teardown_ms": 9.663,
+          "owned_lifecycle_ms": 50.358417
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.624167,
+          "diagnostic_tokens_per_second": 196.92711483782548,
+          "teardown_ms": 9.003625,
+          "owned_lifecycle_ms": 49.627792
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.466292,
+          "diagnostic_tokens_per_second": 207.97429604080372,
+          "teardown_ms": 8.982125,
+          "owned_lifecycle_ms": 47.448417000000006
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.520458,
+          "diagnostic_tokens_per_second": 207.68185051174626,
+          "teardown_ms": 9.069292,
+          "owned_lifecycle_ms": 47.589749999999995
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.643542,
+          "diagnostic_tokens_per_second": 196.83323859913588,
+          "teardown_ms": 8.977333,
+          "owned_lifecycle_ms": 49.620875
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.547666,
+          "diagnostic_tokens_per_second": 197.29865585851476,
+          "teardown_ms": 9.45425,
+          "owned_lifecycle_ms": 50.001916
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.644083,
+          "diagnostic_tokens_per_second": 207.01746241462115,
+          "teardown_ms": 9.294875,
+          "owned_lifecycle_ms": 47.938958
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.52725,
+          "diagnostic_tokens_per_second": 207.64523811068787,
+          "teardown_ms": 9.083584,
+          "owned_lifecycle_ms": 47.610834000000004
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.693208,
+          "diagnostic_tokens_per_second": 196.5930039234066,
+          "teardown_ms": 9.711917,
+          "owned_lifecycle_ms": 50.405125
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.623792,
+          "diagnostic_tokens_per_second": 196.92893268063207,
+          "teardown_ms": 8.939333,
+          "owned_lifecycle_ms": 49.563125
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.534958,
+          "diagnostic_tokens_per_second": 207.60370362931235,
+          "teardown_ms": 9.014916,
+          "owned_lifecycle_ms": 47.549874
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.527791,
+          "diagnostic_tokens_per_second": 207.64232239528084,
+          "teardown_ms": 9.506833,
+          "owned_lifecycle_ms": 48.034624
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesOFF",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.561959,
+          "diagnostic_tokens_per_second": 197.22913284341124,
+          "teardown_ms": 8.916208,
+          "owned_lifecycle_ms": 49.478167
+        }
+      ]
+    },
+    {
+      "name": "B8-used1023-gatesON",
+      "B": 8,
+      "used": 1023,
+      "gates": true,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 40.594958500000004,
+          "teardown_ms": 8.0567495,
+          "owned_lifecycle_ms": 48.6793335,
+          "diagnostic_tokens_per_second": 197.0688608193444
+        },
+        "C": {
+          "forward_ms": 38.414395999999996,
+          "teardown_ms": 8.049438,
+          "owned_lifecycle_ms": 46.4520845,
+          "diagnostic_tokens_per_second": 208.2552604202846
+        }
+      },
+      "median_forward_speedup": 1.0567642011083556,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.573542,
+            38.490375,
+            38.419666,
+            40.616375
+          ],
+          "A_mean_ms": 40.594958500000004,
+          "C_mean_ms": 38.4550205,
+          "A_over_C": 1.0556478184688525
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.666042,
+            38.411584,
+            38.417208,
+            40.542375
+          ],
+          "A_mean_ms": 40.6042085,
+          "C_mean_ms": 38.414395999999996,
+          "A_over_C": 1.0570049962519261
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.652291,
+            38.393709,
+            38.335667,
+            40.543083
+          ],
+          "A_mean_ms": 40.597687,
+          "C_mean_ms": 38.364688,
+          "A_over_C": 1.0582045395494941
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 125.134083,
+          "diagnostic_tokens_per_second": 63.93142306401047,
+          "teardown_ms": 10.115666,
+          "owned_lifecycle_ms": 135.249749
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 92.347541,
+          "diagnostic_tokens_per_second": 86.62926931644016,
+          "teardown_ms": 9.326041,
+          "owned_lifecycle_ms": 101.67358200000001
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 38.546417,
+          "diagnostic_tokens_per_second": 207.5419876249458,
+          "teardown_ms": 8.854208,
+          "owned_lifecycle_ms": 47.400625
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 40.60125,
+          "diagnostic_tokens_per_second": 197.03826852621532,
+          "teardown_ms": 8.937416,
+          "owned_lifecycle_ms": 49.538666
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.573542,
+          "diagnostic_tokens_per_second": 197.172827553483,
+          "teardown_ms": 8.96475,
+          "owned_lifecycle_ms": 49.538292000000006
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.490375,
+          "diagnostic_tokens_per_second": 207.8441688344164,
+          "teardown_ms": 8.486791,
+          "owned_lifecycle_ms": 46.977166
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.419666,
+          "diagnostic_tokens_per_second": 208.22669306911726,
+          "teardown_ms": 8.06725,
+          "owned_lifecycle_ms": 46.486916
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.616375,
+          "diagnostic_tokens_per_second": 196.9648940852058,
+          "teardown_ms": 8.076416,
+          "owned_lifecycle_ms": 48.692791
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.666042,
+          "diagnostic_tokens_per_second": 196.72433329016874,
+          "teardown_ms": 7.999834,
+          "owned_lifecycle_ms": 48.665876
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.411584,
+          "diagnostic_tokens_per_second": 208.2705050643056,
+          "teardown_ms": 8.041667,
+          "owned_lifecycle_ms": 46.453250999999995
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.417208,
+          "diagnostic_tokens_per_second": 208.2400157762636,
+          "teardown_ms": 8.024541,
+          "owned_lifecycle_ms": 46.441749
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.542375,
+          "diagnostic_tokens_per_second": 197.32440440403406,
+          "teardown_ms": 8.037083,
+          "owned_lifecycle_ms": 48.579458
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.652291,
+          "diagnostic_tokens_per_second": 196.79087705044716,
+          "teardown_ms": 8.457542,
+          "owned_lifecycle_ms": 49.109832999999995
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.393709,
+          "diagnostic_tokens_per_second": 208.36746978521924,
+          "teardown_ms": 8.057209,
+          "owned_lifecycle_ms": 46.450918
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.335667,
+          "diagnostic_tokens_per_second": 208.6829479189706,
+          "teardown_ms": 7.991792,
+          "owned_lifecycle_ms": 46.327459000000005
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1023-gatesON",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.543083,
+          "diagnostic_tokens_per_second": 197.320958546739,
+          "teardown_ms": 7.988084,
+          "owned_lifecycle_ms": 48.531167
+        }
+      ]
+    },
+    {
+      "name": "B1-used1024-gatesOFF",
+      "B": 1,
+      "used": 1024,
+      "gates": false,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 24.3145625,
+          "teardown_ms": 3.832479,
+          "owned_lifecycle_ms": 28.1470415,
+          "diagnostic_tokens_per_second": 41.12767169644915
+        },
+        "C": {
+          "forward_ms": 22.5243125,
+          "teardown_ms": 3.7829375,
+          "owned_lifecycle_ms": 26.281875,
+          "diagnostic_tokens_per_second": 44.3964721284096
+        }
+      },
+      "median_forward_speedup": 1.07948078326475,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            28.679916,
+            26.726416,
+            22.567,
+            24.374667
+          ],
+          "A_mean_ms": 26.527291499999997,
+          "C_mean_ms": 24.646708,
+          "A_over_C": 1.0763016099350873
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            24.286375,
+            22.526792,
+            22.471083,
+            24.34275
+          ],
+          "A_mean_ms": 24.3145625,
+          "C_mean_ms": 22.4989375,
+          "A_over_C": 1.0806982551953843
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            24.284459,
+            22.521833,
+            22.46575,
+            24.281791
+          ],
+          "A_mean_ms": 24.283125,
+          "C_mean_ms": 22.4937915,
+          "A_over_C": 1.0795478832459169
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.541375,
+          "diagnostic_tokens_per_second": 40.747513128339385,
+          "teardown_ms": 4.209542,
+          "owned_lifecycle_ms": 28.750916999999998
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.500083,
+          "diagnostic_tokens_per_second": 44.44428049443195,
+          "teardown_ms": 4.125542,
+          "owned_lifecycle_ms": 26.625625
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.37225,
+          "diagnostic_tokens_per_second": 44.6982310675055,
+          "teardown_ms": 4.034208,
+          "owned_lifecycle_ms": 26.406458
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.295333,
+          "diagnostic_tokens_per_second": 41.16016849820499,
+          "teardown_ms": 5.020834,
+          "owned_lifecycle_ms": 29.316167
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 28.679916,
+          "diagnostic_tokens_per_second": 34.8676056094446,
+          "teardown_ms": 4.103875,
+          "owned_lifecycle_ms": 32.783791
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 26.726416,
+          "diagnostic_tokens_per_second": 37.41616533993933,
+          "teardown_ms": 4.133958,
+          "owned_lifecycle_ms": 30.860374
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.567,
+          "diagnostic_tokens_per_second": 44.31249169140781,
+          "teardown_ms": 4.020417,
+          "owned_lifecycle_ms": 26.587417000000002
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.374667,
+          "diagnostic_tokens_per_second": 41.026201506670844,
+          "teardown_ms": 4.017083,
+          "owned_lifecycle_ms": 28.39175
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.286375,
+          "diagnostic_tokens_per_second": 41.17535037649711,
+          "teardown_ms": 3.916958,
+          "owned_lifecycle_ms": 28.203333
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.526792,
+          "diagnostic_tokens_per_second": 44.39158491808332,
+          "teardown_ms": 3.822625,
+          "owned_lifecycle_ms": 26.349417
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.471083,
+          "diagnostic_tokens_per_second": 44.50163794953719,
+          "teardown_ms": 3.74325,
+          "owned_lifecycle_ms": 26.214333
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.34275,
+          "diagnostic_tokens_per_second": 41.07999301640119,
+          "teardown_ms": 3.748,
+          "owned_lifecycle_ms": 28.09075
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.284459,
+          "diagnostic_tokens_per_second": 41.178599037351425,
+          "teardown_ms": 3.676459,
+          "owned_lifecycle_ms": 27.960918
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.521833,
+          "diagnostic_tokens_per_second": 44.40135933873588,
+          "teardown_ms": 3.589,
+          "owned_lifecycle_ms": 26.110833
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.46575,
+          "diagnostic_tokens_per_second": 44.51220190734785,
+          "teardown_ms": 3.542708,
+          "owned_lifecycle_ms": 26.008458
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesOFF",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 24.281791,
+          "diagnostic_tokens_per_second": 41.18312360072616,
+          "teardown_ms": 3.513708,
+          "owned_lifecycle_ms": 27.795499
+        }
+      ]
+    },
+    {
+      "name": "B1-used1024-gatesON",
+      "B": 1,
+      "used": 1024,
+      "gates": true,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 23.6379795,
+          "teardown_ms": 2.8189374999999997,
+          "owned_lifecycle_ms": 26.4698545,
+          "diagnostic_tokens_per_second": 42.30480706770813
+        },
+        "C": {
+          "forward_ms": 22.0888755,
+          "teardown_ms": 2.914625,
+          "owned_lifecycle_ms": 25.009771,
+          "diagnostic_tokens_per_second": 45.271737509580575
+        }
+      },
+      "median_forward_speedup": 1.0701305052853414,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.686416,
+            22.139084,
+            22.118292,
+            23.6895
+          ],
+          "A_mean_ms": 23.687958000000002,
+          "C_mean_ms": 22.128688,
+          "A_over_C": 1.0704637346778083
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.628459,
+            22.130833,
+            22.059459,
+            23.6475
+          ],
+          "A_mean_ms": 23.6379795,
+          "C_mean_ms": 22.095146,
+          "A_over_C": 1.069826807209149
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            23.522,
+            21.994625,
+            21.939209,
+            23.579958
+          ],
+          "A_mean_ms": 23.550978999999998,
+          "C_mean_ms": 21.966917000000002,
+          "A_over_C": 1.0721112571236098
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 24.132209,
+          "diagnostic_tokens_per_second": 41.43839463681091,
+          "teardown_ms": 3.370292,
+          "owned_lifecycle_ms": 27.502501
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.285542,
+          "diagnostic_tokens_per_second": 44.87214176796777,
+          "teardown_ms": 3.476166,
+          "owned_lifecycle_ms": 25.761708
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 22.251792,
+          "diagnostic_tokens_per_second": 44.940200771245756,
+          "teardown_ms": 3.3295,
+          "owned_lifecycle_ms": 25.581291999999998
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 23.774042,
+          "diagnostic_tokens_per_second": 42.062683324947436,
+          "teardown_ms": 3.157584,
+          "owned_lifecycle_ms": 26.931626
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.686416,
+          "diagnostic_tokens_per_second": 42.2182908549778,
+          "teardown_ms": 3.1035,
+          "owned_lifecycle_ms": 26.789916
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.139084,
+          "diagnostic_tokens_per_second": 45.16898711798555,
+          "teardown_ms": 3.120625,
+          "owned_lifecycle_ms": 25.259709
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.118292,
+          "diagnostic_tokens_per_second": 45.211447610873385,
+          "teardown_ms": 3.1115,
+          "owned_lifecycle_ms": 25.229792
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.6895,
+          "diagnostic_tokens_per_second": 42.21279469807299,
+          "teardown_ms": 2.914792,
+          "owned_lifecycle_ms": 26.604291999999997
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.628459,
+          "diagnostic_tokens_per_second": 42.32184587238635,
+          "teardown_ms": 2.956792,
+          "owned_lifecycle_ms": 26.585251
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.130833,
+          "diagnostic_tokens_per_second": 45.18582739294088,
+          "teardown_ms": 2.92075,
+          "owned_lifecycle_ms": 25.051583
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 22.059459,
+          "diagnostic_tokens_per_second": 45.33202740828776,
+          "teardown_ms": 2.9085,
+          "owned_lifecycle_ms": 24.967959
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.6475,
+          "diagnostic_tokens_per_second": 42.28776826302992,
+          "teardown_ms": 2.706958,
+          "owned_lifecycle_ms": 26.354458
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.522,
+          "diagnostic_tokens_per_second": 42.5133917183913,
+          "teardown_ms": 2.723083,
+          "owned_lifecycle_ms": 26.245082999999997
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 21.994625,
+          "diagnostic_tokens_per_second": 45.465653540353614,
+          "teardown_ms": 2.732875,
+          "owned_lifecycle_ms": 24.7275
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 21.939209,
+          "diagnostic_tokens_per_second": 45.58049472066199,
+          "teardown_ms": 2.683125,
+          "owned_lifecycle_ms": 24.622334000000002
+        },
+        {
+          "event": "sample",
+          "name": "B1-used1024-gatesON",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 23.579958,
+          "diagnostic_tokens_per_second": 42.40889657225004,
+          "teardown_ms": 2.652208,
+          "owned_lifecycle_ms": 26.232166
+        }
+      ]
+    },
+    {
+      "name": "B8-used1024-gatesOFF",
+      "B": 8,
+      "used": 1024,
+      "gates": false,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 40.469354499999994,
+          "teardown_ms": 9.0736875,
+          "owned_lifecycle_ms": 49.54975,
+          "diagnostic_tokens_per_second": 197.68044857595464
+        },
+        "C": {
+          "forward_ms": 38.366562,
+          "teardown_ms": 9.417771,
+          "owned_lifecycle_ms": 47.7601255,
+          "diagnostic_tokens_per_second": 208.51490420232068
+        }
+      },
+      "median_forward_speedup": 1.0548079470868408,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.474917,
+            38.366583,
+            38.394042,
+            40.513292
+          ],
+          "A_mean_ms": 40.4941045,
+          "C_mean_ms": 38.3803125,
+          "A_over_C": 1.0550749033114308
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.507542,
+            38.426458,
+            38.366541,
+            40.441625
+          ],
+          "A_mean_ms": 40.4745835,
+          "C_mean_ms": 38.3964995,
+          "A_over_C": 1.0541217045059017
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.37925,
+            38.348084,
+            38.290667,
+            40.463792
+          ],
+          "A_mean_ms": 40.421521,
+          "C_mean_ms": 38.3193755,
+          "A_over_C": 1.0548585532141566
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 93.159208,
+          "diagnostic_tokens_per_second": 85.87449562688424,
+          "teardown_ms": 10.423708,
+          "owned_lifecycle_ms": 103.58291600000001
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 95.465333,
+          "diagnostic_tokens_per_second": 83.80005336596898,
+          "teardown_ms": 9.209125,
+          "owned_lifecycle_ms": 104.674458
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 38.378042,
+          "diagnostic_tokens_per_second": 208.4525312677494,
+          "teardown_ms": 9.189791,
+          "owned_lifecycle_ms": 47.567833
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 40.535834,
+          "diagnostic_tokens_per_second": 197.35624534085076,
+          "teardown_ms": 9.218583,
+          "owned_lifecycle_ms": 49.754417000000004
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.474917,
+          "diagnostic_tokens_per_second": 197.65327746070489,
+          "teardown_ms": 9.777375,
+          "owned_lifecycle_ms": 50.252292
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.366583,
+          "diagnostic_tokens_per_second": 208.51479007134932,
+          "teardown_ms": 9.112458,
+          "owned_lifecycle_ms": 47.479040999999995
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.394042,
+          "diagnostic_tokens_per_second": 208.3656625681662,
+          "teardown_ms": 9.183792,
+          "owned_lifecycle_ms": 47.577833999999996
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.513292,
+          "diagnostic_tokens_per_second": 197.46605632541537,
+          "teardown_ms": 9.1285,
+          "owned_lifecycle_ms": 49.641792
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.507542,
+          "diagnostic_tokens_per_second": 197.49408640988386,
+          "teardown_ms": 9.076375,
+          "owned_lifecycle_ms": 49.583917
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.426458,
+          "diagnostic_tokens_per_second": 208.1898883316282,
+          "teardown_ms": 9.837541,
+          "owned_lifecycle_ms": 48.263999
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.366541,
+          "diagnostic_tokens_per_second": 208.51501833329203,
+          "teardown_ms": 9.697208,
+          "owned_lifecycle_ms": 48.063749
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.441625,
+          "diagnostic_tokens_per_second": 197.81598785904373,
+          "teardown_ms": 9.071,
+          "owned_lifecycle_ms": 49.512625
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.37925,
+          "diagnostic_tokens_per_second": 198.12155995963275,
+          "teardown_ms": 9.02725,
+          "owned_lifecycle_ms": 49.4065
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.348084,
+          "diagnostic_tokens_per_second": 208.61537697685236,
+          "teardown_ms": 9.147583,
+          "owned_lifecycle_ms": 47.495667
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.290667,
+          "diagnostic_tokens_per_second": 208.92819652371165,
+          "teardown_ms": 9.65175,
+          "owned_lifecycle_ms": 47.942417
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesOFF",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.463792,
+          "diagnostic_tokens_per_second": 197.70761969120443,
+          "teardown_ms": 9.051791,
+          "owned_lifecycle_ms": 49.515583
+        }
+      ]
+    },
+    {
+      "name": "B8-used1024-gatesON",
+      "B": 8,
+      "used": 1024,
+      "gates": true,
+      "formal_samples": 12,
+      "warm_samples": 4,
+      "medians": {
+        "A": {
+          "forward_ms": 40.564854,
+          "teardown_ms": 8.342813,
+          "owned_lifecycle_ms": 48.9414785,
+          "diagnostic_tokens_per_second": 197.21505807294287
+        },
+        "C": {
+          "forward_ms": 38.297478999999996,
+          "teardown_ms": 8.3422085,
+          "owned_lifecycle_ms": 46.7360835,
+          "diagnostic_tokens_per_second": 208.8910662713264
+        }
+      },
+      "median_forward_speedup": 1.059204288616491,
+      "ACCA_blocks": [
+        {
+          "block": 0,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.567625,
+            38.464667,
+            38.312458,
+            40.664833
+          ],
+          "A_mean_ms": 40.616229000000004,
+          "C_mean_ms": 38.3885625,
+          "A_over_C": 1.0580294325946695
+        },
+        {
+          "block": 1,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.562083,
+            38.2825,
+            38.451042,
+            40.629292
+          ],
+          "A_mean_ms": 40.5956875,
+          "C_mean_ms": 38.366771,
+          "A_over_C": 1.0580949723394757
+        },
+        {
+          "block": 2,
+          "arms": "ACCA",
+          "forward_ms": [
+            40.39775,
+            38.275666,
+            38.231,
+            40.510458
+          ],
+          "A_mean_ms": 40.454104,
+          "C_mean_ms": 38.253333,
+          "A_over_C": 1.057531483596475
+        }
+      ],
+      "raw_samples": [
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 93.835167,
+          "diagnostic_tokens_per_second": 85.25588279711806,
+          "teardown_ms": 44.952792,
+          "owned_lifecycle_ms": 138.787959
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 91.955334,
+          "diagnostic_tokens_per_second": 86.99875963693417,
+          "teardown_ms": 9.679417,
+          "owned_lifecycle_ms": 101.634751
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 38.237375,
+          "diagnostic_tokens_per_second": 209.2193828682016,
+          "teardown_ms": 9.758584,
+          "owned_lifecycle_ms": 47.995959
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": true,
+          "status": "PASS",
+          "forward_ms": 40.525791,
+          "diagnostic_tokens_per_second": 197.40515367115228,
+          "teardown_ms": 9.749875,
+          "owned_lifecycle_ms": 50.275666
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 0,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.567625,
+          "diagnostic_tokens_per_second": 197.20158624025933,
+          "teardown_ms": 8.2675,
+          "owned_lifecycle_ms": 48.835125
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 1,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.464667,
+          "diagnostic_tokens_per_second": 207.98308224012442,
+          "teardown_ms": 8.312084,
+          "owned_lifecycle_ms": 46.776751
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 2,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.312458,
+          "diagnostic_tokens_per_second": 208.80936430651357,
+          "teardown_ms": 8.382958,
+          "owned_lifecycle_ms": 46.695416
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 3,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.664833,
+          "diagnostic_tokens_per_second": 196.73018207157028,
+          "teardown_ms": 8.359667,
+          "owned_lifecycle_ms": 49.0245
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 4,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.562083,
+          "diagnostic_tokens_per_second": 197.2285299056264,
+          "teardown_ms": 8.371333,
+          "owned_lifecycle_ms": 48.933416
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 5,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.2825,
+          "diagnostic_tokens_per_second": 208.97276823613925,
+          "teardown_ms": 9.302916,
+          "owned_lifecycle_ms": 47.585415999999995
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 6,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.451042,
+          "diagnostic_tokens_per_second": 208.05678035981444,
+          "teardown_ms": 8.331209,
+          "owned_lifecycle_ms": 46.782251
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 7,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.629292,
+          "diagnostic_tokens_per_second": 196.9022743492552,
+          "teardown_ms": 8.325166,
+          "owned_lifecycle_ms": 48.954458
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 8,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.39775,
+          "diagnostic_tokens_per_second": 198.03083092498963,
+          "teardown_ms": 8.325959,
+          "owned_lifecycle_ms": 48.723709
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 9,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.275666,
+          "diagnostic_tokens_per_second": 209.01007966784954,
+          "teardown_ms": 8.25575,
+          "owned_lifecycle_ms": 46.531416
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "C",
+          "index": 10,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 38.231,
+          "diagnostic_tokens_per_second": 209.2542700949491,
+          "teardown_ms": 8.353208,
+          "owned_lifecycle_ms": 46.584208000000004
+        },
+        {
+          "event": "sample",
+          "name": "B8-used1024-gatesON",
+          "arm": "A",
+          "index": 11,
+          "warm": false,
+          "status": "PASS",
+          "forward_ms": 40.510458,
+          "diagnostic_tokens_per_second": 197.47987050652452,
+          "teardown_ms": 8.439083,
+          "owned_lifecycle_ms": 48.949540999999996
+        }
+      ]
+    }
+  ],
+  "ledger_sha256": "9820bc3f5b8dfbc231be0f4eabbeeaa6342dc8c7b6185b3261a3ba57a17b42aa",
+  "ledger_lines": 319,
+  "qualification_output_checks": 1548,
+  "qualification_input_checks": 2096,
+  "prefill_checks": 3096,
+  "sample_checks": 33280,
+  "warm_samples": 32,
+  "formal_samples": 96
+}

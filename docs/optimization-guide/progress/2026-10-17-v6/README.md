@@ -20,3 +20,7 @@ Subsequent E024 long decode graph qualification failed exact logits at its first
 The separate [four-arm follow-up](../../../experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/README.md) identifies bound change as sufficient to reproduce the rejected candidate difference at B1/used257; same-bound compilation is exact there. It has no performance qualification and does not change these points.
 
 The subsequent [route-preserving matrix](../../../experiments/m5-ultra-256gb/E024-route-matrix-v1/README.md) passes52 fixed diagnostic steps. Independent raw verification covers three complete output contrasts; the other points retain device/hash receipts. It still has no HTTP/performance qualification, so these two plotted baseline points remain unchanged.
+
+The [subsequent eight-configuration forward timing](../2026-10-17-v7/README.md)
+passes its diagnostic bit checks and measures lower graph forward medians. It
+excludes the serving lifecycle and contributes no HTTP Pareto point here.
