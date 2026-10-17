@@ -1,0 +1,102 @@
+{
+  "runtime": "MLX/mlx-metal0.32.3,AppleM4Max/applegpu_g16s only in frozen guard",
+  "quantization": {
+    "group_size": 16,
+    "bits": 4,
+    "mode": "nvfp4",
+    "bias": null
+  },
+  "T": [
+    2,
+    4,
+    5
+  ],
+  "geometries_N_K": [
+    [
+      48,
+      5120
+    ],
+    [
+      1024,
+      5120
+    ],
+    [
+      5120,
+      6144
+    ],
+    [
+      5120,
+      17408
+    ],
+    [
+      6144,
+      5120
+    ],
+    [
+      10240,
+      5120
+    ],
+    [
+      12288,
+      5120
+    ],
+    [
+      17408,
+      5120
+    ],
+    [
+      248320,
+      5120
+    ]
+  ],
+  "grid": [
+    "64",
+    "N//8",
+    "1"
+  ],
+  "threadgroup": [
+    64,
+    1,
+    1
+  ],
+  "SIMD_width": 32,
+  "SIMD_groups": 2,
+  "output_rows_per_SIMD": 4,
+  "output_rows_per_threadgroup": 8,
+  "template": [
+    "T=bfloat16",
+    "VERIFY_T=Trows",
+    "K_SIZE=K",
+    "N_SIZE=N"
+  ],
+  "input_names": [
+    "weight",
+    "scales",
+    "x"
+  ],
+  "output_names": [
+    "output"
+  ],
+  "weight_dtype_shape": [
+    "uint32",
+    "[N,K/8]"
+  ],
+  "scale_dtype_shape": [
+    "uint8",
+    "[N,K/16]"
+  ],
+  "X_dtype_shape": [
+    "bfloat16",
+    "[T,K]"
+  ],
+  "output_dtype_shape": [
+    "bfloat16",
+    "[T,N]"
+  ],
+  "ensure_row_contiguous": false,
+  "incomplete_output_tile": "unsupported; helper requires N%8=0 and exact target shapes",
+  "copy_repack_or_weight_rebind": false,
+  "math_policy": "No math-policy override passed; frozen original header/expression and MLX0.32.3 custom-kernel defaults. Actual fixture byte equality is not a universal compiler proof.",
+  "observed_M4_numeric_matrix_checks": 1491,
+  "M5_numeric_or_performance_qualified": false
+}

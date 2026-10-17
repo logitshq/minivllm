@@ -94,3 +94,5 @@ docs/              计划、教程、远程版的契约和 notes
 [43：新的三家 C1 吞吐—延迟对照](docs/experiments/43-fresh-c1-throughput-latency.md)完成九次 fresh 加载：本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。本方三轮均领先；这是当时的 C1 切面；后续完整同场复测见第44章。
 
 [44：完整 C1/C2/C4 吞吐—延迟前沿](docs/experiments/44-fresh-full-throughput-latency.md)完成全新 21 次独立加载。在同一 Qwen3.8-27B NVFP4、19→32 短负载下，本方三点组成联合 Pareto 前沿，覆盖本轮 oMLX 三点与 Lithos C1。相对 oMLX，C1/C2/C4 配置中位吞吐分别高约 3.90% / 8.36% / 16.55%，完整请求 p50 分别低约 3.75% / 6.36% / 12.79%。正确性是入图条件；新旧批次、M5 和 GLM 结果不混合。
+
+[共享 W 多行 M1 源码与数值补记](docs/code-versions/44-shared-w-m1/README.md)另存新 kernel：1491 个同输入完整矩阵比较通过，含 497 个真实 T5 输入及派生前缀。尚无整模接入或速度结论，不是第44章曲线的收益来源；供 M5 重建本机资格。

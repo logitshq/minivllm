@@ -1,0 +1,81 @@
+{
+  "status": "CPU_PREPARED_LOCAL_NUMERIC_GPU_UNRUN",
+  "source": "v124-shared-weight-m1-source-build1",
+  "source_manifest_sha256": "a633fa7557edccb725101150772c4ea0fd7a492e889dad8e60be91a9fb967e9f",
+  "shapes_N_K": [
+    [
+      48,
+      5120
+    ],
+    [
+      17408,
+      5120
+    ],
+    [
+      5120,
+      6144
+    ],
+    [
+      5120,
+      17408
+    ]
+  ],
+  "T": [
+    2,
+    4,
+    5
+  ],
+  "banks": [
+    "random clipped standard normal with original packed random U32 and finite signed E4M3 scales",
+    "all16 E2M1 nibbles, signed zeros and onehot lane/block boundaries, repeated rows",
+    "BF16 subnormals, signedzero, +/-2^40, opposite-sign cancellation"
+  ],
+  "extra": "T5 code-bank row permutation [4,2,0,3,1] per shape",
+  "cases": 40,
+  "strict_matrix_comparisons": 80,
+  "strict_rows_per_arm": 152,
+  "references": "Each native mx.quantized_matmul invocation uses one row M1; concatenate only after separate M1 operator calls. Original expression custom control is compared separately before candidate. No output is an input to candidate.",
+  "gate": "BF16 shape/dtype/finite + every byte including signedzero; record per-row hashes. First failed reference finite check is INVALID_FIXTURE rather than a candidate failure. First control or candidate mismatch stops all remaining cases, saves diagnosis; no tolerances.",
+  "readonly": "Before/after sourcecontrol, candidate and finally: complete W/scales/X hashes, shapes/dtypes/observed canonical zero-copy buffer strides and object identities. No W copy/repack in prepare.",
+  "synthetic_only": true,
+  "checkpoint_or_model_load": false,
+  "peak_and_active_limit_bytes": 1073741824,
+  "allocator_cache_limit_bytes": 67108864,
+  "maximum_weight_and_scale_payload_bytes": 50135040,
+  "resource_policy": "root owns GPU/process/timeout; worker raw outside-case snapshots first, then original guard; AC, thermal0/1, pressure1, known-foreign-none, swapMB no growth, Swapouts stable. Root may impose stricter nominal0 outer guard.",
+  "controls": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "uncovered_actual_shapes_N_K": [
+    [
+      1024,
+      5120
+    ],
+    [
+      6144,
+      5120
+    ],
+    [
+      10240,
+      5120
+    ],
+    [
+      12288,
+      5120
+    ],
+    [
+      248320,
+      5120
+    ]
+  ],
+  "partial_N": "not supported by frozen target-only helper; CPU guard rejects N49 and N56, no partial-tile GPU claim",
+  "claims": {
+    "performance": false,
+    "universal_exactness": false,
+    "fullmodel_qualification": false,
+    "adoption": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "status": "SOURCE_PROTOTYPE_CPU_ONLY_GPU_UNRUN",
+  "scope": "T2/4/5 shared-original-W singleton-R4 arithmetic, no engine integration",
+  "baseline": "concat independent M1 native mx.quantized_matmul per row AND frozen V113 broadcast-M1",
+  "source_control": "verbatim fp_qmv_fast_impl<BF16,16,4,false,4> single-row bridge",
+  "gate": "shape/dtype/finite/full raw bytes equality including signed zeros; all input/weight/scale owners readonly; first mismatch STOP, no numerical tolerance",
+  "rows": [
+    2,
+    4,
+    5
+  ],
+  "threads": 64,
+  "simdgroups": 2,
+  "outputs_per_simdgroup": 4,
+  "K_step": 512,
+  "input_values_per_lane": 16,
+  "no_math_policy_override": true,
+  "input_names": [
+    "weight",
+    "scales",
+    "x"
+  ],
+  "output_names": [
+    "output"
+  ],
+  "explicit_pointer_arguments": 4,
+  "no_weight_copy_or_repack": true,
+  "actual_PSO_or_register_spill_or_DRAM_bandwidth_observed": false,
+  "next_local_cases": [
+    "all9 target N/K geometries, T2/4/5, independent synthetic rows incl zero/signedzero/one-hot block/lane boundaries/cancellation/subnormal/large finite",
+    "row permutation and repeated rows; original-M1 bridge and V113 reference both strict; output rows all consumed",
+    "reuse V112 first-verify actual497 same operator inputs when recaptured; historical MLP input used only as labelled generic vector if needed"
+  ],
+  "before_integration": "all497 same-input strict gate; then separate same-frontier128 cache+last-computed-logits and old96 IDs qualification identical to V117; no A output/IDs fed to B",
+  "performance": "none prepared; source logical W loads/T reduction is not measured DRAM saving; register/occupancy/X reread/cross-row compilation remain unknown"
+}

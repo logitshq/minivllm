@@ -1,0 +1,218 @@
+[
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__kernels__fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "bytes": 69285,
+    "line_start": 31,
+    "line_end": 102,
+    "claim": "NVFP4 group16 scale decode and exact four-term qdot",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__kernels__fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "bytes": 69285,
+    "line_start": 339,
+    "line_end": 406,
+    "claim": "M1 SG2/R4 K512/16values per lane, scalar accumulation, simd_sum, BF16 cast",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__kernels__fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "bytes": 69285,
+    "line_start": 570,
+    "line_end": 690,
+    "claim": "native qmv_wide changes lane K partition, dot(float4), shuffle tree: not old M1",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__kernels__fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "bytes": 69285,
+    "line_start": 1248,
+    "line_end": 1305,
+    "claim": "broadcast qmv_fast batch-offset adjustment calls same singleton impl",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__kernels__fp_quantized.h",
+    "sha256": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "bytes": 69285,
+    "line_start": 1642,
+    "line_end": 1699,
+    "claim": "gather fast calls same singleton impl after gather offsets",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__quantized.cpp",
+    "sha256": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+    "bytes": 62459,
+    "line_start": 89,
+    "line_end": 152,
+    "claim": "M4gen16s vector_limit13 for target shapes, fast K alignment512",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__quantized.cpp",
+    "sha256": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+    "bytes": 62459,
+    "line_start": 463,
+    "line_end": 539,
+    "claim": "M1 qmv fast R4 SG2 launch M,N/8,B; M5 narrow only gen17s",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__quantized.cpp",
+    "sha256": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+    "bytes": 62459,
+    "line_start": 1376,
+    "line_end": 1443,
+    "claim": "gather fast R4 geometry and pointer/index bindings",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/source/mlx__backend__metal__quantized.cpp",
+    "sha256": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+    "bytes": 62459,
+    "line_start": 1825,
+    "line_end": 1929,
+    "claim": "native M>=2 qmv_wide vs M1 dispatch and row-contiguity M folding",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/speculative/vlm_mtp.py",
+    "sha256": "0bb7874ed06edb2e3b3c51db918b6648c512e53777b5d00883c3fa8bb3327080",
+    "bytes": 15562,
+    "line_start": 44,
+    "line_end": 60,
+    "claim": "oMLX imported actual mlx-vlm MTP round helpers/stream",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/mtp.py",
+    "sha256": "4ed467918bd24e26c60730d6d3529c6a9e633448b2fc6028829965bb1f4daad1",
+    "bytes": 44365,
+    "line_start": 153,
+    "line_end": 222,
+    "claim": "actual target verifier selection; transaction abort on exception",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/mtp.py",
+    "sha256": "4ed467918bd24e26c60730d6d3529c6a9e633448b2fc6028829965bb1f4daad1",
+    "bytes": 44365,
+    "line_start": 660,
+    "line_end": 690,
+    "claim": "bonus+drafts concat and target verify input, then acceptance",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/speculative_verifier.py",
+    "sha256": "32b632f3ade3bcdfdab61d280ac3c219edc3b7b54881a2fba8b06415396302e9",
+    "bytes": 14403,
+    "line_start": 26,
+    "line_end": 58,
+    "claim": "Qwen3_5 explicit verifier target-linear wiring, not Qwen4",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/speculative_verifier.py",
+    "sha256": "32b632f3ade3bcdfdab61d280ac3c219edc3b7b54881a2fba8b06415396302e9",
+    "bytes": 14403,
+    "line_start": 209,
+    "line_end": 235,
+    "claim": "MLP and GDN siblings enter same target linear helpers",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/ops/linear.py",
+    "sha256": "02a8c23259882c4476e682dd574accd9714450ff5e7a6fdc6819d174f24dedfa",
+    "bytes": 5952,
+    "line_start": 33,
+    "line_end": 132,
+    "claim": "affine optimized guard first, otherwise singleton gather; separate multiple-projection helper",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/quantized_verifier.py",
+    "sha256": "f3f3c485f164fbaf237a7f294b44f7fa0ab3e2078bfcfd71c6fab6bf1a877289",
+    "bytes": 71395,
+    "line_start": 391,
+    "line_end": 420,
+    "claim": "NVFP4 singleton helper uses contiguous X + singleton W/scales views and gather_qmm; no shared-T device cache in this function",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/quantized_verifier.py",
+    "sha256": "f3f3c485f164fbaf237a7f294b44f7fa0ab3e2078bfcfd71c6fab6bf1a877289",
+    "bytes": 71395,
+    "line_start": 1645,
+    "line_end": 1706,
+    "claim": "shared-T custom qmv eligibility requires affine/bias scales BF16 or F16, not target nvfp4",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/company/lithos-metal/monolith/compiler/emit.py",
+    "sha256": "aeb9a9007d1bd54cb5f897d116d0173f125999f90c0b02c774b6599b74064483",
+    "bytes": 102420,
+    "line_start": 312,
+    "line_end": 405,
+    "claim": "Lithos symbolic verify T variants and per-T gemv_T specialization",
+    "scope": "current read-only local checkout; emit.py matches earlier handoff snapshot; no speculative engagement claim for old M4 none arm"
+  },
+  {
+    "path": "/Users/ryanli/code/company/lithos-metal/kernels/common/gemv_T.metal",
+    "sha256": "aacc9ddf17fae15bd124330d034e76ebf996967ce96309c146e24671e5128ae8",
+    "bytes": 27819,
+    "line_start": 385,
+    "line_end": 509,
+    "claim": "Lithos packed lane-row W decode outside T, fma and row-scale after simd_sum differ from original MLX M1",
+    "scope": "current read-only local checkout kernel; historical handoff text lacks this file, not claimed as old capture binary attestation"
+  },
+  {
+    "path": "/Users/ryanli/code/company/lithos-metal/monolith/formats/nvfp4.py",
+    "sha256": "5f4a6954a4ec1c9b45e6b9f9b15f152e6a9ea37a1addbb51ed32cce638126559",
+    "bytes": 11310,
+    "line_start": 1,
+    "line_end": 24,
+    "claim": "Lithos lane-row packed layout and default decode3 factor-fold differs from MLX original array format",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v113-broadcast-m1-diagnostic-build1/broadcast_m1.py",
+    "sha256": "77ac3b6a18801f20672d7a3395e4be96c468d6db28ed9553b33f76d0011aab95",
+    "bytes": 1264,
+    "line_start": 1,
+    "line_end": 27,
+    "claim": "frozen zero-stride leading-batch-view workaround, unchanged",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v116-bounded-draftloader-build1-root/tutorial_code/miniengine/engine/spec_runner.py",
+    "sha256": "51d5530f34f3c647c48dcdd3e07fb12ea1c8c922c291554dd618ec0f6f84578f",
+    "bytes": 9348,
+    "line_start": 87,
+    "line_end": 144,
+    "claim": "V117 actual transaction-only use and commit; new kernel not integrated here",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v124-shared-weight-m1-source-build1/shared_impl.metal",
+    "sha256": "6dfe076f5a45af62aa14c644826791f3aa143d2e92bc230a0f07c39886fcecc9",
+    "bytes": 2249,
+    "line_start": 1,
+    "line_end": 63,
+    "claim": "V124 candidate exact expression and shared packed reads; CPU source only",
+    "scope": "primary source read; kernel engagement not independently observed"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/quantized_verifier.py",
+    "sha256": "f3f3c485f164fbaf237a7f294b44f7fa0ab3e2078bfcfd71c6fab6bf1a877289",
+    "bytes": 71395,
+    "line_start": 1844,
+    "line_end": 1935,
+    "claim": "separate potential optimizedNVFP4 head argmax path uses8values/lane/K256, not M1 reference",
+    "scope": "current installed source; selected head PSO not independently observed"
+  }
+]

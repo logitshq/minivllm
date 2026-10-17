@@ -1,0 +1,31 @@
+{
+  "status": "SOURCE_READY_FOR_ROOT_STRICT_LOCAL_NUMERIC_GPU_UNRUN",
+  "directory": "/private/tmp/minivllm-engine-optimization-20261014/v124-shared-weight-m1-source-build1",
+  "manifest_sha256": "a633fa7557edccb725101150772c4ea0fd7a492e889dad8e60be91a9fb967e9f",
+  "helper_sha256": "8c9cbc970305bb2d43c1d769a45ae43cb43a20581d1286989bb4b9551eaa4feb",
+  "kernel_sha256": "6dfe076f5a45af62aa14c644826791f3aa143d2e92bc230a0f07c39886fcecc9",
+  "report_sha256": "ec0e0d96a7c8991ea39a13cd0d093056e710c96ddbf11fdb7f5bf8c023f71bba",
+  "CPU_checks": {
+    "status": "PASS_CPU_SOURCE_AND_INTEGER_ADDRESS_CHECKS_ONLY",
+    "guard_cases": 48,
+    "address_tile_cases": 54,
+    "shapes": 9,
+    "rows": [
+      2,
+      4,
+      5
+    ],
+    "qdot_four_term_expression_matches_pinned_M1": true,
+    "header_and_MIT_license_verbatim": true,
+    "MLX_imported": false,
+    "GPU_used": false,
+    "floating_numerical_claim": false,
+    "metal_compiler": "xcrun metal unavailable; no compilation claim",
+    "required_next": "root-only real Metal strict numeric against concat-M1 and V113; no engine/adoption/performance qualification"
+  },
+  "limitations": [
+    "No Metal compile on author machine: xcrun metal unavailable",
+    "No real floating numeric qualification",
+    "No numeric executable CLI or engine integration/performance harness; injected helper API and exact test plan only"
+  ]
+}
