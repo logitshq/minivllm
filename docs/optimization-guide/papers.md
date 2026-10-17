@@ -84,3 +84,11 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   作者在长上下文稀疏模型上报告收益，不能外推到M5统一内存或本Qwen稠密attention。
   本机可借用的独立机制是bounded draft KV：当前DFlash2只读2048窗口却拼接全历史。
   E014先保留原投影、可见KV和位置数学，检验减少无效复制；不是复现HBM/host分层系统。
+
+- [ReaDy v1](https://arxiv.org/html/2610.20503v1)，2026-10-14；读摘要、§3、§4.1，
+  同时核对[官方实现说明](https://github.com/StartLuxLabs/ReaDy)。在DSpark中加入经训练的
+  低秩reader，让不同draft位置读取已提交GDN状态；固定大小状态仍有gather与准备成本，
+  实现将这些搬运融合。作者的B200/BF16、C1、thinking-on结果不能外推本机NVFP4。
+  该方法需要reader训练与drafter适配，当前DFlash2权重不能加一个读取开关就复现。
+  我们的推论：下一轮保持committed-state ownership明确，并优先消除已有状态的重复搬运；
+  E018只研究原始递归数学的短T驻留kernel，不是ReaDy复现，也不先移植其训练头。

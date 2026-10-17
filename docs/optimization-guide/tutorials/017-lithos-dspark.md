@@ -121,3 +121,17 @@ accepted proposals 与 committed tokens/round。Lithos `Generation.ms_per_token`
 server 当前拒绝同时请求，不能从 C1 推导 C32，也不能把排队请求当实际 GPU batch。
 初筛通过标准是三次 process 中 DSpark 对本引擎 target-only 的端到端 wall 改善稳定，
 所有质量合同成立；是否胜过我们的实现按全样本报告，失败同样归档。
+
+## E017 engine资格实际入口（运行前）
+
+固定revision的DSpark已通过snapshot解析与三shard SHA/大小校验；download-v1记录
+1,136,258,502 bytes，尚不代表模型资格。`qualify.py`实际调用serving.prepare、
+assets.options与load_session，在两个独立进程各跑三次原始19→32请求。普通臂明确no_draft，
+DSpark固定gamma7；正常EOS、prefix_cache=False、无自动Max recipe。两臂从各自新pack目录
+创建2048/2054容量，由原始pack逻辑处理，不替换目标量化权重。
+
+观察器保存真实编译Program和kernel SHA、accept/conf二进制日志、StepState与Generation。
+独立compare再解析accept日志，核对actual route/验证长度/计数及fresh普通控制的192个
+rawIDs。最后一个GPU块可能多提交，不能把它当作返回的输出数；全部实际工作照样记录。
+释放session engines/引用并由guard wait/reap证明进程结束。9项CPU腐败/CLI检查通过。
+此阶段只证明实际engine路由和短输入输出一致，不证明全部状态、HTTP或性能。

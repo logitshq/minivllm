@@ -260,6 +260,16 @@ fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16�
 10资源快照正常，子进程reap与原服务恢复完整。插桩engine API资格，无HTTP速度排名。
 [教程](tutorials/015-official-mtp.md)、[原始事件和独立审计](../experiments/m5-ultra-256gb/E015-official-mtp-v1/README.md)。
 
+## E017 · 2026-10-17 · Lithos DSpark · engine资格预注册
+
+固定Lithos2236580、原target5ff8ef与DSpark b169bc4，三个权重shard已SHA验证。
+实际serving.prepare→assets.options→load_session，自然M5 Ultra backend、无Max recipe，
+普通/DSpark各fresh process三请求19→32，关闭prefix cache、保留normal EOS。
+新pack分别2048/2054容量；固定gamma7与实际accept日志、编译program和rawIDs作资格。
+完整最后GPU块可多提交，必须记录真实accepted/committed并与返回前32IDs分开。
+9项CPU腐败/CLI检查通过；运行尚待GPU队列，不作HTTP/全状态或速度结论。
+[教程](tutorials/017-lithos-dspark.md)。
+
 ## E016 · 2026-10-17 · draft backbone图复用 · 拒绝
 
 24组312数组严格通过，9点完整draft几何平均1.040008×，最低1.006598×，未过1.10×门。
