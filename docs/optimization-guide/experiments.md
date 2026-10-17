@@ -348,3 +348,12 @@ Compressions+813047，完整保留，不能称内存状态完全不变。
 六个旁置负向挑战全部被拒绝（visible IDs、时钟、MTP日志、listener/parent PID、restore identity），原tar不变。
 [教程及全部fresh数值](tutorials/020-external-spec-http.md)、
 [独立审计和原始证据](../experiments/m5-ultra-256gb/E020-external-spec-http-v1/README.md)。
+
+## E022 · 2026-10-17 · native HTTP TCP_NODELAY · CPU 已资格，GPU 待运行
+
+只切换 stdlib accepted-socket Nagle 选项，冻结复用 E020 模型/core/SSE/client。
+6 fresh servers、36 请求的 OFF/ON 三对计划已固定；每 socket readback 不符即整个进程退出。
+16 CPU tests 双方通过；新 23 small pins 与继承 8658 pins 分层保留，尚无速度结论。
+全部数值、资源与回收先过门，才看三 pair 均 E2E >1、GM≥1.05、TTFT每对≥0.97。
+GLM 下载/SHA 后才调度 GPU；不与 E010/E020 历史锚点池化，不声称 GPU kernel 加速。
+[教程](tutorials/022-native-transport.md)。

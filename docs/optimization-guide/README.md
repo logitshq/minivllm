@@ -19,6 +19,7 @@
 [E018短块GDN状态驻留](tutorials/018-persistent-gdn-verify.md) ·
 [E019只提取新增hidden history](tutorials/019-drafter-history-tail.md) ·
 [E020官方投机模式 HTTP 对照](tutorials/020-external-spec-http.md) ·
+[E022 HTTP 发送延迟预注册](tutorials/022-native-transport.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·

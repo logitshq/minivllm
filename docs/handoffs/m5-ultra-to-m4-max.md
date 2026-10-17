@@ -228,3 +228,10 @@ oMLX vendor preload/sanitize/EnginePool 路径，它已有 C1 MoE/KDA/mHC 融合
 5-bit routed down 是否落在慢路需要实际资格与成本测量，静态边界见
 [GLM first-principles 审查](../../bench/reviews/glm-flash-first-principles.md)。
 下载/SHA 期间不跑 GPU 性能测量。本轮再次 fetch，M4 分支仍为 `aea008c`，已合入。
+
+E022 的 16 项 CPU 资格已由实现者和主线程分别通过，固定三对 OFF/ON、36 请求，
+plan SHA `b239f6117c4a2b7799b5cf366b31c0a8277182f77773b5cc78c49f218f321fc1`。
+仍未运行 GPU；见 [E022 tutorial](../optimization-guide/tutorials/022-native-transport.md)。
+下一次完整并发曲线采用新候选工作负载方案，先修正 adapter 的实际 admission：
+E020 C1 shim 是单请求排空，不能只提高 client C 就声称 batching。oMLX MTP 在 contention
+下会回退，Lithos 单在途限制须真实报告。见 [下一轮 Pareto 方案](../../bench/reviews/pareto-next-workloads.md)。
