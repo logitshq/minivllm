@@ -206,3 +206,25 @@ E019已按预注册be12f82完成GPU提取micro：150数值点通过，120计时�
 但72其他点中27点低于0.97×，整体REJECT，核心未改。服务74384已恢复S。
 只是synthetic hidden-history提取，不能写成整模7×；完整输入/样本归档正在独立CPU审计。
 本轮fetch后M4分支仍为aea008c。
+
+## 2026-10-17 E020 新 HTTP 结果与 GLM 准备
+
+E019 的完整 310-file 原始归档与独立审计已提交 `09568bc`，全部数值通过但性能门失败，
+没有接入核心。E020 也在该提交冻结后完成全部 15 fresh servers、90 请求，45 formal。
+当前同轮 C1 的完整请求延迟/总吞吐中位数为：native 716.10 ms / 44.69 tok/s；
+oMLX none 679.32 / 47.11、MTP 752.06 / 42.55；Lithos none 812.92 / 39.36、
+DSpark 741.96 / 43.13。所有预注册输出/路由合同通过，不能再以旧 E010 native 锚点
+声称新一轮三方全面领先。MTP 与 DSpark 的成对吞吐 GM 分别 0.905527 / 1.085991×。
+完整图表见 [v4](../optimization-guide/progress/2026-10-17-v4/README.md)。
+
+用户再次明确 Pareto 只画 throughput vs latency，正确性是硬前提。v3 保留此前并发扫描；
+v4 是新的 C1 切面，两批不池化。新旧 native HTTP adapter payload/观察器不同，尚未因果
+归因。E022 独立 CPU 原型测试 stdlib TCP_NODELAY，只换 accepted-socket 选项；
+原始结果和失败不改，未执行前不宣称收益。没有更改 M4 的 projection / transaction 代码。
+
+GLM-5.3-Flash MLX 固定 revision `fa04cbc3622b16aa7475404060b05e506d81bd4e` 的
+62-shard、203,992,076,296-byte 下载已启动；尚无运行资格。首个参考必须走真实
+oMLX vendor preload/sanitize/EnginePool 路径，它已有 C1 MoE/KDA/mHC 融合。
+5-bit routed down 是否落在慢路需要实际资格与成本测量，静态边界见
+[GLM first-principles 审查](../../bench/reviews/glm-flash-first-principles.md)。
+下载/SHA 期间不跑 GPU 性能测量。本轮再次 fetch，M4 分支仍为 `aea008c`，已合入。

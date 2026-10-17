@@ -1,0 +1,77 @@
+{
+  "status": "PASS_6_NEGATIVE_CHALLENGES",
+  "baselines": [
+    "original raw SSE reconstructed successfully",
+    "original official MTP logs establish six valid routes",
+    "original listener/PPID/reap/absence proof valid",
+    "original authorized service restore identity/transition valid"
+  ],
+  "challenges": [
+    {
+      "case": "visible_ID_corruption",
+      "rejected": true,
+      "mutation": "raw SSE text changed; cached text/IDs/counts and valid=true left untouched",
+      "contract_failures": [
+        "actual input/output counts differ from 19->32",
+        "visible canonical IDs differ from engine-specific qualified raw IDs"
+      ],
+      "independent_integrity_errors": 9
+    },
+    {
+      "case": "reversed_SSE_timestamp",
+      "rejected": true,
+      "mutation": "second event precedes first; stored timing metrics retained",
+      "contract_failures": [
+        "SSE clock moved backwards/missing",
+        "SSE outside measured request lifecycle"
+      ],
+      "independent_integrity_errors": 2
+    },
+    {
+      "case": "forged_MTP_acceptance",
+      "rejected": true,
+      "mutation": "ordinary log accepts more than its capacity; route.json valid flag is not consumed",
+      "contract_failures": [
+        "MTP acceptance/capacity log invalid"
+      ]
+    },
+    {
+      "case": "forged_listener_PID",
+      "rejected": true,
+      "mutation": "listener inventory points to a different PID while direct_child/valid booleans remain true",
+      "contract_failures": [
+        "ready listener does not belong only to direct child"
+      ]
+    },
+    {
+      "case": "forged_parent_PID",
+      "rejected": true,
+      "mutation": "actual PS PPID differs from controller, declaration remains direct_child=true",
+      "contract_failures": [
+        "launch PS does not prove direct child"
+      ]
+    },
+    {
+      "case": "wrong_restore_identity",
+      "rejected": true,
+      "mutation": "resume identity_match=false despite stored T->S transition",
+      "contract_failures": [
+        "service identity/restore transition failed"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "audit": "c36dfbf41bf1fd8871b9a23499b671e21dc1730f1cde12cd23c6c1475f42c0c5",
+    "challenge_script": "48f7cd08f340e4d0b9fa06f02a46b76fba189c0fe384fa86a5a69e9b8df2a073"
+  },
+  "original_evidence_sha256": {
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1/pair1-native-none/warm-0.json": "d3ca7cfecd732a82e119230f485038dfa02a7de1fe3116381a0de954b66f1773",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1/pair1-omlx-mtp/server.log": "20d495c333a80bdf2e9a943452debb1c081927154f755982ac462de0dd05938b",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1/pair1-native-none/owned-pid.json": "cbde7329abb62186e16736962fbea89f0192ec3fb4780031ba3777b1efc2f5c2",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1/pair1-native-none/ready.json": "8dff7a77a5fded2eb4fbd294ac3ae6c15b99f29b1930f77e7a118a0b8fa33744",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1/pair1-native-none/release.json": "3cb1c53fb8e125696c57c009a4a9754acfda5cfb291058bc6b7d8ac44c214c30",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-service-lease/lease.json": "0befd3c38247bfe93427f19c789d0111f07a8e90b2bcb17015cc52f7767c2607",
+    ".artifacts/m5-ultra-256gb/external-spec-http-v1-service-lease/resume.json": "01b5f3b1b4c6d08a9a6cafa079f03d12b3cf3fc0e4a4d54e672cc96ad2030e82"
+  },
+  "scope": "In-memory corruptions only; no original raw file, verified archive, server or GPU was modified"
+}

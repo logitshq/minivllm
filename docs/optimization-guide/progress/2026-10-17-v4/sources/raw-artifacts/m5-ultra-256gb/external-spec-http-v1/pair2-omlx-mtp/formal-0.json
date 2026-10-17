@@ -1,0 +1,162 @@
+{
+  "request_id": "pair2-omlx-mtp-formal-0",
+  "method": "POST",
+  "path": "/v1/completions",
+  "body": {
+    "model": "Qwen3.8-27B-nvfp4",
+    "prompt": "<|im_start|>user\n用一句话解释什么是 KV cache。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "temperature": 0,
+    "repetition_penalty": 1.0,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "http_status": 200,
+  "done": true,
+  "usage": {
+    "prompt_tokens": 19,
+    "completion_tokens": 32,
+    "total_tokens": 51,
+    "input_tokens": 19,
+    "output_tokens": 32,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "time_to_first_token": 0.1,
+    "total_time": 0.75,
+    "prompt_eval_duration": 0.1,
+    "generation_duration": 0.65,
+    "prompt_tokens_per_second": 194.39,
+    "generation_tokens_per_second": 49.37
+  },
+  "finish_reason": "length",
+  "first_text_perf_counter_s": 104971.542070416,
+  "done_perf_counter_s": 104972.190104333,
+  "output_ids_when_available": null,
+  "sse_events": [
+    {
+      "client_perf_counter_s": 104971.542070416,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227651, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \"KV\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104971.705890541,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227651, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \" Cache \\u662f Transformer\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104971.82892925,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227651, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \" \\u6a21\\u578b\\u5728\\u751f\\u6210\\u6587\\u672c\\u65f6\\uff0c\\u7f13\\u5b58\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104971.992563166,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227652, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \"\\u5df2\\u8ba1\\u7b97\\u8fc7\\u7684 Key \\u548c Value\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104972.115059291,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227652, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \" \\u5411\\u91cf\\uff0c\\u4ee5\\u907f\\u514d\\u91cd\\u590d\\u8ba1\\u7b97\\u5386\\u53f2\\u4e0a\\u4e0b\\u6587\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104972.189860708,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227652, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [{\"index\": 0, \"text\": \"\\uff0c\\u4ece\\u800c\\u663e\\u8457\\u63d0\\u5347\\u63a8\\u7406\", \"finish_reason\": \"length\"}]}"
+    },
+    {
+      "client_perf_counter_s": 104972.190024708,
+      "data": "{\"id\": \"cmpl-04089524\", \"object\": \"text_completion\", \"created\": 1792227652, \"model\": \"Qwen3.8-27B-nvfp4\", \"choices\": [], \"usage\": {\"prompt_tokens\": 19, \"completion_tokens\": 32, \"total_tokens\": 51, \"input_tokens\": 19, \"output_tokens\": 32, \"prompt_tokens_details\": {\"cached_tokens\": 0}, \"time_to_first_token\": 0.1, \"total_time\": 0.75, \"prompt_eval_duration\": 0.1, \"generation_duration\": 0.65, \"prompt_tokens_per_second\": 194.39, \"generation_tokens_per_second\": 49.37}}"
+    },
+    {
+      "client_perf_counter_s": 104972.190104333,
+      "data": "[DONE]"
+    }
+  ],
+  "text_events": [
+    {
+      "client_perf_counter_s": 104971.542070416,
+      "text": "KV"
+    },
+    {
+      "client_perf_counter_s": 104971.705890541,
+      "text": " Cache 是 Transformer"
+    },
+    {
+      "client_perf_counter_s": 104971.82892925,
+      "text": " 模型在生成文本时，缓存"
+    },
+    {
+      "client_perf_counter_s": 104971.992563166,
+      "text": "已计算过的 Key 和 Value"
+    },
+    {
+      "client_perf_counter_s": 104972.115059291,
+      "text": " 向量，以避免重复计算历史上下文"
+    },
+    {
+      "client_perf_counter_s": 104972.189860708,
+      "text": "，从而显著提升推理"
+    }
+  ],
+  "error": null,
+  "absolute_request_timeout_s": 300,
+  "start_perf_counter_s": 104971.442307791,
+  "cleanup_complete_perf_counter_s": 104972.19016375,
+  "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+  "visible_roundtrip_ids": [
+    79852,
+    18887,
+    220,
+    95761,
+    60277,
+    220,
+    103725,
+    95772,
+    103910,
+    109120,
+    95865,
+    3709,
+    111734,
+    96221,
+    97792,
+    100658,
+    5141,
+    220,
+    95793,
+    4997,
+    220,
+    117888,
+    3709,
+    120718,
+    108695,
+    97792,
+    96671,
+    129933,
+    3709,
+    99131,
+    146502,
+    111892
+  ],
+  "actual_visible_canonical_count": 32,
+  "actual_usage_output_count": 32,
+  "cached_prompt_tokens_when_available": 0,
+  "cache_usage_field_present": true,
+  "first_chunk_text": "KV",
+  "first_chunk_reconstructed_tokens": 1,
+  "first_chunk_prefix_verified": true,
+  "full_visible_roundtrip_count_matches_usage": true,
+  "client_total_s": 0.7477965419966495,
+  "client_ttft_text_s": 0.09976262500276789,
+  "client_post_first_chunk_s": 0.6480339169938816,
+  "actual_request_count": 1,
+  "group_window_s": 0.7477965419966495,
+  "total_completion_tokens": 32,
+  "output_tok_s": 42.79238830733103,
+  "aggregate_output_tok_s": 42.79238830733103,
+  "stream_cleanup_after_done_s": 5.9416997828520834e-05,
+  "client_estimated_interactivity_tok_s": 47.83700233438968,
+  "phase": "formal",
+  "index": 0,
+  "arm": "omlx-mtp",
+  "pair": 2,
+  "contract_failures": [],
+  "qualified_raw_ids_source": "omlx",
+  "visible_ID_scope": "canonical visible text compared with prior engine raw-ID qualification; no live raw IDs"
+}

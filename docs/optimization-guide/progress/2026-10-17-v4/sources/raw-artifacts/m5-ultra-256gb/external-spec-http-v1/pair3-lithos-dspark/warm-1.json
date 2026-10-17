@@ -1,0 +1,236 @@
+{
+  "request_id": "pair3-lithos-dspark-warm-1",
+  "method": "POST",
+  "path": "/v1/chat/completions",
+  "body": {
+    "model": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "messages": [
+      {
+        "role": "user",
+        "content": "用一句话解释什么是 KV cache。"
+      }
+    ],
+    "temperature": 0,
+    "top_p": 1,
+    "max_completion_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "http_status": 200,
+  "done": true,
+  "usage": {
+    "prompt_tokens": 19,
+    "completion_tokens": 32,
+    "total_tokens": 51
+  },
+  "finish_reason": "length",
+  "first_text_perf_counter_s": 105090.512319875,
+  "done_perf_counter_s": 105091.002304041,
+  "output_ids_when_available": null,
+  "sse_events": [
+    {
+      "client_perf_counter_s": 105090.261339291,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.512319875,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"KV\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.548431041,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" Cache\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.583993458,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" 是大型\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.620091666,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"语言模型在\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.656259875,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"生成\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.691237291,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"文本\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.727434541,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"时，缓存\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.763610375,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"已处理\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.799318166,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"过的\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.835572125,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"词\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.870076875,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"元\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.906282541,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"（Token\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.942565916,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"）的键\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105090.978224,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"（\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105091.002263,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"Key）和值（Value）向量\"}, \"finish_reason\": null}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105091.00228975,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"length\"}], \"usage\": null}"
+    },
+    {
+      "client_perf_counter_s": 105091.002297875,
+      "data": "{\"id\": \"chatcmpl-65bed5fa821940c2ab3b2e4a9a5a1d44\", \"object\": \"chat.completion.chunk\", \"created\": 1792227770, \"model\": \"5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6\", \"choices\": [], \"usage\": {\"prompt_tokens\": 19, \"completion_tokens\": 32, \"total_tokens\": 51}}"
+    },
+    {
+      "client_perf_counter_s": 105091.002304041,
+      "data": "[DONE]"
+    }
+  ],
+  "text_events": [
+    {
+      "client_perf_counter_s": 105090.512319875,
+      "text": "KV"
+    },
+    {
+      "client_perf_counter_s": 105090.548431041,
+      "text": " Cache"
+    },
+    {
+      "client_perf_counter_s": 105090.583993458,
+      "text": " 是大型"
+    },
+    {
+      "client_perf_counter_s": 105090.620091666,
+      "text": "语言模型在"
+    },
+    {
+      "client_perf_counter_s": 105090.656259875,
+      "text": "生成"
+    },
+    {
+      "client_perf_counter_s": 105090.691237291,
+      "text": "文本"
+    },
+    {
+      "client_perf_counter_s": 105090.727434541,
+      "text": "时，缓存"
+    },
+    {
+      "client_perf_counter_s": 105090.763610375,
+      "text": "已处理"
+    },
+    {
+      "client_perf_counter_s": 105090.799318166,
+      "text": "过的"
+    },
+    {
+      "client_perf_counter_s": 105090.835572125,
+      "text": "词"
+    },
+    {
+      "client_perf_counter_s": 105090.870076875,
+      "text": "元"
+    },
+    {
+      "client_perf_counter_s": 105090.906282541,
+      "text": "（Token"
+    },
+    {
+      "client_perf_counter_s": 105090.942565916,
+      "text": "）的键"
+    },
+    {
+      "client_perf_counter_s": 105090.978224,
+      "text": "（"
+    },
+    {
+      "client_perf_counter_s": 105091.002263,
+      "text": "Key）和值（Value）向量"
+    }
+  ],
+  "error": null,
+  "absolute_request_timeout_s": 300,
+  "start_perf_counter_s": 105090.245834291,
+  "cleanup_complete_perf_counter_s": 105091.002378541,
+  "text": "KV Cache 是大型语言模型在生成文本时，缓存已处理过的词元（Token）的键（Key）和值（Value）向量",
+  "visible_roundtrip_ids": [
+    79852,
+    18887,
+    220,
+    95761,
+    100606,
+    98277,
+    103725,
+    95772,
+    103910,
+    109120,
+    95865,
+    3709,
+    111734,
+    96221,
+    96961,
+    100658,
+    96919,
+    96287,
+    9616,
+    3214,
+    7313,
+    95726,
+    97295,
+    9616,
+    1536,
+    7313,
+    95793,
+    96326,
+    9616,
+    1094,
+    7313,
+    117888
+  ],
+  "actual_visible_canonical_count": 32,
+  "actual_usage_output_count": 32,
+  "cached_prompt_tokens_when_available": null,
+  "cache_usage_field_present": false,
+  "first_chunk_text": "KV",
+  "first_chunk_reconstructed_tokens": 1,
+  "first_chunk_prefix_verified": true,
+  "full_visible_roundtrip_count_matches_usage": true,
+  "client_total_s": 0.7564697500056354,
+  "client_ttft_text_s": 0.2664855839975644,
+  "client_post_first_chunk_s": 0.48998416600807104,
+  "actual_request_count": 1,
+  "group_window_s": 0.7564697500056354,
+  "total_completion_tokens": 32,
+  "output_tok_s": 42.301757604665106,
+  "aggregate_output_tok_s": 42.301757604665106,
+  "stream_cleanup_after_done_s": 7.449999975506216e-05,
+  "client_estimated_interactivity_tok_s": 63.26735056064927,
+  "phase": "warm",
+  "index": 1,
+  "arm": "lithos-dspark",
+  "pair": 3,
+  "contract_failures": [],
+  "qualified_raw_ids_source": "lithos",
+  "visible_ID_scope": "canonical visible text compared with prior engine raw-ID qualification; no live raw IDs"
+}

@@ -322,3 +322,29 @@ tail点几何平均7.247945×，但72个other点中27个<0.97×，完整预注�
 原七份source pin含教程从be12f82取出后验证，授权服务恢复S。
 [教程与预注册门](tutorials/019-drafter-history-tail.md)。
 [全部坏点与完整证据归档](../experiments/m5-ultra-256gb/E019-history-tail-v1/README.md)。
+
+## E020 · 2026-10-17 · 官方投机 HTTP 强对照 · 合同通过，收益分化
+
+09568bc 预注册15个fresh server：native target-only三个锚点、oMLX none/MTP三对、
+Lithos none/DSpark三对。固定19→32、C1、正常EOS，每进程3warm+3formal；
+90请求全部满足各自输出合同，45正式请求实际1440tokens，无重跑或剔除负样本。
+主指标是POST→DONE完整E2E和实际completion_tokens/E2E，TTFT另报。
+
+oMLX MTP/none配对throughput为0.903280/0.911512/0.901819×，GM **0.905527×**，
+三次完整请求吞吐均下降；TTFT更低不能掩盖E2E回退。
+Lithos DSpark/none为1.077841/1.099826/1.080440×，GM **1.085991×**，三次均提升。
+native当前target-only三个锚点44.687/44.029/45.615tok/s；
+oMLX none为47.106/46.908/47.128tok/s，本轮native尚未超过该普通基线。
+允许按明确质量合同比较三方性能：native/oMLX与Lithos的qualified continuation不同；
+18次native有当次raw IDs，其余72次官方HTTP只核visible文本重新编码与既有资格，
+不声称新raw-ID/full-state等价，也不把其他模块收益乘加进入本轮图。
+
+13项CPU fixtures、双人静态审查、原始SSE/官方日志/三对ratio独立重算通过。
+15个直接owned listener PID全部reap及端口消失，原服务identity不变T→S恢复。
+225资源快照中Swapins/Swapouts增量均0；首native整个owner区间Pageouts+1、
+Compressions+813047，完整保留，不能称内存状态完全不变。
+9131个归档成员逐size/SHA复核，8590份冻结source/config独立核hash，
+68个大payload/runtime哈希保留runner前后receipt；不归档大weights或运行环境。
+六个旁置负向挑战全部被拒绝（visible IDs、时钟、MTP日志、listener/parent PID、restore identity），原tar不变。
+[教程及全部fresh数值](tutorials/020-external-spec-http.md)、
+[独立审计和原始证据](../experiments/m5-ultra-256gb/E020-external-spec-http-v1/README.md)。

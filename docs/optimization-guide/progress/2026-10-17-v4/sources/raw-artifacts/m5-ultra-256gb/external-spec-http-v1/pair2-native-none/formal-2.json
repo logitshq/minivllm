@@ -1,0 +1,395 @@
+{
+  "request_id": "pair2-native-none-formal-2",
+  "method": "POST",
+  "path": "/v1/completions",
+  "body": {
+    "model": "native-current-target-only",
+    "prompt": "<|im_start|>user\n用一句话解释什么是 KV cache。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "temperature": 0,
+    "repetition_penalty": 1.0,
+    "max_tokens": 32,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "http_status": 200,
+  "done": true,
+  "usage": {
+    "prompt_tokens": 19,
+    "completion_tokens": 32,
+    "total_tokens": 51,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "length",
+  "first_text_perf_counter_s": 104953.755325916,
+  "done_perf_counter_s": 104954.342231791,
+  "output_ids_when_available": [
+    79852,
+    18887,
+    220,
+    95761,
+    60277,
+    220,
+    103725,
+    95772,
+    103910,
+    109120,
+    95865,
+    3709,
+    111734,
+    96221,
+    97792,
+    100658,
+    5141,
+    220,
+    95793,
+    4997,
+    220,
+    117888,
+    3709,
+    120718,
+    108695,
+    97792,
+    96671,
+    129933,
+    3709,
+    99131,
+    146502,
+    111892
+  ],
+  "sse_events": [
+    {
+      "client_perf_counter_s": 104953.755325916,
+      "data": "{\"choices\": [{\"text\": \"KV\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.841997291,
+      "data": "{\"choices\": [{\"text\": \" Cache\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.859044875,
+      "data": "{\"choices\": [{\"text\": \" \", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.876280125,
+      "data": "{\"choices\": [{\"text\": \"是\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.89344175,
+      "data": "{\"choices\": [{\"text\": \" Transformer\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.910671916,
+      "data": "{\"choices\": [{\"text\": \" \", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.927804041,
+      "data": "{\"choices\": [{\"text\": \"模型\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.945295208,
+      "data": "{\"choices\": [{\"text\": \"在\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.96253225,
+      "data": "{\"choices\": [{\"text\": \"生成\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.9796395,
+      "data": "{\"choices\": [{\"text\": \"文本\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104953.997036708,
+      "data": "{\"choices\": [{\"text\": \"时\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.014005541,
+      "data": "{\"choices\": [{\"text\": \"，\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.031261375,
+      "data": "{\"choices\": [{\"text\": \"缓存\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.048467708,
+      "data": "{\"choices\": [{\"text\": \"已\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.06567825,
+      "data": "{\"choices\": [{\"text\": \"计算\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.082895416,
+      "data": "{\"choices\": [{\"text\": \"过的\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.100146666,
+      "data": "{\"choices\": [{\"text\": \" Key\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.117319041,
+      "data": "{\"choices\": [{\"text\": \" \", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.134509708,
+      "data": "{\"choices\": [{\"text\": \"和\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.151687083,
+      "data": "{\"choices\": [{\"text\": \" Value\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.168836375,
+      "data": "{\"choices\": [{\"text\": \" \", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.185817458,
+      "data": "{\"choices\": [{\"text\": \"向量\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.202960875,
+      "data": "{\"choices\": [{\"text\": \"，\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.220014958,
+      "data": "{\"choices\": [{\"text\": \"以避免\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.237317291,
+      "data": "{\"choices\": [{\"text\": \"重复\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.254426958,
+      "data": "{\"choices\": [{\"text\": \"计算\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.271825958,
+      "data": "{\"choices\": [{\"text\": \"历史\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.288865208,
+      "data": "{\"choices\": [{\"text\": \"上下文\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.30611775,
+      "data": "{\"choices\": [{\"text\": \"，\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.32324475,
+      "data": "{\"choices\": [{\"text\": \"从而\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.339263833,
+      "data": "{\"choices\": [{\"text\": \"显著提升\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.34218375,
+      "data": "{\"choices\": [{\"text\": \"推理\", \"finish_reason\": null}]}"
+    },
+    {
+      "client_perf_counter_s": 104954.342223708,
+      "data": "{\"choices\": [{\"text\": \"\", \"finish_reason\": \"length\"}], \"usage\": {\"prompt_tokens\": 19, \"completion_tokens\": 32, \"total_tokens\": 51, \"prompt_tokens_details\": {\"cached_tokens\": 0}}, \"benchmark_output_ids\": [79852, 18887, 220, 95761, 60277, 220, 103725, 95772, 103910, 109120, 95865, 3709, 111734, 96221, 97792, 100658, 5141, 220, 95793, 4997, 220, 117888, 3709, 120718, 108695, 97792, 96671, 129933, 3709, 99131, 146502, 111892]}"
+    },
+    {
+      "client_perf_counter_s": 104954.342231791,
+      "data": "[DONE]"
+    }
+  ],
+  "text_events": [
+    {
+      "client_perf_counter_s": 104953.755325916,
+      "text": "KV"
+    },
+    {
+      "client_perf_counter_s": 104953.841997291,
+      "text": " Cache"
+    },
+    {
+      "client_perf_counter_s": 104953.859044875,
+      "text": " "
+    },
+    {
+      "client_perf_counter_s": 104953.876280125,
+      "text": "是"
+    },
+    {
+      "client_perf_counter_s": 104953.89344175,
+      "text": " Transformer"
+    },
+    {
+      "client_perf_counter_s": 104953.910671916,
+      "text": " "
+    },
+    {
+      "client_perf_counter_s": 104953.927804041,
+      "text": "模型"
+    },
+    {
+      "client_perf_counter_s": 104953.945295208,
+      "text": "在"
+    },
+    {
+      "client_perf_counter_s": 104953.96253225,
+      "text": "生成"
+    },
+    {
+      "client_perf_counter_s": 104953.9796395,
+      "text": "文本"
+    },
+    {
+      "client_perf_counter_s": 104953.997036708,
+      "text": "时"
+    },
+    {
+      "client_perf_counter_s": 104954.014005541,
+      "text": "，"
+    },
+    {
+      "client_perf_counter_s": 104954.031261375,
+      "text": "缓存"
+    },
+    {
+      "client_perf_counter_s": 104954.048467708,
+      "text": "已"
+    },
+    {
+      "client_perf_counter_s": 104954.06567825,
+      "text": "计算"
+    },
+    {
+      "client_perf_counter_s": 104954.082895416,
+      "text": "过的"
+    },
+    {
+      "client_perf_counter_s": 104954.100146666,
+      "text": " Key"
+    },
+    {
+      "client_perf_counter_s": 104954.117319041,
+      "text": " "
+    },
+    {
+      "client_perf_counter_s": 104954.134509708,
+      "text": "和"
+    },
+    {
+      "client_perf_counter_s": 104954.151687083,
+      "text": " Value"
+    },
+    {
+      "client_perf_counter_s": 104954.168836375,
+      "text": " "
+    },
+    {
+      "client_perf_counter_s": 104954.185817458,
+      "text": "向量"
+    },
+    {
+      "client_perf_counter_s": 104954.202960875,
+      "text": "，"
+    },
+    {
+      "client_perf_counter_s": 104954.220014958,
+      "text": "以避免"
+    },
+    {
+      "client_perf_counter_s": 104954.237317291,
+      "text": "重复"
+    },
+    {
+      "client_perf_counter_s": 104954.254426958,
+      "text": "计算"
+    },
+    {
+      "client_perf_counter_s": 104954.271825958,
+      "text": "历史"
+    },
+    {
+      "client_perf_counter_s": 104954.288865208,
+      "text": "上下文"
+    },
+    {
+      "client_perf_counter_s": 104954.30611775,
+      "text": "，"
+    },
+    {
+      "client_perf_counter_s": 104954.32324475,
+      "text": "从而"
+    },
+    {
+      "client_perf_counter_s": 104954.339263833,
+      "text": "显著提升"
+    },
+    {
+      "client_perf_counter_s": 104954.34218375,
+      "text": "推理"
+    }
+  ],
+  "error": null,
+  "absolute_request_timeout_s": 300,
+  "start_perf_counter_s": 104953.615445541,
+  "cleanup_complete_perf_counter_s": 104954.342292208,
+  "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+  "visible_roundtrip_ids": [
+    79852,
+    18887,
+    220,
+    95761,
+    60277,
+    220,
+    103725,
+    95772,
+    103910,
+    109120,
+    95865,
+    3709,
+    111734,
+    96221,
+    97792,
+    100658,
+    5141,
+    220,
+    95793,
+    4997,
+    220,
+    117888,
+    3709,
+    120718,
+    108695,
+    97792,
+    96671,
+    129933,
+    3709,
+    99131,
+    146502,
+    111892
+  ],
+  "actual_visible_canonical_count": 32,
+  "actual_usage_output_count": 32,
+  "cached_prompt_tokens_when_available": 0,
+  "cache_usage_field_present": true,
+  "first_chunk_text": "KV",
+  "first_chunk_reconstructed_tokens": 1,
+  "first_chunk_prefix_verified": true,
+  "full_visible_roundtrip_count_matches_usage": true,
+  "client_total_s": 0.7267862500011688,
+  "client_ttft_text_s": 0.1398803750053048,
+  "client_post_first_chunk_s": 0.586905874995864,
+  "actual_request_count": 1,
+  "group_window_s": 0.7267862500011688,
+  "total_completion_tokens": 32,
+  "output_tok_s": 44.02945157527201,
+  "aggregate_output_tok_s": 44.02945157527201,
+  "stream_cleanup_after_done_s": 6.0417005443014205e-05,
+  "client_estimated_interactivity_tok_s": 52.81937244233321,
+  "phase": "formal",
+  "index": 2,
+  "arm": "native-none",
+  "pair": 2,
+  "contract_failures": [],
+  "qualified_raw_ids_source": "native",
+  "visible_ID_scope": "live native raw IDs also captured"
+}

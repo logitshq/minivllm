@@ -1,6 +1,6 @@
 # E020：把已资格通过的官方投机路线变成真实 HTTP 对照
 
-状态：**运行前计划；尚未测量 E020。** CPU runner 使用官方 oMLX/Lithos 服务入口，主线程审查、冻结、提交计划后才能占用唯一 GPU 队列。E015/E017 的 observer 时长不参与这里的速度排名。
+状态：**已完成，15 个进程、90 个请求的 HTTP 合同及独立审计通过。** 以下保留预注册设计，实测见第 8 节；09568bc 冻结时的原教程也保存在证据归档。CPU runner 使用官方 oMLX/Lithos 服务入口，E015/E017 的 observer 时长不参与速度排名。
 
 CPU prepare 已于2026-10-17通过，固定8658个source/runtime/model/pack pins；计划SHA256为
 `e3f0c3e24d4ea841d5e6c0b0094652e65e463c02367836e765ef6d9e3c6e2bdc`。
@@ -103,7 +103,7 @@ Lithos 普通日志必须指向 m5_ultra_80c、相同 target/draft、空 recipes
 
 安全/transport/lifecycle 失败写 partial JSON 并停止；输出或 route 合同失败保留所有六个请求和后续计划进程，以 invalid 标注，绝不重新抽样。不满足合同的 process 仅保留诊断中位数，不进入 paired speed ratio。
 
-## 7. 可复核运行入口（尚未执行）
+## 7. 可复核运行入口（预注册计划）
 
 源码均在 `bench/m5_ultra_256gb/external_spec_http/`。`prepare.py` 不导入 MLX、monolith runtime 或官方服务；只读 metadata/tokenizer、复制源代码、继承已资格 payload SHA。小 source 会即刻校验，大 weights/pack 完整 SHA 在 scheduled run 的矩阵前后核对。每 arm 还检查全体 size/mtime 与小 source SHA，不在请求 timer 中 hash。
 
@@ -134,4 +134,35 @@ CPU 准备（必须选择不存在的目录；此步会做较多 CPU source hash
   --out .artifacts/m5-ultra-256gb/external-spec-http-v1-service-lease
 ```
 
-CPU fixtures：`python3 -B -m unittest discover -s bench/m5_ultra_256gb/external_spec_http -p 'test_*.py' -v`。它们仅模拟 SSE/log/cleanup 返回值，不创建 listener、不加载模型。尚未运行真实服务，因此最终 route log 和官方 HTTP 行为仍需本轮实际校验；parser 若暴露未知官方语义，原尝试冻结后另开修订计划，不能事后修改已测门。
+CPU fixtures：`python3 -B -m unittest discover -s bench/m5_ultra_256gb/external_spec_http -p 'test_*.py' -v`。它们仅模拟 SSE/log/cleanup 返回值，不创建 listener、不加载模型。预注册时尚未运行真实服务，因此最终 route log 和官方 HTTP 行为须经实际校验；parser 若暴露未知官方语义，原尝试冻结后另开修订计划，不能事后修改已测门。本轮实际结果如下。
+
+## 8. 实测：正确性先过，再比较完整 HTTP
+
+预注册 commit **09568bc**，plan SHA256 **e3f0c3e24d4ea841d5e6c0b0094652e65e463c02367836e765ef6d9e3c6e2bdc**。13 项纯 CPU fixtures 和双人源码审查通过后，按原 15-process 顺序串行执行；没有额外挑跑。15 臂全部有效，45 warm + 45 formal = **90 请求**，正式实际产出 **1440 tokens**。
+
+每个下面的数字都是一个独立 fresh process 内三个正式请求的中位数；三值按 pair 1/2/3 排列，不能把三轮合并后只留下最好的一点。
+
+| arm | E2E latency（ms） | aggregate throughput（tok/s） | TTFT（ms） |
+|---|---|---|---|
+| native target-only | 716.098 / 726.786 / 701.526 | 44.687 / 44.029 / 45.615 | 131.060 / 139.880 / 135.450 |
+| oMLX none | 679.324 / 682.184 / 679.003 | 47.106 / 46.908 / 47.128 | 113.478 / 113.560 / 113.121 |
+| oMLX MTP | 752.063 / 748.409 / 752.926 | 42.550 / 42.757 / 42.501 | 100.239 / 99.763 / 99.612 |
+| Lithos none | 788.896 / 816.022 / 812.920 | 40.563 / 39.215 / 39.364 | 246.423 / 280.766 / 278.709 |
+| Lithos DSpark | 731.923 / 741.955 / 752.397 | 43.720 / 43.129 / 42.531 | 241.591 / 251.650 / 263.404 |
+
+| 同框架配对 | pair 1 | pair 2 | pair 3 | 配对 throughput GM |
+|---|---:|---:|---:|---:|
+| oMLX MTP / none | 0.903280× | 0.911512× | 0.901819× | **0.905527×** |
+| Lithos DSpark / none | 1.077841× | 1.099826× | 1.080440× | **1.085991×** |
+
+**MTP 在本工作负载三次都降低完整请求吞吐**，同时 TTFT 更低。DSpark 三次都提高自身 none 基线的吞吐。当前 native target-only 锚点尚未超过本轮 oMLX none 的 E2E/throughput；native DFlash2 不在这个 15-process 矩阵中。不能拿模块 speedup 加乘、或用更短 TTFT 代替完整请求耗时来改变这些结果。
+
+质量合同分层保持原样：90 次 visible canonical 输出均与各自已有 qualified sequence 一致；其中 18 次 native 请求另有当次实际 raw IDs（576 IDs）核对。72 次官方外部 HTTP 请求提供的是文本及重新编码后的 2304 IDs，不能把它们升级为当次 engine raw-ID 采集。oMLX 18 个 MTP 请求的 stock started/stats 证据完整；Lithos 每个进程的 6 条 stock Generation 记录满足原 verify-width、cache-hit=0 和正式 setup_ms=0 合同。不同框架的 continuation 仍不完全相同。
+
+独立审计从每个原始 SSE payload/timestamp 重建文本、usage、first text、DONE、实际数量、E2E、TTFT、吞吐和三对 ratio，全部与 runner 记录吻合。15 个实际 listener PID 都是 controller 的直接子进程，全部 wait/reap、PID 消失、端口消失；74384 的外层 lease identity 不变，T→S 恢复成功。
+
+资源共 **225 个快照**。各进程区间 Swapins/Swapouts 增量均为 0；但首个 native 整个 owner 区间 **Pageouts +1、Compressions +813047**，Decompressions 也有变化，不能写成“分页和内存状态完全不变”。样本 RSS 不是统一内存/GPU allocation 的峰值，不据此比较模型真实显存占用。
+
+[完整独立审计与归档](../../experiments/m5-ultra-256gb/E020-external-spec-http-v1/README.md) 保存 **9131 个成员**，压缩 **29,444,554 bytes**；全部 tar member size/SHA 独立复核通过，archive SHA256 **ba9c668ce0d98760f5413307af86400e4129d43974ab7d3d64cdfcfe0bdfddec**。8590 份冻结源码/config 独立重算 SHA，另 68 项权重/pack/runtime 大 payload 保留运行时矩阵前后完整 SHA receipts；CPU 审计没有重新读取或归档大权重与可运行 venv。
+
+旁置的六个负向挑战全部被拒绝：raw SSE 文本被改、时间戳倒退、伪造 MTP acceptance、伪造 listener PID、伪造父 PID、错误恢复 identity。四个原始正向基线先通过，再只修改内存副本；不改原始数据或已验证的 tar。这说明审计确实读取原证据，而不是仅信任 `valid: true`。

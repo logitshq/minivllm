@@ -1,0 +1,54 @@
+{
+  "pair": 3,
+  "arm": "lithos-none",
+  "valid": true,
+  "contract_failures": [],
+  "fatal_failure": null,
+  "cleanup_errors": [],
+  "request_count": 6,
+  "formal_count": 3,
+  "diagnostic_medians_including_invalid_samples": {
+    "median_wall_s": 0.8129201670089969,
+    "median_TTFT_s": 0.2787090000056196,
+    "median_output_tok_s": 39.364258999427484,
+    "median_client_estimated_interactivity_tok_s": 57.941962245464886
+  },
+  "median_wall_s": 0.8129201670089969,
+  "median_TTFT_s": 0.2787090000056196,
+  "median_output_tok_s": 39.364258999427484,
+  "median_client_estimated_interactivity_tok_s": 57.941962245464886,
+  "request_files": [
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/warm-0.json",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/warm-1.json",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/warm-2.json",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/formal-0.json",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/formal-1.json",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/pair3-lithos-none/formal-2.json"
+  ],
+  "resource_samples": 15,
+  "release": {
+    "pid": 12319,
+    "parent_pid": 8999,
+    "port": 57999,
+    "kill_escalated": false,
+    "returncode": -15,
+    "waited_reaped": true,
+    "absence": {
+      "pid": 12319,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "listeners": {
+      "port": 57999,
+      "pids": [],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "tcp_connect_ex_after_reap": 61,
+    "valid": true
+  },
+  "route_valid": true,
+  "scope": "One fresh server; 3 warm + 3 formal serial requests. No observer timing. Actual server PID reaped."
+}

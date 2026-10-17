@@ -5,6 +5,7 @@
 
 | 快照 | 本批内容 | 结论 |
 |---|---|---|
+| [2026-10-17 v4](2026-10-17-v4/README.md) | E020 官方 MTP / DSpark 与同轮 target-only；15 fresh servers / 90 请求 | C1 的 latency–throughput 最优为 oMLX target-only；MTP 吞吐 GM 0.906×、DSpark 1.086×，不与旧并发曲线混用 |
 | [2026-10-17 v3](2026-10-17-v3/README.md) | throughput–完整请求latency Pareto；48进程/2304请求从时间戳重算 | 正确性为前置；本负载联合前沿为native C1/2/4/8/32，外部为历史target-only实测 |
 | [2026-10-17 v2](2026-10-17-v2/README.md) | E018 单层 GDN 初筛及三次复测；1 张 PNG/SVG | 660 项精确比较通过；复测 PASS/FAIL/PASS，当前候选不采用 |
 | [2026-10-17 v1](2026-10-17-v1/README.md) | E010 HTTP、E012/E014/E016 模块及状态表；7 张 PNG/SVG | 全部 E014 进程保留，核心接入的短点失败没有被平均值掩盖 |

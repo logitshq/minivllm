@@ -6,7 +6,8 @@
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
-[当前 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
+[并发 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
+[最新官方 MTP / DSpark 同轮 HTTP 对照](progress/2026-10-17-v4/README.md) ·
 [NAX prefill设计](prefill-design.md) ·
 [E011逐次实验教程](tutorials/011-large-batch-graphs.md) ·
 [E012设备端草稿选路](tutorials/012-device-draft-selector.md) ·
@@ -17,6 +18,7 @@
 [E017 Lithos DSpark资格](tutorials/017-lithos-dspark.md) ·
 [E018短块GDN状态驻留](tutorials/018-persistent-gdn-verify.md) ·
 [E019只提取新增hidden history](tutorials/019-drafter-history-tail.md) ·
+[E020官方投机模式 HTTP 对照](tutorials/020-external-spec-http.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
