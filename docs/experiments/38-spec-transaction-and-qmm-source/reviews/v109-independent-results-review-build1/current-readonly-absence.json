@@ -1,0 +1,63 @@
+{
+  "status": "PASS_CURRENT_READONLY_NESTED2_PID_PORT_ABSENCE",
+  "recorded_unix_s": 1792191830.269664,
+  "signals_sent": 0,
+  "checks": [
+    {
+      "pid": 12114,
+      "port": 55521,
+      "ps": {
+        "command": [
+          "/bin/ps",
+          "-p",
+          "12114",
+          "-o",
+          "pid=,ppid=,lstart=,comm="
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      "lsof": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "-iTCP:55521",
+          "-sTCP:LISTEN",
+          "-Fp"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "pid": 12238,
+      "port": 55556,
+      "ps": {
+        "command": [
+          "/bin/ps",
+          "-p",
+          "12238",
+          "-o",
+          "pid=,ppid=,lstart=,comm="
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      "lsof": {
+        "command": [
+          "/usr/sbin/lsof",
+          "-nP",
+          "-iTCP:55556",
+          "-sTCP:LISTEN",
+          "-Fp"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      }
+    }
+  ]
+}

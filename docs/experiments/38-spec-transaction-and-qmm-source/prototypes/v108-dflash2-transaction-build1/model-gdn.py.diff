@@ -1,0 +1,32 @@
+--- frozen44/model/gdn.py
++++ candidate108/model/gdn.py
+@@ -104,6 +104,8 @@
+ 
+     def _prefill(self, x: mx.array, cache) -> mx.array:
+         """单序列：x [T, hidden]。T=1 走递推，否则走分块；状态接 cache。"""
++        if cache is not None and getattr(cache, "_verify108", None) is not None:
++            return self._prefill_verify108(x, cache)
+         T = x.shape[0]
+         qkv = self.in_proj_qkv(x)
+         z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
+@@ -122,6 +124,20 @@
+             o, S = gated_delta_rule_chunk(q, k, v, g, beta, S0, chunk=chunk)
+         if cache is not None:
+             cache.conv_state, cache.S, cache.offset = new_conv_state, S, cache.offset + T
++        o = self.norm(o.astype(x.dtype), z)
++        return self.out_proj(o.reshape(T, -1))
++
++
++    def _prefill_verify108(self, x, cache):
++        """Opt-in verify profile: batched projections, sequential exact44 helpers."""
++        from ..spec.transaction import fused_recurrent_history
++        T = x.shape[0]
++        if type(self) is not GatedDeltaNet or x.shape != (T, 5120) or x.dtype != mx.bfloat16 or not 1 <= T <= 8:
++            raise ValueError("V108 fixed27B verify profile requires T1..8 BF16")
++        raw = self.in_proj_qkv(x)
++        z = self.in_proj_z(x).reshape(T, self.Hv, self.Dv)
++        beta, g = self._gates(self.in_proj_b(x), self.in_proj_a(x))
++        o = fused_recurrent_history(raw, g, beta, self.conv1d_weight.astype(raw.dtype), cache, mx)
+         o = self.norm(o.astype(x.dtype), z)
+         return self.out_proj(o.reshape(T, -1))
+ 

@@ -1,0 +1,36 @@
+{
+  "status": "CPU_READY_ONLY_NO_NUMERICAL_OR_PERFORMANCE_CLAIM",
+  "source_pins_sha256": "72856f12da32bc6438ef7aa050462e0bfbac35f0a074e718c07723cf28d55871",
+  "pin_count": 50,
+  "fullqual_sha256": "1c70ff5a430cf2e1a84071ee1cfde1d27902de8efd19a0ae250571a6ce7a405b",
+  "entry_sha256": "cebc519eb0760de48a9d1bf4bc1d0a287f771da1cd9e7df8eb394c57b3fa8bfd",
+  "observer_sha256": "932179062d94cbc93451952e4aec309bee9da8ec810ad3781dfe0db8f1fcdf1b",
+  "checks_sha256": "e89512c31be66899ce9869a8cf691db86256268f0621ba70588f92b7d7c76cc1",
+  "source_map_sha256": "a3f5998bc357e9a8f2411cdd7784ff870d6f780e25793f8c339629764befb6ef",
+  "protocol_sha256": "74817d183c4a207effe775f605306cc730d1f4b7bf97472e72668b873aeca033",
+  "CPU_checks": {
+    "status": "PASS_CPU_SOURCE_API_AST_AND_RECEIPT_REJECTION_ONLY",
+    "count": 21,
+    "request_and_group_AST_exact": true,
+    "inert_exit_code": 0,
+    "MLX_or_numpy_imported": false,
+    "GPU_or_model_loaded": false,
+    "native_dylib_loaded": false,
+    "server_or_child_started": false
+  },
+  "root_command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v109-omlx-external-mtp-qual-build1/fullqual.py",
+    "--run",
+    "--out",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/omlx-mtp-v109-attempt1/child-output",
+    "--pins-sha256",
+    "72856f12da32bc6438ef7aa050462e0bfbac35f0a074e718c07723cf28d55871"
+  ],
+  "outer_owner": "root wait-only900s; root owns actual run and verifies driver release after script reaps its two sequential owned official servers",
+  "expected_time": "approximately1-3min; readiness180s each, each original HTTP request180s; outer hardlimit900s",
+  "memory": "two sequential model services, never concurrent; target16,054,475,404filebytes plus238,933,307draftbytes in MTP arm; activation/cache/allocator/runtime peak unknown and must be observed. Original AC/thermal0/pressure1/paging guards unchanged",
+  "freeze": "Do not modify these source files/pins after publication; failed actual artifacts remain immutable; no automatic retry",
+  "scope": "Current official external-MTP C1 correctness/resources qualification, not global-best, DFlash2, performance, or native oldmath compatibility"
+}

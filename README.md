@@ -82,3 +82,5 @@ docs/              计划、教程、远程版的契约和 notes
 
 
 [M4 与 M5 持续同步](docs/handoffs/m4-max-to-m5-ultra.md)：按数值／性能检查点交换已推送源码、正负结果及下一步，两个硬件域分别验证。
+
+[38：投机事务与量化乘法](docs/experiments/38-spec-transaction-and-qmm.md)保存V108旧ID门失败、官方MTP数值资格及三对HTTP负结果、同输入逐算子诊断；187项源码身份与449份公开运行文本已归档（417份原字节、32份凭据字段脱敏view），尚无新的完整Pareto胜出。

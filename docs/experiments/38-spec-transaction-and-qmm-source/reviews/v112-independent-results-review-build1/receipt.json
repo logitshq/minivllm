@@ -1,0 +1,362 @@
+{
+  "status": "PASS_INDEPENDENT_SAVED_EVIDENCE_AUDIT_V112",
+  "GPU_used_by_reviewer": false,
+  "receipt_sha256": "09c7f55cfbd46a803b4bd014eb24f694573f62de48e2a3fdee3568ec1910992a",
+  "source_pins_verified": 76,
+  "original108_pins_preserved": 61,
+  "actual_imports_before": 23,
+  "actual_imports_final": 26,
+  "captured_operations": 978,
+  "comparisons": 1138,
+  "linear_calls": 497,
+  "linear_exact": 146,
+  "linear_different": 351,
+  "linear_differing_elements": 1281,
+  "non_linear_comparisons_exact": 641,
+  "by_kind": {
+    "RMSNorm:row_M1": {
+      "calls": 161,
+      "strict_equal": 161,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "Linear:row_M1": {
+      "calls": 497,
+      "strict_equal": 146,
+      "strict_different": 351,
+      "different_elements": 1281
+    },
+    "pointwise.sigmoid:row_M1": {
+      "calls": 64,
+      "strict_equal": 64,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "pointwise.softplus:row_M1": {
+      "calls": 48,
+      "strict_equal": 48,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "GDN.gates:row_M1_explicit": {
+      "calls": 96,
+      "strict_equal": 96,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "GDN.gates:row_M1_compiled_decode": {
+      "calls": 96,
+      "strict_equal": 96,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "GatedRMSNorm:row_M1": {
+      "calls": 48,
+      "strict_equal": 48,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "pointwise.silu:row_M1": {
+      "calls": 64,
+      "strict_equal": 64,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "attention.RoPE:row_M1_offset_incremented": {
+      "calls": 32,
+      "strict_equal": 32,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "attention.SDPA:row_M1_prefix_None": {
+      "calls": 16,
+      "strict_equal": 16,
+      "strict_different": 0,
+      "different_elements": 0
+    },
+    "attention.SDPA:row_M1_prefix_decode_boolmask": {
+      "calls": 16,
+      "strict_equal": 16,
+      "strict_different": 0,
+      "different_elements": 0
+    }
+  },
+  "linear_geometry": {
+    "Linear:nvfp4:K5120:N10240": {
+      "calls": 48,
+      "strict_equal": 4,
+      "strict_different": 44,
+      "first_difference": {
+        "order": 16,
+        "name": "layers.1.linear_attn.in_proj_qkv",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            1,
+            8745
+          ],
+          "batch_bits": 15652,
+          "M1_bits": 15651,
+          "batch_value": 0.0400390625,
+          "M1_value": 0.039794921875
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N6144": {
+      "calls": 48,
+      "strict_equal": 15,
+      "strict_different": 33,
+      "first_difference": {
+        "order": 17,
+        "name": "layers.1.linear_attn.in_proj_z",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            2,
+            117
+          ],
+          "batch_bits": 48181,
+          "M1_bits": 48180,
+          "batch_value": -0.01104736328125,
+          "M1_value": -0.010986328125
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N48": {
+      "calls": 96,
+      "strict_equal": 96,
+      "strict_different": 0,
+      "first_difference": null
+    },
+    "Linear:nvfp4:K6144:N5120": {
+      "calls": 64,
+      "strict_equal": 3,
+      "strict_different": 61,
+      "first_difference": {
+        "order": 9,
+        "name": "layers.0.linear_attn.out_proj",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            0,
+            709
+          ],
+          "batch_bits": 12974,
+          "M1_bits": 13008,
+          "batch_value": 2.0256265997886658e-08,
+          "M1_value": 2.421438694000244e-08
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N17408": {
+      "calls": 128,
+      "strict_equal": 2,
+      "strict_different": 126,
+      "first_difference": {
+        "order": 11,
+        "name": "layers.0.mlp.gate_proj",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            0,
+            4256
+          ],
+          "batch_bits": 48107,
+          "M1_bits": 48108,
+          "batch_value": -0.007171630859375,
+          "M1_value": -0.0072021484375
+        }
+      }
+    },
+    "Linear:nvfp4:K17408:N5120": {
+      "calls": 64,
+      "strict_equal": 1,
+      "strict_different": 63,
+      "first_difference": {
+        "order": 14,
+        "name": "layers.0.mlp.down_proj",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            2,
+            3696
+          ],
+          "batch_bits": 47100,
+          "M1_bits": 47099,
+          "batch_value": -3.0040740966796875e-05,
+          "M1_value": -2.9921531677246094e-05
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N12288": {
+      "calls": 16,
+      "strict_equal": 0,
+      "strict_different": 16,
+      "first_difference": {
+        "order": 46,
+        "name": "layers.3.self_attn.q_proj",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            0,
+            1029
+          ],
+          "batch_bits": 46824,
+          "M1_bits": 46825,
+          "batch_value": -6.9141387939453125e-06,
+          "M1_value": -6.943941116333008e-06
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N1024": {
+      "calls": 32,
+      "strict_equal": 25,
+      "strict_different": 7,
+      "first_difference": {
+        "order": 109,
+        "name": "layers.7.self_attn.v_proj",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            2,
+            155
+          ],
+          "batch_bits": 13881,
+          "M1_bits": 13879,
+          "batch_value": 2.7567148208618164e-06,
+          "M1_value": 2.726912498474121e-06
+        }
+      }
+    },
+    "Linear:nvfp4:K5120:N248320": {
+      "calls": 1,
+      "strict_equal": 0,
+      "strict_different": 1,
+      "first_difference": {
+        "order": 977,
+        "name": "lm_head",
+        "component": 0,
+        "first_difference": {
+          "index": [
+            0,
+            5853
+          ],
+          "batch_bits": 15874,
+          "M1_bits": 15875,
+          "batch_value": 0.126953125,
+          "M1_value": 0.1279296875
+        }
+      }
+    }
+  },
+  "earliest_difference": {
+    "order": 9,
+    "kind": "Linear",
+    "name": "layers.0.linear_attn.out_proj",
+    "variant": "row_M1",
+    "component": 0,
+    "metadata": {
+      "quantization": {
+        "group_size": 16,
+        "bits": 4,
+        "mode": "nvfp4"
+      },
+      "input_features": 6144,
+      "output_features": 5120,
+      "weight_dtype": "mlx.core.uint32",
+      "weight_shape": [
+        5120,
+        768
+      ]
+    },
+    "input_signatures": [
+      {
+        "shape": [
+          5,
+          6144
+        ],
+        "dtype": "mlx.core.bfloat16",
+        "bytes": 61440,
+        "sha256": "887f94f1a2cffd3325d21c4a377d2a2af698dd2e46ed29b78b3c51920af86b3d"
+      }
+    ],
+    "shape": [
+      5,
+      5120
+    ],
+    "dtype": "mlx.core.bfloat16",
+    "strict_equal": false,
+    "different_elements": 5,
+    "total_elements": 25600,
+    "first_difference": {
+      "index": [
+        0,
+        709
+      ],
+      "batch_bits": 12974,
+      "M1_bits": 13008,
+      "batch_value": 2.0256265997886658e-08,
+      "M1_value": 2.421438694000244e-08
+    },
+    "max_abs_diagnostic_only": 4.76837158203125e-07,
+    "batch_sha256": "379b7065d0321e701ebb3424b08725b56032be931ef9745fe322d2090c39ae3e",
+    "M1_sha256": "f8947ea4f0c20fe05eb626a0a670f74d9003f5f85a7b7c2abc4af3f9fbf9ce5a"
+  },
+  "first_layer_input": {
+    "shape": [
+      5,
+      5120
+    ],
+    "dtype": "mlx.core.bfloat16",
+    "bytes": 51200,
+    "sha256": "f4c0c896eab78d21f4747a97e018905b86064f1f0229afc61819a8c15321e08d",
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/diagnostic-v112-attempt1/child-output/first-layer-projection-input.bf16",
+    "encoding": "little-endian BF16 raw bits"
+  },
+  "initial_cache_signatures": 128,
+  "initial_matches_original108": true,
+  "keep0_restored_all128": true,
+  "target_parameter_count": 1349,
+  "target_readonly": "saved final assertion; before signatures/identities retained, after signatures not separately retained",
+  "deferred_original_outputs": "source wrappers return y; alternatives built after original eval; saved actual input/output readonly assertions completed",
+  "live_anchor": 79852,
+  "saved_actual_draft_proposals": [
+    6297,
+    220,
+    95761,
+    95779
+  ],
+  "reproduced_posterior": [
+    18887,
+    220,
+    98435,
+    100606,
+    98277
+  ],
+  "future_gold_injected": false,
+  "owner": {
+    "owner_pid": 20374,
+    "child_pid": 20383,
+    "returncode": 0,
+    "reaped": true,
+    "saved_strict_absence": true
+  },
+  "resources": {
+    "owner_raw_samples": 11,
+    "external_raw_samples": 1,
+    "power": "AC Power",
+    "thermal": 0,
+    "pressure": 1,
+    "owner_swap_mb": 4470.88,
+    "external_swap_mb": 4462.88,
+    "Swapouts": 17460761,
+    "inventory": "raw benchmark matcher empty; 9 during rows add explicit owned child PID20383 in derived inventory, exactly as owner source lines20-24",
+    "policy": "numerical any-power; saved release only, not live GPU lease probing or timing qualification"
+  },
+  "limits": [
+    "1138 output raw pairs are not retained: audit recomputes counts/summary and checks saved hashes, not absent tensor payloads",
+    "978 is Python captured-call completion order, not actual dispatch count or execution order",
+    "same-input local batch versus M1 comparisons keep original batch outputs upstream; no counterfactual full trajectory",
+    "no observed PSO/reduction implementation, full96-ID repair, performance, or adoption claim"
+  ]
+}

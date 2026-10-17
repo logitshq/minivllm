@@ -1,0 +1,80 @@
+--- frozen44/engine/spec_runner.py
++++ candidate108/engine/spec_runner.py
+@@ -27,6 +27,7 @@
+             raise ValueError("drafter target layer IDs do not fit this target model")
+         if drafter.cfg.hidden_size != model.cfg.hidden_size:
+             raise ValueError("drafter and target hidden dimensions differ")
++        self.set_verify_transaction(False)
+         self.block = block_size                                # None = 自适应：按逐位置接受率在 5 和 3 之间切
+         self.state: dict[str, SpecState] = {}
+         self.finished_stats: dict[str, tuple[int, int]] = {}   # req_id → (接受数, 轮数)，请求结束后留着给跑分读
+@@ -35,6 +36,8 @@
+         """caches: 请求的单序列 cache；history: 这个请求到目前为止全部的上下文特征（位置 0..start-1，按块存）。
+         drafter 自己的上下文 cache 长度就是它已经吃到哪了；差的部分从 history 补上（刚从 batch 抽回来时是全部）。
+         返回产出的 token 和要追加进 history 的新特征。"""
++        if self._verify_transaction_enabled:
++            return self._step_transaction108(req, caches, history)
+         if req.sampling.temperature != 0:
+             raise ValueError("DFlash2 tutorial verification supports greedy (temperature=0) only")
+         st = self.state.setdefault(req.req_id, SpecState())
+@@ -61,6 +64,60 @@
+         st.q = 0.8 * st.q + 0.2 * (n / max(1, bs - 1))
+         return produced, new_feats[: n + 1]                 # 锚点 + 接受的草稿的特征，追加进 history
+ 
++    def set_verify_transaction(self, enabled, *, eos_ids=(), capacity=64, observer=None):
++        if type(enabled) is not bool or type(capacity) is not int or capacity < 1:
++            raise TypeError("strict bool and positive integer capacity required")
++        self._verify_transaction_enabled = enabled
++        self._verify_eos_ids = frozenset(eos_ids)
++        self._verify_capacity = capacity
++        self._transaction_observer = observer
++        self.transaction_rounds = []
++
++    def _step_transaction108(self, req, caches, history):
++        from ..spec.transaction import VerifyTransaction, select_delivery
++        if req.sampling.temperature != 0:
++            raise ValueError("V108 greedy only")
++        remaining = req.sampling.max_tokens - len(req.output_token_ids)
++        start = req.num_computed_tokens
++        if remaining <= 0 or start >= self._verify_capacity:
++            raise ValueError("no remaining output/context budget")
++        if any(cache.offset != start for cache in caches):
++            raise RuntimeError("request/cache frontiers differ")
++        st = self.state.setdefault(req.req_id, SpecState())
++        anchor = req.all_token_ids[-1]
++        bs = min(self.block or (5 if st.q >= 0.45 else 3), remaining, self._verify_capacity - start)
++        fed = self.drafter.layers[0].self_attn.ctx_len
++        feats = None
++        if fed < start:
++            full = history[0] if len(history) == 1 else mx.concatenate(history)
++            feats = full[fed:start]
++        drafts = [] if bs == 1 else self.drafter.draft(feats, anchor, start, self.model.embed_tokens, self.model.lm_head_fn, bs)
++        if len(drafts) != bs - 1:
++            raise RuntimeError("drafter returned wrong bounded length")
++        with VerifyTransaction(caches, bs) as transaction:
++            observer = self._transaction_observer
++            if observer is not None:
++                observer("begin", transaction, {"request": req.req_id, "start": start})
++            logits, new_feats = self.model(mx.array([anchor] + drafts), ForwardContext("prefill", caches), capture=self.capture)
++            posterior = mx.argmax(logits, axis=-1)
++            mx.eval(posterior, new_feats, *transaction.eval_arrays())
++            post = posterior.tolist()
++            produced, accepted, keep = select_delivery(drafts, post, remaining, self._verify_eos_ids, req.sampling.stop_token_ids, req.sampling.ignore_eos)
++            info = {"transaction": transaction.id, "request": req.req_id, "start": start, "verify_inputs": bs,
++                    "output_count_before": len(req.output_token_ids), "remaining_before": remaining, "drafts": list(drafts), "posterior": post,
++                    "draft_calls": int(bs > 1), "drafted_tokens": len(drafts), "accepted_before_clip": accepted,
++                    "delivered": len(produced), "committed_inputs": keep, "next_anchor": produced[-1],
++                    "next_frontier": start + keep, "GDN_helper_calls": sum(t.updates for t in transaction.traces if t.kind == "gdn")}
++            if observer is not None:
++                observer("before_commit", transaction, info)
++            transaction.commit(keep)
++            if observer is not None:
++                observer("after_commit", transaction, info)
++            self.transaction_rounds.append(info)
++        st.stats[0] += min(accepted, max(0, len(produced) - 1)); st.stats[1] += 1
++        st.q = 0.8 * st.q + 0.2 * (accepted / max(1, bs - 1))
++        return produced, new_feats[:keep]
++
+     def drop(self, req_id: str):
+         st = self.state.pop(req_id, None)
+         if st is not None:
