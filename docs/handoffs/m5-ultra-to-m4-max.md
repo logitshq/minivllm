@@ -582,3 +582,32 @@ and [registered v2 retry](../../bench/m5_ultra_256gb/pareto_realistic/prereg-htt
 separate the historical failure, restored predecessor and next attempt. No new
 Pareto point follows from this retry preparation; only independently qualified,
 separate production timing can update throughput vs POST→DONE p50.
+
+
+## Actual D512 HTTP qualification PASS (2026-10-17)
+
+C1/C8 completed 24 actual HTTP requests, 5124 replay steps and 12,288 committed tokens.
+Independent full-ledger audits account for 6,572,973 original-dtype bit-equal checks
+and 13,145,946 finite checks across full vocabulary logits/cache/ahead state. All
+requests hit cap 512; normal EOS was enabled but actual early EOS coverage is zero.
+This covers recorded arrivals only. E028/E024 remain OFF and no timing point is awarded.
+
+Both audit failures remain preserved: integer 0 versus the HTTP producer's float 0.0
+sampling metadata/ahead key, and a strict-positive file-size check that rejected
+three valid empty package files. Separate v2 auditors fix only those expectations;
+root CPU regressions and complete actual audits PASS, with no raw record edits or
+GPU rerun. Full source/runtime/model provenance and 249 raw resource samples passed;
+pressure 1, zero swap/Swapouts/Pageouts growth, Swapins +3. All four children were reaped.
+Original oMLX recovered asPID 90204 with the original model and fresh MTP/resident PLE
+logs; warm KV/exact hidden runtime state are not restored.
+
+[Complete D512 evidence](../experiments/m5-ultra-256gb/E023-http-baseline-v2/README.md).
+
+Observer-OFF formal native C1/C8 specs now bind these actual independent receipts
+and pass CPU prepare/validate: 8 warm + 64 formal requests each. The next graph will use
+actual committed tokens/common window versus full POST→DONE p50, separate from the
+historic cap 32 panel. Official oMLX's D512 route/count observer and Lithos launch/cache
+contract are prepared; neither has a new D512 measurement yet.
+
+Latest fetch still finds M4 `53d4906`, already an ancestor of this M5 branch.
+No M4 change was overwritten; this commit publishes the complete M5 qualification.
