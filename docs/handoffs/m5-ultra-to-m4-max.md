@@ -762,3 +762,20 @@ warmKV not restored. Next rootGPU work: actual Lithos D512 C1/C8 qualification,
 then observer-free formal comparison, using the existing pack and direct-owned
 server trial. Older cap32 observations do not supply D512 competitor points.
 Latest fetched M4 tip53d4906 is already merged; this update is shared via Git.
+
+
+## 2026-10-17 · Lithos D512 request bug isolated before performance claims
+
+Actual qualification preregistered47ba0fd completed8 C1 requests, then failed
+full prompt IDs; C8 was skipped. Our client sent already templated prompt_text
+as user.content, producing a second template and11 extra tokens in every input.
+CPU official tokenizer proves original fixture.messages produces the exact
+frozen prompt_ids. Retry only fixes request construction and its exact body
+check, preserving the original oracle and old source/evidence. No new D512
+competitor point or graph HTTP gain is claimed.
+
+Original M5 oMLX restored asPID25221; independent MTP/resident PLE restoration
+audit PASS, warm KV not restored. M4 tip53d4906 remains merged; source/result
+updates shared through the M5 branch.
+
+[Failed-attempt evidence](../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v1/README.md).

@@ -839,3 +839,27 @@ remain45.372/167.399 outputtok/s at p50 11.283/24.432s, n=1 each.
 
 [Results and evidence](../experiments/m5-ultra-256gb/E024-route-timing-v1/README.md) ·
 [Forward-only figure](progress/2026-10-17-v7/README.md).
+
+
+## Lithos D512 first actual qualification rejects double templating (2026-10-17)
+
+The preregistered actual run (47ba0fd) completed eight C1 HTTP requests, then
+rejected the first full-prompt identity comparison. Our request builder put the
+already templated fixture.prompt_text inside user.content, so official Lithos
+applied its chat template a second time. All eight actual inputs gained eleven
+tokens. The complete official CPU tokenizer reproduction matches both the
+incorrect captured inputs and, from fixture.messages, the original frozen IDs.
+This is a request-construction bug, not an inference numerical failure.
+
+C8 was deliberately skipped after C1 failed. No throughput/latency or Pareto
+point is awarded. The original prompt-ID oracle remains the contract; the retry
+uses the original messages and keeps that exact gate. A source-preserving new
+harness version avoids overwriting any failed raw evidence or registered source.
+
+Owner24167 and direct server24265 were reaped. oMLX recovered asPID25221 with
+the original model/config and fresh MTP/resident PLE evidence; independent
+restoration audit PASS. Warm KV/hidden state are not restored. The frozen
+qualification/resource auditors reject this incomplete two-phase cycle before
+full evidence inspection; their FAIL status is not a finding of resource pressure.
+
+[Complete failure evidence](../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v1/README.md).

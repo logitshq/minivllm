@@ -1,0 +1,624 @@
+{
+  "schema": "E023-lithos-D512-cold-journal-v1",
+  "id": "6f76e29e-ed46-4b86-b7f1-d515861c2e06",
+  "state": "RESTORED",
+  "plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+  "controller_sha256": "becfd425ba67cd42acbd172cc24ff15e9ba6f38bc2ae7009e68da8936bc89b92",
+  "support_sha256": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+  "original": {
+    "pid": 19870,
+    "ppid": 1,
+    "start": "Sat Oct 17 10:44:54 2026",
+    "comm": "omlx-server"
+  },
+  "original_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "global_settings_stat": {
+    "dev": 16777231,
+    "ino": 816826,
+    "size": 3516,
+    "mtime_ns": 1792162741806656607
+  },
+  "model_metadata": {
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/config.json": "237c4cda786207d2bebe2d8a1cf157419bec5cc01bbd03b4ed41e888dc1e5af7",
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/model.safetensors.index.json": "380e393bb71519d6f9dc6eb1c3d681b0ca16986285640784fbd33a45bb0ec298"
+  },
+  "log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 199378,
+    "mtime_ns": 1792259125069367265
+  },
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner",
+  "owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512/prereg-qualification-v1/owner-plan.json",
+    "sha256": "d4e0edad9491cb17d4c18451850bf334e67376ad9eb6eba710d23c5b6bdfdc3f"
+  },
+  "owner_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512/owner.py",
+    "sha256": "a6796b153d558954899a46a96cd8ead828928e8627aea1ba8a8b6453ab74bddd"
+  },
+  "trials": [
+    "lithos-c1",
+    "lithos-c8"
+  ],
+  "predecessor": {
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-timing-v1/restoration-audit.json",
+      "sha256": "fabbadf4e94b4db33c7fa956b0ea55b31f41386b2290322ee27f73181215fb74"
+    },
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-timing-v1/restored-journal.json",
+    "sha256": "93ccc6a326ee41026ee6198b3c01454f6685bab4e778d3f890bce7c0bc027360"
+  },
+  "predecessor_copies": {
+    "predecessor.json": "93ccc6a326ee41026ee6198b3c01454f6685bab4e778d3f890bce7c0bc027360",
+    "predecessor-audit.json": "fabbadf4e94b4db33c7fa956b0ea55b31f41386b2290322ee27f73181215fb74"
+  },
+  "resource_samples": [
+    {
+      "time": 1792261866.451664,
+      "system_footprint": 24472944640,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-cd7e722a62f54e9b94e952fa28cd8a7f/footprint.raw.json",
+        "sha256": "6e4c8187d4386b210136957de271dce184de99c9ba11144cfbe6cf899bed9188",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-cd7e722a62f54e9b94e952fa28cd8a7f/commands.json",
+        "commands_sha256": "ca5013cb19dc8f20236bc239a925255d54e7611d6729e6f00f0acfbc39812355"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792261871.510624,
+      "system_footprint": 24345853952,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-d28cb550a8884e8d9695d6b080aae162/footprint.raw.json",
+        "sha256": "455973ab266a5fdf914dcebababf4df81e31cdd5e31c9eae94db3a7151aff895",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-d28cb550a8884e8d9695d6b080aae162/commands.json",
+        "commands_sha256": "f70c99d197b98b43cd6f6b4fbd105971a716b8c9fe89fd28e2f8e09861434d7c"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792261873.873811,
+      "system_footprint": 24412372992,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-122eed07bf1a4bfab76937eecc26b22e/footprint.raw.json",
+        "sha256": "f94811f7b04a19a28db4342991a1e33fb481fdf224ce7e4c5c4955f40fb1def8",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-122eed07bf1a4bfab76937eecc26b22e/commands.json",
+        "commands_sha256": "5cbfa7805a8fafcb95c0e23d9718e7edb56b1b84936a2d70a4bbe1d578fda673"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792261878.931096,
+      "system_footprint": 24417533952,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-d9dde7e67beb4c25a3b5b87947a1d7cf/footprint.raw.json",
+        "sha256": "0993cdb9350446ec7f16e40eeb68dc64ef129fbd1640cc4d9b302c0076c82236",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-d9dde7e67beb4c25a3b5b87947a1d7cf/commands.json",
+        "commands_sha256": "7d6b82f48970ee86173a2608a1a30b9419a4a01495f58e24e8e75e22c503a501"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792261879.046318,
+      "system_footprint": 24426217472,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-b170a24e6468436aa6ee4bbfef1a386c/footprint.raw.json",
+        "sha256": "efab05dba63187c12ef57d2dc98504ac48b499cdfae65c02e9a962f26eb1c383",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-b170a24e6468436aa6ee4bbfef1a386c/commands.json",
+        "commands_sha256": "5e90c366b9b2c772d5c09516c6a8e104d32b0e0e45b418ae2999fe1c5dfe6138"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261881.156544,
+      "system_footprint": 42576461824,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-5b2f98c4df544cad8c45d4d3e6105176/footprint.raw.json",
+        "sha256": "c91b533c87f71410d9c13fe8c8b8a45041a6bc69a1fe26676f09f492422ecbaa",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-5b2f98c4df544cad8c45d4d3e6105176/commands.json",
+        "commands_sha256": "980264cca1ebdd94b5cd97e13c67007a7fb8cdcb17a8c429ee0fcac7ecbce7ed"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261883.2702239,
+      "system_footprint": 63806865408,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-f2c77880ca1a4631a3cb009aa35bfd2e/footprint.raw.json",
+        "sha256": "4119e2edf205cfe18f7e833d05ebf14b1b7a4daa2650de833b0f6fb7ab360209",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-f2c77880ca1a4631a3cb009aa35bfd2e/commands.json",
+        "commands_sha256": "db9edf3927b9042ff41ce3daeaa2f8429b30801baa6270083faa74fe7684fbdc"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261885.386365,
+      "system_footprint": 70136397824,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-8893ea08185e43958c5b22db22afc000/footprint.raw.json",
+        "sha256": "a90ac0953bc4230ee0983f02e7f0ddc6be0e5dac39d1b59a1e0ced7d49878c61",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-8893ea08185e43958c5b22db22afc000/commands.json",
+        "commands_sha256": "e2c3d099eeee24bbd302bb9d10d0d136bd0f12c99f89ef18ee60162ec04790f9"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261887.503382,
+      "system_footprint": 91357954048,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-532f2b6164ed45d5a5f3e3685be5f60e/footprint.raw.json",
+        "sha256": "f6641fe2e38ddb5599cad3df7b657ff2eb610c9ec98b72ba670a44e9d64e7ee5",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-532f2b6164ed45d5a5f3e3685be5f60e/commands.json",
+        "commands_sha256": "036a62c04b1d691161a30400dd58e5d865161033143c23cbc89a1d4d2d2500ec"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261889.625327,
+      "system_footprint": 120357683200,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-33345d49deb34106890ef68519c2744c/footprint.raw.json",
+        "sha256": "ee71b1f02a89fece6abe6e3f2f2b75deeb5ae2abe4c19defebf0772b36d09fc8",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-33345d49deb34106890ef68519c2744c/commands.json",
+        "commands_sha256": "2249b09586f5030bf9ea64eb77b940357b4cfe2fd1378d4e1da1c09f022bc85f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261891.746607,
+      "system_footprint": 138236968960,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-a5c83945823a491c8a8208c5f2c4485e/footprint.raw.json",
+        "sha256": "433c09c98a9d6b62f585a8df4a028491b85ada4338143323ee3e556131603fa9",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-a5c83945823a491c8a8208c5f2c4485e/commands.json",
+        "commands_sha256": "2f2788e7beeaf01b9c97f1b2ebb109714bb898329b44bd3d78b1e46084e6402f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261893.877558,
+      "system_footprint": 142278115328,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-0957ead204934cf4ad39b44245f70f0f/footprint.raw.json",
+        "sha256": "6aed072909a0642e47585e0ffe22cc562e4169ff3f756717ca0076940367d1a8",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-0957ead204934cf4ad39b44245f70f0f/commands.json",
+        "commands_sha256": "7f93aea2ee1eb3a7cc52eb9d52faec843a238dd012d467d8f466e9a049a3fdfb"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261896.002526,
+      "system_footprint": 159397117952,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-54607911836347ed8286a67281fc97ed/footprint.raw.json",
+        "sha256": "91dbdf2773d5969481f344c43df5e6dd0462a32fb28339ff295438c603ec5ca2",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-54607911836347ed8286a67281fc97ed/commands.json",
+        "commands_sha256": "7c40a6986b2eb8e0410bf0c6a7cab6f49f915804bc5a91b1cbe30c32ab425c68"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261898.130645,
+      "system_footprint": 174033141760,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-82cafcc943ea4c18ae02b383d72ca3c1/footprint.raw.json",
+        "sha256": "f54ffe118389dc5ab4cfd5b7959eeeee03f2c902534a6f69146147033bfaa931",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-82cafcc943ea4c18ae02b383d72ca3c1/commands.json",
+        "commands_sha256": "d8c91b4ce00598551be5660b6170c2008bd0fb6e76ec1e9f7120657378cefe0b"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261900.239906,
+      "system_footprint": 175482257408,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-1f63ea42fb654e5285b6e448e9a414f0/footprint.raw.json",
+        "sha256": "d0d92814fbacfc37e7f1162efe53bdb11fb53c413905e8f3dca5bb688e8cbb51",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-1f63ea42fb654e5285b6e448e9a414f0/commands.json",
+        "commands_sha256": "eb35923dbc06e5ddd5d182557cfee97889a0c3a867a2c566dd50c1be956c3b10"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261902.345824,
+      "system_footprint": 174935719936,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-b0692deb2e0e413aa89024d37b79601d/footprint.raw.json",
+        "sha256": "1a684634cc374bd60bb348340f85109dbd4458ade7bed67b9fdd87b21a58ec27",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-b0692deb2e0e413aa89024d37b79601d/commands.json",
+        "commands_sha256": "bb7a9c22d6a1134d41ef9d9c6ba0c971fba5b5a18415012aa645c06b7ef112c9"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792261902.443562,
+      "system_footprint": 174864564224,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-4abb37e5fac74faeb640bd22479d586e/footprint.raw.json",
+        "sha256": "37d40023f33d653e3bd4f5a146051e865e625af7a2727faa5443894097a13d2a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-4abb37e5fac74faeb640bd22479d586e/commands.json",
+        "commands_sha256": "d5729d8ac03672d2c47d20d466bc8fc6e0073f588b06b2e8d6637d60de10c5bd"
+      },
+      "label": "load-reconciliation"
+    },
+    {
+      "time": 1792261902.542304,
+      "system_footprint": 174865285120,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-5aa63dfec4154625b91b79536be51979/footprint.raw.json",
+        "sha256": "e3aec6dae5d53ca07c621a2d4ddf289ee47bed752830db42fe0c7ecda36387cb",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-5aa63dfec4154625b91b79536be51979/commands.json",
+        "commands_sha256": "2b7b4315a153924e1f2569184b75f5ae9e51ea91cb4edc871515e0346f65c287"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792261907.603199,
+      "system_footprint": 174937505792,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-01ca9c17fc4945faba4b6e27bfa1afcd/footprint.raw.json",
+        "sha256": "25a371b8eabeaeb1e4aa23ae778b4116772befa0b24f617c11cfc6b835256578",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/physical-01ca9c17fc4945faba4b6e27bfa1afcd/commands.json",
+        "commands_sha256": "68f8d6f3d761957746ecba56b7951acc194ea49b702f5042d21ddde5a12c3873"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "events": [
+    {
+      "event": "prepared_lithos_read_only",
+      "time": 1792261389.824406,
+      "monotonic": 138709.553429166
+    },
+    {
+      "event": "bootout_intent",
+      "time": 1792261738.1166131,
+      "monotonic": 139057.843484291
+    },
+    {
+      "event": "bootout_returned",
+      "time": 1792261738.120916,
+      "monotonic": 139057.847786666
+    },
+    {
+      "event": "service_absent",
+      "time": 1792261740.230664,
+      "monotonic": 139059.957522333
+    },
+    {
+      "event": "experiment_terminal_checked",
+      "time": 1792261866.357942,
+      "monotonic": 139186.084020541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261866.45195,
+      "monotonic": 139186.178028458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261871.5108721,
+      "monotonic": 139191.236919208
+    },
+    {
+      "event": "bootstrap_intent",
+      "time": 1792261871.5963898,
+      "monotonic": 139191.322435833
+    },
+    {
+      "event": "bootstrap_returned",
+      "time": 1792261871.601263,
+      "monotonic": 139191.327308791
+    },
+    {
+      "event": "job_reconciled",
+      "time": 1792261873.772844,
+      "monotonic": 139193.498876958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261873.8740659,
+      "monotonic": 139193.600097833
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261878.93144,
+      "monotonic": 139198.657441083
+    },
+    {
+      "event": "load_intent_monitored",
+      "time": 1792261879.021323,
+      "monotonic": 139198.747323666
+    },
+    {
+      "event": "post_worker_started",
+      "time": 1792261879.0231318,
+      "monotonic": 139198.749132666
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261879.046504,
+      "monotonic": 139198.772503833
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261881.1567738,
+      "monotonic": 139200.882760875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261883.2704818,
+      "monotonic": 139202.996456583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261885.386631,
+      "monotonic": 139205.112592208
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261887.503805,
+      "monotonic": 139207.229753
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261889.6255739,
+      "monotonic": 139209.35150925
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261891.7469609,
+      "monotonic": 139211.472882416
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261893.877923,
+      "monotonic": 139213.603831958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261896.002939,
+      "monotonic": 139215.728834625
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261898.130906,
+      "monotonic": 139217.856788791
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261900.2402089,
+      "monotonic": 139219.966078625
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261902.34619,
+      "monotonic": 139222.072046375
+    },
+    {
+      "event": "post_worker_returned",
+      "time": 1792261902.414998,
+      "monotonic": 139222.140853458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261902.4437592,
+      "monotonic": 139222.169615166
+    },
+    {
+      "event": "raw_log_window_retained",
+      "time": 1792261902.514914,
+      "monotonic": 139222.240768875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261902.542609,
+      "monotonic": 139222.268464208
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792261907.603482,
+      "monotonic": 139227.329305875
+    },
+    {
+      "event": "restored_persisted_visible_variant",
+      "time": 1792261907.693423,
+      "monotonic": 139227.419246
+    }
+  ],
+  "approved_contract": "cold-restart-persisted-visible-v1",
+  "bootout_returncode": 0,
+  "removed_at": 1792261740.230659,
+  "reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 24167,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/attempt.json",
+        "sha256": "53a26694cc0e1cf907b2bb9a258cc8218722da9f4bb004b41af44c7ff53857a2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/stopped-journal.json",
+        "sha256": "6be44ef5e0d6cd40883f4f89888aaaf0e112e259792fe646ded90c6b8cfa551d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/spawn-intent.json",
+        "sha256": "da83c1d3878fe3f8b6d96a5d5c20aef3aba1e3734fb376519c623e9f03f888c4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/children.json",
+        "sha256": "c7c93352979e21260dd4cada54bb947c5a61eab4b419741065f6f0c2d8b335fe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/release.json",
+        "sha256": "c6d959d190e4a290d451eda95801157f91d0850ee4ff243908ceb4df162ee95b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/intent.json",
+        "sha256": "da83c1d3878fe3f8b6d96a5d5c20aef3aba1e3734fb376519c623e9f03f888c4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/child.json",
+        "sha256": "17f7e8dc1cfef222b2528a55c5a84389f95e03bcbb9214fb3d4a4e57c43ef461"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/release.json",
+        "sha256": "42d2a19d994bc35961f9f270ff6f5382aa812576bcd42c3c014f460b3c0b9290"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/trial/spawn-intent.json",
+        "sha256": "9b61c840f0b04ec460ff1fc64e8400ebdb84b17f2569d2886a1c6d6751cf2578"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/trial/child.json",
+        "sha256": "ff6e917f4c554b9369aaf44602d7a4531feffae32504948c742d29d72ffb52c9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-owner/phases/lithos-c1/trial/release.json",
+        "sha256": "3569d8cbc9952292e295a4b21087dd0c4f10c43c8c68b58e80628d1bac9d34b4"
+      }
+    ]
+  },
+  "recovery_log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 200898,
+    "mtime_ns": 1792261739303366530
+  },
+  "bootstrap_returncode": 0,
+  "replacement": {
+    "pid": 25221,
+    "ppid": 1,
+    "start": "Sat Oct 17 11:31:11 2026",
+    "comm": "omlx-server"
+  },
+  "load_baseline_swap_bytes": 441513411,
+  "load_worker": {
+    "nonce": "21ef047d2e894a78811bc0c6ef57642a",
+    "directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/load-worker",
+    "parent_identity": {
+      "pid": 25196,
+      "ppid": 24145,
+      "start": "Sat Oct 17 11:31:06 2026",
+      "comm": "/Users/ryanli/code/minivllm/.venv/bin/python"
+    }
+  },
+  "post_worker_pid": 25268,
+  "post_result": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/load-worker/result.json",
+    "sha256": "48f2767bb4e0536b34a480a4a361ee8f320e5d788ffe1053338670f7dfe4c3d6"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v1-cold-journal/evidence/log-70d14d35a9a642d88fcbc31e87cf1975/window.raw.log",
+    "sha256": "63f2955c9640283dc31b7feab5c7825d2bb83eee5d9e27e71172c7824b9803bd",
+    "bytes": 11301,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 200898,
+      "mtime_ns": 1792261739303366530
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 212199,
+      "mtime_ns": 1792261902105124447
+    },
+    "start_offset": 200898,
+    "end_offset": 212199
+  },
+  "final_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "monitoring_scope": "observed physical bounds; no OS hard cap; HTTP cancellation does not cancel server loader"
+}
