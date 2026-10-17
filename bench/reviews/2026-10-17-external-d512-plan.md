@@ -1,7 +1,8 @@
 # External D512: shortest path to two measured points per engine
 
 CPU/source plan, 2026-10-17. No external D512 device qualification or new speed
-result is claimed here. Native recorded-HTTP qualification is currently running.
+result is claimed here. Native recorded-HTTP qualification and one observer-OFF C1/C8
+baseline are complete; external device qualification/timing remain pending.
 First deliver C1/C8; C2/C4 require their own capacity/arrival qualification.
 
 ## Fixed common task and chart

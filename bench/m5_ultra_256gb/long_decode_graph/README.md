@@ -1,6 +1,6 @@
 # E024：固定 1536 的 long-context graph-only 候选
 
-2026-10-17。**CPU 原型，默认 OFF；未编译 Metal、未加载模型、未运行 GPU、没有数值或性能结论。** 本文是候选预注册设计，尚不是冻结执行 plan。root 审核、实际输入/配置/source pins 全部冻结、下载及资源条件允许后，才能排唯一 GPU 队列。
+2026-10-17 更新：**已在真机首点 B1/used257 失败，默认 OFF，不可采用，没有性能资格。** [失败证据](../../../docs/experiments/m5-ultra-256gb/E024-long-decode-cold-v1/README.md)已归档；后续[四组隔离](../../../docs/experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/README.md)确认，在该点改变 attention bound 足以产生差异。以下保留原预注册设计与 CPU 阶段记录，不能将其中待执行事项读成当前结果。旧 candidate/qualifier 保持冻结，新两档方案另目录实现。
 
 本目录不修改 `tutorial_code/miniengine`，不安装到生产 runner，不修改 E023 的五份冻结 Python 源，不改变 D fixtures。原 E023 长任务 fallback baseline 必须保留。
 

@@ -1,0 +1,54 @@
+{
+  "schema": "E024-route-canary-prereg-v1",
+  "status": "PREPARED",
+  "plan_sha256": "3c6cea36b7faf5e8f5272c649766e678ad238e6febd4bfcab848afeb6b77c193",
+  "route_plan_sha256": "44ad5ff024e857430f761df6b5baa4cafb9219a717fab11d37eb11f284459cc2",
+  "prepared_journal_sha256": "9e2cc6492111a14d8c118a69e507cd06810411c95dfd33b7ca76e5e3d76245c6",
+  "prepared_journal_original": {
+    "pid": 11548,
+    "ppid": 1,
+    "start": "Sat Oct 17 09:43:01 2026",
+    "comm": "omlx-server"
+  },
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualify.py": "fe8e1c044e97885ec7c97fddce04a6e34f5b9067be4d982c5f6ad1071c59c801",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/cold_owner.py": "4d850e3bc46478c4c22572e71bb377bc0bf1e6a5b04ceffdcca0379c863f0c96",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/test_cold_owner_cpu.py": "e5b8b99d02bef676828b7320d24e1f963a16f060fc1fc04b2955b18f39e613e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v7.py": "c30aaffc4157e606b2027c98933cb97d0602aa5db6a614338ae0631dce70a1ab",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/audit_restore_v7.py": "0ab9fd49b4e2919d686845f587d291e78d24a75cbd20325fdc9ca78fe6149ad1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-canary-v1/execute.py": "0bec74eef282b75d594e84cb68cf79c2ac40ff062018cb5268dfb3dcf29f4a62",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-canary-v1/prepare-plan.py": "244257155644090bf5e58ba6e39255ff20e26e86e69879d954429965fb6be306",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/test_cpu.py": "7f14787dc8aea413598821ee9dd1a97254ec54dd8fe469dc609df22763527e78",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_v7_cpu.py": "fff260ffd5e2faed69aedc1230f3f62fbb3fbbb59d796dc1635c1d1ee246c046",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_audit_restore_v7_cpu.py": "5a77f6b931ccd8d9232ef3114236cb3db5b470252b1709f7964842644e879f5b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_raw.py": "f58ed9abbb2c184dda2eac49fc9b66411b786300a7cfdaf1bcd2d101072c0855",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/test_audit_raw_cpu.py": "c5e0e27cc579ef70c728589d6895af07c3a3d6628cad46195c5a41a1f199f1b3"
+  },
+  "cpu_prepare": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-canary-v1-cpu-prepare/prepared.json",
+    "sha256": "8c8c4625a627be868e70264c923011a4efea84e19f8a3486f8a6cecd7d6e379b"
+  },
+  "read_only_service_prepare": "PASS; original service remains running",
+  "authorization": "Existing explicit human permission: 允许停止、实验后恢复",
+  "diagnostic": {
+    "phase": "e024-route-canary",
+    "batch": 1,
+    "used": 257,
+    "reference_bound": 257,
+    "candidate_bound": 1023,
+    "physical_KV_capacity": 1536,
+    "configuration": "gates/norm/fuse/core compile OFF; new candidate explicit graph ON",
+    "numeric_deadline_s": 1800,
+    "owner_deadline_s": 1830
+  },
+  "numerical_qualified": false,
+  "performance_qualified": false
+}
