@@ -23,7 +23,7 @@ oMLX的CLI/settings并发上限需都匹配C；target-only和MTP policy保留强
 
 已查当前editable安装0.1.2、clean commit `223658090ae549e59220bdec459957cbdad7926a`，
 不是只根据旧429推断。`lithos-metal serve`→cli.py→serve.main，与E020的
-`python -m monolith.serve`进入相同代码。源码SHA见同目录lithos-concurrency.json。
+`python -m monolith.serve`进入相同代码。源码SHA见[来源回执](2026-10-17-lithos-concurrency.json)。
 
 - serve.py:195–210用单GPU锁包住整次generation；427为app级FifoLock，490–491让
   非Ollama请求在重叠时429。单cached session和max_sessions编译variant不是请求batch。
