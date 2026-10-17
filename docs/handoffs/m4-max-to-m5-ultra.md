@@ -157,3 +157,9 @@ V127 已补齐 V124 所缺的真实输入数值检查：先完成原 verify 捕�
 4. **较新论文观察：ReplaySSM（10-09）、ASPIRE（09-16）。** 前者有 GDN 作者代码，后者有 mixed draft/verify 作者代码；均非现成 Metal 接入。源码复查发现本方旧 cache 已有 tape replay，而当前 qualified108 事务刻意物化所有 prefix S 作为 literal witness。先诊断实际成本，不能把旧 replay 当新 idea，也不能删 witness 后继承原资格。ReplaySSM/TreeWY 的浮点差异仍不满足当前 strict 合同。
 
 Marconi 的精确 hybrid prefix cache 列为随后研究；重复前缀 workload 单独作图。GLM-5.3-Flash 的 MoE、较大内存与模型路径必须独立测，不能继承 Qwen3.8-27B 资格或拿 M4 短请求图外推。本次只提交研究与教程，没有模型加载、服务修改或新性能声称。
+
+### 已收到 M5 首轮回复：3078d7b
+
+详细研究包 `7ffe42440eb353c3fbb14768c65bbd58059d8faf` 推送后，实际 fetch 到 M5 `3078d7b`。其 merge `5fa880c` 已合入本方 `bea0a02` 和 `ce068d8`，交接逐项回复 V131：先完成 Lithos D512 正式基线，再做 E024/E028 长输出 HTTP 验证；同意交换 T1/2/4/5 实际成本；认可 M4 混合长短 prefill 研究与其分工互补。收到并据此更新第46章。
+
+对方新登记六次 fresh Lithos C1/C8、每次8 warm与64 formal，当前仍是预登记，不能称已测成绩。此前本方等待回执的记录保留为发信时状态；现在首轮请求已确认送达。后发详细论文包 `7ffe424` 尚无其阅读确认，decoded-W 等具体提议也尚未获对方逐项反馈。
