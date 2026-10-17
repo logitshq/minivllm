@@ -13,11 +13,13 @@ from .scheduler import Scheduler
 class LLMEngine:
     def __init__(self, model_dir: str, max_seqs: int = 8, max_len: int = 4096, max_batched_tokens: int = 512,
                  dtype=mx.bfloat16, cache_limit_gb: int = 2, drafter_dir: str | None = None, spec_block: int | None = None,
-                 compile_decode: bool = False, fuse_decode: bool = False, draft_device_selection: bool = False):
-        if type(draft_device_selection) is not bool:
-            raise TypeError("draft_device_selection must be bool")
-        if draft_device_selection and not drafter_dir:
-            raise ValueError("draft_device_selection requires drafter_dir")
+                 compile_decode: bool = False, fuse_decode: bool = False, draft_device_selection: bool = False,
+                 draft_bounded_kv: bool = False):
+        for name, value in (("draft_device_selection", draft_device_selection), ("draft_bounded_kv", draft_bounded_kv)):
+            if type(value) is not bool:
+                raise TypeError(f"{name} must be bool")
+            if value and not drafter_dir:
+                raise ValueError(f"{name} requires drafter_dir")
         if fuse_decode and not compile_decode:
             raise ValueError("fuse_decode requires compile_decode=True")
         # MLX 的 allocator 会把释放的 buffer 留着复用；decode 每步都在生成新的 K/V 拷贝，尺寸各不相同，
@@ -29,7 +31,7 @@ class LLMEngine:
         drafter = None
         if drafter_dir:
             from ..spec.dflash2 import load_drafter
-            drafter = load_drafter(drafter_dir, device_selection=draft_device_selection)
+            drafter = load_drafter(drafter_dir, device_selection=draft_device_selection, bounded_kv=draft_bounded_kv)
         self.runner = ModelRunner(self.model, max_len, drafter, spec_block, compile_decode=compile_decode, fuse_decode=fuse_decode)
         self.requests: dict[str, Request] = {}
         self._counter = 0

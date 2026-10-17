@@ -146,3 +146,22 @@ owned-lifecycle ≥1.10×，32/2048 各点 ≥0.97×；8192 仍只报告。2 GiB
 
 释放本臂Python引用并同步只证明应用层生命周期，不证明allocator回收全部底层buffer。
 所有长历史仍为synthetic KV replay，不能称实际长生成收益，也没有修复target回滚或证明HTTP性能。
+
+## 实际核心接入：运行前计划
+
+核心两个文件净增20行，`load_drafter(..., bounded_kv=False)` 与
+`LLMEngine(..., draft_bounded_kv=False)` 默认关闭，与E012 selector独立。
+只在空cache时允许设置；有cache时拒绝切换（包括同值），reset后可重新配置。
+没有复制attention函数，没有把flag加入模型参数树。
+
+`integrated.py`直接经公开loader加载四个组合，各有独立的量化drafter权重；
+以v2冻结源码中原始`DraftAttention.__call__`作数值oracle，避免新OFF路径的共同错误。
+每进程184×4=736严格检查覆盖hidden/logits、完整可保留KV后缀、可见KV与logical位置。
+正式计时只比较实际selector ON的KV OFF/ON。每轮计时前清掉所有qualification产物，
+只保留四份已声明权重和seed；每个sample承担自己的teardown，保留全部phase。
+因此本轮绝对时间不能直接与v2单drafter的绝对时间归因比较。
+
+预注册四个fresh process：16/16/16/2 GiB。三个16 GiB分别要求长点每个≥1.10×、
+短点每个≥0.97×，所有数值通过；2 GiB兼容性单独列出。失败也保留，不追加挑选重跑。
+仍然只授予模块资格。6项新接口与2项旧selector测试通过；最初误用test_interface模式
+搜索旧selector目录导致0 tests/exit5，已纠正为test_switch并保存该尝试。

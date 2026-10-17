@@ -71,6 +71,7 @@ class DraftAttention(nn.Module):
         self.v_proj = Linear(cfg.hidden_size, self.Hkv * self.D, q); self.o_proj = Linear(self.H * self.D, cfg.hidden_size, q)
         self.q_norm = RMSNorm(self.D, cfg.rms_norm_eps, zero_centered=False); self.k_norm = RMSNorm(self.D, cfg.rms_norm_eps, zero_centered=False)
         self.ctx_k = None; self.ctx_v = None; self.ctx_len = 0           # 上下文的 K/V cache [1, Hkv, N, D]
+        object.__setattr__(self, "_bounded_kv_enabled", False)
 
     def reset(self):
         self.ctx_k = self.ctx_v = None; self.ctx_len = 0
@@ -87,11 +88,14 @@ class DraftAttention(nn.Module):
             k, v = self._kv(ctx_new, start - ctx_new.shape[0])
             self.ctx_k = k if self.ctx_k is None else mx.concatenate([self.ctx_k, k], axis=2)
             self.ctx_v = v if self.ctx_v is None else mx.concatenate([self.ctx_v, v], axis=2)
-            self.ctx_len = self.ctx_k.shape[2]
+            self.ctx_len += ctx_new.shape[0]                           # Logical history; retained KV may be shorter.
+        if self._bounded_kv_enabled and self.ctx_k is not None and self.ctx_k.shape[2] > 2 * self.window:
+            self.ctx_k = mx.contiguous(self.ctx_k[:, :, -self.window:])
+            self.ctx_v = mx.contiguous(self.ctx_v[:, :, -self.window:])
         L = x.shape[0]
         q = apply_rope(self.q_norm(self.q_proj(x).reshape(L, self.H, self.D)).transpose(1, 0, 2)[None], start, self.D, self.theta)
         kb, vb = self._kv(x, start)
-        lo = max(0, self.ctx_len - self.window + L)                      # 滑窗：块里最后一个位置往前 2048
+        lo = max(0, self.ctx_k.shape[2] - self.window + L)               # 滑窗按实际保留的 KV 寻址。
         k = mx.concatenate([self.ctx_k[:, :, lo:], kb], axis=2); v = mx.concatenate([self.ctx_v[:, :, lo:], vb], axis=2)
         o = mx.fast.scaled_dot_product_attention(q, k, v, scale=self.D ** -0.5, mask=None)   # 块内非因果，上下文全可见
         return self.o_proj(o[0].transpose(1, 0, 2).reshape(L, -1))
@@ -146,6 +150,16 @@ class DFlash2Drafter(nn.Module):
             raise TypeError("device selection flag must be bool")
         object.__setattr__(self, "_device_selection_enabled", enabled)
 
+    def set_bounded_kv(self, enabled=False):
+        """Opt-in E014 storage bound. Set only before a cache trajectory starts."""
+        if type(enabled) is not bool:
+            raise TypeError("bounded_kv must be bool")
+        if any(layer.self_attn.ctx_len != 0 or layer.self_attn.ctx_k is not None or layer.self_attn.ctx_v is not None
+               for layer in self.layers):
+            raise RuntimeError("set bounded_kv before caching; reset() before changing the mode")
+        for layer in self.layers:
+            object.__setattr__(layer.self_attn, "_bounded_kv_enabled", enabled)
+
     def draft(self, feats_new, anchor: int, start: int, embed_fn, lm_head_fn, block_size: int | None = None) -> list[int]:
         """feats_new: 还没喂给 drafter 的上下文特征 [n, 5·H]（位置 start-n..start-1）；anchor 在位置 start。
         返回 block_size-1 个草稿 token（drafter 按 block 8 训练，更小的块只是少取几个位置）。"""
@@ -179,11 +193,15 @@ class DFlash2Drafter(nn.Module):
         return path
 
 
-def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}, *, device_selection: bool = False) -> DFlash2Drafter:
+def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}, *, device_selection: bool = False, bounded_kv: bool = False) -> DFlash2Drafter:
     """读 bf16 的 safetensors；quantize 不为 None 时把大的 Linear 在加载时量化（默认 affine 4bit，和 dflash-mlx 一样）。"""
+    for name, value in (("device_selection", device_selection), ("bounded_kv", bounded_kv)):
+        if type(value) is not bool:
+            raise TypeError(f"{name} must be bool")
     cfg = DraftConfig.from_dir(model_dir)
     model = DFlash2Drafter(cfg, quantize)
     model.set_device_selection(device_selection)
+    model.set_bounded_kv(bounded_kv)
     weights = {}
     for k, v in mx.load(str(Path(model_dir) / "model.safetensors")).items():
         k = k.replace("candidate_selector.hidden_projection", "selector_proj").replace("candidate_selector.", "")
