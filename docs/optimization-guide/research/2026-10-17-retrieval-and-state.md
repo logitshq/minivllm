@@ -10,6 +10,8 @@
 
 本机当前 [SpecRunner](../../../tutorial_code/miniengine/engine/spec_runner.py) 使用 DFlash2 的 `capture`、`history`、drafter context 和单序列 cache rollback。lookup 不是替换 `drafter.draft()` 后就完整等价：移除 feature capture、检查 target verify 的计算路径、EOS/cap裁剪以及每一层 recurrent state 回滚都要独立证明。当前 target-only 的 decode 与 prefill verification 也不能仅凭数学等价推定浮点逐位相等。先做相同输入 state 下 T1/2/4/5 的完整 logits/state 检查与成本筛选，再考虑整模型/HTTP。
 
+lookup 的草稿数 K=1/2/4 对应含 anchor 的验证宽度 T=2/3/5；共享成本表 T1/2/4/5 缺少 T3，因此还必须额外完成 T3 的正确性资格与成本实测，不能从 T2/T4 插值。
+
 ## 一个必须可证伪的收益条件
 
 以下是本项目的简单成本模型，所有量都要在同一模型/量化、相同实际 batch 与长度下测量：

@@ -873,3 +873,14 @@ establish a local leak or justify adding a synchronization fence.
 本方新增[AgSpec与state研究笔记](../optimization-guide/research/2026-10-17-retrieval-and-state.md)：AgSpec v2（10月6日）可借鉴request/session文本草稿与成本控制，但其Blackwell generation-only吞吐不对应我们的POST→DONE。先交换 T1/2/4/5 真成本和完整精确检查；最小候选只用本请求已见prompt/committed输出，绝不将同fixture上一重复答案注入后续formal请求。KVBuffer/DAMP提供状态IO分析，但重排递推/低精度state不能继承当前逐位资格。
 
 已准备 E024 fresh-runner default-OFF adapter、原37请求+42参数替换/恢复诊断及离线审计源码；当前不运行CPU测试以避免干扰计时。原37请求的候选ahead discard在既有E028中实际为0，因此只报告真实覆盖，不强制一个不可保证发生的计数；取消/sampling-key失效另列独立诊断。oMLX D512 observer/trial与GLM官方冷load短请求probe也在CPU源码准备阶段，未声称device资格。高C按[新计划](../../bench/reviews/d512-high-concurrency-plan.md)从C16递进，新的N128/256/512不池化旧N64。
+
+
+### 2026-10-17 15:57 PDT — repeated Lithos run, implementation preparation
+
+The six-process observer-OFF D512 cycle remains live. Completed r1-C1, r1-C8 and r2-C8 have 64 formal requests apiece; all 512-token caps, no EOS. The second C8 process records 44.967055 tok/s, POST→DONE p50 91.072059 s and p95 91.186858 s. These are raw trial metrics with performance_qualified=false until all six processes, independent resources and service restoration are closed. r2-C1 is finishing; no service restore is claimed yet. Last observed pressure1 and swap421.06MiB unchanged.
+
+Fetched M4 cdb0649 again; retain the agreed M4 prefill/admission and M5 graph/refill split. Do not merge into frozen benchmark sources while timing. The new E024 serving adapter, independent checker, source-plan builder and cold-cycle-v2 predecessor bridge are prepared only, not device-qualified. New CPU tests await completion of Lithos to avoid timing interference. The new driver refuses --no-experiment after unknown owner launch even if its directory is absent.
+
+[oMLX owner review](../../bench/reviews/omlx-d512-owner-next-review.md) identifies the actual server PID/Popen resource boundary; a trial wrapper PID cannot substitute. The first owner source is prepared, but controller/auditors are still absent and execution must fail closed. [E024 HTTP review](../../bench/reviews/e024-http-adapter-next-review.md) locates the one decode installation point and the run_case adaptation collision to avoid. These are implementation readiness notes, not new HTTP or GLM performance results.
+
+Lookup research now explicitly adds verification width T3: K1/2/4 proposals require T2/3/5 including the anchor, so the existing shared T1/2/4/5 table cannot interpolate the missing point.
