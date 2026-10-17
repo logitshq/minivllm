@@ -1,0 +1,69 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v105-cap64-direct-http-screen-build1/driver.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/driver.py
+@@ -22,13 +22,20 @@
+ OLD = P / 'm4-final-native15-official-attempt2'
+ sys.path.insert(0, str(OLD))
+ import common as controls
+-spec = importlib.util.spec_from_file_location('v105_official_client', OLD / 'client.py')
++spec = importlib.util.spec_from_file_location('v125_official_client', OLD / 'client.py')
+ official = importlib.util.module_from_spec(spec); spec.loader.exec_module(official)
+ import httpx
+ from tokenizers import Tokenizer
+ 
+ 
+ def write_new(path, value): controls.write_new(path, value)
++
++
++def full_request_latency_p50_ms(groups):
++    """Group request p50 -> arm median, using original POST-through-DONE timestamps."""
++    return 1000.0 * statistics.median(
++        statistics.median(q['done_perf_counter_s'] - q['start_perf_counter_s']
++                          for q in g['requests']) for g in groups)
+ 
+ 
+ def assert_pipeline(native, steps, resets):
+@@ -216,6 +223,7 @@
+                   'y': statistics.median(g['y_total_output_throughput_tok_s_mac'] for g in groups['measure']),
+                   'ttft_s': statistics.median(q['client_ttft_text_s'] for g in groups['measure'] for q in g['requests']),
+                   'E2E_s': statistics.median(q['client_total_s'] for g in groups['measure'] for q in g['requests']),
++                  'latency_p50_ms': full_request_latency_p50_ms(groups['measure']),
+                   'source_config_sha256': controls.sha(D / 'runtime-config.json'),
+                   'sampling': {'greedy': True, 'output_cap': 32, 'EOS': 'normal', 'draft': None, 'prefix_cache': 0},
+                   'scope': 'fresh same-campaign C1 screen only; no C2/C4 or full-frontier conclusion'}
+@@ -248,7 +256,7 @@
+     assert result is not None
+     result.update(resource_snapshots=samples, owned_exit=cleanup)
+     write_new(run_dir / 'result.json', result)
+-    return {k: result[k] for k in ('label', 'engine', 'x', 'y', 'ttft_s', 'E2E_s')}
++    return {k: result[k] for k in ('label', 'engine', 'x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
+ 
+ 
+ def main():
+@@ -291,12 +299,26 @@
+             completed.append(run_arm(item, args.out, config, previous_env))
+             print(json.dumps({'event': 'ARM_COMPLETED', 'completed': len(completed), 'total': 9,
+                               **completed[-1]}), flush=True)
++            if len(completed) < len(plan):
++                # Exactly eight fixed gaps after successful owned unload/reap/resource guard.
++                # No model or request is live; cooling is outside every HTTP clock.
++                gap_start = time.monotonic()
++                print(json.dumps({'event': 'FIXED_UNLOADED_COOLING', 'after_arm': len(completed),
++                                  'seconds': 60}), flush=True)
++                time.sleep(60)
++                write_new(args.out / f'cool-gap-{len(completed):02d}.json', {
++                    'after_arm': len(completed), 'requested_seconds': 60,
++                    'start_monotonic_s': gap_start, 'end_monotonic_s': time.monotonic(),
++                    'outside_HTTP_clocks': True, 'prior_owned_cleanup_passed': True,
++                    'adaptive': False})
+         for path, digest in pins['files'].items(): assert controls.sha(path) == digest, path
+         assert len(completed) == 9
+         medians = {engine: {key: statistics.median(r[key] for r in completed if r['engine'] == engine)
+-                            for key in ('x', 'y', 'ttft_s', 'E2E_s')}
++                            for key in ('x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
+                    for engine in ('native', 'omlx', 'lithos')}
+         completion = {'status': 'PASS_C1_SCREEN', 'arms': completed,
++            'primary_metrics': {'X': 'full HTTP POST-through-DONE latency_p50_ms, lower', 'Y': 'total output y token/s, higher'},
++            'auxiliary_metrics': {'x': 'legacy first-text delivery proxy only; not primary win criterion'},
+             'medians': medians, 'all_negative_pairs_retained': True, 'full_frontier_win': False,
+             'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
+             'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,

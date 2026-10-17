@@ -134,3 +134,9 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [38：投机事务与量化乘法](../experiments/38-spec-transaction-and-qmm.md)保留整模旧序列失败、官方MTP较慢的配对结果及逐算子诊断。
 
 [39：保留逐行量化乘法的结果](../experiments/39-verify-broadcast-m1.md)从旧代码到广播M1逐步对照，附固定候选与diff；局部497项通过，整模仍待新资格。[进展图与台账](../progress/README.md)保存已验证结果和负结果，章节持续迭代。
+
+[40：整模通过后再测吞吐和延迟](../experiments/40-m1-verify-and-bounded-loader.md)补上完整投机路径资格与加载资源边界。
+
+[41：HTTP 传输选项](../experiments/41-native-http-nodelay-pilot.md)和[42：短请求投机解码](../experiments/42-startup-warm-short-request.md)分别保存一次无收益和一次明显变慢的真实对照。
+
+[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)以完整请求 latency 和总输出 throughput 作图：本方三轮均领先，仍需同场并发点才能判断完整 Pareto 前沿。正文对照旧 native15、当前 CAP64/direct 与本轮测量代码的变化。

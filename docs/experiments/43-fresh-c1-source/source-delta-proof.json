@@ -1,0 +1,26 @@
+{
+  "status": "CPU_DELTA_ONLY_SOURCE_AND_LAUNCH_PASS",
+  "CPU_tests": 8,
+  "old_full_suite_repeated": false,
+  "native_server_exact105": {
+    "original": "/private/tmp/minivllm-engine-optimization-20261014/v105-cap64-direct-http-screen-build1/server.py",
+    "sha256": "ea2aa1343aa58976cf77458581029cb0bb42ab55aafd2199223940c3611fdbd8",
+    "exact": true
+  },
+  "request_group_assertpipeline_AST_exact105": true,
+  "run_arm_AST_inverse_only_new_latency_field": true,
+  "main_AST_inverse_only_cooling_and_primary_metric_metadata": true,
+  "primaryX": "full HTTP POST-through-DONE latency_p50_ms,lower",
+  "primaryY": "actual total output token/s,higher",
+  "old_x_auxiliary_only": true,
+  "aggregation": "per-request full duration p50/group -> median3 formal groups/arm -> median3 fresh arms/config",
+  "independent_nested_median_and_millisecond_units_tests": true,
+  "native_runtime_config_fields_other_than_new_sourcepins_exact105": true,
+  "fixed_cooling_gaps": 8,
+  "fixed_cooling_seconds": 60,
+  "owner_deadline_seconds": 2400,
+  "attempt_marker_new_and_absent": true,
+  "scope": "C1 concurrency slice only, not full C1/C2/C4 frontier",
+  "GPU_MLX_server_model_executed_by_author": false,
+  "W_Git_old_evidence_modified": false
+}
