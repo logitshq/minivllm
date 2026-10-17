@@ -235,3 +235,28 @@ plan SHA `b239f6117c4a2b7799b5cf366b31c0a8277182f77773b5cc78c49f218f321fc1`。
 下一次完整并发曲线采用新候选工作负载方案，先修正 adapter 的实际 admission：
 E020 C1 shim 是单请求排空，不能只提高 client C 就声称 batching。oMLX MTP 在 contention
 下会回退，Lithos 单在途限制须真实报告。见 [下一轮 Pareto 方案](../../bench/reviews/pareto-next-workloads.md)。
+
+## 2026-10-17 已接收第39章与长任务入口
+
+实际fetch到M4 `89b9bd2`（含`8bc68da`），通过merge `269fa1e`合入本分支。
+已读V113 broadcast-M1、V114整模资源STOP、V116 bounded loader及V117待资格边界；
+运行第39章`verify_sources.py`，31份源码/许可SHA与语法检查通过，无MLX/GPU工作。
+这是Git可验证的接收记录，不表示已在M5授予runtime资格。M4的事务/verify主线继续由M4推进。
+
+M5下一条完整曲线为E023长编码任务，八份输入已在输出或计时前冻结：886–978 prompt tokens，
+cap512、正常EOS、thinking off；fixture SHA
+`6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db`。
+新单worker HTTP入口每step接收pending、独立rid退休；异步client固定C槽补位、实际token计数、
+完整POST→DONE计时，不复用旧C1串行入口冒充batch。CPU mocks不等于长形状数值资格；
+真实同调度logits/cache/IDs与外部policy覆盖验证仍待执行。
+
+静态审查发现当前compiled/fused decode的长度guard≤256，长任务从首decode就fallback；
+grouped prefill还要求同长度、T≤512，当前八份自然长度也不走该快路。这是后续独立优化
+候选，不能先放宽guard或改任务再宣称已有收益。[E023教程](../optimization-guide/tutorials/023-realistic-throughput-latency.md)
+记录实际范围。用户要求的主图仍是正确性过门后的throughput–完整请求latency。
+
+GLM固定190 GiB下载继续，无本机速度点。新的[加载预算审查](../../bench/reviews/glm-flash-load-budget.md)
+确认官方后置gate/up已逐层eval/drop/clear；更早的113,446个tensor与逐expert stack在整模型首次
+eval的峰值尚未知，不能把190+外部服务RSS简单相减当作安全加载证明。新增CPU header inventory
+等待下载全部SHA通过后运行。研究笔记补Edge0：其预测替换路由及recovery LoRA不进入本次
+同权重正确性主线，可独立学习固定槽位复用；BaseRT当前核心为独立binary，未声称读到其kernel。

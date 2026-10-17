@@ -1,0 +1,41 @@
+{
+  "status": "PASS_CPU_ONLY",
+  "GPU_executed": false,
+  "listener_started": false,
+  "root_independent_run": true,
+  "tests": 40,
+  "source_sha256": {
+    "client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "native_server.py": "db0ce2e05d55abb6263d6a28e3a241ed84ea0c83664a154a30cc9afa2b692cfd",
+    "prepare_fixtures.py": "6219bb1a566ea26719d49ec595947b4f5f4292de6460c0e47647b07419735442",
+    "test_client_cpu.py": "9462600ffd993d006e4b9d6b2ca54839d2a40a6dfc9ed397a97968b4ff312a53",
+    "test_native_cpu.py": "ccc19c6bdcd43af83fd4756fcefe0806d4b4fd18ef93f04d6e1b2cd0b0f0ca69"
+  },
+  "fixture_sha256": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db",
+  "input_pins_checked": 7,
+  "results": [
+    {
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "bench/m5_ultra_256gb/pareto_realistic/test_native_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_broken_delivery_and_queue_timeout_release_waiters (__main__.HTTPTests.test_broken_delivery_and_queue_timeout_release_waiters) ... ok\ntest_eos_raw_and_committed_accounting (__main__.HTTPTests.test_eos_raw_and_committed_accounting) ... ok\ntest_help_and_unknown_flags_cannot_import_gpu_or_open_listener (__main__.HTTPTests.test_help_and_unknown_flags_cannot_import_gpu_or_open_listener) ... ok\ntest_models_identity_and_failed_readiness (__main__.HTTPTests.test_models_identity_and_failed_readiness) ... ok\ntest_parse_variable_cap_and_reject_silent_contract_changes (__main__.HTTPTests.test_parse_variable_cap_and_reject_silent_contract_changes) ... ok\ntest_partial_unicode_waits_for_complete_decoding (__main__.HTTPTests.test_partial_unicode_waits_for_complete_decoding) ... ok\ntest_queued_error_has_no_done_and_bad_input_never_submits (__main__.HTTPTests.test_queued_error_has_no_done_and_bad_input_never_submits) ... ok\ntest_socket_readback_mismatch_is_permanent_even_if_thread_swallows (__main__.HTTPTests.test_socket_readback_mismatch_is_permanent_even_if_thread_swallows) ... ok\ntest_stream_final_ids_eos_usage_and_special_tokens (__main__.HTTPTests.test_stream_final_ids_eos_usage_and_special_tokens) ... ok\ntest_active_cancel_permanently_wakes_all_and_idle_worker (__main__.WorkerTests.test_active_cancel_permanently_wakes_all_and_idle_worker) ... ok\ntest_add_or_step_exception_fails_all_queued_requests (__main__.WorkerTests.test_add_or_step_exception_fails_all_queued_requests) ... ok\ntest_admit_together_retire_independently_and_refill (__main__.WorkerTests.test_admit_together_retire_independently_and_refill) ... ok\ntest_arrival_during_step_enters_next_boundary (__main__.WorkerTests.test_arrival_during_step_enters_next_boundary) ... ok\ntest_concurrent_http_submitters_never_touch_engine (__main__.WorkerTests.test_concurrent_http_submitters_never_touch_engine) ... ok\ntest_finished_disconnect_is_already_released (__main__.WorkerTests.test_finished_disconnect_is_already_released) ... ok\ntest_observers_are_opt_in (__main__.WorkerTests.test_observers_are_opt_in) ... ok\ntest_pending_cancel_does_not_cancel_survivor (__main__.WorkerTests.test_pending_cancel_does_not_cancel_survivor) ... ok\ntest_wrong_rid_malformed_outputs_and_missing_retirement_fail (__main__.WorkerTests.test_wrong_rid_malformed_outputs_and_missing_retirement_fail) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.107s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "bench/m5_ultra_256gb/pareto_realistic/test_client_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_429_retained_once_no_replacement_no_valid_point (__main__.ClientTests.test_429_retained_once_no_replacement_no_valid_point) ... ok\ntest_absolute_request_deadline_defeats_trickle (__main__.ClientTests.test_absolute_request_deadline_defeats_trickle) ... ok\ntest_canonical_body_digest_is_order_invariant_but_content_exact (__main__.ClientTests.test_canonical_body_digest_is_order_invariant_but_content_exact) ... ok\ntest_close_is_bounded_and_does_not_delay_refill (__main__.ClientTests.test_close_is_bounded_and_does_not_delay_refill) ... ok\ntest_custom_stop_minimum_output_and_ignore_eos_are_rejected (__main__.ClientTests.test_custom_stop_minimum_output_and_ignore_eos_are_rejected) ... ok\ntest_early_eos_variable_lengths_reasoning_and_actual_total (__main__.ClientTests.test_early_eos_variable_lengths_reasoning_and_actual_total) ... ok\ntest_external_cancel_writes_partial_then_raises_with_result (__main__.ClientTests.test_external_cancel_writes_partial_then_raises_with_result) ... ok\ntest_group_deadline_preserves_partial_and_unsent_tail (__main__.ClientTests.test_group_deadline_preserves_partial_and_unsent_tail) ... ok\ntest_malformed_metadata_still_preserves_all_rows (__main__.ClientTests.test_malformed_metadata_still_preserves_all_rows) ... ok\ntest_native_eos_only_zero_output_is_not_replaced (__main__.ClientTests.test_native_eos_only_zero_output_is_not_replaced) ... ok\ntest_native_raw_committed_terminal_and_explicit_oracle (__main__.ClientTests.test_native_raw_committed_terminal_and_explicit_oracle) ... ok\ntest_native_terminal_eos_at_cap_passes_cap_plus_one_fails (__main__.ClientTests.test_native_terminal_eos_at_cap_passes_cap_plus_one_fails) ... ok\ntest_output_directory_cannot_be_reused (__main__.ClientTests.test_output_directory_cannot_be_reused) ... ok\ntest_p95_nearest_rank_not_interpolated (__main__.ClientTests.test_p95_nearest_rank_not_interpolated) ... ok\ntest_raw_limit_retains_prefix_and_invalidates (__main__.ClientTests.test_raw_limit_retains_prefix_and_invalidates) ... ok\ntest_refill_initial_overlap_and_fixed_formal_count (__main__.ClientTests.test_refill_initial_overlap_and_fixed_formal_count) ... ok\ntest_request_path_body_and_exact_queue_map_bind_qualification (__main__.ClientTests.test_request_path_body_and_exact_queue_map_bind_qualification) ... ok\ntest_scope_and_formal_size_validation (__main__.ClientTests.test_scope_and_formal_size_validation) ... ok\ntest_second_cancel_during_cleanup_is_saved_and_bounded (__main__.ClientTests.test_second_cancel_during_cleanup_is_saved_and_bounded) ... ok\ntest_sse_chunk_boundaries_multiline_and_unicode_preserved (__main__.ClientTests.test_sse_chunk_boundaries_multiline_and_unicode_preserved) ... ok\ntest_unqualified_usage_stays_reported_not_throughput (__main__.ClientTests.test_unqualified_usage_stays_reported_not_throughput) ... ok\ntest_wrong_counts_duplicate_ids_and_missing_done_invalidate (__main__.ClientTests.test_wrong_counts_duplicate_ids_and_missing_done_invalidate) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.291s\n\nOK\n"
+    }
+  ],
+  "limits": "Pure mocks and CPU tokenizer inputs; no model correctness, performance, route or scheduling runtime qualification."
+}

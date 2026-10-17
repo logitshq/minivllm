@@ -357,3 +357,17 @@ Compressions+813047，完整保留，不能称内存状态完全不变。
 全部数值、资源与回收先过门，才看三 pair 均 E2E >1、GM≥1.05、TTFT每对≥0.97。
 GLM 下载/SHA 后才调度 GPU；不与 E010/E020 历史锚点池化，不声称 GPU kernel 加速。
 [教程](tutorials/022-native-transport.md)。
+
+## E023 · 2026-10-17 · 长生成 throughput–latency · CPU 准备
+
+固定八份编码任务，实际模板后输入886–978 tokens、cap512、正常EOS；两种tokenizer API
+与decode round trip一致，七份输入依赖SHA核对通过，未观察答案/速度后选任务。
+新HTTP入口每step接收pending，client以C槽固定有限队列及时补位，按实际tokens/共同窗口
+算吞吐，按POST→DONE算延迟。服务端18项与client 22项纯CPU测试root复核通过。
+独立审查发现的完整请求绑定和raw EOS越cap问题已修复，负测及全部root输出保留；
+没有GPU/监听或任何新合格性能点。
+
+长输入还揭示已有快路覆盖缺口：compiled/fused decode guard≤256；grouped prefill
+要求同长、T≤512。当前任务应先如实测fallback基线，扩展快路需独立模块、资格与配对。
+GLM下载及加载预算审查同步推进，未把CPU准备或模型下载算作运行成功。
+[教程](tutorials/023-realistic-throughput-latency.md)。

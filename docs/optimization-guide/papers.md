@@ -106,3 +106,15 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   本机推论：E020要测无观察器的完整HTTP，分别记TTFT、实际产出与总时长；
   19→32只作首个可比较点，后续长输出/不同任务须新资格，不能据此宣称完整前沿。
   接受长度增大只有在draft+verify+commit总成本低于被替换普通步骤时才有意义。
+
+- [Edge0 v1](https://arxiv.org/html/2609.18063v1)，2026-09-16；读§3.1–3.3、§4、§5.1。
+  prerouter的预测直接替换原路由，配套训练recovery LoRA；不能作为同权重、同路由的
+  无损预取优化。可独立借鉴fixed-slot/incremental stack，只重写发生变化的expert槽位。
+  本机推论：先保留GLM原路由与packed字节，明确buffer所有权，再量布局准备成本；
+  不引入训练头。作者active-memory数字不含OS page cache，不当成本机物理峰值预算。
+- [BaseRT当前官方仓库](https://github.com/basecompute/baseRT)，2026-10-17查阅README，
+  与前述7月论文分开：当前宣称已有continuous batching、paged KV和prefix cache；
+  不能继续把旧论文的功能边界当最新版本。公开的是转换器、格式、绑定等，实际推理
+  核心为单独分发的专有预编译binary，未读取其Metal实现。README列affine Q2–Q8；
+  加入本机基线前仍须核对NVFP4是否可原样表示，不能换量化后称同checkpoint比较。
+  本轮未安装、未跑分，不把其自报速度放入本机Pareto。
