@@ -15,3 +15,9 @@ CPU取值也会等待GPU；`eval_wait_ms`不是纯GPU核时间。若lm_head超�
 同时准备官方oMLX外部MTP对照：固定M4已定位的`b9b764dada894b8c416f89cbc8cf99bc7e20b831`，
 target revision保持不变。下载不等于资格；须独立证明加载、attach、实际route和verify计数，
 再做未插观察器的计时。M4的结果不替代M5资格。
+
+## 尝试1：启动失败，未加载模型
+
+脚本最初命名`profile.py`，遮蔽stdlib `profile`。transformers导入torch/cProfile时回到
+本脚本，引发循环导入；没有形成plan或GPU计时。guard保存完整trace、资源和进程回收，
+服务恢复成功。改名`costs.py`后先运行`--help`验证导入，再以新v2目录执行同一计划。

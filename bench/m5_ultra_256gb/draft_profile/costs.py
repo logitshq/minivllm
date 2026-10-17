@@ -1,4 +1,7 @@
-"""E013: synchronized component costs, plus uninstrumented full draft."""
+"""E013: synchronized component costs, plus uninstrumented full draft.
+
+Named costs.py to avoid shadowing the Python standard-library profile module.
+"""
 import argparse
 import hashlib
 import json
