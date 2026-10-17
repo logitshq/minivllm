@@ -131,5 +131,20 @@ E013已测32/256/1024历史、block3/5/8：5层draft backbone始终为最大组�
 多agent并行后，本机三条CPU实现线分别为E014 bounded draft KV、E015官方MTP对照资格、
 E016 draft backbone图复用；GPU测试仍由本主线程单队列隔离运行。
 
+## E014/E016结果与下一轮
+
+E014 v1全部136数值检查通过，长历史回放加速但2048边界0.9102/0.9556×，拒绝。
+另发现跨臂输出释放计时归属值得纠正。v2改为超过2W才裁到W，明确本臂teardown；
+预注册2/16 GiB两个fresh process，以16 GiB强reference作采用门。这里只是合成KV回放，
+不宣称真实长上下文生成或target verify资格。
+
+E016保持原数学、显式输入输出KV的backbone图：24组312数组严格通过，完整draft几何
+平均1.040008×，低于1.10×门；首次图调用205.702 ms。拒绝，不继续堆bucket。
+原始数据、全部首调、108正式计时和资源恢复证据已归档。
+
+官方E015 MTP正在准备fresh普通engine对照，使用本机专用0.7.1.dev1环境；
+注意官方 `_MTPResetBindingProxy` 的累计计数写在proxy，不能读underlying model冒充计数。
+跨机器仍请独立资格。此轮fetch后M4分支仍为4862215，未发现新的代码提交。
+
 MTP `b9b764dada894b8c416f89cbc8cf99bc7e20b831`已下载，actual oMLX wheel仍0.7.1.dev1；
 尚未在M5授予MTP数值资格。上述工作不修改M4的GDN事务与V112诊断。

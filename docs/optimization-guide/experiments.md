@@ -242,3 +242,14 @@ lm_head为完整draft的22.9%–28.9%，未达40%分界。下一步E014窗口KV�
 三组ABBA的candidate前后顺序还有稳定差异，可能含跨臂缓存释放成本；不改写v1，不授予
 生产或长生成收益。后续分批裁剪与明确本臂生命周期归属另做v2。
 [教程](tutorials/014-bounded-draft-kv.md)、[完整原始证据](../experiments/m5-ultra-256gb/E014-draft-window-v1/)。
+
+v2预注册：只在物理KV超过2W时裁到W；每个样本分别计prepare、draft和自己的teardown，
+采用门按draft+teardown计算。固定跑2/16 GiB两个新进程，16 GiB作为更强reference的采用门，
+2 GiB兼容性单独保留。184数值用例涵盖4095/4096/4097与变长block链；尚待GPU运行。
+
+## E016 · 2026-10-17 · draft backbone图复用 · 拒绝
+
+24组312数组严格通过，9点完整draft几何平均1.040008×，最低1.006598×，未过1.10×门。
+首次图调用205.702 ms；9次trace包含增长shape，位置变化与同shape切换请求可复用。
+108正式计时全部保留；5资源快照正常，exit/reap/恢复完整。不继续增加bucket复杂度。
+[教程](tutorials/016-draft-backbone-graph.md)、[独立审计与证据](../experiments/m5-ultra-256gb/E016-draft-graph-v1/README.md)。

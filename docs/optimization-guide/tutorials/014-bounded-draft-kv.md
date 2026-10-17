@@ -79,3 +79,39 @@ workload SHA、设备、MLX、环境变量及每个失败。拒绝复用输出�
 为5.39/6.24/7.60ms；B8也有相同顺序差异。计时内restore可能把上一reference的大KV释放
 记到candidate，尚未用allocator trace证明因果。v1照原计划报告，不把长历史倍数当实际生成结论。
 v2将明确区分draft与本臂teardown，并调查每步裁剪改为有余量的分批裁剪。
+
+## 尝试2：有余量的裁剪与正确的生命周期归属（运行前计划）
+
+v1 的失败与样本保持原样。v2 是新的因果比较：当物理行数 **大于 4096** 时才裁到 2048，
+其余轮次保留至多 4096 行，减少每轮一次额外 contiguous copy。追加瞬间可能临时达到
+`4096 + incoming_rows`，完整投影输入仍不裁剪；attention 仍只读取 `2048 - block` 的后缀。
+逻辑 `ctx_len` 持续增长，物理容量不决定位置。
+
+正确性把 retained suffix 检查改为 reference 的最后 `candidate.shape[2]` 行，逐字节比较；
+visible suffix、hidden/logits、IDs 和逻辑长度继续严格比较，并检查物理行数 ≤4096。
+保留原有边界，新增初始长度 4095 和 4097，新增连续 block 8→3→5→8→3，
+incoming 1→None→empty→1→7，在 4095/4096/4097 三个起点逐步比较。
+单次 2049 行投影检查保留，再增加 4097 行，验证超过 2W 时也先按原尺寸完整投影。
+本轮计划共 184 项数值检查：cold3、固定block链150、大输入6、变block链15、计时前10。
+
+每个计时样本有三个显式阶段，两边执行相同的元数据工作和 KV 求值：
+
+1. `prepare_ms`：恢复本臂已准备种子并同步，记录但不纳入主门。
+2. `draft_ms`：完整 draft、实际 lm_head/selector、持久 KV materialize 并同步。
+3. `teardown_ms`：恢复同臂种子、释放本次产出的 KV/IDs 并同步。`finally` 保证失败也清理，
+   返回前检查 drafter 只持有种子；不把当前产物留给下一臂承担释放。
+
+主指标为 `owned_lifecycle_ms = draft_ms + teardown_ms`。同时报告三个阶段、首次资格检查后的
+样本、两轮 warmup、三组 ABBA 的全部原始值；不清 cache、不只清某一臂、不筛选 first/second
+candidate。元数据 restore 与 framework destructor 成本如实按阶段归属，不将它们叫纯 kernel 时间。
+
+预先固定两次 fresh process：`--cache-gib 2` 与 `--cache-gib 16`，默认参数是 2。
+脚本同时将 MLX cache limit 和 LLMEngine `cache_limit_gb` 设为该值，计划记录该值。
+每次内部两臂使用同一上限，两个池的所有点都保留，不看结果再选择更好的池。
+原因是 reference 的 131072 行 KV 单份约 2.5 GiB，2 GiB 缓存池可能引入 allocator 抖动；
+短 HTTP 负载的旧缓存池实验不能排除这里的影响。
+
+**采用主门必须在 16 GiB 的强 reference 下通过**：全部数值一致，32K/131072 各点
+owned-lifecycle ≥1.10×，32/2048 各点 ≥0.97×；8192 仍只报告。2 GiB 结果单独标为兼容性，
+不能替代 16 GiB 的采用资格。脚本单进程 `advance` 只表示对应池的数值/速度门；必须结合
+预注册的两次运行再决定是否独立接入。真实 allocator 数量、长生成和端到端 HTTP 仍未被本实验证明。

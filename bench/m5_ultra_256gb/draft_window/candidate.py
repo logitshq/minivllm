@@ -16,7 +16,9 @@ def bounded_attention(self, x, ctx_new, start):
         self.ctx_k = k if self.ctx_k is None else mx.concatenate([self.ctx_k, k], axis=2)
         self.ctx_v = v if self.ctx_v is None else mx.concatenate([self.ctx_v, v], axis=2)
         self.ctx_len += ctx_new.shape[0]  # Logical position is independent of residency.
-    if self.ctx_k is not None and self.ctx_k.shape[2] > self.window:
+    # Amortize compaction: at most 2W resident rows after a call. Append can
+    # transiently use 2W + incoming rows; the next block still reads only W-L.
+    if self.ctx_k is not None and self.ctx_k.shape[2] > 2 * self.window:
         self.ctx_k = mx.contiguous(self.ctx_k[:, :, -self.window:])
         self.ctx_v = mx.contiguous(self.ctx_v[:, :, -self.window:])
     L = x.shape[0]

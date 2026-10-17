@@ -26,8 +26,9 @@ from tutorial_code.miniengine.engine.llm_engine import LLMEngine
 from tutorial_code.miniengine.model.gdn import _m5_ultra_decode_identity
 from tutorial_code.miniengine.spec.dflash2 import DFlash2Drafter, load_drafter
 
-CHECK_LENGTHS = [0, 31, 2040, 2047, 2048, 2049, 4096, 32768]
+CHECK_LENGTHS = [0, 31, 2040, 2047, 2048, 2049, 4095, 4096, 4097, 32768]
 TIMING_LENGTHS = [32, 2048, 8192, 32768, 131072]
+BLOCK_CHAIN = [(8, 1), (3, None), (5, 0), (8, 1), (3, 7)]
 PROMPT = 'Compute 17 * 23 and explain briefly.'
 
 
@@ -75,7 +76,7 @@ def repeated_state(seed, length):
 
 def bounded_state(state, window):
     result = [(mx.contiguous(k[:, :, -window:]), mx.contiguous(v[:, :, -window:]), n)
-              for k, v, n in state]
+              if k.shape[2] > 2 * window else (k, v, n) for k, v, n in state]
     mx.eval([x for k, v, _ in result for x in (k, v)])
     return result
 
@@ -97,30 +98,24 @@ def observe_selector(destination):
         DFlash2Drafter._select = original
 
 
-def timed(fn):
-    mx.synchronize()
-    start = time.perf_counter_ns()
-    fn()
-    mx.synchronize()
-    return (time.perf_counter_ns() - start) / 1e6
-
-
-def paired(fn, persist):
-    record = {'first_post_qualification_ms': {}, 'warmup_samples': [], 'samples': []}
+def paired(sample, persist):
+    record = {'first_post_qualification': {}, 'warmup_samples': [], 'samples': []}
     for variant in ('reference', 'candidate'):
-        record['first_post_qualification_ms'][variant] = timed(lambda: fn(variant))
+        record['first_post_qualification'][variant] = sample(variant)
         persist(record)
     for warm in range(2):
         for variant in ('reference', 'candidate'):
-            record['warmup_samples'].append({'warm': warm, 'variant': variant, 'ms': timed(lambda: fn(variant))})
+            record['warmup_samples'].append({'warm': warm, 'variant': variant, **sample(variant)})
             persist(record)
     for block in range(3):
-        for variant in ('reference', 'candidate', 'candidate', 'reference'):
-            record['samples'].append({'block': block, 'variant': variant, 'ms': timed(lambda: fn(variant))})
+        for arm, variant in enumerate(('reference', 'candidate', 'candidate', 'reference')):
+            record['samples'].append({'block': block, 'arm': arm, 'variant': variant, **sample(variant)})
             persist(record)
-    record['median_ms'] = {v: statistics.median(r['ms'] for r in record['samples'] if r['variant'] == v)
-                           for v in ('reference', 'candidate')}
-    record['speedup'] = record['median_ms']['reference'] / record['median_ms']['candidate']
+    record['median_ms'] = {metric: {v: statistics.median(r[metric] for r in record['samples'] if r['variant'] == v)
+                                   for v in ('reference', 'candidate')}
+                           for metric in ('prepare_ms', 'draft_ms', 'teardown_ms', 'owned_lifecycle_ms')}
+    record['speedup'] = {metric: med['reference'] / med['candidate'] for metric, med in record['median_ms'].items()
+                         if metric in ('draft_ms', 'owned_lifecycle_ms')}
     persist(record)
     return record
 
@@ -130,6 +125,7 @@ def main():
     p.add_argument('--workload', required=True, type=Path)
     p.add_argument('--drafter', required=True, type=Path)
     p.add_argument('--out', required=True, type=Path)
+    p.add_argument('--cache-gib', type=int, choices=(2, 16), default=2)
     a = p.parse_args()
     a.out.mkdir()  # Never overwrite a previous attempt, including a failed attempt.
     checks, timings = [], []
@@ -139,18 +135,21 @@ def main():
         source_files = sorted((ROOT / 'tutorial_code/miniengine').rglob('*.py')) + sorted(Path(__file__).parent.glob('*.py'))
         pins = {str(f.relative_to(ROOT)): file_hash(f) for f in source_files}
         plan = {
-            'experiment': 'E014', 'baseline_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+            'experiment': 'E014-v2', 'baseline_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
             'source_sha256': pins, 'workload_sha256': file_hash(a.workload), 'target_model': str(target_dir),
             'target_revision': target_dir.name, 'drafter': str(a.drafter), 'drafter_revision': a.drafter.name,
             'model_hash_status': 'pending; filled before any model load',
             'prompt': PROMPT, 'check_lengths': CHECK_LENGTHS, 'check_blocks': [3, 5, 8],
-            'chained_input_rows': [4, None, 0, 1, 7], 'additional_projection_input_boundary': {'seed_length': 31, 'input_rows': 2049},
+            'chained_input_rows': [4, None, 0, 1, 7], 'additional_projection_input_boundary': {'seed_length': 31, 'input_rows': [2049, 4097]},
+            'variable_block_chain': {'lengths': [4095, 4096, 4097], 'block_and_input_rows': BLOCK_CHAIN},
+            'residency_policy': 'When physical rows exceed 2W=4096, compact to W=2048; never crop projection inputs; logical ctx_len independent',
             'cold_initialization': 'None KV plus four real target feature rows, for all three blocks',
             'timing_lengths': TIMING_LENGTHS, 'timing_blocks': [3, 8], 'timing_input_rows': 4,
             'selector': 'E012 device selection ON in both arms; unchanged actual original selector',
             'correctness': 'Byte-exact selector input hidden/logits, identical draft IDs, all ten retained KV suffixes and logical ctx_len; chained states independently advance',
-            'timing': 'Seed construction/cropping outside timing; metadata restore, full draft and persistent KV evaluation inside both timed arms; no observation hook; 2 warm rounds, 3 ABBA blocks; every sample persisted',
-            'advance': 'All numeric checks; every point at N32768/N131072 >=1.10x; every point at N32/N2048 >=0.97x; N8192 descriptive only',
+            'timing': 'Separate prepare (restore+sync), draft (complete draft+persistent KV materialization+sync), teardown (restore same-arm seed, release own result, sync). No observer. Report every phase; main metric draft+teardown owned lifecycle; 2 warm rounds, 3 ABBA blocks, every sample persisted',
+            'cache_limit_gib': a.cache_gib, 'predeclared_process_matrix_cache_gib': [2, 16],
+            'advance': 'All numeric checks; owned lifecycle every N32768/N131072 point >=1.10x and every N32/N2048 point >=0.97x; N8192 descriptive. Adoption requires the predeclared fresh 16GiB process gate, with 2GiB compatibility reported independently. No selection between pools.',
             'scope': 'Synthetic cache-state replay from repeated real short-history KV, NOT actual long-context generation, target verification, rollback or HTTP. Memory is tensor logical bytes only, not allocator evidence.',
             'mode_switch': 'Scoped benchmark only; each arm restores its own complete state. Cannot resume full-history mode from cropped state.',
             'environment': {k: v for k, v in os.environ.items() if k.startswith(('MLX_', 'METAL_'))},
@@ -164,10 +163,10 @@ def main():
         plan['device'] = mx.device_info()
         write(a.out / 'plan.json', plan)
         assert _m5_ultra_decode_identity(), 'This preregistered screen is M5 Ultra only'
-        mx.set_cache_limit(2 * 1024**3)
+        mx.set_cache_limit(a.cache_gib * 1024**3)
         draft = load_drafter(str(a.drafter), device_selection=True)
         assert draft.cfg.sliding_window == 2048 and draft._device_selection_enabled
-        engine = LLMEngine(str(target_dir), max_seqs=1, max_len=2048, cache_limit_gb=2)
+        engine = LLMEngine(str(target_dir), max_seqs=1, max_len=2048, cache_limit_gb=a.cache_gib)
         model = engine.model
         from transformers import AutoTokenizer
         tok = AutoTokenizer.from_pretrained(str(target_dir), local_files_only=True)
@@ -201,22 +200,23 @@ def main():
             suffix_exact, visible_exact = [], []
             for (ok, ov, on), (nk, nv, nn) in zip(old_after, new_after):
                 for ox, nx in ((ok, nk), (ov, nv)):
-                    suffix_exact.append(bit_equal(ox[:, :, max(0, ox.shape[2] - draft.cfg.sliding_window):], nx))
+                    suffix_exact.append(bit_equal(ox[:, :, ox.shape[2] - nx.shape[2]:], nx))
                     old_lo = max(0, ox.shape[2] - draft.cfg.sliding_window + block)
                     new_lo = max(0, nx.shape[2] - draft.cfg.sliding_window + block)
                     visible_exact.append(bit_equal(ox[:, :, old_lo:], nx[:, :, new_lo:]))
             expected_len = old_state[0][2] + (0 if incoming is None else incoming.shape[0])
             logical = [on == nn == expected_len for (_, _, on), (_, _, nn) in zip(old_after, new_after)]
+            bounded = [k.shape[2] <= 2 * draft.cfg.sliding_window for k, _, _ in new_after]
             row = {'case': label, 'block': block, 'start': start, 'new_rows': None if incoming is None else incoming.shape[0],
                    'reference_ids': old_ids, 'candidate_ids': new_ids, 'selector_hidden_logits_bit_equal': inputs_exact,
                    'retained_suffix_bit_equal': suffix_exact, 'attention_visible_suffix_bit_equal': visible_exact,
-                   'logical_length_equal': logical, 'logical_ctx_len': expected_len,
+                   'logical_length_equal': logical, 'logical_ctx_len': expected_len, 'physical_at_most_2W': bounded,
                    'reference_physical_rows': [k.shape[2] for k, _, _ in old_after],
                    'candidate_physical_rows': [k.shape[2] for k, _, _ in new_after],
                    'tensor_logical_bytes': {'reference': logical_bytes(old_after), 'candidate': logical_bytes(new_after)}}
             checks.append(row)
             write(a.out / 'checks.json', checks)
-            assert old_ids == new_ids and old_input[0][2] == new_input[0][2] and all(inputs_exact + suffix_exact + visible_exact + logical), row
+            assert old_ids == new_ids and old_input[0][2] == new_input[0][2] and all(inputs_exact + suffix_exact + visible_exact + logical + bounded), row
             return old_after, new_after
 
         cold = [(None, None, 0) for _ in draft.layers]
@@ -233,9 +233,20 @@ def main():
                     position += 0 if n is None else n
                     old_state, new_state = check(f'replay-N{length}-step{step}', old_state, new_state, incoming, position, block)
                 if length == 31:
-                    big = mx.tile(features, ((2049 + features.shape[0] - 1) // features.shape[0], 1))[:2049]
-                    check('projection-input-2049', initial, cropped, big, length + 2049, block)
+                    for rows in (2049, 4097):
+                        big = mx.tile(features, ((rows + features.shape[0] - 1) // features.shape[0], 1))[:rows]
+                        check(f'projection-input-{rows}', initial, cropped, big, length + rows, block)
             print('PASS chained cache replay', length, flush=True)
+
+        for length in (4095, 4096, 4097):
+            old_state = repeated_state(seed, length)
+            new_state = bounded_state(old_state, draft.cfg.sliding_window)
+            position = length
+            for step, (block, n) in enumerate(BLOCK_CHAIN):
+                incoming = None if n is None else features[:n]
+                position += 0 if n is None else n
+                old_state, new_state = check(f'variable-block-N{length}-step{step}', old_state, new_state, incoming, position, block)
+            print('PASS variable-block boundary', length, flush=True)
 
         for length in TIMING_LENGTHS:
             initial = repeated_state(seed, length)
@@ -243,25 +254,53 @@ def main():
             for block in (3, 8):
                 check(f'timing-replay-N{length}', initial, cropped, features[-4:], length + 4, block)
                 states = {'reference': initial, 'candidate': cropped}
-                def run(variant):
-                    # Metadata restore is part of both arms; no selector capture or
-                    # comparison. Synchronize all draft KV via snapshot in invoke.
-                    invoke(variant, states[variant], features[-4:], length + 4, block)
+                incoming = features[-4:]
+                def sample(variant):
+                    prepared = states[variant]
+                    after = ids = None
+                    times = {}
+                    try:
+                        begin = time.perf_counter_ns()
+                        restore(draft, prepared)
+                        mx.synchronize()
+                        times['prepare_ms'] = (time.perf_counter_ns() - begin) / 1e6
+                        with enabled(variant == 'candidate'):
+                            begin = time.perf_counter_ns()
+                            ids = draft.draft(incoming, anchor, length + 4, model.embed_tokens, model.lm_head_fn, block)
+                            after = snapshot(draft)
+                            mx.synchronize()
+                            times['draft_ms'] = (time.perf_counter_ns() - begin) / 1e6
+                    finally:
+                        # Destruction of THIS arm's output is charged to this arm.
+                        # No result tensor escapes sample; next arm sees only seed.
+                        begin = time.perf_counter_ns()
+                        restore(draft, prepared)
+                        after = ids = None
+                        mx.synchronize()
+                        times['teardown_ms'] = (time.perf_counter_ns() - begin) / 1e6
+                        for layer, (k, v, n) in zip(draft.layers, prepared):
+                            assert layer.self_attn.ctx_k is k and layer.self_attn.ctx_v is v and layer.self_attn.ctx_len == n
+                    times['owned_lifecycle_ms'] = times['draft_ms'] + times['teardown_ms']
+                    times['own_products_released_before_next_sample'] = True
+                    return times
                 row = {'history_rows': length, 'block': block,
                        'seed_tensor_logical_bytes': {v: logical_bytes(s) for v, s in states.items()}}
                 timings.append(row)
                 def persist(record):
                     row['full_draft'] = record
                     write(a.out / 'timing.json', timings)
-                result = paired(run, persist)
+                result = paired(sample, persist)
                 print('TIMING', length, block, result['speedup'], flush=True)
         assert all(file_hash(ROOT / f) == sha for f, sha in pins.items()), 'Source changed during experiment'
-        long = [r['full_draft']['speedup'] for r in timings if r['history_rows'] in (32768, 131072)]
-        short = [r['full_draft']['speedup'] for r in timings if r['history_rows'] in (32, 2048)]
+        long = [r['full_draft']['speedup']['owned_lifecycle_ms'] for r in timings if r['history_rows'] in (32768, 131072)]
+        short = [r['full_draft']['speedup']['owned_lifecycle_ms'] for r in timings if r['history_rows'] in (32, 2048)]
         advance = min(long) >= 1.10 and min(short) >= .97
         write(a.out / 'complete.json', {'status': 'PASS', 'numeric_cases': len(checks), 'timing_cases': len(timings),
-              'advance': advance, 'long_min_speedup': min(long), 'short_min_speedup': min(short),
-              'scope': plan['scope'], 'decision': 'Independent fresh-process/module integration qualification next' if advance else 'Keep prototype only; preregistered speed gate did not pass'})
+              'cache_limit_gib': a.cache_gib, 'main_metric': 'owned_lifecycle_ms',
+              'advance': advance, 'strong_reference_adoption_gate_passed': advance if a.cache_gib == 16 else None,
+              'two_gib_compatibility_gate_passed': advance if a.cache_gib == 2 else None,
+              'long_min_speedup': min(long), 'short_min_speedup': min(short),
+              'scope': plan['scope'], 'decision': 'This pool gate passed; combine both predeclared fresh runs before adoption' if advance else 'This pool gate failed; preserve all points without selecting another pool post hoc'})
         print('COMPLETE advance', advance, flush=True)
     except BaseException:
         write(a.out / 'failure.json', {'status': 'STOP', 'error': traceback.format_exc(), 'completed_checks': len(checks),
