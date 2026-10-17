@@ -1,0 +1,366 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/driver.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v128-fresh-full-pareto-build1/driver.py
+@@ -1,4 +1,4 @@
+-"""C1 CAP64 direct-production native NOL/OLN/LNO screen; original58 HTTP protocol and official definitions."""
++"""Fresh21-arm static native profile-set C1/C2/C4 campaign; original HTTP/SSE clocks."""
+ import argparse
+ import ast
+ import concurrent.futures
+@@ -22,7 +22,7 @@
+ OLD = P / 'm4-final-native15-official-attempt2'
+ sys.path.insert(0, str(OLD))
+ import common as controls
+-spec = importlib.util.spec_from_file_location('v125_official_client', OLD / 'client.py')
++spec = importlib.util.spec_from_file_location('v128_official_client', OLD / 'client.py')
+ official = importlib.util.module_from_spec(spec); spec.loader.exec_module(official)
+ import httpx
+ from tokenizers import Tokenizer
+@@ -36,6 +36,11 @@
+     return 1000.0 * statistics.median(
+         statistics.median(q['done_perf_counter_s'] - q['start_perf_counter_s']
+                           for q in g['requests']) for g in groups)
++
++
++def auxiliary_median(values):
++    values = tuple(values)
++    return statistics.median(values) if values and all(v is not None for v in values) else None
+ 
+ 
+ def assert_pipeline(native, steps, resets):
+@@ -59,8 +64,19 @@
+     assert p['total_failed'] == p['request_failed'] == 0
+ 
+ 
++def idle_trace(run_dir, proc, expected_delivered):
++    deadline = time.monotonic() + 30
++    while True:
++        try: value = json.loads((run_dir / 'engine-trace.json').read_text())
++        except (FileNotFoundError, json.JSONDecodeError): value = None
++        if value and sum(q['delivered_ids'] for q in value['steps']) == expected_delivered: return value
++        assert proc.poll() is None
++        if time.monotonic() > deadline: raise TimeoutError('idle batch trace boundary')
++        time.sleep(0.01)
++
++
+ def run_arm(item, output, config, previous_env):
+-    engine = item['engine']; label = item['label']; batch = 1
++    engine = item['engine']; label = item['label']; batch = item['batch']
+     run_dir = output / label; run_dir.mkdir()
+     model = Path(config['model_dir'])
+     w = json.loads((P / 'workload.json').read_text())
+@@ -77,8 +93,10 @@
+     else:
+         previous_env.update(env)
+     if engine == 'native':
+-        env['DYLD_INSERT_LIBRARIES'] = config['native_library']
+-        command = [sys.executable, '-B', str(D / 'server.py'), '--config', str(D / 'runtime-config.json'),
++        if batch == 1: env['DYLD_INSERT_LIBRARIES'] = config['native_library']
++        else: assert not any(k.startswith(('DYLD_', 'METAL_')) for k in env)
++        command = [sys.executable, '-B', config['curve_entry'], '--config', config['curve_profiles'],
++                   '--enable-full-curve', '--concurrency', str(batch),
+                    '--model', str(model), '--port', str(port), '--trace', str(run_dir / 'engine-trace.json'),
+                    '--run-dir', str(run_dir), '--owner-pid', str(os.getpid())]
+     else:
+@@ -95,7 +113,7 @@
+             'engine': engine, 'command': ['<api-key>' if x == key else x for x in command],
+             'environment': controls.boot.environment_record(env), 'source_config_sha256': controls.sha(D / 'runtime-config.json'),
+             'selected_environment': {k: v for k, v in env.items() if k.startswith(('MLX_', 'DYLD_', 'MONOLITH_'))},
+-            'native_treatment': 'qualified native C1 adapter; native DYLD only; ordinary extra startup warm explicitly recorded'})
++            'native_treatment': ('exact125 directC1/maxseq1/CAP64/extraordinarywarm1' if batch == 1 else 'qualified126 original25 realbatch/maxseq4/CAP256/noadapter/noDYLD') if engine == 'native' else 'original official source/config' })
+         lf = (run_dir / 'server.log').open('x')
+         started = time.perf_counter()
+         proc = subprocess.Popen(command, stdout=lf, stderr=subprocess.STDOUT, env=env)
+@@ -115,7 +133,7 @@
+         controls.exact_listener(proc.pid, port, run_dir / 'server-ready-exact-listener.json')
+         birth = controls.lock_owned_identity(proc, birth, engine, run_dir, 'ready')
+         runtime_identity = response.json().get('benchmark_identity')
+-        if engine == 'native':
++        if engine == 'native' and batch == 1:
+             assert runtime_identity['manifest_all_sources_match'] and runtime_identity['measurement_hooks'] is False
+             assert runtime_identity['startup_ordinary_warm_requests'] == 1
+             assert runtime_identity['prior_fullqual_sha256'] == config['fullqual_receipt_sha256']
+@@ -124,6 +142,13 @@
+             assert len(runtime_identity['actual_adapter_chain_sources']) == 4
+             for path in [*runtime_identity['actual_imported_sources'].values(), *runtime_identity['actual_adapter_chain_sources']]:
+                 assert config['source_pins'].get(path) == controls.sha(path)
++        elif engine == 'native':
++            assert runtime_identity['manifest_all_sources_match'] and runtime_identity['static_profile'] == 'legacy_batched256'
++            assert runtime_identity['server_max_seqs'] == 4 and runtime_identity['required_client_concurrency'] == batch
++            assert runtime_identity['native_adapter_installed'] is False and runtime_identity['dynamic_native_batch_migration'] is False
++            assert runtime_identity['physical_capacity_steps'] == [256, 256] and runtime_identity['parameter_tree_array_count'] == 1349
++            assert runtime_identity['actual_source_files_sha256'] == config['legacy_package_sources']
++            assert runtime_identity['gates_startup']['enabled'] is True
+         name = response.json()['data'][0]['id']
+         sample('server-ready-before-warmup')
+         path = '/v1/completions'
+@@ -169,17 +194,17 @@
+          with concurrent.futures.ThreadPoolExecutor(max_workers=batch) as ex:runs=list(ex.map(lambda i:request(barrier,group_id,f"{group_id}-R{i}"),range(batch)))
+          begin=min(r['start_perf_counter_s'] for r in runs);end=max(r['done_perf_counter_s'] for r in runs);window=end-begin;xs=[r['x_client_estimated_interactivity_tok_s_user'] for r in runs]
+          return {'group_id':group_id,'actual_request_count':batch,'requests':runs,'arrival_spread_s':max(r['start_perf_counter_s'] for r in runs)-begin,'group_window_s':window,'total_completion_tokens':sum(r['usage']['completion_tokens'] for r in runs),'y_total_output_throughput_tok_s_mac':batch*32/window,'x_client_estimated_interactivity_tok_s_user':statistics.median(xs) if all(x is not None for x in xs) else None}
+-        groups = {}; warm_metadata = None
++        groups = {}; warm_metadata = None; warm_trace_prefix = None
+         for phase in ('warm', 'measure'):
+             groups[phase] = []
+             for i in range(3):
+-                gid = f'C1-{phase}-{i}'
++                gid = f'C{batch}-{phase}-{i}'
+                 sample('before-' + gid)
+                 group_result = group(batch, gid)
+                 write_new(run_dir / (gid + '.json'), group_result)
+                 groups[phase].append(group_result)
+                 sample('after-' + gid)
+-            if phase == 'warm' and engine == 'native':
++            if phase == 'warm' and engine == 'native' and batch == 1:
+                 deadline = time.monotonic() + 30
+                 while not (run_dir / 'warm-metadata.json').exists():
+                     assert proc.poll() is None
+@@ -190,22 +215,49 @@
+                 assert warm_metadata['parameter_tree_unchanged'] and warm_metadata['terminal_cleanup']
+                 assert warm_metadata['measurement_hooks'] is False
+                 assert_pipeline(warm_metadata['native'], 93, 3)
++            elif phase == 'warm' and engine == 'native':
++                deadline = time.monotonic() + 30
++                while not (run_dir / 'warm-metadata.json').exists():
++                    assert proc.poll() is None
++                    if time.monotonic() > deadline: raise TimeoutError('batch warm metadata')
++                    time.sleep(0.01)
++                warm_metadata = json.loads((run_dir / 'warm-metadata.json').read_text())
++                official.validate_warm(warm_metadata, batch)
++                assert warm_metadata['routes']['decode_batch_counts'].get(str(batch), 0) > 0
++                warm_trace = idle_trace(run_dir, proc, 3 * batch * 32)
++                warm_trace_prefix = len(warm_trace['steps'])
+             if phase == 'warm': sample('after-three-warm-before-measure')
+         sample('after-measure-before-unload')
+         requests = [q for phase in ('warm', 'measure') for g in groups[phase] for q in g['requests']]
+         final_native = None; lithos_proof = None
+         if engine == 'native':
+-            assert all(q['output_ids_when_available'] == w['continuation_ids'] for q in requests)
+-            with httpx.Client(headers=headers, trust_env=False, timeout=30) as client:
+-                response = client.get(base + '/benchmark-state'); response.raise_for_status()
+-                final_native = response.json()
+-            assert final_native['active'] is None and final_native['native_steps'] == 186
+-            assert final_native['request_count'] == 6
+-            f = final_native['native']['feedback']
+-            assert final_native['native']['status'] == 'OK' and f['total_steps'] == 186 and f['resets'] == 6
+-            assert f['icb']['execution_count'] == 186 and f['icb']['bank_executions'] == [96, 90]
+-            assert f['pingpong']['eligible_count'] == 48
+-            assert_pipeline(final_native['native'], 186, 6)
++            if batch == 1:
++                assert all(q['output_ids_when_available'] == w['continuation_ids'] for q in requests)
++                with httpx.Client(headers=headers, trust_env=False, timeout=30) as client:
++                    response = client.get(base + '/benchmark-state'); response.raise_for_status()
++                    final_native = response.json()
++                assert final_native['active'] is None and final_native['native_steps'] == 186
++                assert final_native['request_count'] == 6
++                f = final_native['native']['feedback']
++                assert final_native['native']['status'] == 'OK' and f['total_steps'] == 186 and f['resets'] == 6
++                assert f['icb']['execution_count'] == 186 and f['icb']['bank_executions'] == [96, 90]
++                assert f['pingpong']['eligible_count'] == 48
++                assert_pipeline(final_native['native'], 186, 6)
++            else:
++                allowed = json.loads(Path(config['same_C_ID_assertions']).read_text())['variants'][str(batch)]
++                for q in requests:
++                    ids = q['output_ids_when_available']
++                    digest = hashlib.sha256(json.dumps(ids, separators=(',', ':')).encode()).hexdigest()
++                    assert allowed.get(digest) == ids, 'native same-C raw output mismatch'
++                assert warm_trace_prefix is not None
++                terminal_trace = idle_trace(run_dir, proc, 6 * batch * 32)
++                formal_steps = terminal_trace['steps'][warm_trace_prefix:]
++                assert formal_steps and max(q['active_decode_batch'] for q in formal_steps) == batch
++                final_native = {'static_profile': 'legacy_batched256', 'actual_formal_max_batch': batch,
++                    'formal_trace_steps': len(formal_steps), 'total_delivered_ids': 6 * batch * 32,
++                    'warm_hooks_removed_before_measure': True, 'native_adapter_installed': False,
++                    'pipeline186_assertion_applicable': False, 'raw_same_C_assertions_passed': True,
++                    'idle_source_cleanup_assertions_completed': True}
+             write_new(run_dir / 'native-final-metadata.json', final_native)
+         if engine == 'lithos':
+             text = (run_dir / 'server.log').read_text()
+@@ -215,18 +267,19 @@
+             assert len(native_metrics) >= 6 and all(v['cached_prompt_tokens'] == 0 for v in native_metrics)
+             lithos_proof = {'backend': 'm4_max', 'draft': None, 'metrics': native_metrics,
+                             'precleanup_server_log_sha256': controls.sha(run_dir / 'server.log')}
+-        result = {'engine': engine, 'label': label, 'concurrency': 1,
++        result = {'engine': engine, 'label': label, 'concurrency': batch,
+                   'warmups': groups['warm'], 'runs': groups['measure'],
+                   'runtime_identity': runtime_identity, 'warm_metadata': warm_metadata,
+                   'final_native_metadata': final_native, 'lithos_proof': lithos_proof,
+-                  'x': statistics.median(g['x_client_estimated_interactivity_tok_s_user'] for g in groups['measure']),
++                  'x': auxiliary_median(g['x_client_estimated_interactivity_tok_s_user'] for g in groups['measure']),
+                   'y': statistics.median(g['y_total_output_throughput_tok_s_mac'] for g in groups['measure']),
+                   'ttft_s': statistics.median(q['client_ttft_text_s'] for g in groups['measure'] for q in g['requests']),
+                   'E2E_s': statistics.median(q['client_total_s'] for g in groups['measure'] for q in g['requests']),
+                   'latency_p50_ms': full_request_latency_p50_ms(groups['measure']),
+                   'source_config_sha256': controls.sha(D / 'runtime-config.json'),
+                   'sampling': {'greedy': True, 'output_cap': 32, 'EOS': 'normal', 'draft': None, 'prefix_cache': 0},
+-                  'scope': 'fresh same-campaign C1 screen only; no C2/C4 or full-frontier conclusion'}
++                  'static_native_profile': ('direct_c1' if batch == 1 else 'legacy_batched') if engine == 'native' else None,
++                  'scope': 'fresh same-campaign measured C1/C2/C4 configuration set; await raw audit/external release, no automatic adoption'}
+     except BaseException as exc:
+         error = exc
+         write_new(run_dir / 'first-failure.json', {'type': type(exc).__name__, 'message': str(exc),
+@@ -256,7 +309,53 @@
+     assert result is not None
+     result.update(resource_snapshots=samples, owned_exit=cleanup)
+     write_new(run_dir / 'result.json', result)
+-    return {k: result[k] for k in ('label', 'engine', 'x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
++    return {k: result[k] for k in ('label', 'engine', 'concurrency', 'x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
++
++
++def qualification_gate(config):
++    ref = config['curve_qualification']
++    assert ref is not None, 'HOLD: actual126 C2/C4 new-entry qualification not bound'
++    assert controls.sha(ref['receipt']) == ref['receipt_sha256']
++    q = json.loads(Path(ref['receipt']).read_text())
++    assert q['status'] == 'PASS_V126_STATIC_BATCH_ENTRY_C2_C4_GENUINE_BATCH_RAW_IDS_AND_IDLE'
++    assert q['HTTP_requests'] == 24 and q['completion_tokens'] == 768
++    assert [p['concurrency'] for p in q['points']] == [2, 4]
++    for p in q['points']:
++        assert p['actual_requested_batch_GDN_calls'] > 0 and p['post_hook_reentry_actual_requested_batch']
++        assert p['weighted_warm_GDN_rows'] == 48 * 31 * 3 * p['concurrency']
++        assert p['warm_hooks_removed_before_reentry'] and p['raw32_same_C_reference_and_visible_usage_exact']
++        assert p['idle_source_assertions_completed'] and p['parameter_tree_identity_unchanged']
++        assert p['owned_exit']['wait_completed'] and p['owned_exit']['exact_pid_absence']['absent']
++    assert controls.sha(ref['release']) == ref['release_sha256']
++    release = json.loads(Path(ref['release']).read_text())
++    assert release['status'] == 'PASS_EXTERNAL_RELEASE_V126_C2_C4_ENTRY'
++    assert release['GPU_released'] is True and release['tool_exit_code'] == 0
++    assert release['source_receipt_sha256'] == ref['receipt_sha256']
++    assert ref['source_pins_sha256'] == controls.sha(config['curve_source_pins'])
++    assert controls.sha(ref['independent_review']) == ref['independent_review_sha256']
++    audit = json.loads(Path(ref['independent_review']).read_text())
++    assert audit['status'] == 'PASS_INDEPENDENT_V126_ACTUAL_ENTRY_RESULTS'
++    assert audit['actual_receipt_sha256'] == ref['receipt_sha256']
++    assert audit['actual_external_release_sha256'] == ref['release_sha256']
++    assert audit['source_pins_sha256'] == ref['source_pins_sha256']
++
++
++def signed_pairs(completed, plan):
++    rows = {q['label']: q for q in completed}
++    output = []
++    for c, engines in ((1, ('omlx', 'lithos')), (2, ('omlx',)), (4, ('omlx',))):
++        for replica in (1, 2, 3):
++            items = [p for p in plan if p['batch'] == c and p['replica'] == replica]
++            native = rows[next(p['label'] for p in items if p['engine'] == 'native')]
++            for engine in engines:
++                other = rows[next(p['label'] for p in items if p['engine'] == engine)]
++                output.append({'concurrency': c, 'replica': replica, 'comparison': 'native_vs_' + engine,
++                    'native_latency_p50_ms': native['latency_p50_ms'], 'other_latency_p50_ms': other['latency_p50_ms'],
++                    'native_y': native['y'], 'other_y': other['y'],
++                    'latency_reduction_percent': 100 * (1 - native['latency_p50_ms'] / other['latency_p50_ms']),
++                    'throughput_gain_percent': 100 * (native['y'] / other['y'] - 1),
++                    'negative_values_retained': True})
++    return output
+ 
+ 
+ def main():
+@@ -276,15 +375,18 @@
+     assert not any(n == 'mlx' or n.startswith('mlx.') for n in sys.modules)
+     assert not controls.selected(os.environ)
+     assert sys.executable == controls.PYTHON
+-    plan = [{'block': b, 'label': f'C1-B{b}-{name}', 'engine': name}
+-            for b, order in enumerate((('native', 'omlx', 'lithos'), ('omlx', 'lithos', 'native'),
+-                                       ('lithos', 'native', 'omlx')), 1) for name in order]
++    plan = json.loads((D / 'campaign-plan.json').read_text())['configs']
++    assert len(plan) == 21 and sum(6 * item['batch'] for item in plan) == 270
+     if args.cpu_dry_run:
+-        print(json.dumps({'status': 'PASS_CPU_DRY_RUN', 'plan': plan, 'fresh_loads': 9,
+-                          'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
++        print(json.dumps({'status': 'PASS_CPU_DRY_RUN', 'plan': plan, 'fresh_loads': 21,
++                          'HTTP_requests': 270, 'HTTP_completion_tokens': 8640,
+                           'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+-                          'total_executed_requests': 57, 'total_executed_tokens': 1824, 'GPU_used': False}))
++                          'total_executed_requests': 273, 'total_executed_tokens': 8736,
++                          'formal_requests': 135, 'formal_tokens': 4320,
++                          'fixed_cooling_gaps': 20, 'cooling_seconds': 1200,
++                          'qualification_binding': config['curve_qualification'], 'GPU_used': False}))
+         return 0
++    qualification_gate(config)
+     assert args.out is not None and args.out.is_absolute(); args.out.mkdir()
+     write_new(D / 'attempt.consumed.json', {'pid': os.getpid(), 'pins_sha256': args.pins_sha256})
+     completed = []; previous_env = {}; samples = []; error = None; completion = None
+@@ -297,10 +399,10 @@
+         for item in plan:
+             print(json.dumps({'event': 'ARM_STARTED', **item}), flush=True)
+             completed.append(run_arm(item, args.out, config, previous_env))
+-            print(json.dumps({'event': 'ARM_COMPLETED', 'completed': len(completed), 'total': 9,
++            print(json.dumps({'event': 'ARM_COMPLETED', 'completed': len(completed), 'total': 21,
+                               **completed[-1]}), flush=True)
+             if len(completed) < len(plan):
+-                # Exactly eight fixed gaps after successful owned unload/reap/resource guard.
++                # Exactly twenty fixed gaps after successful owned unload/reap/resource guard.
+                 # No model or request is live; cooling is outside every HTTP clock.
+                 gap_start = time.monotonic()
+                 print(json.dumps({'event': 'FIXED_UNLOADED_COOLING', 'after_arm': len(completed),
+@@ -312,18 +414,27 @@
+                     'outside_HTTP_clocks': True, 'prior_owned_cleanup_passed': True,
+                     'adaptive': False})
+         for path, digest in pins['files'].items(): assert controls.sha(path) == digest, path
+-        assert len(completed) == 9
+-        medians = {engine: {key: statistics.median(r[key] for r in completed if r['engine'] == engine)
+-                            for key in ('x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
+-                   for engine in ('native', 'omlx', 'lithos')}
+-        completion = {'status': 'PASS_C1_SCREEN', 'arms': completed,
++        assert len(completed) == 21
++        medians = {}
++        for engine, batch in (('native', 1), ('omlx', 1), ('lithos', 1), ('native', 2), ('omlx', 2), ('native', 4), ('omlx', 4)):
++            rows = [r for r in completed if r['engine'] == engine and r['concurrency'] == batch]
++            assert len(rows) == 3
++            medians[f'{engine}:C{batch}'] = {key: (auxiliary_median(r[key] for r in rows) if key == 'x' else statistics.median(r[key] for r in rows))
++                for key in ('x', 'y', 'ttft_s', 'E2E_s', 'latency_p50_ms')}
++        pairs = signed_pairs(completed, plan)
++        completion = {'status': 'PASS_FRESH_FULL_CURVE_AWAIT_INDEPENDENT_AUDIT_AND_EXTERNAL_RELEASE', 'arms': completed,
+             'primary_metrics': {'X': 'full HTTP POST-through-DONE latency_p50_ms, lower', 'Y': 'total output y token/s, higher'},
+-            'auxiliary_metrics': {'x': 'legacy first-text delivery proxy only; not primary win criterion'},
+-            'medians': medians, 'all_negative_pairs_retained': True, 'full_frontier_win': False,
+-            'HTTP_requests': 54, 'HTTP_completion_tokens': 1728,
++            'auxiliary_metrics': {'x': 'legacy first-text delivery proxy only; E2E_s/ttft_s flat-request aux'},
++            'medians': medians, 'signed_pairs': pairs, 'all_negative_pairs_retained': True,
++            'automatic_adoption': False, 'full_frontier_win': False,
++            'native_configuration_set': ['direct_c1:44+101+102/maxseq1/CAP64', 'legacy_batched:accepted25/maxseq4/CAP256'],
++            'dynamic_live_migration': False, 'old125_or_oldC4_pooled': False,
++            'HTTP_requests': 270, 'HTTP_completion_tokens': 8640,
+             'native_startup_ordinary_requests': 3, 'native_startup_ordinary_tokens': 96,
+-            'total_executed_requests': 57, 'total_executed_tokens': 1824,
+-            'measured_requests': 27, 'measured_tokens': 864}
++            'total_executed_requests': 273, 'total_executed_tokens': 8736,
++            'measured_requests': 135, 'measured_tokens': 4320,
++            'cooling_gaps': 20, 'fixed_cooling_total_seconds': 1200,
++            'Lithos_C2_C4': 'N/A under pinned endpoint admission, no zero or serial surrogate point'}
+     except BaseException as exc:
+         error = {'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()}
+         write_new(args.out / 'suite-failure.json', {'error': error, 'completed': completed, 'raw_preserved': True})
+--- /private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/owner.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v128-fresh-full-pareto-build1/owner.py
+@@ -1,4 +1,4 @@
+-"""Root sole-GPU HTTP owner; wait-only during nine serial performance arms."""
++"""Root sole-GPU HTTP owner; wait-only during twenty-one serial performance arms."""
+ import argparse
+ import hashlib
+ import json
+@@ -8,7 +8,7 @@
+ import sys
+ 
+ P = Path('/private/tmp/minivllm-engine-optimization-20261014')
+-D = P / 'v125-fresh-c1-native-official-build1'
++D = P / 'v128-fresh-full-pareto-build1'
+ ap = argparse.ArgumentParser(description=__doc__)
+ ap.add_argument('--out', type=Path, required=True)
+ ap.add_argument('--pins-sha256', required=True)
+@@ -26,7 +26,7 @@
+ O.mkdir()
+ command = [sys.executable, '-B', str(D / 'driver.py'), '--run', '--pins-sha256', pins,
+            '--out', str(O / 'child-output')]
+-r = {'owner_pid': os.getpid(), 'command': command, 'deadline_seconds': 2400,
++r = {'owner_pid': os.getpid(), 'command': command, 'deadline_seconds': 3600,
+      'driver_sha256': hashlib.sha256((D / 'driver.py').read_bytes()).hexdigest(),
+      'pins_sha256': pins, 'resource_policy': 'driver samples only outside request/group windows',
+      'stage': 'before-spawn'}
+@@ -40,7 +40,7 @@
+         r.update(driver_pid=proc.pid, driver_birth=birth, stage='running')
+         write(O / 'owner-receipt.json', r)
+         print(json.dumps({'owner_pid': os.getpid(), 'driver_pid': proc.pid, 'output': str(O)}), flush=True)
+-        r['returncode'] = proc.wait(timeout=2400)
++        r['returncode'] = proc.wait(timeout=3600)
+ except BaseException as exc:
+     r['owner_error'] = {'type': type(exc).__name__, 'message': str(exc)}
+     raise

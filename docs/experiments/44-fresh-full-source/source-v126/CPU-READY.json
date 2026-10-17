@@ -1,0 +1,48 @@
+{
+  "status": "CPU_READY_FROZEN_V126_STATIC_NATIVE_FULLCURVE_ENTRY_QUALIFICATION_GPU_UNRUN",
+  "source_pins_sha256": "59606283b28b8706af1465ebab156f08aedecb34f41b16a3991391c2530932bf",
+  "source_pins": 52,
+  "manifest_sha256": "cf5928f2fe1acca56289ea6be2ed9c6b910db9afe9f024ec2f561e29786954d3",
+  "qualifier_sha256": "18207bd44e697d51b27dd2b1e17f10cf8aeb16abfbc0449c5e578c173673bc61",
+  "server_sha256": "f8ed851ea3140ef127142a52046453aa1fa916438a92ebcc0893d6e5258bed72",
+  "batched_server_sha256": "53557f8c576e7eacad53e1665ca96e70412216546f6f0fc28c64291af24ef8df",
+  "c1_server_sha256": "ea2aa1343aa58976cf77458581029cb0bb42ab55aafd2199223940c3611fdbd8",
+  "CPU_checks": {
+    "status": "PASS_CPU_V126_STATIC_ENTRY_SOURCE_ONLY",
+    "policy_cases": 11,
+    "c1_server_byte_exact125": true,
+    "accepted25_batched_work_AST_inverse_exact_native15": true,
+    "Handler_AST_exact_native15": true,
+    "POST_AST_exact125": true,
+    "request_group_AST_exact125": true,
+    "actual_historical_C2_C4_arms": 6,
+    "new_entry_GPU_qualified": false,
+    "fullcurve_driver_prepared": false,
+    "defaultOFF": true,
+    "dynamic_live_migration": false,
+    "GPU_used": false,
+    "MLX_imported": false
+  },
+  "inert": "PASS_INERT_V126_ENTRY_QUALIFICATION_GPU_UNRUN",
+  "runtime_scope": "two immutable startup configurations; direct C1 current125 byteexact; C2/4 originalaccepted25 genuinebatch maxseq4/CAP256/noadapter",
+  "qualification": {
+    "fresh_loads": 2,
+    "HTTP_requests": 24,
+    "completion_tokens": 768,
+    "groups_per_point": "3warm+1post-hook reentry",
+    "actual_B_expected": [
+      2,
+      4
+    ],
+    "parameter_count": 1349,
+    "raw_ID_reference": "saved exact same-C accepted25, assertions only, never model input",
+    "post_hook_reentry_actual_batch": true,
+    "full_tensor_comparison": false
+  },
+  "new_GPU_result": false,
+  "performance_driver_ready": false,
+  "dynamic_live_migration": false,
+  "W_Git_modified": false,
+  "active_CPU_children": 0,
+  "root_clean_parent_CLI": "/Users/ryanli/code/minivllm/.venv/bin/python -B /private/tmp/minivllm-engine-optimization-20261014/v126-native-full-curve-prework-build1/qualify_batch.py --execute-gpu --out ABSOLUTE_NEW_OUTPUT --pins-sha256 59606283b28b8706af1465ebab156f08aedecb34f41b16a3991391c2530932bf"
+}

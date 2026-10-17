@@ -1,0 +1,167 @@
+{
+  "status": "CPU_DRAFT_HOLD_ACTUAL126_BINDING",
+  "configs": [
+    {
+      "label": "V128-C1-block1-native",
+      "engine": "native",
+      "batch": 1,
+      "replica": 1,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "label": "V128-C1-block1-omlx",
+      "engine": "omlx",
+      "batch": 1,
+      "replica": 1
+    },
+    {
+      "label": "V128-C1-block1-lithos",
+      "engine": "lithos",
+      "batch": 1,
+      "replica": 1
+    },
+    {
+      "label": "V128-C1-block2-omlx",
+      "engine": "omlx",
+      "batch": 1,
+      "replica": 2
+    },
+    {
+      "label": "V128-C1-block2-lithos",
+      "engine": "lithos",
+      "batch": 1,
+      "replica": 2
+    },
+    {
+      "label": "V128-C1-block2-native",
+      "engine": "native",
+      "batch": 1,
+      "replica": 2,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "label": "V128-C1-block3-lithos",
+      "engine": "lithos",
+      "batch": 1,
+      "replica": 3
+    },
+    {
+      "label": "V128-C1-block3-native",
+      "engine": "native",
+      "batch": 1,
+      "replica": 3,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "label": "V128-C1-block3-omlx",
+      "engine": "omlx",
+      "batch": 1,
+      "replica": 3
+    },
+    {
+      "label": "V128-C2-pair1-native",
+      "engine": "native",
+      "batch": 2,
+      "replica": 1,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C2-pair1-omlx",
+      "engine": "omlx",
+      "batch": 2,
+      "replica": 1
+    },
+    {
+      "label": "V128-C2-pair2-omlx",
+      "engine": "omlx",
+      "batch": 2,
+      "replica": 2
+    },
+    {
+      "label": "V128-C2-pair2-native",
+      "engine": "native",
+      "batch": 2,
+      "replica": 2,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C2-pair3-native",
+      "engine": "native",
+      "batch": 2,
+      "replica": 3,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C2-pair3-omlx",
+      "engine": "omlx",
+      "batch": 2,
+      "replica": 3
+    },
+    {
+      "label": "V128-C4-pair1-native",
+      "engine": "native",
+      "batch": 4,
+      "replica": 1,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C4-pair1-omlx",
+      "engine": "omlx",
+      "batch": 4,
+      "replica": 1
+    },
+    {
+      "label": "V128-C4-pair2-omlx",
+      "engine": "omlx",
+      "batch": 4,
+      "replica": 2
+    },
+    {
+      "label": "V128-C4-pair2-native",
+      "engine": "native",
+      "batch": 4,
+      "replica": 2,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C4-pair3-native",
+      "engine": "native",
+      "batch": 4,
+      "replica": 3,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "label": "V128-C4-pair3-omlx",
+      "engine": "omlx",
+      "batch": 4,
+      "replica": 3
+    }
+  ],
+  "fresh_loads": 21,
+  "warm_groups_per_process": 3,
+  "measure_groups_per_process": 3,
+  "HTTP_requests": 270,
+  "HTTP_completion_tokens": 8640,
+  "measured_requests": 135,
+  "measured_tokens": 4320,
+  "native_extra_startup_ordinary_requests": 3,
+  "native_extra_startup_ordinary_tokens": 96,
+  "native_configuration_set": [
+    "direct_c1:44+101+102/maxseq1/CAP64",
+    "legacy_batched:accepted25/maxseq4/CAP256"
+  ],
+  "model_and_workload_unchanged": true,
+  "old_points_pooled": false,
+  "primary_X": "request POST-to-DONE p50 milliseconds/group ->median3groups/arm->median3fresharms/config",
+  "primary_Y": "group total output token/s ->median3groups/arm->median3fresharms/config",
+  "Lithos_C2_C4": "N/A under pinned endpoint admission; no serial queue throughput point or zero point",
+  "officials": "original official_command(engine,C) and source; oMLX balanced.03 C-adjusted actual scheduler; Lithos C1 tested configuration",
+  "cooling": {
+    "fixed_seconds": 60,
+    "gaps": 20,
+    "total_seconds": 1200,
+    "outside_clocks": true,
+    "adaptive": false
+  },
+  "qualification_before_timing": "new C2/C4 genuine admit/decode/cleanup/output witness; C1 delegated exact125 source with103 qualification inherited"
+}

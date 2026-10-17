@@ -1,0 +1,6073 @@
+[
+  {
+    "arm": "V128-C1-block1-native",
+    "engine": "native",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 51852,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "43ebfd15b8f32beb28de686bcab7eb9a112ab80d7b32ad36a9d02ac1d96d7393",
+        "exact_pid_absence": {
+          "pid": 51852,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60517,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 219990.433140583,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block1-native/result.json",
+      "sha256": "6db9cb4c0a5a2473c3b080e73b3bf49f5110edbbd8378e4eb72a975c731b812f",
+      "bytes": 2776746
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "warm": {
+      "completed_requests": 3,
+      "native_steps": 93,
+      "parameter_tree_unchanged": true,
+      "terminal_cleanup": true,
+      "measurement_hooks": false,
+      "pipeline": {
+        "depth": 2,
+        "total_submitted": 93,
+        "total_completed": 93,
+        "total_delivered": 93,
+        "total_discarded": 0,
+        "total_failed": 0
+      }
+    },
+    "native_final": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_submitted": 186,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "V128-C1-block1-omlx",
+    "engine": "omlx",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 52078,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "4f23e1bab06ed9daeacbc5d17b822f3fef00b033776dce74845af63bc0b4e911",
+        "exact_pid_absence": {
+          "pid": 52078,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60573,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220069.490674958,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block1-omlx/result.json",
+      "sha256": "98e9d4a320652a017e6c5f90440566816099ef1b0430494218369b0bd506c83e",
+      "bytes": 119861
+    }
+  },
+  {
+    "arm": "V128-C1-block1-lithos",
+    "engine": "lithos",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 52277,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "300a4d9b2d4b3b145bfcb9d498cd9d0fd33e972553b4ac74403f2be4b929625a",
+        "exact_pid_absence": {
+          "pid": 52277,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60597,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220152.121593541,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block1-lithos/result.json",
+      "sha256": "10e7795396002cbc60c4ff3724c1a8afa1f74ea1d9cf71cc2770c27818f4cf10",
+      "bytes": 121053
+    },
+    "Lithos_participation": {
+      "backend": "m4_max",
+      "draft": null,
+      "Generation_cached_prompt_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "server_log_original_sha256": "183644f7f9e5d87199d205e405e2a2ecfeadc26d31537b4aa28feac102f38539"
+    }
+  },
+  {
+    "arm": "V128-C1-block2-omlx",
+    "engine": "omlx",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 52479,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "7077073f25280fe799c8781e200d527d32084ddd7ea9847dee6eb8bdae1a0f50",
+        "exact_pid_absence": {
+          "pid": 52479,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60640,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220232.702930791,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block2-omlx/result.json",
+      "sha256": "c5caa9d3f75ab696a29d473c69a9733581b8c5d6e2d0aa7ce790178dcbb03e32",
+      "bytes": 119876
+    }
+  },
+  {
+    "arm": "V128-C1-block2-lithos",
+    "engine": "lithos",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 52701,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "24bfe014201785302f684b3e9ab69cdf34d0e74adc3fb1f18736ba33639bc8f5",
+        "exact_pid_absence": {
+          "pid": 52701,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60691,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220315.376822791,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block2-lithos/result.json",
+      "sha256": "8aa3fa6d5fa71885a90fc0dd61329ade436921160ab53f5f194f1e35702f571e",
+      "bytes": 121065
+    },
+    "Lithos_participation": {
+      "backend": "m4_max",
+      "draft": null,
+      "Generation_cached_prompt_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "server_log_original_sha256": "87d90d65be670fc0bf1cd3a3d5fa714aae22dc0e3628f5096373ff38372dd7a2"
+    }
+  },
+  {
+    "arm": "V128-C1-block2-native",
+    "engine": "native",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 52934,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "baaf414eb22d24d62b3aa729601f033b3662e5808f376f0140be4da3d417158a",
+        "exact_pid_absence": {
+          "pid": 52934,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60736,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220391.0842105,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block2-native/result.json",
+      "sha256": "d8286c6ff4f028819e08db01445f6f7ddc35da61ff14e2e888e4d7de764cf9c7",
+      "bytes": 2775099
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "warm": {
+      "completed_requests": 3,
+      "native_steps": 93,
+      "parameter_tree_unchanged": true,
+      "terminal_cleanup": true,
+      "measurement_hooks": false,
+      "pipeline": {
+        "depth": 2,
+        "total_submitted": 93,
+        "total_completed": 93,
+        "total_delivered": 93,
+        "total_discarded": 0,
+        "total_failed": 0
+      }
+    },
+    "native_final": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_submitted": 186,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "V128-C1-block3-lithos",
+    "engine": "lithos",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 53140,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "d907abf07f45e671a40b9593e763947799fcdb9ae72938ffc31f026e0b1f3607",
+        "exact_pid_absence": {
+          "pid": 53140,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60787,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220473.914649666,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block3-lithos/result.json",
+      "sha256": "112382b44c329fa92b7561fadc4f58f200a915c189d200d4a8577faec729a7ee",
+      "bytes": 121070
+    },
+    "Lithos_participation": {
+      "backend": "m4_max",
+      "draft": null,
+      "Generation_cached_prompt_tokens": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "server_log_original_sha256": "6189a31ce292cd300cfe438d58ab72efbaf357315e0069fe7e1ab109d2abae2c"
+    }
+  },
+  {
+    "arm": "V128-C1-block3-native",
+    "engine": "native",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 53343,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "dbdfe4fe0cacace076c35a352ae2153e00a29205db2be28e3373c8f8a2157dc5",
+        "exact_pid_absence": {
+          "pid": 53343,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60826,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220548.843178291,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block3-native/result.json",
+      "sha256": "5f9944c2ea8d8fb586f464a8c4ebc59c3f36bf339f1840baa11dda62c8c27d9a",
+      "bytes": 2776077
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "warm": {
+      "completed_requests": 3,
+      "native_steps": 93,
+      "parameter_tree_unchanged": true,
+      "terminal_cleanup": true,
+      "measurement_hooks": false,
+      "pipeline": {
+        "depth": 2,
+        "total_submitted": 93,
+        "total_completed": 93,
+        "total_delivered": 93,
+        "total_discarded": 0,
+        "total_failed": 0
+      }
+    },
+    "native_final": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_submitted": 186,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "V128-C1-block3-omlx",
+    "engine": "omlx",
+    "concurrency": 1,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 53584,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "1b151de287d0aa0dc023c40569cb7abebec1d92c5c980f9c36f0482e26450ef5",
+        "exact_pid_absence": {
+          "pid": 53584,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60888,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220628.220786708,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C1-block3-omlx/result.json",
+      "sha256": "af4fbef1670b9feb56c8d703ee115a4ec55260049624b2bc8365c1df4950979d",
+      "bytes": 119875
+    }
+  },
+  {
+    "arm": "V128-C2-pair1-native",
+    "engine": "native",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 53825,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "2e71d73b5192e27be86da95a895b3c91a0a96ad1aac6e40d9398c0f4ff407929",
+        "exact_pid_absence": {
+          "pid": 53825,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60926,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220703.319025083,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair1-native/result.json",
+      "sha256": "ad99e373a47b3bd287af01c35019d8fc52f4544bb1a704f28a0278203ed2f46b",
+      "bytes": 574038
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 2,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 6,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "2": 4416,
+          "1": 96
+        },
+        "normal_decode_calls": 4512,
+        "gates_route_calls": 4512,
+        "compiled_eligible_calls": 96,
+        "fallback_calls": 4416,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 8928
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 2,
+      "formal_trace_steps": 97,
+      "total_delivered_ids": 384,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair1-native/engine-trace.json",
+        "sha256": "260525bd5e07edf80bab816eb80e3c032b2d23c05ae6d9123a2d3a1946e73c59",
+        "bytes": 122038
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C2-pair1-omlx",
+    "engine": "omlx",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 54025,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "6d70c7e53e86792456639538703436c8d8abb51904c6aab2682ed815f42ef269",
+        "exact_pid_absence": {
+          "pid": 54025,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 60971,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220784.363811041,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair1-omlx/result.json",
+      "sha256": "032753d77e72b3a47d07b81b68df67a481dd2c4f73c9874d5f1cd452db500400",
+      "bytes": 157275
+    }
+  },
+  {
+    "arm": "V128-C2-pair2-omlx",
+    "engine": "omlx",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 54234,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "be826be11394f6bdba10de5edd3bd32bcccc3b2e05824c7c2e00fbf92ae394ab",
+        "exact_pid_absence": {
+          "pid": 54234,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61011,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220865.781053375,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair2-omlx/result.json",
+      "sha256": "41af16686f85fb1e005f51e0c2d1f62026e5f6d9419ba8355c057314de3f9353",
+      "bytes": 157282
+    }
+  },
+  {
+    "arm": "V128-C2-pair2-native",
+    "engine": "native",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 54475,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "e52e2c9f52eb375f5b76577617e5cbb74fd80e68507eb3f063c58657d058564b",
+        "exact_pid_absence": {
+          "pid": 54475,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61063,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 220940.92505375,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair2-native/result.json",
+      "sha256": "c0ab4df1a563497e82df591d0ee5e9cc45e71c4f2a188b443f015dfd54d632bf",
+      "bytes": 574019
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 2,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 6,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "1": 192,
+          "2": 4368
+        },
+        "normal_decode_calls": 4560,
+        "gates_route_calls": 4560,
+        "compiled_eligible_calls": 192,
+        "fallback_calls": 4368,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 8928
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 2,
+      "formal_trace_steps": 97,
+      "total_delivered_ids": 384,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair2-native/engine-trace.json",
+        "sha256": "b280fb00d08f25d7acaa21cb8681af4bad6195ef21884939688cc609ff563f3a",
+        "bytes": 122201
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C2-pair3-native",
+    "engine": "native",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 54676,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "546b276fca2fb3f090b6d0b54abb27bb4ff3143ad89c93972da24e540f59750f",
+        "exact_pid_absence": {
+          "pid": 54676,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61108,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221015.740358333,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair3-native/result.json",
+      "sha256": "449503f912cc8ef0f587e9bd613c1bb62d1891f2820143ae88577493fa8c3515",
+      "bytes": 574055
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 2,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 6,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "1": 96,
+          "2": 4416
+        },
+        "normal_decode_calls": 4512,
+        "gates_route_calls": 4512,
+        "compiled_eligible_calls": 96,
+        "fallback_calls": 4416,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 8928
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 2,
+      "formal_trace_steps": 97,
+      "total_delivered_ids": 384,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair3-native/engine-trace.json",
+        "sha256": "4838cc9180a6331308ed8e3a392d68ff8cded0330494b1d31e7aa0e50667d7ca",
+        "bytes": 122034
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C2-pair3-omlx",
+    "engine": "omlx",
+    "concurrency": 2,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 54878,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "720ed682baa99324859e039e6f649505a5188d907da7660683076888a69e9376",
+        "exact_pid_absence": {
+          "pid": 54878,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61150,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221096.980805708,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C2-pair3-omlx/result.json",
+      "sha256": "1f92bc26428a74ed43ff3373ad407503fe38c0b4f5514c612e5d3dcce7a91e00",
+      "bytes": 157288
+    }
+  },
+  {
+    "arm": "V128-C4-pair1-native",
+    "engine": "native",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 55091,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "584c598d5113da98ecf145bbbcd6dfea3267623ac9e96368b01d94573a161c98",
+        "exact_pid_absence": {
+          "pid": 55091,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61201,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221175.607828708,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair1-native/result.json",
+      "sha256": "777837a262393ce7fa2d139e8e2ecfd79aee4f4da51fa58ef084dd76f82ebcb8",
+      "bytes": 720754
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 4,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 12,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "3": 96,
+          "4": 4320,
+          "1": 96,
+          "2": 96
+        },
+        "normal_decode_calls": 4608,
+        "gates_route_calls": 4608,
+        "compiled_eligible_calls": 96,
+        "fallback_calls": 4512,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 17856
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 4,
+      "formal_trace_steps": 99,
+      "total_delivered_ids": 768,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair1-native/engine-trace.json",
+        "sha256": "f966983365981255e2e1a97959576b9025e6a93ccdb53a3c78ebe42a089e3e6c",
+        "bytes": 122690
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C4-pair1-omlx",
+    "engine": "omlx",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 55324,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "c1f43c7f3d3ad77cef15ce0e2a302956ecc777856f433b691f9bd744d3a485d1",
+        "exact_pid_absence": {
+          "pid": 55324,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61264,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221261.556639666,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair1-omlx/result.json",
+      "sha256": "53c14903ee1844824a2a4271f9f93b22c349f1e4b39fc75b88e03fd6f9a5b4b0",
+      "bytes": 216677
+    }
+  },
+  {
+    "arm": "V128-C4-pair2-omlx",
+    "engine": "omlx",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 55531,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "45b47a53abd189d8312148b5b76a8f8a388c865922fd757f215d1dec3d6c63d5",
+        "exact_pid_absence": {
+          "pid": 55531,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61320,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221347.271622625,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair2-omlx/result.json",
+      "sha256": "b9dbe0fe0117d5fa9e8d6f0698108e059d720d39db7ca833f05578fdd74d18a1",
+      "bytes": 216678
+    }
+  },
+  {
+    "arm": "V128-C4-pair2-native",
+    "engine": "native",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 55750,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "9358c801f40d1ec62e533c4bde1fe100704c230c7fd7b584e41ef8bd74ec89f2",
+        "exact_pid_absence": {
+          "pid": 55750,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61376,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221425.4444945,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair2-native/result.json",
+      "sha256": "cc0de0cb22799af14531044decf69982391d97340352113f5d3e00ad4e2497cd",
+      "bytes": 720759
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 4,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 12,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "3": 96,
+          "4": 4320,
+          "1": 96,
+          "2": 96
+        },
+        "normal_decode_calls": 4608,
+        "gates_route_calls": 4608,
+        "compiled_eligible_calls": 96,
+        "fallback_calls": 4512,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 17856
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 4,
+      "formal_trace_steps": 98,
+      "total_delivered_ids": 768,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair2-native/engine-trace.json",
+        "sha256": "ad7fe6ffbf1844f9515216fc7343954317fc3e86aee230285c652123993aeb3f",
+        "bytes": 122512
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 4
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C4-pair3-native",
+    "engine": "native",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 55949,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "5851ea326d3814f4cb14a56b1d5d0a700c9833141f03ffbfb0ad973e1acd52c2",
+        "exact_pid_absence": {
+          "pid": 55949,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61432,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221503.423436583,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair3-native/result.json",
+      "sha256": "ecf3189cf826a1d7c326aa4f7fe13ffa07f71ee9549ec5221f19fbf7e19276d0",
+      "bytes": 720771
+    },
+    "identity": {
+      "manifest_all_sources_match": true,
+      "server_max_seqs": 4,
+      "static_profile": "legacy_batched256",
+      "dynamic_native_batch_migration": false,
+      "native_adapter_installed": false,
+      "physical_capacity_steps": [
+        256,
+        256
+      ],
+      "allocator_cache_limit_bytes": 2147483648,
+      "required_client_concurrency": 4,
+      "parameter_tree_array_count": 1349
+    },
+    "warm": {
+      "completed_requests": 12,
+      "parameter_tree_unchanged": true,
+      "gates": {
+        "enabled": true,
+        "count": 48,
+        "compiled_callable_count": 48
+      },
+      "routes": {
+        "decode_batch_counts": {
+          "2": 96,
+          "4": 4320,
+          "1": 96,
+          "3": 96
+        },
+        "normal_decode_calls": 4608,
+        "gates_route_calls": 4608,
+        "compiled_eligible_calls": 96,
+        "fallback_calls": 4512,
+        "setter_calls": 48,
+        "hooks_restored_before_measure": true
+      },
+      "weighted_GDN_rows": 17856
+    },
+    "native_final": {
+      "static_profile": "legacy_batched256",
+      "actual_formal_max_batch": 4,
+      "formal_trace_steps": 98,
+      "total_delivered_ids": 768,
+      "warm_hooks_removed_before_measure": true,
+      "native_adapter_installed": false,
+      "pipeline186_assertion_applicable": false,
+      "raw_same_C_assertions_passed": true,
+      "idle_source_cleanup_assertions_completed": true
+    },
+    "batch_trace_selected": {
+      "source": {
+        "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair3-native/engine-trace.json",
+        "sha256": "78a50d1d5dd64d1d462a3c6e8c898fd550f8040885366aba886a4778678b770c",
+        "bytes": 122538
+      },
+      "steps": [
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 1
+        },
+        {
+          "active_decode_batch": 1,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 3,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 3
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 2,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 2
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 4,
+          "delivered_ids": 4
+        },
+        {
+          "active_decode_batch": 0,
+          "delivered_ids": 4
+        }
+      ]
+    }
+  },
+  {
+    "arm": "V128-C4-pair3-omlx",
+    "engine": "omlx",
+    "concurrency": 4,
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 56172,
+        "wait_completed": true,
+        "returncode": -15,
+        "recorded_birth_identity_sha256": "9c886118e4a4b49449a86cb9cc55d31cbe0d5f1975b0d612ba525a1060a7ec02",
+        "exact_pid_absence": {
+          "pid": 56172,
+          "absent": true,
+          "returncode": 1
+        }
+      }
+    },
+    "port_absence": {
+      "port": 61494,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 221589.152904166,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "source": {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/full-curve-v128-attempt1/child-output/V128-C4-pair3-omlx/result.json",
+      "sha256": "36d804a8f182b8ca9f3613ee8be488fc1ba3f0b98d8f4d05c82c5feda415745e",
+      "bytes": 216656
+    }
+  }
+]
