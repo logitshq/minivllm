@@ -524,3 +524,9 @@ journal 仍 PREPARED，owner 不存在；实际审计返回 INCOMPLETE/qualified
 第一阶段只用真实层形状的一attention+一GDN合成状态，检查非连续视图、延迟eval和双向
 写入隔离，不代替64层/模型/HTTP资格，无性能点。[教程](tutorials/028-identity-refill.md)与
 [固定计划](../../bench/m5_ultra_256gb/identity_refill/prereg-v1/README.md)。
+
+
+E028 v1实际在首输入生成器停止：MLX不支持int|array，0checks/0snapshots/2phases；
+candidate factory到达但rebuild未调用，不称数值拒绝。child58427已reap，原74384恢复S。
+v2只修两处array-first OR和版本绑定，候选/位模式/预算不变，23CPU tests通过；
+[独立v2注册](../../bench/m5_ultra_256gb/identity_refill/prereg-v2/README.md)冻结573pins后再运行。

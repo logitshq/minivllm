@@ -45,3 +45,17 @@ MLX 可能消去部分操作，只有实测才能判断。[源证据与算式](.
 [ops.cpp 的单输入分支](https://github.com/ml-explore/mlx/blob/v0.32.3/mlx/ops.cpp#L1297-L1299)可直接返回原数组。
 因此本候选要求存在新请求，保留多输入 concat，并实测非连续输入和延迟求值。
 源码行为支持实验设计，不能直接换算成本机的带宽或吞吐收益。
+
+
+## v1 输入生成失败与 v2 小修
+
+先提交 `cb3c4fd` 再执行 v1。MLX 已初始化并通过设备门，但第一组输入构造中的
+`0x3e00 | low` 抛出 TypeError：array 实现正向 OR，没有 `__ror__`。因此0组比较、
+0份状态snapshot、2个资源阶段；factory和OFF batch构造到达，rebuild尚未调用。
+child58427 exit1已回收，原服务74384同identity恢复。随后owner的footprint读到已失败
+退出的child而报错，这是次生监测失败，不是候选数值差异。
+
+v2另存screen/owner，不改v1：只把两处OR改成array在左，保持全部位模式、候选、
+10/88/53覆盖与预算。新增不支持反向OR的fake array，直接运行实际pattern函数，
+复现旧写法失败并核对BF16/F32整数位域。23CPU测试与独立审读通过，573项来源固定；
+[新计划](../../../bench/m5_ultra_256gb/identity_refill/prereg-v2/README.md)仍须先提交再执行。
