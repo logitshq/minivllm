@@ -409,3 +409,14 @@ root独立复核owner的8项CPU检查；子进程1800秒、owner1830秒预算，
 E024 新增真实GPU诊断入口（尚未调度）：32个B/长度点、真实参数值替换与恢复、B1→B8→B1、
 实际compiled callable见证和cap4 ahead生命周期。root与独立reviewer均复核12项CPU检查；
 SHA与日志在 `long_decode_graph/cpu-qualification-v1`。完整D512/gates-ON门仍需后续运行。
+
+
+E023 v1 实机已因资源门中止：owner859.55s；C1完成8请求4096IDs，C8最后完整step515，
+未完成全16请求及13请求lifecycle。首错误pressure2，swap324→469.06MB；无已保存数值差异。
+child TERM(-15)、reap与独立PID absence通过，外部服务同identity T→S恢复。资格INCOMPLETE、
+无末尾model/source recheck、无性能点；完整332成员归档保留。E024暂不调度，先诊断资源。
+
+## E025 · 2026-10-17 · 相同split-K的NAX prefill部分乘法 · CPU准备
+
+仅T19的GDN z、MLP down与out三形状，保持原split2/2/3与BF16中间舍入，尝试官方MLX NAX helper代替SIMD部分乘法。默认OFF、独立模块，其余形状回原QMM；重建SIMD归约必须先逐位等于官方QMM，然后才能运行候选。root复核10项CPU tests通过；未编译Metal、未运行GPU、未获得数值或性能资格。
+[源码、来源、推导与严格执行顺序](../../bench/m5_ultra_256gb/prefill_nax_same_split/README.md)。

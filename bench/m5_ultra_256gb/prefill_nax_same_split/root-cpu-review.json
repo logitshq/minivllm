@@ -1,0 +1,29 @@
+{
+  "scope": "CPU-only root verification; no GPU, Metal compilation or performance qualification",
+  "checks": [
+    {
+      "name": "E023 independent auditor self-test",
+      "chunk_id": "7ddb9a",
+      "wall_time_seconds": 0.000005833,
+      "exit_code": 0,
+      "original_token_count": 30,
+      "output": "PASS: full synthetic step + 10 corruptions rejected; ordinal/rid reuse, scheduler, EOS, INCOMPLETE and streaming checks\n"
+    },
+    {
+      "name": "E025 independent CPU tests",
+      "chunk_id": "0c7b5b",
+      "wall_time_seconds": 0.000006416,
+      "exit_code": 0,
+      "original_token_count": 28,
+      "output": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.049s\n\nOK\n"
+    },
+    {
+      "name": "Post-abort resource/process check",
+      "chunk_id": "b61b7c",
+      "wall_time_seconds": 0.000007083,
+      "exit_code": 0,
+      "original_token_count": 23,
+      "output": "kern.memorystatus_vm_pressure_level: 2\n74384 S    Fri Oct 16 08:01:58 2026     omlx-server\n"
+    }
+  ]
+}

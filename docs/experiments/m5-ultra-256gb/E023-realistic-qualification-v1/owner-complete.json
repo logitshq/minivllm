@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "owner_pid": 24388,
+  "errors": [
+    {
+      "phase": "execution",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py\", line 127, in run\n    probe('child-running', child.pid)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py\", line 102, in probe\n    resources.guard(samples)\n    ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py\", line 51, in guard\n    original.guard(samples[:-1] + [{**last, 'only_owned_known_inference_processes': approved}])\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py\", line 47, in guard\n    if s['pressure_level_value'] is not None and s['pressure_level_value']>=2:raise RuntimeError('Resource pressure warning: unload owned model and pause')\n                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Resource pressure warning: unload owned model and pause\n"
+    },
+    {
+      "phase": "postflight",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py\", line 164, in run\n    probe('postflight')\n    ~~~~~^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py\", line 102, in probe\n    resources.guard(samples)\n    ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py\", line 51, in guard\n    original.guard(samples[:-1] + [{**last, 'only_owned_known_inference_processes': approved}])\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py\", line 47, in guard\n    if s['pressure_level_value'] is not None and s['pressure_level_value']>=2:raise RuntimeError('Resource pressure warning: unload owned model and pause')\n                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Resource pressure warning: unload owned model and pause\n"
+    }
+  ],
+  "samples": 166,
+  "elapsed_wall_s": 859.5457884999923,
+  "external_service_restoration": "outer suspended_service sole owner"
+}

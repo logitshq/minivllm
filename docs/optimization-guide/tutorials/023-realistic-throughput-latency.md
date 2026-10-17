@@ -83,3 +83,24 @@ grouped prefill范围；不会把开关ON误写成实际kernel命中。先保留
 Lithos当前OpenAI接口的单inflight限制需要显式C2探针，不能静默重试串行化。
 GLM-5.3-Flash沿用相同语义任务但单独tokenize、资格和作图，下载或CPU审查不会产生速度点。
 完整候选协议见[下一轮负载方案](../../../bench/reviews/pareto-next-workloads.md)。
+
+
+## v1 实机结果：正确性前缀通过，资源门中止
+
+冻结计划在 `e9600a8` 后实际执行。C1完成8请求/4096 raw IDs，观察到的full logits/cache/
+ahead/输出均一致；随后C8最后完整写入step515，在第一波结束和补位附近触发pressure2。
+owner859.55秒停止child，returncode-15且wait/reap/严格absence通过；独立ps确认owner也退出。
+外服务74384保持原启动identity并恢复T→S。完整37请求未完成，不能把C1完成或C8前缀PASS
+提升为整组资格，更不能拿带逐步观察器的时长生成性能点。
+
+资源第164个样本（编号从0开始）记录pressure2、swap324→469.06MB；postflight仍pressure2。
+child RSS约29GiB并不代表全部GPU/system物理使用；外服务SIGSTOP仍占约143GiB footprint。
+下一步核查双模型生命周期、快照与refill瞬时峰值。没有足够证据归因某个kernel、模型泄漏或
+外部请求；不通过放宽资源门、缩短任务、重试成功子集来修饰结果。E024计划保持未执行。
+
+[完整失败归档](../../experiments/m5-ultra-256gb/E023-realistic-qualification-v1/README.md)
+保留332个成员与全部step前缀、资源和恢复证据；独立stream audit与root重跑逐字段一致，结果在归档内。模型/source
+末尾recheck未运行，因此这次状态明确是未完成数值资格，而不是正确性PASS或数值FAIL。
+
+审计独立重建调度、batch维、全层覆盖及退休：4,617完整行、4,611成功step记录、无末行截断。
+全部已完成请求均到达cap，实际EOS早退覆盖为0；因此既不授予整组资格，也不声称覆盖EOS早退。

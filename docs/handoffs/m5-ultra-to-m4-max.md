@@ -310,3 +310,11 @@ cache关键事实：`_sync_batch`的新行容量参数是prompt+output budget，
 已预留1536，不需先改KV增长策略。现有256图的closure读取长度同样固定256，不能只放宽guard。
 GLM190GiB权重已全部SHA通过，但原服务142.82GiB物理驻留不因SIGSTOP释放；恢复预检发现
 admin主key未配置且匿名admin卸载401。尚未修改认证、卸载或加载GLM；Qwen工作独立继续。
+
+## 2026-10-17 E023资源中止，Pareto口径与下一步
+
+E023 v1已终止并完整归档：C1完成8请求/4096 IDs；C8最后step515，未完成16请求与13请求lifecycle。首个失败是pressure2（sample164，swap324→469.06MB），无已保存数值不一致。child TERM/reap、owner absence及原74384同identity T→S恢复均有证据。独立stream audit与root重跑完全一致，qualified=false；已完成请求均cap结束，无实际EOS早退覆盖，末尾model/source recheck未执行。不得把观察器计时或正确前缀加入性能图。
+
+[完整归档](../experiments/m5-ultra-256gb/E023-realistic-qualification-v1/README.md)保存332成员，压缩7.8MB的xz保留原1.4GB JSONL。E024仍冻结未运行，当前资源压力仍2，先查buffer ownership。E025已准备独立、默认OFF的T19 same-split NAX部分乘法诊断，root10项CPU tests通过，未编译Metal/加载GPU，不接入core。
+
+最新可报告的仍是[v5吞吐/完整延迟图](../optimization-guide/progress/2026-10-17-v5/qualified-throughput-latency.png)：历史C2–64与受控E020 C1分开；正确性是入场门，不作可交换轴。C1 oMLX仍领先，不能宣称全面前沿获胜。
