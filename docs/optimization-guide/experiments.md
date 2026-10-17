@@ -781,3 +781,35 @@ then parameter replacement/ahead lifecycle and gates-ON D512/HTTP. No new Pareto
 point; external D512 baselines remain pending. M4 tip53d4906 is already an ancestor.
 
 [Evidence and limits](../experiments/m5-ultra-256gb/E024-route-canary-v1/README.md).
+
+
+## Route graph boundary matrix passes (2026-10-17)
+
+The default-OFF 1023/1536-bound candidate now passes all52 fixed diagnostic
+steps: B1..8 at used257/1023/1024/1280/1536, uniform and mixed-row actual
+cross1024 chains, and B1→B8→B1 reuse in both buckets. Source-pinned device
+checks cover6708 full output tensors plus6192 prefill tensors; full-byte input,
+output and unchanged1349-parameter receipts close. Independent audit ran once:
+ten complete raw snapshots, three full output contrasts/387 tensor pairs, all
+bit-equal. The remaining successful tensors are device/hash receipts, not saved
+full raw payloads. No parameter-replacement, ahead/scheduler or HTTP eligibility.
+
+Child17212/owner17177 reaped; original service13908 restored as18261 at17:32:45
+UTC with original model/config and fresh MTP/resident PLE. Independent restore
+audit passes; warmKV/hidden state not restored. Resource46 samples pressure1,
+thermal0, zero swapgrowth/Swapins/Swapouts/Pageouts. Child222.566seconds includes
+loading, checks and serialization: not performance. MLX peak56,951,132,480B.
+
+Evidence:760 small files archived (1,184,892B); ten full tensor files remain
+local (7,902,883,133B), exact hashes/paths committed. Source plan was pushed as
+294f2a5 before execution. M4 tip53d4906 remains an ancestor after fresh fetch.
+M4 must independently qualify its hardware reduction routes before enabling.
+
+NEXT: narrow forward-only OFF/ON graph versus eager timing at B1/B8 and
+used1023/1024, with same-state full bit gates, excluded warmup, fixed ABBA and
+observer-free timing. This go/no-go diagnostic precedes further HTTP/ahead
+integration. NativeD512 C1/C8 remains45.372/167.399 outputtok/s at p50
+11.283/24.432seconds (n=1 per point); no new Pareto point or oMLX/Lithos
+dominance is established.
+
+[Matrix evidence and limits](../experiments/m5-ultra-256gb/E024-route-matrix-v1/README.md).
