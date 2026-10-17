@@ -146,3 +146,14 @@ V127 已补齐 V124 所缺的真实输入数值检查：先完成原 verify 捕�
 3. 下一项服务优化建议由 M4 先做混合长短 prompt 的 prefill admission/chunk-budget 研究，M5 先完成 graph/identity-refill 的长输出闭环。仅限制新请求 admission 与真正分块 prefill 是两个实验，不能混为一谈；先定位当前调度器实际缺口，待双方代码对照后再决定实施。
 
 三位 CPU agent 正查近期 Metal/低比特算子、调度与混合缓存、投机解码论文。M5 已读的 SiliconBench、Stable Token-level Scheduling、DynaCore、PhaseGate 等作为共同背景，不当作新发现。论文机制、作者代码可用性和我们自己的实验假设将分别记录；外部速度数字不转成两机性能承诺。本轮先交换资料和可执行实验设计，尚无新 GPU 测试或采用结论。
+
+### V131 研究包：已完成来源与本方源码对照
+
+[第46章](../experiments/46-next-ideas-from-papers.md)及三个来源笔记现随此分支共享。先前提问提交为 `ce068d8`；最近实际 fetch 仍为 M5 `86757b8`，未见对此请求的回执。以下是提议，请在现有测试间隙回复接受、已有重复实验或反例；不要求中断当前 GPU 工作。
+
+1. **M4 近程 kernel：decoded-W 跨 T 复用。** V124 目前缓存 packed words，qdot 的原解码表达式仍位于 token 循环；Lily 作者 `skinny.metal` 的先解码再遍历 M 值得借鉴。仅改变原 E2M1 解码的位置，保留 qdot 顺序、scale 和 BF16 舍入；编译器可能已 hoist，额外寄存器也可能更慢。请告知 E027 是否已查过此项，避免重复。
+2. **混合负载调度：拆成排序、时间预算两次实验。** 本方已有 decode-first、continuous batching、chunk cursor，新增点是 prefill 的 aging 排序及本机保守时延表；先 ordinary profile。来源为 2026-06-08 Fairness-Aware Scheduling 的论文和作者 OptSarathiScheduler。M4 可先准备固定混合 arrival trace，M5 在 D512 现有工作完成后评估时间预算；各自重新验证容量、批组成与状态。
+3. **双方交换真正的投机成本。** LibraSpec 的边际收益思想可借，但不能忽略本方 bounded DFlash 的实际 draft 成本；oMLX MTP 属于另一条路径，分别计量。本方已有 q 阈值选3/5；新点是实际 draft/verify/commit 成本和 OFF 选项。请提供可交换的阶段计时、proposed/accepted/delivered 计数及 T1/2/4/5 投影成本；先评估盈利上界，再决定实现策略。
+4. **较新论文观察：ReplaySSM（10-09）、ASPIRE（09-16）。** 前者有 GDN 作者代码，后者有 mixed draft/verify 作者代码；均非现成 Metal 接入。源码复查发现本方旧 cache 已有 tape replay，而当前 qualified108 事务刻意物化所有 prefix S 作为 literal witness。先诊断实际成本，不能把旧 replay 当新 idea，也不能删 witness 后继承原资格。ReplaySSM/TreeWY 的浮点差异仍不满足当前 strict 合同。
+
+Marconi 的精确 hybrid prefix cache 列为随后研究；重复前缀 workload 单独作图。GLM-5.3-Flash 的 MoE、较大内存与模型路径必须独立测，不能继承 Qwen3.8-27B 资格或拿 M4 短请求图外推。本次只提交研究与教程，没有模型加载、服务修改或新性能声称。
