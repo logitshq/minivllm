@@ -1,0 +1,37 @@
+test_response_close_cancelled_after_valid_eof_is_not_a_valid_point (_root_lithos_negative_tests.ClientTests.test_response_close_cancelled_after_valid_eof_is_not_a_valid_point) ... ERROR
+test_cancelled_client_close_invalidates_otherwise_complete_group (_root_lithos_negative_tests.ClientTests.test_cancelled_client_close_invalidates_otherwise_complete_group) ... FAIL
+
+======================================================================
+ERROR: test_response_close_cancelled_after_valid_eof_is_not_a_valid_point (_root_lithos_negative_tests.ClientTests.test_response_close_cancelled_after_valid_eof_is_not_a_valid_point)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/test_lithos_client_cpu.py", line 377, in test_response_close_cancelled_after_valid_eof_is_not_a_valid_point
+    self.assertEqual(row['error']['type'], 'CancelledError')
+                     ~~~~~~~~~~~~^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+FAIL: test_cancelled_client_close_invalidates_otherwise_complete_group (_root_lithos_negative_tests.ClientTests.test_cancelled_client_close_invalidates_otherwise_complete_group)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/test_lithos_client_cpu.py", line 394, in test_cancelled_client_close_invalidates_otherwise_complete_group
+    self.assertFalse(result['cleanup']['complete'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+FAILED (failures=1, errors=1)

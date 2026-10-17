@@ -134,3 +134,22 @@ root复跑66项CPU检查通过；真实prepare核157份原runtime/core/manifest/
 PASS都不是性能收益。先C1/C8配对定位收益，随后在同轮官方比较中补并发扫描；只有
 实际HTTP输出量/共同请求窗口与POST→DONE延迟才能更新图。正式计时窗口不并行跑
 重型CPU归档/数组审计；这些工作放到计时结束后。
+
+
+## 独立审计适配与真实只读准备
+
+后续补齐两层独立审计：数值层从已验证调度重建eligible refill、容量与实际rebuild
+计数，严格核64层/128数组并逐条对应refills事件；原37请求的logits、状态、ahead、
+EOS与完整释放门保留。owner层检查真实嵌套路径和CLI，不能伪造旧目录结构让旧审计
+误以为兼容。原资源、直属子进程回收与服务恢复证据沿用独立冻结检查。
+
+root实际核对CPU prepare的157+5文件并重哈希241,872,766B runtime。新journal随后
+通过只读prepare创建，仍PREPARED；实际审计返回INCOMPLETE且不打开数值ledger，
+owner目录尚不存在。这是拒绝缺失证据的验证，不是整模型成功。原冷停/恢复提问仍待答。
+[回执与快照](../../../bench/reviews/2026-10-17-pareto-adapters-cpu-v1/README.md)。
+
+同轮补Lithos官方/api/chat计时适配：真实C个在途请求，延迟包含FIFO排队；结束记录
+到达时立即补请求，EOF与连接关闭另做有界收尾。独立审查发现“EOF后关闭取消”可能
+漏报，修复并保留负测；测量工具的成功门也要检查异常路径。计数仍须独立raw-ID合同，
+每条真实日志仍须零cache命中，不能用客户端单项通过替代完整HTTP资格。
+本轮无真实模型/服务操作，也无新throughput–latency点。

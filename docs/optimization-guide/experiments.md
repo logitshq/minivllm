@@ -559,3 +559,15 @@ E028整模型准备追加：新的私有qualifier保留原37请求，补实际id
 157+5来源的真实CPU prepare通过，未GPU、未服务操作。固定计划在
 [prereg-model-v1](../../bench/m5_ultra_256gb/identity_refill/prereg-model-v1/README.md)。
 新增证据仍需独立审计、真实整模型及HTTP资格，当前没有新的throughput–latency点。
+
+
+E028整模型独立审计追加：新数值审计保留原37请求门，独立重建identity refill与
+fallback计数并核128数组；新owner审计核真实nested路径/CLI及原资源恢复证据。
+root实际CPU prepare检查157+5文件和241,872,766B runtime，PASS。新controller只读
+prepare后journal仍PREPARED；真实审计INCOMPLETE/qualified=false/ledger_opened=false，
+owner目录不存在。冷停/恢复授权仍待答，未GPU或服务变更。
+
+Lithos官方/api/chat NDJSON客户端已补，按实际终场接收时间统计完整请求延迟，C8
+测试保持8个HTTP在途、mock单生成峰值1。首次60CPU tests通过后，独立审读发现
+EOF后closer取消漏报，保留原版与窄修复负测。[审计和修复记录](../../bench/reviews/2026-10-17-pareto-adapters-cpu-v1/README.md)。
+客户端只条件校验计数；实际raw-ID/每条零cache日志与全模型仍待验证。无新Pareto点。

@@ -35,3 +35,19 @@ groups and old owner/path bindings; it must not be advertised as compatible.
 Then run full-model qualification under the resource owner, followed by separate
 HTTP qualification and uninstrumented fresh-process OFF/ON measurements. All
 new performance gates remain pending. Candidate/core defaults are unchanged.
+
+
+## 2026-10-17 follow-up: independent audit and read-only journal preparation
+
+After the preparation stage above, the new journal was actually created by
+`controller_v2 prepare`; it remains PREPARED with one read-only event. No cold
+operation or child execution occurred. The original plans and preparation
+receipts above are unchanged.
+
+New `audit_model.py` and `audit_model_owner.py` independently check the additional
+128-array groups, actual nested owner bindings and the unchanged resource and
+restore gates. Root's actual prepared-source audit verified 157+5 entries,
+including real runtime hashes. Against the real PREPARED journal the owner audit
+returns INCOMPLETE without opening the numerical ledger; the owner directory
+remains absent. [CPU results and exact journal snapshot](../../../reviews/2026-10-17-pareto-adapters-cpu-v1/README.md).
+Full-model execution, HTTP qualification and performance are still pending.

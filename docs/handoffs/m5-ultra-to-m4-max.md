@@ -459,3 +459,17 @@ C1/C8都走相同API；NDJSON的done时钟、原wire字节和EOS计数需要窄�
 
 主目标明确为throughput vs complete-request latency，正确性是入图硬门。图仍为v5，
 没有用CPU准备制造新性能点；原服务74384同identity为S，pressure2，未冷停/重启。
+
+
+## E028 independent audits and Lithos NDJSON adapter: CPU only
+
+本次fetch核M4仍为53d4906，已在M5祖先中。新增E028独立数值/owner审计，按真实
+嵌套路径核157+5pins，并重建实际refill128数组/counter。root真实CPU prepare文件
+复核通过；新cold journal只读prepare成功，仍PREPARED，owner不存在，实际审计
+INCOMPLETE且未打开ledger。原冷停恢复授权仍待答，未服务变更/未GPU。
+
+Lithos真实/api/chat FIFO并发与NDJSON计时客户端已实现，原body/wire/usage保留，
+actual DONE立即refill，EOS计数有独立合同才规范化；每run零cache日志仍需controller。
+独立review发现EOF后close取消会漏报，保存原版并修复加负测。所有工作都是CPU准备，
+没有新的模型资格或性能点。[可复核记录](../../bench/reviews/2026-10-17-pareto-adapters-cpu-v1/README.md)。
+正确性先过门，正式目标仍是整机实际tokens/s↑ vs POST→DONE p50 latency↓。

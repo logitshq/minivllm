@@ -1,0 +1,106 @@
+{
+  "schema": "pareto-adapters-cpu-review-v1",
+  "base_commit": "fb4b17cf473474dc48b64394e9bcb30f83911ca5",
+  "scope": "CPU tests/read-only real preflight and PREPARED journal audit; no GPU/service mutation/performance result",
+  "sources": {
+    "identity_refill/audit_model.py": "d46c60266e70b7998e2ebeb17d1c126ef4eb896226857419ba6146ae1b642c67",
+    "identity_refill/test_audit_model_cpu.py": "9d85c2905382b0b0f9f5d104a711aa0a56f3980749532453edb18b5a0d8506cb",
+    "identity_refill/audit_model_owner.py": "b37901424d5bcce9b20b89b19e2cea065a56cf6138bdd6653f922d0a14bc1482",
+    "identity_refill/test_audit_model_owner_cpu.py": "d10f34fef7d9915f6c1a17dd83a92effe768e5ffb8fa3389084f43d8f4cee1a7",
+    "pareto_realistic/lithos_client.py": "9b87917c6c27958b481cffb12f43d1b373cb9e091ce6fef8583517bc149c94be",
+    "pareto_realistic/test_lithos_client_cpu.py": "90271ad39e54c889f6c3f60f732d96131ca6c155c74681a313deac5dfe175df4",
+    "pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "pareto_realistic/audit_qualification.py": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+    "pareto_realistic/audit_absent_qualification.py": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d"
+  },
+  "tests": [
+    {
+      "test": "test_audit_model_cpu.py",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill",
+        "-p",
+        "test_audit_model_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.19366391700168606,
+      "source_sha256": "9d85c2905382b0b0f9f5d104a711aa0a56f3980749532453edb18b5a0d8506cb",
+      "stdout_sha256": "fc5eaef4c1f728e4b95d4a4a36aa00be9c51a62eb31db846e54d36296a8a7d10",
+      "stderr_sha256": "2ca0209a36a33ae9542198c879f591ea6d4a8a17e091f644383b2c3cd7e0ff36"
+    },
+    {
+      "test": "test_audit_model_owner_cpu.py",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill",
+        "-p",
+        "test_audit_model_owner_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.3260339999978896,
+      "source_sha256": "d10f34fef7d9915f6c1a17dd83a92effe768e5ffb8fa3389084f43d8f4cee1a7",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "4a387f4c2cffdc26743a72c8cc03da6466427587af4bcc24f911a655df66b7c3"
+    },
+    {
+      "test": "test_lithos_client_cpu.py",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_lithos_client_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.40212608299043495,
+      "source_sha256": "90271ad39e54c889f6c3f60f732d96131ca6c155c74681a313deac5dfe175df4",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "03b9efb32d62f0299449582b57dc7e05c2efe5b8019de1542d139b92cb14e965"
+    },
+    {
+      "test": "test_client_cpu.py",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_client_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.3472097920021042,
+      "source_sha256": "9462600ffd993d006e4b9d6b2ca54839d2a40a6dfc9ed397a97968b4ff312a53",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c5b1da74bc893e940549a6301c92986fbad1fa0731cb1ea99758c8576314f650"
+    }
+  ],
+  "actual_preflight_pass": true,
+  "actual_prepared_status": "INCOMPLETE",
+  "ledger_opened": false,
+  "new_performance_points": 0
+}

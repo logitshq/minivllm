@@ -1,0 +1,74 @@
+{
+  "schema": "pareto-adapters-root-review-v1",
+  "time_utc": "2026-10-17T13:56:41.845807+00:00",
+  "status": "CPU_PREPARATION_REVIEWED",
+  "qualified": false,
+  "performance_qualified": false,
+  "new_performance_points": 0,
+  "final_sources": {
+    "identity_refill/audit_model.py": "d46c60266e70b7998e2ebeb17d1c126ef4eb896226857419ba6146ae1b642c67",
+    "identity_refill/audit_model_owner.py": "b37901424d5bcce9b20b89b19e2cea065a56cf6138bdd6653f922d0a14bc1482",
+    "identity_refill/test_audit_model_cpu.py": "9d85c2905382b0b0f9f5d104a711aa0a56f3980749532453edb18b5a0d8506cb",
+    "identity_refill/test_audit_model_owner_cpu.py": "d10f34fef7d9915f6c1a17dd83a92effe768e5ffb8fa3389084f43d8f4cee1a7",
+    "pareto_realistic/lithos_client.py": "13a629f096434bc6c422803bf7bfd8992e24396cb122880b493e893cc5ecd2e9",
+    "pareto_realistic/test_lithos_client_cpu.py": "f36c661698a70fe2aa2961c2b5891ab90ce367f761da43e3f1fd56bd37b37496"
+  },
+  "selected_final_cpu_tests": 62,
+  "source_review": {
+    "numerical_audit": "Independent reviewer and root checked frozen real model_runner/llm_engine; no concrete blocker found. Original 37-request gates retained.",
+    "owner_audit": "Root reviewed actual nested CLI/plan/source/reap binding and real 157+5 prepared file audit. Original resource/restoration checker reused without changing it.",
+    "lithos_client": "Independent reviewer found cancelled closer false-PASS in initial source. Exact prior bytes preserved; both new negative tests reject that version. Fixed delta independently reviewed; no remaining concrete blocker found."
+  },
+  "git_sync": {
+    "m4_fetched_head": "53d4906f93bb38287af98b722b18bc46360ff4f7",
+    "already_ancestor": true,
+    "m5_base_head": "fb4b17cf473474dc48b64394e9bcb30f83911ca5"
+  },
+  "journal": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-model-v1-cold-journal/journal.json",
+    "sha256": "8408a8e2d6c486e42c6e7732d92366d30592f9d850828056bc6bc848fe03eacb",
+    "state": "PREPARED",
+    "unchanged_since_read_only_prepare": true,
+    "owner_directory_exists": false
+  },
+  "final_read_only_service_check": [
+    {
+      "command": [
+        "/bin/ps",
+        "-p",
+        "74384",
+        "-o",
+        "pid=,ppid=,lstart=,state=,comm="
+      ],
+      "returncode": 0,
+      "stdout": "74384     1 Fri Oct 16 08:01:58 2026     S    omlx-server\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/sbin/sysctl",
+        "-n",
+        "kern.memorystatus_vm_pressure_level"
+      ],
+      "returncode": 0,
+      "stdout": "2\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/sbin/sysctl",
+        "vm.swapusage"
+      ],
+      "returncode": 0,
+      "stdout": "vm.swapusage: total = 1024.00M  used = 445.06M  free = 578.94M  (encrypted)\n",
+      "stderr": ""
+    }
+  ],
+  "pending": [
+    "Previously asked cold stop/recovery authorization",
+    "Resource admission for full model",
+    "E028 actual full-model independent qualification",
+    "Actual HTTP/raw-ID qualification and complete zero-cache logs",
+    "Fresh uninstrumented measurements and same-round official comparison"
+  ]
+}

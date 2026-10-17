@@ -1,0 +1,46 @@
+{
+  "schema": "lithos-cancelled-cleanup-correction-v1",
+  "scope": "MockTransport CPU tests only, no real performance point",
+  "original_client_sha256": "9b87917c6c27958b481cffb12f43d1b373cb9e091ce6fef8583517bc149c94be",
+  "original_tests_sha256": "90271ad39e54c889f6c3f60f732d96131ca6c155c74681a313deac5dfe175df4",
+  "negative_tests_run_against_exact_prior_bytes": [
+    "test_response_close_cancelled_after_valid_eof_is_not_a_valid_point",
+    "test_cancelled_client_close_invalidates_otherwise_complete_group"
+  ],
+  "expected_prior_rejections": {
+    "tests": 2,
+    "failures": 1,
+    "errors": 1,
+    "log_sha256": "22922c6986887bce316c90f61bae4c65d0a924e2be79c61f9a5a3b1fef4a8a50"
+  },
+  "final_client_sha256": "13a629f096434bc6c422803bf7bfd8992e24396cb122880b493e893cc5ecd2e9",
+  "final_tests_sha256": "f36c661698a70fe2aa2961c2b5891ab90ce367f761da43e3f1fd56bd37b37496",
+  "command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+    "-p",
+    "test_lithos_client_cpu.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "elapsed_s": 0.38603983299981337,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "a3f6f779db3cac4635319ee7bbf898c5f15d7ff5b7d6eab8da2345a3517f6215",
+  "final_client_tests": 15,
+  "final_selected_test_set": {
+    "numeric_audit": 11,
+    "owner_audit": 14,
+    "lithos_client": 15,
+    "frozen_client_unchanged_regression": 22,
+    "total": 62,
+    "note": "Only changed client tests rerun after the correction; unchanged suites are in cpu-tests.json."
+  },
+  "production_defaults_changed": false,
+  "new_performance_points": 0
+}
