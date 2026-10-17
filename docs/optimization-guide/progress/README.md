@@ -21,3 +21,9 @@ v5随后完成的 [E022 v2](../../experiments/m5-ultra-256gb/E022-native-transpo
 [E026 layer v2](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md)随后通过24单层真实权重数值/状态用例；两ON与OFF完整逐位一致，T978驻留state减少20,037,632B。它没有HTTP性能资格，所以v5曲线不增加点。本轮从217来源重画v5，chartdata SHA与原版一致。正确性是硬门槛，优化轴始终为整机throughput与完整请求latency。
 
 M4同步：已接收并离线核验[第44章同轮C1/C2/C4曲线](../../experiments/44-fresh-full-throughput-latency.md)，native在其7个已测配置中构成联合前沿。硬件、轮次和资格范围独立，不合并进M5图。
+
+2026-10-17 E027：M5共享原权重M1通过33个局部数值点、66次原始BF16比较和110个
+GPU descriptor核对；[完整证据](../../experiments/m5-ultra-256gb/E027-shared-w-m1-v1/README.md)
+与[教程](../tutorials/027-shared-weight-m1.md)已保存。默认OFF，整模型与HTTP性能待验证。
+**这不是新的吞吐—完整请求延迟测量，当前有效Pareto仍为v5。** 正确性是入图硬门槛，
+内存/核级收益作为诊断证据分别保存。

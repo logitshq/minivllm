@@ -228,3 +228,21 @@ source pins hold, and the original service is restored.
 [Full original arrays, independent audit and tutorial result](../../../docs/experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md).
 This does not qualify full-model execution, ordinary prompt-prefix continuing
 state, the production evaluation placement, or any throughput/latency point.
+
+### Staging at the existing runner eval (CPU prototype)
+
+`staged_integration.py` adds an independent default-OFF scope around the exact
+ordinary eager runner instance. It replaces only that instance's private view
+of its original single `mx.eval`, stages eligible lazy tail copies immediately
+before it, and includes them in the same eval. It does not wrap GDN/conv or add
+per-layer evals. Grouped prefill, speculative/capture and decode-only paths are
+excluded; unrelated staging requests are not scanned. Context exit restores
+the exact prior runner attribute, including exceptions.
+
+Thirteen CPU tests execute the original runner AST with fake arrays and check
+routing, the eval argument boundary, source guards, exception restoration and
+reference release. An initial weakref test was retained as a fixture failure:
+`unittest.mock` held the runner in call history; clearing that history makes the
+unchanged weakref assertion pass. This is not a GPU result. Original eval args
+can retain parents until return; neither peak reduction nor whole-model output
+identity or throughput/latency gain has been demonstrated for this prototype.

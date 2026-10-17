@@ -1,0 +1,232 @@
+{
+  "status": "PASS",
+  "qualified": true,
+  "numerical_scope": "33 local same-input matrices,66 comparisons; 27 synthetic and6 real-weight/synthetic-X",
+  "performance_qualified": false,
+  "full_model_qualified": false,
+  "cases": [
+    {
+      "case": "synthetic-N48-random-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 384
+    },
+    {
+      "case": "synthetic-N48-random-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 768
+    },
+    {
+      "case": "synthetic-N48-random-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 960
+    },
+    {
+      "case": "synthetic-N48-codes_signed_boundaries-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 384
+    },
+    {
+      "case": "synthetic-N48-codes_signed_boundaries-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 768
+    },
+    {
+      "case": "synthetic-N48-codes_signed_boundaries-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 960
+    },
+    {
+      "case": "synthetic-N48-extreme_cancellation-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 384
+    },
+    {
+      "case": "synthetic-N48-extreme_cancellation-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 768
+    },
+    {
+      "case": "synthetic-N48-extreme_cancellation-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 960
+    },
+    {
+      "case": "synthetic-N1024-random-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 8192
+    },
+    {
+      "case": "synthetic-N1024-random-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 16384
+    },
+    {
+      "case": "synthetic-N1024-random-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 20480
+    },
+    {
+      "case": "synthetic-N1024-codes_signed_boundaries-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 8192
+    },
+    {
+      "case": "synthetic-N1024-codes_signed_boundaries-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 16384
+    },
+    {
+      "case": "synthetic-N1024-codes_signed_boundaries-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 20480
+    },
+    {
+      "case": "synthetic-N1024-extreme_cancellation-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 8192
+    },
+    {
+      "case": "synthetic-N1024-extreme_cancellation-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 16384
+    },
+    {
+      "case": "synthetic-N1024-extreme_cancellation-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 20480
+    },
+    {
+      "case": "synthetic-N10240-random-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 81920
+    },
+    {
+      "case": "synthetic-N10240-random-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 163840
+    },
+    {
+      "case": "synthetic-N10240-random-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 204800
+    },
+    {
+      "case": "synthetic-N10240-codes_signed_boundaries-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 81920
+    },
+    {
+      "case": "synthetic-N10240-codes_signed_boundaries-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 163840
+    },
+    {
+      "case": "synthetic-N10240-codes_signed_boundaries-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 204800
+    },
+    {
+      "case": "synthetic-N10240-extreme_cancellation-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 81920
+    },
+    {
+      "case": "synthetic-N10240-extreme_cancellation-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 163840
+    },
+    {
+      "case": "synthetic-N10240-extreme_cancellation-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 204800
+    },
+    {
+      "case": "real-in_proj_a-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 384
+    },
+    {
+      "case": "real-in_proj_a-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 768
+    },
+    {
+      "case": "real-in_proj_a-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 960
+    },
+    {
+      "case": "real-in_proj_qkv-T2",
+      "comparisons": 2,
+      "output_bytes_compared": 81920
+    },
+    {
+      "case": "real-in_proj_qkv-T4",
+      "comparisons": 2,
+      "output_bytes_compared": 163840
+    },
+    {
+      "case": "real-in_proj_qkv-T5",
+      "comparisons": 2,
+      "output_bytes_compared": 204800
+    }
+  ],
+  "comparisons": 66,
+  "prepared_banks": 11,
+  "rows_per_implementation": 121,
+  "bf16_elements_per_implementation": 486464,
+  "readonly_case_operand_records": 99,
+  "raw_files_finite_sha_checked": 209,
+  "actual_gpu_descriptors": 110,
+  "memory": {
+    "count": 68,
+    "maximum_mlx_peak_bytes": 30097544,
+    "maximum_mlx_active_bytes": 29900800,
+    "maximum_aux_physical_peak_bytes": 413172552,
+    "maximum_physical_peak_bytes": 413172552,
+    "maximum_physical_current_bytes": 409830192
+  },
+  "resources": {
+    "samples": 6,
+    "physical_samples": 3,
+    "physical_measured": 3,
+    "terminal_races_not_measurements": 0,
+    "first_pressure": 2,
+    "last_pressure": 2,
+    "swapouts_growth": 0,
+    "minimum_free_bytes": 67132817408,
+    "maximum_swap_growth_mib": 0.0
+  },
+  "release": {
+    "pid": 45274,
+    "returncode": 0,
+    "waited_reaped": true,
+    "strict_absence": true,
+    "cleanup_notes": [],
+    "absence_probe": {
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "service_restore": {
+    "identity_match": true,
+    "state_before": "T",
+    "state_after": "S",
+    "time": 1792238197.555728
+  },
+  "bundle": {
+    "manifest_sha256": "43537c9579d672c01d96de710c07a61db9766893e1b07c1624140d4a55c5bf42",
+    "bundle_sha256": "224cfdf30bc04ee8b01e39fc8fee4746aae2bda2828202dc56006aa0ac525cf5",
+    "bundle_bytes": 65239488,
+    "tensor_count": 14,
+    "selected_source_bytes_independently_compared": 65239488,
+    "whole_5GiB_shard_rehashed_by_auditor": false,
+    "source_scope": "Preparation full-source SHA receipt plus independent current header/stat/metadata and every selected raw tensor byte"
+  },
+  "source_pins_checked": 576,
+  "plan_sha256": "840b1eb0a4e6127bf6fb5e322fdca82d34fabcd7f92712b429b25e596f0f2351",
+  "limits": "No propagated model/state/HTTP qualification. Random PRNG values are not independently regenerated; saved finite raw operands and pinned generator provide scope. Structured banks are independently regenerated. Full bank W/scales before/after bytes plus every-case readonly hashes are checked; no transient write history is claimed. Callable counts are host witnesses, not GPU compile counts or performance.",
+  "audit_source_sha256": "57bb96046ca651ef34bc7f36f0e2cc6b535c571a93063311528ac81d3b04f25e",
+  "independent_primitives_sha256": "8796ad0296860763fdf0a2ca3c23dcd92d61aceb25aae1d04b4fbc123785d96f"
+}

@@ -458,3 +458,18 @@ shape/stride descriptor 独立读取，原输入与所有输出全量保存，�
 [代码与计划](../../bench/m5_ultra_256gb/shared_w_m1/README.md)；运行前另存确切计划、
 源码/runtime/bundle SHA 和命令，并先 commit。数值PASS之后仍需整模型和HTTP资格；
 寄存器占用、缓存与调度开销可能抵消读取复用，没有预先宣称速度或新增 Pareto 点。
+
+**E027 v1 实际执行追加。** 先提交 `a33249d` 再运行，33case/66原始BF16比较全PASS；
+原始M1、表达式control与shared输出逐位一致。110份实际GPU布局记录，68个self
+physical phases，11prepared banks均复用一次callable，原X/W/scales只读检查通过。
+root重新读取319份独立raw文件（260,130,624B），66对输出实际比较1,945,856B，全通过。
+MLX peak30,097,544B、cache0、finalactive0；最大physicalpeak413,172,552B。
+6个资源样本pressure2稳定，swap/Swapouts不增，真实free≥62.522GiB。child45274
+exit0/reaped/strictabsence，原服务74384 sameidentity T→S恢复。原始证据1,173成员
+全保存并重新解包验SHA，见[归档](../experiments/m5-ultra-256gb/E027-shared-w-m1-v1/README.md)。
+这是三个几何的局部数值通过，未建立actualmodelactivation/整模型/性能资格；
+没有把诊断耗时或memory数字加入throughput—complete-latency Pareto。
+
+E027独立审计追加：PASS；576个pins、33cases/66comparisons、319个raw文件，
+以及physical/resource/reap/lease证据均复核通过。审计器6项CPU测试覆盖篡改拒绝。
+资格仍限局部矩阵，整模型与HTTP待验证。

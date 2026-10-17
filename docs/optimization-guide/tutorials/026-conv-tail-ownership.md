@@ -61,3 +61,17 @@ The first real-weight attempt stopped before a case: an overly strict equality c
 After the separately frozen v2 monitoring correction, all 24 single-layer cases pass: both lazy and immediate ownership copies exactly preserve the complete output and state. Independent and root audit receipts are identical. T978 retained state falls from 23,248,896 to 3,211,264 allocated bytes; active and unique bytes each fall by the same 20,037,632 bytes after temporary aliases are dropped. This isolates the ownership effect inside the real computation. The original 1 GiB MLX and 2 GiB physical budgets hold, all children exit, and the original service is restored.
 
 [Complete evidence](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md) preserves every raw array with lossless duplicate links. The remaining 8 active bytes include a known 4-byte norm epsilon global; avoid claiming total allocator release. These figures apply to one layer and synthetic continuing state after validation evaluation. A full engine numerical qualification and uninstrumented HTTP run are still required before advancing the throughput–latency frontier.
+
+## 后续接入：借用 runner 已有的统一 eval
+
+新增默认关闭的 `StagedPrefillTailScope` CPU 原型，完整源码在
+[staged_integration.py](../../../bench/m5_ultra_256gb/conv_tail_owned_copy/staged_integration.py)。
+它沿用原 `ModelRunner.run` 的 code object 和实例私有 globals，只在原有的一次
+`mx.eval` 之前，把本步普通 prefill staging 中的合格 tail 改为 lazy owned copy，
+加入同一个 eval。没有逐层同步，也不改 GDN/卷积数学；grouped/spec/decode-only
+路径保持原路。13项CPU测试通过，初次Mock调用历史造成的weakref失败另行保留。
+
+这是把单层想法推进到 runner 边界的可运行原型，还没有GPU整模型资格。
+所有prefill图仍先建好，原eval参数也可能保留大父buffer至返回，所以不能把
+单层19–20MB节省直接乘层数，更不能声称降低峰值或改善吞吐—完整请求延迟。
+后续先验证实际同调度下的全部输出/状态，再做无观察器HTTP对比。

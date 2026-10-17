@@ -365,3 +365,17 @@ E026 layer v2实机PASS：3fresh arms×8case/204phase；两ON各84原dtype数组
 共享W包66payload/54原字节source/audit/39repo依赖核验通过；1491保存矩阵记录不是本机重算，5历史原件仅identity。已收到实际kernel、geometry与原始累加表达式，M5下一步需新source-pinned default-OFF adapter与本机数值资格，保留M4g16s guard和原件；不得把每call prepare的数值探针当性能路径。源码核验记录在`bench/reviews/m4-shared-w-received-review.json`。
 
 M5本轮新结果已push `502f68a`：E026真实单层v2全部24case逐位PASS，原始约996MB证据用hardlink去重无损压缩为83,143,136B归档；仅内存所有权资格，尚无新HTTP点。双方继续以正确性硬门下的throughput–latency前沿为目标。
+
+## E027 · M5 已独立执行 shared-W 局部数值门
+
+本轮fetch确认M4仍为53d4906；保留该提交的原始shader。M5 adapter与计划先提交
+`a33249d`，随后单次实际执行33case/66 exact BF16 comparisons全部通过，涵盖
+(N,K)=(48,5120),(1024,5120),(10240,5120)，T2/4/5，三个syntheticbank及两个实际
+layer0 projection/syntheticX。110 actual GPU descriptors与全部原始输入输出已保存。
+Prepared对象每bank一次callable构造、三次lazygraph返回，无X/Y缓存，无W repack。
+这不是剩余六种几何、真实模型输入、传播后状态或HTTP资格；没有新增M5Pareto点。
+
+[完整归档](../experiments/m5-ultra-256gb/E027-shared-w-m1-v1/README.md)与
+[教程](../optimization-guide/tutorials/027-shared-weight-m1.md)。E026另新增默认OFF的
+staged_integration.py：在runner现有统一eval加入ownedtail，13CPUtestsPASS，
+无GPU整模型结果。两条实验可分别开关，不修改M4冻结源码或生产默认。

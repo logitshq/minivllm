@@ -1,0 +1,29 @@
+{
+  "status": "PASS_CPU_MECHANISMS_ONLY",
+  "tests": 13,
+  "command": ".venv/bin/python -I -B bench/m5_ultra_256gb/conv_tail_owned_copy/test_staged_integration_cpu.py",
+  "GPU_used": false,
+  "real_MLX_imported": false,
+  "full_model_qualified": false,
+  "performance_qualified": false,
+  "source_sha256": {
+    "staged_integration.py": "b67a7725d4c2f4bf28204bd84b96a0e1cb8a27531a60f5647712eeb37a49e193",
+    "test_staged_integration_cpu.py": "153f8cac2648e9e59ca1343698f03b03df138f96dbf194696418308b03e7784c"
+  },
+  "attempts": [
+    {
+      "tests": 12,
+      "passed": 11,
+      "failed": 1,
+      "failure": "weakref lifetime assertion",
+      "diagnosis": "unittest.mock _verify_runner.call_args retained runner; clear test-only call history before unchanged weakref assertions"
+    },
+    {
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "change": "reset mock call history; add actual source-AST validator positive and negative test"
+    }
+  ],
+  "scope": "Original runner AST with fake arrays; one existing eval includes eligible current-step ordinary-prefill tails. No proof of actual device bit equality, backing release or peak reduction."
+}
