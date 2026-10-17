@@ -35,3 +35,17 @@ CPU fixtures 用小字节缓冲保存任意位模式，包括 signed zero 和 Na
 下一阶段由唯一 GPU owner 安排，先冻结独立 raw 输入与 core/harness source SHA。在真实 MLX 上对 BF16/width25600、N∈{19,128,512,2048}、尾部长度∈{1,3,7}，以及 fed=0 和 fed=start 做严格逐字节资格。历史分块必须包括单块、短尾块、跨块和 64/65 压缩后的形式；全部质量点通过后才能计时。两臂都保留原完整 history，两个返回结果均 eval，单独记录首调用、warmup 和 ABBA 原始样本；不能把输入生成或已有 history 压缩的成本只算给 reference。
 
 微基准的继续门预注册为：N=512/2048 的全部尾部点几何平均至少 1.25×，其余有非空输出的点各至少 0.97×；fed=start 是 None 的行为资格，不以空操作计时制造比例。若元数据检查抵消小点收益，记录拒绝，不事后排除小点。通过仍仅说明数组片段提取有效；随后需真实 DFlash 输入、raw draft IDs、接受数、最终 token 和状态资格，才考虑默认关闭的核心开关。本实验不改变 verify 算术，也不解除已有 whole-verifier 精确性限制。
+
+## 设备 runner 的具体冻结范围
+
+`screen.py --out <new-directory>` 是单进程 micro，只在解析 CLI 后才导入 MLX。候选与原始 reference 的已加载路径必须指向本目录，记录 core/harness/tutorial 的 SHA，结束时重验。固定 MLX/MLX-Metal 0.32.3、Apple M5 Ultra 和 2 GiB allocator pool。源码与 CLI/矩阵测试已通过，尚未运行设备资格。
+
+输入为可复现的有限 BF16 位模式，不来自真实模型：`bf16(((arange + 19019) % 257 - 128) / 128)`。每个 N 只保存一个 `(2*N+4)*25600` 元素的一维 safetensors backing，四个文件总计约 265 MiB，写盘后重新加载作为实际资格与计时输入。历史视图由 plan 和源码重建，因此不依赖 safetensors 保存 stride。单块、短尾块、跨块使用前 N 行；offset 单块从元素 25601 开始；另外分别构造真实行 stride=2 与列 stride=2 的三块 history。64/65 边界按原 `>64` 规则预先准备，且在两臂计时外 eval。
+
+N=19 有六种布局；N=128/512/2048 各加上两种 64/65 边界布局。N=19 的旧前缀只有 12 行，不能拆成 64/65 个非空旧块，因此这两种布局在 plan 构建时就不适用。每种布局有 tail1/3/7、reset、caught-up 五个点，总计 150 个资格点。120 个非空点全部计时：48 个长 N 尾部点进入 1.25× 几何平均门，72 个其余点逐点执行 0.97× 门；不删 single 或 reset。
+
+资格逐点将 BF16 **reinterpret 为同宽 uint16** 后读取逻辑字节，避免用 FP32 数值转换丢掉位信息。比较输出 shape/dtype/全部字节，并在输出求值与读取后重新 hash 整个原 history；输入数组对象也必须不变。Python concat spy 只在资格阶段核对调用和选中行数，它不证明实际 Metal 内存流量。任何点失败则保存失败数组和全部已有记录，并禁止全部计时。
+
+计时保留原 reference 的惰性 `concat→slice` 图，只 eval 最终返回值；不会提前 eval 完整 concat 来强迫复制。MLX 若已经优化掉旧前缀搬运，结果必须如实反映。每次采样重新构建表达式、完整 eval，然后释放本次结果引用；两臂都保留所有原 history/backing。每次记录 build+eval、结果释放、合计三种时长，性能门使用合计。候选返回原 piece 时只释放本次新增引用，不能释放 history 持有的对象。
+
+每点单记首个**资格后的计时调用**，不称 cold compile；随后每臂 2 warmup、3 ABBA blocks，全部原始样本写盘。输入生成、已有 history 压缩和资格 hash 均不算给任一臂。计时结束再次核验全部 history 字节/对象、输入文件 SHA 与 source SHA。这里的 consumer 仅是输出 eval 和位读取，真实 drafter 的 fc/norm 可能因 stride 或 alias 选择不同路径，仍需后续完整 draft 资格。
