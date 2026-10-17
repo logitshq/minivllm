@@ -235,3 +235,10 @@ v2改名costs.py，同一计划9组108数组相等，全部441个正式计时保
 lm_head为完整draft的22.9%–28.9%，未达40%分界。下一步E014窗口KV与E016图复用分别调查。
 同步组件不相加，不是优化收益或端到端结论。[教程](tutorials/013-draft-cost-profile.md)、
 [含失败的完整证据](../experiments/m5-ultra-256gb/E013-draft-profile-v2/)。
+
+## E014 · 2026-10-17 · 有界draft KV · v1拒绝
+
+136数值检查通过，32K/131072状态回放较快，但2048窗口边界0.9102/0.9556×未过门。
+三组ABBA的candidate前后顺序还有稳定差异，可能含跨臂缓存释放成本；不改写v1，不授予
+生产或长生成收益。后续分批裁剪与明确本臂生命周期归属另做v2。
+[教程](tutorials/014-bounded-draft-kv.md)、[完整原始证据](../experiments/m5-ultra-256gb/E014-draft-window-v1/)。
