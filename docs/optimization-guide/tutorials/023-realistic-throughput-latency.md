@@ -104,3 +104,16 @@ child RSS约29GiB并不代表全部GPU/system物理使用；外服务SIGSTOP仍�
 
 审计独立重建调度、batch维、全层覆盖及退休：4,617完整行、4,611成功step记录、无末行截断。
 全部已完成请求均到达cap，实际EOS早退覆盖为0；因此既不授予整组资格，也不声称覆盖EOS早退。
+
+
+## Recorded HTTP replay preparation and approved E028 execution
+
+Native HTTP raw SSE/UUID/scheduler join、独立双引擎实际调度回放及固定来源wrapper已完成，
+28 CPU tests通过；真实24条D请求经冻结server/tokenizer解析通过。root修复startup identity
+的int/float timeout不一致，保留原版和重跑证据。只有CPU/mock资格，暂无新Pareto点。
+实际HTTP仍需capture owner及native client取消close的窄修复；不把准备工作当速度提升。
+[可复跑记录](../../../bench/reviews/2026-10-17-http-replay-cpu-v1/README.md)。
+
+用户现已明确授权“允许停止、实验后恢复”。接下来按冻结E028 model v1执行冷停→完整
+37请求→回收→恢复原oMLX模型，并核新日志中的MTP/resident PLE。先前pending记录是历史
+快照，当前不再等待同一授权；失败也执行恢复。M4分支53d4906已在本分支祖先中。

@@ -1,0 +1,377 @@
+{
+  "schema": "E023-native-recorded-http-input-cpu-v1",
+  "status": "CPU_INPUTS_MATCH",
+  "scope": "24 real D request bodies parsed through the frozen native parser and pinned tokenizer; no HTTP, GPU, model load, numerical or performance qualification",
+  "parser_sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+  "adapter_sha256": "bd87ec5bc80de6a8bda95be97e4d6976deec20faf13e883541171353e7d352fe",
+  "fixture_sha256": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db",
+  "tokenizer_json_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+  "tokenizers_version": "0.23.3",
+  "backend_imports": [],
+  "contracts": [
+    {
+      "concurrency": 1,
+      "phase": "qualification",
+      "requests": [
+        {
+          "request_id": "qual-c1-r00",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body_sha256": "08bdca82ac576112df3c1534cf0fb72280675f6c728a772f1380d56e34368a9c",
+          "prompt_tokens": 978,
+          "prompt_ids_sha256": "d260240cb15fe5f9323c04e076eb168986db7e28de3add6a8fc15c6c3e5ddd7d",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r01",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body_sha256": "04b7cd40dbae247b0613850164119a141807ebbaa22b2c331950b1d7d992be17",
+          "prompt_tokens": 886,
+          "prompt_ids_sha256": "9bcc0f6067489b335ff367aea261b0c74f0b7faf296c3c72882ba36cf07e7621",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r02",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body_sha256": "3f3a23a9f8271e3ebb4bc7adcf4aa867b51b0df0be3699b1e4a10939156cf788",
+          "prompt_tokens": 926,
+          "prompt_ids_sha256": "26f55a795db5aa12461c88e62b4c4144abd4239c7e499d0eaf42398383227afa",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r03",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body_sha256": "158d6d6456ac922e9f0f64e26700e601fd364c53e6691bc0ce3f5eb30735f138",
+          "prompt_tokens": 921,
+          "prompt_ids_sha256": "e1c633bb7faea56cddaef9757326cbbfbf74f4a5c875f83ae5f891f164aa2535",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r04",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body_sha256": "68cf36d8713aaba56742312884c657602d3ab5c0c5d05004ea19df68b8ef5b87",
+          "prompt_tokens": 954,
+          "prompt_ids_sha256": "2f31e6491b0313ed7e0ce5e478e280294a21e2d73000d7657a440220ca4b1ff2",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r05",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body_sha256": "93793f1742706cd574e6b4b00c62d88e9535b196bb128aa4d8fe998085a3acff",
+          "prompt_tokens": 935,
+          "prompt_ids_sha256": "b89c55505d6c336855160802cb9a2ef86a6c668e04815c9d7ccbe78bed8ce197",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r06",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body_sha256": "67d67089a954836056a37dc3115a50b16db403871fb06cfd142b1f229c4b54ce",
+          "prompt_tokens": 903,
+          "prompt_ids_sha256": "5cd1b272ff12884267dcdb494e73b8bea13fd6f9af5285c1849a1a7a9b282bf6",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c1-r07",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body_sha256": "6c128c56b8a983f9d6deec0c3654577a65ab5c3005c81d8fd8e76a5209a9d571",
+          "prompt_tokens": 958,
+          "prompt_ids_sha256": "35d983d3a40913e59184b21f2d50f3c51409abe3f32c8c61b2968d33ae6e2838",
+          "cap": 512
+        }
+      ],
+      "expected_startup_identity": {
+        "configuration": {
+          "max_len": 2048,
+          "max_batched_tokens": 2048,
+          "cache_limit_gib": 2,
+          "max_seqs": 1,
+          "compile_decode": "on",
+          "fuse_decode": "on",
+          "gates_compile": "on",
+          "norm_reuse": "off",
+          "tcp_nodelay": "off",
+          "io_timeout_seconds": 300
+        },
+        "source_files": {
+          "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+          "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+          "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+          "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+          "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+          "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+          "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+          "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+          "kernels/gdn_decode_fused.py": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+          "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+          "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+          "kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+          "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+          "spec/dflash2.py": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+          "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+          "spec/device_selector.py": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+          "model/attention.py": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+          "model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+          "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model/qwen3_5.py": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+          "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+          "model/layers.py": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+          "engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+          "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+          "engine/llm_engine.py": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+          "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+          "engine/packed_decode.py": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+          "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+          "engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+          "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+        },
+        "source_manifest_sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "manifest_all_sources_match": true,
+        "package_root_loaded": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine",
+        "model_snapshot_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_snapshot_name": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+        "server_source_sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "step_observer": true,
+        "per_token_observer": false,
+        "qualification_trace_enabled": true,
+        "drafter": null,
+        "normal_eos": true,
+        "eos_ids": [
+          248044,
+          248046
+        ],
+        "prefix_cache": false,
+        "completion_usage": "committed target IDs excluding terminal EOS; raw IDs include EOS",
+        "text_decode": "skip_special_tokens=False; terminal EOS excluded",
+        "cancellation": "pending skipped; active cancellation permanently fails this benchmark server",
+        "weights_identity_scope": "external controller must verify model weight pins; this server checks source/config identity"
+      }
+    },
+    {
+      "concurrency": 8,
+      "phase": "qualification",
+      "requests": [
+        {
+          "request_id": "qual-c8-r00",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body_sha256": "08bdca82ac576112df3c1534cf0fb72280675f6c728a772f1380d56e34368a9c",
+          "prompt_tokens": 978,
+          "prompt_ids_sha256": "d260240cb15fe5f9323c04e076eb168986db7e28de3add6a8fc15c6c3e5ddd7d",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r01",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body_sha256": "04b7cd40dbae247b0613850164119a141807ebbaa22b2c331950b1d7d992be17",
+          "prompt_tokens": 886,
+          "prompt_ids_sha256": "9bcc0f6067489b335ff367aea261b0c74f0b7faf296c3c72882ba36cf07e7621",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r02",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body_sha256": "3f3a23a9f8271e3ebb4bc7adcf4aa867b51b0df0be3699b1e4a10939156cf788",
+          "prompt_tokens": 926,
+          "prompt_ids_sha256": "26f55a795db5aa12461c88e62b4c4144abd4239c7e499d0eaf42398383227afa",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r03",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body_sha256": "158d6d6456ac922e9f0f64e26700e601fd364c53e6691bc0ce3f5eb30735f138",
+          "prompt_tokens": 921,
+          "prompt_ids_sha256": "e1c633bb7faea56cddaef9757326cbbfbf74f4a5c875f83ae5f891f164aa2535",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r04",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body_sha256": "68cf36d8713aaba56742312884c657602d3ab5c0c5d05004ea19df68b8ef5b87",
+          "prompt_tokens": 954,
+          "prompt_ids_sha256": "2f31e6491b0313ed7e0ce5e478e280294a21e2d73000d7657a440220ca4b1ff2",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r05",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body_sha256": "93793f1742706cd574e6b4b00c62d88e9535b196bb128aa4d8fe998085a3acff",
+          "prompt_tokens": 935,
+          "prompt_ids_sha256": "b89c55505d6c336855160802cb9a2ef86a6c668e04815c9d7ccbe78bed8ce197",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r06",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body_sha256": "67d67089a954836056a37dc3115a50b16db403871fb06cfd142b1f229c4b54ce",
+          "prompt_tokens": 903,
+          "prompt_ids_sha256": "5cd1b272ff12884267dcdb494e73b8bea13fd6f9af5285c1849a1a7a9b282bf6",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r07",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body_sha256": "6c128c56b8a983f9d6deec0c3654577a65ab5c3005c81d8fd8e76a5209a9d571",
+          "prompt_tokens": 958,
+          "prompt_ids_sha256": "35d983d3a40913e59184b21f2d50f3c51409abe3f32c8c61b2968d33ae6e2838",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r08",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body_sha256": "08bdca82ac576112df3c1534cf0fb72280675f6c728a772f1380d56e34368a9c",
+          "prompt_tokens": 978,
+          "prompt_ids_sha256": "d260240cb15fe5f9323c04e076eb168986db7e28de3add6a8fc15c6c3e5ddd7d",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r09",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body_sha256": "04b7cd40dbae247b0613850164119a141807ebbaa22b2c331950b1d7d992be17",
+          "prompt_tokens": 886,
+          "prompt_ids_sha256": "9bcc0f6067489b335ff367aea261b0c74f0b7faf296c3c72882ba36cf07e7621",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r10",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body_sha256": "3f3a23a9f8271e3ebb4bc7adcf4aa867b51b0df0be3699b1e4a10939156cf788",
+          "prompt_tokens": 926,
+          "prompt_ids_sha256": "26f55a795db5aa12461c88e62b4c4144abd4239c7e499d0eaf42398383227afa",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r11",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body_sha256": "158d6d6456ac922e9f0f64e26700e601fd364c53e6691bc0ce3f5eb30735f138",
+          "prompt_tokens": 921,
+          "prompt_ids_sha256": "e1c633bb7faea56cddaef9757326cbbfbf74f4a5c875f83ae5f891f164aa2535",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r12",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body_sha256": "68cf36d8713aaba56742312884c657602d3ab5c0c5d05004ea19df68b8ef5b87",
+          "prompt_tokens": 954,
+          "prompt_ids_sha256": "2f31e6491b0313ed7e0ce5e478e280294a21e2d73000d7657a440220ca4b1ff2",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r13",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body_sha256": "93793f1742706cd574e6b4b00c62d88e9535b196bb128aa4d8fe998085a3acff",
+          "prompt_tokens": 935,
+          "prompt_ids_sha256": "b89c55505d6c336855160802cb9a2ef86a6c668e04815c9d7ccbe78bed8ce197",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r14",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body_sha256": "67d67089a954836056a37dc3115a50b16db403871fb06cfd142b1f229c4b54ce",
+          "prompt_tokens": 903,
+          "prompt_ids_sha256": "5cd1b272ff12884267dcdb494e73b8bea13fd6f9af5285c1849a1a7a9b282bf6",
+          "cap": 512
+        },
+        {
+          "request_id": "qual-c8-r15",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body_sha256": "6c128c56b8a983f9d6deec0c3654577a65ab5c3005c81d8fd8e76a5209a9d571",
+          "prompt_tokens": 958,
+          "prompt_ids_sha256": "35d983d3a40913e59184b21f2d50f3c51409abe3f32c8c61b2968d33ae6e2838",
+          "cap": 512
+        }
+      ],
+      "expected_startup_identity": {
+        "configuration": {
+          "max_len": 2048,
+          "max_batched_tokens": 2048,
+          "cache_limit_gib": 2,
+          "max_seqs": 8,
+          "compile_decode": "on",
+          "fuse_decode": "on",
+          "gates_compile": "on",
+          "norm_reuse": "off",
+          "tcp_nodelay": "off",
+          "io_timeout_seconds": 300
+        },
+        "source_files": {
+          "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+          "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+          "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+          "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+          "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+          "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+          "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+          "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+          "kernels/gdn_decode_fused.py": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+          "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+          "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+          "kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+          "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+          "spec/dflash2.py": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+          "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+          "spec/device_selector.py": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+          "model/attention.py": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+          "model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+          "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model/qwen3_5.py": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+          "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+          "model/layers.py": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+          "engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+          "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+          "engine/llm_engine.py": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+          "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+          "engine/packed_decode.py": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+          "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+          "engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+          "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+        },
+        "source_manifest_sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "manifest_all_sources_match": true,
+        "package_root_loaded": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine",
+        "model_snapshot_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_snapshot_name": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+        "server_source_sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "step_observer": true,
+        "per_token_observer": false,
+        "qualification_trace_enabled": true,
+        "drafter": null,
+        "normal_eos": true,
+        "eos_ids": [
+          248044,
+          248046
+        ],
+        "prefix_cache": false,
+        "completion_usage": "committed target IDs excluding terminal EOS; raw IDs include EOS",
+        "text_decode": "skip_special_tokens=False; terminal EOS excluded",
+        "cancellation": "pending skipped; active cancellation permanently fails this benchmark server",
+        "weights_identity_scope": "external controller must verify model weight pins; this server checks source/config identity"
+      }
+    }
+  ]
+}

@@ -571,3 +571,16 @@ Lithos官方/api/chat NDJSON客户端已补，按实际终场接收时间统计�
 测试保持8个HTTP在途、mock单生成峰值1。首次60CPU tests通过后，独立审读发现
 EOF后closer取消漏报，保留原版与窄修复负测。[审计和修复记录](../../bench/reviews/2026-10-17-pareto-adapters-cpu-v1/README.md)。
 客户端只条件校验计数；实际raw-ID/每条零cache日志与全模型仍待验证。无新Pareto点。
+
+
+## Recorded HTTP replay preparation and approved E028 execution
+
+Native HTTP raw SSE/UUID/scheduler join、独立双引擎实际调度回放及固定来源wrapper已完成，
+28 CPU tests通过；真实24条D请求经冻结server/tokenizer解析通过。root修复startup identity
+的int/float timeout不一致，保留原版和重跑证据。只有CPU/mock资格，暂无新Pareto点。
+实际HTTP仍需capture owner及native client取消close的窄修复；不把准备工作当速度提升。
+[可复跑记录](../../bench/reviews/2026-10-17-http-replay-cpu-v1/README.md)。
+
+用户现已明确授权“允许停止、实验后恢复”。接下来按冻结E028 model v1执行冷停→完整
+37请求→回收→恢复原oMLX模型，并核新日志中的MTP/resident PLE。先前pending记录是历史
+快照，当前不再等待同一授权；失败也执行恢复。M4分支53d4906已在本分支祖先中。

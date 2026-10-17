@@ -1,0 +1,41 @@
+{
+  "schema": "E023-http-timeout-identity-correction-v1",
+  "scope": "CPU startup-identity false rejection repair, no real HTTP/GPU attempt",
+  "before_source_sha256": "bd87ec5bc80de6a8bda95be97e4d6976deec20faf13e883541171353e7d352fe",
+  "after_source_sha256": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+  "actual_server_argparse_type": "float",
+  "old_expected_type": "int",
+  "fixed_expected_type": "float",
+  "old_json_identity_matches_server": false,
+  "fixed_json_identity_matches_server": true,
+  "command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+    "-p",
+    "test_http_qualification_cpu.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "elapsed_s": 0.048345167000661604,
+  "stdout_sha256": "69a070ec760ca3d0a7d2af2bc357525e80998bea506a77071dfe026a40303e88",
+  "stderr_sha256": "62e59ec1f56361a49df491ebcf32862665ee1a383c296e654619eb0fbab4db39",
+  "final_sources": {
+    "http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "test_http_join_cpu.py": "7dd4ea68529cbde07afc7fdcedeb849e4938b3f46a246c88ab8300c8615e157e",
+    "test_http_replay_cpu.py": "12b9f6437e0fc41d0ca1211e5c97413d2a01f1bb834f1deca3462dfac1fd0d6b",
+    "test_http_qualification_cpu.py": "b4ef8d650cab6f58210c0563ce4f5878c83bbc64dbdc00846200a817f70afc32",
+    "test_http_pipeline_cpu.py": "23336ee606f1a876b05a946d77452d624ffd8093e76a2a4c1ee233d0a9a5892c"
+  },
+  "final_tests": 28,
+  "focused_tests_rerun": 7,
+  "unchanged_test_results": "cpu-tests.json",
+  "real_inputs_superseding_receipt": "actual-inputs-cpu-v2.json"
+}

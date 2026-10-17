@@ -1,0 +1,99 @@
+{
+  "schema": "E023-http-replay-cpu-tests-v1",
+  "scope": "CPU mechanism and wiring tests only; no real model, HTTP network, numerical qualification or Pareto point",
+  "final_sources": {
+    "http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "http_qualification.py": "bd87ec5bc80de6a8bda95be97e4d6976deec20faf13e883541171353e7d352fe",
+    "test_http_join_cpu.py": "7dd4ea68529cbde07afc7fdcedeb849e4938b3f46a246c88ab8300c8615e157e",
+    "test_http_replay_cpu.py": "12b9f6437e0fc41d0ca1211e5c97413d2a01f1bb834f1deca3462dfac1fd0d6b",
+    "test_http_qualification_cpu.py": "8fbd042161d28eeadf8e35d6d3a06a23b6e43896fedc9413b68063f416968a9c",
+    "test_http_pipeline_cpu.py": "23336ee606f1a876b05a946d77452d624ffd8093e76a2a4c1ee233d0a9a5892c"
+  },
+  "tests": [
+    {
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_http_join_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.035908207995817065,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "6003e7cf8615e5200b70187a1aa8c9344bc9c5467435352f43f958be14322c05"
+    },
+    {
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_http_replay_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.09224295899912249,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "65a5dd7b76da3788f04bf2cfbf69ffc5942753dacb8e195bf17f1c2063e67c74"
+    },
+    {
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic",
+        "-p",
+        "test_http_pipeline_cpu.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.14889191700785886,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b47e525b0b9bb498d97f7246daeb3124df8db7a4c2dc0b5dd5b4c43bbf0cfa06"
+    }
+  ],
+  "prior_wrapper_tests": "wrapper-tests-initial.json",
+  "test_counts": {
+    "join": 8,
+    "replay": 11,
+    "wrapper": 7,
+    "pipeline": 2,
+    "total": 28
+  },
+  "backend_import_guard_pass": true,
+  "actual_CPU_scheduler_sources": {
+    "engine/scheduler.py": {
+      "loaded_from": "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/scheduler.py",
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+      "matches_frozen_manifest": true
+    },
+    "engine/request.py": {
+      "loaded_from": "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/request.py",
+      "sha256": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+      "matches_frozen_manifest": true
+    },
+    "sampling_params.py": {
+      "loaded_from": "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampling_params.py",
+      "sha256": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+      "matches_frozen_manifest": true
+    }
+  },
+  "new_performance_points": 0
+}
