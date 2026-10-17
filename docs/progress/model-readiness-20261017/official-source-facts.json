@@ -1,0 +1,28 @@
+[
+  {
+    "url": "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "checked_date": "2026-10-17",
+    "facts": "官方说明320B总/18B激活；稀疏+线性attention与mHC；model_type glm5_next。",
+    "kind": "official model card, not local tensor inspection"
+  },
+  {
+    "url": "https://huggingface.co/mlx-community/GLM-5.3-Flash-4bit",
+    "checked_date": "2026-10-17",
+    "facts": "卡声明62shards合计203992076296bytes约190GiB，mixed4/5/6bit group64；mlx-vlm架构，非mlx-lm；需256GB及以上Mac。",
+    "kind": "converter model card claims, no downloaded-shard verification"
+  },
+  {
+    "url": "https://github.com/jundot/omlx/pull/3184",
+    "checked_date": "2026-10-17",
+    "merged_date": "2026-08-27",
+    "merge_commit_short": "9b93696",
+    "facts": "GLM5.3 text/multimodal支持已合并；复用DSA/MLA/MoE/vectorGDN/KDA/affineQMM；复合cache不支持TurboQuant。",
+    "kind": "upstream support, not actual target320B qualification"
+  },
+  {
+    "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+    "checked_date": "2026-10-17",
+    "facts": "125B模型/6B激活，另51B ngram与4B MTP；GDN+QSA+MoE+gated residual；model_type qwen4_exp。",
+    "kind": "official model card; quantized checkpoint/memory/runtime not selected or qualified"
+  }
+]

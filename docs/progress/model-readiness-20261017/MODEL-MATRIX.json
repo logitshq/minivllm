@@ -1,0 +1,145 @@
+{
+  "checked_date": "2026-10-17",
+  "scope": "CPU read-only source/readiness; no runtime imports, model downloads/loads, GPU or git mutations",
+  "primary_families": [
+    "Qwen3.8",
+    "GLM5.3Flash"
+  ],
+  "main_m4_model": "mlx-community/Qwen3.8-27B-nvfp4@5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "secondary_m5_qwen": "Qwen/Qwen3.8-Flash-Next, quantization not selected",
+  "m4_saved_device": {
+    "device_name": "Apple M4 Max",
+    "max_recommended_working_set_size": 40200896512,
+    "memory_size": 51539607552,
+    "architecture": "applegpu_g16s",
+    "max_buffer_length": 30150672384,
+    "resource_limit": 499000
+  },
+  "local_glm_HF_cache_directories": [],
+  "GLM_full_resident_weights_memory_fit_m4": "NOT_APPLICABLE_FOR_THIS_190GiB_CHECKPOINT_ON_48GiB_M4",
+  "GLM_M5_256GB": "FUTURE_BASELINE_NUMERIC_AND_RESOURCE_QUALIFICATION_REQUIRED_NOT_TESTED",
+  "engines": {
+    "omlx": {
+      "version": "0.7.1.dev1",
+      "glm5_next": "SOURCE_ROUTE_AND_VENDOR_IMPLEMENTATION_PRESENT_GPU_UNRUN_FOR_GLM",
+      "loader_chain": [
+        "model_discovery VLM_NATIVE_TEXT_MODEL_TYPES",
+        "engine_pool VLMBatchedEngine",
+        "start maybe_apply_pre_load_patches(for_vlm=True)",
+        "glm5_next compat vendor source assertion",
+        "mlx_vlm load"
+      ],
+      "secondary_qwen4_exp": "vendored model and preload compatibility present; actual model discovery/config and inference UNRUN",
+      "glm_turboquant": "disabled for composite latent/indexer cache",
+      "Qwen_actual109": {
+        "status": "PASS_EXTERNAL_MTP_GREEDY32_RAW_TARGET_CONTROL_RESOURCES",
+        "actual_fresh_servers": 2,
+        "actual_requests": 6,
+        "target_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "external_draft_revision": "b9b764dada894b8c416f89cbc8cf99bc7e20b831",
+        "performance_qualified": false,
+        "global_best_claim": false
+      }
+    },
+    "lithos": {
+      "local_source_revision": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+      "installed_keyfiles_byte_equal": [
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/registry.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/models/registry.py",
+          "byte_equal": true,
+          "sha256": "8b72115ea924ae2d282a0ce870b9598db5287a0cbf93f58ccdad6f6218a06aae"
+        },
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/__init__.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/models/__init__.py",
+          "byte_equal": true,
+          "sha256": "7d4b53ce486866eefdf91ad969db8a05bf33256743d7465e48b59f54f478a17c"
+        },
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/registry.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/registry.py",
+          "byte_equal": true,
+          "sha256": "86b23ee79ea4327c306eb4a7303919b36dcab4a46bf019953e1a787ea2544f88"
+        },
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/serving/setup.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/serving/setup.py",
+          "byte_equal": true,
+          "sha256": "ef9a66711755e678c7b3d8445852a2dca18349cfa34d7a3567e05d8b298c6824"
+        },
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/generate.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/generate.py",
+          "byte_equal": true,
+          "sha256": "434ac1398c6010b37fa44f138505d5ca1757f4e7b747bc6b582d386e2e3ba3b4"
+        },
+        {
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/qwen3_5/model.py",
+          "installed": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/.venv/lib/python3.12/site-packages/monolith/models/qwen3_5/model.py",
+          "byte_equal": true,
+          "sha256": "acd64790acdec4c47c541db08c46a9a976b6647d6aded04048d986976a92d848"
+        }
+      ],
+      "static_registered_architectures": [
+        {
+          "architecture": "Qwen3ForCausalLM",
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/qwen3/model.py",
+          "line": 22
+        },
+        {
+          "architecture": "Qwen3_5MoeForConditionalGeneration",
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/qwen3_5_moe/model.py",
+          "line": 28
+        },
+        {
+          "architecture": "Qwen3_5ForConditionalGeneration",
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/qwen3_5/model.py",
+          "line": 27
+        },
+        {
+          "architecture": "LlamaForCausalLM",
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/llama/model.py",
+          "line": 26
+        },
+        {
+          "architecture": "Qwen3MoeForCausalLM",
+          "source": "/Users/ryanli/code/minivllm-tutorial/.artifacts/lithos-baseline/lithos-metal-5485ad6bac0a5649d66a347f3e01a655ea29d937/monolith/models/qwen3_moe/model.py",
+          "line": 24
+        }
+      ],
+      "glm_or_qwen4_registration_found": false,
+      "unknown_serving_architecture": "ValueError No model package registered; lower load_session RuntimeError",
+      "claim_limit": "This fixed installed source only. Not a claim about latest/global Lithos support.",
+      "peer_M5_engine_revision": "223658090ae549e59220bdec459957cbdad7926a",
+      "peer_M5_upstream_base": "5485ad6bac0a5649d66a347f3e01a655ea29d937",
+      "peer_DSpark_HF_draft_revision": "b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+      "peer_DSpark_scope": "3weight shards SHA-checked per05d75cf handoff; actual Session numerical not yet qualified in that snapshot; no direct M5 inspection"
+    },
+    "own": {
+      "model": "Qwen3_5ForCausalLM only",
+      "glm_and_qwen4": "ARCHITECTURE_ADAPTER_NOT_IMPLEMENTED",
+      "missing": [
+        "GLM loader/sanitizer/mixed per-module quant contract",
+        "vector-gated KDA recurrence math/state profile",
+        "sparse MLA+DSA pooled-indexer KV cache",
+        "MoE grouped router/expert shared path",
+        "mHC multi-stream/Sinkhorn residual",
+        "GLM tokenizer/thinking/vision/MTP contracts"
+      ],
+      "Qwen_actual44_status": "PASS_NATIVE_CONV_ACTIVATED_NORMREUSE_CACHE_ICB_BASE_RESET_CHANGED_VS_ACCEPTED25_STRICT"
+    }
+  },
+  "reuse_limits": [
+    "Generic MLX dense quantized_matmul/norm/elementwise primitives and test/owner/resource tooling can be reused after contracts are validated.",
+    "Existing fixed27B NVFP4g16 GQA/scalar-g GDN Metal math/layout and ICBCAP64 bindings do not qualify GLM KDA/MLA or mixed affine4/5/6g64.",
+    "Qwen FlashNext needs QSA/MoE/gated residual/ngram loader and cache changes despite familiar GDN head dimensions."
+  ],
+  "measurement_policy": {
+    "untested_performance": null,
+    "never_encode_unrun_as_zero": true,
+    "new_models_have_no_HTTP_or_Pareto_win": true,
+    "pin_per_machine_wheel_source_checkpoint_tokenizer_resources": true,
+    "baseline_first_M5_GLM": true
+  }
+}

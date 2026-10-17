@@ -1,0 +1,139 @@
+{
+  "snapshot_date": "2026-10-17",
+  "stages": [
+    {
+      "stage": "V108",
+      "status": "FULLMODEL_OLD_ID_FAIL",
+      "title": "缓存前缀事务",
+      "observed": "21项tiny事务通过；普通A96旧IDs通过；投机B旧ID硬门失败。",
+      "limit": "整模FAIL保留，不能以官方文本一致改判。",
+      "sources": [
+        "108tiny",
+        "108full"
+      ]
+    },
+    {
+      "stage": "V109",
+      "status": "OFFICIAL_MTP_NUMERIC_PASS",
+      "title": "官方外部MTP资格",
+      "observed": "6条raw32与fresh普通官方控制一致；每MTP请求17 verify / 34提案 / 15接受 / 32交付。",
+      "limit": "观察器计时不排名；34提案不是34交付。",
+      "sources": [
+        "109qual"
+      ]
+    },
+    {
+      "stage": "V111",
+      "status": "C1_MTP_SLOWER",
+      "title": "官方none/MTP配对HTTP",
+      "observed": "3对均慢；有符号中位变化x −34.8496%、y −29.5934%。",
+      "limit": "仅两个C1配置，不是全局最好或完整Pareto前沿。",
+      "sources": [
+        "111http"
+      ]
+    },
+    {
+      "stage": "V112",
+      "status": "SAME_INPUT_DIAGNOSTIC",
+      "title": "逐Linear形状敏感性",
+      "observed": "497项同输入Linear：146 exact / 351不同。",
+      "limit": "局部逐算子诊断，无整模修复或速度结论。",
+      "sources": [
+        "112local"
+      ]
+    },
+    {
+      "stage": "V113",
+      "status": "LOCAL_BROADCAST_NUMERIC_PASS",
+      "title": "broadcast-M1局部数值",
+      "observed": "同497输入全部exact；原112输入/output hashes重现。",
+      "limit": "仅局部数值通过；无实际PSO、整模96 IDs修复或速度结论。",
+      "sources": [
+        "113local"
+      ]
+    },
+    {
+      "stage": "V114",
+      "status": "RESOURCE_STOP_B_UNREACHED",
+      "title": "target-verify整合",
+      "observed": "A三请求96旧IDs通过；资源压力触发SIGTERM，B未到达，事务0项。",
+      "limit": "checkpoint仍为STARTED；不是数值FAIL也不是整模PASS。进程已reap/外部释放。",
+      "sources": [
+        "114checkpoint",
+        "114owner",
+        "114release"
+      ]
+    },
+    {
+      "stage": "V115",
+      "status": "CPU_READY_GPU_UNRUN",
+      "title": "device draft selector",
+      "observed": "冻结CPU准备记录；GPU数值未运行。",
+      "limit": "CPU/source测试不替代GPU数值资格，无性能结论。",
+      "sources": [
+        "115cpu"
+      ]
+    }
+  ],
+  "full_frontier_win": false,
+  "default_promoted": false,
+  "completion_percentage": null,
+  "percentage_note": "不同资格层级不折算成完成百分比。",
+  "sources": {
+    "108tiny": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/numeric-v108tiny-attempt1/child-output/receipt.json",
+      "sha256": "2a03d8ef97cbe0243b6c34c313d793e030e9dd64ff6610816dcc9f9bfde91b4b",
+      "bytes": 286954
+    },
+    "108full": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v108transaction-attempt1/child-output/receipt.json",
+      "sha256": "7966209c6a956f71d0b688ff689df11c0f8d082661f8a39d5a52c51a3cd71d9d",
+      "bytes": 5883617
+    },
+    "109qual": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/omlx-mtp-v109-attempt1/child-output/receipt.json",
+      "sha256": "b9337fbc71bef73dfef4190834ba83c64b4483afa61b7d4cc1145d8e8c7b3ec5",
+      "bytes": 4262
+    },
+    "111http": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/omlx-mtp-v111-attempt1/child-output/suite-complete.json",
+      "sha256": "95b83086f63ef6f26ea4d4b6061a52f1602b4b19aaa910766dba38d2f7694401",
+      "bytes": 5288
+    },
+    "112local": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/diagnostic-v112-attempt1/child-output/receipt.json",
+      "sha256": "09c7f55cfbd46a803b4bd014eb24f694573f62de48e2a3fdee3568ec1910992a",
+      "bytes": 1897846
+    },
+    "113local": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/diagnostic-v113-attempt2/child-output/receipt.json",
+      "sha256": "910f31995c14065f1d99360ff93652350a580b6a73896646c590d5b261c025f7",
+      "bytes": 2969343
+    },
+    "114checkpoint": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/child-output/receipt.json",
+      "sha256": "93412a28406638a8adb16c5161d1d8984511756d6f00c1393f5b683d10c9a05a",
+      "bytes": 466904
+    },
+    "114owner": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/owner-receipt.json",
+      "sha256": "327d14aec6da977ee3bd1b4ddb1cee7aed7f6352194d6af62a4fbb9d21c23b17",
+      "bytes": 1994
+    },
+    "114release": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/external-release.json",
+      "sha256": "fac9e09bda9ef008baf8fd59504c5137df31be12fec59e3237250e928a6f2e94",
+      "bytes": 615
+    },
+    "115cpu": {
+      "path_relative_to_private_source_root": "v115-device-draft-selector-build1/CPU-READY.json",
+      "sha256": "d4da89b020f6ff606e9d36d5bc453890700945ebecb5471476888879098fbd54",
+      "bytes": 1572
+    },
+    "111clock_source": {
+      "path_relative_to_private_source_root": "v111-omlx-none-mtp-http-screen-build1/driver.py",
+      "sha256": "a458f07e259c8ccb9e2099cf674b55bddae309af11f1ed6bdf3d6cbb67747c72",
+      "bytes": 16381
+    }
+  }
+}

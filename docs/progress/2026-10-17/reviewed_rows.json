@@ -1,0 +1,169 @@
+{
+  "snapshot_date": "2026-10-17",
+  "scope": "M4 Max 40 GPU cores / 48 GiB; Qwen3.8-27B NVFP4 (Qwen3.5 architecture); MLX 0.32.3",
+  "http": {
+    "experiment": "V111",
+    "pairs": [
+      {
+        "pair": 1,
+        "order": [
+          "none",
+          "mtp"
+        ],
+        "none": {
+          "x": 27.003212853729245,
+          "y": 23.431028013859734,
+          "ttft_s": 0.22327820799546316,
+          "E2E_s": 1.3657104579906445
+        },
+        "mtp": {
+          "x": 18.557528316715235,
+          "y": 17.2332327546562,
+          "ttft_s": 0.19274062500335276,
+          "E2E_s": 1.8568773749866523
+        },
+        "x_signed_MTP_pct": -31.276591355119542,
+        "y_signed_MTP_pct": -26.451230631184696
+      },
+      {
+        "pair": 2,
+        "order": [
+          "mtp",
+          "none"
+        ],
+        "none": {
+          "x": 28.986680590175485,
+          "y": 24.764605651613195,
+          "ttft_s": 0.21873412499553524,
+          "E2E_s": 1.2921667500049807
+        },
+        "mtp": {
+          "x": 18.651113843662745,
+          "y": 17.21531786988813,
+          "ttft_s": 0.19357087498065084,
+          "E2E_s": 1.8588097089959774
+        },
+        "x_signed_MTP_pct": -35.65626189711352,
+        "y_signed_MTP_pct": -30.48418330551247
+      },
+      {
+        "pair": 3,
+        "order": [
+          "none",
+          "mtp"
+        ],
+        "none": {
+          "x": 29.015623890532407,
+          "y": 24.867845856079292,
+          "ttft_s": 0.2184123329934664,
+          "E2E_s": 1.2868022499897052
+        },
+        "mtp": {
+          "x": 18.90380493940433,
+          "y": 17.50860086882296,
+          "ttft_s": 0.18843179201940075,
+          "E2E_s": 1.827673167019384
+        },
+        "x_signed_MTP_pct": -34.84956583831199,
+        "y_signed_MTP_pct": -29.593415649459086
+      }
+    ],
+    "grain": "One point is the median of three measured C1 HTTP requests in one fresh service arm; all three signed pairs retained.",
+    "warm_requests": 18,
+    "measured_requests": 18,
+    "measured_tokens": 576,
+    "x_definition": "Client-estimated tokens after first nonempty text chunk: (32 - reencoded first-chunk token count) / (done_time - first_text_time). Not ordinary per-step decode throughput.",
+    "y_definition": "Total output tokens / HTTP group window; C1 has one request, hence 32 / (done_time - start_time).",
+    "aggregation": "Three measured groups per arm; median per arm. Figure shows all six arm medians. Signed pair change = 100*(MTP/none-1).",
+    "signed_pair_medians": {
+      "x": -34.84956583831199,
+      "y": -29.593415649459086
+    },
+    "limits": [
+      "Only C1, prompt19/output32, fresh official none vs external MTP default block3; not our native engine and not a complete frontier.",
+      "No raw token IDs in timed API: visible text reencoded to32; separate V109 fresh-official-control raw32 qualification.",
+      "No confidence intervals or statistical significance claim; three pairs are not pooled as independent requests.",
+      "AC/thermal0/pressure1 samples; Swapouts stable, but transient swap_used and Pageouts growth occurred."
+    ]
+  },
+  "local_linear": {
+    "denominator": 497,
+    "unit": "same-input Linear call outputs compared by exact bytes",
+    "rows": [
+      {
+        "experiment": "V112",
+        "comparison": "batch M=T vs serial M=1",
+        "exact": 146,
+        "different": 351
+      },
+      {
+        "experiment": "V113",
+        "comparison": "broadcast batch=T, M=1 vs serial M=1",
+        "exact": 497,
+        "different": 0
+      }
+    ],
+    "limits": [
+      "Same497 captured Linear inputs from one actual first-verify block; not497 independent model runs.",
+      "A local exact-byte result is not full-model IDs/cache qualification, PSO identification, or a speed result."
+    ]
+  },
+  "sources": {
+    "108tiny": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/numeric-v108tiny-attempt1/child-output/receipt.json",
+      "sha256": "2a03d8ef97cbe0243b6c34c313d793e030e9dd64ff6610816dcc9f9bfde91b4b",
+      "bytes": 286954
+    },
+    "108full": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v108transaction-attempt1/child-output/receipt.json",
+      "sha256": "7966209c6a956f71d0b688ff689df11c0f8d082661f8a39d5a52c51a3cd71d9d",
+      "bytes": 5883617
+    },
+    "109qual": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/omlx-mtp-v109-attempt1/child-output/receipt.json",
+      "sha256": "b9337fbc71bef73dfef4190834ba83c64b4483afa61b7d4cc1145d8e8c7b3ec5",
+      "bytes": 4262
+    },
+    "111http": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/omlx-mtp-v111-attempt1/child-output/suite-complete.json",
+      "sha256": "95b83086f63ef6f26ea4d4b6061a52f1602b4b19aaa910766dba38d2f7694401",
+      "bytes": 5288
+    },
+    "112local": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/diagnostic-v112-attempt1/child-output/receipt.json",
+      "sha256": "09c7f55cfbd46a803b4bd014eb24f694573f62de48e2a3fdee3568ec1910992a",
+      "bytes": 1897846
+    },
+    "113local": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/diagnostic-v113-attempt2/child-output/receipt.json",
+      "sha256": "910f31995c14065f1d99360ff93652350a580b6a73896646c590d5b261c025f7",
+      "bytes": 2969343
+    },
+    "114checkpoint": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/child-output/receipt.json",
+      "sha256": "93412a28406638a8adb16c5161d1d8984511756d6f00c1393f5b683d10c9a05a",
+      "bytes": 466904
+    },
+    "114owner": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/owner-receipt.json",
+      "sha256": "327d14aec6da977ee3bd1b4ddb1cee7aed7f6352194d6af62a4fbb9d21c23b17",
+      "bytes": 1994
+    },
+    "114release": {
+      "path_relative_to_private_source_root": "v23-root-control-build1/fullmodel-v114broadcast-attempt1/external-release.json",
+      "sha256": "fac9e09bda9ef008baf8fd59504c5137df31be12fec59e3237250e928a6f2e94",
+      "bytes": 615
+    },
+    "115cpu": {
+      "path_relative_to_private_source_root": "v115-device-draft-selector-build1/CPU-READY.json",
+      "sha256": "d4da89b020f6ff606e9d36d5bc453890700945ebecb5471476888879098fbd54",
+      "bytes": 1572
+    },
+    "111clock_source": {
+      "path_relative_to_private_source_root": "v111-omlx-none-mtp-http-screen-build1/driver.py",
+      "sha256": "a458f07e259c8ccb9e2099cf674b55bddae309af11f1ed6bdf3d6cbb67747c72",
+      "bytes": 16381
+    }
+  },
+  "safety": "Whitelisted aggregate/count rows only; no argv, API key, raw text stream, parameter arrays, or tensor payload copied."
+}
