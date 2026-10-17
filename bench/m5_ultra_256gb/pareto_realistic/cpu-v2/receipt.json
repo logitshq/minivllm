@@ -1,0 +1,33 @@
+{
+  "status": "PASS_CPU_ONLY",
+  "root_independent_run": true,
+  "tests": 52,
+  "GPU_executed": false,
+  "listener_started": false,
+  "command": [
+    ".venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "bench/m5_ultra_256gb/pareto_realistic",
+    "-p",
+    "test_*cpu.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "reported_elapsed_s": 0.444,
+  "source_sha256": {
+    "client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "prepare_fixtures.py": "6219bb1a566ea26719d49ec595947b4f5f4292de6460c0e47647b07419735442",
+    "qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "test_client_cpu.py": "9462600ffd993d006e4b9d6b2ca54839d2a40a6dfc9ed397a97968b4ff312a53",
+    "test_native_cpu.py": "0c37d323f6f65bb818d56c3ced0c3dc0819f3ba82038add2639e6b1821bdb52e",
+    "test_qualify_cpu.py": "ebe41e91945f5195aee5f18a8a3174f14f1ec94a7c2a89d291b1ea9760370f20"
+  },
+  "changes": "TCP_NODELAY bool semantics covers 0/1/4 positive and negative cases; fixed-schedule full-state numerical qualifier added. Earlier cpu-v1 remains immutable.",
+  "limits": "Pure CPU mocks only; not model, actual socket, HTTP runtime or performance qualification.",
+  "recorded_unix": 1792230852.673386
+}

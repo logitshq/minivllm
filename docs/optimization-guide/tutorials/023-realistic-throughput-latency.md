@@ -60,10 +60,24 @@ cap、sampling或模板参数不能复用旧资格。后续controller还须验�
 这些检查不加载MLX、不创建listener。
 新长形状的真实数值资格、完整controller及逐C资源资格尚未运行。
 
+后续新增同调度双引擎资格入口 `qualify_native.py`：真实 eager reference 与现有候选
+逐步比较全 vocabulary logits、全部 cache/ahead 状态、原始 IDs、到达与退休；首个差异
+保留原 dtype 张量。C1 与 C8 分别正常构造双引擎，中间销毁并清理，最多两份模型驻留；
+37 请求、最多每臂 12,411 raw IDs、含加载清理的 30 分钟绝对预算。
+该入口尚未运行 GPU。root 复核全部 **52 项 CPU tests**，记录在 `cpu-v2/receipt.json`。
+
+E022 v1 暴露了 macOS 的 TCP_NODELAY 非零 flag 读回（4）会被 `==1` 错拒问题；
+本入口已按布尔语义修正并补 0/1/4 正反测试。原 `cpu-v1` 结果保持，不能以 mock
+通过代替真实 socket 或模型资格。
+
 已发现的快路范围值得独立优化：现有compiled/fused decode的used-length guard为≤256，
 而grouped prefill需要同长、T≤512。当前八份输入从首decode就走普通fallback，也不满足
 grouped prefill范围；不会把开关ON误写成实际kernel命中。先保留这个真实baseline，后续
 扩大范围的候选另行默认OFF、验证与测量。
+
+[具体数值资格方案](../../../bench/reviews/e023-qualification-plan.md)列出同调度双臂、
+完整logits/cache/ahead比较、真实HTTP rid对照和确定的工作上界。256还写在compiled closure
+的attention读取长度中，只删除guard会截断历史，不能作为正确的扩容实现。
 
 执行时先D的C1/C8资格，再扩展C1/2/4/8/16/32/64。oMLX MTP须报告实际MTP/fallback覆盖率；
 Lithos当前OpenAI接口的单inflight限制需要显式C2探针，不能静默重试串行化。

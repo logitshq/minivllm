@@ -1,0 +1,67 @@
+{
+  "schema": "E022-v2-Apple-primary-source-review",
+  "commit": "f6217f891ac0bb64f3d375211650a4c1ff8ca1ea",
+  "accessed_utc": "2026-10-17T09:52:20.580328+00:00",
+  "sources": [
+    {
+      "path": "bsd/netinet/tcp_usrreq.c",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/netinet/tcp_usrreq.c",
+      "github_url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/netinet/tcp_usrreq.c",
+      "sha256": "c5543005f55a3676fdcf9943fea503fd3806fd69689b2337f5d9850c45c9b1cb",
+      "bytes": 89271,
+      "matches": [
+        {
+          "needle": "optval = tp->t_flags & TF_NODELAY;",
+          "line_numbers": [
+            2830
+          ]
+        },
+        {
+          "needle": "if (optval) {",
+          "line_numbers": [
+            2347,
+            2371,
+            2384,
+            2673,
+            2695,
+            2708,
+            2794
+          ]
+        }
+      ]
+    },
+    {
+      "path": "bsd/netinet/tcp_var.h",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/netinet/tcp_var.h",
+      "github_url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/netinet/tcp_var.h",
+      "sha256": "b333a427f387842a913e1a721b7bfdc9ea2070f5b27da54fa05628b6e58664ad",
+      "bytes": 103811,
+      "matches": [
+        {
+          "needle": "#define TF_NODELAY",
+          "line_numbers": [
+            433,
+            1129
+          ]
+        }
+      ]
+    },
+    {
+      "path": "bsd/man/man4/tcp.4",
+      "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/man/man4/tcp.4",
+      "github_url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/man/man4/tcp.4",
+      "sha256": "d9cfb468ad0e46e211f562e1769e33752e4ce3d289d0da2797dcf964c80f1492",
+      "bytes": 11415,
+      "matches": [
+        {
+          "needle": "The boolean option",
+          "line_numbers": [
+            133,
+            151
+          ]
+        }
+      ]
+    }
+  ],
+  "finding": "Published XNU returns the TF_NODELAY bitmask rather than normalizing to 1; TF_NODELAY is 0x00004. TCP_NODELAY is documented as boolean. This does not identify the exact local binary build or prove a latency benefit."
+}

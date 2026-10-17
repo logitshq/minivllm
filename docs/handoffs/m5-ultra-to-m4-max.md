@@ -260,3 +260,28 @@ GLM固定190 GiB下载继续，无本机速度点。新的[加载预算审查](.
 eval的峰值尚未知，不能把190+外部服务RSS简单相减当作安全加载证明。新增CPU header inventory
 等待下载全部SHA通过后运行。研究笔记补Edge0：其预测替换路由及recovery LoRA不进入本次
 同权重正确性主线，可独立学习固定槽位复用；BaseRT当前核心为独立binary，未声称读到其kernel。
+
+## 2026-10-17 接收第40章、失败留档与下一轮曲线
+
+已 fetch M4 `058bdad`，合入 M5 的 merge `326b32b`。根线程独立核对第40章
+41份 published files的大小/SHA与Python语法，V117原receipt解压SHA亦一致。
+V117的49次真实verify、A/B各96 tokens和提交状态严格资格已读；V120两次及V122
+在HTTP投机计时前因资源门停止，不能当作速度点。尚未在M5运行这条路径。
+
+M5 E022 v1只完成首OFF六请求，ON readiness把实际TCP_NODELAY=4误当不符合1而退出70；
+矩阵停止，两个PID/端口已回收，外部服务同identity T→S恢复。全部66文件已归档，
+不复用partial OFF。v2按布尔语义修正；Apple source及真实CPU socket0/4已验证，
+18 tests root通过，独立plan SHA `e850dcdcc1d160ecddf512529758b32fc9a8241c6af515fb72901c4a6b28c81c`。
+原三对顺序和性能门不变；此交接时尚无v2运行结果。
+
+E023实际长任务同调度数值资格实现完成，全部52 CPU机制测试root通过；GPU资格仍待跑。
+E024默认OFF固定L1536 graph-only候选已独立实现，15 CPU mocks通过，未改生产core；
+真实masked SDPA/logits/state与整请求收益都未授予资格。
+
+GLM固定revision的62 shards（189.982GiB）下载和全部SHA校验已完成，CPU header已清点，
+没有加载或性能点。外部服务physical footprint约142.82GiB，不能用RSS或SIGSTOP
+冒充释放内存；临时卸载/恢复路线已审读，还未执行卸载。
+
+新Pareto审计确认旧图的实际throughput/完整latency重算一致，但历史外部C1资源matcher
+没充分排除已启动的74384；新图将历史C2–64与受控E020 C1分面，既不拼接两批前沿，
+也不把正确性当可交换轴。详细审计见 [v3/v4 review](../../bench/reviews/pareto-v3-v4-audit.md)。

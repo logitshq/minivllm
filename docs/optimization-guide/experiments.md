@@ -349,7 +349,7 @@ Compressions+813047，完整保留，不能称内存状态完全不变。
 [教程及全部fresh数值](tutorials/020-external-spec-http.md)、
 [独立审计和原始证据](../experiments/m5-ultra-256gb/E020-external-spec-http-v1/README.md)。
 
-## E022 · 2026-10-17 · native HTTP TCP_NODELAY · CPU 已资格，GPU 待运行
+## E022 · 2026-10-17 · native HTTP TCP_NODELAY · v1 readiness FAIL
 
 只切换 stdlib accepted-socket Nagle 选项，冻结复用 E020 模型/core/SSE/client。
 6 fresh servers、36 请求的 OFF/ON 三对计划已固定；每 socket readback 不符即整个进程退出。
@@ -357,6 +357,16 @@ Compressions+813047，完整保留，不能称内存状态完全不变。
 全部数值、资源与回收先过门，才看三 pair 均 E2E >1、GM≥1.05、TTFT每对≥0.97。
 GLM 下载/SHA 后才调度 GPU；不与 E010/E020 历史锚点池化，不声称 GPU kernel 加速。
 [教程](tutorials/022-native-transport.md)。
+
+v1 已执行：OFF 第一进程 3 warm+3 formal 完成；ON 第一进程在 readiness 时
+得到原始 TCP_NODELAY=4，而校验要求整数 1，exit70；ON 无请求计时，矩阵停止。
+这属于 harness 布尔读回检查缺口；没有 paired effect，不进入 Pareto，不复用 OFF 单点。
+两个自有进程回收、端口消失，外部服务 identity 不变 T→S。全部 66 文件 SHA 复核归档见
+[E022-v1](../experiments/m5-ultra-256gb/E022-native-transport-v1/README.md)。修正版独立 v2，原门保持。
+
+v2 真实 CPU socket OFF=0、ON=4，按布尔语义修复，18 tests root复核通过。
+新 plan SHA `e850dcdcc1d160ecddf512529758b32fc9a8241c6af515fb72901c4a6b28c81c`，
+24 small pins 与继承 pins 已绑定；此条为执行前准备，未赋予速度资格。
 
 ## E023 · 2026-10-17 · 长生成 throughput–latency · CPU 准备
 
@@ -371,3 +381,15 @@ GLM 下载/SHA 后才调度 GPU；不与 E010/E020 历史锚点池化，不声�
 要求同长、T≤512。当前任务应先如实测fallback基线，扩展快路需独立模块、资格与配对。
 GLM下载及加载预算审查同步推进，未把CPU准备或模型下载算作运行成功。
 [教程](tutorials/023-realistic-throughput-latency.md)。
+
+同调度完整数值资格脚本现已实现，root共52项CPU机制测试通过；37请求、两模型驻留上限、
+30分钟绝对预算，实际GPU尚未执行。原cpu-v1保留，TCP布尔读回修复和新资格对应cpu-v2。
+
+## E024 · 2026-10-17 · 长上下文固定图 · CPU 原型
+
+默认 OFF 的单独 graph-only callable，B1–8、used257–1536、K/V backing均≥1536；
+固定closure长度、资格上限与backing下限同步定义，不改原256模块、不改D输入。
+显式状态输入输出、模型参数作为compile inputs、无packed/fuse；其余形状回原路径。
+15 CPU mock tests经root复核，31core source pins一致，两人静态审读无阻断。
+真实L1536 attention归约、ahead生命周期、参数替换及完整长任务性能尚未验证，不能进入Pareto。
+[实现、推导和GPU候选计划](../../bench/m5_ultra_256gb/long_decode_graph/README.md)。

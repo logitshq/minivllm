@@ -64,3 +64,22 @@ python3 bench/m5_ultra_256gb/glm_flash/runtime_probe.py \
 6. 加载稳定后先一个≤128输入token、cap8的普通greedy文本请求，normal EOS。若资源稳定，再同一固定GLM tokenizer/template prompt运行3个独立request、cap32（允许EOS提前结束）。记录累计raw token IDs、实际prompt IDs、EOS/finish reason、cached_tokens=0、无speculation/offload、每请求状态reset；只证明该范围加载/确定性/路由，不冒充跨实现质量或长上下文资格。后续无观察器、真实HTTP throughput–实际E2E latency须另外配对，首轮加载时间不混入稳态decode点。
 
 本次结论是：**原有官方gate/up regroup无需为内存重新实现；先用完整header和实际物理预算收窄初始stack/eval风险。当前没有加载成功、峰值安全或性能结论。**
+
+## Root实际物理占用补记（2026-10-17，下载期间）
+
+只读`footprint -p 74384 --noCategories --sysFootprint -f bytes`实际报告该外部服务
+`phys_footprint=153,346,982,168 bytes`（约142.82 GiB），历史峰值198,404,471,160 bytes；
+同次`ps`的RSS只有35,520,256 KiB。系统footprint为187,547,942,912 bytes，pressure=1，
+已用swap=268.81 MiB。单次读数不是新增swap或稳定内存证明，但已明确否定“服务只占约34 GiB”
+这一加载预算假设：**仅SIGSTOP不能与190 GiB GLM全驻留并存。**
+
+只读`lsof`与`/api/status`确认PID仍是原授权身份，实际服务在127.0.0.1:8001，
+运行oMLX **0.7.0**，环境位于`~/.local/share/uv/tools/omlx`，不是实验baseline的0.7.1.dev1。
+当次只有`Qwen3.8-Flash-Next-oQ6e-mtp`一个loaded model，active/waiting/loading均0；
+API声明model memory为158,077,204,528 bytes，不能把它与系统phys_footprint当同一指标。
+现有模型列表另含GLM oQ4e/oQ5e，但它们不是本次固定mixed-bit checkpoint，不静默替换。
+
+原始只读记录在`.artifacts/m5-ultra-256gb/glm-flash-physical-preflight-v1/`。
+后续需使用实际0.7.0版本的官方卸载/精确重载接口，在用户已授权的临时暂停和恢复范围内
+释放驻留模型，再验证实际物理余量；保留模型文件与配置。当前只是核查接口，尚未卸载。
+E022小模型延迟配对仍按原冻结SIGSTOP/SIGCONT流程，不因GLM准备而改其环境协议。

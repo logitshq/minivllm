@@ -1,0 +1,39 @@
+{
+  "status": "INCOMPLETE_HARNESS_PORTABILITY_FAILURE",
+  "preregistered_plan_sha256": "b239f6117c4a2b7799b5cf366b31c0a8277182f77773b5cc78c49f218f321fc1",
+  "completed_servers": 1,
+  "failed_before_readiness_servers": 1,
+  "warm_requests": 3,
+  "formal_requests": 3,
+  "socket_failure": {
+    "schema": "E022-fatal-socket-v1",
+    "pid": 19011,
+    "tcp_nodelay_requested": true,
+    "tcp_nodelay_actual": 4,
+    "error_type": "RuntimeError",
+    "error": "accepted socket TCP_NODELAY=4, expected 1"
+  },
+  "off_only_diagnostic_medians": {
+    "median_wall_s": 0.772208167007193,
+    "median_TTFT_s": 0.1783532080007717,
+    "median_output_tok_s": 41.43960316299261,
+    "median_client_estimated_interactivity_tok_s": 52.20129853233204
+  },
+  "paired_effect": null,
+  "pareto_eligible": false,
+  "advance": false,
+  "service_restoration": {
+    "identity_match": true,
+    "state_before": "T",
+    "state_after": "S",
+    "time": 1792230322.794261
+  },
+  "archive": {
+    "file": "evidence.tar.gz",
+    "bytes": 54725,
+    "sha256": "eb41e5feda7b293d1424a689680031ac520d34e4b31b5069c981ed13162b4a35",
+    "members": 66,
+    "all_member_hashes_verified": true
+  },
+  "scope": "All v1 run/lease/source files preserved. No performance conclusion; no partial OFF reuse in a later version. This archive verifies file integrity and failure/lifecycle receipts, not a full-matrix numerical requalification."
+}

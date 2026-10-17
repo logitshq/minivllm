@@ -1,0 +1,188 @@
+--- native_transport/candidate.py
++++ native_transport_v2/candidate.py
+@@ -1,4 +1,4 @@
+-"""E022: use StreamRequestHandler's existing per-connection Nagle switch.
++"""E022 v2: portable boolean readback of the existing per-connection switch.
+ 
+ No model import, socket creation, listener, SSE rewriting, or buffering change.
+ Both arms read back the actual accepted socket option and fail closed on a
+@@ -25,16 +25,18 @@
+             try:
+                 super().setup()
+                 actual = self.connection.getsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY)
+-                if actual != int(tcp_nodelay):
+-                    raise RuntimeError(f'accepted socket TCP_NODELAY={actual}, expected {int(tcp_nodelay)}')
++                if type(actual) is not int or bool(actual) != tcp_nodelay:
++                    raise RuntimeError(f'accepted socket TCP_NODELAY raw={actual}, expected enabled={tcp_nodelay}')
+                 if receipt is not None:
+                     receipt({'tcp_nodelay_requested': tcp_nodelay, 'tcp_nodelay_actual': actual,
++                             'tcp_nodelay_actual_enabled': bool(actual),
+                              'wbufsize': self.wbufsize, 'rbufsize': self.rbufsize})
+             except BaseException as error:
+                 # ThreadingMixIn catches ordinary Exceptions and otherwise
+                 # could let a readiness retry hide the broken connection.
+                 if fatal is not None:
+                     fatal({'tcp_nodelay_requested': tcp_nodelay, 'tcp_nodelay_actual': actual,
++                           'tcp_nodelay_actual_enabled': bool(actual) if type(actual) is int else None,
+                            'error_type': type(error).__name__, 'error': str(error)})
+                 raise
+ 
+--- native_transport/prepare.py
++++ native_transport_v2/prepare.py
+@@ -56,7 +56,7 @@
+         destination.parent.mkdir(parents=True, exist_ok=True)
+         shutil.copyfile(path, destination)
+         assert digest(destination) == sha
+-    plan = {'schema': 'E022-v1', 'status': 'PREPARED_NOT_RUN', 'configs': CONFIGS, 'gate': GATE,
++    plan = {'schema': 'E022-v2', 'status': 'PREPARED_NOT_RUN', 'configs': CONFIGS, 'gate': GATE,
+         'e020_plan': str(e020_path), 'e020_plan_sha256': e020_sha,
+         'inherited_pin_policy': 'Reuse all E020 model/runtime/core pins and stats by reference; full SHA before/after scheduled run, no large hash during prepare.',
+         'inherited_pin_count': len(e020['pins']), 'reused_sources': reused,
+@@ -65,7 +65,7 @@
+         'expected_counts': {'servers': 6, 'warm_requests': 18, 'formal_requests': 18, 'formal_tokens_if_valid': 576},
+         'environment': e020['environment'], 'normal_eos': True, 'concurrency': 1,
+         'warm_requests': 3, 'formal_requests': 3, 'cooldown_seconds_after_each_request': 2,
+-        'socket_contract': 'Every accepted socket readback must match OFF=0 / ON=1. Any setup/readback/receipt failure writes permanent fatal evidence and exits whole server code 70; never readiness retry.',
++        'socket_contract': 'Every accepted socket readback must be an int and bool(raw) must match requested OFF/ON; preserve raw plus normalized enabled. Any setup/readback/receipt failure writes permanent fatal evidence and exits whole server code 70; never readiness retry.',
+         'lifecycle': 'Unmodified frozen E020 run_one/client/resource/lease helpers; direct owner PID, absolute request/probe bounds, cancel reap and outer restore.',
+         'scope': 'Only TCP_NODELAY differs; E020 raw measurements remain. No payload padding, model changes, step observer or end-to-end GPU-speed claim.'}
+     write(out / 'plan.json', plan)
+--- native_transport/run.py
++++ native_transport_v2/run.py
+@@ -34,8 +34,11 @@
+         failures.append('missing actual accepted-socket receipt')
+     else:
+         expected = config['arm'] == 'on'
+-        if not (receipt['schema'] == 'E022-socket-v1' and receipt['pid'] == release.get('pid')
+-                and receipt['tcp_nodelay_requested'] is expected and receipt['tcp_nodelay_actual'] == int(expected)
++        if not (receipt['schema'] == 'E022-socket-v2' and receipt['pid'] == release.get('pid')
++                and receipt['tcp_nodelay_requested'] is expected
++                and type(receipt['tcp_nodelay_actual']) is int
++                and bool(receipt['tcp_nodelay_actual']) is expected
++                and receipt['tcp_nodelay_actual_enabled'] is expected
+                 and receipt['wbufsize'] == 0 and receipt['rbufsize'] == -1
+                 and receipt['server_source'] == plan['reused_sources']['native_server']
+                 and receipt['server_source_sha256'] == plan['native_server_sha256']):
+@@ -64,7 +67,7 @@
+     try:
+         assert digest(args.plan) == args.plan_sha256, 'reviewed E022 plan mismatch'
+         plan = read(args.plan)
+-        assert plan['schema'] == 'E022-v1' and plan['configs'] == CONFIGS and plan['gate'] == GATE
++        assert plan['schema'] == 'E022-v2' and plan['configs'] == CONFIGS and plan['gate'] == GATE
+         verify_small(plan)
+         assert digest(plan['e020_plan']) == plan['e020_plan_sha256']
+         e020 = read(plan['e020_plan'])
+--- native_transport/serve.py
++++ native_transport_v2/serve.py
+@@ -21,7 +21,7 @@
+     """Every accepted-socket failure is terminal, even if its receipt cannot write."""
+     try:
+         with Path(path).open('x') as stream:
+-            json.dump({'schema': 'E022-fatal-socket-v1', 'pid': os.getpid(), **row}, stream, indent=2)
++            json.dump({'schema': 'E022-fatal-socket-v2', 'pid': os.getpid(), **row}, stream, indent=2)
+             stream.write('\n')
+     finally:
+         # Exit the whole directly owned process, not just the handler thread.
+@@ -64,7 +64,7 @@
+         with lock:
+             if written.is_set():
+                 return
+-            payload = {'schema': 'E022-socket-v1', 'pid': os.getpid(),
++            payload = {'schema': 'E022-socket-v2', 'pid': os.getpid(),
+                        'server_source': str(source), 'server_source_sha256': actual_sha,
+                        'scope': 'first accepted connection; every connection readback asserted', **row}
+             with args.socket_receipt.open('x') as stream:
+--- native_transport/test_cpu.py
++++ native_transport_v2/test_cpu.py
+@@ -15,13 +15,14 @@
+ 
+ 
+ class FakeSocket:
+-    def __init__(self, initial=0, apply=True):
++    def __init__(self, initial=0, apply=True, enabled_raw=1):
+         self.option, self.apply, self.options, self.sent = initial, apply, [], []
++        self.enabled_raw = enabled_raw
+ 
+     def setsockopt(self, level, name, value):
+         self.options.append((level, name, value))
+         if self.apply:
+-            self.option = int(value)
++            self.option = self.enabled_raw if value else 0
+ 
+     def getsockopt(self, level, name):
+         assert (level, name) == (socket.IPPROTO_TCP, socket.TCP_NODELAY)
+@@ -56,6 +57,19 @@
+         self.assertEqual(instance.request.options, [(socket.IPPROTO_TCP, socket.TCP_NODELAY, True)])
+         self.assertEqual(observed[0]['tcp_nodelay_actual'], 1)
+         self.assertEqual(observed[0]['wbufsize'], 0)
++        instance.finish()
++
++    def test_noncanonical_boolean_readback_retains_raw_value(self):
++        for raw in (1, 4):
++            with self.subTest(raw=raw):
++                instance, observed = setup(True, FakeSocket(enabled_raw=raw))
++                self.assertEqual(observed[0]['tcp_nodelay_actual'], raw)
++                self.assertIs(observed[0]['tcp_nodelay_actual_enabled'], True)
++                self.assertEqual(instance.request.options, [(socket.IPPROTO_TCP, socket.TCP_NODELAY, True)])
++                instance.finish()
++        instance, observed = setup(False)
++        self.assertEqual(observed[0]['tcp_nodelay_actual'], 0)
++        self.assertIs(observed[0]['tcp_nodelay_actual_enabled'], False)
+         instance.finish()
+ 
+     def test_both_arms_send_identical_bytes_without_extra_buffer(self):
+@@ -71,8 +85,9 @@
+     def test_failed_set_and_unexpected_reference_option_stop(self):
+         with self.assertRaises(RuntimeError):
+             setup(True, FakeSocket(apply=False))
+-        with self.assertRaises(RuntimeError):
+-            setup(False, FakeSocket(initial=1))
++        for raw in (1, 4):
++            with self.subTest(raw=raw), self.assertRaises(RuntimeError):
++                setup(False, FakeSocket(initial=raw))
+ 
+     def test_configuration_fails_early(self):
+         for value in (0, 1, 'on', None):
+@@ -175,8 +190,8 @@
+ 
+     def test_late_socket_failure_overrides_initial_success(self):
+         plan = {'reused_sources': {'native_server': '/frozen/server.py'}, 'native_server_sha256': 'sha'}
+-        receipt = {'schema': 'E022-socket-v1', 'pid': 123, 'tcp_nodelay_requested': True,
+-            'tcp_nodelay_actual': 1, 'wbufsize': 0, 'rbufsize': -1,
++        receipt = {'schema': 'E022-socket-v2', 'pid': 123, 'tcp_nodelay_requested': True,
++            'tcp_nodelay_actual': 4, 'tcp_nodelay_actual_enabled': True, 'wbufsize': 0, 'rbufsize': -1,
+             'server_source': '/frozen/server.py', 'server_source_sha256': 'sha'}
+         result = {'valid': True, 'release': {'pid': 123}, 'contract_failures': [],
+                   'diagnostic_medians_including_invalid_samples': {}, 'median_wall_s': 1,
+@@ -191,6 +206,31 @@
+             self.assertFalse(rejected['valid'])
+             self.assertIsNone(rejected['median_wall_s'])
+ 
++    def test_controller_independently_validates_zero_nonzero_and_normalized_evidence(self):
++        plan = {'reused_sources': {'native_server': '/frozen/server.py'}, 'native_server_sha256': 'sha'}
++        result = {'valid': True, 'release': {'pid': 123}, 'contract_failures': [],
++                  'diagnostic_medians_including_invalid_samples': {}, 'median_wall_s': 1,
++                  'median_TTFT_s': .1, 'median_output_tok_s': 32}
++        with tempfile.TemporaryDirectory() as tmp:
++            directory = Path(tmp)
++            for expected in (False, True):
++                for raw in (0, 1, 4):
++                    row = {'schema': 'E022-socket-v2', 'pid': 123,
++                        'tcp_nodelay_requested': expected, 'tcp_nodelay_actual': raw,
++                        'tcp_nodelay_actual_enabled': bool(raw), 'wbufsize': 0, 'rbufsize': -1,
++                        'server_source': '/frozen/server.py', 'server_source_sha256': 'sha'}
++                    (directory / 'socket.json').write_text(json.dumps(row))
++                    config = {'pair': 1, 'arm': 'on' if expected else 'off'}
++                    actual = transport_result(result, plan, config, directory)
++                    self.assertEqual(actual['valid'], bool(raw) == expected)
++                    row['tcp_nodelay_actual_enabled'] = not bool(raw)
++                    (directory / 'socket.json').write_text(json.dumps(row))
++                    self.assertFalse(transport_result(result, plan, config, directory)['valid'])
++            for raw in ('4', 4.0, True):
++                row.update(tcp_nodelay_requested=True, tcp_nodelay_actual=raw, tcp_nodelay_actual_enabled=True)
++                (directory / 'socket.json').write_text(json.dumps(row))
++                self.assertFalse(transport_result(result, plan, {'pair': 1, 'arm': 'on'}, directory)['valid'])
++
+     def test_launch_has_same_model_and_explicit_socket_arm(self):
+         plan = {'reused_sources': {'native_server': '/frozen/server.py'}, 'native_server_sha256': 'sha'}
+         e020 = {'runtime_versions': {'controller-native': {'python': '/venv/python'}},

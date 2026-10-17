@@ -1,0 +1,96 @@
+{
+  "schema": "E022-v2-CPU-checks",
+  "started_utc": "2026-10-17T09:54:48.193259+00:00",
+  "python": "/Users/ryanli/code/minivllm/.venv/bin/python",
+  "checks": [
+    {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.07134237499849405,
+      "stdout": "",
+      "stderr": "test_controller_independently_validates_zero_nonzero_and_normalized_evidence (test_cpu.PlanTests.test_controller_independently_validates_zero_nonzero_and_normalized_evidence) ... ok\ntest_duplicates_rejected_and_partial_not_qualified (test_cpu.PlanTests.test_duplicates_rejected_and_partial_not_qualified) ... ok\ntest_fixed_schedule_and_gate (test_cpu.PlanTests.test_fixed_schedule_and_gate) ... ok\ntest_late_socket_failure_overrides_initial_success (test_cpu.PlanTests.test_late_socket_failure_overrides_initial_success) ... ok\ntest_launch_has_same_model_and_explicit_socket_arm (test_cpu.PlanTests.test_launch_has_same_model_and_explicit_socket_arm) ... ok\ntest_single_negative_wall_pair_is_not_pooled_away (test_cpu.PlanTests.test_single_negative_wall_pair_is_not_pooled_away) ... ok\ntest_ttft_floor_and_invalid_process_reject (test_cpu.PlanTests.test_ttft_floor_and_invalid_process_reject) ... ok\ntest_both_arms_send_identical_bytes_without_extra_buffer (test_cpu.TransportTests.test_both_arms_send_identical_bytes_without_extra_buffer) ... ok\ntest_configuration_fails_early (test_cpu.TransportTests.test_configuration_fails_early) ... ok\ntest_failed_set_and_unexpected_reference_option_stop (test_cpu.TransportTests.test_failed_set_and_unexpected_reference_option_stop) ... ok\ntest_fatal_exits_whole_process_even_when_receipt_cannot_write (test_cpu.TransportTests.test_fatal_exits_whole_process_even_when_receipt_cannot_write) ... ok\ntest_no_shared_class_mutation (test_cpu.TransportTests.test_no_shared_class_mutation) ... ok\ntest_noncanonical_boolean_readback_retains_raw_value (test_cpu.TransportTests.test_noncanonical_boolean_readback_retains_raw_value) ... ok\ntest_off_keeps_stdlib_default (test_cpu.TransportTests.test_off_keeps_stdlib_default) ... ok\ntest_on_sets_accepted_socket_option (test_cpu.TransportTests.test_on_sets_accepted_socket_option) ... ok\ntest_receipt_error_also_reaches_fatal_callback (test_cpu.TransportTests.test_receipt_error_also_reaches_fatal_callback) ... ok\ntest_threading_mixin_cannot_hide_fatal_callback (test_cpu.TransportTests.test_threading_mixin_cannot_hide_fatal_callback) ... ok\ntest_frozen_lifecycle_launch_and_six_requests_without_listener (test_lifecycle_cpu.FrozenLifecycleTests.test_frozen_lifecycle_launch_and_six_requests_without_listener) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.021s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/serve.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.029703332998906262,
+      "stdout": "usage: serve.py [-h] --server-source SERVER_SOURCE\n                --server-source-sha256 SERVER_SOURCE_SHA256\n                --tcp-nodelay {off,on} --socket-receipt SOCKET_RECEIPT\n                --socket-failure SOCKET_FAILURE --model MODEL --port PORT\n                --package-root PACKAGE_ROOT --source-manifest SOURCE_MANIFEST\n\nE022 isolated OFF/ON entrypoint over a pinned copy of the E020 native shim.\n--help imports no MLX or model. Only main() loads the requested shim, and its\nown main() owns the actual HTTP listener in this same process. Does not edit\nthe source shim, core, E020 result, client, or SSE payload.\n\noptions:\n  -h, --help            show this help message and exit\n  --server-source SERVER_SOURCE\n  --server-source-sha256 SERVER_SOURCE_SHA256\n  --tcp-nodelay {off,on}\n  --socket-receipt SOCKET_RECEIPT\n  --socket-failure SOCKET_FAILURE\n  --model MODEL\n  --port PORT\n  --package-root PACKAGE_ROOT\n  --source-manifest SOURCE_MANIFEST\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/run.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.022661333990981802,
+      "stdout": "usage: run.py [-h] --plan PLAN --plan-sha256 PLAN_SHA256 --out OUT\n              --lease LEASE\n\nE022 six fresh native servers, frozen E020 lifecycle/client, explicit OFF/ON.\nRun only in the sole GPU slot under suspended_service.py after preregistration\nreview/commit. Do not wrap with guarded_v2. --help imports no model runtime.\n\noptions:\n  -h, --help            show this help message and exit\n  --plan PLAN\n  --plan-sha256 PLAN_SHA256\n  --out OUT\n  --lease LEASE\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/prepare.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.022481709005660377,
+      "stdout": "usage: prepare.py [-h] --out OUT [--e020-plan E020_PLAN]\n                  --e020-plan-sha256 E020_PLAN_SHA256\n\nPrepare E022 from frozen E020 sources/pins; no model import or large hash.\n\noptions:\n  -h, --help            show this help message and exit\n  --out OUT\n  --e020-plan E020_PLAN\n  --e020-plan-sha256 E020_PLAN_SHA256\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/probe_socket_cpu.py",
+        "--out",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/cpu-localhost-probe.json"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.03242058400064707,
+      "stdout": "{\"status\": \"PASS\", \"raw\": [0, 4]}\n",
+      "stderr": ""
+    }
+  ],
+  "ast_parsed": [
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/candidate.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/common.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/prepare.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/probe_socket_cpu.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/run.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/serve.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_cpu.py",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_lifecycle_cpu.py"
+  ],
+  "source_sha256": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/candidate.py": "0374e8a0f644bcec98300bb2ccd0125ed48136ca273c688375ae5ccf38060ffe",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/common.py": "fd8b8e59285912c4151ead66656431e3aa673e6ac097245754b211603c367dd4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/prepare.py": "305abf655126ea27bcf795291aef1242a446d5ea537c018819f91d48f8a09b61",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/probe_socket_cpu.py": "c47cd764bebff3206f666a8c179b5bad3fcd5e36762cbd857450685e58bfc812",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/run.py": "32494ebdaf7ed485cb79fb936e32fe3b521308b103f33b16e0e25c2f2bddfacb",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/serve.py": "37d539db23a92337214a406ba378936d750edddd8deaf43e9b643ea098164372",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_cpu.py": "7d77adb44cbd426ee471685791a4e376d8e41a1ca98c0667c7bf1ac38a1592a8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_lifecycle_cpu.py": "c393678fbf49e8de058e8883c500124e8bf94aaad5f272ce13f7b4ad18ecdacc"
+  },
+  "status": "PASS",
+  "finished_utc": "2026-10-17T09:54:48.375693+00:00"
+}

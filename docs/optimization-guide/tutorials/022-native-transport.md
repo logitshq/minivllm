@@ -1,6 +1,6 @@
 # E022：先验证 HTTP 发送是否增加了延迟
 
-状态：**CPU 资格通过，计划已冻结，尚未运行 GPU 或真实服务。** GLM-5.3-Flash 下载与校验结束后，才进入唯一性能测量队列。
+状态：**v1 在第二个进程 readiness 时失败，停止矩阵；不进入 Pareto。** 原计划和结果保留，修复使用独立 v2。
 
 E020 的当前 native C1 锚点是 716.10 ms / 44.69 tok/s，慢于同轮 oMLX target-only 的 679.32 ms / 47.11 tok/s。完整请求 latency 包含模型执行、排队和 HTTP 发送；所以应先检查具体等待，不能把整个差距归因于 kernel。
 
@@ -28,3 +28,28 @@ env MLX_MAX_OPS_PER_BUFFER=50 MLX_MAX_MB_PER_BUFFER=50 \
 ```
 
 本次 CPU 资格不是运行结果；实测和最终服务恢复将在新小节追加，冻结源码与原门不修改。
+
+## v1 实测失败：布尔 socket 选项不是固定整数 1
+
+GLM 下载校验结束后执行了 v1。OFF 第一进程完成六个请求，ON 第一进程读取到
+`TCP_NODELAY=4`，冻结校验 `actual == 1` 失败并 exit 70。ON 没有进入 warm/formal，
+因此三对矩阵未完成，没有速度比或采用结论。原 16 CPU mock 未覆盖非零 flag 读回，
+这是测试入口的可移植性缺口。不能将它写成模型数值失败，也不能用 OFF 单点替代配对。
+
+两个模型进程已回收，端口消失，外部服务 identity 不变、T→S 恢复。
+[66 文件完整归档](../../experiments/m5-ultra-256gb/E022-native-transport-v1/README.md)
+包括源码、计划、所有请求、资源、失败及恢复凭据。v2 须先用真实 socket 核对布尔语义，
+保留 raw 值，覆盖 0/1/4 正反测试，再重新冻结全新矩阵；原性能门不改。
+
+## v2 修正与新计划
+
+独立 [native_transport_v2](../../../bench/m5_ultra_256gb/native_transport_v2/README.md)
+按 `bool(raw)` 校验，并保存原始 integer 与 normalized boolean。Apple 固定版本的 XNU
+源码把 getter 写为 `t_flags & TF_NODELAY`、该 flag 为 0x4；本机真实 loopback probe
+分别读取 OFF=0、ON=4，发送字节一致、全部 fd 和端口已关闭。证据与固定源码 URL 在 v2 目录。
+18 项 CPU tests 经实现者和 root 分别通过，原 common 中顺序和性能门逐字节不变。
+
+v2 独立计划 SHA 为 `e850dcdcc1d160ecddf512529758b32fc9a8241c6af515fb72901c4a6b28c81c`，
+[prereg-v2](../../../bench/m5_ultra_256gb/native_transport_v2/prereg-v2/plan.json)
+固定 24 份新增 small pins 与全部继承 E020 pins。仍是 6 fresh servers / 36 请求，
+不用 v1 的 OFF 数据。当前为已准备、待提交后执行；没有新增速度结论。

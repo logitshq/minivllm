@@ -381,16 +381,31 @@ class HTTPTests(unittest.TestCase):
         h.do_GET()
         self.assertEqual(h.responses, [503])
 
+    def test_boolean_socket_readback_accepts_nonzero_flag(self):
+        for enabled, raw in ((False, 0), (True, 1), (True, 4)):
+            with self.subTest(enabled=enabled, raw=raw):
+                w = worker()
+                cls = server.handler_class(w, Tokenizer(), max_len=64,
+                    tcp_nodelay=enabled, io_timeout=1)
+                h = cls.__new__(cls)
+                h.connection = types.SimpleNamespace(getsockopt=lambda *args: raw)
+                with patch.object(server.BaseHTTPRequestHandler, 'setup'):
+                    h.setup()
+                self.assertIsNone(w.failure)
+
     def test_socket_readback_mismatch_is_permanent_even_if_thread_swallows(self):
-        w = worker()
-        cls = server.handler_class(w, Tokenizer(), max_len=64, tcp_nodelay=True, io_timeout=1)
-        h = cls.__new__(cls)
-        h.connection = types.SimpleNamespace(getsockopt=lambda *args: 0)
-        with patch.object(server.BaseHTTPRequestHandler, 'setup'), self.assertRaises(RuntimeError):
-            h.setup()
-        self.assertIn('accepted socket setup failed', w.failure)
-        with self.assertRaises(RuntimeError):
-            w.submit([1], 1)
+        for enabled, raw in ((True, 0), (False, 1), (False, 4)):
+            with self.subTest(enabled=enabled, raw=raw):
+                w = worker()
+                cls = server.handler_class(w, Tokenizer(), max_len=64,
+                    tcp_nodelay=enabled, io_timeout=1)
+                h = cls.__new__(cls)
+                h.connection = types.SimpleNamespace(getsockopt=lambda *args: raw)
+                with patch.object(server.BaseHTTPRequestHandler, 'setup'), self.assertRaises(RuntimeError):
+                    h.setup()
+                self.assertIn('accepted socket setup failed', w.failure)
+                with self.assertRaises(RuntimeError):
+                    w.submit([1], 1)
 
     def test_help_and_unknown_flags_cannot_import_gpu_or_open_listener(self):
         code = '''

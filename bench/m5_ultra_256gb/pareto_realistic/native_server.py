@@ -226,8 +226,9 @@ def handler_class(worker, tokenizer, *, max_len, tcp_nodelay, io_timeout):
             try:
                 super().setup()
                 actual = self.connection.getsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY)
-                if actual != int(tcp_nodelay):
-                    raise RuntimeError(f'TCP_NODELAY readback {actual} != {int(tcp_nodelay)}')
+                # TCP_NODELAY is boolean; Darwin can return its nonzero flag (4).
+                if bool(actual) != tcp_nodelay:
+                    raise RuntimeError(f'TCP_NODELAY readback {actual} disagrees with enabled={tcp_nodelay}')
             except BaseException:
                 worker.fail('accepted socket setup failed: ' + traceback.format_exc())
                 raise

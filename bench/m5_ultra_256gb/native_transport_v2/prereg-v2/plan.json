@@ -1,0 +1,196 @@
+{
+  "schema": "E022-v2",
+  "status": "PREPARED_NOT_RUN",
+  "configs": [
+    {
+      "pair": 1,
+      "arm": "off"
+    },
+    {
+      "pair": 1,
+      "arm": "on"
+    },
+    {
+      "pair": 2,
+      "arm": "on"
+    },
+    {
+      "pair": 2,
+      "arm": "off"
+    },
+    {
+      "pair": 3,
+      "arm": "off"
+    },
+    {
+      "pair": 3,
+      "arm": "on"
+    }
+  ],
+  "gate": {
+    "all_correctness_resource_reap_checks": true,
+    "paired_wall_geomean_min": 1.05,
+    "every_paired_wall_speedup_strictly_above": 1.0,
+    "every_paired_TTFT_speedup_min": 0.97
+  },
+  "e020_plan": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/plan.json",
+  "e020_plan_sha256": "e3f0c3e24d4ea841d5e6c0b0094652e65e463c02367836e765ef6d9e3c6e2bdc",
+  "inherited_pin_policy": "Reuse all E020 model/runtime/core pins and stats by reference; full SHA before/after scheduled run, no large hash during prepare.",
+  "inherited_pin_count": 8658,
+  "reused_sources": {
+    "run": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/run.py",
+    "client": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/client.py",
+    "contract": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/contract.py",
+    "launch": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/launch.py",
+    "native_server": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py",
+    "resources_v2": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py",
+    "resources": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py",
+    "resource_base": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py",
+    "suspended_service": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py"
+  },
+  "native_server_sha256": "e5b767928044564df5085c52c4e801d393fedf302cd059a28e46f20b90053e2b",
+  "pins": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/run.py": "892e22277969709f2abf46b45949856cebb9045b27a86d0c3a5a12cf9b7bea31",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/client.py": "0d482c91138d2ba070cda140480ca84038ac70f729042c8f7bb447d8b2bc6972",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/contract.py": "daadffe3e4fb38008fee7d0055979d9a85ef74ce2acfe9a6365972707de6b663",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/launch.py": "7b2ddc6d85b4f612b19c51711f7cd126f13b261fdc152e0a426ceae51d1d66e3",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py": "e5b767928044564df5085c52c4e801d393fedf302cd059a28e46f20b90053e2b",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/plan.json": "e3f0c3e24d4ea841d5e6c0b0094652e65e463c02367836e765ef6d9e3c6e2bdc",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/complete.json": "52689bd1e0aef3b18b50e891f5b869ebf93cf8db2f7d8e0754f086931ac16bf3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/candidate.py": "0374e8a0f644bcec98300bb2ccd0125ed48136ca273c688375ae5ccf38060ffe",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/common.py": "fd8b8e59285912c4151ead66656431e3aa673e6ac097245754b211603c367dd4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/prepare.py": "305abf655126ea27bcf795291aef1242a446d5ea537c018819f91d48f8a09b61",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/probe_socket_cpu.py": "c47cd764bebff3206f666a8c179b5bad3fcd5e36762cbd857450685e58bfc812",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/run.py": "32494ebdaf7ed485cb79fb936e32fe3b521308b103f33b16e0e25c2f2bddfacb",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/serve.py": "37d539db23a92337214a406ba378936d750edddd8deaf43e9b643ea098164372",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_cpu.py": "7d77adb44cbd426ee471685791a4e376d8e41a1ca98c0667c7bf1ac38a1592a8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_lifecycle_cpu.py": "c393678fbf49e8de058e8883c500124e8bf94aaad5f272ce13f7b4ad18ecdacc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/README.md": "8e24638846dae680c85911e0e141b330899f93c0c11d728691a17f3f86b3b036",
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/socketserver.py": "ecbbe1a633801460399a8f10b39007aa0e13cdbdad507e39414000f097b769b5",
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/socket.py": "382289c864b6a74abf0f411ec254a1dea596a45463746b05a590f9547db19d03",
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/http/server.py": "932345b6f01a84ad7757a47c6b64017ea60712275fbf546d756887cfa955d402",
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/threading.py": "a979d5ab97993d7fbfd7601e928476c8dc90e1807df7c8c7d9f324e620331caa"
+  },
+  "pin_stats": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/run.py": {
+      "bytes": 17496,
+      "mtime_ns": 1792227291543941993
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/client.py": {
+      "bytes": 6754,
+      "mtime_ns": 1792227291544219287
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/contract.py": {
+      "bytes": 8930,
+      "mtime_ns": 1792227291544612789
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/launch.py": {
+      "bytes": 2800,
+      "mtime_ns": 1792227291544486913
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py": {
+      "bytes": 6570,
+      "mtime_ns": 1792227291544098286
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "bytes": 2705,
+      "mtime_ns": 1792227291544878582
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "bytes": 4027,
+      "mtime_ns": 1792227291544993625
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "bytes": 4155,
+      "mtime_ns": 1792227291545134875
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-sources/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": {
+      "bytes": 4093,
+      "mtime_ns": 1792227291545256751
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/plan.json": {
+      "bytes": 3460109,
+      "mtime_ns": 1792227291641581499
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1/complete.json": {
+      "bytes": 34492,
+      "mtime_ns": 1792227824295102111
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/candidate.py": {
+      "bytes": 2195,
+      "mtime_ns": 1792230708210797663
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/common.py": {
+      "bytes": 4637,
+      "mtime_ns": 1792230708181745109
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/prepare.py": {
+      "bytes": 5437,
+      "mtime_ns": 1792230708211239457
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/probe_socket_cpu.py": {
+      "bytes": 5318,
+      "mtime_ns": 1792230875232824173
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/run.py": {
+      "bytes": 6421,
+      "mtime_ns": 1792230708210959747
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/serve.py": {
+      "bytes": 4114,
+      "mtime_ns": 1792230708211107206
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_cpu.py": {
+      "bytes": 12071,
+      "mtime_ns": 1792230708211382416
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/test_lifecycle_cpu.py": {
+      "bytes": 6113,
+      "mtime_ns": 1792230708182555780
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/native_transport_v2/README.md": {
+      "bytes": 5513,
+      "mtime_ns": 1792230940909264534
+    },
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/socketserver.py": {
+      "bytes": 28065,
+      "mtime_ns": 1792128315378792106
+    },
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/socket.py": {
+      "bytes": 38218,
+      "mtime_ns": 1792128315378722980
+    },
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/http/server.py": {
+      "bytes": 50054,
+      "mtime_ns": 1792128315296536257
+    },
+    "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/threading.py": {
+      "bytes": 55343,
+      "mtime_ns": 1792128315387495415
+    }
+  },
+  "expected_counts": {
+    "servers": 6,
+    "warm_requests": 18,
+    "formal_requests": 18,
+    "formal_tokens_if_valid": 576
+  },
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "normal_eos": true,
+  "concurrency": 1,
+  "warm_requests": 3,
+  "formal_requests": 3,
+  "cooldown_seconds_after_each_request": 2,
+  "socket_contract": "Every accepted socket readback must be an int and bool(raw) must match requested OFF/ON; preserve raw plus normalized enabled. Any setup/readback/receipt failure writes permanent fatal evidence and exits whole server code 70; never readiness retry.",
+  "lifecycle": "Unmodified frozen E020 run_one/client/resource/lease helpers; direct owner PID, absolute request/probe bounds, cancel reap and outer restore.",
+  "scope": "Only TCP_NODELAY differs; E020 raw measurements remain. No payload padding, model changes, step observer or end-to-end GPU-speed claim."
+}
