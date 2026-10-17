@@ -5,6 +5,7 @@
 
 | 快照 | 本批内容 | 结论 |
 |---|---|---|
+| [2026-10-17 v8](2026-10-17-v8/README.md) | D512 native n=1/C 与 Lithos n=3/C，八个实际点 | Lithos 六进程384正式请求及资源/恢复审计PASS；C8原生167.40 vs Lithos44.92 tok/s，p50 24.43 vs91.18s；oMLX待测、无全网/最大并发声明 |
 | [2026-10-17 v6](2026-10-17-v6/README.md) | 新 D512 native C1/C8，128正式请求，各1新进程 | 全周期独立审计PASS；45.37 /167.40 tok/s，p50 11.28 /24.43 s；oMLX/Lithos D512待测，不拼旧cap32 |
 | [2026-10-17 v5](2026-10-17-v5/README.md) | 历史C2–64与同轮E020 C1分面；217份来源独立核对 | 正确性硬门下比较真实吞吐/完整延迟；保留被支配点，历史外部C1干扰排除证据不足，未拼接跨轮前沿 |
 | [2026-10-17 v4](2026-10-17-v4/README.md) | E020 官方 MTP / DSpark 与同轮 target-only；15 fresh servers / 90 请求 | C1 的 latency–throughput 最优为 oMLX target-only；MTP 吞吐 GM 0.906×、DSpark 1.086×，不与旧并发曲线混用 |

@@ -1,0 +1,94 @@
+{
+  "schema": "cold-service-restoration-audit-v1",
+  "status": "PASS",
+  "qualified": true,
+  "performance_qualified": false,
+  "numerical_qualified": false,
+  "ledger_opened": false,
+  "scope": "Raw restoration physical/log/worker evidence and retained Lithos direct-server child ps/port bytes; owner absence and final HTTP/PID/job/listener are controller receipts. No numerical/performance or live observation claim.",
+  "audit_source_sha256": "41d260e63ce13c5c5912217ae74169e5c3cd118af32f3667aefffc3637a2d66f",
+  "frozen_formal_audit_source_sha256": "af46699fcea1065c4fcf69a85225a916987fba484098d53ef2acb905eb4ae3a8",
+  "journal_sha256": "104e60213c19362cae2691955ee39da6af7d84f10abf0aea1bca09b3091102d2",
+  "owner_plan_sha256": "ab8d035bf53f65855143ac9c5f2713d0a119bcd81a9504766a0aa8b376612523",
+  "service_restore": {
+    "status": "PERSISTED_VISIBLE_RECEIPTS_CONSISTENT",
+    "physical_samples": 19,
+    "max_recorded_system_footprint_bytes": 175299117056,
+    "raw_log_bytes": 11301,
+    "raw_log_sha256": "c732899792ccba9be0244883d9e3885d99cfc857856fd9a899e789c5883bca93",
+    "replacement": {
+      "pid": 85613,
+      "ppid": 1,
+      "start": "Sat Oct 17 16:26:08 2026",
+      "comm": "omlx-server"
+    },
+    "http_worker_returncode": 0,
+    "exact_runtime_signature_restored": false,
+    "warm_kv_restored": false,
+    "scope": "Raw physical/log checks independent; final HTTP status and PID/job/listener observations exist only as pinned-controller receipts."
+  },
+  "owner_reap": {
+    "status": "ALL_OBSERVED_CHILDREN_REAPED",
+    "owner_status": "PASS",
+    "owner_pid": 57285,
+    "children": [
+      {
+        "phase": "r1-c1",
+        "pid": 57360
+      },
+      {
+        "phase": "r1-c8",
+        "pid": 62179
+      },
+      {
+        "phase": "r2-c8",
+        "pid": 67487
+      },
+      {
+        "phase": "r2-c1",
+        "pid": 72922
+      },
+      {
+        "phase": "r3-c1",
+        "pid": 77425
+      },
+      {
+        "phase": "r3-c8",
+        "pid": 81388
+      }
+    ],
+    "scope": "Phase intents/releases and retained child ps/port bytes checked; owner absence at restoration is a pinned-controller receipt."
+  },
+  "controller_sha256": "5c13010c5645e93eb099592e32ee6192f8a2ec7ca81c5ab2ed67c06f7e4273c2",
+  "raw_auditor_sha256": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_formal/formal.py": "fca180b4296e352e7b75db517ac897fe56d25ceea313d31b6a6c091a515c73ff",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_formal/contract.py": "2c5b221608e8c53b39116b2e13b247b9fb78d83c74cbee069179efbea9210b32",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/owner.py": "97b0f596b8369e36b71fef838f4e290ae4f63b6a02cb47f13e01aa9e14c8f2af",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/audit_qualification.py": "a932583f5a5234b0aff434d9b967a004fcdea05ff9b1c03a1d5d34fe86f6df08",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/audit_resources.py": "e6468ac9bcc90fc2d4f3fcdfc55c5292e042a479905e38de9a85b5d5a0ba093f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/audit_restore.py": "002cb1839b00a0d617404801dcb08cca873deb048da6c39bc726c67f1ef8aa33",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/trial.py": "32d1bdca8236c70129ba5113bfadbad377c8c925e40a925bafd027e8ecff5ebe",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/serve_probe.py": "c6f4915a83d15cf5c527d71e73d4e54683c0de3881de4c2352b9e0d0abc14703",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/join.py": "2d4dfa12c9672a7a9deff7a962ea18dd671f53c4e7010eed3589fa4a0826cd0d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/lithos_client.py": "13a629f096434bc6c422803bf7bfd8992e24396cb122880b493e893cc5ecd2e9",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_formal/owner.py": "49dfa344b0abca24ba3ec84a14b44018751cb57353b82fd16197ca4bd49c9b70",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/controller.py": "b5237c458afa8324ffa6d5e6a5c49167578daec7425ff036112ec8e108d61213",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v4.py": "836a4c16534521441da8021df3f963210d885da867f79a33d86a3b6dd01101c0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller.py": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_retry/controller.py": "d3e251d6a521407c889ed6b8f7b2fed4903445263a440d2dd50755f8db9f8a14",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_formal/controller.py": "5c13010c5645e93eb099592e32ee6192f8a2ec7ca81c5ab2ed67c06f7e4273c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/audit_restore_v4.py": "af46699fcea1065c4fcf69a85225a916987fba484098d53ef2acb905eb4ae3a8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_absent_qualification.py": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/lithos_d512_formal/audit_restore.py": "41d260e63ce13c5c5912217ae74169e5c3cd118af32f3667aefffc3637a2d66f"
+  },
+  "weight_shards_rehashed": false,
+  "adapter_scope": "Unmodified frozen raw audit plus current-cycle original/replacement inequality; historical74384 exclusion retained. No global patch, source-path spoof or evidence rewriting."
+}

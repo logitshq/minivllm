@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "test_before_sha256": "3324d744d552915b09b29b91b1ac12188beab6decab604c59bcb66da4d0b1cfd",
+  "test_after_sha256": "1308009d072b60da42e79af6414d4790129f3278edc718b47e22c33a68349f21",
+  "prior_registered_sources_unchanged": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/join.py": "e31b135db7e57ce99daa6bc93c6d51a67a09ebefc2a257a1a8b832a0a656bafe",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/join_v2.py": "9a09959a840503240f387dc1a6e447311e08b1187b54ba3516e09a60c18cd8d1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/owner.py": "9c2df0b4e76bd2a6ef590c34bb7a6f9c89972c878f76f4b99f69d0b8e658019f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/serve_probe.py": "226aeb6818b954ab00f62062470868a4e4a18665a9b96fc8635d077aa000fe67",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/serve_probe_v2.py": "d0498a5fd825adcca97b4eee420dd89dbec9b6ee986b9a604986e286d2ad8b9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/test_owner_cpu.py": "4b3770179c7df762e18896b570b1a953d16d64300b085afa5460c07f4109e95c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/test_probe_cpu.py": "7d6fae2d5d653116de97de44a4dc73d9915aa5fa68557ea9e9c360c40aa03925",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/trial.py": "18ceeadb0c47874308d58f87f93e61cc160d24bb551dd3e50c62f1084e4c0ec6"
+  },
+  "artifacts": {
+    "fixture-fix.diff": {
+      "sha256": "8125705b43f59e91263c6ce08acf0c38433dd748609fa3443c3d1b82e356a9bc",
+      "bytes": 786
+    },
+    "origin.json": {
+      "sha256": "e04998cb89508548c420e572a57e52b7b63e4e82a060009a4106ea5f2075c73e",
+      "bytes": 213
+    },
+    "result.json": {
+      "sha256": "3097d1116f7fec83697b8c815906ed455d982b7ad391348bf8363d5452a387b6",
+      "bytes": 5458
+    },
+    "run_cpu.py": {
+      "sha256": "738ffa96ced4114dd238fdbc3df9ce868dee6b1c76c7d0a017acc2267600a932",
+      "bytes": 4215
+    },
+    "stderr.txt": {
+      "sha256": "377ceb8b935595c51f90e1be3022d81706e71f8c56124cd15aede21e0840872b",
+      "bytes": 2693
+    },
+    "stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "test_v2_cpu-after.py": {
+      "sha256": "1308009d072b60da42e79af6414d4790129f3278edc718b47e22c33a68349f21",
+      "bytes": 18589
+    },
+    "test_v2_cpu-before.py": {
+      "sha256": "3324d744d552915b09b29b91b1ac12188beab6decab604c59bcb66da4d0b1cfd",
+      "bytes": 18384
+    }
+  },
+  "fixes": [
+    "canonical resolved fake model path",
+    "canonical resolved fake output directory"
+  ],
+  "scope": "14 targeted CPU tests only; original 91-test failure retained; no production sources changed; no model/service/device qualification"
+}

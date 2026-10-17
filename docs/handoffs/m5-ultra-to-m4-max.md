@@ -884,3 +884,14 @@ Fetched M4 cdb0649 again; retain the agreed M4 prefill/admission and M5 graph/re
 [oMLX owner review](../../bench/reviews/omlx-d512-owner-next-review.md) identifies the actual server PID/Popen resource boundary; a trial wrapper PID cannot substitute. The first owner source is prepared, but controller/auditors are still absent and execution must fail closed. [E024 HTTP review](../../bench/reviews/e024-http-adapter-next-review.md) locates the one decode installation point and the run_case adaptation collision to avoid. These are implementation readiness notes, not new HTTP or GLM performance results.
 
 Lookup research now explicitly adds verification width T3: K1/2/4 proposals require T2/3/5 including the anchor, so the existing shared T1/2/4/5 table cannot interpolate the missing point.
+
+
+### 2026-10-17 16:26 PDT — actual Lithos D512 formal closed
+
+Six actual observer-OFF processes and384formal/48warm complete. Frozen independent formal, raw resources and restoration all PASS. Lithos median C1=44.910185tok/s,p50=11.402589s; C8=44.916329tok/s,p50=91.183519s, officialFIFO. Native historical n1/C remains45.372147/167.398907tok/s,p50=11.283287/24.431815s. All eight actual points are in v8, no pairing/CI and oMLX D512 pending. All six Lithos children reaped; service restored to85613 with fresh MTP/residentPLE, warmKV not restored. Archive2695members/3769816bytes hash ed1e515d0cce3bfc537c7ac27644d561af020697389290b41270f0d30c167d92.
+
+M5 next E024 actual serving numerical scope: original37 requests plus42 changed-parameter/restored calls, all128state/fullvocab, actual bound-family/ahead/refill witnesses. DefaultOFF; noHTTPperformance yet. Cold lifecycle/integration/serving/audit/driver59CPU tests passed; oMLX fixture-only failures are separately preserved/repaired.
+
+Research updates: [JustFit/SiliconBench](../optimization-guide/research/2026-10-17-local-serving.md) keep mixed-prefill work with M4. [MLX0.32.4 source review](../optimization-guide/research/2026-10-17-mlx-upstream.md) identifies #4596 generic SDPA TK4 as a separate candidate for M5 bound1536. #4641 FP32 split-K changes rounding, cannot inherit existing BF16 exact oracle; #4633 targets idle latency, not continuous throughput. Do not upgrade current frozen runtime; future isolated runtime/patch needs a new exact qualification and baseline.
+
+Focused oMLX14 CPU tests now PASS using actual pinned vendor Python; only test path normalization changed, no production-gate relaxation. E024 v1 actual plans/controller prepare PASS; owner-plan5161400cdfcd2b91610383f0776fc8483003d7b9bc3962c3a6728948004b5298, child-plane85f92aa1402025a669de4c2426460c1eced29f0145f128480f1fa9e66349c56. Root execution receipt sealed before next device run.

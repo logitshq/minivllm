@@ -1,0 +1,21 @@
+--- test_v2_cpu-before.py
++++ test_v2_cpu-after.py
+@@ -22,7 +22,8 @@
+ from bench.m5_ultra_256gb.omlx_d512.test_probe_cpu import fixture as old_fixture
+ 
+ PROBE='a'*64
+-MODEL='/tmp/omlx-cpu-only-model'
++# Match loaded_identity's canonical path on macOS (/tmp -> /private/tmp).
++MODEL=str(Path('/tmp/omlx-cpu-only-model').resolve())
+ PID=79123
+ 
+ 
+@@ -228,6 +229,8 @@
+ 
+ 
+ def fake_spec(out,C=1):
++    # Production prepare/run bind the resolved directory, including /var aliases.
++    out=Path(out).resolve()
+     data=fixture(C);jobs=data[2]
+     spec=dict(output_directory=str(out),concurrency=C,port=18024,api_key='cpu',command=['cpu-only'],cwd='/tmp',environment={},
+         sources={str(t.HERE/'serve_probe_v2.py'):PROBE},official_args=['serve','--cpu-mock'],model_directory=MODEL,

@@ -904,3 +904,16 @@ schema mismatches (raw point metadata and scheduler SHA field) were repaired;
 fixture-only test failures are recorded. Fixed originals and failed experiments
 remain untouched. M4 bea0a02/ce068d8 were fetched and merged before registration;
 response and proposed work split are in the Git handoff.
+
+
+## E023 Lithos D512 formal v1 completes · 2026-10-17
+
+Six observer-OFF fresh processes,48warm+384formal,196608 formal committed tokens. Each C has three process observations. Frozen independent formal/resource/restoration audits ran once and PASS. C1 process-metric medians44.910185tok/s, p50 11.402589s; C8 44.916329tok/s, p50 91.183519s. All cap512, early-EOS0. Native historical n1/C remains45.372147/167.398907tok/s and p50 11.283287/24.431815s. New v8 plots eight observations without pooling/CI/interpolation. oMLX D512 remains pending; no global-frontier claim.
+
+999 resource samples pressure1,swap growth0MiB,Swapouts/Pageouts0. All six actual child servers reaped; original oMLX restored as85613 with original model/config plus fresh MTP/resident PLE evidence. WarmKV not restored. Evidence archive2695members/3769816bytes; complete member/source/tree verification PASS.
+
+Next prepared CPU suite actually ran91tests:77 unaffected tests pass; oMLX's14-test module had9errors/1failure (loaded-identity fixture, macOS resolved temporary-path mismatch, missing Pydantic in root test interpreter). Original output preserved; fixture/interpreter repair runs separately without weakening production gates. E024's59 lifecycle/integration/schedule/auditor/driver CPU tests pass. New HTTP entry is only source-reviewed, not covered by these tests.
+
+[Formal evidence](../experiments/m5-ultra-256gb/E023-lithos-formal-v1/README.md) · [D512 plot](progress/2026-10-17-v8/README.md).
+
+Focused oMLX test repair subsequently PASS14/14 in0.385s under the existing pinned oMLX Python. Only two fixture path normalizations changed; production gates unchanged. Original failed stdout/stderr, all actual tested v1 source bytes, focused before/after/command/pins are in [CPU evidence](../experiments/m5-ultra-256gb/prepared-cpu-2026-10-17/README.md).
