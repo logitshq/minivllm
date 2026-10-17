@@ -8,6 +8,7 @@
 [NAX prefill设计](prefill-design.md) ·
 [E011逐次实验教程](tutorials/011-large-batch-graphs.md) ·
 [E012设备端草稿选路](tutorials/012-device-draft-selector.md) ·
+[E013草稿成本分解](tutorials/013-draft-cost-profile.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。

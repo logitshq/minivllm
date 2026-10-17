@@ -21,3 +21,15 @@ target revision保持不变。下载不等于资格；须独立证明加载、at
 脚本最初命名`profile.py`，遮蔽stdlib `profile`。transformers导入torch/cProfile时回到
 本脚本，引发循环导入；没有形成plan或GPU计时。guard保存完整trace、资源和进程回收，
 服务恢复成功。改名`costs.py`后先运行`--help`验证导入，再以新v2目录执行同一计划。
+
+## 尝试2：完成成本分解
+
+9组hidden/logits/10个KV共108个数组严格通过；第一调用及全部441个正式组件计时保留。
+5层backbone在所有case都是最大组件；lm_head仅为完整draft的22.9%–28.9%，未到40%分界。
+1024历史时，block3/5/8的backbone分别2.825/2.924/3.840ms，完整draft为
+3.883/4.056/5.938ms。同步边界会改变重叠，不能把这些组件相加，也不能把比例当Amdahl精确占比。
+
+[69文件归档](../../experiments/m5-ultra-256gb/E013-draft-profile-v2/)同时保留失败v1、成功v2、
+源码、所有样本和资源。4个正式运行资源样本pressure1/thermal0，swap/Swapouts不变，
+子进程已回收，外部服务同身份恢复。下一步拆两种backbone成本：E014有界KV避免长历史
+反复复制；E016只测显式状态图复用上限。两项互相独立，主线程统一安排GPU测试。

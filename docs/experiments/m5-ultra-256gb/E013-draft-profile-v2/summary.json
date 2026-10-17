@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "cases": 9,
+  "array_checks": 108,
+  "resource_samples": 4,
+  "previous_attempt": "Import failure from stdlib profile name collision, no model load or timing; preserved",
+  "decision": "Backbone has largest component time in every case; investigate graph overhead and long-history KV copying",
+  "scope": "Synchronized components are not additive; call_ms and eval_wait_ms are not separate CPU/GPU hardware timings",
+  "rows": [
+    {
+      "history_length": 32,
+      "block": 3,
+      "median_ms": {
+        "context_projection": 0.3,
+        "embedding": 0.205042,
+        "backbone": 2.463,
+        "final_norm": 0.197083,
+        "lm_head": 0.90025,
+        "selector": 0.457083,
+        "full_draft": 3.471
+      },
+      "head_fraction_of_full": 0.2593632958801498
+    },
+    {
+      "history_length": 32,
+      "block": 5,
+      "median_ms": {
+        "context_projection": 0.314208,
+        "embedding": 0.209334,
+        "backbone": 2.795625,
+        "final_norm": 0.188792,
+        "lm_head": 0.9315,
+        "selector": 0.580041,
+        "full_draft": 3.933042
+      },
+      "head_fraction_of_full": 0.2368395760838557
+    },
+    {
+      "history_length": 32,
+      "block": 8,
+      "median_ms": {
+        "context_projection": 0.320042,
+        "embedding": 0.2205,
+        "backbone": 3.476917,
+        "final_norm": 0.221292,
+        "lm_head": 1.583917,
+        "selector": 0.753333,
+        "full_draft": 5.480291
+      },
+      "head_fraction_of_full": 0.28902060127828977
+    },
+    {
+      "history_length": 256,
+      "block": 3,
+      "median_ms": {
+        "context_projection": 0.310708,
+        "embedding": 0.2095,
+        "backbone": 2.545541,
+        "final_norm": 0.213041,
+        "lm_head": 0.923208,
+        "selector": 0.458709,
+        "full_draft": 3.606333
+      },
+      "head_fraction_of_full": 0.255996326462365
+    },
+    {
+      "history_length": 256,
+      "block": 5,
+      "median_ms": {
+        "context_projection": 0.293917,
+        "embedding": 0.219875,
+        "backbone": 2.771208,
+        "final_norm": 0.20025,
+        "lm_head": 0.919333,
+        "selector": 0.5655,
+        "full_draft": 4.013875
+      },
+      "head_fraction_of_full": 0.22903877176045592
+    },
+    {
+      "history_length": 256,
+      "block": 8,
+      "median_ms": {
+        "context_projection": 0.311041,
+        "embedding": 0.224375,
+        "backbone": 3.5695,
+        "final_norm": 0.206667,
+        "lm_head": 1.604708,
+        "selector": 0.773958,
+        "full_draft": 5.65575
+      },
+      "head_fraction_of_full": 0.2837303629050082
+    },
+    {
+      "history_length": 1024,
+      "block": 3,
+      "median_ms": {
+        "context_projection": 0.346042,
+        "embedding": 0.229917,
+        "backbone": 2.82525,
+        "final_norm": 0.234625,
+        "lm_head": 0.915375,
+        "selector": 0.48325,
+        "full_draft": 3.882959
+      },
+      "head_fraction_of_full": 0.2357416083971013
+    },
+    {
+      "history_length": 1024,
+      "block": 5,
+      "median_ms": {
+        "context_projection": 0.330083,
+        "embedding": 0.232459,
+        "backbone": 2.9235,
+        "final_norm": 0.217625,
+        "lm_head": 0.969083,
+        "selector": 0.593334,
+        "full_draft": 4.055708
+      },
+      "head_fraction_of_full": 0.23894299096483276
+    },
+    {
+      "history_length": 1024,
+      "block": 8,
+      "median_ms": {
+        "context_projection": 0.340625,
+        "embedding": 0.234083,
+        "backbone": 3.839833,
+        "final_norm": 0.25275,
+        "lm_head": 1.617083,
+        "selector": 0.82225,
+        "full_draft": 5.938291
+      },
+      "head_fraction_of_full": 0.2723145430225632
+    }
+  ]
+}

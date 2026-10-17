@@ -227,3 +227,11 @@ B16至少1.10×且B8/32/64不回退超过3%才继续调度与HTTP资格。
 99组selector和27组完整draft/KV通过。所有27个点均提升，最小1.094524×。
 核心31增3删，独立`draft_device_selection`默认OFF；没有改verify/commit，也不计入HTTP前沿。
 [接入资格与完整证据](../experiments/m5-ultra-256gb/E012-draft-selector-integrated-v1/README.md)。
+
+## E013 · 2026-10-17 · draft分层成本 · 完成定位
+
+固定E012 ON、历史32/256/1024与block3/5/8。v1脚本名遮蔽stdlib profile，导入失败，未加载模型；
+v2改名costs.py，同一计划9组108数组相等，全部441个正式计时保留。最大组件均为backbone，
+lm_head为完整draft的22.9%–28.9%，未达40%分界。下一步E014窗口KV与E016图复用分别调查。
+同步组件不相加，不是优化收益或端到端结论。[教程](tutorials/013-draft-cost-profile.md)、
+[含失败的完整证据](../experiments/m5-ultra-256gb/E013-draft-profile-v2/)。

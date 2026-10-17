@@ -123,3 +123,13 @@ V112在定位同输入逐算子差异。M5不重复修改这条事务/诊断线�
 通过，97文件完整归档见[E012接入报告](../experiments/m5-ultra-256gb/E012-draft-selector-integrated-v1/README.md)。
 默认OFF；可用`load_drafter(..., device_selection=True)`独立评估，不必接入旧SpecRunner。
 M4的事务与本模块组合时仍须新资格。记录、基准和失败均推本M5分支；不声称已通过聊天送达。
+
+## E013定位与并行研究边界
+
+E013已测32/256/1024历史、block3/5/8：5层draft backbone始终为最大组件，lm_head占
+完整draft约22.9%–28.9%。108数组严格通过，首次命名导致的导入失败也保留。用户授权
+多agent并行后，本机三条CPU实现线分别为E014 bounded draft KV、E015官方MTP对照资格、
+E016 draft backbone图复用；GPU测试仍由本主线程单队列隔离运行。
+
+MTP `b9b764dada894b8c416f89cbc8cf99bc7e20b831`已下载，actual oMLX wheel仍0.7.1.dev1；
+尚未在M5授予MTP数值资格。上述工作不修改M4的GDN事务与V112诊断。

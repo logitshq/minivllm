@@ -78,3 +78,9 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   §3.2说明提前停止的因果要求，以及全局最优依赖平滑/单峰成本曲线。
   推论：不在看到未来candidate后回选长度，也不把未校准confidence直接当概率。
   本机先保留fixed block成本与真实接受trace；暂无该checkpoint的校准置信头。
+
+- [Adaptive DHiSparse v1](https://arxiv.org/html/2610.13708v1)，2026-10-09；读摘要、§1、§3.4。
+  草稿KV按可见窗口保存，验证暂存按活跃层复用；逻辑位置与物理驻留分离，覆盖前等待旧reader。
+  作者在长上下文稀疏模型上报告收益，不能外推到M5统一内存或本Qwen稠密attention。
+  本机可借用的独立机制是bounded draft KV：当前DFlash2只读2048窗口却拼接全历史。
+  E014先保留原投影、可见KV和位置数学，检验减少无效复制；不是复现HBM/host分层系统。
