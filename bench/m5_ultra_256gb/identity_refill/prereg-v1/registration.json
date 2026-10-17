@@ -1,0 +1,304 @@
+{
+  "plan_sha256": "652486a29e021bd8009bc27a1bdede607c63aa56d9fb84bf70940860a8e437ee",
+  "jobs_sha256": "75c4fc3ab26ab0bdf640b517683b52afedbc661df7c636f32ffd6e317e94d383",
+  "pins": 570,
+  "contract": {
+    "schema": "E028-identity-refill-screen-v1",
+    "cases": [
+      {
+        "id": "identity-2-to-4",
+        "old_B": 2,
+        "keep": [
+          0,
+          1
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 4,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "identity_refill",
+        "checks": 8
+      },
+      {
+        "id": "identity-4-to-6",
+        "old_B": 4,
+        "keep": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 6,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": true,
+        "on_path": "identity_refill",
+        "checks": 12
+      },
+      {
+        "id": "identity-6-to-8",
+        "old_B": 6,
+        "keep": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 8,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "identity_refill",
+        "checks": 8
+      },
+      {
+        "id": "identity-offset-noncontiguous",
+        "old_B": 4,
+        "keep": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 6,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": true,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "identity_refill",
+        "checks": 8
+      },
+      {
+        "id": "control-reorder",
+        "old_B": 4,
+        "keep": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 6,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "fallback",
+        "checks": 8
+      },
+      {
+        "id": "control-removal",
+        "old_B": 4,
+        "keep": [
+          0,
+          2
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 4,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "fallback",
+        "checks": 8
+      },
+      {
+        "id": "control-no-new",
+        "old_B": 4,
+        "keep": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_B": 0,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 4,
+        "new_offsets": [],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "fallback",
+        "checks": 8
+      },
+      {
+        "id": "control-length-growth",
+        "old_B": 4,
+        "keep": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1793,
+        "output_L": 2048,
+        "output_B": 6,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "fallback",
+        "checks": 8
+      },
+      {
+        "id": "control-empty-old",
+        "old_B": 0,
+        "keep": [],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 2,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": false,
+        "reverse_output_write": false,
+        "on_path": "fallback",
+        "checks": 8
+      },
+      {
+        "id": "identity-delayed-eval",
+        "old_B": 4,
+        "keep": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_B": 2,
+        "old_L": 1536,
+        "new_need": 1536,
+        "output_L": 1536,
+        "output_B": 6,
+        "new_offsets": [
+          935,
+          954
+        ],
+        "views": false,
+        "delayed": true,
+        "reverse_output_write": false,
+        "on_path": "identity_refill",
+        "checks": 12
+      }
+    ],
+    "expected_cases": 10,
+    "expected_checks": 88,
+    "expected_phases": 53,
+    "cache_limit_bytes": 0,
+    "mlx_observation_budget_bytes": 1073741824,
+    "physical_observation_budget_bytes": 2147483648,
+    "child_alarm_seconds": 120,
+    "physical_reading_semantics": "separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current",
+    "layers": [
+      {
+        "kind": "attention",
+        "Hkv": 4,
+        "D": 256,
+        "KV_dtype": "bfloat16"
+      },
+      {
+        "kind": "GDN",
+        "conv_shape": [
+          3,
+          10240
+        ],
+        "conv_dtype": "bfloat16",
+        "S_shape": [
+          48,
+          128,
+          128
+        ],
+        "S_dtype": "float32"
+      }
+    ],
+    "phases": [
+      "before_case",
+      "after_rebuild_graph",
+      "after_outputs_eval",
+      "after_source_writes",
+      "after_case_release"
+    ],
+    "extra_phase": "after_output_write only identity-4-to-6",
+    "raw_storage": "complete safetensors at each path; byte-identical snapshots may be hardlinked after SHA verification",
+    "global_phases": [
+      "initial",
+      "final_release only on PASS"
+    ],
+    "source_writes": {
+      "delayed_before_output_eval": -8.0,
+      "after_output_eval": -16.0
+    },
+    "output_write": -32.0,
+    "mutation": "Exactly the first scalar of every present old/staging/output array; all other bytes unchanged",
+    "source_pattern": "BF16/F32 finite uint words: low=(i+i//127+seed)%128, sign=(i+i//127+seed)&1; no RNG",
+    "view_layout": "old KV: backing[B+1,4,L+2,512][1:,:,1:L+1,::2]; analogous staging, conv and S offset/strided views",
+    "gate": "finite + complete original dtype/shape/bytes + IDs/lens + branch witness + independent buffer ownership",
+    "true_empty_keep_and_new": "not supported by native rebuild; not invented as a successful case",
+    "performance_qualified": false,
+    "full_model_qualified": false,
+    "observed_limits_not_OS_hard_caps": true
+  },
+  "registered_paths": {
+    "inputs": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-v1-inputs",
+    "owner": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-v1-owner",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-v1-service-lease"
+  },
+  "device_run": false,
+  "performance_qualified": false,
+  "full_model_qualified": false
+}

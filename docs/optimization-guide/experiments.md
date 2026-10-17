@@ -514,3 +514,13 @@ journal 仍 PREPARED，owner 不存在；实际审计返回 INCOMPLETE/qualified
 未执行停服、重载或模型工作；cold restart 授权仍待答，现有 pressure2 不满足全模型资源门。
 [固定计划、只读记录与 CPU 回执](../../bench/m5_ultra_256gb/pareto_realistic/prereg-cold-service-v1/README.md)。
 正确性是入场门，目标仍是完整请求 p50 延迟↓、整机输出 tokens/s↑；本次准备不记作性能进步。
+
+
+## E028 · 2026-10-17 · refill 跳过恒等 gather · 预注册
+
+独立默认OFF batch adapter，仅旧行完整按原顺序保留、新请求非空且所有KV容量不变时，
+省去旧K/V/conv/S的gather，保留原concat及算术。20CPU检查和8个错误计划拒绝通过；
+独立静态审读无阻断。固定10cases/88完整字节比较/53资源阶段，570pins；先提交再实跑。
+第一阶段只用真实层形状的一attention+一GDN合成状态，检查非连续视图、延迟eval和双向
+写入隔离，不代替64层/模型/HTTP资格，无性能点。[教程](tutorials/028-identity-refill.md)与
+[固定计划](../../bench/m5_ultra_256gb/identity_refill/prereg-v1/README.md)。

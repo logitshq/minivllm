@@ -1,0 +1,60 @@
+{
+  "status": "CPU_PREPARE_PASS",
+  "plan_sha256": "652486a29e021bd8009bc27a1bdede607c63aa56d9fb84bf70940860a8e437ee",
+  "source_count": 570,
+  "fixed_contract": {
+    "cases": 10,
+    "checks": 88,
+    "phases": 53
+  },
+  "tests": 20,
+  "negative_plans": [
+    {
+      "case": "schema",
+      "rejected": true,
+      "error": "numeric scope"
+    },
+    {
+      "case": "extra",
+      "rejected": true,
+      "error": "plan fields"
+    },
+    {
+      "case": "memory",
+      "rejected": true,
+      "error": "fixed numerical resource policy"
+    },
+    {
+      "case": "cache",
+      "rejected": true,
+      "error": "fixed screen contract"
+    },
+    {
+      "case": "checks",
+      "rejected": true,
+      "error": "fixed screen contract"
+    },
+    {
+      "case": "screen",
+      "rejected": true,
+      "error": "screen/python"
+    },
+    {
+      "case": "environment",
+      "rejected": true,
+      "error": "fixed environment"
+    },
+    {
+      "case": "candidate-pin",
+      "rejected": true,
+      "error": "required pins missing"
+    }
+  ],
+  "independent_review": {
+    "candidate_sha256": "bb9f8a461625e97c80e75140c9d9b7b8718a633595ab4f3a422267e752ded8f5",
+    "screen_sha256": "160c8848026e8640827dee0e739d8d68040c520a5e1517041eac87d4116bace3",
+    "owner_sha256": "524d8c6471cdf80c645205c27add36f8a881d674f36c3a71b3dd7a4594b3a61a",
+    "status": "no_static_blocker"
+  },
+  "device_run": false
+}
