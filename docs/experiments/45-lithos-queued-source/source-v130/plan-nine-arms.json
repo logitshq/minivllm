@@ -1,0 +1,63 @@
+{
+  "status": "GPU_UNRUN_QUALIFICATION_REQUIRED",
+  "arms": [
+    {
+      "label": "V130-block1-C1",
+      "concurrency": 1,
+      "replica": 1
+    },
+    {
+      "label": "V130-block1-C2",
+      "concurrency": 2,
+      "replica": 1
+    },
+    {
+      "label": "V130-block1-C4",
+      "concurrency": 4,
+      "replica": 1
+    },
+    {
+      "label": "V130-block2-C2",
+      "concurrency": 2,
+      "replica": 2
+    },
+    {
+      "label": "V130-block2-C4",
+      "concurrency": 4,
+      "replica": 2
+    },
+    {
+      "label": "V130-block2-C1",
+      "concurrency": 1,
+      "replica": 2
+    },
+    {
+      "label": "V130-block3-C4",
+      "concurrency": 4,
+      "replica": 3
+    },
+    {
+      "label": "V130-block3-C1",
+      "concurrency": 1,
+      "replica": 3
+    },
+    {
+      "label": "V130-block3-C2",
+      "concurrency": 2,
+      "replica": 3
+    }
+  ],
+  "same_protocol": "official /api/chat NDJSON",
+  "fresh_loads": 9,
+  "warm_groups_per_arm": 3,
+  "formal_groups_per_arm": 3,
+  "HTTP_requests": 126,
+  "outputs": 4032,
+  "formal_requests": 63,
+  "formal_outputs": 2016,
+  "fixed_unloaded_gaps": 8,
+  "cooling_s": 480,
+  "fixed_power": "explicit CLI AC or Battery; no cross-domain pool",
+  "queue": "official ticket-serialized single generation, not GPU batch",
+  "old_AC_comparison_pooled": false
+}

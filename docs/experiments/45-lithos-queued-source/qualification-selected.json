@@ -1,0 +1,76 @@
+{
+  "status": "PASS_V130_OFFICIAL_OLLAMA_QUEUE_C1_C2_C4_OUTPUT_AND_CALIBRATION",
+  "fixed_power": "AC",
+  "HTTP_requests": 8,
+  "completion_tokens": 256,
+  "groups": [
+    {
+      "group_id": "calibrate-openai-C1",
+      "protocol": "openai",
+      "requested_concurrency": 1,
+      "successful_requests": 1,
+      "all_requested_POSTs_before_first_terminal": true,
+      "latency_p50_ms": 11836.370750010246,
+      "total_throughput_tok_s": 2.7035314012931115,
+      "all_correctness_checks_passed": true
+    },
+    {
+      "group_id": "qualify-ollama-C1",
+      "protocol": "ollama",
+      "requested_concurrency": 1,
+      "successful_requests": 1,
+      "all_requested_POSTs_before_first_terminal": true,
+      "latency_p50_ms": 1484.6000839897897,
+      "total_throughput_tok_s": 21.554626289661506,
+      "all_correctness_checks_passed": true
+    },
+    {
+      "group_id": "qualify-ollama-C2",
+      "protocol": "ollama",
+      "requested_concurrency": 2,
+      "successful_requests": 2,
+      "all_requested_POSTs_before_first_terminal": true,
+      "latency_p50_ms": 2212.5807294942206,
+      "total_throughput_tok_s": 21.69485396457746,
+      "all_correctness_checks_passed": true
+    },
+    {
+      "group_id": "qualify-ollama-C4",
+      "protocol": "ollama",
+      "requested_concurrency": 4,
+      "successful_requests": 4,
+      "all_requested_POSTs_before_first_terminal": true,
+      "latency_p50_ms": 3690.3606459964067,
+      "total_throughput_tok_s": 21.58158738333643,
+      "all_correctness_checks_passed": true
+    }
+  ],
+  "source_pins_sha256": "ee894ddd3a116089f4372cd1c8d2c2b2c23d02cad78a5812c6b350252e026679",
+  "gold_is_saved_visible32_not_internal_raw": true,
+  "no_automatic_retry": true,
+  "no_new_performance_point": true,
+  "custom_queue": false,
+  "GPU_batch_claim": false,
+  "HTTP_arrival_fairness_claim": false,
+  "old_429_raw_observed": false,
+  "source": {
+    "path": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130qual-attempt1/driver-output/receipt.json",
+    "sha256": "b62bdca3f6bc15589268176cdd9420068d3338d58a8bcfdea5c21dc246f0b511",
+    "bytes": 2566
+  },
+  "cleanup": {
+    "failure": null,
+    "cleanup_errors": [],
+    "owned_exit": {
+      "pid": 68282,
+      "wait_completed": true,
+      "returncode": -15,
+      "recorded_birth_identity_sha256": "7a7606c8e7098b885c769c7acf6e30ecb5c8f165fbb5f473f3326a062776f64c",
+      "exact_pid_absence": {
+        "pid": 68282,
+        "returncode": 1,
+        "absent": true
+      }
+    }
+  }
+}

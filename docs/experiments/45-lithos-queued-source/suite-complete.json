@@ -1,0 +1,119 @@
+{
+  "status": "PASS_V130_OFFICIAL_OLLAMA_QUEUED_LOAD_SLICE_AWAIT_INDEPENDENT_AUDIT_AND_EXTERNAL_RELEASE",
+  "fixed_power": "AC",
+  "arms": [
+    {
+      "label": "V130-block1-C1",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318,
+      "HTTP_requests": 6,
+      "completion_tokens": 192
+    },
+    {
+      "label": "V130-block1-C2",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357,
+      "HTTP_requests": 12,
+      "completion_tokens": 384
+    },
+    {
+      "label": "V130-block1-C4",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_p50_ms": 3713.353520492092,
+      "total_throughput_tok_s": 21.48744276261209,
+      "HTTP_requests": 24,
+      "completion_tokens": 768
+    },
+    {
+      "label": "V130-block2-C2",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_p50_ms": 2251.56358302047,
+      "total_throughput_tok_s": 21.33804845154775,
+      "HTTP_requests": 12,
+      "completion_tokens": 384
+    },
+    {
+      "label": "V130-block2-C4",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_p50_ms": 3801.7626460059546,
+      "total_throughput_tok_s": 20.963392348546392,
+      "HTTP_requests": 24,
+      "completion_tokens": 768
+    },
+    {
+      "label": "V130-block2-C1",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_p50_ms": 1513.7338339991402,
+      "total_throughput_tok_s": 21.13977984852136,
+      "HTTP_requests": 6,
+      "completion_tokens": 192
+    },
+    {
+      "label": "V130-block3-C4",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997,
+      "HTTP_requests": 24,
+      "completion_tokens": 768
+    },
+    {
+      "label": "V130-block3-C1",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_p50_ms": 1489.0947499952745,
+      "total_throughput_tok_s": 21.48956606025342,
+      "HTTP_requests": 6,
+      "completion_tokens": 192
+    },
+    {
+      "label": "V130-block3-C2",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_p50_ms": 2341.6946459910832,
+      "total_throughput_tok_s": 20.47889659704138,
+      "HTTP_requests": 12,
+      "completion_tokens": 384
+    }
+  ],
+  "medians": {
+    "1": {
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318
+    },
+    "2": {
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357
+    },
+    "4": {
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997
+    }
+  },
+  "HTTP_requests": 126,
+  "completion_tokens": 4032,
+  "formal_requests": 63,
+  "formal_tokens": 2016,
+  "source_pins_sha256": "ee894ddd3a116089f4372cd1c8d2c2b2c23d02cad78a5812c6b350252e026679",
+  "qualification": {
+    "receipt": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130qual-attempt1/driver-output/receipt.json",
+    "receipt_sha256": "b62bdca3f6bc15589268176cdd9420068d3338d58a8bcfdea5c21dc246f0b511",
+    "external_release": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/lithos-ollama-v130qual-attempt1/external-release.json",
+    "external_release_sha256": "edb43e2a7b87e73d8c9beb199cb8986c7161baa7e3e5eaf8ff0fb0943455a391"
+  },
+  "all_same_protocol": true,
+  "GPU_batch_claim": false,
+  "HTTP_arrival_fairness_claim": false,
+  "automatic_retry": false,
+  "prior_AC_campaign_pooled": false,
+  "full_27_arm_comparison": false,
+  "automatic_adoption": false
+}

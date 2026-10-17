@@ -4,6 +4,8 @@
 
 这次补齐的是一次全新、可比较的 C1/C2/C4 测量。第 43 章的 C1 结果和更早的 C4 数据均没有拼入本图。
 
+后续补充：[第45章](45-lithos-queued-concurrency.md)发现并实测同版本 Lithos 已有的官方 Ollama FIFO 排队入口，补齐 C1/C2/C4。本章 Lithos C2/C4 的 N/A 仅限当时使用的 OpenAI 接口，不代表引擎不能承接多个排队请求；本章历史图与原始结果保持不变。
+
 ## 1. 先看坐标，再看 C
 
 ![M4 Max Qwen3.8-27B：吞吐与完整 HTTP 请求延迟的 Pareto 图](44-fresh-full-source/fresh-full-throughput-latency.png)

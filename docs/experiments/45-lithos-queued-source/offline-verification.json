@@ -1,0 +1,46 @@
+{
+  "status": "PASS_PORTABLE_V130_SAVED_ROWS_REPLAY",
+  "scope": "author offline replay, not independent raw/GPU audit",
+  "qualification_requests": 8,
+  "performance_requests": 126,
+  "formal_requests": 63,
+  "formal_tokens": 2016,
+  "groups": 58,
+  "performance_groups": 54,
+  "performance_arms": 9,
+  "configuration_medians": [
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_p50_ms": 1511.1249999899883,
+      "total_throughput_tok_s": 21.176275953486318
+    },
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_p50_ms": 2326.1144584976137,
+      "total_throughput_tok_s": 20.75437898024357
+    },
+    {
+      "engine": "lithos",
+      "protocol": "official Ollama NDJSON",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_p50_ms": 3797.9672709916485,
+      "total_throughput_tok_s": 21.10082481118997
+    }
+  ],
+  "all_visible_streams_same": true,
+  "resources": 175,
+  "fixed_power": "AC",
+  "cooling_gaps": 8,
+  "performance_PID_absences": 11,
+  "performance_port_absences": 9,
+  "manifest_payloads_checked": "all payloads rechecked after seal",
+  "qualification_warm_ranked": false,
+  "GPU_used": false
+}
