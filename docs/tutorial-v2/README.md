@@ -146,3 +146,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 另读[共享权重多行 M1 补记](../code-versions/44-shared-w-m1/LOCAL-NUMERIC.zh.md)：从已经正确的 broadcast-M1 出发，尝试在多个 token 之间复用读取的权重，同时保留每行累加顺序。代码和局部数值记录已保存；它尚未取得整模或性能资格。
 
 [45：补测 Lithos 的并发请求](../experiments/45-lithos-queued-concurrency.md)对照 OpenAI 与 Ollama 请求代码，解释客户端并发、服务端排队和 GPU batching 的区别。官方排队接口实测 C1/C2/C4，吞吐基本持平而完整延迟增加；三家九点图保留测试批次标签。
+
+[46：读新论文，找下一处值得替换的代码](../experiments/46-next-ideas-from-papers.md)区分已实现机制与真正的新改动，用前后伪代码解释 decoded-W 复用，并拆开调度排序、时间预算、投机成本策略。包含近期论文与作者代码；候选尚未实现或计入性能图。

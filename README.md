@@ -100,3 +100,5 @@ docs/              计划、教程、远程版的契约和 notes
 [共享 W 多行 M1 源码与数值补记](docs/code-versions/44-shared-w-m1/README.md)另存新 kernel：1491 个同输入完整矩阵比较通过，含 497 个真实 T5 输入及派生前缀。尚无整模接入或速度结论，不是第44章曲线的收益来源；供 M5 重建本机资格。
 
 [45：补测 Lithos C1/C2/C4](docs/experiments/45-lithos-queued-concurrency.md)使用原版本已有的官方 Ollama FIFO 排队接口，完成九次独立加载。C1/C2/C4 中位吞吐为 21.18 / 20.75 / 21.10 tok/s，完整请求延迟为 1.51 / 2.33 / 3.80 秒；126 个请求全部通过。新图展示三家各三个并发档位，注明 native/oMLX 来自 V128、Lithos 来自 V130；两轮均为 AC、同模型和负载，属于跨轮描述性比较。本次补齐测量与教程，没有修改引擎或宣称新的提速。
+
+[46：从新论文到下一轮实验](docs/experiments/46-next-ideas-from-papers.md)记录与 M5 的 Git 研究交接，以及 decoded-W 复用、混合请求调度和真实成本投机策略的代码替换点。论文与作者实现已核对；这是待验证方案，尚无新性能点。
