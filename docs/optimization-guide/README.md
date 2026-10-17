@@ -7,6 +7,7 @@
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
 [NAX prefill设计](prefill-design.md) ·
 [E011逐次实验教程](tutorials/011-large-batch-graphs.md) ·
+[E012设备端草稿选路](tutorials/012-device-draft-selector.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
@@ -55,6 +56,21 @@ T_step ≳ max(实际读取字节 / 有效带宽, 实际运算 / 有效算力)
 一次只改一个主因。微基准快而模型不快，先用 Amdahl 定律解释：
 若优化部分占比为 `f`、局部加速 `s`，整体上限约 `1/(1-f+f/s)`。
 不要因为局部漂亮就扩充维护成本。
+
+### 模块与实验开关
+
+先按实际成本和状态所有权划边界，再写代码。每个实验只有一个独立开关和明确输入输出；
+对照路径随时可用，启用状态写入运行identity。不要用隐藏环境变量自动叠加多个实验。
+
+| 模块 | 独立控制 | 组合约束 |
+|---|---|---|
+| decode图复用 | `compile_decode` | 数学、shape与显式状态分别验证 |
+| decode投影/预处理融合 | `fuse_decode` | 依赖graph，但不能用graph收益替代融合收益 |
+| 大batch graph原型E011 | 隔离candidate类 | 已拒绝，生产B1–8边界不扩大 |
+| draft选路原型E012 | `enabled(device=False/True)` | 只换选路，不动draft长度、verify与commit |
+| 投机验证/提交 | 保留独立数值资格 | 组合前检查接受、拒绝、EOS、预算和cache owner |
+
+先测模块，再测完整请求；实验独立通过不自动意味着组合通过。
 
 ## 3. 从 oMLX、Lithos 拿走什么
 
