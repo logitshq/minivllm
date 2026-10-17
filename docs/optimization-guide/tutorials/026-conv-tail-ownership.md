@@ -1,6 +1,6 @@
 # E026: copy a small state, release a large prefill buffer
 
-2026-10-17. This default-off candidate has now passed its isolated device bit/backing diagnostic. A scoped integration is CPU-reviewed; real-model numerical qualification and performance measurement remain pending.
+2026-10-17. This default-off candidate has now passed its isolated device bit/backing diagnostic. The scoped integration also passed a real-weight single-layer exact-output/state diagnostic. Full-model numerical qualification and HTTP performance measurement remain pending.
 
 The recurrent state we need after a prefill is small, but a small view is not necessarily a small allocation. The frozen GDN implementation stores `xp[T:]`: three BF16 rows of width 10240, or 60 KiB per layer. MLX 0.32.3 slicing shares the parent buffer. With a roughly 1000-token prompt, that handle can retain about 20 MiB per layer. Across 48 GDN layers, this makes ownership worth investigating before changing the math.
 
@@ -55,3 +55,9 @@ are three distinct interventions and require separate qualification.
 The [layer-v1 registration](../../../bench/m5_ultra_256gb/conv_tail_owned_copy/prereg-layer-v1/README.md) now pins the real 14-tensor bundle, original GDN computation, three switch configurations, eight input/state cases per configuration, and resource/deadline rules. Root passed 27 CPU tests; an independent auditor passed 31 negative checks. Full original output, convolution output and both states must compare exactly. This remains a numerical/state diagnostic, with no HTTP timing or new Pareto point.
 
 The first real-weight attempt stopped before a case: an overly strict equality check on two OS footprint readouts rejected a 64 KiB discrepancy, although each was below 2 GiB. [Its failure evidence is preserved](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v1/README.md). Bound each raw observation independently; do not increase the budget to fix a parser assumption.
+
+## Real-weight result, with the original arithmetic intact
+
+After the separately frozen v2 monitoring correction, all 24 single-layer cases pass: both lazy and immediate ownership copies exactly preserve the complete output and state. Independent and root audit receipts are identical. T978 retained state falls from 23,248,896 to 3,211,264 allocated bytes; active and unique bytes each fall by the same 20,037,632 bytes after temporary aliases are dropped. This isolates the ownership effect inside the real computation. The original 1 GiB MLX and 2 GiB physical budgets hold, all children exit, and the original service is restored.
+
+[Complete evidence](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md) preserves every raw array with lossless duplicate links. The remaining 8 active bytes include a known 4-byte norm epsilon global; avoid claiming total allocator release. These figures apply to one layer and synthetic continuing state after validation evaluation. A full engine numerical qualification and uninstrumented HTTP run are still required before advancing the throughput–latency frontier.

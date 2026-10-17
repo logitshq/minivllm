@@ -1,7 +1,8 @@
 # E026: GDN convolution-tail ownership and isolated candidate
 
 2026-10-17. **The isolated tiny device diagnostic passed: 48 exact-bit cases,
-with retained backing reduced to 64 KiB in both ON arms. Full-model correctness
+with retained backing reduced to 64 KiB in both ON arms. The real-weight layer-v2
+diagnostic also passed 24 exact-output/state cases; full-model correctness
 and throughput/latency remain unqualified.** See the
 [archived results, independent audit, and memory figure](../../../docs/experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md).
 The helper remains default OFF and does not modify production/frozen code.
@@ -190,7 +191,7 @@ records the separate execution and audit. Correctness is an admission gate:
 only a subsequently qualified full-model HTTP run may add a point to the
 throughput-versus-complete-request-latency Pareto plot.
 
-## Scoped integration: CPU-reviewed, not device-qualified
+## Scoped integration and qualification scope
 
 `integration.py` temporarily binds only selected GDN instances on ordinary
 eager single-sequence prefill. It preserves the original `_prefill` code object
@@ -213,3 +214,17 @@ separately; validation-induced evaluation is not a measured production benefit.
 The [single-layer feasibility review](../../reviews/e026-single-layer-feasibility.md)
 prepares a small real-weight diagnostic without loading the whole model. It
 requires a separate resource contract; the tiny run grants no larger admission.
+
+## Real-weight single-layer v2 result
+
+After separately preserving the v1 footprint-observation failure, the reviewed
+v2 monitor retained the same budgets and all original model arithmetic. Three
+fresh arms completed 24 cases and 204 phases. Both ON configurations exactly
+match OFF for all complete outputs/states, inputs and parameters. T978 retained
+state is 23,248,896 B OFF versus 3,211,264 B ON after observation aliases are
+dropped; active and unique buffers each save 20,037,632 B. Every process exits,
+source pins hold, and the original service is restored.
+
+[Full original arrays, independent audit and tutorial result](../../../docs/experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md).
+This does not qualify full-model execution, ordinary prompt-prefix continuing
+state, the production evaluation placement, or any throughput/latency point.

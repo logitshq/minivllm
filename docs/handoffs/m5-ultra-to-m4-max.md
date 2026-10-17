@@ -355,3 +355,5 @@ E026后续：scoped ordinary-prefill hook已通过12项root CPU checks及独立r
 E026 layer v1准备完成：14个真实layer0张量共65,239,488B，原5.34GB shard完整SHA已核，再独立对照全部抽取bytes；608源/runtime/bundle pins冻结。OFF/ON-lazy/ON-materialize各8case，root27 CPU检查+独立审计31负测PASS，设备结果尚无。严格逐位输出/状态通过后才推进整模型；单层时间不入Pareto。当前目标始终是正确性作为硬门槛的throughput–latency前沿，oMLX/Lithos均保留强合法配置。
 
 E026 layer v1首case前被physical parser误杀：top current65389240、auxcurrent/peak65323704，均<2GiB，旧相等断言失败；非数值错误/内存超限。0case、ON未启动，owner/child已reap，原74384恢复。完整失败已归档；v2只修读数假设与取消文案，预算和原GDN算术不变。
+
+E026 layer v2实机PASS：3fresh arms×8case/204phase；两ON各84原dtype数组逐byte比OFF，全655,616,512B相同；root/独立audit完全一致。T978释放观察器后state23,248,896→3,211,264B，active/unique同减20,037,632B；T935同减19,152,896B。608pins/14resources/6externalphysical全部过，peak MLX970,521,466B，physical1,001,554,856B，swap无增长，原74384恢复，全部reap。仅单真实layer+synthetic输入/初始state，非整机性能或全模型资格；helper/integration仍默认OFF。完整原始byte归档与教程可复用，但M4 backend guard需独立注册。

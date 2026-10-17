@@ -1,0 +1,162 @@
+{
+  "schema": "E026-layer-independent-memory-comparison-v2",
+  "source_audit_sha256": "72050762dbaa37a0bedf42ea18512952519e233bf639101464b99cf0c9c3b9ad",
+  "qualification": "single real-weight layer synthetic finite input only",
+  "performance_qualified": false,
+  "phase": "after_drop_observer_refs",
+  "units": "bytes",
+  "rows": [
+    {
+      "case": "T935-fresh",
+      "arm": "on-lazy",
+      "off": {
+        "state_buffer_bytes": 22364160,
+        "active_bytes": 97204872,
+        "unique_buffer_bytes": 97204864
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78051976,
+        "unique_buffer_bytes": 78051968
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 19152896,
+        "active_bytes": 19152896,
+        "unique_buffer_bytes": 19152896
+      }
+    },
+    {
+      "case": "T935-fresh",
+      "arm": "on-materialize",
+      "off": {
+        "state_buffer_bytes": 22364160,
+        "active_bytes": 97204872,
+        "unique_buffer_bytes": 97204864
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78051976,
+        "unique_buffer_bytes": 78051968
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 19152896,
+        "active_bytes": 19152896,
+        "unique_buffer_bytes": 19152896
+      }
+    },
+    {
+      "case": "T935-continuing",
+      "arm": "on-lazy",
+      "off": {
+        "state_buffer_bytes": 22364160,
+        "active_bytes": 97204872,
+        "unique_buffer_bytes": 97204864
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78051976,
+        "unique_buffer_bytes": 78051968
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 19152896,
+        "active_bytes": 19152896,
+        "unique_buffer_bytes": 19152896
+      }
+    },
+    {
+      "case": "T935-continuing",
+      "arm": "on-materialize",
+      "off": {
+        "state_buffer_bytes": 22364160,
+        "active_bytes": 97204872,
+        "unique_buffer_bytes": 97204864
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78051976,
+        "unique_buffer_bytes": 78051968
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 19152896,
+        "active_bytes": 19152896,
+        "unique_buffer_bytes": 19152896
+      }
+    },
+    {
+      "case": "T978-fresh",
+      "arm": "on-lazy",
+      "off": {
+        "state_buffer_bytes": 23248896,
+        "active_bytes": 98531976,
+        "unique_buffer_bytes": 98531968
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78494344,
+        "unique_buffer_bytes": 78494336
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 20037632,
+        "active_bytes": 20037632,
+        "unique_buffer_bytes": 20037632
+      }
+    },
+    {
+      "case": "T978-fresh",
+      "arm": "on-materialize",
+      "off": {
+        "state_buffer_bytes": 23248896,
+        "active_bytes": 98531976,
+        "unique_buffer_bytes": 98531968
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78494344,
+        "unique_buffer_bytes": 78494336
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 20037632,
+        "active_bytes": 20037632,
+        "unique_buffer_bytes": 20037632
+      }
+    },
+    {
+      "case": "T978-continuing",
+      "arm": "on-lazy",
+      "off": {
+        "state_buffer_bytes": 23248896,
+        "active_bytes": 98531976,
+        "unique_buffer_bytes": 98531968
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78494344,
+        "unique_buffer_bytes": 78494336
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 20037632,
+        "active_bytes": 20037632,
+        "unique_buffer_bytes": 20037632
+      }
+    },
+    {
+      "case": "T978-continuing",
+      "arm": "on-materialize",
+      "off": {
+        "state_buffer_bytes": 23248896,
+        "active_bytes": 98531976,
+        "unique_buffer_bytes": 98531968
+      },
+      "on": {
+        "state_buffer_bytes": 3211264,
+        "active_bytes": 78494344,
+        "unique_buffer_bytes": 78494336
+      },
+      "reduction_off_minus_on": {
+        "state_buffer_bytes": 20037632,
+        "active_bytes": 20037632,
+        "unique_buffer_bytes": 20037632
+      }
+    }
+  ]
+}
