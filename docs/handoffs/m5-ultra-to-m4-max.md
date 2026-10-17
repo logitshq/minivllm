@@ -180,3 +180,9 @@ M5 E017实际Lithos native M5 Ultra、empty recipe普通/DSpark六请求192raw I
 用户要求常画图，已保存[第一版进展快照](../optimization-guide/progress/2026-10-17-v1/README.md)：
 7张PNG+SVG、840条正式样本和逐源SHA。保留E014全部4进程与短点FAIL；HTTP和模块分图。
 后续每个有结论的实验批次创建新版本，不覆盖旧快照。
+
+E018隔离literal GDN核已实际初筛+三fresh复测，T1/3/5/8×真实/零/随机状态，
+每步输出/S和全部keep前缀共660个严格比较通过。三fresh的T3/5/8几何平均
+1.397486/1.384694/1.410092×；第二进程T1=0.939084，未过原无回退门，所以整体
+PASS/FAIL/PASS，当前候选不采用。它不修projection几何、不证明整模事务；
+T>1方向可与将来V114组合验证，T1应另测直接保留原路径的分派，不事后改本轮门。

@@ -1,0 +1,295 @@
+{
+  "status": "PASS_INDEPENDENT_LITHOS_DSPARK_QUALIFICATION_AUDIT",
+  "requests": 6,
+  "raw_ids_compared": 192,
+  "modes": {
+    "none": [
+      {
+        "request": 0,
+        "decode_rounds": 31,
+        "committed": 31
+      },
+      {
+        "request": 1,
+        "decode_rounds": 31,
+        "committed": 31
+      },
+      {
+        "request": 2,
+        "decode_rounds": 31,
+        "committed": 31
+      }
+    ],
+    "dspark": [
+      {
+        "request": 0,
+        "decode_rounds": 14,
+        "accepted": 17,
+        "verified": 98,
+        "committed": 31,
+        "acceptance_histogram": {
+          "0": 7,
+          "2": 4,
+          "1": 2,
+          "7": 1
+        },
+        "budget_overshoot": 0
+      },
+      {
+        "request": 1,
+        "decode_rounds": 14,
+        "accepted": 17,
+        "verified": 98,
+        "committed": 31,
+        "acceptance_histogram": {
+          "0": 7,
+          "2": 4,
+          "1": 2,
+          "7": 1
+        },
+        "budget_overshoot": 0
+      },
+      {
+        "request": 2,
+        "decode_rounds": 14,
+        "accepted": 17,
+        "verified": 98,
+        "committed": 31,
+        "acceptance_histogram": {
+          "0": 7,
+          "2": 4,
+          "1": 2,
+          "7": 1
+        },
+        "budget_overshoot": 0
+      }
+    ]
+  },
+  "programs": [
+    {
+      "mode": "none",
+      "index": 0,
+      "bound": 32,
+      "dynamic": true,
+      "prefill": true,
+      "backend": "m5_ultra_80c",
+      "context_capacity": 2048,
+      "program_sha256": "5e85f1f088f71060e6e1f63eecd612bde899e3d36d88b620768f2c8f0fe1e6e2",
+      "config_digest": "dab9936705138359",
+      "op_count": 1209,
+      "draft_ops": 0,
+      "kernel_functions": [
+        "advance",
+        "argmax_final",
+        "argmax_partial",
+        "embed",
+        "gdn_mixer",
+        "gdn_norm",
+        "gdn_prepare",
+        "gemm_tile",
+        "gemv_T",
+        "gqa_decode",
+        "gqa_merge",
+        "norm_apply",
+        "rmsnorm_stat",
+        "x_permute"
+      ],
+      "kernel_count": 33
+    },
+    {
+      "mode": "none",
+      "index": 1,
+      "bound": 1,
+      "dynamic": false,
+      "prefill": false,
+      "backend": "m5_ultra_80c",
+      "context_capacity": 2048,
+      "program_sha256": "ada195d61217f93d7a5c659b6e1c6d4dc195763fa7d7b1c0506af24626328fc2",
+      "config_digest": "dab9936705138359",
+      "op_count": 535,
+      "draft_ops": 0,
+      "kernel_functions": [
+        "advance",
+        "argmax_final",
+        "argmax_partial",
+        "embed",
+        "gdn_mixer",
+        "gemv_nvfp4_rows",
+        "gqa_decode",
+        "gqa_merge",
+        "rmsnorm_stat",
+        "x_permute"
+      ],
+      "kernel_count": 18
+    },
+    {
+      "mode": "dspark",
+      "index": 0,
+      "bound": 32,
+      "dynamic": true,
+      "prefill": true,
+      "backend": "m5_ultra_80c",
+      "context_capacity": 2048,
+      "program_sha256": "998c10d3ddd755b17a340f0220e8eb22d0612c6f972611c76f12e924b6c19415",
+      "config_digest": "dab9936705138359",
+      "op_count": 1292,
+      "draft_ops": 43,
+      "kernel_functions": [
+        "accept_scan",
+        "argmax_final",
+        "argmax_partial",
+        "confidence",
+        "embed",
+        "gdn_mixer",
+        "gdn_norm",
+        "gdn_prepare",
+        "gemm_tile",
+        "gemv_T",
+        "gqa_decode",
+        "gqa_merge",
+        "norm_apply",
+        "rmsnorm_stat",
+        "tap_concat",
+        "verify_select",
+        "x_permute"
+      ],
+      "kernel_count": 69
+    },
+    {
+      "mode": "dspark",
+      "index": 1,
+      "bound": 8,
+      "dynamic": true,
+      "prefill": false,
+      "backend": "m5_ultra_80c",
+      "context_capacity": 2048,
+      "program_sha256": "153bbb950a4950f9bb78b5ea0d98ddaabb74dc915ee8263bc55da8a09ff2e9dc",
+      "config_digest": "dab9936705138359",
+      "op_count": 586,
+      "draft_ops": 43,
+      "kernel_functions": [
+        "accept_scan",
+        "argmax_final",
+        "argmax_partial",
+        "confidence",
+        "embed",
+        "gdn_mixer",
+        "gdn_norm",
+        "gemm_tile",
+        "gemv_T",
+        "gqa_decode",
+        "gqa_merge",
+        "norm_apply",
+        "rmsnorm_stat",
+        "tap_concat",
+        "verify_select",
+        "x_permute"
+      ],
+      "kernel_count": 57
+    }
+  ],
+  "packs": [
+    {
+      "mode": "none",
+      "role": "target",
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/none/target-b6042c39f78b9df33a19ac1c",
+      "manifest_sha256": "30b0723affb28128d896c85e5120553723ec7a615df8438a41736fd4a6b7ab96",
+      "weights_sha256": "383eced2c4e8830ed7ec5d7f8903a3b3f2a14f0d02b7a2f8db7573c8f86d5a19",
+      "bytes": 16069099520,
+      "quantize": null,
+      "capacity": 2048,
+      "slab_formats": {
+        "nvfp4": 258
+      },
+      "layout": {
+        "lane_order": "interleaved16",
+        "lanes": 32,
+        "rows": 16,
+        "scale_order": "lane",
+        "scale_placement": "block",
+        "share_scales": true
+      }
+    },
+    {
+      "mode": "dspark",
+      "role": "target",
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/target-61919dc70e5833f7b19fc670",
+      "manifest_sha256": "1964d6282867d030e62bcfbedce0afc53842bee74ad20906b1515ec3e24fd399",
+      "weights_sha256": "5fb054b010cec1eb9a404b25f603016deaede76158f3e27dd4c3c1e22a37b239",
+      "bytes": 16069132288,
+      "quantize": null,
+      "capacity": 2054,
+      "slab_formats": {
+        "nvfp4": 258
+      },
+      "layout": {
+        "lane_order": "interleaved16",
+        "lanes": 32,
+        "rows": 16,
+        "scale_order": "lane",
+        "scale_placement": "block",
+        "share_scales": true
+      }
+    },
+    {
+      "mode": "dspark",
+      "role": "draft",
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/draft-f7cb21710c30a1c544e31b99",
+      "manifest_sha256": "5232fbad5570b9886aff24a1e9fc3bdee9dfadb2c5fe5169caba7a78be07da72",
+      "weights_sha256": "b2c6c33658b74ae31a92ba4c3ca508a3945b95cf6312e3fcb038158e9eba8891",
+      "bytes": 1229651968,
+      "quantize": null,
+      "capacity": 2054,
+      "slab_formats": {
+        "nvfp4": 27,
+        "bf16": 1
+      },
+      "layout": {
+        "lane_order": "interleaved16",
+        "lanes": 32,
+        "rows": 16,
+        "scale_order": "lane",
+        "scale_placement": "block",
+        "share_scales": true
+      }
+    }
+  ],
+  "eos_ids": [
+    248046,
+    248044
+  ],
+  "no_eos_token_observed": true,
+  "scope": "One 19-token raw prompt repeated three times in each of two fresh processes; route and returned-ID qualification only, no full-state, HTTP or speed ranking",
+  "source_hashes_checked": 221,
+  "harness_hashes_checked": 3,
+  "resource_samples": 19,
+  "pressure": 1,
+  "thermal": 0,
+  "swap_used_mb": 268.81,
+  "swapouts": 303419,
+  "owner_release": [
+    {
+      "mode": "none",
+      "owner_pid": 99794,
+      "pid": 99806,
+      "returncode": 0,
+      "waited_reaped": true,
+      "strict_absence": true
+    },
+    {
+      "mode": "dspark",
+      "owner_pid": 147,
+      "pid": 158,
+      "returncode": 0,
+      "waited_reaped": true,
+      "strict_absence": true
+    }
+  ],
+  "service_resume": {
+    "identity_match": true,
+    "state_before": "T",
+    "state_after": "S",
+    "time": 1792225095.953213
+  },
+  "model_and_pack_payload_hashes": "Each runtime checked payloads before/after; audit independently checked metadata/manifests/Program/log/source bytes without rereading or archiving large weight payloads"
+}

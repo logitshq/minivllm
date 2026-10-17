@@ -14,7 +14,8 @@
 [E016草稿图复用](tutorials/016-draft-backbone-graph.md) ·
 [E017 Lithos DSpark资格](tutorials/017-lithos-dspark.md) ·
 [E018短块GDN状态驻留](tutorials/018-persistent-gdn-verify.md) ·
-[2026-10-17进展图与逐点数据](progress/2026-10-17-v1/README.md) ·
+[E019只提取新增hidden history](tutorials/019-drafter-history-tail.md) ·
+[版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。

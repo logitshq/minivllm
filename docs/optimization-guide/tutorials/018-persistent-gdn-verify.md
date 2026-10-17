@@ -1,6 +1,6 @@
 # E018：在短验证块内保留 GDN 状态
 
-2026-10-17，M5 Ultra 256 GiB。阶段：单进程 micro 初筛通过，待三个 fresh process 复测；默认核心不使用。
+2026-10-17，M5 Ultra 256 GiB。阶段：单进程 micro 初筛通过，三个 fresh process 的整体重复性门未通过；默认核心不使用。
 
 ## 假设与范围
 
@@ -47,3 +47,32 @@
 [Evaluating Losslessness Under Finite Precision v2](https://arxiv.org/html/2609.15504v2)，v2 2026-09-27，读 §1、§3.5、§4.2。作者在 Orthrus/Qwen3-1.7B 上观察到低精度下的轨迹差异，说明算法证明与实际 token 一致性应分别验证；它未定位本机误差来源，不能拿来放宽本实验逐字节门。
 
 已有 TreeWY 阅读表明其三角重建改变计算表达，不能作为本实验 exact 性质的依据。
+
+
+## 三 fresh process 结果与独立审计
+
+[完整初筛和复测归档](../../experiments/m5-ultra-256gb/E018-persistent-gdn-verify-v1/README.md)
+已通过独立 CPU 审计；按原预注册，**整体重复性未通过，不进入生产采用**。
+三个复测各自的完整结果如下，初筛保持单独呈现，未池化或补跑挑选。
+
+| 复测 | T1 | T3 | T5 | T8 | GM T3/5/8 | 单进程门 |
+|---|---:|---:|---:|---:|---:|---|
+| 1 | 1.023888× | 1.220317× | 1.461622× | 1.530151× | 1.397486× | PASS |
+| 2 | 0.939084× | 1.270615× | 1.413632× | 1.478124× | 1.384694× | REJECT |
+| 3 | 1.066419× | 1.256273× | 1.483812× | 1.504110× | 1.410092× | PASS |
+
+第 2 次复测的 T1 为 0.939084×，低于 0.97× 门，即使该进程 T3/5/8 GM 超过 1.25×，
+仍必须拒绝整体重复性。T≥3 的三个复测点全部有收益，是后续独立假设的线索，不替代本次失败门。
+
+四进程共 48 cases、660 个输出/FP32 history/keep-prefix 比较全部 exact；独立审计逐项核对
+shape、dtype、reference/candidate SHA、keep 与 history 对应关系、各 T 的共同前缀，
+并直接解析四份 safetensors 验证 BF16/FP32 类型、offset、完整输入 SHA 与跨进程 tensor bytes。
+三个不同 initial-state 的 hash 也不同。CPU 审计没有重新执行设备数学。
+
+所有 192 formal、64 warm、32 first-post-qualification 样本全部保留，ABBA 顺序和 median/speedup
+重新计算。被测 34 份源、workload、模型 metadata、两轮 lease/jobs 和所有资源/owner 记录入档。
+模型大权重由每个 screen 前后校验；独立审计没有重复读取大 payload。188 个 archive members
+的大小与 SHA 全部通过。四个子进程全部 exit 0、wait/reap 与 strict absence 通过，两次服务恢复 T→S。
+
+下一步若仅研究 T≥3，必须另立新的实验范围与资格，不能追改本实验的 T1 门。
+多层、非连续输入、整模 cache/rollback 事务以及 HTTP 性能仍未获此实验的证明。
