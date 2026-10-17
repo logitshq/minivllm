@@ -1,0 +1,106 @@
+{
+  "schema": "E023-native-formal-owner-plan-v1",
+  "execution": {
+    "owner": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal_owner.py",
+      "sha256": "e33faa8f211e905f40daabd00941f3fd016041c9705c6a7a4a2fe805fb0aceff"
+    },
+    "pins": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_owner_v2.py": "f645bc1a32bee8fdaf57d1626a84ebce1ad6d1c775ecdc9b6de3ebbc12105bf1",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal.py": "ec9cdc924f7987ad46eac6820b6264495c95fb182c726545a6e3ce283df7e654",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay.py": "1e26e35bdde5cf7b81da37101326a4ef6f87ef7db2775c6324b56d053645c995",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal_owner.py": "e33faa8f211e905f40daabd00941f3fd016041c9705c6a7a4a2fe805fb0aceff"
+    }
+  },
+  "qualification": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json",
+    "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+  },
+  "qualifications": {
+    "1": {
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "replay_plan": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-owner/phases/c1-replay/qualification/plan.json",
+        "sha256": "1c4dffea59fd4c5a576f5bdfd65f32e3bf440d80014625457718de55575285fc"
+      },
+      "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-owner/phases/c1-replay/qualification"
+    },
+    "8": {
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "replay_plan": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-owner/phases/c8-replay/qualification/plan.json",
+        "sha256": "af74504302c9d0092c3c884ade1b9197bb07ccbdb43e5ff4a08c34c271edb661"
+      },
+      "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-owner/phases/c8-replay/qualification"
+    }
+  },
+  "cold_restart": {
+    "journal_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-cold-journal",
+    "controller": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v4.py",
+      "sha256": "836a4c16534521441da8021df3f963210d885da867f79a33d86a3b6dd01101c0"
+    },
+    "approved_contract": "cold-restart-persisted-visible-v1",
+    "proposal_plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "predecessor": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-http-baseline-v2/restored-journal.json",
+      "sha256": "65e3f72dac3b87e7084b5e20978da9a3c66ce0b9dd6ebd5bf2badc6b229babf8",
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-http-baseline-v2/restoration-audit.json",
+        "sha256": "82ac555c7a12d0b9817045d5df6819f81605267c083f7fe07ccfc3860c420b21"
+      }
+    }
+  },
+  "http": {
+    "transport": {
+      "port": 18023,
+      "tcp_nodelay": true,
+      "io_timeout_seconds": 300.0
+    },
+    "environment": {
+      "HOME": "/Users/ryanli",
+      "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/ryanli/.codex/tmp/arg0-macos/codex-arg0zSbbRg:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ryanli/.local/bin:/Users/ryanli/.local/share/mise/shims:/opt/homebrew/sbin:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+      "TMPDIR": "/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/",
+      "LANG": "en_US.UTF-8",
+      "LC_ALL": "en_US.UTF-8",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0"
+    },
+    "deadlines": {
+      "ready": 120,
+      "request": 600,
+      "warm": 720,
+      "formal": 2400,
+      "close": 10,
+      "term": 15,
+      "kill": 15,
+      "overall": 3300,
+      "resource_interval": 5
+    }
+  },
+  "trials": [
+    "r1-c1",
+    "r1-c8"
+  ],
+  "deadline_seconds": 7004
+}

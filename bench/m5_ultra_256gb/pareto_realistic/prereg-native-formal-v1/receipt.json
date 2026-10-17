@@ -1,0 +1,52 @@
+{
+  "schema": "E023-native-formal-prereg-v1",
+  "status": "PREPARED",
+  "plan_sha256": "7b7a563ee832c1f91c2f5c745ec0b3087ef25dae6d8974cbfa6e0cb9a23687bb",
+  "prepared_journal_sha256": "ac4a816ba58bb15b0e051635bbe195d2f1c8a5402a6d42060cd9ac5037f5af02",
+  "prepared_journal_original": {
+    "pid": 90204,
+    "ppid": 1,
+    "start": "Sat Oct 17 08:43:48 2026",
+    "comm": "omlx-server"
+  },
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_owner_v2.py": "f645bc1a32bee8fdaf57d1626a84ebce1ad6d1c775ecdc9b6de3ebbc12105bf1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal.py": "ec9cdc924f7987ad46eac6820b6264495c95fb182c726545a6e3ce283df7e654",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay.py": "1e26e35bdde5cf7b81da37101326a4ef6f87ef7db2775c6324b56d053645c995",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal_owner.py": "e33faa8f211e905f40daabd00941f3fd016041c9705c6a7a4a2fe805fb0aceff",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v4.py": "836a4c16534521441da8021df3f963210d885da867f79a33d86a3b6dd01101c0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/prereg-native-formal-v1/execute.py": "be264a2ce42378deac050f15cc0de181354c78aa61a9c0599a95875d47ac4129",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/prereg-native-formal-v1/prepare-plan.py": "af9d6fbfbe8d5fc5a7f8b87c928450b53c797622fb7a8e1ad6507a0f82910d42",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/test_native_formal_owner_cpu.py": "3f1e01d35172e3aa8b85b90f47d59f93c41b3fb8fff3c6fe57bdcb4a6452b9d3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_v4_cpu.py": "6f7f7e040f458feb616ed778ef8b526fa20bc71e098b23e89bf33a2465447b10"
+  },
+  "cpu_prepare": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-cpu-prepare/prepared.json",
+    "sha256": "eac787529e3d704b0f7a777f9fae54a5562233fbc5f4e3500bf83da5d06eee13"
+  },
+  "read_only_service_prepare": "PASS; no stop or GPU execution yet",
+  "workload": {
+    "trials": [
+      "r1-c1",
+      "r1-c8"
+    ],
+    "warm_requests_per_trial": 8,
+    "formal_requests_per_trial": 64,
+    "max_output_tokens": 512,
+    "normal_eos": true,
+    "observers": false
+  },
+  "authorization": "Existing explicit human permission: \u5141\u8bb8\u505c\u6b62\u3001\u5b9e\u9a8c\u540e\u6062\u590d",
+  "performance_qualified": false
+}
