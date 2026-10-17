@@ -1,8 +1,11 @@
 # E026: GDN convolution-tail ownership and isolated candidate
 
-2026-10-17. **CPU/source review only. No GPU execution, allocation measurement,
-numerical qualification, integration, performance result, or E023 cause claim.**
-The helper is default OFF and does not modify or patch production/frozen code.
+2026-10-17. **The isolated tiny device diagnostic passed: 48 exact-bit cases,
+with retained backing reduced to 64 KiB in both ON arms. Full-model correctness
+and throughput/latency remain unqualified.** See the
+[archived results, independent audit, and memory figure](../../../docs/experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md).
+The helper remains default OFF and does not modify production/frozen code.
+The source analysis below predates the device run; it is not an E023 cause claim.
 
 ## Confirmed source path
 
@@ -120,7 +123,7 @@ The last complete raw rows, 513–515, each report B6 decode plus two prefills,
 two additional retirements, and PASS. This establishes workload overlap only;
 the resource abort may have occurred in any unrecorded phase of the next step.
 
-## Minimal next device validation — not run
+## Original device-validation plan and remaining controls
 
 1. Pre-register fresh-process OFF, ON-lazy, and ON-materialize arms. Retain the
    fixed resource guard, direct owner, timeout, and restored-service lease.
@@ -168,3 +171,21 @@ This diagnostic allocates no weights: its largest named parent is below 20 MiB, 
 The existing, authorized SIGSTOP/SIGCONT lease pauses and restores original PID74384. It does not unload/restart the service or depend on the pending cold-restart approval. Direct child ownership, strict reap/absence, partial-result rejection and failure-stop behavior are CPU checked. Root reran 7 helper, 9 screen and 11 owner checks. The 561 source/runtime pins include MLX and NumPy but do not purport to package all system frameworks/stdlib.
 
 Frozen plan SHA: `037999b2ede8daf5e5d244c41871a36dd9c77e864f2959cfdd3f3540b1cac93e`. This paragraph records preparation, before any device result.
+
+## Completed tiny device run
+
+The frozen three-arm contract above completed with 48/48 exact-bit cases and
+528 recorded phases passing. An independent standard-library auditor and root
+rerun agree. For T978, the retained output backing changes from 20,103,168 to
+65,536 bytes; each case ends with zero observed active array memory. These
+figures describe isolated synthetic ownership, not full-model peak memory.
+Finite-validation temporaries also release bytes in OFF, so use the audited
+retained-backing difference rather than the full active-byte delta.
+
+All children and the owner exited and were reaped; the original service was
+resumed with its original PID/start identity. No cold restart occurred.
+The preregistration and CPU receipts remain historical preparation evidence;
+[the result archive](../../../docs/experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)
+records the separate execution and audit. Correctness is an admission gate:
+only a subsequently qualified full-model HTTP run may add a point to the
+throughput-versus-complete-request-latency Pareto plot.

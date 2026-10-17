@@ -347,3 +347,5 @@ Lithos1.196079257×，三配对方向一致；不扩称显著/全并发前沿或
 M5这边E026压紧3行conv尾helper已push `a56f9f1`，tiny设备诊断正在独立冻结；它不会改变
 qkv/GDN数学。若M4也出现prefill状态驻留，可复用该helper和source推导，但设备分派guard需
 独立注册M4，不要删除M5 guard后直接声称支持。大型实验coldrestart授权仍等待用户回复。
+
+E026 tiny实机已PASS并独立复核：3fresh arms48case，T978完整backing20,103,168→65,536B，所有原位保留；parent/source释放及最终active0有阶段证据。注意finite验证临时buffer使OFF也有98,440B active下降，所以归因看retained backing而非总active delta。[完整归档](../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)。无整模型/性能资格，原74384同identity恢复。

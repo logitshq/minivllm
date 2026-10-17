@@ -425,3 +425,5 @@ child TERM(-15)、reap与独立PID absence通过，外部服务同identity T→S
 
 已从MLX0.32.3官方源码证实小slice共享整块prefill父buffer；默认OFF的uint16 contiguous复制仅保留最后3行，不改模型算术，立即eval另设开关。root复核7项CPU checks通过；未运行GPU、不归因E023中止、无性能点。先做无权重buffer ownership实测，再做完整引擎资格和吞吐/延迟配对。
 [教程](tutorials/026-conv-tail-ownership.md)。
+
+E026 tiny v1已在e03ff2d之后实机PASS：3fresh arms、48case/528phase、全部uint16位域与finite样例通过；T978 retained backing 20,103,168→65,536B，两种ON相同。根线程与独立审计一致，665原始成员逐SHA归档；11资源采样pressure2不恶化、无swap增长，全部reap，原服务T→S恢复。仅该无模型位/所有权诊断通过；不是完整模型资格、不是E023根因或性能点。见[证据与图](../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)。

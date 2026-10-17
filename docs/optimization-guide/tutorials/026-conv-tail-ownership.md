@@ -1,6 +1,6 @@
 # E026: copy a small state, release a large prefill buffer
 
-2026-10-17. This is a default-off candidate with CPU/source checks only. It has not yet passed device numerical or allocation checks, been integrated into the model, or produced a performance point.
+2026-10-17. This default-off candidate has now passed its isolated device bit/backing diagnostic. Model integration, complete numerical qualification and performance measurement remain pending.
 
 The recurrent state we need after a prefill is small, but a small view is not necessarily a small allocation. The frozen GDN implementation stores `xp[T:]`: three BF16 rows of width 10240, or 60 KiB per layer. MLX 0.32.3 slicing shares the parent buffer. With a roughly 1000-token prompt, that handle can retain about 20 MiB per layer. Across 48 GDN layers, this makes ownership worth investigating before changing the math.
 
@@ -13,3 +13,14 @@ This source path could account for about 3.46 GiB of excess reachable backing ac
 Root reran seven CPU checks for OFF identity, uint16 transfer, separate materialization, fallback guards, source pins and forbidden imports. The static contract passed. These checks do not establish GPU equivalence or speed.
 
 [Candidate and source reasoning](../../../bench/m5_ultra_256gb/conv_tail_owned_copy/README.md) · [Cache capacity analysis](../../../bench/reviews/e023-cache-memory-budget.md)
+
+
+## Device result and what it proves
+
+After preregistration `e03ff2d`, three fresh processes completed 48 cases and 528 recorded phases. Exact original uint16 words survived both lazy and immediate copies, including the full payload domain; all finite fixtures stayed finite. For T978, the original tail retains 20,103,168 allocator bytes, while either ON form retains 65,536 bytes after old references are dropped. Every case returns active arrays to zero on final release. This is an actual ownership result, not a projection from shape arithmetic.
+
+Full active-memory deltas include other temporary buffers: the finite-validation branch releases 98,440 bytes even in OFF. The retained-buffer API and alias union, rather than that aggregate delta, establish the optimized storage. This is why a memory graph needs explicit roots and phases.
+
+The observed pressure-2 system state stayed unchanged under this separately preregistered no-model diagnostic; free physical pages stayed above 69.53 GiB and no new swapping appeared. Model and performance gates still require pressure1. All experiment processes were reaped and the original service was resumed, not restarted.
+
+[Full evidence and memory figure](../../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md). No new point is added to the throughput/latency Pareto chart until complete model correctness and an independent HTTP performance run pass.
