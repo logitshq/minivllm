@@ -189,3 +189,27 @@ The preregistration and CPU receipts remain historical preparation evidence;
 records the separate execution and audit. Correctness is an admission gate:
 only a subsequently qualified full-model HTTP run may add a point to the
 throughput-versus-complete-request-latency Pareto plot.
+
+## Scoped integration: CPU-reviewed, not device-qualified
+
+`integration.py` temporarily binds only selected GDN instances on ordinary
+eager single-sequence prefill. It preserves the original `_prefill` code object
+and changes only its private convolution wrapper, leaving convolution output
+identity and all arithmetic intact. Copy and immediate materialization remain
+separate switches, both default OFF. Decode, grouped prefill, record/capture/spec
+routes are excluded; every temporary instance attribute is restored on exit.
+This is a diagnostic hook, not a production timing path.
+
+Root reran 12 CPU tests; independent review found no blocking issue and checked
+the installed MLX Module attribute behavior without importing MLX. See
+[integration-cpu-review.json](integration-cpu-review.json). An outer `mx.compile`
+is explicitly unsupported. Future observers must store scalar receipts and
+serialized errors, not tensor references or exception tracebacks.
+
+The actual convolution output graph also references the old parent. Immediate
+tail evaluation alone does not prove the parent is released at the hook. Record
+hook, normal-product evaluation, common validation, and observer-release phases
+separately; validation-induced evaluation is not a measured production benefit.
+The [single-layer feasibility review](../../reviews/e026-single-layer-feasibility.md)
+prepares a small real-weight diagnostic without loading the whole model. It
+requires a separate resource contract; the tiny run grants no larger admission.

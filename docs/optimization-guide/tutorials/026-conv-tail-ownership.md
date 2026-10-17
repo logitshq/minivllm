@@ -1,6 +1,6 @@
 # E026: copy a small state, release a large prefill buffer
 
-2026-10-17. This default-off candidate has now passed its isolated device bit/backing diagnostic. Model integration, complete numerical qualification and performance measurement remain pending.
+2026-10-17. This default-off candidate has now passed its isolated device bit/backing diagnostic. A scoped integration is CPU-reviewed; real-model numerical qualification and performance measurement remain pending.
 
 The recurrent state we need after a prefill is small, but a small view is not necessarily a small allocation. The frozen GDN implementation stores `xp[T:]`: three BF16 rows of width 10240, or 60 KiB per layer. MLX 0.32.3 slicing shares the parent buffer. With a roughly 1000-token prompt, that handle can retain about 20 MiB per layer. Across 48 GDN layers, this makes ownership worth investigating before changing the math.
 
@@ -24,3 +24,28 @@ Full active-memory deltas include other temporary buffers: the finite-validation
 The observed pressure-2 system state stayed unchanged under this separately preregistered no-model diagnostic; free physical pages stayed above 69.53 GiB and no new swapping appeared. Model and performance gates still require pressure1. All experiment processes were reaped and the original service was resumed, not restarted.
 
 [Full evidence and memory figure](../../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md). No new point is added to the throughput/latency Pareto chart until complete model correctness and an independent HTTP performance run pass.
+
+## Integrate only the ownership change
+
+The diagnostic hook keeps the original prefill code object and convolution output.
+It replaces only the returned tail through a private function-global mapping,
+limited to selected ordinary eager prefill instances. Both switches remain OFF
+by default, and temporary bindings are restored in `finally`. Root
+reran 12 CPU checks and independent review found no blocking issue, including
+MLX Module parameter-dictionary behavior. This establishes routing and cleanup,
+not real-device model equality. The wrapper is diagnostic instrumentation, not
+a performance candidate to benchmark with frame inspection enabled.
+
+The next finite test can read only the first real GDN layer
+([feasibility and known byte counts](../../../bench/reviews/e026-single-layer-feasibility.md)).
+Its approximately 62 MiB weight payload avoids loading an entire 5 GiB shard.
+A new resource contract and real-weight numerical checks are still required;
+it does not replace the original 37-request full-model qualification.
+
+For a later production-placement candidate, the pinned ordinary runner already
+has one shared evaluation at `model_runner.py:158`. Its inputs include decode
+batch arrays but omit staging prefill tails. Appending only eligible copied
+staging tails to that existing evaluation could avoid 48 separate per-layer
+synchronization points. This is a source-based hypothesis, not implemented or
+measured here; copy-only, immediate-per-layer, and shared-boundary evaluation
+are three distinct interventions and require separate qualification.

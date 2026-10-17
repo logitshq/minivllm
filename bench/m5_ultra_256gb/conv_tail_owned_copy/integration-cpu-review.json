@@ -1,0 +1,34 @@
+{
+  "status": "CPU_REVIEW_PASS_ONLY",
+  "root_tests": 12,
+  "sources": {
+    "integration.py": "906dcfece0ce249d3fc06e968ec552d0ae20b665086e5812c54453fa47780ad1",
+    "test_integration_cpu.py": "631615c1639f386a01f799fe4dee952c052174f9d4a1f379ec3a304d5bccd4c3"
+  },
+  "independent_review": {
+    "agent": "draft_graph",
+    "blocking_findings": [],
+    "reported_extra_check": "AST execution of installed mlx.nn.Module attribute methods: shadow/restore preserves parameter dict and permits weakref collection; no MLX import",
+    "receipt_limit": "extra AST check reported by independent reviewer; this file does not substitute for raw device evidence"
+  },
+  "default_enabled": false,
+  "materialize_is_independent": true,
+  "scope": "temporary instance ordinary eager prefill; unchanged original code object except private causal_conv1d global",
+  "unsupported": "outer mx.compile and arbitrary compiled closures",
+  "required_next": [
+    "separate preregistered real-weight single-layer diagnostic",
+    "all 48 GDN witnesses and full logits/state on fixed real prefill",
+    "original 37-request full numerical qualification",
+    "unobserved HTTP correctness and throughput/complete-request-latency qualification"
+  ],
+  "performance_qualified": false,
+  "production_files_modified": false,
+  "root_header_review": {
+    "path": "bench/reviews/e026-single-layer-feasibility.md",
+    "sha256": "d2e80bea7df069b2718b5c26d5ebdc02d62997151bd42dfa5a6659e78bb95c23",
+    "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7",
+    "tensor_count": 14,
+    "payload_bytes": 65239488,
+    "payload_read": false
+  }
+}

@@ -349,3 +349,5 @@ qkv/GDN数学。若M4也出现prefill状态驻留，可复用该helper和source�
 独立注册M4，不要删除M5 guard后直接声称支持。大型实验coldrestart授权仍等待用户回复。
 
 E026 tiny实机已PASS并独立复核：3fresh arms48case，T978完整backing20,103,168→65,536B，所有原位保留；parent/source释放及最终active0有阶段证据。注意finite验证临时buffer使OFF也有98,440B active下降，所以归因看retained backing而非总active delta。[完整归档](../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)。无整模型/性能资格，原74384同identity恢复。
+
+E026后续：scoped ordinary-prefill hook已通过12项root CPU checks及独立review；仅改tail ownership，copy/materialize独立且默认OFF。尚未GPU集成，不可直接拿CPU结果入性能图。约62MiB单GDN真实权重路径可独立诊断，注意不得mx.load整5GiB shard再筛。
