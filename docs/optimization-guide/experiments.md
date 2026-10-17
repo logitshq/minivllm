@@ -537,3 +537,18 @@ E028 v2实际：1完整case/11检查PASS后，B4构图后的历史MLXpeak1,131,8
 输入parent逐个求值，保持全部位值、非连续view、输出delay、10/88/53与预算；26CPU
 检查通过，576pins固定，[v3预注册](../../bench/m5_ultra_256gb/identity_refill/prereg-v3/README.md)
 提交后才运行。无新性能点。
+
+
+E028 v3（提交896e5f1后单次设备运行）完成10cases/88checks/53phases/108全量snapshot。
+MLXpeak614,891,549B、physicalpeak1,623,885,336B，原预算通过；child59771exit0/reap，
+原74384恢复S，14资源采样pressure2稳定且swap不增。独立v2/v3全16文件字节相同，
+B2/B4的40输出tensor由原始输入重新拼接核对PASS，root复跑一致。另新增默认OFF
+单runner安装helper，7CPUtests通过，未接生产。两层合成state≠64层模型/HTTP资格，
+无新Pareto点；完整原件审计与归档随后补记。
+
+
+E028 v3完整独立审计与root复核完成：所有108snapshot/880tensor原始5,312,069,632B
+解析并独立重建各case全部输出，88groups/724pairs通过；576pins及完整资源/回收/
+恢复证据通过。1366成员无损归档26,103,106B，逐成员SHA重复核验。v1/v2失败同时
+保留。[v3原件](../experiments/m5-ultra-256gb/E028-identity-refill-v3/README.md)。
+资格严格限两层合成state矩阵，完整模型和HTTP仍未完成，Pareto图未新增点。

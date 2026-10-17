@@ -413,3 +413,25 @@ NAX失败与CPU准备不进入曲线，当前M5图仍为v5，不声称已压过�
 
 下一条独立候选是 refill 时跳过恒等行 gather，保留原 concat/算术；实际 E023 两步命中，但速度未知。
 [源码与最小验证说明](../../bench/reviews/2026-10-17-identity-refill-gather.md)。尚未实现，不计性能进步。
+
+
+## E028 identity refill：本机局部状态门通过，真实模型尚未运行
+
+最新fetch仍为M4 `53d4906`，已在M5祖先中。E028只省去identity keep+追加请求且KV
+容量不变时的旧K/V/conv/S gather，保留原concat/算术；不是改变GDN归约的kernel。
+候选默认OFF，无全局patch。v1输入生成int|array失败，v2合成输入构造peak超1GiB，
+均完整归档。v3只逐个materialize输入parent，保持相同位值/非连续view与输出delay，
+提交896e5f1后实跑10case/88完整bytechecks/53phase全部PASS。源写、输出写、延迟求值、
+重排/删除/扩容/空旧batch均覆盖，原服务恢复。v2全部16文件与v3对应bytes相同。
+
+新增独立integration.install(runner, enabled=False)，只能新建空runner、spec=None，
+拒绝重复安装，不改生产默认。7CPU测试通过，不能据此推断64层/模型/HTTP。下一步
+复用37请求资格，在实际refill后decode前比较完整64层状态，再做C1/C8配对性能。
+M4若采用需独立固定自身来源和运行合同；不能把M5本次shape诊断当M4已获资格。
+[教程](../optimization-guide/tutorials/028-identity-refill.md)。当前M5 Pareto v5未改变。
+
+E028 v3最终独立audit与root复核一致：所有10case的输出从原始sourcebytes重建通过，
+完整5.3GB逻辑payload无损归档为26,103,106B，tar SHA
+`ab06a72561a5074ee7cb3a12390dcaa1faa867bfb403b18b2f667d07421ca37a`。
+v1/v2失败也完整保留。安装层另经第二agent审查无阻断。下一轮需要实际模型及
+同轮官方HTTP配对，不能把这次合成状态门或新的输入生成时序当作性能收益。

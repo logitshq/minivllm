@@ -1,7 +1,8 @@
 # E028：新请求加入时，跳过旧状态的恒等 gather
 
 本轮目标是减少 refill 的状态搬运。正确性是前提，最终指标仍是整机输出吞吐和完整请求延迟。
-当前为默认 OFF 的实验模块准备阶段；尚无设备结果，也没有新的 Pareto 点。
+v3 已通过10个真实层形状合成状态场景、88项完整原字节检查；独立原件审计与root复核均已通过。
+模块仍默认 OFF，尚未完成全模型与 HTTP 资格，也没有新的 Pareto 点。
 
 ## 从真实路径选优化点
 
@@ -74,3 +75,43 @@ child58999 exit1并回收，原服务74384同identity恢复S。[原件归档](..
 候选和延迟输出的求值边界不变。保留历史peak、不缩小场景、不放宽预算。26项CPU
 测试通过，核对实际value()时序和pattern/run_case AST；设备后再核对v2已有输入字节。
 [固定v3计划](../../../bench/m5_ultra_256gb/identity_refill/prereg-v3/README.md)先提交再跑。
+
+
+## v3 设备结果与可切换安装
+
+`896e5f1` 提交后单次运行，10case/88check/53phase全部完成，108份完整safetensors保留。
+历史MLX峰值614,891,549B、物理峰值1,623,885,336B，均在原预算内；cache0，
+14次资源记录pressure2稳定、swap无增长。child59771 exit0回收，原服务74384同identity
+恢复S。11.76秒是含生成/保存/验证的诊断用时，不是性能计时，不计算优化倍数。
+
+[跨版本独立复核](../../experiments/m5-ultra-256gb/E028-identity-refill-v3-cross-version/README.md)
+覆盖v2全部16份文件（14同名、2份失败时输入映射到相同只读边界），每侧671,577,268B
+逐字节相同。另从输入原bytes独立重建B2/B4的完整拼接与KV逐head补零，40个输出tensor
+每侧493,928,448B完全相同；包括后续source写入隔离和B4首scalar输出写入。root重跑
+得到逐字相同回执。此证据证明修复未换输入或缩小已跑场景，不推断原始GPU物理strides。
+
+新的 `identity_refill/integration.py` 提供 `install(runner, enabled=False)`。OFF不读取
+runner，不导入候选；ON仅在构造后、加入请求和安装观察器前使用，拒绝非空或spec runner、
+重复安装、源码/backend不匹配。所有安装检查只执行一次，成功后只赋值该runner的batch，
+不patch全局、不改变eval。7项CPU检查通过；没有接入生产默认，没有实际整模型结果。
+
+下一门复用E023的37请求矩阵与既有完整logits/raw IDs、staging/ahead、退场和EOS检查，
+在实际eligible refill后、decode前补全64层完整状态比较。只要这门通过，再用相同模型、
+量化、请求与参数做fresh-process OFF/ON：先C1控制与C8 refill，测实际token总数/共同
+请求窗口、POST→SSE DONE的p50/p95。较高并发先补对应资格。既有pressure1要求和
+服务冷停/恢复授权边界保持；不将本次生成输入的eval带入真实runner或计时路径。
+
+
+## 独立复核与完整归档
+
+[完整v3原件](../../experiments/m5-ultra-256gb/E028-identity-refill-v3/README.md)保留全部
+108份snapshot、880个tensor、5,312,069,632B原始payload。CPU审计独立生成所有输入
+位模式（包含非连续view的父索引）并重建10case输出；88组/724个tensor pair共
+4,334,575,616B比较全部相同，24组-8/-16/-32首scalar写符合计划。576来源、53资源
+阶段、14主机快照、11个外部physical采样及回收/恢复证据核对通过；root重跑完全相同。
+1366成员完整归档26,103,106B，每个成员的原字节SHA均经独立与root复读。
+
+[v1输入生成失败](../../experiments/m5-ultra-256gb/E028-identity-refill-v1/README.md)和
+[v2资源中止](../../experiments/m5-ultra-256gb/E028-identity-refill-v2/README.md)同时归档，
+不覆盖、不删除失败记录。安装helper经独立审读及7项CPU测试；三个设备实验及归档
+没有改变任何生产默认。当前收益是局部状态门通过，吞吐/请求延迟收益仍未知。
