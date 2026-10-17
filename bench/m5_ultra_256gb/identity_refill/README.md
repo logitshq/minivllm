@@ -1,8 +1,10 @@
 # E028: skip identity gathers during decode refill
 
-Status: local two-layer GPU state gate PASS; default OFF. Full-model CPU
-preparation is frozen in [prereg-model-v1](prereg-model-v1/README.md). No
-full-model or performance qualification yet.
+Status: local two-layer gate and fixed 37-request same-schedule full-model
+numerical qualification PASS; default OFF. The separately versioned v2 independent
+audit passed after correcting C8-to-lifecycle scheduler-state carry.
+[Full results and original evidence](../../../docs/experiments/m5-ultra-256gb/E028-identity-refill-model-v1/README.md).
+Actual early EOS did not occur. HTTP and performance qualification remain pending.
 
 The current DecodeBatch rebuild gathers every surviving old row before appending
 new requests, including when every old row survives in its original order. The
@@ -19,18 +21,22 @@ saved time are unknown. See the [source review](../../reviews/2026-10-17-identit
 The first device gate uses one actual-shape attention layer plus one GDN layer,
 with independent OFF/ON inputs, full original BF16/F32 snapshots and exact-byte
 comparisons. It includes identity refills, fallback controls, strided/offset
-inputs, delayed evaluation and independent subsequent writes. The complete
-64-layer state, model logits/tokens, scheduling and HTTP remain later gates;
-this diagnostic cannot substitute for them.
+inputs, delayed evaluation and independent subsequent writes. The subsequent
+full-model gate covers complete 64-layer state, model logits/tokens
+and the fixed discrete schedule. Real HTTP remains a separate gate; this local
+diagnostic cannot substitute for it.
 
-The bounded numerical policy reuses the exercised E026 guards: cache 0, observed
+The original local two-layer bounded numerical policy reuses the exercised E026
+guards: cache 0, observed
 MLX active/cache/peak at most 1 GiB, observed physical current/peak at most 2 GiB,
 120-second child, external owner with cleanup, stable existing pressure 2 allowed
 only for this separately registered small diagnostic. It does not admit full-model
 or performance work at pressure 2. The outer authorized SIGSTOP/SIGCONT lease alone
-pauses/restores the original oMLX service. No cold restart is authorized here.
+pauses/restores the original oMLX service. That first-stage scope did not authorize
+a cold restart. The later full-model run
+used separate explicit user authorization and completed the cold-stop/restore cycle.
 
-The fixed device contract and all source/runtime identities will be committed
+The fixed device contract and all source/runtime identities were committed
 before execution. First numerical mismatch stops the screen; retain the full
 successful prefix and failed evidence. A passing screen is module-level evidence,
 not a throughput–latency point. Paired whole-model HTTP measurements are required

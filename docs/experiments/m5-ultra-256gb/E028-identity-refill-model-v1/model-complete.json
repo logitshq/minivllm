@@ -1,0 +1,42 @@
+{
+  "schema": "E028-model-qualification-result-v1",
+  "status": "PASS",
+  "plan_sha256": "bc4890e6d302141597eae8e0e9347c093307a8492c09f958f42bdb8d1c7aa73c",
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/model_qualification.py": "b8b84a57b63c6f46ea1449ec9eeed8310d1b4dbe074a81082e5a665371061042",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/integration.py": "ea0d6cb6af7c80d7580b4ab1c8319a4b76110fd1d73cf660c048c8dd45cf0c52",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/candidate.py": "bb9f8a461625e97c80e75140c9d9b7b8718a633595ab4f3a422267e752ded8f5"
+  },
+  "numerical_only_not_http": true,
+  "performance_qualified": false,
+  "source_pins_rechecked": true,
+  "coverage": {
+    "candidate_installs": 2,
+    "paired_identity_refills": 12,
+    "compared_arrays": 1536,
+    "per_case": {
+      "D-C8": 7,
+      "lifecycle": 5
+    },
+    "restored_observers": 4,
+    "candidate_final_counters": [
+      {
+        "identity_refill": 0,
+        "fallback": 8
+      },
+      {
+        "identity_refill": 12,
+        "fallback": 19
+      }
+    ]
+  },
+  "base_result": {
+    "path": "base/complete.json",
+    "sha256": "24c1b08cd5defd76cf08ee46375e1a62bb265fadb0a05990239b86d3c4c1f212",
+    "status": "PASS",
+    "returncode": 0
+  },
+  "total_requests": 37,
+  "scope": "Original 37-request same-schedule eager versus current native stack plus E028; all base gates plus full refill states. Not live HTTP/performance."
+}

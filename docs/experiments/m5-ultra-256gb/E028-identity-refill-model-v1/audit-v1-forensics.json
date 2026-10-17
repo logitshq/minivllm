@@ -1,0 +1,219 @@
+{
+  "schema": "E028-model-audit-v1-forensics-v1",
+  "status": "AUDITOR_CASE_BOUNDARY_STATE_DEFECT",
+  "qualified": false,
+  "performance_qualified": false,
+  "failure_receipt": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-model-v1-execution/independent-audit.json",
+    "sha256": "faf4cf701b848a49f4ee1f3434baa30bcdd67e3781ff3ea4147bb14ca8903071"
+  },
+  "ledger": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/identity-refill-model-v1-owner/qualification/base/steps.jsonl",
+    "read_method": "binary line streaming; stopped after line 5130; full file neither loaded nor hashed",
+    "lines": {
+      "5129": {
+        "case": "D-C8",
+        "step": 1027,
+        "bytes": 149966,
+        "sha256": "29dea120591aa45bd7fe7435396fab065ed798836eb0ba17be12b22091148623",
+        "comparisons": 641,
+        "all_bit_finite_flags_true": true
+      },
+      "5130": {
+        "case": "lifecycle",
+        "step": 1,
+        "bytes": 317561,
+        "sha256": "54f927bbed98a1b7de28b4cc0d0eb34166cb8aa2131e411568641e41c3687b41",
+        "comparisons": 1027,
+        "all_bit_finite_flags_true": true
+      }
+    }
+  },
+  "prior_reused_pair": {
+    "free_slots": [
+      1,
+      0,
+      3,
+      2,
+      5,
+      4,
+      7,
+      6
+    ],
+    "finished_pending": [
+      "c8-14",
+      "c8-15"
+    ],
+    "running": [],
+    "waiting": [],
+    "batch_rids": [],
+    "has_work": false
+  },
+  "actual": {
+    "decode": [],
+    "prefill": [
+      [
+        "probe-0",
+        978
+      ],
+      [
+        "probe-1",
+        886
+      ],
+      [
+        "probe-2",
+        184
+      ]
+    ],
+    "finished_ids": [
+      "c8-14",
+      "c8-15"
+    ],
+    "request_slots": [
+      [
+        "probe-0",
+        6
+      ],
+      [
+        "probe-1",
+        7
+      ],
+      [
+        "probe-2",
+        4
+      ],
+      [
+        "probe-3",
+        null
+      ],
+      [
+        "probe-4",
+        null
+      ],
+      [
+        "probe-5",
+        null
+      ],
+      [
+        "probe-6",
+        null
+      ],
+      [
+        "probe-7",
+        null
+      ]
+    ]
+  },
+  "original_expected": {
+    "free_stack_before_schedule": [
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    "request_slots": [
+      [
+        "probe-0",
+        0
+      ],
+      [
+        "probe-1",
+        1
+      ],
+      [
+        "probe-2",
+        2
+      ],
+      [
+        "probe-3",
+        null
+      ],
+      [
+        "probe-4",
+        null
+      ],
+      [
+        "probe-5",
+        null
+      ],
+      [
+        "probe-6",
+        null
+      ],
+      [
+        "probe-7",
+        null
+      ]
+    ]
+  },
+  "unique_differences": [
+    {
+      "path": "/requests/0/slot",
+      "actual": 6,
+      "expected": 0
+    },
+    {
+      "path": "/requests/1/slot",
+      "actual": 7,
+      "expected": 1
+    },
+    {
+      "path": "/requests/2/slot",
+      "actual": 4,
+      "expected": 2
+    }
+  ],
+  "full_schedule_equal_after_reused_stack_correction": true,
+  "correction_basis": "Producer reuses C8 engine pair for lifecycle; schedule pops free slots and update appends in running retirement order. Drain requires full free permutation, not initial order. New audit must COPY independently reconstructed preceding free stack, not seed from lifecycle claims. Here the prior saved stack is used only to localize the defect; final audit reconstructs it independently.",
+  "sources": [
+    {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_qualification.py",
+      "sha256": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+      "lines": [
+        75,
+        79,
+        332,
+        333
+      ]
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py",
+      "sha256": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+      "lines": [
+        341,
+        347,
+        576,
+        577,
+        580,
+        581
+      ]
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/audit_model.py",
+      "sha256": "d46c60266e70b7998e2ebeb17d1c126ef4eb896226857419ba6146ae1b642c67",
+      "lines": [
+        82,
+        86,
+        188
+      ]
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/scheduler.py",
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+      "lines": [
+        32,
+        49,
+        50,
+        66,
+        90,
+        93,
+        94
+      ]
+    }
+  ],
+  "scope": "Narrow failure localization only; v1 failure retained. Full 37-request independent numerical audit must be rerun using reviewed v2."
+}

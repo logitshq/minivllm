@@ -584,3 +584,23 @@ Native HTTP raw SSE/UUID/scheduler join、独立双引擎实际调度回放及�
 用户现已明确授权“允许停止、实验后恢复”。接下来按冻结E028 model v1执行冷停→完整
 37请求→回收→恢复原oMLX模型，并核新日志中的MTP/resident PLE。先前pending记录是历史
 快照，当前不再等待同一授权；失败也执行恢复。M4分支53d4906已在本分支祖先中。
+
+
+## E028 full-model result and restoration: PASS (2026-10-17)
+
+Frozen model v1 completed 37 requests / 5163 steps / 12411 raw=committed tokens.
+Twelve actual identity refills (C8 seven, lifecycle five) passed full 64-layer/128-array
+checks. The full ledger records 6,624,069 bit-equal comparisons. All requests hit caps;
+normal EOS was enabled but early EOS did not occur. Original v1 audit rejected the
+C8→lifecycle free-slot ordering; separately reviewed v2 carries the independently
+reconstructed reused scheduler state. Root 5+6 CPU tests and the full v2 audit PASS;
+original failure and sources remain intact, with no GPU rerun or relaxed comparison.
+
+Original oMLX is RESTORED as PID74456 with its original model, Lightning MTP and
+resident PLE confirmed in fresh logs. Model child68871 and load worker74512 were
+reaped. Pressure1 held across212 samples; swap usage/Swapouts did not grow, but
+Swapins increased40. Instrumented elapsed1087.833s and dual-engine MLX peak69.648GiB
+are not production performance. No HTTP/performance qualification or new Pareto point.
+[Final evidence](../experiments/m5-ultra-256gb/E028-identity-refill-model-v1/README.md)
+archives all692 files with full member/source SHA verification. This supersedes earlier
+pending/running status snapshots; approved cold stop and restoration both completed.

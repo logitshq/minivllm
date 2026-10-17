@@ -1,0 +1,186 @@
+{
+  "schema": "E028-model-v1-publication-summary-v1",
+  "status": "PASS",
+  "scope": "Fixed 37-request same-schedule full-model numerical qualification; independent recorded-evidence audit v2. No live HTTP or performance qualification.",
+  "model": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "default_enabled": false,
+  "performance_qualified": false,
+  "cases": [
+    {
+      "name": "D-C1",
+      "requests": 8,
+      "steps": 4096,
+      "raw_tokens": 4096,
+      "committed_tokens": 4096,
+      "all_hit_cap": true,
+      "eos_occurrences": 0
+    },
+    {
+      "name": "D-C8",
+      "requests": 16,
+      "steps": 1027,
+      "raw_tokens": 8192,
+      "committed_tokens": 8192,
+      "all_hit_cap": true,
+      "eos_occurrences": 0
+    },
+    {
+      "name": "lifecycle",
+      "requests": 13,
+      "steps": 40,
+      "raw_tokens": 123,
+      "committed_tokens": 123,
+      "all_hit_cap": true,
+      "eos_occurrences": 0
+    }
+  ],
+  "total_requests": 37,
+  "total_steps": 5163,
+  "total_raw_tokens": 12411,
+  "total_committed_tokens": 12411,
+  "eos_ids": [
+    248044,
+    248046
+  ],
+  "actual_early_eos_covered": false,
+  "refills": {
+    "sha256": "5bc1e52cc9085bc685b2590855b83b3fb8ae48ef4c0adebc8e600d5bb4155767",
+    "bytes": 6541,
+    "events": 12,
+    "arrays": 1536,
+    "per_case": {
+      "D-C8": 7,
+      "lifecycle": 5
+    },
+    "candidate_final_counters": [
+      {
+        "identity_refill": 0,
+        "fallback": 8
+      },
+      {
+        "identity_refill": 12,
+        "fallback": 19
+      }
+    ]
+  },
+  "array_counts": {
+    "full_vocabulary_logits": 10315,
+    "all_arrays": 6624069,
+    "state_arrays": 6598400,
+    "ahead_token_arrays": 15354,
+    "e028_refill_arrays": 1536
+  },
+  "bit_equal_checks": 6624069,
+  "finite_checks": 13248138,
+  "ledger": {
+    "sha256": "370d257cf76ea7ee16887d959c6f2a1994129e712dffd764f208dcabed83dd5d",
+    "bytes": 1628395463,
+    "lines": 5171,
+    "completed_step_rows": 5163,
+    "truncated_final_line": null
+  },
+  "diagnostic_resources": {
+    "instrumented_owner_elapsed_wall_s": 1087.8332952920027,
+    "mlx_peak_bytes": 74784272346,
+    "mlx_peak_scope": "Two engines plus correctness observers; not a single production engine.",
+    "samples": 212,
+    "pressure": 1,
+    "swap_used_mb_first": 437.06,
+    "swap_used_mb_last": 437.06,
+    "swapins_first": 76702,
+    "swapins_last": 76742,
+    "swapouts_first": 316235,
+    "swapouts_last": 316235
+  },
+  "restoration": {
+    "state": "RESTORED",
+    "contract": "cold-restart-persisted-visible-v1",
+    "replacement": {
+      "pid": 74456,
+      "ppid": 1,
+      "start": "Sat Oct 17 07:37:30 2026",
+      "comm": "omlx-server"
+    },
+    "final_status": {
+      "version": "0.7.0",
+      "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+      "loaded": [
+        "Qwen3.8-Flash-Next-oQ6e-mtp"
+      ],
+      "loading": 0,
+      "target_loading": false,
+      "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+      "pinned": false,
+      "engine_type": "vlm",
+      "config_model_type": "qwen4_exp"
+    },
+    "log_markers": [
+      "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+      "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+      "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+      "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+      "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+    ],
+    "exact_runtime_signature_restored": false,
+    "warm_kv_restored": false,
+    "independent_audit": "PERSISTED_VISIBLE_RECEIPTS_CONSISTENT"
+  },
+  "audit_v1_status": "FAIL: lifecycle free-slot stack wrongly reset; original retained",
+  "audit_v2_status": "PASS",
+  "audit_correction": "Copy independently reconstructed drained C8 free-slot stack into lifecycle; no evidence-derived seed.",
+  "archive": {
+    "file": "raw-evidence.tar.xz",
+    "bytes": 2480860,
+    "sha256": "b61917ac2bff91c97aa35460e1176382b03cbbf521f6c4428390b0a9ba8a6900",
+    "members": 692,
+    "uncompressed_member_bytes": 1633685854,
+    "all_members_rehashed": true,
+    "sources_rechecked_after_archive": true
+  },
+  "receipt_copies": {
+    "independent-audit-v1.json": {
+      "bytes": 2432,
+      "sha256": "faf4cf701b848a49f4ee1f3434baa30bcdd67e3781ff3ea4147bb14ca8903071"
+    },
+    "independent-audit-v2.json": {
+      "bytes": 558287,
+      "sha256": "f38ddfab6f578a49f8f8087c51cf3246b26280787c9a3305afed23ec19baa1a7"
+    },
+    "audit-v1-forensics.json": {
+      "bytes": 4796,
+      "sha256": "3740e307c25413b30f91d2e1369507182b5be0c2775335d72062fbc03158f89f"
+    },
+    "owner-complete.json": {
+      "bytes": 657,
+      "sha256": "d8792fc8df6c5eed5db38ccfe89e0dd30f556ae24f041aa94d1ac9d8542af19b"
+    },
+    "model-complete.json": {
+      "bytes": 1660,
+      "sha256": "b8a59b0f2c1a463f19bb4dd5da6e30302f96bc130d58147a55c6dfb34b2df5bc"
+    },
+    "model-base-complete.json": {
+      "bytes": 449578,
+      "sha256": "24c1b08cd5defd76cf08ee46375e1a62bb265fadb0a05990239b86d3c4c1f212"
+    },
+    "model-release.json": {
+      "bytes": 118,
+      "sha256": "920542eefa1e31c4ff4903cd4ca2d61109299dcb113ac4d1fd85ce068aa7a98f"
+    },
+    "restored-journal.json": {
+      "bytes": 24720,
+      "sha256": "1e6def6f768fe6a64229077b798ac71bdf2124ca9b7f6de630a65a35fe764c4a"
+    },
+    "numeric-v2-cpu.json": {
+      "bytes": 1238,
+      "sha256": "39187666fe12d2417f773f48c1f98d6ee86f804ce6e6c11702cd5a45afe92e46"
+    },
+    "owner-v2-cpu.json": {
+      "bytes": 1542,
+      "sha256": "5b96e3f66abc0e2956cfaeed784c3d572ca4b10e58214bcac12410014aa770e9"
+    },
+    "execution-final.json": {
+      "bytes": 114,
+      "sha256": "a486a2ff794ad8ee067bc91969b8878489b8af9626c8dac4ec6b37bce47b91d3"
+    }
+  }
+}

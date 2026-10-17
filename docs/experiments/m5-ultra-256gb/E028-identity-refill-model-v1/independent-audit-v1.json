@@ -1,0 +1,62 @@
+{
+  "schema": "E028-model-owner-audit-v1",
+  "qualified": false,
+  "ledger_opened": true,
+  "performance_qualified": false,
+  "scope": "E028 fixed 37-request numerical qualification plus offline owner/recovery evidence; no HTTP or throughput-latency performance point.",
+  "owner_resources": {
+    "samples": 212,
+    "absence_probes": 213,
+    "known_owned_samples": 209,
+    "pressure": 1,
+    "authorized_suspended_pids": [],
+    "last_recorded_at": 1792247844.643086,
+    "swap_delta_mb": 0.0,
+    "swapouts_delta": 0
+  },
+  "service_restore": {
+    "status": "PERSISTED_VISIBLE_RECEIPTS_CONSISTENT",
+    "physical_samples": 19,
+    "max_recorded_system_footprint_bytes": 176099999744,
+    "raw_log_bytes": 11458,
+    "raw_log_sha256": "e0e90ad2856ed6167f3094e60d1945ad838b8a6bbff5132421440ac7679771ce",
+    "replacement": {
+      "pid": 74456,
+      "ppid": 1,
+      "start": "Sat Oct 17 07:37:30 2026",
+      "comm": "omlx-server"
+    },
+    "http_worker_returncode": 0,
+    "exact_runtime_signature_restored": false,
+    "warm_kv_restored": false,
+    "scope": "Raw physical/log checks independent; final HTTP status and PID/job/listener observations exist only as pinned-controller receipts."
+  },
+  "pins": {
+    "original_verified_entries": 157,
+    "execution_pins": 122,
+    "adapter_source_copies": 5,
+    "runtime_bytes_rehashed": 241872766,
+    "weight_shards_rehashed": false,
+    "scope": "Actual frozen source/manifest/fixture copies and runtime binaries independently hashed; model weight recheck remains the numerical child receipt."
+  },
+  "numerical": {
+    "schema": "E028-model-independent-audit-v1",
+    "status": "FAIL",
+    "qualified": false,
+    "ledger_opened": true,
+    "performance_qualified": false,
+    "scope": "Recorded full-model same-schedule numerical checks only; no HTTP/performance or owner/service qualification.",
+    "audit_source_sha256": "d46c60266e70b7998e2ebeb17d1c126ef4eb896226857419ba6146ae1b642c67",
+    "base_auditor_sha256": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+    "first_failure": {
+      "type": "ValueError",
+      "message": "ledger line 5130, lifecycle step 1: independent FCFS/metadata schedule mismatch"
+    }
+  },
+  "status": "FAIL",
+  "first_failure": {
+    "type": "ValueError",
+    "message": "numerical audit rejected qualification"
+  },
+  "audit_source_sha256": "b37901424d5bcce9b20b89b19e2cea065a56cf6138bdd6653f922d0a14bc1482"
+}

@@ -2,7 +2,8 @@
 
 本轮目标是减少 refill 的状态搬运。正确性是前提，最终指标仍是整机输出吞吐和完整请求延迟。
 v3 已通过10个真实层形状合成状态场景、88项完整原字节检查；独立原件审计与root复核均已通过。
-模块仍默认 OFF，尚未完成全模型与 HTTP 资格，也没有新的 Pareto 点。
+2026-10-17 已完成固定37请求的整模型同调度数值资格及独立v2审计；12次实际refill通过。
+模块仍默认 OFF，HTTP资格与吞吐—完整请求延迟收益尚未验证，没有新的 Pareto 点。
 
 ## 从真实路径选优化点
 
@@ -153,3 +154,36 @@ owner目录尚不存在。这是拒绝缺失证据的验证，不是整模型成
 漏报，修复并保留负测；测量工具的成功门也要检查异常路径。计数仍须独立raw-ID合同，
 每条真实日志仍须零cache命中，不能用客户端单项通过替代完整HTTP资格。
 本轮无真实模型/服务操作，也无新throughput–latency点。
+
+
+## 固定37请求整模型结果：通过；HTTP与性能仍待实测
+
+本次用户明确授权冷停后，原冻结计划单次执行完成：D-C1为8请求/4096步/4096token，
+D-C8为16请求/1027步/8192token，lifecycle为13请求/40步/123token。总37请求、
+5163步、12411个raw=committed token。真实identity refill共12次（C8七次、lifecycle
+五次），逐次比较64层/128数组，共1536项额外状态比较；C1零命中控制也通过。
+整轮记录6,624,069项逐位相同及13,248,138项有限值检查。原eager参考与当前native
+栈+E028按相同离散调度运行；独立审计核对原GPU记录和重建调度，不是另一次GPU重算。
+
+第一版审计在lifecycle第一步拒绝，原因是审计器错误地重置了free-slot顺序，而
+实际producer沿用C8引擎。C8完整退场后的free stack为[1,0,3,2,5,4,7,6]，下一案
+前3个slot应为[6,7,4]。v2复制独立重建的前案stack并检查完整退场、唯一槽位和
+pending retirement；不从待验证的下一条schedule取预期值。root的5+6 CPU负测/
+回归检查通过后，完整1.628GB原ledger重审PASS。原审计、首次FAIL与定位记录均保留，
+没有重跑模型、改变候选或放宽比较。
+
+正常EOS启用，但EOS ID实际出现0次，37请求全到cap，所以真实EOS提前终止尚未覆盖。
+同样，固定调度数值门不替代实际HTTP调度和wire输出检查。owner用时1087.833秒，
+双引擎加观察器MLX峰值69.648GiB，均是诊断数据，不能用来计算生产吞吐或内存节省。
+212次pressure1，swap usage及Swapouts不增；Swapins增加40，不能说完全无paging。
+
+child68871退出并回收后，原oMLX于14:38:06 UTC恢复，replacement PID74456；原模型
+Qwen3.8-Flash-Next-oQ6e-mtp已重新加载，新日志确认MTP与resident PLE。独立审计核
+恢复记录一致，范围是已授权的persisted-visible合同，不含暖KV和隐藏runtime状态。
+[完整结果、首次失败与归档](../../experiments/m5-ultra-256gb/E028-identity-refill-model-v1/README.md)
+保留692成员/1,633,685,854原字节，压缩2,480,860B后逐成员SHA及源文件重核通过。
+
+下一步先取得实际HTTP trace并验证调度与输出，再做fresh-process C1/C8 OFF/ON配对。
+最后与同轮oMLX、Lithos对齐模型/量化/输入/输出规则并扫描并发，画实际提交token总数
+除以共同请求窗口 versus POST→DONE p50/p95。当前Pareto图不加点，也不由这次数值PASS
+宣称超越任何引擎。长上下文graph仍是独立的下一大方向，继续保持模块开关和逐次记录。
