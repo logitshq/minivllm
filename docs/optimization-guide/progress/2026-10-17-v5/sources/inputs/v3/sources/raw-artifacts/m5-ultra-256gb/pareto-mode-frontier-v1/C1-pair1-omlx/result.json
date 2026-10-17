@@ -1,0 +1,2354 @@
+{
+  "omlx_burst_mode": "balanced",
+  "lithos_native_metrics": [],
+  "lithos_profile": null,
+  "engine": "omlx",
+  "pair": 1,
+  "concurrency": 1,
+  "groups": {
+    "warm": [
+      {
+        "group_id": "C1-warm-0",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-warm-0",
+            "request_id": "C1-warm-0-R0",
+            "cleanup_complete_perf_counter_s": 40317.986571625,
+            "stream_cleanup_after_done_s": 5.149999924469739e-05,
+            "start_perf_counter_s": 40314.803111166,
+            "done_perf_counter_s": 40317.986520125,
+            "first_text_perf_counter_s": 40317.406604083,
+            "client_total_s": 3.183408958997461,
+            "client_ttft_text_s": 2.6034929169982206,
+            "client_post_first_chunk_s": 0.5799160419992404,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "model_load_duration": 2.19,
+              "time_to_first_token": 0.41,
+              "total_time": 0.99,
+              "prompt_eval_duration": 0.41,
+              "generation_duration": 0.58,
+              "prompt_tokens_per_second": 46.71,
+              "generation_tokens_per_second": 55.0
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 53.456013896647136,
+            "events": [
+              {
+                "client_perf_counter_s": 40317.406604083,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40317.538973166,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40317.668978625,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40317.799092416,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40317.929479333,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40317.986310416,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 3.183408958997461,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 10.0521172152753,
+        "x_client_estimated_interactivity_tok_s_user": 53.456013896647136
+      },
+      {
+        "group_id": "C1-warm-1",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-warm-1",
+            "request_id": "C1-warm-1-R0",
+            "cleanup_complete_perf_counter_s": 40318.901440541,
+            "stream_cleanup_after_done_s": 5.395799962570891e-05,
+            "start_perf_counter_s": 40318.213320833,
+            "done_perf_counter_s": 40318.901386583,
+            "first_text_perf_counter_s": 40318.322305791,
+            "client_total_s": 0.6880657500005327,
+            "client_ttft_text_s": 0.10898495800211094,
+            "client_post_first_chunk_s": 0.5790807919984218,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "time_to_first_token": 0.1,
+              "total_time": 0.69,
+              "prompt_eval_duration": 0.1,
+              "generation_duration": 0.58,
+              "prompt_tokens_per_second": 181.32,
+              "generation_tokens_per_second": 55.04
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 53.53311736177305,
+            "events": [
+              {
+                "client_perf_counter_s": 40318.322305791,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40318.455498958,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40318.585292875,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40318.715094708,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40318.845023166,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40318.901197333,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 0.6880657500005327,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 46.507183361437804,
+        "x_client_estimated_interactivity_tok_s_user": 53.53311736177305
+      },
+      {
+        "group_id": "C1-warm-2",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-warm-2",
+            "request_id": "C1-warm-2-R0",
+            "cleanup_complete_perf_counter_s": 40319.810703,
+            "stream_cleanup_after_done_s": 5.275000148685649e-05,
+            "start_perf_counter_s": 40319.122377291,
+            "done_perf_counter_s": 40319.81065025,
+            "first_text_perf_counter_s": 40319.231173041,
+            "client_total_s": 0.6882729589997325,
+            "client_ttft_text_s": 0.10879574999853503,
+            "client_post_first_chunk_s": 0.5794772090011975,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "time_to_first_token": 0.1,
+              "total_time": 0.69,
+              "prompt_eval_duration": 0.1,
+              "generation_duration": 0.58,
+              "prompt_tokens_per_second": 181.06,
+              "generation_tokens_per_second": 55.02
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 53.49649566620995,
+            "events": [
+              {
+                "client_perf_counter_s": 40319.231173041,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40319.364020333,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40319.493911,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40319.62359525,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40319.753437916,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40319.81047875,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 0.6882729589997325,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 46.493182074893106,
+        "x_client_estimated_interactivity_tok_s_user": 53.49649566620995
+      }
+    ],
+    "measure": [
+      {
+        "group_id": "C1-measure-0",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-measure-0",
+            "request_id": "C1-measure-0-R0",
+            "cleanup_complete_perf_counter_s": 40320.723863125,
+            "stream_cleanup_after_done_s": 5.0583999836817384e-05,
+            "start_perf_counter_s": 40320.034972416,
+            "done_perf_counter_s": 40320.723812541,
+            "first_text_perf_counter_s": 40320.144243291,
+            "client_total_s": 0.6888401250034804,
+            "client_ttft_text_s": 0.10927087500022026,
+            "client_post_first_chunk_s": 0.5795692500032601,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "time_to_first_token": 0.11,
+              "total_time": 0.69,
+              "prompt_eval_duration": 0.11,
+              "generation_duration": 0.58,
+              "prompt_tokens_per_second": 180.33,
+              "generation_tokens_per_second": 55.01
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 53.48799992378068,
+            "events": [
+              {
+                "client_perf_counter_s": 40320.144243291,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40320.277365541,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40320.407393916,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40320.537260791,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40320.667301083,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40320.723632583,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 0.6888401250034804,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 46.45490127311954,
+        "x_client_estimated_interactivity_tok_s_user": 53.48799992378068
+      },
+      {
+        "group_id": "C1-measure-1",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-measure-1",
+            "request_id": "C1-measure-1-R0",
+            "cleanup_complete_perf_counter_s": 40321.643363291,
+            "stream_cleanup_after_done_s": 5.416599742602557e-05,
+            "start_perf_counter_s": 40320.948985791,
+            "done_perf_counter_s": 40321.643309125,
+            "first_text_perf_counter_s": 40321.057621916,
+            "client_total_s": 0.6943233339989092,
+            "client_ttft_text_s": 0.10863612499815645,
+            "client_post_first_chunk_s": 0.5856872090007528,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "time_to_first_token": 0.1,
+              "total_time": 0.69,
+              "prompt_eval_duration": 0.1,
+              "generation_duration": 0.59,
+              "prompt_tokens_per_second": 181.29,
+              "generation_tokens_per_second": 54.45
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 52.9292761112018,
+            "events": [
+              {
+                "client_perf_counter_s": 40321.057621916,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40321.194387666,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40321.325793416,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40321.456498666,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40321.586529833,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40321.643111375,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 0.6943233339989092,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 46.08803770960443,
+        "x_client_estimated_interactivity_tok_s_user": 52.9292761112018
+      },
+      {
+        "group_id": "C1-measure-2",
+        "actual_request_count": 1,
+        "requests": [
+          {
+            "group_id": "C1-measure-2",
+            "request_id": "C1-measure-2-R0",
+            "cleanup_complete_perf_counter_s": 40322.559066666,
+            "stream_cleanup_after_done_s": 5.433300248114392e-05,
+            "start_perf_counter_s": 40321.868849708,
+            "done_perf_counter_s": 40322.559012333,
+            "first_text_perf_counter_s": 40321.977783125,
+            "client_total_s": 0.6901626249964465,
+            "client_ttft_text_s": 0.10893341700284509,
+            "client_post_first_chunk_s": 0.5812292079936014,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "input_tokens": 19,
+              "output_tokens": 32,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "time_to_first_token": 0.11,
+              "total_time": 0.69,
+              "prompt_eval_duration": 0.11,
+              "generation_duration": 0.58,
+              "prompt_tokens_per_second": 180.75,
+              "generation_tokens_per_second": 54.86
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": null,
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 53.33524119858283,
+            "events": [
+              {
+                "client_perf_counter_s": 40321.977783125,
+                "text": "KV",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40322.11096375,
+                "text": " Cache 是 Transformer 模型在",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40322.240744416,
+                "text": "生成文本时，缓存已计算",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40322.371607916,
+                "text": "过的 Key 和 Value 向量",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40322.502105416,
+                "text": "，以避免重复计算历史上下文，",
+                "engine_delivery": null
+              },
+              {
+                "client_perf_counter_s": 40322.558834291,
+                "text": "从而显著提升推理",
+                "engine_delivery": null
+              }
+            ]
+          }
+        ],
+        "arrival_spread_s": 0.0,
+        "group_window_s": 0.6901626249964465,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 46.36588369323065,
+        "x_client_estimated_interactivity_tok_s_user": 53.33524119858283
+      }
+    ]
+  },
+  "x": 53.33524119858283,
+  "y": 46.36588369323065,
+  "TTFT_s": 0.10893341700284509,
+  "actual_gpu_batch_scope": "native trace records scheduler batch after each step; official GPU batch not inferred from HTTP concurrency",
+  "official_raw_ids_available": false,
+  "runtime_identity": null,
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "expected_power": "AC",
+  "checkpoint_revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "normal_EOS": true,
+  "prefix_cache": 0,
+  "draft": null,
+  "usage_and_canonical_count": 32,
+  "gates_compile": "official",
+  "norm_reuse": "official",
+  "compile_decode": false,
+  "fuse_decode": false,
+  "allocator_pool_gib": "official",
+  "resources": [
+    {
+      "label": "before-launch",
+      "recorded_at": "2026-10-16T15:03:12.541121+00:00",
+      "monotonic_s": 40312.817223291,
+      "owned_model_pid": null,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 39%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                  1755496.\nPages active:                                1896332.\nPages inactive:                              3211507.\nPages speculative:                               757.\nPages throttled:                                   0.\nPages wired down:                            9831538.\nPages purgeable:                               43874.\n\"Translation faults\":                      730769373.\nPages copy-on-write:                        14670535.\nPages zero filled:                        3630709107.\nPages reactivated:                           1307078.\nPages purged:                                1664607.\nFile-backed pages:                           3707501.\nAnonymous pages:                             1401095.\nPages stored in compressor:                    99543.\nPages occupied by compressor:                  30906.\nDecompressions:                             18973596.\nCompressions:                               29443430.\nPageins:                                    77638180.\nPageouts:                                      14949.\nSwapins:                                       28475.\nSwapouts:                                     290733.\nPages tagged:                                 179519.\nPages tagged resident:                        173141.\nPages tagged compressed:                        6378.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10306.\nPages tag-storage free:                       164207.\nPages tag-storage non-tag pageable:           349066.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1045120.\nTagged compressions:                           48981.\nTagged decompressions:                         16560.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 39,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28475,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973596
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "unknown",
+        "pid": null,
+        "reason": "owned_pid not supplied",
+        "raw": null
+      }
+    },
+    {
+      "label": "ready-before-warm",
+      "recorded_at": "2026-10-16T15:03:14.296519+00:00",
+      "monotonic_s": 40314.572620875,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 40%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                  1740626.\nPages active:                                1908981.\nPages inactive:                              3217266.\nPages speculative:                               901.\nPages throttled:                                   0.\nPages wired down:                            9827857.\nPages purgeable:                               49756.\n\"Translation faults\":                      730816421.\nPages copy-on-write:                        14675842.\nPages zero filled:                        3630743696.\nPages reactivated:                           1307080.\nPages purged:                                1664607.\nFile-backed pages:                           3711870.\nAnonymous pages:                             1415278.\nPages stored in compressor:                    99499.\nPages occupied by compressor:                  30905.\nDecompressions:                             18973691.\nCompressions:                               29443430.\nPageins:                                    77639185.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 178947.\nPages tagged resident:                        172579.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       161954.\nPages tag-storage non-tag pageable:           351318.\nPages tag-storage non-tag wired:                  19.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 40,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973691
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 153328,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 153328 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 153328,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 12,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 95
+      }
+    },
+    {
+      "label": "before-C1-warm-0",
+      "recorded_at": "2026-10-16T15:03:14.416271+00:00",
+      "monotonic_s": 40314.692360541,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 40%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                  1740646.\nPages active:                                1909278.\nPages inactive:                              3217266.\nPages speculative:                               901.\nPages throttled:                                   0.\nPages wired down:                            9827541.\nPages purgeable:                               49756.\n\"Translation faults\":                      730827442.\nPages copy-on-write:                        14678003.\nPages zero filled:                        3630747246.\nPages reactivated:                           1307080.\nPages purged:                                1664607.\nFile-backed pages:                           3711872.\nAnonymous pages:                             1415573.\nPages stored in compressor:                    99495.\nPages occupied by compressor:                  30904.\nDecompressions:                             18973695.\nCompressions:                               29443430.\nPageins:                                    77639195.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 178937.\nPages tagged resident:                        172569.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       161986.\nPages tag-storage non-tag pageable:           351286.\nPages tag-storage non-tag wired:                  19.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 40,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973695
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 153328,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 153328 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 153328,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 4
+      }
+    },
+    {
+      "label": "after-C1-warm-0",
+      "recorded_at": "2026-10-16T15:03:17.711116+00:00",
+      "monotonic_s": 40317.987201583,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   674844.\nPages active:                                1963676.\nPages inactive:                              3274154.\nPages speculative:                               944.\nPages throttled:                                   0.\nPages wired down:                           10782022.\nPages purgeable:                               42904.\n\"Translation faults\":                      731908170.\nPages copy-on-write:                        14680951.\nPages zero filled:                        3631861163.\nPages reactivated:                           1307080.\nPages purged:                                1664927.\nFile-backed pages:                           3768630.\nAnonymous pages:                             1470144.\nPages stored in compressor:                    99441.\nPages occupied by compressor:                  30896.\nDecompressions:                             18973716.\nCompressions:                               29443430.\nPageins:                                    77693804.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 180001.\nPages tagged resident:                        173633.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155050.\nPages tag-storage non-tag pageable:           358223.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973716
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565168,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565168 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565168,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 21
+      }
+    },
+    {
+      "label": "before-C1-warm-1",
+      "recorded_at": "2026-10-16T15:03:17.824733+00:00",
+      "monotonic_s": 40318.100808958,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   675023.\nPages active:                                1963502.\nPages inactive:                              3274149.\nPages speculative:                               944.\nPages throttled:                                   0.\nPages wired down:                           10782022.\nPages purgeable:                               42904.\n\"Translation faults\":                      731919089.\nPages copy-on-write:                        14683116.\nPages zero filled:                        3631864618.\nPages reactivated:                           1307080.\nPages purged:                                1664927.\nFile-backed pages:                           3768632.\nAnonymous pages:                             1469963.\nPages stored in compressor:                    99441.\nPages occupied by compressor:                  30896.\nDecompressions:                             18973716.\nCompressions:                               29443430.\nPageins:                                    77693814.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 180001.\nPages tagged resident:                        173633.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155193.\nPages tag-storage non-tag pageable:           358080.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973716
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565168,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565168 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565168,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 0
+      }
+    },
+    {
+      "label": "after-C1-warm-1",
+      "recorded_at": "2026-10-16T15:03:18.625945+00:00",
+      "monotonic_s": 40318.902015875,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   683282.\nPages active:                                1954783.\nPages inactive:                              3274169.\nPages speculative:                               945.\nPages throttled:                                   0.\nPages wired down:                           10782461.\nPages purgeable:                               34712.\n\"Translation faults\":                      731931377.\nPages copy-on-write:                        14685347.\nPages zero filled:                        3631888651.\nPages reactivated:                           1307080.\nPages purged:                                1664927.\nFile-backed pages:                           3768658.\nAnonymous pages:                             1461239.\nPages stored in compressor:                    99438.\nPages occupied by compressor:                  30896.\nDecompressions:                             18973719.\nCompressions:                               29443430.\nPageins:                                    77693825.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155184.\nPages tag-storage non-tag pageable:           358089.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973719
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565216,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565216 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565216,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 3
+      }
+    },
+    {
+      "label": "before-C1-warm-2",
+      "recorded_at": "2026-10-16T15:03:18.737056+00:00",
+      "monotonic_s": 40319.013125125,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   683261.\nPages active:                                1956108.\nPages inactive:                              3274170.\nPages speculative:                               945.\nPages throttled:                                   0.\nPages wired down:                           10781156.\nPages purgeable:                               34712.\n\"Translation faults\":                      731942967.\nPages copy-on-write:                        14687690.\nPages zero filled:                        3631892199.\nPages reactivated:                           1307080.\nPages purged:                                1664927.\nFile-backed pages:                           3768659.\nAnonymous pages:                             1462564.\nPages stored in compressor:                    99438.\nPages occupied by compressor:                  30896.\nDecompressions:                             18973723.\nCompressions:                               29443430.\nPageins:                                    77693836.\nPageouts:                                      14949.\nSwapins:                                       28487.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155180.\nPages tag-storage non-tag pageable:           358093.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28487,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973723
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565216,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565216 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565216,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 4
+      }
+    },
+    {
+      "label": "after-C1-warm-2",
+      "recorded_at": "2026-10-16T15:03:19.535219+00:00",
+      "monotonic_s": 40319.811285125,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   683292.\nPages active:                                1956031.\nPages inactive:                              3274177.\nPages speculative:                               945.\nPages throttled:                                   0.\nPages wired down:                           10781194.\nPages purgeable:                               34712.\n\"Translation faults\":                      731955321.\nPages copy-on-write:                        14689935.\nPages zero filled:                        3631915981.\nPages reactivated:                           1307082.\nPages purged:                                1664927.\nFile-backed pages:                           3768678.\nAnonymous pages:                             1462475.\nPages stored in compressor:                    99434.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973737.\nCompressions:                               29443430.\nPageins:                                    77693846.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155168.\nPages tag-storage non-tag pageable:           358105.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973737
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565296,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565296 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565296,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 4,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 14
+      }
+    },
+    {
+      "label": "before-C1-measure-0",
+      "recorded_at": "2026-10-16T15:03:19.647790+00:00",
+      "monotonic_s": 40319.923856083,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   688479.\nPages active:                                1951048.\nPages inactive:                              3274178.\nPages speculative:                               945.\nPages throttled:                                   0.\nPages wired down:                           10780989.\nPages purgeable:                               29592.\n\"Translation faults\":                      731966250.\nPages copy-on-write:                        14692120.\nPages zero filled:                        3631919448.\nPages reactivated:                           1307082.\nPages purged:                                1664927.\nFile-backed pages:                           3768679.\nAnonymous pages:                             1457492.\nPages stored in compressor:                    99433.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973738.\nCompressions:                               29443430.\nPageins:                                    77693856.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155176.\nPages tag-storage non-tag pageable:           358097.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973738
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565296,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565296 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565296,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 1
+      }
+    },
+    {
+      "label": "after-C1-measure-0",
+      "recorded_at": "2026-10-16T15:03:20.448372+00:00",
+      "monotonic_s": 40320.724433458,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   688426.\nPages active:                                1951027.\nPages inactive:                              3274280.\nPages speculative:                               947.\nPages throttled:                                   0.\nPages wired down:                           10780959.\nPages purgeable:                               29592.\n\"Translation faults\":                      731978637.\nPages copy-on-write:                        14694370.\nPages zero filled:                        3631943197.\nPages reactivated:                           1307082.\nPages purged:                                1664927.\nFile-backed pages:                           3768691.\nAnonymous pages:                             1457563.\nPages stored in compressor:                    99431.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973740.\nCompressions:                               29443430.\nPageins:                                    77693871.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155144.\nPages tag-storage non-tag pageable:           358129.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973740
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565296,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565296 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565296,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 2
+      }
+    },
+    {
+      "label": "before-C1-measure-1",
+      "recorded_at": "2026-10-16T15:03:20.562518+00:00",
+      "monotonic_s": 40320.838579166,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   688438.\nPages active:                                1951011.\nPages inactive:                              3274282.\nPages speculative:                               947.\nPages throttled:                                   0.\nPages wired down:                           10780961.\nPages purgeable:                               29592.\n\"Translation faults\":                      731989560.\nPages copy-on-write:                        14696563.\nPages zero filled:                        3631946619.\nPages reactivated:                           1307082.\nPages purged:                                1664927.\nFile-backed pages:                           3768693.\nAnonymous pages:                             1457547.\nPages stored in compressor:                    99431.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973740.\nCompressions:                               29443430.\nPageins:                                    77693881.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 179981.\nPages tagged resident:                        173613.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155146.\nPages tag-storage non-tag pageable:           358127.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973740
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565296,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565296 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565296,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 0
+      }
+    },
+    {
+      "label": "after-C1-measure-1",
+      "recorded_at": "2026-10-16T15:03:21.367840+00:00",
+      "monotonic_s": 40321.643896625,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   690694.\nPages active:                                1948468.\nPages inactive:                              3274508.\nPages speculative:                              1015.\nPages throttled:                                   0.\nPages wired down:                           10780954.\nPages purgeable:                               26524.\n\"Translation faults\":                      732018592.\nPages copy-on-write:                        14702428.\nPages zero filled:                        3631974206.\nPages reactivated:                           1307082.\nPages purged:                                1664929.\nFile-backed pages:                           3768986.\nAnonymous pages:                             1455005.\nPages stored in compressor:                    99431.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973740.\nCompressions:                               29443430.\nPageins:                                    77694175.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 180010.\nPages tagged resident:                        173642.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       155014.\nPages tag-storage non-tag pageable:           358259.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973740
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565360,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565360 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565360,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 0
+      }
+    },
+    {
+      "label": "before-C1-measure-2",
+      "recorded_at": "2026-10-16T15:03:21.478208+00:00",
+      "monotonic_s": 40321.754264375,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   690153.\nPages active:                                1949011.\nPages inactive:                              3274509.\nPages speculative:                              1012.\nPages throttled:                                   0.\nPages wired down:                           10780954.\nPages purgeable:                               26524.\n\"Translation faults\":                      732030084.\nPages copy-on-write:                        14704639.\nPages zero filled:                        3631978177.\nPages reactivated:                           1307082.\nPages purged:                                1664929.\nFile-backed pages:                           3768987.\nAnonymous pages:                             1455545.\nPages stored in compressor:                    99431.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973740.\nCompressions:                               29443430.\nPageins:                                    77694185.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 180010.\nPages tagged resident:                        173642.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       154993.\nPages tag-storage non-tag pageable:           358280.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973740
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565360,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565360 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565360,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 0
+      }
+    },
+    {
+      "label": "after-C1-measure-2",
+      "recorded_at": "2026-10-16T15:03:22.283590+00:00",
+      "monotonic_s": 40322.559639958,
+      "owned_model_pid": 74755,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 34%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   701695.\nPages active:                                1965051.\nPages inactive:                              3274517.\nPages speculative:                              1018.\nPages throttled:                                   0.\nPages wired down:                           10753358.\nPages purgeable:                               38956.\n\"Translation faults\":                      732043861.\nPages copy-on-write:                        14707068.\nPages zero filled:                        3632002217.\nPages reactivated:                           1307083.\nPages purged:                                1665633.\nFile-backed pages:                           3769001.\nAnonymous pages:                             1471585.\nPages stored in compressor:                    99431.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973740.\nCompressions:                               29443430.\nPageins:                                    77694205.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 180000.\nPages tagged resident:                        173632.\nPages tagged compressed:                        6368.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       154950.\nPages tag-storage non-tag pageable:           358323.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042496.\nTagged compressions:                           48981.\nTagged decompressions:                         16570.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 34,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973740
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "owned_pid_rss_kib": 16565392,
+      "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "known",
+        "pid": 74755,
+        "raw": {
+          "command": [
+            "/bin/ps",
+            "-p",
+            "74755",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 0,
+          "stdout": "74755 74538 16565392 omlx-server",
+          "stderr": ""
+        },
+        "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+        "ppid": 74538,
+        "rss_kib": 16565392,
+        "executable": "omlx-server"
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 0
+      }
+    },
+    {
+      "label": "after-unload",
+      "recorded_at": "2026-10-16T15:03:23.348043+00:00",
+      "monotonic_s": 40323.62408925,
+      "owned_model_pid": null,
+      "memory_pressure": {
+        "returncode": 0,
+        "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 40%",
+        "error": ""
+      },
+      "pressure_level": {
+        "returncode": 0,
+        "text": "1",
+        "error": ""
+      },
+      "swap": {
+        "returncode": 0,
+        "text": "vm.swapusage: total = 3072.00M  used = 1638.56M  free = 1433.44M  (encrypted)",
+        "error": ""
+      },
+      "vm_stat": {
+        "returncode": 0,
+        "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                  1772720.\nPages active:                                1878542.\nPages inactive:                              3274527.\nPages speculative:                              1014.\nPages throttled:                                   0.\nPages wired down:                            9768836.\nPages purgeable:                               12188.\n\"Translation faults\":                      732056979.\nPages copy-on-write:                        14709558.\nPages zero filled:                        3632006749.\nPages reactivated:                           1307085.\nPages purged:                                1666497.\nFile-backed pages:                           3769007.\nAnonymous pages:                             1385076.\nPages stored in compressor:                    99426.\nPages occupied by compressor:                  30897.\nDecompressions:                             18973745.\nCompressions:                               29443430.\nPageins:                                    77694216.\nPageouts:                                      14949.\nSwapins:                                       28491.\nSwapouts:                                     290733.\nPages tagged:                                 179303.\nPages tagged resident:                        172936.\nPages tagged compressed:                        6367.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10305.\nPages tag-storage free:                       163986.\nPages tag-storage non-tag pageable:           349287.\nPages tag-storage non-tag wired:                  18.\nBytes of compressed tags:                    1042368.\nTagged compressions:                           48981.\nTagged decompressions:                         16571.",
+        "error": ""
+      },
+      "thermal": {
+        "returncode": 0,
+        "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+        "error": ""
+      },
+      "free_percent": 40,
+      "swap_used_mb": 1638.56,
+      "pressure_level_value": 1,
+      "vm_counters": {
+        "Swapouts": 290733,
+        "Swapins": 28491,
+        "Pageouts": 14949,
+        "Compressions": 29443430,
+        "Decompressions": 18973745
+      },
+      "process_inventory_ok": true,
+      "known_inference_processes": [],
+      "known_inference_process_count": 0,
+      "only_owned_known_inference_processes": true,
+      "exactly_one_owned_known_model": false,
+      "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+      "power_metadata": {
+        "status": "known",
+        "percent": null,
+        "source": "AC Power",
+        "state_text": null,
+        "raw": {
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'",
+          "stderr": ""
+        }
+      },
+      "processinfo_thermal_metadata": {
+        "status": "known",
+        "code": 0,
+        "name": "nominal",
+        "raw": {
+          "command": [
+            "/usr/bin/osascript",
+            "-l",
+            "JavaScript",
+            "-e",
+            "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+          ],
+          "returncode": 0,
+          "stdout": "0",
+          "stderr": ""
+        },
+        "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+      },
+      "exact_owned_pid_metadata": {
+        "status": "unknown",
+        "pid": null,
+        "reason": "owned_pid not supplied",
+        "raw": null
+      },
+      "swap_used_mb_delta": 0.0,
+      "vm_counter_delta": {
+        "Swapouts": 0,
+        "Swapins": 0,
+        "Pageouts": 0,
+        "Compressions": 0,
+        "Decompressions": 5
+      }
+    }
+  ],
+  "process_exit": {
+    "pid": 74755,
+    "returncode": -15,
+    "waited_reaped": true,
+    "absence": {
+      "pid": 74755,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  }
+}

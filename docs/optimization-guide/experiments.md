@@ -368,6 +368,12 @@ v2 真实 CPU socket OFF=0、ON=4，按布尔语义修复，18 tests root复核�
 新 plan SHA `e850dcdcc1d160ecddf512529758b32fc9a8241c6af515fb72901c4a6b28c81c`，
 24 small pins 与继承 pins 已绑定；此条为执行前准备，未赋予速度资格。
 
+v2 已在3873101提交后完成6server/36请求，独立输出/资源/回收审计通过、0 errors。
+完整请求三对speedup=1.017017/1.016630/1.007713×，GM=**1.013777×**；
+TTFT三对=.899891/1.005569/1.021203×。GM<1.05且首TTFT<.97，拒绝采用，
+正确性通过的全部观测仍保存；不称数值失败、不混进其他批次Pareto。223文件归档SHA通过、
+外部服务identity不变T→S，见 [v2全部证据](../experiments/m5-ultra-256gb/E022-native-transport-v2/README.md)。
+
 ## E023 · 2026-10-17 · 长生成 throughput–latency · CPU 准备
 
 固定八份编码任务，实际模板后输入886–978 tokens、cap512、正常EOS；两种tokenizer API

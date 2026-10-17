@@ -285,3 +285,8 @@ GLM固定revision的62 shards（189.982GiB）下载和全部SHA校验已完成�
 新Pareto审计确认旧图的实际throughput/完整latency重算一致，但历史外部C1资源matcher
 没充分排除已启动的74384；新图将历史C2–64与受控E020 C1分面，既不拼接两批前沿，
 也不把正确性当可交换轴。详细审计见 [v3/v4 review](../../bench/reviews/pareto-v3-v4-audit.md)。
+
+后续E022 v2已完成：36请求全部正确、6进程全部reap、独立audit0 errors、外部服务恢复S。
+完整请求paired GM=1.013777×，TTFT首对0.899891×，未过原采用门，未接入core；
+223文件完整归档。v5分面图已独立逐点复算和视检，217份来源SHA一致；
+保持“正确性是硬门，吞吐/完整延迟才是Pareto两轴”的口径。

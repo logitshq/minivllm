@@ -53,3 +53,15 @@ v2 独立计划 SHA 为 `e850dcdcc1d160ecddf512529758b32fc9a8241c6af515fb72901c4
 [prereg-v2](../../../bench/m5_ultra_256gb/native_transport_v2/prereg-v2/plan.json)
 固定 24 份新增 small pins 与全部继承 E020 pins。仍是 6 fresh servers / 36 请求，
 不用 v1 的 OFF 数据。当前为已准备、待提交后执行；没有新增速度结论。
+
+## v2 实测：正确性通过，收益不足
+
+`3873101` 提交后完整执行了6个fresh server、36请求；全部输出/资源/回收合同通过。
+独立 auditor 重算 SSE、实际时间戳、配对和lease，结果 `PASS_INDEPENDENT_AUDIT`、0 errors。
+三对完整请求加速为1.017017/1.016630/1.007713×，几何平均 **1.013777×**。
+三对TTFT加速0.899891/1.005569/1.021203×。完整请求GM低于1.05，第一对TTFT低于0.97，
+因此不采用；属于性能门失败，不能记为数值失败，也不删除这些有效观测。
+
+全部223文件归档并重开核SHA，原服务同identity T→S恢复。
+[完整结果与失败取舍](../../experiments/m5-ultra-256gb/E022-native-transport-v2/README.md)。
+本实验说明该socket设置在此负载只有小幅E2E变化，不能解释历史adapter差值或建立模型加速。

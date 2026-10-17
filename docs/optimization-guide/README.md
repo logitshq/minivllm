@@ -6,6 +6,7 @@
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
+[当前分面 throughput–latency 图](progress/2026-10-17-v5/README.md) ·
 [并发 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
 [最新官方 MTP / DSpark 同轮 HTTP 对照](progress/2026-10-17-v4/README.md) ·
 [NAX prefill设计](prefill-design.md) ·

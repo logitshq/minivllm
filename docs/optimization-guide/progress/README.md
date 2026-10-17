@@ -5,6 +5,7 @@
 
 | 快照 | 本批内容 | 结论 |
 |---|---|---|
+| [2026-10-17 v5](2026-10-17-v5/README.md) | 历史C2–64与同轮E020 C1分面；217份来源独立核对 | 正确性硬门下比较真实吞吐/完整延迟；保留被支配点，历史外部C1干扰排除证据不足，未拼接跨轮前沿 |
 | [2026-10-17 v4](2026-10-17-v4/README.md) | E020 官方 MTP / DSpark 与同轮 target-only；15 fresh servers / 90 请求 | C1 的 latency–throughput 最优为 oMLX target-only；MTP 吞吐 GM 0.906×、DSpark 1.086×，不与旧并发曲线混用 |
 | [2026-10-17 v3](2026-10-17-v3/README.md) | throughput–完整请求latency Pareto；48进程/2304请求从时间戳重算 | 正确性为前置；本负载联合前沿为native C1/2/4/8/32，外部为历史target-only实测 |
 | [2026-10-17 v2](2026-10-17-v2/README.md) | E018 单层 GDN 初筛及三次复测；1 张 PNG/SVG | 660 项精确比较通过；复测 PASS/FAIL/PASS，当前候选不采用 |
@@ -12,3 +13,7 @@
 
 最新实验细节见[实验账本](../experiments.md)；完整源代码、资源与进程回收证据见每个实验的归档。
 曲线只连接已测点，不推算未测负载；局部收益不相乘为整机加速，也不代表全网最快。
+
+v5随后完成的 [E022 v2](../../experiments/m5-ultra-256gb/E022-native-transport-v2/README.md)
+36请求正确性/资源/回收均通过，完整请求配对GM仅1.014×且一对TTFT回退，未过采用门。
+这是单独transport配对实验，不池化进v5的历史并发或E020 C1数据；并非数值失败。

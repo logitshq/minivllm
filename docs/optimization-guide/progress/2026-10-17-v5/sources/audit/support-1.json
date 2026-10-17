@@ -1,0 +1,73 @@
+{
+  "physical": {
+    "command": [
+      "/usr/bin/footprint",
+      "-p",
+      "74384",
+      "--noCategories",
+      "--sysFootprint",
+      "-f",
+      "bytes",
+      "-j",
+      ".artifacts/m5-ultra-256gb/glm-flash-physical-preflight-v1/footprint.json"
+    ],
+    "code": 0,
+    "stdout": "======================================================================\npython [74384]: 64-bit    Footprint: 153346982168 B (16384 bytes per page)\n======================================================================\n\nAuxiliary data:\n    phys_footprint: 153346982168 B\n    phys_footprint_peak: 198404471160 B\n\n\nSystem auxiliary data:\n    boot_carveout:         929120256 B\n    sys_wired:            6295027712 B\n    sys_unwired:        180323794944 B\n    ---------------------------------------\n    sys_footprint:      187547942912 B\n\n",
+    "stderr": "",
+    "time": 1792229943.043593
+  },
+  "service": {
+    "command": [
+      "/bin/ps",
+      "-p",
+      "74384",
+      "-o",
+      "pid=,ppid=,lstart=,stat=,rss=,comm="
+    ],
+    "code": 0,
+    "stdout": "74384     1 Fri Oct 16 08:01:58 2026     S    35520256 omlx-server\n",
+    "stderr": "",
+    "time": 1792229943.0469608
+  },
+  "pressure": {
+    "command": [
+      "/usr/sbin/sysctl",
+      "-n",
+      "kern.memorystatus_vm_pressure_level"
+    ],
+    "code": 0,
+    "stdout": "1\n",
+    "stderr": "",
+    "time": 1792229943.0498219
+  },
+  "swap": {
+    "command": [
+      "/usr/sbin/sysctl",
+      "vm.swapusage"
+    ],
+    "code": 0,
+    "stdout": "vm.swapusage: total = 1024.00M  used = 268.81M  free = 755.19M  (encrypted)\n",
+    "stderr": "",
+    "time": 1792229943.0521889
+  },
+  "vm": {
+    "command": [
+      "/usr/bin/vm_stat"
+    ],
+    "code": 0,
+    "stdout": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    71678.\nPages active:                                6767098.\nPages inactive:                              8742324.\nPages speculative:                               120.\nPages throttled:                                   0.\nPages wired down:                             351092.\nPages purgeable:                               53050.\n\"Translation faults\":                     1454870269.\nPages copy-on-write:                        33346063.\nPages zero filled:                        7620831452.\nPages reactivated:                           1872342.\nPages purged:                                3230160.\nFile-backed pages:                           4743297.\nAnonymous pages:                            10766245.\nPages stored in compressor:                   903344.\nPages occupied by compressor:                 794224.\nDecompressions:                             19346441.\nCompressions:                               30721027.\nPageins:                                    96156240.\nPageouts:                                      14987.\nSwapins:                                       74578.\nSwapouts:                                     303419.\nPages tagged:                                 216992.\nPages tagged resident:                        205433.\nPages tagged compressed:                       11559.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                10735.\nPages tag-storage free:                          520.\nPages tag-storage non-tag pageable:           512896.\nPages tag-storage non-tag wired:                  21.\nBytes of compressed tags:                    1647552.\nTagged compressions:                           69312.\nTagged decompressions:                         30800.\n",
+    "stderr": "",
+    "time": 1792229943.0545762
+  },
+  "physical_memory": {
+    "command": [
+      "/usr/sbin/sysctl",
+      "-n",
+      "hw.memsize"
+    ],
+    "code": 0,
+    "stdout": "274877906944\n",
+    "stderr": "",
+    "time": 1792229943.056876
+  }
+}
