@@ -1,0 +1,754 @@
+{
+  "schema": "E023-http-owner-prepare-v1",
+  "status": "PREPARED",
+  "owner_plan_sha256": "d641a95b7a454ce45ea01c3f3b3b0bc59f08ec71de0f0d5c79973315f7861429",
+  "capture_specs": [
+    {
+      "schema": "E023-http-capture-spec-v1",
+      "sources": {
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture.py": "8f43c71b8f3fd99d655ba760aa344eb3026eef35450be9c5ed1f06171109a0fb",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2"
+      },
+      "base_plan": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json",
+        "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+      },
+      "python": "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "environment": {
+        "HOME": "/Users/ryanli",
+        "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/ryanli/.codex/tmp/arg0-macos/codex-arg0zSbbRg:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ryanli/.local/bin:/Users/ryanli/.local/share/mise/shims:/opt/homebrew/sbin:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+        "TMPDIR": "/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "MLX_MAX_OPS_PER_BUFFER": "50",
+        "MLX_MAX_MB_PER_BUFFER": "50",
+        "MLX_BFS_MAX_WIDTH": "20",
+        "MLX_METAL_FAST_SYNCH": "0"
+      },
+      "transport": {
+        "port": 18023,
+        "tcp_nodelay": true,
+        "io_timeout_seconds": 300.0
+      },
+      "deadlines": {
+        "ready": 120,
+        "request": 600,
+        "group": 720,
+        "overall": 900,
+        "close": 10,
+        "term": 15,
+        "kill": 15,
+        "resource_interval": 5
+      },
+      "concurrency": 1,
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py",
+        "--model",
+        "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "--package-root",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native",
+        "--source-manifest",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json",
+        "--source-manifest-sha256",
+        "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "--port",
+        "18023",
+        "--max-len",
+        "2048",
+        "--max-seqs",
+        "1",
+        "--max-batched-tokens",
+        "2048",
+        "--cache-limit-gib",
+        "2",
+        "--compile-decode",
+        "on",
+        "--fuse-decode",
+        "on",
+        "--gates-compile",
+        "on",
+        "--norm-reuse",
+        "off",
+        "--tcp-nodelay",
+        "on",
+        "--io-timeout-seconds",
+        "300.0"
+      ],
+      "jobs": [
+        {
+          "request_id": "qual-c1-r00",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted LRU cache with caller-supplied time\n\nRequired API:\n```python\nclass Cache:\n    def __init__(self, max_weight: int): ...\n    def put(self, key: str, value: str, weight: int, ttl: int, now: int) -> bool: ...\n    def get(self, key: str, now: int) -> str | None: ...\n    def snapshot(self, now: int) -> list[tuple[str, str, int, int]]: ...\n```\n\nBehavior:\n1. max_weight, weight and ttl are positive integers; now is a nonnegative integer and cannot go backwards across successful operations. Invalid arguments do not advance the remembered time.\n2. An entry inserted at now expires when current time is greater than or equal to now + ttl. Every valid operation removes expired entries before returning. Expiration happens before capacity eviction.\n3. get returns None for a missing or expired key. A live get moves the entry to most-recently-used position. snapshot returns fresh tuples in least-to-most-recent order and does not change recency.\n4. put replaces an existing key, resets its expiry and makes it most recent. Evict least-recent live entries until the sum of weights fits. An oversized new value returns False and leaves any old value for that key in place; normal expiration and time advancement still occur.\n5. The cache bounds total weight, not entry count. key and value must be strings; the empty string is valid. Keep the implementation deterministic when several entries expire together.\n6. A replacement must not count both the old and new weights. The cache must remain usable after a failed validation, an oversized replacement, or expiration of every entry. snapshot must not expose the internal container.\n\nExamples and edge cases:\n- Cache(5): put('a','A',2,10,0) and put('b','B',3,10,0) both succeed; snapshot(0) lists a then b.\n- get('a',1) returns 'A'; put('c','C',2,10,1) evicts b, leaving a then c with total weight 4.\n- put('a','new',6,10,2) returns False; get('a',2) still returns 'A'.\n- At time 10, a is expired; c inserted at time 1 remains live until time 11.\n- Calling get with now=-1 or a time before the last successful operation raises ValueError without changing state.\n- Replacing c by a weight-1 value at time 10 resets its expiry and leaves total weight 1.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r01",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA deterministic bounded DAG scheduler\n\nRequired API:\n```python\nclass Scheduler:\n    def __init__(self, dependencies: dict[str, list[str]], slots: int): ...\n    def start_ready(self) -> list[str]: ...\n    def finish(self, task: str, succeeded: bool) -> None: ...\n    def snapshot(self) -> dict[str, str]: ...\n```\n\nBehavior:\n1. Task names are nonempty strings. Dependency lists contain no duplicates, reference existing tasks and never the task itself. Reject cycles during construction before exposing a partially built scheduler.\n2. slots is a positive integer. A task is pending, running, done, failed or blocked. Initially every task is pending. Preserve a copy of the dependency structure so caller mutation cannot change scheduling.\n3. start_ready fills all available slots with lexicographically smallest pending tasks whose dependencies are all done. It returns the newly started names in start order and does not include tasks already running.\n4. finish accepts only a currently running task and an actual boolean result. Success moves it to done. Failure moves it to failed and permanently blocks every transitive dependent that has not started.\n5. Independent branches continue after a failure. A descendant of a failed or blocked dependency can never run. Repeated start_ready calls without a finish must not exceed the slot count or start a task twice.\n6. snapshot returns a new dictionary in sorted task-name order. Empty graphs are valid. Do not implement polling, worker threads, durations or automatic completion; these methods only describe deterministic transitions.\n\nExamples and edge cases:\n- For {'a':[], 'b':[], 'c':['a'], 'd':['a','b']} with slots=2, start_ready returns ['a','b'].\n- After finish('a',True), start_ready returns ['c']; d remains pending while b runs.\n- If b then fails, d becomes blocked, while c may still complete successfully.\n- Finishing a pending, already done or unknown task raises ValueError and does not free a slot.\n- A two-node a->b->a cycle is rejected; a diamond with a common ancestor is valid.\n- With one slot and two independent tasks z and a, a starts first regardless of input dictionary order.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r02",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA bounded event-time rollup for a stream of metric records\n\nRequired API:\n```python\nclass Rollup:\n    def __init__(self, width: int): ...\n    def add(self, timestamp: int, key: str, value: int) -> None: ...\n    def advance(self, timestamp: int) -> None: ...\n    def snapshot(self) -> list[dict]: ...\n```\n\nBehavior:\n1. width is a positive integer. Input timestamps are nonnegative and monotonic across add and advance calls; equal timestamps are allowed. Keys are nonempty strings and values may be negative integers.\n2. The active window at current timestamp t contains events with t-width < event.timestamp <= t. The left boundary is exclusive, including when an event occurs exactly width units before t.\n3. add validates its complete record, advances time, evicts old events and inserts the new event. advance performs the same time and eviction transition without inserting a record.\n4. snapshot returns one new dictionary for each key having active events, sorted by key. Fields are key, count, sum, minimum and maximum. Repeated equal-valued events are independent events and must be counted separately.\n5. Do not scan an unbounded history or retain expired events. An implementation using a deque of active events and per-key counters is acceptable; explain its actual complexity, including how minimum and maximum are obtained.\n6. No event deduplication is requested. Negative sums, an empty window and removal of the last event for a key must work. snapshot is read-only and must not advance time or change aggregation state.\n\nExamples and edge cases:\n- With width=3, add(1,'x',4), add(2,'x',-2), add(2,'y',7) produce x count2/sum2/min-2/max4 and y count1/sum7.\n- advance(4) removes the event at timestamp1 because 4-3=1 is excluded; the two timestamp2 events remain.\n- advance(5) removes both timestamp2 events and snapshot returns an empty list.\n- Two add calls with identical timestamp/key/value increase count by two; they are not duplicates to discard.\n- add(4,'bad',True) and a backwards advance are rejected without evicting or adding any event.\n- A key can disappear after eviction and later reappear without inheriting its old minimum, count or sum.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r03",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn incremental length-prefixed UTF-8 frame parser\n\nRequired API:\n```python\nclass FrameParser:\n    def __init__(self, max_bytes: int): ...\n    def feed(self, chunk: bytes) -> list[str]: ...\n    def finish(self) -> None: ...\n    def reset(self) -> None: ...\n```\n\nBehavior:\n1. Each frame consists of an unsigned 4-byte big-endian length followed by that many UTF-8 payload bytes. max_bytes is a positive integer limiting one payload, not an entire feed call.\n2. feed accepts only bytes. A frame header, a UTF-8 code point or an entire payload may be split across arbitrary chunks. Return every complete decoded payload in wire order, retaining only incomplete trailing data.\n3. A zero-length payload is a valid empty string. An oversized length is rejected as soon as its complete header is available. Decode with strict UTF-8 so malformed input is never silently replaced.\n4. Parsing failures are terminal until reset. If any frame in a feed call is invalid, raise ValueError and return no partial list from that call; previously successful calls are not rolled back. Later feed or finish calls also raise until reset.\n5. finish verifies that neither a partial header nor a partial payload remains and marks the stream closed. An incomplete stream becomes failed. A second finish after a successful finish is allowed, but feed after a successful finish is invalid until reset.\n6. reset drops all buffered data and error/closed state while keeping max_bytes. Avoid repeatedly concatenating the full historical stream. Describe the buffer ownership and why an incomplete declared frame cannot grow beyond the configured payload limit plus its header.\n\nExamples and edge cases:\n- feed(b'\\x00\\x00') then feed(b'\\x00\\x02hi') returns [] then ['hi'].\n- Two complete frames in one chunk return two strings; a complete frame plus two bytes of the next header returns only the first.\n- A UTF-8 multibyte character divided between two chunks is decoded only after its whole frame is available.\n- The header b'\\x00\\x00\\x00\\x00' immediately emits an empty string.\n- For max_bytes=3, a length4 header fails before any payload is accepted. reset permits a later valid frame.\n- finish with one buffered header byte fails; finish on an empty fresh parser succeeds.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r04",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA retry planner with a shared elapsed-time budget\n\nRequired API:\n```python\nclass RetryPlan:\n    def __init__(self, max_attempts: int, base: int, cap: int, deadline: int): ...\n    def begin(self, now: int) -> int: ...\n    def complete(self, attempt: int, now: int, retryable: bool, retry_after: int | None = None) -> int | None: ...\n    def snapshot(self) -> dict: ...\n```\n\nBehavior:\n1. All configuration values are positive integers except deadline, which is a nonnegative absolute timestamp. Times never go backwards across successful calls. Do not read a clock, sleep or perform a request.\n2. begin starts the next one-based attempt only when none is running, the plan is not terminal, now is at least the next eligible time, now is strictly before deadline and max_attempts is not exhausted.\n3. complete accepts the current running attempt exactly once. retryable=False ends the plan. Otherwise, after attempt k choose delay=min(cap, base*2**(k-1)); if retry_after is present it is a nonnegative minimum delay and can exceed cap.\n4. The next eligible time is completion now plus the chosen delay. If it is greater than or equal to deadline, or the maximum attempt count has been reached, end the plan and return None. Otherwise return that timestamp.\n5. A running attempt may finish after deadline, but no further attempt may begin. retry_after validation is required even if retryable is False. Avoid creating arbitrarily huge integers when the exponential has already saturated at cap.\n6. snapshot returns a new dictionary with attempts_started, running_attempt, next_eligible and terminal. A failed begin before eligibility must not consume an attempt; a wrong completion ID must not clear the real running attempt.\n\nExamples and edge cases:\n- RetryPlan(3,2,5,20): begin(0)->1; complete(1,1,True)->3; begin(3)->2; complete(2,4,True)->8.\n- The third retryable completion returns None because max_attempts=3 has been reached.\n- For base=2 and cap=5, attempt3 normally waits5 rather than8; retry_after=9 makes the wait9.\n- If the computed eligible time equals deadline exactly, no retry is scheduled.\n- Calling begin while another attempt runs or before its ready timestamp raises ValueError without changing snapshot.\n- retryable must be an actual bool; invalid retry_after or a stale attempt number leaves the current attempt intact.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r05",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn interval booking ledger with atomic moves\n\nRequired API:\n```python\nclass Calendar:\n    def book(self, booking_id: str, start: int, end: int) -> bool: ...\n    def cancel(self, booking_id: str) -> bool: ...\n    def move(self, booking_id: str, start: int, end: int) -> bool: ...\n    def free_slots(self, start: int, end: int, minimum: int) -> list[tuple[int, int]]: ...\n```\n\nBehavior:\n1. Intervals are half-open [start,end), with nonnegative integer endpoints and start<end. Booking IDs are nonempty strings. Adjacent intervals do not overlap.\n2. book rejects an already used ID with ValueError. A valid but conflicting new booking returns False without inserting anything. Successful bookings preserve a deterministic sorted representation.\n3. cancel returns False for an unknown well-formed ID and True after removing an existing booking. It never changes other bookings.\n4. move requires an existing ID. Validate the proposed interval and check overlap against all other bookings while ignoring its old interval. If the proposal conflicts, return False and keep the old interval exactly intact.\n5. free_slots clips occupied intervals to the query range and returns maximal free intervals of length at least minimum, in ascending order. minimum is a positive integer; do not split a long free interval into multiple minimum-sized slots.\n6. A simple sorted list plus ID dictionary is sufficient. Explain the lookup and insertion complexity honestly. The caller never receives the internal mutable container. Queries must not mutate bookings, and moving a booking to its current interval succeeds.\n\nExamples and edge cases:\n- book('a',2,5) and book('b',5,7) both succeed; book('c',4,6) returns False.\n- For those bookings, free_slots(0,10,2) returns [(0,2),(7,10)].\n- move('a',6,8) fails because it overlaps b; a must still occupy [2,5).\n- move('a',0,2) succeeds; free_slots(0,10,1) then returns [(2,5),(7,10)].\n- A query fully inside a booking returns []; a query completely outside all bookings returns its full range if long enough.\n- cancel('missing') is False; cancel('a') is True once and False on repetition. Equal start/end and boolean endpoints are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r06",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn atomic versioned key-value batch store\n\nRequired API:\n```python\nclass Store:\n    def read(self, key: str) -> tuple[str | None, int]: ...\n    def apply(self, operations: list[dict]) -> bool: ...\n    def snapshot(self) -> dict[str, tuple[str | None, int]]: ...\n```\n\nBehavior:\n1. Each operation has exactly key, expected_version and value fields. key is a nonempty string; expected_version is a nonnegative integer; value is a string to write or None to delete. Empty string values are valid.\n2. A never-seen key reads as (None,0). Every successful write or delete increments that key's version by one, even if the written value equals the previous value or a missing key is deleted.\n3. Deletion retains a tombstone version, so deleting a key and recreating it does not reset its version. snapshot includes tombstones and returns a fresh sorted dictionary of immutable tuples.\n4. apply validates all operation shapes and types before any state change. Repeated keys in one batch are invalid, including two deletes. Extra fields and absent fields are invalid.\n5. After structural validation, compare every expected_version to the version at the start of the batch. If any differs, return False and apply nothing. Otherwise atomically commit all changes and return True. Empty batches succeed without changing the store.\n6. Do not add transaction IDs, persistence, locks or concurrent access. This API is a deterministic in-memory optimistic concurrency model. Distinguish malformed input, which raises ValueError, from a well-formed version conflict, which returns False.\n\nExamples and edge cases:\n- read('a') initially returns (None,0); apply([{'key':'a','expected_version':0,'value':'x'}]) succeeds and read('a') is ('x',1).\n- Writing a with expected_version0 now returns False and leaves its value/version unchanged.\n- Deleting a at version1 produces (None,2); recreating it must expect2 and produces version3.\n- A batch with one correct key and one conflicting key applies neither operation.\n- A batch with an invalid second operation raises without applying the valid first operation.\n- Two operations for the same key are invalid even if their expected versions appear sequential; apply([]) is True.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c1-r07",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted sliding-window rate limiter\n\nRequired API:\n```python\nclass Limiter:\n    def __init__(self, capacity: int, window: int): ...\n    def allow(self, key: str, weight: int, now: int) -> tuple[bool, int]: ...\n    def usage(self, key: str, now: int) -> int: ...\n    def active_keys(self, now: int) -> list[str]: ...\n```\n\nBehavior:\n1. capacity, window and request weight are positive integers. Keys are nonempty strings. now is a nonnegative integer and cannot go backwards across successful calls for any key; time is global to this limiter.\n2. Only accepted requests consume capacity. At time t, retain accepted events with t-window < event.timestamp <= t. Prune expired events and delete empty per-key queues on every valid operation.\n3. allow returns (True,now) when adding this weight would fit. On rejection it records no event and returns (False, earliest_time_this_weight_could_fit) assuming no future arrivals.\n4. Compute earliest eligibility by considering enough old accepted events expiring to free the needed capacity; the first expiry alone may be insufficient for a large request. Events at the same timestamp expire together.\n5. A weight greater than capacity is invalid and raises ValueError before any pruning or remembered-time change. Other valid rejections still advance global time and perform expiration. usage and active_keys also advance time and prune, but never consume capacity.\n6. Use bounded active-window state rather than all historical requests. active_keys returns sorted live keys. Avoid mutating a deque while iterating over the same deque to calculate eligibility; the computation must not consume still-live events.\n\nExamples and edge cases:\n- With capacity5/window10: allow('a',2,0)->(True,0); allow('a',3,2)->(True,2); usage('a',2)->5.\n- allow('a',3,3) rejects with eligible time12, because expiry of the weight2 event at time10 alone is insufficient.\n- At time10 the weight2 event expires, so usage('a',10) is3 and allow('a',2,10) succeeds.\n- Requests for b have an independent capacity budget but share the global monotonic time requirement.\n- Multiple events at time2 all expire at time12; active_keys omits a key whose last event just expired.\n- A rejected request must not influence a later usage value or eligibility calculation. Oversized, boolean or negative weights are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        }
+      ],
+      "identity": {
+        "configuration": {
+          "max_len": 2048,
+          "max_batched_tokens": 2048,
+          "cache_limit_gib": 2,
+          "max_seqs": 1,
+          "compile_decode": "on",
+          "fuse_decode": "on",
+          "gates_compile": "on",
+          "norm_reuse": "off",
+          "tcp_nodelay": "on",
+          "io_timeout_seconds": 300.0
+        },
+        "source_files": {
+          "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+          "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+          "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+          "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+          "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+          "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+          "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+          "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+          "kernels/gdn_decode_fused.py": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+          "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+          "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+          "kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+          "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+          "spec/dflash2.py": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+          "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+          "spec/device_selector.py": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+          "model/attention.py": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+          "model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+          "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model/qwen3_5.py": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+          "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+          "model/layers.py": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+          "engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+          "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+          "engine/llm_engine.py": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+          "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+          "engine/packed_decode.py": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+          "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+          "engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+          "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+        },
+        "source_manifest_sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "manifest_all_sources_match": true,
+        "package_root_loaded": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine",
+        "model_snapshot_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_snapshot_name": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+        "server_source_sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "step_observer": true,
+        "per_token_observer": false,
+        "qualification_trace_enabled": true,
+        "drafter": null,
+        "normal_eos": true,
+        "eos_ids": [
+          248044,
+          248046
+        ],
+        "prefix_cache": false,
+        "completion_usage": "committed target IDs excluding terminal EOS; raw IDs include EOS",
+        "text_decode": "skip_special_tokens=False; terminal EOS excluded",
+        "cancellation": "pending skipped; active cancellation permanently fails this benchmark server",
+        "weights_identity_scope": "external controller must verify model weight pins; this server checks source/config identity"
+      },
+      "external_pin_scope": "Outer owner must verify runtime/Python/all source and weight pins before and after."
+    },
+    {
+      "schema": "E023-http-capture-spec-v1",
+      "sources": {
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture.py": "8f43c71b8f3fd99d655ba760aa344eb3026eef35450be9c5ed1f06171109a0fb",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2"
+      },
+      "base_plan": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json",
+        "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+      },
+      "python": "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "environment": {
+        "HOME": "/Users/ryanli",
+        "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/ryanli/.codex/tmp/arg0-macos/codex-arg0zSbbRg:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ryanli/.local/bin:/Users/ryanli/.local/share/mise/shims:/opt/homebrew/sbin:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+        "TMPDIR": "/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "MLX_MAX_OPS_PER_BUFFER": "50",
+        "MLX_MAX_MB_PER_BUFFER": "50",
+        "MLX_BFS_MAX_WIDTH": "20",
+        "MLX_METAL_FAST_SYNCH": "0"
+      },
+      "transport": {
+        "port": 18023,
+        "tcp_nodelay": true,
+        "io_timeout_seconds": 300.0
+      },
+      "deadlines": {
+        "ready": 120,
+        "request": 600,
+        "group": 720,
+        "overall": 900,
+        "close": 10,
+        "term": 15,
+        "kill": 15,
+        "resource_interval": 5
+      },
+      "concurrency": 8,
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py",
+        "--model",
+        "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "--package-root",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native",
+        "--source-manifest",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json",
+        "--source-manifest-sha256",
+        "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "--port",
+        "18023",
+        "--max-len",
+        "2048",
+        "--max-seqs",
+        "8",
+        "--max-batched-tokens",
+        "2048",
+        "--cache-limit-gib",
+        "2",
+        "--compile-decode",
+        "on",
+        "--fuse-decode",
+        "on",
+        "--gates-compile",
+        "on",
+        "--norm-reuse",
+        "off",
+        "--tcp-nodelay",
+        "on",
+        "--io-timeout-seconds",
+        "300.0"
+      ],
+      "jobs": [
+        {
+          "request_id": "qual-c8-r00",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted LRU cache with caller-supplied time\n\nRequired API:\n```python\nclass Cache:\n    def __init__(self, max_weight: int): ...\n    def put(self, key: str, value: str, weight: int, ttl: int, now: int) -> bool: ...\n    def get(self, key: str, now: int) -> str | None: ...\n    def snapshot(self, now: int) -> list[tuple[str, str, int, int]]: ...\n```\n\nBehavior:\n1. max_weight, weight and ttl are positive integers; now is a nonnegative integer and cannot go backwards across successful operations. Invalid arguments do not advance the remembered time.\n2. An entry inserted at now expires when current time is greater than or equal to now + ttl. Every valid operation removes expired entries before returning. Expiration happens before capacity eviction.\n3. get returns None for a missing or expired key. A live get moves the entry to most-recently-used position. snapshot returns fresh tuples in least-to-most-recent order and does not change recency.\n4. put replaces an existing key, resets its expiry and makes it most recent. Evict least-recent live entries until the sum of weights fits. An oversized new value returns False and leaves any old value for that key in place; normal expiration and time advancement still occur.\n5. The cache bounds total weight, not entry count. key and value must be strings; the empty string is valid. Keep the implementation deterministic when several entries expire together.\n6. A replacement must not count both the old and new weights. The cache must remain usable after a failed validation, an oversized replacement, or expiration of every entry. snapshot must not expose the internal container.\n\nExamples and edge cases:\n- Cache(5): put('a','A',2,10,0) and put('b','B',3,10,0) both succeed; snapshot(0) lists a then b.\n- get('a',1) returns 'A'; put('c','C',2,10,1) evicts b, leaving a then c with total weight 4.\n- put('a','new',6,10,2) returns False; get('a',2) still returns 'A'.\n- At time 10, a is expired; c inserted at time 1 remains live until time 11.\n- Calling get with now=-1 or a time before the last successful operation raises ValueError without changing state.\n- Replacing c by a weight-1 value at time 10 resets its expiry and leaves total weight 1.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r01",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA deterministic bounded DAG scheduler\n\nRequired API:\n```python\nclass Scheduler:\n    def __init__(self, dependencies: dict[str, list[str]], slots: int): ...\n    def start_ready(self) -> list[str]: ...\n    def finish(self, task: str, succeeded: bool) -> None: ...\n    def snapshot(self) -> dict[str, str]: ...\n```\n\nBehavior:\n1. Task names are nonempty strings. Dependency lists contain no duplicates, reference existing tasks and never the task itself. Reject cycles during construction before exposing a partially built scheduler.\n2. slots is a positive integer. A task is pending, running, done, failed or blocked. Initially every task is pending. Preserve a copy of the dependency structure so caller mutation cannot change scheduling.\n3. start_ready fills all available slots with lexicographically smallest pending tasks whose dependencies are all done. It returns the newly started names in start order and does not include tasks already running.\n4. finish accepts only a currently running task and an actual boolean result. Success moves it to done. Failure moves it to failed and permanently blocks every transitive dependent that has not started.\n5. Independent branches continue after a failure. A descendant of a failed or blocked dependency can never run. Repeated start_ready calls without a finish must not exceed the slot count or start a task twice.\n6. snapshot returns a new dictionary in sorted task-name order. Empty graphs are valid. Do not implement polling, worker threads, durations or automatic completion; these methods only describe deterministic transitions.\n\nExamples and edge cases:\n- For {'a':[], 'b':[], 'c':['a'], 'd':['a','b']} with slots=2, start_ready returns ['a','b'].\n- After finish('a',True), start_ready returns ['c']; d remains pending while b runs.\n- If b then fails, d becomes blocked, while c may still complete successfully.\n- Finishing a pending, already done or unknown task raises ValueError and does not free a slot.\n- A two-node a->b->a cycle is rejected; a diamond with a common ancestor is valid.\n- With one slot and two independent tasks z and a, a starts first regardless of input dictionary order.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r02",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA bounded event-time rollup for a stream of metric records\n\nRequired API:\n```python\nclass Rollup:\n    def __init__(self, width: int): ...\n    def add(self, timestamp: int, key: str, value: int) -> None: ...\n    def advance(self, timestamp: int) -> None: ...\n    def snapshot(self) -> list[dict]: ...\n```\n\nBehavior:\n1. width is a positive integer. Input timestamps are nonnegative and monotonic across add and advance calls; equal timestamps are allowed. Keys are nonempty strings and values may be negative integers.\n2. The active window at current timestamp t contains events with t-width < event.timestamp <= t. The left boundary is exclusive, including when an event occurs exactly width units before t.\n3. add validates its complete record, advances time, evicts old events and inserts the new event. advance performs the same time and eviction transition without inserting a record.\n4. snapshot returns one new dictionary for each key having active events, sorted by key. Fields are key, count, sum, minimum and maximum. Repeated equal-valued events are independent events and must be counted separately.\n5. Do not scan an unbounded history or retain expired events. An implementation using a deque of active events and per-key counters is acceptable; explain its actual complexity, including how minimum and maximum are obtained.\n6. No event deduplication is requested. Negative sums, an empty window and removal of the last event for a key must work. snapshot is read-only and must not advance time or change aggregation state.\n\nExamples and edge cases:\n- With width=3, add(1,'x',4), add(2,'x',-2), add(2,'y',7) produce x count2/sum2/min-2/max4 and y count1/sum7.\n- advance(4) removes the event at timestamp1 because 4-3=1 is excluded; the two timestamp2 events remain.\n- advance(5) removes both timestamp2 events and snapshot returns an empty list.\n- Two add calls with identical timestamp/key/value increase count by two; they are not duplicates to discard.\n- add(4,'bad',True) and a backwards advance are rejected without evicting or adding any event.\n- A key can disappear after eviction and later reappear without inheriting its old minimum, count or sum.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r03",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn incremental length-prefixed UTF-8 frame parser\n\nRequired API:\n```python\nclass FrameParser:\n    def __init__(self, max_bytes: int): ...\n    def feed(self, chunk: bytes) -> list[str]: ...\n    def finish(self) -> None: ...\n    def reset(self) -> None: ...\n```\n\nBehavior:\n1. Each frame consists of an unsigned 4-byte big-endian length followed by that many UTF-8 payload bytes. max_bytes is a positive integer limiting one payload, not an entire feed call.\n2. feed accepts only bytes. A frame header, a UTF-8 code point or an entire payload may be split across arbitrary chunks. Return every complete decoded payload in wire order, retaining only incomplete trailing data.\n3. A zero-length payload is a valid empty string. An oversized length is rejected as soon as its complete header is available. Decode with strict UTF-8 so malformed input is never silently replaced.\n4. Parsing failures are terminal until reset. If any frame in a feed call is invalid, raise ValueError and return no partial list from that call; previously successful calls are not rolled back. Later feed or finish calls also raise until reset.\n5. finish verifies that neither a partial header nor a partial payload remains and marks the stream closed. An incomplete stream becomes failed. A second finish after a successful finish is allowed, but feed after a successful finish is invalid until reset.\n6. reset drops all buffered data and error/closed state while keeping max_bytes. Avoid repeatedly concatenating the full historical stream. Describe the buffer ownership and why an incomplete declared frame cannot grow beyond the configured payload limit plus its header.\n\nExamples and edge cases:\n- feed(b'\\x00\\x00') then feed(b'\\x00\\x02hi') returns [] then ['hi'].\n- Two complete frames in one chunk return two strings; a complete frame plus two bytes of the next header returns only the first.\n- A UTF-8 multibyte character divided between two chunks is decoded only after its whole frame is available.\n- The header b'\\x00\\x00\\x00\\x00' immediately emits an empty string.\n- For max_bytes=3, a length4 header fails before any payload is accepted. reset permits a later valid frame.\n- finish with one buffered header byte fails; finish on an empty fresh parser succeeds.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r04",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA retry planner with a shared elapsed-time budget\n\nRequired API:\n```python\nclass RetryPlan:\n    def __init__(self, max_attempts: int, base: int, cap: int, deadline: int): ...\n    def begin(self, now: int) -> int: ...\n    def complete(self, attempt: int, now: int, retryable: bool, retry_after: int | None = None) -> int | None: ...\n    def snapshot(self) -> dict: ...\n```\n\nBehavior:\n1. All configuration values are positive integers except deadline, which is a nonnegative absolute timestamp. Times never go backwards across successful calls. Do not read a clock, sleep or perform a request.\n2. begin starts the next one-based attempt only when none is running, the plan is not terminal, now is at least the next eligible time, now is strictly before deadline and max_attempts is not exhausted.\n3. complete accepts the current running attempt exactly once. retryable=False ends the plan. Otherwise, after attempt k choose delay=min(cap, base*2**(k-1)); if retry_after is present it is a nonnegative minimum delay and can exceed cap.\n4. The next eligible time is completion now plus the chosen delay. If it is greater than or equal to deadline, or the maximum attempt count has been reached, end the plan and return None. Otherwise return that timestamp.\n5. A running attempt may finish after deadline, but no further attempt may begin. retry_after validation is required even if retryable is False. Avoid creating arbitrarily huge integers when the exponential has already saturated at cap.\n6. snapshot returns a new dictionary with attempts_started, running_attempt, next_eligible and terminal. A failed begin before eligibility must not consume an attempt; a wrong completion ID must not clear the real running attempt.\n\nExamples and edge cases:\n- RetryPlan(3,2,5,20): begin(0)->1; complete(1,1,True)->3; begin(3)->2; complete(2,4,True)->8.\n- The third retryable completion returns None because max_attempts=3 has been reached.\n- For base=2 and cap=5, attempt3 normally waits5 rather than8; retry_after=9 makes the wait9.\n- If the computed eligible time equals deadline exactly, no retry is scheduled.\n- Calling begin while another attempt runs or before its ready timestamp raises ValueError without changing snapshot.\n- retryable must be an actual bool; invalid retry_after or a stale attempt number leaves the current attempt intact.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r05",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn interval booking ledger with atomic moves\n\nRequired API:\n```python\nclass Calendar:\n    def book(self, booking_id: str, start: int, end: int) -> bool: ...\n    def cancel(self, booking_id: str) -> bool: ...\n    def move(self, booking_id: str, start: int, end: int) -> bool: ...\n    def free_slots(self, start: int, end: int, minimum: int) -> list[tuple[int, int]]: ...\n```\n\nBehavior:\n1. Intervals are half-open [start,end), with nonnegative integer endpoints and start<end. Booking IDs are nonempty strings. Adjacent intervals do not overlap.\n2. book rejects an already used ID with ValueError. A valid but conflicting new booking returns False without inserting anything. Successful bookings preserve a deterministic sorted representation.\n3. cancel returns False for an unknown well-formed ID and True after removing an existing booking. It never changes other bookings.\n4. move requires an existing ID. Validate the proposed interval and check overlap against all other bookings while ignoring its old interval. If the proposal conflicts, return False and keep the old interval exactly intact.\n5. free_slots clips occupied intervals to the query range and returns maximal free intervals of length at least minimum, in ascending order. minimum is a positive integer; do not split a long free interval into multiple minimum-sized slots.\n6. A simple sorted list plus ID dictionary is sufficient. Explain the lookup and insertion complexity honestly. The caller never receives the internal mutable container. Queries must not mutate bookings, and moving a booking to its current interval succeeds.\n\nExamples and edge cases:\n- book('a',2,5) and book('b',5,7) both succeed; book('c',4,6) returns False.\n- For those bookings, free_slots(0,10,2) returns [(0,2),(7,10)].\n- move('a',6,8) fails because it overlaps b; a must still occupy [2,5).\n- move('a',0,2) succeeds; free_slots(0,10,1) then returns [(2,5),(7,10)].\n- A query fully inside a booking returns []; a query completely outside all bookings returns its full range if long enough.\n- cancel('missing') is False; cancel('a') is True once and False on repetition. Equal start/end and boolean endpoints are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r06",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn atomic versioned key-value batch store\n\nRequired API:\n```python\nclass Store:\n    def read(self, key: str) -> tuple[str | None, int]: ...\n    def apply(self, operations: list[dict]) -> bool: ...\n    def snapshot(self) -> dict[str, tuple[str | None, int]]: ...\n```\n\nBehavior:\n1. Each operation has exactly key, expected_version and value fields. key is a nonempty string; expected_version is a nonnegative integer; value is a string to write or None to delete. Empty string values are valid.\n2. A never-seen key reads as (None,0). Every successful write or delete increments that key's version by one, even if the written value equals the previous value or a missing key is deleted.\n3. Deletion retains a tombstone version, so deleting a key and recreating it does not reset its version. snapshot includes tombstones and returns a fresh sorted dictionary of immutable tuples.\n4. apply validates all operation shapes and types before any state change. Repeated keys in one batch are invalid, including two deletes. Extra fields and absent fields are invalid.\n5. After structural validation, compare every expected_version to the version at the start of the batch. If any differs, return False and apply nothing. Otherwise atomically commit all changes and return True. Empty batches succeed without changing the store.\n6. Do not add transaction IDs, persistence, locks or concurrent access. This API is a deterministic in-memory optimistic concurrency model. Distinguish malformed input, which raises ValueError, from a well-formed version conflict, which returns False.\n\nExamples and edge cases:\n- read('a') initially returns (None,0); apply([{'key':'a','expected_version':0,'value':'x'}]) succeeds and read('a') is ('x',1).\n- Writing a with expected_version0 now returns False and leaves its value/version unchanged.\n- Deleting a at version1 produces (None,2); recreating it must expect2 and produces version3.\n- A batch with one correct key and one conflicting key applies neither operation.\n- A batch with an invalid second operation raises without applying the valid first operation.\n- Two operations for the same key are invalid even if their expected versions appear sequential; apply([]) is True.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r07",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted sliding-window rate limiter\n\nRequired API:\n```python\nclass Limiter:\n    def __init__(self, capacity: int, window: int): ...\n    def allow(self, key: str, weight: int, now: int) -> tuple[bool, int]: ...\n    def usage(self, key: str, now: int) -> int: ...\n    def active_keys(self, now: int) -> list[str]: ...\n```\n\nBehavior:\n1. capacity, window and request weight are positive integers. Keys are nonempty strings. now is a nonnegative integer and cannot go backwards across successful calls for any key; time is global to this limiter.\n2. Only accepted requests consume capacity. At time t, retain accepted events with t-window < event.timestamp <= t. Prune expired events and delete empty per-key queues on every valid operation.\n3. allow returns (True,now) when adding this weight would fit. On rejection it records no event and returns (False, earliest_time_this_weight_could_fit) assuming no future arrivals.\n4. Compute earliest eligibility by considering enough old accepted events expiring to free the needed capacity; the first expiry alone may be insufficient for a large request. Events at the same timestamp expire together.\n5. A weight greater than capacity is invalid and raises ValueError before any pruning or remembered-time change. Other valid rejections still advance global time and perform expiration. usage and active_keys also advance time and prune, but never consume capacity.\n6. Use bounded active-window state rather than all historical requests. active_keys returns sorted live keys. Avoid mutating a deque while iterating over the same deque to calculate eligibility; the computation must not consume still-live events.\n\nExamples and edge cases:\n- With capacity5/window10: allow('a',2,0)->(True,0); allow('a',3,2)->(True,2); usage('a',2)->5.\n- allow('a',3,3) rejects with eligible time12, because expiry of the weight2 event at time10 alone is insufficient.\n- At time10 the weight2 event expires, so usage('a',10) is3 and allow('a',2,10) succeeds.\n- Requests for b have an independent capacity budget but share the global monotonic time requirement.\n- Multiple events at time2 all expire at time12; active_keys omits a key whose last event just expired.\n- A rejected request must not influence a later usage value or eligibility calculation. Oversized, boolean or negative weights are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r08",
+          "fixture_id": "D01-ttl-lru",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted LRU cache with caller-supplied time\n\nRequired API:\n```python\nclass Cache:\n    def __init__(self, max_weight: int): ...\n    def put(self, key: str, value: str, weight: int, ttl: int, now: int) -> bool: ...\n    def get(self, key: str, now: int) -> str | None: ...\n    def snapshot(self, now: int) -> list[tuple[str, str, int, int]]: ...\n```\n\nBehavior:\n1. max_weight, weight and ttl are positive integers; now is a nonnegative integer and cannot go backwards across successful operations. Invalid arguments do not advance the remembered time.\n2. An entry inserted at now expires when current time is greater than or equal to now + ttl. Every valid operation removes expired entries before returning. Expiration happens before capacity eviction.\n3. get returns None for a missing or expired key. A live get moves the entry to most-recently-used position. snapshot returns fresh tuples in least-to-most-recent order and does not change recency.\n4. put replaces an existing key, resets its expiry and makes it most recent. Evict least-recent live entries until the sum of weights fits. An oversized new value returns False and leaves any old value for that key in place; normal expiration and time advancement still occur.\n5. The cache bounds total weight, not entry count. key and value must be strings; the empty string is valid. Keep the implementation deterministic when several entries expire together.\n6. A replacement must not count both the old and new weights. The cache must remain usable after a failed validation, an oversized replacement, or expiration of every entry. snapshot must not expose the internal container.\n\nExamples and edge cases:\n- Cache(5): put('a','A',2,10,0) and put('b','B',3,10,0) both succeed; snapshot(0) lists a then b.\n- get('a',1) returns 'A'; put('c','C',2,10,1) evicts b, leaving a then c with total weight 4.\n- put('a','new',6,10,2) returns False; get('a',2) still returns 'A'.\n- At time 10, a is expired; c inserted at time 1 remains live until time 11.\n- Calling get with now=-1 or a time before the last successful operation raises ValueError without changing state.\n- Replacing c by a weight-1 value at time 10 resets its expiry and leaves total weight 1.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r09",
+          "fixture_id": "D02-dag-scheduler",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA deterministic bounded DAG scheduler\n\nRequired API:\n```python\nclass Scheduler:\n    def __init__(self, dependencies: dict[str, list[str]], slots: int): ...\n    def start_ready(self) -> list[str]: ...\n    def finish(self, task: str, succeeded: bool) -> None: ...\n    def snapshot(self) -> dict[str, str]: ...\n```\n\nBehavior:\n1. Task names are nonempty strings. Dependency lists contain no duplicates, reference existing tasks and never the task itself. Reject cycles during construction before exposing a partially built scheduler.\n2. slots is a positive integer. A task is pending, running, done, failed or blocked. Initially every task is pending. Preserve a copy of the dependency structure so caller mutation cannot change scheduling.\n3. start_ready fills all available slots with lexicographically smallest pending tasks whose dependencies are all done. It returns the newly started names in start order and does not include tasks already running.\n4. finish accepts only a currently running task and an actual boolean result. Success moves it to done. Failure moves it to failed and permanently blocks every transitive dependent that has not started.\n5. Independent branches continue after a failure. A descendant of a failed or blocked dependency can never run. Repeated start_ready calls without a finish must not exceed the slot count or start a task twice.\n6. snapshot returns a new dictionary in sorted task-name order. Empty graphs are valid. Do not implement polling, worker threads, durations or automatic completion; these methods only describe deterministic transitions.\n\nExamples and edge cases:\n- For {'a':[], 'b':[], 'c':['a'], 'd':['a','b']} with slots=2, start_ready returns ['a','b'].\n- After finish('a',True), start_ready returns ['c']; d remains pending while b runs.\n- If b then fails, d becomes blocked, while c may still complete successfully.\n- Finishing a pending, already done or unknown task raises ValueError and does not free a slot.\n- A two-node a->b->a cycle is rejected; a diamond with a common ancestor is valid.\n- With one slot and two independent tasks z and a, a starts first regardless of input dictionary order.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r10",
+          "fixture_id": "D03-event-rollup",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA bounded event-time rollup for a stream of metric records\n\nRequired API:\n```python\nclass Rollup:\n    def __init__(self, width: int): ...\n    def add(self, timestamp: int, key: str, value: int) -> None: ...\n    def advance(self, timestamp: int) -> None: ...\n    def snapshot(self) -> list[dict]: ...\n```\n\nBehavior:\n1. width is a positive integer. Input timestamps are nonnegative and monotonic across add and advance calls; equal timestamps are allowed. Keys are nonempty strings and values may be negative integers.\n2. The active window at current timestamp t contains events with t-width < event.timestamp <= t. The left boundary is exclusive, including when an event occurs exactly width units before t.\n3. add validates its complete record, advances time, evicts old events and inserts the new event. advance performs the same time and eviction transition without inserting a record.\n4. snapshot returns one new dictionary for each key having active events, sorted by key. Fields are key, count, sum, minimum and maximum. Repeated equal-valued events are independent events and must be counted separately.\n5. Do not scan an unbounded history or retain expired events. An implementation using a deque of active events and per-key counters is acceptable; explain its actual complexity, including how minimum and maximum are obtained.\n6. No event deduplication is requested. Negative sums, an empty window and removal of the last event for a key must work. snapshot is read-only and must not advance time or change aggregation state.\n\nExamples and edge cases:\n- With width=3, add(1,'x',4), add(2,'x',-2), add(2,'y',7) produce x count2/sum2/min-2/max4 and y count1/sum7.\n- advance(4) removes the event at timestamp1 because 4-3=1 is excluded; the two timestamp2 events remain.\n- advance(5) removes both timestamp2 events and snapshot returns an empty list.\n- Two add calls with identical timestamp/key/value increase count by two; they are not duplicates to discard.\n- add(4,'bad',True) and a backwards advance are rejected without evicting or adding any event.\n- A key can disappear after eviction and later reappear without inheriting its old minimum, count or sum.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r11",
+          "fixture_id": "D04-frame-parser",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn incremental length-prefixed UTF-8 frame parser\n\nRequired API:\n```python\nclass FrameParser:\n    def __init__(self, max_bytes: int): ...\n    def feed(self, chunk: bytes) -> list[str]: ...\n    def finish(self) -> None: ...\n    def reset(self) -> None: ...\n```\n\nBehavior:\n1. Each frame consists of an unsigned 4-byte big-endian length followed by that many UTF-8 payload bytes. max_bytes is a positive integer limiting one payload, not an entire feed call.\n2. feed accepts only bytes. A frame header, a UTF-8 code point or an entire payload may be split across arbitrary chunks. Return every complete decoded payload in wire order, retaining only incomplete trailing data.\n3. A zero-length payload is a valid empty string. An oversized length is rejected as soon as its complete header is available. Decode with strict UTF-8 so malformed input is never silently replaced.\n4. Parsing failures are terminal until reset. If any frame in a feed call is invalid, raise ValueError and return no partial list from that call; previously successful calls are not rolled back. Later feed or finish calls also raise until reset.\n5. finish verifies that neither a partial header nor a partial payload remains and marks the stream closed. An incomplete stream becomes failed. A second finish after a successful finish is allowed, but feed after a successful finish is invalid until reset.\n6. reset drops all buffered data and error/closed state while keeping max_bytes. Avoid repeatedly concatenating the full historical stream. Describe the buffer ownership and why an incomplete declared frame cannot grow beyond the configured payload limit plus its header.\n\nExamples and edge cases:\n- feed(b'\\x00\\x00') then feed(b'\\x00\\x02hi') returns [] then ['hi'].\n- Two complete frames in one chunk return two strings; a complete frame plus two bytes of the next header returns only the first.\n- A UTF-8 multibyte character divided between two chunks is decoded only after its whole frame is available.\n- The header b'\\x00\\x00\\x00\\x00' immediately emits an empty string.\n- For max_bytes=3, a length4 header fails before any payload is accepted. reset permits a later valid frame.\n- finish with one buffered header byte fails; finish on an empty fresh parser succeeds.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r12",
+          "fixture_id": "D05-retry-budget",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA retry planner with a shared elapsed-time budget\n\nRequired API:\n```python\nclass RetryPlan:\n    def __init__(self, max_attempts: int, base: int, cap: int, deadline: int): ...\n    def begin(self, now: int) -> int: ...\n    def complete(self, attempt: int, now: int, retryable: bool, retry_after: int | None = None) -> int | None: ...\n    def snapshot(self) -> dict: ...\n```\n\nBehavior:\n1. All configuration values are positive integers except deadline, which is a nonnegative absolute timestamp. Times never go backwards across successful calls. Do not read a clock, sleep or perform a request.\n2. begin starts the next one-based attempt only when none is running, the plan is not terminal, now is at least the next eligible time, now is strictly before deadline and max_attempts is not exhausted.\n3. complete accepts the current running attempt exactly once. retryable=False ends the plan. Otherwise, after attempt k choose delay=min(cap, base*2**(k-1)); if retry_after is present it is a nonnegative minimum delay and can exceed cap.\n4. The next eligible time is completion now plus the chosen delay. If it is greater than or equal to deadline, or the maximum attempt count has been reached, end the plan and return None. Otherwise return that timestamp.\n5. A running attempt may finish after deadline, but no further attempt may begin. retry_after validation is required even if retryable is False. Avoid creating arbitrarily huge integers when the exponential has already saturated at cap.\n6. snapshot returns a new dictionary with attempts_started, running_attempt, next_eligible and terminal. A failed begin before eligibility must not consume an attempt; a wrong completion ID must not clear the real running attempt.\n\nExamples and edge cases:\n- RetryPlan(3,2,5,20): begin(0)->1; complete(1,1,True)->3; begin(3)->2; complete(2,4,True)->8.\n- The third retryable completion returns None because max_attempts=3 has been reached.\n- For base=2 and cap=5, attempt3 normally waits5 rather than8; retry_after=9 makes the wait9.\n- If the computed eligible time equals deadline exactly, no retry is scheduled.\n- Calling begin while another attempt runs or before its ready timestamp raises ValueError without changing snapshot.\n- retryable must be an actual bool; invalid retry_after or a stale attempt number leaves the current attempt intact.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r13",
+          "fixture_id": "D06-interval-booking",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn interval booking ledger with atomic moves\n\nRequired API:\n```python\nclass Calendar:\n    def book(self, booking_id: str, start: int, end: int) -> bool: ...\n    def cancel(self, booking_id: str) -> bool: ...\n    def move(self, booking_id: str, start: int, end: int) -> bool: ...\n    def free_slots(self, start: int, end: int, minimum: int) -> list[tuple[int, int]]: ...\n```\n\nBehavior:\n1. Intervals are half-open [start,end), with nonnegative integer endpoints and start<end. Booking IDs are nonempty strings. Adjacent intervals do not overlap.\n2. book rejects an already used ID with ValueError. A valid but conflicting new booking returns False without inserting anything. Successful bookings preserve a deterministic sorted representation.\n3. cancel returns False for an unknown well-formed ID and True after removing an existing booking. It never changes other bookings.\n4. move requires an existing ID. Validate the proposed interval and check overlap against all other bookings while ignoring its old interval. If the proposal conflicts, return False and keep the old interval exactly intact.\n5. free_slots clips occupied intervals to the query range and returns maximal free intervals of length at least minimum, in ascending order. minimum is a positive integer; do not split a long free interval into multiple minimum-sized slots.\n6. A simple sorted list plus ID dictionary is sufficient. Explain the lookup and insertion complexity honestly. The caller never receives the internal mutable container. Queries must not mutate bookings, and moving a booking to its current interval succeeds.\n\nExamples and edge cases:\n- book('a',2,5) and book('b',5,7) both succeed; book('c',4,6) returns False.\n- For those bookings, free_slots(0,10,2) returns [(0,2),(7,10)].\n- move('a',6,8) fails because it overlaps b; a must still occupy [2,5).\n- move('a',0,2) succeeds; free_slots(0,10,1) then returns [(2,5),(7,10)].\n- A query fully inside a booking returns []; a query completely outside all bookings returns its full range if long enough.\n- cancel('missing') is False; cancel('a') is True once and False on repetition. Equal start/end and boolean endpoints are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r14",
+          "fixture_id": "D07-versioned-store",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nAn atomic versioned key-value batch store\n\nRequired API:\n```python\nclass Store:\n    def read(self, key: str) -> tuple[str | None, int]: ...\n    def apply(self, operations: list[dict]) -> bool: ...\n    def snapshot(self) -> dict[str, tuple[str | None, int]]: ...\n```\n\nBehavior:\n1. Each operation has exactly key, expected_version and value fields. key is a nonempty string; expected_version is a nonnegative integer; value is a string to write or None to delete. Empty string values are valid.\n2. A never-seen key reads as (None,0). Every successful write or delete increments that key's version by one, even if the written value equals the previous value or a missing key is deleted.\n3. Deletion retains a tombstone version, so deleting a key and recreating it does not reset its version. snapshot includes tombstones and returns a fresh sorted dictionary of immutable tuples.\n4. apply validates all operation shapes and types before any state change. Repeated keys in one batch are invalid, including two deletes. Extra fields and absent fields are invalid.\n5. After structural validation, compare every expected_version to the version at the start of the batch. If any differs, return False and apply nothing. Otherwise atomically commit all changes and return True. Empty batches succeed without changing the store.\n6. Do not add transaction IDs, persistence, locks or concurrent access. This API is a deterministic in-memory optimistic concurrency model. Distinguish malformed input, which raises ValueError, from a well-formed version conflict, which returns False.\n\nExamples and edge cases:\n- read('a') initially returns (None,0); apply([{'key':'a','expected_version':0,'value':'x'}]) succeeds and read('a') is ('x',1).\n- Writing a with expected_version0 now returns False and leaves its value/version unchanged.\n- Deleting a at version1 produces (None,2); recreating it must expect2 and produces version3.\n- A batch with one correct key and one conflicting key applies neither operation.\n- A batch with an invalid second operation raises without applying the valid first operation.\n- Two operations for the same key are invalid even if their expected versions appear sequential; apply([]) is True.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        },
+        {
+          "request_id": "qual-c8-r15",
+          "fixture_id": "D08-sliding-limit",
+          "path": "/v1/completions",
+          "body": {
+            "model": "native-target-only",
+            "prompt": "<|im_start|>user\nImplement the Python module described below. Return complete runnable Python code followed by a short explanation of the main invariants and complexity. Use Python 3.11 or newer and only the standard library. The caller supplies all input in memory; do not read files, contact a network, start threads, sleep, inspect the real clock, or use randomness. Include concise executable assertions demonstrating the specified edge cases. Prefer a small implementation with explicit state over a general framework. Do not replace the requested behavior with pseudocode or a list of suggestions.\n\nA weighted sliding-window rate limiter\n\nRequired API:\n```python\nclass Limiter:\n    def __init__(self, capacity: int, window: int): ...\n    def allow(self, key: str, weight: int, now: int) -> tuple[bool, int]: ...\n    def usage(self, key: str, now: int) -> int: ...\n    def active_keys(self, now: int) -> list[str]: ...\n```\n\nBehavior:\n1. capacity, window and request weight are positive integers. Keys are nonempty strings. now is a nonnegative integer and cannot go backwards across successful calls for any key; time is global to this limiter.\n2. Only accepted requests consume capacity. At time t, retain accepted events with t-window < event.timestamp <= t. Prune expired events and delete empty per-key queues on every valid operation.\n3. allow returns (True,now) when adding this weight would fit. On rejection it records no event and returns (False, earliest_time_this_weight_could_fit) assuming no future arrivals.\n4. Compute earliest eligibility by considering enough old accepted events expiring to free the needed capacity; the first expiry alone may be insufficient for a large request. Events at the same timestamp expire together.\n5. A weight greater than capacity is invalid and raises ValueError before any pruning or remembered-time change. Other valid rejections still advance global time and perform expiration. usage and active_keys also advance time and prune, but never consume capacity.\n6. Use bounded active-window state rather than all historical requests. active_keys returns sorted live keys. Avoid mutating a deque while iterating over the same deque to calculate eligibility; the computation must not consume still-live events.\n\nExamples and edge cases:\n- With capacity5/window10: allow('a',2,0)->(True,0); allow('a',3,2)->(True,2); usage('a',2)->5.\n- allow('a',3,3) rejects with eligible time12, because expiry of the weight2 event at time10 alone is insufficient.\n- At time10 the weight2 event expires, so usage('a',10) is3 and allow('a',2,10) succeeds.\n- Requests for b have an independent capacity budget but share the global monotonic time requirement.\n- Multiple events at time2 all expire at time12; active_keys omits a key whose last event just expired.\n- A rejected request must not influence a later usage value or eligibility calculation. Oversized, boolean or negative weights are invalid.\n\nIntegration context: this module will be embedded in a deterministic service simulation. Calls may arrive in an unexpected order, and a rejected call must leave state exactly as it was before that call. The caller owns its lists and dictionaries, so do not mutate them or retain mutable aliases when a snapshot is promised. Invalid inputs must raise ValueError unless a different exception is explicitly specified. Validate the entire operation before changing persistent state. Do not catch broad exceptions and silently return a successful result. Handle empty inputs and boundary equality explicitly; never rely on dictionary or set iteration accidentally producing the intended ordering. Document a deliberate tie-breaking rule wherever more than one answer is valid. Times, sequence numbers, weights and capacities in this task are ordinary integers. Treat bool as invalid when an integer is required, because True is not an intended capacity or timestamp. Tests must use exact expected values rather than only checking result types. A compact helper is welcome when it removes repeated validation, but avoid decorators, plugins, callbacks beyond the given API, or a dependency-injection layer. Keep returned records simple and make their ownership clear. Separate the state transition from presentation so an exception during validation cannot leave a partially applied operation. Explain why each retained piece of state is needed, and avoid storing an unbounded history when the API only needs a bounded summary. The example cases are part of the contract, not an exhaustive list of valid inputs. Preserve the specified API names so the module can be imported directly by the simulation.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+            "temperature": 0,
+            "top_p": 1.0,
+            "repetition_penalty": 1.0,
+            "max_tokens": 512,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "n": 1
+          }
+        }
+      ],
+      "identity": {
+        "configuration": {
+          "max_len": 2048,
+          "max_batched_tokens": 2048,
+          "cache_limit_gib": 2,
+          "max_seqs": 8,
+          "compile_decode": "on",
+          "fuse_decode": "on",
+          "gates_compile": "on",
+          "norm_reuse": "off",
+          "tcp_nodelay": "on",
+          "io_timeout_seconds": 300.0
+        },
+        "source_files": {
+          "eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+          "config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+          "sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+          "cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+          "__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+          "context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+          "sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+          "kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+          "kernels/gdn_decode_fused.py": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+          "kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+          "kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+          "kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+          "kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+          "spec/dflash2.py": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+          "spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+          "spec/device_selector.py": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+          "model/attention.py": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+          "model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+          "model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model/qwen3_5.py": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+          "model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+          "model/layers.py": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+          "engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+          "engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+          "engine/llm_engine.py": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+          "engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+          "engine/packed_decode.py": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+          "engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+          "engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+          "engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+        },
+        "source_manifest_sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050",
+        "manifest_all_sources_match": true,
+        "package_root_loaded": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine",
+        "model_snapshot_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_snapshot_name": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+        "model_config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+        "server_source_sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+        "step_observer": true,
+        "per_token_observer": false,
+        "qualification_trace_enabled": true,
+        "drafter": null,
+        "normal_eos": true,
+        "eos_ids": [
+          248044,
+          248046
+        ],
+        "prefix_cache": false,
+        "completion_usage": "committed target IDs excluding terminal EOS; raw IDs include EOS",
+        "text_decode": "skip_special_tokens=False; terminal EOS excluded",
+        "cancellation": "pending skipped; active cancellation permanently fails this benchmark server",
+        "weights_identity_scope": "external controller must verify model weight pins; this server checks source/config identity"
+      },
+      "external_pin_scope": "Outer owner must verify runtime/Python/all source and weight pins before and after."
+    }
+  ],
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture.py": "8f43c71b8f3fd99d655ba760aa344eb3026eef35450be9c5ed1f06171109a0fb",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_owner.py": "8ee25e08f6028920e53d2f6d6287e91bfa318883e3becb4fe7a881624ff9dc62"
+  },
+  "runtime_weights_verified": false,
+  "scope": "CPU small source/metadata only; no service or model action"
+}

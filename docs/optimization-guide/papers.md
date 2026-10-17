@@ -230,3 +230,19 @@ is a default-OFF limit of one new prefill in a step with existing decode work.
 No speed ratio is projected. Changed batch history still needs full numerical
 checks and its own HTTP trace; complete request latency includes added queueing.
 [Source scope, local mechanism and proposed checks](../../bench/reviews/2026-10-17-prefill-admission-research.md).
+
+
+### 2026-10-17: recent ANE research and the shared-memory constraint
+
+Read the October 10 primary [MacPaw technical note](https://research.macpaw.com/publications/llm-inference-apple-neural-engine),
+Methods through Heterogeneous Execution. It studies LFM2.5-2.6B on M2/M3/M4 Pro,
+not our Qwen3.8 NVFP4 on M5 Ultra. Its ANE path changes layout, precision and
+quantization; its quality class is not arithmetic equivalence. Concurrent ANE/GPU
+weight reads did not provide additive memory bandwidth in its microbenchmark.
+Tree verification benefits depended on the measured width-cost curve.
+
+Our inference: leave the current target and numerical contract intact; prioritize
+GPU graph reuse and measure verification width on this machine before considering
+another execution backend. Do not assume using another compute unit increases
+memory bandwidth. This read adds no local performance point or ANE implementation;
+HTTP capture/replay remains the next experiment.

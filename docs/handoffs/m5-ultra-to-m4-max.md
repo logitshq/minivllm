@@ -532,3 +532,27 @@ identity to the immutable RESTORED predecessor (PID74456), because original v2
 controller/owner bind PID74384. The already recorded repeat-cycle design preserves
 the authorized cold-stop/restore contract. HTTP capture/cleanup CPU preparation is
 in `5308c36`; actual HTTP trace/replay and paired performance remain next work.
+
+
+## Actual HTTP baseline: frozen C1/C8 capture/replay preparation
+
+The repeat cold cycle now binds the previously verified RESTORED PID74456 through
+immutable journal/audit hashes. A real v3 source owns its POST worker and preserves
+the original persisted-visible contract; no source-path spoofing or arbitrary
+listener adoption is used. The new outer owner runs exactly C1 capture→reap→replay,
+then C8 capture→reap→replay, with four separately recorded direct children.
+
+Root18 controller +17 owner CPU tests PASS, including cross-module recovery for
+preflight failure, a known returned Popen with failed identity probe, and the
+capture's inner intent written before a rejected Popen call. Unknown spawn and
+unreaped children still block restoration; failed numerical work does not.
+Repeated cancellation waits for an in-flight resource probe before reap.
+
+Actual small-source CPU prepare and service read-only prepare both passed;
+journal is PREPARED, no service change or GPU execution at this recorded point.
+Plan SHA `d641a95b7a454ce45ea01c3f3b3b0bc59f08ec71de0f0d5c79973315f7861429`.
+[Registered workload, exact plan and receipts](../../bench/m5_ultra_256gb/pareto_realistic/prereg-http-baseline-v1/README.md).
+Fixed D/normalEOS/cap512 requests are8 at C1 and16 at C8; E028 isOFF. Captured real
+UUID arrivals are replayed by independent engines; recorded schedules/tokens are
+comparison targets. No performance claim follows from CPU or instrumented timing.
+The existing user authorization applies to the same stop/experiment/restore scope.

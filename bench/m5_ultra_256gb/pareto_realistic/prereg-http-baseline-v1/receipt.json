@@ -1,0 +1,57 @@
+{
+  "schema": "E023-http-baseline-preregistration-v1",
+  "status": "PREPARED",
+  "owner_plan_sha256": "d641a95b7a454ce45ea01c3f3b3b0bc59f08ec71de0f0d5c79973315f7861429",
+  "prepared_journal_sha256": "daf8b5b29c059a04d907ff7e8b4a9ec25ba56d36779cc1849de2a99847faafcd",
+  "original": {
+    "pid": 74456,
+    "ppid": 1,
+    "start": "Sat Oct 17 07:37:30 2026",
+    "comm": "omlx-server"
+  },
+  "cpu_tests": {
+    "controller_v3": 18,
+    "http_owner": 17,
+    "all_passed": true
+  },
+  "actual_cpu_prepare": "PREPARED",
+  "service_mutated": false,
+  "gpu_executed": false,
+  "runtime_weights_verified": false,
+  "performance_qualified": false,
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v3.py": "461355834222ad6820cc054c7a9450fd1b128cdb5e11491e2fdc915a08ae6974",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_v3_cpu.py": "ce2d25b74950de946803e1c35e4f84f6c5226e70577a1dab803063f4d3300cc8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_owner.py": "8ee25e08f6028920e53d2f6d6287e91bfa318883e3becb4fe7a881624ff9dc62",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/test_http_owner_cpu.py": "9dd3b1690edaa6569018b6e392c9a684613232af3ddbcd0185e11977c4cd898a"
+  },
+  "root_tool_receipts": {
+    "cpu_prepare": {
+      "chunk_id": "d3b6c7",
+      "wall_time_seconds": 6.625e-06,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "readonly_prepare": {
+      "chunk_id": "ef25ab",
+      "wall_time_seconds": 0.0008455,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "independent_review": {
+    "status": "NO_REMAINING_CONCRETE_BLOCKER",
+    "scope": "Read-only final source delta and controller/owner protocol review; no extra device execution",
+    "owner_sha256": "8ee25e08f6028920e53d2f6d6287e91bfa318883e3becb4fe7a881624ff9dc62",
+    "controller_sha256": "461355834222ad6820cc054c7a9450fd1b128cdb5e11491e2fdc915a08ae6974",
+    "resolved_findings": [
+      "NO_CHILD with diagnostic directories/empty index",
+      "Known returned Popen identity-probe failure",
+      "Exact restored predecessor identity and independent restoration scope",
+      "Inner capture intent preceding confirmed rejected Popen",
+      "Release receipt before interrupted index update"
+    ]
+  }
+}
