@@ -167,3 +167,66 @@ client and join; no model/server/service is exercised:
 Ten tests passed, including C1/C8 raw flows, authenticated requests, missing seal,
 wrong readiness/identity, unknown spawn, TERM failure followed by KILL, resource
 cancellation, repeated cancellation during reap, and surviving PID rejection.
+
+## Two-stage direct owner
+
+`owner.py` directly awaits the unchanged `trial.run` in its own process, first
+`lithos-c1` (8 requests), then a fresh `lithos-c8` (16 requests). Its tracked
+backend forwards the registered `cwd` and retains the actual server Popen object.
+There is no Python trial subprocess between the owner and server. The owner
+settles each resource-probe thread before cancellation propagates, requires
+pressure1/AC/thermal and the original swap guards, and independently repeats
+TERM/KILL/wait plus raw PID/port-absence checks after the trial closes.
+
+The new exact plan schema is `E023-lithos-D512-owner-plan-v1`, with fields
+`schema`, `execution`, `qualification`, `cold_restart`, `http`, `verification`,
+`trials`, `deadline_seconds`. `http` contains `port`, `api_key`, `deadlines`,
+`environment`; the frozen trial defines those deadlines/environment. Work is
+`300 + 2 × (overall + close + term + kill + 12)` seconds, rounded up; postflight
+gets its existing separate120-second bound. `plan_template(...)` builds this
+CPU-only recipe. The `qualification` reference binds the unchanged D fixtures
+and resource helpers; it does not pretend to qualify Lithos numerics.
+
+`verification={python,groups}` explicitly supplies five groups:
+`lithos_runtime`, `lithos_source`, `target_model`, `pack`, `outer_runtime`.
+Each group maps absolute paths to `{sha256,bytes,mtime_ns}`. Required Lithos
+source/runtime and pack inventories inherit E020 hashes; the target inherits
+the original model manifest. Resolved Python binaries and the actual outer
+environment's httpx/httpcore/transformers/tokenizers are mandatory. The outer
+tokenizer runs in the owner, so its runtime must be pinned separately from the
+official server environment. Additional transitive dependencies belong in
+these supplied groups. Full preflight and postflight hash every supplied file
+in1MiB blocks with deadline checks, preserving open-file and pathname identity
+before/after. Zero-byte files are valid. No native preparation receipt replaces
+Lithos runtime/pack verification; OS shared libraries and stdlib are not fully
+encapsulated by this inventory.
+
+The owner requires a new `E023-lithos-D512-cold-journal-v1` STOPPED journal,
+binding the exact owner plan/source and immutable restored predecessor. It
+does not stop or restore a service. A separate reviewed `controller.py` and
+restoration auditor must consume its real two-phase protocol before execution:
+canonical `phases/{phase}/{intent,child,release}.json`, inner
+`phases/{phase}/trial/{spawn-intent,child,release}.json`, and top-level
+attempt/index/final release. Pre-Popen rejection has explicit `no-popen.json`
+evidence; unknown spawn remains unresolved. A later-phase failure preserves the
+already-reaped prefix. No numerical/performance PASS is required to recover a
+failed experiment, but every observed child must be proven reaped.
+
+The CLI is `owner.py --plan PATH --plan-sha256 SHA --out NEW [--prepare-only]`.
+Prepare-only checks small metadata and source pins; it does not hash runtime,
+weights or pack payloads or start a process. Actual execution is still pending.
+Owner PASS means both observed route/count/text trials and cleanup completed;
+`performance_qualified` and independent qualification remain false. Formal
+observer-OFF timing and its separately bounded warm/formal log windows remain
+unimplemented here.
+
+CPU command: `.venv/bin/python -B -m unittest
+bench.m5_ultra_256gb.lithos_d512.test_owner_cpu -v`. Final24 tests passed in0.167s;
+isolated `-I -B owner.py --help` also passed. The first16-test run was15/16
+because a cancellation fixture retained the old phase label. The next22-test
+run was21/22 because the AST comparison expected the old error-message text;
+both test-only mismatches were corrected. Additional tests cover all five pin
+groups, zero-byte files, changed bytes with unchanged stats, path replacement
+during reading, deadline interruption and retaining the primary error if an
+error-receipt write also fails. All process/service/HTTP behavior in these owner
+tests is explicitly fake; no real model, listener, service or device was used.
