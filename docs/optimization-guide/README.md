@@ -22,7 +22,8 @@
 [E019只提取新增hidden history](tutorials/019-drafter-history-tail.md) ·
 [E020官方投机模式 HTTP 对照](tutorials/020-external-spec-http.md) ·
 [E022 HTTP 发送延迟预注册](tutorials/022-native-transport.md) ·
-[E023 长生成吞吐—延迟测试准备](tutorials/023-realistic-throughput-latency.md) ·
+[E023 长生成吞吐—延迟实测](tutorials/023-realistic-throughput-latency.md) ·
+[E024 图编译与attention长度隔离](tutorials/024-decode-graph-dispatch.md) ·
 [E025 相同 split-K NAX 筛选与拒绝](tutorials/025-same-split-nax.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
@@ -178,3 +179,5 @@ C8/C32/C64配对吞吐约+14.7%/+12.3%/+14.5%，只改两个核心文件。
 自适应投机按实际成本占比排序。
 对可能带来数量级变化的方案大胆建小原型；对
 不足以影响端到端结果的小kernel变化及时止损。
+
+2026-10-17：[E024四组诊断教程](tutorials/024-decode-graph-dispatch.md)确认在B1/used257同长度编译全部逐位一致，改变补齐长度重现失败。无新速度点；下一步保持SDPA归约路径再验证。

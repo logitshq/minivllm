@@ -674,3 +674,21 @@ cache=0/setup=0; logs have no per-request wire IDs. Root and author each passed
 not grant full-state correctness or a performance point.
 
 [Implementation, limits and recorded preparation attempts](../../bench/m5_ultra_256gb/lithos_d512/README.md).
+
+
+## Four-arm graph diagnosis: bound, not a speed result (2026-10-17)
+
+Independent raw audit confirms all129 output tensors bit-equal for eager versus
+compiled at the same bound (257 or1536). Changing bound257→1536 reproduces the
+original difference:121/129 tensors,35,960,404 words. Four131-array inputs stay
+identical; all outputs finite, parameter value receipts unchanged. Scope is only
+B1/used257. This isolates bound as sufficient at that point; no runtime kernel
+trace, full candidate qualification or performance point is claimed.
+
+Original service recovered asPID11548 at16:43:37 UTC, independently audited;
+13 resource samples had pressure1/zero swap growth. Complete small evidence is
+archived;13 original full-state tensor files (3,312,040,693B) remain locally with
+committed hashes/paths. Next source-backed hypothesis uses1023/1536 bounds to
+preserve the native reduction route; it still needs40 boundary points and lifecycle.
+
+[Result and evidence](../experiments/m5-ultra-256gb/E024-dispatch-isolation-v1/README.md) · [Tutorial](../optimization-guide/tutorials/024-decode-graph-dispatch.md).
