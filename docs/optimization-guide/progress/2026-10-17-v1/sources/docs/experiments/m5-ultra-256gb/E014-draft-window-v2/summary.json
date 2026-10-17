@@ -1,0 +1,693 @@
+{
+  "status": "PASS",
+  "decision": "Prototype passes predeclared strong-reference and compatibility gates; independent default-OFF core integration qualification next",
+  "scope": "Synthetic cache-state replay, not actual long-context generation; no target verification, rollback, HTTP or allocator-release claim",
+  "main_metric": "owned_lifecycle_ms",
+  "processes": 2,
+  "numeric_cases": 368,
+  "formal_samples": 240,
+  "warmup_samples": 80,
+  "first_post_qualification_samples": 40,
+  "pools": [
+    {
+      "cache_gib": 2,
+      "gate": true,
+      "long_min_speedup": 1.1901097869546788,
+      "short_min_speedup": 0.996994682673955,
+      "formal_samples": 120,
+      "warmup_samples": 40,
+      "first_post_qualification_samples": 20
+    },
+    {
+      "cache_gib": 16,
+      "gate": true,
+      "long_min_speedup": 1.1889549668834154,
+      "short_min_speedup": 0.9833950427654449,
+      "formal_samples": 120,
+      "warmup_samples": 40,
+      "first_post_qualification_samples": 20
+    }
+  ],
+  "rows": [
+    {
+      "cache_gib": 2,
+      "history_rows": 32,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.021792,
+          "candidate": 0.023167
+        },
+        "draft_ms": {
+          "reference": 3.5012084999999997,
+          "candidate": 3.4750414999999997
+        },
+        "teardown_ms": {
+          "reference": 0.023146,
+          "candidate": 0.024562
+        },
+        "owned_lifecycle_ms": {
+          "reference": 3.5240210000000003,
+          "candidate": 3.5016455
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0075299820160422,
+        "owned_lifecycle_ms": 1.0063899957891227
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.4688749999999997,
+        "1": 3.444583,
+        "2": 3.5587079999999998,
+        "3": 3.578916
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 32,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0235,
+          "candidate": 0.022104
+        },
+        "draft_ms": {
+          "reference": 5.4038955,
+          "candidate": 5.418749999999999
+        },
+        "teardown_ms": {
+          "reference": 0.021603999999999998,
+          "candidate": 0.0226875
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.425666,
+          "candidate": 5.442021
+        }
+      },
+      "speedup": {
+        "draft_ms": 0.9972586851211074,
+        "owned_lifecycle_ms": 0.996994682673955
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.422958,
+        "1": 5.439082999999999,
+        "2": 5.442833,
+        "3": 5.428666000000001
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 2048,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0234995,
+          "candidate": 0.021396
+        },
+        "draft_ms": {
+          "reference": 3.7098750000000003,
+          "candidate": 3.6999375
+        },
+        "teardown_ms": {
+          "reference": 0.021021,
+          "candidate": 0.020583
+        },
+        "owned_lifecycle_ms": {
+          "reference": 3.7314995,
+          "candidate": 3.720125
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0026858561800032,
+        "owned_lifecycle_ms": 1.0030575585497798
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.722792,
+        "1": 3.720542,
+        "2": 3.719708,
+        "3": 3.7402070000000003
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 2048,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0282085,
+          "candidate": 0.0222915
+        },
+        "draft_ms": {
+          "reference": 5.953667,
+          "candidate": 5.9043955
+        },
+        "teardown_ms": {
+          "reference": 0.023,
+          "candidate": 0.0250835
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.9774795,
+          "candidate": 5.9307495
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0083448847557723,
+        "owned_lifecycle_ms": 1.0078792739433693
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 6.063833000000001,
+        "1": 5.940208,
+        "2": 5.921291,
+        "3": 5.891126
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 8192,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0230205,
+          "candidate": 0.0230625
+        },
+        "draft_ms": {
+          "reference": 4.0057915,
+          "candidate": 3.7102295
+        },
+        "teardown_ms": {
+          "reference": 0.0238955,
+          "candidate": 0.0224585
+        },
+        "owned_lifecycle_ms": {
+          "reference": 4.0312494999999995,
+          "candidate": 3.7404374999999996
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0796613794375793,
+        "owned_lifecycle_ms": 1.0777481243838454
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.9747500000000002,
+        "1": 3.751583,
+        "2": 3.737875,
+        "3": 4.119333999999999
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 8192,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.025437,
+          "candidate": 0.0242915
+        },
+        "draft_ms": {
+          "reference": 5.967874999999999,
+          "candidate": 5.788875
+        },
+        "teardown_ms": {
+          "reference": 0.022958,
+          "candidate": 0.0236045
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.991521,
+          "candidate": 5.811292
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.030921379369912,
+        "owned_lifecycle_ms": 1.0310135852750129
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.992334,
+        "1": 5.812709,
+        "2": 5.809875,
+        "3": 5.986416
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 32768,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.02375,
+          "candidate": 0.0229165
+        },
+        "draft_ms": {
+          "reference": 4.9723545,
+          "candidate": 3.707104
+        },
+        "teardown_ms": {
+          "reference": 0.021020999999999998,
+          "candidate": 0.0222915
+        },
+        "owned_lifecycle_ms": {
+          "reference": 4.9926045000000006,
+          "candidate": 3.728791
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.3413042903571089,
+        "owned_lifecycle_ms": 1.338933852822537
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 4.9902500000000005,
+        "1": 3.725041,
+        "2": 3.733584,
+        "3": 4.996875
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 32768,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.030625,
+          "candidate": 0.0291875
+        },
+        "draft_ms": {
+          "reference": 6.9931874999999994,
+          "candidate": 5.8688955
+        },
+        "teardown_ms": {
+          "reference": 0.026521000000000003,
+          "candidate": 0.022937
+        },
+        "owned_lifecycle_ms": {
+          "reference": 7.017333000000001,
+          "candidate": 5.8963745
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.1915679023421015,
+        "owned_lifecycle_ms": 1.1901097869546788
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 6.998374,
+        "1": 5.929416,
+        "2": 5.863333,
+        "3": 7.076959
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 131072,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.029124999999999998,
+          "candidate": 0.0303335
+        },
+        "draft_ms": {
+          "reference": 23.330271,
+          "candidate": 6.524833
+        },
+        "teardown_ms": {
+          "reference": 0.053666,
+          "candidate": 0.032854
+        },
+        "owned_lifecycle_ms": {
+          "reference": 23.383937,
+          "candidate": 6.5569375
+        }
+      },
+      "speedup": {
+        "draft_ms": 3.5756119735171765,
+        "owned_lifecycle_ms": 3.566289445339383
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 24.40425,
+        "1": 10.332792,
+        "2": 5.990416,
+        "3": 23.013583
+      }
+    },
+    {
+      "cache_gib": 2,
+      "history_rows": 131072,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.034853999999999996,
+          "candidate": 0.030479
+        },
+        "draft_ms": {
+          "reference": 28.036458500000002,
+          "candidate": 14.547729499999999
+        },
+        "teardown_ms": {
+          "reference": 0.051479,
+          "candidate": 0.035896
+        },
+        "owned_lifecycle_ms": {
+          "reference": 28.0894165,
+          "candidate": 14.579562500000002
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.9272051009746918,
+        "owned_lifecycle_ms": 1.9266295885078852
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 31.444499999999998,
+        "1": 16.452959,
+        "2": 13.067458,
+        "3": 27.125041000000003
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 32,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0224165,
+          "candidate": 0.0239375
+        },
+        "draft_ms": {
+          "reference": 3.5199995,
+          "candidate": 3.526125
+        },
+        "teardown_ms": {
+          "reference": 0.0228125,
+          "candidate": 0.0223335
+        },
+        "owned_lifecycle_ms": {
+          "reference": 3.5419785000000004,
+          "candidate": 3.5494995
+        }
+      },
+      "speedup": {
+        "draft_ms": 0.9982628239214435,
+        "owned_lifecycle_ms": 0.9978811097170179
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.659417,
+        "1": 3.546875,
+        "2": 3.552124,
+        "3": 3.5211240000000004
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 32,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0232705,
+          "candidate": 0.0225
+        },
+        "draft_ms": {
+          "reference": 5.546021,
+          "candidate": 5.4882085
+        },
+        "teardown_ms": {
+          "reference": 0.0246665,
+          "candidate": 0.024229
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.572,
+          "candidate": 5.514563
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0105339474620907,
+        "owned_lifecycle_ms": 1.0104155125256526
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.529167,
+        "1": 5.512709,
+        "2": 5.516417,
+        "3": 5.614833
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 2048,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.023875,
+          "candidate": 0.0230625
+        },
+        "draft_ms": {
+          "reference": 3.7774165,
+          "candidate": 3.8390625
+        },
+        "teardown_ms": {
+          "reference": 0.0237705,
+          "candidate": 0.0225835
+        },
+        "owned_lifecycle_ms": {
+          "reference": 3.801375,
+          "candidate": 3.8655625000000002
+        }
+      },
+      "speedup": {
+        "draft_ms": 0.983942433862434,
+        "owned_lifecycle_ms": 0.9833950427654449
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.803625,
+        "1": 3.790708,
+        "2": 4.01875,
+        "3": 3.799125
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 2048,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.025333500000000002,
+          "candidate": 0.020625
+        },
+        "draft_ms": {
+          "reference": 5.8885415000000005,
+          "candidate": 5.940771
+        },
+        "teardown_ms": {
+          "reference": 0.022646,
+          "candidate": 0.026875
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.9139585,
+          "candidate": 5.967646
+        }
+      },
+      "speedup": {
+        "draft_ms": 0.9912082960275697,
+        "owned_lifecycle_ms": 0.9910035715925508
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.894375,
+        "1": 5.937666,
+        "2": 6.004084,
+        "3": 5.933542
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 8192,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.022875,
+          "candidate": 0.0234165
+        },
+        "draft_ms": {
+          "reference": 3.9593540000000003,
+          "candidate": 3.709708
+        },
+        "teardown_ms": {
+          "reference": 0.020854499999999998,
+          "candidate": 0.022417
+        },
+        "owned_lifecycle_ms": {
+          "reference": 3.980041,
+          "candidate": 3.7322495
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0672953235133331,
+        "owned_lifecycle_ms": 1.066391997641101
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 3.983916,
+        "1": 3.730958,
+        "2": 3.7335409999999998,
+        "3": 3.976166
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 8192,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0230835,
+          "candidate": 0.022854
+        },
+        "draft_ms": {
+          "reference": 5.9606665,
+          "candidate": 5.790354000000001
+        },
+        "teardown_ms": {
+          "reference": 0.021374999999999998,
+          "candidate": 0.022479
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.9842085,
+          "candidate": 5.8150415
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.0294131412345429,
+        "owned_lifecycle_ms": 1.029091279916059
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.983209,
+        "1": 5.809540999999999,
+        "2": 5.817209,
+        "3": 5.985208
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 32768,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0271875,
+          "candidate": 0.0268545
+        },
+        "draft_ms": {
+          "reference": 5.083146,
+          "candidate": 3.8653120000000003
+        },
+        "teardown_ms": {
+          "reference": 0.0225,
+          "candidate": 0.0222085
+        },
+        "owned_lifecycle_ms": {
+          "reference": 5.1050835,
+          "candidate": 3.8869375
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.3150674512173919,
+        "owned_lifecycle_ms": 1.3133947998906594
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 5.117709,
+        "1": 3.874375,
+        "2": 3.8876250000000003,
+        "3": 5.092458000000001
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 32768,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0257295,
+          "candidate": 0.0274585
+        },
+        "draft_ms": {
+          "reference": 7.0568335,
+          "candidate": 5.934396
+        },
+        "teardown_ms": {
+          "reference": 0.024458,
+          "candidate": 0.028104
+        },
+        "owned_lifecycle_ms": {
+          "reference": 7.0831255,
+          "candidate": 5.957438
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.1891409841877758,
+        "owned_lifecycle_ms": 1.1889549668834154
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 7.07,
+        "1": 5.902875,
+        "2": 6.012001000000001,
+        "3": 7.0962510000000005
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 131072,
+      "block": 3,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.035375000000000004,
+          "candidate": 0.042665999999999996
+        },
+        "draft_ms": {
+          "reference": 9.3729585,
+          "candidate": 4.2105
+        },
+        "teardown_ms": {
+          "reference": 0.041854,
+          "candidate": 0.044042
+        },
+        "owned_lifecycle_ms": {
+          "reference": 9.428791499999999,
+          "candidate": 4.254542000000001
+        }
+      },
+      "speedup": {
+        "draft_ms": 2.22609155682223,
+        "owned_lifecycle_ms": 2.2161707417625673
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 9.462833,
+        "1": 4.262125,
+        "2": 4.246959,
+        "3": 9.415333
+      }
+    },
+    {
+      "cache_gib": 16,
+      "history_rows": 131072,
+      "block": 8,
+      "median_ms": {
+        "prepare_ms": {
+          "reference": 0.0318955,
+          "candidate": 0.026958
+        },
+        "draft_ms": {
+          "reference": 11.133874500000001,
+          "candidate": 6.0800625
+        },
+        "teardown_ms": {
+          "reference": 0.026416500000000002,
+          "candidate": 0.028270999999999998
+        },
+        "owned_lifecycle_ms": {
+          "reference": 11.158520500000002,
+          "candidate": 6.106479
+        }
+      },
+      "speedup": {
+        "draft_ms": 1.831210534431184,
+        "owned_lifecycle_ms": 1.827324797153974
+      },
+      "owned_lifecycle_ms_median_by_abba_arm": {
+        "0": 11.164333000000001,
+        "1": 6.091416000000001,
+        "2": 6.121542,
+        "3": 11.152708
+      }
+    }
+  ]
+}

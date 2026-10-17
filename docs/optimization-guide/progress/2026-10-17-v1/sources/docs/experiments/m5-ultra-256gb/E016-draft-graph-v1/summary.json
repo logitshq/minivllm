@@ -1,0 +1,105 @@
+{
+  "status": "PASS_AUDIT_REJECT_OPTIMIZATION",
+  "decision": "Do not integrate; fixed-shape full-draft gain fails preregistered 1.10x gate",
+  "correctness_cases": 24,
+  "array_checks": 312,
+  "timing_cases": 9,
+  "timed_samples": 108,
+  "full_draft_geomean_speedup": 1.0400083806452256,
+  "minimum_speedup": 1.0065979594901862,
+  "advance": false,
+  "trace_count": 9,
+  "first_graph_call_ms": 205.702125,
+  "later_new_shape_first_call_ms_range": [
+    4.529958,
+    6.797209
+  ],
+  "interleaved_seed_length": 15,
+  "all_ten_seed_arrays_different": true,
+  "value_only_position_and_request_changes_reused_graph": true,
+  "peak_active_gib": 18.620378971099854,
+  "rows": [
+    {
+      "prompt": "math",
+      "block": 3,
+      "median_ms": {
+        "reference": 3.5877714999999997,
+        "candidate": 3.5286045
+      },
+      "speedup": 1.0167678185526317
+    },
+    {
+      "prompt": "math",
+      "block": 5,
+      "median_ms": {
+        "reference": 3.8832915,
+        "candidate": 3.731979
+      },
+      "speedup": 1.0405448422941286
+    },
+    {
+      "prompt": "math",
+      "block": 8,
+      "median_ms": {
+        "reference": 5.695937499999999,
+        "candidate": 5.3440625
+      },
+      "speedup": 1.0658441026840535
+    },
+    {
+      "prompt": "code",
+      "block": 3,
+      "median_ms": {
+        "reference": 3.625229,
+        "candidate": 3.4814375
+      },
+      "speedup": 1.041302335601314
+    },
+    {
+      "prompt": "code",
+      "block": 5,
+      "median_ms": {
+        "reference": 3.947542,
+        "candidate": 3.9216670000000002
+      },
+      "speedup": 1.0065979594901862
+    },
+    {
+      "prompt": "code",
+      "block": 8,
+      "median_ms": {
+        "reference": 5.4678955,
+        "candidate": 5.2493125
+      },
+      "speedup": 1.0416403100406004
+    },
+    {
+      "prompt": "chinese",
+      "block": 3,
+      "median_ms": {
+        "reference": 3.6011040000000003,
+        "candidate": 3.430396
+      },
+      "speedup": 1.0497633509367432
+    },
+    {
+      "prompt": "chinese",
+      "block": 5,
+      "median_ms": {
+        "reference": 4.172625,
+        "candidate": 3.863979
+      },
+      "speedup": 1.0798777633108254
+    },
+    {
+      "prompt": "chinese",
+      "block": 8,
+      "median_ms": {
+        "reference": 5.5676665,
+        "candidate": 5.4592705
+      },
+      "speedup": 1.0198554000942066
+    }
+  ],
+  "scope": "One process, fixed-shape draft module only. Rejected before long generation, buckets, target verification or HTTP."
+}

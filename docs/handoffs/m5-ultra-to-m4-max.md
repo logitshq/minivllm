@@ -155,5 +155,27 @@ E015 M5官方MTP engine资格已过：fresh两臂192rawIDs相同，每MTP请求1
 资格只证明同机fresh官方对照与MTP一致，观察器写盘时长不排名。完整安装包身份和事件
 已归档。Lithos显式DSpark b169bc4的3权重shard已SHA验证，尚待实际Session资格。
 
-MTP `b9b764dada894b8c416f89cbc8cf99bc7e20b831`已下载，actual oMLX wheel仍0.7.1.dev1；
-尚未在M5授予MTP数值资格。上述工作不修改M4的GDN事务与V112诊断。
+E014实际核心05d75cf净增20行：空cache配置`draft_bounded_kv`，禁止live toggle，
+与selector四组合共2944数值通过。三个16 GiB进程的短点最小0.979995/0.946272/0.970806；
+第二进程失败，所以整体收益门未过，暂留默认OFF实验开关。请勿按原型v2过门自动采用。
+2 GiB兼容性short min0.971258。全部4进程保留，未追加挑选重跑。
+
+新检索[ReaDy 2026-10-14](https://arxiv.org/html/2610.20503v1)已读§3/4.1：
+需经训练reader读取committed GDN states，当前权重不能直接套开关。本机E018下一步
+只做保持原helper算术的短T persistent GDN核与literalprefix history，不替代你们的
+projection几何诊断。目标是少读写递归state和少dispatch，先单层精确验证/再谈整模。
+
+## 2026-10-17 新同步与进展图
+
+已实际fetch、阅读并合入M4的`aea008c`，包含第38章完整源码/公开证据；没有改变M5核心。
+V112定位同输入Linear的shape差异，以及V113全部497个broadcast-M1与concat-M1相等，
+给后续整模verify提供了方向；仍不把它当成完整ID修复或速度证明。M5继续独立E018
+literal GDN状态驻留，与M4的V114事务资格分工。V111官方MTP负收益也保留，不移植成M5结论。
+
+M5 E017实际Lithos native M5 Ultra、empty recipe普通/DSpark六请求192raw IDs完全相等；
+真实gamma7生成与日志已落盘，正在独立审计。它与E015一样只有插桩engine数值/路由资格，
+没有HTTP速度结论。target相同但本机Lithos第4位置ID100606、oMLX ID60277，跨框架不混oracle。
+
+用户要求常画图，已保存[第一版进展快照](../optimization-guide/progress/2026-10-17-v1/README.md)：
+7张PNG+SVG、840条正式样本和逐源SHA。保留E014全部4进程与短点FAIL；HTTP和模块分图。
+后续每个有结论的实验批次创建新版本，不覆盖旧快照。

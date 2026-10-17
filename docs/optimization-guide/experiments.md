@@ -252,6 +252,12 @@ v2实测两个进程全部368数值检查、240正式计时通过。16 GiB强ref
 swap用量和Swapouts稳定，无法定位于计时内；按原门保留，不选样本重跑。
 [全部phase/资源与审计尝试](../experiments/m5-ultra-256gb/E014-draft-window-v2/README.md)。
 
+实际核心05d75cf四个fresh process完成：2944严格数值检查全过；16 GiB三次门为
+PASS/FAIL/PASS，2 GiB兼容性PASS。第二次16 GiB的N32/B3为0.946272×，超3%回退门，
+所以整体接入采用门未过，保留默认OFF实验模块。其余点和重复测量照常保留；
+不能将原型v2或首轮成功冒充实际核心全面采用。继续看长历史收益与短点波动的原因，
+不追加挑选重跑，不授予HTTP或真实长生成收益。
+
 ## E015 · 2026-10-17 · 官方oMLX MTP · engine数值资格通过
 
 fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16轮、31提案、15接受、
@@ -260,14 +266,16 @@ fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16�
 10资源快照正常，子进程reap与原服务恢复完整。插桩engine API资格，无HTTP速度排名。
 [教程](tutorials/015-official-mtp.md)、[原始事件和独立审计](../experiments/m5-ultra-256gb/E015-official-mtp-v1/README.md)。
 
-## E017 · 2026-10-17 · Lithos DSpark · engine资格预注册
+## E017 · 2026-10-17 · Lithos DSpark · engine数值资格通过
 
 固定Lithos2236580、原target5ff8ef与DSpark b169bc4，三个权重shard已SHA验证。
 实际serving.prepare→assets.options→load_session，自然M5 Ultra backend、无Max recipe，
 普通/DSpark各fresh process三请求19→32，关闭prefix cache、保留normal EOS。
 新pack分别2048/2054容量；固定gamma7与实际accept日志、编译program和rawIDs作资格。
 完整最后GPU块可多提交，必须记录真实accepted/committed并与返回前32IDs分开。
-9项CPU腐败/CLI检查通过；运行尚待GPU队列，不作HTTP/全状态或速度结论。
+9项CPU腐败/CLI检查通过；两进程六请求192个raw IDs严格相等，实际DSpark路由已运行。
+首个分歧位置的普通/DSpark同机控制均为ID100606，不能混用oMLX的60277作为oracle。
+原始记录正在独立审计归档；本轮不作HTTP/全状态或速度结论。
 [教程](tutorials/017-lithos-dspark.md)。
 
 ## E016 · 2026-10-17 · draft backbone图复用 · 拒绝
@@ -276,3 +284,13 @@ fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16�
 首次图调用205.702 ms；9次trace包含增长shape，位置变化与同shape切换请求可复用。
 108正式计时全部保留；5资源快照正常，exit/reap/恢复完整。不继续增加bucket复杂度。
 [教程](tutorials/016-draft-backbone-graph.md)、[独立审计与证据](../experiments/m5-ultra-256gb/E016-draft-graph-v1/README.md)。
+
+## E018 · 2026-10-17 · 短块GDN状态驻留 · GPU初筛预注册
+
+单个kernel串行处理T=1/3/5/8，保留原SPLIT4归约和每步完整FP32状态；
+每线程32元素跨token驻留，减少重复读S与dispatch。仅隔离helper，不改core。
+目标首层真实输入、真实/零/随机初始状态，165项输出/状态/独立keep前缀严格比较，
+任何失败即停止计时。通过后2 GiB池、每臂2warm、3ABBA；T3/5/8几何平均需≥1.25×，
+任何T需≥0.97×。6项CPU接口测试与双人源码检查已过，尚待唯一GPU队列。
+不以单层结果替代整模事务、projection几何或HTTP资格。
+[教程](tutorials/018-persistent-gdn-verify.md)。

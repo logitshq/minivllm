@@ -1,0 +1,99 @@
+{
+  "status": "NUMERICS_PASS_SPEED_GATE_FAIL",
+  "numeric_cases": 136,
+  "timing_cases": 10,
+  "source_hashes_verified": true,
+  "rows": [
+    {
+      "history_rows": 32,
+      "block": 3,
+      "reference": 3.7955005,
+      "candidate": 3.645167,
+      "speedup": 1.041241869028223
+    },
+    {
+      "history_rows": 32,
+      "block": 8,
+      "reference": 5.580104,
+      "candidate": 5.582853999999999,
+      "speedup": 0.9995074203982409
+    },
+    {
+      "history_rows": 2048,
+      "block": 3,
+      "reference": 3.8096045,
+      "candidate": 4.185542,
+      "speedup": 0.9101818832543073
+    },
+    {
+      "history_rows": 2048,
+      "block": 8,
+      "reference": 5.8871665,
+      "candidate": 6.160603999999999,
+      "speedup": 0.9556151474757996
+    },
+    {
+      "history_rows": 8192,
+      "block": 3,
+      "reference": 4.1759375,
+      "candidate": 4.210687500000001,
+      "speedup": 0.9917471909278471
+    },
+    {
+      "history_rows": 8192,
+      "block": 8,
+      "reference": 6.1885414999999995,
+      "candidate": 6.269521,
+      "speedup": 0.9870836224968381
+    },
+    {
+      "history_rows": 32768,
+      "block": 3,
+      "reference": 5.22425,
+      "candidate": 4.114208,
+      "speedup": 1.2698069713539033
+    },
+    {
+      "history_rows": 32768,
+      "block": 8,
+      "reference": 7.2356875,
+      "candidate": 6.2386045,
+      "speedup": 1.1598246851519438
+    },
+    {
+      "history_rows": 131072,
+      "block": 3,
+      "reference": 22.513312499999998,
+      "candidate": 8.061896,
+      "speedup": 2.792558040937268
+    },
+    {
+      "history_rows": 131072,
+      "block": 8,
+      "reference": 29.0118335,
+      "candidate": 15.1059585,
+      "speedup": 1.9205556204857839
+    }
+  ],
+  "resources": 5,
+  "swap_used_mb": [
+    268.81
+  ],
+  "swapouts": [
+    303419
+  ],
+  "release": {
+    "pid": 93281,
+    "returncode": 0,
+    "waited_reaped": true,
+    "strict_absence": true
+  },
+  "resume": {
+    "identity_match": true,
+    "state_before": "T",
+    "state_after": "S",
+    "time": 1792223639.5894809
+  },
+  "decision": "Do not integrate v1; investigate amortized trimming and cross-arm cleanup accounting",
+  "scope": "Synthetic cache-state replay from repeated real short-history KV, NOT actual long-context generation, target verification, rollback or HTTP. Memory is tensor logical bytes only, not allocator evidence."
+}

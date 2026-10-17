@@ -12,7 +12,9 @@
 [E014有界草稿KV](tutorials/014-bounded-draft-kv.md) ·
 [E015官方MTP资格](tutorials/015-official-mtp.md) ·
 [E016草稿图复用](tutorials/016-draft-backbone-graph.md) ·
-[E017 Lithos DSpark准备](tutorials/017-lithos-dspark.md) ·
+[E017 Lithos DSpark资格](tutorials/017-lithos-dspark.md) ·
+[E018短块GDN状态驻留](tutorials/018-persistent-gdn-verify.md) ·
+[2026-10-17进展图与逐点数据](progress/2026-10-17-v1/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
@@ -73,6 +75,7 @@ T_step ≳ max(实际读取字节 / 有效带宽, 实际运算 / 有效算力)
 | decode投影/预处理融合 | `fuse_decode` | 依赖graph，但不能用graph收益替代融合收益 |
 | 大batch graph原型E011 | 隔离candidate类 | 已拒绝，生产B1–8边界不扩大 |
 | draft选路E012 | `draft_device_selection=False/True`，默认OFF | 三进程模块资格通过；只换选路，不动draft长度、verify与commit |
+| 有界draft KV E014 | `draft_bounded_kv=False/True`，默认OFF | 实际核心2944严格检查通过，但一个16 GiB短点未过收益门，保留实验模块 |
 | 投机验证/提交 | 保留独立数值资格 | 组合前检查接受、拒绝、EOS、预算和cache owner |
 
 先测模块，再测完整请求；实验独立通过不自动意味着组合通过。
