@@ -1,0 +1,247 @@
+{
+  "schema": "M4-V128-received-offline-review-v1",
+  "status": "PASS_RECEIVED_ROWS_AND_MEASURED_PARETO_RECOMPUTATION",
+  "GPU_used": false,
+  "model_or_service_started": false,
+  "source_mutated": false,
+  "received_through_commit": "53d4906",
+  "frontier_package_introduced_by_commit": "e37f560",
+  "source_directory": "/Users/ryanli/code/minivllm/docs/experiments/44-fresh-full-source",
+  "verify_source_sha256": "788a38a37946d0c796c0ff2cb233234a9e2ce3431e859cbd7e581f9908826202",
+  "readme_sha256": "ee5ba6521d84546684f3405e57e5baef73bde07ddf501837c5f19b971ef45d6b",
+  "manifest_sha256": "a665da316851521726c5e62f98ef8f499d53816d673361743092fa730d7d4b09",
+  "verification_script_review": {
+    "imports": [
+      "pathlib",
+      "hashlib",
+      "json",
+      "math",
+      "statistics"
+    ],
+    "side_effects": "read package files and print JSON only; all manifest paths contained; no subprocess/import of engine or network in verify.py"
+  },
+  "author_replay": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/docs/experiments/44-fresh-full-source/verify.py"
+    ],
+    "observed_exit_code": 0,
+    "observed_status": "PASS_OFFLINE_PUBLICATION_REPLAY"
+  },
+  "independent_recalculation": {
+    "all_HTTP_requests": 270,
+    "formal_HTTP_requests": 135,
+    "all_HTTP_tokens": 8640,
+    "formal_HTTP_tokens": 4320,
+    "groups": 126,
+    "formal_groups": 63,
+    "fresh_arms": 21,
+    "configurations": 7,
+    "signed_same_C_pairs": 12,
+    "both_axes_pair_wins": 12,
+    "exact_one_group_per_request": true,
+    "exact_three_warm_and_three_formal_groups_per_arm": true,
+    "exact_three_distinct_replicas_per_configuration": true,
+    "latency": "median across 3 fresh arms of median across 3 formal groups of per-request POST-before to SSE DONE p50",
+    "throughput": "median across 3 fresh arms of median across 3 formal groups of summed completion tokens / (last DONE - earliest POST)",
+    "configuration_points": [
+      {
+        "config": "lithos:C1",
+        "engine": "lithos",
+        "concurrency": 1,
+        "fresh_arms": 3,
+        "latency_ms": 1461.2691660004202,
+        "throughput_tok_s": 21.89877179683869,
+        "dominated_by": [
+          "native:C1",
+          "omlx:C1"
+        ]
+      },
+      {
+        "config": "native:C1",
+        "engine": "native",
+        "concurrency": 1,
+        "fresh_arms": 3,
+        "latency_ms": 1226.3012920157053,
+        "throughput_tok_s": 26.094729091739534,
+        "dominated_by": []
+      },
+      {
+        "config": "native:C2",
+        "engine": "native",
+        "concurrency": 2,
+        "fresh_arms": 3,
+        "latency_ms": 1470.631771007902,
+        "throughput_tok_s": 43.51170014291116,
+        "dominated_by": []
+      },
+      {
+        "config": "native:C4",
+        "engine": "native",
+        "concurrency": 4,
+        "fresh_arms": 3,
+        "latency_ms": 2011.9921460136538,
+        "throughput_tok_s": 63.37899542713181,
+        "dominated_by": []
+      },
+      {
+        "config": "omlx:C1",
+        "engine": "omlx",
+        "concurrency": 1,
+        "fresh_arms": 3,
+        "latency_ms": 1274.1192920075264,
+        "throughput_tok_s": 25.115387704066702,
+        "dominated_by": [
+          "native:C1"
+        ]
+      },
+      {
+        "config": "omlx:C2",
+        "engine": "omlx",
+        "concurrency": 2,
+        "fresh_arms": 3,
+        "latency_ms": 1570.5621460074326,
+        "throughput_tok_s": 40.15413750412442,
+        "dominated_by": [
+          "native:C2"
+        ]
+      },
+      {
+        "config": "omlx:C4",
+        "engine": "omlx",
+        "concurrency": 4,
+        "fresh_arms": 3,
+        "latency_ms": 2306.9740000064485,
+        "throughput_tok_s": 54.379934653897124,
+        "dominated_by": [
+          "native:C4"
+        ]
+      }
+    ],
+    "signed_pairs": [
+      {
+        "comparison": "native_vs_lithos",
+        "concurrency": 1,
+        "replica": 1,
+        "latency_reduction_percent": 16.15921203972267,
+        "throughput_gain_percent": 19.273688180720217,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_lithos",
+        "concurrency": 1,
+        "replica": 2,
+        "latency_reduction_percent": 16.327130172562576,
+        "throughput_gain_percent": 19.51305148996898,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_lithos",
+        "concurrency": 1,
+        "replica": 3,
+        "latency_reduction_percent": 16.03338858846587,
+        "throughput_gain_percent": 19.09495729187356,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 1,
+        "replica": 1,
+        "latency_reduction_percent": 3.581246919340686,
+        "throughput_gain_percent": 3.7142638801237915,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 1,
+        "replica": 2,
+        "latency_reduction_percent": 3.7189904669886475,
+        "throughput_gain_percent": 3.8626417452691353,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 1,
+        "replica": 3,
+        "latency_reduction_percent": 3.80742902158564,
+        "throughput_gain_percent": 3.9581320915520912,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 2,
+        "replica": 1,
+        "latency_reduction_percent": 5.967592303088365,
+        "throughput_gain_percent": 7.901288541156637,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 2,
+        "replica": 2,
+        "latency_reduction_percent": 6.100935244692474,
+        "throughput_gain_percent": 8.05951173958681,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 2,
+        "replica": 3,
+        "latency_reduction_percent": 6.605861532221391,
+        "throughput_gain_percent": 8.666543088842694,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 4,
+        "replica": 1,
+        "latency_reduction_percent": 9.688271933454807,
+        "throughput_gain_percent": 11.764313529695091,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 4,
+        "replica": 2,
+        "latency_reduction_percent": 13.897840309813759,
+        "throughput_gain_percent": 16.54849501109097,
+        "both_axes_win": true
+      },
+      {
+        "comparison": "native_vs_omlx",
+        "concurrency": 4,
+        "replica": 3,
+        "latency_reduction_percent": 12.90573242812444,
+        "throughput_gain_percent": 17.17612624546485,
+        "both_axes_win": true
+      }
+    ],
+    "joint_frontier": [
+      "native:C1",
+      "native:C2",
+      "native:C4"
+    ],
+    "all_tested_official_points_dominated": true
+  },
+  "evidence": {
+    "manifest_payloads_verified": 82,
+    "manifest_total_bytes": 2663572,
+    "resource_samples": 359,
+    "resource_samples_outside_group_clocks": true,
+    "saved_PID_absences": 23,
+    "saved_port_absences": 21,
+    "saved_M4_independent_review_sha256": "7ce64625eec0192310746b269a7c6dd0944767d86e115f6094dec1f6241edf76",
+    "actual_GPU_qualification_inherited": "C1 actual103; C2/C4 accepted25 mathematics plus actual126 route qualification, as declared in pinned package; this receiving review did not rerun them"
+  },
+  "limits": [
+    "M4/Qwen3.8 NVFP4 fixed 19 prompt tokens, cap32, greedy target-only static configuration set only; all recorded requests terminate at cap, not evidence of early-EOS coverage.",
+    "Lithos C2/C4 absent because admission unsupported; no claims for unmeasured settings or global optimum.",
+    "126 native requests include raw IDs; 144 official requests expose only visible roundtrip/usage, not internal raw-ID equivalence.",
+    "Latency is nested median request POST-to-DONE completion latency, not TTFT, per-token latency, flattened-request median or full long-task latency.",
+    "Read-only replay of received allowlisted projections plus embedded M4 audit; no original wire capture, live PID/port probe, full tensor numerical recomputation or rehash of M4-only runtime binaries.",
+    "Discrete resource snapshots do not rule out in-flight transients; no confidence interval/statistical significance or automatic adoption claim.",
+    "Do not pool with old M4 runs or M5 data."
+  ]
+}

@@ -19,3 +19,5 @@ v5随后完成的 [E022 v2](../../experiments/m5-ultra-256gb/E022-native-transpo
 这是单独transport配对实验，不池化进v5的历史并发或E020 C1数据；并非数值失败。
 
 [E026 layer v2](../../experiments/m5-ultra-256gb/E026-conv-tail-layer-v2/README.md)随后通过24单层真实权重数值/状态用例；两ON与OFF完整逐位一致，T978驻留state减少20,037,632B。它没有HTTP性能资格，所以v5曲线不增加点。本轮从217来源重画v5，chartdata SHA与原版一致。正确性是硬门槛，优化轴始终为整机throughput与完整请求latency。
+
+M4同步：已接收并离线核验[第44章同轮C1/C2/C4曲线](../../experiments/44-fresh-full-throughput-latency.md)，native在其7个已测配置中构成联合前沿。硬件、轮次和资格范围独立，不合并进M5图。

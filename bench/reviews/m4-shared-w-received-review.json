@@ -1,0 +1,78 @@
+{
+  "schema": "m4-shared-w-received-review-v1",
+  "created_at_utc": "2026-10-17T11:43:14.602840+00:00",
+  "git_head": "2e562abb4d86b5ddde982ecd5e3b33410b77829c",
+  "m4_commit_53d4906_is_ancestor": true,
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/docs/code-versions/44-shared-w-m1/verify_sources.py",
+    "--repo-root",
+    "/Users/ryanli/code/minivllm"
+  ],
+  "returncode": 0,
+  "stdout": "{\"status\": \"PASS_OFFLINE_SOURCE_AND_SELECTED_METADATA_ONLY\", \"manifest_payloads\": 66, \"exact_source_and_audit_files\": 54, \"original127_pins_mapped\": 77, \"repository_dependencies_checked\": 39, \"historical_original_identity_only_unverified\": 5, \"matrix_records\": 1491, \"resource_samples\": 42, \"GPU_import_or_execution\": false, \"raw_tensor_recomputation\": false, \"portable_GPU_replay_ready\": false, \"fullmodel_or_performance_qualified\": false}\n",
+  "stderr": "",
+  "elapsed_wall_s": 0.141097458,
+  "status": "PASS_OFFLINE_SOURCE_AND_SELECTED_METADATA_ONLY",
+  "verified": {
+    "status": "PASS_OFFLINE_SOURCE_AND_SELECTED_METADATA_ONLY",
+    "manifest_payloads": 66,
+    "exact_source_and_audit_files": 54,
+    "original127_pins_mapped": 77,
+    "repository_dependencies_checked": 39,
+    "historical_original_identity_only_unverified": 5,
+    "matrix_records": 1491,
+    "resource_samples": 42,
+    "GPU_import_or_execution": false,
+    "raw_tensor_recomputation": false,
+    "portable_GPU_replay_ready": false,
+    "fullmodel_or_performance_qualified": false
+  },
+  "read_source_pins": {
+    "verify_sources.py": "4573276b4337d128565a16f422f76f3441e62309cfd54afb13219ec57f87ef39",
+    "README.md": "382e37ae75f8aff0e495a22ff19972ce293075a4719ba206b43088c10f2b66e5",
+    "manifest.json": "f3e592dbced1e24e812f24ce724b86e4b10276912998ff81b4490a41ae9d2049",
+    "source-map.json": "a1712c65d16d0779ce01a6dc7f7382389b358dc708b018f7666eb6f69d616138",
+    "dependency-map.json": "c19979c11edf2f2c19cf1199bf0b8f4b0cd0bbfdca3aa2a843f4b36dc7ee3e8d",
+    "compile-geometry.json": "267089394d337df76ef007cb9889d1dfbbf52f68a6e3aee7ff15e9874edf5ea3",
+    "LOCAL-NUMERIC.zh.md": "a267666c07c84b7808f290745f484f2b2822ebf495e107ffd1166f91af11be0e",
+    "kernel124/shared_m1.py": "8c9cbc970305bb2d43c1d769a45ae43cb43a20581d1286989bb4b9551eaa4feb",
+    "kernel124/shared_impl.metal": "6dfe076f5a45af62aa14c644826791f3aa143d2e92bc230a0f07c39886fcecc9",
+    "kernel124/kernel_body.metal": "54746243dbaf9b73734dcf8337691016c53b5b68e277afa01451d7a72dd3e2b0",
+    "kernel124/kernel_header.metal": "17759af8d59a7ba185040630de07af69dd3335538e19094bd1f541c2b1140c6b",
+    "kernel124/control_body.metal": "81660cb7363649cddec120a22b65ad59544b5d4bee7e557b958dce7e801e0b1d",
+    "real127/README.md": "f88cf3f5e3fd82c2535d435775493f9cd9eb96fa2452911079c714adad8c39ae",
+    "real127/DESIGN.md": "2e1c0c50fc17d88d20e55395f1a8f037149b702b8c296611ec68d4a9b97d131a",
+    "real127/router.py": "b7ed75e7051dbe1f53a7c18fd9951dd2cda88c0ecf10acbbc225f10bb6f0b2b3"
+  },
+  "static_design": {
+    "implementation": "Each SIMD lane caches four packed uint16 words and one scale per output row/K512 step, reusing them across T2/4/5; original per-lane accumulation, qdot expression, simd_sum and BF16 store order retained in source. Compiler equivalence is not established by source reading.",
+    "original_operands": "Original uint32 W and uint8 scales; canonical observed GPU strides required; no helper copies/repack or parameter rebind.",
+    "geometry": "64 threads, 2 SIMD groups, 4 output rows per SIMD; exact 9 N/K geometries, T2/4/5 only.",
+    "route": "Default OFF router; geometry/input-layout ineligibility routes to old113 fallback, while runtime/quantization/prepare/compile errors propagate. Required local M4 matrix route was shared124 without fallback.",
+    "performance_limitation": "The historical router prepares a new object on every call, so each local probe rebuilds its kernel wrapper. Prepared/kernel caching is only a future plan. Register reuse can reduce occupancy; source reuse does not imply speedup."
+  },
+  "m4_evidence_scope": {
+    "claimed_local_matrix_checks": 1491,
+    "actual_T5_operators": 497,
+    "derived_T2_T4_prefix_checks": 994,
+    "raw_tensor_recomputation": false,
+    "same_input_not_propagated_full_model": true,
+    "author_recheck_not_independent_source_author_review": true,
+    "old_V108_failure_not_overturned": true
+  },
+  "m5_transfer_limits": [
+    "Frozen helper explicitly requires MLX0.32.3 + Apple M4 Max/applegpu_g16s; it is intentionally not an M5 callable route. Do not remove guard and claim qualification.",
+    "Five historical dependency originals retain source-machine identity only; weights/runtime/compiler/original absolute P-directory layout are not bundled. Source verification is not a portable GPU replay.",
+    "M5 needs a new source-pinned default-OFF adapter and fresh local compiler/runtime/actual GPU shape-stride evidence, then complete original-dtype finite/byte equality to native M1 for all supported geometry/T and original-operand readonly checks. No such work was performed here.",
+    "Before adoption, independently qualify propagated full-model state/raw IDs and then unobserved paired HTTP throughput-versus-complete-request-latency under valid resource admission. M4 same-input local checks cannot qualify M5 or confer performance."
+  ],
+  "GPU_import_or_execution": false,
+  "service_actions": false,
+  "model_loaded": false,
+  "kernel_compiled": false,
+  "M5_numerical_qualified": false,
+  "M5_performance_qualified": false
+}

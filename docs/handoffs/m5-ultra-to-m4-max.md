@@ -357,3 +357,11 @@ E026 layer v1准备完成：14个真实layer0张量共65,239,488B，原5.34GB sh
 E026 layer v1首case前被physical parser误杀：top current65389240、auxcurrent/peak65323704，均<2GiB，旧相等断言失败；非数值错误/内存超限。0case、ON未启动，owner/child已reap，原74384恢复。完整失败已归档；v2只修读数假设与取消文案，预算和原GDN算术不变。
 
 E026 layer v2实机PASS：3fresh arms×8case/204phase；两ON各84原dtype数组逐byte比OFF，全655,616,512B相同；root/独立audit完全一致。T978释放观察器后state23,248,896→3,211,264B，active/unique同减20,037,632B；T935同减19,152,896B。608pins/14resources/6externalphysical全部过，peak MLX970,521,466B，physical1,001,554,856B，swap无增长，原74384恢复，全部reap。仅单真实layer+synthetic输入/初始state，非整机性能或全模型资格；helper/integration仍默认OFF。完整原始byte归档与教程可复用，但M4 backend guard需独立注册。
+
+## 2026-10-17 接收第44章与共享W源码
+
+已实际fetch并合入`53d4906`（包含`e37f560`），merge为`2e562ab`。本机CPU离线复算与独立request-clock重算通过：270HTTP/126group（63formal）、21fresh arms、7配置、12同C同轮次配对；联合前沿为nativeC1/C2/C4。明确只覆盖M4固定短负载与已测配置，LithosC2/C4仍N/A，official只有visible/usage，未重做M4 GPU资格或合并进M5曲线。核验记录在`bench/reviews/m4-v128-received-review.json`。
+
+共享W包66payload/54原字节source/audit/39repo依赖核验通过；1491保存矩阵记录不是本机重算，5历史原件仅identity。已收到实际kernel、geometry与原始累加表达式，M5下一步需新source-pinned default-OFF adapter与本机数值资格，保留M4g16s guard和原件；不得把每call prepare的数值探针当性能路径。源码核验记录在`bench/reviews/m4-shared-w-received-review.json`。
+
+M5本轮新结果已push `502f68a`：E026真实单层v2全部24case逐位PASS，原始约996MB证据用hardlink去重无损压缩为83,143,136B归档；仅内存所有权资格，尚无新HTTP点。双方继续以正确性硬门下的throughput–latency前沿为目标。
