@@ -247,6 +247,19 @@ v2预注册：只在物理KV超过2W时裁到W；每个样本分别计prepare、
 采用门按draft+teardown计算。固定跑2/16 GiB两个新进程，16 GiB作为更强reference的采用门，
 2 GiB兼容性单独保留。184数值用例涵盖4095/4096/4097与变长block链；尚待GPU运行。
 
+v2实测两个进程全部368数值检查、240正式计时通过。16 GiB强reference的32K为1.19–1.31×，
+131K为1.83–2.22×，短点最小0.9834×，过预注册门。16 GiB末次采样Swapins增加3，
+swap用量和Swapouts稳定，无法定位于计时内；按原门保留，不选样本重跑。
+[全部phase/资源与审计尝试](../experiments/m5-ultra-256gb/E014-draft-window-v2/README.md)。
+
+## E015 · 2026-10-17 · 官方oMLX MTP · engine数值资格通过
+
+fresh普通/MTP两进程各3请求，192原始IDs完全相等。MTP每请求16轮、31提案、15接受、
+32交付；实际load/attach/route、verify宽度、proxy计数链和draft列表一致。双审在GPU前
+修复了误读underlying计数的观察器问题，原模型计数实测为0，不能代表实际投机是否运行。
+10资源快照正常，子进程reap与原服务恢复完整。插桩engine API资格，无HTTP速度排名。
+[教程](tutorials/015-official-mtp.md)、[原始事件和独立审计](../experiments/m5-ultra-256gb/E015-official-mtp-v1/README.md)。
+
 ## E016 · 2026-10-17 · draft backbone图复用 · 拒绝
 
 24组312数组严格通过，9点完整draft几何平均1.040008×，最低1.006598×，未过1.10×门。

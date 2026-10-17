@@ -146,5 +146,14 @@ E016保持原数学、显式输入输出KV的backbone图：24组312数组严格�
 注意官方 `_MTPResetBindingProxy` 的累计计数写在proxy，不能读underlying model冒充计数。
 跨机器仍请独立资格。此轮fetch后M4分支仍为4862215，未发现新的代码提交。
 
+E014 v2两pool实测过门：16 GiB强reference 32K=1.19–1.31×，131K=1.83–2.22×，
+短点min0.9834；368数值全过。默认OFF核心开关接入与四组合GPU资格分开继续。
+16 GiB末采样Swapins+3已披露，Swapouts和swap用量不变，没有为此挑选重跑。
+
+E015 M5官方MTP engine资格已过：fresh两臂192rawIDs相同，每MTP请求16verify/31proposed/
+15accepted/32delivered。与M4的17/34不同，不能混同；本机对照原始ID在index4为60277。
+资格只证明同机fresh官方对照与MTP一致，观察器写盘时长不排名。完整安装包身份和事件
+已归档。Lithos显式DSpark b169bc4的3权重shard已SHA验证，尚待实际Session资格。
+
 MTP `b9b764dada894b8c416f89cbc8cf99bc7e20b831`已下载，actual oMLX wheel仍0.7.1.dev1；
 尚未在M5授予MTP数值资格。上述工作不修改M4的GDN事务与V112诊断。
