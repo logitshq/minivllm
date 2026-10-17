@@ -1,11 +1,12 @@
 # 从瓶颈到实现：M5 Ultra 推理优化攻略
 
-更新：2026-10-16。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
+更新：2026-10-17。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
 为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
 [NAX prefill设计](prefill-design.md) ·
+[E011逐次实验教程](tutorials/011-large-batch-graphs.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
