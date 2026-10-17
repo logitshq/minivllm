@@ -1,0 +1,64 @@
+{
+  "schema": "E024-serving-archive-summary-v1",
+  "owner_status": "PASS",
+  "owner_plan_sha256": "5161400cdfcd2b91610383f0776fc8483003d7b9bc3962c3a6728948004b5298",
+  "child_plan_sha256": "e85f92aa1402025a669de4c2426460c1eced29f0145f128480f1fa9e66349c56",
+  "numerical_status": "PASS",
+  "resource_status": "PASS",
+  "restoration_status": "PASS",
+  "same_schedule_qualified": true,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "restored_identity": {
+    "pid": 92152,
+    "ppid": 1,
+    "start": "Sat Oct 17 16:50:10 2026",
+    "comm": "omlx-server"
+  },
+  "coverage": {
+    "installs": 2,
+    "restores": 4,
+    "parameter_checks_complete": true,
+    "parameter_direct_calls": 42,
+    "route_hits": {
+      "parameter-diagnostic": {
+        "1023": 21,
+        "1536": 21
+      },
+      "D-C1": {
+        "1023": 723,
+        "1536": 3365
+      },
+      "D-C8": {
+        "1023": 88,
+        "1536": 938
+      }
+    },
+    "long_fallback_calls": 38,
+    "cases": {
+      "D-C1": {
+        "consumed": 4080,
+        "discarded_prior": 0,
+        "partial_retirement": 0,
+        "refills": 0
+      },
+      "D-C8": {
+        "consumed": 1014,
+        "discarded_prior": 0,
+        "partial_retirement": 7,
+        "refills": 7
+      },
+      "lifecycle": {
+        "consumed": 24,
+        "discarded_prior": 0,
+        "partial_retirement": 8,
+        "refills": 5
+      }
+    },
+    "identity_refill_enabled": false
+  },
+  "observed_eos_requests": 0,
+  "discarded_ahead_observed": false,
+  "resource_samples": 217,
+  "scope": "Qualification copied only from separate independent numerical/resource/recovery receipts. Successful tensor bytes are not retained for offline arithmetic recomputation. No HTTP or performance evidence and no unobserved invalidation/cancellation/combined E028 qualification."
+}

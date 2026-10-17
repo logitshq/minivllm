@@ -917,3 +917,15 @@ Next prepared CPU suite actually ran91tests:77 unaffected tests pass; oMLX's14-t
 [Formal evidence](../experiments/m5-ultra-256gb/E023-lithos-formal-v1/README.md) · [D512 plot](progress/2026-10-17-v8/README.md).
 
 Focused oMLX test repair subsequently PASS14/14 in0.385s under the existing pinned oMLX Python. Only two fixture path normalizations changed; production gates unchanged. Original failed stdout/stderr, all actual tested v1 source bytes, focused before/after/command/pins are in [CPU evidence](../experiments/m5-ultra-256gb/prepared-cpu-2026-10-17/README.md).
+
+## E024 route serving: original37 numerical/resource/restoration PASS · 2026-10-17
+
+The default-OFF per-instance adapter completes D-C1 eight, D-C8 sixteen and lifecycle thirteen requests:5,163 steps/12,411 committed IDs. Candidate short compile/fuse/gates ON, norm OFF; reference eager/gates OFF; E028 OFF. Independent schedule reconstruction and all6,622,533 device array-comparison receipts PASS:10,315 full-vocabulary logits,6,596,864 state arrays,15,354 ahead-token arrays. Successful tensor bytes were not retained for offline arithmetic recomputation.
+
+Idle parameter coverage is42 direct calls (6 baseline+18 changed+18 restored), three parameter paths at used1023/1024 and B1→B8→B1,18 meaningful eager-change receipts and17,068 additional comparisons. Actual D graph calls: C1 bound1023/1536=723/3365; C8=88/938. C8 observes7 partial retirements and7 survivor refills; lifecycle8/5. Consumed ahead totals5,118, but discarded ahead0 and observed EOS0. No cancellation/sampling-key invalidation, live weight replacement, combined E028 or unseen-capacity qualification.
+
+Independent resources217samples PASS: pressure1/thermal0, swap growth0MiB, Swapouts/Pageouts/Compressions0; Swapins+12, Decompressions+6053. Owner86493/child86527 reaped; original oMLX85613 restored as92152 with original model/config and fresh MTP/resident PLE. WarmKV/exact hidden state not restored. Independent restoration PASS. Archive935members/3,850,220compressed bytes; original1,628,001,846-byte numerical ledger and6,012,475-byte route ledger preserved, all tar members/source trees rechecked.
+
+No HTTP/performance point is added. Next route-ON C1/C8 capture→strict server reap→independent replay/route audit must pass before observer-OFF throughput vs POST→DONE latency. Current native/Lithos formal frontier is unchanged; oMLX D512 remains pending.
+
+[Closed evidence and limits](../experiments/m5-ultra-256gb/E024-serving-v1/README.md) · [Tutorial](tutorials/024-decode-graph-dispatch.md).

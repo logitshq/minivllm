@@ -172,3 +172,44 @@ change the attention reduction route already isolated in the failed experiment.
 [Source-backed integration plan](../../../bench/reviews/route-graph-serving-plan.md)
 records the minimal adapter and missing gates. It is a design, not an implemented
 or qualified HTTP optimization; the feature remains OFF.
+
+## 真实调度接入：37请求与参数替换诊断通过
+
+本轮将默认关闭的实例适配器接到原有 `runner.decode_model`，保留原scheduler，
+同时覆盖当前decode和ahead调用。候选保持short compile/fuse、GDN gates compile ON，
+norm reuse OFF；reference仍为eager/gates OFF，E028 identity refill OFF。没有扩大
+物理KV资格范围，本轮实际使用1536容量。
+
+原37请求全部完成：D-C1八请求、D-C8十六请求各为normal-EOS cap512，另有十三个
+变长cap生命周期请求，共5,163步、12,411个committed IDs。完整词表logits、64层的
+128状态以及ahead检查全部通过。独立审计按实际记录重建FCFS、slot复用、退场与ahead
+配对，核对6,622,533项设备数组比较收据，其中logits 10,315、状态6,596,864、
+ahead tokens 15,354；不是只核对最终greedy IDs。
+
+| Case | Consumed ahead | Partial retirements | Survivor refills | Bound1023 / bound1536实际调用 |
+| --- | ---: | ---: | ---: | ---: |
+| D-C1 | 4,080 | 0 | 0 | 723 / 3,365 |
+| D-C8 | 1,014 | 7 | 7 | 88 / 938 |
+| Lifecycle | 24 | 8 | 5 | 本case走原适用路径；不借用D长图覆盖 |
+
+参数诊断在请求开始前、engine为空时进行。三个真实参数路径——最终norm weight、
+第0层GDN `in_proj_a.weight` 与 `scales`——分别在used1023/1024做B1→B8→B1。
+42次direct calls由6次baseline、18次changed、18次restored组成；18条收据确认实际
+改值确实改变了eager logits，恢复后输出逐位回到原值，另有17,068项数组比较通过。
+这证明的是注册的空闲参数替换诊断，不能说成支持请求中途热换权重。
+
+两个未覆盖边界必须保留：所有case的discarded-prior-ahead均为0；normal EOS虽开启，
+实际EOS退休也为0。因此不授予取消、sampling-key变化、ahead失效或EOS退休路径资格。
+本轮成功张量没有保存完整raw，离线审计检查的是完整设备比较/哈希收据和独立调度重建，
+不能写成把所有成功tensor字节又离线重算了一遍。
+
+数值、217个记录资源样本和恢复三份独立审计均PASS。资源为pressure1、thermal0，
+swap增长0，Swapouts/Pageouts/Compressions增长0；Swapins+12、Decompressions+6,053。
+owner86493/child86527已回收，原oMLX85613恢复为92152，原模型配置与新MTP/resident PLE
+证据通过；暖KV和隐藏状态不恢复。[归档与精确范围](../../experiments/m5-ultra-256gb/E024-serving-v1/README.md)
+保留935个成员、完整1.628GB原始ledger与独立route记录的压缩证据。
+
+**这次闭合的是固定调度下的完整模型数值资格，没有新增HTTP或性能点。** 下一步让真实
+C1/C8 HTTP到达顺序进入新entry，严格回收server后再独立replay，绑定实际图调用与完整
+状态；通过后才关observer测吞吐和完整POST→DONE延迟。前向诊断的约6%收益仍不能
+直接投射端到端曲线，也不意味着与E028组合或更高batch已通过。
