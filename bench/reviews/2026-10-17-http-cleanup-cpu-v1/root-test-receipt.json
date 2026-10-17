@@ -1,0 +1,25 @@
+{
+  "schema": "native-cleanup-root-cpu-review-v1",
+  "command": [
+    ".venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "bench/m5_ultra_256gb/pareto_realistic",
+    "-p",
+    "test_native_cleanup_cpu.py",
+    "-v"
+  ],
+  "cwd": "/Users/ryanli/code/minivllm",
+  "returncode": 0,
+  "tests": 6,
+  "reported_test_seconds": 0.055,
+  "source_sha256": {
+    "bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "bench/m5_ultra_256gb/pareto_realistic/test_native_cleanup_cpu.py": "935481dff0331575c59485e3210e18b8736e7289f542f83389b4575f1732d160"
+  },
+  "source": "Root execution tool result; summary transcribed, no fabricated raw stdout",
+  "scope": "CPU MockTransport only; no actual network/model/performance"
+}

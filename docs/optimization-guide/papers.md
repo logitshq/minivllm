@@ -218,3 +218,15 @@ hashing, archive compression and raw-array audits, since CPU and GPU share
 memory service. Finish those jobs before timing. We do not copy the calibrated
 4→1 retrieval limits or add a retrieval scheduler to this engine. Numerical
 qualification and uninstrumented HTTP performance remain separate runs.
+
+
+### 2026-10-17: Admission pacing and limits of lookahead batching
+
+Read [Stable Token-level Scheduling](https://arxiv.org/html/2610.17689v1) and
+[Online Batching with Lookahead](https://arxiv.org/html/2610.16013v1). The first
+motivates limiting prefill interference; the second assumes a fixed batch service
+time that does not model this autoregressive workload. Our separate hypothesis
+is a default-OFF limit of one new prefill in a step with existing decode work.
+No speed ratio is projected. Changed batch history still needs full numerical
+checks and its own HTTP trace; complete request latency includes added queueing.
+[Source scope, local mechanism and proposed checks](../../bench/reviews/2026-10-17-prefill-admission-research.md).

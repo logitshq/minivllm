@@ -486,3 +486,21 @@ Native HTTP raw SSE/UUID/scheduler join、独立双引擎实际调度回放及�
 用户现已明确授权“允许停止、实验后恢复”。接下来按冻结E028 model v1执行冷停→完整
 37请求→回收→恢复原oMLX模型，并核新日志中的MTP/resident PLE。先前pending记录是历史
 快照，当前不再等待同一授权；失败也执行恢复。M4分支53d4906已在本分支祖先中。
+
+
+## Native HTTP cleanup/capture preparation; E028 now running
+
+Native SSE cleanup has a separately versioned cancellation fix; root six CPU tests
+pass. New single-server capture phase retains actual startup/group/trace/close/reap
+evidence and requires outer resource callbacks; root seven CPU lifecycle tests pass,
+including repeated cancellation while the server is alive. Independent review found
+no blocker. No real HTTP/performance result yet; see
+[CPU review](../../bench/reviews/2026-10-17-http-cleanup-cpu-v1/README.md).
+
+User cold-stop authorization is received and the frozen E028 run is active. C1 is
+finished; observed C8 has passed step545, beyond the prior pressure abort, while
+pressure remains1. This is live partial progress, not completed qualification.
+The original service will be restored and audited before the final result is claimed.
+Repeated cycles need to bind the verified replacement PID through an immutable
+RESTORED predecessor; [minimal follow-up design](../../bench/reviews/2026-10-17-repeat-cold-cycle-design.md)
+keeps the same authorized stop/experiment/recovery scope.
