@@ -1,0 +1,26 @@
+--- V105/server.py
++++ V121/server.py
+@@ -12,6 +12,7 @@
+ import time
+ import traceback
+ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
++from socket_transport import handler_with_nodelay, first_socket_receipt, fatal_socket
+ 
+ P = Path('/private/tmp/minivllm-engine-optimization-20261014')
+ ap = argparse.ArgumentParser()
+@@ -21,7 +22,9 @@
+ ap.add_argument('--trace', type=Path, required=True)
+ ap.add_argument('--run-dir', type=Path, required=True)
+ ap.add_argument('--owner-pid', type=int, required=True)
++ap.add_argument('--tcp-nodelay', choices=('off', 'on'), default='off')
+ a = ap.parse_args()
++socket_receipt = first_socket_receipt(a.run_dir / 'socket-first.json', a.run_dir / 'socket-failure.json')
+ assert os.getppid() == a.owner_pid
+ config = json.loads(a.config.read_text())
+ for path, digest in config['source_pins'].items():
+@@ -205,4 +208,4 @@
+   send({'choices':[{'text':'','finish_reason':'stop' if eos else 'length'}],'usage':{'prompt_tokens':len(ids),'completion_tokens':n,'total_tokens':len(ids)+n,'prompt_tokens_details':{'cached_tokens':0}},'benchmark_output_ids':out})
+   self.wfile.write(b'data: [DONE]\n\n');self.wfile.flush();self.close_connection=True
+ 
+-ThreadingHTTPServer(('127.0.0.1',a.port),Handler).serve_forever()
++ThreadingHTTPServer(('127.0.0.1',a.port),handler_with_nodelay(Handler, tcp_nodelay=a.tcp_nodelay == 'on', receipt=socket_receipt, fatal=lambda row: fatal_socket(a.run_dir / 'socket-failure.json', row))).serve_forever()

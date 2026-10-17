@@ -1,0 +1,4865 @@
+{
+  "schema": "V121 publication whitelist v1; raw scalar/event fields preserved, not a full launch/environment archive",
+  "groups": [
+    {
+      "arm": "off",
+      "phase": "warm",
+      "repeat": 0,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-warm-0.json",
+        "sha256": "b78ad0b930e7e977852c8ca00a22cd54d6c41fae476fda0607f0a4cb81611198"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-0",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.402476333983941,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 22.816784301164837,
+        "x_client_estimated_interactivity_tok_s_user": 24.95166201048455,
+        "requests": [
+          {
+            "group_id": "C1-warm-0",
+            "request_id": "C1-warm-0-R0",
+            "cleanup_complete_perf_counter_s": 215900.131338041,
+            "stream_cleanup_after_done_s": 4.816602449864149e-05,
+            "start_perf_counter_s": 215898.728813541,
+            "done_perf_counter_s": 215900.131289875,
+            "first_text_perf_counter_s": 215898.888887666,
+            "client_total_s": 1.402476333983941,
+            "client_ttft_text_s": 0.16007412498584017,
+            "client_post_first_chunk_s": 1.2424022089981008,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 24.95166201048455,
+            "events": [
+              {
+                "client_perf_counter_s": 215898.888887666,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215898.888502041
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.116011625,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215899.115634291
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.150131125,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215899.149879166
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.184226375,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215899.183935041
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.21824925,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215899.217979083
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.252454625,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215899.252229708
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.286285916,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215899.286067541
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.320029333,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215899.319837208
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.353774916,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215899.353602458
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.387643458,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215899.387464625
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.421462,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215899.421299208
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.455220958,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215899.45506725
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.488944875,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215899.488778333
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.522865541,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215899.5226915
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.556538333,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215899.55638275
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.590470666,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215899.590333333
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.624276375,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215899.624139958
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.65797075,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215899.657847791
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.691729125,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215899.691576291
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.725563333,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215899.725431791
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.759228875,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215899.759093875
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.793298916,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215899.793159083
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.82703175,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215899.826924375
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.860844,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215899.860713375
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.894574916,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215899.894451041
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.928367791,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215899.928250375
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.962284,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215899.962146958
+                }
+              },
+              {
+                "client_perf_counter_s": 215899.996037,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215899.995886
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.029808,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215900.029666583
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.063608791,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215900.063474708
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.097313833,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215900.097170375
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.13128325,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215900.131066583
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "off",
+      "phase": "warm",
+      "repeat": 1,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-warm-1.json",
+        "sha256": "7811e4834e7763942ceab7364f308d09e35509af58ed0a331c392ff7494c66b2"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-1",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2473375830159057,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 25.654642685124596,
+        "x_client_estimated_interactivity_tok_s_user": 28.52198716511992,
+        "requests": [
+          {
+            "group_id": "C1-warm-1",
+            "request_id": "C1-warm-1-R0",
+            "cleanup_complete_perf_counter_s": 215901.568574833,
+            "stream_cleanup_after_done_s": 4.612500197254121e-05,
+            "start_perf_counter_s": 215900.321191125,
+            "done_perf_counter_s": 215901.568528708,
+            "first_text_perf_counter_s": 215900.481647916,
+            "client_total_s": 1.2473375830159057,
+            "client_ttft_text_s": 0.16045679099624977,
+            "client_post_first_chunk_s": 1.086880792019656,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.52198716511992,
+            "events": [
+              {
+                "client_perf_counter_s": 215900.481647916,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215900.481225291
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.552859833,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215900.552589166
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.586784458,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215900.586552041
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.620409583,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215900.620240458
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.654163583,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215900.654022291
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.687897291,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215900.687766875
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.72187625,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215900.721711166
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.755593458,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215900.755441083
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.789336083,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215900.789176541
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.823290416,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215900.823099916
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.857226708,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215900.857030125
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.890904333,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215900.890737833
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.924725166,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215900.924580958
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.958516458,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215900.958363416
+                }
+              },
+              {
+                "client_perf_counter_s": 215900.992335708,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215900.992164833
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.026826791,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215901.026551125
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.060691625,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215901.060525083
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.094677833,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215901.094445666
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.128476208,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215901.128297791
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.162310041,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215901.162166166
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.196046166,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215901.195925958
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.229896833,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215901.229741791
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.263685416,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215901.263560666
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.29743325,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215901.297307791
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.331302958,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215901.331161458
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.365173375,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215901.365049375
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.399056708,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215901.398930083
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.433003208,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215901.432890083
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.466782333,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215901.466641875
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.500820333,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215901.500588708
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.534453958,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215901.534309125
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.568520916,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215901.568279416
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "off",
+      "phase": "warm",
+      "repeat": 2,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-warm-2.json",
+        "sha256": "6fc95bf74769a627312cf0f5c6d411f46c30fe756da6fcae4f7158571a6ae06b"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-2",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.230920750007499,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 25.99679955009699,
+        "x_client_estimated_interactivity_tok_s_user": 28.910805212692928,
+        "requests": [
+          {
+            "group_id": "C1-warm-2",
+            "request_id": "C1-warm-2-R0",
+            "cleanup_complete_perf_counter_s": 215902.988987375,
+            "stream_cleanup_after_done_s": 8.599998545832932e-05,
+            "start_perf_counter_s": 215901.757980625,
+            "done_perf_counter_s": 215902.988901375,
+            "first_text_perf_counter_s": 215901.916637916,
+            "client_total_s": 1.230920750007499,
+            "client_ttft_text_s": 0.1586572910018731,
+            "client_post_first_chunk_s": 1.072263459005626,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.910805212692928,
+            "events": [
+              {
+                "client_perf_counter_s": 215901.916637916,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215901.9162415
+                }
+              },
+              {
+                "client_perf_counter_s": 215901.969965041,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215901.969702625
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.004168583,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215902.003915958
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.037989666,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215902.037804041
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.071579333,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215902.071428875
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.1055105,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215902.105358041
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.139232583,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215902.139087583
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.173151416,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215902.172995625
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.20711825,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215902.206958541
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.241113125,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215902.240968083
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.275214666,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215902.275048458
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.309266916,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215902.309124541
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.343260291,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215902.343122833
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.377330541,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215902.377193083
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.411023875,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215902.410896916
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.444947083,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215902.444826541
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.478685083,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215902.478545291
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.512600083,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215902.512478041
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.54631025,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215902.546202166
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.580179833,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215902.580087875
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.614018083,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215902.613899625
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.647881083,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215902.647756583
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.681554083,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215902.681441333
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.715474208,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215902.715348291
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.749226958,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215902.749112541
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.783143541,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215902.783019416
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.816961666,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215902.816840083
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.850887208,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215902.850756833
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.884584875,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215902.88447475
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.918480666,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215902.918358333
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.95215025,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215902.952049416
+                }
+              },
+              {
+                "client_perf_counter_s": 215902.988893375,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215902.986096041
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "off",
+      "phase": "measure",
+      "repeat": 0,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-measure-0.json",
+        "sha256": "ba599e3b0b8a8e7d0fa0f9614a93fffcb57138a67b770c0c2a4d5aa10f400501"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-0",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2261454589897767,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 26.098045517670354,
+        "x_client_estimated_interactivity_tok_s_user": 29.049772568866707,
+        "requests": [
+          {
+            "group_id": "C1-measure-0",
+            "request_id": "C1-measure-0-R0",
+            "cleanup_complete_perf_counter_s": 215904.500609708,
+            "stream_cleanup_after_done_s": 6.083300104364753e-05,
+            "start_perf_counter_s": 215903.274403416,
+            "done_perf_counter_s": 215904.500548875,
+            "first_text_perf_counter_s": 215903.433414875,
+            "client_total_s": 1.2261454589897767,
+            "client_ttft_text_s": 0.15901145900716074,
+            "client_post_first_chunk_s": 1.067133999982616,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 29.049772568866707,
+            "events": [
+              {
+                "client_perf_counter_s": 215903.433414875,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215903.433069875
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.484192333,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215903.483969375
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.517993916,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215903.517827
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.551686083,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215903.551519166
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.585603458,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215903.585479416
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.619347333,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215903.619225083
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.653251708,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215903.653115458
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.686962916,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215903.68682775
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.7209,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215903.720751291
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.754659583,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215903.754512625
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.788504416,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215903.78835875
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.822192875,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215903.822070541
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.856190083,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215903.856021083
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.890003916,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215903.889847833
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.924027958,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215903.923881833
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.957725291,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215903.957594541
+                }
+              },
+              {
+                "client_perf_counter_s": 215903.991542416,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215903.9914095
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.025684958,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215904.025430458
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.059694291,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215904.059491958
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.09344975,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215904.09330975
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.127243291,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215904.127107583
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.1614665,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215904.161315041
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.195391791,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215904.1952475
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.229075916,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215904.228949541
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.262939041,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215904.262811541
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.296813666,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215904.296723625
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.330741041,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215904.330612
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.364593791,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215904.3644815
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.39841075,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215904.398285416
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.432359041,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215904.432234958
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.466317958,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215904.466185125
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.500540375,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215904.500255833
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "off",
+      "phase": "measure",
+      "repeat": 1,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-measure-1.json",
+        "sha256": "3b227cffc167bae349a5332a4e36df32bdeefbc688d518dbb8a0a4e3de71ee6c"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-1",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.228423541993834,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 26.04964729677952,
+        "x_client_estimated_interactivity_tok_s_user": 28.987789625434825,
+        "requests": [
+          {
+            "group_id": "C1-measure-1",
+            "request_id": "C1-measure-1-R0",
+            "cleanup_complete_perf_counter_s": 215905.920705833,
+            "stream_cleanup_after_done_s": 4.800001624971628e-05,
+            "start_perf_counter_s": 215904.692234291,
+            "done_perf_counter_s": 215905.920657833,
+            "first_text_perf_counter_s": 215904.851242041,
+            "client_total_s": 1.228423541993834,
+            "client_ttft_text_s": 0.15900775001500733,
+            "client_post_first_chunk_s": 1.0694157919788267,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.987789625434825,
+            "events": [
+              {
+                "client_perf_counter_s": 215904.851242041,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215904.850900208
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.902585708,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215904.902334833
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.936201041,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215904.936039041
+                }
+              },
+              {
+                "client_perf_counter_s": 215904.970138916,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215904.96998
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.003972,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215905.003823041
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.037886208,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215905.037747291
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.071766541,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215905.071612875
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.105710125,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215905.10556575
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.139487,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215905.139349916
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.173470125,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215905.173332916
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.207547791,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215905.207327083
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.241927625,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215905.241685958
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.275607125,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215905.275432291
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.309550583,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215905.309392375
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.343446125,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215905.34330125
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.377419083,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215905.377305083
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.411334791,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215905.411203
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.445243583,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215905.445118875
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.479039791,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215905.478957541
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.513328625,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215905.513113875
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.547278375,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215905.547047208
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.581269958,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215905.581075375
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.614989208,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215905.614858458
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.6490295,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215905.648904375
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.682806625,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215905.682692083
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.716804541,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215905.716683625
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.750678833,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215905.750550291
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.78493875,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215905.784740125
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.818706125,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215905.818540208
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.852638791,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215905.852494916
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.886470083,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215905.886331708
+                }
+              },
+              {
+                "client_perf_counter_s": 215905.920649958,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215905.920381666
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "off",
+      "phase": "measure",
+      "repeat": 2,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-off/C1-measure-2.json",
+        "sha256": "c2cf99498b55984f5207f1150f6d3669a91ab41b9c224e242fe99c5c174b3a44"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-2",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2271769590151962,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 26.076108881379138,
+        "x_client_estimated_interactivity_tok_s_user": 29.03693955277564,
+        "requests": [
+          {
+            "group_id": "C1-measure-2",
+            "request_id": "C1-measure-2-R0",
+            "cleanup_complete_perf_counter_s": 215907.33993625,
+            "stream_cleanup_after_done_s": 4.48749924544245e-05,
+            "start_perf_counter_s": 215906.112714416,
+            "done_perf_counter_s": 215907.339891375,
+            "first_text_perf_counter_s": 215906.27228575,
+            "client_total_s": 1.2271769590151962,
+            "client_ttft_text_s": 0.15957133399206214,
+            "client_post_first_chunk_s": 1.067605625023134,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 29.03693955277564,
+            "events": [
+              {
+                "client_perf_counter_s": 215906.27228575,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215906.271937833
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.322508333,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215906.322257458
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.356336166,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215906.356160291
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.390157791,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215906.390006791
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.424010041,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215906.42387075
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.457873875,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215906.457742125
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.491776291,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215906.49163375
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.525608791,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215906.525496375
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.559804458,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215906.559666583
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.593651708,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215906.593508916
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.627457541,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215906.627348708
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.661456541,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215906.661322333
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.695251083,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215906.6950925
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.729210166,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215906.729061041
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.76307275,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215906.762988458
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.796900125,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215906.796778416
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.830808916,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215906.830689
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.864713916,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215906.864603041
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.898548458,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215906.898437375
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.932584458,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215906.932454
+                }
+              },
+              {
+                "client_perf_counter_s": 215906.966580291,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215906.966453208
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.000408166,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215907.0002835
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.034433041,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215907.034280416
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.068287291,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215907.068142166
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.102117125,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215907.101983916
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.136070708,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215907.135950083
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.17005975,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215907.169940833
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.20393325,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215907.203808208
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.2379585,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215907.237835
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.271802041,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215907.271680208
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.305694208,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215907.305585125
+                }
+              },
+              {
+                "client_perf_counter_s": 215907.339884958,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215907.339590833
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "warm",
+      "repeat": 0,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-warm-0.json",
+        "sha256": "0e87fed7f71107c91ee6cf567e992beb0e490c1a7fe192ae22508602016f9659"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-0",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.4793254579999484,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 21.631480636630208,
+        "x_client_estimated_interactivity_tok_s_user": 23.516834497780415,
+        "requests": [
+          {
+            "group_id": "C1-warm-0",
+            "request_id": "C1-warm-0-R0",
+            "cleanup_complete_perf_counter_s": 215915.35398825,
+            "stream_cleanup_after_done_s": 6.220900104381144e-05,
+            "start_perf_counter_s": 215913.874600583,
+            "done_perf_counter_s": 215915.353926041,
+            "first_text_perf_counter_s": 215914.035721416,
+            "client_total_s": 1.4793254579999484,
+            "client_ttft_text_s": 0.16112083301413804,
+            "client_post_first_chunk_s": 1.3182046249858104,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 23.516834497780415,
+            "events": [
+              {
+                "client_perf_counter_s": 215914.035721416,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215914.035183541
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.330205125,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215914.329787625
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.363846041,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215914.363669416
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.397773666,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215914.397593916
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.431643,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215914.431477208
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.465726,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215914.465599458
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.49970925,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215914.499548541
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.533609416,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215914.533455375
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.567591166,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215914.567469208
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.601574666,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215914.601432041
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.635699791,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215914.635519625
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.670244791,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215914.6699725
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.704551458,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215914.704276791
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.73902325,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215914.738708666
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.773299958,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215914.773008958
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.807415041,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215914.807122541
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.841303458,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215914.84113625
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.875258083,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215914.87510075
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.909306791,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215914.90915975
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.943202166,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215914.943082791
+                }
+              },
+              {
+                "client_perf_counter_s": 215914.977299458,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215914.977197041
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.01136175,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215915.011209083
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.045379916,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215915.045241583
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.079391916,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215915.079271875
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.113681833,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215915.113562583
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.147614625,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215915.147490541
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.181719125,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215915.181603
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.215763416,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215915.215632416
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.249930625,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215915.249796208
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.283846416,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215915.283709333
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.318782583,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215915.318481833
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.353891333,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215915.353553291
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "warm",
+      "repeat": 1,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-warm-1.json",
+        "sha256": "8563ff8fa26b0dee230073f569a12034e3b4296041bca6e9f48a9a2043a088ec"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-1",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2744588339992333,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 25.108696449287784,
+        "x_client_estimated_interactivity_tok_s_user": 27.82424708734158,
+        "requests": [
+          {
+            "group_id": "C1-warm-1",
+            "request_id": "C1-warm-1-R0",
+            "cleanup_complete_perf_counter_s": 215916.862759166,
+            "stream_cleanup_after_done_s": 5.404098192229867e-05,
+            "start_perf_counter_s": 215915.588246291,
+            "done_perf_counter_s": 215916.862705125,
+            "first_text_perf_counter_s": 215915.748568958,
+            "client_total_s": 1.2744588339992333,
+            "client_ttft_text_s": 0.16032266698312014,
+            "client_post_first_chunk_s": 1.1141361670161132,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 27.82424708734158,
+            "events": [
+              {
+                "client_perf_counter_s": 215915.748568958,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215915.748106416
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.831177333,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215915.830902958
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.865466833,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215915.865196416
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.899872208,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215915.899605875
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.934295791,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215915.934029375
+                }
+              },
+              {
+                "client_perf_counter_s": 215915.968765125,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215915.968474333
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.003017666,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215916.0027535
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.037536,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215916.037290416
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.071964666,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215916.071704541
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.106595291,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215916.106290375
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.140910583,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215916.140593166
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.175107083,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215916.174805375
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.20931125,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215916.209057916
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.243814333,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215916.243536916
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.27801325,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215916.277767916
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.312398125,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215916.312106625
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.346527791,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215916.346268708
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.380888791,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215916.380652541
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.415157083,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215916.414879833
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.449532666,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215916.449261791
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.48373375,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215916.4834755
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.518135625,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215916.517881541
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.552478583,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215916.55222625
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.586802791,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215916.586563791
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.621065291,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215916.620846958
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.655756791,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215916.655495541
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.690235875,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215916.689961666
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.724742125,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215916.724473125
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.759017958,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215916.758761666
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.793747958,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215916.793464458
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.828184291,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215916.827921625
+                }
+              },
+              {
+                "client_perf_counter_s": 215916.862696333,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215916.862406208
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "warm",
+      "repeat": 2,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-warm-2.json",
+        "sha256": "5e3b745ffda3468bb7a7cad3586ffd08974cc4e3b2da63de5e6ab9ab63043425"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-warm-2",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2525592500169296,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 25.54769365167156,
+        "x_client_estimated_interactivity_tok_s_user": 28.34995273074099,
+        "requests": [
+          {
+            "group_id": "C1-warm-2",
+            "request_id": "C1-warm-2-R0",
+            "cleanup_complete_perf_counter_s": 215918.336277166,
+            "stream_cleanup_after_done_s": 5.216599674895406e-05,
+            "start_perf_counter_s": 215917.08366575,
+            "done_perf_counter_s": 215918.336225,
+            "first_text_perf_counter_s": 215917.24274875,
+            "client_total_s": 1.2525592500169296,
+            "client_ttft_text_s": 0.15908300000592135,
+            "client_post_first_chunk_s": 1.0934762500110082,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.34995273074099,
+            "events": [
+              {
+                "client_perf_counter_s": 215917.24274875,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215917.242357416
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.299196833,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215917.298912708
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.333190291,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215917.332949208
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.367461666,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215917.367167708
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.401620916,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215917.401368208
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.43594425,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215917.435697708
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.470139875,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215917.469899791
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.504466458,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215917.50418225
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.538736208,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215917.538455416
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.57301125,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215917.572708625
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.6072895,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215917.607025833
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.641731833,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215917.6414835
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.676229833,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215917.675956041
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.710817541,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215917.710548833
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.745198916,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215917.744963875
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.77974375,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215917.779513041
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.814212666,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215917.813942083
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.848749458,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215917.848501458
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.88322525,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215917.882986
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.917773166,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215917.917529458
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.952232,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215917.951957375
+                }
+              },
+              {
+                "client_perf_counter_s": 215917.986750791,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215917.986481458
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.021080833,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215918.020835125
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.055684291,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215918.055405791
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.090144708,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215918.089897166
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.124812375,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215918.124562916
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.159166458,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215918.158955708
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.193676708,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215918.193434791
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.227979083,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215918.227716458
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.262586125,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215918.262343375
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.297703791,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215918.297345791
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.336217916,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215918.333312083
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "measure",
+      "repeat": 0,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-measure-0.json",
+        "sha256": "922525f8e732097226569eb446bd991fa7750cc13afa49911470e2439cadd8dd"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-0",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.232441915984964,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 25.964712482555978,
+        "x_client_estimated_interactivity_tok_s_user": 28.898588560284747,
+        "requests": [
+          {
+            "group_id": "C1-measure-0",
+            "request_id": "C1-measure-0-R0",
+            "cleanup_complete_perf_counter_s": 215919.910012916,
+            "stream_cleanup_after_done_s": 7.687500328756869e-05,
+            "start_perf_counter_s": 215918.677494125,
+            "done_perf_counter_s": 215919.909936041,
+            "first_text_perf_counter_s": 215918.837219291,
+            "client_total_s": 1.232441915984964,
+            "client_ttft_text_s": 0.15972516598412767,
+            "client_post_first_chunk_s": 1.0727167500008363,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.898588560284747,
+            "events": [
+              {
+                "client_perf_counter_s": 215918.837219291,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215918.836849541
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.889196041,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215918.88888775
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.922982875,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215918.92283875
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.956947708,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215918.95680175
+                }
+              },
+              {
+                "client_perf_counter_s": 215918.991301083,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215918.991039083
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.025086625,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215919.024893666
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.059457458,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215919.059277708
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.093498375,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215919.09328725
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.127513208,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215919.127366791
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.1615185,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215919.161375083
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.195459291,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215919.195319291
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.22940725,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215919.229259416
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.263387541,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215919.263248416
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.297335166,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215919.2972045
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.3313815,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215919.33126225
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.365476625,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215919.365356125
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.399410708,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215919.399316208
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.433523666,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215919.433409541
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.467663541,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215919.467531125
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.501761541,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215919.501632583
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.535728041,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215919.535579416
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.569758916,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215919.569631041
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.6036705,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215919.603550916
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.63768325,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215919.637560583
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.671690833,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215919.671565541
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.705745583,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215919.705624583
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.739658333,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215919.739536791
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.773676666,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215919.773553625
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.807640208,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215919.8075125
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.841682916,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215919.841561333
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.875577,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215919.875462875
+                }
+              },
+              {
+                "client_perf_counter_s": 215919.909928916,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215919.909655916
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "measure",
+      "repeat": 1,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-measure-1.json",
+        "sha256": "942b2cb2c4e2e1542fb3c23f987ed172403c5bd34fffb1915d76923d6157f728"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-1",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2302052910090424,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 26.011918688589667,
+        "x_client_estimated_interactivity_tok_s_user": 28.949276665268837,
+        "requests": [
+          {
+            "group_id": "C1-measure-1",
+            "request_id": "C1-measure-1-R0",
+            "cleanup_complete_perf_counter_s": 215921.342488708,
+            "stream_cleanup_after_done_s": 6.254200707189739e-05,
+            "start_perf_counter_s": 215920.112220875,
+            "done_perf_counter_s": 215921.342426166,
+            "first_text_perf_counter_s": 215920.271587666,
+            "client_total_s": 1.2302052910090424,
+            "client_ttft_text_s": 0.1593667910201475,
+            "client_post_first_chunk_s": 1.070838499988895,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.949276665268837,
+            "events": [
+              {
+                "client_perf_counter_s": 215920.271587666,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215920.271226625
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.321224541,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215920.320968666
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.355029333,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215920.354876125
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.389047375,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215920.38892025
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.423056375,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215920.422948541
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.457413958,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215920.457248666
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.491504791,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215920.49126025
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.525567625,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215920.525401583
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.559583166,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215920.559463
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.593740916,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215920.593582125
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.627712958,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215920.627600916
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.661795458,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215920.66164925
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.696000333,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215920.695755083
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.729814208,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215920.729681416
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.763929291,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215920.763806708
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.797871083,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215920.797753666
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.831803791,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215920.831676375
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.865848541,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215920.865724208
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.89978,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215920.899655791
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.933845541,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215920.9337215
+                }
+              },
+              {
+                "client_perf_counter_s": 215920.967839375,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215920.967711666
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.001771583,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215921.001654
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.035945791,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215921.035800041
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.069873833,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215921.069748
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.103910666,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215921.103773041
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.138017666,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215921.137877416
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.172039708,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215921.171927875
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.206014458,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215921.205892625
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.2400385,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215921.239932083
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.274032458,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215921.27391475
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.308098666,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215921.307977625
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.342418666,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215921.342100541
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "arm": "on",
+      "phase": "measure",
+      "repeat": 2,
+      "source": {
+        "original": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/native-http-v121-attempt1/child-output/C1-P1-on/C1-measure-2.json",
+        "sha256": "74da282da874aa8c19b07f5316c968d43d238d72245a03afdd48752d15163087"
+      },
+      "raw_whitelisted": {
+        "group_id": "C1-measure-2",
+        "actual_request_count": 1,
+        "arrival_spread_s": 0.0,
+        "group_window_s": 1.2294478749972768,
+        "total_completion_tokens": 32,
+        "y_total_output_throughput_tok_s_mac": 26.02794364101925,
+        "x_client_estimated_interactivity_tok_s_user": 28.962511445990597,
+        "requests": [
+          {
+            "group_id": "C1-measure-2",
+            "request_id": "C1-measure-2-R0",
+            "cleanup_complete_perf_counter_s": 215922.774668541,
+            "stream_cleanup_after_done_s": 5.066601443104446e-05,
+            "start_perf_counter_s": 215921.54517,
+            "done_perf_counter_s": 215922.774617875,
+            "first_text_perf_counter_s": 215921.704268708,
+            "client_total_s": 1.2294478749972768,
+            "client_ttft_text_s": 0.15909870801260695,
+            "client_post_first_chunk_s": 1.0703491669846699,
+            "usage": {
+              "prompt_tokens": 19,
+              "completion_tokens": 32,
+              "total_tokens": 51,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "finish_reason": "length",
+            "text": "KV Cache 是 Transformer 模型在生成文本时，缓存已计算过的 Key 和 Value 向量，以避免重复计算历史上下文，从而显著提升推理",
+            "output_ids_when_available": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "visible_roundtrip_ids": [
+              79852,
+              18887,
+              220,
+              95761,
+              60277,
+              220,
+              103725,
+              95772,
+              103910,
+              109120,
+              95865,
+              3709,
+              111734,
+              96221,
+              97792,
+              100658,
+              5141,
+              220,
+              95793,
+              4997,
+              220,
+              117888,
+              3709,
+              120718,
+              108695,
+              97792,
+              96671,
+              129933,
+              3709,
+              99131,
+              146502,
+              111892
+            ],
+            "first_chunk_text": "KV",
+            "first_chunk_reconstructed_tokens": 1,
+            "first_chunk_prefix_verified": true,
+            "full_visible_roundtrip_count_matches_usage": true,
+            "x_client_estimated_interactivity_tok_s_user": 28.962511445990597,
+            "events": [
+              {
+                "client_perf_counter_s": 215921.704268708,
+                "text": "KV",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 1,
+                  "id": 79852,
+                  "engine_delivery_perf_counter": 215921.703926208
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.75264425,
+                "text": " Cache",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 2,
+                  "id": 18887,
+                  "engine_delivery_perf_counter": 215921.752395
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.786603166,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 3,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215921.786446166
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.820548708,
+                "text": "是",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 4,
+                  "id": 95761,
+                  "engine_delivery_perf_counter": 215921.820381416
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.854503333,
+                "text": " Transformer",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 5,
+                  "id": 60277,
+                  "engine_delivery_perf_counter": 215921.854379208
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.88852125,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 6,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215921.888330958
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.92249925,
+                "text": "模型",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 7,
+                  "id": 103725,
+                  "engine_delivery_perf_counter": 215921.922342875
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.956327458,
+                "text": "在",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 8,
+                  "id": 95772,
+                  "engine_delivery_perf_counter": 215921.956198916
+                }
+              },
+              {
+                "client_perf_counter_s": 215921.990431166,
+                "text": "生成",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 9,
+                  "id": 103910,
+                  "engine_delivery_perf_counter": 215921.990269708
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.024754458,
+                "text": "文本",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 10,
+                  "id": 109120,
+                  "engine_delivery_perf_counter": 215922.024488333
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.058608708,
+                "text": "时",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 11,
+                  "id": 95865,
+                  "engine_delivery_perf_counter": 215922.058431208
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.092599416,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 12,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215922.092432958
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.127116083,
+                "text": "缓存",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 13,
+                  "id": 111734,
+                  "engine_delivery_perf_counter": 215922.126877916
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.160979625,
+                "text": "已",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 14,
+                  "id": 96221,
+                  "engine_delivery_perf_counter": 215922.160812041
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.195048666,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 15,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215922.194921125
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.229104625,
+                "text": "过的",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 16,
+                  "id": 100658,
+                  "engine_delivery_perf_counter": 215922.22898475
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.26301275,
+                "text": " Key",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 17,
+                  "id": 5141,
+                  "engine_delivery_perf_counter": 215922.262899041
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.297010291,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 18,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215922.296890916
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.33124,
+                "text": "和",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 19,
+                  "id": 95793,
+                  "engine_delivery_perf_counter": 215922.33110075
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.365373208,
+                "text": " Value",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 20,
+                  "id": 4997,
+                  "engine_delivery_perf_counter": 215922.365235875
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.399305666,
+                "text": " ",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 21,
+                  "id": 220,
+                  "engine_delivery_perf_counter": 215922.399196625
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.433437375,
+                "text": "向量",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 22,
+                  "id": 117888,
+                  "engine_delivery_perf_counter": 215922.433335583
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.467509833,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 23,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215922.4673775
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.50148575,
+                "text": "以避免",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 24,
+                  "id": 120718,
+                  "engine_delivery_perf_counter": 215922.501347166
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.535607375,
+                "text": "重复",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 25,
+                  "id": 108695,
+                  "engine_delivery_perf_counter": 215922.535484625
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.569794666,
+                "text": "计算",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 26,
+                  "id": 97792,
+                  "engine_delivery_perf_counter": 215922.569673875
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.603809583,
+                "text": "历史",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 27,
+                  "id": 96671,
+                  "engine_delivery_perf_counter": 215922.60368675
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.637906541,
+                "text": "上下文",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 28,
+                  "id": 129933,
+                  "engine_delivery_perf_counter": 215922.637779833
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.672052458,
+                "text": "，",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 29,
+                  "id": 3709,
+                  "engine_delivery_perf_counter": 215922.67192925
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.7061715,
+                "text": "从而",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 30,
+                  "id": 99131,
+                  "engine_delivery_perf_counter": 215922.706051416
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.740178166,
+                "text": "显著提升",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 31,
+                  "id": 146502,
+                  "engine_delivery_perf_counter": 215922.740053166
+                }
+              },
+              {
+                "client_perf_counter_s": 215922.774610541,
+                "text": "推理",
+                "engine_delivery": {
+                  "emitted_id_ordinal": 32,
+                  "id": 111892,
+                  "engine_delivery_perf_counter": 215922.77430425
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
