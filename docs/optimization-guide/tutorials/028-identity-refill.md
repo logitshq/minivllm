@@ -59,3 +59,18 @@ v2另存screen/owner，不改v1：只把两处OR改成array在左，保持全部
 10/88/53覆盖与预算。新增不支持反向OR的fake array，直接运行实际pattern函数，
 复现旧写法失败并核对BF16/F32整数位域。23CPU测试与独立审读通过，573项来源固定；
 [新计划](../../../bench/m5_ultra_256gb/identity_refill/prereg-v2/README.md)仍须先提交再执行。
+
+
+## v2 合成输入峰值越界与 v3 时序修复
+
+先提交 `4c134d0` 再执行 v2。B2→4 的8项检查全部通过，B4→6 的输入一致性及
+两臂 rebuild 只读检查再通过3项；尚未比较该案输出。第8个资源阶段记录历史
+MLX peak 1,131,872,976B，超过原定1GiB门，按计划停止；当时active105,611,296B，
+physical peak1,109,951,736B仍小于2GiB。11项已执行检查无数值差异，剩余覆盖未完成。
+child58999 exit1并回收，原服务74384同identity恢复S。[原件归档](../../experiments/m5-ultra-256gb/E028-identity-refill-v2/README.md)。
+
+候选不变。v3仅逐个求值合成输入的完整parent，使位运算构图的临时数组可及时释放；
+非连续视图仍在parent求值后按原slice建立。原v2也在rebuild前求值全部输入，因此
+候选和延迟输出的求值边界不变。保留历史peak、不缩小场景、不放宽预算。26项CPU
+测试通过，核对实际value()时序和pattern/run_case AST；设备后再核对v2已有输入字节。
+[固定v3计划](../../../bench/m5_ultra_256gb/identity_refill/prereg-v3/README.md)先提交再跑。

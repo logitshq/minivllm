@@ -530,3 +530,10 @@ E028 v1实际在首输入生成器停止：MLX不支持int|array，0checks/0snap
 candidate factory到达但rebuild未调用，不称数值拒绝。child58427已reap，原74384恢复S。
 v2只修两处array-first OR和版本绑定，候选/位模式/预算不变，23CPU tests通过；
 [独立v2注册](../../bench/m5_ultra_256gb/identity_refill/prereg-v2/README.md)冻结573pins后再运行。
+
+
+E028 v2实际：1完整case/11检查PASS后，B4构图后的历史MLXpeak1,131,872,976B越过
+1GiB门而停止。B4输出未比较，无完整资格。child58999已回收、原服务恢复。v3只将
+输入parent逐个求值，保持全部位值、非连续view、输出delay、10/88/53与预算；26CPU
+检查通过，576pins固定，[v3预注册](../../bench/m5_ultra_256gb/identity_refill/prereg-v3/README.md)
+提交后才运行。无新性能点。

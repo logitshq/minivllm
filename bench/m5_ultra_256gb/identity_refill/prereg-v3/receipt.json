@@ -1,0 +1,24 @@
+{
+  "status": "CPU_PREPARE_PASS",
+  "plan_sha256": "fbcf114be8507484d30b2ceb367e5864f2a2928c475423d3a30192c23cfc72a7",
+  "pins": 576,
+  "tests": 26,
+  "version_binding_rejections": [
+    {
+      "case": "v2-screen",
+      "rejected": true,
+      "error": "screen/python"
+    },
+    {
+      "case": "v2-schema",
+      "rejected": true,
+      "error": "numeric scope"
+    }
+  ],
+  "change": "Only evaluate each generated input parent before return/view; original pattern and rebuild evaluation boundaries unchanged; candidate, v1 and v2 unchanged",
+  "screen_sha256": "4deeff89a314e50870f25c5bb4a94ac3d6ccd798edb44a982834e4e1ec9068cc",
+  "owner_sha256": "70aad291eb977f0d3f158f8efa99f83f4560ffd9bd59eb61fc72eaae9d2a6a0e",
+  "independent_review": "no_static_blocker",
+  "device_run": false,
+  "preparation_note": "Initial negative-test wrapper caught ValueError instead of existing RuntimeError; valid prepare had passed. Wrapper corrected and both wrong versions rejected. Frozen experiment code unchanged."
+}
