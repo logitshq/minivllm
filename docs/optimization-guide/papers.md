@@ -195,3 +195,26 @@ SDPA call unchanged. First establish that eager long decode actually repeats
 this work; compiled execution may already eliminate it. This is a hypothesis,
 not implemented or qualified, and is lower priority than the already prepared
 E025 native-QMM-first NAX screen. Neither PR supplies a new Pareto point.
+
+
+### 2026-10-17: October scheduling papers and local measurement decisions
+
+[Lightweight Scheduling Policies v1](https://arxiv.org/html/2610.15899v1),
+October 11; read §§2, 5–8. This PyTorch/Hugging Face study uses L40S/A100/H100,
+small models and trace-defined output lengths, not normal-EOS generation.
+Aging shortest-prompt-first is useful in some settings, not universally;
+remaining-length scheduling uses unavailable oracle information. Our inference:
+a small waiting-admission policy may merit a separate experiment once the
+baseline exists. Preserve active-row order and test starvation; do not import
+its speed ratios or mix model/workload averages into our frontier. The current
+D prompts have a narrow length range, so this paper does not predict a benefit.
+
+[PhaseGate v1](https://arxiv.org/html/2610.04537v1), October 3; read §§2–5 and
+Appendix A.1. M4/M2 experiments coordinate independent CPU HNSW retrieval with
+GPU inference. Their synthetic loop uses fixed decode inputs without sampling
+or output feedback; reported retrieval throughput gains are not LLM speedups.
+Our inference: formal M5 performance windows should also exclude heavy CPU
+hashing, archive compression and raw-array audits, since CPU and GPU share
+memory service. Finish those jobs before timing. We do not copy the calibrated
+4→1 retrieval limits or add a retrieval scheduler to this engine. Numerical
+qualification and uninstrumented HTTP performance remain separate runs.

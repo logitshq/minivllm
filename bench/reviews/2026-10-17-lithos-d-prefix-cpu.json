@@ -1,0 +1,488 @@
+{
+  "schema": "Lithos-fixed-D-prefix-CPU-v1",
+  "status": "CPU_SOURCE_REPLAY_PASS",
+  "device_qualified": false,
+  "performance_measured": false,
+  "lithos_commit": "223658090ae549e59220bdec459957cbdad7926a",
+  "lithos_clean": true,
+  "python": {
+    "executable": "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+    "version": "3.12.15 (main, Oct 14 2026, 00:55:37) [Clang 23.1.3 ]"
+  },
+  "versions": {
+    "lithos-metal": "0.1.2",
+    "jinja2": "3.1.6",
+    "tokenizers": "0.23.2",
+    "pydantic": "2.13.5"
+  },
+  "actual_protocol_module": "/Users/ryanli/code/lithos-metal/monolith/serving/protocol.py",
+  "sources_sha256": {
+    "/Users/ryanli/code/lithos-metal/monolith/__init__.py": "c3ac80466fc80a68646b069ac4374582961b223dfb3a7ddd1d863c61a413921a",
+    "/Users/ryanli/code/lithos-metal/monolith/serving/__init__.py": "33ebf796e2573fbb73025bd1231e93b44f1a7348266dec63caf11e2162125f7e",
+    "/Users/ryanli/code/lithos-metal/monolith/serve.py": "9759ee14c4860ed43218118d6a3eafbb680e9e722e3ddad72bae52473579f419",
+    "/Users/ryanli/code/lithos-metal/monolith/generate.py": "434ac1398c6010b37fa44f138505d5ca1757f4e7b747bc6b582d386e2e3ba3b4",
+    "/Users/ryanli/code/lithos-metal/monolith/serving/protocol.py": "5f015e2c55037bd0ae73f8b33e7eb64adf8fcb67f19f0f1dc2d25157b1f83ada",
+    "/Users/ryanli/code/lithos-metal/monolith/serving/events.py": "aaa11acb7cb058f55916365e94a0b45b160f286356ffd1d610f08fbaf67b316d",
+    "/Users/ryanli/code/lithos-metal/monolith/runtime/prefix_cache.py": "2ffa0f9bfed792765d27af811f8df3d08f9c6b5709c05d6b1e996ba0721297ad",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/fixtures/prepared-D-v1/fixtures.json": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/fixtures/tasks-v1.json": "c1ffe580911ba184e824ee82e9c19daae3e1333dd19d8864605023c103b91995",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/prepare_fixtures.py": "6219bb1a566ea26719d49ec595947b4f5f4292de6460c0e47647b07419735442",
+    "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/config.json": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+    "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/tokenizer_config.json": "792fa3f0cb88b111e54ef3134c873531008c4df471d108da17903426e308aa7b",
+    "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+    "/Users/ryanli/code/minivllm/bench/reviews/lithos_d_prefix_cpu.py": "77bdafd315d18fd293cf38fd2c45ff7fb8bf81e80edfd2af289a8cbd55868c45"
+  },
+  "source_pins_rechecked": true,
+  "rows": [
+    {
+      "fixture_id": "D01-ttl-lru",
+      "path": "/v1/chat/completions",
+      "body_sha256": "6f8db1c1666c6706c76d4a61086004b5708dc37eb2bbec63676b4696ee7b00d5",
+      "prompt_tokens": 978,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D01-ttl-lru",
+      "path": "/api/chat",
+      "body_sha256": "1441f3a38192d255284f585cd17448f47d0fc610caf07e613e275ded733410fa",
+      "prompt_tokens": 978,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D02-dag-scheduler",
+      "path": "/v1/chat/completions",
+      "body_sha256": "bfa9daf9472c5785cb2327c47d59430423beb7ecf192d830ba6c21a9dc1a59a6",
+      "prompt_tokens": 886,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D02-dag-scheduler",
+      "path": "/api/chat",
+      "body_sha256": "b0754c683d81d4ea38bda487cb65b9766a3604deff6c5c31b2ae04fc000736b0",
+      "prompt_tokens": 886,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D03-event-rollup",
+      "path": "/v1/chat/completions",
+      "body_sha256": "b1412a6169d29b4b7ca100078e54789d7ebb1a7b2cd59a91e09a07c66a862259",
+      "prompt_tokens": 926,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D03-event-rollup",
+      "path": "/api/chat",
+      "body_sha256": "5eb4af3564cf73fef15dc591ba83bbaddfb407055797cf2952f3721f63a42cc8",
+      "prompt_tokens": 926,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D04-frame-parser",
+      "path": "/v1/chat/completions",
+      "body_sha256": "8a37254d612379958ce2df1acfef9742fb6e2d987c3463f0e7503c541ac082e5",
+      "prompt_tokens": 921,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D04-frame-parser",
+      "path": "/api/chat",
+      "body_sha256": "5172781c7120c756174bcfb2720f60c51f6ddf7ed8701edb54d67152f8a9151d",
+      "prompt_tokens": 921,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D05-retry-budget",
+      "path": "/v1/chat/completions",
+      "body_sha256": "a275515274228032a4515a916609548bce164573ad2ed4b264f73d08e16c3c28",
+      "prompt_tokens": 954,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D05-retry-budget",
+      "path": "/api/chat",
+      "body_sha256": "1755e9603fdf4ce231bec63717962a9431919ae7e231be3500563e9b75351451",
+      "prompt_tokens": 954,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D06-interval-booking",
+      "path": "/v1/chat/completions",
+      "body_sha256": "e35e8ada430c7b0f9706d0db7326316dcbf263a2adbeaab36214f23c01aff6f0",
+      "prompt_tokens": 935,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D06-interval-booking",
+      "path": "/api/chat",
+      "body_sha256": "a833228c5ec4d46f97ebcc725ca444b258f11f95efbb1d88e7a355f5d0ea434b",
+      "prompt_tokens": 935,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D07-versioned-store",
+      "path": "/v1/chat/completions",
+      "body_sha256": "d111e3d1a3b34aa3a26fefd12f6fa498c5ca842bc05706e63a517dac7ab5608e",
+      "prompt_tokens": 903,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D07-versioned-store",
+      "path": "/api/chat",
+      "body_sha256": "f0a551ebe9f94e067cebad82ac4f64c4546ad3bdc12b07d59af1a405563b23d4",
+      "prompt_tokens": 903,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D08-sliding-limit",
+      "path": "/v1/chat/completions",
+      "body_sha256": "988129123d8acfdb3f241a7999ea200ea7c1ddd9a68c0d5d9847cd961e6e4b9e",
+      "prompt_tokens": 958,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    },
+    {
+      "fixture_id": "D08-sliding-limit",
+      "path": "/api/chat",
+      "body_sha256": "6302b1ffd40c3be52f48344fcae18f70dd69e288a840b8bb0fb8da63c5edd0d6",
+      "prompt_tokens": 958,
+      "prompt_text_and_ids_equal_frozen_fixture": true,
+      "probes": [
+        {
+          "text": "<|im_start|>user\n<|im_end|>\n",
+          "token_ids": [
+            248045,
+            846,
+            198,
+            248046,
+            198
+          ],
+          "matching_tokens": 3
+        }
+      ],
+      "stable_prefix_tokens": [
+        3
+      ],
+      "candidate_checkpoints": [
+        3
+      ],
+      "saved_checkpoints": []
+    }
+  ],
+  "fixture_count": 8,
+  "protocol_fixture_checks": 16,
+  "forbidden_modules_imported": [],
+  "server_contract": {
+    "prefill_chunk_size": "128-exact",
+    "prefix_cache_min_tokens": 128,
+    "fresh_process": true,
+    "prefix_cache_dir": null,
+    "keep_warm": 0,
+    "no_warmup": true,
+    "only_registered_D_requests": true,
+    "initial_cache_entries": 0
+  },
+  "proof_boundary": "The pinned eight single-user string fixtures yield no checkpoint candidates after the 128-token threshold; a fresh empty memory cache therefore stays empty under their repetition. No general cache-disabled claim.",
+  "still_required": "Device qualification and complete warm/formal Generation logs: exactly one per completed registered request, every cached_prompt_tokens=0, source/config/model pins unchanged. Any nonzero/missing record invalidates the zero-hit claim.",
+  "rerun": "/Users/ryanli/code/lithos-metal/.venv/bin/python -I -B /Users/ryanli/code/minivllm/bench/reviews/lithos_d_prefix_cpu.py --out NEW.json"
+}

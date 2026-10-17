@@ -552,3 +552,10 @@ E028 v3完整独立审计与root复核完成：所有108snapshot/880tensor原始
 恢复证据通过。1366成员无损归档26,103,106B，逐成员SHA重复核验。v1/v2失败同时
 保留。[v3原件](../experiments/m5-ultra-256gb/E028-identity-refill-v3/README.md)。
 资格严格限两层合成state矩阵，完整模型和HTTP仍未完成，Pareto图未新增点。
+
+
+E028整模型准备追加：新的私有qualifier保留原37请求，补实际identity refill后的
+64层/128数组比较与D-C8命中门；新owner复用原资源生命周期。root66 CPU checks和
+157+5来源的真实CPU prepare通过，未GPU、未服务操作。固定计划在
+[prereg-model-v1](../../bench/m5_ultra_256gb/identity_refill/prereg-model-v1/README.md)。
+新增证据仍需独立审计、真实整模型及HTTP资格，当前没有新的throughput–latency点。

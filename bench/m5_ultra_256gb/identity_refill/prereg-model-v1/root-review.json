@@ -1,0 +1,39 @@
+{
+  "schema": "E028-model-root-review-v1",
+  "status": "CPU_PREPARATION_REVIEWED",
+  "model_qualified": false,
+  "performance_qualified": false,
+  "source_files": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/model_qualification.py": "b8b84a57b63c6f46ea1449ec9eeed8310d1b4dbe074a81082e5a665371061042",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/model_owner.py": "da80f65af9cafcbc382f1c8444fe5f6ca54a012aabea7ce8943ad85dd04c53b4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/test_model_qualification_cpu.py": "f2d4393689fdb2ed2aed1aa42ec80623b29e45040b1bd7361134d8c82b2d365b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/identity_refill/test_model_owner_cpu.py": "db2e69d784afb29015e76726ce62ca746a7451e8205d5a364d1bbba68acc32a3"
+  },
+  "plans": {
+    "qualification-plan.json": "bc4890e6d302141597eae8e0e9347c093307a8492c09f958f42bdb8d1c7aa73c",
+    "owner-plan.json": "02a2cc98d068d037c6ddd5cda24fe2c5be13152013b919b5a94ddcdfdd0290f2"
+  },
+  "cpu_tests": {
+    "receipt": "cpu-tests.json",
+    "sha256": "e12cc34a043938549d3c79626799bc5c59ffdfce7bf5e00fa3e6fc87bc7fc7ac",
+    "total": 66,
+    "status": "PASS"
+  },
+  "actual_cpu_prepare": {
+    "receipt": "cpu-prepare.json",
+    "sha256": "7da01cfd306db8edf856a5de33f563bad744d9e92c4e9a38db9b4e20cc01cdea",
+    "original_files": 157,
+    "adapter_files": 5,
+    "status": "PASS"
+  },
+  "independent_source_reviews": {
+    "qualifier": "draft_window: no blocking finding; actual sync-before-decode full state capture and fresh branch witnesses; release has no extra model retention. Actual GPU allocator behavior not established.",
+    "owner": "draft_graph: no blocking finding; original prepare/resource pins/env/deadline and service-absent/spawn/reap protocol retained; command and result bindings match."
+  },
+  "limits": [
+    "Full model has not run.",
+    "Old numerical and absent-owner auditors are not compatible with the added groups and nested paths.",
+    "Cold restart approval remains pending; no new journal or service action.",
+    "No change to the v5 throughput-latency plot."
+  ]
+}

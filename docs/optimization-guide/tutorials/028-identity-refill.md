@@ -115,3 +115,22 @@ runner，不导入候选；ON仅在构造后、加入请求和安装观察器前
 [v2资源中止](../../experiments/m5-ultra-256gb/E028-identity-refill-v2/README.md)同时归档，
 不覆盖、不删除失败记录。安装helper经独立审读及7项CPU测试；三个设备实验及归档
 没有改变任何生产默认。当前收益是局部状态门通过，吞吐/请求延迟收益仍未知。
+
+
+## 从局部数组门接到真实模型：本轮只完成CPU准备
+
+新 [固定计划与回执](../../../bench/m5_ultra_256gb/identity_refill/prereg-model-v1/README.md)
+复用原37请求及完整logits、raw IDs、staging/ahead/EOS检查。候选runner先安装E028，
+再接观察器；实际identity refill同步后、decode前比较64层/128数组。必须有本次计数
+增量和D-C8实际命中，不能凭ON开关或残留last_path宣称覆盖；C1作为零命中控制。
+模型对释放时还原实例方法并清除额外snapshot引用，避免资格观察器留住第三份模型。
+
+root复跑66项CPU检查通过；真实prepare核157份原runtime/core/manifest/fixture文件和
+5份新source副本，不导入GPU、不加载模型。子进程CLI和原4项MLX环境已绑定，服务
+控制和1830秒owner/1800秒child门沿用冻结实现。当前服务仍在运行，未创建新冷停journal。
+新增ledger组和嵌套路径需要独立审计适配；不能套用旧E023 auditor作为已通过证据。
+
+优化目标始终是**正确性硬门后的吞吐—完整请求延迟前沿**。本次准备和之前局部状态
+PASS都不是性能收益。先C1/C8配对定位收益，随后在同轮官方比较中补并发扫描；只有
+实际HTTP输出量/共同请求窗口与POST→DONE延迟才能更新图。正式计时窗口不并行跑
+重型CPU归档/数组审计；这些工作放到计时结束后。

@@ -1,6 +1,8 @@
 # E028: skip identity gathers during decode refill
 
-Status: preparation, default OFF. No model or performance qualification yet.
+Status: local two-layer GPU state gate PASS; default OFF. Full-model CPU
+preparation is frozen in [prereg-model-v1](prereg-model-v1/README.md). No
+full-model or performance qualification yet.
 
 The current DecodeBatch rebuild gathers every surviving old row before appending
 new requests, including when every old row survives in its original order. The

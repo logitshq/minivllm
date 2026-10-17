@@ -440,3 +440,22 @@ v1/v2失败也完整保留。安装层另经第二agent审查无阻断。下一�
 HTTP并发排FIFO，应如实测含排队的延迟，不能直接漏掉Lithos C8。OpenAI入口重叠429。
 本版强制prefix cache，D长输入重复请求需另固定cache合同；旧E020每条日志已验
 cached_prompt_tokens=0，不受此静态发现推翻。[具体来源和最小计划](../../bench/reviews/2026-10-17-next-pareto.md)。
+
+
+## E028整模型CPU准备与Lithos实际并发入口
+
+本次fetch仍是M4 `53d4906`，已在M5祖先中。E028新的model_qualification/model_owner
+仅私有适配原37请求及资源owner；refill之后decode之前补全64层/128数组，D-C8必须
+实际触发、C1必须零触发，退出释放全部新增引用。root共66CPU checks通过，真实CPU
+prepare核157原pins+5source副本。固定计划见identity_refill/prereg-model-v1；尚无
+真实整模型、HTTP或性能结果，旧审计器的新增组/嵌套路径适配仍待完成。
+
+Lithos固定D的cache疑问已缩小：8条单user字符串的两个prefix probe只匹配3token，
+低于128保存门，故fresh cache不建立checkpoint；实际protocol/Jinja/tokenizer两路
+16项CPU重演PASS，root重跑JSON逐字相同。保留128-exact，不人为改chunk；实机每条
+warm/formal日志仍须cached_prompt_tokens=0。官方/api/chat FIFO要测真正并发排队，
+C1/C8都走相同API；NDJSON的done时钟、原wire字节和EOS计数需要窄适配。
+[更新计划及可复跑证据](../../bench/reviews/2026-10-17-next-pareto.md)。
+
+主目标明确为throughput vs complete-request latency，正确性是入图硬门。图仍为v5，
+没有用CPU准备制造新性能点；原服务74384同identity为S，pressure2，未冷停/重启。
