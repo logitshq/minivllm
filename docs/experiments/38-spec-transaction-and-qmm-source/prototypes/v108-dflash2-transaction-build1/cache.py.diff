@@ -1,0 +1,12 @@
+--- frozen44/cache.py
++++ candidate108/cache.py
+@@ -20,6 +20,9 @@
+ 
+     def update(self, k: mx.array, v: mx.array) -> tuple[mx.array, mx.array]:
+         """k, v: [1, Hkv, T, D]。写入后返回 [1, Hkv, offset+T, D] 的完整历史。"""
++        transaction = getattr(self, "_verify108", None)
++        if transaction is not None:
++            return transaction.attention_update(k, v, mx)
+         T = k.shape[2]
+         end = self.offset + T
+         if self.keys is None or end > self.keys.shape[2]:

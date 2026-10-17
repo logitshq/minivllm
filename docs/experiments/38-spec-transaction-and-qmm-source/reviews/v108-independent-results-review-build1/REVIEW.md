@@ -1,0 +1,17 @@
+# V108 independent saved-result CPU review
+
+PASS for evidence consistency; **fullmodel remains FAIL_STOP**. This is stdlib saved-text/hash replay, not a new GPU result, model run, or old-ID gate relaxation.
+
+- Tiny receipt `2a03d8ef97cbe0243b6c34c313d793e030e9dd64ff6610816dcc9f9bfde91b4b`:21 strict T1/3/5/8×keep0..T cases.84 committed-array comparisons,274 literal-prefix rows/548 array signatures,137 retained producer pairs; original5 source signatures before/after equal. Scripted delivery cases are not model predictions.
+- Tiny abort raises before any producer (`tiny.py:69`). Completed-producer keep0 cases test restoration, but no actual GPU partial-producer exception coverage is earned.
+- Full receipt `7966209c6a956f71d0b688ff689df11c0f8d082661f8a39d5a52c51a3cd71d9d`: serialA base/reset/changed96 old IDs pass. B.base32 first differs from old IDs at zero-basedindex4 and exactly equals actualV109 official ordinary/MTP raw32. This is a one-prompt ID observation, not whole-model/donor-math qualification.
+- First hard failure is `fullqual.py:70`, postgeneration B.base `emitted==expected`, called at108. Gate was not relaxed. B.reset/changed and budgets1/2/3/5 were not run; completedoldBchecks0.
+- Before that failure:15 literal same-invocation transactions over64caches,73 verified input tokens,31 committed inputs.960 committedcache trace rows =1920 array comparisons;5632 literal-prefix history rows =11,264 signatures. All recorded expected/actual cache metadata equal the selected history entry and saved history/input readonly assertions pass.
+- Actual15 draft calls/58drafts/16accepted-before-clip,31 delivereddecode tokens; frontier19→50,48×73=3504 original44 GDN helper calls. Recomputed delivery from actual drafts/posterior; no saved future IDs fed. Retained producer pairs3744. These prove transaction-prefix selection/preservation, not old132 tensor equality or serialT1 arithmetic equivalence.
+- FinalB.base old128-state diagnostics are0same/128different, with each old44 SHA independently checked; diagnostics do not become PASS or toleranced equality.
+- Same61 pins in tiny/full and current source hashes match. Tiny final imports resolve candidate; full recorded23 before-token imports resolve candidate. Fullfinalprovenance was NOT_REACHED, so no finalB import-proof claim.
+-1349 target parameter identities/signatures before-first-token and each of threeA request readonly guards pass. Fullreached afterdraftload guard thenB; B-posttargetRO/cleanup assertions and global parameter_after/identity_after were NOT_REACHED after the IDassert. No finalB/finalparameterRO claim is made.
+- Tiny owner12873/child12882 rc0 wait/reap; threeowner snapshots allAC/thermal0/pressure1,swap4742.88MB/SO17460761stable. Original externalraw records Battery; finalanypowerrelease only proves exactPIDabsence/resources, not AC timing eligibility. The first strictpower release attempt is not silently treated as an AC PASS.
+- Full owner16910/child16919 rc1 wait/reap;28owner snapshots allAC/thermal0/pressure1,swap4646.88MB/SO17460761stable. FinalreleaseobservedAC but policyany/numerical; no performance-domain qualification, pooling, speed or adoption claim.
+
+`review.py` reproduces saved counts/hash checks without MLX/native/GPU or live resource probes. `raw-source-seals.json` seals original text/source identities; original failure/receipts remain untouched. Source-control/readonly statements are limited to saved execution and source order, not reconstruction of dead GPU memory.

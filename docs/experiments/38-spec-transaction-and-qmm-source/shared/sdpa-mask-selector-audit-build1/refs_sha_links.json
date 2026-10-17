@@ -1,0 +1,255 @@
+{
+  "status": "NUMERIC_QUAL_ELIGIBLE",
+  "scope": {
+    "B": 1,
+    "query_length": 1,
+    "dtype": "BF16",
+    "query_heads": 24,
+    "kv_heads": 4,
+    "gqa_factor": 6,
+    "query_head_dim": 256,
+    "value_head_dim": 256,
+    "key_lengths_inclusive": [
+      19,
+      50
+    ],
+    "mode": "ordinary nontraining full-prefix decode"
+  },
+  "provenance": {
+    "repository": "https://github.com/ml-explore/mlx",
+    "tag": "v0.32.3",
+    "tag_ref_url": "https://api.github.com/repos/ml-explore/mlx/git/ref/tags/v0.32.3",
+    "commit": "64ea011cb65f14d9ce2737e60db9a4ae91ed7441",
+    "tag_snapshot_path": "/private/tmp/minivllm-engine-optimization-20261014/sdpa-mask-selector-audit-build1/official_tag_ref.json",
+    "official_header_matches_baseline": true,
+    "official_header_matches_current": true,
+    "local_package_versions": [
+      "0.32.3",
+      "0.32.3"
+    ],
+    "host_selector_found_locally": false,
+    "binary_attestation": false
+  },
+  "selector": {
+    "family": "vector",
+    "passes": 1,
+    "template": "sdpa_vector<BF16,256,256>",
+    "threadgroup": [
+      1024,
+      1,
+      1
+    ],
+    "grid": [
+      24,
+      1,
+      1
+    ],
+    "BN": 32,
+    "BD": 32,
+    "qk_per_lane": 8,
+    "v_per_lane": 8,
+    "duplication_free_gqa": false,
+    "changed_function_constants": [
+      20,
+      23
+    ],
+    "same_source_arithmetic_tree": true,
+    "actual_output_bit_equality": "unexecuted",
+    "full_model_qualified": false,
+    "speed_qualified": false,
+    "adoption_qualified": false
+  },
+  "official_sources": [
+    {
+      "repo_path": "mlx/backend/metal/scaled_dot_product_attention.cpp",
+      "url": "https://github.com/ml-explore/mlx/blob/64ea011cb65f14d9ce2737e60db9a4ae91ed7441/mlx/backend/metal/scaled_dot_product_attention.cpp",
+      "raw_url": "https://raw.githubusercontent.com/ml-explore/mlx/64ea011cb65f14d9ce2737e60db9a4ae91ed7441/mlx/backend/metal/scaled_dot_product_attention.cpp",
+      "snapshot_path": "/private/tmp/minivllm-engine-optimization-20261014/sdpa-mask-selector-audit-build1/official_mlx__backend__metal__scaled_dot_product_attention.cpp",
+      "sha256": "4eaca28cbe1d192a3137a970b2f4d7cdecaba67a1f448b0b0b5f0309b6b3961e",
+      "line_ranges": [
+        [
+          444,
+          532
+        ],
+        [
+          550,
+          555
+        ],
+        [
+          772,
+          832
+        ],
+        [
+          837,
+          906
+        ],
+        [
+          951,
+          1020
+        ]
+      ]
+    },
+    {
+      "repo_path": "mlx/backend/metal/kernels/sdpa_vector.h",
+      "url": "https://github.com/ml-explore/mlx/blob/64ea011cb65f14d9ce2737e60db9a4ae91ed7441/mlx/backend/metal/kernels/sdpa_vector.h",
+      "raw_url": "https://raw.githubusercontent.com/ml-explore/mlx/64ea011cb65f14d9ce2737e60db9a4ae91ed7441/mlx/backend/metal/kernels/sdpa_vector.h",
+      "snapshot_path": "/private/tmp/minivllm-engine-optimization-20261014/sdpa-mask-selector-audit-build1/official_mlx__backend__metal__kernels__sdpa_vector.h",
+      "sha256": "f52c8da21f2c31f3f77168d326a49815fc29bde4b573883896a8eb3298f11508",
+      "line_ranges": [
+        [
+          43,
+          48
+        ],
+        [
+          99,
+          175
+        ],
+        [
+          320,
+          462
+        ]
+      ]
+    }
+  ],
+  "local_references": [
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/model/attention.py",
+      "line_ranges": [
+        [
+          12,
+          12
+        ],
+        [
+          78,
+          91
+        ]
+      ],
+      "sha256": "23b02cfac714d84155653781df5921cca438809b482b0932075e497be48f69c3"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/engine/model_runner.py",
+      "line_ranges": [
+        [
+          60,
+          101
+        ]
+      ],
+      "sha256": "b64677f9999d284d87bb2c09756c1a1f177c3e09713dcb4566381813d7d0c538"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root/tutorial_code/miniengine/config.py",
+      "line_ranges": [
+        [
+          35,
+          49
+        ]
+      ],
+      "sha256": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0"
+    },
+    {
+      "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/config.json",
+      "line_ranges": [
+        [
+          41,
+          44
+        ],
+        [
+          125,
+          127
+        ]
+      ],
+      "sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/next-optimization-source-audit-build1/proposal.md",
+      "line_ranges": [
+        [
+          37,
+          54
+        ]
+      ],
+      "sha256": "d0460150df1fc4a7d825dede8f73a35ec611307e352064694411b21f382529b1"
+    },
+    {
+      "path": "/private/tmp/minivllm-engine-optimization-20261014/next-optimization-source-audit-build1/source_refs_sha.json",
+      "line_ranges": [],
+      "sha256": "87b63ad13efaff46c2b270a34672a66240ea9dbe3c4bb95bdc4b02c57e440187"
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/sdpa_vector.h",
+      "line_ranges": [
+        [
+          43,
+          48
+        ],
+        [
+          99,
+          175
+        ],
+        [
+          320,
+          462
+        ]
+      ],
+      "sha256": "f52c8da21f2c31f3f77168d326a49815fc29bde4b573883896a8eb3298f11508"
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx-0.32.3.dist-info/METADATA",
+      "line_ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "sha256": "8520f04babb9b28cc25403487d7a2c075aab252a34dbf158b5a6806c23243be0"
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/sdpa_vector.h",
+      "line_ranges": [
+        [
+          43,
+          48
+        ],
+        [
+          99,
+          175
+        ],
+        [
+          320,
+          462
+        ]
+      ],
+      "sha256": "f52c8da21f2c31f3f77168d326a49815fc29bde4b573883896a8eb3298f11508"
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx-0.32.3.dist-info/METADATA",
+      "line_ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "sha256": "8520f04babb9b28cc25403487d7a2c075aab252a34dbf158b5a6806c23243be0"
+    }
+  ],
+  "artifact_sha256": {
+    "SUMMARY.md": "e89d6625bd41b601e1169185691773ea2b96656630a21cd73914c993cbc2c62b",
+    "analysis.md": "cdb869bb3df8106a91f4477b870eb91d70b28b78dc1d9a75259e33be63288af5",
+    "CHECKPOINT.md": "c1c599833ec4b96fcc2ba07932d8555f52dddfde3149a7bebae6175a7b190cfa",
+    "official_tag_ref.json": "c5db397b2c98b1f647ac92ab7735c4065e224e35c9a99ce3942fd1aacbfff313",
+    "official_tree_paths.json": "cef3ce2b107d3ecf1353cd26d9fcfa4b3d88ce6035db969f33791535d47579b0"
+  },
+  "actions": {
+    "mlx_import": false,
+    "gpu": false,
+    "model_load": false,
+    "resource_sampling": false,
+    "benchmark": false,
+    "network": true,
+    "engine_edits": false,
+    "package_install": false,
+    "checkout_change": false,
+    "commit": false,
+    "writes": "audit artifact directory only"
+  }
+}

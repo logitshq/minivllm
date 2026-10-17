@@ -1,0 +1,3 @@
+Run `python3 -B /private/tmp/minivllm-engine-optimization-20261014/v112-independent-results-review-build1/review.py`.
+
+This reads only frozen original files and this review. It re-hashes all 103 sealed original paths (including the 51200-byte first-layer BF16 fixture), independently recomputes saved comparison counts/summary, validates first differing BF16 bits and resource raw/derived metadata, and checks source semantics plus saved owner/release evidence. It imports only the Python standard library. Original paths must be present. No GPU/model/native library is loaded; absent full output tensor pairs cannot be recomputed.

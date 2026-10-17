@@ -1,0 +1,69 @@
+[
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/drafters/qwen3_5_mtp/qwen3_5_mtp.py",
+    "sha256": "3b2cf5cf0e83393a331fdd95394b812cda749d207a96b9bd4905bc025df85876",
+    "matching_line_numbers": [
+      16
+    ],
+    "claim": "one FC, effective gamma norms, one dense attention layer, target binding, seed/draft/trim/replay"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/language.py",
+    "sha256": "bdeb2cb3e01338b9cfdb2a5fac7f021265dda62d81d75b952136d38839d4b953",
+    "matching_line_numbers": [
+      1334
+    ],
+    "claim": "target model returns post-final-norm hidden"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/models/qwen3_5/language.py",
+    "sha256": "bdeb2cb3e01338b9cfdb2a5fac7f021265dda62d81d75b952136d38839d4b953",
+    "matching_line_numbers": [
+      1772
+    ],
+    "claim": "final hidden entry is target model returned out"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/mtp.py",
+    "sha256": "4ed467918bd24e26c60730d6d3529c6a9e633448b2fc6028829965bb1f4daad1",
+    "matching_line_numbers": [
+      622,
+      926
+    ],
+    "claim": "initial seed receives actual prompt normalized hidden and shifted next tokens"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/mtp.py",
+    "sha256": "4ed467918bd24e26c60730d6d3529c6a9e633448b2fc6028829965bb1f4daad1",
+    "matching_line_numbers": [
+      719
+    ],
+    "claim": "target verifies proposals and commits selected prefix before emission"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/drafters/qwen3_5_mtp/config.py",
+    "sha256": "4555b3973a8dd77fade607b27d79471b7241fa3eb94b4073887a363b0c367409",
+    "matching_line_numbers": [
+      20
+    ],
+    "claim": "trained block3/one MTP layer"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm-0.7.7.dist-info/licenses/LICENSE",
+    "sha256": "f74c448746be3376e27dee43e2be9ec9d55f4820cd7466c603a6c7d1fd2d25b8",
+    "matching_line_numbers": [
+      1
+    ],
+    "claim": "actual source license"
+  },
+  {
+    "path": "/Users/ryanli/code/minivllm-tutorial/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/mlx_vlm/speculative/mtp.py",
+    "sha256": "4ed467918bd24e26c60730d6d3529c6a9e633448b2fc6028829965bb1f4daad1",
+    "matching_line_numbers": [
+      238,
+      239,
+      240
+    ],
+    "claim": "_mtp_draft_hidden leaves hidden unchanged absent speculative_draft_hidden; actual qwen3_5 language class has no such hook (CPU AST/source search), not inferred from other model families"
+  }
+]

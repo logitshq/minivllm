@@ -1,0 +1,27 @@
+{
+  "status": "CPU_SOURCE_GUARDS_NOT_GPU_PROOF",
+  "parent": "independent frozen44 candidate",
+  "parent_package_python_files": 27,
+  "new_package_python_files": 28,
+  "modified_files": [
+    "cache.py",
+    "model/gdn.py",
+    "engine/spec_runner.py"
+  ],
+  "new_file": "spec/transaction.py",
+  "other24_parent_files_byte_exact": true,
+  "new_source_AST_inverse_to44_checked": true,
+  "no_new_Metal_or_native_source": true,
+  "old_helpers_exact": {
+    "kernels/gdn_conv_silu_metal.py": "dc88326764a6a6800111b15b4121ce70c26c14b5c7b1f1bd7e2bf713de5cafb4",
+    "kernels/gdn_activated_norm_reuse_cached_metal.py": "5f05383ccd697ee39bb92b2a5cf26254e9c061c0617184139074fa36b4bca952"
+  },
+  "profile": "batched projections and norm/outproj; old44 conv/state pertoken; not claimed T1 projection bitexact",
+  "prefix_gdn_gold": "actual returned S_t/conv_t views plus original B1 producer owners, all strong referenced and named eval outputs same invocation",
+  "attention_gold": "same-invocation projected K/V pure prefix copy; keep>0 zero-tail, keep0 originalexact",
+  "early_budget": "verifyT bounded beforedraft; T1 skipsdraft; postEOS commit=len(delivered), latestdelivery remains nextanchor/uncomputed",
+  "readonly": "before-forward initialcachehash + afterproducer/allprefixhash + aftercommit retainedhash; before/after1349 targetparameterrawhash+name/objectidentity",
+  "oldIDs": "old38/44/89 allsame96, assert afterlive emission only",
+  "old_tensor_policy": "diagnostic128state hash only, no old132equivalence claim, no tolerance",
+  "GPU_used": false
+}

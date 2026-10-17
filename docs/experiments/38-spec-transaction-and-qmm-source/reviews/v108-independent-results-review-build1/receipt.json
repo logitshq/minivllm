@@ -1,0 +1,110 @@
+{
+  "status": "PASS_CPU_SAVED_EVIDENCE_REVIEW_TINY_PASS_FULL_FAIL_PRESERVED",
+  "tiny_receipt_sha256": "2a03d8ef97cbe0243b6c34c313d793e030e9dd64ff6610816dcc9f9bfde91b4b",
+  "full_receipt_sha256": "7966209c6a956f71d0b688ff689df11c0f8d082661f8a39d5a52c51a3cd71d9d",
+  "source_pins_SHA256": "485cd1fb76695295f6b2a926c7a52ba200f98e2a6f2cc6b367f3c611f3962c18",
+  "pins_verified": 61,
+  "same_pins_tiny_full": true,
+  "counts": {
+    "numeric-v108tiny-attempt1": {
+      "transactions": 21,
+      "verify_input_tokens": 116,
+      "committed_inputs": 58,
+      "committed_cache_trace_rows": 42,
+      "committed_cache_array_comparisons": 84,
+      "literal_prefix_history_rows": 274,
+      "literal_prefix_array_signatures": 548,
+      "producer_owner_pairs_retained": 137
+    },
+    "fullmodel-v108transaction-attempt1": {
+      "transactions": 15,
+      "verify_input_tokens": 73,
+      "committed_inputs": 31,
+      "committed_cache_trace_rows": 960,
+      "committed_cache_array_comparisons": 1920,
+      "literal_prefix_history_rows": 5632,
+      "literal_prefix_array_signatures": 11264,
+      "producer_owner_pairs_retained": 3744
+    }
+  },
+  "failure": {
+    "earliest_hard_failure": "fullqual.py:70 postgeneration B.base IDs gate called from108",
+    "old_A_IDs_completed": 96,
+    "old_B_IDs_completed": 0,
+    "B_base_actual_IDs": 32,
+    "first_zero_based_mismatch_index": 4,
+    "B_matches_actual109_official32": true,
+    "actual109_receipt_sha256": "b9337fbc71bef73dfef4190834ba83c64b4483afa61b7d4cc1145d8e8c7b3ec5",
+    "old128_state_diagnostic_equal": 0,
+    "old128_state_diagnostic_different": 128,
+    "B_postparameter_RO_assertion_completed": false,
+    "final_parameter_after_present": false,
+    "B_postcleanup_assertions_completed": false,
+    "final_actual_import_provenance_completed": false,
+    "full_qualification_PASS": false
+  },
+  "transactions": {
+    "actual_draft_calls": 15,
+    "drafted_tokens": 58,
+    "accepted_before_clip_sum": 16,
+    "delivered_decode_tokens": 31,
+    "final_frontier": 50,
+    "actual44_GDN_helper_calls": 3504,
+    "history_vs_old132_equivalence_claim": false,
+    "scope": "same invocation selected literal prefix + saved before/after readonly flags; no independent reconstruction of dead GPU arrays"
+  },
+  "lifecycle": {
+    "numeric-v108tiny-attempt1": {
+      "owner": 12873,
+      "child": 12882,
+      "waited_returncode": 0,
+      "external_release_sha256": "c28b414931a1b2805bf517c9d94b5db486b92f21ba420188fabe84f63bb1c867",
+      "release_observed_power": "Battery Power",
+      "release_power_policy": "any, PID absence only; no timing qualification",
+      "owner_resource_samples": 3,
+      "actual_owner_power_counts": {
+        "AC Power": 3
+      },
+      "actual_pressure_values": [
+        1
+      ],
+      "actual_thermal_codes": [
+        0
+      ],
+      "stable_swap_used_MB": 4742.88,
+      "stable_Swapouts": 17460761
+    },
+    "fullmodel-v108transaction-attempt1": {
+      "owner": 16910,
+      "child": 16919,
+      "waited_returncode": 1,
+      "external_release_sha256": "5f6a8e8976461da781614956653a2774b42c90117cc39a1448472cc726ac36a6",
+      "release_observed_power": "AC Power",
+      "release_power_policy": "any, PID absence only; no timing qualification",
+      "owner_resource_samples": 28,
+      "actual_owner_power_counts": {
+        "AC Power": 28
+      },
+      "actual_pressure_values": [
+        1
+      ],
+      "actual_thermal_codes": [
+        0
+      ],
+      "stable_swap_used_MB": 4646.88,
+      "stable_Swapouts": 17460761
+    }
+  },
+  "power_note": "Tinyowner3samplesAC; first externalrawBattery retained, finalanypowerrelease onlyabsentPID. Full28ownersamplesallACpressure1thermal0stableSO; anypowermetadata numericalpolicy, no timingqual.",
+  "tiny_abort_scope": "raises before producer;21completed-prefix casesinclude keep0 restore, not actualGPU partialproducer exception",
+  "parameter_scope": "1349before and threeA requestreadonly guards; afterdraftload guard by reached sourcecontrolflow. No B-post/finalreadonly assertion earned after IDFAIL.",
+  "actual_import_scope": {
+    "tiny_final_modules": 7,
+    "full_before_token_modules": 23,
+    "full_final_modules": "NOT_REACHED"
+  },
+  "MLX_imported": false,
+  "native_loaded": false,
+  "GPU_executed": false,
+  "source_modified": false
+}

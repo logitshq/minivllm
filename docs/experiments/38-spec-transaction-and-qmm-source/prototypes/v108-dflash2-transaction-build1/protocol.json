@@ -1,0 +1,47 @@
+{
+  "status": "CPU_NUMERIC_READY_GPU_UNRUN",
+  "profile": "V108 batched qkv/z/b/a + sequential original44 conv_silu_raw_tail/activated_normreuse state; batched norm/outproj",
+  "default_OFF": true,
+  "target_model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "candidate_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v108-dflash2-transaction-build1-root",
+  "draft_snapshot": "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+  "draft_raw_file_bytes": 3848817896,
+  "draft_loader_quantization": {
+    "group_size": 64,
+    "bits": 4,
+    "mode": "affine"
+  },
+  "target_parameter_identity_readonly_count": 1349,
+  "old_receipts": [
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v89native-attempt1/child-output/receipt.json"
+  ],
+  "required_requests": [
+    "base",
+    "reset-base",
+    "changed-prefill"
+  ],
+  "required_old_IDs_each_arm": 96,
+  "max_output_tokens": 32,
+  "physical_capacity": 64,
+  "verify_block": 5,
+  "GDN_history_bound": {
+    "max_tokens": 8,
+    "S_bytes_per_layer_per_token": 3145728,
+    "max48layer_S_producer_bytes": 1207959552,
+    "extra_conv_history_bytes_at8tokens": 23592960,
+    "plus": "initial state references, attention copies, draftKV/features/activations and quantization transients observed separately"
+  },
+  "transaction_witness": "literal same-invocation44 S_t andconv_t arrays + strong producer owners, all included in same mx.eval outputs before observer; no freshprefill/chunk replay/copy creates GDN reference",
+  "attention_policy": "same batched projected K/V; separate array handles copy-prefix fill, full fixed64 prefix buffers clear all future tail bytes for keep>0; keep0 restores exact original physicalbuffer including preexisting tail; no oldtail equality assumption",
+  "delivery_invariant": "bound verifyT by remaining output/context before drafting; delivered last token is nextanchor, uncomputed. commit_inputs=len(delivered)=one prioranchor +len(delivered)-1 accepted drafts; applies alsoEOS insideacceptedprefix. Scheduler receives alreadyclipped sequence, updates frontier by samecount.",
+  "tiny_required_before_full": true,
+  "tiny_cases": 21,
+  "tiny_scope": "one real44 GDN producer plus one attention cache, T1/3/5/8 everykeep0..T; allprefixes, abort/error restore; scripted delivery/EOS separate from modelpredictions",
+  "full_scope": "one27B load, live serial A all96 oldIDs first, actualDFlash B all96 oldIDs, then budgets1/2/3/5; full64cache same-invocation selectedprefix/history/input rawhash strict, 1349targetparameters identity+rawhashRO eachrequest; literal history allretained",
+  "old_tensor_policy": "old128 cache state SHA differences saved diagnostic only; no tolerance, no old132 bitexact claim; 96IDs hardFAIL unchanged",
+  "GPU_policy": "root only; noGPU executed by author; no native interposition, new shader or perf",
+  "baseline_policy": "future compare oMLX strongest qualified compatibleMTP/DFlash2 and countdraft resource; old draftNone balanced.03 is notglobalbest",
+  "resource_budget": "MLXfull34GiB limit+2GiB cache; tiny2GiB+64MiB; actual loaded/peak/cache snapshots. Limits are numerical guard budgets, not measured resource results."
+}

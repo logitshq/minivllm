@@ -1,0 +1,15 @@
+# V108 independent CPU source review
+
+PASS for the declared fixed27B/B1/greedy/CAP64 numerical scope; no concrete source blocker found. Actual full-model numeric qualification remains required. No MLX/NumPy/native load, GPU or Git was performed by reviewer.
+
+- Independently ran existing6stdlib tests and tiny/full `--inert`: allPASS,61pins/header identities verified. Actual configs match hidden5120/vocab248320, target64layers and5capture layers; block5fits trained8. Drafter remains actual `load_drafter` affine4/group64 strict loader, not a scripted substitute (`spec/dflash2.py:172–190`, fullqual81–85).
+- `transaction.py:156–180`: each S_t/conv_t is the returned original44 helper result. View witnesses retain original B1 producers; eval_arrays includes every history/producer in the same `mx.eval` boundary. No chunk replay or fresh smaller-prefix prefill creates gold.
+- `transaction.py:52–78`: attention histories consume the same invocation projected K/V. New view handles prevent Python __setitem__ handle replacement of earlier witnesses; keep>0 futuretail is zero, keep0/abort restores originalfull physicaltail.
+- `transaction.py:138–153`: all histories validate before commit mutates any cache; abort bypasses completeness and restores initialowners/offset; detach clears record/tape/snapshot on ordinarycacheobjects. Histories are not model attrs or new NN parameters.
+- `spec_runner.py:80–118` + scheduler74–104: verifyT bounded before drafter by output/contextremaining, T1 skips draft; EOS/stop/budget clipping sets keep=len(delivered). Prioranchor plus all delivered except last is cached; last delivery is next uncomputedanchor. Scheduler advances same count and featurehistory appends new_feats[:keep]. No goldfuture feeds drafting/verify.
+- `fullqual.py:59–80,85–122`: serialA generated live and then asserted old96IDs; actualDFlashB generated independently and samehardgate, plusbudgets1/2/3/5. ExpectedIDs enter only postgeneration checks; actualdrafts/posterior are recorded. Old128 cachehash differences are diagnostics, never old132 PASS.
+- Fullruntime checks1349 parameter names/objectIDs/rawbytes before/after eachrequest, actualcandidate imports, emptyrequests/staging/batch/features/ahead, emptySpecState and resetdraftctxKV afterfinish. Root still owns resources/deadline/reap; header pins are not fullcheckpointbody hashes.
+- Observer compares committed cache with the selected literal same-invocation witness and rehashes all histories/inputs before/after. This verifies prefixselection/owner preservation, not independent serialT1 arithmetic equivalence. Batched projections/norm/outproj are explicitly a profile requiring fullID qualification.
+- Coverage wording:21GPUtiny cases are T1/3/5/8×everykeep0..T (including completed-producer keep0/partial/all). tiny69 abort raises **before** anyproducer; partial-producer abort is CPU/source proof, not exercised GPUexception. Scripted EOS/delivery cases are selection logic, not modelpredictions. No tiny/full outcome is inferred from CPUreview.
+
+receipt.json records source SHA and observed CPU commands. Frozen implementation untouched; reviewer CPU processes have exited.
