@@ -92,3 +92,5 @@ docs/              计划、教程、远程版的契约和 notes
 [41：HTTP 传输选项的首对负结果](docs/experiments/41-native-http-nodelay-pilot.md)保留 TCP_NODELAY OFF/ON 的真实请求、吞吐—延迟图和代码差异；ON 吞吐比 0.997538，未采用，当前三家 Pareto 前沿不变。
 
 [42：短请求跑通后的投机解码负结果](docs/experiments/42-startup-warm-short-request.md)记录同一次新配对的完整请求延迟与吞吐：spec 2555.93 ms / 12.52 tok/s，ordinary 1247.41 ms / 25.65 tok/s；全部原始输出通过，短请求尚无性能收益。
+
+[43：新的三家 C1 吞吐—延迟对照](docs/experiments/43-fresh-c1-throughput-latency.md)完成九次 fresh 加载：本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。本方三轮均领先；这是新的 C1 切面，完整 C1/C2/C4 前沿仍待同场复测。

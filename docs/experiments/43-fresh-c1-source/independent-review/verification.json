@@ -1,0 +1,290 @@
+{
+  "status": "PASS_INDEPENDENT_COMPLETE_V125_C1_SAVED_RESULTS_REPLAY",
+  "counts": {
+    "HTTP_requests": 54,
+    "HTTP_outputs": 1728,
+    "native_startup_requests": 3,
+    "native_startup_outputs": 96,
+    "total_model_requests": 57,
+    "total_outputs": 1824,
+    "formal_requests": 27,
+    "formal_outputs": 864
+  },
+  "configuration_medians": [
+    {
+      "engine": "native",
+      "latency_p50_ms": 1230.1598750054836,
+      "throughput_tok_s": 26.01287901693051,
+      "TTFT_ms": 159.34245797689073,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    },
+    {
+      "engine": "omlx",
+      "latency_p50_ms": 1271.8407080101315,
+      "throughput_tok_s": 25.16038352795442,
+      "TTFT_ms": 214.15816599619575,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    },
+    {
+      "engine": "lithos",
+      "latency_p50_ms": 1471.3687089970335,
+      "throughput_tok_s": 21.74845761251303,
+      "TTFT_ms": 422.36541700549424,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "block": 1,
+      "rival": "omlx",
+      "order": [
+        "native",
+        "omlx",
+        "lithos"
+      ],
+      "native_throughput_ratio": 1.0329771860089654,
+      "native_throughput_change_pct": 3.2977186008965376,
+      "rival_latency_over_native_latency": 1.0329771860089654,
+      "native_latency_reduction_pct": 3.1924408840408924
+    },
+    {
+      "block": 1,
+      "rival": "lithos",
+      "order": [
+        "native",
+        "omlx",
+        "lithos"
+      ],
+      "native_throughput_ratio": 1.1967443120479402,
+      "native_throughput_change_pct": 19.67443120479402,
+      "rival_latency_over_native_latency": 1.1967443120479402,
+      "native_latency_reduction_pct": 16.439962159607813
+    },
+    {
+      "block": 2,
+      "rival": "omlx",
+      "order": [
+        "omlx",
+        "lithos",
+        "native"
+      ],
+      "native_throughput_ratio": 1.032461121798401,
+      "native_throughput_change_pct": 3.2461121798400994,
+      "rival_latency_over_native_latency": 1.032461121798401,
+      "native_latency_reduction_pct": 3.1440527021354803
+    },
+    {
+      "block": 2,
+      "rival": "lithos",
+      "order": [
+        "omlx",
+        "lithos",
+        "native"
+      ],
+      "native_throughput_ratio": 1.1940257574790551,
+      "native_throughput_change_pct": 19.402575747905516,
+      "rival_latency_over_native_latency": 1.1940257574790551,
+      "native_latency_reduction_pct": 16.249712894695122
+    },
+    {
+      "block": 3,
+      "rival": "omlx",
+      "order": [
+        "lithos",
+        "native",
+        "omlx"
+      ],
+      "native_throughput_ratio": 1.0338824520710872,
+      "native_throughput_change_pct": 3.38824520710872,
+      "rival_latency_over_native_latency": 1.0338824520710872,
+      "native_latency_reduction_pct": 3.277205450504883
+    },
+    {
+      "block": 3,
+      "rival": "lithos",
+      "order": [
+        "lithos",
+        "native",
+        "omlx"
+      ],
+      "native_throughput_ratio": 1.1885630922528843,
+      "native_throughput_change_pct": 18.856309225288427,
+      "rival_latency_over_native_latency": 1.188563092252884,
+      "native_latency_reduction_pct": 15.864794513808157
+    }
+  ],
+  "comparison_summaries": [
+    {
+      "rival": "omlx",
+      "ratio_of_configuration_medians": 1.0338824520710872,
+      "geometric_mean_of_three_paired_ratios": 1.0331067529534403,
+      "all_three_pairs_native_faster": true,
+      "interpretation": "Observed C1 slice only; small samples, no significance or full C1/C2/C4 frontier claim. No5percent rule is substituted for dominance."
+    },
+    {
+      "rival": "lithos",
+      "ratio_of_configuration_medians": 1.1960792567636582,
+      "geometric_mean_of_three_paired_ratios": 1.1931062001342303,
+      "all_three_pairs_native_faster": true,
+      "interpretation": "Observed C1 slice only; small samples, no significance or full C1/C2/C4 frontier claim. No5percent rule is substituted for dominance."
+    }
+  ],
+  "source_pins_rehashed": {
+    "controller": 18,
+    "runtime": 201
+  },
+  "source_full_reaudit_repeated": false,
+  "resources": {
+    "arm": 153,
+    "campaign": 2,
+    "total": 155,
+    "all_AC_thermal0_pressure1": true,
+    "Swapouts_growth": 0,
+    "max_within_arm_swap_growth_MB": 0,
+    "campaign_swap_change_MB": -8.0,
+    "all_saved_sample_timestamps_outside_HTTP_windows": true
+  },
+  "fixed_60sec_gaps": 8,
+  "actual_cooling_seconds": [
+    60.001876374997664,
+    60.00643004101585,
+    60.00872933398932,
+    60.00932079201448,
+    60.009139166999375,
+    60.00839195802109,
+    60.009333583002444,
+    60.00454854199779
+  ],
+  "native": {
+    "fresh_services": 3,
+    "model_loads_each": 1,
+    "parameter_identity_guard_count": 1349,
+    "raw32_HTTP_requests": 18,
+    "CAP64_before_anytoken": true,
+    "per_service_steps": 186,
+    "resets": 6,
+    "slots": [
+      4,
+      4
+    ],
+    "S_pingpong": 48,
+    "direct_links": 83,
+    "ICB_banks": 2,
+    "byteRO_scope": "Inherited103fullqualification,not newly read back fullweights or all132duringHTTP"
+  },
+  "official": {
+    "raw_IDs_available": false,
+    "visible32_usage_requests": 36,
+    "cross_engine_raw_ID_equality_claimed": false,
+    "Lithos_m4max_noDraft_metrics_six_each": true
+  },
+  "cleanup": {
+    "saved_child_waits": 9,
+    "server_pids": [
+      46073,
+      46338,
+      46551,
+      46761,
+      46969,
+      47197,
+      47398,
+      47606,
+      47811
+    ],
+    "server_ports": [
+      58280,
+      58352,
+      58401,
+      58445,
+      58483,
+      58526,
+      58583,
+      58629,
+      58684
+    ],
+    "root_real_time_release_PIDs": 11,
+    "root_real_time_release_ports": 9,
+    "live_ps_or_socket_run_by_reviewer": false,
+    "root_release_sha256": "c925ebca509b836ee3167f8cd006950e2feba3a057f31235b8ab7d7805fa8eec"
+  },
+  "public_export": {
+    "directory": "/private/tmp/minivllm-engine-optimization-20261014/v125-public-safe-results-build1",
+    "exact_auth_free_client_group_records": 54,
+    "clock_rows": 54,
+    "resource_rows": 155,
+    "private_runtime_values_current_discovered": 3,
+    "known_value_residuals": 0,
+    "wire_HTTP_body_available": false,
+    "strict_auth_control_field_scan_groups": 54
+  },
+  "adoption_or_fullfrontier_win_claimed": false,
+  "GPU_W_Git_original_mutated": false,
+  "actual_source_capture_identity": [
+    {
+      "arm": "C1-B1-lithos",
+      "engine": "lithos",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "db3039dcbdc282c15795a6a9ce5e43c5afcdbab6d755a8fea6050d40a44f414e",
+      "no_native_interposition": true
+    },
+    {
+      "arm": "C1-B1-native",
+      "engine": "native",
+      "source": "recorded actual imported candidate/adapter paths match unchanged qualified source hashes",
+      "module_count": 24
+    },
+    {
+      "arm": "C1-B1-omlx",
+      "engine": "omlx",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "291516fcd115066a1c01b23e5753d2827cc95a010cca6ac78b2f6da6b27a9f0e",
+      "no_native_interposition": true
+    },
+    {
+      "arm": "C1-B2-lithos",
+      "engine": "lithos",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "db3039dcbdc282c15795a6a9ce5e43c5afcdbab6d755a8fea6050d40a44f414e",
+      "no_native_interposition": true
+    },
+    {
+      "arm": "C1-B2-native",
+      "engine": "native",
+      "source": "recorded actual imported candidate/adapter paths match unchanged qualified source hashes",
+      "module_count": 24
+    },
+    {
+      "arm": "C1-B2-omlx",
+      "engine": "omlx",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "291516fcd115066a1c01b23e5753d2827cc95a010cca6ac78b2f6da6b27a9f0e",
+      "no_native_interposition": true
+    },
+    {
+      "arm": "C1-B3-lithos",
+      "engine": "lithos",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "db3039dcbdc282c15795a6a9ce5e43c5afcdbab6d755a8fea6050d40a44f414e",
+      "no_native_interposition": true
+    },
+    {
+      "arm": "C1-B3-native",
+      "engine": "native",
+      "source": "recorded actual imported candidate/adapter paths match unchanged qualified source hashes",
+      "module_count": 24
+    },
+    {
+      "arm": "C1-B3-omlx",
+      "engine": "omlx",
+      "source": "saved official pre-MLX child source/native tree identity equals frozen registry",
+      "source_native_tree_sha256": "291516fcd115066a1c01b23e5753d2827cc95a010cca6ac78b2f6da6b27a9f0e",
+      "no_native_interposition": true
+    }
+  ]
+}

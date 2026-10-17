@@ -1,0 +1,692 @@
+[
+  {
+    "arm": "C1-B1-native",
+    "engine": "native",
+    "block": 1,
+    "summary": {
+      "label": "C1-B1-native",
+      "engine": "native",
+      "x": 28.96111800414481,
+      "y": 26.027342943590693,
+      "ttft_s": 0.159075584000675,
+      "E2E_s": 1.2294762500096112,
+      "latency_p50_ms": 1229.4762500096112
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 46073,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 46073,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "46073",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "da9c47a09b46ad47e16e349af38f72112c7c914ba3d09fd71ae4b2139d50e161",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "da9c47a09b46ad47e16e349af38f72112c7c914ba3d09fd71ae4b2139d50e161",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58280,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217555.7217145,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "runtime_identity_selected": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "native_selected": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "C1-B1-omlx",
+    "engine": "omlx",
+    "block": 1,
+    "summary": {
+      "label": "C1-B1-omlx",
+      "engine": "omlx",
+      "x": 29.35083757493965,
+      "y": 25.19643540642997,
+      "ttft_s": 0.2138330000161659,
+      "E2E_s": 1.2700209169997834,
+      "latency_p50_ms": 1270.0209169997834
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 46338,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 46338,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "46338",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "183890dd197cb8e1cc4ee6d18debe28ab7cbe9b6deadebdc93e2c5a3d23a1688",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "183890dd197cb8e1cc4ee6d18debe28ab7cbe9b6deadebdc93e2c5a3d23a1688",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58352,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217635.822213916,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "arm": "C1-B1-lithos",
+    "engine": "lithos",
+    "block": 1,
+    "summary": {
+      "label": "C1-B1-lithos",
+      "engine": "lithos",
+      "x": 29.53139509864921,
+      "y": 21.74845761251303,
+      "ttft_s": 0.4214102499827277,
+      "E2E_s": 1.4713687089970335,
+      "latency_p50_ms": 1471.3687089970335
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 46551,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 46551,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "46551",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "91b52349900b3cbee1a01e69d39f996bbdc6eefb90714334e50719a1d423d04c",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "91b52349900b3cbee1a01e69d39f996bbdc6eefb90714334e50719a1d423d04c",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58401,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217718.855282583,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "arm": "C1-B2-omlx",
+    "engine": "omlx",
+    "block": 2,
+    "summary": {
+      "label": "C1-B2-omlx",
+      "engine": "omlx",
+      "x": 29.309845335861574,
+      "y": 25.15058751189533,
+      "ttft_s": 0.21451079100370407,
+      "E2E_s": 1.2723360829986632,
+      "latency_p50_ms": 1272.3360829986632
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 46761,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 46761,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "46761",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "0679e462a1242f0e51df82d615e602e268c36cc696ddd730e59345740cd613ff",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "0679e462a1242f0e51df82d615e602e268c36cc696ddd730e59345740cd613ff",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58445,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217798.619807458,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "arm": "C1-B2-lithos",
+    "engine": "lithos",
+    "block": 2,
+    "summary": {
+      "label": "C1-B2-lithos",
+      "engine": "lithos",
+      "x": 29.533236729837714,
+      "y": 21.747440232147426,
+      "ttft_s": 0.42240408301586285,
+      "E2E_s": 1.4714375420007855,
+      "latency_p50_ms": 1471.4375420007855
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 46969,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 46969,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "46969",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "5c08f10f488ea1d32fb6fb93022ebcbe50f0c8d037e94fdc9fee6866c6f03108",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "5c08f10f488ea1d32fb6fb93022ebcbe50f0c8d037e94fdc9fee6866c6f03108",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58483,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217881.427507833,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "arm": "C1-B2-native",
+    "engine": "native",
+    "block": 2,
+    "summary": {
+      "label": "C1-B2-native",
+      "engine": "native",
+      "x": 28.891649905093978,
+      "y": 25.967003796420308,
+      "ttft_s": 0.15934245797689073,
+      "E2E_s": 1.232333166000899,
+      "latency_p50_ms": 1232.333166000899
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 47197,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 47197,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "47197",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "3755d512258db37f4f69c29322aac5cd31e61a14350384569333d7f89ce77763",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "3755d512258db37f4f69c29322aac5cd31e61a14350384569333d7f89ce77763",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58526,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 217956.161261291,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "runtime_identity_selected": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "native_selected": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "C1-B3-lithos",
+    "engine": "lithos",
+    "block": 3,
+    "summary": {
+      "label": "C1-B3-lithos",
+      "engine": "lithos",
+      "x": 29.83169629588207,
+      "y": 21.885989213768962,
+      "ttft_s": 0.42236541700549424,
+      "E2E_s": 1.462122625001939,
+      "latency_p50_ms": 1462.122625001939
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 47398,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 47398,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "47398",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "35c2f6373c47ef83a6a0c7b5a84e66898b57bc5a6f069f9b2a5c42a9ea8060b0",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "35c2f6373c47ef83a6a0c7b5a84e66898b57bc5a6f069f9b2a5c42a9ea8060b0",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58583,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 218039.076290916,
+          "connect_ex": 61
+        }
+      ]
+    }
+  },
+  {
+    "arm": "C1-B3-native",
+    "engine": "native",
+    "block": 3,
+    "summary": {
+      "label": "C1-B3-native",
+      "engine": "native",
+      "x": 28.95623851321917,
+      "y": 26.01287901693051,
+      "ttft_s": 0.159452958003385,
+      "E2E_s": 1.2301598750054836,
+      "latency_p50_ms": 1230.1598750054836
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 47606,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 47606,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "47606",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "c37482c8fd62149ccf24d4b78134413ddfc2b20a3491f13fe693652ad1f54b6c",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "c37482c8fd62149ccf24d4b78134413ddfc2b20a3491f13fe693652ad1f54b6c",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58629,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 218113.806125458,
+          "connect_ex": 61
+        }
+      ]
+    },
+    "runtime_identity_selected": {
+      "manifest_all_sources_match": true,
+      "mode": "conv_normreuse_cache",
+      "scheduler_max_seqs": 1,
+      "model_loads": 1,
+      "parameter_count": 1349,
+      "parameter_tree_unchanged": true,
+      "gates_on": 48,
+      "fixed_cap": 64,
+      "native_library_sha256": "bf3d99c4979fcbd50562abd2e2520b549b897930414c21be6760f67918dcbcdf",
+      "adapter_sha256": "e04f0e18d90608e912237106c2b6f314283d35460e3cbf0cebd9eb6857416270",
+      "prior_fullqual_sha256": "551ccb7d44965fe29b3c9f5c2cb2eaf7f8b2c43c65ba5ab9aefc6d90a589bba1",
+      "prefix_cache": 0,
+      "startup_ordinary_warm_requests": 1,
+      "startup_ordinary_warm_tokens": 32,
+      "async_pipeline_depth": 2,
+      "direct_production": true,
+      "physical_CAP64_before_engine_and_ANYtoken": true,
+      "measurement_hooks": false,
+      "cache_policy": "fresh per-request prefill; all131seed ranges uploaded once; native token/state feedback"
+    },
+    "native_selected": {
+      "native_steps": 186,
+      "request_count": 6,
+      "active": null,
+      "parameter_ranges_registered": 1349,
+      "feedback": {
+        "capacity": 64,
+        "resets": 6,
+        "total_steps": 186,
+        "CPU_full_state_restore_per_step": false
+      },
+      "pipeline": {
+        "enabled": true,
+        "depth": 2,
+        "total_completed": 186,
+        "total_delivered": 186,
+        "total_discarded": 0,
+        "total_failed": 0,
+        "pending": [],
+        "inflight": 0
+      },
+      "icb": {
+        "enabled": true,
+        "banks": 2,
+        "execution_count": 186,
+        "bank_executions": [
+          96,
+          90
+        ]
+      },
+      "pingpong": {
+        "eligible_count": 48,
+        "staged_link_count": 83
+      },
+      "direct_pipeline": {
+        "enabled": true,
+        "diagnostic_snapshot": false,
+        "direct_links": 83,
+        "prediction_slot_bytes": 4
+      }
+    }
+  },
+  {
+    "arm": "C1-B3-omlx",
+    "engine": "omlx",
+    "block": 3,
+    "summary": {
+      "label": "C1-B3-omlx",
+      "engine": "omlx",
+      "x": 29.317964853123033,
+      "y": 25.16038352795442,
+      "ttft_s": 0.21415816599619575,
+      "E2E_s": 1.2718407080101315,
+      "latency_p50_ms": 1271.8407080101315
+    },
+    "cleanup": {
+      "error": null,
+      "cleanup_errors": [],
+      "owned_exit": {
+        "pid": 47811,
+        "wait_completed": true,
+        "returncode": -15,
+        "exact_pid_absence": {
+          "pid": 47811,
+          "command": [
+            "/bin/ps",
+            "-p",
+            "47811",
+            "-o",
+            "pid=,ppid=,rss=,comm="
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "",
+          "absent": true
+        },
+        "recorded_birth_identity_sha256": "cdd069793b3f22e8020da5e90bf92cd0eef976ddc05f555a1797dbf8938d5dab",
+        "signal_identity_decisions": [
+          {
+            "signal": 15,
+            "current_identity_sha256": "cdd069793b3f22e8020da5e90bf92cd0eef976ddc05f555a1797dbf8938d5dab",
+            "decision": "SAME_IDENTITY_SIGNAL"
+          }
+        ]
+      }
+    },
+    "port_absence": {
+      "port": 58684,
+      "localhost_only": true,
+      "absent": true,
+      "checks": [
+        {
+          "monotonic_s": 218193.049051541,
+          "connect_ex": 61
+        }
+      ]
+    }
+  }
+]

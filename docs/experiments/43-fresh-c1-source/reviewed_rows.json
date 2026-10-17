@@ -1,0 +1,274 @@
+{
+  "schema": "V125-reviewed-complete-C1-slice-v1",
+  "date": "2026-10-17",
+  "scope": "New complete ninefreshC1 slice,not oldC2C4/fullfrontier; old105STOP untouched/unpooled",
+  "primaryX": "full HTTP POST-through-SSE-DONE latency p50 milliseconds,lower",
+  "primaryY": "actual total output token/s,higher",
+  "aggregation": "request duration p50/group -> median3 formal groups/arm -> median3fresh arms/config",
+  "request_policy": "same Qwen27B NVFP4g16b4,19prompt/32greedy normalEOS,uncached; native rawIDs available, official rawIDs absent and visible32+usage policy only",
+  "configuration_medians": [
+    {
+      "engine": "native",
+      "latency_p50_ms": 1230.1598750054836,
+      "throughput_tok_s": 26.01287901693051,
+      "TTFT_ms": 159.34245797689073,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    },
+    {
+      "engine": "omlx",
+      "latency_p50_ms": 1271.8407080101315,
+      "throughput_tok_s": 25.16038352795442,
+      "TTFT_ms": 214.15816599619575,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    },
+    {
+      "engine": "lithos",
+      "latency_p50_ms": 1471.3687089970335,
+      "throughput_tok_s": 21.74845761251303,
+      "TTFT_ms": 422.36541700549424,
+      "fresh_arms": 3,
+      "formal_requests": 9,
+      "formal_tokens": 288
+    }
+  ],
+  "fresh_arms": [
+    {
+      "arm": "C1-B1-native",
+      "block": 1,
+      "engine": "native",
+      "latency_p50_ms": 1229.4762500096112,
+      "throughput_tok_s": 26.027342943590693,
+      "TTFT_ms": 159.075584000675,
+      "aux_first_text_proxy": 28.96111800414481,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B1-omlx",
+      "block": 1,
+      "engine": "omlx",
+      "latency_p50_ms": 1270.0209169997834,
+      "throughput_tok_s": 25.19643540642997,
+      "TTFT_ms": 213.8330000161659,
+      "aux_first_text_proxy": 29.35083757493965,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B1-lithos",
+      "block": 1,
+      "engine": "lithos",
+      "latency_p50_ms": 1471.3687089970335,
+      "throughput_tok_s": 21.74845761251303,
+      "TTFT_ms": 421.4102499827277,
+      "aux_first_text_proxy": 29.53139509864921,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B2-omlx",
+      "block": 2,
+      "engine": "omlx",
+      "latency_p50_ms": 1272.3360829986632,
+      "throughput_tok_s": 25.15058751189533,
+      "TTFT_ms": 214.51079100370407,
+      "aux_first_text_proxy": 29.309845335861574,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B2-lithos",
+      "block": 2,
+      "engine": "lithos",
+      "latency_p50_ms": 1471.4375420007855,
+      "throughput_tok_s": 21.747440232147426,
+      "TTFT_ms": 422.40408301586285,
+      "aux_first_text_proxy": 29.533236729837714,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B2-native",
+      "block": 2,
+      "engine": "native",
+      "latency_p50_ms": 1232.333166000899,
+      "throughput_tok_s": 25.967003796420308,
+      "TTFT_ms": 159.34245797689073,
+      "aux_first_text_proxy": 28.891649905093978,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B3-lithos",
+      "block": 3,
+      "engine": "lithos",
+      "latency_p50_ms": 1462.122625001939,
+      "throughput_tok_s": 21.885989213768962,
+      "TTFT_ms": 422.36541700549424,
+      "aux_first_text_proxy": 29.83169629588207,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B3-native",
+      "block": 3,
+      "engine": "native",
+      "latency_p50_ms": 1230.1598750054836,
+      "throughput_tok_s": 26.01287901693051,
+      "TTFT_ms": 159.452958003385,
+      "aux_first_text_proxy": 28.95623851321917,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    },
+    {
+      "arm": "C1-B3-omlx",
+      "block": 3,
+      "engine": "omlx",
+      "latency_p50_ms": 1271.8407080101315,
+      "throughput_tok_s": 25.16038352795442,
+      "TTFT_ms": 214.15816599619575,
+      "aux_first_text_proxy": 29.317964853123033,
+      "formal_requests": 3,
+      "formal_tokens": 96,
+      "HTTP_requests": 6,
+      "HTTP_tokens": 192
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "block": 1,
+      "rival": "omlx",
+      "order": [
+        "native",
+        "omlx",
+        "lithos"
+      ],
+      "native_throughput_ratio": 1.0329771860089654,
+      "native_throughput_change_pct": 3.2977186008965376,
+      "rival_latency_over_native_latency": 1.0329771860089654,
+      "native_latency_reduction_pct": 3.1924408840408924
+    },
+    {
+      "block": 1,
+      "rival": "lithos",
+      "order": [
+        "native",
+        "omlx",
+        "lithos"
+      ],
+      "native_throughput_ratio": 1.1967443120479402,
+      "native_throughput_change_pct": 19.67443120479402,
+      "rival_latency_over_native_latency": 1.1967443120479402,
+      "native_latency_reduction_pct": 16.439962159607813
+    },
+    {
+      "block": 2,
+      "rival": "omlx",
+      "order": [
+        "omlx",
+        "lithos",
+        "native"
+      ],
+      "native_throughput_ratio": 1.032461121798401,
+      "native_throughput_change_pct": 3.2461121798400994,
+      "rival_latency_over_native_latency": 1.032461121798401,
+      "native_latency_reduction_pct": 3.1440527021354803
+    },
+    {
+      "block": 2,
+      "rival": "lithos",
+      "order": [
+        "omlx",
+        "lithos",
+        "native"
+      ],
+      "native_throughput_ratio": 1.1940257574790551,
+      "native_throughput_change_pct": 19.402575747905516,
+      "rival_latency_over_native_latency": 1.1940257574790551,
+      "native_latency_reduction_pct": 16.249712894695122
+    },
+    {
+      "block": 3,
+      "rival": "omlx",
+      "order": [
+        "lithos",
+        "native",
+        "omlx"
+      ],
+      "native_throughput_ratio": 1.0338824520710872,
+      "native_throughput_change_pct": 3.38824520710872,
+      "rival_latency_over_native_latency": 1.0338824520710872,
+      "native_latency_reduction_pct": 3.277205450504883
+    },
+    {
+      "block": 3,
+      "rival": "lithos",
+      "order": [
+        "lithos",
+        "native",
+        "omlx"
+      ],
+      "native_throughput_ratio": 1.1885630922528843,
+      "native_throughput_change_pct": 18.856309225288427,
+      "rival_latency_over_native_latency": 1.188563092252884,
+      "native_latency_reduction_pct": 15.864794513808157
+    }
+  ],
+  "comparison_summaries": [
+    {
+      "rival": "omlx",
+      "ratio_of_configuration_medians": 1.0338824520710872,
+      "geometric_mean_of_three_paired_ratios": 1.0331067529534403,
+      "all_three_pairs_native_faster": true,
+      "interpretation": "Observed C1 slice only; small samples, no significance or full C1/C2/C4 frontier claim. No5percent rule is substituted for dominance."
+    },
+    {
+      "rival": "lithos",
+      "ratio_of_configuration_medians": 1.1960792567636582,
+      "geometric_mean_of_three_paired_ratios": 1.1931062001342303,
+      "all_three_pairs_native_faster": true,
+      "interpretation": "Observed C1 slice only; small samples, no significance or full C1/C2/C4 frontier claim. No5percent rule is substituted for dominance."
+    }
+  ],
+  "HTTP_requests": 54,
+  "HTTP_outputs": 1728,
+  "formal_requests": 27,
+  "formal_outputs": 864,
+  "extra_native_startup_requests": 3,
+  "extra_native_startup_outputs": 96,
+  "resources": {
+    "arm": 153,
+    "campaign": 2,
+    "total": 155
+  },
+  "full_frontier_win": false,
+  "statistical_significance_claim": false,
+  "legacy_first_text_proxy_primary": false,
+  "cache_observation_scope": {
+    "policy": "prefix caching disabled per frozen configuration",
+    "usage_cached_tokens_observed_zero_requests": 36,
+    "usage_cached_tokens_not_exposed_requests": 18,
+    "missing_usage_scope": "all18Lithos requests; represented null,not zero",
+    "Lithos_engine_log_scope": "separate3arms×6Generation records each cached_prompt_tokens0/prefix_sourceNone; not rewritten into missing usage fields"
+  }
+}

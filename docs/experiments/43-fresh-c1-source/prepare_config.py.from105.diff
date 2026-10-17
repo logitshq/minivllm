@@ -1,0 +1,17 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v105-cap64-direct-http-screen-build1/prepare_config.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/prepare_config.py
+@@ -1,4 +1,4 @@
+-"""CPU-only V105 binding of actual103 both-mode lifecycle results. Never launches anything."""
++"""CPU-only V125 binding of actual103 both-mode lifecycle results. Never launches anything."""
+ import argparse
+ import hashlib
+ import json
+@@ -90,7 +90,7 @@
+  for name in ('common.py','client.py','official_entry.py','registry.json','pins.json'):controls[str(prior/name)]=sha(prior/name)
+  for name in ('metal_buffer_bootstrap_v1.py','power_paired_support_v1.py','resource_snapshot_power_v1.py','resource_snapshot_precise_v1.py','workload.json'):controls[str(P/name)]=sha(P/name)
+  for name in ('protocol.json','README.md'):controls[str(D/name)]=sha(D/name)
+- write_new(D/'pins.json',{'files':controls,'runtime_config_sha256':sha(D/'runtime-config.json'),'scope':'V105 fresh9arm C1; untouched58 STOP; no fullcurve/Pareto victory'})
++ write_new(D/'pins.json',{'files':controls,'runtime_config_sha256':sha(D/'runtime-config.json'),'scope':'V125 fresh9arm C1; untouched105/58 STOP; no fullcurve/Pareto victory'})
+  print(json.dumps({'status':'PASS_CPU_CONFIG_BOUND','pins_sha256':sha(D/'pins.json'),'source_pins':len(source_pins),'controller_pins':len(controls),'GPU_used':False}))
+ 
+ 

@@ -1,0 +1,126 @@
+{
+  "status": "PASS_C1_SCREEN",
+  "arms": [
+    {
+      "label": "C1-B1-native",
+      "engine": "native",
+      "x": 28.96111800414481,
+      "y": 26.027342943590693,
+      "ttft_s": 0.159075584000675,
+      "E2E_s": 1.2294762500096112,
+      "latency_p50_ms": 1229.4762500096112
+    },
+    {
+      "label": "C1-B1-omlx",
+      "engine": "omlx",
+      "x": 29.35083757493965,
+      "y": 25.19643540642997,
+      "ttft_s": 0.2138330000161659,
+      "E2E_s": 1.2700209169997834,
+      "latency_p50_ms": 1270.0209169997834
+    },
+    {
+      "label": "C1-B1-lithos",
+      "engine": "lithos",
+      "x": 29.53139509864921,
+      "y": 21.74845761251303,
+      "ttft_s": 0.4214102499827277,
+      "E2E_s": 1.4713687089970335,
+      "latency_p50_ms": 1471.3687089970335
+    },
+    {
+      "label": "C1-B2-omlx",
+      "engine": "omlx",
+      "x": 29.309845335861574,
+      "y": 25.15058751189533,
+      "ttft_s": 0.21451079100370407,
+      "E2E_s": 1.2723360829986632,
+      "latency_p50_ms": 1272.3360829986632
+    },
+    {
+      "label": "C1-B2-lithos",
+      "engine": "lithos",
+      "x": 29.533236729837714,
+      "y": 21.747440232147426,
+      "ttft_s": 0.42240408301586285,
+      "E2E_s": 1.4714375420007855,
+      "latency_p50_ms": 1471.4375420007855
+    },
+    {
+      "label": "C1-B2-native",
+      "engine": "native",
+      "x": 28.891649905093978,
+      "y": 25.967003796420308,
+      "ttft_s": 0.15934245797689073,
+      "E2E_s": 1.232333166000899,
+      "latency_p50_ms": 1232.333166000899
+    },
+    {
+      "label": "C1-B3-lithos",
+      "engine": "lithos",
+      "x": 29.83169629588207,
+      "y": 21.885989213768962,
+      "ttft_s": 0.42236541700549424,
+      "E2E_s": 1.462122625001939,
+      "latency_p50_ms": 1462.122625001939
+    },
+    {
+      "label": "C1-B3-native",
+      "engine": "native",
+      "x": 28.95623851321917,
+      "y": 26.01287901693051,
+      "ttft_s": 0.159452958003385,
+      "E2E_s": 1.2301598750054836,
+      "latency_p50_ms": 1230.1598750054836
+    },
+    {
+      "label": "C1-B3-omlx",
+      "engine": "omlx",
+      "x": 29.317964853123033,
+      "y": 25.16038352795442,
+      "ttft_s": 0.21415816599619575,
+      "E2E_s": 1.2718407080101315,
+      "latency_p50_ms": 1271.8407080101315
+    }
+  ],
+  "primary_metrics": {
+    "X": "full HTTP POST-through-DONE latency_p50_ms, lower",
+    "Y": "total output y token/s, higher"
+  },
+  "auxiliary_metrics": {
+    "x": "legacy first-text delivery proxy only; not primary win criterion"
+  },
+  "medians": {
+    "native": {
+      "x": 28.95623851321917,
+      "y": 26.01287901693051,
+      "ttft_s": 0.15934245797689073,
+      "E2E_s": 1.2301598750054836,
+      "latency_p50_ms": 1230.1598750054836
+    },
+    "omlx": {
+      "x": 29.317964853123033,
+      "y": 25.16038352795442,
+      "ttft_s": 0.21415816599619575,
+      "E2E_s": 1.2718407080101315,
+      "latency_p50_ms": 1271.8407080101315
+    },
+    "lithos": {
+      "x": 29.533236729837714,
+      "y": 21.74845761251303,
+      "ttft_s": 0.42236541700549424,
+      "E2E_s": 1.4713687089970335,
+      "latency_p50_ms": 1471.3687089970335
+    }
+  },
+  "all_negative_pairs_retained": true,
+  "full_frontier_win": false,
+  "HTTP_requests": 54,
+  "HTTP_completion_tokens": 1728,
+  "native_startup_ordinary_requests": 3,
+  "native_startup_ordinary_tokens": 96,
+  "total_executed_requests": 57,
+  "total_executed_tokens": 1824,
+  "measured_requests": 27,
+  "measured_tokens": 864
+}

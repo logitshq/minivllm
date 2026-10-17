@@ -6,7 +6,8 @@
 
 已有的日期快照保持原样；同日后续结果另存检查点，Git commit保留演进。每次显著数值／性能结果之后commit/push、fetch M5交接，并更新本方交接。性能图只使用同机、同权重、同负载与相符资源条件的结果；M4/M5、局部/整模、不同电源和不同轮次分开。
 
-- [M4 throughput–latency Pareto主图](2026-10-17-m4-pareto/README.md)：正确性为先决条件；联合前沿、各家前沿与被支配配置均标明。
+- [最新 M4 三家 C1 吞吐—延迟图](../experiments/43-fresh-c1-throughput-latency.md)：九次 fresh 加载，本方在三轮中均领先 oMLX/Lithos；新 C1 切面与旧并发曲线分开保存。
+- [此前完整 M4 throughput–latency Pareto 图](2026-10-17-m4-pareto/README.md)：正确性为先决条件；联合前沿、各家前沿与被支配配置均标明。
 - [M4此前完整三家对照的延迟—吞吐图](2026-10-17-native15/README.md)：旧轮次重新核算真实HTTP完整请求时长，保留21个arm、22份聚合原件与全部白名单时钟；不是新候选跑分。
 - [2026-10-17 图与台账](2026-10-17/README.md)：oMLX none/MTP三对HTTP计时，以及同输入Linear局部数值图。PNG/SVG、已审数据和生成脚本均保存。
 - [当前模型与三家对照范围](MODEL-PLAN.md)：Qwen3.8与GLM-5.3-Flash。
@@ -20,3 +21,5 @@ native15快照README保留作者在源机运行的命令。其`collect_rows.py`�
 [41：TCP_NODELAY HTTP 对照](../experiments/41-native-http-nodelay-pilot.md)新增首对负结果：OFF 为 1227.177 ms / 26.0761 tok/s，ON 为 1230.205 ms / 26.0119 tok/s。按冻结计划停止，未采用；两臂同机 AC、thermal 0、pressure 1。该内部单因素筛查单独保存，不替换上面的三家对照前沿。
 
 [42：投机与普通路径的新短请求对照](../experiments/42-startup-warm-short-request.md)：V123 两臂完成，raw32 与资源检查通过；spec 吞吐为 ordinary 的 48.805%，不采用。新图和负结果单独归档，不与旧三家前沿混合。
+
+[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)：V125 完成 N–O–L / O–L–N / L–N–O 三轮。按 fresh-arm 中位数，本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。相对 oMLX 吞吐高 3.388%、完整请求延迟低 3.277%；三个配对方向一致，尚不声称统计显著。C1 固定输出 32 tokens，两轴互为倒数；需要同场 C2/C4 才能检验完整前沿，不能用旧并发点拼接。
