@@ -1,0 +1,67 @@
+{
+  "schema": "omlx-target-load-window-v2",
+  "time_utc": "2026-10-17T10:07:46.112108+00:00",
+  "path": "/Users/ryanli/.omlx/logs/service.stderr.log",
+  "window_start_byte": 41760,
+  "window_end_byte": 46336,
+  "window_sha256": "de7b5880181c75d5dd598f5e3488cc04daf9795e974bce49bec26f59c58e17f9",
+  "scope": "Only first/unique recorded physical target loading transaction; selected engine and MTP/offload messages, no request bodies.",
+  "selected_lines": [
+    {
+      "byte_offset": 41760,
+      "line": "2026-10-16 08:02:37,366 - omlx.engine_pool - INFO - Loading model: Qwen3.8-Flash-Next-oQ6e-mtp"
+    },
+    {
+      "byte_offset": 41855,
+      "line": "2026-10-16 08:02:37,379 - omlx.patches.mlx_vlm_qwen4_exp_compat - INFO - Qwen4-Exp mlx-vlm compatibility patch applied"
+    },
+    {
+      "byte_offset": 41974,
+      "line": "2026-10-16 08:02:37,380 - omlx.utils.model_loading - INFO - Qwen4-Exp mlx-vlm compatibility patch applied for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp"
+    },
+    {
+      "byte_offset": 42142,
+      "line": "2026-10-16 08:02:37,381 - omlx.patches.mlx_lm_mtp.nemotron_h_chain - INFO - nemotron_h MTP chain patch applied (depth-k drafting, sequential fused verify, replay-free rollback)"
+    },
+    {
+      "byte_offset": 42319,
+      "line": "2026-10-16 08:02:37,382 - omlx.patches.mlx_vlm_qwen4_exp_compat - INFO - Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident"
+    },
+    {
+      "byte_offset": 42483,
+      "line": "2026-10-16 08:02:37,382 - omlx.patches.mlx_vlm_qwen4_exp_compat - INFO - Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp (checkpoint layout: mtp.)"
+    },
+    {
+      "byte_offset": 42676,
+      "line": "2026-10-16 08:02:37,384 - omlx.engine.vlm - INFO - qwen4_exp pre-quantization sanitize active for Qwen3.8-Flash-Next-oQ6e-mtp"
+    },
+    {
+      "byte_offset": 42802,
+      "line": "2026-10-16 08:02:43,016 - mlx_vlm.models.qwen4_exp.qwen4_exp - INFO - Skipped Qwen4-Exp exact hybrid projections while Lightning MTP target verification is enabled"
+    },
+    {
+      "byte_offset": 42966,
+      "line": "2026-10-16 08:02:43,017 - mlx_vlm.models.qwen4_exp.qwen4_exp - INFO - Enabled Qwen4-Exp hyper-connection optimizations: 0 exact hybrid projection pairs, 100 compiled decode paths"
+    },
+    {
+      "byte_offset": 43145,
+      "line": "2026-10-16 08:02:43,017 - mlx_vlm.models.qwen4_exp.qwen4_exp - INFO - Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding"
+    },
+    {
+      "byte_offset": 45503,
+      "line": "2026-10-16 08:02:59,654 - omlx.engine_core - INFO - Engine started"
+    },
+    {
+      "byte_offset": 45928,
+      "line": "2026-10-16 08:02:59,711 - omlx.engine.vlm - INFO - VLM tool calling enabled: parser=qwen3_coder"
+    },
+    {
+      "byte_offset": 46024,
+      "line": "2026-10-16 08:02:59,714 - omlx.engine.vlm - INFO - VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp"
+    },
+    {
+      "byte_offset": 46158,
+      "line": "2026-10-16 08:02:59,715 - omlx.engine_pool - INFO - Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp (actual: 140.48GB, local estimate: 147.22GB, full model: 147.22GB, total: 147.22GB)"
+    }
+  ]
+}

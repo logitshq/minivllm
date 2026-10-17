@@ -399,3 +399,13 @@ GLM下载及加载预算审查同步推进，未把CPU准备或模型下载算�
 15 CPU mock tests经root复核，31core source pins一致，两人静态审读无阻断。
 真实L1536 attention归约、ahead生命周期、参数替换及完整长任务性能尚未验证，不能进入Pareto。
 [实现、推导和GPU候选计划](../../bench/m5_ultra_256gb/long_decode_graph/README.md)。
+
+
+E023 实机资格计划现已冻结并在 `e9600a8` 后启动：plan SHA
+`21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb`，122执行依赖pins。
+root独立复核owner的8项CPU检查；子进程1800秒、owner1830秒预算，资源守卫与外部服务恢复
+归独立lease负责。运行中的逐步PASS不等于整组通过；计时带完整数值观察，不进入性能图。
+
+E024 新增真实GPU诊断入口（尚未调度）：32个B/长度点、真实参数值替换与恢复、B1→B8→B1、
+实际compiled callable见证和cap4 ahead生命周期。root与独立reviewer均复核12项CPU检查；
+SHA与日志在 `long_decode_graph/cpu-qualification-v1`。完整D512/gates-ON门仍需后续运行。

@@ -1,0 +1,110 @@
+{
+  "schema": "omlx-unload-readonly-preflight-v2",
+  "started_utc": "2026-10-17T10:05:34.875354+00:00",
+  "scope": "Read-only PID/launchd metadata; no argument/environment values, credentials, HTTP mutation or signals.",
+  "process": {
+    "command": [
+      "/bin/ps",
+      "-p",
+      "74384",
+      "-o",
+      "pid=,ppid=,stat=,lstart=,comm="
+    ],
+    "returncode": 0,
+    "metadata_line": "74384     1 S    Fri Oct 16 08:01:58 2026     omlx-server",
+    "error_category": "none"
+  },
+  "launchd": {
+    "command": [
+      "/bin/launchctl",
+      "print",
+      "gui/501/local.omlx.server"
+    ],
+    "returncode": 0,
+    "selected_fields": [
+      {
+        "field": "active count",
+        "value": "1"
+      },
+      {
+        "field": "path",
+        "value": "/Users/ryanli/Library/LaunchAgents/local.omlx.server.plist"
+      },
+      {
+        "field": "type",
+        "value": "LaunchAgent"
+      },
+      {
+        "field": "state",
+        "value": "running"
+      },
+      {
+        "field": "program",
+        "value": "/Users/ryanli/.local/bin/omlx"
+      },
+      {
+        "field": "working directory",
+        "value": "/Users/ryanli/.omlx"
+      },
+      {
+        "field": "stdout path",
+        "value": "/Users/ryanli/.omlx/logs/service.stdout.log"
+      },
+      {
+        "field": "stderr path",
+        "value": "/Users/ryanli/.omlx/logs/service.stderr.log"
+      },
+      {
+        "field": "minimum runtime",
+        "value": "30"
+      },
+      {
+        "field": "exit timeout",
+        "value": "5"
+      },
+      {
+        "field": "runs",
+        "value": "4"
+      },
+      {
+        "field": "pid",
+        "value": "74384"
+      },
+      {
+        "field": "type",
+        "value": "resource"
+      },
+      {
+        "field": "state",
+        "value": "active"
+      },
+      {
+        "field": "active count",
+        "value": "1"
+      },
+      {
+        "field": "type",
+        "value": "jetsam"
+      },
+      {
+        "field": "state",
+        "value": "active"
+      },
+      {
+        "field": "active count",
+        "value": "1"
+      },
+      {
+        "field": "spawn type",
+        "value": "daemon (3)"
+      },
+      {
+        "field": "properties",
+        "value": "keepalive | runatload | inferred program"
+      }
+    ],
+    "error_category": "none",
+    "full_output_not_retained": true
+  },
+  "finished_utc": "2026-10-17T10:05:34.882975+00:00"
+}

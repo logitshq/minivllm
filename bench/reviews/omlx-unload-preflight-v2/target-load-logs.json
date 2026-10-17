@@ -1,0 +1,56 @@
+{
+  "schema": "omlx-targeted-service-log-v2",
+  "time_utc": "2026-10-17T10:07:25.034324+00:00",
+  "target": "Qwen3.8-Flash-Next-oQ6e-mtp",
+  "scope": "Only three exact current-service destinations; bounded tails; only target load/unload/runtime-variant messages retained. No unrelated log traversal.",
+  "files": [
+    {
+      "path": "/Users/ryanli/.omlx/logs/service.stdout.log",
+      "exists": true,
+      "size_bytes": 0,
+      "mtime_ns": 1792162562819486854,
+      "tail_start_byte": 0,
+      "tail_bytes": 0,
+      "tail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target_lifecycle_matches": []
+    },
+    {
+      "path": "/Users/ryanli/.omlx/logs/service.stderr.log",
+      "exists": true,
+      "size_bytes": 84311,
+      "mtime_ns": 1792191651084332852,
+      "tail_start_byte": 0,
+      "tail_bytes": 84311,
+      "tail_sha256": "8c8a2ea7a8a77387934db7625d51d0d062ad2d1e4afc1d398c922210c1924170",
+      "target_lifecycle_matches": [
+        {
+          "byte_offset": 41760,
+          "line": "2026-10-16 08:02:37,366 - omlx.engine_pool - INFO - Loading model: Qwen3.8-Flash-Next-oQ6e-mtp"
+        },
+        {
+          "byte_offset": 46158,
+          "line": "2026-10-16 08:02:59,715 - omlx.engine_pool - INFO - Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp (actual: 140.48GB, local estimate: 147.22GB, full model: 147.22GB, total: 147.22GB)"
+        }
+      ]
+    },
+    {
+      "path": "/Users/ryanli/.omlx/logs/server.log",
+      "exists": true,
+      "size_bytes": 86235,
+      "mtime_ns": 1792191651084358227,
+      "tail_start_byte": 0,
+      "tail_bytes": 86235,
+      "tail_sha256": "3f2999108150818f7593908c03755ef084c00d08e4fd3ba7a770945c3d44d2ec",
+      "target_lifecycle_matches": [
+        {
+          "byte_offset": 42442,
+          "line": "2026-10-16 08:02:37,366 - omlx.engine_pool - INFO - [-] - Loading model: Qwen3.8-Flash-Next-oQ6e-mtp"
+        },
+        {
+          "byte_offset": 47020,
+          "line": "2026-10-16 08:02:59,715 - omlx.engine_pool - INFO - [-] - Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp (actual: 140.48GB, local estimate: 147.22GB, full model: 147.22GB, total: 147.22GB)"
+        }
+      ]
+    }
+  ]
+}

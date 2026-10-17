@@ -118,3 +118,16 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   核心为单独分发的专有预编译binary，未读取其Metal实现。README列affine Q2–Q8；
   加入本机基线前仍须核对NVFP4是否可原样表示，不能换量化后称同checkpoint比较。
   本轮未安装、未跑分，不把其自报速度放入本机Pareto。
+
+- [FusionML v1](https://arxiv.org/html/2607.22785v1)，2026-07-24；2026-10-17读§3–6。
+  已materialize的输入可让CPU/GPU行拆分并发；lazy GPU依赖可能使其串行。统一内存共享带宽，
+  增加计算单元不等于增加decode带宽。正文§5.4说明六组生成中有一组near-tie token分歧，
+  §5.1用误差容限验数值，因此不能从摘要的token-identical概括为本任务的逐位无误差资格。
+  本机推论：暂不引入CPU分流主线；可借鉴按实际瓶颈选择单独开关，以及避免在线探测
+  挤出当前working set。该论文不是10月新发表，也没有在本机复现它的速度。
+- [BaseRT M5 v1](https://arxiv.org/html/2607.19438v1)，2026-07-21；2026-10-17读§2–4。
+  M5 GPU内部矩阵单元由Metal4 cooperative tensor操作使用；论文将高算术强度prefill与
+  memory-bound decode分别调度，并保留shape不满足时的SIMD路径。§3.2未公布完整shape
+  阈值；其Q4/Q8格式及M5 Pro结果不能直接证明本机NVFP4受益。推论：先核查MLX现有
+  NVFP4/NAX dispatch，再做独立prefill形状实验；不重新量化checkpoint，不将作者速度
+  放进本机Pareto。当前E024只研究长decode图复用，与论文tensor kernel加速分开验证。

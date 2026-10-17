@@ -1,0 +1,61 @@
+{
+  "schema": "omlx-readonly-anonymous-management-probe-v2",
+  "credentials_supplied": false,
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8001/api/status",
+      "method": "GET",
+      "started_utc": "2026-10-17T10:06:09.320150+00:00",
+      "http_status": 200,
+      "selected_data": {
+        "status": "ok",
+        "version": "0.7.0",
+        "loaded_models": [
+          "Qwen3.8-Flash-Next-oQ6e-mtp"
+        ],
+        "models_loaded": 1,
+        "models_loading": 0,
+        "active_requests": 0,
+        "waiting_requests": 0,
+        "model_memory_used": 158077204528,
+        "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp"
+      },
+      "finished_utc": "2026-10-17T10:06:09.327874+00:00"
+    },
+    {
+      "url": "http://127.0.0.1:8001/v1/models/status",
+      "method": "GET",
+      "started_utc": "2026-10-17T10:06:09.327879+00:00",
+      "http_status": 200,
+      "selected_data": {
+        "models": [
+          {
+            "id": "Qwen3.8-Flash-Next-oQ6e-mtp",
+            "model_path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+            "loaded": true,
+            "is_loading": false,
+            "pinned": false,
+            "engine_type": "vlm",
+            "model_type": "vlm",
+            "config_model_type": "qwen4_exp",
+            "estimated_size": 158077204528,
+            "resident_estimated_size": 158077204528,
+            "actual_size": 150844290256,
+            "last_access": 1792191648.358505
+          }
+        ],
+        "scope": "Loaded or original target physical/profile rows only; unrelated models and arbitrary settings fields omitted."
+      },
+      "finished_utc": "2026-10-17T10:06:09.333162+00:00"
+    },
+    {
+      "url": "http://127.0.0.1:8001/admin/api/models",
+      "method": "GET",
+      "started_utc": "2026-10-17T10:06:09.333165+00:00",
+      "http_status": 401,
+      "www_authenticate": null,
+      "outcome": "HTTP_error_body_not_read",
+      "finished_utc": "2026-10-17T10:06:09.337509+00:00"
+    }
+  ]
+}
