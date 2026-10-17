@@ -1,0 +1,78 @@
+{
+  "experiment": "E012 integrated module",
+  "processes": 3,
+  "repetitions": [
+    1,
+    2,
+    3
+  ],
+  "per_process_gate": {
+    "all_strict_checks": true,
+    "full_draft_geomean_min": 1.05,
+    "every_case_min": 0.97
+  },
+  "scope": "Module only, default OFF. No target verify/rollback/generation or HTTP qualification.",
+  "script": "bench/m5_ultra_256gb/draft_selector/integration.py",
+  "jobs": [
+    [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/guarded_v2.py",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-owner-v1",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-owner-v1-r1",
+      "74384",
+      "--cwd",
+      "/Users/ryanli/code/minivllm",
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/screen.py",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/integration.py",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/fullqual-build2/workload.json",
+      "--drafter",
+      "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-v1-r1"
+    ],
+    [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/guarded_v2.py",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-owner-v1",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-owner-v1-r2",
+      "74384",
+      "--cwd",
+      "/Users/ryanli/code/minivllm",
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/screen.py",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/integration.py",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/fullqual-build2/workload.json",
+      "--drafter",
+      "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-v1-r2"
+    ],
+    [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/guarded_v2.py",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-owner-v1",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-owner-v1-r3",
+      "74384",
+      "--cwd",
+      "/Users/ryanli/code/minivllm",
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/screen.py",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/draft_selector/integration.py",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/fullqual-build2/workload.json",
+      "--drafter",
+      "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/draft-selector-integrated-v1-r3"
+    ]
+  ]
+}

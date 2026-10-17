@@ -127,6 +127,7 @@ class DFlash2Drafter(nn.Module):
     def __init__(self, cfg: DraftConfig, q=None):
         super().__init__()
         self.cfg = cfg
+        object.__setattr__(self, "_device_selection_enabled", False)
         self.fc = Linear(len(cfg.target_layer_ids) * cfg.hidden_size, cfg.hidden_size, q)
         self.hidden_norm = RMSNorm(cfg.hidden_size, cfg.rms_norm_eps, zero_centered=False)
         self.layers = [DraftLayer(cfg, q) for _ in range(cfg.num_layers)]
@@ -138,6 +139,12 @@ class DFlash2Drafter(nn.Module):
     def reset(self):
         for l in self.layers:
             l.self_attn.reset()
+
+    def set_device_selection(self, enabled=False):
+        """Opt-in E012 module; changes neither draft length nor target verification."""
+        if type(enabled) is not bool:
+            raise TypeError("device selection flag must be bool")
+        object.__setattr__(self, "_device_selection_enabled", enabled)
 
     def draft(self, feats_new, anchor: int, start: int, embed_fn, lm_head_fn, block_size: int | None = None) -> list[int]:
         """feats_new: 还没喂给 drafter 的上下文特征 [n, 5·H]（位置 start-n..start-1）；anchor 在位置 start。
@@ -158,6 +165,9 @@ class DFlash2Drafter(nn.Module):
         unary = mx.take_along_axis(logits, cand, axis=-1)               # 它们的 logit
         proj = self.selector_proj(h).astype(mx.float32)                 # [7, r]
         succ = self.successor_codebook[cand].astype(mx.float32)         # [7, k, r]
+        if self._device_selection_enabled:
+            from .device_selector import select_path
+            return select_path(self.predecessor_codebook, cand, unary, proj, succ, anchor)
         path, prev = [], anchor
         mx.eval(cand, unary, proj, succ)
         for p in range(h.shape[0]):
@@ -169,10 +179,11 @@ class DFlash2Drafter(nn.Module):
         return path
 
 
-def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}) -> DFlash2Drafter:
+def load_drafter(model_dir: str, quantize: dict | None = {"group_size": 64, "bits": 4, "mode": "affine"}, *, device_selection: bool = False) -> DFlash2Drafter:
     """读 bf16 的 safetensors；quantize 不为 None 时把大的 Linear 在加载时量化（默认 affine 4bit，和 dflash-mlx 一样）。"""
     cfg = DraftConfig.from_dir(model_dir)
     model = DFlash2Drafter(cfg, quantize)
+    model.set_device_selection(device_selection)
     weights = {}
     for k, v in mx.load(str(Path(model_dir) / "model.safetensors")).items():
         k = k.replace("candidate_selector.hidden_projection", "selector_proj").replace("candidate_selector.", "")

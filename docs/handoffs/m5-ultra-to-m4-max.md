@@ -99,3 +99,17 @@ C2/C4/C16另外各三新进程补齐当前前沿；外部对照沿用归档并�
 258源码身份、566文本成员、797依赖绑定通过。V105 thermal STOP及V107 HOLD保持原样；
 这些归档不构成M5上CAP64/SIMD4/投机路径的运行资格。M5本轮继续target-only，
 没有与M4正在进行的V108/V109混合，也没有将两机数据pool。
+
+## 2026-10-17：E011拒绝、E012独立selector模块
+
+E011大batch图复用仅B16=1.023×，未过1.10×门，原型与失败已归档，未接入核心。
+E012原型`e96c1a5`移除draft选路每个位置的两次主机同步，保持FP32 score运算次序。
+33组score/IDs及9组完整draft/KV严格通过；完整draft九点几何平均1.177892×。
+不是整请求收益，也没有证明当前SpecRunner无损。
+
+正在接入的边界是`spec/device_selector.py`、`spec/dflash2.py`的selector开关，以及
+`engine/llm_engine.py`的`draft_device_selection=False`参数。默认关闭。
+不改GDN缓存、SpecRunner或literal-prefix-history事务；M4继续V108/V109可独立推进。
+三次新进程实际核心复测已预声明。M4取用前请先看
+[E012 tutorial](../optimization-guide/tutorials/012-device-draft-selector.md)中的最新资格状态，
+并在M4重测收益；不复制M5性能结论。之后通过本交接文件和各自分支同步。
