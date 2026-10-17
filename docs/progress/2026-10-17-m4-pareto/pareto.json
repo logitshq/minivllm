@@ -1,0 +1,504 @@
+{
+  "status": "CPU_PARETO_OF_FROZEN_HISTORICAL_REVIEWED_MEDIANS",
+  "source": "/private/tmp/minivllm-engine-optimization-20261014/status-three-engine-native15-20261017-build1/reviewed_rows.json",
+  "source_sha256": "708835be74dfaa44b76ba37805629eb140d51e9548f783cc0fb8aa89a749d658",
+  "model": "Qwen3.8-27B NVFP4 g16/b4",
+  "device": "Apple M4 Max 48GiB",
+  "workload": "19 prompt tokens ->32 completion tokens, greedy/normal EOS, uncached",
+  "objective": "minimize actual complete-request latency;maximize total output throughput;correctness is prerequisite,notaxis",
+  "latency_definition": "per measure group p50(DONE-start), then median3groups perarm, median3fresh arms perconfiguration; milliseconds",
+  "throughput_definition": "per group B*32/(maxDONE-minPOSTstart), then median3measuregroups perarm, median3fresharms perconfiguration; token/s",
+  "dominance_rule": "A.latency<=B.latency and A.throughput>=B.throughput and at leastone strict",
+  "frontier_scope": "Seven measured configuration medians;21 fresh-arm points retained as variation, not extra selectable configpoints",
+  "joint_frontier": [
+    "omlx-C1",
+    "native-C4"
+  ],
+  "per_engine_frontiers": {
+    "native": [
+      "native-C1",
+      "native-C4"
+    ],
+    "omlx": [
+      "omlx-C1",
+      "omlx-C4"
+    ],
+    "lithos": [
+      "lithos-C1"
+    ]
+  },
+  "configurations": [
+    {
+      "engine": "native",
+      "concurrency": 1,
+      "latency_ms": 1273.0945000075735,
+      "throughput_tok_s": 25.13560462307365,
+      "old_x_interactivity_tok_s": 27.951540885988983,
+      "fresh_arms": 3,
+      "measured_requests": 9,
+      "arm_labels": [
+        "C1-block1-native",
+        "C1-block2-native",
+        "C1-block3-native"
+      ],
+      "point_id": "native-C1",
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "joint_dominated_by": [
+        "omlx-C1"
+      ],
+      "same_engine_dominated_by": []
+    },
+    {
+      "engine": "native",
+      "concurrency": 2,
+      "latency_ms": 2799.683687000652,
+      "throughput_tok_s": 22.628166356601444,
+      "old_x_interactivity_tok_s": 13.487014674313762,
+      "fresh_arms": 3,
+      "measured_requests": 18,
+      "arm_labels": [
+        "C2-pair1-native",
+        "C2-pair2-native",
+        "C2-pair3-native"
+      ],
+      "point_id": "native-C2",
+      "joint_non_dominated": false,
+      "engine_non_dominated": false,
+      "joint_dominated_by": [
+        "native-C1",
+        "omlx-C1"
+      ],
+      "same_engine_dominated_by": [
+        "native-C1"
+      ]
+    },
+    {
+      "engine": "native",
+      "concurrency": 4,
+      "latency_ms": 3291.0859164985595,
+      "throughput_tok_s": 38.88648794562105,
+      "old_x_interactivity_tok_s": 12.200735241051921,
+      "fresh_arms": 3,
+      "measured_requests": 36,
+      "arm_labels": [
+        "C4-pair1-native",
+        "C4-pair2-native",
+        "C4-pair3-native"
+      ],
+      "point_id": "native-C4",
+      "joint_non_dominated": true,
+      "engine_non_dominated": true,
+      "joint_dominated_by": [],
+      "same_engine_dominated_by": []
+    },
+    {
+      "engine": "omlx",
+      "concurrency": 1,
+      "latency_ms": 1259.7697080054786,
+      "throughput_tok_s": 25.401468059319964,
+      "old_x_interactivity_tok_s": 29.64692424911186,
+      "fresh_arms": 3,
+      "measured_requests": 9,
+      "arm_labels": [
+        "C1-block1-omlx",
+        "C1-block2-omlx",
+        "C1-block3-omlx"
+      ],
+      "point_id": "omlx-C1",
+      "joint_non_dominated": true,
+      "engine_non_dominated": true,
+      "joint_dominated_by": [],
+      "same_engine_dominated_by": []
+    },
+    {
+      "engine": "omlx",
+      "concurrency": 2,
+      "latency_ms": 3115.389791986672,
+      "throughput_tok_s": 20.303770039787274,
+      "old_x_interactivity_tok_s": 13.156233459010798,
+      "fresh_arms": 3,
+      "measured_requests": 18,
+      "arm_labels": [
+        "C2-pair1-omlx",
+        "C2-pair2-omlx",
+        "C2-pair3-omlx"
+      ],
+      "point_id": "omlx-C2",
+      "joint_non_dominated": false,
+      "engine_non_dominated": false,
+      "joint_dominated_by": [
+        "native-C1",
+        "native-C2",
+        "omlx-C1",
+        "lithos-C1"
+      ],
+      "same_engine_dominated_by": [
+        "omlx-C1"
+      ]
+    },
+    {
+      "engine": "omlx",
+      "concurrency": 4,
+      "latency_ms": 3640.5600830039475,
+      "throughput_tok_s": 34.445484829310764,
+      "old_x_interactivity_tok_s": 11.623696890195703,
+      "fresh_arms": 3,
+      "measured_requests": 36,
+      "arm_labels": [
+        "C4-pair1-omlx",
+        "C4-pair2-omlx",
+        "C4-pair3-omlx"
+      ],
+      "point_id": "omlx-C4",
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "joint_dominated_by": [
+        "native-C4"
+      ],
+      "same_engine_dominated_by": []
+    },
+    {
+      "engine": "lithos",
+      "concurrency": 1,
+      "latency_ms": 1470.1796250010375,
+      "throughput_tok_s": 21.76604780519756,
+      "old_x_interactivity_tok_s": 29.488618620243457,
+      "fresh_arms": 3,
+      "measured_requests": 9,
+      "arm_labels": [
+        "C1-block1-lithos",
+        "C1-block2-lithos",
+        "C1-block3-lithos"
+      ],
+      "point_id": "lithos-C1",
+      "joint_non_dominated": false,
+      "engine_non_dominated": true,
+      "joint_dominated_by": [
+        "native-C1",
+        "omlx-C1"
+      ],
+      "same_engine_dominated_by": []
+    }
+  ],
+  "arms": [
+    {
+      "arm": "C1-block1-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "latency_ms": 1470.1796250010375,
+      "throughput_tok_s": 21.76604780519756,
+      "old_x_interactivity_tok_s": 29.488618620243457,
+      "all_measured_request_p50_ms_appendix_only": 1470.1796250010375,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block1-lithos-validated.json",
+      "source_report_sha256": "6ca3858e0b8eebc07de8af89d0baea794a03471676048f2a1ee67d60b75d0f99"
+    },
+    {
+      "arm": "C1-block1-native",
+      "engine": "native",
+      "concurrency": 1,
+      "latency_ms": 1271.0402090160642,
+      "throughput_tok_s": 25.17622949534523,
+      "old_x_interactivity_tok_s": 27.951540885988983,
+      "all_measured_request_p50_ms_appendix_only": 1271.0402090160642,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block1-native-validated.json",
+      "source_report_sha256": "3684a1b8e502b172e6e5a525a8f807690d15d1e3ac278883eb1b2e88218e87ba"
+    },
+    {
+      "arm": "C1-block1-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "latency_ms": 1259.7697080054786,
+      "throughput_tok_s": 25.401468059319964,
+      "old_x_interactivity_tok_s": 29.64692424911186,
+      "all_measured_request_p50_ms_appendix_only": 1259.7697080054786,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block1-omlx-validated.json",
+      "source_report_sha256": "0fa06ce24f69d207c10eaaa3c83bcf4bc19e7bad7ba907767657b08cd42e1692"
+    },
+    {
+      "arm": "C1-block2-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "latency_ms": 1474.296583008254,
+      "throughput_tok_s": 21.705266341121842,
+      "old_x_interactivity_tok_s": 29.45148394356078,
+      "all_measured_request_p50_ms_appendix_only": 1474.296583008254,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block2-lithos-validated.json",
+      "source_report_sha256": "4e84153990020e8340dfb3416a85b18318c48d198f7819668c2e32365a891e28"
+    },
+    {
+      "arm": "C1-block2-native",
+      "engine": "native",
+      "concurrency": 1,
+      "latency_ms": 1273.0945000075735,
+      "throughput_tok_s": 25.13560462307365,
+      "old_x_interactivity_tok_s": 28.001903811453396,
+      "all_measured_request_p50_ms_appendix_only": 1273.0945000075735,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block2-native-validated.json",
+      "source_report_sha256": "23d4277b0db5f3eed7fd1db0744ec4e19e90d0249dbb740cdd3b5975565d3100"
+    },
+    {
+      "arm": "C1-block2-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "latency_ms": 1258.4942080138717,
+      "throughput_tok_s": 25.427212772398615,
+      "old_x_interactivity_tok_s": 29.670229762300703,
+      "all_measured_request_p50_ms_appendix_only": 1258.4942080138717,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block2-omlx-validated.json",
+      "source_report_sha256": "971eb6252b53459d4c020ec5ad234c0f2531c36002310b1d89dfd7a63c3f7205"
+    },
+    {
+      "arm": "C1-block3-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "latency_ms": 1467.926916986471,
+      "throughput_tok_s": 21.7994503879616,
+      "old_x_interactivity_tok_s": 29.560460976327636,
+      "all_measured_request_p50_ms_appendix_only": 1467.926916986471,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block3-lithos-validated.json",
+      "source_report_sha256": "44e32182c665ad72165e715fa583bbc7d39d7ce38e47033064780daf5a1c52eb"
+    },
+    {
+      "arm": "C1-block3-native",
+      "engine": "native",
+      "concurrency": 1,
+      "latency_ms": 1632.8902920067776,
+      "throughput_tok_s": 19.59715245821743,
+      "old_x_interactivity_tok_s": 22.66171186308861,
+      "all_measured_request_p50_ms_appendix_only": 1632.8902920067776,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block3-native-validated.json",
+      "source_report_sha256": "3250ee0f24a15a327a224084b67211cdab0f72894211cb5b12553b329e000472"
+    },
+    {
+      "arm": "C1-block3-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "latency_ms": 2131.0327500104904,
+      "throughput_tok_s": 15.01619343946848,
+      "old_x_interactivity_tok_s": 17.690134889397445,
+      "all_measured_request_p50_ms_appendix_only": 2131.0327500104904,
+      "measure_groups": 3,
+      "measured_requests": 3,
+      "measured_tokens": 96,
+      "source_aggregate": "C1-block3-omlx-validated.json",
+      "source_report_sha256": "a07e1f18d1942de41a5e3df94e14ef1065c5f8604b5069d13be46f6c9430bc81"
+    },
+    {
+      "arm": "C2-pair1-native",
+      "engine": "native",
+      "concurrency": 2,
+      "latency_ms": 3134.1111044894205,
+      "throughput_tok_s": 20.2136772535762,
+      "old_x_interactivity_tok_s": 11.87229493510479,
+      "all_measured_request_p50_ms_appendix_only": 3122.3174374899827,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair1-native-validated.json",
+      "source_report_sha256": "82bf6b93bca1362d7ad9d71da81911dfd8a969c2eab076f689b593aa5b0b54c4"
+    },
+    {
+      "arm": "C2-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "latency_ms": 3662.383853996289,
+      "throughput_tok_s": 17.308252565141505,
+      "old_x_interactivity_tok_s": 10.888295865483295,
+      "all_measured_request_p50_ms_appendix_only": 3662.383853996289,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair1-omlx-validated.json",
+      "source_report_sha256": "27f202562994f963d738ba0802882dd72616897c9ab1665f9e04ef59a3cf1dd5"
+    },
+    {
+      "arm": "C2-pair2-native",
+      "engine": "native",
+      "concurrency": 2,
+      "latency_ms": 2799.683687000652,
+      "throughput_tok_s": 22.628166356601444,
+      "old_x_interactivity_tok_s": 13.487014674313762,
+      "all_measured_request_p50_ms_appendix_only": 2788.338249491062,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair2-native-validated.json",
+      "source_report_sha256": "8eb493cac4c5797d58610b8dc417e5c3dbd48217fe5d722405b29c3c1862a2ca"
+    },
+    {
+      "arm": "C2-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "latency_ms": 3115.389791986672,
+      "throughput_tok_s": 20.303770039787274,
+      "old_x_interactivity_tok_s": 13.156233459010798,
+      "all_measured_request_p50_ms_appendix_only": 3106.773624997004,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair2-omlx-validated.json",
+      "source_report_sha256": "c7fb0015e9a7e281fbf56a9c7a9f75c63b73882b62c78ed0fe6cbb6b6b6ee973"
+    },
+    {
+      "arm": "C2-pair3-native",
+      "engine": "native",
+      "concurrency": 2,
+      "latency_ms": 2641.0156869969796,
+      "throughput_tok_s": 23.97997896869342,
+      "old_x_interactivity_tok_s": 13.934762175818408,
+      "all_measured_request_p50_ms_appendix_only": 2641.0156869969796,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair3-native-validated.json",
+      "source_report_sha256": "5cfba76aa1a07847a25bf53e6369656c31b623160b37aef3459a08179577595e"
+    },
+    {
+      "arm": "C2-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "latency_ms": 2659.171604012954,
+      "throughput_tok_s": 23.78680223642115,
+      "old_x_interactivity_tok_s": 15.643898879781329,
+      "all_measured_request_p50_ms_appendix_only": 2640.3910415101564,
+      "measure_groups": 3,
+      "measured_requests": 6,
+      "measured_tokens": 192,
+      "source_aggregate": "C2-pair3-omlx-validated.json",
+      "source_report_sha256": "bd922fd6327b10f0c5943e93a6f3ffc15e3176ef5ba60f98f415f9c103daac61"
+    },
+    {
+      "arm": "C4-pair1-native",
+      "engine": "native",
+      "concurrency": 4,
+      "latency_ms": 3389.8338539875112,
+      "throughput_tok_s": 37.44723651477657,
+      "old_x_interactivity_tok_s": 11.756468742638473,
+      "all_measured_request_p50_ms_appendix_only": 3377.912916490459,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair1-native-validated.json",
+      "source_report_sha256": "e6547d891c23ece51136eb05946b66f9b814753aae1f221e2c8b136f4097760e"
+    },
+    {
+      "arm": "C4-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "latency_ms": 3635.5322914896533,
+      "throughput_tok_s": 34.445484829310764,
+      "old_x_interactivity_tok_s": 11.490358707991152,
+      "all_measured_request_p50_ms_appendix_only": 3607.3858960007783,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair1-omlx-validated.json",
+      "source_report_sha256": "315e7234e7450cde565893ee74d16be9147f425af583f98c33e63825f788ab26"
+    },
+    {
+      "arm": "C4-pair2-native",
+      "engine": "native",
+      "concurrency": 4,
+      "latency_ms": 3274.478499995894,
+      "throughput_tok_s": 39.08420167965301,
+      "old_x_interactivity_tok_s": 12.818091868659375,
+      "all_measured_request_p50_ms_appendix_only": 3274.478499995894,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair2-native-validated.json",
+      "source_report_sha256": "0ee155a997df2935110dd4f2815afb563cbc742788a016b5dd9cff097e7a8e25"
+    },
+    {
+      "arm": "C4-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "latency_ms": 3640.5600830039475,
+      "throughput_tok_s": 34.45093303989395,
+      "old_x_interactivity_tok_s": 11.879736523715703,
+      "all_measured_request_p50_ms_appendix_only": 3621.0748749872437,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair2-omlx-validated.json",
+      "source_report_sha256": "3eaa867abf3b876e96e5fef99be3a0c41e00d18538c528ebb28a961b74106abb"
+    },
+    {
+      "arm": "C4-pair3-native",
+      "engine": "native",
+      "concurrency": 4,
+      "latency_ms": 3291.0859164985595,
+      "throughput_tok_s": 38.88648794562105,
+      "old_x_interactivity_tok_s": 12.200735241051921,
+      "all_measured_request_p50_ms_appendix_only": 3291.0859164985595,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair3-native-validated.json",
+      "source_report_sha256": "0ff0b111e5f036d09073b167581609715406d40851e46cc57f86f3cb86ba8e93"
+    },
+    {
+      "arm": "C4-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "latency_ms": 3720.5733959999634,
+      "throughput_tok_s": 33.683407221293756,
+      "old_x_interactivity_tok_s": 11.623696890195703,
+      "all_measured_request_p50_ms_appendix_only": 3715.1402920135297,
+      "measure_groups": 3,
+      "measured_requests": 12,
+      "measured_tokens": 384,
+      "source_aggregate": "C4-pair3-omlx-validated.json",
+      "source_report_sha256": "a192e88278240d93b792762ef9b0181e70b140114723ff18c21675dfa2d04213"
+    }
+  ],
+  "not_available": [
+    {
+      "engine": "lithos",
+      "concurrency": 2,
+      "status": "N/A",
+      "reason": "concurrency429 boundary; no measuredpoint inthis campaign, not zero"
+    },
+    {
+      "engine": "lithos",
+      "concurrency": 4,
+      "status": "N/A",
+      "reason": "concurrency429 boundary; no measuredpoint inthis campaign, not zero"
+    }
+  ],
+  "line_semantics": "Connect measured frontier endpoints only; segments are not measured/interpolated feasible configurations or significance evidence.",
+  "limits": [
+    "Historical accepted native15 source, not newest native candidate.",
+    "Three fresh repetitions and mixedthermal states; no significance/completeParetofrontier assertion.",
+    "No M5/GLM numbers mixed; Qwen3.8 native15 snapshot only.",
+    "Only aggregate copies and whitelisted timing/count/labels exported, not rawHTTP text/IDs/settings/credentials.",
+    "Existing suite GPU_released flag is historical completion-time metadata, not current liveGPU state; no currentresourcecheck or GPU action performed."
+  ],
+  "correctness_scope": "Inherited historical campaign validation/19-32usage and per-engine qualification;this chart adds no numerical proof or wholecrossenginebitwise-equivalenceclaim. Latest unqualified fullmodel speculative candidates excluded.",
+  "GPU_used": false
+}

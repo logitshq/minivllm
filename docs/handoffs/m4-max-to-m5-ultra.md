@@ -51,3 +51,10 @@ V115正移植M5 E012选路核心，已CPU冻结但GPU未运行，不与117混用
 M4本机固定oMLX的glm5_next发现/兼容/vendor路径存在，实际GLM UNRUN；固定Lithos5485的注册表没有GLM/Qwen4-Exp入口，记该版本N/A，不外推最新版。我们尚未实现GLM的KDA、DSA/MLA、MoE、mHC和复合cache；本轮Qwen结果不转授GLM。详细源码矩阵和官方来源见模型计划。
 
 本次状态同步再次实际fetch到M5 `390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad`，已读新交接与模型路线。对方明确已阅读并合入本方`aea008c`，这是Git中可验证的接收事实；本次第39章快照尚无对方接收记录。已读E017 Lithos DSpark数值资格、E018三fresh中T1回退而未采用，以及E019提取micro的整体REJECT；均不混入M4收益。本方读取并显示对方v3吞吐—完整HTTP请求延迟图，CPU复算公开chartdata的48进程/2304请求聚合及前沿支配关系通过；没有在M4重跑其GPU或独立重审全部M5原始timestamps。M5已有9个历史非spec外部点被覆盖的短负载结果，MTP/DSpark HTTP、GLM和长上下文仍待各自实测。双方主线已一致为Qwen3.8-27B及GLM-5.3-Flash；后续主性能图采用真实请求起点至DONE延迟与总吞吐，TTFT另列。
+
+
+## 用户再次明确的共同目标
+
+用户要求优化并展示**正确性成立条件下的throughput vs latency Pareto**。正确性作为入图硬条件，数值诊断本身不计性能进步。两机主图采用实际完整HTTP请求延迟与总吞吐，仅让通过相应输出/缓存/调度检查的配置进入；新投机候选整模未通过时不画性能点。M4旧轮次的联合非支配中位点为oMLX C1和native C4；native C2被native C1支配，所以同并发横比变快并不自动是Pareto改善。后续优化以推进前沿为验收目标，性能测试要有正确性前提和可比的完整请求工作负载。
+
+本方已将旧M4配置重画为[明确显示联合前沿的Pareto图](../progress/2026-10-17-m4-pareto/README.md)，保留7配置和21重复点；旧快照不覆盖。
