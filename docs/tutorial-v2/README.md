@@ -139,4 +139,8 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 
 [41：HTTP 传输选项](../experiments/41-native-http-nodelay-pilot.md)和[42：短请求投机解码](../experiments/42-startup-warm-short-request.md)分别保存一次无收益和一次明显变慢的真实对照。
 
-[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)以完整请求 latency 和总输出 throughput 作图：本方三轮均领先，仍需同场并发点才能判断完整 Pareto 前沿。正文对照旧 native15、当前 CAP64/direct 与本轮测量代码的变化。
+[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)以完整请求 latency 和总输出 throughput 作图：本方三轮均领先；当时缺少的同场并发点已在第44章补齐。正文对照旧 native15、当前 CAP64/direct 与本轮测量代码的变化。
+
+[44：完整吞吐—延迟前沿](../experiments/44-fresh-full-throughput-latency.md)先解释 C1/C2/C4 与非支配点，再展示固定启动配置如何接入真实 batching。21 次全新加载的同轮结果中，本方 C1/C2/C4 覆盖全部已测外部点；图包含全部重复测量。结论限定于该模型、短负载及已测配置，未验证的 kernel 不计入收益。
+
+另读[共享权重多行 M1 补记](../code-versions/44-shared-w-m1/LOCAL-NUMERIC.zh.md)：从已经正确的 broadcast-M1 出发，尝试在多个 token 之间复用读取的权重，同时保留每行累加顺序。代码和局部数值记录已保存；它尚未取得整模或性能资格。

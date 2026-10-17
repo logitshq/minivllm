@@ -1,0 +1,45 @@
+{
+  "status": "CPU_PASS_GPU_UNRUN",
+  "tests_passed": 8,
+  "stdlib_only": true,
+  "inert": [
+    {
+      "script": "localqual.py",
+      "returncode": 0,
+      "stdout": {
+        "status": "INERT_CPU_SOURCE_PINS_PASS",
+        "GPU_used": false,
+        "source_manifest_sha256": "a633fa7557edccb725101150772c4ea0fd7a492e889dad8e60be91a9fb967e9f",
+        "planned_cases": 40,
+        "planned_matrix_checks": 80
+      },
+      "stderr": ""
+    },
+    {
+      "script": "launch.py",
+      "returncode": 0,
+      "stdout": {
+        "status": "INERT_CLEAN_LAUNCH_READY",
+        "GPU_used": false,
+        "controls": {
+          "MLX_MAX_OPS_PER_BUFFER": "50",
+          "MLX_MAX_MB_PER_BUFFER": "50",
+          "MLX_BFS_MAX_WIDTH": "20",
+          "MLX_METAL_FAST_SYNCH": "0"
+        },
+        "parent_selected_policy": "remove every selected key, then set exact child controls"
+      },
+      "stderr": ""
+    }
+  ],
+  "MLX_imported": false,
+  "GPU_used": false,
+  "source_manifest_sha256": "a633fa7557edccb725101150772c4ea0fd7a492e889dad8e60be91a9fb967e9f",
+  "planned_cases": 40,
+  "planned_matrix_comparisons": 80,
+  "strict_rows_per_arm": 152,
+  "represented_shapes": 4,
+  "uncovered_actual_shapes": 5,
+  "partial_N_rejected": true,
+  "source_or_W_Git_mutated": false
+}

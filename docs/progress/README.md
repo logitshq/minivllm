@@ -6,7 +6,8 @@
 
 已有的日期快照保持原样；同日后续结果另存检查点，Git commit保留演进。每次显著数值／性能结果之后commit/push、fetch M5交接，并更新本方交接。性能图只使用同机、同权重、同负载与相符资源条件的结果；M4/M5、局部/整模、不同电源和不同轮次分开。
 
-- [最新 M4 三家 C1 吞吐—延迟图](../experiments/43-fresh-c1-throughput-latency.md)：九次 fresh 加载，本方在三轮中均领先 oMLX/Lithos；新 C1 切面与旧并发曲线分开保存。
+- [最新 M4 完整吞吐—延迟前沿](../experiments/44-fresh-full-throughput-latency.md)：21 次独立加载、7 个配置，同轮 C1/C2/C4 本方点组成联合前沿，覆盖本轮 oMLX/Lithos 已测点。仅限 Qwen3.8-27B NVFP4 的 19→32 短负载。
+- [此前 M4 三家 C1 吞吐—延迟图](../experiments/43-fresh-c1-throughput-latency.md)：九次 fresh 加载的 C1 切面，独立保留，不与其他批次拼接。
 - [此前完整 M4 throughput–latency Pareto 图](2026-10-17-m4-pareto/README.md)：正确性为先决条件；联合前沿、各家前沿与被支配配置均标明。
 - [M4此前完整三家对照的延迟—吞吐图](2026-10-17-native15/README.md)：旧轮次重新核算真实HTTP完整请求时长，保留21个arm、22份聚合原件与全部白名单时钟；不是新候选跑分。
 - [2026-10-17 图与台账](2026-10-17/README.md)：oMLX none/MTP三对HTTP计时，以及同输入Linear局部数值图。PNG/SVG、已审数据和生成脚本均保存。
@@ -14,7 +15,7 @@
 - [M4→M5交接](../handoffs/m4-max-to-m5-ultra.md)：已实际推送、接收的源码事实与下一步。
 - [39：广播M1教程](../experiments/39-verify-broadcast-m1.md)与[固定代码快照](../code-versions/39-broadcast-m1/README.md)。
 
-[40：整模通过后再测端到端性能](../experiments/40-m1-verify-and-bounded-loader.md)记录 V117 严格整模通过、V120 两次加载资源中止与 V122 小缓存诊断。普通路径单组测到 1250.37 ms / 25.59 tok/s，投机路径尚无请求性能；不混入旧前沿，完整 Pareto 胜出尚未成立。
+[40：整模通过后再测端到端性能](../experiments/40-m1-verify-and-bounded-loader.md)记录 V117 严格整模通过、V120 两次加载资源中止与 V122 小缓存诊断。普通路径单组测到 1250.37 ms / 25.59 tok/s，投机路径尚无请求性能；不混入旧前沿；该阶段尚未取得完整 Pareto 胜出，最新结论见第44章。
 
 native15快照README保留作者在源机运行的命令。其`collect_rows.py`依赖未公开的完整arm报告与原目录布局，离机不能把这条命令当作完整采证重放。公开时间戳白名单和聚合表足够复算图中延迟与吞吐；重新绘图先复制快照到新目录，并准备Matplotlib及适用中文字体。`generate_figure.py`从脚本所在目录读数据、写图，当前字体路径为macOS STHeiti；不要直接在冻结快照中覆盖原图。
 
@@ -22,4 +23,6 @@ native15快照README保留作者在源机运行的命令。其`collect_rows.py`�
 
 [42：投机与普通路径的新短请求对照](../experiments/42-startup-warm-short-request.md)：V123 两臂完成，raw32 与资源检查通过；spec 吞吐为 ordinary 的 48.805%，不采用。新图和负结果单独归档，不与旧三家前沿混合。
 
-[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)：V125 完成 N–O–L / O–L–N / L–N–O 三轮。按 fresh-arm 中位数，本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。相对 oMLX 吞吐高 3.388%、完整请求延迟低 3.277%；三个配对方向一致，尚不声称统计显著。C1 固定输出 32 tokens，两轴互为倒数；需要同场 C2/C4 才能检验完整前沿，不能用旧并发点拼接。
+[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)：V125 完成 N–O–L / O–L–N / L–N–O 三轮。按 fresh-arm 中位数，本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。相对 oMLX 吞吐高 3.388%、完整请求延迟低 3.277%；三个配对方向一致，尚不声称统计显著。C1 固定输出 32 tokens，两轴互为倒数；当时缺少的同场 C2/C4 已在第44章重新测量，未用旧并发点拼接。
+
+[44：完整短负载前沿](../experiments/44-fresh-full-throughput-latency.md)：V126 先验证不可变 C2/C4 启动配置、真实 batch 和输出；V128 再完成同轮 21 次加载。横轴是完整请求 p50，纵轴是总输出吞吐。C1/C2/C4 本方中位点分别为 1226.301 / 1470.632 / 2011.992 ms 和 26.0947 / 43.5117 / 63.3790 token/s，覆盖本轮全部外部配置点。每配置三次独立运行，不能据此声称统计显著或其他负载胜出；旧图和负结果继续保留。

@@ -1,0 +1,45 @@
+{
+  "status": "CPU_READY_V127_1491_SAME_INPUT_LOCAL_QUALIFICATION_GPU_UNRUN",
+  "qualify_sha256": "0171c8161435deb5c4df42253d7b4a3ab44e893096f92332ddeba7b6c32e1e96",
+  "source_pins_sha256": "a09781dfeaedc6f1218262959c62cd3109c5d793f05222f2d1405158f4c3ec68",
+  "source_pins_count": 77,
+  "candidate_source_files": 31,
+  "candidate_python_files": 30,
+  "CPU_tests": 6,
+  "actual124_review_receipt": "/private/tmp/minivllm-engine-optimization-20261014/v124-independent-results-review-build1/receipt.json",
+  "actual124_review_receipt_sha256": "cd19eaf65721355d32ba963c151714ab76e4d7852a7fe57dfd2d0fb5fd84fc3f",
+  "inert_command": [
+    "python3",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v127-real-input-shared-m1-qual-build1/qualify.py",
+    "--inert"
+  ],
+  "root_owned_child_argv": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-B",
+    "/private/tmp/minivllm-engine-optimization-20261014/v127-real-input-shared-m1-qual-build1/qualify.py",
+    "--execute-gpu",
+    "--out",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/numeric-v127-attempt1/child-output"
+  ],
+  "child_selected_environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "root_external_owner_required": {
+    "timeout_seconds": 900,
+    "resource_monitor": "root existing guard,AC/thermal0or1/pressure1/no growth Swapouts orswapMB/no known foreign inference; worker34GiB64MiBcache",
+    "cleanup": "wait/reap and strict saved owned PID absence; no liveps by author"
+  },
+  "planned_actual_T5_operators": 497,
+  "planned_matrix_checks": 1491,
+  "T2_T4_scope": "derived prefixes, not separate actual trajectories",
+  "draft_loads": 0,
+  "future_A_IDs_as_proposals": false,
+  "local_only": true,
+  "production_kernel_reuse_or_performance_claim": false,
+  "fullmodel_qualified": false,
+  "GPU_used_by_author": false
+}

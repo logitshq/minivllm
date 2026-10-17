@@ -1,0 +1,501 @@
+{
+  "scope": "V128 short19-to32/Qwen3.8-27B NVFP4/M4/frozen static configuration set only",
+  "primary_X": "nested median request POST-to-DONE latency p50 milliseconds",
+  "primary_Y": "group total output tokens/(lastDONE-firstPOST), nested medians",
+  "arms": [
+    {
+      "arm": "V128-C1-block1-native",
+      "engine": "native",
+      "C": 1,
+      "replica": 1,
+      "latency_p50_ms": 1225.1395829953253,
+      "throughput_tok_s": 26.11947278836888,
+      "ttft_ms": 159.59320901311003,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block1-omlx",
+      "engine": "omlx",
+      "C": 1,
+      "replica": 1,
+      "latency_p50_ms": 1270.64450000762,
+      "throughput_tok_s": 25.184069973787395,
+      "ttft_ms": 214.84920801594853,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block1-lithos",
+      "engine": "lithos",
+      "C": 1,
+      "replica": 1,
+      "latency_p50_ms": 1461.2691660004202,
+      "throughput_tok_s": 21.89877179683869,
+      "ttft_ms": 411.3399999914691,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block2-omlx",
+      "engine": "omlx",
+      "C": 1,
+      "replica": 2,
+      "latency_p50_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "ttft_ms": 214.4730419968255,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block2-lithos",
+      "engine": "lithos",
+      "C": 1,
+      "replica": 2,
+      "latency_p50_ms": 1466.1083329992834,
+      "throughput_tok_s": 21.82649077134441,
+      "ttft_ms": 418.4591250086669,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block2-native",
+      "engine": "native",
+      "C": 1,
+      "replica": 2,
+      "latency_p50_ms": 1226.7349169997033,
+      "throughput_tok_s": 26.08550515401017,
+      "ttft_ms": 159.64575001271442,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block3-lithos",
+      "engine": "lithos",
+      "C": 1,
+      "replica": 3,
+      "latency_p50_ms": 1460.4629999957979,
+      "throughput_tok_s": 21.910859775353483,
+      "ttft_ms": 420.8077500225045,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block3-native",
+      "engine": "native",
+      "C": 1,
+      "replica": 3,
+      "latency_p50_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "ttft_ms": 159.78033299325034,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C1-block3-omlx",
+      "engine": "omlx",
+      "C": 1,
+      "replica": 3,
+      "latency_p50_ms": 1274.8399169940967,
+      "throughput_tok_s": 25.10119080319649,
+      "ttft_ms": 215.3031670022756,
+      "formal_requests": 3,
+      "formal_tokens": 96
+    },
+    {
+      "arm": "V128-C2-pair1-native",
+      "engine": "native",
+      "C": 2,
+      "replica": 1,
+      "latency_p50_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "ttft_ms": 300.51752099825535,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C2-pair1-omlx",
+      "engine": "omlx",
+      "C": 2,
+      "replica": 1,
+      "latency_p50_ms": 1563.9626880001742,
+      "throughput_tok_s": 40.325468519603966,
+      "ttft_ms": 437.5054789998103,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C2-pair2-omlx",
+      "engine": "omlx",
+      "C": 2,
+      "replica": 2,
+      "latency_p50_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "ttft_ms": 437.84145850804634,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C2-pair2-native",
+      "engine": "native",
+      "C": 2,
+      "replica": 2,
+      "latency_p50_ms": 1474.7431665018667,
+      "throughput_tok_s": 43.390364930199155,
+      "ttft_ms": 302.87772849260364,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C2-pair3-native",
+      "engine": "native",
+      "C": 2,
+      "replica": 3,
+      "latency_p50_ms": 1469.3178745219484,
+      "throughput_tok_s": 43.5504961716812,
+      "ttft_ms": 300.8123954932671,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C2-pair3-omlx",
+      "engine": "omlx",
+      "C": 2,
+      "replica": 3,
+      "latency_p50_ms": 1573.2442084990907,
+      "throughput_tok_s": 40.07718929282176,
+      "ttft_ms": 438.88139601040166,
+      "formal_requests": 6,
+      "formal_tokens": 192
+    },
+    {
+      "arm": "V128-C4-pair1-native",
+      "engine": "native",
+      "C": 4,
+      "replica": 1,
+      "latency_p50_ms": 2069.811541499803,
+      "throughput_tok_s": 61.185567161005935,
+      "ttft_ms": 571.7172704898985,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    },
+    {
+      "arm": "V128-C4-pair1-omlx",
+      "engine": "omlx",
+      "C": 4,
+      "replica": 1,
+      "latency_p50_ms": 2291.8524380074814,
+      "throughput_tok_s": 54.7451733282908,
+      "ttft_ms": 791.1226665164577,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    },
+    {
+      "arm": "V128-C4-pair2-omlx",
+      "engine": "omlx",
+      "C": 4,
+      "replica": 2,
+      "latency_p50_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "ttft_ms": 796.5071664948482,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    },
+    {
+      "arm": "V128-C4-pair2-native",
+      "engine": "native",
+      "C": 4,
+      "replica": 2,
+      "latency_p50_ms": 1986.3544374966295,
+      "throughput_tok_s": 63.37899542713181,
+      "ttft_ms": 505.77799999155104,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    },
+    {
+      "arm": "V128-C4-pair3-native",
+      "engine": "native",
+      "C": 4,
+      "replica": 3,
+      "latency_p50_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.60924705924159,
+      "ttft_ms": 504.7272709925892,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    },
+    {
+      "arm": "V128-C4-pair3-omlx",
+      "engine": "omlx",
+      "C": 4,
+      "replica": 3,
+      "latency_p50_ms": 2310.1315414969577,
+      "throughput_tok_s": 54.285159526429986,
+      "ttft_ms": 792.521333496552,
+      "formal_requests": 12,
+      "formal_tokens": 384
+    }
+  ],
+  "configurations": [
+    {
+      "point_id": "native:C1",
+      "engine": "native",
+      "C": 1,
+      "latency_p50_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "fresh_arms": 3,
+      "dominated_by": [],
+      "joint_non_dominated": true
+    },
+    {
+      "point_id": "omlx:C1",
+      "engine": "omlx",
+      "C": 1,
+      "latency_p50_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "fresh_arms": 3,
+      "dominated_by": [
+        "native:C1"
+      ],
+      "joint_non_dominated": false
+    },
+    {
+      "point_id": "lithos:C1",
+      "engine": "lithos",
+      "C": 1,
+      "latency_p50_ms": 1461.2691660004202,
+      "throughput_tok_s": 21.89877179683869,
+      "fresh_arms": 3,
+      "dominated_by": [
+        "native:C1",
+        "omlx:C1"
+      ],
+      "joint_non_dominated": false
+    },
+    {
+      "point_id": "native:C2",
+      "engine": "native",
+      "C": 2,
+      "latency_p50_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "fresh_arms": 3,
+      "dominated_by": [],
+      "joint_non_dominated": true
+    },
+    {
+      "point_id": "omlx:C2",
+      "engine": "omlx",
+      "C": 2,
+      "latency_p50_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "fresh_arms": 3,
+      "dominated_by": [
+        "native:C2"
+      ],
+      "joint_non_dominated": false
+    },
+    {
+      "point_id": "native:C4",
+      "engine": "native",
+      "C": 4,
+      "latency_p50_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.37899542713181,
+      "fresh_arms": 3,
+      "dominated_by": [],
+      "joint_non_dominated": true
+    },
+    {
+      "point_id": "omlx:C4",
+      "engine": "omlx",
+      "C": 4,
+      "latency_p50_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "fresh_arms": 3,
+      "dominated_by": [
+        "native:C4"
+      ],
+      "joint_non_dominated": false
+    }
+  ],
+  "joint_frontier": [
+    "native:C1",
+    "native:C2",
+    "native:C4"
+  ],
+  "signed_pairs": [
+    {
+      "C": 1,
+      "replica": 1,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 3.581246919340686,
+      "native_throughput_gain_pct": 3.7142638801237915,
+      "native_throughput_ratio": 1.037142638801238,
+      "both_axes_improve": true
+    },
+    {
+      "C": 1,
+      "replica": 1,
+      "rival": "lithos",
+      "native_latency_reduction_pct": 16.15921203972267,
+      "native_throughput_gain_pct": 19.273688180720217,
+      "native_throughput_ratio": 1.1927368818072022,
+      "both_axes_improve": true
+    },
+    {
+      "C": 1,
+      "replica": 2,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 3.7189904669886475,
+      "native_throughput_gain_pct": 3.8626417452691353,
+      "native_throughput_ratio": 1.0386264174526914,
+      "both_axes_improve": true
+    },
+    {
+      "C": 1,
+      "replica": 2,
+      "rival": "lithos",
+      "native_latency_reduction_pct": 16.327130172562576,
+      "native_throughput_gain_pct": 19.51305148996898,
+      "native_throughput_ratio": 1.1951305148996898,
+      "both_axes_improve": true
+    },
+    {
+      "C": 1,
+      "replica": 3,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 3.80742902158564,
+      "native_throughput_gain_pct": 3.9581320915520912,
+      "native_throughput_ratio": 1.039581320915521,
+      "both_axes_improve": true
+    },
+    {
+      "C": 1,
+      "replica": 3,
+      "rival": "lithos",
+      "native_latency_reduction_pct": 16.03338858846587,
+      "native_throughput_gain_pct": 19.09495729187356,
+      "native_throughput_ratio": 1.1909495729187356,
+      "both_axes_improve": true
+    },
+    {
+      "C": 2,
+      "replica": 1,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 5.967592303088365,
+      "native_throughput_gain_pct": 7.901288541156637,
+      "native_throughput_ratio": 1.0790128854115664,
+      "both_axes_improve": true
+    },
+    {
+      "C": 2,
+      "replica": 2,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 6.100935244692474,
+      "native_throughput_gain_pct": 8.05951173958681,
+      "native_throughput_ratio": 1.080595117395868,
+      "both_axes_improve": true
+    },
+    {
+      "C": 2,
+      "replica": 3,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 6.605861532221391,
+      "native_throughput_gain_pct": 8.666543088842694,
+      "native_throughput_ratio": 1.086665430888427,
+      "both_axes_improve": true
+    },
+    {
+      "C": 4,
+      "replica": 1,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 9.688271933454807,
+      "native_throughput_gain_pct": 11.764313529695091,
+      "native_throughput_ratio": 1.117643135296951,
+      "both_axes_improve": true
+    },
+    {
+      "C": 4,
+      "replica": 2,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 13.897840309813759,
+      "native_throughput_gain_pct": 16.54849501109097,
+      "native_throughput_ratio": 1.1654849501109097,
+      "both_axes_improve": true
+    },
+    {
+      "C": 4,
+      "replica": 3,
+      "rival": "omlx",
+      "native_latency_reduction_pct": 12.90573242812444,
+      "native_throughput_gain_pct": 17.17612624546485,
+      "native_throughput_ratio": 1.1717612624546485,
+      "both_axes_improve": true
+    }
+  ],
+  "pair_summaries": [
+    {
+      "rival": "omlx",
+      "C": 1,
+      "pairs": 3,
+      "both_axes_wins": 3,
+      "latency_reduction_pct_range": [
+        3.581246919340686,
+        3.80742902158564
+      ],
+      "throughput_gain_pct_range": [
+        3.7142638801237915,
+        3.9581320915520912
+      ],
+      "geomean_throughput_ratio": 1.0384496409129997
+    },
+    {
+      "rival": "lithos",
+      "C": 1,
+      "pairs": 3,
+      "both_axes_wins": 3,
+      "latency_reduction_pct_range": [
+        16.03338858846587,
+        16.327130172562576
+      ],
+      "throughput_gain_pct_range": [
+        19.09495729187356,
+        19.51305148996898
+      ],
+      "geomean_throughput_ratio": 1.1929377604268638
+    },
+    {
+      "rival": "omlx",
+      "C": 2,
+      "pairs": 3,
+      "both_axes_wins": 3,
+      "latency_reduction_pct_range": [
+        5.967592303088365,
+        6.605861532221391
+      ],
+      "throughput_gain_pct_range": [
+        7.901288541156637,
+        8.666543088842694
+      ],
+      "geomean_throughput_ratio": 1.0820861235635841
+    },
+    {
+      "rival": "omlx",
+      "C": 4,
+      "pairs": 3,
+      "both_axes_wins": 3,
+      "latency_reduction_pct_range": [
+        9.688271933454807,
+        13.897840309813759
+      ],
+      "throughput_gain_pct_range": [
+        11.764313529695091,
+        17.17612624546485
+      ],
+      "geomean_throughput_ratio": 1.1513737410188494
+    }
+  ],
+  "observed_pair_both_axes_wins": 12,
+  "raw_suite_full_frontier_win_field": false,
+  "field_interpretation": "pre-independent-audit conservative marker; not a computed dominance conclusion",
+  "all_tested_official_points_dominated": true,
+  "global_all_workload_or_statistical_significance_claim": false
+}

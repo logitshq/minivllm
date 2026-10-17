@@ -1,0 +1,11 @@
+# V127 target-only same-input shared-W M1 qualification
+
+One candidate116 target load, CAP64 and final64MiB allocator cache. One ordinary19→32 warm proves raw IDs and empty runner before a separate prompt prefill. No drafter is needed to build the V113 capture: load zero draft models, avoid unused draft quantization/residency, and preserve its bounded loader unchanged.
+
+Reuse the saved **actual V108 B DFlash proposals**, with their source receipt and fixture hashes. This run does not regenerate proposals. Regenerate only the target anchor from prompt. Complete the unchanged original batched T5 target graph and reproduce all497 V112/V113 input/batch-output/native-M1-output hashes before claiming coverage. Alternatives never feed the target or proposals.
+
+For all497 captured operators (nine geometries, including lm_head), compare shared-W output to independently concatenated native M1 outputs for T5, and separately the same X prefixes T2 and T4. These prefixes are derived local inputs, not independently observed verify trajectories. Expected1491 complete matrices with exact dtype/shape/finite/bytes and W/scales/X/captured-output readonly. Existing113 broadcastM1 remains default-OFF wrapper fallback for unsupported eligible inputs, with route/reason recorded; no silent fallback may satisfy required shared9×3 coverage.
+
+Original target payload is15,132,811,264B; captured497 X and Y sums (before alias deduction) are33,966,080B and41,523,200B. T5 history bound for48 GDN S producers is754,974,720B; one largest fresh output is2,483,200B. Original113 observed allocator peak16,960,347,808B is historical only. Declare34GiB allocator limit/64MiB cache; actual allocator/resources are recorded at model-ready, after ordinary warm, capture, periodic comparison and finally. No fullweight copies or retained alternate1491 outputs. These figures are component bounds, not predicted exact peak; root owns actual pressure/paging/timeout/cleanup gates.
+
+Success establishes local same-input arithmetic only, not propagated speculative/fullmodel correctness or speed. V117 and V123 successes are warm/loader source references, not a transferred new shared-kernel qualification. No performance ranking.

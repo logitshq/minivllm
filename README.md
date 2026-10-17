@@ -87,10 +87,14 @@ docs/              计划、教程、远程版的契约和 notes
 
 [39：保留逐行量化乘法的结果](docs/experiments/39-verify-broadcast-m1.md)附冻结代码与前后diff；[进展图与台账](docs/progress/README.md)保存PNG/SVG、数据及复现脚本，[模型计划](docs/progress/MODEL-PLAN.md)明确Qwen3.8和GLM-5.3-Flash的机器与对照范围。
 
-[40：整模通过后再测吞吐和延迟](docs/experiments/40-m1-verify-and-bounded-loader.md)保存 V117 实际正确性结果、V120/V122 资源中止及代码；当前主图为 [M4 throughput–latency Pareto](docs/progress/2026-10-17-m4-pareto/README.md)。
+[40：整模通过后再测吞吐和延迟](docs/experiments/40-m1-verify-and-bounded-loader.md)保存 V117 实际正确性结果、V120/V122 资源中止及代码；[旧 M4 throughput–latency Pareto](docs/progress/2026-10-17-m4-pareto/README.md)保留为历史快照。
 
 [41：HTTP 传输选项的首对负结果](docs/experiments/41-native-http-nodelay-pilot.md)保留 TCP_NODELAY OFF/ON 的真实请求、吞吐—延迟图和代码差异；ON 吞吐比 0.997538，未采用，当前三家 Pareto 前沿不变。
 
 [42：短请求跑通后的投机解码负结果](docs/experiments/42-startup-warm-short-request.md)记录同一次新配对的完整请求延迟与吞吐：spec 2555.93 ms / 12.52 tok/s，ordinary 1247.41 ms / 25.65 tok/s；全部原始输出通过，短请求尚无性能收益。
 
-[43：新的三家 C1 吞吐—延迟对照](docs/experiments/43-fresh-c1-throughput-latency.md)完成九次 fresh 加载：本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。本方三轮均领先；这是新的 C1 切面，完整 C1/C2/C4 前沿仍待同场复测。
+[43：新的三家 C1 吞吐—延迟对照](docs/experiments/43-fresh-c1-throughput-latency.md)完成九次 fresh 加载：本方 1230.160 ms / 26.0129 tok/s，oMLX 1271.841 / 25.1604，Lithos 1471.369 / 21.7485。本方三轮均领先；这是当时的 C1 切面；后续完整同场复测见第44章。
+
+[44：完整 C1/C2/C4 吞吐—延迟前沿](docs/experiments/44-fresh-full-throughput-latency.md)完成全新 21 次独立加载。在同一 Qwen3.8-27B NVFP4、19→32 短负载下，本方三点组成联合 Pareto 前沿，覆盖本轮 oMLX 三点与 Lithos C1。相对 oMLX，C1/C2/C4 配置中位吞吐分别高约 3.90% / 8.36% / 16.55%，完整请求 p50 分别低约 3.75% / 6.36% / 12.79%。正确性是入图条件；新旧批次、M5 和 GLM 结果不混合。
+
+[共享 W 多行 M1 源码与数值补记](docs/code-versions/44-shared-w-m1/README.md)另存新 kernel：1491 个同输入完整矩阵比较通过，含 497 个真实 T5 输入及派生前缀。尚无整模接入或速度结论，不是第44章曲线的收益来源；供 M5 重建本机资格。

@@ -1,0 +1,508 @@
+{
+  "scope": "one fresh V128 campaign only; correctness is an entry prerequisite, not a plot axis",
+  "metric_definitions": {
+    "latency": "1000*median_3fresh(median_3formal_groups(median_requests(DONE-POST)))",
+    "throughput": "median_3fresh(median_3formal_groups(sum_completion_tokens/(last_DONE-earliest_POST)))"
+  },
+  "arms": [
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block1-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1225.1395829953253,
+      "throughput_tok_s": 26.11947278836888,
+      "aux_interactivity_tok_s": 29.10153814010473,
+      "aux_ttft_ms": 159.59320901311003,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block1-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1270.64450000762,
+      "throughput_tok_s": 25.184069973787395,
+      "aux_interactivity_tok_s": 29.336640584097353,
+      "aux_ttft_ms": 214.84920801594853,
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V128-C1-block1-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 1,
+      "latency_ms": 1461.2691660004202,
+      "throughput_tok_s": 21.89877179683869,
+      "aux_interactivity_tok_s": 29.840737107795302,
+      "aux_ttft_ms": 411.3399999914691,
+      "static_native_profile": null
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block2-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "aux_interactivity_tok_s": 29.27190272103201,
+      "aux_ttft_ms": 214.4730419968255,
+      "static_native_profile": null
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V128-C1-block2-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1466.1083329992834,
+      "throughput_tok_s": 21.82649077134441,
+      "aux_interactivity_tok_s": 29.590457322857855,
+      "aux_ttft_ms": 418.4591250086669,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block2-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 2,
+      "latency_ms": 1226.7349169997033,
+      "throughput_tok_s": 26.08550515401017,
+      "aux_interactivity_tok_s": 29.05961219215834,
+      "aux_ttft_ms": 159.64575001271442,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "config": "lithos:C1",
+      "arm": "V128-C1-block3-lithos",
+      "engine": "lithos",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1460.4629999957979,
+      "throughput_tok_s": 21.910859775353483,
+      "aux_interactivity_tok_s": 29.866421236906536,
+      "aux_ttft_ms": 420.8077500225045,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C1",
+      "arm": "V128-C1-block3-native",
+      "engine": "native",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "aux_interactivity_tok_s": 29.073370724182585,
+      "aux_ttft_ms": 159.78033299325034,
+      "static_native_profile": "direct_c1"
+    },
+    {
+      "config": "omlx:C1",
+      "arm": "V128-C1-block3-omlx",
+      "engine": "omlx",
+      "concurrency": 1,
+      "replica": 3,
+      "latency_ms": 1274.8399169940967,
+      "throughput_tok_s": 25.10119080319649,
+      "aux_interactivity_tok_s": 29.258069623577754,
+      "aux_ttft_ms": 215.3031670022756,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair1-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "aux_interactivity_tok_s": 26.49017760633071,
+      "aux_ttft_ms": 300.51752099825535,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 1,
+      "latency_ms": 1563.9626880001742,
+      "throughput_tok_s": 40.325468519603966,
+      "aux_interactivity_tok_s": 27.53768548188051,
+      "aux_ttft_ms": 437.5054789998103,
+      "static_native_profile": null
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "aux_interactivity_tok_s": 27.444266059287973,
+      "aux_ttft_ms": 437.84145850804634,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair2-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 2,
+      "latency_ms": 1474.7431665018667,
+      "throughput_tok_s": 43.390364930199155,
+      "aux_interactivity_tok_s": 26.47358800826533,
+      "aux_ttft_ms": 302.87772849260364,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "native:C2",
+      "arm": "V128-C2-pair3-native",
+      "engine": "native",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_ms": 1469.3178745219484,
+      "throughput_tok_s": 43.5504961716812,
+      "aux_interactivity_tok_s": 26.530494064726113,
+      "aux_ttft_ms": 300.8123954932671,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "omlx:C2",
+      "arm": "V128-C2-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 2,
+      "replica": 3,
+      "latency_ms": 1573.2442084990907,
+      "throughput_tok_s": 40.07718929282176,
+      "aux_interactivity_tok_s": 27.401455400766324,
+      "aux_ttft_ms": 438.88139601040166,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair1-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_ms": 2069.811541499803,
+      "throughput_tok_s": 61.185567161005935,
+      "aux_interactivity_tok_s": 19.646587231102625,
+      "aux_ttft_ms": 571.7172704898985,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair1-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 1,
+      "latency_ms": 2291.8524380074814,
+      "throughput_tok_s": 54.7451733282908,
+      "aux_interactivity_tok_s": 20.741168223286365,
+      "aux_ttft_ms": 791.1226665164577,
+      "static_native_profile": null
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair2-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "aux_interactivity_tok_s": 20.670999691506097,
+      "aux_ttft_ms": 796.5071664948482,
+      "static_native_profile": null
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair2-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 2,
+      "latency_ms": 1986.3544374966295,
+      "throughput_tok_s": 63.37899542713181,
+      "aux_interactivity_tok_s": 19.70336209749585,
+      "aux_ttft_ms": 505.77799999155104,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "native:C4",
+      "arm": "V128-C4-pair3-native",
+      "engine": "native",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.60924705924159,
+      "aux_interactivity_tok_s": 20.88492460949272,
+      "aux_ttft_ms": 504.7272709925892,
+      "static_native_profile": "legacy_batched"
+    },
+    {
+      "config": "omlx:C4",
+      "arm": "V128-C4-pair3-omlx",
+      "engine": "omlx",
+      "concurrency": 4,
+      "replica": 3,
+      "latency_ms": 2310.1315414969577,
+      "throughput_tok_s": 54.285159526429986,
+      "aux_interactivity_tok_s": 20.661262342457192,
+      "aux_ttft_ms": 792.521333496552,
+      "static_native_profile": null
+    }
+  ],
+  "configurations": [
+    {
+      "config": "native:C1",
+      "engine": "native",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_ms": 1226.3012920157053,
+      "throughput_tok_s": 26.094729091739534,
+      "static_native_profile": "direct_c1",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "native:C2",
+      "engine": "native",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_ms": 1470.631771007902,
+      "throughput_tok_s": 43.51170014291116,
+      "static_native_profile": "legacy_batched",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "native:C4",
+      "engine": "native",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_ms": 2011.9921460136538,
+      "throughput_tok_s": 63.37899542713181,
+      "static_native_profile": "legacy_batched",
+      "dominated_by": [],
+      "joint_non_dominated": true,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "omlx:C1",
+      "engine": "omlx",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_ms": 1274.1192920075264,
+      "throughput_tok_s": 25.115387704066702,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "omlx:C2",
+      "engine": "omlx",
+      "concurrency": 2,
+      "fresh_arms": 3,
+      "latency_ms": 1570.5621460074326,
+      "throughput_tok_s": 40.15413750412442,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C2"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "omlx:C4",
+      "engine": "omlx",
+      "concurrency": 4,
+      "fresh_arms": 3,
+      "latency_ms": 2306.9740000064485,
+      "throughput_tok_s": 54.379934653897124,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C4"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true
+    },
+    {
+      "config": "lithos:C1",
+      "engine": "lithos",
+      "concurrency": 1,
+      "fresh_arms": 3,
+      "latency_ms": 1461.2691660004202,
+      "throughput_tok_s": 21.89877179683869,
+      "static_native_profile": null,
+      "dominated_by": [
+        "native:C1",
+        "omlx:C1"
+      ],
+      "joint_non_dominated": false,
+      "engine_non_dominated": true
+    }
+  ],
+  "joint_frontier": [
+    "native:C1",
+    "native:C2",
+    "native:C4"
+  ],
+  "pairs": [
+    {
+      "concurrency": 1,
+      "replica": 1,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 3.581246919340686,
+      "throughput_gain_percent": 3.7142638801237915
+    },
+    {
+      "concurrency": 1,
+      "replica": 1,
+      "comparison": "native_vs_lithos",
+      "latency_reduction_percent": 16.15921203972267,
+      "throughput_gain_percent": 19.273688180720217
+    },
+    {
+      "concurrency": 1,
+      "replica": 2,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 3.7189904669886475,
+      "throughput_gain_percent": 3.8626417452691353
+    },
+    {
+      "concurrency": 1,
+      "replica": 2,
+      "comparison": "native_vs_lithos",
+      "latency_reduction_percent": 16.327130172562576,
+      "throughput_gain_percent": 19.51305148996898
+    },
+    {
+      "concurrency": 1,
+      "replica": 3,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 3.80742902158564,
+      "throughput_gain_percent": 3.9581320915520912
+    },
+    {
+      "concurrency": 1,
+      "replica": 3,
+      "comparison": "native_vs_lithos",
+      "latency_reduction_percent": 16.03338858846587,
+      "throughput_gain_percent": 19.09495729187356
+    },
+    {
+      "concurrency": 2,
+      "replica": 1,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 5.967592303088365,
+      "throughput_gain_percent": 7.901288541156637
+    },
+    {
+      "concurrency": 2,
+      "replica": 2,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 6.100935244692474,
+      "throughput_gain_percent": 8.05951173958681
+    },
+    {
+      "concurrency": 2,
+      "replica": 3,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 6.605861532221391,
+      "throughput_gain_percent": 8.666543088842694
+    },
+    {
+      "concurrency": 4,
+      "replica": 1,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 9.688271933454807,
+      "throughput_gain_percent": 11.764313529695091
+    },
+    {
+      "concurrency": 4,
+      "replica": 2,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 13.897840309813759,
+      "throughput_gain_percent": 16.54849501109097
+    },
+    {
+      "concurrency": 4,
+      "replica": 3,
+      "comparison": "native_vs_omlx",
+      "latency_reduction_percent": 12.90573242812444,
+      "throughput_gain_percent": 17.17612624546485
+    }
+  ],
+  "comparison_summary": [
+    {
+      "concurrency": 1,
+      "comparison": "native_vs_omlx",
+      "ratio_of_config_medians": {
+        "latency_reduction_percent": 3.753023778211395,
+        "throughput_gain_percent": 3.8993679859230523
+      },
+      "median_of_signed_pair_percentages": {
+        "latency_reduction_percent": 3.7189904669886475,
+        "throughput_gain_percent": 3.8626417452691353
+      },
+      "paired_both_axis_wins": 3,
+      "pair_count": 3
+    },
+    {
+      "concurrency": 1,
+      "comparison": "native_vs_lithos",
+      "ratio_of_config_medians": {
+        "latency_reduction_percent": 16.079712037436323,
+        "throughput_gain_percent": 19.160696927791054
+      },
+      "median_of_signed_pair_percentages": {
+        "latency_reduction_percent": 16.15921203972267,
+        "throughput_gain_percent": 19.273688180720217
+      },
+      "paired_both_axis_wins": 3,
+      "pair_count": 3
+    },
+    {
+      "concurrency": 2,
+      "comparison": "native_vs_omlx",
+      "ratio_of_config_medians": {
+        "latency_reduction_percent": 6.362713838071688,
+        "throughput_gain_percent": 8.361685364159221
+      },
+      "median_of_signed_pair_percentages": {
+        "latency_reduction_percent": 6.100935244692474,
+        "throughput_gain_percent": 8.05951173958681
+      },
+      "paired_both_axis_wins": 3,
+      "pair_count": 3
+    },
+    {
+      "concurrency": 4,
+      "comparison": "native_vs_omlx",
+      "ratio_of_config_medians": {
+        "latency_reduction_percent": 12.786527025964322,
+        "throughput_gain_percent": 16.54849501109097
+      },
+      "median_of_signed_pair_percentages": {
+        "latency_reduction_percent": 12.90573242812444,
+        "throughput_gain_percent": 16.54849501109097
+      },
+      "paired_both_axis_wins": 3,
+      "pair_count": 3
+    }
+  ],
+  "Lithos_C2_C4": null,
+  "missing_reason": "pinned endpoint admission does not support C2/C4; no zero or serial surrogate point",
+  "connections": "guides joining observed engine-frontier configurations only; no interpolation or additional feasible points"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "v126-static-native-profile-set-v1",
+  "status": "HOLD_NEW_BATCHED_ENTRY_GPU_UNRUN",
+  "scope": "two immutable startup configurations; no same-process native-to-batch migration",
+  "direct_c1": {
+    "entry": "c1_server.py",
+    "entry_sha256": "ea2aa1343aa58976cf77458581029cb0bb42ab55aafd2199223940c3611fdbd8",
+    "original_entry": "/private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/server.py",
+    "runtime_config": "/private/tmp/minivllm-engine-optimization-20261014/v125-fresh-c1-native-official-build1/runtime-config.json",
+    "runtime_config_sha256": "9f0b8f3a0150cd42a9144873a4d16d21f782ded5f16862a3ff125e8ed06caeda",
+    "concurrency": 1,
+    "max_seqs": 1,
+    "physical_capacity": 64,
+    "native_adapter": 102,
+    "native_library": 101,
+    "source_profile": "candidate44 conv+normreuse/gates ON",
+    "startup_ordinary_warm_requests": 1
+  },
+  "legacy_batched": {
+    "entry": "batched_server.py",
+    "entry_sha256": "53557f8c576e7eacad53e1665ca96e70412216546f6f0fc28c64291af24ef8df",
+    "original_worker": "/private/tmp/minivllm-engine-optimization-20261014/m4-final-native15-official-attempt2/child.py",
+    "original_worker_sha256": "6ba54460c97e370fc7cc370efb63e7b36837c0d4e325c0ff9a0c79770378d8cc",
+    "package_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v17-gdn-gates-build1-root",
+    "source_manifest": "/private/tmp/minivllm-engine-optimization-20261014/source-manifest-v17-gdn-gates-build1.json",
+    "source_manifest_sha256": "31fa053925bb732ce2a68b4feb8e4d2351d73939138f6a6c4a7d56df2b5cb41c",
+    "concurrencies": [
+      2,
+      4
+    ],
+    "max_seqs": 4,
+    "physical_capacity": 256,
+    "native_adapter": null,
+    "native_library": null,
+    "source_profile": "accepted25/native15 gatesON; original B>1 fallback",
+    "allocator_cache_limit_bytes": 2147483648,
+    "startup_ordinary_warm_requests": 0,
+    "new_entry_qualification_pending": true
+  },
+  "common": {
+    "max_len": 2048,
+    "max_batched_tokens": 512,
+    "prompt_ids": 19,
+    "max_output_tokens": 32,
+    "greedy": true,
+    "normal_EOS": true,
+    "prefix_cache": 0,
+    "draft": null,
+    "wait_to_form_batch": false,
+    "client_clock": "POST-before to SSE DONE",
+    "primary_X": "per-group request p50 ms -> median3 groups/arm -> median3 fresh arms/config",
+    "primary_Y": "group total output tokens/(lastDONE-earliestPOST) -> median3 groups/arm -> median3 fresh arms/config"
+  }
+}
