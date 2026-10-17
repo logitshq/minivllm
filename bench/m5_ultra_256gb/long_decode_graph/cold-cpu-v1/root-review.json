@@ -1,0 +1,33 @@
+{
+  "schema": "E024-cold-root-review-v1",
+  "status": "PASS",
+  "scope": "CPU-only; real service and numerical candidate not executed",
+  "root_source_read": true,
+  "independent_source_review": "draft_graph + root",
+  "sources": {
+    "long_decode_graph/cold_owner.py": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b",
+    "long_decode_graph/test_cold_owner_cpu.py": "962ec5981a1af5db34e56358f4eecbe3ea5dc0202f14082cd0e12eead479ea7c",
+    "omlx_cold_restart/controller_v5.py": "6f61d28450d9c44401c2e5a4e6f8945ce82ec9430f56456476c7eda0cd4cd578",
+    "omlx_cold_restart/test_v5_cpu.py": "7a57faa20b0ff395f776a23455143e67908bbac29b24a0278303be6f3103b64f",
+    "omlx_cold_restart/audit_restore_v5.py": "9039af520fc095982d85d07cf1712010cec62f672786dc2b04f871db08891ee3",
+    "omlx_cold_restart/test_audit_restore_v5_cpu.py": "8b93db43fb32248ca051856af0fd5092d759209eb6f92ef6cc3c33366e38a0bb"
+  },
+  "tests": [
+    {
+      "command": ".venv/bin/python -B -m unittest bench.m5_ultra_256gb.long_decode_graph.test_cold_owner_cpu bench.m5_ultra_256gb.omlx_cold_restart.test_v5_cpu -v",
+      "tests": 15,
+      "elapsed_seconds": 0.126,
+      "tool_chunk": "b23033",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/python -B -m unittest bench.m5_ultra_256gb.omlx_cold_restart.test_audit_restore_v5_cpu -v",
+      "tests": 10,
+      "elapsed_seconds": 0.292,
+      "tool_chunk": "af0762",
+      "exit_code": 0
+    }
+  ],
+  "gpu_qualified": false,
+  "performance_qualified": false
+}

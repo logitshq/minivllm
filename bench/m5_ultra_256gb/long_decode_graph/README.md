@@ -82,3 +82,29 @@ logits = candidate(tokens, context)
 先测 graph-only 的整请求收益，不以微基准替代。L1536 每步比真实887等长度读更多masked列；双阶段prefill不受本模块加速；C>8还会回 eager。这些都可能让完整D吞吐不增反降。未通过就保留证据，默认 core保持原样；不追加调小bound/挑prompt后称本候选通过。
 
 一个长域 bound 无请求 cache owner、无allocator/prefix cache策略、无bucket调度器。只有 graph-only 经完整资格和实际长任务门通过，才值得讨论融合或第二个bound；任何扩展另登记。当前不存在“已实现1536生产支持”或“已超过官方引擎”的结论。
+
+
+## 2026-10-17: cold-service execution adapter ready
+
+`cold_owner.py` owns exactly one direct `e024-diagnostic` child. It invokes the
+unchanged original E024 owner plan, qualifier and candidate: gates/norm/fuse/core
+compile OFF, 1800-second numerical budget, 1830-second outer work budget, bounded
+TERM/KILL and postflight. This does not inherit the gates-ON HTTP qualification.
+The original earliest graph point is B1/used257/bound1536 after independently
+loaded weights and real-prefix cache checks; the first numerical difference is
+retained and stops the diagnostic before any performance claim.
+
+`controller_v5.py` accepts a pinned, independently audited v4 RESTORED predecessor
+from the immutable experiment archive. It keeps the original stop/physical/log/
+HTTP-worker recovery operations and represents this actual single-child phase.
+`audit_restore_v5.py` independently checks retained restoration and child-absence
+bytes; numerical failure may still have a successful restoration. It never
+awards numerical or performance eligibility.
+
+Root 15 owner/controller +10 recovery-auditor CPU tests PASS. The two initial
+owner-test fixture errors and narrow fixes are retained in
+[cold CPU receipts](cold-cpu-v1/receipt.json); [root checks](cold-cpu-v1/root-review.json)
+use the actual repository Python runtime. These are preparation results only.
+The [cold preregistration](prereg-cold-v1/README.md) now binds the completed D512
+cycle's immutable restoration journal and audit. Device execution remains a
+separate step after this preparation commit.

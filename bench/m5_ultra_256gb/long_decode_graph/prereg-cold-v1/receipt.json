@@ -1,0 +1,46 @@
+{
+  "schema": "E024-cold-prereg-v1",
+  "status": "PREPARED",
+  "plan_sha256": "8e508928672abddec6a2c06680635dd26e1c8fb1a8456a3b092628cd4e800f2d",
+  "prepared_journal_sha256": "dee8f6b5acb5c31b8dbc447d450d74fc23ba5529d5648c60b099609c855a5ed3",
+  "prepared_journal_original": {
+    "pid": 98702,
+    "ppid": 1,
+    "start": "Sat Oct 17 09:11:45 2026",
+    "comm": "omlx-server"
+  },
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/cold_owner.py": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/test_cold_owner_cpu.py": "962ec5981a1af5db34e56358f4eecbe3ea5dc0202f14082cd0e12eead479ea7c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v5.py": "6f61d28450d9c44401c2e5a4e6f8945ce82ec9430f56456476c7eda0cd4cd578",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/audit_restore_v5.py": "9039af520fc095982d85d07cf1712010cec62f672786dc2b04f871db08891ee3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-cold-v1/execute.py": "c72256c336aaa3d2e3909e42e80d9c6eb9173c181de4f4b450c93e1eec5d57ed",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-cold-v1/prepare-plan.py": "48af72608a63a1a59c7a7b69a32b60519bc87b5f86c08d23ffffd8554c03c8f8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_v5_cpu.py": "7a57faa20b0ff395f776a23455143e67908bbac29b24a0278303be6f3103b64f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/test_audit_restore_v5_cpu.py": "8b93db43fb32248ca051856af0fd5092d759209eb6f92ef6cc3c33366e38a0bb"
+  },
+  "cpu_prepare": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-cpu-prepare/prepared.json",
+    "sha256": "7f49a48524b80067058a288e18bd13a2a87780cdd8e4ed5e955626c8db5d9312"
+  },
+  "read_only_service_prepare": "PASS; service remains running",
+  "authorization": "Existing explicit human permission: 允许停止、实验后恢复",
+  "diagnostic": {
+    "original_owner_plan_sha256": "4dff5f46d0b35d038ffbb0e32ebb6197b047f4da6e847b3160f3ae8685caf6a4",
+    "original_qualification_plan_sha256": "5025d37768a5fa74d6e3e256a96ff8b8e4e92b31837183d5ffe031d9473e7123",
+    "phase": "e024-diagnostic",
+    "matrix": "B1..8 x used257/1024/1280/1536",
+    "first_graph": "B1 used257 bound1536",
+    "configuration": "gates/norm/fuse/core compile OFF; graph-only candidate ON",
+    "numeric_deadline_s": 1800,
+    "owner_work_deadline_s": 1830
+  },
+  "numerical_qualified": false,
+  "performance_qualified": false
+}

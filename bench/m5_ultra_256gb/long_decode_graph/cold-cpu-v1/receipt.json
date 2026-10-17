@@ -1,0 +1,42 @@
+{
+  "schema": "E024-cold-adapter-cpu-receipt-v1",
+  "date": "2026-10-17",
+  "scope": "stdlib fake process/resource tests and original small-file plan validation; no GPU, service, model loading or runtime payload hashing",
+  "command": "python3 -B -m unittest bench.m5_ultra_256gb.long_decode_graph.test_cold_owner_cpu bench.m5_ultra_256gb.omlx_cold_restart.test_v5_cpu -v",
+  "attempts": [
+    {
+      "tool_chunk": "f4c52d",
+      "exit_code": 1,
+      "tests": 15,
+      "passed": 13,
+      "errors": 1,
+      "failures": 1,
+      "reported_seconds": 0.210,
+      "issues": [
+        "CPU temporary fixture used noncanonical /var path on macOS; original validator correctly required resolved /private path.",
+        "CPU socket mock replaced the socket class before ssl import; stdlib SSLSocket inheritance failed before the --help test."
+      ]
+    },
+    {
+      "tool_chunk": "da4dcc",
+      "exit_code": 0,
+      "tests": 15,
+      "passed": 15,
+      "reported_seconds": 0.231,
+      "status": "PASS"
+    }
+  ],
+  "changes_between_attempts": [
+    "test_cold_owner_cpu.py resolves its temporary root before constructing paths.",
+    "test_v5_cpu.py imports stdlib http.client before replacing socket.socket for the no-network --help check."
+  ],
+  "producer_changed_between_attempts": false,
+  "source_sha256": {
+    "bench/m5_ultra_256gb/long_decode_graph/cold_owner.py": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b",
+    "bench/m5_ultra_256gb/long_decode_graph/test_cold_owner_cpu.py": "962ec5981a1af5db34e56358f4eecbe3ea5dc0202f14082cd0e12eead479ea7c",
+    "bench/m5_ultra_256gb/omlx_cold_restart/controller_v5.py": "6f61d28450d9c44401c2e5a4e6f8945ce82ec9430f56456476c7eda0cd4cd578",
+    "bench/m5_ultra_256gb/omlx_cold_restart/test_v5_cpu.py": "7a57faa20b0ff395f776a23455143e67908bbac29b24a0278303be6f3103b64f"
+  },
+  "gpu_qualified": false,
+  "performance_qualified": false
+}

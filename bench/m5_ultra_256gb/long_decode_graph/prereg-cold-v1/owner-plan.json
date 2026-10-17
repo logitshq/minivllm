@@ -1,0 +1,44 @@
+{
+  "schema": "E024-cold-owner-plan-v1",
+  "execution": {
+    "owner": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/cold_owner.py",
+      "sha256": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b"
+    },
+    "pins": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/cold_owner.py": "49e4ef7396a81c12c167b8a33075725c0d2af679d91d652b204fb408ddfda07b",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/test_cold_owner_cpu.py": "962ec5981a1af5db34e56358f4eecbe3ea5dc0202f14082cd0e12eead479ea7c"
+    }
+  },
+  "diagnostic_owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-v1/owner-plan.json",
+    "sha256": "4dff5f46d0b35d038ffbb0e32ebb6197b047f4da6e847b3160f3ae8685caf6a4"
+  },
+  "cold_restart": {
+    "journal_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-cold-v1-cold-journal",
+    "controller": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller_v5.py",
+      "sha256": "6f61d28450d9c44401c2e5a4e6f8945ce82ec9430f56456476c7eda0cd4cd578"
+    },
+    "approved_contract": "cold-restart-persisted-visible-v1",
+    "proposal_plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "predecessor": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-native-formal-v1/restored-journal.json",
+      "sha256": "4ea4e1bb05951a325b9dcfd003562f859ca03f05c23eb934b94c738da1a3b98c",
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-native-formal-v1/restoration-audit.json",
+        "sha256": "247341149ef4ceea519a73552337c0174e6352837c707d733bb824a5d0954b26"
+      }
+    }
+  },
+  "trials": [
+    "e024-diagnostic"
+  ],
+  "deadline_seconds": 1830
+}
