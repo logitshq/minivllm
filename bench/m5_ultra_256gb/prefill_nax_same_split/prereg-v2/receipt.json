@@ -1,0 +1,64 @@
+{
+  "status": "CPU_READY_DEVICE_UNRUN",
+  "plan_sha256": "3beae0672fd90d6a83a3869f66164273229751151d99868259dcb3f1c4b16a12",
+  "jobs_sha256": "8ccfb4f389c2b2a5b858cfbd2ec34dc03037ebedbf58c8200cbfbf6a537fa8df",
+  "source_pin_count": 570,
+  "screen_tests": 10,
+  "screen_tests_command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/test_screen_v2_cpu.py",
+    "-v"
+  ],
+  "screen_tests_returncode": 0,
+  "screen_tests_stderr_sha256": "7a4d9067880bc1b386530422a26a260c0db96329e38d2c7292b5a905a7b4e1cc",
+  "actual_owner_prepare_passed": true,
+  "preparation_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/prefill-nax-v2-cpu-prepare",
+  "preparation_receipt_sha256": "0292a25831436c5e601adaf392c417869dac7750b1a8d79bc2554a700c200f3b",
+  "negative_plan_cases": [
+    {
+      "label": "wrong schema",
+      "rejected": true,
+      "error": "numeric scope"
+    },
+    {
+      "label": "extra field",
+      "rejected": true,
+      "error": "plan fields"
+    },
+    {
+      "label": "relaxed memory",
+      "rejected": true,
+      "error": "fixed numerical resource policy"
+    },
+    {
+      "label": "cache enabled",
+      "rejected": true,
+      "error": "fixed screen contract"
+    },
+    {
+      "label": "changed comparison coverage",
+      "rejected": true,
+      "error": "fixed screen contract"
+    },
+    {
+      "label": "wrong screen",
+      "rejected": true,
+      "error": "screen/python"
+    },
+    {
+      "label": "changed environment",
+      "rejected": true,
+      "error": "fixed environment"
+    },
+    {
+      "label": "missing executed pin",
+      "rejected": true,
+      "error": "required pins missing"
+    }
+  ],
+  "gpu_executed": false,
+  "performance_qualified": false,
+  "independent_review": "CPU/static review by official_mtp at final screen and owner hashes; no blockers found. Actual compilation and numerical equivalence remain unknown."
+}
