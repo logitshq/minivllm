@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/history_tail",
+    "-p",
+    "test*.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_all_small_split_and_fed_boundaries (test_cpu.TailTests.test_all_small_split_and_fed_boundaries) ... ok\ntest_caught_up_and_empty_prefix (test_cpu.TailTests.test_caught_up_and_empty_prefix) ... ok\ntest_compression_exactly_matches_existing_greater_than_64_rule (test_cpu.TailTests.test_compression_exactly_matches_existing_greater_than_64_rule) ... ok\ntest_cross_chunk_only_concatenates_required_rows (test_cpu.TailTests.test_cross_chunk_only_concatenates_required_rows) ... ok\ntest_dtype_and_current_width_contract (test_cpu.TailTests.test_dtype_and_current_width_contract) ... ok\ntest_empty_pieces_preserve_boundaries (test_cpu.TailTests.test_empty_pieces_preserve_boundaries) ... ok\ntest_invalid_contract_rejected_before_concat (test_cpu.TailTests.test_invalid_contract_rejected_before_concat) ... ok\ntest_offset_and_strided_views_are_not_materialized_by_helper (test_cpu.TailTests.test_offset_and_strided_views_are_not_materialized_by_helper) ... ok\ntest_partial_last_piece_without_concat (test_cpu.TailTests.test_partial_last_piece_without_concat) ... ok\ntest_reset_fed_zero_delivers_complete_prefix (test_cpu.TailTests.test_reset_fed_zero_delivers_complete_prefix) ... ok\ntest_single_whole_piece_returns_identity_without_concat (test_cpu.TailTests.test_single_whole_piece_returns_identity_without_concat) ... ok\ntest_concat_row_contract (test_screen_cpu.ScreenTests.test_concat_row_contract) ... ok\ntest_fixed_matrix_and_group_counts (test_screen_cpu.ScreenTests.test_fixed_matrix_and_group_counts) ... ok\ntest_gate_keeps_single_and_reset_regressions (test_screen_cpu.ScreenTests.test_gate_keeps_single_and_reset_regressions) ... ok\ntest_gate_rejects_slow_long_group (test_screen_cpu.ScreenTests.test_gate_rejects_slow_long_group) ... ok\ntest_help_does_not_import_runtime_or_create_output (test_screen_cpu.ScreenTests.test_help_does_not_import_runtime_or_create_output) ... ok\ntest_layout_shapes_strides_and_existing_compression_condition (test_screen_cpu.ScreenTests.test_layout_shapes_strides_and_existing_compression_condition) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.040s\n\nOK\n",
+  "runtime_scope": "stdlib tests and fake arrays only; real MLX/NumPy/Torch imports blocked by tests"
+}

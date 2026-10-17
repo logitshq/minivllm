@@ -307,11 +307,18 @@ v1单进程165严格比较通过，T1/3/5/8为0.982453/1.199745/1.219095/1.57876
 T3/5/8在三个进程中都更快这一有限事实保留。后续可独立验证T1保留原路径、
 多token才驻留状态的分派设计；当前没有该分派实现或整模结果，不能改写本轮FAIL。
 
-## E019 · 2026-10-17 · 只提取新增hidden history · CPU原型
+## E019 · 2026-10-17 · 只提取新增hidden history · REJECT
 
 当前每轮完整concatenate后只取[fed:start]，候选反向收集相交尾部，单piece直接返回，
 多piece仅拼所需行。保留完整history、batch reset后的完整重喂、原64/65块压缩逻辑。
 独立函数只读取元数据和切片，不导入MLX；严格同dtype/width及sumrows==start契约。
-11项CPU测试通过（包括544个小分块/fed组合），主线程独立复核通过。
-后续真实MLX字节检查、短/长历史微基准和完整draft资格尚未运行；没有速度结论或核心开关。
+17项CPU边界/CLI测试通过（包括544个小分块/fed组合），主线程与独立静态审查通过。
+be12f82冻结后的设备micro：150个资格点通过，120非空点全部计时；48个N512/N2048
+tail点几何平均7.247945×，但72个other点中27个<0.97×，完整预注册门失败。
+全部single/reset和坏点保留，未重跑，核心不采用；不进入主throughput–latency图。
+独立stdlib审计从四份真实BF16 backing重建全部逻辑输入/输出SHA，核原始ABBA与gate，
+17测试及6破坏记录检查通过。周期257元素的输入不能覆盖任意长距离错行；真实features、
+完整draft和HTTP资格仍未完成。归档保存全部265MiB输入、raw、owner/lease和310个成员，
+原七份source pin含教程从be12f82取出后验证，授权服务恢复S。
 [教程与预注册门](tutorials/019-drafter-history-tail.md)。
+[全部坏点与完整证据归档](../experiments/m5-ultra-256gb/E019-history-tail-v1/README.md)。

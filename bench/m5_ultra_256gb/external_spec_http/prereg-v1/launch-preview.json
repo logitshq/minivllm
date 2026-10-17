@@ -1,0 +1,992 @@
+[
+  {
+    "pair": 1,
+    "arm": "native-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--port",
+      "<ephemeral-port>",
+      "--package-root",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native",
+      "--source-manifest",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 1,
+    "arm": "omlx-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair1-omlx-none/models",
+      "--base-path",
+      "<new-output>/pair1-omlx-none/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair1-omlx-none/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair1-omlx-none/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": false,
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair1-omlx-none/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 1,
+    "arm": "omlx-mtp",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair1-omlx-mtp/models",
+      "--base-path",
+      "<new-output>/pair1-omlx-mtp/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair1-omlx-mtp/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair1-omlx-mtp/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": true,
+            "vlm_mtp_draft_model": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-MTP-nvfp4/snapshots/b9b764dada894b8c416f89cbc8cf99bc7e20b831",
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair1-omlx-mtp/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 1,
+    "arm": "lithos-none",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/none/target-b6042c39f78b9df33a19ac1c",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--no-draft"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 1,
+    "arm": "lithos-dspark",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/target-61919dc70e5833f7b19fc670",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--draft",
+      "/Users/ryanli/.cache/huggingface/hub/models--LithosAI--Qwen3.8-27B-DSpark-NVFP4/snapshots/b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+      "--draft-kind",
+      "dspark",
+      "--draft-pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/draft-f7cb21710c30a1c544e31b99",
+      "--draft-quantization",
+      "none",
+      "--draft-block-size",
+      "7",
+      "--draft-sampling",
+      "argmax"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 2,
+    "arm": "lithos-dspark",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/target-61919dc70e5833f7b19fc670",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--draft",
+      "/Users/ryanli/.cache/huggingface/hub/models--LithosAI--Qwen3.8-27B-DSpark-NVFP4/snapshots/b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+      "--draft-kind",
+      "dspark",
+      "--draft-pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/draft-f7cb21710c30a1c544e31b99",
+      "--draft-quantization",
+      "none",
+      "--draft-block-size",
+      "7",
+      "--draft-sampling",
+      "argmax"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 2,
+    "arm": "lithos-none",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/none/target-b6042c39f78b9df33a19ac1c",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--no-draft"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 2,
+    "arm": "native-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--port",
+      "<ephemeral-port>",
+      "--package-root",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native",
+      "--source-manifest",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 2,
+    "arm": "omlx-mtp",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair2-omlx-mtp/models",
+      "--base-path",
+      "<new-output>/pair2-omlx-mtp/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair2-omlx-mtp/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair2-omlx-mtp/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": true,
+            "vlm_mtp_draft_model": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-MTP-nvfp4/snapshots/b9b764dada894b8c416f89cbc8cf99bc7e20b831",
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair2-omlx-mtp/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 2,
+    "arm": "omlx-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair2-omlx-none/models",
+      "--base-path",
+      "<new-output>/pair2-omlx-none/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair2-omlx-none/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair2-omlx-none/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": false,
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair2-omlx-none/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 3,
+    "arm": "omlx-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair3-omlx-none/models",
+      "--base-path",
+      "<new-output>/pair3-omlx-none/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair3-omlx-none/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair3-omlx-none/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": false,
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair3-omlx-none/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 3,
+    "arm": "omlx-mtp",
+    "command": [
+      "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/omlx",
+      "serve",
+      "--model-dir",
+      "<new-output>/pair3-omlx-mtp/models",
+      "--base-path",
+      "<new-output>/pair3-omlx-mtp/state",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--api-key",
+      "<ephemeral-key>",
+      "--headless",
+      "--no-hf-cache",
+      "--no-cache",
+      "--max-concurrent-requests",
+      "1",
+      "--sse-keepalive-mode",
+      "off"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {
+      "<new-output>/pair3-omlx-mtp/state/settings.json": {
+        "server": {
+          "burst_decode_mode": "balanced"
+        },
+        "scheduler": {
+          "max_concurrent_requests": 1,
+          "chunked_prefill": false,
+          "prefill_priority": "speed",
+          "decode_fairness": true
+        },
+        "cache": {
+          "enabled": false
+        }
+      },
+      "<new-output>/pair3-omlx-mtp/state/model_settings.json": {
+        "version": 1,
+        "models": {
+          "Qwen3.8-27B-nvfp4": {
+            "force_sampling": false,
+            "qwen4_ple_ssd_offload": false,
+            "deepseek_v41_engram_ssd_offload": false,
+            "deepseek_v41_ced_prefill_enabled": false,
+            "thinking_budget_enabled": false,
+            "guided_grammar_enabled": false,
+            "turboquant_kv_enabled": false,
+            "turboquant_kv_bits": 4.0,
+            "turboquant_skip_last": true,
+            "qwen35_ane_prefill_enabled": false,
+            "qwen35_ane_prefill_sequence_length": 2048,
+            "qwen35_ane_prefill_tail_padding_min_tokens": 0,
+            "qwen35_ane_prefill_shared_fraction": 1.0,
+            "qwen35_ane_prefill_fused_down": false,
+            "qwen35_ane_prefill_max_layers": 64,
+            "qwen35_ane_prefill_dual_ane": true,
+            "qwen35_ane_prefill_gdn": true,
+            "qwen35_ane_prefill_gdn_fraction": 0.5,
+            "qwen35_ane_prefill_gdn_max_layers": 48,
+            "qwen35_ane_prefill_cpu_enabled": false,
+            "qwen35_ane_prefill_cpu_fraction": 0.135,
+            "qwen35_ane_prefill_cpu_down_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_gdn_fraction": 0.0,
+            "qwen35_ane_prefill_cpu_threads": 8,
+            "qwen35_ane_prefill_cpu_shared_resource": true,
+            "qwen35_oq_a8_enabled": false,
+            "qwen35_oq_a8_min_tokens": 128,
+            "moe_expert_offload_enabled": false,
+            "moe_expert_offload_resident_fraction": 0.25,
+            "specprefill_enabled": false,
+            "dflash_enabled": false,
+            "dflash_in_memory_cache": true,
+            "dflash_in_memory_cache_max_entries": 4,
+            "dflash_in_memory_cache_max_bytes": 8589934592,
+            "dflash_ssd_cache": false,
+            "dflash_ssd_cache_max_bytes": 21474836480,
+            "dflash_draft_sink_size": 0,
+            "mtp_enabled": false,
+            "vlm_mtp_enabled": true,
+            "vlm_mtp_draft_model": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-MTP-nvfp4/snapshots/b9b764dada894b8c416f89cbc8cf99bc7e20b831",
+            "is_pinned": false,
+            "is_default": false,
+            "is_hidden": false,
+            "is_favorite": false,
+            "trust_remote_code": false,
+            "embedding_audio_enabled": false
+          }
+        }
+      }
+    },
+    "symlinks": {
+      "<new-output>/pair3-omlx-mtp/models/Qwen3.8-27B-nvfp4": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6"
+    }
+  },
+  {
+    "pair": 3,
+    "arm": "lithos-none",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/none/target-b6042c39f78b9df33a19ac1c",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--no-draft"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 3,
+    "arm": "lithos-dspark",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/target-61919dc70e5833f7b19fc670",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "<ephemeral-port>",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--keep-warm",
+      "0",
+      "--no-warmup",
+      "--draft",
+      "/Users/ryanli/.cache/huggingface/hub/models--LithosAI--Qwen3.8-27B-DSpark-NVFP4/snapshots/b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+      "--draft-kind",
+      "dspark",
+      "--draft-pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1/dspark/draft-f7cb21710c30a1c544e31b99",
+      "--draft-quantization",
+      "none",
+      "--draft-block-size",
+      "7",
+      "--draft-sampling",
+      "argmax"
+    ],
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "MONOLITH_ACCELERATOR": "on",
+      "LITHOS_METAL_API_KEY": "<ephemeral-key>"
+    },
+    "files": {},
+    "symlinks": {}
+  },
+  {
+    "pair": 3,
+    "arm": "native-none",
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/external_spec_http/native_server.py",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--port",
+      "<ephemeral-port>",
+      "--package-root",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native",
+      "--source-manifest",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json"
+    ],
+    "cwd": "/Users/ryanli/code/minivllm",
+    "environment": {
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0",
+      "HF_HUB_OFFLINE": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "files": {},
+    "symlinks": {}
+  }
+]
