@@ -1,0 +1,190 @@
+{
+  "status": "PASS_STATIC_METADATA_ONLY",
+  "source_commit": "223658090ae549e59220bdec459957cbdad7926a",
+  "source_sha256": {
+    "monolith/serve.py": "9759ee14c4860ed43218118d6a3eafbb680e9e722e3ddad72bae52473579f419",
+    "monolith/models/catalog.py": "23e228af167ad1f83ba32621988ead3888ab9472ddef5b4cdd530f97f4b9ca92",
+    "monolith/serving/setup.py": "ef9a66711755e678c7b3d8445852a2dca18349cfa34d7a3567e05d8b298c6824",
+    "monolith/serving/cache.py": "b8a97130b06bedf34bfa0981270d7c858e8d6804c27ee25a7caa23f0bcca5160",
+    "monolith/spec/dspark/model.py": "ddd11d490774122aca1ef3b10037663c826c7d4d0643ecda173f0d5de4545f43",
+    "monolith/spec/dspark/config.py": "91d191dd84fbe649922a2a0ab77e6cea659e7fadaa54d3e2218467ff81704ff1",
+    "monolith/spec/dspark/weights.py": "b06f9e039b3f9a9185f78a30827f48066d24c37028c606480cd7f27d967d86f7",
+    "monolith/spec/dspark/optimization.py": "f68711162b0ef7fcddaad0450d96512e4ddbed614af3a1fc220bf441d367e025",
+    "monolith/nn/pack_plan.py": "8f55301952ad1e66484d062a37a8da38293e6e054a55a2ba498801d93f4c0b26",
+    "monolith/models/qwen3_5/weights.py": "bb11ae3a74de32fb8c20222e17372c70bc067ad5a27dcd21453b43f5df30cae5",
+    "monolith/backends/metal/base.py": "583bfa1662b1f3df39e5d34b0c775f26fbba36063b449ad7ea6eba6940f68173",
+    "monolith/backends/metal/m5_ultra_80c/backend.py": "dbf7510c655e76e5db9f83e98b546b9d442a179221c75b72a0124c2ba98bd8b3",
+    "monolith/backends/metal/m5_ultra_80c/config.json": "1ac3ab812ed90ba2124d8bda082b21adcb99e2c7469e2d6840728c2d76f3ae58",
+    "monolith/backends/metal/m5_max_40c/serving.py": "20dedec486e3f78908877db1750aba6166bfcbbce7f6bfdf21e2ca194dd1cd0f",
+    "monolith/backends/metal/m5_max_40c/recipes/dspark/selected-nvfp4-endpoints.json": "ade50ee92f1a3445eb51bfef6606f789f8c622f8866fbfb7db08ca0b9f43563e",
+    "monolith/generate.py": "434ac1398c6010b37fa44f138505d5ca1757f4e7b747bc6b582d386e2e3ba3b4"
+  },
+  "harness_sha256": "93ab9da2306ca4fdcc73ec5f3f4620751914a84b5497ceb6189866aef7f53bc2",
+  "upstream_sources": {
+    "hub-metadata": {
+      "url": "https://huggingface.co/api/models/LithosAI/Qwen3.8-27B-DSpark-NVFP4/revision/b169bc4c8dc805a9e6178fa82f6a7b84b169a457?blobs=true",
+      "sha256": "fb08e1316935d11ab2f66d884a2065acaa6482f2352a065ab00c0fc6ef5b9125"
+    },
+    "config.json": {
+      "url": "https://huggingface.co/LithosAI/Qwen3.8-27B-DSpark-NVFP4/resolve/b169bc4c8dc805a9e6178fa82f6a7b84b169a457/config.json",
+      "bytes": 2739,
+      "sha256": "87e703a712b306c614dfe5a16ec6ba3e42f3afbc4d973b11f72c8e8b1d5f30f5"
+    },
+    "conversion.json": {
+      "url": "https://huggingface.co/LithosAI/Qwen3.8-27B-DSpark-NVFP4/resolve/b169bc4c8dc805a9e6178fa82f6a7b84b169a457/conversion.json",
+      "bytes": 9889,
+      "sha256": "5d4aecc8210522be9ddb2d6eaa5dd617fd05758c700bd67debf44ff524d6607c"
+    },
+    "validation.json": {
+      "url": "https://huggingface.co/LithosAI/Qwen3.8-27B-DSpark-NVFP4/resolve/b169bc4c8dc805a9e6178fa82f6a7b84b169a457/validation.json",
+      "bytes": 908,
+      "sha256": "86c7d432fe97db7b81f25b0aa05bc4df69e9b08c60e4f1fc4876cc0d4558135f"
+    },
+    "model.safetensors.index.json": {
+      "url": "https://huggingface.co/LithosAI/Qwen3.8-27B-DSpark-NVFP4/resolve/b169bc4c8dc805a9e6178fa82f6a7b84b169a457/model.safetensors.index.json",
+      "bytes": 9443,
+      "sha256": "e33a8bf6b07a2d20636ed192289b23f414c43c55d182a9e79762a868d25c55d9"
+    },
+    "README.md": {
+      "url": "https://huggingface.co/LithosAI/Qwen3.8-27B-DSpark-NVFP4/raw/b169bc4c8dc805a9e6178fa82f6a7b84b169a457/README.md",
+      "bytes": 5256,
+      "sha256": "8e878fe915adc879acf51ace6c51d7056d86ef35c6109b1916887c4980d3beb9",
+      "body_saved": false
+    }
+  },
+  "target": {
+    "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "index_sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+    "workload_sha256": "65be876cac2397bf9afa76105c8e3fcce23de5e6c8652a28cb1b5f39640c153c",
+    "weight_bytes_hashed_in_this_preparation": false
+  },
+  "draft": {
+    "repo": "LithosAI/Qwen3.8-27B-DSpark-NVFP4",
+    "revision": "b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+    "shards": [
+      {
+        "name": "model-00001.safetensors",
+        "bytes": 533870726,
+        "remote_declared_sha256": "e99ca354a8e212e71b2ba39f2f4e5a956b3c0824cc7cec6a357dcd92a1b7aaae",
+        "downloaded": false
+      },
+      {
+        "name": "model-00002.safetensors",
+        "bytes": 439479068,
+        "remote_declared_sha256": "03a43dd42f462d707fbf72d0128d01710da5a5c4a7ec6d1a417ac87c636c5a86",
+        "downloaded": false
+      },
+      {
+        "name": "model-00003.safetensors",
+        "bytes": 162908708,
+        "remote_declared_sha256": "dc310c2cfeb640a10ebe821d8aaf7ed00ccb405efd268bd6d4e7722869e4a642",
+        "downloaded": false
+      }
+    ],
+    "total_weight_bytes_to_download": 1136258502,
+    "weight_bytes_downloaded": 0,
+    "weight_format": {
+      "format": "nvfp4",
+      "weight_only": true,
+      "block_size": 16,
+      "weight_dtype": "uint8_packed_e2m1",
+      "block_scale_dtype": "float8_e4m3fn",
+      "tensor_scale_dtype": "float32",
+      "keep": [
+        "markov_w1"
+      ],
+      "auxiliary_precision": "source",
+      "quantizer": "monolith.formats.nvfp4.NVFP4.quantize"
+    },
+    "rope": {
+      "beta_fast": 32.0,
+      "beta_slow": 1.0,
+      "factor": 32.0,
+      "original_max_position_embeddings": 8192,
+      "rope_theta": 10000000,
+      "rope_type": "yarn"
+    },
+    "block_size_proposals": 7,
+    "sliding_window": null
+  },
+  "static_compatibility": {
+    "target_architecture": [
+      "Qwen3_5ForConditionalGeneration"
+    ],
+    "hidden_size_match": true,
+    "vocab_size_match": true,
+    "target_num_layers": 64,
+    "target_taps": [
+      5,
+      19,
+      33,
+      47,
+      61
+    ],
+    "taps_in_layer_range": true,
+    "checkpoint_embedding_absent": true,
+    "checkpoint_lm_head_absent": true,
+    "markov_head_present": true,
+    "confidence_head_present": true,
+    "default_catalog_matches_target": false,
+    "scope": "Static source/config evidence only; target binding, tokens, state and GPU routes still unqualified"
+  },
+  "pack": {
+    "old_manifest_sha256": "30b0723affb28128d896c85e5120553723ec7a615df8438a41736fd4a6b7ab96",
+    "old_capacity": 2048,
+    "target_formats": [
+      "nvfp4"
+    ],
+    "required_spec_capacity": 2054,
+    "old_pack_reusable_at_requested_capacity": false,
+    "new_cache_root": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1"
+  },
+  "launch_plan": {
+    "cwd": "/Users/ryanli/code/lithos-metal",
+    "command": [
+      "/Users/ryanli/code/lithos-metal/.venv/bin/python",
+      "-B",
+      "-m",
+      "monolith.serve",
+      "--model",
+      "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+      "--draft",
+      "LithosAI/Qwen3.8-27B-DSpark-NVFP4",
+      "--draft-revision",
+      "b169bc4c8dc805a9e6178fa82f6a7b84b169a457",
+      "--draft-kind",
+      "dspark",
+      "--draft-quantization",
+      "none",
+      "--draft-block-size",
+      "7",
+      "--draft-sampling",
+      "argmax",
+      "--max-context",
+      "2048",
+      "--prefill-chunk-size",
+      "128-exact",
+      "--pack",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-spec-packs-v1",
+      "--local-files-only",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18017",
+      "--keep-warm",
+      "0"
+    ],
+    "environment": {
+      "MONOLITH_ACCELERATOR": "on",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "executed": false,
+    "requires_prior_pinned_weight_download": true,
+    "external_service_lease_required": true,
+    "exclusive_gpu_queue_required": true
+  },
+  "recipe_scope": "Native M5 Ultra backend has no validated serving recipes; existing same-target pack is all NVFP4, whereas Max mixed-target selector needs NVFP4 and FP8. Do not silently substitute target or label fallback as best-tuned Lithos.",
+  "next_gate": "Pinned weights + direct pack validation, hardware identity, actual DSpark/verify routes, raw greedy IDs and committed-state correctness before paired timing"
+}
