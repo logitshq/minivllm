@@ -1,0 +1,83 @@
+{
+  "schema": "omlx-controller-readonly-interface-check-v1",
+  "time_utc": "2026-10-17T11:01:04.884059+00:00",
+  "scope": "Only ps, launchctl print and lsof. No controller backend, mutation, HTTP, credentials, model import or GPU.",
+  "process": {
+    "command": [
+      "/bin/ps",
+      "-p",
+      "74384",
+      "-o",
+      "pid=,ppid=,lstart=,comm="
+    ],
+    "returncode": 0,
+    "stderr_retained": false,
+    "selected_stdout": "74384     1 Fri Oct 16 08:01:58 2026     omlx-server"
+  },
+  "job": {
+    "command": [
+      "/bin/launchctl",
+      "print",
+      "gui/501/local.omlx.server"
+    ],
+    "returncode": 0,
+    "stderr_retained": false,
+    "selected_top_level_fields": {
+      "path": "/Users/ryanli/Library/LaunchAgents/local.omlx.server.plist",
+      "state": "running",
+      "program": "/Users/ryanli/.local/bin/omlx",
+      "working directory": "/Users/ryanli/.omlx",
+      "pid": "74384"
+    },
+    "selected_indentation": [
+      {
+        "field": "path",
+        "leading_tabs": 1,
+        "leading_spaces": 0
+      },
+      {
+        "field": "state",
+        "leading_tabs": 1,
+        "leading_spaces": 0
+      },
+      {
+        "field": "pid",
+        "leading_tabs": 1,
+        "leading_spaces": 0
+      },
+      {
+        "field": "state",
+        "leading_tabs": 2,
+        "leading_spaces": 0
+      },
+      {
+        "field": "state",
+        "leading_tabs": 2,
+        "leading_spaces": 0
+      }
+    ]
+  },
+  "absent_job": {
+    "command": [
+      "/bin/launchctl",
+      "print",
+      "gui/501/local.minivllm.readonly-probe-nonexistent-20261017"
+    ],
+    "returncode": 113,
+    "stderr_retained": false,
+    "stdout_empty": true
+  },
+  "listener": {
+    "command": [
+      "/usr/sbin/lsof",
+      "-nP",
+      "-a",
+      "-iTCP:8001",
+      "-sTCP:LISTEN",
+      "-Fpn"
+    ],
+    "returncode": 0,
+    "stderr_retained": false,
+    "selected_stdout": "p74384\nf4\nn127.0.0.1:8001"
+  }
+}

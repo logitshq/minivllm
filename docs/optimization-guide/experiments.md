@@ -427,3 +427,5 @@ child TERM(-15)、reap与独立PID absence通过，外部服务同identity T→S
 [教程](tutorials/026-conv-tail-ownership.md)。
 
 E026 tiny v1已在e03ff2d之后实机PASS：3fresh arms、48case/528phase、全部uint16位域与finite样例通过；T978 retained backing 20,103,168→65,536B，两种ON相同。根线程与独立审计一致，665原始成员逐SHA归档；11资源采样pressure2不恶化、无swap增长，全部reap，原服务T→S恢复。仅该无模型位/所有权诊断通过；不是完整模型资格、不是E023根因或性能点。见[证据与图](../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)。
+
+Cold-restart preparation remains unexecuted: root reviewed the fixed-target controller and reran 23 CPU tests (PASS). Independent read-only interface review confirmed the parsers/saved payload schemas but found required service-absent owner/auditor, pre-spawn-failure recovery, and live reload-monitor/evidence work. User cold-restart approval remains pending; no stop/load occurred. [Review](../../bench/reviews/omlx-controller-interface-audit.md).
