@@ -212,7 +212,7 @@ B16至少1.10×且B8/32/64不回退超过3%才继续调度与HTTP资格。
 1.0155×，未过收益门，不进入HTTP。B8控制0.9806×、B9为1.0542×，全部样本保留。
 原型未接入；[完整归档](../experiments/m5-ultra-256gb/E011-large-graph-v1/)含源码、资源和服务恢复。
 
-## E012 · 2026-10-17 · GPU保留DFlash2选路 · 原型通过，接入待测
+## E012 · 2026-10-17 · GPU保留DFlash2选路 · 默认OFF模块采用
 
 基线`604ce07`。用GPU依赖索引代替每个草稿token的两次主机取值，只在最后取回整条路径。
 独立开关保持真实旧函数对照；24组合成score/IDs、9组真实draft/全部KV检查后，再分别
@@ -222,3 +222,8 @@ B16至少1.10×且B8/32/64不回退超过3%才继续调度与HTTP资格。
 原型33组score/IDs及9组完整draft/KV通过；selector为1.782–2.809×，完整draft九点
 几何平均1.177892×。接入独立模块与默认关闭开关，预声明三次新进程复测实际核心。
 第一次CPU接口检查为测试夹具构造错误，保留于tutorial；不属于GPU数值失败。
+
+实际核心`f05c3cf`的三次新进程全部过门，完整draft几何平均1.185085/1.185097/1.190796×，
+99组selector和27组完整draft/KV通过。所有27个点均提升，最小1.094524×。
+核心31增3删，独立`draft_device_selection`默认OFF；没有改verify/commit，也不计入HTTP前沿。
+[接入资格与完整证据](../experiments/m5-ultra-256gb/E012-draft-selector-integrated-v1/README.md)。

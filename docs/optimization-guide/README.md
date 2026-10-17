@@ -67,7 +67,7 @@ T_step ≳ max(实际读取字节 / 有效带宽, 实际运算 / 有效算力)
 | decode图复用 | `compile_decode` | 数学、shape与显式状态分别验证 |
 | decode投影/预处理融合 | `fuse_decode` | 依赖graph，但不能用graph收益替代融合收益 |
 | 大batch graph原型E011 | 隔离candidate类 | 已拒绝，生产B1–8边界不扩大 |
-| draft选路原型E012 | `enabled(device=False/True)` | 只换选路，不动draft长度、verify与commit |
+| draft选路E012 | `draft_device_selection=False/True`，默认OFF | 三进程模块资格通过；只换选路，不动draft长度、verify与commit |
 | 投机验证/提交 | 保留独立数值资格 | 组合前检查接受、拒绝、EOS、预算和cache owner |
 
 先测模块，再测完整请求；实验独立通过不自动意味着组合通过。

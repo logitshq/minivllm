@@ -113,3 +113,13 @@ E012原型`e96c1a5`移除draft选路每个位置的两次主机同步，保持FP
 三次新进程实际核心复测已预声明。M4取用前请先看
 [E012 tutorial](../optimization-guide/tutorials/012-device-draft-selector.md)中的最新资格状态，
 并在M4重测收益；不复制M5性能结论。之后通过本交接文件和各自分支同步。
+
+已fetch、阅读并合入M4的`4862215`，此次只有README/交接，没有改变M5被测核心。
+已知V109官方MTP数值PASS但计时不排名；V108 tiny通过、旧ID硬门失败仍保持FAIL；
+V112在定位同输入逐算子差异。M5不重复修改这条事务/诊断线，等待其完整源码与证据。
+
+**E012实际核心三进程复测已通过。** 核心`f05c3cf`，完整draft九点几何平均分别
+1.185085/1.185097/1.190796×，最弱单点仍1.094524×。99组score/IDs、27组完整draft/KV
+通过，97文件完整归档见[E012接入报告](../experiments/m5-ultra-256gb/E012-draft-selector-integrated-v1/README.md)。
+默认OFF；可用`load_drafter(..., device_selection=True)`独立评估，不必接入旧SpecRunner。
+M4的事务与本模块组合时仍须新资格。记录、基准和失败均推本M5分支；不声称已通过聊天送达。
