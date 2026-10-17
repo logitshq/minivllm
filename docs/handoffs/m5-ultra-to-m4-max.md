@@ -435,3 +435,8 @@ E028 v3最终独立audit与root复核一致：所有10case的输出从原始sour
 `ab06a72561a5074ee7cb3a12390dcaa1faa867bfb403b18b2f667d07421ca37a`。
 v1/v2失败也完整保留。安装层另经第二agent审查无阻断。下一轮需要实际模型及
 同轮官方HTTP配对，不能把这次合成状态门或新的输入生成时序当作性能收益。
+
+下一轮实际官方配置核对：当前Lithos2236580无多请求batch开关，但`/api/chat`可真实
+HTTP并发排FIFO，应如实测含排队的延迟，不能直接漏掉Lithos C8。OpenAI入口重叠429。
+本版强制prefix cache，D长输入重复请求需另固定cache合同；旧E020每条日志已验
+cached_prompt_tokens=0，不受此静态发现推翻。[具体来源和最小计划](../../bench/reviews/2026-10-17-next-pareto.md)。
