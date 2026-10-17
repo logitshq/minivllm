@@ -86,3 +86,5 @@ docs/              计划、教程、远程版的契约和 notes
 [38：投机事务与量化乘法](docs/experiments/38-spec-transaction-and-qmm.md)保存V108旧ID门失败、官方MTP数值资格及三对HTTP负结果、同输入逐算子诊断；187项源码身份与449份公开运行文本已归档（417份原字节、32份凭据字段脱敏view），尚无新的完整Pareto胜出。
 
 [39：保留逐行量化乘法的结果](docs/experiments/39-verify-broadcast-m1.md)附冻结代码与前后diff；[进展图与台账](docs/progress/README.md)保存PNG/SVG、数据及复现脚本，[模型计划](docs/progress/MODEL-PLAN.md)明确Qwen3.8和GLM-5.3-Flash的机器与对照范围。
+
+[40：整模通过后再测吞吐和延迟](docs/experiments/40-m1-verify-and-bounded-loader.md)保存 V117 实际正确性结果、V120/V122 资源中止及代码；当前主图为 [M4 throughput–latency Pareto](docs/progress/2026-10-17-m4-pareto/README.md)。

@@ -1,0 +1,217 @@
+{
+  "status": "SAVED_ACTUAL_V117_PASS_TUTORIAL_SUMMARY_NOT_INDEPENDENT_REVIEW",
+  "scope": "old44 target math;targetverify-only broadcastM1 +boundedDFlashloader;correctness qualification only",
+  "fullmodel_status": "PASS_V117_BOUNDED_LOAD_VERIFY_BROADCAST_M1_OLD96IDS_LITERAL_AND_ORDINARY_M1_COMMIT128_LASTLOGITS_STRICT",
+  "old_ID_checks_each_arm": {
+    "A": 96,
+    "B": 96
+  },
+  "requests": [
+    {
+      "arm": "A",
+      "case": "base",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "A",
+      "case": "reset-base",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "A",
+      "case": "changed-prefill",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "B",
+      "case": "base",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "B",
+      "case": "reset-base",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "B",
+      "case": "changed-prefill",
+      "budget": 32,
+      "output_token_count": 32,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "E",
+      "case": "budget1",
+      "budget": 1,
+      "output_token_count": 1,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "E",
+      "case": "budget2",
+      "budget": 2,
+      "output_token_count": 2,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "E",
+      "case": "budget3",
+      "budget": 3,
+      "output_token_count": 3,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    },
+    {
+      "arm": "E",
+      "case": "budget5",
+      "budget": 5,
+      "output_token_count": 5,
+      "old_ID_equal": true,
+      "runner_empty": true,
+      "target1349_readonly": true
+    }
+  ],
+  "transactions": 49,
+  "verify_length_histogram": {
+    "1": 6,
+    "2": 2,
+    "3": 1,
+    "4": 2,
+    "5": 38
+  },
+  "independent_ordinaryM1_reference_requests": 7,
+  "independent_begin_cache_components_strict": 6272,
+  "independent_commit_cache_components_strict": 6272,
+  "committed_last_logits_strict": 49,
+  "all_attention_usedprefix_equal_and_each_futuretail_zero": true,
+  "same_invocation_selected_cache_components_strict": 6272,
+  "all_literal_histories_and_invocation_inputs_readonly": true,
+  "actual_verify_linear_calls": 24353,
+  "all497_once_per_verify_scope": true,
+  "actual_GDN_helper_calls": 10128,
+  "decode_tokens_delivered": 100,
+  "drafted_tokens": 162,
+  "target_parameter_count": 1349,
+  "target1349_readonly": true,
+  "old44_final128_hash_diagnostic_equal": [
+    {
+      "case": "base",
+      "equal": 128,
+      "different": 0
+    },
+    {
+      "case": "reset-base",
+      "equal": 128,
+      "different": 0
+    },
+    {
+      "case": "changed-prefill",
+      "equal": 128,
+      "different": 0
+    }
+  ],
+  "old132_tensor_PASS_claim": false,
+  "allocator_only": {
+    "current117_at_target_load": {
+      "get_active_memory": 15133597696,
+      "get_cache_memory": 738786,
+      "get_peak_memory": 15133945640
+    },
+    "current117_at_draft_load_end": {
+      "get_active_memory": 16399649292,
+      "get_cache_memory": 1017707857,
+      "get_peak_memory": 16399649292
+    },
+    "current117_final": {
+      "get_active_memory": 16399649292,
+      "get_cache_memory": 2149962206,
+      "get_peak_memory": 18348106041
+    },
+    "old108_at_draft_load_end": {
+      "get_active_memory": 16399649292,
+      "get_cache_memory": 2147515729,
+      "get_peak_memory": 19993643532
+    },
+    "old108_active_peak_minus_current117_at_same_stage": 3593994240,
+    "current117_bounded_loader_metadata_stages": 83,
+    "physical_memory_savings_claim": false,
+    "timing_or_speed_claim": false
+  },
+  "resources": {
+    "sample_count": 75,
+    "pressure_counts": {
+      "1": 75
+    },
+    "thermal_counts": {
+      "0": 75
+    },
+    "power_counts": {
+      "AC Power": 75
+    },
+    "free_percent_min": 36,
+    "free_percent_max": 82,
+    "swap_MiB_delta": 0.0,
+    "swapouts_delta": 0
+  },
+  "release": {
+    "owner_pid": 39460,
+    "child_pid": 39470,
+    "child_exit": 0,
+    "waited_reaped": true,
+    "external_release_status": "PASS_EXTERNAL_RELEASE",
+    "both_strict_absent": true
+  },
+  "current_historical_measured_frontier": [
+    {
+      "configuration": "native-C4",
+      "latency_ms": 3291.0859164985595,
+      "throughput_tok_s": 38.88648794562105
+    },
+    {
+      "configuration": "omlx-C1",
+      "latency_ms": 1259.7697080054786,
+      "throughput_tok_s": 25.401468059319964
+    }
+  ],
+  "not_performance_qualified": true,
+  "not_HTTP_or_Pareto_adoption": true,
+  "evidence_sha256": {
+    "actual117_receipt": "bbc2067380d4ecac328427411a92853c8587a0a16ea11cf12bb8da2b370491e5",
+    "actual117_external_release": "022a2483cb9bbd4b81496863500028f70537f6d8afc617104e283e19fc2254d8",
+    "actual117_owner": "3fabb774da69d89c520e3cd685252679cbe57462dcead0ec543a340cde1c60e7",
+    "actual117_resources": "b4523c6897b7c17cee6d0243b3217d1c8e72b872227e14c026ae5e0adbd8a0a1",
+    "frozen117_sourcepins": "57c4f2e30539ad83357b323e42bbe0b6d07b243b8b52b6d6d1ec0c04aab6c82c",
+    "old108_receipt_for_allocator_context": "7966209c6a956f71d0b688ff689df11c0f8d082661f8a39d5a52c51a3cd71d9d",
+    "historical_pareto_rows": "071a6e4464fe2494b3ff3fbb4b25485bac6661bf78ec2f364ce3615ffbee8319"
+  },
+  "redaction": "whitelisted counts/status/allocator/resource aggregates andevidence hashes only;noargv/settings/HTTPtext/IDs/weightdata/fullrawreceipt",
+  "author_GPU_used": false,
+  "W_Git_modified": false
+}

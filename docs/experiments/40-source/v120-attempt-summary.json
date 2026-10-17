@@ -1,0 +1,92 @@
+{
+  "status": "TWO_RESOURCE_STOPS_NO_PAIRED_PERFORMANCE_RESULT",
+  "attempts": [
+    {
+      "attempt": 1,
+      "classification": "RESOURCE_PRESSURE_STOP_BEFORE_SPECULATIVE_HTTP",
+      "owner_status": "FAILED",
+      "owner_pid": 40985,
+      "exception_type": "RuntimeError",
+      "error": "Resource pressure warning: unload owned model and pause",
+      "completed_arms": [
+        {
+          "mode": "ordinary",
+          "status": "C1_SINGLE_ARM_COMPLETED_NO_ADOPTION",
+          "latency_p50_ms": 1250.3733330231626,
+          "total_output_tok_s": 25.592356422565526,
+          "ttft_p50_ms": 162.08699997514486
+        }
+      ],
+      "speculative_HTTP_requests": 0,
+      "owned_server_exits": [
+        {
+          "arm": "00-ordinary",
+          "pid": 40994,
+          "wait_completed": true,
+          "returncode": -15,
+          "exact_pid_absent": true,
+          "recorded_birth_identity_sha256": "a906dd06dae81f94cb68e801631a9f2b6509d824924d19b145d2964a95b8e99a",
+          "port": 55763,
+          "port_absent": true
+        },
+        {
+          "arm": "01-speculative",
+          "pid": 41248,
+          "wait_completed": true,
+          "returncode": -15,
+          "exact_pid_absent": true,
+          "recorded_birth_identity_sha256": "3fdca8e3a417f2b1ea1e089f4eeb7dfa6f17f359d8930b4a4a27f2ccfa3890ec",
+          "port": 55832,
+          "port_absent": true
+        }
+      ],
+      "external_release_status": "PASS_EXTERNAL_RELEASE_RESOURCE_STOP",
+      "external_all_owned_pids_absent": true,
+      "wrapper_tool_exit": 1,
+      "launched_servers": 2,
+      "planned_servers": 2,
+      "stdout_all_owned_reaped_expected": true,
+      "scope": "oneordinaryarm descriptiveonly;no pairedresult/no improvement/no adoption"
+    },
+    {
+      "attempt": 2,
+      "classification": "RESOURCE_PRESSURE_STOP_BEFORE_SPECULATIVE_HTTP",
+      "owner_status": "FAILED",
+      "owner_pid": 41530,
+      "exception_type": "RuntimeError",
+      "error": "Resource pressure warning: unload owned model and pause",
+      "completed_arms": [],
+      "speculative_HTTP_requests": 0,
+      "owned_server_exits": [
+        {
+          "arm": "00-speculative",
+          "pid": 41539,
+          "wait_completed": true,
+          "returncode": -15,
+          "exact_pid_absent": true,
+          "recorded_birth_identity_sha256": "b4f82e22319486a61006139384f9704e76aa17c20ce16c05004e919aa63cfee9",
+          "port": 55976,
+          "port_absent": true
+        }
+      ],
+      "external_release_status": "PASS_EXTERNAL_RELEASE_RESOURCE_STOP",
+      "external_all_owned_pids_absent": true,
+      "wrapper_tool_exit": 1,
+      "launched_servers": 1,
+      "planned_servers": 2,
+      "stdout_all_owned_reaped_expected": false,
+      "scope": "oneordinaryarm descriptiveonly;no pairedresult/no improvement/no adoption"
+    }
+  ],
+  "ordinary_one_arm_only": {
+    "mode": "ordinary",
+    "status": "C1_SINGLE_ARM_COMPLETED_NO_ADOPTION",
+    "latency_p50_ms": 1250.3733330231626,
+    "total_output_tok_s": 25.592356422565526,
+    "ttft_p50_ms": 162.08699997514486
+  },
+  "cleanup_note": "Attempt2 printed all_owned_reaped=false compares planned2 to launched/reaped1;actualsole serverwaited/reaped/strictabsent andportabsent. Externalrelease independently confirmsowner+serverabsent.",
+  "no_paired_improvement": true,
+  "no_speculative_performance_point": true,
+  "GPU_used_by_publication_author": false
+}
