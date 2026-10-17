@@ -1,0 +1,684 @@
+{
+  "schema": "E024-route-matrix-prereg-preparation-v1",
+  "status": "CPU_PREPARED",
+  "owner_plan_sha256": "10bfb6796e1e2f522967503518b1f332c34968634baa028c59a60fe5290d8136",
+  "route_plan_sha256": "a03e2ccf914991aff03f6498a412cdef328b26c78c27816356c5fd83b3564bbf",
+  "lifecycle": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json",
+    "sha256": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8"
+  },
+  "cpu_prepare": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-decode-matrix-v1-cpu-prepare/prepared.json",
+    "sha256": "c1bcba6e03afe3b7bc49accc4cff54be1f7e44c146113964180a5dc6f398e5ab"
+  },
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/controller.py": "b5237c458afa8324ffa6d5e6a5c49167578daec7425ff036112ec8e108d61213",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/owner.py": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/audit_restore.py": "08f5a24dc9d100ca5e5b4ed469ec6587f7ba5b36b3910e6e580e7027f32b5d21",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualifier_matrix.py": "6130d948450c825302d9857450204f8503c0dab449050a1bb59eaa51b77920e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/qualify.py": "fe8e1c044e97885ec7c97fddce04a6e34f5b9067be4d982c5f6ad1071c59c801",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller.py": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-matrix-v1/route-plan.json": "a03e2ccf914991aff03f6498a412cdef328b26c78c27816356c5fd83b3564bbf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-v1/owner-plan.json": "4dff5f46d0b35d038ffbb0e32ebb6197b047f4da6e847b3160f3ae8685caf6a4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-matrix-v1/prepare-plan.py": "b58f5fe4d5c69c7901fc8988a06ae2a243bc052ea413386bf63161fa01da5f66",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-matrix-v1/execute.py": "e4860143ac0d557b899837139dcbe3889edde0da5d4d7d423efa58b3717518d9",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-matrix-v1/README.md": "948bbaec28cbbe7761ee2b8396a20cb1b5d395fe0359e7bdf9a91e448ef386f4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-canary-v1/execute.py": "0bec74eef282b75d594e84cb68cf79c2ac40ff062018cb5268dfb3dcf29f4a62",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/test_cpu.py": "bba717f1d8e4f619cf60247b2d39983f59fbe5f9ec4d936c6f31132cf7da9b8e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/test_matrix_cpu.py": "4355a6b78631f781345d6e04de49fc8e6d9a4b3b7f6a9cc6cf3b138fec093ba4"
+  },
+  "contract": {
+    "schema": "E024-route-matrix-contract-v1",
+    "points": [
+      {
+        "name": "matrix-B1-used257",
+        "kind": "matrix",
+        "B": 1,
+        "lens": [
+          257
+        ]
+      },
+      {
+        "name": "matrix-B2-used257",
+        "kind": "matrix",
+        "B": 2,
+        "lens": [
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B3-used257",
+        "kind": "matrix",
+        "B": 3,
+        "lens": [
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B4-used257",
+        "kind": "matrix",
+        "B": 4,
+        "lens": [
+          257,
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B5-used257",
+        "kind": "matrix",
+        "B": 5,
+        "lens": [
+          257,
+          257,
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B6-used257",
+        "kind": "matrix",
+        "B": 6,
+        "lens": [
+          257,
+          257,
+          257,
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B7-used257",
+        "kind": "matrix",
+        "B": 7,
+        "lens": [
+          257,
+          257,
+          257,
+          257,
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B8-used257",
+        "kind": "matrix",
+        "B": 8,
+        "lens": [
+          257,
+          257,
+          257,
+          257,
+          257,
+          257,
+          257,
+          257
+        ]
+      },
+      {
+        "name": "matrix-B1-used1023",
+        "kind": "matrix",
+        "B": 1,
+        "lens": [
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B2-used1023",
+        "kind": "matrix",
+        "B": 2,
+        "lens": [
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B3-used1023",
+        "kind": "matrix",
+        "B": 3,
+        "lens": [
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B4-used1023",
+        "kind": "matrix",
+        "B": 4,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B5-used1023",
+        "kind": "matrix",
+        "B": 5,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B6-used1023",
+        "kind": "matrix",
+        "B": 6,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B7-used1023",
+        "kind": "matrix",
+        "B": 7,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B8-used1023",
+        "kind": "matrix",
+        "B": 8,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "uniform-used1023",
+        "kind": "uniform-chain",
+        "B": 1,
+        "lens": [
+          1023
+        ]
+      },
+      {
+        "name": "uniform-used1024",
+        "kind": "uniform-chain",
+        "B": 1,
+        "lens": [
+          1024
+        ]
+      },
+      {
+        "name": "uniform-used1025",
+        "kind": "uniform-chain",
+        "B": 1,
+        "lens": [
+          1025
+        ]
+      },
+      {
+        "name": "reuse-used1023-0-B1",
+        "kind": "batch-reuse",
+        "B": 1,
+        "lens": [
+          1023
+        ]
+      },
+      {
+        "name": "reuse-used1023-1-B8",
+        "kind": "batch-reuse",
+        "B": 8,
+        "lens": [
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023,
+          1023
+        ]
+      },
+      {
+        "name": "reuse-used1023-2-B1",
+        "kind": "batch-reuse",
+        "B": 1,
+        "lens": [
+          1023
+        ]
+      },
+      {
+        "name": "matrix-B1-used1024",
+        "kind": "matrix",
+        "B": 1,
+        "lens": [
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B2-used1024",
+        "kind": "matrix",
+        "B": 2,
+        "lens": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B3-used1024",
+        "kind": "matrix",
+        "B": 3,
+        "lens": [
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B4-used1024",
+        "kind": "matrix",
+        "B": 4,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B5-used1024",
+        "kind": "matrix",
+        "B": 5,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B6-used1024",
+        "kind": "matrix",
+        "B": 6,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B7-used1024",
+        "kind": "matrix",
+        "B": 7,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B8-used1024",
+        "kind": "matrix",
+        "B": 8,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "reuse-used1024-0-B1",
+        "kind": "batch-reuse",
+        "B": 1,
+        "lens": [
+          1024
+        ]
+      },
+      {
+        "name": "reuse-used1024-1-B8",
+        "kind": "batch-reuse",
+        "B": 8,
+        "lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "reuse-used1024-2-B1",
+        "kind": "batch-reuse",
+        "B": 1,
+        "lens": [
+          1024
+        ]
+      },
+      {
+        "name": "matrix-B1-used1280",
+        "kind": "matrix",
+        "B": 1,
+        "lens": [
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B2-used1280",
+        "kind": "matrix",
+        "B": 2,
+        "lens": [
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B3-used1280",
+        "kind": "matrix",
+        "B": 3,
+        "lens": [
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B4-used1280",
+        "kind": "matrix",
+        "B": 4,
+        "lens": [
+          1280,
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B5-used1280",
+        "kind": "matrix",
+        "B": 5,
+        "lens": [
+          1280,
+          1280,
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B6-used1280",
+        "kind": "matrix",
+        "B": 6,
+        "lens": [
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B7-used1280",
+        "kind": "matrix",
+        "B": 7,
+        "lens": [
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B8-used1280",
+        "kind": "matrix",
+        "B": 8,
+        "lens": [
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280,
+          1280
+        ]
+      },
+      {
+        "name": "matrix-B1-used1536",
+        "kind": "matrix",
+        "B": 1,
+        "lens": [
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B2-used1536",
+        "kind": "matrix",
+        "B": 2,
+        "lens": [
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B3-used1536",
+        "kind": "matrix",
+        "B": 3,
+        "lens": [
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B4-used1536",
+        "kind": "matrix",
+        "B": 4,
+        "lens": [
+          1536,
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B5-used1536",
+        "kind": "matrix",
+        "B": 5,
+        "lens": [
+          1536,
+          1536,
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B6-used1536",
+        "kind": "matrix",
+        "B": 6,
+        "lens": [
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B7-used1536",
+        "kind": "matrix",
+        "B": 7,
+        "lens": [
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "matrix-B8-used1536",
+        "kind": "matrix",
+        "B": 8,
+        "lens": [
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536,
+          1536
+        ]
+      },
+      {
+        "name": "mixed-used1023",
+        "kind": "mixed-chain",
+        "B": 8,
+        "lens": [
+          257,
+          511,
+          767,
+          900,
+          978,
+          1000,
+          1022,
+          1023
+        ]
+      },
+      {
+        "name": "mixed-used1024",
+        "kind": "mixed-chain",
+        "B": 8,
+        "lens": [
+          258,
+          512,
+          768,
+          901,
+          979,
+          1001,
+          1023,
+          1024
+        ]
+      },
+      {
+        "name": "mixed-used1025",
+        "kind": "mixed-chain",
+        "B": 8,
+        "lens": [
+          259,
+          513,
+          769,
+          902,
+          980,
+          1002,
+          1024,
+          1025
+        ]
+      }
+    ],
+    "expected_points": 52,
+    "matrix_points": 40,
+    "uniform_crossing_points": 3,
+    "mixed_crossing_points": 3,
+    "batch_reuse_points": 6,
+    "layers": 64,
+    "state_arrays": 128,
+    "output_arrays": 129,
+    "input_arrays": 131,
+    "KV_backing": 1536,
+    "prefill_checkpoints": [
+      256,
+      1022,
+      1023,
+      1279,
+      1535
+    ],
+    "max_prefill_tokens_per_model": 18730,
+    "max_decode_output_tokens_per_model": 227,
+    "history": "repeat each frozen D prompt IDs and truncate; diagnostic extension, not generation",
+    "configuration": {
+      "max_len": 2048,
+      "max_seqs": 8,
+      "max_batched_tokens": 16384,
+      "cache_limit_gib": 2,
+      "compile_decode": false,
+      "fuse_decode": false,
+      "gates_compile": false,
+      "norm_reuse": false
+    },
+    "raw_points": {
+      "matrix-B1-used257": "canonical",
+      "matrix-B1-used1023": "both",
+      "matrix-B1-used1024": "both",
+      "mixed-used1024": "both"
+    },
+    "expected_pass_full_snapshots": 10,
+    "pass_evidence": "All arrays device finite/unsigned-bit comparison plus full-byte SHA receipts; sparse full raw snapshots only",
+    "failure_evidence": "First failure retains original input handles as observed at failure, available outputs and genuine pre-execution hash receipts; no historical before-payload claim, no later points",
+    "two_callable_families_not_two_machine_graphs": true,
+    "parameter_replacement_qualified": false,
+    "ahead_qualified": false,
+    "scheduler_lifecycle_qualified": false,
+    "full_model_qualified": false,
+    "performance_qualified": false
+  },
+  "service_prepared": false,
+  "numerical_qualified": false,
+  "performance_qualified": false
+}
