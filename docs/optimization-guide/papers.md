@@ -131,3 +131,13 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   阈值；其Q4/Q8格式及M5 Pro结果不能直接证明本机NVFP4受益。推论：先核查MLX现有
   NVFP4/NAX dispatch，再做独立prefill形状实验；不重新量化checkpoint，不将作者速度
   放进本机Pareto。当前E024只研究长decode图复用，与论文tensor kernel加速分开验证。
+
+- [Orthrus精度复现研究 v1](https://arxiv.org/html/2609.15504v1)，2026-09-14；2026-10-17读§3–5。
+  RTX3090/Qwen3-1.7B、1190 prompts、greedy cap128的BF16完整轨迹一致率为45%/43%，
+  FP32在这组实验中全部一致；下游任务分数近似不证明逐token等价。作者未定位具体偏差算子，
+  因此不能把该失败率外推到本机或某个kernel。推论：继续保留固定数值合同、完整logits/
+  状态与轨迹验证，正确性失败不能用速度或平均任务分数抵消。本机未训练或移植Orthrus。
+
+2026-10-17追加检索10月Apple Silicon/GDN/persistent inference/continuous batching，未筛出
+比已记录ReaDy等更直接适用的10月系统方案；EAGLE-ASR是语音模型专用训练头，未纳入本轮。
+上述7月和9月条目是本轮新阅读，不称为本月新发表。

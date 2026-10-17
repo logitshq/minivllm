@@ -290,3 +290,23 @@ GLM固定revision的62 shards（189.982GiB）下载和全部SHA校验已完成�
 完整请求paired GM=1.013777×，TTFT首对0.899891×，未过原采用门，未接入core；
 223文件完整归档。v5分面图已独立逐点复算和视检，217份来源SHA一致；
 保持“正确性是硬门，吞吐/完整延迟才是Pareto两轴”的口径。
+
+
+## 2026-10-17 接收第41/42章，长负载资格运行中
+
+已实际fetch并merge M4 `ee9f243`（包含`eba6320`），merge为`97273be`。
+root阅读两章并运行标准库保存证据校验：V121的0.997538× transport比、V123的
+0.4880478× spec/ordinary比、全部请求/资源/退出证据均通过。保留无收益结论，不在M5
+冒充已运行这条路径，也不混合两机器的绝对速度。
+
+M5已推送`ed32cab`，新增E023 owner与冻结数值计划（此前commit `e9600a8`）；本轮正在
+真实GPU运行37个固定请求、C1/C8/混合生命周期，plan SHA
+`21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb`。
+逐步PASS不能当整组PASS，带观察器计时不用于Pareto。E024单独的1536图诊断已实现，
+32个形状点+真实参数替换+B1→B8→B1+actual ahead检查，12CPU tests经过root和独立复核。
+GPU诊断未调度；后续完整D512/gatesON资格仍必需。
+
+cache关键事实：`_sync_batch`的新行容量参数是prompt+output budget，D任务首次decode
+已预留1536，不需先改KV增长策略。现有256图的closure读取长度同样固定256，不能只放宽guard。
+GLM190GiB权重已全部SHA通过，但原服务142.82GiB物理驻留不因SIGSTOP释放；恢复预检发现
+admin主key未配置且匿名admin卸载401。尚未修改认证、卸载或加载GLM；Qwen工作独立继续。

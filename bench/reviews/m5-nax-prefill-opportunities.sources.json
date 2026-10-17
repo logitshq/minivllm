@@ -1,0 +1,172 @@
+{
+  "scope": "CPU static dispatch calculation, not actual GPU route proof or measurement",
+  "architecture_assumed_from_existing_qualification": "applegpu_g17d",
+  "OS_readonly_version": "27.0.1",
+  "quantization": {
+    "group_size": 16,
+    "bits": 4,
+    "mode": "nvfp4"
+  },
+  "transpose": true,
+  "dtype": "BF16",
+  "weight_ndim": 2,
+  "activations_row_contiguous": true,
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/quantized.cpp",
+      "path": ".artifacts/m5-ultra-256gb/nax-review-v2/mlx__backend__metal__quantized.cpp",
+      "bytes": 62459,
+      "sha256": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+      "installed_header_identical": null,
+      "older_local_source_identical": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/device.cpp",
+      "path": ".artifacts/m5-ultra-256gb/nax-review-v2/mlx__backend__metal__device.cpp",
+      "bytes": 30728,
+      "sha256": "d2254ea5cb2ac282f65c2869c6ef56decc97669e2a5fc26fba9d831b60569c9f",
+      "installed_header_identical": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/jit_kernels.cpp",
+      "path": ".artifacts/m5-ultra-256gb/nax-review-v2/mlx__backend__metal__jit_kernels.cpp",
+      "bytes": 47593,
+      "sha256": "f757ea0a975a0966be61a64cef6535c62ef4f2b5571abe7b8f7547ad36b38fb2",
+      "installed_header_identical": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/kernels/fp_quantized_nax.h",
+      "path": ".artifacts/m5-ultra-256gb/nax-review-v2/mlx__backend__metal__kernels__fp_quantized_nax.h",
+      "bytes": 28771,
+      "sha256": "8a712870dc17493ddf05daa706481d52867b29e9141d2ecb76dccf47f04c8b42",
+      "installed_header_identical": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/metal/kernels/steel/gemm/nax.h",
+      "path": ".artifacts/m5-ultra-256gb/nax-review-v2/mlx__backend__metal__kernels__steel__gemm__nax.h",
+      "bytes": 25621,
+      "sha256": "fb10bcae44095e9fed5c81213d03527dd5fe5ac11be11ec7784bd357c6f317ec",
+      "installed_header_identical": true
+    }
+  ],
+  "local_sources": [
+    {
+      "path": "tutorial_code/miniengine/model/layers.py",
+      "sha256": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908"
+    },
+    {
+      "path": "tutorial_code/miniengine/model/qwen3_5.py",
+      "sha256": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce"
+    },
+    {
+      "path": "tutorial_code/miniengine/model/gdn.py",
+      "sha256": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030"
+    },
+    {
+      "path": "tutorial_code/miniengine/model/attention.py",
+      "sha256": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c"
+    },
+    {
+      "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/config.json",
+      "sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706"
+    },
+    {
+      "path": ".venv/lib/python3.13/site-packages/mlx/share/cmake/MLX/MLXConfig.cmake",
+      "sha256": "8bc05615f53253e43f28d7973a2b083be4370a36589b6ac0ae03324a4717a5fa"
+    },
+    {
+      "path": ".venv/lib/python3.13/site-packages/mlx-0.32.3.dist-info/METADATA",
+      "sha256": "8520f04babb9b28cc25403487d7a2c075aab252a34dbf158b5a6806c23243be0"
+    }
+  ],
+  "shapes": [
+    {
+      "operator": "MLP gate/up",
+      "K": 5120,
+      "N": 17408,
+      "single_matrix_routes": {
+        "19": "NAX eligible",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "attention q",
+      "K": 5120,
+      "N": 12288,
+      "single_matrix_routes": {
+        "19": "NAX eligible",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "GDN qkv",
+      "K": 5120,
+      "N": 10240,
+      "single_matrix_routes": {
+        "19": "NAX eligible",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "GDN z",
+      "K": 5120,
+      "N": 6144,
+      "single_matrix_routes": {
+        "19": "SIMD splitK2",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "MLP down",
+      "K": 17408,
+      "N": 5120,
+      "single_matrix_routes": {
+        "19": "SIMD splitK2",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "attention/GDN out",
+      "K": 6144,
+      "N": 5120,
+      "single_matrix_routes": {
+        "19": "SIMD splitK3",
+        "128": "NAX eligible",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "attention k/v",
+      "K": 5120,
+      "N": 1024,
+      "single_matrix_routes": {
+        "19": "SIMD splitK16",
+        "128": "SIMD splitK4",
+        "512": "NAX eligible",
+        "1024": "NAX eligible"
+      }
+    },
+    {
+      "operator": "GDN a/b",
+      "K": 5120,
+      "N": 48,
+      "single_matrix_routes": {
+        "19": "SIMD splitK160",
+        "128": "SIMD splitK40",
+        "512": "SIMD splitK16",
+        "1024": "SIMD splitK8"
+      }
+    }
+  ]
+}
