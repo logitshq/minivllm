@@ -263,3 +263,29 @@ committed throughput and full POST→DONE latency. The existing native n=1 point
 and D512 graph are unchanged; Lithos/oMLX formal D512 points remain pending.
 
 [Complete qualification evidence](../../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/README.md).
+
+## Registering repeated observer-OFF Lithos timing (2026-10-17)
+
+The next finite cycle uses six fresh official processes, in order C1/C8,
+C8/C1, C1/C8. Each sees the same original-message fixture cycle: eight warm
+requests then 64 formal requests. Raw terminal usage is normalized once for
+normal EOS under the actual v2 qualification. No output is retokenized to invent
+an output-token count. HTTP queue time remains in POST-to-DONE latency; the
+common first-POST/last-DONE window supplies aggregate committed throughput.
+
+Independent quiet stderr windows preserve device/inode, byte offset, prefix
+hash and clocks before POST and after complete drain/close. All 72 Generation
+entries must report zero cached prompt tokens, and all 64 formal entries must
+report zero setup time. Three process-level results per concurrency remain
+separate; medians are not pooled percentiles or confidence intervals. Existing
+native n=1 results are not relabeled as three paired replicates.
+
+CPU integration caught result-point metadata and scheduler-receipt field
+mismatches before any real request. A resource-auditor boundary case also failed
+conceptually at sample1000: lexicographic actual filenames were compared with a
+numeric-order expected list. Sorting both lists preserves the exact membership
+gate and numeric chronological replay; a regression covers more than1000
+samples and a missing sample. Frozen earlier source/evidence remains unchanged.
+The recipe reuses existing HTTP, raw NDJSON, stop/recover and resource policies;
+this registration adds no measured performance point. CPU fixture failures and
+final test receipts are retained with the preregistration.

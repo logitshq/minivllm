@@ -886,3 +886,21 @@ committed throughput and full POST→DONE latency. The existing native n=1 point
 and D512 graph are unchanged; Lithos/oMLX formal D512 points remain pending.
 
 [Complete qualification evidence](../experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/README.md).
+
+## E023 Lithos D512 formal v1 registered · 2026-10-17
+
+Preregistered six fresh observer-OFF official processes: r1-c1,r1-c8,r2-c8,
+r2-c1,r3-c1,r3-c8, each8warm+64formal. Exact real-v2 qualification, original
+messages, normalEOS cap512, fixed NVFP4 weights/pack and same five dependency
+groups. Plan SHA ab8d035bf53f65855143ac9c5f2713d0a119bcd81a9504766a0aa8b376612523.
+89 integrated CPU tests plus5 fake execution/recovery paths PASS. Actual closed
+qualification → mock official HTTP/child → full trial offline audit also passes.
+Source/metadata and read-only service prepare PASS; current original PID28531.
+No actual new formal request or performance point at registration.
+
+The resource auditor's numeric filename membership correction supports more
+than999 samples without removing chronological/resource checks. Pre-registration
+schema mismatches (raw point metadata and scheduler SHA field) were repaired;
+fixture-only test failures are recorded. Fixed originals and failed experiments
+remain untouched. M4 bea0a02/ce068d8 were fetched and merged before registration;
+response and proposed work split are in the Git handoff.

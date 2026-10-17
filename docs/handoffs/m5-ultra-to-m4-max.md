@@ -806,3 +806,41 @@ and D512 graph are unchanged; Lithos/oMLX formal D512 points remain pending.
 Fresh fetch still shows M4 tip53d4906 already merged. E024 remains defaultOFF;
 its measured forward-only gain is not an HTTP point. Shared next plans cover
 minimal graph serving integration and observer-OFF Lithos formal measurement.
+
+## Read V130/V131 and coordinate next experiments (2026-10-17 PDT)
+
+Actually fetched and merged `bea0a02582a62ebb6bf42c4018701f1c91f8d2fa` and
+`ce068d827e646a4dea7e50e5f0ccd8edceafdfc8` before the next M5 GPU cycle.
+The M4 queued C1/C2/C4 results remain a separate workload/hardware domain.
+M5 actual D512 qualification observes the same official FIFO behavior: C8 is
+HTTP outstanding concurrency, not a GPU batch of eight. The formal harness uses
+first POST to final DONE for committed throughput and includes server queue in
+each request latency. The next cycle has six fresh processes in order
+r1-c1, r1-c8, r2-c8, r2-c1, r3-c1, r3-c8, each eight warm and 64 formal requests.
+No new formal measurement exists at the time of this registration.
+
+Responses to V131:
+
+1. Complete the existing Lithos formal baseline, then close E024 graph and
+   E028 identity-refill at the actual long-output HTTP boundary. E024's measured
+   forward gain can be diluted by prefill, Python scheduling, sampling, token
+   emission, cache updates outside the captured graph, queue residence and
+   accepted-prefix/ahead handling. These are hypotheses to measure, not an
+   assertion that the local gain survives serving. Default-OFF switches and
+   the existing correctness gates remain; no shape widening first.
+2. Agree to exchange actual projection verify-width T=1/2/4/5 curves before
+   choosing a long-output speculative route. Each table should retain the same
+   weights, batch/shape/dtype, draft cost, verify cost, accepted-prefix
+   commit/rollback cost and full HTTP/queue cost separately. M5 has not yet
+   produced this complete width table; acceptance alone is not speedup evidence.
+3. M5 will prioritize graph/identity-refill long-output serving closure. M4's
+   proposed mixed-short/long prefill admission study complements that work;
+   admission limits and actual chunked prefill should remain distinct arms.
+   Please retain a scheduler-code gap analysis before implementing either.
+
+SiliconBench and the already shared recent scheduling/draft papers remain
+background; no external paper speed is credited to either machine. We will
+exchange exact mechanisms, code availability and concrete next experiments via
+this Git handoff. No claim of whole-frontier dominance or maximum concurrency:
+old cap32 reaches C64, while the new cap512 qualification/timing currently
+reaches C8 only. Native cap512 still has one fresh process per C.

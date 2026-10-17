@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scope": "CPU fake driver only; no subprocess/service/network",
+  "source_sha256": "f18ec943335bc149b5f96e7567d8e9aae71a8895f6092ebcfcb6dc685acdc250",
+  "tests": [
+    {
+      "case": "success",
+      "status": "PASS",
+      "result": 0,
+      "phases": [
+        "stop",
+        "lithos-formal-owner",
+        "recover"
+      ]
+    },
+    {
+      "case": "owner-fail",
+      "status": "PASS",
+      "result": 1,
+      "phases": [
+        "stop",
+        "lithos-formal-owner",
+        "recover"
+      ]
+    },
+    {
+      "case": "owner-exception",
+      "status": "PASS",
+      "result": "OSError",
+      "phases": [
+        "stop",
+        "lithos-formal-owner",
+        "recover"
+      ]
+    },
+    {
+      "case": "stop-reject",
+      "status": "PASS",
+      "result": 1,
+      "phases": [
+        "stop"
+      ]
+    },
+    {
+      "case": "bad-pin",
+      "status": "PASS",
+      "result": "ValueError",
+      "phases": []
+    }
+  ]
+}
