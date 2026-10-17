@@ -169,3 +169,29 @@ and use TTFT/ITL only for diagnosis. Do not copy the paper's TTFT–ITL axes or
 multi-GPU TP/PP recommendation into our M5 plot. E027 tests weight reuse with
 unchanged per-row arithmetic; it is our local candidate, not a reproduction of
 this paper or a new Pareto measurement.
+
+
+### 2026-10-17: recent MLX-LM proposals checked against our actual path
+
+This bounded search did not identify another directly applicable October paper
+that preserves this experiment's weights and arithmetic. Two newly read items
+were proposals in the upstream MLX-LM repository, not accepted research results:
+
+- [PR #1950](https://github.com/ml-explore/mlx-lm/pull/1950), opened October 6,
+  still open when read. Read its description, reported tests/results and server
+  and test diffs. It avoids a device-to-host scalar log-probability read when a
+  response does not request log probabilities. Our native runner has no matching
+  unused log-probability read; its remaining token reads serve delivery and EOS.
+  No local speed gain is inferred from the proposal's measurements.
+- [PR #1970](https://github.com/ml-explore/mlx-lm/pull/1970), opened October 13
+  and withdrawn by its author October 16. Read the discussion/reproduction and
+  `_LeftPaddingMixin` plus prepare/finalize changes. Removing a mask can change
+  SDPA dispatch and rounding. B1 alone does not establish absence of padding,
+  especially with a compiled fixed attention bound. It is not adopted here.
+
+A narrower local hypothesis is to reuse identical boolean mask arrays within
+one forward context while keeping their values, shapes, K/V bound and array-mask
+SDPA call unchanged. First establish that eager long decode actually repeats
+this work; compiled execution may already eliminate it. This is a hypothesis,
+not implemented or qualified, and is lower priority than the already prepared
+E025 native-QMM-first NAX screen. Neither PR supplies a new Pareto point.

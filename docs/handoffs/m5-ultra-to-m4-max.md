@@ -395,3 +395,21 @@ T2/4/5进fp_qmv_wide，本身已复用权重。新独立prereg28b67d0后实跑�
 
 Cold controller v2/service-absent owner root46CPU tests与只读物理schema通过，尚无实际
 冷重启；相关独立审计/固定注册仍需完成，原有待授权事项不视为已获批准。
+
+
+## E025 v2: same-split NAX rejected; Pareto remains unchanged
+
+本次 fetch 确认 M4 分支仍为 `53d4906`，已在 M5 祖先中。M5 先提交 `4d97a8d`
+再实跑 E025：GDN z/T19 原生 QMM 对 OFF、SIMD 重构两个门逐位通过；相同 split2
+的 NAX partial 有11/233,472 BF16元素不同，第一处0x3d29→0x3d2a。按计划拒绝，
+不放宽误差、不跑计时。最终 NAX 归约、后两形状与模型未运行，不推断其最终输出。
+[教程与原件](../optimization-guide/tutorials/025-same-split-nax.md)包含所有输入/输出/来源和恢复证据。
+root重跑与独立审计相同；570pins、完整输入不变、child reaped、原74384同identity恢复。
+
+E023 service-absent 审计器现已完成，25CPU tests与实际PREPARED状态拒绝通过，固定计划
+和真实只读journal已保存。仍无冷重启授权、无完整37请求结果；E026内存所有权是独立
+默认OFF路线。正确性硬门后的 throughput vs complete-request latency 才是优化目标；
+NAX失败与CPU准备不进入曲线，当前M5图仍为v5，不声称已压过所有oMLX/Lithos配置。
+
+下一条独立候选是 refill 时跳过恒等行 gather，保留原 concat/算术；实际 E023 两步命中，但速度未知。
+[源码与最小验证说明](../../bench/reviews/2026-10-17-identity-refill-gather.md)。尚未实现，不计性能进步。

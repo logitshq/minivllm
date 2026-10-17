@@ -1,0 +1,36 @@
+{
+  "status": "CPU_REVIEW_PASS",
+  "source_sha256": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+  "test_sha256": "f10707f50ac6ff63ced463a2734b9e3c39805b844f6a21b9656e999adb5e783f",
+  "test_count": 25,
+  "command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/test_audit_absent_cpu.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout_sha256": "fc5eaef4c1f728e4b95d4a4a36aa00be9c51a62eb31db846e54d36296a8a7d10",
+  "stderr_sha256": "f998084824ad47c07ee3bd20beddee9a8460efe607564aad82d9ad31d4ff5603",
+  "actual_readonly_rejection": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_absent_qualification.py",
+      "--owner",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e023-cold-service-v1-owner",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-cold-v2-journal-v1",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e023-cold-service-v1-prepared-audit.json"
+    ],
+    "returncode": 2,
+    "receipt_sha256": "4cb6d6508d42389176425067b335619ac71dfb3ec8c7f347ec33eaa026aa4e65",
+    "scope": "Actual PREPARED journal intentionally has no completed model run; INCOMPLETE is expected and not a numerical result"
+  },
+  "independent_review": "official_mtp reviewed final auditor and verified stale-phase replay rejection; exact mathematical gates reused from pinned frozen auditor",
+  "device_run": false,
+  "cold_restart_authorized": false
+}

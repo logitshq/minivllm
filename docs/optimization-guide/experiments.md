@@ -489,3 +489,28 @@ Cold恢复v2与service-absent owner已通过root46项CPU tests（16+30），独�
 后者pressure2、systemphysical约164.6–164.7GiB，绝非cold资源准入。原服务仍同identity S。
 新的独立数值/lifecycle审计与运行注册还需完成，停服/重载授权仍待答；未执行cold mutation。
 [CPU与只读证据](../../bench/reviews/omlx-controller-v2-cpu-v1/README.md)。
+
+
+## E025 v2 · 相同 split-K 的 NAX 实机筛选：拒绝
+
+运行前已提交 `4d97a8d`，保持三形状原 split2/2/3、BF16 partial store、原模型权重格式；
+候选默认 OFF。第一形状 GDN z/T19 的 OFF 与原始 QMM、重建 SIMD 归约与原始 QMM
+两项全量逐位通过，随后 NAX partial 的 233,472 个 BF16 元素有 11 个不同。
+首差异 [0,0,2350]：0x3d29 → 0x3d2a。按预注册门立即拒绝；NAX 最终归约、
+ON callable、fallback、其余两形状与模型均未运行，不能据此声称最终模型输出错误。
+
+root 与独立 CPU 审计的 audit.json 及原件 manifest 逐字一致；输入全字节未改变，
+570 项来源核对，原服务 74384 同 identity T→S 恢复，child55031 exit1/reaped/absence。
+保留观察中 MLX peak45,219,886B、physical peak335,659,752B；pressure2 稳定且无 swap 增长。
+这些是小型数值筛选的观测，不是性能测量，也不是 full-model pressure1 准入。
+[教程](tutorials/025-same-split-nax.md)与[完整失败原件](../experiments/m5-ultra-256gb/E025-same-split-nax-v2/README.md)
+保留两项 PASS、首个 FAIL 与未运行范围。无新 throughput–latency 点，不改变现有前沿。
+
+## E023 service-absent v1 · 审计和只读准备完成
+
+原 37 请求数值计划不变。新的独立审计器冻结 SHA `1b7b526d…ddaf6d`，root25项CPU测试通过，
+独立审查发现的旧时间采样误用已修复并加负测。实际 controller_v2 只读 prepare 通过，
+journal 仍 PREPARED，owner 不存在；实际审计返回 INCOMPLETE/qualified=false，未打开数值日志。
+未执行停服、重载或模型工作；cold restart 授权仍待答，现有 pressure2 不满足全模型资源门。
+[固定计划、只读记录与 CPU 回执](../../bench/m5_ultra_256gb/pareto_realistic/prereg-cold-service-v1/README.md)。
+正确性是入场门，目标仍是完整请求 p50 延迟↓、整机输出 tokens/s↑；本次准备不记作性能进步。

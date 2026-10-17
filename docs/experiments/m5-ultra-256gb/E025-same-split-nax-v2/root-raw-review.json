@@ -1,0 +1,169 @@
+{
+  "status": "REJECT_REGISTERED_NAX_PARTIAL_GATE",
+  "checks": [
+    {
+      "label": "gdn_z-M19/OFF-vs-original",
+      "shape": [
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "pair_sha256": "b261234d7f1a65fe6a9244d385d4e5b8559c1d371bf0755004b853d30b9d9969",
+      "elements": 116736,
+      "differing_elements": 0,
+      "all_differences": []
+    },
+    {
+      "label": "gdn_z-M19/reference-vs-original-QMM",
+      "shape": [
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "pair_sha256": "b261234d7f1a65fe6a9244d385d4e5b8559c1d371bf0755004b853d30b9d9969",
+      "elements": 116736,
+      "differing_elements": 0,
+      "all_differences": []
+    },
+    {
+      "label": "gdn_z-M19/every-partial",
+      "shape": [
+        2,
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "pair_sha256": "c2fd8b169a001fdcb2c1c4855a1f0906d8b5ae105d9564aa2cfe84d4e5aca7fc",
+      "elements": 233472,
+      "differing_elements": 11,
+      "all_differences": [
+        {
+          "index": [
+            0,
+            0,
+            2350
+          ],
+          "reference_bits": 15657,
+          "candidate_bits": 15658,
+          "reference_float": 0.041259765625,
+          "candidate_float": 0.04150390625
+        },
+        {
+          "index": [
+            0,
+            0,
+            5669
+          ],
+          "reference_bits": 48509,
+          "candidate_bits": 48508,
+          "reference_float": -0.061767578125,
+          "candidate_float": -0.0615234375
+        },
+        {
+          "index": [
+            0,
+            1,
+            1178
+          ],
+          "reference_bits": 49590,
+          "candidate_bits": 49589,
+          "reference_float": -22.75,
+          "candidate_float": -22.625
+        },
+        {
+          "index": [
+            0,
+            11,
+            1859
+          ],
+          "reference_bits": 49639,
+          "candidate_bits": 49640,
+          "reference_float": -28.875,
+          "candidate_float": -29.0
+        },
+        {
+          "index": [
+            0,
+            15,
+            1711
+          ],
+          "reference_bits": 14977,
+          "candidate_bits": 14978,
+          "reference_float": 0.00098419189453125,
+          "candidate_float": 0.0009918212890625
+        },
+        {
+          "index": [
+            0,
+            18,
+            3410
+          ],
+          "reference_bits": 49388,
+          "candidate_bits": 49387,
+          "reference_float": -7.375,
+          "candidate_float": -7.34375
+        },
+        {
+          "index": [
+            1,
+            6,
+            5333
+          ],
+          "reference_bits": 15826,
+          "candidate_bits": 15827,
+          "reference_float": 0.1025390625,
+          "candidate_float": 0.10302734375
+        },
+        {
+          "index": [
+            1,
+            9,
+            4786
+          ],
+          "reference_bits": 15371,
+          "candidate_bits": 15372,
+          "reference_float": 0.00848388671875,
+          "candidate_float": 0.008544921875
+        },
+        {
+          "index": [
+            1,
+            10,
+            1204
+          ],
+          "reference_bits": 14784,
+          "candidate_bits": 14783,
+          "reference_float": 0.0003662109375,
+          "candidate_float": 0.0003643035888671875
+        },
+        {
+          "index": [
+            1,
+            11,
+            2171
+          ],
+          "reference_bits": 46876,
+          "candidate_bits": 46884,
+          "reference_float": -9.298324584960938e-06,
+          "candidate_float": -9.775161743164062e-06
+        },
+        {
+          "index": [
+            1,
+            12,
+            2176
+          ],
+          "reference_bits": 15481,
+          "candidate_bits": 15480,
+          "reference_float": 0.01519775390625,
+          "candidate_float": 0.01513671875
+        }
+      ],
+      "first_differing_byte": 4700
+    }
+  ],
+  "input_bytes_unchanged": true,
+  "input_sha256": "a9ee0f395c0c7cec1411823f5d91e0bd634627ada2cdc3f1f5bfbe9cd4304aae",
+  "activation_finite": true,
+  "scope": "CPU decode of saved original-dtype bytes only; NAX final/ON/fallback/remaining shapes and full model were not run"
+}

@@ -1,0 +1,365 @@
+{
+  "schema": "E025-failure-audit-v2",
+  "status": "PASS",
+  "experiment_status": "REJECTED_NUMERICAL_PARTIAL",
+  "plan_sha256": "3beae0672fd90d6a83a3869f66164273229751151d99868259dcb3f1c4b16a12",
+  "checks": [
+    {
+      "index": 0,
+      "label": "gdn_z-M19/OFF-vs-original",
+      "shape": [
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "finite": true,
+      "bytes_equal": true,
+      "reference": {
+        "shape": [
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 233472,
+        "sha256": "8f64f32f792f59f455a3315a301a835e4a6f31306bd8aabc8604506c626182e3",
+        "finite": true
+      },
+      "candidate": {
+        "shape": [
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 233472,
+        "sha256": "8f64f32f792f59f455a3315a301a835e4a6f31306bd8aabc8604506c626182e3",
+        "finite": true
+      },
+      "elements": 116736,
+      "differing_bytes": 0,
+      "differing_elements": 0,
+      "first_differing_byte_index": null,
+      "max_absolute_difference": 0,
+      "differences": []
+    },
+    {
+      "index": 1,
+      "label": "gdn_z-M19/reference-vs-original-QMM",
+      "shape": [
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "finite": true,
+      "bytes_equal": true,
+      "reference": {
+        "shape": [
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 233472,
+        "sha256": "8f64f32f792f59f455a3315a301a835e4a6f31306bd8aabc8604506c626182e3",
+        "finite": true
+      },
+      "candidate": {
+        "shape": [
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 233472,
+        "sha256": "8f64f32f792f59f455a3315a301a835e4a6f31306bd8aabc8604506c626182e3",
+        "finite": true
+      },
+      "elements": 116736,
+      "differing_bytes": 0,
+      "differing_elements": 0,
+      "first_differing_byte_index": null,
+      "max_absolute_difference": 0,
+      "differences": []
+    },
+    {
+      "index": 2,
+      "label": "gdn_z-M19/every-partial",
+      "shape": [
+        2,
+        19,
+        6144
+      ],
+      "dtype": "BF16",
+      "finite": true,
+      "bytes_equal": false,
+      "reference": {
+        "shape": [
+          2,
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 466944,
+        "sha256": "4536a573d357cdd8f42a461006651434f9d3ee1769b4a2ba721655d671470ece",
+        "finite": true
+      },
+      "candidate": {
+        "shape": [
+          2,
+          19,
+          6144
+        ],
+        "dtype": "BF16",
+        "bytes": 466944,
+        "sha256": "d6a6ae320f8098db221c940addd29baf89b35141186fca4eee4e0b264a900f50",
+        "finite": true
+      },
+      "elements": 233472,
+      "differing_bytes": 11,
+      "differing_elements": 11,
+      "first_differing_byte_index": 4700,
+      "max_absolute_difference": 0.125,
+      "differences": [
+        {
+          "element_index": 2350,
+          "coordinates": [
+            0,
+            0,
+            2350
+          ],
+          "reference_hex": "3d29",
+          "candidate_hex": "3d2a",
+          "reference": 0.041259765625,
+          "candidate": 0.04150390625,
+          "absolute_difference": 0.000244140625
+        },
+        {
+          "element_index": 5669,
+          "coordinates": [
+            0,
+            0,
+            5669
+          ],
+          "reference_hex": "bd7d",
+          "candidate_hex": "bd7c",
+          "reference": -0.061767578125,
+          "candidate": -0.0615234375,
+          "absolute_difference": 0.000244140625
+        },
+        {
+          "element_index": 7322,
+          "coordinates": [
+            0,
+            1,
+            1178
+          ],
+          "reference_hex": "c1b6",
+          "candidate_hex": "c1b5",
+          "reference": -22.75,
+          "candidate": -22.625,
+          "absolute_difference": 0.125
+        },
+        {
+          "element_index": 69443,
+          "coordinates": [
+            0,
+            11,
+            1859
+          ],
+          "reference_hex": "c1e7",
+          "candidate_hex": "c1e8",
+          "reference": -28.875,
+          "candidate": -29.0,
+          "absolute_difference": 0.125
+        },
+        {
+          "element_index": 93871,
+          "coordinates": [
+            0,
+            15,
+            1711
+          ],
+          "reference_hex": "3a81",
+          "candidate_hex": "3a82",
+          "reference": 0.00098419189453125,
+          "candidate": 0.0009918212890625,
+          "absolute_difference": 7.62939453125e-06
+        },
+        {
+          "element_index": 114002,
+          "coordinates": [
+            0,
+            18,
+            3410
+          ],
+          "reference_hex": "c0ec",
+          "candidate_hex": "c0eb",
+          "reference": -7.375,
+          "candidate": -7.34375,
+          "absolute_difference": 0.03125
+        },
+        {
+          "element_index": 158933,
+          "coordinates": [
+            1,
+            6,
+            5333
+          ],
+          "reference_hex": "3dd2",
+          "candidate_hex": "3dd3",
+          "reference": 0.1025390625,
+          "candidate": 0.10302734375,
+          "absolute_difference": 0.00048828125
+        },
+        {
+          "element_index": 176818,
+          "coordinates": [
+            1,
+            9,
+            4786
+          ],
+          "reference_hex": "3c0b",
+          "candidate_hex": "3c0c",
+          "reference": 0.00848388671875,
+          "candidate": 0.008544921875,
+          "absolute_difference": 6.103515625e-05
+        },
+        {
+          "element_index": 179380,
+          "coordinates": [
+            1,
+            10,
+            1204
+          ],
+          "reference_hex": "39c0",
+          "candidate_hex": "39bf",
+          "reference": 0.0003662109375,
+          "candidate": 0.0003643035888671875,
+          "absolute_difference": 1.9073486328125e-06
+        },
+        {
+          "element_index": 186491,
+          "coordinates": [
+            1,
+            11,
+            2171
+          ],
+          "reference_hex": "b71c",
+          "candidate_hex": "b724",
+          "reference": -9.298324584960938e-06,
+          "candidate": -9.775161743164062e-06,
+          "absolute_difference": 4.76837158203125e-07
+        },
+        {
+          "element_index": 192640,
+          "coordinates": [
+            1,
+            12,
+            2176
+          ],
+          "reference_hex": "3c79",
+          "candidate_hex": "3c78",
+          "reference": 0.01519775390625,
+          "candidate": 0.01513671875,
+          "absolute_difference": 6.103515625e-05
+        }
+      ]
+    }
+  ],
+  "native_QMM_reference_gate_passed_first": true,
+  "inputs": {
+    "activation": {
+      "shape": [
+        128,
+        5120
+      ],
+      "dtype": "BF16",
+      "bytes": 1310720,
+      "sha256": "135409f1f45f1bd018f6e4176548c57198cc653f87dc7b6cf5405ba5802683d2",
+      "finite": true
+    },
+    "scales": {
+      "shape": [
+        6144,
+        320
+      ],
+      "dtype": "U8",
+      "bytes": 1966080,
+      "sha256": "7de4ab4eefdc08a674902f5371e35d91981bb443d9987651d234e6645d3eb28e",
+      "finite": null
+    },
+    "weight": {
+      "shape": [
+        6144,
+        640
+      ],
+      "dtype": "U32",
+      "bytes": 15728640,
+      "sha256": "ec65c607b1b6a93f003d29fc58f99038af02554651c055d7bfd37b9860e6807f",
+      "finite": null
+    }
+  },
+  "input_full_bytes_unchanged": true,
+  "sources": {
+    "pins": 570,
+    "before_after_receipts_match": true,
+    "frozen_copies_rehashed": 538,
+    "current_uncopied_files_rehashed": 32,
+    "kernel_sources_reconstructed": 2,
+    "child_final_source_recheck_reached": false
+  },
+  "observed_resources": {
+    "phases": 6,
+    "owner_samples": 3,
+    "owner_physical_samples": 1,
+    "mlx_peak_bytes": 45219886,
+    "mlx_active_bytes": 20217872,
+    "physical_peak_bytes": 335659752,
+    "raw_system_samples": [
+      {
+        "label": "preflight",
+        "free_bytes": 67826073600,
+        "pressure": 2,
+        "swap_used_mib": 445.06,
+        "swapouts": 316235
+      },
+      {
+        "label": "running",
+        "free_bytes": 67817275392,
+        "pressure": 2,
+        "swap_used_mib": 445.06,
+        "swapouts": 316235
+      },
+      {
+        "label": "postflight",
+        "free_bytes": 67836379136,
+        "pressure": 2,
+        "swap_used_mib": 445.06,
+        "swapouts": 316235
+      }
+    ],
+    "scope": "Only retained observations; no after-failing-check/final-release or full-resource qualification"
+  },
+  "lifecycle": {
+    "owner_pid": 55019,
+    "child_pid": 55031,
+    "child_exit": 1,
+    "strict_reaped_absent": true,
+    "service_pid": 74384,
+    "same_identity_restored_T_to_S": true
+  },
+  "not_run": [
+    "NAX final reduction comparison",
+    "ON callable",
+    "all fallback checks",
+    "mlp_down",
+    "out",
+    "final_release",
+    "child final source recheck"
+  ],
+  "conclusion": "NAX partial materialized and differs in exact BF16 bits; native SIMD reduced reference first matched native QMM. Unrun final/model outputs are not judged.",
+  "performance_qualified": false,
+  "full_model_qualified": false,
+  "auditor": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/audit_failure_v2.py",
+    "sha256": "994c3f1a138b8246f3b858403a56a8c11751da98377d3e54ef1c40a4cce08223"
+  },
+  "artifact_manifest_sha256": "4c7a31b2dca92ed21ac40cbb5a406e4ef7e90b8a86b77ca9160fae3877718987"
+}

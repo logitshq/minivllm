@@ -1,0 +1,26 @@
+{
+  "schema": "E025-failure-audit-CPU-challenges-v1",
+  "status": "PASS",
+  "tests": 4,
+  "elapsed_s_reported_by_unittest": 0.001,
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "bench/m5_ultra_256gb/prefill_nax_same_split",
+    "-p",
+    "test_audit_failure_v2_cpu.py",
+    "-v"
+  ],
+  "test_sha256": "6ec01fb418cc3610dad580dc4c700af6726bba34f534dadbdbcba96b611eb1a2",
+  "challenges": [
+    "signed-zero byte mismatch retained although absolute numeric difference is zero",
+    "equal NaN bits rejected",
+    "shape mismatch and trailing payload rejected",
+    "physical forged boolean identity/units, overbudget, peak below current rejected"
+  ],
+  "execution": "stdlib only; no MLX, service, GPU or signal calls"
+}

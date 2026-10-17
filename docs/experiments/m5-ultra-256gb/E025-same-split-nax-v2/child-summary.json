@@ -1,0 +1,355 @@
+{
+  "schema": "E025-same-split-result-v2",
+  "status": "FAIL",
+  "device_run": true,
+  "pid": 55031,
+  "ppid": 55019,
+  "contract": {
+    "schema": "E025-same-split-screen-v2",
+    "normal_M": [
+      19
+    ],
+    "fallback_M": [
+      1,
+      11,
+      12,
+      32,
+      33,
+      128
+    ],
+    "shapes": [
+      {
+        "name": "gdn_z",
+        "K": 5120,
+        "N": 6144
+      },
+      {
+        "name": "mlp_down",
+        "K": 17408,
+        "N": 5120
+      },
+      {
+        "name": "out",
+        "K": 6144,
+        "N": 5120
+      }
+    ],
+    "geometries": [
+      {
+        "M": 19,
+        "K": 5120,
+        "N": 6144,
+        "split_k": 2,
+        "K_eff": 2560,
+        "reference": {
+          "bm": 32,
+          "bn": 32,
+          "bk": 32,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            6144,
+            2,
+            4
+          ]
+        },
+        "candidate": {
+          "bm": 32,
+          "bn": 64,
+          "bk": 64,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            3072,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "M": 19,
+        "K": 17408,
+        "N": 5120,
+        "split_k": 2,
+        "K_eff": 8704,
+        "reference": {
+          "bm": 32,
+          "bn": 32,
+          "bk": 32,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            5120,
+            2,
+            4
+          ]
+        },
+        "candidate": {
+          "bm": 32,
+          "bn": 64,
+          "bk": 64,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            2560,
+            2,
+            4
+          ]
+        }
+      },
+      {
+        "M": 19,
+        "K": 6144,
+        "N": 5120,
+        "split_k": 3,
+        "K_eff": 2048,
+        "reference": {
+          "bm": 32,
+          "bn": 32,
+          "bk": 32,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            5120,
+            2,
+            6
+          ]
+        },
+        "candidate": {
+          "bm": 32,
+          "bn": 64,
+          "bk": 64,
+          "threadgroup": [
+            32,
+            2,
+            2
+          ],
+          "grid": [
+            2560,
+            2,
+            6
+          ]
+        }
+      }
+    ],
+    "dtype": "bfloat16",
+    "quantization": {
+      "mode": "nvfp4",
+      "bits": 4,
+      "group_size": 16
+    },
+    "seed": 20261017,
+    "cache_limit_bytes": 0,
+    "mlx_observation_budget_bytes": 1073741824,
+    "physical_observation_budget_bytes": 2147483648,
+    "child_alarm_seconds": 120,
+    "physical_reading_semantics": "separate-int-bounds;current=max(top,aux-current);peak=max(top,aux-peak);aux-peak>=aux-current",
+    "expected_checks": 33,
+    "expected_phases": 68,
+    "expected_kernels": 6,
+    "normal_cases": 3,
+    "fallback_cases": 18,
+    "only_numerical_diagnostic": true,
+    "default_OFF": true,
+    "performance_qualified": false,
+    "full_model_qualified": false,
+    "observed_limits_not_OS_hard_caps": true,
+    "phase_order": "initial; each check before_check,after_check; final_release only on PASS",
+    "check_order": [
+      "OFF-vs-original",
+      "reference-vs-original-QMM",
+      "every-partial",
+      "final",
+      "ON-callable",
+      "six unregistered-fallback lengths"
+    ],
+    "rawpair_keys": [
+      "reference",
+      "candidate"
+    ],
+    "gate": "original native QMM first; finite and exact original BF16 bytes, shape and dtype; no tolerance"
+  },
+  "checks": [
+    {
+      "index": 0,
+      "label": "gdn_z-M19/OFF-vs-original",
+      "left_shape": [
+        19,
+        6144
+      ],
+      "right_shape": [
+        19,
+        6144
+      ],
+      "left_dtype": "mlx.core.bfloat16",
+      "right_dtype": "mlx.core.bfloat16",
+      "left_finite": true,
+      "right_finite": true,
+      "finite": true,
+      "bytes_equal": true,
+      "metadata_equal": true,
+      "rawpair": {
+        "path": "pairs/000.safetensors",
+        "sha256": "b261234d7f1a65fe6a9244d385d4e5b8559c1d371bf0755004b853d30b9d9969"
+      },
+      "status": "PASS"
+    },
+    {
+      "index": 1,
+      "label": "gdn_z-M19/reference-vs-original-QMM",
+      "left_shape": [
+        19,
+        6144
+      ],
+      "right_shape": [
+        19,
+        6144
+      ],
+      "left_dtype": "mlx.core.bfloat16",
+      "right_dtype": "mlx.core.bfloat16",
+      "left_finite": true,
+      "right_finite": true,
+      "finite": true,
+      "bytes_equal": true,
+      "metadata_equal": true,
+      "rawpair": {
+        "path": "pairs/001.safetensors",
+        "sha256": "b261234d7f1a65fe6a9244d385d4e5b8559c1d371bf0755004b853d30b9d9969"
+      },
+      "status": "PASS"
+    },
+    {
+      "index": 2,
+      "label": "gdn_z-M19/every-partial",
+      "left_shape": [
+        2,
+        19,
+        6144
+      ],
+      "right_shape": [
+        2,
+        19,
+        6144
+      ],
+      "left_dtype": "mlx.core.bfloat16",
+      "right_dtype": "mlx.core.bfloat16",
+      "left_finite": true,
+      "right_finite": true,
+      "finite": true,
+      "bytes_equal": false,
+      "metadata_equal": true,
+      "rawpair": {
+        "path": "pairs/002.safetensors",
+        "sha256": "c2fd8b169a001fdcb2c1c4855a1f0906d8b5ae105d9564aa2cfe84d4e5aca7fc"
+      },
+      "status": "FAIL",
+      "first_differing_byte_index": 4700
+    }
+  ],
+  "inputs": [
+    {
+      "name": "gdn_z",
+      "before": {
+        "path": "gdn_z-input-before.safetensors",
+        "sha256": "a9ee0f395c0c7cec1411823f5d91e0bd634627ada2cdc3f1f5bfbe9cd4304aae"
+      },
+      "x_shape": [
+        128,
+        5120
+      ],
+      "x_dtype": "mlx.core.bfloat16",
+      "synthetic_only": true,
+      "x_finite": true,
+      "after": {
+        "path": "gdn_z-input-after.safetensors",
+        "sha256": "a9ee0f395c0c7cec1411823f5d91e0bd634627ada2cdc3f1f5bfbe9cd4304aae"
+      },
+      "bytes_equal": true
+    }
+  ],
+  "physical_receipts": [
+    {
+      "path": "physical-000.raw.json",
+      "sha256": "cc721af5943f5b3acbfc8e5848c9c48ee20f0f2ec86a142cad71768075b6c7fc",
+      "pid": 55031,
+      "phase": "initial",
+      "case": "global"
+    },
+    {
+      "path": "physical-001.raw.json",
+      "sha256": "536bf29603ff487963b7ca6fea3bd5cad763a673caa5a3c853ac619c0ab1701b",
+      "pid": 55031,
+      "phase": "before_check",
+      "case": "gdn_z-M19/OFF-vs-original"
+    },
+    {
+      "path": "physical-002.raw.json",
+      "sha256": "c7f576db7cc15a721410c877f5299d39bf85731045b6494b6a37bc5134a0427b",
+      "pid": 55031,
+      "phase": "after_check",
+      "case": "gdn_z-M19/OFF-vs-original"
+    },
+    {
+      "path": "physical-003.raw.json",
+      "sha256": "5941f9633df8642013456b602ca256524c05e25231e4d8ec2b3670b38698d2b5",
+      "pid": 55031,
+      "phase": "before_check",
+      "case": "gdn_z-M19/reference-vs-original-QMM"
+    },
+    {
+      "path": "physical-004.raw.json",
+      "sha256": "cdb9c577db2a319154e47d147c3ea88966b6c7748bd678cb30bcfeb201661e18",
+      "pid": 55031,
+      "phase": "after_check",
+      "case": "gdn_z-M19/reference-vs-original-QMM"
+    },
+    {
+      "path": "physical-005.raw.json",
+      "sha256": "a9ebfe133fd1da7a4eb6e57dc6166d5f491f47aa17fb6f883a1457dedf3d8b2d",
+      "pid": 55031,
+      "phase": "before_check",
+      "case": "gdn_z-M19/every-partial"
+    }
+  ],
+  "normal_cases_passed": 0,
+  "fallback_cases_passed": 0,
+  "source_pins_rechecked": false,
+  "performance_qualified": false,
+  "full_model_qualified": false,
+  "elapsed_wall_s": 0.631023665991961,
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/candidate.py": "c67a3478e0d12f81f982c83a68ccc1fc4f2a336e87f6f5af0b28699b41f08b3e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/installed-sources.json": "9e72dd0a1a0091cd5c239a853c574bbf23583a6d7651f886b41b5f7cee2e8364",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/LICENSE.MLX": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/shared_w_m1/screen.py": "d01f28e36b07176e73830b424f3ab65113f1263cc1f810678f2c88b50c11dacf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/conv_tail_owned_copy/layer_screen.py": "a0423d0648b19236f972598ce5acb5e8e9cdd617fadb2646f1c7fef01d9ec302",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/screen_v2.py": "9d14fcba9dd798129438b9cb2783e148185344c1ede47f7c34e94ec2f0800993"
+  },
+  "synthetic_only": true,
+  "fixtures": null,
+  "device": {
+    "name": "Apple M5 Ultra",
+    "architecture": "applegpu_g17d"
+  },
+  "kernel_count": 2,
+  "error": {
+    "type": "ValueError",
+    "message": "strict numerical gate rejected: gdn_z-M19/every-partial",
+    "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/screen_v2.py\", line 283, in main\n    execute(mx, args.out, result, captures, ledger, emit)\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/screen_v2.py\", line 192, in execute\n    equal(label + '/every-partial', values['reference_partial'], values['candidate_partial'])\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/screen_v2.py\", line 148, in equal\n    need(row['status'] == 'PASS', 'strict numerical gate rejected: ' + label)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/prefill_nax_same_split/screen_v2.py\", line 38, in need\n    raise ValueError(message)\nValueError: strict numerical gate rejected: gdn_z-M19/every-partial\n"
+  }
+}
