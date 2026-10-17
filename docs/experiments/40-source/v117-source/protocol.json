@@ -1,0 +1,61 @@
+{
+  "status": "CPU_READY_GPU_UNRUN_NUMERICAL_ONLY",
+  "profile": "V117 unchanged114 target-verify broadcast-M1 math/transactions; qualified116 bounded draft loader only",
+  "default_OFF": true,
+  "target_model_dir": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "candidate_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v116-bounded-draftloader-build1-root",
+  "draft_snapshot": "/Users/ryanli/.cache/huggingface/hub/models--z-lab--Qwen3.8-27B-DFlash2/snapshots/50307d4c4cde6860d4eee73e2547cd786fe8e8a4",
+  "draft_raw_file_bytes": 3848817896,
+  "draft_loader_quantization": {
+    "group_size": 64,
+    "bits": 4,
+    "mode": "affine"
+  },
+  "target_parameter_identity_readonly_count": 1349,
+  "old_receipts": [
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v38native-attempt1/child-output/receipt.json",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v44native-attempt1/child-output/receipt.json",
+    "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/fullmodel-v89native-attempt1/child-output/receipt.json"
+  ],
+  "required_requests": [
+    "base",
+    "reset-base",
+    "changed-prefill"
+  ],
+  "required_old_IDs_each_arm": 96,
+  "max_output_tokens": 32,
+  "physical_capacity": 64,
+  "verify_block": 5,
+  "GDN_history_bound": {
+    "max_tokens": 8,
+    "S_bytes_per_layer_per_token": 3145728,
+    "max48layer_S_producer_bytes": 1207959552,
+    "extra_conv_history_bytes_at8tokens": 23592960,
+    "plus": "initial state references, attention copies, draftKV/features/activations and quantization transients observed separately"
+  },
+  "transaction_witness": "literal same-invocation44 S_t andconv_t arrays + strong producer owners, all included in same mx.eval outputs before observer; no freshprefill/chunk replay/copy creates GDN reference",
+  "attention_policy": "same batched projected K/V; separate array handles copy-prefix fill, full fixed64 prefix buffers clear all future tail bytes for keep>0; keep0 restores exact original physicalbuffer including preexisting tail; no oldtail equality assumption",
+  "delivery_invariant": "bound verifyT by remaining output/context before drafting; delivered last token is nextanchor, uncomputed. commit_inputs=len(delivered)=one prioranchor +len(delivered)-1 accepted drafts; applies alsoEOS insideacceptedprefix. Scheduler receives alreadyclipped sequence, updates frontier by samecount.",
+  "tiny_required_before_full": true,
+  "tiny_cases": 21,
+  "tiny_scope": "one real44 GDN producer plus one attention cache, T1/3/5/8 everykeep0..T; allprefixes, abort/error restore; scripted delivery/EOS separate from modelpredictions",
+  "full_scope": "One27B load; A ordinary engine old96 IDs; B realDFlash old96 IDs; E budgets1/2/3/5. Independent own-prefill ordinary-M1 live reference for each B/E request. All original literal transaction/history/inputRO/1349 parameter guards retained.",
+  "old_tensor_policy": "Old44 committed128 SHA equality/difference remains explicit diagnostic; no old132 tensor PASS claim. New independent ordinary-M1 128+lastlogits is a HARD exact gate.",
+  "GPU_policy": "Root only after bound116actualPASS+release+independentreview; all original113 andtiny prerequisites retained. No GPU by author; unchanged114 resource-stop preserved.",
+  "baseline_policy": "future compare oMLX strongest qualified compatibleMTP/DFlash2 and countdraft resource; old draftNone balanced.03 is notglobalbest",
+  "resource_budget": "MLXfull34GiB limit+2GiB cache; tiny2GiB+64MiB; actual loaded/peak/cache snapshots. Limits are numerical guard budgets, not measured resource results.",
+  "parent_candidate_root": "/private/tmp/minivllm-engine-optimization-20261014/candidate-v108-dflash2-transaction-build1-root",
+  "explicit_opt_in": "runner.spec.set_verify_broadcast_m1(True, logits_observer=callback)",
+  "scope": "Only self.model invocation inside actual _step_transaction108 VerifyTransaction; includes verify lm_head. Scope removed before eval/posterior/callback/commit and before every drafter or ordinary call.",
+  "projection_contract": "Verbatim V113 helper, strict T1..8/BF16/quantized NVFP4 g16 b4/known K/untied target497 Linears; current original W/scales singleton views, no weight concatenation/rebind/materialization. Actual propagation NOT yet qualified.",
+  "independent_reference": "Reference consumes its own argmax tokens only, advanced to B actual computed start+committed_inputs. It never provides future IDs/hash/state inputs to B. Ordinary M1 runs only after all broadcast flags restored.",
+  "new114_HARD_gate": "Every B/E transaction initial128 cache components and committed128 cache components plus committed-last-logits exact shape/dtype/raw bytes. Attention used prefix compared after explicit fixed64 shape agreement; each A/B future tail separately zero. GDN full conv/S exact bytes. Both hashes and first different index/bits/values saved before assert.",
+  "frontier_alignment": "Input anchor at start; committed_inputs equals emitted delivery count, old anchor plus accepted drafts; last emitted delivery remains uncomputed. A decode count frontier-promptlen and last logits correspond to final computed anchor/draft, not final emitted token.",
+  "new_profile_not_old_PASS": "V108 full failure remains unchanged. V113 local same-input all497 strict PASS is prerequisite only; it does not establish propagated model/IDs/caches or new114 gates.",
+  "actual113_binding": "/private/tmp/minivllm-engine-optimization-20261014/v114-verify-broadcast-m1-build1/v113-binding.json",
+  "parent_fullqual": "/private/tmp/minivllm-engine-optimization-20261014/v114-verify-broadcast-m1-build1/fullqual.py",
+  "candidate_source_unchanged": true,
+  "loader_change": "Only load_drafter call opts bounded_load=True; qualification-only stage callback logs metadata/allocator and no arrays. No new target/draft math.",
+  "V116_binding": "/private/tmp/minivllm-engine-optimization-20261014/v117-verify-broadcast-m1-bounded-load-build1/v116-binding.json",
+  "V116_prerequisite": "actual175strict/release/independent review exact receiptSHA bound before anyMLXimport"
+}

@@ -1,0 +1,125 @@
+{
+  "status": "CPU_READY_ACTUAL117_BOUND_GPU_UNRUN",
+  "scope": "Short same-source C1 pilot; no performance/adoption/global-frontier result",
+  "qualification_binding": "/private/tmp/minivllm-engine-optimization-20261014/v120-spec-throughput-latency-prework-build1/qualification-binding.json",
+  "root_only_GPU": true,
+  "target": "same Qwen3.8-27B NVFP4 g16/b4 checkpoint as117",
+  "activation": "BF16",
+  "physical_capacity": 64,
+  "allocation_step": 64,
+  "target_loads_per_fresh_server": 1,
+  "cache_limit_bytes": 2147483648,
+  "memory_limit_bytes": 36507222016,
+  "controls": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "ordinary": {
+    "source": "candidate116 original ModelRunner",
+    "drafter": false,
+    "ahead": "original retained; no sequential single-step surrogate"
+  },
+  "speculative": {
+    "source": "same116 target; realDFlash2 bounded loader",
+    "bounded_load": true,
+    "block": 5,
+    "transaction": true,
+    "broadcast_M1": true,
+    "qualification_observer": null,
+    "logits_observer": null,
+    "intrinsic_source_metadata": "unchanged SpecRunner transaction_rounds/verify_m1_rounds retained; no added tensor hashing/reference callback in performance"
+  },
+  "pilot": {
+    "fresh_order": [
+      "ordinary",
+      "speculative"
+    ],
+    "warm_per_arm": 3,
+    "measure_per_arm": 3,
+    "requests": 12,
+    "completion_tokens": 384,
+    "measured_requests": 6,
+    "measured_tokens": 192,
+    "cool_gap_seconds": 20,
+    "cooling": "one fixed gap after owned reap/unload+resource check, before nextarm; outside clocks",
+    "stop_policy": "Keep both signs; an obviously slower speculative result stops progression, never reclassifies or drops negative data"
+  },
+  "confirmation_if_promising": {
+    "new_fresh_pairs": [
+      [
+        "ordinary",
+        "speculative"
+      ],
+      [
+        "speculative",
+        "ordinary"
+      ],
+      [
+        "ordinary",
+        "speculative"
+      ]
+    ],
+    "warm_per_arm": 3,
+    "measure_per_arm": 3,
+    "requests": 36,
+    "measured_requests": 18,
+    "pilot_is_not_pooled_into_confirmation": true,
+    "no_CI_or_significance_claim_from_three_pairs": true
+  },
+  "sampling": {
+    "prompt_ids_count": 19,
+    "max_tokens": 32,
+    "temperature": 0,
+    "EOS": "normal",
+    "ignore_eos": false,
+    "prefix_cache": 0,
+    "concurrency": 1,
+    "raw32": "both local modes must equal qualified native fixture; external APIs may only expose usage/visible text"
+  },
+  "timing": {
+    "request": "client perf_counter immediately before HTTP POST through arrival of SSE [DONE]; includes server queue,prefill,draft,verify,commit,delivery and transport; excludes stream teardown afterDONE",
+    "latency_p50": "median request DONE-start per measured group → median3groups/arm → median3fresh arms/config in confirmation",
+    "throughput": "actual emitted completion tokens / (lastDONE-firstPOST); median3groups/arm → median3fresh arms/config",
+    "primary_axes": [
+      "full E2E request p50 ms,lower",
+      "total output token/s,higher"
+    ],
+    "secondary": [
+      "TTFT p50",
+      "all raw per-request timings",
+      "signed paired deltas"
+    ],
+    "old_first_text_interactivity": "supplementary only; speculative bursts make it a delivery proxy, not GPU decode throughput",
+    "qualification_timing": "never used as performance"
+  },
+  "resource_owner": {
+    "existing_pattern": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/v105_http_owner_build1.py",
+    "root_new_owner": "/private/tmp/minivllm-engine-optimization-20261014/v23-root-control-build1/v120_paired_c1_owner_build1.py",
+    "AC": true,
+    "thermal": 0,
+    "pressure": 1,
+    "paging": "original guard; no swapout/swap growth relaxation",
+    "samples": "before/after each group outside clocks; startup every2s only; no added performance-window hooks",
+    "cleanup": "direct Popen exact birth/PPID/listener, owned TERM/KILL+wait/reap, strict PID+port absence before nextfresh; no port-wide kill"
+  },
+  "long_stage": {
+    "status": "NOT_IMPLEMENTED_NOT_QUALIFIED_BY117",
+    "fixtures": [
+      {
+        "prompt_tokens": 512,
+        "output_cap": 128,
+        "suggested_physical_reserve": 640
+      },
+      {
+        "prompt_tokens": 4096,
+        "output_cap": 128,
+        "suggested_physical_reserve": 4224
+      }
+    ],
+    "issue": "VerifyTransaction uses existing actual K/V allocation and rejects off+T>capacity; merely raising engine.max_len/verify_capacity does not reserve KV",
+    "requirements": "New exact tokenized prompt fixture/own-prefill ordinary reference; independent argmax progression, same-frontier used128+lastlogits strict, literal prefix/history/inputs readonly, futuretailzero, budgets/EOS/lifecycle; then separate fresh performance. No carryover short PASS. NormalEOS retains real output count and reason, no forced128 claim."
+  },
+  "historical_comparisons": "Keep native15 and official oMLX none best compatible configuration medians as dated reference only. Do not pool old runs, raw-native-only screens, or MTP-slower configuration into a new Pareto claim. A promising candidate needs fresh compatible official none/native controls before C1/Pareto claims."
+}

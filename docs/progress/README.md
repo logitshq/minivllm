@@ -13,6 +13,6 @@
 - [M4→M5交接](../handoffs/m4-max-to-m5-ultra.md)：已实际推送、接收的源码事实与下一步。
 - [39：广播M1教程](../experiments/39-verify-broadcast-m1.md)与[固定代码快照](../code-versions/39-broadcast-m1/README.md)。
 
-上述图快照截止V115。之后V116草稿加载器已实际完成175参数严格对照，仍不授予完整目标模型/投机生成资格；独立审查已通过，待新整模运行后追加下一检查点。完整Pareto胜出尚未成立。
+[40：整模通过后再测端到端性能](../experiments/40-m1-verify-and-bounded-loader.md)记录 V117 严格整模通过、V120 两次加载资源中止与 V122 小缓存诊断。普通路径单组测到 1250.37 ms / 25.59 tok/s，投机路径尚无请求性能；不混入旧前沿，完整 Pareto 胜出尚未成立。
 
 native15快照README保留作者在源机运行的命令。其`collect_rows.py`依赖未公开的完整arm报告与原目录布局，离机不能把这条命令当作完整采证重放。公开时间戳白名单和聚合表足够复算图中延迟与吞吐；重新绘图先复制快照到新目录，并准备Matplotlib及适用中文字体。`generate_figure.py`从脚本所在目录读数据、写图，当前字体路径为macOS STHeiti；不要直接在冻结快照中覆盖原图。

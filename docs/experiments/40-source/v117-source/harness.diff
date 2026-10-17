@@ -1,0 +1,51 @@
+--- /private/tmp/minivllm-engine-optimization-20261014/v114-verify-broadcast-m1-build1/fullqual.py
++++ /private/tmp/minivllm-engine-optimization-20261014/v117-verify-broadcast-m1-bounded-load-build1/fullqual.py
+@@ -1,4 +1,4 @@
+-"""V114 root-only full27B numerical qualification. CPU inert default; no timing."""
++"""V117 root-only full27B numerical qualification. CPU inert default; no timing."""
+ import argparse
+ import json
+ from pathlib import Path
+@@ -12,9 +12,11 @@
+     pins=identity();gold=json.loads((D/'assertion-gold.json').read_text());protocol=json.loads((D/'protocol.json').read_text())
+     if not args.execute_gpu:
+         assert not any(n=='mlx' or n.startswith(('mlx.','numpy')) for n in sys.modules)
+-        print(json.dumps({'status':'CPU_READY_FULL_NUMERIC_GPU_UNRUN','pins':len(pins),'required_prior_tiny_actual':True,'V113_binding':json.loads((D/'v113-binding.json').read_text())['status'],'requires_bound113_PASS_and_independent_review':True,'expected_old_IDs_each_arm':96,'GPU_used':False,'performance_prepared':False}));return 0
++        print(json.dumps({'status':'CPU_READY_FULL_NUMERIC_GPU_UNRUN','pins':len(pins),'required_prior_tiny_actual':True,'V113_binding':json.loads((D/'v113-binding.json').read_text())['status'],'V116_binding':json.loads((D/'v116-binding.json').read_text())['status'],'requires_bound113_PASS_and_independent_review':True,'expected_old_IDs_each_arm':96,'GPU_used':False,'performance_prepared':False}));return 0
+     from qualification_gate import require_v113
+     prerequisite=require_v113()  # hard HOLD checked before importing MLX
++    from loader_gate import require_v116
++    loader_prerequisite=require_v116()
+     from runtime_support import sha
+     assert args.out and args.out.is_absolute();assert args.tiny_receipt and args.tiny_receipt.is_absolute() and args.tiny_sha256
+     assert sha(args.tiny_receipt)==args.tiny_sha256
+@@ -24,7 +26,7 @@
+     assert all(pins[p]==h for p,h in tiny['pins'].items()),'tiny source pins changed'
+     args.out.mkdir(exist_ok=False)
+     r={'status':'STARTED','model_loads':0,'GPU_used':False,'pins':pins,'tiny_receipt':str(args.tiny_receipt),'tiny_receipt_sha256':args.tiny_sha256,'profile':protocol['profile'],'timing_run':False,'performance_qualified':False,'adopted':False,'requests':[],'transactions':[],
+-       'old96_ID_hard_gate_each_arm':True,'V113_prerequisite':prerequisite,'ordinary_M1_reference_requests':[],'same_frontier_initial_checks':[],'same_frontier_commit_checks':[],'all_same_frontier_128_and_last_logits_are_HARD_GATES':True,'old_tensor_gold_not_relaxed':True,'old128_state_hash_diagnostics':[],
++       'old96_ID_hard_gate_each_arm':True,'V113_prerequisite':prerequisite,'V116_loader_prerequisite':loader_prerequisite,'bounded_loader_stages':[],'ordinary_M1_reference_requests':[],'same_frontier_initial_checks':[],'same_frontier_commit_checks':[],'all_same_frontier_128_and_last_logits_are_HARD_GATES':True,'old_tensor_gold_not_relaxed':True,'old128_state_hash_diagnostics':[],
+        'draft_source_file_bytes':3848817896,'draft_memory_scope':'raw checkpoint size; loaded/quantization/history/KV allocator counters separately observed','weight_loads_expected':1,'native_or_shader_changed':False}
+     save=lambda:write(args.out/'receipt.json',r);save()
+     try:
+@@ -91,7 +93,10 @@
+             row['memory_after_finish']=memory(mx);save();return emitted
+         for name,row in gold['requests'].items():generate('A',name,row['prompt_ids'],32,row['expected_IDs'])
+         r['A_old96_IDs_passed']=True;save()
+-        drafter=load_drafter(protocol['draft_snapshot'])
++        def bounded_loader_stage(label, detail):
++            r['bounded_loader_stages'].append({'label':label,'detail':detail,'allocator':memory(mx)})
++            save()
++        drafter=load_drafter(protocol['draft_snapshot'],bounded_load=True,stage_observer=bounded_loader_stage)
+         r['draft_parameter_arrays_observed']=len(tree_flatten(drafter.parameters()))
+         r['after_draft_load_memory']=memory(mx)
+         assert parameter_signatures()==before,'draft load changed target parameters'
+@@ -147,7 +152,7 @@
+         r['parameter_after']=after
+         r['actual_imported_sources_final']=provenance(pins)
+         assert len(r['requests'])==10 and all(row['target1349_readonly'] and row['runner_empty_after_finish'] for row in r['requests'])
+-        r.update(status='PASS_V114_VERIFY_BROADCAST_M1_OLD96IDS_LITERAL_AND_ORDINARY_M1_COMMIT128_LASTLOGITS_STRICT',old_ID_checks_each_arm=96,target_parameter_identity_count=1349,target1349_readonly=True,strict_transactions=len(rounds),same_invocation_cache_array_checks=128*len(rounds),draft_calls=sum(row['draft_calls'] for row in rounds),drafted_tokens=sum(row['drafted_tokens'] for row in rounds),delivered_decode_tokens=sum(row['delivered'] for row in rounds),ordinary_fresh_prefill_not_prefix_bitgold=True,full_old132_tensor_equivalence_claim=False,memory_final=memory(mx))
++        r.update(status='PASS_V117_BOUNDED_LOAD_VERIFY_BROADCAST_M1_OLD96IDS_LITERAL_AND_ORDINARY_M1_COMMIT128_LASTLOGITS_STRICT',old_ID_checks_each_arm=96,target_parameter_identity_count=1349,target1349_readonly=True,strict_transactions=len(rounds),same_invocation_cache_array_checks=128*len(rounds),draft_calls=sum(row['draft_calls'] for row in rounds),drafted_tokens=sum(row['drafted_tokens'] for row in rounds),delivered_decode_tokens=sum(row['delivered'] for row in rounds),ordinary_fresh_prefill_not_prefix_bitgold=True,full_old132_tensor_equivalence_claim=False,memory_final=memory(mx))
+         identity();return 0
+     except BaseException as error:
+         r.update(status='FAIL_STOP',error=repr(error),traceback=traceback.format_exc());raise

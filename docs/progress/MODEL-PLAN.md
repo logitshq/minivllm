@@ -4,7 +4,7 @@
 
 | 模型 | 机器与优先级 | 我们当前状态 | oMLX | Lithos固定安装 |
 |---|---|---|---|---|
-| Qwen3.8-27B，当前同一NVFP4 checkpoint | M4/M5；当前正确性与速度主线 | 已实现；旧完整轮次有成绩，新投机整模尚未通过 | 本机已有普通/MTP资格及计时 | 本机C1已测，当前协议C2/C4受容量限制 |
+| Qwen3.8-27B，当前同一NVFP4 checkpoint | M4/M5；当前正确性与速度主线 | 已实现；V117 投机整模严格通过，端到端性能尚未取得 | 本机已有普通/MTP资格及计时 | 本机C1已测，当前协议C2/C4受容量限制 |
 | GLM-5.3-Flash | M5 256GB；并行做架构与baseline准备 | 尚未实现，不沿用Qwen成绩 | 固定安装有glm5_next发现及vendor路由；模型实测待做 | 5485ad6固定安装缺GLM注册；记N/A，不画成0 |
 | Qwen3.8-Flash-Next | M5；Qwen MoE扩展候选 | 尚未实现和实测，单独资格 | qwen4_exp vendor及兼容入口存在，checkpoint实测待做 | 此5485固定注册表也缺入口；不外推最新版 |
 
@@ -48,10 +48,14 @@ oMLX已合入GLM-5.3-Flash支持，包括DSA/MLA、MoE和线性attention等；�
 
 ## M5最新已测范围
 
-M5最新已推送检查点为`390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad`，其[吞吐—完整请求延迟图及逐源记录](https://github.com/logitshq/minivllm/tree/390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad/docs/optimization-guide/progress/2026-10-17-v3)基于48进程、2304正式请求：native C1为622.15ms/51.43tok/s、C4为999.27ms/126.67tok/s、C32为5286.72ms/190.44tok/s。其9个此前实测非spec外部配置中位点均被native点覆盖。外部未在该次画图时重跑，Lithos只有C1；结论仅限同机Qwen27B、19→32、target-only，不覆盖MTP/DSpark、GLM或长上下文。M4只读了Git记录，并复算其公开chartdata的聚合和支配关系，没有在本机重跑M5。
+M5 此前检查点 `390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad` 的[吞吐—完整请求延迟图及逐源记录](https://github.com/logitshq/minivllm/tree/390d98f976cddc90e0cf5e4ec9de3c42bc7fc4ad/docs/optimization-guide/progress/2026-10-17-v3)基于48进程、2304正式请求：native C1为622.15ms/51.43tok/s、C4为999.27ms/126.67tok/s、C32为5286.72ms/190.44tok/s。其9个此前实测非spec外部配置中位点均被native点覆盖。外部未在该次画图时重跑，Lithos只有C1；结论仅限同机Qwen27B、19→32、target-only，不覆盖MTP/DSpark、GLM或长上下文。M4只读了Git记录，并复算其公开chartdata的聚合和支配关系，没有在本机重跑M5。
+
+本轮实际 fetch 到 `c01624d43ddb51415cd6971353d9cac6a313fe5f`。较新的 [E020 同轮 C1 对照](https://github.com/logitshq/minivllm/tree/9f1e331a7afdb31889e7f007c9eef21ecde5b8d9/docs/optimization-guide/progress/2026-10-17-v4)报告：native 716.10 ms / 44.69 tok/s、oMLX 普通 679.32 / 47.11、oMLX MTP 752.06 / 42.55、Lithos 普通 812.92 / 39.36、Lithos DSpark 741.96 / 43.13。15 个独立进程、45 条正式请求；该轮最快是 oMLX 普通配置。M4 已读其源码、设置和报告，没有独立重审全部原始测量，不能继续把旧轮次优势当作当前全面领先。两个轮次分别保留，不混成一条前沿。
+
+该检查点报告 GLM-5.3-Flash 固定 revision 的 62 shards 下载已启动；尚无加载或性能资格。
 
 ## 接下来的测量顺序
 
-M4继续完成广播M1、低峰值草稿加载与整模事务资格，再重新跑三家端到端对照。M5并行准备GLM-5.3-Flash的固定权重和oMLX baseline，先证明实际加载、正确输出、资源余量；我们补齐其MoE/attention/cache实现后再加入性能表。Lithos只在其固定版本实际支持的模型上比较。
+M4 的 V117 已完成 A/B 各 96 个旧 token ID、49 次实际事务及同提交位置缓存/logits 严格检查。V120 两次投机服务和 V122 小缓存配置均在首请求前因内存压力中止；只有 V120 普通路径的一组 1250.37 ms / 25.59 tok/s，不能据此宣布配对提速。下一步独立测 HTTP 发送选项，并继续排查投机服务的加载资源；已有前沿不增加未测点。M5并行准备GLM-5.3-Flash的固定权重和oMLX baseline，先证明实际加载、正确输出、资源余量；我们补齐其MoE/attention/cache实现后再加入性能表。Lithos只在其固定版本实际支持的模型上比较。
 
 每个模型先固定同一权重、dtype、量化与请求定义，比较非spec路径；再单独资格并测各家兼容的spec配置。19→32继续作回归探针，新增512/4K输入、128输出和资源允许的C1/2/4，之后再扩16K及更高并发；不以短探针宣布真实长上下文已胜出。
