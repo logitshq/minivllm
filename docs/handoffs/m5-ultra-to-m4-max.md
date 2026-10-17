@@ -351,3 +351,5 @@ qkv/GDN数学。若M4也出现prefill状态驻留，可复用该helper和source�
 E026 tiny实机已PASS并独立复核：3fresh arms48case，T978完整backing20,103,168→65,536B，所有原位保留；parent/source释放及最终active0有阶段证据。注意finite验证临时buffer使OFF也有98,440B active下降，所以归因看retained backing而非总active delta。[完整归档](../experiments/m5-ultra-256gb/E026-conv-tail-tiny-v1/README.md)。无整模型/性能资格，原74384同identity恢复。
 
 E026后续：scoped ordinary-prefill hook已通过12项root CPU checks及独立review；仅改tail ownership，copy/materialize独立且默认OFF。尚未GPU集成，不可直接拿CPU结果入性能图。约62MiB单GDN真实权重路径可独立诊断，注意不得mx.load整5GiB shard再筛。
+
+E026 layer v1准备完成：14个真实layer0张量共65,239,488B，原5.34GB shard完整SHA已核，再独立对照全部抽取bytes；608源/runtime/bundle pins冻结。OFF/ON-lazy/ON-materialize各8case，root27 CPU检查+独立审计31负测PASS，设备结果尚无。严格逐位输出/状态通过后才推进整模型；单层时间不入Pareto。当前目标始终是正确性作为硬门槛的throughput–latency前沿，oMLX/Lithos均保留强合法配置。

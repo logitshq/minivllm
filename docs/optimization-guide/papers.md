@@ -152,3 +152,7 @@ KV写入、设备token、EOS/取消输出边界。测“CPU提交间隙”可消
   token轨迹不逐位相同，因此不直接接入其状态重建算术。本仓已有单checkpoint+tape而非
   store_all，不能套其状态节省倍数。可借鉴缩短已核对snapshot的存活期，并区分准入收益与每步成本。
   [独立阅读笔记与候选切点](../../bench/reviews/2026-10-17-apple-mlx-research.md)保留来源和适用边界。
+
+### 2026-10-17: GDN ownership, structural prefill, and fused-scale audits
+
+Read the July [MSInfer technical report](https://arxiv.org/html/2607.16831v1) and September [NVFP4 GDN study](https://arxiv.org/html/2609.04098v1). Selected lessons: distinguish dispatch costs from chunked prefill structure, retain strong same-environment baselines, and verify original per-projection scale semantics before fusion. No numerical relaxation or NVIDIA speed factor is imported. Local oMLX/Lithos source checks independently support explicit small-state ownership. [Detailed bounded review and source hashes](../../bench/reviews/2026-10-17-gdn-ownership-and-fusion-research.md).
