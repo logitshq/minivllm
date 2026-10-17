@@ -5,6 +5,7 @@
 
 | 快照 | 本批内容 | 结论 |
 |---|---|---|
+| [2026-10-17 v6](2026-10-17-v6/README.md) | 新 D512 native C1/C8，128正式请求，各1新进程 | 全周期独立审计PASS；45.37 /167.40 tok/s，p50 11.28 /24.43 s；oMLX/Lithos D512待测，不拼旧cap32 |
 | [2026-10-17 v5](2026-10-17-v5/README.md) | 历史C2–64与同轮E020 C1分面；217份来源独立核对 | 正确性硬门下比较真实吞吐/完整延迟；保留被支配点，历史外部C1干扰排除证据不足，未拼接跨轮前沿 |
 | [2026-10-17 v4](2026-10-17-v4/README.md) | E020 官方 MTP / DSpark 与同轮 target-only；15 fresh servers / 90 请求 | C1 的 latency–throughput 最优为 oMLX target-only；MTP 吞吐 GM 0.906×、DSpark 1.086×，不与旧并发曲线混用 |
 | [2026-10-17 v3](2026-10-17-v3/README.md) | throughput–完整请求latency Pareto；48进程/2304请求从时间戳重算 | 正确性为前置；本负载联合前沿为native C1/2/4/8/32，外部为历史target-only实测 |
@@ -25,5 +26,5 @@ M4同步：已接收并离线核验[第44章同轮C1/C2/C4曲线](../../experime
 2026-10-17 E027：M5共享原权重M1通过33个局部数值点、66次原始BF16比较和110个
 GPU descriptor核对；[完整证据](../../experiments/m5-ultra-256gb/E027-shared-w-m1-v1/README.md)
 与[教程](../tutorials/027-shared-weight-m1.md)已保存。默认OFF，整模型与HTTP性能待验证。
-**这不是新的吞吐—完整请求延迟测量，当前有效Pareto仍为v5。** 正确性是入图硬门槛，
+**这不是新的吞吐—完整请求延迟测量，该批没有改变v5的历史Pareto。** 正确性是入图硬门槛，
 内存/核级收益作为诊断证据分别保存。

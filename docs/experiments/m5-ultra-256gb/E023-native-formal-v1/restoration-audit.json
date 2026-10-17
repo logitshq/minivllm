@@ -1,0 +1,67 @@
+{
+  "schema": "cold-service-restoration-audit-v1",
+  "status": "PASS",
+  "qualified": true,
+  "performance_qualified": false,
+  "numerical_qualified": false,
+  "ledger_opened": false,
+  "scope": "Independent raw restoration evidence and fixed native-formal-owner reap protocol only; no numerical or performance qualification, no current live observation.",
+  "audit_source_sha256": "af46699fcea1065c4fcf69a85225a916987fba484098d53ef2acb905eb4ae3a8",
+  "frozen_v3_audit_source_sha256": "5878d8a8bc19b38c4e8b2a255fc1b575536894a1430e8e98a2fb42a9e3836a16",
+  "journal_sha256": "4ea4e1bb05951a325b9dcfd003562f859ca03f05c23eb934b94c738da1a3b98c",
+  "owner_plan_sha256": "7b7a563ee832c1f91c2f5c745ec0b3087ef25dae6d8974cbfa6e0cb9a23687bb",
+  "service_restore": {
+    "status": "PERSISTED_VISIBLE_RECEIPTS_CONSISTENT",
+    "physical_samples": 19,
+    "max_recorded_system_footprint_bytes": 175831891968,
+    "raw_log_bytes": 11301,
+    "raw_log_sha256": "fd586610e74c13f923c81c6a5841c1abda2a5c01cc9827d9f0f6548f909191e8",
+    "replacement": {
+      "pid": 98702,
+      "ppid": 1,
+      "start": "Sat Oct 17 09:11:45 2026",
+      "comm": "omlx-server"
+    },
+    "http_worker_returncode": 0,
+    "exact_runtime_signature_restored": false,
+    "warm_kv_restored": false,
+    "scope": "Raw physical/log checks independent; final HTTP status and PID/job/listener observations exist only as pinned-controller receipts."
+  },
+  "owner_reap": {
+    "status": "ALL_OBSERVED_CHILDREN_REAPED",
+    "owner_status": "PASS",
+    "owner_pid": 92476,
+    "children": [
+      {
+        "phase": "r1-c1",
+        "pid": 92555
+      },
+      {
+        "phase": "r1-c8",
+        "pid": 97229
+      }
+    ],
+    "scope": "Phase intents/releases and retained child ps/port bytes checked; owner absence at restoration is a pinned-controller receipt."
+  },
+  "controller_sha256": "836a4c16534521441da8021df3f963210d885da867f79a33d86a3b6dd01101c0",
+  "raw_auditor_sha256": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_owner_v2.py": "f645bc1a32bee8fdaf57d1626a84ebce1ad6d1c775ecdc9b6de3ebbc12105bf1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal.py": "ec9cdc924f7987ad46eac6820b6264495c95fb182c726545a6e3ce283df7e654",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay.py": "1e26e35bdde5cf7b81da37101326a4ef6f87ef7db2775c6324b56d053645c995",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal_owner.py": "e33faa8f211e905f40daabd00941f3fd016041c9705c6a7a4a2fe805fb0aceff"
+  },
+  "weight_shards_rehashed": false,
+  "adapter_scope": "Frozen raw audit identity predicate uses current original PID; no source-path spoof or evidence rewriting."
+}

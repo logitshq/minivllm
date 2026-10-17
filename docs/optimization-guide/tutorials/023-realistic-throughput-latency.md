@@ -169,3 +169,28 @@ and pass CPU prepare/validate: 8 warm + 64 formal requests each. The next graph 
 actual committed tokens/common window versus full POST→DONE p50, separate from the
 historic cap 32 panel. Official oMLX's D512 route/count observer and Lithos launch/cache
 contract are prepared; neither has a new D512 measurement yet.
+
+
+## Native D512 observer-OFF timing: two audited points (2026-10-17)
+
+One fresh process per C, eight warm then 64 formal requests, same fixed NVFP4 model
+and D fixtures, normal EOS/cap 512. Complete-cycle independent audit PASS:
+
+| Concurrency | Requests | Committed tokens | Common window (s) | Output tok/s | p50 (s) | p95 (s) |
+| --- | --- | --- | --- | --- | --- | --- |
+| C1 | 64 | 32768 | 722.205195 | 45.372147 | 11.283287 | 11.348184 |
+| C8 | 64 | 32768 | 195.747992 | 167.398907 | 24.431814 | 25.979063 |
+
+These are single-run baseline observations. C8 raises total throughput and also
+request latency; both measured native points are nondominated among these two.
+They do not establish dominance over oMLX/Lithos, whose D512 points are pending.
+The cap 32 history stays in its own chart. Actual early EOS coverage here is zero.
+
+All 144 warm+formal raw requests passed protocol/count/text checks. Representative
+captured C1/C8 histories supply full-logit/state numerical eligibility; no claim
+is made that every new formal schedule was replayed. All 216 resource samples
+passed, pressure 1, swap−8 MiB, Swapouts/Pageouts 0. Original service recovered
+asPID 98702 with fresh MTP/resident PLE evidence; warm KV/exact hidden state are not
+restored. Both actual experiment children were strictly reaped.
+
+[Complete 935-member evidence](../../experiments/m5-ultra-256gb/E023-native-formal-v1/README.md) · [New D512 chart](../progress/2026-10-17-v6/README.md).

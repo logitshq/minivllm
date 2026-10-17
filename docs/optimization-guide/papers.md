@@ -262,3 +262,41 @@ prior E025/E027 numerical failures remain failures. Reusing a bounded long-conte
 graph (E024) is still a more direct local next test than importing a Split-K or
 phase-quantization change. No new kernel, quality relaxation, or performance point
 is introduced by this reading. Full-request latency remains the Pareto x-axis.
+
+### 2026-10-17: test launch cost separately from memory traffic
+
+Read the May 28 [batch-1 decode measurement study](https://arxiv.org/html/2605.30571v1),
+abstract and §§3.1–3.5. Its controlled NVIDIA bf16 experiments compare eager and
+CUDA-graph execution to isolate dispatch cost; graph benefits differ by device.
+This supports an experiment design, not an M5 speed prediction. The paper's
+introductory observed/floor wording reverses the ratio shown in §3.4, so we do not
+import that ratio or its hardware ranking. Its kernels, weights and model family
+also differ from our NVFP4 hybrid model.
+
+Local inference: keep E024 graph-only and default OFF, hold the actual D512
+prompts/normal-EOS/precision fixed, qualify full logits/cache state, then measure
+observer-OFF whole-request throughput and latency against the real long-domain
+fallback. A faster submission path must earn its gain after padded attention and
+compile/warmup costs; neither nominal bandwidth nor a faster microkernel predicts
+that gain. Formal measurements must not overlap audit compression or heavy tests.
+
+Also checked the September 29 [RVQ speculative decoding abstract](https://arxiv.org/abs/2609.37007).
+It specializes a TTS residual-code decoder with position-aware draft parameters.
+That is a distinct output structure and model-head contract; it supplies no
+ready-to-use Qwen/GLM text-inference candidate or transferable speed multiplier.
+
+
+### 2026-10-17: GLM hybrid cache recovery needs an exact logical position
+
+Read the September 14 primary [GLM-5.3-Flash cache-recovery study](https://arxiv.org/html/2609.15030v1).
+A recurrent checkpoint must match the scheduler's computed-token position.
+Restoring full-prompt state while replaying the final prompt token is inconsistent;
+its strict-prefix lookup instead restores an earlier checkpoint and recomputes a
+nonempty suffix. This is a modified four-GPU vLLM/LMCache experiment, not an Apple
+GPU result; serial token equality does not establish full-state or concurrent
+correctness. We do not transfer its timings.
+
+Local inference: a future GLM prefix-cache adapter must bind checkpoint position,
+attention state and recurrent state together, and qualify replay after restore.
+Keep the first GLM load uncached. The fixed 189.982 GiB Flash checkpoint is already
+downloaded; this reading adds neither a model download nor a qualified GLM point.

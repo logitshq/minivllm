@@ -1,0 +1,77 @@
+{
+  "schema": "native-D512-throughput-latency-chart-v1",
+  "source_audit_sha256": "b669350e95ef07f4da5cac3a5cf6fb6fdaf2aea57e886d3ba60b9afd15e950bd",
+  "source_audit_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-analysis/independent-audit.json",
+  "owner_plan_sha256": "7b7a563ee832c1f91c2f5c745ec0b3087ef25dae6d8974cbfa6e0cb9a23687bb",
+  "model": "mlx-community/Qwen3.8-27B-nvfp4",
+  "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "hardware": "M5 Ultra 256 GiB",
+  "workload": "Eight D coding fixtures, 886-978 prompt tokens, greedy normal EOS, output cap 512",
+  "x": "Per-request full POST-to-DONE p50 latency (seconds); smaller is better",
+  "y": "Actual committed output tokens / (last DONE - first POST); larger is better",
+  "fresh_processes_per_concurrency": 1,
+  "warm_requests_per_process": 8,
+  "measured_requests_per_process": 64,
+  "comparison_status": {
+    "native": "qualified",
+    "omlx_D512": "pending",
+    "lithos_D512": "pending"
+  },
+  "scope": "One fresh process per point, no confidence interval, no competitor dominance claim. Numerical qualification covers recorded representative histories, not every new formal schedule.",
+  "points": [
+    {
+      "phase": "r1-c1",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 722.205195167,
+      "aggregate_output_tok_s": 45.37214661329437,
+      "e2e_p50_s": 11.28328733350645,
+      "e2e_p95_s": 11.348184375005076,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c1/trial/formal-group.json",
+        "sha256": "0e37182129057b197aff82345263a2b095b9345e55ab89df70e669f6ca968ea0"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c1/trial/point.json",
+        "sha256": "1b946b4fc64cb3df83b11b8597b5517a04083e400cb198a08429158599c86e9d"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "nondominated_among_these_native_points": true
+    },
+    {
+      "phase": "r1-c8",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 195.74799216599786,
+      "aggregate_output_tok_s": 167.39890732678444,
+      "e2e_p50_s": 24.431814499999746,
+      "e2e_p95_s": 25.97906349999539,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c8/trial/formal-group.json",
+        "sha256": "c55628e7fd398a99dae9b2bbb562d6efc5da063d9e823d355b420a4438e9e9aa"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c8/trial/point.json",
+        "sha256": "0cb2d9003a8b5b6ae0c2f76918fb149e321a9e522767e2df476fbe32dd77ad4b"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "nondominated_among_these_native_points": true
+    }
+  ]
+}
