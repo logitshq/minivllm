@@ -1097,3 +1097,12 @@ Next work is the actual combined HTTP history and independent replay, followed b
 E030 combined GDN+E02442/37 completed with all producer/owner/restoration/resource/numerical gates PASS. Independent ledger counted5,163steps,6,622,533full-array bit checks and13,245,066finite checks;12compiled tracing events,5,144reuse and38eager fallback events were reconstructed. No discarded-prior-ahead was observed. No HTTP/performance qualification follows from these numerical receipts. Service72953 recovered80649 and all three driver codes were0.
 
 E030-gdn-graph-combined-serving-v1 retains969members,1,660,774,222raw bytes and9,958,428compressed bytes, archiveSHA592190ee9d708db4b3d35c392d0e7aa65b7517165f5f6831a093da2b8cdaeaeb. Every member/originalSHA was checked. At12:32:47 PDT actual combined HTTP owner81295 started the next four-phase C1/C8 capture→reap→independent replay cycle under plan7783b4c35798d590f1a326739c38a410ac59a3d0655cd384813d6e5b9f0a02e8. Current performance frontier is unchanged; real paired timing follows successful HTTP qualification.
+
+
+### 12:45 PDT — V136 received; C1 combined HTTP passed
+
+Fetched and read M4 `94c070e6bbf0cf0e229261f1d019fd0b2032c4a7` / V136, merged and pushed as `fe8bb96`. Only chapter-two notebooks and documentation changed; the running inference source pins remain intact. M5 did not execute those MPS notebooks, so their validation remains M4 evidence.
+
+Combined HTTP owner81295 has completed and reaped both actual C1 capture81355 and C1 numerical replay81912, each producer PASS. C8 capture87227 is running; the independent whole-cycle qualification is pending. The next formal experiment is already source-prepared: same combined server in both arms, route graph always ON, GDN OFF/ON, three fresh process pairs each at C1/C8, observers OFF,8warm+64formal per process. Factory12 CPU checks passed; lifecycle+independent-audit58 passed after preserving the first runner's five asyncio SIGINT guard failures. No combined performance point exists yet.
+
+The separate B2/B8 local GDN canary now has real native batched activation/independent three-step state preparation and12 CPU checks; device execution is still pending. This does not qualify B3–7, dynamic row retirement/refill, full-model serving or HTTP. ReaDy source compatibility findings are retained separately; the square recurrent-state axes require a transpose and its trained DSpark draft contract is not interchangeable with our current DFlash2 path.

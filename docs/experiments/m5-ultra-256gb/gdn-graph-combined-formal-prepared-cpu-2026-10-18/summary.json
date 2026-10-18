@@ -1,0 +1,189 @@
+{
+  "schema": "combined-formal-prepared-cpu-summary-v1",
+  "status": "PASS_WITH_RETAINED_PRIOR_RUNNER_FAILURE",
+  "distinct_successful_checks": 70,
+  "factory_checks": 12,
+  "lifecycle_and_audit_checks": 58,
+  "attempts": {
+    "gdn-graph-combined-formal-cpu-v1": {
+      "schema": "GDN-graph-combined-formal-cpu-v1",
+      "status": "PASS",
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true,
+      "local_asyncio_sockets": [
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM"
+      ],
+      "denied": [],
+      "error": null,
+      "started_at": 1792352103.295119,
+      "ended_at": 1792352104.0236201,
+      "numerical_qualified": false,
+      "http_qualified": false,
+      "performance_qualified": false
+    },
+    "gdn-graph-combined-formal-source-seal-v1": {
+      "schema": "GDN-graph-combined-formal-source-seal-v1",
+      "status": "PASS",
+      "only_change": "UNSEALED cycle audit SHA to actual frozen45c98",
+      "before": "a8faee2089eef538613cdac132c5c691858f62e00ca330493f7b832bf7497b05",
+      "after": "4b567f8ed6090175f3639aa109584ca26c1426165c03de3167c3ebde74891a89",
+      "prior_cpu_result_sha256": "d73603355ec3fba37e4e8c47659933413cf285e99b442b85494caff200ab45f7",
+      "numerical_qualified": false,
+      "http_qualified": false,
+      "performance_qualified": false
+    },
+    "combined-formal-lifecycle-cpu-v1": {
+      "schema": "combined-formal-lifecycle-cpu-v1",
+      "status": "FAIL",
+      "modules": [
+        {
+          "name": "test_owner_cpu",
+          "tests": 19
+        },
+        {
+          "name": "test_controller_cpu",
+          "tests": 15
+        },
+        {
+          "name": "test_audit_restore_cpu",
+          "tests": 11
+        },
+        {
+          "name": "test_audit_formal_cpu",
+          "tests": 13
+        }
+      ],
+      "tests_run": 58,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "error": null,
+      "denied": [
+        "signal",
+        "signal",
+        "signal",
+        "signal",
+        "signal"
+      ],
+      "source_unchanged": true,
+      "started_at": 1792352545.456384,
+      "ended_at": 1792352546.674764,
+      "scope": "fake control flow/source contracts; no service/model/GPU",
+      "qualified": false
+    },
+    "combined-formal-lifecycle-cpu-v2": {
+      "schema": "combined-formal-lifecycle-cpu-v2",
+      "status": "PASS",
+      "modules": [
+        {
+          "name": "test_owner_cpu",
+          "tests": 19
+        },
+        {
+          "name": "test_controller_cpu",
+          "tests": 15
+        },
+        {
+          "name": "test_audit_restore_cpu",
+          "tests": 11
+        },
+        {
+          "name": "test_audit_formal_cpu",
+          "tests": 13
+        }
+      ],
+      "tests_run": 58,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "error": null,
+      "denied": [],
+      "asyncio_sigint_fakes": [
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        },
+        {
+          "signal": 2,
+          "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+          "effect": "suppressed OS handler mutation"
+        }
+      ],
+      "source_unchanged": true,
+      "started_at": 1792352584.079954,
+      "ended_at": 1792352597.712817,
+      "scope": "fake control flow/source contracts; no service/model/GPU",
+      "qualified": false
+    },
+    "combined-formal-archive-preflight-v1": {
+      "status": "FAIL",
+      "scope": "archive preflight only; no output archive created",
+      "reason": "Overbroad check counted UNSEALED outside the exact CYCLE_AUDITOR literal. Actual source seal diff is one literal only.",
+      "source_sha256": "0dba41d1b3148eee02bae97b83259e4e20622fd19ba4e3a229ee0dc11b25035c",
+      "stderr_source": "Preserved from tool chunk eeb4be; original process stderr was returned by exec rather than redirected."
+    }
+  },
+  "execute_source_tested_by_these_suites": false,
+  "archive": {
+    "status": "PASS",
+    "members": 230,
+    "regular_bytes": 3559504,
+    "archive_sha256": "cfdfc3b495b901feffbf69bc6452c466aa10d0fe6d331c28deda0f2bfb7a8e1f",
+    "archive_bytes": 588848,
+    "originals_rechecked": true
+  },
+  "numerical_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false
+}
