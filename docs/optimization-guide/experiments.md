@@ -1036,3 +1036,10 @@ Actual guarded v2 registration and CPU owner preparation PASS; subsequent read-o
 Added a separate default-OFF HTTP entry, captured-history replay and independent audit under [gdn_prework_http](../../bench/m5_ultra_256gb/gdn_prework_http/README.md). Native worker/transport/scheduler and the original numerical comparator are reused. Only48 GDN instance hooks change; E024/E028 remainOFF. Capture counters observe real Python submissions without array evaluation. C8 requires actual multirow fallback, not an invented B8 candidate hit; its tail may executeB1.
 
 Root and independent agent reviewed the four modules; AST parsing succeeded. Sixteen focused CPU test methods are written but **not executed**, to keep the ongoing E024 formal timing isolated. Source manifestSHA9d1ba2ab648f9ea10e0c0fea512257314358f838abb6705e4f27ca260fc98a1a. No new HTTP, numerical or speed qualification. Outer lifecycle/registration remains required; prefill_batch and unobserved EOS/cancellation/composition remain outside this adapter's current scope.
+
+
+## E024 future display policy and C8 hypothesis · 2026-10-17
+
+Prepared [v12 chart source](progress/2026-10-17-v12/README.md) before ON results: retain all14 historical observations unchanged and append all12 paired OFF/ON points only after the entire formal/resource/restoration/archive chain passes. Historical native n=1 remains separate from OFF n=3. No rendering or current-link change yet.
+
+A [source-only GDN B2–8 design](../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) identifies reuse of existing batched prework/state kernels while retaining five native Linear calls, original B>1 gates and state ownership. It preserves packing regressions and per-row M1 arithmetic failures. No candidate implementation, test or speed claim for this extension.

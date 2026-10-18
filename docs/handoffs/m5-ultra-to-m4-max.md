@@ -985,3 +985,12 @@ E024 v2 actually started after c2b03fa was pushed: twelve fresh servers, three O
 
 
 2026-10-17: fetched M4 again; remote still095bbb8, no new commits to merge. M5 GDN HTTP4modules/16test methods are source-prepared and independently reviewed; no tests or GPU run yet. It reuses ordinary native serving and preserves E024/E028OFF. The live E024 paired cycle has completed firstC1OFF; automatic finally-recovery plus reviewed closed-audit/archive continuation are active. No early timing point is promoted.
+
+
+## 2026-10-17: prepared next steps during E024 timing
+
+E024 paired formal v2 is active on M5; original oMLX is temporarily stopped under the existing authorization and driver finally-recovery. Separate closure watcher will require actual restoration, run frozen independent audits and retain failures as well as successes. No completed new speed result yet.
+
+The v12 display policy is source-prepared: preserve14 old process points, then add all12 paired native OFF/ON observations only on full closed PASS. Native historical n=1 is never pooled into new OFF n=3; p50/p95 and actual process ranges remain separate. No current-link update.
+
+GDN next C8 hypothesis: preserve original five native projections and B>1 gates; reuse existing batched conv/norm/state kernels in a separate default-OFF adapter, with new real-state qualification. See bench/reviews/2026-10-17-gdn-prework-batched-next.md. This is design only, not implementation or speed evidence; E004/packing/M1 failures remain constraints.

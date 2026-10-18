@@ -80,3 +80,10 @@ The math-mode correction above was checked against this actual pinned installati
 新增 [独立 HTTP 接入](../../../bench/m5_ultra_256gb/gdn_prework_http/README.md) 复用原服务、客户端和逐状态比较器；只在48个GDN实例上安装局部开关。先捕获、回收服务进程，再让两套模型按实际到达历史独立生成。记录的token只用于比较，不能喂给候选来掩盖分歧。
 
 HTTP侧只读Python调用计数，不增加tensor求值；数值检查留给replay。消费已有ahead不算新调用，实际B>1必须核原路径回退。16项CPU测试已写、未跑；外层资源owner/controller和真实注册尚未完成。这是接入准备，不能增加Pareto点。
+
+
+### C8 的下一项假设：保持原投影，扩展预处理覆盖
+
+当前长历史候选仅在 B1 生效。源码检查发现现有 fused kernel 已有 B2–8 的 batch 地址计算，因此下一项小实验应先保留五次原生 Linear，只扩展卷积、激活、Q/K norm 与状态核的调用范围。B>1 继续使用原 gates；不改变投影归约、权重布局或状态提交顺序。
+
+[具体设计与逐行风险](../../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) 先要求 B2/B8、早晚真实激活、三个层位的独立三步状态链，再验证混合历史/row reorder/refill 与完整 HTTP。这一方向仍未实现、未测量；已有 B1 结果不能覆盖它。它减少中间计算，但不减少五次投影的权重流量和每行递归状态的读写，收益取决于真实瓶颈。此前 packing 和 per-row M1 的失败保留为约束。
