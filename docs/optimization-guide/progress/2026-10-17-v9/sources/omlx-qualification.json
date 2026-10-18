@@ -1,0 +1,138 @@
+{
+  "schema": "E023-omlx-D512-qualification-audit-v1",
+  "status": "PASS",
+  "qualified": true,
+  "route_count_text_qualified": true,
+  "full_state_qualified": false,
+  "performance_qualified": false,
+  "independent_resource_verified": false,
+  "restoration_verified": false,
+  "raw_requests_opened": true,
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+  "audit_source_sha256": "e75a8a36b8fa53fcca0ff19c668092537e58c88c3257e4baa25f6235fba100f8",
+  "owner_source_sha256": "9c2df0b4e76bd2a6ef590c34bb7a6f9c89972c878f76f4b99f69d0b8e658019f",
+  "recursive_runtime_coverage_verified": false,
+  "closed_server_logs_independently_verified": false,
+  "scope": "Closed C1/C8 raw route/count/text/cache and direct server closure only. Logs are retained/hash-checked, not semantically interpreted as full lifespan health; separate resource/restoration audits required.",
+  "phases": [
+    {
+      "concurrency": 1,
+      "requests": 8,
+      "pid": 93587,
+      "raw_join": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/raw-join.json",
+        "sha256": "16277ffabab0acef6dcde0d9d98b875d98b4a6acd5d3f4d737e8a8691d82f2b0"
+      },
+      "observer": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/probe/observer.jsonl",
+        "sha256": "3e4e248db02a133e7857dc17eae3b646dfc0c2e9dd089a7f8af9f48d57bbaa09"
+      },
+      "group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/group.json",
+        "sha256": "38beb23eaa66481d906bd556c1be3a908895379aa206a0a875aa29cdcf240611"
+      },
+      "request_seal": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/request-seal.json",
+        "sha256": "d9d1826ca5d1e1b6ef723a189ad5cdaeb376e6a6a6274ae2b6f6ea76310fb32b"
+      },
+      "trial_complete": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/complete.json",
+        "sha256": "a4e40401f9769c69aed1df4ec1d4329d4039fc25f669cf47f0ea16097bb13fa8"
+      },
+      "server_stdout": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/server.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "server_stderr": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/server.stderr",
+        "sha256": "fc1c714f07a2b4a9b10cfa8fdcc9e4cf506ebb30efb17787d9c9786d0ef5b5b0"
+      },
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "observed_terminal_eos": 0,
+      "raw_output_count": 4096,
+      "committed_output_count": 4096,
+      "max_http_outstanding": 1,
+      "actual_batch_histogram": {
+        "1": 4096
+      },
+      "observer_closed": false,
+      "generator_eof_proven": false,
+      "count_rule": "identity: official completion_tokens excludes terminal EOS"
+    },
+    {
+      "concurrency": 8,
+      "requests": 16,
+      "pid": 94094,
+      "raw_join": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/raw-join.json",
+        "sha256": "f5d0d87449985c35b2732b9ada64c4263138bb307b172be07e00614d7c6ef63c"
+      },
+      "observer": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/probe/observer.jsonl",
+        "sha256": "e5d45e0950bc5fa09dedb3735e324a79d7524da583d5b8c74122c9efe25b7c30"
+      },
+      "group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/group.json",
+        "sha256": "c282b00fc4a468963fce288136e7dec1a32a0e1cf4a3ff336576cbdf72559819"
+      },
+      "request_seal": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/request-seal.json",
+        "sha256": "4c49c5c62a52cc18da42a6ed187f64e3a6717150048c53b0121ac6f36d637eca"
+      },
+      "trial_complete": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/complete.json",
+        "sha256": "bc2c1bf96f222ac0ff395079cd3ba4a39406fa544df876d0eda3b14ae93e825a"
+      },
+      "server_stdout": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/server.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "server_stderr": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/server.stderr",
+        "sha256": "ef3372d914ee0cb4a2f520798d5941907d67283e5142a81ce4cb72e4abe0c80c"
+      },
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "observed_terminal_eos": 0,
+      "raw_output_count": 8192,
+      "committed_output_count": 8192,
+      "max_http_outstanding": 8,
+      "actual_batch_histogram": {
+        "1": 21,
+        "2": 16,
+        "3": 33,
+        "4": 15,
+        "5": 38,
+        "6": 35,
+        "7": 76,
+        "8": 881
+      },
+      "observer_closed": false,
+      "generator_eof_proven": false,
+      "count_rule": "identity: official completion_tokens excludes terminal EOS"
+    }
+  ],
+  "requests": 24,
+  "preparation": {
+    "groups": {
+      "omlx_runtime": 5245,
+      "omlx_source": 8,
+      "outer_runtime": 4309,
+      "target_model": 13
+    },
+    "preflight_postflight_identical": true,
+    "model_weights_rehashed": false,
+    "recursive_runtime_coverage_verified": false,
+    "scope": "Four supplied pre/post full-hash/stat receipts; no independent weight payload rehash or recursive dependency closure."
+  },
+  "owner_plan_sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef",
+  "owner_complete_sha256": "8409d416fcc3b87f8d133865862441f8e2f907b46599eba430f7e2c19ed56f96",
+  "outer_runtime_rehashed": true,
+  "tokenizer_payloads_rehashed": true,
+  "model_weights_rehashed": false
+}

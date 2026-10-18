@@ -938,3 +938,10 @@ After committed registration bccad9c, two fresh official servers completed C1 ei
 Independent resource41samples PASS: pressure1, swap growth0MiB; Swapouts/Pageouts/Compressions0, Swapins+8, Decompressions+373. Both servers93587/94094 and owner93524 reaped; original service92152 restored as94592, fresh MTP/residentPLE/originalmodel/config verified, warmKV/hiddenstate not restored. Separate restoration PASS. Owner inventories match before/after; independent auditor does not rehash weight payloads or claim recursive runtime closure.
 
 Observer request seals preceded owner SIGTERM-15 and strict process/listener absence. They are not generator EOF/process-close certificates; actual observer_closed=false and generator_eof_proven=false remain visible. Archive414members/3,267,180compressed bytes, all member/original hashes and tree membership checked. Next is observer-OFF warm8/formal64 fresh-process timing, not reuse of diagnostic timings. [Complete evidence](../experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/README.md).
+
+
+## Route HTTP replay preparation and progress v9 · 2026-10-17
+
+The new per-instance HTTP entry/capture passes the 12 server and11 capture CPU tests (the original23-test attempt preserves one macOS temporary-path fixture failure; only that fixture was fixed). The new replay adapter separately passes13 guarded CPU tests; no GPU/runtime/model/network/process backend was exercised. A later one-string docstring correction has an AST-equivalence receipt and is not claimed as retested. Actual HTTP capture/replay, independent route audit and formal performance remain pending. [Replay CPU evidence](../experiments/m5-ultra-256gb/route-http-replay-cpu-v1/README.md).
+
+[Progress v9](progress/2026-10-17-v9/README.md) retains exactly the same eight formal points as v8 and shows new E024/oMLX qualification status separately. PNG was visually checked; no diagnostic timing or invented new Pareto point was added.
