@@ -1,0 +1,122 @@
+{
+  "schema": "combined-http-prepared-cpu-summary-v1",
+  "status": "PASS_WITH_RETAINED_PRIOR_RUNNER_FAILURE",
+  "tests": {
+    "gdn-graph-combined-http-cpu-v2": 14,
+    "gdn-graph-combined-http-audit-cpu-v1": 9,
+    "combined-http-cycle-cpu-v1": 14,
+    "combined-http-cycle-audit-cpu-v1": 13
+  },
+  "successful_current_tests": 50,
+  "attempts": {
+    "gdn-graph-combined-http-cpu-v1": {
+      "schema": "GDN-graph-combined-http-cpu-v1",
+      "status": "FAIL",
+      "tests_run": 14,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true,
+      "denied": [
+        "socket.__new__",
+        "socket.__new__",
+        "socket.__new__",
+        "socket.__new__"
+      ],
+      "error": null,
+      "started_at": 1792351344.090712,
+      "ended_at": 1792351344.284482,
+      "numerical_qualified": false,
+      "http_qualified": false,
+      "performance_qualified": false
+    },
+    "gdn-graph-combined-http-cpu-v2": {
+      "schema": "GDN-graph-combined-http-cpu-v2",
+      "status": "PASS",
+      "tests_run": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true,
+      "local_asyncio_sockets": [
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM"
+      ],
+      "denied": [],
+      "error": null,
+      "started_at": 1792351368.33446,
+      "ended_at": 1792351368.625835,
+      "numerical_qualified": false,
+      "http_qualified": false,
+      "performance_qualified": false
+    },
+    "gdn-graph-combined-http-audit-cpu-v1": {
+      "schema": "GDN-graph-combined-http-audit-cpu-v1",
+      "status": "PASS",
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true,
+      "local_asyncio_sockets": [
+        "AF_UNIX/SOCK_STREAM",
+        "AF_UNIX/SOCK_STREAM"
+      ],
+      "denied": [],
+      "error": null,
+      "started_at": 1792351546.9135082,
+      "ended_at": 1792351547.6649961,
+      "numerical_qualified": false,
+      "http_qualified": false,
+      "performance_qualified": false
+    },
+    "combined-http-cycle-cpu-v1": {
+      "schema": "combined-http-cycle-cpu-v1",
+      "status": "PASS",
+      "tests_run": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "error": null,
+      "denied": [],
+      "source_unchanged": true,
+      "started_at": 1792351939.930777,
+      "ended_at": 1792351940.0667,
+      "scope": "fake control flow/source contracts; no service/model/GPU",
+      "qualified": false
+    },
+    "combined-http-cycle-audit-cpu-v1": {
+      "schema": "combined-http-cycle-audit-cpu-v1",
+      "status": "PASS",
+      "tests_run": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "error": null,
+      "denied": [],
+      "source_unchanged": true,
+      "started_at": 1792352126.1811771,
+      "ended_at": 1792352126.275723,
+      "scope": "fake control flow/source contracts; no service/model/GPU",
+      "qualified": false
+    }
+  },
+  "archive": {
+    "status": "PASS",
+    "members": 362,
+    "regular_bytes": 5331154,
+    "archive_sha256": "afe446e017c570f74d05539cb4cc8be1276d184ee05a29a37e08520145171324",
+    "archive_bytes": 994768,
+    "originals_rechecked": true
+  },
+  "numerical_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "CPU mechanisms only. Concurrent actual HTTP capture/replay and future formal cycle excluded."
+}
