@@ -1029,3 +1029,10 @@ Progress [v11](progress/2026-10-17-v11/README.md) was actually rendered and visu
 Fixed only the registrar digest variable and moved execution paths to v2. All64 CPU testsPASS, including two actual saved-command/seal regressions; original62PASS and failed realv1 registration remain immutable. CPUv2 archive335members/824452B/SHAa84ae43c0d6ba2c6cf0f917235f3dd154ce3400e5d27b3611c5eea6b0658ae42. Original registration FAIL archive103members/328280B/SHA371f79397c093ac8bdaf0fa03028e494eea045fc967aa657bdad10f7a35cf8ae.
 
 Actual guarded v2 registration and CPU owner preparation PASS; subsequent read-only service prepare bindsPID43565. Plan0920aceae,PREPAREDjournalda0e9518,76pins. Twelve fresh processes retain3 adjacent OFF/ON pairs each at C1/C8,96warm+768formal requests, identical cap512/normalEOS/gatesON/normOFF/E028OFF and frozen transport. [Preparation evidence](../experiments/m5-ultra-256gb/route-formal-registration-v2/README.md):115members/335704B/SHA23e5ed64fb5c2394e98b91b91bfed6d42b592959f63414d0d2ab34cbc2cbb86e. No measured graph performance point yet.
+
+
+## E029 GDN-only HTTP adapters source-prepared · 2026-10-17
+
+Added a separate default-OFF HTTP entry, captured-history replay and independent audit under [gdn_prework_http](../../bench/m5_ultra_256gb/gdn_prework_http/README.md). Native worker/transport/scheduler and the original numerical comparator are reused. Only48 GDN instance hooks change; E024/E028 remainOFF. Capture counters observe real Python submissions without array evaluation. C8 requires actual multirow fallback, not an invented B8 candidate hit; its tail may executeB1.
+
+Root and independent agent reviewed the four modules; AST parsing succeeded. Sixteen focused CPU test methods are written but **not executed**, to keep the ongoing E024 formal timing isolated. Source manifestSHA9d1ba2ab648f9ea10e0c0fea512257314358f838abb6705e4f27ca260fc98a1a. No new HTTP, numerical or speed qualification. Outer lifecycle/registration remains required; prefill_batch and unobserved EOS/cancellation/composition remain outside this adapter's current scope.

@@ -73,3 +73,10 @@ The math-mode correction above was checked against this actual pinned installati
 本次证据也确认了开关的边界：长 B1 在每个 GDN 层进入候选，多行 decode 回到原实现；没有暗中把 B1 的正确性推广到 B8 融合。两个模型对分别安装/撤回，48 层计数与实际调用相符。没有观察到 EOS 终止，因而保留这一未覆盖范围。原服务恢复完成。[逐项结果与全部原始记录](../../experiments/m5-ultra-256gb/E029-gdn-prework-serving-v1/RESULTS.md)。
 
 下一道门是同样真实 HTTP 的记录与重放，再关闭观察器进行配对计时。通过局部和整模型轨迹，只说明值得继续测量；不能提前把预处理融合画成更快的点。E024 的独立 OFF/ON 正式计时先运行，组合实验仍需自己的正确性检查。
+
+
+### 下一道门：真实 HTTP 调度（源码已准备，尚未执行）
+
+新增 [独立 HTTP 接入](../../../bench/m5_ultra_256gb/gdn_prework_http/README.md) 复用原服务、客户端和逐状态比较器；只在48个GDN实例上安装局部开关。先捕获、回收服务进程，再让两套模型按实际到达历史独立生成。记录的token只用于比较，不能喂给候选来掩盖分歧。
+
+HTTP侧只读Python调用计数，不增加tensor求值；数值检查留给replay。消费已有ahead不算新调用，实际B>1必须核原路径回退。16项CPU测试已写、未跑；外层资源owner/controller和真实注册尚未完成。这是接入准备，不能增加Pareto点。
