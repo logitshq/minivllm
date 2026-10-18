@@ -1,0 +1,82 @@
+{
+  "schema": "GLM-cycle-v2-source-preparation-v1",
+  "status": "CPU_FAKE_TESTS_PASS",
+  "files": {
+    "README.md": {
+      "sha256": "fc625b9fd621603fd9103675788dce2efc539a0bfda086f28ba21d1404560417",
+      "bytes": 7487
+    },
+    "_reuse.py": {
+      "sha256": "fbf523c586629ce6e5e2030d629b00c9f1cd99dfec9edef6c35ac8e054468f97",
+      "bytes": 2527
+    },
+    "audit_closed.py": {
+      "sha256": "44a8598512271ec11aa646182f761d30f5f1956391b7b57cd418a64eb9cef904",
+      "bytes": 929
+    },
+    "audit_restore.py": {
+      "sha256": "de1674780f5d3de7cdcf0cd4d54c6b9136f086120bb827d7bcd2f25377084996",
+      "bytes": 915
+    },
+    "controller.py": {
+      "sha256": "bdb5afac1febec8be8b2e10d70b77bbbc150aac76416385ac0c89f5ce48c6579",
+      "bytes": 5043
+    },
+    "execute.py": {
+      "sha256": "2d2c9a5ba266a3491ee1704e224aad8f32618cb5c6f0c1a3848b241a0620376a",
+      "bytes": 829
+    },
+    "owner.py": {
+      "sha256": "f8e32b6532ed0d22b21b27ef83231ae7a1d7423a4269ea32b5e4aa20ff2a0657",
+      "bytes": 1008
+    },
+    "prepare_inputs.py": {
+      "sha256": "9f28d336f44346fb8310b69fc1d17cd6e2717b8c7ac1e0c218e72cf1caa2317c",
+      "bytes": 780
+    },
+    "preregister.py": {
+      "sha256": "b6eeeda7489028ef1d28db1cb1c291b66941b621c1c554c24ba30e49e41b610f",
+      "bytes": 870
+    },
+    "test_adapter_cpu.py": {
+      "sha256": "ce5bef6a74b673090bf3820d6939742712b261fd8f3f93b2103b0c55761b1469",
+      "bytes": 15245
+    }
+  },
+  "cpu_attempts": [
+    {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-cycle-v2-prepared-cpu-v1/result.json",
+      "sha256": "15bc466f8d2f9cc1366706c44c0e71998374b931d979641889cc3182c6697dbe",
+      "status": "FAIL",
+      "tests": 16,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "source_unchanged": true,
+      "tree_membership_unchanged": true,
+      "denied_operations": [],
+      "forbidden_modules_loaded": []
+    },
+    {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-cycle-v2-prepared-cpu-v2/result.json",
+      "sha256": "c7fc4772f7f18722c82d60a09a50a0fc8cab8630f314c1c7b2401990f79a5316",
+      "status": "PASS",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true,
+      "tree_membership_unchanged": true,
+      "denied_operations": [],
+      "forbidden_modules_loaded": []
+    }
+  ],
+  "production_changes_between_attempts": false,
+  "registration_created": false,
+  "service_prepared": false,
+  "model_loaded": false,
+  "performance_qualified": false,
+  "inventory_scope": "Explicit seven frozen original GLM files plus actual v2 sources; not a recursive runtime closure.",
+  "prerequisite": "Future actual immutable GDN formal RESTORED journal and independent restoration audit dual refs remain required.",
+  "note": "First failure is a negative fixture exception mismatch; only fixture corrected. Runtime production and old frozen sources unchanged."
+}
