@@ -1,0 +1,225 @@
+{
+  "schema": "splash-release-preparation-evidence-v1",
+  "status": "PASS",
+  "scope": "release SHA/safe unpack + config-only native check + draft metadata; no model/draft payload or device qualification",
+  "release_preparation": {
+    "schema": "splash-isolated-release-preparation-v1",
+    "status": "PASS",
+    "url": "https://github.com/incoai/splash/releases/download/1.3.2/splash-1.3.2-arm64-macos26.tar.gz",
+    "expected_sha256": "c3deb1dd971461ffafcf6b82c318789d6698b22aa865e490a11a0ed943686c0b",
+    "expected_bytes": 74590927,
+    "runner_sha256": "d907f0ae45ada3a5300e22b72bbab0958f575a8ccdd857318eb40700265a2aff",
+    "binary_executed": false,
+    "model_or_draft_downloaded": false,
+    "device_run": false,
+    "previous_attempt_overwritten": false,
+    "archive_sha256": "c3deb1dd971461ffafcf6b82c318789d6698b22aa865e490a11a0ed943686c0b",
+    "archive_bytes": 74590927,
+    "release_json_sha256": "f069fdc152dc5b3da57c50a4ab21d1425c0a8349a02f671004fea0362efe46a8",
+    "verified_files": {
+      "splash": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/release-prepare-v1/unpacked/splash-1.3.2-arm64-macos26/engine/splash",
+        "bytes": 2603576,
+        "sha256": "7acb1a0bc4f6e746a8bc206696ad3bc1dbff631958171f56662dcb57a16d54f2"
+      },
+      "splash.metallib": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/release-prepare-v1/unpacked/splash-1.3.2-arm64-macos26/engine/splash.metallib",
+        "bytes": 36807832,
+        "sha256": "a611aff2c9e61879345397ac5bea28a58f2278fcc3864176e7842ad20bd02b11"
+      }
+    },
+    "extracted_root": "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/release-prepare-v1/unpacked/splash-1.3.2-arm64-macos26",
+    "member_count": 8127,
+    "elapsed_s": 3.8526332920009736
+  },
+  "config_check": {
+    "schema": "splash-cpu-config-check-v1",
+    "status": "PASS",
+    "returncode": 0,
+    "elapsed_s": 0.489279291999992,
+    "argv": [
+      "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/release-prepare-v1/unpacked/splash-1.3.2-arm64-macos26/engine/splash",
+      "model-check",
+      "mlx-affine",
+      "none",
+      "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/config-check-v1/target-config.json",
+      "/Users/ryanli/code/minivllm/.artifacts/splash-baseline/config-check-v1/draft-config.json"
+    ],
+    "source_path_reasoning": {
+      "main": "runtime/main.mm:390-416",
+      "config_only": "runtime/model/ModelDescriptor.mm:744-759",
+      "json_limit": "runtime/model/ModelDescriptor.mm:29-69",
+      "value_only_layouts": "runtime/model/ModelDescriptor.mm:682-704",
+      "backend_creation_not_reached": "runtime/metal/MetalBackend.mm:1080-1090,1162-1173",
+      "static_device_trace": false,
+      "scope": "Source-path inspection; no hardware tracing. Ordinary host JSON/descriptor allocations remain."
+    },
+    "binary_sha256": "7acb1a0bc4f6e746a8bc206696ad3bc1dbff631958171f56662dcb57a16d54f2",
+    "target_config_sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+    "draft_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+    "target_and_draft_config_only": true,
+    "weight_payload_opened_by_source_path": false,
+    "metal_backend_constructed_by_source_path": false,
+    "device_inference": false,
+    "model_or_draft_loaded": false
+  },
+  "draft_metadata": {
+    "schema": "splash-dflash2-metadata-v1",
+    "repository": "incoai/Qwen3.8-27B-DFlash2",
+    "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "api_url": "https://huggingface.co/api/models/incoai/Qwen3.8-27B-DFlash2?blobs=true",
+    "api_sha256": "14be26358d0c879b0476fdf3470c9fb34640f5b23c56719e2614c688f9f5ec3d",
+    "files": [
+      {
+        "rfilename": ".gitattributes",
+        "size": 1581,
+        "blobId": "50bbb90c56f7da6c41ef378fa235a891daf5a238",
+        "lfs": null
+      },
+      {
+        "rfilename": "README.md",
+        "size": 5399,
+        "blobId": "f753df682b9f4281444f209c4deb14fc3a9894f1",
+        "lfs": null
+      },
+      {
+        "rfilename": "assets/dflash2-figure.png",
+        "size": 286889,
+        "blobId": "193b679a468160fbbd79815634125c46fd6fd403",
+        "lfs": {
+          "sha256": "6d8dcc9a9472bddb644c881fe83050b5343d09bf5ffb0912e5598e55fe671e99",
+          "size": 286889,
+          "pointerSize": 131
+        }
+      },
+      {
+        "rfilename": "config.json",
+        "size": 1239,
+        "blobId": "79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+        "lfs": null
+      },
+      {
+        "rfilename": "model.safetensors",
+        "size": 3848817896,
+        "blobId": "a988e2ea15d5cb6553f37a7f140304fb42fa8c10",
+        "lfs": {
+          "sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+          "size": 3848817896,
+          "pointerSize": 135
+        }
+      }
+    ],
+    "total_listed_bytes": 3849113004,
+    "tensor_file_bytes": 3848817896,
+    "small_sources": [
+      {
+        "path": "config.json",
+        "url": "https://huggingface.co/incoai/Qwen3.8-27B-DFlash2/resolve/015e795645c74b1a0eeef3b570031fb62e769bc5/config.json",
+        "bytes": 1239,
+        "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980"
+      },
+      {
+        "path": "README.md",
+        "url": "https://huggingface.co/incoai/Qwen3.8-27B-DFlash2/resolve/015e795645c74b1a0eeef3b570031fb62e769bc5/README.md",
+        "bytes": 5399,
+        "sha256": "be141ff737af8779959cb5ecaefb458ac3c214a5020aa40f69d4d1dc6f42494a"
+      }
+    ],
+    "weights_downloaded": false,
+    "payload_verified": false,
+    "model_loaded": false
+  },
+  "files": [
+    {
+      "path": "config-check-v1/command.json",
+      "bytes": 992,
+      "sha256": "4c34f2b7b000389668c82874796a21feaf207d5d1d38ca351d6a4fd9fabdb149"
+    },
+    {
+      "path": "config-check-v1/draft-config.json",
+      "bytes": 1239,
+      "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980"
+    },
+    {
+      "path": "config-check-v1/result.json",
+      "bytes": 1485,
+      "sha256": "daa56eae12ddfe5a8c602d2b92f92a6bb38887e9cb81e08bba2f7430c64a6130"
+    },
+    {
+      "path": "config-check-v1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "config-check-v1/stdout.txt",
+      "bytes": 25,
+      "sha256": "ef34041fbcd48c0d2d0d4db6c2e5f7301974b57b78f6cc03083d74150efd9c8f"
+    },
+    {
+      "path": "config-check-v1/target-config.json",
+      "bytes": 4930,
+      "sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706"
+    },
+    {
+      "path": "draft-metadata-v1/README.md",
+      "bytes": 5399,
+      "sha256": "be141ff737af8779959cb5ecaefb458ac3c214a5020aa40f69d4d1dc6f42494a"
+    },
+    {
+      "path": "draft-metadata-v1/config.json",
+      "bytes": 1239,
+      "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980"
+    },
+    {
+      "path": "draft-metadata-v1/model-api.json",
+      "bytes": 2151,
+      "sha256": "14be26358d0c879b0476fdf3470c9fb34640f5b23c56719e2614c688f9f5ec3d"
+    },
+    {
+      "path": "draft-metadata-v1/result.json",
+      "bytes": 2103,
+      "sha256": "6be4fcf2368afe401169e4bf811729b53d55669a8201b2f794bb27503a73a99a"
+    },
+    {
+      "path": "release-prepare-v1/archive-members.json",
+      "bytes": 1382711,
+      "sha256": "b8a9f6dc65c14215f23f766e74f96a4339e4bdce593bab0ba142d639c13a1a56"
+    },
+    {
+      "path": "release-prepare-v1/phases.jsonl",
+      "bytes": 1075,
+      "sha256": "dd7302c0d49f06c1a4a3e40207baa4cfcbc5b91354397c688dc70b70e6df32c1"
+    },
+    {
+      "path": "release-prepare-v1/response-headers.json",
+      "bytes": 985,
+      "sha256": "dc1e2c4d18536817502cceec7cc508741029f2e6d840c7b166e504c82b5d625f"
+    },
+    {
+      "path": "release-prepare-v1/result.json",
+      "bytes": 1505,
+      "sha256": "b8272c4586de156848ad7875316a9d42b566a1ced8cf73988de4ab7b8f751124"
+    },
+    {
+      "path": "release-prepare-v1/runner.py",
+      "bytes": 5660,
+      "sha256": "d907f0ae45ada3a5300e22b72bbab0958f575a8ccdd857318eb40700265a2aff"
+    },
+    {
+      "path": "release-prepare-v1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "release-prepare-v1/stdout.txt",
+      "bytes": 2580,
+      "sha256": "d1432e713a45d1964e5856e0c370734d7a9d280331a715c0991cac06df0c5365"
+    }
+  ],
+  "excluded_from_small_manifest": {
+    "release-prepare-v1/splash.tar.gz": "Full release SHA retained in preparation result; not rehashed again.",
+    "release-prepare-v1/unpacked": "Full expanded distribution bound by original archive SHA and checked member inventory; native/metallib independently hashed once."
+  },
+  "model_payloads_downloaded": false,
+  "device_inference": false
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "GDN-http-closed-audits-v1",
+  "status": "PASS",
+  "started_at": "2026-10-18T06:31:49.461956+00:00",
+  "owner_plan_sha256": "5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_restore.py": "40d07aabef5d3588b4eac57a2acadf4278eee2328a3304da2a041a234f66ff5e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/audit.py": "5ccb357e1f6a1296ab8673a604c48f2e183d01d83671e8d7857edc85cded7cd0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_cycle.py": "086500e1a63edaea05e325039ec422b6383d553fd944632f3d41f59868990253"
+  },
+  "jobs": {
+    "restoration": {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_restore.py",
+        "--journal",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-cold-journal",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/restoration-audit.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_restore.py",
+        "sha256": "40d07aabef5d3588b4eac57a2acadf4278eee2328a3304da2a041a234f66ff5e",
+        "bytes": 12067
+      },
+      "started_at": "2026-10-18T06:31:49.462534+00:00",
+      "status": "RETURNED",
+      "returncode": 0,
+      "ended_at": "2026-10-18T06:31:49.673001+00:00",
+      "elapsed_seconds": 0.21041524998145178,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/restoration-audit.json",
+        "sha256": "9a3d0efa2a837ff1e611bec332238c461166997da59000a281e535a4c3ba77ad",
+        "bytes": 7544
+      },
+      "audit_status": "PASS"
+    },
+    "c1": {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/audit.py",
+        "--child",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-replay/qualification",
+        "--plan-sha256",
+        "dca27dde86e3febc2f0fa4d970b0a62cc8c8729708a75d14d6d1fa1b19dffe16",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c1.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/audit.py",
+        "sha256": "5ccb357e1f6a1296ab8673a604c48f2e183d01d83671e8d7857edc85cded7cd0",
+        "bytes": 19375
+      },
+      "started_at": "2026-10-18T06:31:49.673858+00:00",
+      "status": "RETURNED",
+      "returncode": 0,
+      "ended_at": "2026-10-18T06:32:01.451380+00:00",
+      "elapsed_seconds": 11.777370166993933,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c1.json",
+        "sha256": "d9051acf568c8245fee53784f26643c11145cfb11db9893cc3016f67d6402a92",
+        "bytes": 13515
+      },
+      "audit_status": "PASS"
+    },
+    "c8": {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/audit.py",
+        "--child",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c8-replay/qualification",
+        "--plan-sha256",
+        "64c71d88d8d68b41e3c3b6bae2ad7ecdef8f5bc80be58e085fa9d93bce4bdf64",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c8.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/audit.py",
+        "sha256": "5ccb357e1f6a1296ab8673a604c48f2e183d01d83671e8d7857edc85cded7cd0",
+        "bytes": 19375
+      },
+      "started_at": "2026-10-18T06:32:01.452147+00:00",
+      "status": "RETURNED",
+      "returncode": 0,
+      "ended_at": "2026-10-18T06:32:07.114496+00:00",
+      "elapsed_seconds": 5.6622402089997195,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c8.json",
+        "sha256": "151410c0b0a209b28fe1fb193a45bd6eb3d8f25bdd3e939b4d7d1390ab2d4cf7",
+        "bytes": 13557
+      },
+      "audit_status": "PASS"
+    },
+    "cycle": {
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_cycle.py",
+        "--owner",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner",
+        "--journal",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-cold-journal",
+        "--plan-sha256",
+        "5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024",
+        "--c1-audit",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c1.json",
+        "--c1-audit-sha256",
+        "d9051acf568c8245fee53784f26643c11145cfb11db9893cc3016f67d6402a92",
+        "--c8-audit",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-c8.json",
+        "--c8-audit-sha256",
+        "151410c0b0a209b28fe1fb193a45bd6eb3d8f25bdd3e939b4d7d1390ab2d4cf7",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-cycle.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/audit_cycle.py",
+        "sha256": "086500e1a63edaea05e325039ec422b6383d553fd944632f3d41f59868990253",
+        "bytes": 17042
+      },
+      "started_at": "2026-10-18T06:32:07.115260+00:00",
+      "status": "RETURNED",
+      "returncode": 0,
+      "ended_at": "2026-10-18T06:32:07.698323+00:00",
+      "elapsed_seconds": 0.5829761659842916,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-analysis/independent-cycle.json",
+        "sha256": "d74257719ab052bfdaaf640ceca030165ad924421e724171349317de79cd54e6",
+        "bytes": 16405
+      },
+      "audit_status": "PASS"
+    }
+  },
+  "restoration_qualified": true,
+  "numerical_qualified": true,
+  "http_history_qualified": true,
+  "performance_qualified": false,
+  "inputs": {
+    "restored-journal.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-cold-journal/journal.json",
+      "sha256": "c0c228e0f58d9854ebda61a7f261897d06f33330fcdc996db4b7ac44d4eccdf4",
+      "bytes": 29867
+    },
+    "driver-final.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-execution/final.json",
+      "sha256": "d3a2afa910d18eae642fe44951f628813497dd4a71491d1f2f45f738c3d452c1",
+      "bytes": 232
+    },
+    "registration-receipt.json": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/prereg-http-v1/receipt.json",
+      "sha256": "a70d9ff5d173c7e16d3b721245627a2edcb1f0bee3c3f10cfd54e3e73cfcddfb",
+      "bytes": 36064
+    }
+  },
+  "sources_unchanged": true,
+  "inputs_unchanged": true,
+  "ended_at": "2026-10-18T06:32:07.699230+00:00"
+}

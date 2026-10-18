@@ -1,0 +1,223 @@
+{
+  "schema": "GDN-recorded-http-independent-v1",
+  "status": "PASS",
+  "qualified": true,
+  "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-replay/qualification",
+  "ledger_opened": true,
+  "http_history_qualified": true,
+  "performance_qualified": false,
+  "owner_resources_restore_qualified": false,
+  "offline_tensor_bytes_rechecked": false,
+  "weight_shards_rehashed": false,
+  "combined_candidates_qualified": false,
+  "parameter_replacement_qualified": false,
+  "audit_source_sha256": "5ccb357e1f6a1296ab8673a604c48f2e183d01d83671e8d7857edc85cded7cd0",
+  "support_sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/http_qualification.py": "3dddc8d00b42e0ebe34883805f13a018325f83b232cf007f170cd01a27c18209",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_qualification.py": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_audit_v2.py": "88f32e3b3f44206b48a1f581cbfe0bde0788060cbd2a0c5030a3ec472a0139fe"
+  },
+  "scope": "Actual captured GDN-only HTTP history, source-pinned full64 device bit/finite receipts; no future workload/performance/composition grant.",
+  "concurrency": 1,
+  "plan_sha256": "dca27dde86e3febc2f0fa4d970b0a62cc8c8729708a75d14d6d1fa1b19dffe16",
+  "base_plan_sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb",
+  "terminal_sha256": {
+    "plan.json": "dca27dde86e3febc2f0fa4d970b0a62cc8c8729708a75d14d6d1fa1b19dffe16",
+    "complete.json": "82d5da3cd9337421cf63b0606bbb8e3098a8286b988b1a4993deff42b775130b",
+    "base/plan.json": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb",
+    "base/complete.json": "676992f1210d5192a6748339c515cd03df854f37f35ddbedf63acbcfaddc7299",
+    "recording.json": "fedbc3cafe9e341c559160d0e31eace116ec5ad0f4833c723b314d42994438e3"
+  },
+  "raw_inputs": {
+    "group": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/group.json",
+      "sha256": "bf040576b298e5606d6c6e1920118d7a173183920de1a15c86b5120885224ca9"
+    },
+    "trace": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/trace.jsonl",
+      "sha256": "1a42d6e6cef1844dff53a52e02aff1532daa65efbabc7521310723469f0f3d9e"
+    },
+    "dispatch_events": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/dispatch-events.jsonl",
+      "sha256": "80211605a5fb4afadf1ff7837c7871a41e6e9d5330a55f78ad6491b58e7f5a47"
+    }
+  },
+  "capture": {
+    "spec": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/spec.json",
+      "sha256": "862f69744f148534ce60901ea110bb0d5ee8613c046ff1deae152ce2102d5653"
+    },
+    "complete": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/complete.json",
+      "sha256": "5cb553a8e6f1db9c0a48b3fb4d0ada5e0b1a8e8e37d5ed6326985f47767fc7c0"
+    },
+    "child": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/child.json",
+      "sha256": "eebac420eb1176f20d18a052e607610390bae0fe5227d585899730ef20505d8f"
+    },
+    "release": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/release.json",
+      "sha256": "401bca99dc7d33f0fa03831867987a5e0d541f300826e7cd889a1d0595e59cba"
+    },
+    "absence": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/child-absence.json",
+      "sha256": "bf3a0602a160adda4ac534d01621b20dcd9a810efb2bae8e6e10cd804642edc0"
+    },
+    "port": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner/phases/c1-capture/capture/port-after.json",
+      "sha256": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e"
+    }
+  },
+  "serving_prerequisite": {
+    "plan": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-owner/phases/gdn-prework-serving/qualification/plan.json",
+      "sha256": "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b"
+    },
+    "complete": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-owner/phases/gdn-prework-serving/qualification/complete.json",
+      "sha256": "8072b3bb91448abdc74b3312604b3491a97522d71e540be716a15f8a563e6ec5"
+    },
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-serving-v1/independent-numerical.json",
+      "sha256": "fee50c90c30c3224934489c66e5ecb4a5d7f0c4fb57ae0baa0576f6efe9a769b"
+    }
+  },
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py": "3f493752d95996bd08cc1ea7389fc3159ab615e1ac162b36332eecc47dab862c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit_serving.py": "268cc336417a3d31dffc30c749701d132da610fbb41d9b0f4c85ad6adaa2f2bc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/http_server.py": "e4408d9df0c26a2f7fc5db93312902e4797b72a8958f67f1912b4b9bd628e3d4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/http_capture.py": "0ecedc988d2b77a55f010bdd09e9f9581e4aa9618d7070a6eb4b81960e5849c8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http/http_qualification.py": "3dddc8d00b42e0ebe34883805f13a018325f83b232cf007f170cd01a27c18209"
+  },
+  "tokenizer_runtime_pins": {
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers-0.23.3.dist-info/METADATA": "87032ea29ec14be956ce0f15d164a8f436d6f1adbe19b261d6c179d9184f5cba",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/__init__.py": "b1cee924695651af5c3dab98e8c34406ab355a2cc1d633228646c470210e649e",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/decoders/__init__.py": "85fc0ce821540ef94c1862f8fb1b1a698cfcd4af4fe6b408e592f950758af18e",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/__init__.py": "57302ca65688a3bae5e0014ef0c8aeee283b31f663be89f055b959c34d7347a3",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/base_tokenizer.py": "b20192817decd800a26b6b0401afcb5f3ddcf9dc2bcf2e949619087bd73b6575",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/bert_wordpiece.py": "b0a0ae9b414a3d875280914937c2c37ab541a130d14aacaa49dadc9be96f42a2",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/byte_level_bpe.py": "8817a933fcf5b392b2ef314356b60b7372f96f262b228ba4efe934246b85d74b",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/char_level_bpe.py": "35a83f1c5abc46f72e72a8bc321575fb4c6da11d02ec58c739e70555444beecb",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_bpe.py": "734f1f29fea2f7613646c2a0b31cbb2f365f617f3e3000874911bc53f239cad6",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_unigram.py": "d91a087c556988c9093ad382b2433f54278210b59a0bf6cd9ddb3a1afb44d0a4",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/models/__init__.py": "d86e49a8152f16b2a2684a45125b95524b414f0f2d942619fb6a3c83b67c72a2",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/normalizers/__init__.py": "ff4eb0e1ca9122dbde12021d75868b3127209123a4200308cd809eb1be400385",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/pre_tokenizers/__init__.py": "584db71f3ea5c969b8dfe99bac7e57122744e00bf1f0e80bc3e5df3822fa8deb",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/processors/__init__.py": "990538dd3ce6c8570467f7900c82d243341bc477d78ec8fd967eed3db6229b3c",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tokenizers.abi3.so": "83c58f9ec4937f86521c76ba5222215d3e7707a25818d5ea69604e230fd4a96c",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/__init__.py": "c46f1c681f4e1c2f1c6c1d354b9bd8575e0767184ee9e59b2de86c6fbd29a62a",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/visualizer.py": "fbcfedafd89b0f9784f4e0ce6a80cacc964906458fb8ff9d9a685adfda85b97e",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/trainers/__init__.py": "92179215cac004d76afa167a978f5ea88105c52d2c247913ebdb827fc4a61adf"
+  },
+  "ledger": {
+    "sha256": "9380bc2fa6f4939a805e1751df27f5ce19dc057748352e386f5e7d5a4ebfa84e",
+    "bytes": 1244295988,
+    "lines": 4100,
+    "events": [
+      {
+        "event": "load-pair-start",
+        "elapsed_wall_s": 5.238655749999452,
+        "max_seqs": 1,
+        "model_instances": 2
+      },
+      {
+        "event": "load-pair-complete",
+        "elapsed_wall_s": 6.3101839589944575,
+        "max_seqs": 1,
+        "independent_weight_arrays": 1349
+      },
+      {
+        "event": "release-pair-start",
+        "elapsed_wall_s": 540.9709438749996,
+        "model_instances": 2
+      },
+      {
+        "event": "release-pair-complete",
+        "elapsed_wall_s": 541.056323124998,
+        "qualification_only": true
+      }
+    ],
+    "requests": 8,
+    "steps": 4096,
+    "raw_output_count": 4096,
+    "committed_output_count": 4096,
+    "observed_terminal_eos": 0,
+    "decode_batch_histogram": {
+      "0": 8,
+      "1": 4088
+    },
+    "array_counts": {
+      "full_vocabulary_logits": 8176,
+      "all_arrays": 5251008,
+      "state_arrays": 5230592,
+      "ahead_token_arrays": 12240
+    },
+    "ahead_counts": {
+      "produced": 4080,
+      "carried": 4080,
+      "consumed": 4080,
+      "invalidated": 0
+    },
+    "bit_equal_checks": 5251008,
+    "finite_checks": 10502016
+  },
+  "dispatch": {
+    "captured": {
+      "sha256": "80211605a5fb4afadf1ff7837c7871a41e6e9d5330a55f78ad6491b58e7f5a47",
+      "bytes": 741494,
+      "lines": 4097,
+      "counts": {
+        "candidate": 196224,
+        "fallback": 0,
+        "b1_calls": 4088,
+        "multirow_calls": 0,
+        "prefill_calls": 8,
+        "short_bypass_calls": 0
+      }
+    },
+    "replay": {
+      "sha256": "ad83712aaa869554385bf5fd8ab33c696e018e2f677f2322a41b9716ceda178f",
+      "bytes": 736028,
+      "lines": 4097,
+      "counts": {
+        "candidate": 196224,
+        "fallback": 0,
+        "b1_calls": 4088,
+        "multirow_calls": 0,
+        "prefill_calls": 8,
+        "short_bypass_calls": 0
+      }
+    },
+    "calls": 4096,
+    "replay_pid": 83829,
+    "scope": "Independent semantic call order/context/counters; no token values in sidecar, no Metal completion count."
+  },
+  "http": {
+    "max_http_outstanding": 1,
+    "requests": 8,
+    "fully_drained": true,
+    "scope": "Actual POST->DONE caller concurrency; not GPU batch size or a performance measurement."
+  },
+  "ahead_retirement": {
+    "HTTP-C1": {
+      "consumed": 4080,
+      "discarded_prior": 0,
+      "partial_retirement": 0
+    }
+  },
+  "peak_bytes_diagnostic": 38094987318,
+  "original_37_request_gate_replaced": false,
+  "unobserved": "Only observed cancellation/EOS/ahead invalidation counts; no unobserved coverage or later formal speed grant."
+}

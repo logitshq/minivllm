@@ -1,0 +1,238 @@
+{
+  "schema": "splash-qwen27b-source-compatibility-review-v1",
+  "created_at": "2026-10-18T06:26:59.939149+00:00",
+  "status": "SOURCE_AND_HEADER_REVIEW_COMPLETE",
+  "commit": "be3b083c5f413673d44e44881042e875e674e333",
+  "tag": "1.3.2",
+  "build_executed": false,
+  "bundle_downloaded": false,
+  "model_loaded": false,
+  "device_run": false,
+  "payload_verified": false,
+  "tests_run": false,
+  "scope": "Header metadata + pinned source review; no runtime compatibility/numerical/performance qualification.",
+  "header_evidence": {
+    "schema": "splash-mlx-header-compatibility-v1",
+    "status": "METADATA_MATCH",
+    "splash_commit": "be3b083c5f413673d44e44881042e875e674e333",
+    "model_snapshot": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+    "config": {
+      "config.json": {
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/config.json",
+        "sha256": "7380cfc6eb77891381ee24e944e6bd0caed7a957707f2512ddd6effc82c7e706",
+        "bytes": 4930
+      },
+      "model.safetensors.index.json": {
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model.safetensors.index.json",
+        "sha256": "8a3f70b51e57843efcb417829dc8be081e414517995234e71fc7cf508ae01f90",
+        "bytes": 167058
+      }
+    },
+    "headers": [
+      {
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00001-of-00003.safetensors",
+        "stat": {
+          "device": 16777231,
+          "inode": 628231,
+          "size": 5343250458,
+          "mtime_ns": 1792128548075854683
+        },
+        "header_bytes": 86450,
+        "header_sha256": "5ee4fe36fedff37be5707fae8d414da5f4fbf11f23c74dd0c3a97d7384f497e7",
+        "prefix_and_header_sha256": "00f14d525d9db3745509ed68f8b824aa8bca9e8a670fb4b2c4e2712f584b87c3",
+        "tensor_payload_bytes_read": 0
+      },
+      {
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00002-of-00003.safetensors",
+        "stat": {
+          "device": 16777231,
+          "inode": 628242,
+          "size": 5354159381,
+          "mtime_ns": 1792128546891705998
+        },
+        "header_bytes": 68557,
+        "header_sha256": "8f93becf8c7619733122018894d054a4c3e7decf382ce8cf4df86237ed2988ab",
+        "prefix_and_header_sha256": "c7b5f702a2b79c199f784cfe72ce81d76503b656d0c160ba75b60645747a16f5",
+        "tensor_payload_bytes_read": 0
+      },
+      {
+        "path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/model-00003-of-00003.safetensors",
+        "stat": {
+          "device": 16777231,
+          "inode": 628248,
+          "size": 5357065565,
+          "mtime_ns": 1792128548110075081
+        },
+        "header_bytes": 58133,
+        "header_sha256": "910ede76e14d0da40deb3bca75126c4a4989641e2f664c927adf58473e2cc249",
+        "prefix_and_header_sha256": "e0766a41aa21abd33acf5853de1b2d0e783ce2be2f736e90f5e043b65a373fd5",
+        "tensor_payload_bytes_read": 0
+      }
+    ],
+    "indexed_tensor_count": 1682,
+    "native_target_tensor_count": 1349,
+    "other_indexed_tensor_count": 333,
+    "geometry_matches": true,
+    "quantization_matches": true,
+    "splash_binary_executed": false,
+    "device_run": false,
+    "payload_verified": false,
+    "scope": "Source-derived dtype/shape/name checks; no tensor values, loader execution, numerical or performance qualification."
+  },
+  "header_result_sha256": "e3ecbfe16d574ae1b78b5a2c670e98c6066eb42117bb2d74e4c597bb2ab20880",
+  "review_sources": [
+    {
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES",
+      "sha256": "2fedf1277bf732f8435c3e3be2798f52f25f7e2bd4155865cb366da55b88e50b",
+      "bytes": 12049
+    },
+    {
+      "path": "Makefile",
+      "sha256": "60b2c0df72e23dcdafba65b6341462bdc408021c2afa5aaa75e092a8650bc8d7",
+      "bytes": 16812
+    },
+    {
+      "path": "DEVELOPMENT.md",
+      "sha256": "a1a628338848321433b011de31a97c382efe764d0a9dc7b285cc87dbfe3b74d0",
+      "bytes": 187096
+    },
+    {
+      "path": "runtime/model/SafetensorsImage.cpp",
+      "sha256": "1c4d6d3e6f3b17e662bc23a9fc1ec23caca01bc8f8c3a77b07f493fde9473e5a",
+      "bytes": 21656
+    },
+    {
+      "path": "runtime/model/GgufPreparation.cpp",
+      "sha256": "a402f8e39a09972e9c84b33c3a41edf84d943982b1574bde1c081dc69e497d1a",
+      "bytes": 29550
+    },
+    {
+      "path": "runtime/model/ModelDescriptor.mm",
+      "sha256": "8d0d4cc289bcdb83694dbfcb5b844bf2e584b115c6804285ea1096a64d688dfb",
+      "bytes": 41372
+    },
+    {
+      "path": "runtime/model/Qwen3_8.hpp",
+      "sha256": "79ab186404e8da4c3e0931fe5f1780b4439bb530db6d2930b641446bb7ae702c",
+      "bytes": 3576
+    },
+    {
+      "path": "runtime/model/Runtime.cpp",
+      "sha256": "537accffa7f851e38e4635b7dde59b2e3191d5d9adb4307cb2181c93b726aa88",
+      "bytes": 138319
+    },
+    {
+      "path": "runtime/engine/Engine.cpp",
+      "sha256": "26b4b1feb0b76948478999c570371f9b3a7d95548c732e99703ae09f377d921c",
+      "bytes": 94007
+    },
+    {
+      "path": "runtime/engine/NativeArguments.cpp",
+      "sha256": "3a60268f26d22371de1d33426ff0faba1403d2ae00f6ae375c6cea3ac2337442",
+      "bytes": 7275
+    },
+    {
+      "path": "runtime/main.mm",
+      "sha256": "803e09054883ff5aa8af2d3a81cd9653db6e7d3c1c477b8b7e173fc8b85cdaa4",
+      "bytes": 17745
+    },
+    {
+      "path": "server/frontend.py",
+      "sha256": "75737f129bf08c1c472e85e90419ec91d45461315c1e8bc9009878f33b9ff12c",
+      "bytes": 49862
+    },
+    {
+      "path": "server/server.py",
+      "sha256": "18b39fcd013d0098cc89d9d1e1ced0f01ef2b0040f3852b3e13451916f4ac2f7",
+      "bytes": 71656
+    },
+    {
+      "path": "server/metrics.py",
+      "sha256": "fe6167617ee771a7cdaadf300da5eac3a27be1e56042d39deab5f1ace46f8b43",
+      "bytes": 13733
+    },
+    {
+      "path": "server/protocol.py",
+      "sha256": "c5588c4edeeb40ee73bbb9b1bf35cce4df512b5392571d7816cfdbac8650a13c",
+      "bytes": 47019
+    },
+    {
+      "path": "server/runtime.py",
+      "sha256": "568cfad8999a9a7121cce913ece2719cf60049e48e6fd642a7e4821bc47f9972",
+      "bytes": 59037
+    },
+    {
+      "path": "server/backend.py",
+      "sha256": "4974832d6dcf7fc3b3ddb04d6f25b2da002fcd336cb421447fa4d4d102ab1598",
+      "bytes": 43422
+    },
+    {
+      "path": "server/serve_options.py",
+      "sha256": "aa4af098c4e0756fc43277335c15875d6eccf8f8eae6662744dc405aa2e7ddb2",
+      "bytes": 21760
+    },
+    {
+      "path": "install/upstream.py",
+      "sha256": "835d8c13223a62023395646c4dd133464274ae02dcfcbe6601240d7bbfe98d93",
+      "bytes": 28862
+    },
+    {
+      "path": "install/families.py",
+      "sha256": "fb524ddc09ad99128a7691725d757bb8cd576fbd18a410a65855dbd845150979",
+      "bytes": 1033
+    },
+    {
+      "path": "install/launcher.py",
+      "sha256": "9f107bf8b80b9edae9489b4c569f167ea73a5d91daca74c0c68ab13430fce93e",
+      "bytes": 18495
+    },
+    {
+      "path": "install/paths.py",
+      "sha256": "0bad8120f06a24865bc2cac7602e9dad72e113c728430b68c7af06eed9c50c85",
+      "bytes": 550
+    },
+    {
+      "path": "install/requirements.txt",
+      "sha256": "e67b228e4f8964e355938d9085d22e09235285a3173d988dda5e39fde0723ff1",
+      "bytes": 698
+    }
+  ],
+  "release_metadata_sha256": "89d601d5bf8ac729be14fd6a69e99ce4f717077f2cb4e2a79ccc33c7f9800c9c",
+  "release_asset": {
+    "name": "splash-1.3.2-arm64-macos26.tar.gz",
+    "size": 74590927,
+    "digest": "sha256:c3deb1dd971461ffafcf6b82c318789d6698b22aa865e490a11a0ed943686c0b",
+    "browser_download_url": "https://github.com/incoai/splash/releases/download/1.3.2/splash-1.3.2-arm64-macos26.tar.gz"
+  },
+  "environment_observations": {
+    "macos": "27.0.1",
+    "selected_developer": "/Library/Developer/CommandLineTools",
+    "metal_tool_lookup": "not found by xcrun -sdk macosx --find metal",
+    "DEVELOPER_DIR": null,
+    "standard_xcode_app_matches": [],
+    "splash_on_PATH": null,
+    "homebrew_cellar_splash_exists": false,
+    "standard_appsupport_splash_app_exists": false,
+    "scope": "No exhaustive filesystem search; commands only read metadata.",
+    "tool_chunks": [
+      "574787",
+      "da8a33"
+    ]
+  },
+  "executed_inspection": {
+    "command": "/usr/bin/python3 -I -B .artifacts/splash-baseline/inspect_headers.py",
+    "tool_chunk": "3ab682",
+    "exit_code": 0,
+    "indexed_tensor_count": 1682,
+    "target_tensor_count": 1349,
+    "mismatch_count": 0,
+    "payload_bytes_read": 0
+  },
+  "network_actions": "Source clone/sparse checkout and small primary release metadata/package source only. Partial-clone ls-tree --long size enumeration was interrupted; no binary/model download.",
+  "local_evidence_root": "/Users/ryanli/code/minivllm/.artifacts/splash-baseline"
+}
