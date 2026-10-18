@@ -1,0 +1,50 @@
+{
+  "schema": "GLM-cycle-prepared-cpu-v2-summary",
+  "status": "PASS_FAKE_CPU_RETRY",
+  "attempts": [
+    {
+      "name": "v1",
+      "status": "FAIL",
+      "tests": 33,
+      "passed": 32,
+      "errors": 1,
+      "failures": 0,
+      "skipped": 0,
+      "result_sha256": "89db7a2348d4dd5fdc751cb190e420f5fd2101e84aaa4fb874d581387b4dbd6d"
+    },
+    {
+      "name": "v2",
+      "status": "PASS",
+      "tests": 33,
+      "passed": 33,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "result_sha256": "53637bfc4114386decca0aafa2eee8837f051aecd12584eb2568fda8eab41258"
+    }
+  ],
+  "root_cause": "Fixture named an external registered owner-plan.json without creating it; a module-level patch did not replace the already-copied dependency dictionary used by reaped(). Production correctly required the external registration.",
+  "fix": "Write and bind the external registration, STOPPED snapshot and attempt; keep the real registered_trials/owner_plan route, absent owner-local copy assertion and corrupt-external-bytes rejection.",
+  "production_source_unchanged": {
+    "controller.py": "98bc920d97b529c07f9af0a64213e47e73728b63caee2e867e496f1ac30bde88",
+    "audit_restore.py": "732c60870b9400d1d7b6bfb9c303bce19b9c92032bc06bc9db193b66ace3bf6d",
+    "audit_closed.py": "0158be373f614c55ed03393320337b7cca4c1525360fd850f5081a5462694d48",
+    "prepare_inputs.py": "da10a83b826150b88f44e1442423660b9e7edd990114e368fe2fea98032207fb",
+    "preregister.py": "7f937f709b0c6806a0dfca7606122e1178b2c495b4574665e7df1eea2862e842",
+    "execute.py": "cbc28848a124c74fabd9aede971b57b8fb9162051031e9a720dde5f87029635a",
+    "owner.py": "37f47300c14d8da721d6c30fcc71f52325132bad3dc3ba902c1cc08af4326b40"
+  },
+  "source_guards_unchanged": true,
+  "all_original_files_rehashed": true,
+  "archived_files": 678,
+  "raw_bytes": 11854917,
+  "archive": {
+    "filename": "raw-evidence.tar.xz",
+    "bytes": 1351148,
+    "sha256": "b99b1ede1511196f76c94d61a9aaf6ebcc9f9dc7f50f38623c6fce4f85195ca8"
+  },
+  "scope": "Fake-only CPU protocol/registration/audit/driver tests. No actual GLM preparation, service action, model load, physical-capacity validation, numerical/model/HTTP/performance qualification.",
+  "device_executed": false,
+  "model_loaded": false,
+  "performance_qualified": false
+}

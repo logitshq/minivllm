@@ -69,9 +69,30 @@ class ProtocolTests(unittest.TestCase):
         return folder
 
     def test_preintent_empty_index_and_directory_without_plan_copy(self):
-        self.nochild();result=c.reaped(self.j,self.system)
-        self.assertTrue(result['no_child_started']);self.assertFalse((self.owner/'owner-plan.json').exists())
-        self.assertIn(str(self.owner/'children.json'),[r['path'] for r in result['receipts']])
+        # Missing owner-local copy is valid; the immutable external registration
+        # still exists and must pass the real registered_trials/owner_plan path.
+        self.registration.stop()
+        path=Path(self.data['owner_plan']['path'])
+        plan=dict(schema=c.OWNER_SCHEMA,outputs={'owner':str(self.owner)},
+            cold_restart=dict(journal_path=str(self.journal),controller=reference(HERE/'controller.py')))
+        write(path,plan);self.data['owner_plan']=reference(path)
+        write(self.owner/'stopped-journal.json',self.data)
+        self.attempt.update(owner_plan_sha256=c.b.sha(path),stopped_journal_sha256=c.b.sha(self.owner/'stopped-journal.json'))
+        write(self.owner/'attempt.json',self.attempt)
+        self.bound.update(owner_plan_sha256=c.b.sha(path),attempt_sha256=c.b.sha(self.owner/'attempt.json'))
+        seen=[]
+        def validate(args):
+            self.assertEqual(args.plan,path);self.assertEqual(args.out,self.owner)
+            self.assertEqual(args.plan_sha256,c.b.sha(path));seen.append(args)
+            return plan,None,None,None
+        self.nochild()
+        with patch.object(c,'owner_module',return_value=SimpleNamespace(validate_plan=validate)),patch.object(c,'source_pins',return_value={}):
+            result=c.reaped(self.j,self.system)
+            self.assertEqual(len(seen),1)
+            self.assertTrue(result['no_child_started']);self.assertFalse((self.owner/'owner-plan.json').exists())
+            self.assertIn(str(self.owner/'children.json'),[r['path'] for r in result['receipts']])
+            write(path,dict(plan,unexpected='changed registered bytes'))
+            with self.assertRaises(AssertionError):c.reaped(self.j,self.system)
 
     def test_unknown_popen_intent_never_becomes_nochild(self):
         self.nochild();write(self.owner/'spawn-intent.json',{})
