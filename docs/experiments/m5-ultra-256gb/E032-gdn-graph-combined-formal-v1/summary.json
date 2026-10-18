@@ -1,0 +1,17 @@
+{
+  "schema": "GDN-graph-combined-formal-launch-failure-archive-v1",
+  "owner_plan_sha256": "3e65c89baecc67b14e8f97c2063d4647085a8ca86c2cc8e6c48dd03577bd6d4b",
+  "status": "FAILED_BEFORE_EXPERIMENT_CHILD",
+  "owner_cli_returncode": 2,
+  "owner_directory_observed_absent": true,
+  "requested_owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v1-owner",
+  "model_children_started": 0,
+  "formal_requests": 0,
+  "warm_requests": 0,
+  "performance_qualified": false,
+  "audit_statuses": {
+    "restoration-audit": "PASS"
+  },
+  "cause": "execute.py passed --run to the formal owner, whose argparse accepts --plan/--plan-sha256/--out and optional --prepare-only. It exited2 before creating its owner directory or spawning a model child.",
+  "scope": "Actual failed CLI invocation retained. No timing, numerical or model result. Driver normally waited the rejected CLI and ran recover --no-experiment; independent restoration is a separate result."
+}

@@ -1,6 +1,6 @@
 # 031：把GDN融合放进长decode编译图
 
-2026-10-18。组合数值、资源与恢复的独立复核已通过；实际组合HTTP验证已启动，尚无组合吞吐成绩。单项成绩见[v15](../progress/2026-10-17-v15/README.md)：GDN改善C1，E024保留C8优势，不能将两个百分比相加。
+2026-10-18。组合数值、HTTP、资源与恢复的独立复核已通过；正式测速首轮因入口参数错误在启动模型前失败，尚无组合吞吐成绩。单项成绩见[v15](../progress/2026-10-17-v15/README.md)：GDN改善C1，E024保留C8优势，不能将两个百分比相加。
 
 ## 第一性问题：图究竟编译了哪一个函数
 
@@ -48,3 +48,12 @@ The independent cycle audit also passed247 retained resource samples, pressure1,
 [The complete E031 archive](../../experiments/m5-ultra-256gb/E031-gdn-graph-combined-http-v1/README.md) retains1,100 members,1,875,145,734 raw bytes and11,470,864 compressed bytes. Every member and original SHA was verified; archiveSHA742a5988d72924beedaf5bf24914413997e569ed09bf2fb38c046b33623c6639. Restoration, C1 numerical/HTTP, C8 numerical/HTTP and full-cycle resource audits all independently passed. This remains observer-enabled qualification, with no new performance point.
 
 The next timing plan compares the same combined server with graph always ON and GDN OFF/ON. It uses12 sequential fresh processes, three pairs at C1/C8,8 warm and64 formal requests per process, and no observers. Its actual CPU preparation validated all12 specs against the closed E031 receipts. Do not multiply the earlier independent GDN and graph speedups; use the resulting paired measurement.
+
+
+## E032：入口失败也要完整记录
+
+2026-10-18 12:56 PDT，root编写的正式driver把`--run`传给了不接受该选项的owner。真实argparse以2退出；owner输出目录尚未创建，模型子进程、warm请求、formal请求均为0。70项factory/生命周期/审计CPU检查没有覆盖这个新driver，不能把它们写成driver也通过。原失败代码、计划、命令、stdout/stderr全部保留。
+
+外层driver正常wait了失败的CLI，再执行`recover --no-experiment`；原服务90614恢复为91373，独立恢复审计PASS。恢复通过不改变实验失败，也不能产生任何速度点。[E032完整记录](../../experiments/m5-ultra-256gb/E032-gdn-graph-combined-formal-v1/README.md)含182个成员、8,519,786原始字节、305,300压缩字节；逐成员和原文件SHA复核PASS。
+
+修复使用新的retry-v2入口、计划和日志。原12个测速spec、HTTP服务器、数值实现和测量算法不变；新的生命周期绑定实际E032恢复证据。driver用一个函数构造正式与prepare-only命令，并在停止服务前调用真实owner的`--prepare-only`。这是检查真正解析器和计划的便宜入口验证；原失败记录不会被覆盖。

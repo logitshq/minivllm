@@ -1113,3 +1113,10 @@ The separate B2/B8 local GDN canary now has real native batched activation/indep
 Both actual combined HTTP histories and numerical replays passed:24 requests/12,288 committed tokens,5,124steps/6,573,486 full-array bit comparisons. All four children strictly reaped; original80649 restored90614 with all driver codes0. Independent C1, C8, resource and restoration audits PASS. E031 retains1,100members/1,875,145,734rawB/11,470,864xzB, SHA742a5988d72924beedaf5bf24914413997e569ed09bf2fb38c046b33623c6639. No combined performance result yet.
 
 Actual12-spec CPU preparation now PASS for the incremental GDN-on-graph experiment, owner planSHA3e65c89baecc67b14e8f97c2063d4647085a8ca86c2cc8e6c48dd03577bd6d4b. Both arms use the same combined entry with graph ON, GDN OFF/ON, observers OFF,3pairs per C1/C8,8warm+64formal per process. Root is binding the verified restored service before execution.
+
+
+### 12:57 PDT — E032 launcher failure retained; retry being prepared
+
+The root-written formal driver incorrectly passed `--run` to the formal owner's argparse. It exited2 before owner-directory creation or any model child:0 warm/0 formal requests. The preceding70 CPU checks did not cover this new driver. Stop returned0; the normally waited CLI permitted `recover --no-experiment`, which returned0. Service90614 recovered91373; the separate independent restoration auditPASS. No numerical/performance result. E032 retains182members/8,519,786rawB/305,300xzB, archiveSHAab6f4d24cbb68e3e0c554e8d351dba558f4aaa004e0d9cc15a817cb27d575a85, every member/original verified.
+
+A new retry-v2 lifecycle will bind that exact closed predecessor, preserving the original failed source and all12 original timing specs/factory algorithms. The corrected driver builds owner argv once and runs the actual `--prepare-only` CLI before service stop. Retry is not yet device-started. GLM next loading remains prepared but unrun; it must bind the actual later retry closure, not assume success. Current measured Pareto is unchanged.
