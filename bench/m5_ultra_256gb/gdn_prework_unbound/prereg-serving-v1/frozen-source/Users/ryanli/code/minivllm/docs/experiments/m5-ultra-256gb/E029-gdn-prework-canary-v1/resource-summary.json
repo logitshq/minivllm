@@ -1,0 +1,247 @@
+{
+  "schema": "cold-single-child-resource-reparse-v1",
+  "status": "PASS",
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner",
+  "owner_status": "PASS",
+  "phase": "gdn-prework-real-layer",
+  "child_pid": 29163,
+  "owner_pid": 29126,
+  "source_sha256": "5948ccbf7baeb21d1e71d9e8f7169b1bd9f84e65eb492746aba86fe377806c23",
+  "raw_file_pins": {
+    "complete.json": {
+      "sha256": "289be3717b2781065437c155401e9e6eb47c7ff8bd4d5a283db13b03b1a91235",
+      "bytes": 768
+    },
+    "release.json": {
+      "sha256": "256d70b17137682f309a36c647dbf346a66da595233b62644742eb67bea9165e",
+      "bytes": 1640
+    },
+    "children.json": {
+      "sha256": "9eed2a1de3e705397d6ed07d182b9f4720f8644bc901b2f7bc9ed6eb3afc7f62",
+      "bytes": 843
+    },
+    "phases/gdn-prework-real-layer/release.json": {
+      "sha256": "698eba28e63e2e3356549fdcfc3b58181d8fde825d0057c0287f2e7ab38fd37b",
+      "bytes": 320
+    },
+    "resource-000.json": {
+      "sha256": "d668585ab90059755e13e8f5fd6db64a9032f002e0aaf05ce01786356f020749",
+      "bytes": 4478
+    },
+    "resource-001.json": {
+      "sha256": "e92f53ec5760fb25ab14ecd94ba28a5254a95936d7159b26196c8fd32df3abf7",
+      "bytes": 4490
+    },
+    "resource-002.json": {
+      "sha256": "c507663d1184337f76aace7b9347e50ea9d1243ee4193ba6e40e978e9d46a913",
+      "bytes": 5341
+    },
+    "resource-003.json": {
+      "sha256": "f0ca78c085846f62823983ef75b3452b9863a1719ad7c491224051ab65d1fd27",
+      "bytes": 5341
+    },
+    "resource-004.json": {
+      "sha256": "6aad72b4495597eb2b452acf2c2a1720aba41a7ae2b7b41eda4eb42d6f0a9e86",
+      "bytes": 5352
+    },
+    "resource-005.json": {
+      "sha256": "e212350779c1fd7015e96ae43a55d49f7d340ca15e2bc72fe0a4ae8f61cd44e0",
+      "bytes": 5345
+    },
+    "resource-006.json": {
+      "sha256": "82223e00c190df6e7a3a8b18cf906bc5e68689a39890a7e01c5d1c1c278f1bd2",
+      "bytes": 4474
+    },
+    "resources.json": {
+      "sha256": "1306685518aeb806cf2c08b635722562df505216c4e52eee4d39ce09d0cdc5e0",
+      "bytes": 37405
+    }
+  },
+  "samples": 7,
+  "observed": [
+    {
+      "label": "before-prepare",
+      "monotonic_s": 165417.654772875,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650693
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 152537759744,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "unknown",
+      "exact_pid_rss_kib": null,
+      "known_inventory_clean": true,
+      "native_inventory_count": 0,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "after-prepare-before-spawn",
+      "monotonic_s": 165419.107531083,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650696
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 152238424064,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "unknown",
+      "exact_pid_rss_kib": null,
+      "known_inventory_clean": true,
+      "native_inventory_count": 0,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "gdn-prework-real-layer:running",
+      "monotonic_s": 165419.401512791,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650696
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 152087461888,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "known",
+      "exact_pid_rss_kib": 47920,
+      "known_inventory_clean": true,
+      "native_inventory_count": 1,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "gdn-prework-real-layer:running",
+      "monotonic_s": 165424.619661375,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650700
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 137065857024,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "known",
+      "exact_pid_rss_kib": 62240,
+      "known_inventory_clean": true,
+      "native_inventory_count": 1,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "gdn-prework-real-layer:running",
+      "monotonic_s": 165429.843853041,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650703
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 117425848320,
+      "free_percent": 90,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "known",
+      "exact_pid_rss_kib": 14878368,
+      "known_inventory_clean": true,
+      "native_inventory_count": 1,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "gdn-prework-real-layer:running",
+      "monotonic_s": 165435.088629833,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650706
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 135723253760,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "known",
+      "exact_pid_rss_kib": 225568,
+      "known_inventory_clean": true,
+      "native_inventory_count": 1,
+      "legacy_inventory_count": 0
+    },
+    {
+      "label": "postflight",
+      "monotonic_s": 165435.986943916,
+      "pressure": 1,
+      "swap_mib": 421.06,
+      "vm": {
+        "Swapouts": 316235,
+        "Swapins": 77696,
+        "Pageouts": 15727,
+        "Compressions": 47522335,
+        "Decompressions": 25650706
+      },
+      "page_size_bytes": 16384,
+      "free_bytes": 136181743616,
+      "free_percent": 96,
+      "power_source": "AC Power",
+      "thermal_code": 0,
+      "exact_pid_probe_status": "unknown",
+      "exact_pid_rss_kib": null,
+      "known_inventory_clean": true,
+      "native_inventory_count": 0,
+      "legacy_inventory_count": 0
+    }
+  ],
+  "guard_violations": [],
+  "pressure_values": [
+    1
+  ],
+  "thermal_codes": [
+    0
+  ],
+  "swap_delta_mib": 0.0,
+  "max_swap_growth_mib": 0.0,
+  "vm_delta": {
+    "Swapouts": 0,
+    "Swapins": 0,
+    "Pageouts": 0,
+    "Compressions": 0,
+    "Decompressions": 13
+  },
+  "minimum_free_bytes": 117425848320,
+  "scope": "Raw pressure/swap/VM/power/NSProcessInfo thermal and exact owned-PID ps reparsed. Native/legacy process inventories checked only as producer receipts; their complete raw ps tables were not saved. Free bytes are Pages free times page size, not available-memory or physical footprint. No exclusion of unrecognized runtimes or GUI GPU activity.",
+  "resource_scope": "Recorded samples and original pressure1/AC/thermal/known-inventory/sustained-swap guards only; not service restoration or unsampled intervals.",
+  "sole_gpu_qualified": false,
+  "restoration_qualified": false,
+  "numerical_qualified": false,
+  "performance_qualified": false
+}

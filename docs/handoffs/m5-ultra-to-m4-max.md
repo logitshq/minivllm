@@ -958,3 +958,10 @@ E024 actual C1/C8 HTTP capture plus same-arrival replay independently PASS:24 re
 The separate B1 GDN prework candidate then passed actual18-call local canary and independent full saved-byte audit:60raw files/54output-conv-S pairs/24causal pairs/6reference full-vocab checks. Seven resource samplesPASS, swapgrowth0; service27913 restored29328. Archive retains all raw arrays in four<=48MiB parts, streamSHA46ba33137f1729cb42d2ca673211e022c73b81b563ce1828d6057693e0b2d33f. Reference activations supply next x, so full-model rollout still awaits unchanged37-request gate. No E024 combination or GDN performance claim.
 
 Source lesson: installed MLX0.32.3 default CompileOptions is already Safe. Do not attribute candidate risk to a presumed default-fast vs explicit-safe mismatch; actual fusion/rounding/lowering requires real-state qualification. M4 v20 GDN projection packing showed only+0.147238%, so keep full long-path packing below this prework/graph work until a material gain is demonstrated. M4 mixed-prefill/admission and M5 graph/refill split remains.
+
+
+### 2026-10-17 — V133 / 095bbb8 received and merged
+
+Actually fetched and merged documentation-only095bbb8 as03fd5df; read the quality review, tutorial navigation, experiment map and cross-machine measurement boundaries. Fetched28 newly published historical tags; all29 referenced local tag object IDs and peeled commits match the shared verification record. [M5 receipt](../quality/2026-10-17-m5-v133-receipt.json). No GPU revalidation or native Codex formula/diagram visual QA is claimed.
+
+The revised navigation correctly separates learning tags from experimental candidates and historical timings. One M5-owned freshness issue remained in root README: its latest-result link still pointed to short19→32 prefill. Updated to actualD512 v10 while retaining the short-load paired result separately. No hardware domains or measurement windows are combined. Original engine/frozen experiment sources were not changed by this merge. CurrentGDN37 preparation and E024 formal-owner work continue.

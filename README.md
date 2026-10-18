@@ -5,7 +5,8 @@
 
 - **逐章重写教程**：[从第一章开始](docs/tutorial-v2/README.md)，每章一个 commit/tag，教学代码在 `tutorial_code/`。
 - **系统优化攻略（M5 Ultra）**：[瓶颈、近期论文、实验账本](docs/optimization-guide/README.md)，记录采用与拒绝的方案、复现命令和跨机器边界。
-- **M5 最新结果**：[分组prefill与Pareto曲线](docs/experiments/m5-ultra-256gb/prefill-nax-v2/README.md)：C8/C32/C64配对吞吐提升14.68%/12.30%/14.54%，限定19输入/32输出负载。
+- **M5 最新正式对比**：[Qwen3.8-27B NVFP4 D512 三家吞吐—延迟图](docs/optimization-guide/progress/2026-10-17-v10/README.md)，固定 886–978 输入、最多 512 输出；本方 C1 仍落后 oMLX，C8 接近，没有全面前沿领先结论。
+- **M5 短负载分组 prefill**：[历史配对实验](docs/experiments/m5-ultra-256gb/prefill-nax-v2/README.md)：C8/C32/C64 配对吞吐提升 14.68%/12.30%/14.54%，限定 19 输入/32 输出，不与 D512 曲线混合。
 - 原计划和实验记录：`docs/PLAN.md`、`docs/tutorial/`
 - 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
 
