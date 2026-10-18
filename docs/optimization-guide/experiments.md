@@ -1043,3 +1043,10 @@ Root and independent agent reviewed the four modules; AST parsing succeeded. Six
 Prepared [v12 chart source](progress/2026-10-17-v12/README.md) before ON results: retain all14 historical observations unchanged and append all12 paired OFF/ON points only after the entire formal/resource/restoration/archive chain passes. Historical native n=1 remains separate from OFF n=3. No rendering or current-link change yet.
 
 A [source-only GDN B2–8 design](../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) identifies reuse of existing batched prework/state kernels while retaining five native Linear calls, original B>1 gates and state ownership. It preserves packing regressions and per-row M1 arithmetic failures. No candidate implementation, test or speed claim for this extension.
+
+
+## GLM cold-load cycle source prepared · 2026-10-17
+
+Added separate controller, input inventory builder, registration/seal, explicit execution driver and independent restore/load audit. The existing original probe/owner/physical guard remain frozen. The input builder retains original62 shard SHA provenance and stats current files; it hashes only the supplied runtime/source set, not204GB of weights. No real input plan, service preparation or GLM load has happened.
+
+Root and independent agents reviewed the source. Review caught an auditor error before execution: aggregating token events by case could accept wrong order or an empty drain map. It now checks actual before/after/terminal/reset ordering and all seven queue counters. Thirty-three fake tests are written and AST-parsed, not run during active E024 timing. [Prepared source and usage](../../bench/m5_ultra_256gb/glm_flash_cycle/README.md). The future load diagnostic is separate from full-model correctness, quality, physical-capacity or speed qualification.

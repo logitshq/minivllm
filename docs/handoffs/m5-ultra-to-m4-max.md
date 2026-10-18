@@ -994,3 +994,6 @@ E024 paired formal v2 is active on M5; original oMLX is temporarily stopped unde
 The v12 display policy is source-prepared: preserve14 old process points, then add all12 paired native OFF/ON observations only on full closed PASS. Native historical n=1 is never pooled into new OFF n=3; p50/p95 and actual process ranges remain separate. No current-link update.
 
 GDN next C8 hypothesis: preserve original five native projections and B>1 gates; reuse existing batched conv/norm/state kernels in a separate default-OFF adapter, with new real-state qualification. See bench/reviews/2026-10-17-gdn-prework-batched-next.md. This is design only, not implementation or speed evidence; E004/packing/M1 failures remain constraints.
+
+
+2026-10-17: GLM cycle source now includes actual input-builder/registration/driver/independent-audit interfaces;33 new fake CPU methods remain unexecuted. No actual GLM registration, service preparation or load. Source review repaired token-event aggregation and empty drain-map false acceptance before any run. The frozen probe/owner/physical guard are unchanged. E024 has completed first C1 OFF/ON and entered C8 ON; no fully audited new timing result yet.

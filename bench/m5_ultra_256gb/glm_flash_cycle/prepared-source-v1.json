@@ -1,0 +1,66 @@
+{
+  "schema": "GLM-cycle-source-preparation-v1",
+  "status": "SOURCE_PREPARED",
+  "ast_parsed": true,
+  "cpu_test_methods": {
+    "test_controller_cpu.py": 9,
+    "test_preparation_cpu.py": 6,
+    "test_audits_cpu.py": 8,
+    "test_execute_cpu.py": 10
+  },
+  "cpu_tests_executed": false,
+  "actual_registration_created": false,
+  "service_prepared": false,
+  "model_loaded": false,
+  "performance_qualified": false,
+  "files": {
+    "controller.py": {
+      "sha256": "98bc920d97b529c07f9af0a64213e47e73728b63caee2e867e496f1ac30bde88",
+      "bytes": 20337
+    },
+    "audit_restore.py": {
+      "sha256": "732c60870b9400d1d7b6bfb9c303bce19b9c92032bc06bc9db193b66ace3bf6d",
+      "bytes": 11915
+    },
+    "audit_closed.py": {
+      "sha256": "0158be373f614c55ed03393320337b7cca4c1525360fd850f5081a5462694d48",
+      "bytes": 21067
+    },
+    "prepare_inputs.py": {
+      "sha256": "da10a83b826150b88f44e1442423660b9e7edd990114e368fe2fea98032207fb",
+      "bytes": 6861
+    },
+    "preregister.py": {
+      "sha256": "7f937f709b0c6806a0dfca7606122e1178b2c495b4574665e7df1eea2862e842",
+      "bytes": 11162
+    },
+    "execute.py": {
+      "sha256": "cbc28848a124c74fabd9aede971b57b8fb9162051031e9a720dde5f87029635a",
+      "bytes": 7914
+    },
+    "test_controller_cpu.py": {
+      "sha256": "30b4b4fa0d39d26299bdf9a9926f0bc201243093b10173be7e86922cfa1a428f",
+      "bytes": 10550
+    },
+    "test_preparation_cpu.py": {
+      "sha256": "8798d44237059a4c5260cd5902826cdbb12211a59760cde8173289c30ed44452",
+      "bytes": 7937
+    },
+    "test_audits_cpu.py": {
+      "sha256": "6717572506b87c9c502763445f24f05e83d3c12e1478df2791bbd9d3c086832f",
+      "bytes": 8071
+    },
+    "test_execute_cpu.py": {
+      "sha256": "fc6a36bf99d48d17873c5ba58b57512e22030297900d5562d59c51dcbf5b2ad2",
+      "bytes": 7871
+    },
+    "README.md": {
+      "sha256": "7e200208dbc83aa08102d136b87bc088f72740764e9424c066189a029b9e799f",
+      "bytes": 14727
+    }
+  },
+  "review_findings": [
+    "Closed-audit request-event aggregation could accept reordered terminal events or empty drain maps; repaired before execution by explicit event ordering and seven strictly zero integer queue counters."
+  ],
+  "scope": "Source and fake-test preparation only; frozen original owner/probe/physical guard unchanged."
+}
