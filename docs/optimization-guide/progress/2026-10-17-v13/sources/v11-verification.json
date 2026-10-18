@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "performance_points": 14,
+  "source_pins": {
+    "omlx-audit-supplement-verification.json": "948eebfb40ed94d60e4327336deaa3e8fd34ba9b2985eefbd1fc05bfe619b33c",
+    "omlx-first-formal-failure.json": "4b6f610dda24d0c4d52ae7ec22452709491a84bcd460f36814ae9ca1e416530f",
+    "v9-chartdata.json": "c0e5ac892a2d675b1d2e227cc1e8b214cb88630de7258fc018299f76d94a8534",
+    "native-independent-audit.json": "b669350e95ef07f4da5cac3a5cf6fb6fdaf2aea57e886d3ba60b9afd15e950bd",
+    "lithos-independent-audit.json": "562787c59f3a3b96a71b279538f61b38fd042dae9f2bc9c6117e022db7a6fb77",
+    "omlx-independent-audit.json": "b8582928c375524f8a0286360d606adbac834494a73910a6d85dcd9ee212c591",
+    "omlx-resources.json": "a8a492863b4a3ea6b5467919bf2fefa8b6256e0803a4705488a69252095278df",
+    "omlx-restoration.json": "9aaf59b6482f22c24268b36e3ee8b661510d924b2a2ae3b4b43e204b5a934aca",
+    "omlx-archive-verification.json": "e3e45750ba7edfeffa7347cfeb40ff6a395de6001dacf116cad92b6efee398b1"
+  },
+  "qualification_source_pins": {
+    "v10-chartdata.json": "8f5a5edba7d5171ee3c0ad7caf6a1dfece80fbda00a78b07f932c7c9291acbe8",
+    "e024-cycle.json": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f",
+    "e024-c1.json": "b9443261ca47dbea5782e469dca1987737e51df34a12c01539fbc46fe2a99ff4",
+    "e024-c8.json": "4aac471df2778dd39ff74e10a7f965f2ad4690546c6dcaee9ce144e30c28e4d7",
+    "e024-restoration.json": "6bb4be00801ce4519a0ab399d171463e8c4a3e4c1802031295c965497316914e",
+    "e024-journal.json": "dff835b4518710efe2fce1c6b3f12784432b0f3295a63aaa5503840e916ddd61",
+    "gdn-canary.json": "8765a6089c362e37a89f66f8584c0bf39a45cdf929757a2f7bb87d764cd11df4",
+    "gdn-canary-resources.json": "8631f0dc594ba2ad639a0b2b386c8f2bacca6c268ed278f6beda4efa5d5c708a",
+    "gdn-canary-restoration.json": "7ee69cc3babbe404438f526ddc8e97b068e24913386dd9b01c8298dc48fb24c4",
+    "gdn-canary-journal.json": "2091fa547a94a8538b44f64a3c8fdf964764113c5a8c5a7acf653861b7c8cf14",
+    "gdn-serving.json": "fee50c90c30c3224934489c66e5ecb4a5d7f0c4fb57ae0baa0576f6efe9a769b",
+    "gdn-serving-resources.json": "874595f189d86c84b3e8af1900809225da8f83013d87526d4466e843f0e5f601",
+    "gdn-serving-restoration.json": "673d1ba136c784f445567015f15c4fb7c0b22c6635a33201b14026e2ba3edd29",
+    "gdn-serving-journal.json": "abddf49c3c43407e7903dfabb06f3227ee993b464f2f66055e22928d8f6dcbb5",
+    "gdn-serving-owner.json": "3f39cce96fad5ee2b45d1b469d798815da42ad848c0184745a052d6a6ddfebad",
+    "gdn-serving-child.json": "8072b3bb91448abdc74b3312604b3491a97522d71e540be716a15f8a563e6ec5"
+  },
+  "previous_chartdata_sha256": "8f5a5edba7d5171ee3c0ad7caf6a1dfece80fbda00a78b07f932c7c9291acbe8",
+  "qualification_status": [
+    {
+      "candidate": "E024 route graph",
+      "status": "HTTP history PASS",
+      "evidence": "C1: 8 requests; C8: 16 requests",
+      "next_gate": "Paired OFF/ON formal pending",
+      "histories": [
+        {
+          "concurrency": 1,
+          "requests": 8,
+          "steps": 4096,
+          "observed_eos": 0
+        },
+        {
+          "concurrency": 8,
+          "requests": 16,
+          "steps": 1028,
+          "observed_eos": 0
+        }
+      ],
+      "performance_qualified": false
+    },
+    {
+      "candidate": "GDN prework",
+      "status": "Canary + 37-request PASS",
+      "evidence": "18 canary calls; 8 / 16 / 13 serving requests",
+      "next_gate": "HTTP + formal pending",
+      "canary_raw_pairs": 54,
+      "serving_requests": 37,
+      "observed_eos": 0,
+      "performance_qualified": false
+    },
+    {
+      "candidate": "GLM 190 GiB",
+      "status": "Download / load pending",
+      "evidence": "No qualified measurement",
+      "next_gate": "Load / numerical gates pending",
+      "basis": "Maintainer status at this snapshot; no qualification receipt or performance point.",
+      "performance_qualified": false
+    }
+  ],
+  "renderer_sha256": "6e34ab1253e708941cb4d40c7590341997d4e62b732e636668adf3814dc38f0c",
+  "chartdata_sha256": "df412e157da1e08436bdf81ef1cfaa126eaca42da7d12d6241b8ad6e46073123",
+  "historical_metrics_unchanged": true,
+  "scope": "Offline audit-receipt/source checks and plotting; original measurements not rerun."
+}

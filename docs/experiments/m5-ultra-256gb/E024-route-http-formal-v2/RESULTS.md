@@ -7,3 +7,7 @@ The frozen formal auditor returned FAIL: `canonical unchanged pinned ref`. It ve
 The full failure, raw twelve-process experiment, restoration, frozen source, registration and preparation are retained in the verified archive. `archive-verification.json` and `archive-stream.json` bind the archive, extracted member hashes and original membership. Archive retention is independent of experiment success. This explanatory file is outside the sealed archive; sealed members are unchanged.
 
 Next step: identify the precise reference contract mismatch. Any parser repair and offline rerun must use a new source and result directory, preserve this failure and check the same original evidence. There is no authorization from this failure to drop a source/hash, resource, count, timing or restoration requirement.
+
+## Later independently versioned reparse
+
+The registered HF tokenizer snapshot symlink caused this rejection. A narrow new parser and eight targeted regressions later passed; the complete same raw cycle now has independent864-request/resource/restoration PASS. See [separate corrected audit and results](../E024-route-http-formal-v2-reparse-v1/RESULTS.md). This original failed audit and sealed archive are unchanged.

@@ -1062,3 +1062,21 @@ Root and independent source review found no concrete blocker. AST verification c
 ## Offline continuation actually queued · 2026-10-17
 
 The active E024 driver will attempt its original service recovery before the separate audit/archive continuation. New one-cycle waiting processes now serialize GDN HTTP16 and GLM33 complete fake CPU modules after actual closure, then generate the fixed v12 figure only on full formal PASS. Actual parent wait-return evidence prevents overlapping offline stages; a child result file alone is insufficient. No tests/render had begun at the saved snapshot, and the batched GDN12 tests are outside this queue. [Exact scripts and startup states](../experiments/m5-ultra-256gb/queued-continuations-v1/README.md). Current v11 stays unchanged until visual review; failures remain inspectable and do not create speed points.
+
+
+## E024 paired formal closed; original parser failure retained · 2026-10-17
+
+All12 registered fresh servers completed96warm+768formal; original43565 restored73594 and independentlyPASS. First frozen formal audit rejected a legitimate registered HF tokenizer symlink before rawHTTP, so automaticv12 correctly producedNO_NEW_SPEED_CHART. OriginalFAIL/3,733-member archive preserved and pushed688b68c. Separatev2 parser retains genericcanonical receipts, validates exact snapshot/model-manifest/targethash+stat and repeats target check after audit. Actual8 focusedCPU regressionsPASS; every original count/timing/resource function remains unchanged.
+
+The complete same864 raw requests then independentlyPASS with1,267resource samples and zero swapgrowth. C1 OFF/ON process medians45.405789/45.835028tok/s,p50 11.270521/11.165923s; C8 167.536857/170.619844tok/s,p50 24.418582/23.976082s. Six adjacentpairs improve throughput0.847–3.807% with lowerp50/p95. Threeprocesses/configuration/C, no pooledpercentiles/CI, no all-workload victory. The separate corrected archive retains3,843members/38,203,144xzB SHA63e211a8eecaccd7f41e7b690e33fc01964d164c7c45ff5f82d4b3fc2575f7db. [All pair metrics, correction and limits](../experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/RESULTS.md).
+
+## Completed next-module CPU checks · 2026-10-17
+
+GDN HTTP16 actuallyPASS with no backend/model/network operations; [full239-member CPU archive](../experiments/m5-ultra-256gb/gdn-http-cpu-v1/README.md). BatchedGDN12 firstattemptPASS with14unchanged source snapshots; [full33-member CPU archive](../experiments/m5-ultra-256gb/gdn-batched-cpu-v1/README.md). These do not establish actual HTTP or batched device qualification.
+
+GLM first33-test run had32PASS+1fixtureERROR: the preintent test omitted the external registered plan while testing absence of the owner-local copy. Only thatfixture was repaired; realregistration/hash and corrupt-external-plan rejection remain. New complete33-test runPASS, production sourcesunchanged; [both complete runs and repair tutorial](../experiments/m5-ultra-256gb/glm-cycle-prepared-cpu-v2/README.md). No actualGLM input preparation/service action/model load occurred.
+
+
+## v13 actual rendering and layout repair · 2026-10-17
+
+Predeclaredv12 policy retained:14historical+12newprocess points,10groups,6pairs. v13preparePASS; first renderFAIL missingMatplotlib inroot.venv, identical source/data rendered in existingplotvenv. Root+independentvisualreview found x-axis/tableheading overlap. Separate render_v2 moves only subplotbottom.585→.615 and output/provenance names. FinalPNG viewedPASS/SVGparsed, chartdataSHAff7d06adbe1ecda482173a6747a7e673aa71a73a54713bfd2d8f2f6b52551ef0 unchanged. Allthree actualcommand attempts, bothimages/sources/receipts and failedreview retained. Currentroot/guide links [v13](progress/2026-10-17-v13/README.md). No new timing samples collected.

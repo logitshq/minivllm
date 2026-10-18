@@ -1,0 +1,70 @@
+{
+  "schema": "E024-route-formal-archive-summary-v1",
+  "owner_plan_sha256": "0920aceae4e8bb6ef5c68577d3ae905a2b5976287790a7bb7a4a6e4ea36470ce",
+  "owner_status": "PASS",
+  "audit_status": "PASS",
+  "parser_correction": {
+    "post_run": true,
+    "original_audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2/independent-formal.json",
+      "sha256": "a9ee8acd98c4b89eee3a96f709a6f4a63225a4b5b088aaae7093ac8d9b14f990",
+      "bytes": 12183
+    },
+    "cpu_checks": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-tokenizer-cpu-v1/result.json",
+      "sha256": "442d29d0f29039c25ac329419beecf31b0d92fba570c6fd3e2c28bb695192a29",
+      "bytes": 682
+    },
+    "scope": "Registered HF tokenizer symlink verification only; original v1 FAIL and all raw trials unchanged."
+  },
+  "restoration_qualified": true,
+  "performance_qualified": true,
+  "planned_trials": [
+    "r1-c1-off",
+    "r1-c1-on",
+    "r1-c8-on",
+    "r1-c8-off",
+    "r2-c8-off",
+    "r2-c8-on",
+    "r2-c1-on",
+    "r2-c1-off",
+    "r3-c1-off",
+    "r3-c1-on",
+    "r3-c8-on",
+    "r3-c8-off"
+  ],
+  "actual_closed_trial_names": [
+    "r1-c1-off",
+    "r1-c1-on",
+    "r1-c8-on",
+    "r1-c8-off",
+    "r2-c8-off",
+    "r2-c8-on",
+    "r2-c1-on",
+    "r2-c1-off",
+    "r3-c1-off",
+    "r3-c1-on",
+    "r3-c8-on",
+    "r3-c8-off"
+  ],
+  "independently_checked_requests": {
+    "total": 864,
+    "warm": 96,
+    "formal": 768
+  },
+  "original_identity": {
+    "pid": 43565,
+    "ppid": 1,
+    "start": "Sat Oct 17 19:25:55 2026",
+    "comm": "omlx-server"
+  },
+  "replacement_identity": {
+    "pid": 73594,
+    "ppid": 1,
+    "start": "Sat Oct 17 21:20:38 2026",
+    "comm": "omlx-server"
+  },
+  "actual_compiled_invocations_observed": false,
+  "archive_grants_qualification": false,
+  "scope": "Observer-OFF OFF/ON process timing with prior actual-history qualification. No proof of all future arrivals, observed formal graph hits, or combined candidate qualification."
+}
