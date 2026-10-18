@@ -1,0 +1,111 @@
+{
+  "cpu_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/owner.py",
+    "--prepare-only",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/prereg-formal-v1/owner-plan.json",
+    "--plan-sha256",
+    "a594ab8885b6ba24dd24e644a037b06c6af3a47846d02ae22796a797bc4e96f8",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cpu-prepare"
+  ],
+  "readonly_service_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/controller.py",
+    "prepare",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cold-journal",
+    "--owner-directory",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-owner",
+    "--owner-plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/prereg-formal-v1/owner-plan.json",
+    "--owner-plan-sha256",
+    "a594ab8885b6ba24dd24e644a037b06c6af3a47846d02ae22796a797bc4e96f8",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8"
+  ],
+  "seal_receipt": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/preregister.py",
+    "--seal-receipt"
+  ],
+  "execute": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/execute.py",
+    "--run"
+  ],
+  "stop": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/controller.py",
+    "stop",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cold-journal",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8"
+  ],
+  "owner": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/owner.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/prereg-formal-v1/owner-plan.json",
+    "--plan-sha256",
+    "a594ab8885b6ba24dd24e644a037b06c6af3a47846d02ae22796a797bc4e96f8",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-owner"
+  ],
+  "recover": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/controller.py",
+    "recover",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cold-journal",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--watchdog-seconds",
+    "3600"
+  ],
+  "restore_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/audit_restore.py",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cold-journal",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-analysis/restoration-audit.json"
+  ],
+  "independent_formal_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/audit_formal.py",
+    "--owner",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-owner",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-cold-journal",
+    "--plan-sha256",
+    "a594ab8885b6ba24dd24e644a037b06c6af3a47846d02ae22796a797bc4e96f8",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v1-analysis/independent-formal.json"
+  ],
+  "scope": "Stop/owner/finally-recover requires the supervising execution driver; never run owner without recovery supervision."
+}

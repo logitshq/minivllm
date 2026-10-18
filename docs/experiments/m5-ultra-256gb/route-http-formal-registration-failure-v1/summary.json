@@ -1,0 +1,26 @@
+{
+  "schema": "E024-route-formal-registration-failure-summary-v1",
+  "registration_status": "FAIL",
+  "result_sha256": "fa9e4b860f246d09808fe01bfb8a64a41d4346098406659dc57e97abf38b6c14",
+  "actual_owner_plan_sha256": "d2f66bc9b744e5325476fb9d6c3734c4639d7f80d5d4848b86178c87016baeae",
+  "incorrect_recorded_sha256": "a594ab8885b6ba24dd24e644a037b06c6af3a47846d02ae22796a797bc4e96f8",
+  "wrong_sha_source": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/test_execute_cpu.py",
+  "registrar_sha256": "348594a483e2a2e8dad1e0f5bed71667d6c529f965788d30769f8af111b224c3",
+  "wrapper_sha256": "4280736526e01198aa1f94c705c55458ee9bfe27966871432d7205ffe777039a",
+  "error": {
+    "type": "RuntimeError",
+    "message": "route formal plan SHA",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/prepare-route-formal-v1.py\", line 112, in run\n    need(owner.main(command[4:])==0,'actual in-process owner CPU preparation failed')\n         ~~~~~~~~~~^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/owner.py\", line 524, in main\n    base, plan, _, _, specs = validate_plan(args)\n                              ~~~~~~~~~~~~~^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/owner.py\", line 116, in validate_plan\n    need(base.sha_bytes(raw)==args.plan_sha256,'route formal plan SHA')\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/owner.py\", line 58, in need\n    if not ok: raise RuntimeError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: route formal plan SHA\n"
+  },
+  "source_pin_count": 72,
+  "original_tree_file_counts": {
+    "registration": 21,
+    "partial-preregistration": 75
+  },
+  "service_prepared": false,
+  "gpu_executed": false,
+  "performance_qualified": false,
+  "execution_registered": false,
+  "cause": "The registrar reused digest as the source-pin loop variable; after the loop it wrote the final test source SHA into owner-plan command/preparation fields. Actual owner CPU preparation rejected that SHA.",
+  "scope": "Original failure and complete partial files preserved without repair. Archival verification is separate from registration success."
+}

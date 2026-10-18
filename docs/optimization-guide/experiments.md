@@ -1022,3 +1022,10 @@ All37 requests complete: C1 8/4096steps, C8 16/1027steps, lifecycle13/40steps;12
 The real guarded registration built twelve specs, but the source-copy loop reused the variable holding the owner-plan SHA. Saved commands then named the final test-source SHA instead of the actual plan digest; the real owner CPU preparation rejected it before any service preparation/stop. Preserve the actual v1 registration FAIL and partial preregistration unchanged. The earlier62 fake CPU tests remain their actual PASS evidence but did not cover this registrar bug. A separate v2 registration and saved-command regression are required; no measurement is lost or promoted.
 
 Progress [v11](progress/2026-10-17-v11/README.md) was actually rendered and visually checked. All14 formal observations and six process-metric median groups remain exactly v10 values; only the independent qualification table advances.
+
+
+## E024 paired formal v2 actually PREPARED · 2026-10-17
+
+Fixed only the registrar digest variable and moved execution paths to v2. All64 CPU testsPASS, including two actual saved-command/seal regressions; original62PASS and failed realv1 registration remain immutable. CPUv2 archive335members/824452B/SHAa84ae43c0d6ba2c6cf0f917235f3dd154ce3400e5d27b3611c5eea6b0658ae42. Original registration FAIL archive103members/328280B/SHA371f79397c093ac8bdaf0fa03028e494eea045fc967aa657bdad10f7a35cf8ae.
+
+Actual guarded v2 registration and CPU owner preparation PASS; subsequent read-only service prepare bindsPID43565. Plan0920aceae,PREPAREDjournalda0e9518,76pins. Twelve fresh processes retain3 adjacent OFF/ON pairs each at C1/C8,96warm+768formal requests, identical cap512/normalEOS/gatesON/normOFF/E028OFF and frozen transport. [Preparation evidence](../experiments/m5-ultra-256gb/route-formal-registration-v2/README.md):115members/335704B/SHA23e5ed64fb5c2394e98b91b91bfed6d42b592959f63414d0d2ab34cbc2cbb86e. No measured graph performance point yet.
