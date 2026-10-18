@@ -1,0 +1,648 @@
+{
+  "schema": "E023-omlx-D512-cold-journal-v1",
+  "id": "0fa90997-773d-4407-a045-0103f01a30d0",
+  "state": "RESTORED",
+  "plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+  "controller_sha256": "a2fb20c043880faace5c6075190b115b073baad91acda9232f9468f3757790dc",
+  "support_sha256": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+  "original": {
+    "pid": 92152,
+    "ppid": 1,
+    "start": "Sat Oct 17 16:50:10 2026",
+    "comm": "omlx-server"
+  },
+  "original_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "global_settings_stat": {
+    "dev": 16777231,
+    "ino": 816826,
+    "size": 3516,
+    "mtime_ns": 1792162741806656607
+  },
+  "model_metadata": {
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/config.json": "237c4cda786207d2bebe2d8a1cf157419bec5cc01bbd03b4ed41e888dc1e5af7",
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/model.safetensors.index.json": "380e393bb71519d6f9dc6eb1c3d681b0ca16986285640784fbd33a45bb0ec298"
+  },
+  "log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 250662,
+    "mtime_ns": 1792281040711297506
+  },
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+  "owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+    "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+  },
+  "owner_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/owner.py",
+    "sha256": "9c2df0b4e76bd2a6ef590c34bb7a6f9c89972c878f76f4b99f69d0b8e658019f"
+  },
+  "trials": [
+    "omlx-c1",
+    "omlx-c8"
+  ],
+  "predecessor": {
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-serving-v1/restoration-audit.json",
+      "sha256": "1aa9176b3eb043c77902f9fdaacc75fc0d7e66f1b6fd0d08cdd21b6a54652ec8"
+    },
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-serving-v1/restored-journal.json",
+    "sha256": "c452e5624ed8edeb8901e1cd697c04209320a4f64d2c288d76fadf401721318c"
+  },
+  "predecessor_copies": {
+    "predecessor.json": "c452e5624ed8edeb8901e1cd697c04209320a4f64d2c288d76fadf401721318c",
+    "predecessor-audit.json": "1aa9176b3eb043c77902f9fdaacc75fc0d7e66f1b6fd0d08cdd21b6a54652ec8"
+  },
+  "resource_samples": [
+    {
+      "time": 1792281473.774575,
+      "system_footprint": 23762288640,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-efa5830eaabb40b4a3dedcb5cee504b1/footprint.raw.json",
+        "sha256": "306c47077c6f97adb81200eadfbcef3ba39da4f334844f762197ffa165aa9b17",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-efa5830eaabb40b4a3dedcb5cee504b1/commands.json",
+        "commands_sha256": "ffc1e1e0e0baf02606e6416002e6e35afeaa176df3bd6b6e86ef5b84b2c3a648"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792281478.839936,
+      "system_footprint": 23765696512,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-37d80d6e9d394070bf7519bf984f712b/footprint.raw.json",
+        "sha256": "612188708f8a47f6ea9ea0b8c3b3332ad739412294753742b8583cb8cd7a4d1e",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-37d80d6e9d394070bf7519bf984f712b/commands.json",
+        "commands_sha256": "4e08f4d0d3d156fc8e1697f901b3e883accdddf54d98c4948797748ea6dc0ae3"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792281481.2287529,
+      "system_footprint": 24364826624,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-5f3819b0235144da91a9e32110b08af1/footprint.raw.json",
+        "sha256": "5e73184b04cb6e0bcc6fddd48e431a7de566dedfd2e89b4061eb7236f0165f11",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-5f3819b0235144da91a9e32110b08af1/commands.json",
+        "commands_sha256": "77882fd5483e0d43f22bbb5af65d6dc3a1a338a42bc823e6ebd930fcb9fbaad1"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792281486.286199,
+      "system_footprint": 24112594944,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-6f4acb7e15ea437e8cd8b91b5251a340/footprint.raw.json",
+        "sha256": "c3b1a63bb8ee01932bc4d8be36287072cb094b62db9c2d2b1cb83621892368a5",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-6f4acb7e15ea437e8cd8b91b5251a340/commands.json",
+        "commands_sha256": "1f5b0afadd5c6686b172fa0b6c91b9e4e321ddef86e932c05043b2e704e56939"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792281486.4173381,
+      "system_footprint": 24121294848,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-f8542ba81f2643b983287528db746b45/footprint.raw.json",
+        "sha256": "d0ed2aaaa77a6e6c35491436372cd0f8840da671844227e7bbf7ed1ef19af0d6",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-f8542ba81f2643b983287528db746b45/commands.json",
+        "commands_sha256": "74a14eb40f88bf070687f7c392c6c072fb98f3e8f791879a8551c021d34d254d"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281488.528414,
+      "system_footprint": 45028818944,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-87ab00f9d99247f6aa955a153b3da510/footprint.raw.json",
+        "sha256": "3f4225790790eaba216cb52227c4d37479b32ae675abcc4de02a951a7616b11b",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-87ab00f9d99247f6aa955a153b3da510/commands.json",
+        "commands_sha256": "0fff9459c2a68e461ae33754d15446da716f3c4e7f08ce3869c20d5d4cb2dddb"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281490.644788,
+      "system_footprint": 72405303296,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-4de02340c8c24a0cb963a9cb84e5f136/footprint.raw.json",
+        "sha256": "536ac65c002599d1c70b8bd2bc972254a1db33acc7d8f922c9331b5facd529f0",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-4de02340c8c24a0cb963a9cb84e5f136/commands.json",
+        "commands_sha256": "cdde9c51ed7444a748809dd4c599d0e26ed0b7e2c5c5269e8545b8f33a370c09"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281492.763138,
+      "system_footprint": 78715420672,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-00eaf88d802a4dfe95d5727b90e2e82f/footprint.raw.json",
+        "sha256": "cfe87089dd83f48a9062d435432b66f98d0cf043ce1fb32807eecde716ed7703",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-00eaf88d802a4dfe95d5727b90e2e82f/commands.json",
+        "commands_sha256": "b7e3709e02d850fcae547086e309b9e8db366898a4f70931ddca7cc8d039eb35"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281494.8739169,
+      "system_footprint": 100254777344,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-72af5d12105a4c6fb06f61c2ea3b3cc7/footprint.raw.json",
+        "sha256": "563ce6caa835f76a69ca8b719eda1636e1ab4b5c9cb86e5b458f3bdf16d1882d",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-72af5d12105a4c6fb06f61c2ea3b3cc7/commands.json",
+        "commands_sha256": "4beb5d5324ca0ccd2c119ec0cdd9aa263d9ba1dfa1a48d1361bdd2588e82837c"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281496.993222,
+      "system_footprint": 120995758080,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-652a28eea77248ea97502c261a635797/footprint.raw.json",
+        "sha256": "f535bd9c8b2a518fae5602223c0eb4697dc262d97bcd7bf0dc9729ecb4f637b7",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-652a28eea77248ea97502c261a635797/commands.json",
+        "commands_sha256": "a646e94b858687b147e03182574799a00556506aefd743008e4e20053ff204d7"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281499.114051,
+      "system_footprint": 134214516736,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-e8852ffaa9574646a6de810530f822bc/footprint.raw.json",
+        "sha256": "84e83b4da82327844b2e0aec4ef90ab2f0ffa1c9260e7c4e05031e2189810104",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-e8852ffaa9574646a6de810530f822bc/commands.json",
+        "commands_sha256": "0ea8d60623b2583fc6a91d2442c9a2639d86a3418c1c75fba9e7139b59caed93"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281501.250457,
+      "system_footprint": 137917366272,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-4246d5fe851841a9bc3ae1db6e295359/footprint.raw.json",
+        "sha256": "b69ad64749eaf17ce8a766c1d2c6d2ca334163b7db1806391409612f55a1ae4a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-4246d5fe851841a9bc3ae1db6e295359/commands.json",
+        "commands_sha256": "83b800f9bfdec238e41eed12818103203417ccf4bd511d7505cc308fbe5efbea"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281503.367815,
+      "system_footprint": 157244653568,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-c8db8e2157e747d5b1e5f328ea906698/footprint.raw.json",
+        "sha256": "db54f05ba92838b4265a81010739b344b32e2c86d3fec70b390688505c5310b9",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-c8db8e2157e747d5b1e5f328ea906698/commands.json",
+        "commands_sha256": "7cec8e329103ae9a168fc088cdb501ea6c3b2351815f98ec7b4d2a0425c2f093"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281505.4822001,
+      "system_footprint": 175201402880,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-3201b6b0340f4036a9e7ef191f8046cd/footprint.raw.json",
+        "sha256": "d899e0818770afb11c7cf871f544631f3ddaab961bad1be04d03998f1949f333",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-3201b6b0340f4036a9e7ef191f8046cd/commands.json",
+        "commands_sha256": "e3269196302f518b45ec88c41ba33d6a0390467114a32e025af060f872f772c2"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281507.603433,
+      "system_footprint": 176278650880,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-3ad68c0e3d5b47499d8d2a5e4592c599/footprint.raw.json",
+        "sha256": "7c7d54cbc0f7d40a3bbc2d633e52261674938ea8b2f3e3d449a9eaeb75579125",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-3ad68c0e3d5b47499d8d2a5e4592c599/commands.json",
+        "commands_sha256": "ce8b81ddc54d5f89b635012f5f522aeec3884a031fe3a6a1674de55b7985010a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281509.722582,
+      "system_footprint": 175255470080,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-d6e26785e0e541fb8e731e860ded1d19/footprint.raw.json",
+        "sha256": "79c8057fe8793fd09893f7c204a8ca4aaf2b740b439d94d0a3dc55111b50ec32",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-d6e26785e0e541fb8e731e860ded1d19/commands.json",
+        "commands_sha256": "e62839f23c2fd8223f728d3af13ce3ddb05a2d7acbbc1750ee80b8d4d02f471c"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792281509.823976,
+      "system_footprint": 175255601152,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-9ae5383431e748cc8bf8f45aaabe9382/footprint.raw.json",
+        "sha256": "c30a10fbd20774237fc76b642d1ddc9051d3478e0d7fd3ee9f629c0e0be0626d",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-9ae5383431e748cc8bf8f45aaabe9382/commands.json",
+        "commands_sha256": "f8fd110ab3ded0a05292e9ba3ebce0bb72c3fb12b1e3c3987cd897546fd8e648"
+      },
+      "label": "load-reconciliation"
+    },
+    {
+      "time": 1792281509.923826,
+      "system_footprint": 175255715840,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-c2e1509daddc4d32af27fb23cad4a091/footprint.raw.json",
+        "sha256": "eda58ddc5cfb19c3242ac99706fb6bf3e65abd1afdb5ef9e9eabd8f8057cf89f",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-c2e1509daddc4d32af27fb23cad4a091/commands.json",
+        "commands_sha256": "e2fb2a22def315431bc55fd619fc21c0ecb7add5ff360c06b7fde6d83843a16b"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792281514.9693508,
+      "system_footprint": 175277178880,
+      "pressure": 1,
+      "swap_bytes": 441513411,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-2fadff392fbd4660af983936b42a27f9/footprint.raw.json",
+        "sha256": "0dc9507b48bc9319a8a4c66ee471cc5ee3fa46fbd7543e0a6d5d1dedafad311b",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/physical-2fadff392fbd4660af983936b42a27f9/commands.json",
+        "commands_sha256": "a54849b5aa63af2984b705acbca2343bc36d00fef249276c58dbf99d57a76e49"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "events": [
+    {
+      "event": "prepared_omlx_read_only",
+      "time": 1792281174.075028,
+      "monotonic": 158493.733650541
+    },
+    {
+      "event": "bootout_intent",
+      "time": 1792281313.139371,
+      "monotonic": 158632.79815325
+    },
+    {
+      "event": "bootout_returned",
+      "time": 1792281313.143884,
+      "monotonic": 158632.802665958
+    },
+    {
+      "event": "service_absent",
+      "time": 1792281315.251316,
+      "monotonic": 158634.910100333
+    },
+    {
+      "event": "experiment_terminal_checked",
+      "time": 1792281473.678484,
+      "monotonic": 158793.337450583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281473.774953,
+      "monotonic": 158793.433920333
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281478.8402839,
+      "monotonic": 158798.49925625
+    },
+    {
+      "event": "bootstrap_intent",
+      "time": 1792281478.943559,
+      "monotonic": 158798.602532166
+    },
+    {
+      "event": "bootstrap_returned",
+      "time": 1792281478.949486,
+      "monotonic": 158798.60845875
+    },
+    {
+      "event": "job_reconciled",
+      "time": 1792281481.121151,
+      "monotonic": 158800.78012625
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281481.2290921,
+      "monotonic": 158800.888067375
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281486.286496,
+      "monotonic": 158805.945477625
+    },
+    {
+      "event": "load_intent_monitored",
+      "time": 1792281486.3881128,
+      "monotonic": 158806.047094333
+    },
+    {
+      "event": "post_worker_started",
+      "time": 1792281486.3905349,
+      "monotonic": 158806.049517208
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281486.417568,
+      "monotonic": 158806.076549875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281488.528708,
+      "monotonic": 158808.187692583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281490.645118,
+      "monotonic": 158810.3041045
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281492.763412,
+      "monotonic": 158812.422400916
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281494.8744571,
+      "monotonic": 158814.533448541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281496.993508,
+      "monotonic": 158816.652501333
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281499.114325,
+      "monotonic": 158818.773321083
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281501.250808,
+      "monotonic": 158820.909806375
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281503.3681228,
+      "monotonic": 158823.027124541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281505.4825358,
+      "monotonic": 158825.141539416
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281507.6036532,
+      "monotonic": 158827.262659083
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281509.7228642,
+      "monotonic": 158829.381872458
+    },
+    {
+      "event": "post_worker_returned",
+      "time": 1792281509.791561,
+      "monotonic": 158829.450568958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281509.8241751,
+      "monotonic": 158829.483183875
+    },
+    {
+      "event": "raw_log_window_retained",
+      "time": 1792281509.898846,
+      "monotonic": 158829.557854166
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281509.9240818,
+      "monotonic": 158829.583090083
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792281514.969772,
+      "monotonic": 158834.628786958
+    },
+    {
+      "event": "restored_persisted_visible_variant",
+      "time": 1792281515.0833201,
+      "monotonic": 158834.742334083
+    }
+  ],
+  "approved_contract": "cold-restart-persisted-visible-v1",
+  "bootout_returncode": 0,
+  "removed_at": 1792281315.251308,
+  "reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 93524,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/attempt.json",
+        "sha256": "272e71873ab9953ce949a9dfe358c787d4d91304ee9bd4ffe9368ad515a8a4ac"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/stopped-journal.json",
+        "sha256": "163fec1878ed9ade7fb61c86218277db38fd7326d5b63edf4795deeba697d891"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/spawn-intent.json",
+        "sha256": "06c6a2733aeaace6daae93e8133bf38413120f7b297ef7ae7ed9ac34e248a8b4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/children.json",
+        "sha256": "da472d9acafe15c4e04e2c1a2381b4b8f154ae63d6073d62aa7039f8d2f43ab3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/release.json",
+        "sha256": "41b0acb6d9330c62103d1ccda3566ba288d20a280599ec2e8043477082953413"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/intent.json",
+        "sha256": "06c6a2733aeaace6daae93e8133bf38413120f7b297ef7ae7ed9ac34e248a8b4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/child.json",
+        "sha256": "85a254883a184433c0869b75f3859e236f5c6ad6d5e160bba4fd0591b239c1d4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/release.json",
+        "sha256": "83c4f0461e52ab61a7f7b996fb5a066f1837b17e921d715bf4437c07348f32f2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/spawn-intent.json",
+        "sha256": "f9880685163e39a37552f232ba781c5bdaf0b4e528b3c1ba4ef8943bd85f6141"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/child.json",
+        "sha256": "3ca702efc387d0038809715d99f3c07438c321c1cc9766fddde9916b23009e39"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c1/trial/release.json",
+        "sha256": "5c6bcd96416ee4aaddd648cb587673eab98d478a9d89e7c3499cd3d8a12a4bc7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/intent.json",
+        "sha256": "7e977ae550d23a5737b855e8a11f5450217f607e3d5b5e81a972943289f28e97"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/child.json",
+        "sha256": "6aa33c3f3b82bff1f606ca0782d42f4c63b93463085d380e3b753bbc4f518d21"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/release.json",
+        "sha256": "644778c21e3848f07cd6afd4ba8b7ca52a2a4a4bc7322ce4a0554c41d4774883"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/spawn-intent.json",
+        "sha256": "0a093771b7c143f18a0077f9cf869002d9acab8624acd53a411f43f7b04ed445"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/child.json",
+        "sha256": "ef0c8ce04ba896492028b2d3e896d25faabe7be94a398ab97276c49dd5ce3d09"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner/phases/omlx-c8/trial/release.json",
+        "sha256": "cb5ec1f7ec361c0654176954defde09b8086efe9a6a39dbeb85249b8856f54e6"
+      }
+    ]
+  },
+  "recovery_log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 252182,
+    "mtime_ns": 1792281314364124463
+  },
+  "bootstrap_returncode": 0,
+  "replacement": {
+    "pid": 94592,
+    "ppid": 1,
+    "start": "Sat Oct 17 16:57:58 2026",
+    "comm": "omlx-server"
+  },
+  "load_baseline_swap_bytes": 441513411,
+  "load_worker": {
+    "nonce": "702bc34333f9418695340098785702a3",
+    "directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/load-worker",
+    "parent_identity": {
+      "pid": 94567,
+      "ppid": 93502,
+      "start": "Sat Oct 17 16:57:53 2026",
+      "comm": "/Users/ryanli/code/minivllm/.venv/bin/python"
+    }
+  },
+  "post_worker_pid": 94637,
+  "post_result": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/load-worker/result.json",
+    "sha256": "0133be5f795440814a903831bdf7afd9bbdc1758c47df9820f62e1190c5c8696"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-cold-journal/evidence/log-a9de9e360970413484a0debf42ee891c/window.raw.log",
+    "sha256": "261f7d4beb531e8cdff3cf469993d26c8bb8698a41d2d5b42950be0e7709149a",
+    "bytes": 11458,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 252182,
+      "mtime_ns": 1792281314364124463
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 263640,
+      "mtime_ns": 1792281509298862770
+    },
+    "start_offset": 252182,
+    "end_offset": 263640
+  },
+  "final_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "monitoring_scope": "observed physical bounds; no OS hard cap; HTTP cancellation does not cancel server loader"
+}

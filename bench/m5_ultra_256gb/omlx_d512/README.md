@@ -1,4 +1,11 @@
-# oMLX D512 qualification probe (CPU preparation only)
+# oMLX D512 qualification
+
+Actual C1/C8 qualification is now complete: 24 requests and three independent audits PASS.
+See [the closed result](../../../docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/README.md).
+This adds no performance or cross-framework full-state equality claim. The original preparation notes below remain historical; the executed cycle uses the versioned v2 observer/join, trial and committed owner/controller.
+
+## Original CPU preparation notes
+
 
 No service, model or GPU execution has been performed for this probe. It adds
 qualification observations around the installed official CLI; it does not

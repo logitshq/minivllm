@@ -929,3 +929,12 @@ Independent resources217samples PASS: pressure1/thermal0, swap growth0MiB, Swapo
 No HTTP/performance point is added. Next route-ON C1/C8 capture→strict server reap→independent replay/route audit must pass before observer-OFF throughput vs POST→DONE latency. Current native/Lithos formal frontier is unchanged; oMLX D512 remains pending.
 
 [Closed evidence and limits](../experiments/m5-ultra-256gb/E024-serving-v1/README.md) · [Tutorial](tutorials/024-decode-graph-dispatch.md).
+
+
+## oMLX D512 actual C1/C8 qualification closes · 2026-10-17
+
+After committed registration bccad9c, two fresh official servers completed C1 eight/C8 sixteen D512 requests:12,288 committed tokens, all cap512, EOS0. Full prompt/raw IDs/text/usage/cache and real target-only route pass independent raw reparse. Peak HTTP outstanding1/8 and actual GPU batch1/8; C8 contains881 batch-8 response events. This is protocol/route/count qualification, not cross-framework numerical/quality equality or timing.
+
+Independent resource41samples PASS: pressure1, swap growth0MiB; Swapouts/Pageouts/Compressions0, Swapins+8, Decompressions+373. Both servers93587/94094 and owner93524 reaped; original service92152 restored as94592, fresh MTP/residentPLE/originalmodel/config verified, warmKV/hiddenstate not restored. Separate restoration PASS. Owner inventories match before/after; independent auditor does not rehash weight payloads or claim recursive runtime closure.
+
+Observer request seals preceded owner SIGTERM-15 and strict process/listener absence. They are not generator EOF/process-close certificates; actual observer_closed=false and generator_eof_proven=false remain visible. Archive414members/3,267,180compressed bytes, all member/original hashes and tree membership checked. Next is observer-OFF warm8/formal64 fresh-process timing, not reuse of diagnostic timings. [Complete evidence](../experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/README.md).

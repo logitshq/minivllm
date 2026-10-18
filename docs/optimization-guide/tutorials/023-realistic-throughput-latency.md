@@ -1,6 +1,6 @@
 # E023 · 正确性过门后，测长生成的 throughput–latency Pareto
 
-2026-10-17。当前状态：**native D512 HTTP资格及C1/C8各一次正式测量已完成；oMLX/Lithos同负载测量待完成。** 历史准备、失败与重试按时间保留在下文。
+2026-10-17。当前状态：**native C1/C8各一次及Lithos各三次D512正式测量已完成；oMLX协议资格PASS，正式计时待完成。** 历史准备、失败与重试按时间保留在下文。
 
 主优化目标始终是同一模型、同一任务集上的整机输出吞吐与完整请求延迟。
 正确性不参与权衡：候选先通过数值、状态、请求隔离和计数检查，才允许进入图。
@@ -289,3 +289,21 @@ samples and a missing sample. Frozen earlier source/evidence remains unchanged.
 The recipe reuses existing HTTP, raw NDJSON, stop/recover and resource policies;
 this registration adds no measured performance point. CPU fixture failures and
 final test receipts are retained with the preregistration.
+
+
+## oMLX 同协议接入也通过了实际检查
+
+2026-10-17 的两台fresh官方server完成C1八请求、C8十六请求，共12,288个committed tokens；
+完整prompt IDs、真实request IDs、有效sampling、实际target-only route、raw IDs/text/usage
+以及SSE字节绑定均通过。并发不能只看CLI参数：C8同时达到HTTP outstanding8和真实GPU batch8，
+其中记录881个batch8 response事件。全部请求达到512上限，实际EOS0，不扩大EOS路径证据。
+
+需要保留一个框架差异：oMLX的completion_tokens已经排除EOS，不能照搬Lithos的计数修正。
+观察器只记录Python元数据，正式计时要用相同配置的原官方CLI并关闭观察器。这轮的输出检查
+不意味着不同框架的全部logits、状态或代码质量一致，也没有产生新的速度点。
+
+请求seal与进程退出分别保存。seal证明完整请求集，之后由owner发送SIGTERM并严格wait/reap；
+本轮两个server均为可解释的-15退出，不能虚构正常generator EOF或observer close。
+41个资源样本与独立恢复检查PASS，原服务92152恢复为94592；暖KV不恢复。
+[完整记录](../../experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/README.md)保留414个归档成员，
+接下来正式轮采用与native/Lithos相同的warm8/formal64及fresh-process重复。
