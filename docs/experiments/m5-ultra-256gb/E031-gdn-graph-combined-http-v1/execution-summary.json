@@ -1,0 +1,122 @@
+{
+  "restoration-audit": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_restore.py",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-cold-journal",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/restoration-audit.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_restore.py",
+      "sha256": "0946be64082a5a9264b04606b1a865bcaca1bf266aa3fb42888d2d21ad4bd184",
+      "bytes": 12074
+    },
+    "started_at": 1792353227.7036119,
+    "returncode": 0,
+    "ended_at": 1792353227.974147,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/restoration-audit.json",
+      "sha256": "e08365ebe23519918bfe368313d65cb5686f207597f390d15373a7bb6dc1e4a1",
+      "bytes": 10599
+    },
+    "status": "PASS"
+  },
+  "independent-c1": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py",
+      "--child",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-owner/phases/c1-replay/qualification",
+      "--plan-sha256",
+      "64d12bf9e0c0e0c11a383223e2cdb12ba915fb6520268e9aaddd7d527969d88f",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c1.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py",
+      "sha256": "e41abc8e5073ca812ffdcfc398471a028a6bbd0e12c03a39ec75b0c0e4498717",
+      "bytes": 21004
+    },
+    "started_at": 1792353227.703457,
+    "returncode": 0,
+    "ended_at": 1792353241.043076,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c1.json",
+      "sha256": "396a27a2bc0f0a1b0dba2232ca0e90375f9983dd7b7aaf50d1eb6a645bb3e934",
+      "bytes": 70000
+    },
+    "status": "PASS"
+  },
+  "independent-c8": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py",
+      "--child",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-owner/phases/c8-replay/qualification",
+      "--plan-sha256",
+      "92bfb72bdf2a118b83f565548c333c5d6c61f58f773ac0904b57bdf2c1b7feaf",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c8.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py",
+      "sha256": "e41abc8e5073ca812ffdcfc398471a028a6bbd0e12c03a39ec75b0c0e4498717",
+      "bytes": 21004
+    },
+    "started_at": 1792353227.703428,
+    "returncode": 0,
+    "ended_at": 1792353234.0094001,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c8.json",
+      "sha256": "63e1381e59621aca2cd616e69f09e8f32e8c65dec37917e1c0aacd6bb4109a44",
+      "bytes": 63028
+    },
+    "status": "PASS"
+  },
+  "independent-cycle": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_cycle.py",
+      "--owner",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-owner",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-cold-journal",
+      "--plan-sha256",
+      "7783b4c35798d590f1a326739c38a410ac59a3d0655cd384813d6e5b9f0a02e8",
+      "--c1-audit",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c1.json",
+      "--c1-audit-sha256",
+      "396a27a2bc0f0a1b0dba2232ca0e90375f9983dd7b7aaf50d1eb6a645bb3e934",
+      "--c8-audit",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-c8.json",
+      "--c8-audit-sha256",
+      "63e1381e59621aca2cd616e69f09e8f32e8c65dec37917e1c0aacd6bb4109a44",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-cycle.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_cycle.py",
+      "sha256": "45c98bf8d8eacbb07c060b05310c686320fd9cce3cd9bbaece0cd6fc887c492f",
+      "bytes": 17167
+    },
+    "started_at": 1792353241.04437,
+    "returncode": 0,
+    "ended_at": 1792353241.709312,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-http-v1-analysis/independent-cycle.json",
+      "sha256": "589f8f2953fa2200aa4889587e179fedd40e162346f869e3a1af555d3cc08e10",
+      "bytes": 24506
+    },
+    "status": "PASS"
+  }
+}

@@ -35,3 +35,16 @@ GDN融合减少普通B1路径的预处理算子；E024把长decode的显式状�
 2026-10-18 12:32:47 PDT，新owner81295启动C1 capture→reap→独立replay→C8 capture→reap→独立replay。计划SHA `7783b4c35798d590f1a326739c38a410ac59a3d0655cd384813d6e5b9f0a02e8`，两候选均ON；原服务在driver的finally恢复。新HTTP入口14项CPU机制、独立HTTP审计9项、四阶段生命周期14项通过。初次HTTP异步测试被过严的本地socketpair guard阻断，修正runner后的整14项通过，两个尝试都保留。
 
 此时尚无HTTP整轮结论或正式速度点。正式计时将使用同一入口、route恒ON、GDN OFF/ON，比较组合相对E024-only的增量收益；两个旧单项百分比仍不能相加。
+
+
+## E031: actual combined HTTP history passed
+
+The next actual cycle completed on2026-10-18 at12:53 PDT. C1 served8 requests and C8 served16, all normal-EOS/cap512 requests; these particular requests each reached512 committed tokens and did not observe terminal EOS. Each capture server was strictly reaped before its independent same-history numerical replay. All four direct children exited through their registered cleanup, and the owner passed. The external Qwen service80649 was replaced by90614; the driver stop, owner and recovery codes were all0.
+
+Independent C1/C8 audits passed5,124 total steps and6,573,486 full-array bit comparisons, with13,146,972 finite checks. The saved successful tensor bytes were compared on device; the offline ledger audit does not recompute those tensor payloads. C1 recorded4,080 ahead consumptions and C8 recorded1,014; neither recorded discarded-prior-ahead coverage. C8 actually exercised B2/B4/B6/B8. The GDN optimization still only applies at B1; larger batches use its original fallback.
+
+The independent cycle audit also passed247 retained resource samples, pressure1, zero swap-use growth and zero new Swapouts. Swapins increased130; retained process inventory cannot rule out every GUI or unknown GPU runtime. Both graph trace records were independently reconstructed: C1 had2 Python tracing and4,086 reuse events; C8 had8 tracing and1,019 reuse events. These are Python compiled-call observations, not GPU kernel counts or speedups.
+
+[The complete E031 archive](../../experiments/m5-ultra-256gb/E031-gdn-graph-combined-http-v1/README.md) retains1,100 members,1,875,145,734 raw bytes and11,470,864 compressed bytes. Every member and original SHA was verified; archiveSHA742a5988d72924beedaf5bf24914413997e569ed09bf2fb38c046b33623c6639. Restoration, C1 numerical/HTTP, C8 numerical/HTTP and full-cycle resource audits all independently passed. This remains observer-enabled qualification, with no new performance point.
+
+The next timing plan compares the same combined server with graph always ON and GDN OFF/ON. It uses12 sequential fresh processes, three pairs at C1/C8,8 warm and64 formal requests per process, and no observers. Its actual CPU preparation validated all12 specs against the closed E031 receipts. Do not multiply the earlier independent GDN and graph speedups; use the resulting paired measurement.

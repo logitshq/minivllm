@@ -1106,3 +1106,10 @@ Fetched and read M4 `94c070e6bbf0cf0e229261f1d019fd0b2032c4a7` / V136, merged an
 Combined HTTP owner81295 has completed and reaped both actual C1 capture81355 and C1 numerical replay81912, each producer PASS. C8 capture87227 is running; the independent whole-cycle qualification is pending. The next formal experiment is already source-prepared: same combined server in both arms, route graph always ON, GDN OFF/ON, three fresh process pairs each at C1/C8, observers OFF,8warm+64formal per process. Factory12 CPU checks passed; lifecycle+independent-audit58 passed after preserving the first runner's five asyncio SIGINT guard failures. No combined performance point exists yet.
 
 The separate B2/B8 local GDN canary now has real native batched activation/independent three-step state preparation and12 CPU checks; device execution is still pending. This does not qualify B3–7, dynamic row retirement/refill, full-model serving or HTTP. ReaDy source compatibility findings are retained separately; the square recurrent-state axes require a transpose and its trained DSpark draft contract is not interchangeable with our current DFlash2 path.
+
+
+### 12:54 PDT — E031 HTTP closure PASS; actual timing preparation PASS
+
+Both actual combined HTTP histories and numerical replays passed:24 requests/12,288 committed tokens,5,124steps/6,573,486 full-array bit comparisons. All four children strictly reaped; original80649 restored90614 with all driver codes0. Independent C1, C8, resource and restoration audits PASS. E031 retains1,100members/1,875,145,734rawB/11,470,864xzB, SHA742a5988d72924beedaf5bf24914413997e569ed09bf2fb38c046b33623c6639. No combined performance result yet.
+
+Actual12-spec CPU preparation now PASS for the incremental GDN-on-graph experiment, owner planSHA3e65c89baecc67b14e8f97c2063d4647085a8ca86c2cc8e6c48dd03577bd6d4b. Both arms use the same combined entry with graph ON, GDN OFF/ON, observers OFF,3pairs per C1/C8,8warm+64formal per process. Root is binding the verified restored service before execution.
