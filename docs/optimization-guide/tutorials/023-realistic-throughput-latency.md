@@ -316,3 +316,10 @@ final test receipts are retained with the preregistration.
 本次准备抓到三个接线问题：关闭观察器后入口为原bin/omlx，官方usage带有限非负计时扩展，请求中的采样参数采用原浮点类型。计数/cache=0/原SSE匹配保持严格，只用客户端POST→DONE时钟做性能指标。CPU首轮79中一项要求实际outer解释器；原失败保留后，仅该项换正确解释器PASS，生产和测试源码均未修改。
 
 [可复现实验注册](../../../bench/m5_ultra_256gb/omlx_d512_formal/README.md)已准备并绑定实际恢复证据；六进程、三个独立审计与原服务恢复完成前没有新性能结论。
+
+
+### 真实响应比手写 mock 多了什么
+
+formal-v1在8条warm后失败，原因是官方BaseUsage额外包含input_tokens/output_tokens别名；值与原计数一致，检查器却只允许计时扩展。没有正式计时点。这说明即使合成SSE的完整解析测试通过，也不能替代真实响应schema回归。
+
+修复独立放到omlx_d512_formal_retry：别名若存在，必须是非bool整数且分别等于prompt_tokens/completion_tokens；不重新扣EOS，也不放宽cache=0或raw-wire相等。保留原8条响应作为固定SHA测试，同时保留旧审计拒绝它们的证明。失败周期完整归档且原服务恢复PASS后才重新注册。

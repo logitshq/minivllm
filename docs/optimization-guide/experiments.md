@@ -952,3 +952,13 @@ The new per-instance HTTP entry/capture passes the 12 server and11 capture CPU t
 Observer-OFF official CLI, C1/C8–C8/C1–C1/C8, warm8/formal64 per process, same D512/target-only/cache0 protocol. Four existing actual inventory groups retained, mandatory owner pre/post rehash;48 source pins and actual PREPARED-journal sealed. No service stop or performance measurement yet. [Registration](../../bench/m5_ultra_256gb/omlx_d512_formal/README.md).
 
 CPU first attempt79:78 PASS and one correct rejection when a real outer-runtime inventory test ran under vendor Python. The unchanged exact test then PASS under its actual outer Python. Both attempts/source snapshots preserved, zero real subprocess/network/signals/device imports;80 executions,79 distinct tests passed, no combined rerun. No weakened production gate. [CPU archive](../experiments/m5-ultra-256gb/omlx-formal-prepared-cpu-v1/README.md).
+
+
+## oMLX formal v1 stopped at real usage alias gate · 2026-10-17
+
+First server completed8warm/4096committed; official BaseUsage includes input_tokens/output_tokens aliases not represented in the synthetic fixtures/allowlist. Counts were correct; local validator rejected before formal. Owner/server were reaped, and original94592→98900 recovery independently PASS. Formal/resource audits retainFAIL (six phases not completed); no performance point. Full356member/2,997,492B archive retains exact failure. New versioned retry adds exactint alias equality and actual original SSE regression; old sources unchanged. [Evidence](../experiments/m5-ultra-256gb/E023-omlx-d512-formal-v1/README.md).
+
+
+## oMLX formal retry v2 registration · 2026-10-17
+
+New realsourcefolder/outputcycle; strict optional official count aliases, original count/cache/wire unchanged.83 CPU casesPASS (82vendor+1actualouter), including exactfailedwarmSSE for producer and independent auditor. Current98900 PREPARED after formal-v1 recoveryPASS, earlier24request successfulcountqualification retained separately.49 sourcepins sealed; same6fresh processes/warm8/formal64. [Registration](../../bench/m5_ultra_256gb/omlx_d512_formal_retry/README.md); no formalpoint yet.

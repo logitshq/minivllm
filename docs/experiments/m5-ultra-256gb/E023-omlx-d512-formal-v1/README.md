@@ -1,0 +1,9 @@
+# oMLX D512 formal v1: failed before formal timing
+
+The registered cycle ran from2026-10-17 17:19:36PDT to17:22:02PDT, after source commit db29bb0. It completed eight C1 warm requests (4,096 committed tokens, all cap512), then the local usage validator rejected official `input_tokens`/`output_tokens` aliases. Their values match original prompt/completion counts. This is an adapter schema omission, not an oMLX response error. No formal requests or performance points were produced.
+
+Owner98261 directly reaped server98315. Independent formal audit remains FAIL; formal resource audit remains FAIL because it requires all six successful phases. The23 raw snapshots show pressure1 and unchanged421.06MiB swap, but this is not a passed six-process resource qualification. Independent restoration PASS: original94592 restored as98900, originalmodel/config plus fresh MTP/residentPLE checked. WarmKV and exact hidden state were not restored.
+
+[Complete archive](evidence.tar.xz):356 regular members,60,368,556 logical bytes,2,997,492 compressed bytes; SHA256 `48e285cd05442375e55f0dc3d22b8e5a15f30aed0c587df4a2564a8b527e6081`. Every member, original file and tree membership checked;48 registered source pins retained. One exact model-directory link is recorded without opening/copying weights. [Formal failure](independent-formal.json), [resource failure](resource-summary.json), [restoration PASS](restoration-audit.json), [verification](archive-verification.json).
+
+The retry uses new versioned source/registration/output paths. It checks optional aliases as exact non-boolean integers equal to the existing counts, retains all count/cache/raw-wire checks, and adds these actual eight retained responses to CPU regressions. V1 source, failure and responses remain unchanged. Rechecking warm counts does not award V1 a performance point.

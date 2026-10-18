@@ -917,3 +917,8 @@ Owner93524/direct93587+94094 reaped; original92152→94592 restored with MTP/res
 ### 2026-10-17 — oMLX formal registration ready
 
 Fetched origin/tutorial/18-gdn-projection-packing; still cdb0649, no unmerged new M4 change. M5 now registers six fresh observer-OFF oMLX D512 processes in C1/C8–C8/C1–C1/C8 order, eachwarm8/formal64. Previous actual24-request qualification remains separate. All79 distinct CPU cases pass after retaining one wrong-interpreter first-attempt ERROR and rerunning only that exact test under actualouterPython; no source or gate relaxation. Originalservice94592/PREPARED journal bound. No formal speed or frontier result yet. Keep M4 mixed-prefill/admission and M5 graph/refill split; E024 actual HTTP auditor next, no overlapping GPU work while formal timing.
+
+
+### 2026-10-17 17:22 PDT — formal-v1 failure preserved, service restored
+
+Actual first8warm completed; local parser omitted official BaseUsage input_tokens/output_tokens aliases and correctly failed closed before formal. Counts themselves match. No speed/Pareto point. Server98315/owner98261 reaped; original94592→98900 restored and independently PASS. Full356member evidence archive retains failure; formal/resource audits FAIL because six trials incomplete. New sourcefolderomlx_d512_formal_retry adds strict alias equality and real rawSSE regression, then separately registers. M4 should retain shared-count aliases when checking original oMLX usage; do not subtractEOS twice.
