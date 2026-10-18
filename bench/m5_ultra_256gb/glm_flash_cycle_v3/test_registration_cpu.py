@@ -70,7 +70,7 @@ class Tests(unittest.TestCase):
                 self.assertEqual(audit.call_args.args[0],self.journal)
         self.assertNotEqual(self.commands['restoration_audit'][-1],self.commands['closed_audit'][-1])
 
-    def test_actual_registration_rejects_current_E032_before_any_output(self):
+    def test_actual_registration_rejects_unsealed_E033_and_old_E032_before_output(self):
         args=['--run']
         for name,value in dict(out=self.root/'reg',owner=self.owner,journal=self.root/'new-journal',
             analysis=self.root/'result.json',python=self.root/'python',probe_plan=self.root/'probe.json',
@@ -79,7 +79,11 @@ class Tests(unittest.TestCase):
             verification_sha256='2'*64,predecessor_journal_sha256='3'*64,predecessor_audit_sha256='4'*64,
             child_limit_bytes=220*(1<<30)).items():
             args+=['--'+name.replace('_','-'),str(value)]
-        with self.assertRaisesRegex(ValueError,'deferred until the actual E033'):r.main(args)
+        with self.assertRaisesRegex(ValueError,'not sealed'):r.main(args)
+        self.assertFalse((self.root/'reg').exists())
+        old=SimpleNamespace(PRIOR_ARCHIVE=r.REQUIRED_PREDECESSOR_ARCHIVE.with_name('E032-gdn-graph-combined-formal-v1'))
+        with patch.object(r,'module',return_value=old):
+            with self.assertRaisesRegex(ValueError,'deferred until the actual E033'):r.main(args)
         self.assertFalse((self.root/'reg').exists())
 
     def prepared(self):

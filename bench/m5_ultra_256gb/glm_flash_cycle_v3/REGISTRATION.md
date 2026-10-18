@@ -1,7 +1,9 @@
 # Future v3 registration — source prepared, not executed
 
 The new `preregister.py` and `execute.py` have not performed real registration or
-execution. Their seven focused fake CPU tests passed on the first guarded run.
+execution. The earlier E032-bound source snapshot passed seven focused fake CPU
+tests on its first guarded run. The current E033 adaptation is source-only and
+has not been tested.
 The original input builder and lifecycle are reused under explicit source pins.
 No new framework, operational bridge, model payload hash or future evidence is
 introduced. Existing GLM CPU inputs from `glm-flash-inputs-v1` remain eligible
@@ -9,9 +11,13 @@ only if the real owner revalidates their exact supplied hashes and statistics.
 
 E032 ended with an owner-CLI admission error before any model child or request;
 its independent restoration passed. It is retained history, not the next GLM
-predecessor while retry-v2 is planned. The registrar now explicitly rejects the
-current controller's E032 target. The controller's committed E032 source remains
-unchanged until the exact retry-v2 source pins and actual E033 closure are known.
+predecessor while retry-v2 is planned. The registrar explicitly requires the E033 target. After the retry-v2 sources
+were frozen and its actual formal owner started, the controller's source-only
+adaptation selected those exact controller/owner/auditor pins and v2 journal
+schema. Its predecessor manifest and dependent auditor seals remain UNSEALED.
+No actual E033 result is assumed and no registration can run before closure.
+The earlier E032 controller and seven-test source snapshots remain in the
+committed CPU archive; the new adaptation has not yet been tested.
 
 Before registration, root must have the actual immutable
 `docs/experiments/m5-ultra-256gb/E033-gdn-graph-combined-formal-v2/` pair:

@@ -16,7 +16,7 @@ c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c)
 
 class PredecessorTests(unittest.TestCase):
     def fixtures(self):
-        prior=dict(schema='GDN-graph-combined-http-formal-cold-journal-v1',state='RESTORED',
+        prior=dict(schema='GDN-graph-combined-http-formal-cold-journal-v2',state='RESTORED',
             controller_sha256=c.PRIOR_SHA,trials=list(c.PRIOR_PHASES),approved_contract=c.CONTRACT,
             plan_sha256=c.PLAN_SHA,support_sha256=c.BASE_SHA,events=[],post_monitor_failed=False,
             replacement=dict(pid=85002,ppid=1,start='CPU fake start',comm='omlx-server'),
@@ -35,7 +35,7 @@ class PredecessorTests(unittest.TestCase):
 
     def check(self,prior,audit,*,wrong_path=False,bad_owner_source=False):
         with tempfile.TemporaryDirectory() as temporary:
-            root=Path(temporary).resolve();folder=root/'E032-gdn-graph-combined-formal-v1';folder.mkdir()
+            root=Path(temporary).resolve();folder=root/'E033-gdn-graph-combined-formal-v2';folder.mkdir()
             jp=folder/'restored-journal.json';ap=folder/'restoration-audit.json'
             jp.write_text(json.dumps(prior));audit=copy.deepcopy(audit);audit['journal_sha256']=c.b.sha(jp)
             ap.write_text(json.dumps(audit));binding=dict(path=str(jp),sha256=c.b.sha(jp),audit=dict(path=str(ap),sha256=c.b.sha(ap)))
@@ -73,7 +73,7 @@ class PredecessorTests(unittest.TestCase):
     def test_unsealed_real_binding_wrong_archive_and_source_change_fail_closed(self):
         with self.assertRaisesRegex(Exception,'not sealed'):c.predecessor({})
         prior,audit=self.fixtures()
-        with self.assertRaisesRegex(Exception,'exact E032'):self.check(prior,audit,wrong_path=True)
+        with self.assertRaisesRegex(Exception,'exact E033'):self.check(prior,audit,wrong_path=True)
         with self.assertRaisesRegex(Exception,'owner source changed'):self.check(prior,audit,bad_owner_source=True)
 
 

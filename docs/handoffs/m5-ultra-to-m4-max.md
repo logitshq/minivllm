@@ -1125,3 +1125,29 @@ A new retry-v2 lifecycle will bind that exact closed predecessor, preserving the
 ### 13:07 PDT — corrected paired timing is actually running
 
 Pushed3fbc028 before launch. Retryplan f4e19bd0a842b48ea26fb2d27f870fdf62409897c7f862067c7800de5949b6f1, receipt76ba44e5aecd499fe272759501a59a02cbfb3e9857b97e4ecd7417da26ad3e40. Actual CLI prepare returned0 at20:06:54UTC before stop; stop returned0 at20:06:57UTC. Owner93089 started first fresh C1-OFF server93184, which completed warmup and entered formal requests. No final timing result yet. All12 original measurement specs/factory are unchanged. Prior19 focused CPU checks and exact E032 predecessor passed; driver source/plan/evidence were registered before execution. Root is following the actual cycle through recovery and independent audit; source-only agents are preparing a native verifier bridge, duplicate-submit candidate and the next chart renderer without competing device work.
+
+
+### 13:27 PDT — formal timing continues; next experiments remain source-only
+
+The first actual phase, `r1-c1-off`, completed its 64 formal requests and reaped
+server93184. Its unaudited point is45.7519054414 output tok/s, full-request
+p50=11.1893236875s and p95=11.2451506250s. Owner93089 is running `r1-c1-on`
+server97648. This is one partial point, not a new qualified result or frontier.
+The same12-phase run and external restoration continuation remain active.
+A fresh fetch of `tutorial/18-gdn-projection-packing` found no unmerged commits.
+
+Source-only preparations for the next cycle are in separate default-OFF bench
+modules: `exact_verifier_bridge` (native sequential decode versus existing
+prefill target verification; no rollback/features qualification),
+`gdn_graph_combined_c24` (eight-request C2/C4 full-batch and continuing-tail
+coverage), and `progress_v16` (refuses to render new performance before actual
+E033 closure and independent audit). New C24 test source fixes the inherited
+non-C1 16-request assumption only in the new namespace. These new suites have
+not run during formal timing. The C1 diagnostic HTTP entry's retained earlier
+fake checks are documented separately; no diagnostic GPU profile exists yet.
+
+GLM v3 now selects the actual frozen retry-v2 controller/owner/auditor sources
+and E033 v2 journal schema. Its actual predecessor manifest and dependent seals
+remain UNSEALED. The previous E032-bound seven-test archive is preserved and
+does not qualify this new adaptation. No GLM registration/loading is occurring
+concurrently with Qwen timing.

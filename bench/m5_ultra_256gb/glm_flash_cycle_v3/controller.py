@@ -17,20 +17,20 @@ _reuse = _importlib.module_from_spec(_spec); _spec.loader.exec_module(_reuse)
 _original = _reuse.install(globals(), 'controller.py', dict(
     OWNER_SHA='9d69c5a64dc50b7d65330ad130b8af9f757b91e884aa197d1e828775b27c88a8',
     JOURNAL_SCHEMA='GLM-cold-load-journal-v3', OWNER_SCHEMA='GLM-cold-load-owner-plan-v3',
-    PRIOR_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal/controller.py',
-    PRIOR_SHA='3b8b3033269fcd326e0a52e20470ee27faf65d313be3e3bf0da8881f26f3ac4c',
-    PRIOR_AUDIT_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal/audit_restore.py',
-    PRIOR_AUDIT_SHA='157d6470a9cb87223c419a3f4edd82e8556b3714a7157ea1ad505270c8ed7493'))
+    PRIOR_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal_retry_v2/controller.py',
+    PRIOR_SHA='ca441479a0d2049bcb4daa5a8009b26824b7557a31be8c5c1c2ca57e01ce33cd',
+    PRIOR_AUDIT_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal_retry_v2/audit_restore.py',
+    PRIOR_AUDIT_SHA='7ab477f0d449bf08f78259a820d067f902d2032314ff4ebd389157b2578ec57d'))
 BOUND_MANIFEST_SHA = 'UNSEALED'
 PRIOR_OWNER_PATH = PRIOR_PATH.with_name('owner.py')
-PRIOR_OWNER_SHA = '511b48fbe722ea031a7b4586439eaa67f25c9c9514af12b614de74fb8c53c103'
-PRIOR_ARCHIVE = ARCHIVE_ROOT/'E032-gdn-graph-combined-formal-v1'
+PRIOR_OWNER_SHA = 'f7f44001d11533aa6106d3e5dc5c2635dfb736433f10e7ea680a5a83f2863d9e'
+PRIOR_ARCHIVE = ARCHIVE_ROOT/'E033-gdn-graph-combined-formal-v2'
 # The original already verifies a complete twelve-phase formal restoration.
 # In a separate function namespace change only its exact journal schema literal;
 # every raw SHA, phase, worker, restoration-status and identity gate is retained.
 _predecessor_source = _inspect.getsource(_original.predecessor)
 _old_schema = "'E024-route-http-formal-cold-journal-v1'"
-_new_schema = "'GDN-graph-combined-http-formal-cold-journal-v1'"
+_new_schema = "'GDN-graph-combined-http-formal-cold-journal-v2'"
 if _predecessor_source.count(_old_schema) != 1:
     raise ValueError('frozen formal predecessor schema anchor changed')
 _predecessor_source = _predecessor_source.replace(_old_schema, _new_schema, 1)
@@ -59,7 +59,7 @@ def predecessor(binding):
     need(type(binding['audit']) is dict and set(binding['audit']) == {'path','sha256'}, 'exact audit reference')
     need(Path(binding['path']) == PRIOR_ARCHIVE/'restored-journal.json'
          and Path(binding['audit']['path']) == PRIOR_ARCHIVE/'restoration-audit.json',
-         'exact E032 closed formal archive required')
+         'exact E033 closed formal archive required')
     need(b.sha(PRIOR_OWNER_PATH) == PRIOR_OWNER_SHA, 'prior audited owner source changed')
     prior, raw = _formal_predecessor(binding)
     need(prior.get('owner_source') == dict(path=str(PRIOR_OWNER_PATH),sha256=PRIOR_OWNER_SHA),
