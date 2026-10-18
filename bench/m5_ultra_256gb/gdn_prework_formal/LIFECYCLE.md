@@ -1,0 +1,17 @@
+# GDN-only paired formal lifecycle
+
+Prepared source only. The default-off candidate has no formal performance qualification here. These new files do not modify the frozen GDN HTTP cycle, candidate, native client, or original service.
+
+`prepare_specs.py --run --cpu-receipt ABS_RESULT` is a CPU-only, guarded preparation step. It requires the completed GDN HTTP driver, four independent PASS audits, matching immutable `E029-gdn-prework-http-v1` sidecars and verified archive, plus the actual source-matching 19-method formal CPU suite. It builds all 12 specs into the fresh `.artifacts/m5-ultra-256gb/gdn-http-formal-prepare-v1` directory. It retains failed prefixes and does not register or start a service. The original frozen native C1/C8 specs supply identical D prompts, normal EOS, cap512, transport and deadlines.
+
+`preregister.py --prepare --predecessor ABS_ARCHIVED_JOURNAL --predecessor-sha256 SHA --restoration-audit ABS_ARCHIVED_AUDIT --restoration-audit-sha256 SHA` consumes those 12 specs. It writes an immutable plan and exact commands to `prereg-formal-v1`. The predecessor paths must be the future actual GDN HTTP archive, its true four-phase schema and reviewed controller/auditor sources. Actual journal/audit bytes are frozen by the new plan; no future hashes are invented. Failed experimentation may still be restored, but `formal.prepare` separately requires the full actual GDN C1/C8 numerical/resource/restoration PASS before this formal plan exists.
+
+Root runs the saved owner `--prepare-only` command and read-only controller `prepare`, then `preregister.py --seal-receipt`. Only the explicit `execute.py --run` uses the actual source-sealed PREPARED receipt to stop, run the owner and attempt recovery in `finally`. The direct owner uses the original three CLI arguments, without a fabricated `--run` child flag. Unknown launch cannot become `--no-experiment`.
+
+The twelve real process names are `r1-c1-off`, `r1-c1-on`, `r1-c8-on`, `r1-c8-off`, `r2-c8-off`, `r2-c8-on`, `r2-c1-on`, `r2-c1-off`, `r3-c1-off`, `r3-c1-on`, `r3-c8-on`, `r3-c8-off`. Every process gets eight warm and 64 formal requests, giving 96 warm plus 768 formal requests. The inherited work bound is 40524 seconds; resource cadence, pressure, swap, power, thermal and original 157-source/model preparation gates remain unchanged.
+
+The owner holds each direct server Popen, reaps it before any next process, and preserves first/later no-Popen proofs and unresolved intent failures. A phase intent durable-write failure cannot publish an empty or shortened successful release. Preparation snapshots retain extra adapter files under their real absolute-path-relative names. Outer native `System.read` stores three fields; inner server probes store four fields. No missing outer `stderr` is invented.
+
+`audit_restore.py` validates restoration independently of performance. `audit_formal.py` consumes all actual wire requests, counts, process clocks, resources, source/model preparation and reaps before any performance qualification. It reuses the fixed tokenizer-symlink correction and original metrics/resource algorithms. Readiness observes installation, not candidate calls; formal observers are OFF, and representative HTTP qualification is not a proof for every future arrival schedule. E024 graph and E028 refill remain OFF.
+
+All tests in this directory are CPU fake or real-small-file protocol tests. Their existence is not an actual run receipt; root runs the complete guarded suite and retains first attempts separately.

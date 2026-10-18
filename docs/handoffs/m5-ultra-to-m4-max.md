@@ -1046,3 +1046,8 @@ User correctly noted v13 only plotted scatter points. [v14](../optimization-guid
 ## 2026-10-17: GDN HTTP cycle preregistered
 
 User confirmed Qwen3.8-27B + GLM-5.3-Flash (`glm5_next`). The next M5 experiment is GDN-only long-context prework fusion: C1 actual HTTP capture/replay, then C8 capture/replay, independent audits and original-service recovery. New lifecycle suite actually passed all83 tests; retained evidence: `docs/experiments/m5-ultra-256gb/gdn-http-cycle-cpu-v1`. CPU registration and actual read-only service prepare passed; plan `5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024`. Prepared state is not numerical or performance qualification. E024 graphs and E028 refill remain OFF for isolation; existing v14 Pareto is unchanged. The confirmed C1 mean latency gap is mostly after first output, so this run targets GDN work in real decode. M4 may continue admission/mixed-prefill without duplicating M5 lifecycle work.
+
+
+### Parallel preparation while GDN HTTP executes
+
+The actual C1 capture and numerical replay have returned PASS; C8 remains in progress, so whole-cycle HTTP/resource/restoration qualification is pending. The new `gdn_prework_formal` 12-process OFF/ON framework passed the complete guarded93 CPU tests with retained first-run evidence (`docs/experiments/m5-ultra-256gb/gdn-http-formal-cpu-v1`). It cannot register against missing GDN independent closure. New `c1_pipeline_profile` preserves ahead and original eval boundaries; its11-test runs are recorded and it remains device-unrun. Research notes now cover exact competitor-format gaps and recent DeltaLog/TreeWY/BaseRT work; no external speed is imported into our curves. GLM CPU input preparation also returned successfully, without loading the model.

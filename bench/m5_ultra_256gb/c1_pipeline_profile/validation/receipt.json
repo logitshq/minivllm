@@ -1,0 +1,62 @@
+{
+  "schema": "C1-pipeline-fake-cpu-validation-v1",
+  "status": "PASS",
+  "evidence_origin": "selected original CommandExecution and tool-output records recovered from local session; no tests rerun",
+  "session_file_basename": "rollout-2026-10-17T00-48-55-01a148d5-d63a-7b93-bf8b-bf30256ee536.jsonl",
+  "attempts": [
+    {
+      "attempt": 1,
+      "timestamp": "2026-10-18T06:08:05.245Z",
+      "command_event_id": "exec-b9a15863-200b-4904-8257-9885b28e5399",
+      "tool_chunk": "c842ec",
+      "exit_code": 0,
+      "discovered": 11,
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "unittest_elapsed_s": 0.056,
+      "streams": "original tool combined output; stdout/stderr not separately retained",
+      "snapshot_binding": "not contemporaneously saved; no first-attempt source hash invented"
+    },
+    {
+      "attempt": 2,
+      "timestamp": "2026-10-18T06:09:47.853Z",
+      "command_event_id": "exec-ef124da2-5199-444b-99cb-8769ef86a6c0",
+      "tool_chunk": null,
+      "exit_code": 0,
+      "discovered": 11,
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "unittest_elapsed_s": 0.053,
+      "streams": "original tool combined output; stdout/stderr not separately retained",
+      "snapshot_binding": "three .py SHA256 values are present in original combined output and match current copies"
+    }
+  ],
+  "final_sources": {
+    "instrumentation.py": {
+      "sha256": "58873f2eb395a0ca7d8ab1bac35f75b67581332187ada9be3de74fbdf77ef1bf",
+      "bytes": 13094
+    },
+    "delivery.py": {
+      "sha256": "6d9e3efe46db08e1783ae851787bd79120a03b7501aa65cbf67b4be266b4e685",
+      "bytes": 6504
+    },
+    "test_instrumentation_cpu.py": {
+      "sha256": "4aa457f1b7c01740272794bc47392939f6ab6cfd713c6e1de216ca3a7fe9a29e",
+      "bytes": 12608
+    },
+    "README.md": {
+      "sha256": "7185349fe07671fd784fe2c64c7a58686468a7d33cd42e4df9cf00c5fc41b7ca",
+      "bytes": 5639
+    }
+  },
+  "first_attempt_source_snapshot_available": false,
+  "separate_stdout_stderr_available": false,
+  "assembly_note": "First extraction command a3fd2e stopped because the second tool returned plain text rather than JSON chunk metadata. No tests ran; exact CommandExecution output was already retained. Final extraction retains the actual text form and null chunk ID.",
+  "device_run": false,
+  "numerical_qualified": false,
+  "performance_qualified": false
+}

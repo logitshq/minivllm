@@ -4,7 +4,7 @@
 主线为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`，第二重点为 GLM-5.3-Flash；后者尚未完成本机资格。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
-入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
+入口：[论文与设计笔记](papers.md) · [当前对手兼容性矩阵](research/2026-10-17-frontier-candidates.md) · [新近状态与运行时论文](research/2026-10-17-state-and-runtime-papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
 [D512 三引擎吞吐—延迟对比](progress/2026-10-17-v14/README.md) ·
 [历史 cap32 分面图](progress/2026-10-17-v5/README.md) ·
