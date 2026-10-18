@@ -978,3 +978,12 @@ All six actual observer-OFF processes report completion of48warm/384formal reque
 New135-pin plan `ba7556ffddd28323ce0a7541cc1c6a8557378a687fbdace981c610bfc7b2129d`; actual read-only PREPARED from independently restoredPID19019. Four direct phases are C1 capture/replay then C8 capture/replay, with8+16 actual requests, original37/42 serving prerequisites, source/runtime/model checks, observed graph dispatch, full numerical replay and cold-service restoration. Registration grants no actual HTTP or speed result.
 
 [CPU evidence](../experiments/m5-ultra-256gb/next-modules-prepared-cpu-v1/README.md):173 initial tests,172pass/1fixturefail; production unchanged, repaired fixture's entire12-test module passes. Both attempts archived,185 executions/173 distinct tests with passing evidence; no claimed clean full-suite rerun. GDN/SIMD/GLM/v3 candidates remain defaultOFF and device-unqualified.
+
+
+## oMLX formal-v2 post-run independent audit PASS; progress v10 · 2026-10-17
+
+New versioned auditors correct only the outer reader schema and bind12 actual earlier inner stderr/reap receipts. Six CPU regressions PASS; actual resource597samples pressure1/zero swap growth and full432 raw request reparse PASS. Original two FAIL receipts,49 pins,1707-member archive remain byte-identical. New40-member/127072B supplement SHA fbd9378fa4e2f6c8a83ac97629e8b061caa040e6822f656f8ea73b78b85ac501 records every new source, command, audit and source-manifest binding; this is explicitly post-run, not preregistered.
+
+oMLX process-metric medians C1 50.781568tok/s,p50 10.079909s,p95 10.128053s; C8 168.365034tok/s,p50 24.263937s,p95 26.130037s. Native historical C1 45.372147 and C8 167.398907tok/s: C1 still behind, C8 nearly equal with native p95 25.979063s. No cross-cycle significance or overall frontier claim. New visually checked [v10](progress/2026-10-17-v10/README.md) shows14 actual points, separate p50/p95, source-pinned lineage and all prior eight point values unchanged.
+
+E024 actual HTTP four-phase qualification started after registration4ec464d; C1 capturePASS and numerical replay currently live. No E024 performance timing promoted to chart. GDN source candidates remain defaultOFF; registration/driver preparation proceeds independently without device overlap.

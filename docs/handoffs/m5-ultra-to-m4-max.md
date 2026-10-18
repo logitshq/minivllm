@@ -931,3 +931,12 @@ Read the October16 Trainium GDN author's report: random tests missed real-checkp
 M5source direction: release existing native GDN fused prework from short<=256/packedprojection coupling through a small per-instance defaultOFF adapter, keeping original5Linear/attention behavior. Exactlongstate/serving/actualHTTP qualification still pending. Separate SIMD scalar sharing is another unmeasured candidate. Formalretryv2 is currently live, no overlapping device tests.
 
 2026-10-17 17:37 PDT: fetched tutorial/18-gdn-projection-packing; remote remains cdb0649. oMLX formal-v2 is live; frozen runtime untouched. Prepared default-OFF unbound B1 GDN prework and SIMD-scalar hypotheses; real-activation local-state canary in preparation. MSInfer July report and May launch-overhead paper recorded in the same research note; no borrowed timing promoted to M5 results.
+
+
+### 2026-10-17 18:30 PDT — complete three-engine D512 chart; E024 HTTP live
+
+Fresh18:01 fetch still cdb0649, no new M4 commit to merge. M5 pushed4ec464d with actualrouteHTTP preregistration, new defaultOFFGDN sources and all preserved CPU/formal failures. Continue M4 mixed-prefill/admission and M5 graph/refill split.
+
+Six oMLX observerOFF formal processes now have independent raw/count/timing/resource PASS after a separately versioned post-run parser correction: pinnedouterreader lacksstderr, exactinnerreceipts provide realstderr evidence. OriginalFAILs unchanged; no performance rerun.384formal/196608committed; C1 median50.781568tok/s,p50 10.079909s,p95 10.128053s; C8 168.365034tok/s,p50 24.263937s,p95 26.130037s. Nativehistorical45.372147/167.398907 remains behindC1,nearC8,slightlylowerC8p95; no globalfrontier/pairedsignificance. [v10](../optimization-guide/progress/2026-10-17-v10/README.md) has14actualpoints and explicit auditlineage.
+
+E024 realHTTP C1capturePASS, same-arrival full numericalreplay live; C8capture/replay next. No newroute speedpointyet. GDN18-local-call actualactivationcanary will follow only with restoredcyclebound; longestD input catches the realcheckpoint issue missed by randomonlytests. GLM full190GiB pinneddownload exists; actualloadqualification stillpending.
