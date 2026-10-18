@@ -962,3 +962,19 @@ First server completed8warm/4096committed; official BaseUsage includes input_tok
 ## oMLX formal retry v2 registration · 2026-10-17
 
 New realsourcefolder/outputcycle; strict optional official count aliases, original count/cache/wire unchanged.83 CPU casesPASS (82vendor+1actualouter), including exactfailedwarmSSE for producer and independent auditor. Current98900 PREPARED after formal-v1 recoveryPASS, earlier24request successfulcountqualification retained separately.49 sourcepins sealed; same6fresh processes/warm8/formal64. [Registration](../../bench/m5_ultra_256gb/omlx_d512_formal_retry/README.md); no formalpoint yet.
+
+
+## E029 GDN 长路径预处理 / SIMD 标量候选准备 · 2026-10-17
+
+当前 oMLX formal-v2 独占 GPU 期间只准备新源码：gdn_prework_unbound 保留五次原投影，独立启用现有融合辅助函数；gdn_simd_scalars 尝试共同标量单 SIMD 计算一次。均默认 OFF，未运行设备、无性能资格。真实激活 canary 固定两个 D512 提示、三层、两组三步链，18 局部调用；完整输出/conv/S 原 dtype 比较、候选状态自续、normal EOS，不能替代整模型验证。CPU 测试源码尚待本轮服务恢复后执行。新 HTTP cycle 及 GLM physical guard 也仅源代码准备；未封存前序拒绝实际服务操作。[教程](tutorials/029-unbound-gdn-prework.md)。
+
+
+## oMLX formal-v2 execution closes; first offline parser fails · 2026-10-17
+
+All six actual observer-OFF processes report completion of48warm/384formal requests. Original service restored98900→19019; independent restoration PASS. The frozen resource auditor's outer child/port-absence parser incorrectly expects stderr, which that pinned producer does not retain; resource FAIL and formal FAIL-before-raw are preserved. The six points are not yet added to the chart. All original1707 archive members/189,576,831 logical bytes and49 registered sources are verified. A separate corrected offline audit must bind actual inner stderr evidence and reparse all432 retained requests; no source/data/failure overwrite. [Original evidence](../experiments/m5-ultra-256gb/E023-omlx-d512-formal-v2/README.md).
+
+## E024 real HTTP capture/replay registered · 2026-10-17
+
+New135-pin plan `ba7556ffddd28323ce0a7541cc1c6a8557378a687fbdace981c610bfc7b2129d`; actual read-only PREPARED from independently restoredPID19019. Four direct phases are C1 capture/replay then C8 capture/replay, with8+16 actual requests, original37/42 serving prerequisites, source/runtime/model checks, observed graph dispatch, full numerical replay and cold-service restoration. Registration grants no actual HTTP or speed result.
+
+[CPU evidence](../experiments/m5-ultra-256gb/next-modules-prepared-cpu-v1/README.md):173 initial tests,172pass/1fixturefail; production unchanged, repaired fixture's entire12-test module passes. Both attempts archived,185 executions/173 distinct tests with passing evidence; no claimed clean full-suite rerun. GDN/SIMD/GLM/v3 candidates remain defaultOFF and device-unqualified.

@@ -1,0 +1,7 @@
+# Next default-OFF modules: recorded CPU preparation
+
+The initial guarded run executed all173 explicitly registered tests:172 PASS, one FAIL, zero errors/skips. The failed route-restoration fixture incorrectly used the same path for the authoritative external preregistration plan and the owner copy. Its early-NO_CHILD case deleted both. Only the fixture was repaired to match the actual controller/owner layout; the production controller and auditor did not change. The complete12-test restoration module then PASS under the same guarded runner. Thus185 test executions cover173 distinct tests with passing evidence; this is not a claimed clean173-test rerun.
+
+Both attempts preserve original stdout/stderr, per-test results, source snapshots, before/after hashes and manifests. No real subprocess, model/backend import, network or process signal occurred inside the test runs; all forbidden-operation lists are empty. Fake CPU checks establish routing/contracts/cleanup only, not device arithmetic, physical capacity, HTTP or performance. The new GDN candidate/canary/raw-auditor/serving adapter, SIMD candidate, GLM physical guard, route HTTP lifecycle/auditors and future v3 lifecycle remain independently gated for actual execution.
+
+The archive has577 members/9,540,800 logical bytes;1,116,708 compressed bytes SHA `f82eb5f1a70bc5d13311d50da778b0ca05a5036f804a7f56518b31ac643bc363`. Every member, original file and directory membership was rechecked. First FAIL and subsequent focused PASS remain separate.

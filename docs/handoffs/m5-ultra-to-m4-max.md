@@ -922,3 +922,12 @@ Fetched origin/tutorial/18-gdn-projection-packing; still cdb0649, no unmerged ne
 ### 2026-10-17 17:22 PDT — formal-v1 failure preserved, service restored
 
 Actual first8warm completed; local parser omitted official BaseUsage input_tokens/output_tokens aliases and correctly failed closed before formal. Counts themselves match. No speed/Pareto point. Server98315/owner98261 reaped; original94592→98900 restored and independently PASS. Full356member evidence archive retains failure; formal/resource audits FAIL because six trials incomplete. New sourcefolderomlx_d512_formal_retry adds strict alias equality and real rawSSE regression, then separately registers. M4 should retain shared-count aliases when checking original oMLX usage; do not subtractEOS twice.
+
+
+### 2026-10-17 — latest GDN source lesson and local fusion candidate
+
+Read the October16 Trainium GDN author's report: random tests missed real-checkpoint prefill failure; v15 changes the core. This is not an M5 speed claim. Continue exact real-state qualification; M4 should keep its real-model prefill gates. Apple's October15 M5Ultra Qwen3.8 measurement uses512GB/BF16/8K-or64K/128generation benchmark, so it cannot be mixed into our NVFP4 D512 HTTP Pareto. [Source notes](../optimization-guide/research/2026-10-17-gdn-real-inputs-and-apple.md).
+
+M5source direction: release existing native GDN fused prework from short<=256/packedprojection coupling through a small per-instance defaultOFF adapter, keeping original5Linear/attention behavior. Exactlongstate/serving/actualHTTP qualification still pending. Separate SIMD scalar sharing is another unmeasured candidate. Formalretryv2 is currently live, no overlapping device tests.
+
+2026-10-17 17:37 PDT: fetched tutorial/18-gdn-projection-packing; remote remains cdb0649. oMLX formal-v2 is live; frozen runtime untouched. Prepared default-OFF unbound B1 GDN prework and SIMD-scalar hypotheses; real-activation local-state canary in preparation. MSInfer July report and May launch-overhead paper recorded in the same research note; no borrowed timing promoted to M5 results.

@@ -1,0 +1,93 @@
+{
+  "schema": "E024-route-http-owner-plan-v1",
+  "execution": {
+    "owner": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/owner.py",
+      "sha256": "c279e9de954080894ed2b8f35f169cb30f485f93b08568991cd61a61e13bd4f9"
+    },
+    "pins": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_capture.py": "b331a02988413356e113b3a1283ab0eb8d40de17796b5623a17df312c214151f",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_server_v2.py": "8ed952b4870465718a33e0af7e4ecddbf3fbd6265571e7efd3467b904c5621b7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/integration.py": "4a8dc5518f2ea0a913ad0a5d753a5032324ccb69bacede416abe8ae126bfa800",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/serving_qualification.py": "75de7205febdae2698e99353bfc2908a79044591fbf67abb30a07cb4e54a7264",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_serving.py": "064634acae9510b5744b7c848f09ee0854ee8bf26fc480af78dbed7f159573ba",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_qualification_v2.py": "d3e2a4f76b7c384f6c6c986d0838b68227618502b0552e5cdf74f149029e39e7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/owner.py": "c279e9de954080894ed2b8f35f169cb30f485f93b08568991cd61a61e13bd4f9"
+    }
+  },
+  "qualification": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json",
+    "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+  },
+  "cold_restart": {
+    "journal_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-cold-journal",
+    "controller": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/controller.py",
+      "sha256": "e6bc72007043ed0376e98ea7f28ee152587294dec200953e93a5c7c736a90694"
+    },
+    "approved_contract": "cold-restart-persisted-visible-v1",
+    "proposal_plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "predecessor": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-formal-v2/restored-journal.json",
+      "sha256": "a4cea1bb7c8a8491a0474cbfbb939eead5de81723ee445c4bf2f2a88e0d71e06",
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-formal-v2/restoration-audit.json",
+        "sha256": "9aaf59b6482f22c24268b36e3ee8b661510d924b2a2ae3b4b43e204b5a934aca"
+      }
+    }
+  },
+  "http": {
+    "transport": {
+      "port": 18023,
+      "tcp_nodelay": true,
+      "io_timeout_seconds": 300.0
+    },
+    "deadlines": {
+      "ready": 120,
+      "request": 600,
+      "group": 720,
+      "overall": 900,
+      "close": 10,
+      "term": 15,
+      "kill": 15,
+      "resource_interval": 5
+    },
+    "environment": {
+      "HOME": "/Users/ryanli",
+      "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/ryanli/.codex/tmp/arg0-macos/codex-arg0zSbbRg:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ryanli/.local/bin:/Users/ryanli/.local/share/mise/shims:/opt/homebrew/sbin:/Users/ryanli/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS",
+      "TMPDIR": "/var/folders/mq/q8ktrhz157lcgq5h6s2b54vr0000gn/T/",
+      "LANG": "en_US.UTF-8",
+      "LC_ALL": "en_US.UTF-8",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "MLX_MAX_OPS_PER_BUFFER": "50",
+      "MLX_MAX_MB_PER_BUFFER": "50",
+      "MLX_BFS_MAX_WIDTH": "20",
+      "MLX_METAL_FAST_SYNCH": "0"
+    }
+  },
+  "serving": {
+    "plan": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/prereg-serving-v1/serving-plan.json",
+      "sha256": "e85f92aa1402025a669de4c2426460c1eced29f0145f128480f1fa9e66349c56"
+    },
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-serving-v1/independent-numerical.json",
+      "sha256": "d07ad9e71573adf5737718066a089705d53a03592330e97fa508e30764958856"
+    }
+  },
+  "deadline_seconds": 5700
+}
