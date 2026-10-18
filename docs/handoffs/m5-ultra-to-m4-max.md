@@ -997,3 +997,6 @@ GDN next C8 hypothesis: preserve original five native projections and B>1 gates;
 
 
 2026-10-17: GLM cycle source now includes actual input-builder/registration/driver/independent-audit interfaces;33 new fake CPU methods remain unexecuted. No actual GLM registration, service preparation or load. Source review repaired token-event aggregation and empty drain-map false acceptance before any run. The frozen probe/owner/physical guard are unchanged. E024 has completed first C1 OFF/ON and entered C8 ON; no fully audited new timing result yet.
+
+
+2026-10-17: the proposed GDN batch extension now has separate default-OFF source under bench/m5_ultra_256gb/gdn_prework_batched. Core delta is only batch-shaped guards/two reshapes plus the actual reference-state-kernel pin; original five native projections/gates/state order remain. Root and independent source review complete,12 fake tests written but not run. No device qualification or speed claim; keep it separate from B1 proof and the active route timing.

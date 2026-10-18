@@ -1050,3 +1050,10 @@ A [source-only GDN B2–8 design](../../bench/reviews/2026-10-17-gdn-prework-bat
 Added separate controller, input inventory builder, registration/seal, explicit execution driver and independent restore/load audit. The existing original probe/owner/physical guard remain frozen. The input builder retains original62 shard SHA provenance and stats current files; it hashes only the supplied runtime/source set, not204GB of weights. No real input plan, service preparation or GLM load has happened.
 
 Root and independent agents reviewed the source. Review caught an auditor error before execution: aggregating token events by case could accept wrong order or an empty drain map. It now checks actual before/after/terminal/reset ordering and all seven queue counters. Thirty-three fake tests are written and AST-parsed, not run during active E024 timing. [Prepared source and usage](../../bench/m5_ultra_256gb/glm_flash_cycle/README.md). The future load diagnostic is separate from full-model correctness, quality, physical-capacity or speed qualification.
+
+
+## Batched GDN prework candidate source prepared · 2026-10-17
+
+Implemented the earlier [B2–8 design](../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) as a separate [default-OFF B1–8 adapter](../../bench/m5_ultra_256gb/gdn_prework_batched/README.md). The small runtime delta is a batch-shaped guard and two reshapes, plus a pin for the original state kernel. It preserves all five native Linear calls/current parameters, original B>1 gates fallback and state commit/exception behavior; existing fused Metal math is reused. Original B1 source and current formal pins remain unchanged.
+
+Root and independent source review found no concrete blocker. AST verification confirms unchanged loader/install scopes and all8 native source pins. Twelve new fake test methods are written but unexecuted. This new domain has no device/full-model/HTTP/performance qualification; it is not added to the active GDN HTTP16 CPU task or any speed chart.

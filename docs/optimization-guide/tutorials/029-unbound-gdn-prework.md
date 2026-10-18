@@ -87,3 +87,6 @@ HTTP侧只读Python调用计数，不增加tensor求值；数值检查留给repl
 当前长历史候选仅在 B1 生效。源码检查发现现有 fused kernel 已有 B2–8 的 batch 地址计算，因此下一项小实验应先保留五次原生 Linear，只扩展卷积、激活、Q/K norm 与状态核的调用范围。B>1 继续使用原 gates；不改变投影归约、权重布局或状态提交顺序。
 
 [具体设计与逐行风险](../../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) 先要求 B2/B8、早晚真实激活、三个层位的独立三步状态链，再验证混合历史/row reorder/refill 与完整 HTTP。这一方向仍未实现、未测量；已有 B1 结果不能覆盖它。它减少中间计算，但不减少五次投影的权重流量和每行递归状态的读写，收益取决于真实瓶颈。此前 packing 和 per-row M1 的失败保留为约束。
+
+
+2026-10-17 后续：上述批量方向已落成 [独立默认关闭的候选源码](../../../bench/m5_ultra_256gb/gdn_prework_batched/README.md)。核心修改只有 B1–8 的形状边界与两处 reshape；原有 batched Metal kernel、五次投影和 gates 分支继续复用。12 项假 CPU 测试已写但未执行，逐位真实状态验证仍是下一道门。原 B1 候选与证据保持独立，不能把旧 PASS 改标为新 batch 域已通过。
