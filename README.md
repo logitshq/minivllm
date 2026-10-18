@@ -102,3 +102,5 @@ docs/              计划、教程、远程版的契约和 notes
 [45：补测 Lithos C1/C2/C4](docs/experiments/45-lithos-queued-concurrency.md)使用原版本已有的官方 Ollama FIFO 排队接口，完成九次独立加载。C1/C2/C4 中位吞吐为 21.18 / 20.75 / 21.10 tok/s，完整请求延迟为 1.51 / 2.33 / 3.80 秒；126 个请求全部通过。新图展示三家各三个并发档位，注明 native/oMLX 来自 V128、Lithos 来自 V130；两轮均为 AC、同模型和负载，属于跨轮描述性比较。本次补齐测量与教程，没有修改引擎或宣称新的提速。
 
 [46：从新论文到下一轮实验](docs/experiments/46-next-ideas-from-papers.md)记录与 M5 的 Git 研究交接，以及 decoded-W 复用、混合请求调度和真实成本投机策略的代码替换点。论文与作者实现已核对；这是待验证方案，尚无新性能点。
+
+[47：近期论文精读与更小的实验](docs/experiments/47-recent-paper-reading.md)补读 Apple Silicon 评估、JustFit v3、AgSpec、TLAR 和 QBA。对照原代码解释 prefill 频率与大小、decoded-W 复用、检索候选的接入点；注明作者代码可用性和严格数值边界。本轮为研究与教程，没有新增引擎性能。
