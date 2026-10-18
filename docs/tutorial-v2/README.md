@@ -148,3 +148,5 @@ Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构�
 [45：补测 Lithos 的并发请求](../experiments/45-lithos-queued-concurrency.md)对照 OpenAI 与 Ollama 请求代码，解释客户端并发、服务端排队和 GPU batching 的区别。官方排队接口实测 C1/C2/C4，吞吐基本持平而完整延迟增加；三家九点图保留测试批次标签。
 
 [46：读新论文，找下一处值得替换的代码](../experiments/46-next-ideas-from-papers.md)区分已实现机制与真正的新改动，用前后伪代码解释 decoded-W 复用，并拆开调度排序、时间预算、投机成本策略。包含近期论文与作者代码；候选尚未实现或计入性能图。
+
+[47：再读五篇近期论文](../experiments/47-recent-paper-reading.md)用时间线解释“每次 prefill 多大”和“多久插入一次 prefill”的区别，核对 Apple Silicon 权重复用的正反例，并展示检索式投机要替换哪些代码。标明论文与源码版本；研究方案尚待实现和验证。
