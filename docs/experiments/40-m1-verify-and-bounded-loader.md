@@ -1,5 +1,7 @@
 # 40：先修正 verify 数值，再测吞吐—延迟
 
+历史时点：V117—V122。后续[第42章](42-startup-warm-short-request.md)已测得短请求投机更慢；本章末尾的待测/资源状态是当时记录，不能读成最新进度。
+
 V117 已通过完整目标模型的本轮严格数值资格：普通逐 token A 与投机 B 各得到96个旧 cohort token ID，49次实际 verify 的提交缓存和最后已计算 logits 均严格一致。这是进入性能实验的先决约束，还不是优化收益。目标仍是以正确性为约束，改善 throughput–latency Pareto。
 
 之前的 V114 在加载 DFlash 时触发系统 memory pressure2，由 owner终止并释放。它已经完成 A96，尚未执行 B verify，不能记为算法失败。源码把全部 BF16 原权重留在字典中，又对所有权重建立惰性量化图，直到最后统一求值，延长了源数组存活期。
@@ -24,6 +26,8 @@ for name in tuple(weights):
     out[name], out[base+".scales"], out[base+".biases"] = packed, scales, biases
     del value
 ```
+
+完整实现见[dflash2.py中的加载分支](../code-versions/39-broadcast-m1/candidate116/tutorial_code/miniengine/spec/dflash2.py)，[114→116 diff](../code-versions/39-broadcast-m1/114-to-116-loader.diff)保留实际新增的开关、guard和释放位置。节选中的省略号不可直接当脚本运行。
 
 目标 verify 的另一处修正是保留逐行 M=1 的投影数学。普通 M=T batched QMM 与逐行 M=1 在旧同输入诊断中并非全部相同；V113 的 broadcast 形式对497个实际同输入投影都匹配原 M=1。V117 把该形式严格限制在实际 target verify 调用中，包括该调用的lm_head；普通prefill、drafter及其借用的head在作用域之外，finally恢复所有实例标记。W/scales只加singleton view，不拼接或重新绑定权重。
 

@@ -41,6 +41,8 @@ Scheduler 只操作 Python 请求与计数，不认识矩阵。Runner 把这些�
 
 预算是**模型本步输入的 token 数**，不是输出的字数。C 的 prefill 块没到 prompt 末尾，就不会产生第一个输出 token。
 
+这是一个调度步的总预算，不表示六个 token 放进同一次 forward：本章 runner 先对 A/B 做一次 decode batch，再单独处理 C 的 prefill 块。配置还要求 `max_batched_tokens >= max_seqs`，确保每个活跃 decode 请求都能分到一个输入 token。
+
 当 C 的 prompt 最后一块算完，其末尾 logits 就能预测第一个 token。不要再额外跑一次空 decode 才开始采样。
 
 decode 优先可以避免长 prompt 在每步预算上占满，但一个 prefill 块仍要花真实时间。本实现不能据此保证全局 TTFT 或每个请求的严格延迟上限。
@@ -87,8 +89,10 @@ logits                                         [B,vocab]
 数组里的两个位置属于**两条不同序列**，不能当成同一条序列的两个时间位置。Attention 的 RoPE 为每行使用自己的 position；attention mask 为每行使用自己的有效历史长度。
 
 ```python
-mask = mx.arange(L)[None, :] < ctx.lens[:, None] # ← 关键③ 防止读到别人的 padding
+mask = mx.arange(L)[None, :] < ctx.lens[:, None] # ← 关键③ 屏蔽本行超出有效历史的 padding
 ```
+
+请求之间的隔离来自各自的 batch 行与独立状态；这个 mask 负责排除每行尚未写入的历史位置。源码还把 mask 扩成 `[B,1,1,L]`，以广播到 attention 的头和 query 维度。
 
 GDN 状态增加 batch 维：`S=[B,Hv,Dk,Dv]`、`conv=[B,K−1,C]`。本章用普通 MLX 向量运算并行更新各行，数学仍是第四章的衰减后预测与 delta 更新，没有提前调用自定义 Metal。
 

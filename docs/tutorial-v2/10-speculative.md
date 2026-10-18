@@ -41,6 +41,8 @@ anchor 位置的 logits 预测 draft0；draft0 位置的 logits 预测 draft1；
 
 这是因果模型的一次多 token 前向。只要前面的草稿已经与目标预测匹配，当前位置看到的前缀就与普通 greedy 完全相同。
 
+这里相同的是因果前缀。多 token 验证与普通 M=1 decode 可能选择不同的量化矩阵乘法或归约路径，有限精度下不自动得到相同 logits、状态或 argmax；下面的接受算法不能替代真实模型对照。
+
 ## 3. 接受最长前缀，遇到错误就停
 
 假设草稿是 `[10,11,12]`，目标模型各位置 argmax 是 `[10,11,90,91]`：
@@ -112,7 +114,7 @@ GDN 的做法是：
 
 ## 6. 快慢取决于哪些成本
 
-一轮接收 n 个草稿，加上 bonus，共交付 n+1 个 token。近似吞吐可以写成：
+一轮接受 n 个草稿，加上 bonus，在没有 EOS 或输出预算截断时共交付 n+1 个 token。近似吞吐可以写成：
 
 \[
 \text{tok/s}\approx
@@ -120,6 +122,8 @@ GDN 的做法是：
 \]
 
 块更大可能接受更多，也会提高验证与回滚成本。只报告接受率不足以说明速度；接受率很高但 drafter 很慢，也可能没有收益。
+
+实际吞吐的分子仍须使用停止与截断后真正交付的数量，不能把未交付的 bonus 或草稿计入。
 
 ## 7. 先故意给错草稿，再测真实模型
 
@@ -142,7 +146,7 @@ python -m tutorial_code.check_chapter10 \
 git diff tutorial-09 tutorial-10 -- tutorial_code/miniengine
 ```
 
-[真实模型报告](../../tutorial_code/examples/chapter10-spec-checks.json) 与回滚测试分开。它用同一个目标模型比较普通 greedy 与投机输出，记录接受数和轮数；测试 prompt 上相等不等于所有有限精度路径永远相等，更不能用这个正确性记录宣称速度领先。下一章正式测量。
+[真实模型报告](../../tutorial_code/examples/chapter10-spec-checks.json) 与回滚测试分开。该检查显式设置 `ignore_eos=True`，固定生成16个 token，以比较普通 greedy 与投机输出，并记录接受数和轮数；它没有验证正常 EOS 的完整停止行为。测试 prompt 上相等不等于所有有限精度路径永远相等，更不能用这个正确性记录宣称速度领先。下一章分别说明正常 EOS 与固定步数的测量。
 
 [下一章：11 Baseline 与实验](11-benchmark.md)
 

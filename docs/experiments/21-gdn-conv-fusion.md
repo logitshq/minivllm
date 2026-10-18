@@ -1,5 +1,7 @@
 # 21：把 GDN 真卷积、SiLU 和原始 tail 合成一核
 
+历史时点：V23局部实验。后续完整组合与HTTP检查见[第22章](22-combined-decode-screen.md)，接入原生ICB见[第28章](28-native-gdn-composition.md)。下文的“尚未接入”描述V23当时状态，不覆盖后续实现。
+
 V23 在本机 M4 Max 的局部实验中通过数值门与 micro 门：同样消费 act 和 new_tail，局部 host-wall 中位从 **115.489939µs 降到101.392166µs，减少12.2069275%**，6/6 对获胜。这是继续做模型资格的依据；本章没有模型、HTTP 或 Pareto 胜利，也没有把原型接入26文件引擎。
 
 这一步承接[第20章的实际源码阅读](20-donor-implementation-map.md)。实际 oMLX Qwen3.5 路径会在读取 raw projection 和旧 tail 时做真 conv4＋SiLU，并输出原始新 tail。V23借鉴这个融合边界，按我们自己的 BF16 算术手写；没有照搬 donor 的 FP32 conv 累加。
@@ -77,6 +79,6 @@ PSO归档特别保留[executed-v1源码与build recipe](21-gdn-conv-source/pipel
 
 这12.21%只属于单组卷积的 Python构图/eval/sync host wall。它包含局部执行和提交成本，不能乘48层来宣称每token省多少，也不能换算为HTTP端到端收益。当前 `adopted=false`、`model_qualified=false`、`E2E_run=false`。
 
-下一道门是从冻结25源基线构造候选，捕获真实 preconv 输入，并检查完整模型 logits/IDs、最终 conv/recurrent/KV cache、正常EOS、连续步和 abort/filter/reuse 生命周期。只有这些通过，才做未instrument的固定C1配对与整机收益门。内部 flags 未直接观察这一限制继续保留。
+下一道门是从冻结25源基线构造候选，捕获真实 preconv 输入，并检查完整模型 logits/IDs、最终 conv/recurrent/KV cache、正常EOS、连续步和 实际stop/EOS、行过滤、drop后复用（本段是后续检查计划，不表示已有通用abort API） 生命周期。只有这些通过，才做未instrument的固定C1配对与整机收益门。内部 flags 未直接观察这一限制继续保留。
 
 [小档案目录](21-gdn-conv-source/README.md)保存原型、PSO executed-v1 src/build、数值/micro源码、原 receipts、资源及独立报告；[manifest](21-gdn-conv-source/ARCHIVE-MANIFEST.json)记录原路径、字节数和SHA。源码中的历史绝对路径按原样存档，供审计；它不是任意checkout可直接运行的重定位包。本章没有改26个engine Python文件、旧证据或用户文件。

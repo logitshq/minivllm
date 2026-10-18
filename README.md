@@ -9,7 +9,15 @@
 - 原计划和实验记录：`docs/PLAN.md`、`docs/tutorial/`
 - 引擎只依赖 `mlx`，分词用 `tokenizers`；torch/transformers 只用来生成参考答案；基线（mlx-lm、dflash-mlx）单独一个环境
 
-## 现状（2026-10-14，27B nvfp4，M4 Max 48 GB）
+## 阅读入口与当前比较范围
+
+基础教学从[01—15](docs/tutorial-v2/README.md)开始；后续优化按[实验阅读地图](docs/experiments/README.md)选读。代码分为原完成版`minivllm/`、逐章教学`tutorial_code/`和冻结实验快照，不能将三者的结果混称为同一版本。
+
+当前已保存的M4三家比较见[第45章](docs/experiments/45-lithos-queued-concurrency.md)：Qwen3.8-27B NVFP4、19输入/32输出、C1/C2/C4，以完整HTTP延迟和整组吞吐作图。本方C1与C2/C4使用不同静态启动配置；图不证明全部模型、长负载或所有可调配置最优。论文候选与未采用实验没有计入成绩。
+
+## 原完成版历史测量（2026-10-14，27B nvfp4，M4 Max 48 GB）
+
+下面保留原`minivllm/`测量摘要，场景与计时口径各异；不是逐章教程当前HTTP成绩，也不能和第44—45章直接计算加速倍数。
 
 | 场景 | minivllm | 对照 |
 |---|---|---|
@@ -19,7 +27,7 @@
 | 并发 8 decode 阶段 | 90 tok/s | mlx-lm server 48 |
 | 并发 32 | 跑得起来，峰值 24 GB，持续 115–127 tok/s | mlx-lm server Metal OOM；其静态 batch 142（比我们快 20%） |
 
-教程按步骤在 `docs/tutorial/00`–`06`；吞吐 vs 每用户速度的 Pareto 曲线在 `docs/pareto.html`（`uv run bench/pareto.py` 重画）。
+旧教程在 `docs/tutorial/00`–`06`；旧图 `docs/pareto.html` 使用吞吐与每用户速度，保留为历史参照。现在学习使用 `docs/tutorial-v2/`，完整请求 latency 的新图见第44—45章。
 
 ## 环境
 
@@ -43,7 +51,9 @@ bench/             跑分 client（复刻 vllm bench serve）、基线脚本、�
 docs/              计划、教程、远程版的契约和 notes
 ```
 
-## 独立实验与未采用结果
+## 历史实验索引（各条描述该章时点）
+
+首次阅读建议使用[按问题分组的实验地图](docs/experiments/README.md)。以下是逐次实验记录，包含未采用候选、后续已推进的中间状态与最终服务比较；某章的“待验证”不代表后面没有完成验证。
 
 - [18：先确认优化真的更快](docs/tutorial-v2/18-先确认优化真的更快.md)：GDN/MLP输出行拼接的独立评估，两方向均STOP、未采用；没有修改当前26个引擎源码或V19 default OFF。
 - [投影拼接证据与评估](docs/experiments/18-projection-packing-evaluation.md)：旧AC顺序混杂、新Battery局部配对和控制、原始SHA及独立审查收据；不列为已实现能力。

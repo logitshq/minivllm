@@ -1,6 +1,6 @@
 # 05：把零件装起来，第一次用自己的模型生成
 
-本章是一个明确的交接点：**完整模型的 forward 从 HF 切换到我们写的 MLX 模型。** 前三章分别核对基础块、Attention、GDN，这一章把它们按 checkpoint 的配置装在一起。
+本章是一个明确的交接点：**完整模型的 forward 从 HF 切换到我们写的 MLX 模型。** 第二至四章分别核对基础块、Attention、GDN，这一章把它们按 checkpoint 的配置装在一起。
 
 | 之前 | 本章之后 |
 |---|---|
@@ -137,7 +137,7 @@ tokenizer 仍在 CLI 边界把文字转成 IDs、把输出 IDs 转回文字。`m
 
 ## 6. 跑起来，再检查完整结果
 
-从教学仓库根目录运行，Python 使用已安装 MLX/Torch 的环境：
+在 `tutorial-05` 对应的工作树中，从仓库根目录运行；版本选择方式见[目录](README.md)。Python 使用已安装 MLX/Torch 的环境。当前分支后来的 `generate_mlx.py` 已有 cache 等功能，不能用它代替本章的无 cache 入口：
 
 ```bash
 python -m tutorial_code.generate_mlx \

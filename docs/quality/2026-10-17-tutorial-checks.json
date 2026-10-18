@@ -1,0 +1,410 @@
+{
+  "date": "2026-10-17",
+  "base_commit": "e7205b3344ecacb3c084c6c105a2d9ebe88e5454",
+  "scope": "CPU only; no imports of model code, GPU, runtime qualification, external-link fetching or native preview rendering",
+  "documents": 55,
+  "relative_links": 534,
+  "broken_relative": [],
+  "absolute_links": [],
+  "unclosed_fences": [],
+  "tag_references": 29,
+  "missing_tags": [],
+  "shell_blocks_parsed": 43,
+  "json_blocks_parsed": 9,
+  "core_tags": [
+    "tutorial-01",
+    "tutorial-02-v2",
+    "tutorial-03",
+    "tutorial-04",
+    "tutorial-05",
+    "tutorial-06",
+    "tutorial-07-v2",
+    "tutorial-08",
+    "tutorial-09",
+    "tutorial-10",
+    "tutorial-11-v3",
+    "tutorial-12-v1",
+    "tutorial-13-v1",
+    "tutorial-14-v1",
+    "tutorial-15-v1"
+  ],
+  "tag_python_file_pairs_parsed": 432,
+  "distinct_python_blobs_parsed": 77,
+  "errors": [],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "d4edc6e63693874f09f0e212ae1fb9e9db7f24c8d7ced5dc4f9f49beb34e20e4"
+    },
+    {
+      "path": "docs/tutorial-v2/01-一次文本生成是怎么发生的.md",
+      "sha256": "65448c1f4108395a703b9aaea048eedeb210caac60565d256cafb09ef53c8063"
+    },
+    {
+      "path": "docs/tutorial-v2/02-从ID到向量再到分数.md",
+      "sha256": "a25af5b83deb3c1a0ac2dc0151200bd11d0b854b3fe638ced5d236d39fefebfe"
+    },
+    {
+      "path": "docs/tutorial-v2/03-attention.md",
+      "sha256": "732896422f17b7cb5ff93c72fac1f8306495d4cda33299ab244d29eef76357c2"
+    },
+    {
+      "path": "docs/tutorial-v2/04-gdn.md",
+      "sha256": "3b5d78f5bac28185167da66d96ba6ef4d50c7fc92fc87723520e118d51ea806d"
+    },
+    {
+      "path": "docs/tutorial-v2/05-model.md",
+      "sha256": "b982f018bd181fa8ce7a7258cc1e5582e52957c32050d3175f6cff1c9664f51d"
+    },
+    {
+      "path": "docs/tutorial-v2/06-cache.md",
+      "sha256": "99320ff25d1ad2abebfdca16d80d77d0ab64011a2001802c46acde92e8bbe1f1"
+    },
+    {
+      "path": "docs/tutorial-v2/07-quantization.md",
+      "sha256": "a152bc16fa0023718367d5debc8e525e737375e5828c80b1ec613c847373d96c"
+    },
+    {
+      "path": "docs/tutorial-v2/08-scheduler.md",
+      "sha256": "6d9a9c7e77b7f13876a1b1039af10d4235a7ca600626e90eb2fc30dc23c1dc4d"
+    },
+    {
+      "path": "docs/tutorial-v2/09-metal.md",
+      "sha256": "92e3255e0c0064acd1d66321302b752aef03bdf0bdf3630f4dceeb237d1945ea"
+    },
+    {
+      "path": "docs/tutorial-v2/10-speculative.md",
+      "sha256": "f004ff3e834642613f6d62bb412db4d05129aabb0153c2f8e12b19efb6569d4b"
+    },
+    {
+      "path": "docs/tutorial-v2/11-benchmark.md",
+      "sha256": "e0068ec6fcb13e57056d5a1e138e51d0758ffb547eb4fe62967d2629b012872c"
+    },
+    {
+      "path": "docs/tutorial-v2/12-从同步到流水线再到算子融合.md",
+      "sha256": "40f242418ecb1b6aa16da383d264bcd309050b16a890306191aceeb9b8d96260"
+    },
+    {
+      "path": "docs/tutorial-v2/13-把norm写成一个Metal核.md",
+      "sha256": "e7b49fa897210b7217f60ab761ca9dfde7732c2880817f30417cb83859b1b387"
+    },
+    {
+      "path": "docs/tutorial-v2/14-把多个prompt一起prefill.md",
+      "sha256": "249a275b8ad4ea7bef17daba56bb96e678b21193e6b61daa245b2afafd387157"
+    },
+    {
+      "path": "docs/tutorial-v2/15-把GDN的小门计算一起编译.md",
+      "sha256": "20a0dbebb848b746913dbfad9f4ae22226023d27679d1276875baf855708a093"
+    },
+    {
+      "path": "docs/tutorial-v2/16-实验篇从哪里开始.md",
+      "sha256": "08c9a49991e781effa87cc5d0c545cbf0404caae3c68c42e58271a5868fa19f2"
+    },
+    {
+      "path": "docs/tutorial-v2/18-先确认优化真的更快.md",
+      "sha256": "9ca36e85b58b55bb54f702d8b5864d2cbb2f74ecdaa5a5ba246ad953c5b55373"
+    },
+    {
+      "path": "docs/tutorial-v2/19-把量化矩阵乘拆开看.md",
+      "sha256": "c96ff59abc172af91f893bc95a29fb297562e1c524d99059cbe451e794ec7237"
+    },
+    {
+      "path": "docs/tutorial-v2/README.md",
+      "sha256": "f395ceb2ece2a83c4dee974597443acb0abeb58eb3b1688abcdad7e7623826e0"
+    },
+    {
+      "path": "docs/experiments/17-gdn-norm-reuse-status.md",
+      "sha256": "d1b6fcba6f633fb00c754724c4f95780bde1343315415ef046dbc7801a58c8fb"
+    },
+    {
+      "path": "docs/experiments/17-gdn-norm-reuse-walkthrough.md",
+      "sha256": "5a5adde43bc40fadb2841447f32778fb0ed50bc82a0dee67f4c8124a0d835b81"
+    },
+    {
+      "path": "docs/experiments/18-projection-packing-evaluation.md",
+      "sha256": "986510bbd8cd1bcaa1f6a012af1d9ec343cfa2a4365810f0043712038b3ad603"
+    },
+    {
+      "path": "docs/experiments/19-nvfp4-qmv-geometry.md",
+      "sha256": "ff038a0315365cc556afac487a138f85dd9f13730d15373124b12881ad73d629"
+    },
+    {
+      "path": "docs/experiments/20-donor-implementation-map.md",
+      "sha256": "a238c6553ddf6cd0426b5da9205c11f9efb79158c3099c45b2ff45d3b14b8066"
+    },
+    {
+      "path": "docs/experiments/21-gdn-conv-fusion.md",
+      "sha256": "09b93c12da098da20a386d4f5e3808ab8bb52e58763533a6b5ed0537ce4e678f"
+    },
+    {
+      "path": "docs/experiments/22-combined-decode-screen.md",
+      "sha256": "2e233193801078acd0807156588835dfbec0d3a852fcb072dcaafb311a52b9a7"
+    },
+    {
+      "path": "docs/experiments/23-kernel-tests-and-gpu-diagnostics.md",
+      "sha256": "8ed3d07c1dcd00bd9781ac6ca172ce1d545a26126915da1f5bc9814b0b6c77fb"
+    },
+    {
+      "path": "docs/experiments/24-numerics-and-qmv.md",
+      "sha256": "2e7d7c2136d9926b62fdcf5fe5da3f759a3f6bcbe1f828f59aa7659f847deb0d"
+    },
+    {
+      "path": "docs/experiments/25-fixed-buffer-replay.md",
+      "sha256": "e8d88697406ccde66cbba9b36ef1c002109273a65433656d44e4ae00f218419b"
+    },
+    {
+      "path": "docs/experiments/26-gpu-feedback.md",
+      "sha256": "720366a1dde545d5cc2dac052bd902b689a98503c2f22e75bf09852dd0445026"
+    },
+    {
+      "path": "docs/experiments/27-native-icb-pingpong.md",
+      "sha256": "4b5b56affbec7e213274e55a91fa59e45d260c27245932adfc0a40b6308ad4d7"
+    },
+    {
+      "path": "docs/experiments/28-native-gdn-composition.md",
+      "sha256": "547da5ffb4cf4fb7415c761ca91763bc3ab465ba61bef7f4a78ca46839d86f1f"
+    },
+    {
+      "path": "docs/experiments/29-native-runner-http.md",
+      "sha256": "348e50a1441760c044ae4eb591791c1cbb251d48e45d953c57ad8b4622151689"
+    },
+    {
+      "path": "docs/experiments/30-native-ahead.md",
+      "sha256": "d6cbeb520c9f2bcba15a85545a3478cf6662db4b4b10a096fc5970da43d88fe1"
+    },
+    {
+      "path": "docs/experiments/31-native-direct-profiling.md",
+      "sha256": "04afff09466ff6b25ad2d403e77ade821476af475ac669a135d163e6710cb193"
+    },
+    {
+      "path": "docs/experiments/32-native-residual-projection.md",
+      "sha256": "7194db8de7a529cf9dd8111f93b71a88b2b9aa15cf1b98b56dfc32fa4483e92a"
+    },
+    {
+      "path": "docs/experiments/33-native-range-compiled-step.md",
+      "sha256": "943012d5c2846e86a0004e65614b9ac9d81e9229a5b9d396a9bb4d8b0273688b"
+    },
+    {
+      "path": "docs/experiments/34-native-ba-gates-prework.md",
+      "sha256": "392a358e30f3c84496515f73a286e855e2b176be935e5af2d7aea87d3b361e69"
+    },
+    {
+      "path": "docs/experiments/35-local-probe-stops.md",
+      "sha256": "ec0c14f382d41700edb9ef79e43fceaebfbacd75fbde11473c43b39c0dd63bdd"
+    },
+    {
+      "path": "docs/experiments/36-cap64-and-rms-profile.md",
+      "sha256": "1dcdc741e6e3ddc7a95f79a1ac65c9068153b87b052e1eb99296a41dc52a6004"
+    },
+    {
+      "path": "docs/experiments/37-simd4-async-and-spec-handoff.md",
+      "sha256": "3482063a591d896c6da3b029b7e7d39f08eb5877b93ef6b3af2e7f02ab3af3d1"
+    },
+    {
+      "path": "docs/experiments/38-spec-transaction-and-qmm.md",
+      "sha256": "891adafd08be4cb1ac38b1b995b7d8c9a409e331d8614c73bc23014a2d962837"
+    },
+    {
+      "path": "docs/experiments/39-verify-broadcast-m1.md",
+      "sha256": "955ddb92242a2a50ba4a184d79cc558d7d0c4291610ac0dd99896490fb80c167"
+    },
+    {
+      "path": "docs/experiments/40-m1-verify-and-bounded-loader.md",
+      "sha256": "cbe6b3322f3e82f1d448bff04ca086c6c157f098ea0a7080306bb83ed6567b56"
+    },
+    {
+      "path": "docs/experiments/41-native-http-nodelay-pilot.md",
+      "sha256": "90e94451f904b159d54bd27ea344d75fc9ec93d4961e7d6d7d8bb14f3fd4f4b3"
+    },
+    {
+      "path": "docs/experiments/42-startup-warm-short-request.md",
+      "sha256": "0b59fb01b7104b7af30f9530e9ac427c98a2faef5deb3129fde0a4ea7d835e44"
+    },
+    {
+      "path": "docs/experiments/43-fresh-c1-throughput-latency.md",
+      "sha256": "a97fceb9cb940cdb637dce3c6d9d342f678486714797f122e258e7a3f86489bd"
+    },
+    {
+      "path": "docs/experiments/44-fresh-full-throughput-latency.md",
+      "sha256": "40e1777bc222749b93fc69729abac6ff88b6ffae3fc074c1c88a22ac51329a6c"
+    },
+    {
+      "path": "docs/experiments/45-lithos-queued-concurrency.md",
+      "sha256": "00aa841d2b2d1c3c1520777044c85291487eaa1b3a5b7ea14e9e58bff2f6ac57"
+    },
+    {
+      "path": "docs/experiments/46-next-ideas-from-papers.md",
+      "sha256": "8e544df21a4065bf3da4f992afe5662cfc430824d41c6c7a2929b6f18fec26db"
+    },
+    {
+      "path": "docs/experiments/47-recent-paper-reading.md",
+      "sha256": "cff9e5c256fb6479ef190a5ef2081a6ff5208d55db581041f73ab66276a658e1"
+    },
+    {
+      "path": "docs/experiments/README.md",
+      "sha256": "3180082ef736690a1125f0b19ce584f1e12549701f4795847d618209499b25ff"
+    },
+    {
+      "path": "docs/code-versions/39-broadcast-m1/README.md",
+      "sha256": "1ec1e6b2196b03b3635436a69fdf5454125e8970b6c27e7a47d9575d1dd7d96b"
+    },
+    {
+      "path": "docs/code-versions/44-shared-w-m1/README.md",
+      "sha256": "382e37ae75f8aff0e495a22ff19972ce293075a4719ba206b43088c10f2b66e5"
+    }
+  ],
+  "status": "PASS_STATIC",
+  "remote_tag_verification": {
+    "method": "git ls-remote --tags origin tutorial-* after non-force push",
+    "referenced_tags": 29,
+    "new_tags_published": 28,
+    "all_ref_ids_match": true,
+    "tags": [
+      {
+        "tag": "tutorial-01",
+        "ref": "8b3afc9023caf47aa32d3621dbd5939657f92bc2",
+        "commit": "4f9952da4537a2503477365b789a276e3ff8033d"
+      },
+      {
+        "tag": "tutorial-02",
+        "ref": "fd428b227b02e965acb7580bc305fbf528a73453",
+        "commit": "6bd1ee9e945b4320d1f536110fc81699046d9fe3"
+      },
+      {
+        "tag": "tutorial-02-v2",
+        "ref": "e55e7c59ade307c00e690dc8abcbce933c8464ee",
+        "commit": "f3b203ba44b135693bf0c6d6dbc82dd8072e9a63"
+      },
+      {
+        "tag": "tutorial-03",
+        "ref": "3370530cd48ce12e40fbb320faaa51b2eae6962f",
+        "commit": "3370530cd48ce12e40fbb320faaa51b2eae6962f"
+      },
+      {
+        "tag": "tutorial-04",
+        "ref": "741f8ed64f23cea98d50c4a6b0e75e72a1e01cd5",
+        "commit": "741f8ed64f23cea98d50c4a6b0e75e72a1e01cd5"
+      },
+      {
+        "tag": "tutorial-05",
+        "ref": "1bb0dd3f38fea7b61f305246bd880ee6f341073b",
+        "commit": "1bb0dd3f38fea7b61f305246bd880ee6f341073b"
+      },
+      {
+        "tag": "tutorial-06",
+        "ref": "d6648dacc562496766aed2c6448b2cf515c1dee3",
+        "commit": "d6648dacc562496766aed2c6448b2cf515c1dee3"
+      },
+      {
+        "tag": "tutorial-07",
+        "ref": "04b5f37aedc84bfcf256390e5caeb42f459accd2",
+        "commit": "04b5f37aedc84bfcf256390e5caeb42f459accd2"
+      },
+      {
+        "tag": "tutorial-07-v2",
+        "ref": "761d13a7c358c2c1a256d4e426d94c258dc80b2d",
+        "commit": "761d13a7c358c2c1a256d4e426d94c258dc80b2d"
+      },
+      {
+        "tag": "tutorial-08",
+        "ref": "c12517fed992efda8f80668236a35490d3684ebc",
+        "commit": "c12517fed992efda8f80668236a35490d3684ebc"
+      },
+      {
+        "tag": "tutorial-09",
+        "ref": "2ded99f4d7e095fef87f84eaf85fb6d836960b8d",
+        "commit": "2ded99f4d7e095fef87f84eaf85fb6d836960b8d"
+      },
+      {
+        "tag": "tutorial-10",
+        "ref": "277ac838588a43b83a5321912b8f4ab64cbac769",
+        "commit": "277ac838588a43b83a5321912b8f4ab64cbac769"
+      },
+      {
+        "tag": "tutorial-11",
+        "ref": "ef0e06f7cc7fcd80f441dbb859928ec600111c2b",
+        "commit": "ef0e06f7cc7fcd80f441dbb859928ec600111c2b"
+      },
+      {
+        "tag": "tutorial-11-v2",
+        "ref": "57021cd5160a21c66cc20647f42b67f30aea6279",
+        "commit": "57021cd5160a21c66cc20647f42b67f30aea6279"
+      },
+      {
+        "tag": "tutorial-11-v3",
+        "ref": "c8b6415afbcb7920e78b610a3859ccd3d98a8939",
+        "commit": "c8b6415afbcb7920e78b610a3859ccd3d98a8939"
+      },
+      {
+        "tag": "tutorial-12-pipeline",
+        "ref": "a99351641b957ee5656da85a74868c02a2351ea1",
+        "commit": "a99351641b957ee5656da85a74868c02a2351ea1"
+      },
+      {
+        "tag": "tutorial-12-tiling",
+        "ref": "3d6c6c22f6d773bcdac10551487da1ae60c15a73",
+        "commit": "3d6c6c22f6d773bcdac10551487da1ae60c15a73"
+      },
+      {
+        "tag": "tutorial-12-v1",
+        "ref": "62476bcf81f73ea912401a72296edf4ef57adf69",
+        "commit": "62476bcf81f73ea912401a72296edf4ef57adf69"
+      },
+      {
+        "tag": "tutorial-13-v1",
+        "ref": "8081ac328475825ba2b77af9a1f1174b343f9268",
+        "commit": "8081ac328475825ba2b77af9a1f1174b343f9268"
+      },
+      {
+        "tag": "tutorial-14-ac-evidence",
+        "ref": "d0549e72d22fe6693d8b1a7bcb43444e57310921",
+        "commit": "d0549e72d22fe6693d8b1a7bcb43444e57310921"
+      },
+      {
+        "tag": "tutorial-14-batch-prefill",
+        "ref": "35f5110285744fed1533059e0d82aa92dd39e232",
+        "commit": "35f5110285744fed1533059e0d82aa92dd39e232"
+      },
+      {
+        "tag": "tutorial-14-batched-ops",
+        "ref": "1b0a349e26371a7b23d82d4f76ede1e376ea19b1",
+        "commit": "1b0a349e26371a7b23d82d4f76ede1e376ea19b1"
+      },
+      {
+        "tag": "tutorial-14-v1",
+        "ref": "05d451b229759b6a169654200a8d1fbd89e9702d",
+        "commit": "05d451b229759b6a169654200a8d1fbd89e9702d"
+      },
+      {
+        "tag": "tutorial-15-gates-optin",
+        "ref": "7cc54c53d00ca27d6c947b26b1bcc3d88a569c7e",
+        "commit": "7cc54c53d00ca27d6c947b26b1bcc3d88a569c7e"
+      },
+      {
+        "tag": "tutorial-15-v1",
+        "ref": "f976d6a547a9dc1946b52b1de6db376d799b34d7",
+        "commit": "f976d6a547a9dc1946b52b1de6db376d799b34d7"
+      },
+      {
+        "tag": "tutorial-16-experiment-code",
+        "ref": "33152a7ff0b0c9313568e84564bc24b2dc3d1ecf",
+        "commit": "33152a7ff0b0c9313568e84564bc24b2dc3d1ecf"
+      },
+      {
+        "tag": "tutorial-16-experiment-v1",
+        "ref": "f7d9156de44515b51c681db719644b20ed79cb53",
+        "commit": "f7d9156de44515b51c681db719644b20ed79cb53"
+      },
+      {
+        "tag": "tutorial-17-static-reading-v1",
+        "ref": "8aba03941634c73e0847c23d42a6051d43549525",
+        "commit": "8aba03941634c73e0847c23d42a6051d43549525"
+      },
+      {
+        "tag": "tutorial-format-v1",
+        "ref": "ba515b5c37c0df29d354fc9c527ea07d8ed248ef",
+        "commit": "ba515b5c37c0df29d354fc9c527ea07d8ed248ef"
+      }
+    ]
+  }
+}

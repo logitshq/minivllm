@@ -59,6 +59,8 @@ scales：          [64,8]              # 每 16 个输入维度一组
 
 scales 的存储类型也取决于格式；不要假定它永远是 fp32。
 
+源码里的 affine `biases` 是每个量化组的解码偏移，不是普通 Linear 在矩阵乘之后加的输出偏置。本模型的 Linear 仍没有后一种 bias；NVFP4 路径也不套用 affine 的解码偏移。
+
 ## 3. Embedding 与输出头也要认识量化
 
 读输入 Embedding 时，只需要本次 token 对应的行。以下是省略格式参数的阅读节选：
@@ -87,7 +89,7 @@ x = mx.dequantize(selected_weight, selected_scales, ..., mode=self.q["mode"])
 y=\operatorname{normalize}(x)\,(1+w_{HF}).
 \]
 
-MLX 转换文件里的这些 norm 权重已经包含 `+1`，即 `w_MLX=1+w_HF`。教学类仍沿用 HF 的 `1+w` 公式，所以 loader 要减回去：
+本章核对的 MLX 转换 checkpoint 里，这些 norm 权重已经包含 `+1`，即 `w_MLX=1+w_HF`。教学类仍沿用 HF 的 `1+w` 公式，所以 loader 要减回去：
 
 ```python
 if converted_mlx and is_zero_centered_norm(name):
@@ -96,7 +98,7 @@ if converted_mlx and is_zero_centered_norm(name):
 
 小例子：HF 保存 `w=0.2`，实际倍率是 1.2；转换文件保存 1.2。如果不减 1 就加载进我们的类，倍率变成 2.2，模型会算错。
 
-上面是条件的简写，源码依据文件名前缀识别转换格式，并只对明确列出的 norm 做变换。GDN 输出的普通 gated norm 没有这个 `+1`，不能一律减 1。名字映射、卷积布局与 strict 加载沿用第五章。
+上面是条件的简写，源码依据**参数名**的 `language_model.model.` 前缀识别这条转换路径，并只对明确列出的 norm 做变换，不是检查文件名。GDN 输出的普通 gated norm 没有这个 `+1`，不能一律减 1。换用其他来源的 checkpoint 时仍需核对存储约定；名字和 shape 的 strict 检查本身不能判断权重是否已经加过 1。名字映射、卷积布局与 strict 加载沿用第五章。
 
 ## 5. 本章 diff 与运行入口
 
