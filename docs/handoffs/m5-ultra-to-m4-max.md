@@ -1000,3 +1000,6 @@ GDN next C8 hypothesis: preserve original five native projections and B>1 gates;
 
 
 2026-10-17: the proposed GDN batch extension now has separate default-OFF source under bench/m5_ultra_256gb/gdn_prework_batched. Core delta is only batch-shaped guards/two reshapes plus the actual reference-state-kernel pin; original five native projections/gates/state order remain. Root and independent source review complete,12 fake tests written but not run. No device qualification or speed claim; keep it separate from B1 proof and the active route timing.
+
+
+2026-10-17: actual one-cycle offline continuations are waiting behind the active E024 formal run: independent restore/formal audit+archive, GDN HTTP16 fake CPU checks, GLM33 fake CPU checks, then eligible v12 rendering. Fixed source/startup snapshots are committed under docs/experiments/m5-ultra-256gb/queued-continuations-v1; they are not completed results. NewB1–8 GDN source e3af68b remains unexecuted/defaultOFF. No overlapping GPU run or new speed claim.

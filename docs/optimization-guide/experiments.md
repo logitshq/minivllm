@@ -1057,3 +1057,8 @@ Root and independent agents reviewed the source. Review caught an auditor error 
 Implemented the earlier [B2–8 design](../../bench/reviews/2026-10-17-gdn-prework-batched-next.md) as a separate [default-OFF B1–8 adapter](../../bench/m5_ultra_256gb/gdn_prework_batched/README.md). The small runtime delta is a batch-shaped guard and two reshapes, plus a pin for the original state kernel. It preserves all five native Linear calls/current parameters, original B>1 gates fallback and state commit/exception behavior; existing fused Metal math is reused. Original B1 source and current formal pins remain unchanged.
 
 Root and independent source review found no concrete blocker. AST verification confirms unchanged loader/install scopes and all8 native source pins. Twelve new fake test methods are written but unexecuted. This new domain has no device/full-model/HTTP/performance qualification; it is not added to the active GDN HTTP16 CPU task or any speed chart.
+
+
+## Offline continuation actually queued · 2026-10-17
+
+The active E024 driver will attempt its original service recovery before the separate audit/archive continuation. New one-cycle waiting processes now serialize GDN HTTP16 and GLM33 complete fake CPU modules after actual closure, then generate the fixed v12 figure only on full formal PASS. Actual parent wait-return evidence prevents overlapping offline stages; a child result file alone is insufficient. No tests/render had begun at the saved snapshot, and the batched GDN12 tests are outside this queue. [Exact scripts and startup states](../experiments/m5-ultra-256gb/queued-continuations-v1/README.md). Current v11 stays unchanged until visual review; failures remain inspectable and do not create speed points.
