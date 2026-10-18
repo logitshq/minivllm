@@ -9,7 +9,7 @@
 
 ## 阅读入口与当前比较范围
 
-基础教学从[01—15](docs/tutorial-v2/README.md)开始；后续优化按[实验阅读地图](docs/experiments/README.md)选读。代码分为原完成版`minivllm/`、逐章教学`tutorial_code/`和冻结实验快照，不能将三者的结果混称为同一版本。
+基础教学从[01—15](docs/tutorial-v2/README.md)开始；后续按[优化教程6篇18节](docs/tutorial-v2/optimization/README.md)继续。原16—45全部保留为实验档案，知识点去向见[逐章对应表](docs/tutorial-v2/optimization/coverage.md)。代码分为原完成版`minivllm/`、逐章教学`tutorial_code/`和冻结实验快照，不能将三者的结果混称为同一版本。
 
 当前已保存的M4三家比较见[第45章](docs/experiments/45-lithos-queued-concurrency.md)：Qwen3.8-27B NVFP4、19输入/32输出、C1/C2/C4，以完整HTTP延迟和整组吞吐作图。本方C1与C2/C4使用不同静态启动配置；图不证明全部模型、长负载或所有可调配置最优。论文候选与未采用实验没有计入成绩。
 
@@ -51,7 +51,7 @@ docs/              计划、教程、远程版的契约和 notes
 
 ## 历史实验索引（各条描述该章时点）
 
-首次阅读建议使用[按问题分组的实验地图](docs/experiments/README.md)。以下是逐次实验记录，包含未采用候选、后续已推进的中间状态与最终服务比较；某章的“待验证”不代表后面没有完成验证。
+首次学习请读[6篇18节优化教程](docs/tutorial-v2/optimization/README.md)，查完整实验时使用[档案地图](docs/experiments/README.md)。以下是逐次实验记录，包含未采用候选、后续已推进的中间状态与最终服务比较；某章的“待验证”不代表后面没有完成验证。
 
 - [18：先确认优化真的更快](docs/tutorial-v2/18-先确认优化真的更快.md)：GDN/MLP输出行拼接的独立评估，两方向均STOP、未采用；没有修改当前26个引擎源码或V19 default OFF。
 - [投影拼接证据与评估](docs/experiments/18-projection-packing-evaluation.md)：旧AC顺序混杂、新Battery局部配对和控制、原始SHA及独立审查收据；不列为已实现能力。

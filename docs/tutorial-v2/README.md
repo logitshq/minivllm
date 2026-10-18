@@ -1,6 +1,6 @@
 # 一章一章写一个推理引擎
 
-从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。**第一次学习按01—15顺序读；16以后是独立实验与研究，按问题选读。** 后面的章号不表示前面的所有候选都已经被采用。
+从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。**先读01—15基础章，再读[优化教程的6篇18节](optimization/README.md)。** 原16—45保留为30个实验编号的完整档案；新短章按概念组织，不表示所有候选都已被采用。
 
 | 你现在想做什么 | 从哪里开始 |
 | --- | --- |
@@ -8,7 +8,8 @@
 | 读懂自己实现的完整引擎 | 05完整模型 → 06 Cache → 07量化 → 08调度 |
 | 学习GPU与服务优化 | 09 Metal → 10投机 → 11测量 → 12—15逐步优化 |
 | 看目前三家吞吐—延迟比较 | [45 三家C1/C2/C4](../experiments/45-lithos-queued-concurrency.md)；注意其负载和测试批次 |
-| 看后续实验为什么成功或失败 | [实验阅读地图](../experiments/README.md)，先读导读，再按主题选章 |
+| 一步步学习后续优化 | [6篇18节](optimization/README.md)，从测量到融合、复用、执行、投机与Pareto |
+| 查某次优化的完整代码与正负结果 | [原章对应表](optimization/coverage.md) → [实验档案](../experiments/README.md) |
 
 01—15代码保存在 `tutorial/step-by-step` 的固定tag；当前优化分支还保存后续实验快照。仓库有三套不同用途的代码：`minivllm/`是原完成版参照，`tutorial_code/`是逐章教学代码，`docs/code-versions/`与实验source目录是冻结候选。运行教学代码不会导入完成版引擎。
 
@@ -124,8 +125,10 @@ uv run python -m tutorial_code.check_attention
 
 模型下载方式见第01章；量化checkpoint见第07章。文中 `/Users/ryanli/...` 是原测量机器的路径记录，换机器需要替换，不能把本机已有模型当成仓库自带。oMLX/Lithos使用独立环境，见[baseline说明](../../tutorial_code/baselines/README.md)。核心教程处理token IDs，tokenizer与HTTP serving作为输入输出适配；后续服务实验才测完整HTTP边界。
 
-## 进入实验篇之前
+## 基础篇之后：六篇优化教程
 
-[实验阅读地图](../experiments/README.md)补齐16—47的去向，说明章号、V编号和tag的区别，并给出ICB、CAP、资格检查等词的含义。建议沿“16—17融合与复用 → 27原生命令 → 29—30服务接入 → 38—40投机正确性 → 43—45同负载比较”阅读；中间的负结果按兴趣选读。
+[优化目录](optimization/README.md)按“先测清楚 → 融合 → 复用 → 减少主机工作 → 投机 → 完整服务比较”组织成6篇18节，每节都有前后对照、不变量、实测边界与理解题。六篇是主题层级，不是把30章硬压成六个大章。
+
+[原章对应表](optimization/coverage.md)列出16—45全部30个编号的知识点去向，并明确哪些复杂推导、支线和完整数据仍需打开原文。原章、旧tag、源码和失败记录均保留；只读18节不会逐项复述全部日志。[实验档案地图](../experiments/README.md)继续解释章号、V编号和tag，以及ICB、CAP等术语。
 
 [46论文到实验](../experiments/46-next-ideas-from-papers.md)和[47近期论文精读](../experiments/47-recent-paper-reading.md)是待验证方案，尚无新性能点。历史章节的STOP/PASS描述当时的实验，后续更新由目录与章首链接说明；不覆盖旧tag或原始结果。

@@ -1,0 +1,677 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+  "scope": "Curriculum mapping and preservation; no new implementation or numerical/performance qualification. Short lessons summarize the core; complete derivations and experiments remain required source material for implementation-level study.",
+  "lessons": [
+    {
+      "id": "A1",
+      "file": "a1-timing-boundaries.md"
+    },
+    {
+      "id": "A2",
+      "file": "a2-controlled-comparison.md"
+    },
+    {
+      "id": "B1",
+      "file": "b1-postconv.md"
+    },
+    {
+      "id": "B2",
+      "file": "b2-conv-fusion.md"
+    },
+    {
+      "id": "B3",
+      "file": "b3-gate-fusion.md"
+    },
+    {
+      "id": "C1",
+      "file": "c1-norm-reuse.md"
+    },
+    {
+      "id": "C2",
+      "file": "c2-weight-reuse.md"
+    },
+    {
+      "id": "C3",
+      "file": "c3-state-buffers.md"
+    },
+    {
+      "id": "D1",
+      "file": "d1-command-reuse.md"
+    },
+    {
+      "id": "D2",
+      "file": "d2-device-feedback.md"
+    },
+    {
+      "id": "D3",
+      "file": "d3-service-ownership.md"
+    },
+    {
+      "id": "E1",
+      "file": "e1-spec-transactions.md"
+    },
+    {
+      "id": "E2",
+      "file": "e2-verify-m1.md"
+    },
+    {
+      "id": "E3",
+      "file": "e3-draft-loading.md"
+    },
+    {
+      "id": "E4",
+      "file": "e4-spec-cost.md"
+    },
+    {
+      "id": "F1",
+      "file": "f1-http-measurement.md"
+    },
+    {
+      "id": "F2",
+      "file": "f2-pareto-configurations.md"
+    },
+    {
+      "id": "F3",
+      "file": "f3-queue-vs-batch.md"
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 16,
+      "sources": [
+        {
+          "path": "docs/tutorial-v2/16-把GDN的SiLU和拆头并入状态更新.md",
+          "revision": "f7d9156de44515b51c681db719644b20ed79cb53",
+          "tag": "tutorial-16-experiment-v1",
+          "sha256": "f7a3668d3225ff730cbf569bc4d4426f1af57fb1d07a6a0e3c3923f77830e93b",
+          "url": "https://github.com/logitshq/minivllm/blob/tutorial-16-experiment-v1/docs/tutorial-v2/16-把GDN的SiLU和拆头并入状态更新.md"
+        },
+        {
+          "path": "docs/tutorial-v2/16-实验篇从哪里开始.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "08c9a49991e781effa87cc5d0c545cbf0404caae3c68c42e58271a5868fa19f2"
+        }
+      ],
+      "lessons": [
+        "b1-postconv.md"
+      ],
+      "teaching_points": [
+        "typed SiLU、拆头映射、重复计算与dispatch的取舍"
+      ],
+      "details_retained_in_original": "精确逻辑计数、开关/fallback、独立示例与每轮检查"
+    },
+    {
+      "chapter": 17,
+      "sources": [
+        {
+          "path": "docs/experiments/17-gdn-norm-reuse-status.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "d1b6fcba6f633fb00c754724c4f95780bde1343315415ef046dbc7801a58c8fb"
+        },
+        {
+          "path": "docs/experiments/17-gdn-norm-reuse-walkthrough.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "5a5adde43bc40fadb2841447f32778fb0ed50bc82a0dee67f4c8124a0d835b81"
+        }
+      ],
+      "lessons": [
+        "c1-norm-reuse.md"
+      ],
+      "teaching_points": [
+        "Q/K范数只算一次",
+        "L2与RMS区别",
+        "共享scale不共享S"
+      ],
+      "details_retained_in_original": "串行归约顺序、临时空间、阶段资源STOP、完整结果索引"
+    },
+    {
+      "chapter": 18,
+      "sources": [
+        {
+          "path": "docs/tutorial-v2/18-先确认优化真的更快.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "9ca36e85b58b55bb54f702d8b5864d2cbb2f74ecdaa5a5ba246ad953c5b55373"
+        },
+        {
+          "path": "docs/experiments/18-projection-packing-evaluation.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "986510bbd8cd1bcaa1f6a012af1d9ec343cfa2a4365810f0043712038b3ad603"
+        }
+      ],
+      "lessons": [
+        "a2-controlled-comparison.md",
+        "c2-weight-reuse.md"
+      ],
+      "teaching_points": [
+        "输出行拼接",
+        "顺序漂移",
+        "对称AB/BA与AA/BB"
+      ],
+      "details_retained_in_original": "GDN和MLP各轮原数值、prime/cold、hash放置及采用门"
+    },
+    {
+      "chapter": 19,
+      "sources": [
+        {
+          "path": "docs/tutorial-v2/19-把量化矩阵乘拆开看.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "c96ff59abc172af91f893bc95a29fb297562e1c524d99059cbe451e794ec7237"
+        },
+        {
+          "path": "docs/experiments/19-nvfp4-qmv-geometry.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "ff038a0315365cc556afac487a138f85dd9f13730d15373124b12881ad73d629"
+        }
+      ],
+      "lessons": [
+        "a2-controlled-comparison.md",
+        "c2-weight-reuse.md"
+      ],
+      "teaching_points": [
+        "NVFP4原数学与R4/R2几何",
+        "数值门和速度门"
+      ],
+      "details_retained_in_original": "qdot推导、scale表示、27项逐例检查、冷启动及完整配对"
+    },
+    {
+      "chapter": 20,
+      "sources": [
+        {
+          "path": "docs/experiments/20-donor-implementation-map.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "a238c6553ddf6cd0426b5da9205c11f9efb79158c3099c45b2ff45d3b14b8066"
+        }
+      ],
+      "lessons": [
+        "a1-timing-boundaries.md"
+      ],
+      "teaching_points": [
+        "从实际调用链识别已有机制",
+        "正确借鉴oMLX/Lithos"
+      ],
+      "details_retained_in_original": "wheel与上游版本差别、源码哈希、allocator/in-flight逐项证据"
+    },
+    {
+      "chapter": 21,
+      "sources": [
+        {
+          "path": "docs/experiments/21-gdn-conv-fusion.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "09b93c12da098da20a386d4f5e3808ab8bb52e58763533a6b5ed0537ce4e678f"
+        }
+      ],
+      "lessons": [
+        "b2-conv-fusion.md"
+      ],
+      "teaching_points": [
+        "卷积、SiLU与原始tail同核",
+        "BF16规约次序"
+      ],
+      "details_retained_in_original": "原sum_y推导、带正零partial、6个合成case、8步chain与84项严格比较、Metal完整源码"
+    },
+    {
+      "chapter": 22,
+      "sources": [
+        {
+          "path": "docs/experiments/22-combined-decode-screen.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "2e233193801078acd0807156588835dfbec0d3a852fcb072dcaafb311a52b9a7"
+        }
+      ],
+      "lessons": [
+        "b2-conv-fusion.md"
+      ],
+      "teaching_points": [
+        "融合接回整模",
+        "真实状态与生命周期",
+        "组合结果不归因单项"
+      ],
+      "details_retained_in_original": "函数图复用细节、B2误用gold的修正、所有HTTP组与资源检查"
+    },
+    {
+      "chapter": 23,
+      "sources": [
+        {
+          "path": "docs/experiments/23-kernel-tests-and-gpu-diagnostics.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "8ed3d07c1dcd00bd9781ac6ca172ce1d545a26126915da1f5bc9814b0b6c77fb"
+        }
+      ],
+      "lessons": [
+        "a1-timing-boundaries.md",
+        "c2-weight-reuse.md"
+      ],
+      "teaching_points": [
+        "权重布局与几何",
+        "控制漂移",
+        "profiling边界"
+      ],
+      "details_retained_in_original": "rowblock编码/逆变换、gate/up融合、仪器能力及各次失败"
+    },
+    {
+      "chapter": 24,
+      "sources": [
+        {
+          "path": "docs/experiments/24-numerics-and-qmv.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "2e7d7c2136d9926b62fdcf5fe5da3f759a3f6bcbe1f828f59aa7659f847deb0d"
+        }
+      ],
+      "lessons": [
+        "c2-weight-reuse.md"
+      ],
+      "teaching_points": [
+        "因子搬移与浮点边界",
+        "改归约后需重验"
+      ],
+      "details_retained_in_original": "factor-fold旧/新协议、GDN shuffle变体、全部数值和停止记录"
+    },
+    {
+      "chapter": 25,
+      "sources": [
+        {
+          "path": "docs/experiments/25-fixed-buffer-replay.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "e8d88697406ccde66cbba9b36ef1c002109273a65433656d44e4ae00f218419b"
+        }
+      ],
+      "lessons": [
+        "c3-state-buffers.md"
+      ],
+      "teaching_points": [
+        "固定buffer、offset与所有权",
+        "单步重放不是连续生成"
+      ],
+      "details_retained_in_original": "捕获planner、原生同步失败与修复、reset及完整binding表"
+    },
+    {
+      "chapter": 26,
+      "sources": [
+        {
+          "path": "docs/experiments/26-gpu-feedback.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "720366a1dde545d5cc2dac052bd902b689a98503c2f22e75bf09852dd0445026"
+        }
+      ],
+      "lessons": [
+        "d1-command-reuse.md",
+        "d2-device-feedback.md"
+      ],
+      "teaching_points": [
+        "一次seed",
+        "GPU反馈预测/位置/长度",
+        "参数owner存活"
+      ],
+      "details_retained_in_original": "stage范围、同步/别名细节、原生单臂时间与原参数只读证据"
+    },
+    {
+      "chapter": 27,
+      "sources": [
+        {
+          "path": "docs/experiments/27-native-icb-pingpong.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "4b5b56affbec7e213274e55a91fa59e45d260c27245932adfc0a40b6308ad4d7"
+        }
+      ],
+      "lessons": [
+        "c3-state-buffers.md",
+        "d1-command-reuse.md"
+      ],
+      "teaching_points": [
+        "S双bank",
+        "真正ICB",
+        "资源声明与同步",
+        "克隆负例"
+      ],
+      "details_retained_in_original": "PSO重建、常量bank、dispatch计数、arena克隆/barrier诊断"
+    },
+    {
+      "chapter": 28,
+      "sources": [
+        {
+          "path": "docs/experiments/28-native-gdn-composition.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "547da5ffb4cf4fb7415c761ca91763bc3ab465ba61bef7f4a78ca46839d86f1f"
+        }
+      ],
+      "lessons": [
+        "d1-command-reuse.md"
+      ],
+      "teaching_points": [
+        "融合与命令复用分层",
+        "避免双重SiLU",
+        "重查新绑定"
+      ],
+      "details_retained_in_original": "held-state/norm内核、S_new index错误与修复、各组合资格"
+    },
+    {
+      "chapter": 29,
+      "sources": [
+        {
+          "path": "docs/experiments/29-native-runner-http.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "348e50a1441760c044ae4eb591791c1cbb251d48e45d953c57ad8b4622151689"
+        }
+      ],
+      "lessons": [
+        "d3-service-ownership.md"
+      ],
+      "teaching_points": [
+        "整请求选择路径",
+        "native状态所有权",
+        "不能回退旧seed"
+      ],
+      "details_retained_in_original": "依赖planner支线未减少barrier、三路径逐例生命周期及电源STOP"
+    },
+    {
+      "chapter": 30,
+      "sources": [
+        {
+          "path": "docs/experiments/30-native-ahead.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "d6cbeb520c9f2bcba15a85545a3478cf6662db4b4b10a096fc5970da43d88fe1"
+        }
+      ],
+      "lessons": [
+        "d3-service-ownership.md"
+      ],
+      "teaching_points": [
+        "两票FIFO",
+        "预算减首token",
+        "EOS后drain/discard再drop"
+      ],
+      "details_retained_in_original": "seed mutex竞态修复、slot/bank完整规则、tiny/整模与控制失败"
+    },
+    {
+      "chapter": 31,
+      "sources": [
+        {
+          "path": "docs/experiments/31-native-direct-profiling.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "04afff09466ff6b25ad2d403e77ade821476af475ac669a135d163e6710cb193"
+        }
+      ],
+      "lessons": [
+        "a1-timing-boundaries.md",
+        "d2-device-feedback.md"
+      ],
+      "teaching_points": [
+        "直连替代stage",
+        "诊断与4B生产读取",
+        "计时含seed的区别"
+      ],
+      "details_retained_in_original": "alias证明、allocation未释放、kernel支线、分段时间戳与采样扰动"
+    },
+    {
+      "chapter": 32,
+      "sources": [
+        {
+          "path": "docs/experiments/32-native-residual-projection.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "7194db8de7a529cf9dd8111f93b71a88b2b9aa15cf1b98b56dfc32fa4483e92a"
+        }
+      ],
+      "lessons": [
+        "c2-weight-reuse.md"
+      ],
+      "teaching_points": [
+        "多投影复用x",
+        "原指针与packed数学",
+        "整模通过不等于提速"
+      ],
+      "details_retained_in_original": "residual carry独立分支、四投影的参数/归约/绑定与完整检查"
+    },
+    {
+      "chapter": 33,
+      "sources": [
+        {
+          "path": "docs/experiments/33-native-range-compiled-step.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "943012d5c2846e86a0004e65614b9ac9d81e9229a5b9d396a9bb4d8b0273688b"
+        }
+      ],
+      "lessons": [
+        "d1-command-reuse.md"
+      ],
+      "teaching_points": [
+        "命令复用与整步compile分层",
+        "纯函数动态输入"
+      ],
+      "details_retained_in_original": "ICB范围R8微测、cold位置、完整纯step与未完成的服务结论"
+    },
+    {
+      "chapter": 34,
+      "sources": [
+        {
+          "path": "docs/experiments/34-native-ba-gates-prework.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "392a358e30f3c84496515f73a286e855e2b176be935e5af2d7aea87d3b361e69"
+        }
+      ],
+      "lessons": [
+        "b3-gate-fusion.md"
+      ],
+      "teaching_points": [
+        "BA小投影与gates并入prework",
+        "BF16→FP32边界"
+      ],
+      "details_retained_in_original": "48层实际布局/只读检查、buffer反射范围、raw-native计时"
+    },
+    {
+      "chapter": 35,
+      "sources": [
+        {
+          "path": "docs/experiments/35-local-probe-stops.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "ec0c14f382d41700edb9ef79e43fceaebfbacd75fbde11473c43b39c0dd63bdd"
+        }
+      ],
+      "lessons": [
+        "a2-controlled-comparison.md"
+      ],
+      "teaching_points": [
+        "门槛先定",
+        "6/6赢不等于达到收益门",
+        "负结果也是结论"
+      ],
+      "details_retained_in_original": "half2 FP4、K展开、scaled-ready三候选的diff/控制/原始结果"
+    },
+    {
+      "chapter": 36,
+      "sources": [
+        {
+          "path": "docs/experiments/36-cap64-and-rms-profile.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "1dcdc741e6e3ddc7a95f79a1ac65c9068153b87b052e1eb99296a41dc52a6004"
+        }
+      ],
+      "lessons": [
+        "c3-state-buffers.md"
+      ],
+      "teaching_points": [
+        "容量与有效长度不同",
+        "CAP64范围",
+        "RMS另立数学profile"
+      ],
+      "details_retained_in_original": "CPU补零对照、原ID失败、RMS精度族各参考与新资格记录"
+    },
+    {
+      "chapter": 37,
+      "sources": [
+        {
+          "path": "docs/experiments/37-simd4-async-and-spec-handoff.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "3482063a591d896c6da3b029b7e7d39f08eb5877b93ef6b3af2e7f02ab3af3d1"
+        }
+      ],
+      "lessons": [
+        "d2-device-feedback.md"
+      ],
+      "teaching_points": [
+        "CAP在构造前固定",
+        "异步交付与终态",
+        "资源STOP不补点"
+      ],
+      "details_retained_in_original": "SIMD4独立分支、投机checkpoint探索、service生产/诊断逐例检查"
+    },
+    {
+      "chapter": 38,
+      "sources": [
+        {
+          "path": "docs/experiments/38-spec-transaction-and-qmm.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "891adafd08be4cb1ac38b1b995b7d8c9a409e331d8614c73bc23014a2d962837"
+        }
+      ],
+      "lessons": [
+        "e1-spec-transactions.md",
+        "e2-verify-m1.md"
+      ],
+      "teaching_points": [
+        "交付与计算frontier不同",
+        "真实历史提交",
+        "同输入QMM诊断"
+      ],
+      "details_retained_in_original": "部分producer异常覆盖缺口、外部官方MTP实验、历史M4/M5交换"
+    },
+    {
+      "chapter": 39,
+      "sources": [
+        {
+          "path": "docs/experiments/39-verify-broadcast-m1.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "955ddb92242a2a50ba4a184d79cc558d7d0c4291610ac0dd99896490fb80c167"
+        }
+      ],
+      "lessons": [
+        "e2-verify-m1.md",
+        "e3-draft-loading.md"
+      ],
+      "teaching_points": [
+        "广播batch=T/M=1",
+        "限定verify作用域",
+        "首次整模资源STOP"
+      ],
+      "details_retained_in_original": "497项输入明细、源码dispatch推断边界、首次加载全过程"
+    },
+    {
+      "chapter": 40,
+      "sources": [
+        {
+          "path": "docs/experiments/40-m1-verify-and-bounded-loader.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "cbe6b3322f3e82f1d448bff04ca086c6c157f098ea0a7080306bb83ed6567b56"
+        }
+      ],
+      "lessons": [
+        "e2-verify-m1.md",
+        "e3-draft-loading.md"
+      ],
+      "teaching_points": [
+        "逐tensor pop/eval/release",
+        "参数不变",
+        "后续完整投机资格"
+      ],
+      "details_retained_in_original": "175参数/350对象对照、49事务逐项结果、allocator与后续ready STOP"
+    },
+    {
+      "chapter": 41,
+      "sources": [
+        {
+          "path": "docs/experiments/41-native-http-nodelay-pilot.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "90e94451f904b159d54bd27ea344d75fc9ec93d4961e7d6d7d8bb14f3fd4f4b3"
+        }
+      ],
+      "lessons": [
+        "f1-http-measurement.md"
+      ],
+      "teaching_points": [
+        "完整HTTP边界",
+        "TCP_NODELAY单变量负例"
+      ],
+      "details_retained_in_original": "实际socket读回、warm/formal、启动与trace时钟及每请求记录"
+    },
+    {
+      "chapter": 42,
+      "sources": [
+        {
+          "path": "docs/experiments/42-startup-warm-short-request.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "0b59fb01b7104b7af30f9530e9ac427c98a2faef5deb3129fde0a4ea7d835e44"
+        }
+      ],
+      "lessons": [
+        "e4-spec-cost.md",
+        "f1-http-measurement.md"
+      ],
+      "teaching_points": [
+        "接受率不等于总成本",
+        "短输出投机慢",
+        "fresh与重复分清"
+      ],
+      "details_retained_in_original": "启动warm修正、全部raw32与HTTP/资源记录、不足以归因的计数缺口"
+    },
+    {
+      "chapter": 43,
+      "sources": [
+        {
+          "path": "docs/experiments/43-fresh-c1-throughput-latency.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "a97fceb9cb940cdb637dce3c6d9d342f678486714797f122e258e7a3f86489bd"
+        }
+      ],
+      "lessons": [
+        "f1-http-measurement.md"
+      ],
+      "teaching_points": [
+        "三家同负载C1完整HTTP",
+        "正确性和结束计数先核对"
+      ],
+      "details_retained_in_original": "九次fresh的全部请求、轮换顺序、资源与退出证据；不扩成C4"
+    },
+    {
+      "chapter": 44,
+      "sources": [
+        {
+          "path": "docs/experiments/44-fresh-full-throughput-latency.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "40e1777bc222749b93fc69729abac6ff88b6ffae3fc074c1c88a22ac51329a6c"
+        }
+      ],
+      "lessons": [
+        "f2-pareto-configurations.md"
+      ],
+      "teaching_points": [
+        "吞吐与完整延迟",
+        "离散非支配点",
+        "两种静态启动profile"
+      ],
+      "details_retained_in_original": "21次fresh、聚合层级、配对比与中位数之比、全部请求/资格/图数据"
+    },
+    {
+      "chapter": 45,
+      "sources": [
+        {
+          "path": "docs/experiments/45-lithos-queued-concurrency.md",
+          "revision": "095bbb8dffe1e2bbfcd4b4195983ef5055ee36b8",
+          "sha256": "00aa841d2b2d1c3c1520777044c85291487eaa1b3a5b7ea14e9e58bff2f6ac57"
+        }
+      ],
+      "lessons": [
+        "f3-queue-vs-batch.md"
+      ],
+      "teaching_points": [
+        "官方FIFO与真实batch区别",
+        "协议终止",
+        "跨轮图边界"
+      ],
+      "details_retained_in_original": "九次fresh、134文本核对、C1校准、cache日志、资源和全部可复算数据"
+    }
+  ],
+  "research_only": [
+    "docs/experiments/46-next-ideas-from-papers.md",
+    "docs/experiments/47-recent-paper-reading.md"
+  ]
+}
