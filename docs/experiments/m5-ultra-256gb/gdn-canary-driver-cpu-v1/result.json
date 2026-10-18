@@ -1,0 +1,543 @@
+{
+  "schema": "gdn-canary-driver-cpu-v1",
+  "status": "PASS",
+  "started_at": "2026-10-18T01:33:52.976178+00:00",
+  "argv": [
+    "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/run-gdn-canary-driver-cpu-v1.py",
+    "--suite",
+    "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu:12",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-canary-driver-cpu-v1"
+  ],
+  "suites": [
+    {
+      "module": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu",
+      "expected_tests": 12,
+      "discovered_tests": 12
+    }
+  ],
+  "expected_tests": 12,
+  "python_executable": "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/python",
+  "python_resolved": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/bin/python3.13",
+  "python_version": "3.13.16 (main, Oct 14 2026, 00:55:38) [Clang 23.1.3 ]",
+  "restoration_gate_is_historical": true,
+  "current_service_observed": false,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "denied_operations": [],
+  "test_outcomes": [
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_closed_failed_owner_is_recovered_and_remains_failure",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_closed_owner_with_no_directory_can_use_no_experiment",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_default_and_nonexact_run_are_inert_without_receipt",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_partial_stop_refusal_still_recovers_without_starting_owner",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_prepared_journal_hash_change_is_rejected_before_backend",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_recovery_failure_returns_nonzero_and_preserves_unrestored_state",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_sealed_sources_plan_and_prepared_bytes_reach_actual_driver",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_source_change_is_rejected_before_any_backend_or_execution_directory",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_stop_exception_after_state_change_still_attempts_recovery",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_unknown_owner_with_partial_directory_retains_exact_owner_recovery",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_unknown_owner_without_directory_never_becomes_no_experiment",
+      "status": "PASS"
+    },
+    {
+      "id": "bench.m5_ultra_256gb.gdn_prework_unbound.test_execute_canary_cpu.ExecuteGDNCanaryTests.test_untouched_prepared_stop_refusal_does_not_launch_owner_or_recovery",
+      "status": "PASS"
+    }
+  ],
+  "source_before": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json": {
+      "sha256": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8",
+      "bytes": 667
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v2/lifecycle.json": {
+      "sha256": "20ee659595083869218de7e28a13bfa950c3c4b511e249e2cb4b79c6a2e1eee5",
+      "bytes": 676
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py": {
+      "sha256": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca",
+      "bytes": 10765
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/controller.py": {
+      "sha256": "c5a57793501190430619df24c5d1f240b08b96263b3d9f6e78bff67092a6c7a9",
+      "bytes": 45991
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/lifecycle.json": {
+      "sha256": "5d6922ae88aadb322d5a7080bbae3713f2ac2a42bdcff6635247276cfa7f99c3",
+      "bytes": 676
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/owner.py": {
+      "sha256": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+      "bytes": 15926
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_cpu.py": {
+      "sha256": "b632d401cb477483a79619a4cbf7feea562f5d9e2792b0d8a34146e02dd75d3e",
+      "bytes": 24928
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_predecessor_cpu.py": {
+      "sha256": "197049ac4a8a5ba36edcd1d87ca14d47fe47921a28873138b6576ad747bd7f28",
+      "bytes": 9517
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": {
+      "sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+      "bytes": 23833
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": {
+      "sha256": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+      "bytes": 7730
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/execute_canary.py": {
+      "sha256": "4e1c429cf1c263a720c24f891ff918153b02ea8eb93910e09be93fc259ee0a06",
+      "bytes": 6251
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": {
+      "sha256": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+      "bytes": 26961
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/register_canary.py": {
+      "sha256": "f119952ee3038cb063d2573752607cb5127375ef1fab0951a2b3e8d9628ad7d0",
+      "bytes": 12487
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py": {
+      "sha256": "3f493752d95996bd08cc1ea7389fc3159ab615e1ac162b36332eecc47dab862c",
+      "bytes": 17802
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_audit_cpu.py": {
+      "sha256": "0efa8f23b00b977e5cef62213f7752caf92d7bd742bbee72f7c326660bcf64a5",
+      "bytes": 8357
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_candidate_cpu.py": {
+      "sha256": "b2493fc5de8a29ef15728e9c38d82d6212c20b855154a5d7d859fef434867aa6",
+      "bytes": 7814
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_execute_canary_cpu.py": {
+      "sha256": "82e1dcdfa0ca5a56e34f2fe4eded1276bed8775156edd68d3011fabcee89429c",
+      "bytes": 12600
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_qualify_cpu.py": {
+      "sha256": "2a7abceb285e3ce442a3c8bcf9b7ca770f4105df4e5e7317d3102d6d1b1cf28a",
+      "bytes": 8742
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_serving_cpu.py": {
+      "sha256": "4af8b394722fe466c85095dbcae8a138ecbac3c020c709f74c2706e8307f16ca",
+      "bytes": 15614
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+      "bytes": 4155
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+      "bytes": 4027
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+      "bytes": 2705
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/__init__.py": {
+      "sha256": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+      "bytes": 75
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/cache.py": {
+      "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+      "bytes": 7580
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/config.py": {
+      "sha256": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+      "bytes": 2584
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/context.py": {
+      "sha256": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+      "bytes": 804
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/__init__.py": {
+      "sha256": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+      "bytes": 62
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/compiled_decode.py": {
+      "sha256": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+      "bytes": 4805
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/llm_engine.py": {
+      "sha256": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+      "bytes": 4259
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/model_runner.py": {
+      "sha256": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+      "bytes": 12040
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/packed_decode.py": {
+      "sha256": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+      "bytes": 3022
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/request.py": {
+      "sha256": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+      "bytes": 1354
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/scheduler.py": {
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+      "bytes": 4796
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/spec_runner.py": {
+      "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+      "bytes": 4539
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/eos.py": {
+      "sha256": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+      "bytes": 1272
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn.py": {
+      "sha256": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+      "bytes": 5145
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_decode_fused.py": {
+      "sha256": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+      "bytes": 3891
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_metal.py": {
+      "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+      "bytes": 6277
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_norm_reuse_metal.py": {
+      "sha256": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+      "bytes": 8203
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/norm_metal.py": {
+      "sha256": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+      "bytes": 2966
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/nvfp4_qmv.py": {
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+      "bytes": 2975
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/attention.py": {
+      "sha256": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+      "bytes": 5566
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/gdn.py": {
+      "sha256": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+      "bytes": 15135
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/layers.py": {
+      "sha256": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+      "bytes": 8258
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/loader.py": {
+      "sha256": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+      "bytes": 2423
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/qwen3_5.py": {
+      "sha256": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+      "bytes": 5562
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampler.py": {
+      "sha256": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+      "bytes": 1682
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampling_params.py": {
+      "sha256": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+      "bytes": 586
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/__init__.py": {
+      "sha256": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+      "bytes": 55
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/device_selector.py": {
+      "sha256": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+      "bytes": 640
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/dflash2.py": {
+      "sha256": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+      "bytes": 12925
+    },
+    "/private/tmp/run-gdn-canary-driver-cpu-v1.py": {
+      "sha256": "d6f0de56dfc9d843a88b01beba753a60c3b2c19c67f80c9caed08d07fe6325aa",
+      "bytes": 9016
+    }
+  },
+  "source_after": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle/lifecycle.json": {
+      "sha256": "d9417e51a781275f18c296e20ac98874e61b8ce17b8bf0902ba63e27b5b2b0a8",
+      "bytes": 667
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v2/lifecycle.json": {
+      "sha256": "20ee659595083869218de7e28a13bfa950c3c4b511e249e2cb4b79c6a2e1eee5",
+      "bytes": 676
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py": {
+      "sha256": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca",
+      "bytes": 10765
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/controller.py": {
+      "sha256": "c5a57793501190430619df24c5d1f240b08b96263b3d9f6e78bff67092a6c7a9",
+      "bytes": 45991
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/lifecycle.json": {
+      "sha256": "5d6922ae88aadb322d5a7080bbae3713f2ac2a42bdcff6635247276cfa7f99c3",
+      "bytes": 676
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/owner.py": {
+      "sha256": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+      "bytes": 15926
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_cpu.py": {
+      "sha256": "b632d401cb477483a79619a4cbf7feea562f5d9e2792b0d8a34146e02dd75d3e",
+      "bytes": 24928
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_predecessor_cpu.py": {
+      "sha256": "197049ac4a8a5ba36edcd1d87ca14d47fe47921a28873138b6576ad747bd7f28",
+      "bytes": 9517
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": {
+      "sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+      "bytes": 23833
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": {
+      "sha256": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+      "bytes": 7730
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/execute_canary.py": {
+      "sha256": "4e1c429cf1c263a720c24f891ff918153b02ea8eb93910e09be93fc259ee0a06",
+      "bytes": 6251
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": {
+      "sha256": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+      "bytes": 26961
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/register_canary.py": {
+      "sha256": "f119952ee3038cb063d2573752607cb5127375ef1fab0951a2b3e8d9628ad7d0",
+      "bytes": 12487
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py": {
+      "sha256": "3f493752d95996bd08cc1ea7389fc3159ab615e1ac162b36332eecc47dab862c",
+      "bytes": 17802
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_audit_cpu.py": {
+      "sha256": "0efa8f23b00b977e5cef62213f7752caf92d7bd742bbee72f7c326660bcf64a5",
+      "bytes": 8357
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_candidate_cpu.py": {
+      "sha256": "b2493fc5de8a29ef15728e9c38d82d6212c20b855154a5d7d859fef434867aa6",
+      "bytes": 7814
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_execute_canary_cpu.py": {
+      "sha256": "82e1dcdfa0ca5a56e34f2fe4eded1276bed8775156edd68d3011fabcee89429c",
+      "bytes": 12600
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_qualify_cpu.py": {
+      "sha256": "2a7abceb285e3ce442a3c8bcf9b7ca770f4105df4e5e7317d3102d6d1b1cf28a",
+      "bytes": 8742
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_serving_cpu.py": {
+      "sha256": "4af8b394722fe466c85095dbcae8a138ecbac3c020c709f74c2706e8307f16ca",
+      "bytes": 15614
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+      "bytes": 4155
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+      "bytes": 4027
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+      "bytes": 2705
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/__init__.py": {
+      "sha256": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+      "bytes": 75
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/cache.py": {
+      "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+      "bytes": 7580
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/config.py": {
+      "sha256": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+      "bytes": 2584
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/context.py": {
+      "sha256": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+      "bytes": 804
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/__init__.py": {
+      "sha256": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+      "bytes": 62
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/compiled_decode.py": {
+      "sha256": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+      "bytes": 4805
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/llm_engine.py": {
+      "sha256": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+      "bytes": 4259
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/model_runner.py": {
+      "sha256": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+      "bytes": 12040
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/packed_decode.py": {
+      "sha256": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+      "bytes": 3022
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/request.py": {
+      "sha256": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+      "bytes": 1354
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/scheduler.py": {
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+      "bytes": 4796
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/spec_runner.py": {
+      "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+      "bytes": 4539
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/eos.py": {
+      "sha256": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+      "bytes": 1272
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn.py": {
+      "sha256": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+      "bytes": 5145
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_decode_fused.py": {
+      "sha256": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+      "bytes": 3891
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_metal.py": {
+      "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+      "bytes": 6277
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_norm_reuse_metal.py": {
+      "sha256": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+      "bytes": 8203
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/norm_metal.py": {
+      "sha256": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+      "bytes": 2966
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/nvfp4_qmv.py": {
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+      "bytes": 2975
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/attention.py": {
+      "sha256": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+      "bytes": 5566
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/gdn.py": {
+      "sha256": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+      "bytes": 15135
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/layers.py": {
+      "sha256": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+      "bytes": 8258
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/loader.py": {
+      "sha256": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+      "bytes": 2423
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/qwen3_5.py": {
+      "sha256": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+      "bytes": 5562
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampler.py": {
+      "sha256": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+      "bytes": 1682
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampling_params.py": {
+      "sha256": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+      "bytes": 586
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/__init__.py": {
+      "sha256": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+      "bytes": 55
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/device_selector.py": {
+      "sha256": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+      "bytes": 640
+    },
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/dflash2.py": {
+      "sha256": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+      "bytes": 12925
+    },
+    "/private/tmp/run-gdn-canary-driver-cpu-v1.py": {
+      "sha256": "d6f0de56dfc9d843a88b01beba753a60c3b2c19c67f80c9caed08d07fe6325aa",
+      "bytes": 9016
+    }
+  },
+  "scope": "Fake CPU wiring/validator tests only. No GPU/model/service/physical-capacity/numerical/performance qualification.",
+  "restoration_gate": {
+    "execution-final.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-execution/final.json",
+      "sha256": "ea6bad995d7133106c17bbbc2d45c12d918087a7492c03dd95e0ccebf69b6b8c"
+    },
+    "restored-journal.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-cold-journal/journal.json",
+      "sha256": "a4cea1bb7c8a8491a0474cbfbb939eead5de81723ee445c4bf2f2a88e0d71e06"
+    },
+    "restoration-audit.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-analysis/restoration-audit.json",
+      "sha256": "9aaf59b6482f22c24268b36e3ee8b661510d924b2a2ae3b4b43e204b5a934aca"
+    }
+  },
+  "expected_failures": 0,
+  "unexpected_successes": 0,
+  "loader_errors": [],
+  "failures_detail": [],
+  "errors_detail": [],
+  "source_unchanged": true,
+  "forbidden_modules_loaded": [],
+  "ended_at": "2026-10-18T01:33:53.025858+00:00",
+  "elapsed_seconds": 0.048482166981557384
+}

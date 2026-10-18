@@ -125,3 +125,10 @@ three layers' parameter tensors are not archived; their complete value hashes
 are checked for consistency without claiming offline weight reconstruction.
 Missing terminal/raw evidence is INCOMPLETE, and a failed producer or differing
 byte remains unqualified. Resource, lifecycle and restoration are separate.
+
+
+## Preparation update — 2026-10-17 18:35 PDT
+
+The preceding source-only descriptions record their original preparation stage. The candidate/qualifier/raw-auditor/serving fake CPU modules have now actually passed44 tests in the preserved next-modules run. The new registration/execution driver separately passes all12 guarded CPU tests; [complete evidence](../../../docs/experiments/m5-ultra-256gb/gdn-canary-driver-cpu-v1/README.md) preserves its command, source bytes and all outcomes. No device canary has run yet.
+
+The prepared `cold_cycle_v3` migration admits exactly the future archived routeHTTP restored journal and independent restorationPASS. After that real cycle closes, root seals only its four actual migration constants, regenerates the lifecycle manifest and reruns the relevant fake lifecycle tests. `register_canary.py --prepare` performs inherited CPU source/runtime/model checks and emits the exact read-only service-prepare command; `--seal-receipt` binds the real PREPARED journal. Only then can `execute_canary.py --run` execute the single-child canary with finally recovery. Source/plan/PREPARED bytes must still match; unknown launch is never treated as proof of no child. Actual raw/resource/restoration audits remain separate, and the numerical audit runner must first exclusively create its output parent directory.
