@@ -1,0 +1,3391 @@
+{
+  "schema": "D512-throughput-latency-progress-v13",
+  "hardware": "M5 Ultra 256 GiB",
+  "model": "mlx-community/Qwen3.8-27B-nvfp4",
+  "revision": "5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6",
+  "workload": "Same eight D coding fixtures, 886\u2013978 prompt tokens, greedy normal EOS, output cap512",
+  "previous_chartdata_sha256": "df412e157da1e08436bdf81ef1cfaa126eaca42da7d12d6241b8ad6e46073123",
+  "points": [
+    {
+      "phase": "r1-c1",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 722.205195167,
+      "aggregate_output_tok_s": 45.37214661329437,
+      "e2e_p50_s": 11.28328733350645,
+      "e2e_p95_s": 11.348184375005076,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c1/trial/formal-group.json",
+        "sha256": "0e37182129057b197aff82345263a2b095b9345e55ab89df70e669f6ca968ea0"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c1/trial/point.json",
+        "sha256": "1b946b4fc64cb3df83b11b8597b5517a04083e400cb198a08429158599c86e9d"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "engine": "mini-vLLM",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r1-c8",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 195.74799216599786,
+      "aggregate_output_tok_s": 167.39890732678444,
+      "e2e_p50_s": 24.431814499999746,
+      "e2e_p95_s": 25.97906349999539,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c8/trial/formal-group.json",
+        "sha256": "c55628e7fd398a99dae9b2bbb562d6efc5da063d9e823d355b420a4438e9e9aa"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/native-formal-v1-owner/phases/r1-c8/trial/point.json",
+        "sha256": "0cb2d9003a8b5b6ae0c2f76918fb149e321a9e522767e2df476fbe32dd77ad4b"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "engine": "mini-vLLM",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r1-c1",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 645.2735039170075,
+      "aggregate_output_tok_s": 50.78156750755799,
+      "e2e_p50_s": 10.079908603496733,
+      "e2e_p95_s": 10.122799667005893,
+      "max_http_outstanding": 1,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        10.067272916989168,
+        10.009967625024728,
+        10.048650291981176,
+        10.080626165989088,
+        10.089094499999192,
+        10.094388624973362,
+        10.09820770798251,
+        10.064648459025193,
+        10.114701584010618,
+        10.10400325001683,
+        10.08151762498892,
+        10.122799667005893,
+        10.052611082996009,
+        10.047116708010435,
+        10.07303262501955,
+        10.079191041004378,
+        10.077909124986036,
+        10.02780162502313,
+        10.057074874988757,
+        10.042733958020108,
+        10.041011375025846,
+        10.055264750000788,
+        10.070152707980014,
+        10.045535250013927,
+        10.109096625004895,
+        10.08321137499297,
+        10.093560458015418,
+        10.091004833986517,
+        10.114036374987336,
+        10.092464832996484,
+        10.065409458999056,
+        10.07839124999009,
+        10.095034875004785,
+        10.050786333013093,
+        10.068475667008897,
+        10.056937959016068,
+        10.10318870798801,
+        10.047694875014713,
+        10.051521457993658,
+        10.056084457988618,
+        10.100172082980862,
+        10.051124750025338,
+        10.068046915985178,
+        10.101975958008552,
+        10.11708795899176,
+        10.072793958010152,
+        10.071988707990386,
+        10.088092040998163,
+        10.102803874993697,
+        10.03541620800388,
+        10.090630333987065,
+        10.091326833004132,
+        10.109626791003393,
+        10.093570583994733,
+        10.082592499995371,
+        10.074106792017119,
+        10.139712625008542,
+        10.08500245801406,
+        10.09662450000178,
+        10.231660207995446,
+        10.22464633299387,
+        10.072914959018817,
+        10.059683750005206,
+        10.092991709010676
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c1/trial/point.json",
+        "sha256": "62230345b974d8656cc0c92969ce91470bde53fc86dd9b82768797d31fb63dde"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c1/trial/formal-group.json",
+        "sha256": "cad300cfadff27af3a36faaf4300eabe96c917667b0a8fec22553471d3c8bea2"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 123,
+      "response_ids": [
+        "cmpl-16f51a52",
+        "cmpl-314bf928",
+        "cmpl-4fe9853f",
+        "cmpl-621d8657",
+        "cmpl-70a80557",
+        "cmpl-7c6181ec",
+        "cmpl-a4124cfd",
+        "cmpl-d5235f7e",
+        "cmpl-07e28424",
+        "cmpl-0ad4230c",
+        "cmpl-10f743c7",
+        "cmpl-126b0529",
+        "cmpl-13db3bd9",
+        "cmpl-1f6ea213",
+        "cmpl-22875192",
+        "cmpl-229b7bf6",
+        "cmpl-22e2d579",
+        "cmpl-2ee37d63",
+        "cmpl-3124ef48",
+        "cmpl-320f1135",
+        "cmpl-3b88cd02",
+        "cmpl-3bf986ba",
+        "cmpl-3c25eeab",
+        "cmpl-3ee63853",
+        "cmpl-461d930c",
+        "cmpl-47709522",
+        "cmpl-47f8c059",
+        "cmpl-4a704a53",
+        "cmpl-4c628906",
+        "cmpl-5974b04a",
+        "cmpl-59bd70df",
+        "cmpl-5c60b1b1",
+        "cmpl-5dbcec17",
+        "cmpl-62e296f9",
+        "cmpl-63d30c96",
+        "cmpl-63efd7e4",
+        "cmpl-6400bddc",
+        "cmpl-64a68aa2",
+        "cmpl-672b0c03",
+        "cmpl-68170b44",
+        "cmpl-68d69f2e",
+        "cmpl-6f9d1c5e",
+        "cmpl-786b3ae3",
+        "cmpl-7b0fc574",
+        "cmpl-7d974833",
+        "cmpl-7ed3122e",
+        "cmpl-81ecf969",
+        "cmpl-8286d809",
+        "cmpl-8423ac2c",
+        "cmpl-849300e6",
+        "cmpl-86c58201",
+        "cmpl-88997041",
+        "cmpl-8ab50e06",
+        "cmpl-8bca1158",
+        "cmpl-8ca5438f",
+        "cmpl-8dba6db4",
+        "cmpl-99620729",
+        "cmpl-9b5369e4",
+        "cmpl-9bca5882",
+        "cmpl-a7d143d8",
+        "cmpl-ab2ed536",
+        "cmpl-ac82650c",
+        "cmpl-b0d61afe",
+        "cmpl-baa47d23",
+        "cmpl-c16f3778",
+        "cmpl-c52e621d",
+        "cmpl-c88b8c3a",
+        "cmpl-d4a80d06",
+        "cmpl-dc871535",
+        "cmpl-eaf9f94c",
+        "cmpl-f59b8f64",
+        "cmpl-f84d2b0d"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c1/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c1/trial/server.stderr",
+          "sha256": "7ab645fc763508d6471c7e367fb900c8c9be5fb6b4c03eaadf09bd7223a5f98d"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r1-c8",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 194.62473387501086,
+      "aggregate_output_tok_s": 168.36503432828738,
+      "e2e_p50_s": 24.271552833510214,
+      "e2e_p95_s": 26.1300366249925,
+      "max_http_outstanding": 8,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        24.066608833003556,
+        22.639020249975147,
+        26.1300366249925,
+        23.980881875002524,
+        28.124283582990756,
+        28.12414562498452,
+        26.04001816600794,
+        29.83973141599563,
+        24.15684945799876,
+        23.717084584000986,
+        24.94566895798198,
+        24.241386749985395,
+        25.07497037498979,
+        24.364734790986404,
+        24.36337325000204,
+        23.813617500010878,
+        24.346510792005574,
+        23.522559833014384,
+        24.269993542024167,
+        24.275255083019147,
+        24.244866041000932,
+        24.331376834015828,
+        24.24117483300506,
+        24.762774834001902,
+        24.286564999987604,
+        24.861852915986674,
+        24.192428334004944,
+        24.198901583004044,
+        24.19645283400314,
+        24.187982417002786,
+        24.98833629200817,
+        24.352084792015376,
+        24.312069291976513,
+        23.73978391700075,
+        24.257158790976973,
+        24.257819374994142,
+        24.264455500000622,
+        24.28523108398076,
+        24.279638957988936,
+        24.30091791599989,
+        24.382890292006778,
+        24.382769666000968,
+        24.294286125019426,
+        24.287968458025716,
+        24.283069500001147,
+        24.274161917011952,
+        24.27460274999612,
+        24.27732762499363,
+        24.32311800000025,
+        24.32352112501394,
+        24.235724541998934,
+        24.18841116700787,
+        24.191544375004014,
+        24.198317125003086,
+        24.197900208004285,
+        24.174360500008333,
+        24.248055709002074,
+        24.27311212499626,
+        22.974512375018094,
+        22.145340708986623,
+        21.560742708999896,
+        20.555999125004746,
+        19.85273899999447,
+        19.101555667002685
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c8/trial/point.json",
+        "sha256": "b56d96f05696a31ebea613d13e7acb75efd800cbfde57086793f43a2bcf79c2b"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c8/trial/formal-group.json",
+        "sha256": "3bb2f43a22062eeb34a3180370c50681720e4e57bdcf40563fa261b931bc7033"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 4546,
+      "response_ids": [
+        "cmpl-0eeafe39",
+        "cmpl-51b5dab6",
+        "cmpl-66ab3dfe",
+        "cmpl-688fe8c1",
+        "cmpl-a92e57db",
+        "cmpl-b2bcf560",
+        "cmpl-cda03613",
+        "cmpl-cf7757c1",
+        "cmpl-06b5db91",
+        "cmpl-06c7bcc4",
+        "cmpl-0917a5b5",
+        "cmpl-0d5398b8",
+        "cmpl-0d9825b4",
+        "cmpl-12a6a9d3",
+        "cmpl-14be166e",
+        "cmpl-14eb13a8",
+        "cmpl-16ed774f",
+        "cmpl-18618301",
+        "cmpl-18e11e08",
+        "cmpl-256aa8b9",
+        "cmpl-2571af0a",
+        "cmpl-25757bc2",
+        "cmpl-29c1cd65",
+        "cmpl-2cfc4f6c",
+        "cmpl-367e5e13",
+        "cmpl-434f1ef6",
+        "cmpl-47a652e8",
+        "cmpl-4964f4b6",
+        "cmpl-4bfe59a4",
+        "cmpl-4e958df1",
+        "cmpl-5015d2a8",
+        "cmpl-51938edc",
+        "cmpl-5781b79e",
+        "cmpl-5fb73396",
+        "cmpl-675166cf",
+        "cmpl-676c01ad",
+        "cmpl-7b2a8878",
+        "cmpl-7d08d96d",
+        "cmpl-7d39fc22",
+        "cmpl-88062597",
+        "cmpl-8be33314",
+        "cmpl-8df6b04d",
+        "cmpl-8f63b521",
+        "cmpl-90b83450",
+        "cmpl-92d11cd4",
+        "cmpl-96a88ad6",
+        "cmpl-a6dd5518",
+        "cmpl-aacdaa48",
+        "cmpl-ab3bfdc2",
+        "cmpl-ae5419ba",
+        "cmpl-afd92460",
+        "cmpl-b13d0d04",
+        "cmpl-b419f6e6",
+        "cmpl-b46f327d",
+        "cmpl-b670aa2f",
+        "cmpl-bbd39aa5",
+        "cmpl-bdc953a7",
+        "cmpl-bf0bc62d",
+        "cmpl-c356fa46",
+        "cmpl-c3811f15",
+        "cmpl-cf788dfa",
+        "cmpl-cfcd9148",
+        "cmpl-d44bcce2",
+        "cmpl-d64b2465",
+        "cmpl-d79a2752",
+        "cmpl-e5dc3d25",
+        "cmpl-e69fe038",
+        "cmpl-e6b8eb7d",
+        "cmpl-eb40a649",
+        "cmpl-f19abe0c",
+        "cmpl-f327b8a2",
+        "cmpl-ff5a0a62"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c8/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r1-c8/trial/server.stderr",
+          "sha256": "24d7bd2a0959948be7852d633f4d56a853e2f321b519346701707f390c4ecfcc"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r2-c8",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 194.3952422500006,
+      "aggregate_output_tok_s": 168.56379621605632,
+      "e2e_p50_s": 24.233157520502573,
+      "e2e_p95_s": 27.179984082991723,
+      "max_http_outstanding": 8,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        27.180819792003604,
+        22.54835641599493,
+        23.89911258299253,
+        23.808154833997833,
+        27.969653666979866,
+        25.960871582996333,
+        27.179984082991723,
+        29.827989540994167,
+        24.195181457995204,
+        23.757478124985937,
+        24.890933999995468,
+        24.188598250009818,
+        24.262039958004607,
+        24.261240833991906,
+        24.196328624995658,
+        24.150832832994638,
+        24.177746667002793,
+        23.444225665996782,
+        24.12334758299403,
+        24.115339083014987,
+        24.272228999994695,
+        24.18197608398623,
+        24.180218958004843,
+        23.463496790995123,
+        24.230542375007644,
+        24.22351508299471,
+        24.142076290998375,
+        24.095867583004292,
+        24.182441334007308,
+        25.138115042005666,
+        24.2664238330035,
+        24.99858604199835,
+        24.18701933301054,
+        24.848308749991702,
+        23.92689254198922,
+        24.180996540992055,
+        24.18082133299322,
+        24.265965582977515,
+        25.02154616700136,
+        24.42899479100015,
+        24.336883167008637,
+        24.330801040981896,
+        24.507347541017225,
+        24.24805279201246,
+        24.240430958976503,
+        24.253119915985735,
+        24.23432358301943,
+        24.277267792000202,
+        24.297297124983743,
+        23.648976416996447,
+        24.314097583002876,
+        24.248345708008856,
+        24.232957582978997,
+        24.23335745802615,
+        24.236829666013364,
+        24.363752125005703,
+        24.31870208401233,
+        24.321598292008275,
+        23.008075999998255,
+        22.17332966599497,
+        21.24277629199787,
+        20.56174404200283,
+        19.78900495902053,
+        18.882110708014807
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c8/trial/point.json",
+        "sha256": "36a2586736441819d5809c566e61e2824d2a45fdd37bf3a516ac481500482582"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c8/trial/formal-group.json",
+        "sha256": "663a0b1986b7e76ba61f8466a84d6f50063487001c281d763e2d15f8a90d9d40"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 5913,
+      "response_ids": [
+        "cmpl-24706c41",
+        "cmpl-3f0dc072",
+        "cmpl-3faad464",
+        "cmpl-6c02cd32",
+        "cmpl-7470df95",
+        "cmpl-938339bc",
+        "cmpl-9afdb209",
+        "cmpl-ff4bea74",
+        "cmpl-03a0d1d0",
+        "cmpl-12e875d4",
+        "cmpl-1dbb23b1",
+        "cmpl-250ebfa5",
+        "cmpl-343f53a6",
+        "cmpl-40c914cc",
+        "cmpl-43019cf7",
+        "cmpl-462fdc0f",
+        "cmpl-47df9d92",
+        "cmpl-486f3dd2",
+        "cmpl-48adace5",
+        "cmpl-4aa3f6c0",
+        "cmpl-4c7eea03",
+        "cmpl-5d739034",
+        "cmpl-613db25b",
+        "cmpl-661d9dd8",
+        "cmpl-6743c550",
+        "cmpl-68acc5c4",
+        "cmpl-68c64c13",
+        "cmpl-698099bb",
+        "cmpl-69aa9a5c",
+        "cmpl-6e35c939",
+        "cmpl-6f3510a1",
+        "cmpl-743fe7df",
+        "cmpl-824ceb47",
+        "cmpl-82fa6f82",
+        "cmpl-837e3c4b",
+        "cmpl-83a65e8f",
+        "cmpl-8b528990",
+        "cmpl-92f43cf0",
+        "cmpl-98c0dcda",
+        "cmpl-9916559b",
+        "cmpl-9e4fb17a",
+        "cmpl-9e8a3239",
+        "cmpl-a04a01a8",
+        "cmpl-a2072b8f",
+        "cmpl-a22f3156",
+        "cmpl-a4155471",
+        "cmpl-a7a520ca",
+        "cmpl-aa77040e",
+        "cmpl-aba40e7f",
+        "cmpl-ac566098",
+        "cmpl-b1468c0d",
+        "cmpl-b3ff36d6",
+        "cmpl-ba2a3ad9",
+        "cmpl-bad1efe6",
+        "cmpl-bae4b597",
+        "cmpl-bb09f8f6",
+        "cmpl-bb77a61c",
+        "cmpl-bf985dc8",
+        "cmpl-c65c0ea2",
+        "cmpl-ca5e4f42",
+        "cmpl-d0e9d55d",
+        "cmpl-d256424e",
+        "cmpl-d4173efc",
+        "cmpl-d49261ca",
+        "cmpl-d4c60682",
+        "cmpl-de648ce1",
+        "cmpl-e3054b4a",
+        "cmpl-f206c381",
+        "cmpl-f566b82d",
+        "cmpl-f748858c",
+        "cmpl-f9a2411b",
+        "cmpl-fd451cf9"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c8/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c8/trial/server.stderr",
+          "sha256": "4f879d4cf7a40ee49aa1ff1ca06856ab44e41b81eb7df851a8824d4132442030"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": true,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r2-c1",
+      "concurrency": 1,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 645.1949969160196,
+      "aggregate_output_tok_s": 50.78774658301508,
+      "e2e_p50_s": 10.07643270851986,
+      "e2e_p95_s": 10.128053249994991,
+      "max_http_outstanding": 1,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        10.099295666004764,
+        10.017990624997765,
+        10.061354083998594,
+        10.050262416014448,
+        10.084804958984023,
+        10.0861450000084,
+        10.046915707993321,
+        10.111949750018539,
+        10.102953833003994,
+        10.026152082980843,
+        10.065798374998849,
+        10.06503562501166,
+        10.054156792000867,
+        10.047743125003763,
+        10.065313333994709,
+        10.05744729199796,
+        10.095992624992505,
+        10.062277958000777,
+        10.065861000010045,
+        10.051857290993212,
+        10.064093082997715,
+        10.096202000015182,
+        10.10063704100321,
+        10.096520582999801,
+        10.112025459005963,
+        10.076030042022467,
+        10.095834334002575,
+        10.10864695897908,
+        10.093318042025203,
+        10.094285457977094,
+        10.121866542001953,
+        10.093800583010307,
+        10.113170333002927,
+        10.05015045797336,
+        10.061068958020769,
+        10.04931662499439,
+        10.045225959009258,
+        10.044472458015662,
+        10.045776749990182,
+        10.064615207986208,
+        10.100894917006372,
+        10.073935833992437,
+        10.096675125008915,
+        10.13140562499757,
+        10.096134166000411,
+        10.131734708003933,
+        10.136039709002944,
+        10.128053249994991,
+        10.113577165990137,
+        10.077798874990549,
+        10.10976979197585,
+        10.116860249981983,
+        10.089492917002644,
+        10.074586916016415,
+        10.118137208977714,
+        10.064621040975908,
+        10.126321292016655,
+        10.063290958001744,
+        10.074514999985695,
+        10.057926292007323,
+        10.063389874994755,
+        10.045685750024859,
+        10.060127292003017,
+        10.076835375017254
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c1/trial/point.json",
+        "sha256": "d76a039f50fd0bdee3c7d380ce28bdcb887f2e16f3380df3ac46b058332c0444"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c1/trial/formal-group.json",
+        "sha256": "57d1873da8d4b5b4eef261c2fe0b40a8345232f6f2d045a5819cb7d68ed7bcc9"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 7208,
+      "response_ids": [
+        "cmpl-020b532a",
+        "cmpl-7a970e6f",
+        "cmpl-7bdf35c7",
+        "cmpl-8dff0a50",
+        "cmpl-a41061d5",
+        "cmpl-dcb2a53b",
+        "cmpl-e977430d",
+        "cmpl-f2b5da7a",
+        "cmpl-0c668651",
+        "cmpl-0cf15a07",
+        "cmpl-0e70227a",
+        "cmpl-11b5973c",
+        "cmpl-1391bca1",
+        "cmpl-13ee5160",
+        "cmpl-17ce782d",
+        "cmpl-194acbe7",
+        "cmpl-20ae3b0c",
+        "cmpl-24fbf2bc",
+        "cmpl-263650a1",
+        "cmpl-2666be24",
+        "cmpl-267bc7f2",
+        "cmpl-2ad55c02",
+        "cmpl-2e190c21",
+        "cmpl-2f76eeb4",
+        "cmpl-3869860a",
+        "cmpl-3da75cc6",
+        "cmpl-3e16a8ae",
+        "cmpl-3e9b9ce5",
+        "cmpl-44704a9e",
+        "cmpl-4695508e",
+        "cmpl-46f3c099",
+        "cmpl-5de3eea5",
+        "cmpl-5fb9303c",
+        "cmpl-644a86f0",
+        "cmpl-683660d2",
+        "cmpl-6a149055",
+        "cmpl-6bf4855c",
+        "cmpl-6e518220",
+        "cmpl-6f82dd2a",
+        "cmpl-757b3358",
+        "cmpl-7fd62506",
+        "cmpl-83c8cf86",
+        "cmpl-83d28d1c",
+        "cmpl-8522fdc6",
+        "cmpl-899febe7",
+        "cmpl-8c6093c9",
+        "cmpl-8ef48aa4",
+        "cmpl-928c3c0e",
+        "cmpl-968e57f9",
+        "cmpl-99824ac9",
+        "cmpl-9a8c43fd",
+        "cmpl-9db513b4",
+        "cmpl-a200c1e8",
+        "cmpl-ae618927",
+        "cmpl-b2041687",
+        "cmpl-b5f0b013",
+        "cmpl-be9f9fc3",
+        "cmpl-c719b3eb",
+        "cmpl-c8f2dd31",
+        "cmpl-c97d2aa8",
+        "cmpl-cae1f898",
+        "cmpl-cc09b5fd",
+        "cmpl-d8c2b146",
+        "cmpl-ddb9b14d",
+        "cmpl-ddcb6e99",
+        "cmpl-e9c2e197",
+        "cmpl-ead015ab",
+        "cmpl-ee0ec5a5",
+        "cmpl-f1adea0c",
+        "cmpl-f3fa9491",
+        "cmpl-f93dea4e",
+        "cmpl-fa208472"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c1/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r2-c1/trial/server.stderr",
+          "sha256": "9b309b86dcbabe6da6b818ba7ff276085e9437e3a287407325a3a8152a21ab94"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": true,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r3-c1",
+      "concurrency": 1,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 645.5515629999863,
+      "aggregate_output_tok_s": 50.75969431120515,
+      "e2e_p50_s": 10.091380729485536,
+      "e2e_p95_s": 10.140035999997053,
+      "max_http_outstanding": 1,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        10.09919404098764,
+        10.03211679100059,
+        10.101327041978948,
+        10.091965458006598,
+        10.069897999987006,
+        10.121107334009139,
+        10.113484208995942,
+        10.099902290996397,
+        10.149171041994123,
+        10.04275779199088,
+        10.080886750016361,
+        10.064627541985828,
+        10.101922292000381,
+        10.114784584002336,
+        10.06166970799677,
+        10.079921625001589,
+        10.14874287499697,
+        10.04451712500304,
+        10.049903625011211,
+        10.061929874995258,
+        10.095062709006015,
+        10.056345666991547,
+        10.061348833027296,
+        10.063059374981094,
+        10.085005208995426,
+        10.03088750000461,
+        10.09802549998858,
+        10.119118041999172,
+        10.101022041984834,
+        10.119929708976997,
+        10.095793999993475,
+        10.122664958995301,
+        10.142450416984502,
+        10.102914417017018,
+        10.107269792002626,
+        10.140035999997053,
+        10.105108415998984,
+        10.099685584020335,
+        10.063873541977955,
+        10.09957854199456,
+        10.133973749994766,
+        10.037324208999053,
+        10.049743499985198,
+        10.061085791996447,
+        10.06525579202571,
+        10.087117999995826,
+        10.067871916980948,
+        10.091023666987894,
+        10.10722854200867,
+        10.035825250000926,
+        10.051368540996918,
+        10.091737791983178,
+        10.063790249987505,
+        10.049736583023332,
+        10.089233458013041,
+        10.066117042006226,
+        10.135987374989782,
+        10.083897082979092,
+        10.10412229099893,
+        10.10659733301145,
+        10.097790041996632,
+        10.099343917012447,
+        10.053187291981885,
+        10.066362083976856
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c1/trial/point.json",
+        "sha256": "06a899841bee69b0dbced7eb5e8a6993ecc3e5c4185c84158a1198d52848204f"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c1/trial/formal-group.json",
+        "sha256": "ffa8aae9dd93df58e399b62ab54007ea5da6de892355db51c0ae8c6e937a5910"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 14550,
+      "response_ids": [
+        "cmpl-09c3ab3e",
+        "cmpl-290c8412",
+        "cmpl-2be590a0",
+        "cmpl-40bd3e39",
+        "cmpl-652790fa",
+        "cmpl-be3dd5eb",
+        "cmpl-c20b3736",
+        "cmpl-f18f9725",
+        "cmpl-072e74a6",
+        "cmpl-07c6b405",
+        "cmpl-12676ab8",
+        "cmpl-128d45db",
+        "cmpl-134f9302",
+        "cmpl-13b9ae86",
+        "cmpl-151a6477",
+        "cmpl-184c699d",
+        "cmpl-1936036b",
+        "cmpl-1bd58493",
+        "cmpl-1de803d1",
+        "cmpl-1e46e22f",
+        "cmpl-2195c1cc",
+        "cmpl-271a27ea",
+        "cmpl-27b49294",
+        "cmpl-29c0b9dd",
+        "cmpl-2afb835d",
+        "cmpl-30367994",
+        "cmpl-3fa67069",
+        "cmpl-41c5abb3",
+        "cmpl-44094c92",
+        "cmpl-45c43f67",
+        "cmpl-532ff3c0",
+        "cmpl-566d89b2",
+        "cmpl-5ad6aec5",
+        "cmpl-5b0fbe1f",
+        "cmpl-5f1238c0",
+        "cmpl-6273cf98",
+        "cmpl-68721f6c",
+        "cmpl-68b0d0f5",
+        "cmpl-724f9170",
+        "cmpl-76ec76ae",
+        "cmpl-7b550dd1",
+        "cmpl-7e5c3a31",
+        "cmpl-8a3e0481",
+        "cmpl-8bc263c9",
+        "cmpl-8ce5b674",
+        "cmpl-922c04f4",
+        "cmpl-9fe0260c",
+        "cmpl-aa367f28",
+        "cmpl-adc43f57",
+        "cmpl-b1d110d5",
+        "cmpl-b1f53156",
+        "cmpl-c2d54e85",
+        "cmpl-c51d7bf5",
+        "cmpl-c5dc4d2c",
+        "cmpl-ca0730fb",
+        "cmpl-cc22895a",
+        "cmpl-cc6f5e54",
+        "cmpl-cde2ffdd",
+        "cmpl-d356dd71",
+        "cmpl-d6850286",
+        "cmpl-d8142d52",
+        "cmpl-e3e03194",
+        "cmpl-e6e0b0f8",
+        "cmpl-efb84a9f",
+        "cmpl-f001014c",
+        "cmpl-f027d7c5",
+        "cmpl-f04c5de9",
+        "cmpl-f2bfdbf9",
+        "cmpl-f611797c",
+        "cmpl-f66c9b13",
+        "cmpl-f825ad85",
+        "cmpl-fb01da19"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c1/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c1/trial/server.stderr",
+          "sha256": "04383efdf6b3a31ac39ae917082c013a3465c3c5143bc8aabbb2a2fc2dc055fe"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r3-c8",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 194.66421766698477,
+      "aggregate_output_tok_s": 168.33088480625005,
+      "e2e_p50_s": 24.263937416486442,
+      "e2e_p95_s": 26.119019208010286,
+      "max_http_outstanding": 8,
+      "stop_requests": 0,
+      "cap_requests": 64,
+      "request_latencies_s": [
+        24.043662374984706,
+        22.614389709022362,
+        26.119019208010286,
+        23.958171666017734,
+        28.11755391699262,
+        28.11701666697627,
+        26.029118167003617,
+        29.835356750001665,
+        24.217899666982703,
+        23.775898583000526,
+        24.983682542020688,
+        24.265631874994142,
+        25.096228499984136,
+        24.380597375013167,
+        24.380081958981464,
+        23.8284679579956,
+        24.342335207998985,
+        23.519289499992738,
+        24.262242957978742,
+        24.273795207991498,
+        24.241412041999865,
+        24.322840416018153,
+        24.23332762499922,
+        24.751789208006812,
+        24.269679249991896,
+        24.843892834003782,
+        24.20291045799968,
+        24.20966970801237,
+        24.216125000006286,
+        24.22743566700956,
+        25.034157624992076,
+        24.402429916983237,
+        24.362577833991963,
+        23.79117583401967,
+        24.300071334000677,
+        24.311208375002025,
+        24.305771166982595,
+        24.30611741699977,
+        24.441268167021917,
+        24.250076917000115,
+        24.315623417001916,
+        24.323036916001,
+        24.238188625022303,
+        24.221958624984836,
+        24.22499220800819,
+        24.224268249992747,
+        24.084328500000993,
+        24.287707250012318,
+        24.356974916998297,
+        24.349508792016422,
+        24.272062417003326,
+        24.219565584004158,
+        24.222829375008587,
+        24.209041708993027,
+        24.208151166996686,
+        24.192403833993012,
+        24.27641045799828,
+        24.2869221669971,
+        22.98068241600413,
+        22.146406540996395,
+        21.560762999986764,
+        20.574830458994256,
+        19.864998791977996,
+        19.113683916977607
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c8/trial/point.json",
+        "sha256": "9c5528fe372442393d874f432cfca9b656892c3d0766fd8aa0d0365e0476ed71"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c8/trial/formal-group.json",
+        "sha256": "77f37619b1ea47197090f076d99a247b04437f63afd8f7efb0015d2f9aefb391"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/independent-qualification.json",
+          "sha256": "8e9d77123e44d9485474976362dc70dcdbb3a14f6de290951d3ca989c33aa208"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-qualification-v1-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_d512/prereg-qualification-v1/owner-plan.json",
+          "sha256": "e5294522149dfccccab4e26189280d77ddb6f3eb0b54fe78034646c59a71d4ef"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/resource-summary.json",
+          "sha256": "bc923557b7b59a230d10d5a163f0e5cfaf07c92074c06f04bfc0f7c2e4172531"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/restoration-audit.json",
+          "sha256": "408bf10518e403c508d100abef613dd31b9a1db5bed76ceea34ab36fa20f6c7f"
+        }
+      },
+      "pid": 18078,
+      "response_ids": [
+        "cmpl-1533be50",
+        "cmpl-4a611c44",
+        "cmpl-52db9c10",
+        "cmpl-533fdd9f",
+        "cmpl-5d8015da",
+        "cmpl-71a383ae",
+        "cmpl-d4975fbf",
+        "cmpl-f1712142",
+        "cmpl-18bc3de6",
+        "cmpl-19cad9e9",
+        "cmpl-1ac21f34",
+        "cmpl-1ad9b96e",
+        "cmpl-1eac16d2",
+        "cmpl-28f4dcd3",
+        "cmpl-2a62bbbc",
+        "cmpl-30eb59de",
+        "cmpl-35c36238",
+        "cmpl-386c5a64",
+        "cmpl-3de8e5ce",
+        "cmpl-3f98fa73",
+        "cmpl-41165cb6",
+        "cmpl-474f8751",
+        "cmpl-48c4c48b",
+        "cmpl-494eeef0",
+        "cmpl-4d5878c3",
+        "cmpl-4fe46a90",
+        "cmpl-533de9ed",
+        "cmpl-5f474baf",
+        "cmpl-610a7eb1",
+        "cmpl-6438f2df",
+        "cmpl-6f702617",
+        "cmpl-71030119",
+        "cmpl-723d715a",
+        "cmpl-745079a2",
+        "cmpl-7cadb985",
+        "cmpl-7e097f85",
+        "cmpl-7e69167a",
+        "cmpl-809aa2c8",
+        "cmpl-8252681a",
+        "cmpl-876e1844",
+        "cmpl-8c0bcd6f",
+        "cmpl-92422644",
+        "cmpl-95e97234",
+        "cmpl-9ca6b5f9",
+        "cmpl-9f556545",
+        "cmpl-9ff55a22",
+        "cmpl-b62ebe62",
+        "cmpl-b972c301",
+        "cmpl-ba26fa57",
+        "cmpl-ba94e60f",
+        "cmpl-bee0226e",
+        "cmpl-c3e6828a",
+        "cmpl-c4e7b027",
+        "cmpl-c5fc4e50",
+        "cmpl-c5fe5358",
+        "cmpl-c9757109",
+        "cmpl-c9aba3a6",
+        "cmpl-cd0ca9ee",
+        "cmpl-ce395e55",
+        "cmpl-d52d1442",
+        "cmpl-d5517ed5",
+        "cmpl-d5c77a58",
+        "cmpl-d7e6e417",
+        "cmpl-d8fd537e",
+        "cmpl-da728826",
+        "cmpl-db9ad1e0",
+        "cmpl-e6d9a63f",
+        "cmpl-f1778a89",
+        "cmpl-fc8867cd",
+        "cmpl-fe5f6606",
+        "cmpl-ff827c46",
+        "cmpl-ffd055ee"
+      ],
+      "exit_evidence": {
+        "server_term_events": 1,
+        "server_returncode": -15
+      },
+      "retained_logs": {
+        "server.stdout": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c8/trial/server.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "server.stderr": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/omlx-d512-formal-v2-owner/phases/r3-c8/trial/server.stderr",
+          "sha256": "846e47b5565390a06d619bc45b7559e346badcf31afac044ce22c6e7750c5867"
+        }
+      },
+      "closed_logs_semantically_verified": false,
+      "generator_eof_proven": false,
+      "engine": "oMLX",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": true
+    },
+    {
+      "phase": "r1-c1",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 729.6340502499952,
+      "aggregate_output_tok_s": 44.910184754635104,
+      "e2e_p50_s": 11.404539645503974,
+      "e2e_p95_s": 11.521853334008483,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 1,
+      "request_latencies_s": [
+        11.497212957998272,
+        11.2225227500021,
+        11.351541250012815,
+        11.34449187500286,
+        11.44088691700017,
+        11.429190333001316,
+        11.331651957996655,
+        11.459996666992083,
+        11.521442166995257,
+        11.254192041989882,
+        11.379888958006632,
+        11.372700249979971,
+        11.456585040985374,
+        11.455264083022485,
+        11.355912958009867,
+        11.449576708022505,
+        11.521853334008483,
+        11.22878687499906,
+        11.357989292009734,
+        11.36877974998788,
+        11.435781209002016,
+        11.440189040993573,
+        11.334817082999507,
+        11.441069791006157,
+        11.521530333004193,
+        11.23517491700477,
+        11.368025332980324,
+        11.366455332987243,
+        11.455547541991109,
+        11.446001542004524,
+        11.359656917018583,
+        11.453692665993003,
+        11.538208249985473,
+        11.242253959004302,
+        11.362535583000863,
+        11.356147958984366,
+        11.44843824999407,
+        11.442055708001135,
+        11.374398333980935,
+        11.452436457999283,
+        11.53317691598204,
+        11.257094041997334,
+        11.369449459016323,
+        11.36091279098764,
+        11.454397250025067,
+        11.451753542001825,
+        11.361524125008145,
+        11.461616625019815,
+        11.55489570798818,
+        11.247845749981934,
+        11.35369154199725,
+        11.360325042012846,
+        11.449696958006825,
+        11.454947083024308,
+        11.354848084010882,
+        11.454084666998824,
+        11.52108562499052,
+        11.24987462500576,
+        11.374927333003143,
+        11.36281245801365,
+        11.4583969580126,
+        11.453384083026322,
+        11.365386916004354,
+        11.461018959002104
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r1-c1/trial/point.json",
+        "sha256": "84c9cf6f2253bbc2123d4b57849dd31b5c0088ac1c6ba1d8cda59a21381b61af"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r1-c1/trial/formal-group.json",
+        "sha256": "de85fb11e9eaaa40c91e6d13980543a38aa539ee57f7deab07ba7b53404c2fef"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "d3845befc30ac97fdc6dda01c6d42270d1392863ee89581faa0355a0882b7ae9",
+          "bytes": 4956,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "8aee6ec976e88d233339ef20bfc677c303eb892323bf70488c1b46204b997ff3",
+          "bytes": 39615,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "41d4c7fecce22efa7d8267a26afa893c7f4dfdcbb70193e591cb7ae69305e7f0",
+          "bytes": 45607,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 57360,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r1-c8",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 730.0599290420068,
+      "aggregate_output_tok_s": 44.88398650094185,
+      "e2e_p50_s": 91.25278316698677,
+      "e2e_p95_s": 91.31341833301121,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 8,
+      "request_latencies_s": [
+        22.80929654202191,
+        11.26927825002349,
+        34.18174062500475,
+        45.556797666009516,
+        57.01011600001948,
+        68.47148808301426,
+        79.84039345901692,
+        91.3062890409783,
+        91.57270854202216,
+        91.2895224999811,
+        91.28380124998512,
+        91.26320116699208,
+        91.26290662499378,
+        91.23619787502685,
+        91.22238125000149,
+        91.19971825001994,
+        91.18828291699174,
+        91.19114774998161,
+        91.19986920899828,
+        91.21647987500182,
+        91.21886083300342,
+        91.23427741701016,
+        91.23957287499798,
+        91.26843445797567,
+        91.28238487499766,
+        91.26705662498716,
+        91.26155070899404,
+        91.25024620798649,
+        91.23682449999615,
+        91.22901899999124,
+        91.22467495899764,
+        91.21452416601824,
+        91.20649341700482,
+        91.22360066699912,
+        91.234132166981,
+        91.25454354198882,
+        91.2824442909914,
+        91.28559849999147,
+        91.29484995800885,
+        91.29843499997514,
+        91.31341833301121,
+        91.31436791599845,
+        91.30001900001662,
+        91.27581204197486,
+        91.26397629099665,
+        91.25157116699847,
+        91.24391570800799,
+        91.22545745800016,
+        91.20962266699644,
+        91.2279148339876,
+        91.22394566700677,
+        91.25399516697507,
+        91.25692579199676,
+        91.27585095801624,
+        91.27903291699477,
+        91.31046249999781,
+        91.334888375015,
+        91.29012724998756,
+        91.30203116699704,
+        91.26567299998715,
+        91.25877354198019,
+        91.255915791,
+        91.2573786250141,
+        91.23355866700877
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r1-c8/trial/point.json",
+        "sha256": "cb5dfb0728fc51a8b57c442d4c6bf29fcda601d32488b3b070d1d47a0a46824d"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r1-c8/trial/formal-group.json",
+        "sha256": "4e27e61851b6fae5298d340c20a44fc2786dcbb0d83a5aa47cd8ee1a5e436892"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "f0e50698b9cba6b7735f05bd7f03f69f276804a5ba5501bf15b3784558978a64",
+          "bytes": 4968,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "38911ad038e6483f80215177e3b7d4be52947736529f0d67a893729591ddf6fc",
+          "bytes": 39612,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "c0d0ce533d8fb8b915116a1d5516cae66d46a46f201d8d5047aeabeee41ede32",
+          "bytes": 45616,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 62179,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r2-c8",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 728.711272665998,
+      "aggregate_output_tok_s": 44.96705516866498,
+      "e2e_p50_s": 91.07205927098403,
+      "e2e_p95_s": 91.18685754100443,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 8,
+      "request_latencies_s": [
+        22.76227562499116,
+        11.245950166980037,
+        34.1211766670167,
+        45.47492345800856,
+        56.91022329201223,
+        68.34869287500624,
+        79.68687670797226,
+        91.13864812502288,
+        91.40072279199376,
+        91.14369904101477,
+        91.13167533298838,
+        91.12369087501429,
+        91.12373554200167,
+        91.10288525000215,
+        91.0931347500009,
+        91.07383979199221,
+        91.06774233299075,
+        91.04480758297723,
+        91.0395812499919,
+        91.05049329102621,
+        91.0566664999933,
+        91.07119779198547,
+        91.08094487499329,
+        91.09192470798735,
+        91.1088687919837,
+        91.10357470801682,
+        91.0959492920083,
+        91.08626341700437,
+        91.08644474999164,
+        91.08335745800287,
+        91.08485916699283,
+        91.06562974999542,
+        91.06512954100617,
+        91.07292074998259,
+        91.08962808400975,
+        91.15435537500889,
+        91.15414433399565,
+        91.15903758298373,
+        91.17140399999334,
+        91.18913670800976,
+        91.1932648330112,
+        91.18685754100443,
+        91.18025408301037,
+        91.11036145800608,
+        91.10953675000928,
+        91.09306949999882,
+        91.07521787501173,
+        91.06674195901724,
+        91.04863275002572,
+        91.04165558301611,
+        91.04080441599945,
+        91.04001225001412,
+        91.03096112501225,
+        91.04512008302845,
+        91.04262545899837,
+        91.0474610000092,
+        91.05502204201184,
+        91.04595291698934,
+        91.05050137499347,
+        91.04070199999842,
+        91.02929320797557,
+        91.01431833297829,
+        91.02247429199633,
+        91.03463224999723
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r2-c8/trial/point.json",
+        "sha256": "5bc5709f01817f6327b9ae2c08e166b44c9d2ddf260e87a295620467cb74ddf0"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r2-c8/trial/formal-group.json",
+        "sha256": "9145251b6dc13b34c51f7c117aa5d8922e7eeeb7ae3cdb9617d354b0dd3b5336"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "f640ffbf61621dfc9a48b661278c13e35d43bb33ed4aad4f3d2ca81caba6622f",
+          "bytes": 4958,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "abbdc05a8d223b8da3e376ace894e8da243298316c1e183f0172a11ac86ed644",
+          "bytes": 39592,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "f674407ee2ee1e8f164a31cf82385a5bd4890cdd31455d354e26fceed29a3f5d",
+          "bytes": 45586,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 67487,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r2-c1",
+      "concurrency": 1,
+      "repeat": 2,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 729.026219500025,
+      "aggregate_output_tok_s": 44.947628937780436,
+      "e2e_p50_s": 11.397076145993196,
+      "e2e_p95_s": 11.517164916993352,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 1,
+      "request_latencies_s": [
+        11.518250542023452,
+        11.23319449997507,
+        11.348297832999378,
+        11.3546924580005,
+        11.443461457995,
+        11.437372208019951,
+        11.347653375007212,
+        11.437003832979826,
+        11.519488124991767,
+        11.223047374980524,
+        11.34307762500248,
+        11.357281415985199,
+        11.440949084004387,
+        11.430731708998792,
+        11.349916165985633,
+        11.44242970898631,
+        11.513032666989602,
+        11.232424750021892,
+        11.372643374983454,
+        11.348544542008312,
+        11.448250459012343,
+        11.432896166021237,
+        11.351964417001,
+        11.445529624994379,
+        11.517164916993352,
+        11.227701875002822,
+        11.35736779202125,
+        11.358603333996143,
+        11.444430625007953,
+        11.440953042008914,
+        11.330801292002434,
+        11.442149417009205,
+        11.505063999997219,
+        11.24112341698492,
+        11.354885917011416,
+        11.352392250002595,
+        11.442724458989687,
+        11.421508917002939,
+        11.351664540998172,
+        11.45514983299654,
+        11.523318166990066,
+        11.244553332973737,
+        11.36074983299477,
+        11.357333833002485,
+        11.438850666978396,
+        11.451569583005039,
+        11.34942087501986,
+        11.446116957988124,
+        11.512414875003742,
+        11.220784957986325,
+        11.341060374979861,
+        11.354742958006682,
+        11.447837290994357,
+        11.434806125005707,
+        11.344248417008203,
+        11.44249725001282,
+        11.50999912500265,
+        11.227082875004271,
+        11.355422791995807,
+        11.352906542015262,
+        11.436478584015276,
+        11.428605291992426,
+        11.353832458000397,
+        11.44440783301252
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r2-c1/trial/point.json",
+        "sha256": "d0c86babf853e13fd0102c3b04c885814ef7166583afa4bd8941aa16c2a4da83"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r2-c1/trial/formal-group.json",
+        "sha256": "f75e638edaa720ac48ae3188f52aa7f2237d0c7173db0c979fe319fc03b45fdc"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "665806dff9a1a8613244a726e273293fff8e287f011c64d3923e6c2e8de42760",
+          "bytes": 4959,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "a5b25773e382528d86d7c555bab7125323b1d1f568837e33287a2c7ec83bb742",
+          "bytes": 39565,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "b316475f84fb525d34d5ed45509601c8e73385e8b50e3aa66de8a1091ae4e615",
+          "bytes": 45560,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 72922,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r3-c1",
+      "concurrency": 1,
+      "repeat": 3,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 729.7721613340254,
+      "aggregate_output_tok_s": 44.901685397398566,
+      "e2e_p50_s": 11.402589375007665,
+      "e2e_p95_s": 11.531823875004193,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 1,
+      "request_latencies_s": [
+        11.533019500027876,
+        11.272017832990969,
+        11.368010166974273,
+        11.368789750005817,
+        11.465020458999788,
+        11.46858054198674,
+        11.362685209023766,
+        11.453174791997299,
+        11.531014042004244,
+        11.234358499990776,
+        11.362646833003964,
+        11.358647834014846,
+        11.437324124999577,
+        11.423549625003943,
+        11.353701791987987,
+        11.438395874982234,
+        11.524400249996688,
+        11.250734457978979,
+        11.364144708000822,
+        11.377403791993856,
+        11.469151666999096,
+        11.468216790992301,
+        11.367871583992383,
+        11.461830624990398,
+        11.535816250019707,
+        11.247360749985091,
+        11.368494916998316,
+        11.37781708300463,
+        11.460286999994423,
+        11.461466917011421,
+        11.361138915992342,
+        11.454609708016505,
+        11.531823875004193,
+        11.23876070897677,
+        11.34929350001039,
+        11.35828958300408,
+        11.453610625001602,
+        11.424467624980025,
+        11.346680458984338,
+        11.443755042011617,
+        11.516435541008832,
+        11.250139000010677,
+        11.381629125011386,
+        11.359301707998384,
+        11.461626417003572,
+        11.447779208014254,
+        11.348632459004875,
+        11.44073837500764,
+        11.522579959011637,
+        11.253142542002024,
+        11.378764666995266,
+        11.362838667002507,
+        11.457178500015289,
+        11.441537417005748,
+        11.352176499989582,
+        11.459458333003568,
+        11.548768042004667,
+        11.23947945900727,
+        11.37966912498814,
+        11.350723333016504,
+        11.44432133398368,
+        11.435552042006748,
+        11.343480416981038,
+        11.434245250013191
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r3-c1/trial/point.json",
+        "sha256": "16571da78446062206c42b9ad73c11df50faf76b31d8e706106cf0b34adcfc01"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r3-c1/trial/formal-group.json",
+        "sha256": "cefd6956889eeb3cb9d5e36d997d77748563d76407bd76b36cfa37b76c2602a0"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "4d89140e90719a1801f109ce345e768fcba46bf8ec677ce6e9a919e2246a61da",
+          "bytes": 4962,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "11a5e95e79c55f87ef187505d70d1f872224196c7c32e2b4639e1728246c1bd5",
+          "bytes": 39581,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "89098cf73b7a2f85622a9d7ce8ea0f855f77b59a4c4fdb493f7240d810759a2e",
+          "bytes": 45579,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 77425,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r3-c8",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "raw_output_tokens": 32768,
+      "committed_output_tokens": 32768,
+      "common_window_s": 729.5342473330093,
+      "aggregate_output_tok_s": 44.916328629932636,
+      "e2e_p50_s": 91.1835192500148,
+      "e2e_p95_s": 91.32483770899125,
+      "eos_requests": 0,
+      "cap_requests": 64,
+      "max_http_outstanding": 8,
+      "request_latencies_s": [
+        11.519500624999637,
+        22.763165665994165,
+        34.11392316600541,
+        45.44629145899671,
+        56.87626754201483,
+        68.29707508400315,
+        79.6394300830143,
+        91.07711241699872,
+        91.06237412500195,
+        91.046007500001,
+        91.02917491699918,
+        91.04294058401138,
+        91.04882366699167,
+        91.04277929099044,
+        91.03163708400098,
+        91.02476091700373,
+        91.02697195901419,
+        91.10063012500177,
+        91.11709066599724,
+        91.11758424999425,
+        91.1435568750021,
+        91.14946904199314,
+        91.15718908398412,
+        91.17392441700213,
+        91.19008575001499,
+        91.1360255840118,
+        91.1517504590156,
+        91.16287258302327,
+        91.15996991700376,
+        91.18307754202397,
+        91.17482225000276,
+        91.16372454099474,
+        91.18067100000917,
+        91.19423112500226,
+        91.20416079100687,
+        91.22011887497501,
+        91.22035812499234,
+        91.23858083301457,
+        91.28064670899766,
+        91.31287729099859,
+        91.31175341599737,
+        91.30904466600623,
+        91.3051695000031,
+        91.31762345900643,
+        91.30504858397762,
+        91.29593925000518,
+        91.30474900000263,
+        91.32511266699294,
+        91.32564287498826,
+        91.32600045797881,
+        91.32119829198928,
+        91.29725695899106,
+        91.31399808300193,
+        91.32483770899125,
+        91.3011002500134,
+        91.2697420840268,
+        91.26456487501855,
+        91.26059037499363,
+        91.26081591600087,
+        91.24819770798786,
+        91.23461916699307,
+        91.21276279201265,
+        91.19764958298765,
+        91.18396095800563
+      ],
+      "n_fresh_processes": 1,
+      "warm_requests_checked": 8,
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r3-c8/trial/point.json",
+        "sha256": "992b6bffaf89979182118de5bd564538d9f06622c0c9c5eef40a8b86d79b26c9"
+      },
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-formal-v1-owner/phases/r3-c8/trial/formal-group.json",
+        "sha256": "b33e611c6b0c38ba1b2858440bacc0885011d944223f7ce2c2a2c91004d72b1d"
+      },
+      "qualification": {
+        "audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/independent-qualification.json",
+          "sha256": "df64cd94a1ec47dc4f5dd8f749e61066eba17d126abc0860ad929b1703f16189"
+        },
+        "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner",
+        "owner_plan": {
+          "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/lithos-d512-qualification-v2-owner/owner-plan.json",
+          "sha256": "e72792b61039414d0c16d9f5f3216619aed62d2d3c23536fe491d409383ab354"
+        },
+        "resource_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/resource-summary.json",
+          "sha256": "f171bcbb8f0f709ececc7b9b35a1f25f5e0e4b3194ed5d542799a8fd5e38930e"
+        },
+        "restoration_audit": {
+          "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E023-lithos-d512-qualification-v2/restoration-audit.json",
+          "sha256": "269a9a85b50674077fee8dc464a0edc4a0531fb13e5386d95dbc8cc57ba66e43"
+        }
+      },
+      "log_windows": {
+        "warm": {
+          "status": "PASS",
+          "count": 8,
+          "log_window_sha256": "a523a0248e205e43909fb0e8b4ee23f98938cfc926e61aedf6b3055187f0fbfa",
+          "bytes": 4964,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "formal": {
+          "status": "PASS",
+          "count": 64,
+          "log_window_sha256": "fcce2230eb4c87a11041a607a72d80456b0b562882b2b77c599107aa90dd2c20",
+          "bytes": 39614,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": true,
+          "require_setup_zero": true,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "all_generations": {
+          "status": "PASS",
+          "count": 72,
+          "log_window_sha256": "62b44333ed3280eed0e2c74e649101fdf51e9c4161d33f2cd09182372da99082",
+          "bytes": 45614,
+          "all_cached_prompt_tokens_zero": true,
+          "all_setup_ms_zero": false,
+          "require_setup_zero": false,
+          "per_wire_request_id_bound": false,
+          "scope": "all Generation entries in externally bounded quiet window; owner must prove offsets/file identity/no unrelated requests"
+        },
+        "per_wire_request_id_bound": false,
+        "scope": "Exact quiet byte windows/counts; official Generation lines have no HTTP request IDs."
+      },
+      "pid": 81388,
+      "engine": "Lithos",
+      "nondominated_p50_among_displayed_observations": false,
+      "nondominated_p95_among_displayed_observations": false
+    },
+    {
+      "phase": "r1-c1-off",
+      "arm": "off",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 727.5788260419795,
+      "aggregate_output_tok_s": 45.03704454712838,
+      "e2e_p50_s": 11.364095520999399,
+      "e2e_p95_s": 11.421953792014392,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c1-off/trial/formal-group.json",
+        "sha256": "e500e546cc8fa29ba660ee5cca99e93c5c0e3af481a9dbd491789e7708546615"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c1-off/trial/point.json",
+        "sha256": "5fbfe0a5f1dd4761604361ab7a2bccf93326aea8a1939de384e588d49d24fd32"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r1-c1-on",
+      "arm": "on",
+      "concurrency": 1,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 715.9740980839997,
+      "aggregate_output_tok_s": 45.767018789771335,
+      "e2e_p50_s": 11.18368906249816,
+      "e2e_p95_s": 11.223709500016412,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c1-on/trial/formal-group.json",
+        "sha256": "bc8b2a4dab58415ed21df1443f3dcb31d4370e33418b0ff88cb222b0b1641e10"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c1-on/trial/point.json",
+        "sha256": "78fd0a3bc1bb0e5199962432c48634eb6033a79a6518ee953fa5eda89ec7e207"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c1-independent-numerical.json",
+        "sha256": "b9443261ca47dbea5782e469dca1987737e51df34a12c01539fbc46fe2a99ff4"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r1-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 192.17252883300534,
+      "aggregate_output_tok_s": 170.51344538674846,
+      "e2e_p50_s": 23.990867541506304,
+      "e2e_p95_s": 25.53766000000178,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c8-on/trial/formal-group.json",
+        "sha256": "9f01216ddfc1c460df0f4c66758a813effadb521c94f92fcc4dd41e3aa99ab3b"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c8-on/trial/point.json",
+        "sha256": "e2e2f5dc53b8c0a3aac0ec4492073263cb59bdbfa9cb3a055fca17a19c1d86e8"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c8-independent-numerical.json",
+        "sha256": "4aac471df2778dd39ff74e10a7f965f2ad4690546c6dcaee9ce144e30c28e4d7"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r1-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 195.58681350000552,
+      "aggregate_output_tok_s": 167.53685697731905,
+      "e2e_p50_s": 24.405574687509215,
+      "e2e_p95_s": 26.005544874991756,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c8-off/trial/formal-group.json",
+        "sha256": "d26abd0a552e069fea640899644689b3f79224a41837dc978eee2666497d8749"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r1-c8-off/trial/point.json",
+        "sha256": "e5c4b9d2444426a0b9a5aeb6b7bfa3cac16bf757af195da4c3347d913f636c06"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r2-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 195.5071856249997,
+      "aggregate_output_tok_s": 167.60509285245382,
+      "e2e_p50_s": 24.418581957987044,
+      "e2e_p95_s": 25.891997375001665,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c8-off/trial/formal-group.json",
+        "sha256": "ef129293429605a849228cee5d895ea2d1a692fd5404ed078a90a16bf1d386b6"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c8-off/trial/point.json",
+        "sha256": "fb49fac3f74c0595d374a202f1e603dafe3eecb1d5ac1a834fd098530ec1ca77"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r2-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 192.05268979200628,
+      "aggregate_output_tok_s": 170.61984414531167,
+      "e2e_p50_s": 23.976082187495194,
+      "e2e_p95_s": 25.53103966600611,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c8-on/trial/formal-group.json",
+        "sha256": "bd826da1ad526fb6975bbf18e1559f4da990d4e57a8d2f32c1a1782ced22ebf9"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c8-on/trial/point.json",
+        "sha256": "f1dc8d4b737ffdf6091773d6adc03913d30c97cc84a0b63e9dc28ec9bab5af19"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c8-independent-numerical.json",
+        "sha256": "4aac471df2778dd39ff74e10a7f965f2ad4690546c6dcaee9ce144e30c28e4d7"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r2-c1-on",
+      "arm": "on",
+      "concurrency": 1,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 714.7226722500054,
+      "aggregate_output_tok_s": 45.847153409648605,
+      "e2e_p50_s": 11.165739353513345,
+      "e2e_p95_s": 11.215184333996149,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c1-on/trial/formal-group.json",
+        "sha256": "16afbf42d49575d9c7109d84526e0b3a3f7b7995b826b519c905179082792ad8"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c1-on/trial/point.json",
+        "sha256": "facc3a483baea57f4eb859636b13924448b9997adae2ef2cf91441b23ed2f809"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c1-independent-numerical.json",
+        "sha256": "b9443261ca47dbea5782e469dca1987737e51df34a12c01539fbc46fe2a99ff4"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r2-c1-off",
+      "arm": "off",
+      "concurrency": 1,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 721.6701010839897,
+      "aggregate_output_tok_s": 45.40578853243413,
+      "e2e_p50_s": 11.270520500504063,
+      "e2e_p95_s": 11.319747833011206,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c1-off/trial/formal-group.json",
+        "sha256": "a13f24348fefb7b46fc42ceb91e922823011ede3a662ef4b93516c78f5bf726c"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r2-c1-off/trial/point.json",
+        "sha256": "b97aa91999bb80b113add813948b56ad6ae490aa89c6f397050d3783f2e5b22e"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r3-c1-off",
+      "arm": "off",
+      "concurrency": 1,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 720.9676756249974,
+      "aggregate_output_tok_s": 45.450026551597965,
+      "e2e_p50_s": 11.256669979004073,
+      "e2e_p95_s": 11.316714500018861,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c1-off/trial/formal-group.json",
+        "sha256": "80b17d317d750cbb90fdf362640ec4b71f3a07097963955376064118b2a57bc5"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c1-off/trial/point.json",
+        "sha256": "6c9757656fb4d09b73179e07f3df38627647238e4e498604dbf9c6b80850fd45"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c1-independent-audit-v2.json",
+        "sha256": "72a3928516181b48fb7eebe6c88ead6a55adaccfafeaae57abbcddbd84c8e660"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r3-c1-on",
+      "arm": "on",
+      "concurrency": 1,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 714.9117467920005,
+      "aggregate_output_tok_s": 45.83502809547996,
+      "e2e_p50_s": 11.1659231249796,
+      "e2e_p95_s": 11.213964708003914,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 1,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c1-on/trial/formal-group.json",
+        "sha256": "f72dd299481b6bd2c03774eaacda95834f18b34ceb5547a3064d556e22cd4342"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c1-on/trial/point.json",
+        "sha256": "74f151042bd79f7272b9117c32109163f1c1bf1abc944745dfaaea232e4004c3"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c1-independent-numerical.json",
+        "sha256": "b9443261ca47dbea5782e469dca1987737e51df34a12c01539fbc46fe2a99ff4"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r3-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 191.83204416601802,
+      "aggregate_output_tok_s": 170.81609145363353,
+      "e2e_p50_s": 23.958631166489795,
+      "e2e_p95_s": 25.400913458986906,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c8-on/trial/formal-group.json",
+        "sha256": "d0b8c942d4a769f7baff1ccd59a2b867ffb20cee05529e124909e1ae8797e69a"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c8-on/trial/point.json",
+        "sha256": "5e341aa06518b40de6f35be1b253fadf223039a21e2f85f9f987614afdab427b"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/c8-independent-numerical.json",
+        "sha256": "4aac471df2778dd39ff74e10a7f965f2ad4690546c6dcaee9ce144e30c28e4d7"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    },
+    {
+      "phase": "r3-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 199.1342822079896,
+      "aggregate_output_tok_s": 164.55227917900564,
+      "e2e_p50_s": 24.90838314598659,
+      "e2e_p95_s": 25.859004291996825,
+      "n_fresh_processes": 1,
+      "max_http_outstanding": 8,
+      "warm_requests_checked": 8,
+      "formal_raw_group": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c8-off/trial/formal-group.json",
+        "sha256": "be7e710c15ee8751f96a3757a1cf1096e1de77c08e047d4340f552ec2883ecfd"
+      },
+      "point_receipt": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-v2-owner/phases/r3-c8-off/trial/point.json",
+        "sha256": "008370628645e9ce4a57ff1b9948cc67a054e3eb7690243205cd4f59ba484a81"
+      },
+      "numerical_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/http-baseline-v2-analysis/c8-independent-audit-v2.json",
+        "sha256": "b8eb40faab76eb33e6dd4045b3671507348844f2e364ad21b0abcabb1f7eb264"
+      },
+      "route_cycle_audit": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-v1-analysis/independent-cycle.json",
+        "sha256": "8cbde8d54b246d25deeed2e7c25460d954087a2daf2083efdc9779402d2e313f"
+      },
+      "actual_compiled_invocations_observed": false
+    }
+  ],
+  "display": [
+    {
+      "point_index": 0,
+      "configuration": "native-historical"
+    },
+    {
+      "point_index": 1,
+      "configuration": "native-historical"
+    },
+    {
+      "point_index": 2,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 3,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 4,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 5,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 6,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 7,
+      "configuration": "omlx"
+    },
+    {
+      "point_index": 8,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 9,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 10,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 11,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 12,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 13,
+      "configuration": "lithos"
+    },
+    {
+      "point_index": 14,
+      "configuration": "native-off"
+    },
+    {
+      "point_index": 15,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 16,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 17,
+      "configuration": "native-off"
+    },
+    {
+      "point_index": 18,
+      "configuration": "native-off"
+    },
+    {
+      "point_index": 19,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 20,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 21,
+      "configuration": "native-off"
+    },
+    {
+      "point_index": 22,
+      "configuration": "native-off"
+    },
+    {
+      "point_index": 23,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 24,
+      "configuration": "native-on"
+    },
+    {
+      "point_index": 25,
+      "configuration": "native-off"
+    }
+  ],
+  "display_policy_origin": "v12 sources fixed before ON results; metrics/grouping/pairing policy unchanged",
+  "parser_correction": {
+    "post_run": true,
+    "original_audit_sha256": "a9ee8acd98c4b89eee3a96f709a6f4a63225a4b5b088aaae7093ac8d9b14f990",
+    "original_archive_sha256": "9174c276c76405651cc351f8e248e98b68aba0c257831a8bc5706e4b2fb52b7b",
+    "corrected_audit_source_sha256": "b2bc55b87043d66d79154fd32dc7579cc7c6fdb457844a1b1d3df932ff41224e",
+    "actual_corrected_audit_sha256": "16c285f78e46797fea7b747925caae6b1934b7a975e0ef6583bc3fbf42989a37",
+    "v12_speed_update_withheld": true,
+    "timed_experiment_rerun": false,
+    "scope": "Registered HF tokenizer snapshot symlink handling only; original FAIL/raw evidence retained."
+  },
+  "process_metric_medians": [
+    {
+      "configuration": "native-historical",
+      "label": "Native historical",
+      "concurrency": 1,
+      "fresh_processes": 1,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 45.37214661329437,
+          "minimum": 45.37214661329437,
+          "maximum": 45.37214661329437
+        },
+        "e2e_p50_s": {
+          "median": 11.28328733350645,
+          "minimum": 11.28328733350645,
+          "maximum": 11.28328733350645
+        },
+        "e2e_p95_s": {
+          "median": 11.348184375005076,
+          "minimum": 11.348184375005076,
+          "maximum": 11.348184375005076
+        }
+      }
+    },
+    {
+      "configuration": "native-historical",
+      "label": "Native historical",
+      "concurrency": 8,
+      "fresh_processes": 1,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 167.39890732678444,
+          "minimum": 167.39890732678444,
+          "maximum": 167.39890732678444
+        },
+        "e2e_p50_s": {
+          "median": 24.431814499999746,
+          "minimum": 24.431814499999746,
+          "maximum": 24.431814499999746
+        },
+        "e2e_p95_s": {
+          "median": 25.97906349999539,
+          "minimum": 25.97906349999539,
+          "maximum": 25.97906349999539
+        }
+      }
+    },
+    {
+      "configuration": "native-off",
+      "label": "Native OFF",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 45.40578853243413,
+          "minimum": 45.03704454712838,
+          "maximum": 45.450026551597965
+        },
+        "e2e_p50_s": {
+          "median": 11.270520500504063,
+          "minimum": 11.256669979004073,
+          "maximum": 11.364095520999399
+        },
+        "e2e_p95_s": {
+          "median": 11.319747833011206,
+          "minimum": 11.316714500018861,
+          "maximum": 11.421953792014392
+        }
+      }
+    },
+    {
+      "configuration": "native-off",
+      "label": "Native OFF",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 167.53685697731905,
+          "minimum": 164.55227917900564,
+          "maximum": 167.60509285245382
+        },
+        "e2e_p50_s": {
+          "median": 24.418581957987044,
+          "minimum": 24.405574687509215,
+          "maximum": 24.90838314598659
+        },
+        "e2e_p95_s": {
+          "median": 25.891997375001665,
+          "minimum": 25.859004291996825,
+          "maximum": 26.005544874991756
+        }
+      }
+    },
+    {
+      "configuration": "native-on",
+      "label": "Native ON",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 45.83502809547996,
+          "minimum": 45.767018789771335,
+          "maximum": 45.847153409648605
+        },
+        "e2e_p50_s": {
+          "median": 11.1659231249796,
+          "minimum": 11.165739353513345,
+          "maximum": 11.18368906249816
+        },
+        "e2e_p95_s": {
+          "median": 11.215184333996149,
+          "minimum": 11.213964708003914,
+          "maximum": 11.223709500016412
+        }
+      }
+    },
+    {
+      "configuration": "native-on",
+      "label": "Native ON",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 170.61984414531167,
+          "minimum": 170.51344538674846,
+          "maximum": 170.81609145363353
+        },
+        "e2e_p50_s": {
+          "median": 23.976082187495194,
+          "minimum": 23.958631166489795,
+          "maximum": 23.990867541506304
+        },
+        "e2e_p95_s": {
+          "median": 25.53103966600611,
+          "minimum": 25.400913458986906,
+          "maximum": 25.53766000000178
+        }
+      }
+    },
+    {
+      "configuration": "omlx",
+      "label": "oMLX",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 50.78156750755799,
+          "minimum": 50.75969431120515,
+          "maximum": 50.78774658301508
+        },
+        "e2e_p50_s": {
+          "median": 10.079908603496733,
+          "minimum": 10.07643270851986,
+          "maximum": 10.091380729485536
+        },
+        "e2e_p95_s": {
+          "median": 10.128053249994991,
+          "minimum": 10.122799667005893,
+          "maximum": 10.140035999997053
+        }
+      }
+    },
+    {
+      "configuration": "omlx",
+      "label": "oMLX",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 168.36503432828738,
+          "minimum": 168.33088480625005,
+          "maximum": 168.56379621605632
+        },
+        "e2e_p50_s": {
+          "median": 24.263937416486442,
+          "minimum": 24.233157520502573,
+          "maximum": 24.271552833510214
+        },
+        "e2e_p95_s": {
+          "median": 26.1300366249925,
+          "minimum": 26.119019208010286,
+          "maximum": 27.179984082991723
+        }
+      }
+    },
+    {
+      "configuration": "lithos",
+      "label": "Lithos",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 44.910184754635104,
+          "minimum": 44.901685397398566,
+          "maximum": 44.947628937780436
+        },
+        "e2e_p50_s": {
+          "median": 11.402589375007665,
+          "minimum": 11.397076145993196,
+          "maximum": 11.404539645503974
+        },
+        "e2e_p95_s": {
+          "median": 11.521853334008483,
+          "minimum": 11.517164916993352,
+          "maximum": 11.531823875004193
+        }
+      }
+    },
+    {
+      "configuration": "lithos",
+      "label": "Lithos",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "metrics": {
+        "aggregate_output_tok_s": {
+          "median": 44.916328629932636,
+          "minimum": 44.88398650094185,
+          "maximum": 44.96705516866498
+        },
+        "e2e_p50_s": {
+          "median": 91.1835192500148,
+          "minimum": 91.07205927098403,
+          "maximum": 91.25278316698677
+        },
+        "e2e_p95_s": {
+          "median": 91.31341833301121,
+          "minimum": 91.18685754100443,
+          "maximum": 91.32483770899125
+        }
+      }
+    }
+  ],
+  "historical_process_metric_medians": [
+    {
+      "engine": "mini-vLLM",
+      "concurrency": 1,
+      "fresh_processes": 1,
+      "aggregate_output_tok_s": 45.37214661329437,
+      "e2e_p50_s": 11.28328733350645,
+      "e2e_p95_s": 11.348184375005076,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          45.37214661329437,
+          45.37214661329437
+        ],
+        "e2e_p50_s": [
+          11.28328733350645,
+          11.28328733350645
+        ],
+        "e2e_p95_s": [
+          11.348184375005076,
+          11.348184375005076
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    },
+    {
+      "engine": "mini-vLLM",
+      "concurrency": 8,
+      "fresh_processes": 1,
+      "aggregate_output_tok_s": 167.39890732678444,
+      "e2e_p50_s": 24.431814499999746,
+      "e2e_p95_s": 25.97906349999539,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          167.39890732678444,
+          167.39890732678444
+        ],
+        "e2e_p50_s": [
+          24.431814499999746,
+          24.431814499999746
+        ],
+        "e2e_p95_s": [
+          25.97906349999539,
+          25.97906349999539
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    },
+    {
+      "engine": "oMLX",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "aggregate_output_tok_s": 50.78156750755799,
+      "e2e_p50_s": 10.079908603496733,
+      "e2e_p95_s": 10.128053249994991,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          50.75969431120515,
+          50.78774658301508
+        ],
+        "e2e_p50_s": [
+          10.07643270851986,
+          10.091380729485536
+        ],
+        "e2e_p95_s": [
+          10.122799667005893,
+          10.140035999997053
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    },
+    {
+      "engine": "oMLX",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "aggregate_output_tok_s": 168.36503432828738,
+      "e2e_p50_s": 24.263937416486442,
+      "e2e_p95_s": 26.1300366249925,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          168.33088480625005,
+          168.56379621605632
+        ],
+        "e2e_p50_s": [
+          24.233157520502573,
+          24.271552833510214
+        ],
+        "e2e_p95_s": [
+          26.119019208010286,
+          27.179984082991723
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    },
+    {
+      "engine": "Lithos",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "aggregate_output_tok_s": 44.910184754635104,
+      "e2e_p50_s": 11.402589375007665,
+      "e2e_p95_s": 11.521853334008483,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          44.901685397398566,
+          44.947628937780436
+        ],
+        "e2e_p50_s": [
+          11.397076145993196,
+          11.404539645503974
+        ],
+        "e2e_p95_s": [
+          11.517164916993352,
+          11.531823875004193
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    },
+    {
+      "engine": "Lithos",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "aggregate_output_tok_s": 44.916328629932636,
+      "e2e_p50_s": 91.1835192500148,
+      "e2e_p95_s": 91.31341833301121,
+      "observed_process_ranges": {
+        "aggregate_output_tok_s": [
+          44.88398650094185,
+          44.96705516866498
+        ],
+        "e2e_p50_s": [
+          91.07205927098403,
+          91.25278316698677
+        ],
+        "e2e_p95_s": [
+          91.18685754100443,
+          91.32483770899125
+        ]
+      },
+      "scope": "Median of process metrics, not pooled request percentiles or confidence intervals."
+    }
+  ],
+  "paired_comparisons": {
+    "pairs": [
+      {
+        "repeat": 1,
+        "concurrency": 1,
+        "order": [
+          "off",
+          "on"
+        ],
+        "off_phase": "r1-c1-off",
+        "on_phase": "r1-c1-on",
+        "throughput_on_over_off": 1.0162083069611525,
+        "e2e_p50_on_over_off": 0.9841248730998547,
+        "e2e_p95_on_over_off": 0.982643574329938
+      },
+      {
+        "repeat": 1,
+        "concurrency": 8,
+        "order": [
+          "on",
+          "off"
+        ],
+        "off_phase": "r1-c8-off",
+        "on_phase": "r1-c8-on",
+        "throughput_on_over_off": 1.017766767642253,
+        "e2e_p50_on_over_off": 0.9830076877388526,
+        "e2e_p95_on_over_off": 0.9820082648820053
+      },
+      {
+        "repeat": 2,
+        "concurrency": 8,
+        "order": [
+          "off",
+          "on"
+        ],
+        "off_phase": "r2-c8-off",
+        "on_phase": "r2-c8-on",
+        "throughput_on_over_off": 1.0179872296333607,
+        "e2e_p50_on_over_off": 0.981878563986509,
+        "e2e_p95_on_over_off": 0.9860591014371083
+      },
+      {
+        "repeat": 2,
+        "concurrency": 1,
+        "order": [
+          "on",
+          "off"
+        ],
+        "off_phase": "r2-c1-off",
+        "on_phase": "r2-c1-on",
+        "throughput_on_over_off": 1.0097204539658904,
+        "e2e_p50_on_over_off": 0.9907030782663471,
+        "e2e_p95_on_over_off": 0.9907627360116518
+      },
+      {
+        "repeat": 3,
+        "concurrency": 1,
+        "order": [
+          "off",
+          "on"
+        ],
+        "off_phase": "r3-c1-off",
+        "on_phase": "r3-c1-on",
+        "throughput_on_over_off": 1.008470876104878,
+        "e2e_p50_on_over_off": 0.9919383925980122,
+        "e2e_p95_on_over_off": 0.9909205280371104
+      },
+      {
+        "repeat": 3,
+        "concurrency": 8,
+        "order": [
+          "on",
+          "off"
+        ],
+        "off_phase": "r3-c8-off",
+        "on_phase": "r3-c8-on",
+        "throughput_on_over_off": 1.0380657886106452,
+        "e2e_p50_on_over_off": 0.9618701874814454,
+        "e2e_p95_on_over_off": 0.9822850552234258
+      }
+    ],
+    "process_medians": [
+      {
+        "concurrency": 1,
+        "arm": "off",
+        "n_fresh_processes": 3,
+        "metrics": {
+          "aggregate_output_tok_s": {
+            "median": 45.40578853243413,
+            "minimum": 45.03704454712838,
+            "maximum": 45.450026551597965
+          },
+          "e2e_p50_s": {
+            "median": 11.270520500504063,
+            "minimum": 11.256669979004073,
+            "maximum": 11.364095520999399
+          },
+          "e2e_p95_s": {
+            "median": 11.319747833011206,
+            "minimum": 11.316714500018861,
+            "maximum": 11.421953792014392
+          }
+        }
+      },
+      {
+        "concurrency": 1,
+        "arm": "on",
+        "n_fresh_processes": 3,
+        "metrics": {
+          "aggregate_output_tok_s": {
+            "median": 45.83502809547996,
+            "minimum": 45.767018789771335,
+            "maximum": 45.847153409648605
+          },
+          "e2e_p50_s": {
+            "median": 11.1659231249796,
+            "minimum": 11.165739353513345,
+            "maximum": 11.18368906249816
+          },
+          "e2e_p95_s": {
+            "median": 11.215184333996149,
+            "minimum": 11.213964708003914,
+            "maximum": 11.223709500016412
+          }
+        }
+      },
+      {
+        "concurrency": 8,
+        "arm": "off",
+        "n_fresh_processes": 3,
+        "metrics": {
+          "aggregate_output_tok_s": {
+            "median": 167.53685697731905,
+            "minimum": 164.55227917900564,
+            "maximum": 167.60509285245382
+          },
+          "e2e_p50_s": {
+            "median": 24.418581957987044,
+            "minimum": 24.405574687509215,
+            "maximum": 24.90838314598659
+          },
+          "e2e_p95_s": {
+            "median": 25.891997375001665,
+            "minimum": 25.859004291996825,
+            "maximum": 26.005544874991756
+          }
+        }
+      },
+      {
+        "concurrency": 8,
+        "arm": "on",
+        "n_fresh_processes": 3,
+        "metrics": {
+          "aggregate_output_tok_s": {
+            "median": 170.61984414531167,
+            "minimum": 170.51344538674846,
+            "maximum": 170.81609145363353
+          },
+          "e2e_p50_s": {
+            "median": 23.976082187495194,
+            "minimum": 23.958631166489795,
+            "maximum": 23.990867541506304
+          },
+          "e2e_p95_s": {
+            "median": 25.53103966600611,
+            "minimum": 25.400913458986906,
+            "maximum": 25.53766000000178
+          }
+        }
+      }
+    ],
+    "scope": "Adjacent process comparisons with the same fixtures, not identical realized arrival schedules; no pooled-token ratio or confidence-interval claim."
+  },
+  "qualification_status": [
+    {
+      "candidate": "E024 route graph",
+      "status": "HTTP history + paired formal PASS",
+      "evidence": "12 fresh processes; 768 formal + 96 warm",
+      "next_gate": "This configuration only; no future-arrival proof",
+      "histories": [
+        {
+          "concurrency": 1,
+          "requests": 8,
+          "steps": 4096,
+          "observed_eos": 0
+        },
+        {
+          "concurrency": 8,
+          "requests": 16,
+          "steps": 1028,
+          "observed_eos": 0
+        }
+      ],
+      "performance_qualified": true
+    },
+    {
+      "candidate": "GDN prework",
+      "status": "Canary + 37-request PASS",
+      "evidence": "18 canary calls; 8 / 16 / 13 serving requests",
+      "next_gate": "HTTP + formal pending",
+      "canary_raw_pairs": 54,
+      "serving_requests": 37,
+      "observed_eos": 0,
+      "performance_qualified": false
+    },
+    {
+      "candidate": "GLM 190 GiB",
+      "status": "Download / load pending",
+      "evidence": "No qualified measurement",
+      "next_gate": "Load / numerical gates pending",
+      "basis": "Maintainer status at this snapshot; no qualification receipt or performance point.",
+      "performance_qualified": false
+    }
+  ],
+  "performance_point_count": 26,
+  "historical_points_exactly_unchanged": true,
+  "native_historical_pooled_with_off": false,
+  "sources": {
+    "v12-prepare.py": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v12/prepare.py",
+      "sha256": "5bc8be7c8f6a5994eaff1895e254f9acfbaf483a309ccbf6af01a09c4ee0d966",
+      "bytes": 15894
+    },
+    "v12-render.py": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v12/render.py",
+      "sha256": "a3b3333bd4e89db07a29277e37cd2411037e06c54a4faf25b05fcefc02bde8cc",
+      "bytes": 10395
+    },
+    "v12-README.md": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v12/README.md",
+      "sha256": "c57fa7c2dd4c43d447536dcf219171026b0c34b602800ae2d9f6086ad5d32f77",
+      "bytes": 2446
+    },
+    "v12-render-queue.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/progress-v12-offline-render-queue/status.json",
+      "sha256": "b285e00bc7de57ea129a70a7a84131029ff95a88da619c0ddf79fd34ec6bb5ae",
+      "bytes": 867
+    },
+    "first-formal-failure.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2/independent-formal.json",
+      "sha256": "a9ee8acd98c4b89eee3a96f709a6f4a63225a4b5b088aaae7093ac8d9b14f990",
+      "bytes": 12183
+    },
+    "first-archive-verification.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2/archive-verification.json",
+      "sha256": "74e420089ed0b23678c3b7295d5684b846c839080f2e656f9830986709092471",
+      "bytes": 661
+    },
+    "tokenizer-cpu-result.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/route-http-formal-tokenizer-cpu-v1/result.json",
+      "sha256": "442d29d0f29039c25ac329419beecf31b0d92fba570c6fd3e2c28bb695192a29",
+      "bytes": 682
+    },
+    "audit_formal_v2.py": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/audit_formal_v2.py",
+      "sha256": "b2bc55b87043d66d79154fd32dc7579cc7c6fdb457844a1b1d3df932ff41224e",
+      "bytes": 36270
+    },
+    "test_audit_formal_v2_cpu.py": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/test_audit_formal_v2_cpu.py",
+      "sha256": "9bff5e7d2c1d52d18c0c39d4a286cd17e3be28c19128a82078dc30b8fc120bac",
+      "bytes": 8780
+    },
+    "v11-chartdata.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v11/chartdata.json",
+      "sha256": "df412e157da1e08436bdf81ef1cfaa126eaca42da7d12d6241b8ad6e46073123",
+      "bytes": 91245
+    },
+    "v11-verification.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v11/verification.json",
+      "sha256": "5612840e9057db29971a20ca0aed682f2c53b61e9b099bcaa0f678c362ff9984",
+      "bytes": 4187
+    },
+    "v11-render.py": {
+      "path": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v11/render.py",
+      "sha256": "6e34ab1253e708941cb4d40c7590341997d4e62b732e636668adf3814dc38f0c",
+      "bytes": 22805
+    },
+    "independent-formal.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/independent-formal.json",
+      "sha256": "16c285f78e46797fea7b747925caae6b1934b7a975e0ef6583bc3fbf42989a37",
+      "bytes": 458653
+    },
+    "restoration-audit.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/restoration-audit.json",
+      "sha256": "acb1207ebb8244299b3440d1b18a4d98f8f546d1821fbae90aa1528026af44f9",
+      "bytes": 10731
+    },
+    "restored-journal.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/restored-journal.json",
+      "sha256": "6ca290097aa14d1969a1282c43116fa8cd3ffd736edc9797299bca04064449eb",
+      "bytes": 43231
+    },
+    "audit-execution-summary.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/audit-execution-summary.json",
+      "sha256": "66c5a056c61addfa4838bb0e8ee670f2ac249058d7f6423586b215ed3f24a580",
+      "bytes": 18958
+    },
+    "summary.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/summary.json",
+      "sha256": "0f462f6517113aab07589439a71533da1e9aab415393d9ac9a9a87ba982fd289",
+      "bytes": 2035
+    },
+    "archive-verification.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/archive-verification.json",
+      "sha256": "c060be4cb74ea3a41be5bdfed768d80151c0d434df4ebe7d6b473831351c7a6f",
+      "bytes": 661
+    },
+    "archive-stream.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/archive-stream.json",
+      "sha256": "0d04626d0b4f4d42fbb4a9984c3c98487a2bbb6283aa9b25416cfd2d262fe5f1",
+      "bytes": 346
+    },
+    "archive.py": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/archive.py",
+      "sha256": "528101c543d6f85ec74828591a4c14bce3902733995830c3daf1d510606664fa",
+      "bytes": 19888
+    },
+    "archive-manifest.json": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E024-route-http-formal-v2-reparse-v1/manifest.json",
+      "sha256": "40bcec96bf451aa0d32cb58ad1a6184a9af813daef1319c0b8ed86634974ab72",
+      "bytes": 1182409
+    }
+  },
+  "legacy_point_annotation_scope": "Any retained nondominated_* fields belong to the original fourteen-point v11 set only; v13 rendering does not use them.",
+  "scope": "All26 audited process observations. Historical native n=1/C is separate from new paired OFF/ON n=3/configuration/C. Medians/min-max summarize process metrics, not pooled requests or confidence intervals. p50 and p95 are separate. No interpolation, global-fastest/frontier or observed-formal-graph-hit claim. Different cycles and realized arrival schedules; no proof of all future arrivals, cross-engine full-state/answer-quality equality or E024+GDN composition. Lithos C8 uses official FIFO GPU execution; original oMLX parser FAIL remains preserved in v11 provenance. E024 original tokenizer-path auditor FAIL and v12 withheld chart are retained; v13 uses the complete corrected offline audit, not a rerun."
+}

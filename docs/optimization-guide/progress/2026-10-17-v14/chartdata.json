@@ -1,0 +1,614 @@
+{
+  "schema": "D512-explicit-frontier-v14",
+  "source": "/Users/ryanli/code/minivllm/docs/optimization-guide/progress/2026-10-17-v13/chartdata.json",
+  "source_sha256": "ff7d06adbe1ecda482173a6747a7e673aa71a73a54713bfd2d8f2f6b52551ef0",
+  "performance_points": 26,
+  "new_performance_points": 0,
+  "summary_rows": [
+    {
+      "configuration": "native-historical",
+      "concurrency": 1,
+      "fresh_processes": 1,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          45.37214661329437,
+          45.37214661329437
+        ],
+        "e2e_p50_s": [
+          11.28328733350645,
+          11.28328733350645
+        ],
+        "e2e_p95_s": [
+          11.348184375005076,
+          11.348184375005076
+        ]
+      },
+      "aggregate_output_tok_s": 45.37214661329437,
+      "e2e_p50_s": 11.28328733350645,
+      "e2e_p95_s": 11.348184375005076
+    },
+    {
+      "configuration": "native-historical",
+      "concurrency": 8,
+      "fresh_processes": 1,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          167.39890732678444,
+          167.39890732678444
+        ],
+        "e2e_p50_s": [
+          24.431814499999746,
+          24.431814499999746
+        ],
+        "e2e_p95_s": [
+          25.97906349999539,
+          25.97906349999539
+        ]
+      },
+      "aggregate_output_tok_s": 167.39890732678444,
+      "e2e_p50_s": 24.431814499999746,
+      "e2e_p95_s": 25.97906349999539
+    },
+    {
+      "configuration": "native-off",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          45.03704454712838,
+          45.450026551597965
+        ],
+        "e2e_p50_s": [
+          11.256669979004073,
+          11.364095520999399
+        ],
+        "e2e_p95_s": [
+          11.316714500018861,
+          11.421953792014392
+        ]
+      },
+      "aggregate_output_tok_s": 45.40578853243413,
+      "e2e_p50_s": 11.270520500504063,
+      "e2e_p95_s": 11.319747833011206
+    },
+    {
+      "configuration": "native-off",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          164.55227917900564,
+          167.60509285245382
+        ],
+        "e2e_p50_s": [
+          24.405574687509215,
+          24.90838314598659
+        ],
+        "e2e_p95_s": [
+          25.859004291996825,
+          26.005544874991756
+        ]
+      },
+      "aggregate_output_tok_s": 167.53685697731905,
+      "e2e_p50_s": 24.418581957987044,
+      "e2e_p95_s": 25.891997375001665
+    },
+    {
+      "configuration": "native-on",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          45.767018789771335,
+          45.847153409648605
+        ],
+        "e2e_p50_s": [
+          11.165739353513345,
+          11.18368906249816
+        ],
+        "e2e_p95_s": [
+          11.213964708003914,
+          11.223709500016412
+        ]
+      },
+      "aggregate_output_tok_s": 45.83502809547996,
+      "e2e_p50_s": 11.1659231249796,
+      "e2e_p95_s": 11.215184333996149
+    },
+    {
+      "configuration": "native-on",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          170.51344538674846,
+          170.81609145363353
+        ],
+        "e2e_p50_s": [
+          23.958631166489795,
+          23.990867541506304
+        ],
+        "e2e_p95_s": [
+          25.400913458986906,
+          25.53766000000178
+        ]
+      },
+      "aggregate_output_tok_s": 170.61984414531167,
+      "e2e_p50_s": 23.976082187495194,
+      "e2e_p95_s": 25.53103966600611
+    },
+    {
+      "configuration": "omlx",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          50.75969431120515,
+          50.78774658301508
+        ],
+        "e2e_p50_s": [
+          10.07643270851986,
+          10.091380729485536
+        ],
+        "e2e_p95_s": [
+          10.122799667005893,
+          10.140035999997053
+        ]
+      },
+      "aggregate_output_tok_s": 50.78156750755799,
+      "e2e_p50_s": 10.079908603496733,
+      "e2e_p95_s": 10.128053249994991
+    },
+    {
+      "configuration": "omlx",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          168.33088480625005,
+          168.56379621605632
+        ],
+        "e2e_p50_s": [
+          24.233157520502573,
+          24.271552833510214
+        ],
+        "e2e_p95_s": [
+          26.119019208010286,
+          27.179984082991723
+        ]
+      },
+      "aggregate_output_tok_s": 168.36503432828738,
+      "e2e_p50_s": 24.263937416486442,
+      "e2e_p95_s": 26.1300366249925
+    },
+    {
+      "configuration": "lithos",
+      "concurrency": 1,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          44.901685397398566,
+          44.947628937780436
+        ],
+        "e2e_p50_s": [
+          11.397076145993196,
+          11.404539645503974
+        ],
+        "e2e_p95_s": [
+          11.517164916993352,
+          11.531823875004193
+        ]
+      },
+      "aggregate_output_tok_s": 44.910184754635104,
+      "e2e_p50_s": 11.402589375007665,
+      "e2e_p95_s": 11.521853334008483
+    },
+    {
+      "configuration": "lithos",
+      "concurrency": 8,
+      "fresh_processes": 3,
+      "ranges": {
+        "aggregate_output_tok_s": [
+          44.88398650094185,
+          44.96705516866498
+        ],
+        "e2e_p50_s": [
+          91.07205927098403,
+          91.25278316698677
+        ],
+        "e2e_p95_s": [
+          91.18685754100443,
+          91.32483770899125
+        ]
+      },
+      "aggregate_output_tok_s": 44.916328629932636,
+      "e2e_p50_s": 91.1835192500148,
+      "e2e_p95_s": 91.31341833301121
+    }
+  ],
+  "per_engine_frontiers": {
+    "e2e_p50_s": {
+      "native-on": [
+        {
+          "configuration": "native-on",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              45.767018789771335,
+              45.847153409648605
+            ],
+            "e2e_p50_s": [
+              11.165739353513345,
+              11.18368906249816
+            ],
+            "e2e_p95_s": [
+              11.213964708003914,
+              11.223709500016412
+            ]
+          },
+          "aggregate_output_tok_s": 45.83502809547996,
+          "e2e_p50_s": 11.1659231249796,
+          "e2e_p95_s": 11.215184333996149
+        },
+        {
+          "configuration": "native-on",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              170.51344538674846,
+              170.81609145363353
+            ],
+            "e2e_p50_s": [
+              23.958631166489795,
+              23.990867541506304
+            ],
+            "e2e_p95_s": [
+              25.400913458986906,
+              25.53766000000178
+            ]
+          },
+          "aggregate_output_tok_s": 170.61984414531167,
+          "e2e_p50_s": 23.976082187495194,
+          "e2e_p95_s": 25.53103966600611
+        }
+      ],
+      "omlx": [
+        {
+          "configuration": "omlx",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              50.75969431120515,
+              50.78774658301508
+            ],
+            "e2e_p50_s": [
+              10.07643270851986,
+              10.091380729485536
+            ],
+            "e2e_p95_s": [
+              10.122799667005893,
+              10.140035999997053
+            ]
+          },
+          "aggregate_output_tok_s": 50.78156750755799,
+          "e2e_p50_s": 10.079908603496733,
+          "e2e_p95_s": 10.128053249994991
+        },
+        {
+          "configuration": "omlx",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              168.33088480625005,
+              168.56379621605632
+            ],
+            "e2e_p50_s": [
+              24.233157520502573,
+              24.271552833510214
+            ],
+            "e2e_p95_s": [
+              26.119019208010286,
+              27.179984082991723
+            ]
+          },
+          "aggregate_output_tok_s": 168.36503432828738,
+          "e2e_p50_s": 24.263937416486442,
+          "e2e_p95_s": 26.1300366249925
+        }
+      ],
+      "lithos": [
+        {
+          "configuration": "lithos",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              44.901685397398566,
+              44.947628937780436
+            ],
+            "e2e_p50_s": [
+              11.397076145993196,
+              11.404539645503974
+            ],
+            "e2e_p95_s": [
+              11.517164916993352,
+              11.531823875004193
+            ]
+          },
+          "aggregate_output_tok_s": 44.910184754635104,
+          "e2e_p50_s": 11.402589375007665,
+          "e2e_p95_s": 11.521853334008483
+        },
+        {
+          "configuration": "lithos",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              44.88398650094185,
+              44.96705516866498
+            ],
+            "e2e_p50_s": [
+              91.07205927098403,
+              91.25278316698677
+            ],
+            "e2e_p95_s": [
+              91.18685754100443,
+              91.32483770899125
+            ]
+          },
+          "aggregate_output_tok_s": 44.916328629932636,
+          "e2e_p50_s": 91.1835192500148,
+          "e2e_p95_s": 91.31341833301121
+        }
+      ]
+    },
+    "e2e_p95_s": {
+      "native-on": [
+        {
+          "configuration": "native-on",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              45.767018789771335,
+              45.847153409648605
+            ],
+            "e2e_p50_s": [
+              11.165739353513345,
+              11.18368906249816
+            ],
+            "e2e_p95_s": [
+              11.213964708003914,
+              11.223709500016412
+            ]
+          },
+          "aggregate_output_tok_s": 45.83502809547996,
+          "e2e_p50_s": 11.1659231249796,
+          "e2e_p95_s": 11.215184333996149
+        },
+        {
+          "configuration": "native-on",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              170.51344538674846,
+              170.81609145363353
+            ],
+            "e2e_p50_s": [
+              23.958631166489795,
+              23.990867541506304
+            ],
+            "e2e_p95_s": [
+              25.400913458986906,
+              25.53766000000178
+            ]
+          },
+          "aggregate_output_tok_s": 170.61984414531167,
+          "e2e_p50_s": 23.976082187495194,
+          "e2e_p95_s": 25.53103966600611
+        }
+      ],
+      "omlx": [
+        {
+          "configuration": "omlx",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              50.75969431120515,
+              50.78774658301508
+            ],
+            "e2e_p50_s": [
+              10.07643270851986,
+              10.091380729485536
+            ],
+            "e2e_p95_s": [
+              10.122799667005893,
+              10.140035999997053
+            ]
+          },
+          "aggregate_output_tok_s": 50.78156750755799,
+          "e2e_p50_s": 10.079908603496733,
+          "e2e_p95_s": 10.128053249994991
+        },
+        {
+          "configuration": "omlx",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              168.33088480625005,
+              168.56379621605632
+            ],
+            "e2e_p50_s": [
+              24.233157520502573,
+              24.271552833510214
+            ],
+            "e2e_p95_s": [
+              26.119019208010286,
+              27.179984082991723
+            ]
+          },
+          "aggregate_output_tok_s": 168.36503432828738,
+          "e2e_p50_s": 24.263937416486442,
+          "e2e_p95_s": 26.1300366249925
+        }
+      ],
+      "lithos": [
+        {
+          "configuration": "lithos",
+          "concurrency": 1,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              44.901685397398566,
+              44.947628937780436
+            ],
+            "e2e_p50_s": [
+              11.397076145993196,
+              11.404539645503974
+            ],
+            "e2e_p95_s": [
+              11.517164916993352,
+              11.531823875004193
+            ]
+          },
+          "aggregate_output_tok_s": 44.910184754635104,
+          "e2e_p50_s": 11.402589375007665,
+          "e2e_p95_s": 11.521853334008483
+        },
+        {
+          "configuration": "lithos",
+          "concurrency": 8,
+          "fresh_processes": 3,
+          "ranges": {
+            "aggregate_output_tok_s": [
+              44.88398650094185,
+              44.96705516866498
+            ],
+            "e2e_p50_s": [
+              91.07205927098403,
+              91.25278316698677
+            ],
+            "e2e_p95_s": [
+              91.18685754100443,
+              91.32483770899125
+            ]
+          },
+          "aggregate_output_tok_s": 44.916328629932636,
+          "e2e_p50_s": 91.1835192500148,
+          "e2e_p95_s": 91.31341833301121
+        }
+      ]
+    }
+  },
+  "joint_frontiers": {
+    "e2e_p50_s": [
+      {
+        "configuration": "omlx",
+        "concurrency": 1,
+        "fresh_processes": 3,
+        "ranges": {
+          "aggregate_output_tok_s": [
+            50.75969431120515,
+            50.78774658301508
+          ],
+          "e2e_p50_s": [
+            10.07643270851986,
+            10.091380729485536
+          ],
+          "e2e_p95_s": [
+            10.122799667005893,
+            10.140035999997053
+          ]
+        },
+        "aggregate_output_tok_s": 50.78156750755799,
+        "e2e_p50_s": 10.079908603496733,
+        "e2e_p95_s": 10.128053249994991
+      },
+      {
+        "configuration": "native-on",
+        "concurrency": 8,
+        "fresh_processes": 3,
+        "ranges": {
+          "aggregate_output_tok_s": [
+            170.51344538674846,
+            170.81609145363353
+          ],
+          "e2e_p50_s": [
+            23.958631166489795,
+            23.990867541506304
+          ],
+          "e2e_p95_s": [
+            25.400913458986906,
+            25.53766000000178
+          ]
+        },
+        "aggregate_output_tok_s": 170.61984414531167,
+        "e2e_p50_s": 23.976082187495194,
+        "e2e_p95_s": 25.53103966600611
+      }
+    ],
+    "e2e_p95_s": [
+      {
+        "configuration": "omlx",
+        "concurrency": 1,
+        "fresh_processes": 3,
+        "ranges": {
+          "aggregate_output_tok_s": [
+            50.75969431120515,
+            50.78774658301508
+          ],
+          "e2e_p50_s": [
+            10.07643270851986,
+            10.091380729485536
+          ],
+          "e2e_p95_s": [
+            10.122799667005893,
+            10.140035999997053
+          ]
+        },
+        "aggregate_output_tok_s": 50.78156750755799,
+        "e2e_p50_s": 10.079908603496733,
+        "e2e_p95_s": 10.128053249994991
+      },
+      {
+        "configuration": "native-on",
+        "concurrency": 8,
+        "fresh_processes": 3,
+        "ranges": {
+          "aggregate_output_tok_s": [
+            170.51344538674846,
+            170.81609145363353
+          ],
+          "e2e_p50_s": [
+            23.958631166489795,
+            23.990867541506304
+          ],
+          "e2e_p95_s": [
+            25.400913458986906,
+            25.53766000000178
+          ]
+        },
+        "aggregate_output_tok_s": 170.61984414531167,
+        "e2e_p50_s": 23.976082187495194,
+        "e2e_p95_s": 25.53103966600611
+      }
+    ]
+  },
+  "normalized_x": "512 / median across processes of each process p50 end-to-end latency",
+  "semantics": [
+    "Medians and ranges of process metrics, not pooled request percentiles or confidence intervals.",
+    "Strict point-estimate nondominance, no significance threshold. Lithos C8 throughput exceeds C1 by only 0.00614 tokens/s.",
+    "Segments connect measured summary points only; intermediate configurations are unmeasured and not predicted.",
+    "The joint frontier switches engines; connecting endpoints does not make the segment an executable configuration.",
+    "E2E reciprocal is not ITL or TPOT reciprocal; all retained requests actually output512 tokens.",
+    "Native OFF/history are retained as grey observations and do not alter the joint median frontier."
+  ]
+}
