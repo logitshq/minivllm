@@ -5,7 +5,7 @@
 | 你现在想做什么 | 从哪里开始 |
 | --- | --- |
 | 理解模型如何逐个生成token | [01 生成循环](01-一次文本生成是怎么发生的.md) → 02基础层 → 03 Attention → 04 GDN |
-| 手动逐格运行第一章 | [Notebook 启动说明](../../notebooks/README.md) → [第一章](../../notebooks/ch01/ch01.ipynb)；目前只制作第一章 |
+| 手动逐格运行教程 | [Notebook 启动说明](../../notebooks/README.md) → [第一章](../../notebooks/ch01/ch01.ipynb) → [第二章](../../notebooks/ch02/ch02.ipynb)；后面按章增加 |
 | 读懂自己实现的完整引擎 | 05完整模型 → 06 Cache → 07量化 → 08调度 |
 | 学习GPU与服务优化 | 09 Metal → 10投机 → 11测量 → 12—15逐步优化 |
 | 看目前三家吞吐—延迟比较 | [45 三家C1/C2/C4](../experiments/45-lithos-queued-concurrency.md)；注意其负载和测试批次 |

@@ -1,6 +1,6 @@
 # 用 Jupyter 一格一格运行教程
 
-目前只提供**第一章**：观察文字怎样变成 token IDs，模型怎样给出 logits，再由 greedy 逐个生成 token。后续章节的 Notebook 尚未制作，不要把现有章节文档当作已有 Notebook。
+目前提供**第一、二章**，按学习顺序一章一章增加。先看生成循环，再手写并验证基础组件；第三章起的 Notebook 尚未制作。
 
 ## 1. 从项目根目录启动
 
@@ -22,6 +22,8 @@ Notebook 打印的解释器路径可能位于 uv 临时目录，这是额外 Jup
 | --- | --- |
 | [ch01/ch01.ipynb](ch01/ch01.ipynb) | 主教程：先读问题，再运行短代码，观察形状、分数和新 ID。 |
 | [ch01/exercise-solutions.ipynb](ch01/exercise-solutions.ipynb) | 独立练习答案：先自己做，再打开核对。不要和主教程同时加载模型。 |
+| [ch02/ch02.ipynb](ch02/ch02.ipynb) | 第二章：从小矩阵开始写 Embedding、Linear、RMSNorm、SiLU、MLP 与残差，再与真实 HF 输入和权重核对。 |
+| [ch02/exercise-solutions.ipynb](ch02/exercise-solutions.ipynb) | 第二章独立答案：只用小数组，不加载语言模型。 |
 
 ## 2. 每次只前进一步
 
@@ -47,5 +49,7 @@ Notebook 打印的解释器路径可能位于 uv 临时目录，这是额外 Jup
 本目录的 [reference/generate.py](ch01/reference/generate.py) 和 [参考轨迹](ch01/reference/chapter01-trace.json) 保存第一章固定版本，身份见 [manifest.json](ch01/reference/manifest.json)。启动 Notebook **无需 checkout 旧 tag**；旧 tag 本身不含这些新 Notebook。也不要用当前分支不断更新的 `tutorial_code/generate.py` 替换这里的参照。
 
 后续制作每章 Notebook 时，仍按[章节目录](../docs/tutorial-v2/README.md)标出的独立 tag 固定代码；不能把后面新增的 cache 或默认参数带回前面的课程。第一章的文字讲解见[一次文本生成是怎么发生的](../docs/tutorial-v2/01-一次文本生成是怎么发生的.md)。
+
+第二章固定 `tutorial-02-v2`，实际代码 commit 为 `f3b203ba44b135693bf0c6d6dbc82dd8072e9a63`，来源见 [第二章 manifest](ch02/reference/manifest.json)。这是带注释的 tag；`e55e7c59ade307c00e690dc8abcbce933c8464ee` 是 tag 对象，不是代码 commit。Notebook 直接定义手写组件，[HF 采集辅助代码](ch02/hf_fixture.py)只提供参考输入、权重和输出；对照实际使用本子中当前的组件定义。第一章完整生成入口没有被替换。
 
 教学组织参考 Sebastian Raschka 的 *LLMs from Scratch*：[第2章 Notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch02/01_main-chapter-code/ch02.ipynb)、[第3章 Notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch03/01_main-chapter-code/ch03.ipynb)。这里采用相同的学习节奏：先看问题、运行短单元格、观察输出，再预测下一步；模型与实现仍以本教程的固定版本为准。
