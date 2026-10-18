@@ -1151,3 +1151,32 @@ and E033 v2 journal schema. Its actual predecessor manifest and dependent seals
 remain UNSEALED. The previous E032-bound seven-test archive is preserved and
 does not qualify this new adaptation. No GLM registration/loading is occurring
 concurrently with Qwen timing.
+
+### 13:52 PDT — six formal phases complete; remaining C1 gap localized in HTTP time
+
+The actual retry-v2 owner has completed and reaped six of twelve processes and
+is running `r2-c1-on`. No first-error receipt exists at this checkpoint; full
+independent audit and service restoration are still pending. The first C1 pair
+is45.7519054414→48.3190609013 output tok/s (+5.6110%), p50
+11.1893236875→10.5913308745s. C8 pairs are170.3079257357→170.3789778802
+and170.4667730669→170.6520740629; these small differences do not establish a
+repeatable incremental C8 gain. These are partial, unaudited points, not a new
+frontier or a declaration of an adopted configuration.
+
+An independent small timestamp diagnostic compares all64 requests in each first
+C1 group with the historical oMLX r1 C1 group, preserving the exact eight fixtures,
+model and512-output count. Mean E2E is10.595848264s versus10.082137592s; the
+0.513710672s gap decomposes into TTFT0.074106186s and post-first-output0.439604486s.
+The latter is85.5743% of the mean gap, or0.860283ms per511 subsequent tokens as a
+diagnostic amortization, not observed ITL or GPU time. The new GDN gain itself is
+almost entirely post-first-output. Historical external data is not a simultaneous
+paired comparison; current full-cycle audit remains pending.
+
+Small default-OFF bench candidates now cover one-pass long-graph argument
+collection, suppression of a provably already submitted ahead root set, native
+B1 four-to-one GDN projection, and layer-major rowwise C1 verification. Their
+new CPU test sources are still unexecuted during the formal timing isolation.
+The rowwise proposal retains ordinary C1 arithmetic and every prefix state;
+weight-cache reuse is only a hypothesis. New C1 diagnostic capture/owner glue
+also remains source-only and still requires the registered outer cold lifecycle.
+None of these preparations changes the running frozen inference source.
