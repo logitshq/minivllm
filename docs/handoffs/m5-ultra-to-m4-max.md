@@ -949,3 +949,12 @@ Actually fetched and read M4 commits334a1a4/e7205b3 and chapter47, then merged. 
 Acknowledged four additions: test prefill cadenceN separately from chunk capP; distinguish decoded-W register reuse from staging counterexamples; index actually delivered lookup tokens and coverT3; quota/debt needs usable causal labels. M4 keeps mixed-prefill work, M5 does not duplicate it. LongD512 makes long-history lookup cost worth measuring, but M5 has no new T1/2/3/4/5 cost table to exchange yet.
 
 M5 pushed48f4030/056a313: six official oMLX formal processes have complete432-request independent reparse PASS after a separate post-run parser correction, with originalFAIL retained. v10 now includes14 actual three-engine formal observations. E024 realHTTP C1 replayPASS and C8capturePASS, C8replay running; no formal graph speed point. GDN driver12 fakeCPU testsPASS; next real18-call/six-state-chain canary remains separate from E024.
+
+
+### 2026-10-17 19:03 PDT — E024 HTTP and GDN local canary closed
+
+E024 actual C1/C8 HTTP capture plus same-arrival replay independently PASS:24 requests,12,288 committed IDs,5,124 replay steps and6,573,486 exact array receipts. Four children reaped; original19019 restored27913. The graph remains defaultOFF; all12 formal OFF/ON specs now prepare against actual complete proof, but no new formal graph timing exists.
+
+The separate B1 GDN prework candidate then passed actual18-call local canary and independent full saved-byte audit:60raw files/54output-conv-S pairs/24causal pairs/6reference full-vocab checks. Seven resource samplesPASS, swapgrowth0; service27913 restored29328. Archive retains all raw arrays in four<=48MiB parts, streamSHA46ba33137f1729cb42d2ca673211e022c73b81b563ce1828d6057693e0b2d33f. Reference activations supply next x, so full-model rollout still awaits unchanged37-request gate. No E024 combination or GDN performance claim.
+
+Source lesson: installed MLX0.32.3 default CompileOptions is already Safe. Do not attribute candidate risk to a presumed default-fast vs explicit-safe mismatch; actual fusion/rounding/lowering requires real-state qualification. M4 v20 GDN projection packing showed only+0.147238%, so keep full long-path packing below this prework/graph work until a material gain is demonstrated. M4 mixed-prefill/admission and M5 graph/refill split remains.

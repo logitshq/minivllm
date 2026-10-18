@@ -1,0 +1,36 @@
+{
+  "schema": "E029-gdn-canary-archive-summary-v1",
+  "owner_plan_sha256": "a54e3e74bc3d1c838894a60f4696f142d82156f31a7a18d501805e078562f4dd",
+  "child_plan_sha256": "17e3e23e6d4fd1e2430a176bc0830e17984eca9ddea0c20c61778bc7f60acfe3",
+  "owner_status": "PASS",
+  "child_status": "PASS",
+  "audit_statuses": {
+    "restoration": "PASS",
+    "resources": "PASS",
+    "numerical": "PASS"
+  },
+  "actual_raw_files": 60,
+  "actual_raw_bytes": 176734788,
+  "candidate_calls": 18,
+  "source_model_postrecheck": true,
+  "canary_qualified": true,
+  "restoration_verified": true,
+  "resources_verified": true,
+  "original_identity": {
+    "pid": 27913,
+    "ppid": 1,
+    "start": "Sat Oct 17 18:42:49 2026",
+    "comm": "omlx-server"
+  },
+  "replacement_identity": {
+    "pid": 29328,
+    "ppid": 1,
+    "start": "Sat Oct 17 18:48:43 2026",
+    "comm": "omlx-server"
+  },
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "archive_grants_qualification": false,
+  "scope": "18 local same-reference-activation candidate calls only if independent PASS. Original-dtype output/conv/S and candidate-owned state continuation. All actual failures/prefixes retained. Parameter values are producer original-byte hash/finite receipts; no unstored weights recomputed offline. No full-model candidate rollout or Pareto point."
+}

@@ -1,6 +1,6 @@
 # E029：把 GDN 预处理融合接到真实长上下文路径
 
-2026-10-17，准备阶段。本文的两个新候选尚未执行设备验证，也没有性能结果。现有正式图仍按已审计的实际测量更新；这里的预期收益不进入 Pareto。
+2026-10-17：预处理融合候选已通过真实激活局部验证与独立原始数组复核；整模型验证和性能测量仍待完成。SIMD 标量候选尚未运行设备。现有正式图只包含已审计的实际计时，局部正确性结果不进入 Pareto。
 
 ## 先找没有进入热路径的优化
 
@@ -12,7 +12,7 @@
 
 ## 融合不能省掉舍入语义
 
-卷积的 BF16 乘法/加法、SiLU 舍入、q/k 归一化及 FP32 状态更新都可能改变后续输出。数学上等价不等于逐位一致。已有辅助函数的编译设置与普通状态核也存在差别，因此“它在短路径测过”不能代替本次长路径验证。
+卷积的 BF16 乘法/加法、SiLU 舍入、q/k 归一化及 FP32 状态更新都可能改变后续输出。数学上等价不等于逐位一致。已有辅助函数显式指定 safe，普通状态核使用默认选项；本机 MLX 0.32.3 的 CompileOptions 默认同样是 Safe，因此这不是已证实的数学模式差异。融合边界和编译器 lowering 仍需实际逐位验证，“它在短路径测过”不能代替本次长路径验证。
 
 小实验先回答一个明确问题：在模型真实产生的 activation 与状态上，这个独立替换是否保持完整状态？
 
@@ -56,4 +56,11 @@
 
 ## 已完成的 CPU 准备
 
-2026-10-17 18:35 PDT：候选、真实激活采集器、原始数组审计器和serving接入的44项假CPU测试已有PASS证据；新增单子进程执行驱动的12项测试也全部PASS，完整[源码/命令/结果归档](../../experiments/m5-ultra-256gb/gdn-canary-driver-cpu-v1/README.md)已保存。驱动覆盖默认不执行、绑定改变拒绝、失败/未知启动与finally恢复路由，禁止真实设备、子进程、网络和信号。这些结果不代表实际GPU算术或恢复成功；真实18调用canary仍在等当前HTTP周期完成并恢复后执行。
+2026-10-17 18:35 PDT：候选、真实激活采集器、原始数组审计器和serving接入的44项假CPU测试已有PASS证据；新增单子进程执行驱动的12项测试也全部PASS，完整[源码/命令/结果归档](../../experiments/m5-ultra-256gb/gdn-canary-driver-cpu-v1/README.md)已保存。驱动覆盖默认不执行、绑定改变拒绝、失败/未知启动与finally恢复路由，禁止真实设备、子进程、网络和信号。这些结果不代表实际GPU算术或恢复成功；这项记录保留准备时状态；随后实际 18 调用结果见下节。
+
+
+## 实际局部验证结果 · 2026-10-17
+
+注册的 18 次局部调用已完成，独立原始数组、资源及恢复检查全部通过。60 个原始文件、54 组完整输出/conv/S、24 组连续状态及 6 次全词表参考 argmax 检查均通过。候选在每条三步链中使用自己的上一状态，后续 x 仍来自参考模型；因此尚不能推出候选整模型正确。原服务已恢复。下一步是在观察器安装前接入该候选，运行原有 37 请求完整状态与调度检查。[完整结果与原始证据](../../experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/RESULTS.md)。
+
+The math-mode correction above was checked against this actual pinned installation: `mlx/include/mlx/backend/common/metal_kernel.h:14-15` sets `MathMode::Safe`; `mlx/core/fast.pyi:205-211` documents the same default. It does not prove convolution, SiLU or normalization lowering merely from source spelling. Actual saved-byte checks provide the narrow canary evidence.
