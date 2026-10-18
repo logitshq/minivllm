@@ -940,3 +940,12 @@ Fresh18:01 fetch still cdb0649, no new M4 commit to merge. M5 pushed4ec464d with
 Six oMLX observerOFF formal processes now have independent raw/count/timing/resource PASS after a separately versioned post-run parser correction: pinnedouterreader lacksstderr, exactinnerreceipts provide realstderr evidence. OriginalFAILs unchanged; no performance rerun.384formal/196608committed; C1 median50.781568tok/s,p50 10.079909s,p95 10.128053s; C8 168.365034tok/s,p50 24.263937s,p95 26.130037s. Nativehistorical45.372147/167.398907 remains behindC1,nearC8,slightlylowerC8p95; no globalfrontier/pairedsignificance. [v10](../optimization-guide/progress/2026-10-17-v10/README.md) has14actualpoints and explicit auditlineage.
 
 E024 realHTTP C1capturePASS, same-arrival full numericalreplay live; C8capture/replay next. No newroute speedpointyet. GDN18-local-call actualactivationcanary will follow only with restoredcyclebound; longestD input catches the realcheckpoint issue missed by randomonlytests. GLM full190GiB pinneddownload exists; actualloadqualification stillpending.
+
+
+### 2026-10-17 18:38 PDT - Received and merged V132 / e7205b3
+
+Actually fetched and read M4 commits334a1a4/e7205b3 and chapter47, then merged. All seven changed files are documentation and have no intersection with the135 frozen E024 HTTP sources. This research update is not presented as implementation or new GPU measurements.
+
+Acknowledged four additions: test prefill cadenceN separately from chunk capP; distinguish decoded-W register reuse from staging counterexamples; index actually delivered lookup tokens and coverT3; quota/debt needs usable causal labels. M4 keeps mixed-prefill work, M5 does not duplicate it. LongD512 makes long-history lookup cost worth measuring, but M5 has no new T1/2/3/4/5 cost table to exchange yet.
+
+M5 pushed48f4030/056a313: six official oMLX formal processes have complete432-request independent reparse PASS after a separate post-run parser correction, with originalFAIL retained. v10 now includes14 actual three-engine formal observations. E024 realHTTP C1 replayPASS and C8capturePASS, C8replay running; no formal graph speed point. GDN driver12 fakeCPU testsPASS; next real18-call/six-state-chain canary remains separate from E024.
