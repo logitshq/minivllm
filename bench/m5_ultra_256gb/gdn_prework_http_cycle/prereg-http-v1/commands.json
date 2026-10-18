@@ -1,0 +1,46 @@
+{
+  "cpu_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/owner.py",
+    "--prepare-only",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/prereg-http-v1/owner-plan.json",
+    "--plan-sha256",
+    "5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-cpu-prepare"
+  ],
+  "readonly_service_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/controller.py",
+    "prepare",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-cold-journal",
+    "--owner-directory",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-v1-owner",
+    "--owner-plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/prereg-http-v1/owner-plan.json",
+    "--owner-plan-sha256",
+    "5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8"
+  ],
+  "execute": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/execute.py",
+    "--run"
+  ],
+  "seal_prepared": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_http_cycle/prepare.py",
+    "--seal-prepared"
+  ]
+}

@@ -1,6 +1,6 @@
 # M5 Ultra 256 GiB 模型路线
 
-2026-10-17。双重点为 **Qwen3.8-27B + GLM-5.3-Flash**。Qwen 已有性能实验；GLM 固定权重的 62 shards 已下载、全部 SHA 校验和 CPU header 清点通过，尚未加载或取得性能点。
+2026-10-17。用户已明确确认双重点为 **Qwen3.8-27B + GLM-5.3-Flash（`glm5_next`）**；这里的 Next 指 GLM 架构。Qwen 已有性能实验；GLM 固定权重的 62 shards 已下载、全部 SHA 校验和 CPU header 清点通过，尚未加载或取得性能点。
 
 | 模型 | 参数与架构 | 已核实权重大小 | 本机路线 |
 | --- | --- | --- | --- |

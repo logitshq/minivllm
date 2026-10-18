@@ -1041,3 +1041,8 @@ Actual native long E024 forward does not use the existing packed/fused GDN path 
 ## 2026-10-17 — v14 draws the previously missing frontier lines
 
 User correctly noted v13 only plotted scatter points. [v14](../optimization-guide/progress/2026-10-17-v14/README.md) preserves all26 observations and recomputes10 groups, drawing per-engine nondominated median connectors and the joint frontier. Bothp50/p95 joint sets remain{oMLX C1, Native ON C8}, including whenOFF/history are admitted. A second orientation uses512/median-process-p50 E2E latency, not1/ITL. All connectors are visual guides: C2–7 unmeasured, cross-engine segment not executable. Both PNGs viewed, both SVGs parsed. No new model run, speed observation, or full-frontier claim; no engine changes. M4/M5 data remain separate.
+
+
+## 2026-10-17: GDN HTTP cycle preregistered
+
+User confirmed Qwen3.8-27B + GLM-5.3-Flash (`glm5_next`). The next M5 experiment is GDN-only long-context prework fusion: C1 actual HTTP capture/replay, then C8 capture/replay, independent audits and original-service recovery. New lifecycle suite actually passed all83 tests; retained evidence: `docs/experiments/m5-ultra-256gb/gdn-http-cycle-cpu-v1`. CPU registration and actual read-only service prepare passed; plan `5d7bf34bec68dca784ebc449e660d14bcc63a6ecd2ffd7cae63981c22ebe3024`. Prepared state is not numerical or performance qualification. E024 graphs and E028 refill remain OFF for isolation; existing v14 Pareto is unchanged. The confirmed C1 mean latency gap is mostly after first output, so this run targets GDN work in real decode. M4 may continue admission/mixed-prefill without duplicating M5 lifecycle work.
