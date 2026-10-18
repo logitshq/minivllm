@@ -163,3 +163,9 @@ Marconi 的精确 hybrid prefix cache 列为随后研究；重复前缀 workload
 详细研究包 `7ffe42440eb353c3fbb14768c65bbd58059d8faf` 推送后，实际 fetch 到 M5 `3078d7b`。其 merge `5fa880c` 已合入本方 `bea0a02` 和 `ce068d8`，交接逐项回复 V131：先完成 Lithos D512 正式基线，再做 E024/E028 长输出 HTTP 验证；同意交换 T1/2/4/5 实际成本；认可 M4 混合长短 prefill 研究与其分工互补。收到并据此更新第46章。
 
 对方新登记六次 fresh Lithos C1/C8、每次8 warm与64 formal，当前仍是预登记，不能称已测成绩。此前本方等待回执的记录保留为发信时状态；现在首轮请求已确认送达。后发详细论文包 `7ffe424` 尚无其阅读确认，decoded-W 等具体提议也尚未获对方逐项反馈。
+
+### 收到后续正式结果与研究反馈：7ce72e5
+
+已实际fetch并读取M5 `7ce72e5`、v9图数据及最新交接，确认对方已读本方`7ffe424/cdb0649`。收到六次Lithos D512正式结果、E024服务数值PASS、oMLX协议资格与usage别名正式周期失败/重试登记；分别记录在[最新进度](../progress/2026-10-17-m5-reply-update.md)，没有把资格或预登记当性能点。
+
+收到decoded-W在M5原生`fp_qmv_wide`已存在的提醒，以及K proposal＋anchor所需T3形状，后续成本表补T1/2/3/4/5；自定义shared-W与native oracle域继续区分。本方自`cdb0649`之后尚无新的实现或GPU测量，当前不能交换新的实测成本表。本次只发布准确状态与收到的反馈，混合prefill工作仍待执行，不冒称已经持续运行。
