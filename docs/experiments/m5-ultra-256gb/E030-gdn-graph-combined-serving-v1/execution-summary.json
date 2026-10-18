@@ -1,0 +1,82 @@
+{
+  "restoration-audit": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_observed_cycle/audit_restore.py",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-cold-journal",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/restoration-audit.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_observed_cycle/audit_restore.py",
+      "sha256": "f7e5e7e751b52520a47facfdb65c33db40fb4c103e8ee272b5d154607087ce56",
+      "bytes": 584
+    },
+    "started_at": 1792351801.870275,
+    "returncode": 0,
+    "ended_at": 1792351801.9593868,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/restoration-audit.json",
+      "sha256": "b4c5e9fe339852674aa76965d4e2a0f1fbca579b0f2e8de07b514df9076a66c0",
+      "bytes": 6858
+    },
+    "status": "PASS"
+  },
+  "resource-summary": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_reparse.py",
+      "--owner",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-owner",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/resource-summary.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_reparse.py",
+      "sha256": "5948ccbf7baeb21d1e71d9e8f7169b1bd9f84e65eb492746aba86fe377806c23",
+      "bytes": 12202
+    },
+    "started_at": 1792351801.870322,
+    "returncode": 0,
+    "ended_at": 1792351801.957494,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/resource-summary.json",
+      "sha256": "4e0c4d868f17d57a29c0698eb14bf1dc214e7174b037f1cb50615f4739a23661",
+      "bytes": 177087
+    },
+    "status": "PASS"
+  },
+  "independent-numerical": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/audit.py",
+      "--child",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-owner/phases/gdn-graph-combined-serving/qualification",
+      "--plan-sha256",
+      "fa59abb503725b060dd7e26f87e178bb1770178c6094b359fb666c21cac76dcf",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/independent-numerical.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/audit.py",
+      "sha256": "7e7718ddf1e1b6d744ec374e19b5513248f0374306503aeb8908391edb403270",
+      "bytes": 17327
+    },
+    "started_at": 1792351801.870389,
+    "returncode": 0,
+    "ended_at": 1792351817.5612211,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-v1-analysis/independent-numerical.json",
+      "sha256": "f9f7e1da49270751d3bdef96a7483847a3e045240c128ecc9fcc414da92da06c",
+      "bytes": 509657
+    },
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "GDN-graph-combined-serving-result-v1",
+  "status": "PASS",
+  "plan_sha256": "fa59abb503725b060dd7e26f87e178bb1770178c6094b359fb666c21cac76dcf",
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/integration.py": "4a8dc5518f2ea0a913ad0a5d753a5032324ccb69bacede416abe8ae126bfa800",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/integration.py": "24f89e06f7e6d01041e6daaead40d1bacd927032a68218f8aa5a495bc092b851",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/serving_qualification.py": "75de7205febdae2698e99353bfc2908a79044591fbf67abb30a07cb4e54a7264",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/qualify.py": "f131f3da91e847cf4f00e0644120919c49050227f5a35679b7a446aee8eaa6ee"
+  },
+  "same_schedule_checks_passed": true,
+  "independent_audit_required": true,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "identity_refill_enabled": false,
+  "source_pins_rechecked": true,
+  "coverage": {
+    "route": {
+      "installs": 2,
+      "restores": 4,
+      "parameter_checks_complete": true,
+      "parameter_direct_calls": 42,
+      "route_hits": {
+        "parameter-diagnostic": {
+          "1023": 21,
+          "1536": 21
+        },
+        "D-C1": {
+          "1023": 723,
+          "1536": 3365
+        },
+        "D-C8": {
+          "1023": 88,
+          "1536": 938
+        }
+      },
+      "long_fallback_calls": 38,
+      "cases": {
+        "D-C1": {
+          "consumed": 4080,
+          "discarded_prior": 0,
+          "partial_retirement": 0,
+          "refills": 0
+        },
+        "D-C8": {
+          "consumed": 1014,
+          "discarded_prior": 0,
+          "partial_retirement": 7,
+          "refills": 7
+        },
+        "lifecycle": {
+          "consumed": 24,
+          "discarded_prior": 0,
+          "partial_retirement": 8,
+          "refills": 5
+        }
+      },
+      "identity_refill_enabled": false
+    },
+    "combined": {
+      "installs": 2,
+      "restores": 2,
+      "layer_installs": 96,
+      "layer_restores": 96,
+      "compiled-tracing": 12,
+      "compiled-reuse": 5144,
+      "eager-fallback": 38,
+      "traced_batches": [
+        {
+          "installation": 0,
+          "bound": 1023,
+          "B": 1,
+          "python_passes": 1
+        },
+        {
+          "installation": 0,
+          "bound": 1023,
+          "B": 8,
+          "python_passes": 1
+        },
+        {
+          "installation": 0,
+          "bound": 1536,
+          "B": 1,
+          "python_passes": 1
+        },
+        {
+          "installation": 0,
+          "bound": 1536,
+          "B": 8,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1023,
+          "B": 2,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1023,
+          "B": 4,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1023,
+          "B": 6,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1023,
+          "B": 8,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1536,
+          "B": 8,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1536,
+          "B": 6,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1536,
+          "B": 4,
+          "python_passes": 1
+        },
+        {
+          "installation": 1,
+          "bound": 1536,
+          "B": 2,
+          "python_passes": 1
+        }
+      ]
+    }
+  },
+  "base_result": {
+    "path": "base/complete.json",
+    "sha256": "9d66f55603e9f7a9bb419024df5c3e42ccd367fcc0852392d9b4cf6181dfe9e8",
+    "status": "PASS",
+    "returncode": 0
+  },
+  "total_requests": 37,
+  "parameter_direct_calls": 42,
+  "discarded_ahead_observed": false,
+  "discarded_prior_ahead_count": 0,
+  "scope": "Device full-logit/state comparisons and exact original42 parameter diagnostic +37 requests. GDN Python counters prove tracing branches, not repeated GPU executions. Independent numerical/ownership/resource audit still required; no HTTP/performance qualification."
+}
