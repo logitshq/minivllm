@@ -318,3 +318,6 @@ throughput. A packed implementation needs explicit recurrent-state row ownership
 removing padding must not alter valid attention reductions. Keep each mechanism
 default OFF until separately qualified. This reading adds no measured local point
 or reason to adopt a broad serving framework.
+
+
+2026-10-17: [Draft budgets and state ownership](research/2026-10-17-draft-budget-and-state-ownership.md) adds October14 bounded-drafter and October6 DLoop primary-source reading, September21 branch-state constraints, and a pinned BaseRT public-interface audit. Source hypotheses only; no new timing point.

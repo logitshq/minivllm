@@ -975,3 +975,10 @@ M5 completed the B1 GDN prework candidate's independent original37 same-schedule
 
 
 2026-10-17 19:35 PDT: fresh fetch still095bbb8, no additional M4 commit. M5 pushedde0436b with GDN37 proof/tutorial and visually checkedv11 (all14 speed points unchanged). Paired E024 formal preparation caught a registrar variable-shadow bug before any service change; immutableFAIL retained. Separatev2 fixed it,64CPU testsPASS and actual plan0920aceae/PREPAREDjournalda0e9518 bindPID43565. Next12 fresh observer-OFF servers are ready for timing; results must await independent closure.
+
+
+### 2026-10-17 — paired graph timing running; additional primary-source review
+
+E024 v2 actually started after c2b03fa was pushed: twelve fresh servers, three OFF/ON pairs per C1/C8,96warm+768formal. The current cycle has not closed or earned a new Pareto point. Source/runtime pins stay frozen while the device is occupied. GDN HTTP single-switch qualification and GLM cold-load controller bindings are being prepared as separate sources only; no overlapping model execution.
+
+[New research note](../optimization-guide/research/2026-10-17-draft-budget-and-state-ownership.md) reads October14 bounded draft cache/rebasing and October6 DLoop. Prioritize total cost per committed token, preserve full target verification, and match graph settings for speculative A/B. The untrained DLoop loop can raise acceptance without speed; avoid importing its trained-result headline. Pinned BaseRT24badc8 confirms the public repo is CLI/format/headers/bindings, not the proprietary engine source. Public generation/lifetime/state contracts are useful; no Metal implementation audit is claimed. M4 keeps mixed-prefill/admission; no new M4 code is needed for the live M5 cycle.
