@@ -1,6 +1,6 @@
 # E029：把 GDN 预处理融合接到真实长上下文路径
 
-2026-10-17：预处理融合候选已通过真实激活局部验证与独立原始数组复核；整模型验证和性能测量仍待完成。SIMD 标量候选尚未运行设备。现有正式图只包含已审计的实际计时，局部正确性结果不进入 Pareto。
+2026-10-17：预处理融合候选已通过真实激活局部验证及原 37 请求的整模型同调度检查；真实 HTTP 和正式性能测量仍待完成。SIMD 标量候选尚未运行设备。现有正式图只包含已审计的实际计时，局部正确性结果不进入 Pareto。
 
 ## 先找没有进入热路径的优化
 
@@ -64,3 +64,12 @@
 注册的 18 次局部调用已完成，独立原始数组、资源及恢复检查全部通过。60 个原始文件、54 组完整输出/conv/S、24 组连续状态及 6 次全词表参考 argmax 检查均通过。候选在每条三步链中使用自己的上一状态，后续 x 仍来自参考模型；因此尚不能推出候选整模型正确。原服务已恢复。下一步是在观察器安装前接入该候选，运行原有 37 请求完整状态与调度检查。[完整结果与原始证据](../../experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/RESULTS.md)。
 
 The math-mode correction above was checked against this actual pinned installation: `mlx/include/mlx/backend/common/metal_kernel.h:14-15` sets `MathMode::Safe`; `mlx/core/fast.pyi:205-211` documents the same default. It does not prove convolution, SiLU or normalization lowering merely from source spelling. Actual saved-byte checks provide the narrow canary evidence.
+
+
+## 从局部状态链进入整模型轨迹
+
+2026-10-17 19:26 PDT：原 37 请求完成，独立数值、资源与恢复审计全部 PASS。8 个 D-C1、16 个 D-C8、13 个生命周期请求累计 5,163 步、12,411 committed tokens。独立复核 6,622,533 组完整数组逐位收据；成功数组的离线算术没有重算。
+
+本次证据也确认了开关的边界：长 B1 在每个 GDN 层进入候选，多行 decode 回到原实现；没有暗中把 B1 的正确性推广到 B8 融合。两个模型对分别安装/撤回，48 层计数与实际调用相符。没有观察到 EOS 终止，因而保留这一未覆盖范围。原服务恢复完成。[逐项结果与全部原始记录](../../experiments/m5-ultra-256gb/E029-gdn-prework-serving-v1/RESULTS.md)。
+
+下一道门是同样真实 HTTP 的记录与重放，再关闭观察器进行配对计时。通过局部和整模型轨迹，只说明值得继续测量；不能提前把预处理融合画成更快的点。E024 的独立 OFF/ON 正式计时先运行，组合实验仍需自己的正确性检查。

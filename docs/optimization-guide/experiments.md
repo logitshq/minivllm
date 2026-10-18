@@ -1008,3 +1008,17 @@ Complete archive: 1,040 members, 185,486,960 logical bytes, four compressed part
 ## GLM direct-child owner: 12 CPU tests PASS · 2026-10-17
 
 The separate GLM owner now has complete fake-only wiring/cleanup tests:12PASS, no failures/errors/skips or forbidden backend/process/network/signal operation. Unknown launch remains unknown; a returned child is reaped even if identity inspection fails. It retains actual physical observations separately from performance/full-correctness claims. [Evidence](../experiments/m5-ultra-256gb/glm-owner-prepared-cpu-v1/README.md):142 members,2,114,303 logical bytes,322,436 compressed bytes,SHAae431c2229e4be17f476d7aadde2f2b1d11d1e1d3ca0830acabdb38c1a4d3bc2. The controller/registration remains absent and execution fails closed. No GLM load, capacity or inference performance result is claimed.
+
+
+## E029 original37 same-schedule numerical qualification PASS · 2026-10-17 19:26 PDT
+
+All37 requests complete: C1 8/4096steps, C8 16/1027steps, lifecycle13/40steps;12,411 committed tokens. Independent scheduling/full-logits/state/ahead receipt audit PASS:6,622,533 bit checks,13,245,066 finite checks. Actual48-layer candidate/fallback submissions independently reconcile; B1 candidate stays separate from original multirow fallback. No observed EOS, no HTTP/performance/parameter-replacement/composition claim.211 resource samplesPASS, pressure1/thermal0/swapgrowth0; Swapins+8/Decompressions+2126. Original29328→43565 restored, independentPASS; warmKV/exact hidden runtime state not restored.
+
+[Actual result and evidence](../experiments/m5-ultra-256gb/E029-gdn-prework-serving-v1/RESULTS.md):1343members,1,642,768,789logicalB,10,656,372xzB,streamSHA83343891d17826fb1045660863ad72b71e2e5ca05b9de3086e6e182b4adc316c. All source/raw bytes retained; no successful full-tensor offline arithmetic or new Pareto point. Next E024 formal cycle has62 new fake-only CPU testsPASS with unchanged source,0fail/error/skip; no formal speed result yet.
+
+
+## E024 actual registration rejects overwritten plan digest · 2026-10-17
+
+The real guarded registration built twelve specs, but the source-copy loop reused the variable holding the owner-plan SHA. Saved commands then named the final test-source SHA instead of the actual plan digest; the real owner CPU preparation rejected it before any service preparation/stop. Preserve the actual v1 registration FAIL and partial preregistration unchanged. The earlier62 fake CPU tests remain their actual PASS evidence but did not cover this registrar bug. A separate v2 registration and saved-command regression are required; no measurement is lost or promoted.
+
+Progress [v11](progress/2026-10-17-v11/README.md) was actually rendered and visually checked. All14 formal observations and six process-metric median groups remain exactly v10 values; only the independent qualification table advances.

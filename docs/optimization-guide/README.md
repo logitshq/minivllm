@@ -6,7 +6,7 @@
 
 入口：[论文与设计笔记](papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
-[D512 三引擎吞吐—延迟对比](progress/2026-10-17-v10/README.md) ·
+[D512 三引擎吞吐—延迟对比](progress/2026-10-17-v11/README.md) ·
 [历史 cap32 分面图](progress/2026-10-17-v5/README.md) ·
 [并发 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
 [最新官方 MTP / DSpark 同轮 HTTP 对照](progress/2026-10-17-v4/README.md) ·
@@ -25,7 +25,7 @@
 [E023 长生成吞吐—延迟实测](tutorials/023-realistic-throughput-latency.md) ·
 [E024 图编译与attention长度隔离](tutorials/024-decode-graph-dispatch.md) ·
 [E025 相同 split-K NAX 筛选与拒绝](tutorials/025-same-split-nax.md) ·
-[E029 GDN 长路径预处理融合准备](tutorials/029-unbound-gdn-prework.md) ·
+[E029 GDN 长路径预处理融合与37请求验证](tutorials/029-unbound-gdn-prework.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·

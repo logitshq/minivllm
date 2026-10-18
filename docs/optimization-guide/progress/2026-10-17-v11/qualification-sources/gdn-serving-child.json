@@ -1,0 +1,474 @@
+{
+  "schema": "GDN-prework-serving-result-v1",
+  "status": "PASS",
+  "plan_sha256": "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+  "canary": {
+    "evidence": {
+      "audit": {
+        "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/independent-numerical.json",
+        "sha256": "8765a6089c362e37a89f66f8584c0bf39a45cdf929757a2f7bb87d764cd11df4"
+      },
+      "plan": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/plan.json",
+        "sha256": "17e3e23e6d4fd1e2430a176bc0830e17984eca9ddea0c20c61778bc7f60acfe3"
+      },
+      "complete": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/complete.json",
+        "sha256": "d713f448a0db338d3ed5704feb9ffe391645d893693ed2ad908cf496ea6be2a4"
+      }
+    },
+    "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification",
+    "raw_files": 60,
+    "full_output_state_pairs": 54,
+    "candidate_calls": 18,
+    "audit_source_sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+    "scope": "Consumes SHA-pinned independent raw canary proof; does not rerun its raw audit."
+  },
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py": "3f493752d95996bd08cc1ea7389fc3159ab615e1ac162b36332eecc47dab862c"
+  },
+  "scope": "Original37 same-schedule numerical comparison; current native flags plus default-OFF B1 ordinary GDN adapter. Short packed bypass is not adapter coverage. No E024/E028 composition, idle/live parameter replacement, cancellation, live HTTP or performance proof.",
+  "same_schedule_checks_passed": true,
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "independent_audit_required": true,
+  "source_pins_rechecked": true,
+  "coverage": {
+    "enabled": true,
+    "layer_installs": 96,
+    "layer_restores": 96,
+    "observer_restores": 4,
+    "calls": 5197,
+    "per_case": {
+      "D-C1": {
+        "candidate": 196224,
+        "fallback": 0,
+        "b1_calls": 4088,
+        "multirow_calls": 0,
+        "prefill_calls": 8,
+        "short_bypass_calls": 0
+      },
+      "D-C8": {
+        "candidate": 0,
+        "fallback": 49248,
+        "b1_calls": 0,
+        "multirow_calls": 1026,
+        "prefill_calls": 19,
+        "short_bypass_calls": 0
+      },
+      "lifecycle": {
+        "candidate": 768,
+        "fallback": 1056,
+        "b1_calls": 16,
+        "multirow_calls": 22,
+        "prefill_calls": 18,
+        "short_bypass_calls": 0
+      }
+    },
+    "final_counters": [
+      [
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        },
+        {
+          "candidate": 4088,
+          "fallback": 0
+        }
+      ],
+      [
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        },
+        {
+          "candidate": 16,
+          "fallback": 1048
+        }
+      ]
+    ],
+    "identity_refill_enabled": false,
+    "route_graph_enabled": false
+  },
+  "base_result": {
+    "path": "base/complete.json",
+    "sha256": "911212d3aa82cb4d0124117f3cb63120cd7abe2eded7668fb9ea95fd20b98695",
+    "status": "PASS",
+    "returncode": 0
+  },
+  "total_requests": 37,
+  "dispatch_sha256": "cee0f617db4a42a8ad879148b6855ee766a1420d6dd31649f8334994c0027456"
+}

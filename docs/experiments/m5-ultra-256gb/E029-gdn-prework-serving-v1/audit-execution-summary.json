@@ -1,0 +1,209 @@
+{
+  "schema": "GDN-prework-serving-closed-audits-v1",
+  "status": "PASS",
+  "started_at": "2026-10-18T02:26:43.053816+00:00",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/owner.py": "d9469fe561ee5697068de1582d1e167d2a0e0da222cc03d4449028435c232134",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_absent_owner.py": "5beb6c9bcfa4e22041a386cdbea3f5ecee210cdcb9b345512c50b6c6f873c62d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_owner.py": "1efaf440e991fed64dedf15455be2d37223e709fec41bb07e8c0295a2975c1c2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v2/controller.py": "8566b06a48596f04d91b9cade472db150f59879b32b05fc894c0977bcfa572a2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v2/owner.py": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v2/audit_restore.py": "01b01117e1b4dfac346b1231bb0e36528604fcb2e0d54c9e61461d59b88c2dec",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_absent_qualification.py": "1b7b526dac98c43f5b77f915aec3173d755d1efb28ed49b989e7601293ddaf6d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller.py": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/controller.py": "674b21fbcafa0e79164dedb78875f513e9a24d478337c2aeeb67a439e69a4dc9",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/owner.py": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py": "3f493752d95996bd08cc1ea7389fc3159ab615e1ac162b36332eecc47dab862c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit_serving.py": "268cc336417a3d31dffc30c749701d132da610fbb41d9b0f4c85ad6adaa2f2bc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_qualification.py": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_reparse.py": "5948ccbf7baeb21d1e71d9e8f7169b1bd9f84e65eb492746aba86fe377806c23",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/__init__.py": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/cache.py": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/config.py": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/context.py": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/__init__.py": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/compiled_decode.py": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/llm_engine.py": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/model_runner.py": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/packed_decode.py": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/request.py": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/scheduler.py": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/engine/spec_runner.py": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/eos.py": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn.py": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_decode_fused.py": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_metal.py": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/gdn_norm_reuse_metal.py": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/norm_metal.py": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/attention.py": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/gdn.py": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/layers.py": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/loader.py": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/model/qwen3_5.py": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampler.py": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/sampling_params.py": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/__init__.py": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/device_selector.py": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/spec/dflash2.py": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/lifecycle.json": "c7a6afdcc7807a2b1e5629df628c716ff77278fe3d0bf8562715b8794c4e8dca",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/child-plan.json": "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/prereg-v1/owner-plan.json": "4dff5f46d0b35d038ffbb0e32ebb6197b047f4da6e847b3160f3ae8685caf6a4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/register_serving.py": "b182c104878faf6ab3238ffbe6c21a7735a77969aab574e1e6e28abb146ccf45",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/execute_serving.py": "e03d14b9d93199cd54acfcb511709f5051a8e695877c3f6aaa90b1a9420c4761",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_execute_serving_cpu.py": "773c0b47f643407a6bdb998427bc325ee35f815949f48b7ff2b512cb6bc10fc6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_serving_cpu.py": "4af8b394722fe466c85095dbcae8a138ecbac3c020c709f74c2706e8307f16ca",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/test_audit_serving_cpu.py": "e8da7367388181c1ce826baf3f902fc465e8342675e5d353bc8eab3cfb99bacf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_cpu.py": "b632d401cb477483a79619a4cbf7feea562f5d9e2792b0d8a34146e02dd75d3e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/test_predecessor_cpu.py": "197049ac4a8a5ba36edcd1d87ca14d47fe47921a28873138b6576ad747bd7f28",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/owner-plan.json": "c908eed8087cd72a86a4994a7fc37ffb41bfd719726ad04ff6d8b6f0768c14d2",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/restored-journal.json": "2091fa547a94a8538b44f64a3c8fdf964764113c5a8c5a7acf653861b7c8cf14",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/restoration-audit.json": "7ee69cc3babbe404438f526ddc8e97b068e24913386dd9b01c8298dc48fb24c4",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/archive-verification.json": "c7e0107bf939963e713490ab71991f247df71d55276667c76c710e1a286a6789",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/summary.json": "60dc5eddddde0c147d5250c044f2dfd6586108d9bdcb52524232bb056f94ea5f",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/resource-summary.json": "8631f0dc594ba2ad639a0b2b386c8f2bacca6c268ed278f6beda4efa5d5c708a",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/independent-numerical.json": "8765a6089c362e37a89f66f8584c0bf39a45cdf929757a2f7bb87d764cd11df4",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/plan.json": "17e3e23e6d4fd1e2430a176bc0830e17984eca9ddea0c20c61778bc7f60acfe3",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/complete.json": "d713f448a0db338d3ed5704feb9ffe391645d893693ed2ad908cf496ea6be2a4",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/events.jsonl": "a26cfdce70410d136fbf2ecbc6e1dae230ecf8924c6827470620a527ec0dd17e",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification/captures.json": "0d8f5f0b04f790ef1f0392e6891712dda2536ce98b0db0fda0c88f22c1ff930b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/preparation.json": "7fd25b7494301745ab70516f89891bd3f9b34265a3d00755fbe33ad2e9fcd4d6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/commands.json": "a98c984b215e460fffd0fe86391129a3d4b2cf0f057c640da5227ca27499034d",
+    "/private/tmp/audit-closed-gdn-serving-v1.py": "8fad18f77ebd6c622f0c5745b634b7497e8036a1e004d626cf99b50e1a69e6ec"
+  },
+  "inputs": {
+    "driver-final.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-execution/final.json",
+      "sha256": "14b2aaa7fdb1f6b463687126475cb2163b497c470aa591a89cefd051a2bb9938",
+      "bytes": 232
+    },
+    "restored-journal.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-cold-journal/journal.json",
+      "sha256": "abddf49c3c43407e7903dfabb06f3227ee993b464f2f66055e22928d8f6dcbb5",
+      "bytes": 26284
+    },
+    "registration-receipt.json": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/receipt.json",
+      "sha256": "20dfc08866291f24693581e05eba268c8958a5946d0b5116520840cdef151794",
+      "bytes": 12610
+    },
+    "owner-complete.json": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-owner/complete.json",
+      "sha256": "3f39cce96fad5ee2b45d1b469d798815da42ad848c0184745a052d6a6ddfebad",
+      "bytes": 767
+    }
+  },
+  "jobs": {
+    "restoration": {
+      "status": "RETURNED",
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py",
+        "--journal",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-cold-journal",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/restoration-audit.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py",
+        "sha256": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca",
+        "bytes": 10765
+      },
+      "started_at": "2026-10-18T02:26:43.064342+00:00",
+      "timeout_seconds": 300,
+      "returncode": 0,
+      "ended_at": "2026-10-18T02:26:43.154737+00:00",
+      "elapsed_seconds": 0.09032312501221895,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/restoration-audit.json",
+        "sha256": "673d1ba136c784f445567015f15c4fb7c0b22c6635a33201b14026e2ba3edd29",
+        "bytes": 10881
+      },
+      "audit_status": "PASS"
+    },
+    "resources": {
+      "status": "RETURNED",
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_reparse.py",
+        "--owner",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-owner",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/resource-summary.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_reparse.py",
+        "sha256": "5948ccbf7baeb21d1e71d9e8f7169b1bd9f84e65eb492746aba86fe377806c23",
+        "bytes": 12202
+      },
+      "started_at": "2026-10-18T02:26:43.155471+00:00",
+      "timeout_seconds": 300,
+      "returncode": 0,
+      "ended_at": "2026-10-18T02:26:43.239759+00:00",
+      "elapsed_seconds": 0.0842261670040898,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/resource-summary.json",
+        "sha256": "874595f189d86c84b3e8af1900809225da8f83013d87526d4466e843f0e5f601",
+        "bytes": 168776
+      },
+      "audit_status": "PASS"
+    },
+    "numerical": {
+      "status": "RETURNED",
+      "argv": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit_serving.py",
+        "--child",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-owner/phases/gdn-prework-serving/qualification",
+        "--plan-sha256",
+        "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/independent-numerical.json"
+      ],
+      "source": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit_serving.py",
+        "sha256": "268cc336417a3d31dffc30c749701d132da610fbb41d9b0f4c85ad6adaa2f2bc",
+        "bytes": 18907
+      },
+      "started_at": "2026-10-18T02:26:43.240767+00:00",
+      "timeout_seconds": 300,
+      "returncode": 0,
+      "ended_at": "2026-10-18T02:26:57.943155+00:00",
+      "elapsed_seconds": 14.702219209022587,
+      "output": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-analysis/independent-numerical.json",
+        "sha256": "fee50c90c30c3224934489c66e5ecb4a5d7f0c4fb57ae0baa0576f6efe9a769b",
+        "bytes": 514432
+      },
+      "audit_status": "PASS"
+    }
+  },
+  "execution_pass": true,
+  "restoration_qualified": true,
+  "same_schedule_qualified": true,
+  "resources_qualified": true,
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "One closed original37 same-schedule serving run. Restoration, observed resources and full-state numerical receipts have independent gates; success tensor payloads are not re-evaluated offline.",
+  "owner_plan_sha256": "c908eed8087cd72a86a4994a7fc37ffb41bfd719726ad04ff6d8b6f0768c14d2",
+  "child_plan_sha256": "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+  "sources_unchanged": true,
+  "ended_at": "2026-10-18T02:26:57.948118+00:00"
+}

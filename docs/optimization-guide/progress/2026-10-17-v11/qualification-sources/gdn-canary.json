@@ -1,0 +1,30 @@
+{
+  "schema": "GDN-prework-real-layer-independent-v1",
+  "status": "PASS",
+  "canary_qualified": true,
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "Local same-reference-activation canary only; offline full saved bytes, device comparison/parameter receipts. No full-model rollout, HTTP, resource, restoration or performance qualification.",
+  "audit_source_sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d",
+  "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification",
+  "plan_sha256": "17e3e23e6d4fd1e2430a176bc0830e17984eca9ddea0c20c61778bc7f60acfe3",
+  "raw_files": 60,
+  "full_output_state_pairs": 54,
+  "causal_state_pairs": 24,
+  "full_vocabulary_greedy_checks": 6,
+  "device_comparison_arrays": 162,
+  "complete_sha256": "d713f448a0db338d3ed5704feb9ffe391645d893693ed2ad908cf496ea6be2a4",
+  "ledger_sha256": "a26cfdce70410d136fbf2ecbc6e1dae230ecf8924c6827470620a527ec0dd17e",
+  "captures_sha256": "0d8f5f0b04f790ef1f0392e6891712dda2536ce98b0db0fda0c88f22c1ff930b",
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf"
+  },
+  "model_weights_scope": "Original fixed manifest binding + producer pre/post verification receipt; auditor does not rehash model payloads.",
+  "parameter_scope": "All14 selected-layer original-byte hashes/shape/dtype/finite before/after; parameter payloads are not stored or recomputed offline."
+}
