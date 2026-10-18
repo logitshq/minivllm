@@ -1,12 +1,13 @@
 """GLM v3 recovery: unchanged cold lifecycle, explicit dual-monitor reap proof.
 
-The predecessor manifest is deliberately unsealed until a real Qwen cycle has
+The predecessor manifest is deliberately unsealed until a real twelve-phase combined formal cycle has
 closed RESTORED with its independent audit. No observed LOAD_INTENT exception is
 accepted here. This real module remains the actual recovery load-worker entry.
 """
 import importlib.util as _importlib
 from pathlib import Path as _Path
 import hashlib as _hashlib
+import inspect as _inspect
 
 _reuse_path = _Path(__file__).resolve().parents[1]/'glm_flash_cycle_v2/_reuse.py'
 if _hashlib.sha256(_reuse_path.read_bytes()).hexdigest() != 'fbf523c586629ce6e5e2030d629b00c9f1cd99dfec9edef6c35ac8e054468f97':
@@ -16,14 +17,26 @@ _reuse = _importlib.module_from_spec(_spec); _spec.loader.exec_module(_reuse)
 _original = _reuse.install(globals(), 'controller.py', dict(
     OWNER_SHA='9d69c5a64dc50b7d65330ad130b8af9f757b91e884aa197d1e828775b27c88a8',
     JOURNAL_SCHEMA='GLM-cold-load-journal-v3', OWNER_SCHEMA='GLM-cold-load-owner-plan-v3',
-    PRIOR_PATH=_Path(__file__).resolve().parents[1]/'cold_observed_cycle/controller.py',
-    PRIOR_SHA='5ef9cf1c576eac223a6e82831b443296758f6a45a9fdd8a3486c47ac5e1e8196',
-    PRIOR_AUDIT_PATH=_Path(__file__).resolve().parents[1]/'cold_observed_cycle/audit_restore.py',
-    PRIOR_AUDIT_SHA='f7e5e7e751b52520a47facfdb65c33db40fb4c103e8ee272b5d154607087ce56'))
+    PRIOR_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal/controller.py',
+    PRIOR_SHA='3b8b3033269fcd326e0a52e20470ee27faf65d313be3e3bf0da8881f26f3ac4c',
+    PRIOR_AUDIT_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal/audit_restore.py',
+    PRIOR_AUDIT_SHA='157d6470a9cb87223c419a3f4edd82e8556b3714a7157ea1ad505270c8ed7493'))
 BOUND_MANIFEST_SHA = 'UNSEALED'
-PRIOR_LIFECYCLE = dict(path=str(PRIOR_PATH.parent/'lifecycle.json'),
-    sha256='01a3befda92835ecc49ab58e3acd99c50f0077aeeed5fda96b2b95fdb99fdd88')
-PRIOR_REUSE_SHA = 'b22ee6d9c505fefb3f111760096eb9d6542fc2370336ea30941ccae9baa82ecb'
+PRIOR_OWNER_PATH = PRIOR_PATH.with_name('owner.py')
+PRIOR_OWNER_SHA = '511b48fbe722ea031a7b4586439eaa67f25c9c9514af12b614de74fb8c53c103'
+PRIOR_ARCHIVE = ARCHIVE_ROOT/'E032-gdn-graph-combined-formal-v1'
+# The original already verifies a complete twelve-phase formal restoration.
+# In a separate function namespace change only its exact journal schema literal;
+# every raw SHA, phase, worker, restoration-status and identity gate is retained.
+_predecessor_source = _inspect.getsource(_original.predecessor)
+_old_schema = "'E024-route-http-formal-cold-journal-v1'"
+_new_schema = "'GDN-graph-combined-http-formal-cold-journal-v1'"
+if _predecessor_source.count(_old_schema) != 1:
+    raise ValueError('frozen formal predecessor schema anchor changed')
+_predecessor_source = _predecessor_source.replace(_old_schema, _new_schema, 1)
+_predecessor_namespace = dict(globals())
+exec(compile(_predecessor_source, str(Path(__file__).resolve())+':formal-predecessor', 'exec'), _predecessor_namespace)
+_formal_predecessor = _reuse.bind(_predecessor_namespace['predecessor'], globals())
 _original_source_pins = source_pins
 _original_phase_reaps = phase_reaps
 
@@ -36,36 +49,29 @@ def predecessor_manifest():
     value = b.read_json(path)
     need(set(value) == {'schema','status','binding','trials'}
          and value['schema'] == 'GLM-v3-predecessor-binding-v1' and value['status'] == 'SEALED'
-         and type(value['trials']) is list and len(value['trials']) == 1
-         and type(value['trials'][0]) is str and bool(value['trials'][0]), 'actual single-child predecessor manifest')
+         and value['trials'] == list(PRIOR_PHASES), 'actual twelve-phase combined formal predecessor manifest')
     return value
 
 
 def predecessor(binding):
     manifest = predecessor_manifest()
     need(binding == manifest['binding'] and set(binding) == {'path','sha256','audit'}, 'exact archived predecessor pair')
-    refs = (binding, binding['audit'])
-    for item, filename in zip(refs, ('restored-journal.json', 'restoration-audit.json')):
-        path = Path(item['path'])
-        need(path.is_absolute() and str(path.resolve()) == str(path) and not path.is_symlink()
-             and path.name == filename and path.is_relative_to(ARCHIVE_ROOT.resolve()), 'immutable predecessor path')
-    need(Path(refs[0]['path']).parent == Path(refs[1]['path']).parent, 'same predecessor archive')
-    prior = b.read_json(binding['path'])
-    need(prior.get('schema') == 'cold-single-child-journal-v3' and prior.get('state') == 'RESTORED'
-         and prior.get('trials') == manifest['trials'], 'only closed normal Qwen predecessor; no observed bridge')
-    need(b.sha(PRIOR_AUDIT_PATH) == PRIOR_AUDIT_SHA and b.sha(PRIOR_LIFECYCLE['path']) == PRIOR_LIFECYCLE['sha256']
-         and b.sha(PRIOR_PATH.parent/'_reuse.py') == PRIOR_REUSE_SHA, 'prior audited lifecycle changed')
-    prior_controller = load(PRIOR_PATH, PRIOR_SHA, '_glm_v3_closed_qwen_predecessor')
-    # Call the frozen normal path directly. Never call its observed-failure branch.
-    return prior_controller._original_predecessor(binding, PRIOR_LIFECYCLE)
+    need(type(binding['audit']) is dict and set(binding['audit']) == {'path','sha256'}, 'exact audit reference')
+    need(Path(binding['path']) == PRIOR_ARCHIVE/'restored-journal.json'
+         and Path(binding['audit']['path']) == PRIOR_ARCHIVE/'restoration-audit.json',
+         'exact E032 closed formal archive required')
+    need(b.sha(PRIOR_OWNER_PATH) == PRIOR_OWNER_SHA, 'prior audited owner source changed')
+    prior, raw = _formal_predecessor(binding)
+    need(prior.get('owner_source') == dict(path=str(PRIOR_OWNER_PATH),sha256=PRIOR_OWNER_SHA),
+         'exact twelve-phase predecessor owner source')
+    return prior, raw
 
 
 def source_pins(plan):
     pins = _original_source_pins(plan); pins.update(_reuse.support_pins())
     predecessor_manifest()
     pins.update({str(HERE/'predecessor-manifest.json'):BOUND_MANIFEST_SHA,
-                 PRIOR_LIFECYCLE['path']:PRIOR_LIFECYCLE['sha256'],
-                 str(PRIOR_PATH.parent/'_reuse.py'):PRIOR_REUSE_SHA})
+                 str(PRIOR_OWNER_PATH):PRIOR_OWNER_SHA})
     return pins
 
 

@@ -27,12 +27,16 @@ physical/log/load-worker restoration checks and that same file-only reap chain.
 Neither tool grants model correctness, model fit or performance eligibility.
 
 Execution is deliberately blocked while `predecessor-manifest.json` is
-`UNSEALED`. The current source accepts only a real `cold_observed_cycle` normal
-`RESTORED` single-child journal, successful recovery worker and independent
-restoration PASS. Its older observed `LOAD_INTENT` branch is explicitly excluded.
-The root is planning another HTTP cycle first: accepting that future four-phase
-predecessor needs a reviewed, explicitly pinned adaptation after it actually
-closes. Nothing here discovers a replacement PID or invents future evidence.
+`UNSEALED`. The current source accepts only the future immutable
+`E032-gdn-graph-combined-formal-v1` archive's actual twelve-phase combined formal
+`RESTORED` journal and independent restoration PASS. Its controller, owner and
+auditor sources are pinned now, but no future result, SHA or PID is fabricated.
+The original formal predecessor checks are reused with only the actual journal
+schema literal changed; the exact archive and owner-source gates are additional.
+A failed experiment may be a predecessor only if normal recovery is independently
+proven, including worker return code zero. Observed `LOAD_INTENT`, missing or
+unsettled recovery cannot pass. No service discovery is substituted for the
+immutable journal/audit pair.
 Seal the actual predecessor manifest, controller, restoration auditor and closed
 auditor in that order before creating the next execution plan.
 
@@ -62,3 +66,11 @@ snapshots are under `.artifacts/m5-ultra-256gb/`:
 
 They are fake-only; they do not demonstrate macOS timing, physical headroom or a
 successful load. The source-only predecessor/auditor seals remain pending.
+
+The later E032 predecessor-only adaptation has three additional focused fake
+archive tests, all first-run PASS (tool `0b8464`, 0.062958 s, zero blocked
+operations and unchanged source snapshots). They exercise a restored failed
+experiment, wrong/incomplete ownership and restore proofs, and the unchanged
+original formal-validation AST apart from its exact schema literal. Evidence:
+[predecessor CPU archive](../../../docs/experiments/m5-ultra-256gb/glm-formal-predecessor-prepared-cpu-v1/README.md).
+This is not a rerun of the earlier full lifecycle module or an actual recovery.
