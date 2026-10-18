@@ -45,7 +45,7 @@ def main():
     colors = {'native': '#15806e', 'omlx': '#a13d73', 'lithos': '#ba6e20'}
     markers = {'native-historical': 'x', 'native-off': 'o', 'native-on': 'D',
                'native-gdn-off': 'v', 'native-gdn-on': 'P', 'omlx': 's', 'lithos': '^'}
-    short = {'native-historical': 'Native historical N1', 'native-off': 'E024 OFF', 'native-on': 'E024 ON',
+    short = {'native-historical': 'minivllm historical N1', 'native-off': 'E024 OFF', 'native-on': 'E024 ON',
              'native-gdn-off': 'GDN OFF', 'native-gdn-on': 'GDN ON', 'omlx': 'oMLX', 'lithos': 'Lithos'}
     plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10, 'axes.spines.top': False,
         'axes.spines.right': False, 'figure.facecolor': 'white', 'savefig.facecolor': 'white',
@@ -89,10 +89,41 @@ def main():
                       else f"Full HTTP {('p50' if x == h.XS[0] else 'p95')} POST-to-DONE latency (s)  ← lower")
         ax.text(.03, .95, 'BETTER ↗' if normalized else 'BETTER ↖', transform=ax.transAxes,
                 va='top', color='#475569', weight='bold')
+        # Preserve the full C8/Lithos range above while making C1 differences
+        # readable. The inset contains the same observations, with no jitter.
+        inset = ax.inset_axes([.06, .28, .36, .36] if normalized else [.48, .43, .48, .46])
+        inset.set_facecolor('white'); inset.grid(color='#e2e8f0', lw=.6)
+        c1 = [r for r in rows if r['concurrency'] == 1]
+        raw_c1 = [p for p in data['points'] if p['concurrency'] == 1]
+        for d in data['display']:
+            p = data['points'][d['point_index']]; c = d['configuration']
+            if p['concurrency'] == 1:
+                inset.scatter(fx(p[x]), p[h.Y], s=12, marker=markers[c], color=colors[h.ENGINE[c]], alpha=.25)
+        for r in c1:
+            c = r['configuration']; m = r['metrics']; color = colors[r['engine']]
+            xx, yy = fx(m[x]['median']), m[h.Y]['median']
+            lo, hi = sorted((fx(m[x]['minimum']), fx(m[x]['maximum'])))
+            inset.errorbar(xx, yy, xerr=[[xx-lo], [hi-xx]],
+                yerr=[[yy-m[h.Y]['minimum']], [m[h.Y]['maximum']-yy]], fmt=markers[c], ms=5.5,
+                color=color, mfc='white' if c.endswith('-off') else color, elinewidth=.6, capsize=2)
+            offsets = ({'native-on': (8, -7), 'native-gdn-on': (7, 4), 'omlx': (-46, 7), 'lithos': (5, -13)}
+                       if normalized else {'native-on': (-58, 8), 'native-gdn-on': (6, 6), 'omlx': (6, -1), 'lithos': (-35, -12)})
+            if c in offsets:
+                inset.annotate(short[c], (xx, yy), xytext=offsets[c], textcoords='offset points',
+                               fontsize=8, color=color)
+        xx = [fx(p[x]) for p in raw_c1]; yy = [p[h.Y] for p in raw_c1]
+        xm = max(.1, (max(xx)-min(xx))*.14); ym = max(.2, (max(yy)-min(yy))*.22)
+        inset.set_xlim(min(xx)-xm, max(xx)+xm); inset.set_ylim(min(yy)-ym, max(yy)+ym)
+        inset.tick_params(labelsize=8); inset.set_title('C1 zoom · same process medians/ranges', fontsize=9, pad=6)
+        if normalized:
+            r = next(r for r in rows if r['configuration'] == 'native-gdn-on' and r['concurrency'] == 1)
+            inset_point = (fx(r['metrics'][x]['median']), r['metrics'][h.Y]['median'])
+            ax.annotate('minivllm · GDN C1', inset_point, xytext=(-116, -31), textcoords='offset points',
+                        fontsize=10, color=colors['native'], arrowprops=dict(arrowstyle='-', color=colors['native'], lw=.8))
 
     def furniture(fig, title):
         fig.suptitle(title, x=.065, ha='left', y=.975, fontsize=20, weight='bold', color='#172536')
-        fig.text(.065, .925, 'M5 Ultra · Qwen3.8-27B NVFP4 · D512 · 38 actual process observations; 14 configuration/C groups', color='#475569')
+        fig.text(.065, .925, 'M5 Ultra · Qwen3.8-27B NVFP4 · D512 · 38 process observations; 14 configuration/C groups · Green = minivllm', color='#475569')
         fig.legend(handles=handles, loc='upper left', bbox_to_anchor=(.06, .90), ncol=5, frameon=False, fontsize=9)
         lines = [
             'Markers = process-metric medians; whiskers = observed process min–max, not confidence intervals. Historical Native N=1; other groups N=3.',

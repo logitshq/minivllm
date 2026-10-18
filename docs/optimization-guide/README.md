@@ -1,12 +1,12 @@
 # 从瓶颈到实现：M5 Ultra 推理优化攻略
 
-更新：2026-10-17。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
+更新：2026-10-18。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
 主线为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`，第二重点为 GLM-5.3-Flash；后者尚未完成本机资格。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
 入口：[论文与设计笔记](papers.md) · [当前对手兼容性矩阵](research/2026-10-17-frontier-candidates.md) · [新近状态与运行时论文](research/2026-10-17-state-and-runtime-papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
-[D512 三引擎吞吐—延迟对比](progress/2026-10-17-v14/README.md) ·
+[D512 三引擎吞吐—延迟对比（v15，2026-10-18）](progress/2026-10-17-v15/README.md) ·
 [历史 cap32 分面图](progress/2026-10-17-v5/README.md) ·
 [并发 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
 [最新官方 MTP / DSpark 同轮 HTTP 对照](progress/2026-10-17-v4/README.md) ·
@@ -31,6 +31,8 @@
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
+
+最新D512图包含38个进程观察、14组独立配置/并发汇总。按各配置进程指标的中位数比较，GDN ON的C1为47.86tok/s、完整POST→DONE p50为10.69s，吞吐仍低于oMLX约5.75%；Native的C8前沿保留E024 ON的170.62tok/s。**E024与GDN是分开的开关配置，组合未验证**，也不合并两轮OFF或历史N=1。p50/p95联合前沿仍为oMLX C1与E024 C8；C2–7未知。实际更新日期为10月18日，v15目录保留历史命名。
 
 ## 1. 先算每个 token 为哪些字节和等待付钱
 

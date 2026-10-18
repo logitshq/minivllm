@@ -1,0 +1,40 @@
+{
+  "schema": "D512-v15-visual-review-v1",
+  "status": "PASS",
+  "date_utc": "2026-10-18T18:55:05.985256+00:00",
+  "images": {
+    "D512-frontier-latency.png": {
+      "sha256": "e474d2913883976ca2e9394a51d8d6f53819dc7512226a5b98682c2116b1a569",
+      "bytes": 250764
+    },
+    "D512-frontier-interactivity.png": {
+      "sha256": "008ea16d745457e93da93ffadb65e6af86f55755deb8e0b89196930a1e3daff6",
+      "bytes": 264910
+    }
+  },
+  "svg_checks": [
+    {
+      "path": "D512-frontier-interactivity.svg",
+      "sha256": "ae01d6b8834e57a9604d452c501f6842b91560934c55fffaa13b8e3979b6ecce",
+      "xml_valid": true,
+      "labels_present": true,
+      "viewbox": "0 0 1080 626.4"
+    },
+    {
+      "path": "D512-frontier-latency.svg",
+      "sha256": "c3713230af39840d1367b75febcf0a551ce3d85562cdebc5070026642359ddea",
+      "xml_valid": true,
+      "labels_present": true,
+      "viewbox": "0 0 1224 626.4"
+    }
+  ],
+  "method": "Both final PNGs inspected with view_image; SVG XML and retained text labels checked. SVG not separately rasterized.",
+  "findings": [
+    "C1 zoom makes GDN, E024 and competitor endpoints legible without altering coordinates or adding jitter.",
+    "Titles, legend, axes and caveats fit; principal annotations do not obscure endpoints. Near-identical OFF/history observations genuinely overlap.",
+    "Native frontier selects separate GDN ON C1 and E024 ON C8 configurations, never their combined switches.",
+    "p50/p95 joint frontier derived from data remains oMLX C1 and E024 ON C8; no inference about C2\u20137."
+  ],
+  "first_render_retained": "validation/first-render",
+  "render_verification_sha256": "51546a70b313e8533af076a5eb04231dd3fd8da346b72d7b94784c2ad928bd57"
+}

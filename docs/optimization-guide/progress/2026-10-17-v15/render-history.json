@@ -1,0 +1,50 @@
+{
+  "schema": "D512-v15-render-history-v1",
+  "tests_first_attempt": "PASS8/8",
+  "tests_receipt": "validation/execution-v1/tests/receipt.json",
+  "matplotlib_version": "3.9.4",
+  "attempts": [
+    {
+      "name": "tests",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/tests/receipt.json",
+      "receipt_sha256": "a75a9c14a8e28a4cfd698693e05e10b9c6afbdd950c7322ea2f266f79dc07bbe"
+    },
+    {
+      "name": "runtime",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/runtime/receipt.json",
+      "receipt_sha256": "ef62399374425f492aec1249f17214757288f714ef9ea43d7dbfa4493bae54b5"
+    },
+    {
+      "name": "prepare",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/prepare/receipt.json",
+      "receipt_sha256": "7202dbd04c353161be41b96470832cacf6df569c64a3d9f9f4cb57fc7fa0c4a1"
+    },
+    {
+      "name": "render-v1",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/render-v1/receipt.json",
+      "receipt_sha256": "703f44a829aefe1c6f35795e60b017e63ff392bf46dafc216243713e4e48b7e3"
+    },
+    {
+      "name": "render-v2",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/render-v2/receipt.json",
+      "receipt_sha256": "c058216b9fcc08a14c6cde325c2aa3fd5c104d22664bf5a36ae57e630abab30e"
+    },
+    {
+      "name": "render-v3",
+      "status": "PASS",
+      "receipt": "validation/execution-v1/render-v3/receipt.json",
+      "receipt_sha256": "74513f80a38612cdf18b836890d48798616f304622e2a590113ab9adb9714219"
+    }
+  ],
+  "change": "Only render.py gained C1 insets and an explicit Native GDN C1 annotation after first PNG inspection; math, gates, data and tests unchanged. Third render changes only visible wording to identify green configurations as minivllm; first two renders remain retained.",
+  "current_renderer_sha256": "7dceb35a92aafbf808c441fe94eedf93ef9fac7a66e3e984f0acdae02bdf8c28",
+  "original_26_points_unchanged": true,
+  "original_10_group_metrics_unchanged": true,
+  "v14_untouched": true,
+  "current_link_untouched": true
+}

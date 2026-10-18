@@ -1,0 +1,917 @@
+{
+  "schema": "GDN-prework-http-formal-cold-journal-v1",
+  "id": "2a30da28-1395-49c1-983b-6fefcc16fd49",
+  "state": "RESTORED",
+  "plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+  "controller_sha256": "38a6e904d928813efa8ba1f6de724693dccce196322401c4f44b0442ed4dcd35",
+  "support_sha256": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+  "original": {
+    "pid": 90511,
+    "ppid": 1,
+    "start": "Sat Oct 17 23:31:04 2026",
+    "comm": "omlx-server"
+  },
+  "original_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "global_settings_stat": {
+    "dev": 16777231,
+    "ino": 816826,
+    "size": 3516,
+    "mtime_ns": 1792162741806656607
+  },
+  "model_metadata": {
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/config.json": "237c4cda786207d2bebe2d8a1cf157419bec5cc01bbd03b4ed41e888dc1e5af7",
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/model.safetensors.index.json": "380e393bb71519d6f9dc6eb1c3d681b0ca16986285640784fbd33a45bb0ec298"
+  },
+  "log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 353701,
+    "mtime_ns": 1792305095750587972
+  },
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner",
+  "owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_formal/prereg-formal-v1/owner-plan.json",
+    "sha256": "02337f0267a327ad7b025fd90ae18dec124cfe139811a767e9597c2b27af52f5"
+  },
+  "owner_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_formal/owner.py",
+    "sha256": "0148335cd334524fe367aab00f3a5d2026d1848a928ab469f1d1ce975334c461"
+  },
+  "trials": [
+    "r1-c1-off",
+    "r1-c1-on",
+    "r1-c8-on",
+    "r1-c8-off",
+    "r2-c8-off",
+    "r2-c8-on",
+    "r2-c1-on",
+    "r2-c1-off",
+    "r3-c1-off",
+    "r3-c1-on",
+    "r3-c8-on",
+    "r3-c8-off"
+  ],
+  "predecessor": {
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-http-v1/restored-journal.json",
+    "sha256": "c0c228e0f58d9854ebda61a7f261897d06f33330fcdc996db4b7ac44d4eccdf4",
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E029-gdn-prework-http-v1/restoration-audit.json",
+      "sha256": "9a3d0efa2a837ff1e611bec332238c461166997da59000a281e535a4c3ba77ad"
+    }
+  },
+  "predecessor_copies": {
+    "predecessor.json": "c0c228e0f58d9854ebda61a7f261897d06f33330fcdc996db4b7ac44d4eccdf4",
+    "predecessor-audit.json": "9a3d0efa2a837ff1e611bec332238c461166997da59000a281e535a4c3ba77ad"
+  },
+  "resource_samples": [
+    {
+      "time": 1792311543.410814,
+      "system_footprint": 24671387648,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-548003d5a71547c498d3d1d357f615de/footprint.raw.json",
+        "sha256": "e145c0281e1938fb7785a19a180db0c1a5406aaa854eecffb235dd61c614262e",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-548003d5a71547c498d3d1d357f615de/commands.json",
+        "commands_sha256": "12d73a186c4ac44b3a7eea11772502d1e042f7518155cd1026db0c1da747801a"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792311548.46209,
+      "system_footprint": 24563171328,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c985dd0456014c36a97153e3652c9272/footprint.raw.json",
+        "sha256": "253347f9d9bfee6239e053a00dc0410e3fcafef39ebf2801df270a7930e18399",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c985dd0456014c36a97153e3652c9272/commands.json",
+        "commands_sha256": "5ee0b5f06023c94c7d0542dd232fabf1e1c36d3a96d12dc70cc810ca1e14018e"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792311551.4823968,
+      "system_footprint": 24640159744,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-6eabb36b4ea4445aaa12044be29b2588/footprint.raw.json",
+        "sha256": "deac3d54d8fc0ab87326e4742595d0f8ca68ffbdb6ff56a9eae0debf89bd1fa8",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-6eabb36b4ea4445aaa12044be29b2588/commands.json",
+        "commands_sha256": "7b9da44cb1c314de1c263d571fe9f49199f153784fe59fb3cecd75c49635f689"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792311556.540076,
+      "system_footprint": 24564662272,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-359843c0c99546ffb166f0a2a0dc5d01/footprint.raw.json",
+        "sha256": "d9136fe9db7845f56a394372f9ef3eeedaeb28e95ca60810741428d07d567a84",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-359843c0c99546ffb166f0a2a0dc5d01/commands.json",
+        "commands_sha256": "129f053db9b733ca5a9b29d3b88eb09c276c27921b40e56c12da153e811904de"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792311557.29364,
+      "system_footprint": 24575049728,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-71bd817201af4cd089e7a8852bf8a5c4/footprint.raw.json",
+        "sha256": "ddb631ecf3e3c7c635338ae8ca8fd3f52f2a5abba5a387ecc65afda1e521bcdd",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-71bd817201af4cd089e7a8852bf8a5c4/commands.json",
+        "commands_sha256": "8f548025fc5800a783c755a1499212a2c7bd77fe53412dda17049bdb8fbf94e4"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311559.40362,
+      "system_footprint": 45498302464,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-9b7fdc83556a4ce480cefe2f00e92c41/footprint.raw.json",
+        "sha256": "53f2f25f9f8837df1f791c4ea9d973a51a32a9fca87f1d2ba29e5a1a93e1cd1b",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-9b7fdc83556a4ce480cefe2f00e92c41/commands.json",
+        "commands_sha256": "e73d833bd98171dacd30676436567a4cb3b439e6665b29efa5cd28fd13c3e968"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311561.521483,
+      "system_footprint": 72989900800,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c73d9eb1e5fc4ae2826eebc75dd47dda/footprint.raw.json",
+        "sha256": "dee4df180182abab7d05838562b49e5a6b3b6dad3ea019f1caf8387d47da36b0",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c73d9eb1e5fc4ae2826eebc75dd47dda/commands.json",
+        "commands_sha256": "ef5ae00279001eb4c27c9f934329c82bbaa92b5176101f8b1fa18e99883ecd3d"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311563.6309361,
+      "system_footprint": 78848491520,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-beaddc1b9440494fae7aa61a2ce3a455/footprint.raw.json",
+        "sha256": "1c998ec038f6b7acf44aeb3fc1f2230e8d69da316e72aa4d7dab810ac1f2e794",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-beaddc1b9440494fae7aa61a2ce3a455/commands.json",
+        "commands_sha256": "d1bcbe006c6f322dba03e1c734435a9548e4ae8f57071aef7cceb9f1e49a1e7e"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311565.7549598,
+      "system_footprint": 100301127680,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-2d340a5d73a44ed695bb3a1b4bc57f2a/footprint.raw.json",
+        "sha256": "ebca4b9a48aded012763576273f59f9bd90f7f376d59e087a4f866f9279c78e8",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-2d340a5d73a44ed695bb3a1b4bc57f2a/commands.json",
+        "commands_sha256": "732ae15031c69a1a242987d6da5fa6d1f9957853bd9242d992b652dec950560a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311567.871064,
+      "system_footprint": 120282169344,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-dda1949cfbd44a249a15ff8b0026b372/footprint.raw.json",
+        "sha256": "7a31e18e17fc4dab66a9685b31c5dec20c867cd107fde5c28f6011766d7966a1",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-dda1949cfbd44a249a15ff8b0026b372/commands.json",
+        "commands_sha256": "c6bd2882e7cda2337a5b8f1fc79ecab96c69386292b90d16b563b62d41abc698"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311570.002079,
+      "system_footprint": 133927763968,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-be7375fb22ca4fe3a766af8abfd3089f/footprint.raw.json",
+        "sha256": "1ca1be607dbb451e3c28df145bc2b8f2ab87d4dfde4195968549b270e13c00f0",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-be7375fb22ca4fe3a766af8abfd3089f/commands.json",
+        "commands_sha256": "e4d2e1ae23a05ecd7d1f9b3c7bf51d3f56f06098d8eb6462cfc2b09050a2b613"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311572.1463811,
+      "system_footprint": 138449453056,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-f64b0a98469946f7b7ddf2c3fe505b7c/footprint.raw.json",
+        "sha256": "221e35844bc1fc8a24ab78caa2df7e05a56853ea99dda8cff1e95ac8eebbd0f1",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-f64b0a98469946f7b7ddf2c3fe505b7c/commands.json",
+        "commands_sha256": "c71efcce3ff9603948c35902be6ff306f62ff7a95d7e45b533b722f112cf1d3f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311574.262212,
+      "system_footprint": 155730870272,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-9f8bcd5e378340b599781103532962bc/footprint.raw.json",
+        "sha256": "c1cf30ccc97b3eb6feab6809bbab21b5f9b9211093a6782cbdbd768ce77f56cb",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-9f8bcd5e378340b599781103532962bc/commands.json",
+        "commands_sha256": "bf40449d342846e0143e336cb2c18b9f92790b01fd2dc5c74063de63df907801"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311576.3954182,
+      "system_footprint": 172561137664,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-f080e6de1736472491aa8b41daaa9c42/footprint.raw.json",
+        "sha256": "19353bbf0e4f147d3716baaafe2282f43e1164359bf851f59e1d3514f635b7dd",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-f080e6de1736472491aa8b41daaa9c42/commands.json",
+        "commands_sha256": "c3bee6c7d79e77748b0cae15517134e3767257877fc2c81d42376cc614a15d28"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311578.520097,
+      "system_footprint": 175495299072,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-ee51bea2c17d4cfb8af2fcdfbe8b4701/footprint.raw.json",
+        "sha256": "21285974c585a29b36b9f5c31e2ce4f14a8154dd983e4a3427a387753d0077fb",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-ee51bea2c17d4cfb8af2fcdfbe8b4701/commands.json",
+        "commands_sha256": "7c87beea740475dca7bd0458d0ddcbc6c9cd4f03de52b7e3b4bf5893f06a418a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311580.630263,
+      "system_footprint": 175506440192,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-d61c821bc82a4273a60db848c73777df/footprint.raw.json",
+        "sha256": "25fc5117bdf33a2718e5c18eae1c8d67c66149ab9499c727f43c9b238b54079c",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-d61c821bc82a4273a60db848c73777df/commands.json",
+        "commands_sha256": "2f1ef562cbc1b4c06f22c729f61c5572851155ddec8854e1fe4d87fe0f179a7a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311582.760106,
+      "system_footprint": 175578529792,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-a76ecc88283d4fbbb508c91fc52164cc/footprint.raw.json",
+        "sha256": "246b8d44becc9fcaddac53fbe3cf38ec55c48c952171b9a8c28cbb4d4169e27e",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-a76ecc88283d4fbbb508c91fc52164cc/commands.json",
+        "commands_sha256": "fb2851d54eb358cec9c6c26cc1be82bdbf292b79a8f8216d8e8bf4625d9685b8"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792311582.858685,
+      "system_footprint": 175578726400,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-69807805cc0c41518d29f7641f0d19fd/footprint.raw.json",
+        "sha256": "903baa0732ebe595ac48f02162462c3f468f36e3edc866dec9da7eb125a8043d",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-69807805cc0c41518d29f7641f0d19fd/commands.json",
+        "commands_sha256": "172fdb88e3d63fc51e0df26eecca0c2075df4c6e5573550d6d06d9e2c0541c17"
+      },
+      "label": "load-reconciliation"
+    },
+    {
+      "time": 1792311582.956067,
+      "system_footprint": 175578611712,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-d984b12d9b49419887a1fe5bb6cdf01d/footprint.raw.json",
+        "sha256": "07966d8762ae41a95ec6d58d9ff38044ebe9abe5d83c745cbec00ff6de67ef4b",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-d984b12d9b49419887a1fe5bb6cdf01d/commands.json",
+        "commands_sha256": "67b8e7c9dc81321c6bb4dece10f45e3dc625903310b48afe6a82179de993f312"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792311588.0125241,
+      "system_footprint": 175579086848,
+      "pressure": 1,
+      "swap_bytes": 433124803,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c2f88b9677ec423b8e31c2de60aff076/footprint.raw.json",
+        "sha256": "fa1680490537134590c9d6db49b7edc7c5af56d1493c9e0b2e0da6935701d2a2",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/physical-c2f88b9677ec423b8e31c2de60aff076/commands.json",
+        "commands_sha256": "20d4dca3eb0288fb557a6e7aa3fc334d5818e595c94e5ee16867b06508223c7f"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "events": [
+    {
+      "event": "prepared_gdn_formal_read_only",
+      "time": 1792305236.9593978,
+      "monotonic": 182556.570711
+    },
+    {
+      "event": "bootout_intent",
+      "time": 1792305411.63847,
+      "monotonic": 182731.248806375
+    },
+    {
+      "event": "bootout_returned",
+      "time": 1792305411.643093,
+      "monotonic": 182731.253428791
+    },
+    {
+      "event": "service_absent",
+      "time": 1792305413.733728,
+      "monotonic": 182733.344052
+    },
+    {
+      "event": "experiment_terminal_checked",
+      "time": 1792311543.3155682,
+      "monotonic": 188862.942785958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311543.4111202,
+      "monotonic": 188863.038338041
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311548.462472,
+      "monotonic": 188868.08969975
+    },
+    {
+      "event": "bootstrap_intent",
+      "time": 1792311549.1936169,
+      "monotonic": 188868.820846583
+    },
+    {
+      "event": "bootstrap_returned",
+      "time": 1792311549.1983428,
+      "monotonic": 188868.82557275
+    },
+    {
+      "event": "job_reconciled",
+      "time": 1792311551.376652,
+      "monotonic": 188871.003885541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311551.4827478,
+      "monotonic": 188871.109981958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311556.540386,
+      "monotonic": 188876.167630416
+    },
+    {
+      "event": "load_intent_monitored",
+      "time": 1792311557.266748,
+      "monotonic": 188876.893993333
+    },
+    {
+      "event": "post_worker_started",
+      "time": 1792311557.2690501,
+      "monotonic": 188876.896295833
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311557.293827,
+      "monotonic": 188876.921072666
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311559.403865,
+      "monotonic": 188879.031114875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311561.521694,
+      "monotonic": 188881.14894775
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311563.631187,
+      "monotonic": 188883.258445583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311565.7551901,
+      "monotonic": 188885.382452458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311567.871337,
+      "monotonic": 188887.498603458
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311570.003212,
+      "monotonic": 188889.630483541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311572.1466439,
+      "monotonic": 188891.7739195
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311574.2625148,
+      "monotonic": 188893.889794958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311576.395721,
+      "monotonic": 188896.023004875
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311578.520303,
+      "monotonic": 188898.147591416
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311580.630463,
+      "monotonic": 188900.2577555
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311582.760368,
+      "monotonic": 188902.387664666
+    },
+    {
+      "event": "post_worker_returned",
+      "time": 1792311582.830752,
+      "monotonic": 188902.458048541
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311582.858864,
+      "monotonic": 188902.486161291
+    },
+    {
+      "event": "raw_log_window_retained",
+      "time": 1792311582.933398,
+      "monotonic": 188902.560694833
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311582.956235,
+      "monotonic": 188902.583531916
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792311588.0128078,
+      "monotonic": 188907.640115083
+    },
+    {
+      "event": "restored_persisted_visible_variant",
+      "time": 1792311588.731787,
+      "monotonic": 188908.359095166
+    }
+  ],
+  "approved_contract": "cold-restart-persisted-visible-v1",
+  "bootout_returncode": 0,
+  "removed_at": 1792305413.733702,
+  "reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 91855,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/attempt.json",
+        "sha256": "f829331b5c59a56a9539c3c150862d4d49621d2a3f811edf1981fb76574c6d46"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/stopped-journal.json",
+        "sha256": "a666bcdbc3a428905e3393d1f4c5141f6901aa72be4f2608773c1e7f2ecb163e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/spawn-intent.json",
+        "sha256": "838b4a022a3de3bb999b1a86b13c7dff01cf8d4aa63cea65fdb9216d16862bc0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/children.json",
+        "sha256": "a30e383db320d4422cb6642c8b0fc552a04133e0002532792344f2f031cee724"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/release.json",
+        "sha256": "82cbb9951232c06311abb9d717324f957eeacfef49ed2f16935103f2d61ce2a6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/intent.json",
+        "sha256": "838b4a022a3de3bb999b1a86b13c7dff01cf8d4aa63cea65fdb9216d16862bc0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/child.json",
+        "sha256": "52b857c10bc99993b2d3dfd44a9a04b009218287e95931ef72745a9f2eb8381b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/release.json",
+        "sha256": "3c9d8f4170043d508d3280f4683b0b05ad19c6b26d21fb28ed502755cd819b66"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/trial/spawn-intent.json",
+        "sha256": "e627882a28b055ac364815093e422111662399ab6982ffbd0cf067f62caf9261"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/trial/child.json",
+        "sha256": "d461600c0d68ed60cd72fce2d4b4d1fee711fd53e28f3bf42291402230a1df19"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-off/trial/release.json",
+        "sha256": "57f06639f6edb7b2c8dd3ba04cd6225593c916de639fd1da6dbeaf75dc384e2a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/intent.json",
+        "sha256": "e6d066087e9541f9f0376a59cb4147bf68a53ace34ef6d74a21b07c31ed1fa30"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/child.json",
+        "sha256": "5c54121d86c7ec203da21e7ddaf44d3c87b7361fb19a70b81a2d0b4694f120bc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/release.json",
+        "sha256": "03dffb27ba95076db8c1370be20bee9650373e8a79277eebdbb37dc26d6eb246"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/trial/spawn-intent.json",
+        "sha256": "3ac4939ce3c3abf8cfa47c3b54e8a360d9468cd24d86e691697092768a1bb730"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/trial/child.json",
+        "sha256": "69a7afb20c9b67f38965c343890eec4f046c852cf8cacc308b47f16e7c9575da"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c1-on/trial/release.json",
+        "sha256": "ac056ed6ad83cb3ea4bd8512ea4256cc09d2044ef410369b35c51f1e0e1418c3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/intent.json",
+        "sha256": "cbbb7bc3b089436e7aee2e66ff2f04d97f55ee880c233e1e6e3b62226248c92e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/child.json",
+        "sha256": "98bdccb42d5a551d3cf0b18594597a4bbd36ac117f94841785432e6d6174948a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/release.json",
+        "sha256": "8f3f5a100e0ec9bf42d11846272a202a67e8d1043306c435491a67955cb8ee31"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/trial/spawn-intent.json",
+        "sha256": "9c30b064830a5d7f53339b3acaea46c263fdf9625c2a0508440eae57857233e8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/trial/child.json",
+        "sha256": "6b3ac8d95f168f567e59f15ab1f168658d68882884b77cf770adb076006592b4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-on/trial/release.json",
+        "sha256": "b7695c3e3c3c005169e1f687e4713476c71ae8c9d549ac0f9f48358b85fb0a0f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/intent.json",
+        "sha256": "6ed1669e52cfd492e9f844d61ae00740617af8a79b699ea42919ed7fc1a2b5c0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/child.json",
+        "sha256": "c185418919940da2bc5141c4b815ffb214f3323003e8b700a64b0c71d93faa63"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/release.json",
+        "sha256": "eca40781bfa9da0bd91a4fbc69c13f0b77b8e9788ff4f1df21a7efe6a0e9599e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/trial/spawn-intent.json",
+        "sha256": "d818033a2af817566a3090e657625f6569c1034624a22a14a4ddc4a562389c1c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/trial/child.json",
+        "sha256": "1dfcb8410b5ce22be158dca586668e16a8f94e25eabf806db6222fb17b2ee6f6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r1-c8-off/trial/release.json",
+        "sha256": "25aa2bf9af84366013c56b5ac0572fbd77cefdcd5e5f87c9e5fe8d27986f107a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/intent.json",
+        "sha256": "4fb9137b5a89289cb30f6ce0c5157aa51913bb102a9c91145f34ac4b11f95eee"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/child.json",
+        "sha256": "f9b42b3d413816cbea477a0deb0a4e684cb5161ba4c87b4acf0fd3ab619063df"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/release.json",
+        "sha256": "45230af83e781a1c03cb042dcf7c32db8cba2bf6d3e43e34a516d79f52783270"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/trial/spawn-intent.json",
+        "sha256": "67d37f2dac821971c46f276f5bad3400d754ed48e00e1efa10460975977b8684"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/trial/child.json",
+        "sha256": "5ed1938f0befa18f96b5a61b7ba872efced0a82603df3613e2a18831578d07bf"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-off/trial/release.json",
+        "sha256": "62d410ec016232b53b3b18b7b650de039d82955d173866f0217bb830a30e798b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/intent.json",
+        "sha256": "f821cb64183673129cb40f02a61ebffeb5dac0ae12fd3eecaf52f3271a1e7ddc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/child.json",
+        "sha256": "9dc9e5676c71b4133441ebd7f5ffac5544681629d12097fbc0adfd53756d1915"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/release.json",
+        "sha256": "5171f7ed2804d4a865ce029fe53390c212c3cfb11cbb4e83aae0cd069542c781"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/trial/spawn-intent.json",
+        "sha256": "4bbeb7643de8b08b8ca3c0b2bb8122928e23d154e2b470d76e5e7a5d1bbd8b90"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/trial/child.json",
+        "sha256": "0afbbdca987cc03ae21afa7ac4c5a7d69c10b579183f5dbe99d0032ccaf617f1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c8-on/trial/release.json",
+        "sha256": "35f573ef8a1dcb38eb44f8f97dd9e0f24fa52be4356c0ba21e37c6c8a0ab9c96"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/intent.json",
+        "sha256": "c9f59707366122ba2660a33bc2ba1fec10cfd0eb367099f090e57d680993345a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/child.json",
+        "sha256": "4811cc0c4214d1d646b97597098a6f37d337c133b602a244f519e5ac8bbd59ca"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/release.json",
+        "sha256": "6ffe518341640a6791a85823da275db61d14453d495b3b8ef9c4629dbe870440"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/trial/spawn-intent.json",
+        "sha256": "6ca2d99d80cfd6ffbc7d28348ab0aefccb5e776d59ea59555d0c942f34c7c0f6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/trial/child.json",
+        "sha256": "cfec91926782ec55ffedb38779f6fb50cbd53224d65cd5d753fad66e964d190e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-on/trial/release.json",
+        "sha256": "47908977deacf09dc75bfecdcbeb05fc7434582953619069c9c0051a19ac617b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/intent.json",
+        "sha256": "fd914ee0f7f763087575e171fb4d274a4b4f1e2cc9fa0b46c20cb3d14c8c1e62"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/child.json",
+        "sha256": "349b8453eb22d16debd4f5f244dd7ce37f38837c0b461da1341bcc7f6e8d7cd5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/release.json",
+        "sha256": "afc94c34a3eb5da2b740994475e600999999f060f14aee5984718d201ed88d86"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/trial/spawn-intent.json",
+        "sha256": "0324e180d156ec742e5038c68e41fd554d6dd2e894342cc12a3863289a10f01c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/trial/child.json",
+        "sha256": "9491223eeb00364307d436e055a6db0f5ff012a116e25c02ec9386edc3df451e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r2-c1-off/trial/release.json",
+        "sha256": "e7eaf84adb34d04aecb2d1aaf35ee5873c14957e24f667e4ad9701f0f358edad"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/intent.json",
+        "sha256": "2fdb77f9ca592423f652a8b7ff6c66fc3be779bbce0aa6e3453504730530501e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/child.json",
+        "sha256": "204429c5daeff1809a8cfa298a8d0a4abaf4a2bd6be7261a945440db7ba16a04"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/release.json",
+        "sha256": "422863ef978aadc1816416c56749a81e8726c925c995f80d946f24955ca83695"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/trial/spawn-intent.json",
+        "sha256": "9b7e6f68375b834e226126e291259794062adb97aa630f548ebd58909062baac"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/trial/child.json",
+        "sha256": "d9ae4818c12c19e55acfe6f9217d13279f26c06c1b0edab4bdb0237b08a5393a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-off/trial/release.json",
+        "sha256": "df879e67e0f209964ceea0a9cff10679ad48e7f2b05c660b468640e97e36832a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/intent.json",
+        "sha256": "ad74cbc75ddd0590d64c5dab31fa89b30440070ab9c869190b7963e9934cd809"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/child.json",
+        "sha256": "8d4471130a18da2d441b11e1c1c396615a03deb1b14edceb1a70809ffc63c325"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/release.json",
+        "sha256": "25c0ae44e9dff758da5da9b6d3ffc355ed2d8a9c20c1083901709e9b9e531583"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/trial/spawn-intent.json",
+        "sha256": "eed15363d55c45b01e449279bfbe830be376ae28446238e66a1b1802555d86a6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/trial/child.json",
+        "sha256": "9a90bc1946465c902a5dcfe9e057d2ef56ca561e86a16ea41d28ee5826b4fd32"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c1-on/trial/release.json",
+        "sha256": "a191c41c3661ea48ce812aeccd5c5859f95fdc62954e62d4332b6b733f5db966"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/intent.json",
+        "sha256": "301944a8568c68cc403959be942b7462b2805ceb0644feacbd6e1bd00679b16e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/child.json",
+        "sha256": "010db051f4fd0c940dfc7a14586eda4d5f52e65112d5128a9c0fdf52d60cbef6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/release.json",
+        "sha256": "b6e279fb1078dc63ca7c5ecba92dedd3673bbecc1a27fbf64d81db57e049dddd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/trial/spawn-intent.json",
+        "sha256": "f3de70144c8526fbfd8a1fee010940a228b61b62a3091291120bb4024838dd4a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/trial/child.json",
+        "sha256": "72f4b24685b0619742eb2ead122553770a67202c3470b5525f3044a6758dd3b4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-on/trial/release.json",
+        "sha256": "bd23aa7cefb5100e97fbd0b7e6ae30509e14715ea673b526b1077f1466a31ecb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/intent.json",
+        "sha256": "cf2ff855b694d05b528f299a9e6900500b64021fd2f5ac67d2eb2cd53cc277aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/child.json",
+        "sha256": "5eab2f8ba0a9dc2f43c637af3cda4e4ed757723367f0ae36edb74abc42561547"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/release.json",
+        "sha256": "ea00a8bf094db9238e4e3a68b257e4db0fe63286e92176ef28cb584b82fa9906"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/trial/spawn-intent.json",
+        "sha256": "6f7ea50541fb579a9ec34a1ae2c60581018f715f7dae341bda07ebefb6b48b9f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/trial/child.json",
+        "sha256": "e000e6d583b4a9c7e8489bfe9d9138c93b7bdbf6ab83bccc2955ce9f8bdf076f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-owner/phases/r3-c8-off/trial/release.json",
+        "sha256": "370b208d73393c18af9de33342fa1a377972d556835944837ad486377f759766"
+      }
+    ]
+  },
+  "recovery_log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 355221,
+    "mtime_ns": 1792305412863682000
+  },
+  "bootstrap_returncode": 0,
+  "replacement": {
+    "pid": 27245,
+    "ppid": 1,
+    "start": "Sun Oct 18 01:19:09 2026",
+    "comm": "omlx-server"
+  },
+  "load_baseline_swap_bytes": 433124803,
+  "load_worker": {
+    "nonce": "03be6b81bd01478cb88ffca2e65208b5",
+    "directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/load-worker",
+    "parent_identity": {
+      "pid": 27182,
+      "ppid": 91825,
+      "start": "Sun Oct 18 01:19:01 2026",
+      "comm": "/Users/ryanli/code/minivllm/.venv/bin/python"
+    }
+  },
+  "post_worker_pid": 27290,
+  "post_result": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/load-worker/result.json",
+    "sha256": "0c80a2bcc10bcef3f167c9e633c2e9aa3dee89399cc2cdf097bfb99045cad777"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-http-formal-v1-cold-journal/evidence/log-428c3fd993e046f9b77fcef496b9d9dd/window.raw.log",
+    "sha256": "76eebe44c5a790c827cc99b8765553d65612b642807ee09977912b37eaa38661",
+    "bytes": 11301,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 355221,
+      "mtime_ns": 1792305412863682000
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 366522,
+      "mtime_ns": 1792311580812004442
+    },
+    "start_offset": 355221,
+    "end_offset": 366522
+  },
+  "final_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "monitoring_scope": "observed physical bounds; no OS hard cap; HTTP cancellation does not cancel server loader"
+}
