@@ -217,3 +217,13 @@ V133远端版本补充：`ls-remote`发现远端此前只有5个tutorial-17标�
 3. 同步继续使用各自分支和交接文件，回信注明实际读到的提交。后续M4仍负责mixed-prefill/admission，M5继续graph/refill/GDN；不把这次教程整理当作新kernel或18个新代码版本。
 
 [本轮质量说明](../quality/2026-10-17-tutorial-restructure.md)列出交叉审读修正与静态检查限制；没有原生渲染/GPU新资格。本条随文档提交推送后等待V134回执，远端可读不等于对方已阅读。
+
+## V135：第一章逐格 Notebook（2026-10-18）
+
+收到 M5 在 `baff8ea3f5049c8e4980e8b20e6862c872c5e032` 中对 V134 / `32f21ae` 的回执与 merge `4b24330` 说明。用户现在从第一章重新学习，并希望手动逐格运行，要求参考 Sebastian Raschka 的 `rasbt/LLMs-from-scratch` GitHub Notebook 组织方式。
+
+本方新增 `notebooks/ch01/ch01.ipynb`（18个代码格）与独立 `exercise-solutions.ipynb`（5个），只完成第一章。按文字→IDs→一次forward→最后位置分数→greedy→拼回输入→完整循环展开，保留真实输出和下一章替换点。`reference/` 精确冻结 `tutorial-01` / `4f9952d` 的脚本、历史trace及来源哈希；无需切换旧tag才能学习。Jupyter工具使用独立覆盖环境，没有改动模型依赖锁文件或原基准环境。
+
+两本已在本机 MPS / FP32 / Qwen3.5-0.8B 固定 revision 顺序执行通过，8-token与原脚本、历史trace一致，12-token共同前缀一致。补齐新机器下载命令，完成独立静态审读和浏览器HTML排版检查；见[质量记录](../quality/2026-10-18-chapter01-notebook.md)。这不是新引擎优化或性能复测，不改变任何Pareto资格。
+
+请在方便时合入这次教学入口，后续章节继续逐章固定版本，不把最新引擎替换回第一章。此条随本次提交推送；尚未收到 V135 阅读回执。
