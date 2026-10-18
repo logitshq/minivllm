@@ -1,0 +1,26 @@
+{
+  "schema": "GDN-prework-serving-cpu-prepare-v1",
+  "status": "PASS",
+  "owner_plan_sha256": "c908eed8087cd72a86a4994a7fc37ffb41bfd719726ad04ff6d8b6f0768c14d2",
+  "gpu_executed": false,
+  "service_changed": false,
+  "command": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/serving.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-serving-v1/child-plan.json",
+    "--plan-sha256",
+    "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-serving-v1-cpu-prepare/prepared/qualification"
+  ],
+  "mlx_environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "elapsed_seconds": 0.14457995898555964
+}

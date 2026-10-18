@@ -1,0 +1,41 @@
+{
+  "schema": "GDN-serving-prepared-cpu-archive-summary-v1",
+  "first_attempt": {
+    "status": "FAIL",
+    "tests": 0,
+    "reason": "Guard rejected pure stdlib tutorial_code scheduler during discovery",
+    "result": {
+      "sha256": "6e4d82a2363e2f9331ba6cb46aa8460ee1972e1d79b0646b8805b17677a3bba5",
+      "bytes": 134611
+    }
+  },
+  "retry": {
+    "status": "PASS",
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "denied_operations": [],
+    "result": {
+      "sha256": "ec2e8e698ed1cec3256b59988dfd8ba0b5e65f7bb8ca04203b9400a565b80e1f",
+      "bytes": 143919
+    }
+  },
+  "actual_cpu_prepare": "PASS",
+  "actual_readonly_service_prepare": "PREPARED",
+  "owner_plan_sha256": "c908eed8087cd72a86a4994a7fc37ffb41bfd719726ad04ff6d8b6f0768c14d2",
+  "child_plan_sha256": "dfb6d3d306e6247e34dfdfe54746e12205b297e166e1f175e85024786d73163b",
+  "prepared_journal_sha256": "70a4269e63af463c721855a255c1c577b1fe8b124abba577cafcafecd08e1fcd",
+  "registered_source_count": 76,
+  "members": 945,
+  "raw_bytes": 13885757,
+  "canary_archive_reference": {
+    "sha256": "c7e0107bf939963e713490ab71991f247df71d55276667c76c710e1a286a6789",
+    "bytes": 1208
+  },
+  "canary_payload_duplicated": false,
+  "numerical_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "CPU and historical read-only preparation only. No serving experiment result or current service-state claim."
+}
