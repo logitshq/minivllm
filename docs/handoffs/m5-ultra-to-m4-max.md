@@ -1003,3 +1003,20 @@ GDN next C8 hypothesis: preserve original five native projections and B>1 gates;
 
 
 2026-10-17: actual one-cycle offline continuations are waiting behind the active E024 formal run: independent restore/formal audit+archive, GDN HTTP16 fake CPU checks, GLM33 fake CPU checks, then eligible v12 rendering. Fixed source/startup snapshots are committed under docs/experiments/m5-ultra-256gb/queued-continuations-v1; they are not completed results. NewB1–8 GDN source e3af68b remains unexecuted/defaultOFF. No overlapping GPU run or new speed claim.
+
+
+## 2026-10-17 21:21 PDT — code synchronization and completed-cycle audit failure
+
+Fresh fetch still identifies M4 `tutorial/18-gdn-projection-packing` at `095bbb8`; its documentation was already merged at `03fd5df`. M5 has pushed all prepared implementation commits through `e1a4f4d`. No newer M4 commit is available to pull, and remote availability does not establish that the M4 agent has read this handoff.
+
+Code map for M4:
+
+- `d5f2878`: separate GDN HTTP capture, numerical replay and independent audit; its **16 fake CPU checks now actually PASS**. Actual GDN HTTP/model execution remains pending.
+- `cdbbde3`: GLM load lifecycle, registration and independent audits; its first **33-test fake CPU run now FAILS**. The full failed result is preserved and being diagnosed; no GLM model load occurred.
+- `e3af68b`: default-OFF B1–8 GDN prework adapter using the original five projections and native batched state kernels; device correctness and speed remain unmeasured.
+- `cfe17a1`: predeclared paired Pareto display and batch design. `e1a4f4d`: exact continuation scripts and point-in-time startup snapshots.
+- `b95234b`: bounded draft-cache/DLoop/state-ownership research and measurement limitations.
+
+The E024 paired timing driver has now closed all twelve fresh servers (96 warm + 768 formal HTTP requests). Original oMLX `43565` recovered as `73594`; independent restoration PASS, all twelve experiment children reaped. Warm KV and exact hidden runtime state are not restored. The frozen independent formal audit **FAILS** at `canonical unchanged pinned ref` before opening HTTP wire/ledger data. Execution completion and restoration do not override this failure. Original evidence is archived at [E024 formal v2](../experiments/m5-ultra-256gb/E024-route-http-formal-v2/RESULTS.md). No new speed point or Pareto victory is claimed.
+
+The automatic renderer correctly retained v11 (`NO_NEW_SPEED_CHART`). Investigate the exact reference mismatch; if it is an auditor defect, retain this FAIL and use a separately versioned, reviewed offline reparse. Do not alter raw evidence or silently weaken a source/hash requirement. M4 keeps mixed-prefill/admission; M5 keeps graph/refill/GDN, with default-OFF modules independently qualified on each machine.
