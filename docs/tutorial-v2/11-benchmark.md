@@ -1,6 +1,6 @@
 # 11：怎样证明实现正确，又怎样比较速度
 
-我们已经有自己的模型、cache、调度、Metal kernel 与投机路径。最后一章把验证和计时整理成可复现实验，回答两个不同的问题：算得对吗，以及在指定工作负载上花了多少时间？
+我们已经有自己的模型、cache、调度、Metal kernel 与投机路径。本章把前十章的验证和计时整理成可复现实验，回答两个不同的问题：算得对吗，以及在指定工作负载上花了多少时间？第十二章起再逐步优化执行路径。
 
 | 之前 | 本章之后 |
 |---|---|
@@ -9,6 +9,8 @@
 | 只看一个 tok/s | 分清 TTFT、后续生成、引擎和 HTTP 边界 |
 
 代码版本：`tutorial-11-v3`（保留原 `tutorial-11` / `tutorial-11-v2`）；上一个版本是 `tutorial-10`。入口 [benchmark_core.py](../../tutorial_code/benchmark_core.py)、[run_omlx.py](../../tutorial_code/baselines/run_omlx.py) 和 [probe_baselines.py](../../tutorial_code/baselines/probe_baselines.py)。现有 [baseline 说明](../../tutorial_code/baselines/README.md) 保留安装、版本固定和短请求记录。
+
+以下是本章固定版本的历史记录，不是最新三家排名。后续同一 HTTP 边界的短负载比较见[第44章](../experiments/44-fresh-full-throughput-latency.md)和[第45章](../experiments/45-lithos-queued-concurrency.md)；它们不回填本章的核心引擎/API 表格。
 
 ## 1. 几个 baseline 各负责什么
 
@@ -135,7 +137,7 @@ python -m tutorial_code.baselines.probe_baselines \
 ```
 
 ```bash
-git diff tutorial-10 tutorial-11 -- tutorial_code/benchmark_core.py tutorial_code/baselines
+git diff tutorial-10 tutorial-11-v3 -- tutorial_code/benchmark_core.py tutorial_code/baselines
 ```
 
 到这里，核心链路是 `IDs → 调度 → 自己的模型与 cache → 采样 → IDs`。tokenizer 留在调用边界；HTTP serving 可以以后另加一层，不是读懂或运行这套引擎的前提。
@@ -166,7 +168,7 @@ git diff tutorial-10 tutorial-11 -- tutorial_code/benchmark_core.py tutorial_cod
 
 两边的计时起止事件与输出计数不同，所以不把表中数字相除称为加速倍数。请求提前 EOS：这是一个短 prompt 的 0.8B 重复测量，没有生成满 128 个 token，不能代表持续吞吐、27B、批量或投机性能。完整每轮记录保留在各自 JSON。核心 MLX allocator 峰值约 511 MB；这是 MLX 管理内存，不能写成系统总内存或进程 RSS。
 
-本机 [Lithos 资格记录](../../tutorial_code/examples/chapter11-lithos-qualification.json) 标出 M4 Max 40 核、48GB、macOS 27.0.1 和当时的安装/格式状态。此 tag 尚未包含 Lithos 实测，随后单独加入真实运行记录，保留本版本。
+本机 [Lithos 资格记录](../../tutorial_code/examples/chapter11-lithos-qualification.json) 标出 M4 Max 40 核、48GB、macOS 27.0.1 和当时的安装/格式状态。原 `tutorial-11` 尚未包含 Lithos 实测；下文分别记录后来加入 `tutorial-11-v2` / `tutorial-11-v3` 的真实运行，旧 tag 保持原样。
 
 ## 本机验证记录
 
@@ -343,3 +345,5 @@ git diff tutorial-11-v2 tutorial-11-v3 -- tutorial_code/baselines docs/tutorial-
   --accelerator on --max-new-tokens 128 --repeat 3 \
   --out .artifacts/lithos-baseline/m4-accelerator-on.json
 ```
+
+[下一章：12 从同步到流水线，再到算子融合](12-从同步到流水线再到算子融合.md)

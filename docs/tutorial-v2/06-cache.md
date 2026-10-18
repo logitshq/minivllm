@@ -12,7 +12,7 @@
 
 ## 1. 为什么过去的结果可以复用
 
-因果模型里，追加新 token 不会改变旧位置已经算好的 hidden states。旧 K/V、已经更新好的 GDN 状态都仍然有效。
+因果模型里，权重、位置和已计算前缀不变时，追加新 token 在数学上不会改变旧位置的 hidden states。旧 K/V、已经更新好的 GDN 状态都仍然有效。换一条 prompt 或改动旧 token 时，不能直接沿用这份 cache；本章为新请求重新调用 `make_cache(model)`。
 
 ```text
 无 cache： [A B C] → D；[A B C D] → E；[A B C D E] → F
@@ -87,7 +87,7 @@ cache.S = S
 cache.offset += T                               # ← 关键⑤ 各层接续相同新位置
 ```
 
-完整实现对多 token 使用纯 MLX 的 chunk 计算，单 token 使用第四章的逐步递推。chunk 只是等价的计算组织方式；第九章再展开它的数学和 Metal 三角求解优化。两种路径都接受同一个初始 S，返回末尾 S。
+完整实现对多 token 使用纯 MLX 的 chunk 计算，单 token 使用第四章的逐步递推。chunk 在实数数学上等价，但不保证浮点结果逐字节相同；第九章再展开它的数学和 Metal 三角求解优化。两种路径都接受同一个初始 S，返回末尾 S。
 
 忘记 conv state 会让每轮卷积都误以为序列刚开始；忘记 S 会丢掉长期记忆。仅保存其中一个，通常仍能生成文字，但不再是同一个模型的输出。
 

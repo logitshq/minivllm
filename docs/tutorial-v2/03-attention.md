@@ -35,15 +35,13 @@ flowchart LR
     V --> O
 ```
 
-对位置 \(i\)，先算每个允许读取的位置 \(j\) 的分数：
-
-先算匹配分数：
+以下公式先看一个头，D 是该头的 Q/K 维度。对 query 位置 \(i\)，先算它与 key 位置 \(j\) 的匹配分数：
 
 \[
 s_{ij}=\frac{q_i\cdot k_j}{\sqrt D}
 \]
 
-再把分数转换为权重：
+遮住不允许读取的位置后，再沿 key 位置这一维做 softmax，把分数转换为权重：
 
 \[
 p_{ij}=\operatorname{softmax}(s_i)_j
@@ -100,7 +98,7 @@ query_states = self.q_norm(query_states.view(hidden_shape)).transpose(1, 2)
 key_states = self.k_norm(self.k_proj(hidden_states).view(hidden_shape)).transpose(1, 2)
 value_states = self.v_proj(hidden_states).view(hidden_shape).transpose(1, 2)
 query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin)
-attn_output, _ = attention_interface(             # ← 关键② 因果 attention / GQA
+attn_output, attn_weights = attention_interface(  # ← 关键② 因果 attention / GQA
     self, query_states, key_states, value_states,
     attention_mask, scaling=self.scaling,
 )

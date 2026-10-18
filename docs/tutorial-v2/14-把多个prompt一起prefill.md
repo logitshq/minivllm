@@ -217,7 +217,7 @@ C1的Native两轴仍低于oMLX balanced；C2则是y高8.23%、x低3.27%的取舍
 
 C4另做了正式的三对fresh-process AB/BA/AB，A是本章Native，B是oMLX balanced。三对y分别为60.9257/52.1935、56.7191/49.0940、59.9115/33.7208 tokens/s/Mac，Native分别高16.73%、15.53%、77.67%。但首对x为18.9216/19.5787，低3.36%；九次同序号测量组比较里，三次x仍较低。第三对oMLX的x/y降至11.3709/33.7208，采样thermal到fair(1)，这个异常偏慢点保留在记录中；其77.67%不能解释成可重复的实现收益，也不能凭采样确定原因。
 
-所以本章减少了兼容prompt的重复prefill组织工作，实际C4也观察到较高总吞吐；我们仍没有全并发、全指标的稳定胜出证据。上述是引擎/配置对比，未单独配对测量accepted13 parent，不能把全部差异归因于batch prefill。C4三对记录与C1/C2单进程筛查的证据强度也不同。
+所以本章减少了兼容prompt的重复prefill组织工作，实际C4也观察到较高总吞吐；截至本章这轮历史实验，仍没有全并发、全指标的稳定胜出证据。上述是引擎/配置对比，未单独配对测量accepted13 parent，不能把全部差异归因于batch prefill。C4三对记录与C1/C2单进程筛查的证据强度也不同。后续全新同轮比较见[第44章](../experiments/44-fresh-full-throughput-latency.md)，不拼接或重判本章数据。
 
 [compact证据](../../tutorial_code/examples/chapter14-batch-prefill.json)保留旧资格与微测，另存六个筛查点、六个C4进程点、组内范围、源码/模型身份和raw SHA。C4与筛查均经CPU独立复核，未重跑GPU；资源是采样的系统数据，C4测量paging并非始终为零，不推断独占GPU或热状态因果。完整raw留在原实验目录。
 
@@ -238,3 +238,5 @@ git diff tutorial-14-batch-prefill tutorial-14-v1 -- docs tutorial_code/examples
 完整生成仍使用第十一章的 `tutorial_code.benchmark_core` 入口；GPU命令需在具备相应模型与MLX环境时运行。固定tag用于查看阶段代码，最终证据绑定本章完整六文件组合，不能让中间版本继承不存在的测速。
 
 本章的计算组织由现有Attention/GDN与cache接口推导，量化guard参考固定MLX源码。第十二章已有oMLX流水线和Lithos列所有权出处继续保留；没有把它们的其他实现或硬件配方作为本章新优化来源。
+
+[下一章：15 把 GDN 的小门计算一起编译](15-把GDN的小门计算一起编译.md)

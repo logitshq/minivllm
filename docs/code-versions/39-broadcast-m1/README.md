@@ -1,9 +1,9 @@
 # 第39章代码版本
 
-配套[教程](../../experiments/39-verify-broadcast-m1.md)。`candidate116/`是冻结V116的完整Python候选源码，保留V114仅target verify的广播M1开关，并新增默认关闭的bounded draftloader。未修改仓库生产引擎。
+配套[教程](../../experiments/39-verify-broadcast-m1.md)。`candidate116/`是冻结V116的完整Python候选源码，保留V114仅target verify的广播M1开关，并新增默认关闭的bounded draftloader。未修改仓库生产引擎。以下资格说明截至此快照；后来V117整模检查见[第40章](../../experiments/40-m1-verify-and-bounded-loader.md)，短输出性能见[第42章](../../experiments/42-startup-warm-short-request.md)。
 
-- `108-to-114-layers.diff` / `108-to-114-verify.diff` 对照原批量路径与新verify作用域。
-- `114-to-116-loader.diff` 对照一次保留全部raw量化输入与逐项pop/eval/release。
+- [108-to-114-layers.diff](108-to-114-layers.diff) / [108-to-114-verify.diff](108-to-114-verify.diff) 对照原批量路径与新verify作用域。
+- [114-to-116-loader.diff](114-to-116-loader.diff) 对照一次保留全部raw量化输入与逐项pop/eval/release。
 - `source-map.json`固定原路径、字节数与SHA；`verify_sources.py`只校验源码与语法，不导入MLX或执行GPU。
 
 ```sh

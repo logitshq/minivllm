@@ -191,12 +191,11 @@ git diff tutorial-12-v1 tutorial-13-v1 -- \
   docs/tutorial-v2/13-把norm写成一个Metal核.md
 ```
 
-完整生成入口沿用第十二章。下面是已有0.8B核心模型的运行例子，不是表中27B HTTP screen的复现：
+完整生成入口沿用第十二章。在本章 tag 的仓库根目录、已安装 MLX 的 Python 环境中运行，并将 `MODEL_SMALL` 设为已有的0.8B模型目录。下面是核心模型的运行例子，不是表中27B HTTP screen的复现：
 
 ```bash
-cd /Users/ryanli/code/minivllm-tutorial
-/Users/ryanli/code/minivllm/.venv/bin/python -m tutorial_code.benchmark_core \
-  --model-dir /Users/ryanli/code/minivllm/models/Qwen3.5-0.8B-nvfp4 \
+python -m tutorial_code.benchmark_core \
+  --model-dir "$MODEL_SMALL" \
   --max-new-tokens 32 --repeat 3 --warmup-runs 3 \
   --out /private/tmp/chapter13-core.json
 ```
@@ -204,3 +203,5 @@ cd /Users/ryanli/code/minivllm-tutorial
 ## 出处
 
 本核独立手写，参考MLX **v0.32.3 / MIT** 的 `reduce_row.h`、`reduce.cpp`、`ops.cpp` 与 `unary_ops.h` 的归约及稳定sigmoid公式，源文件保留固定版本出处。oMLX与Lithos的源仓库是Apache-2.0；第十二章的执行流程/列所有权启发继续保留，本步没有引入它们的卷积融合或芯片配方。
+
+[下一章：14 把多个 prompt 一起 prefill](14-把多个prompt一起prefill.md)

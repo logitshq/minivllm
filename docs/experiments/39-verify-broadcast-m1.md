@@ -1,5 +1,7 @@
 # 39：让一次 verify 保留逐行量化乘法的结果
 
+历史时点：V113/V114/V116。后续整模检查已在[第40章](40-m1-verify-and-bounded-loader.md)完成；短请求性能结果见[第42章](42-startup-warm-short-request.md)。本章保留首次资源中止与局部诊断的原始结论。
+
 上一章发现：verify 把几个 token 放在一起计算时，Linear 的结果可能与逐 token 计算不同。本章先修这一处，并把它放回真实 verify 检查。局部 V113 已通过；V114 首次整模尝试在加载草稿模型时因内存压力中止，新 verify 尚未执行。
 
 [固定代码版本与三份前后diff](../code-versions/39-broadcast-m1/README.md)保存当前候选；[图、数据和进度记录](../progress/README.md)随实际检查点更新。
@@ -62,6 +64,8 @@ y = mx.quantized_matmul(
 y = y.reshape(T, N)
 ```
 
+真实替换可从[Linear调用点](../code-versions/39-broadcast-m1/candidate116/tutorial_code/miniengine/model/layers.py)进入[广播M1实现](../code-versions/39-broadcast-m1/candidate116/tutorial_code/miniengine/spec/broadcast_m1_113.py)，再读[前后diff](../code-versions/39-broadcast-m1/108-to-114-layers.diff)。上面的代码块是计算主线节选。
+
 | 写法 | 批次数 | 每次矩阵有几行 M | Python 中的 QMM 调用数 |
 |---|---:|---:|---:|
 | 原批量 | 1 | T | 1 |
@@ -97,6 +101,8 @@ draft：原路径
 target verify：启用广播 M1 → 构建图 → 恢复标记
 接受前缀／提交缓存：原 V108 事务规则
 ```
+
+作用域实现见[verify_broadcast_m1.py](../code-versions/39-broadcast-m1/candidate116/tutorial_code/miniengine/spec/verify_broadcast_m1.py)与[接入diff](../code-versions/39-broadcast-m1/108-to-114-verify.diff)；它解释标记如何进入、如何在异常时恢复。
 
 新资格保留旧的 96 个输出 IDs 硬门，还增加独立普通解码 A：A 自己 prefill、自己 argmax 推进，不向 B 提供 token 或状态。每次提交按实际已计算位置比较 128 个缓存组件，以及最后已计算位置的 logits；不同就停止。最后交付的 anchor 仍未计算，不能错把它计入缓存。
 

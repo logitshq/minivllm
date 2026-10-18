@@ -1,8 +1,16 @@
 # 一章一章写一个推理引擎
 
-从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。01—15 的代码与讲解放在同一教学分支，每章保存固定版本。
+从 HF 的完整模型参照开始，逐步实现自己的模型、cache、调度、Metal kernel 与投机解码。**第一次学习按01—15顺序读；16以后是独立实验与研究，按问题选读。** 后面的章号不表示前面的所有候选都已经被采用。
 
-教学分支是 `tutorial/step-by-step`，工作目录是 `/Users/ryanli/code/minivllm-tutorial`。原 `/Users/ryanli/code/minivllm` 保留在 `main`；完成版与旧教程仍可作为源码参照。
+| 你现在想做什么 | 从哪里开始 |
+| --- | --- |
+| 理解模型如何逐个生成token | [01 生成循环](01-一次文本生成是怎么发生的.md) → 02基础层 → 03 Attention → 04 GDN |
+| 读懂自己实现的完整引擎 | 05完整模型 → 06 Cache → 07量化 → 08调度 |
+| 学习GPU与服务优化 | 09 Metal → 10投机 → 11测量 → 12—15逐步优化 |
+| 看目前三家吞吐—延迟比较 | [45 三家C1/C2/C4](../experiments/45-lithos-queued-concurrency.md)；注意其负载和测试批次 |
+| 看后续实验为什么成功或失败 | [实验阅读地图](../experiments/README.md)，先读导读，再按主题选章 |
+
+01—15代码保存在 `tutorial/step-by-step` 的固定tag；当前优化分支还保存后续实验快照。仓库有三套不同用途的代码：`minivllm/`是原完成版参照，`tutorial_code/`是逐章教学代码，`docs/code-versions/`与实验source目录是冻结候选。运行教学代码不会导入完成版引擎。
 
 ## 阅读顺序与真正的替换点
 
@@ -26,9 +34,9 @@
 
 第二章初版 `tutorial-02` 只包含较少组件，阅读使用扩展版 `tutorial-02-v2`。第七章保留初版 `tutorial-07`，修正量化 Embedding 的激活 dtype 接口后使用 `tutorial-07-v2`；旧 tag 不覆盖。
 
-下一步从第三章读起。可以先只读前半章的数学图与小例子，再看 HF 内部代码、我们对应的实现和 diff；不需要一次读完后面的调度与 kernel。
+每章先读数学图与小例子，再看 HF 内部代码、我们的对应实现和 diff。第一次阅读从01开始；已理解前两章可直接进03。
 
-## 两种验证，加一个候选性能参照
+## 正确性参照与性能参照
 
 | 参照 | 主要用途 | 入口与记录 |
 |---|---|---|
@@ -38,7 +46,7 @@
 
 我们自己的测量入口是 [benchmark_core.py](../../tutorial_code/benchmark_core.py)。HF 第一章的无 cache 循环用于理解与正确性，不作为最终速度目标。量化模型与同 checkpoint 的参考核对，不要求它与 raw fp32 一直生成相同 token。
 
-oMLX 当前驱动经 HTTP/SSE；手写引擎计时从 IDs 输入开始。两个计时边界在报告中分列，不把不同边界的数字相除称为优化倍数。Lithos 在 M4 Max 的上游状态是未测 native fallback；它的 DSpark 与这里的 DFlash2 也不是相同实验，真实 0.8B/27B 本机报告在第十一章扩展版分别列出，未测其他场景不填成绩。
+第11章的oMLX驱动经HTTP/SSE，手写引擎计时从IDs输入开始；该章分列两个边界，不能据此直接计算相对速度。后续第43—45章补上同为完整HTTP请求的比较。Lithos在M4上使用实际支持的后端；第11章保留最初配置及accelerator-on实验，第45章补官方FIFO接口的C1/C2/C4。其DSpark与我们的DFlash2不是同一投机方法。
 
 核心交付的原始 IDs 可能包含终端 EOS，API completion usage 不一定包含它；第十一章另列逻辑完成数与结束原因，不能只看两个输出计数就判断生成工作相同。
 
@@ -74,6 +82,9 @@ git diff tutorial-01 tutorial-02-v2 -- tutorial_code/layers.py tutorial_code/che
 每章在同一份 `tutorial_code/` 上继续修改，并创建 commit 与 tag。后续优化不改变旧 tag 指向的代码。
 
 ```bash
+# 首次从远端获取已有章节标签；不覆盖同名本地tag
+git fetch origin --tags
+
 # 查看第三章的固定代码
 git show tutorial-03:tutorial_code/miniengine/model/attention.py
 
@@ -84,69 +95,37 @@ git diff tutorial-03 tutorial-04 -- tutorial_code/miniengine
 git diff tutorial-07-v2 tutorial-08 -- tutorial_code/miniengine
 ```
 
-如果当前目录有自己的修改，优先用 `git show` 阅读固定版本。要切换整棵目录时先保存本地修改，再 `git switch --detach tutorial-03`；继续开发时回到 `git switch tutorial/step-by-step`。
+正文里的相对源码链接打开的是**你当前checkout**中的文件，可能已包含后续章节的修改。复现本章必须看标注的tag；`git diff`只展示差异，不会替你切换运行版本。
+
+建议保留当前目录，在一个新的同级worktree运行固定版本：
+
+```bash
+# 在本仓库根目录执行；目标目录应尚不存在
+# worktree只写出代码，不会下载权重或运行模型
+git worktree add --detach ../minivllm-ch03 tutorial-03
+cd ../minivllm-ch03
+uv sync --frozen
+# 模型已按第01章下载后，再运行本章checker
+uv run python -m tutorial_code.check_attention
+```
+
+只阅读时用 `git show` 即可。若选择切换当前目录，先保存本地修改，并记录原分支；学习结束后回到原分支，不默认要求跳到另一条开发线。
 
 模型权重留在本地 HF cache 或模型目录，不提交到 Git。章节报告记录实际 checkpoint 路径、精度和验证条件；tag 固定代码，报告固定已运行的案例，不宣称覆盖所有输入。
 
 ## 运行环境
 
-下面命令里的 `python` 指已有 MLX/Torch 环境的解释器。本机路径是 `/Users/ryanli/code/minivllm/.venv/bin/python`；例如运行第三章：
+命令从仓库根目录或上面的固定版本worktree执行，默认使用该目录的锁文件和环境：
 
 ```bash
-cd /Users/ryanli/code/minivllm-tutorial
-/Users/ryanli/code/minivllm/.venv/bin/python -m tutorial_code.check_attention
+uv sync --frozen
+uv run python -m tutorial_code.check_attention
 ```
 
-其他机器先按照仓库依赖准备环境和所需 checkpoint；oMLX 使用独立安装环境，详见 baseline 说明。教程核心不要求实现 tokenizer 或启动自己的 HTTP 服务。
+模型下载方式见第01章；量化checkpoint见第07章。文中 `/Users/ryanli/...` 是原测量机器的路径记录，换机器需要替换，不能把本机已有模型当成仓库自带。oMLX/Lithos使用独立环境，见[baseline说明](../../tutorial_code/baselines/README.md)。核心教程处理token IDs，tokenizer与HTTP serving作为输入输出适配；后续服务实验才测完整HTTP边界。
 
-## 第三条 baseline 的当前准备状态
+## 进入实验篇之前
 
-Lithos 已从完整官方源码 `5485ad6bac0a5649d66a347f3e01a655ea29d937` 构建并安装到独立 Python 3.12 环境；没有本地 kernel 或模型补丁。0.8B/27B 的 CPU checkpoint 格式、19 个输入 IDs 与完整 EOS 集合均已核对，复现步骤见 [Lithos README](../../tutorial_code/baselines/lithos-README.md)。安装与准备记录用 `baseline-lithos-setup-v1` 保存。
+[实验阅读地图](../experiments/README.md)补齐16—47的去向，说明章号、V编号和tag的区别，并给出ICB、CAP、资格检查等词的含义。建议沿“16—17融合与复用 → 27原生命令 → 29—30服务接入 → 38—40投机正确性 → 43—45同负载比较”阅读；中间的负结果按兴趣选读。
 
-用户解锁后关闭空闲应用、保留正在执行的远端 CUDA 工作与 Codex，随后独占 GPU 串行运行。0.8B/27B 的 smoke 与三次重复测量均已完成，报告标记为真实 target-only 本机测量；`tutorial-11-v2` 保存扩展结果。原 `tutorial-11` 和 `baseline-lithos-setup-v1` 的资格/CPU 准备记录保留，不覆盖旧 tag。
-
-本机 M4 官方 accelerator-on 的独立实验已记录，见 [实验说明](../../tutorial_code/baselines/m4-accelerator-README.md)；完整 M5 配置被官方设备检查拒绝，未绕过验证。推荐第十一章阅读版本为 `tutorial-11-v3`，默认 profile/off 与原 `tutorial-11-v2` 记录保留。
-
-## 独立实验阅读（未采用）
-
-[18：先确认优化真的更快](18-先确认优化真的更快.md)记录GDN四投影与MLP两投影的输出行拼接。两条路线均未通过收益门，当前26个引擎源码及V19 default OFF保持不变；章节编号只作实验阅读索引，不表示已集成的新能力。
-
-[19：把量化矩阵乘拆开看](19-把量化矩阵乘拆开看.md)记录独立NVFP4 QMV几何实验：原QMM→R4数值控制→每SIMD行数4→2；严格数值通过、性能STOP，未接入引擎。
-
-[20：沿实际实现读三条执行路径](../experiments/20-donor-implementation-map.md)对照实际版本的oMLX、手搓引擎与Lithos，区分已具备ahead、待验证conv预处理、ICB运行时工程及allocator未知项；仅源码阅读，无新增收益结论。
-
-[21：把GDN真卷积、SiLU和原始tail合成一核](../experiments/21-gdn-conv-fusion.md)记录V23的Y4证据、synthetic严格数值与局部micro；host-wall中位减少12.21%，尚未接入引擎，真实preconv与完整模型/E2E资格仍待完成。
-
-[22：融合和图复用的真实 HTTP 检查](../experiments/22-combined-decode-screen.md)补齐组合版数值、185-token生命周期和六新进程C1测试；X+1.54%/Y+0.76%，收益不足，未采用，继续优化。
-
-[23：继续拆解 kernel 与真实 GPU 诊断](../experiments/23-kernel-tests-and-gpu-diagnostics.md)记录权重重排、SIMD递推、真gate/up融合的严格结果、负结果及整模失败；解释为什么 Metal buffer 时间戳不能直接作为单算子占比。
-
-[27：少搬 state，再把真实 Metal 命令留在 ICB 里](../experiments/27-native-icb-pingpong.md)保存48层S轮换、独立buffer克隆负结果、实际双bank Metal ICB及全数值/B-only计时证据；36.188ms/步、27.633tok/s未作服务或Pareto获胜声明。
-
-[28：把卷积、归一化复用和state保留接到真实ICB](../experiments/28-native-gdn-composition.md)保存V39/V40/V44的严格完整资格、V40绑定失败/修复与B-only计时；候选默认关闭，无HTTP/Pareto采用结论。
-
-[29：把原生 decode 接进调度器，再测真实请求](../experiments/29-native-runner-http.md)说明原生状态的生命周期与普通 runner 回退，保留 V42 负结果和 V45 未完成测试及全部原始证据。
-
-[30：提前提交一步](../experiments/30-native-ahead.md)对照同步 runner 与 depth2 FIFO，说明状态与输出的所有权、提前停止和实际数值范围；真实 HTTP 仍未超过已测前沿。
-
-## 当前继续阅读
-
-[38：投机事务与量化乘法](../experiments/38-spec-transaction-and-qmm.md)保留整模旧序列失败、官方MTP较慢的配对结果及逐算子诊断。
-
-[39：保留逐行量化乘法的结果](../experiments/39-verify-broadcast-m1.md)从旧代码到广播M1逐步对照，附固定候选与diff；局部497项通过，整模仍待新资格。[进展图与台账](../progress/README.md)保存已验证结果和负结果，章节持续迭代。
-
-[40：整模通过后再测吞吐和延迟](../experiments/40-m1-verify-and-bounded-loader.md)补上完整投机路径资格与加载资源边界。
-
-[41：HTTP 传输选项](../experiments/41-native-http-nodelay-pilot.md)和[42：短请求投机解码](../experiments/42-startup-warm-short-request.md)分别保存一次无收益和一次明显变慢的真实对照。
-
-[43：新的三家 C1 对照](../experiments/43-fresh-c1-throughput-latency.md)以完整请求 latency 和总输出 throughput 作图：本方三轮均领先；当时缺少的同场并发点已在第44章补齐。正文对照旧 native15、当前 CAP64/direct 与本轮测量代码的变化。
-
-[44：完整吞吐—延迟前沿](../experiments/44-fresh-full-throughput-latency.md)先解释 C1/C2/C4 与非支配点，再展示固定启动配置如何接入真实 batching。21 次全新加载的同轮结果中，本方 C1/C2/C4 覆盖全部已测外部点；图包含全部重复测量。结论限定于该模型、短负载及已测配置，未验证的 kernel 不计入收益。
-
-另读[共享权重多行 M1 补记](../code-versions/44-shared-w-m1/LOCAL-NUMERIC.zh.md)：从已经正确的 broadcast-M1 出发，尝试在多个 token 之间复用读取的权重，同时保留每行累加顺序。代码和局部数值记录已保存；它尚未取得整模或性能资格。
-
-[45：补测 Lithos 的并发请求](../experiments/45-lithos-queued-concurrency.md)对照 OpenAI 与 Ollama 请求代码，解释客户端并发、服务端排队和 GPU batching 的区别。官方排队接口实测 C1/C2/C4，吞吐基本持平而完整延迟增加；三家九点图保留测试批次标签。
-
-[46：读新论文，找下一处值得替换的代码](../experiments/46-next-ideas-from-papers.md)区分已实现机制与真正的新改动，用前后伪代码解释 decoded-W 复用，并拆开调度排序、时间预算、投机成本策略。包含近期论文与作者代码；候选尚未实现或计入性能图。
-
-[47：再读五篇近期论文](../experiments/47-recent-paper-reading.md)用时间线解释“每次 prefill 多大”和“多久插入一次 prefill”的区别，核对 Apple Silicon 权重复用的正反例，并展示检索式投机要替换哪些代码。标明论文与源码版本；研究方案尚待实现和验证。
+[46论文到实验](../experiments/46-next-ideas-from-papers.md)和[47近期论文精读](../experiments/47-recent-paper-reading.md)是待验证方案，尚无新性能点。历史章节的STOP/PASS描述当时的实验，后续更新由目录与章首链接说明；不覆盖旧tag或原始结果。

@@ -73,7 +73,7 @@ S_t=\bar S_t+k_t\delta_t^\top,\qquad o_t=q_t^\top S_t.
 更新：    S_new = [[2.5], [0]]
 ```
 
-若归一化后的 Q 是 `[1,0]/sqrt(2)`，本步输出就是 `2.5/sqrt(2)`。Q 决定读哪个方向，K 决定写哪个方向，二者的任务不同。
+若 Q 的 L2 归一化结果为 `[1,0]`，再乘本模型的 `Dk**-0.5`（此例 Dk=2），实际参与读取的 Q 就是 `[1,0]/sqrt(2)`，本步输出为 `2.5/sqrt(2)`。Q 决定读哪个方向，K 决定写哪个方向，二者的任务不同。
 
 真实模型从输入投影出 `a`、`b`，再产生门：
 
@@ -82,7 +82,7 @@ S_t=\bar S_t+k_t\delta_t^\top,\qquad o_t=q_t^\top S_t.
 g=-e^{A_{\log}}\operatorname{softplus}(a+dt_{bias}).
 \]
 
-`g≤0`，所以 `0<exp(g)≤1`。这里的 g 是**衰减倍率的对数**，不是已经可以直接乘状态的倍率。门参数和矩阵状态使用 fp32，降低长序列累积误差。
+`g≤0`，所以数学上 `0<exp(g)≤1`。这里的 g 是**衰减倍率的对数**，不是已经可以直接乘状态的倍率。源码将 `A_log`、`dt_bias`、门计算及矩阵状态保持为 fp32；产生 a/b 的 Linear 权重和激活不因此全部变成 fp32。
 
 ## 4. 进入递推前，还有一个因果卷积
 
@@ -135,7 +135,7 @@ last_recurrent_state += k_t.unsqueeze(-1) * delta.unsqueeze(-2)
 core_attn_out[:, :, i] = (last_recurrent_state * q_t.unsqueeze(-1)).sum(dim=-2)
 ```
 
-实际 HF 的多 token 前向可能选择 chunk 公式，单步选择 recurrent 公式。这两种方法表达同一个状态更新；本章选择递推版，让计算顺序可见。
+实际 HF 的多 token 前向可能选择 chunk 公式，单步选择 recurrent 公式。这两种方法在实数数学上表达同一个状态更新，浮点运算的组织不同则可能有舍入差异；本章选择递推版，让计算顺序可见。
 
 ## 6. 手写代码：把同一计算搬到 MLX
 

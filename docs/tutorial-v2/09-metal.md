@@ -10,6 +10,8 @@
 
 代码版本：`tutorial-09`；上一个版本是 `tutorial-08`。核心文件 [gdn_metal.py](../../tutorial_code/miniengine/kernels/gdn_metal.py) 整理移植自原 [minivllm Metal kernel](../../minivllm/kernels/gdn_metal.py)；原 MLX 参考函数保留，方便验证。**是否更快需要计时，写成 Metal 本身不证明提速。**
 
+正文按固定 tag 讲解；文件链接打开的是当前 checkout，可能已包含后续优化。核对本章实现可用 `git show tutorial-09:tutorial_code/miniengine/kernels/gdn_metal.py`；复现实验应使用对应 tag 的独立 checkout 和已有模型环境，不能让后续代码继承本章报告身份。
+
 ## 1. 先看单步：大头是读写 S
 
 第四章的数学保持不变：
@@ -105,7 +107,7 @@ for i in range(1, C):
     rows.append(V[..., i:i+1, :] - A[..., i:i+1, :i] @ X)
 ```
 
-它按正确顺序求解，但 Python 每行组织多个小 GPU 运算。Metal 版在一个 kernel 内完成相同顺序，列可以并行，行之间同步：
+它按行依赖顺序求解，但 Python 每行组织多个小 GPU 运算。Metal 版在一个 kernel 内保留相同的行依赖，列可以并行，行之间同步：
 
 ```cpp
 for (uint i = 0; i < C; i++) {
@@ -118,6 +120,8 @@ for (uint i = 0; i < C; i++) {
 ```
 
 完整 chunk 公式可对照 [HF 的 torch_chunk_gated_delta_rule](../../ref/modeling_qwen3_5.py) 与 [教学 gdn.py](../../tutorial_code/miniengine/kernels/gdn.py)。初学者先抓住“相同 delta 递推，块内用下三角关系批量求修正”即可。
+
+保留行依赖不等于逐位保留浮点求和顺序：参考版先做矩阵乘再减，以上 Metal 循环逐项相减。下面报告实际误差，不能把实数公式相同写成所有输入上的 byte-exact 保证。
 
 ## 5. 代码替换与实际接入
 
