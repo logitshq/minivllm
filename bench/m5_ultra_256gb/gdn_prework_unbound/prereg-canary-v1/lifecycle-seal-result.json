@@ -1,0 +1,37 @@
+{
+  "schema": "cold-v3-actual-route-predecessor-seal-v1",
+  "status": "PASS_SOURCE_ONLY",
+  "values": {
+    "MIGRATION_CONTROLLER_SHA": "e6bc72007043ed0376e98ea7f28ee152587294dec200953e93a5c7c736a90694",
+    "MIGRATION_AUDITOR_SHA": "a51c4a838230fb5d1e3dbbc788dea12df5f78eb360006e657e47f19ea56d83a7",
+    "MIGRATION_JOURNAL_SHA": "dff835b4518710efe2fce1c6b3f12784432b0f3295a63aaa5503840e916ddd61",
+    "MIGRATION_AUDIT_SHA": "6bb4be00801ce4519a0ab399d171463e8c4a3e4c1802031295c965497316914e"
+  },
+  "before_sources": {
+    "controller.py": "c5a57793501190430619df24c5d1f240b08b96263b3d9f6e78bff67092a6c7a9",
+    "owner.py": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c",
+    "audit_restore.py": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca"
+  },
+  "after_manifest": {
+    "schema": "cold-single-child-lifecycle-v3",
+    "sources": {
+      "controller": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/controller.py",
+        "sha256": "674b21fbcafa0e79164dedb78875f513e9a24d478337c2aeeb67a439e69a4dc9"
+      },
+      "owner": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/owner.py",
+        "sha256": "4c2cc6f305de3ecf0c6495e45838baae885efbf7a8f479ed2043dc0ffb67f31c"
+      },
+      "audit_restore": {
+        "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/audit_restore.py",
+        "sha256": "34d608b54ed5779b97e85a0463c17f8796876be731f6f0aafcbe804ffc7b15ca"
+      }
+    }
+  },
+  "algorithm_ast_unchanged": true,
+  "service_operation": false,
+  "tests_run": false,
+  "numerical_qualified": false,
+  "performance_qualified": false
+}

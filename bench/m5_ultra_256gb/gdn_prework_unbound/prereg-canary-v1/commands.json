@@ -1,0 +1,45 @@
+{
+  "readonly_service_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/cold_cycle_v3/controller.py",
+    "prepare",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-cold-journal",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--owner-directory",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner",
+    "--owner-plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/prereg-canary-v1/owner-plan.json",
+    "--owner-plan-sha256",
+    "a54e3e74bc3d1c838894a60f4696f142d82156f31a7a18d501805e078562f4dd"
+  ],
+  "seal_receipt": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/register_canary.py",
+    "--seal-receipt"
+  ],
+  "execute": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/execute_canary.py",
+    "--run"
+  ],
+  "independent_numeric_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py",
+    "--child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-owner/phases/gdn-prework-real-layer/qualification",
+    "--plan-sha256",
+    "17e3e23e6d4fd1e2430a176bc0830e17984eca9ddea0c20c61778bc7f60acfe3",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-prework-canary-v1-analysis/independent-numerical.json"
+  ]
+}

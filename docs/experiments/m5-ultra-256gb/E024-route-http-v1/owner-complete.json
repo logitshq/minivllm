@@ -1,0 +1,52 @@
+{
+  "schema": "E024-route-http-owner-result-v1",
+  "status": "PASS",
+  "owner_pid": 20202,
+  "owner_plan_sha256": "ba7556ffddd28323ce0a7541cc1c6a8557378a687fbdace981c610bfc7b2129d",
+  "errors": [],
+  "absence_probes": 250,
+  "first_failure": null,
+  "phases": [
+    {
+      "phase": "c1-capture",
+      "status": "PASS",
+      "result": {
+        "path": "phases/c1-capture/capture/complete.json",
+        "sha256": "563a52bddeeb19942b7a0f45c784a7b88c96c303fd771c379f748665ad528d3c"
+      }
+    },
+    {
+      "phase": "c1-replay",
+      "status": "PASS",
+      "result": {
+        "path": "phases/c1-replay/qualification/complete.json",
+        "sha256": "252d30da00794965714e83224a26b9ed243d566b4bb3ab08889398d8445bcba5"
+      }
+    },
+    {
+      "phase": "c8-capture",
+      "status": "PASS",
+      "result": {
+        "path": "phases/c8-capture/capture/complete.json",
+        "sha256": "a0597be68b3a0de0d70ac85c12f1273a4eccf46dbe19b4b13bbd27b43dc989c9"
+      }
+    },
+    {
+      "phase": "c8-replay",
+      "status": "PASS",
+      "result": {
+        "path": "phases/c8-replay/qualification/complete.json",
+        "sha256": "ac428383ef732f79a2e3eaf447d63130b2824bdd7ba890713d5a5b1661766462"
+      }
+    }
+  ],
+  "samples": 250,
+  "spawn_intent_written": true,
+  "child_started": true,
+  "all_children_reaped": true,
+  "elapsed_wall_s": 1218.3641220830032,
+  "numerical_replay_complete": true,
+  "independently_qualified": false,
+  "performance_qualified": false,
+  "scope": "Route-ON C1/C8 captured schedules only; producer numerical checks do not grant independent HTTP, resource/restoration or performance qualification."
+}

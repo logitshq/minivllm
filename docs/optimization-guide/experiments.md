@@ -987,3 +987,10 @@ New versioned auditors correct only the outer reader schema and bind12 actual ea
 oMLX process-metric medians C1 50.781568tok/s,p50 10.079909s,p95 10.128053s; C8 168.365034tok/s,p50 24.263937s,p95 26.130037s. Native historical C1 45.372147 and C8 167.398907tok/s: C1 still behind, C8 nearly equal with native p95 25.979063s. No cross-cycle significance or overall frontier claim. New visually checked [v10](progress/2026-10-17-v10/README.md) shows14 actual points, separate p50/p95, source-pinned lineage and all prior eight point values unchanged.
 
 E024 actual HTTP four-phase qualification started after registration4ec464d; C1 capturePASS and numerical replay currently live. No E024 performance timing promoted to chart. GDN source candidates remain defaultOFF; registration/driver preparation proceeds independently without device overlap.
+
+
+## E024 actual HTTP capture/replay independent PASS - 2026-10-17
+
+Four actual phases close: C1eight/C8sixteen,12,288 committed IDs,5,124 replay steps,6,573,486 full-array device receipts independently checked. Both bound families execute; C8 has seven partial retirements and seven survivor refills, ahead invalidation0/EOS0. Full successful tensor payloads are not saved; source-bound exact receipts are audited, not offline arithmetic.250 raw resource samplesPASS, zero swap growth; all direct children reaped. Original19019 restored27913 with fresh MTP/residentPLE, independentPASS. Archive1333members/4,544,516B SHAaec7947a4afd39d2b17c560ef45014b7d4b2b2181732d1bff44292437c09f717. [Evidence](../experiments/m5-ultra-256gb/E024-route-http-v1/README.md). No new formal speed/Pareto point.
+
+Next GDN canary registered: ownerplana54e3e74,child17e3e23e,actualPREPARED journal81263452,68pins. v3 migrated only four actual predecessor hashes, algorithmAST unchanged,24 fake lifecycle testsPASS;12 driver testsPASS. One18-call local real-activation gate, defaultOFF and not combined withE024. Source-only formal adapter12tests first attempt had5failures/1error from unresolved macOS fixture path; fixture-only resolve() fix yields full12PASS, oldattemptretained and productionunchanged.
