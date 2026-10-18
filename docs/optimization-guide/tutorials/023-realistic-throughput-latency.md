@@ -307,3 +307,12 @@ final test receipts are retained with the preregistration.
 41个资源样本与独立恢复检查PASS，原服务92152恢复为94592；暖KV不恢复。
 [完整记录](../../experiments/m5-ultra-256gb/E023-omlx-d512-qualification-v1/README.md)保留414个归档成员，
 接下来正式轮采用与native/Lithos相同的warm8/formal64及fresh-process重复。
+
+
+### oMLX 正式轮注册：让独立进程成为重复单位
+
+原来的24请求只提供真实route/count/text资格。正式性能使用六个新官方无观察器进程，C1/C8、C8/C1、C1/C8，每进程先warm8再formal64；不将资格轮墙钟当作正式吞吐。统计首先在每个完整请求组内重算，然后报告每个C的三进程指标中位数。Native现有n1/C仍是历史点，不能因此画置信区间或称同步配对实验。
+
+本次准备抓到三个接线问题：关闭观察器后入口为原bin/omlx，官方usage带有限非负计时扩展，请求中的采样参数采用原浮点类型。计数/cache=0/原SSE匹配保持严格，只用客户端POST→DONE时钟做性能指标。CPU首轮79中一项要求实际outer解释器；原失败保留后，仅该项换正确解释器PASS，生产和测试源码均未修改。
+
+[可复现实验注册](../../../bench/m5_ultra_256gb/omlx_d512_formal/README.md)已准备并绑定实际恢复证据；六进程、三个独立审计与原服务恢复完成前没有新性能结论。

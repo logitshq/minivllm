@@ -945,3 +945,10 @@ Observer request seals preceded owner SIGTERM-15 and strict process/listener abs
 The new per-instance HTTP entry/capture passes the 12 server and11 capture CPU tests (the original23-test attempt preserves one macOS temporary-path fixture failure; only that fixture was fixed). The new replay adapter separately passes13 guarded CPU tests; no GPU/runtime/model/network/process backend was exercised. A later one-string docstring correction has an AST-equivalence receipt and is not claimed as retested. Actual HTTP capture/replay, independent route audit and formal performance remain pending. [Replay CPU evidence](../experiments/m5-ultra-256gb/route-http-replay-cpu-v1/README.md).
 
 [Progress v9](progress/2026-10-17-v9/README.md) retains exactly the same eight formal points as v8 and shows new E024/oMLX qualification status separately. PNG was visually checked; no diagnostic timing or invented new Pareto point was added.
+
+
+## oMLX D512 six-process formal registration · 2026-10-17
+
+Observer-OFF official CLI, C1/C8–C8/C1–C1/C8, warm8/formal64 per process, same D512/target-only/cache0 protocol. Four existing actual inventory groups retained, mandatory owner pre/post rehash;48 source pins and actual PREPARED-journal sealed. No service stop or performance measurement yet. [Registration](../../bench/m5_ultra_256gb/omlx_d512_formal/README.md).
+
+CPU first attempt79:78 PASS and one correct rejection when a real outer-runtime inventory test ran under vendor Python. The unchanged exact test then PASS under its actual outer Python. Both attempts/source snapshots preserved, zero real subprocess/network/signals/device imports;80 executions,79 distinct tests passed, no combined rerun. No weakened production gate. [CPU archive](../experiments/m5-ultra-256gb/omlx-formal-prepared-cpu-v1/README.md).
