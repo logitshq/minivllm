@@ -1,0 +1,203 @@
+{
+  "schema": "GLM-independent-operational-restoration-v1",
+  "status": "OPERATIONALLY_RESTORED_WITH_MONITOR_FAILURE",
+  "started_at": 1792350257.7302258,
+  "tool_sha256": "743d4d002244c081855cc126570be5b612dfc55f8960b0f696aeca3f99a6f2cb",
+  "controller_sha256": "bdb5afac1febec8be8b2e10d70b77bbbc150aac76416385ac0c89f5ce48c6579",
+  "owner_plan_sha256": "b842f85f04b32ed84cb0903d943ac86b04f1cf7ae6ef2c1f3df4f5848e59af01",
+  "recovery_command_succeeded": false,
+  "original_monitored_recovery_passed": false,
+  "observed_diagnostic_complete": false,
+  "full_model_correctness_qualified": false,
+  "performance_qualified": false,
+  "physical_resource_safety_qualified": false,
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "owner_reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 71758,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/attempt.json",
+        "sha256": "04cd74c750aff5e9849142cb610727114c3efe0453a98689af5b7fa669e604c7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/stopped-journal.json",
+        "sha256": "0cb56287a6d3011d179884ddc12f3956df4a40fcfb1e56afc35ad4251a55f274"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/spawn-intent.json",
+        "sha256": "b2de5857db5339794785af5dc8d35b6aef372255451f966a669a678349de0842"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/children.json",
+        "sha256": "3c1cfb5ab8c78221ca5b852defac9183d8b8f23eae78e5bce5a323367f9737e8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/release.json",
+        "sha256": "2e283c79396cc9ee75114faeff3cb0093f35f43fe873a97291a5a7535811c06b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/intent.json",
+        "sha256": "b2de5857db5339794785af5dc8d35b6aef372255451f966a669a678349de0842"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/child.json",
+        "sha256": "ce884116ae7515f7b1040a9ec14df6b80152e6e5b0f4233aeabe85be3e8fb6cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/release.json",
+        "sha256": "4e455d2ba2b2cee738acba71e7e7edb7e192fa0363f03e3dff245e179c323c3e"
+      }
+    ]
+  },
+  "replacement": {
+    "pid": 72953,
+    "ppid": 1,
+    "start": "Sun Oct 18 11:58:42 2026",
+    "comm": "omlx-server"
+  },
+  "observed_status_before": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/operational-recovery-v1/evidence/log-51ab067b4c5443c382ec0d66d0759728/window.raw.log",
+    "sha256": "3902d17a39ea22823bb09a84241340c44528f8978c6fe08bc6c08550b56fa422",
+    "bytes": 11301,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 368042,
+      "mtime_ns": 1792349873051048970
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 379343,
+      "mtime_ns": 1792349952486748137
+    },
+    "start_offset": 368042,
+    "end_offset": 379343
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "current_resource_samples": [
+    {
+      "time": 1792350257.96991,
+      "system_footprint": 173879508992,
+      "pressure": 1,
+      "swap_bytes": 2532111811,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/operational-recovery-v1/evidence/physical-2d34214a42a14ceeaf92a984ef83d750/footprint.raw.json",
+        "sha256": "d6fd07e4a2cac7bf21668d05e461feccc357488abd2cf50e438bc35da2407fcc",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/operational-recovery-v1/evidence/physical-2d34214a42a14ceeaf92a984ef83d750/commands.json",
+        "commands_sha256": "090c676983fb387d0dfe4c31a836dab0b40646bcfdee3e41464f20ae405ad676"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792350263.008252,
+      "system_footprint": 173735034880,
+      "pressure": 1,
+      "swap_bytes": 2532111811,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/operational-recovery-v1/evidence/physical-23a2df6db96b4eacb0e3710b6a7d6bd8/footprint.raw.json",
+        "sha256": "9e2728eb786344ebbced90e76d6e4ed0617744240b62844881eb55f694779294",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/operational-recovery-v1/evidence/physical-23a2df6db96b4eacb0e3710b6a7d6bd8/commands.json",
+        "commands_sha256": "02c690f58621629e38830f857f6abcd2acf6e97ab263b3def3079f47f0efd100"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "current_resource_scope": "Two fresh loaded-stability samples; no historical POST/swap failure erased; no hard cap.",
+  "owner_reap_after": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 71758,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/attempt.json",
+        "sha256": "04cd74c750aff5e9849142cb610727114c3efe0453a98689af5b7fa669e604c7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/stopped-journal.json",
+        "sha256": "0cb56287a6d3011d179884ddc12f3956df4a40fcfb1e56afc35ad4251a55f274"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/spawn-intent.json",
+        "sha256": "b2de5857db5339794785af5dc8d35b6aef372255451f966a669a678349de0842"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/children.json",
+        "sha256": "3c1cfb5ab8c78221ca5b852defac9183d8b8f23eae78e5bce5a323367f9737e8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/release.json",
+        "sha256": "2e283c79396cc9ee75114faeff3cb0093f35f43fe873a97291a5a7535811c06b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/intent.json",
+        "sha256": "b2de5857db5339794785af5dc8d35b6aef372255451f966a669a678349de0842"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/child.json",
+        "sha256": "ce884116ae7515f7b1040a9ec14df6b80152e6e5b0f4233aeabe85be3e8fb6cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/release.json",
+        "sha256": "4e455d2ba2b2cee738acba71e7e7edb7e192fa0363f03e3dff245e179c323c3e"
+      }
+    ]
+  },
+  "observed_status_after": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "independent_current_observation_passed": true,
+  "original_journal_state": "LOAD_INTENT",
+  "scope": "Current persisted-visible service and strict old-child absence verified using retained raw reads. Original recovery command/HTTP outcome and historical monitor remain failed; no experiment qualification.",
+  "original_evidence_unchanged": true,
+  "original_evidence": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-cold-journal/journal.json": {
+      "sha256": "d1910477a276aa7e48e9e668e1284d5dce5057cbae998483e29a1b36ea744e49",
+      "bytes": 18672
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-execution/final.json": {
+      "sha256": "71251720b53cdf874a12c7b9aee3be6d4d58de023d2747e80a137430619a329b",
+      "bytes": 431
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-cold-journal/load-worker/release.json": {
+      "sha256": "abdaf13e05866ea77809048579346850c4d960277a5360496668f61ef63d6ade",
+      "bytes": 129
+    }
+  },
+  "ended_at": 1792350263.17221
+}

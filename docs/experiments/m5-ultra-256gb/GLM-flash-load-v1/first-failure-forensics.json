@@ -1,0 +1,81 @@
+{
+  "schema": "GLM-load-v1-first-failure-forensics-v1",
+  "status": "EXPERIMENT_AND_ORIGINAL_RECOVERY_FAILED",
+  "owner_complete": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/complete.json",
+    "sha256": "c7f1aefaa24b9485cf240841dbda77ce31a70a44ebad854505b73001ac343c83",
+    "bytes": 1001
+  },
+  "original_final": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-execution/final.json",
+    "sha256": "71251720b53cdf874a12c7b9aee3be6d4d58de023d2747e80a137430619a329b",
+    "bytes": 431
+  },
+  "original_journal": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-cold-journal/journal.json",
+    "sha256": "d1910477a276aa7e48e9e668e1284d5dce5057cbae998483e29a1b36ea744e49",
+    "bytes": 18672
+  },
+  "last_physical": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/physical-0036/sample.json",
+    "sha256": "75a6b8cff84904f09f3afa0c4aae743d73f7def85a50706ba4a8fece456cf73a",
+    "bytes": 4404
+  },
+  "last_checkpoint": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/checkpoint-0041.json",
+    "sha256": "65f47c9b5e202004be688b71e7f475538bea196f91ae3da3a428e177a65574f2",
+    "bytes": 88251
+  },
+  "live_physical_samples": 37,
+  "completed_requests": 0,
+  "physical_duration_s": {
+    "min": 0.025920042011421174,
+    "median": 0.10947483300697058,
+    "max": 0.24415137502364814,
+    "last": 0.24415137502364814
+  },
+  "last_checkpoint_duration_s": 1.5983189590042457,
+  "last_checkpoint_vs_previous_physical_end_s": 1.598785374982981,
+  "last_physical_parsed": {
+    "pid": 71812,
+    "top_bytes": 165722077440,
+    "aux_current_bytes": 165718898944,
+    "aux_peak_bytes": 165718898944,
+    "current_bytes": 165722077440,
+    "peak_bytes": 165722077440,
+    "system_bytes": 192339853312,
+    "pressure": 1,
+    "physical_ram": 274877906944,
+    "swap_bytes": 424736195,
+    "swapouts": 316235
+  },
+  "owner_failure": [
+    {
+      "phase": "glm-official-load",
+      "type": "ValueError",
+      "message": "resource checkpoint exceeded observation cadence",
+      "time": 1792349896.423038
+    }
+  ],
+  "first_cause": "Seven-command resource checkpoint completed within own 5s deadline but exceeded 1s post-physical observation-cadence deadline.",
+  "individual_command_timings_retained": false,
+  "attribution_limit": "No per-command timestamps in either original GLM checkpoint or physical sample. Cannot attribute slow checkpoint to ps/lsof/osascript/pmset. It contains no footprint, pressure, vm_stat or vmmap command. Last complete five-command physical observation took 0.244151375s.",
+  "source_locations": {
+    "owner_loop": "bench/m5_ultra_256gb/glm_flash_cycle/owner.py:385",
+    "cadence_gate": "bench/m5_ultra_256gb/glm_flash_cycle/owner.py:391",
+    "checkpoint": "bench/m5_ultra_256gb/glm_flash_cycle/owner.py:213"
+  },
+  "original_recovery_swap_growth_bytes": 849347,
+  "original_http_worker_returncode": -15,
+  "child_reap": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/phases/glm-official-load/reap.json",
+    "sha256": "3e45bce9eb9f7025b530cc3b4575217e29df83c1fac4ae0c6b4e89cb8ac0f8ac",
+    "bytes": 1358
+  },
+  "new_operational_baseline": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-analysis/service-baseline.json",
+    "sha256": "80654a8a05c863b2c57eb07fc6adf2c629fc725ad0e033749d04e6cdf93b3c32",
+    "bytes": 3241
+  },
+  "performance_qualified": false
+}

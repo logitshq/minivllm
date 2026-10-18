@@ -1,0 +1,31 @@
+{
+  "schema": "GLM-cold-load-owner-result-v1",
+  "status": "FAIL",
+  "owner_pid": 71758,
+  "owner_plan_sha256": "b842f85f04b32ed84cb0903d943ac86b04f1cf7ae6ef2c1f3df4f5848e59af01",
+  "planned_trials": [
+    "glm-official-load"
+  ],
+  "errors": [
+    {
+      "phase": "glm-official-load",
+      "type": "ValueError",
+      "message": "resource checkpoint exceeded observation cadence",
+      "time": 1792349896.423038
+    }
+  ],
+  "spawn_intent_written": true,
+  "child_started": true,
+  "all_children_reaped": true,
+  "child_returncode": -9,
+  "live_physical_samples": 37,
+  "checkpoints": 43,
+  "diagnostic": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-load-v1-owner/diagnostic.json",
+    "sha256": "aea6867ea63e22d548d686b5bf933ec1ac6f913b03013341f016284aa957e9c7"
+  },
+  "full_model_correctness_qualified": false,
+  "performance_qualified": false,
+  "physical_resource_safety_qualified": false,
+  "independent_raw_resource_and_restoration_audits_required": true
+}
