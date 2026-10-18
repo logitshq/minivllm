@@ -1003,3 +1003,8 @@ Registered 18 calls / six candidate-owned three-step state chains pass. Independ
 Complete archive: 1,040 members, 185,486,960 logical bytes, four compressed parts totaling 166,005,544 bytes, stream SHA46ba33137f1729cb42d2ca673211e022c73b81b563ce1828d6057693e0b2d33f. [Result and evidence](../experiments/m5-ultra-256gb/E029-gdn-prework-canary-v1/RESULTS.md). No performance point. Next is the unchanged37-request full-state scheduling gate; separate E024 graph formal timing has twelve actual prepared specs but no execution yet.
 
 [Prepared CPU archive](../experiments/m5-ultra-256gb/cold-v3-route-formal-prepared-cpu-v1/README.md) retains v3 four-constant seal/unchanged algorithm, whole24 lifecycle PASS, original formal12 fixture failures and fixture-only whole12 retry PASS. [Actual formal spec preparation](../experiments/m5-ultra-256gb/route-http-formal-prepare-v1/README.md) binds all12 OFF/ON specs to actual HTTP PASS; it is CPU preparation, not timing.
+
+
+## GLM direct-child owner: 12 CPU tests PASS · 2026-10-17
+
+The separate GLM owner now has complete fake-only wiring/cleanup tests:12PASS, no failures/errors/skips or forbidden backend/process/network/signal operation. Unknown launch remains unknown; a returned child is reaped even if identity inspection fails. It retains actual physical observations separately from performance/full-correctness claims. [Evidence](../experiments/m5-ultra-256gb/glm-owner-prepared-cpu-v1/README.md):142 members,2,114,303 logical bytes,322,436 compressed bytes,SHAae431c2229e4be17f476d7aadde2f2b1d11d1e1d3ca0830acabdb38c1a4d3bc2. The controller/registration remains absent and execution fails closed. No GLM load, capacity or inference performance result is claimed.
