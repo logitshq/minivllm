@@ -1,0 +1,40 @@
+{
+  "schema": "native-m8-shared-projection-pause-v1",
+  "pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_shared/real-prereg-v1/execute.py": "2203ca156fc07b4cac1736b8134cd36c78eb30173777e3be142e6fa1bd548f2b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_shared/real_projection_probe_v1.py": "53825a2d1c689eeddfbe96038d16f16b481ce2c5db9a915ee758e16aea2c2ded",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_shared/candidate.py": "63055795d00405e7aa7fb0960ed597fc95da6fdeefd3c28187957ce2387f4a50"
+  },
+  "service_pid": 52818,
+  "service_identity": "Mon Oct 19 09:22:08 2026 omlx-server",
+  "environment": {},
+  "child": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_shared/real_projection_probe_v1.py",
+    "--run",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-shared-real-projection-v1"
+  ],
+  "owner_deadline_seconds": 160,
+  "physical": {
+    "system_limit_bytes": 257698037760,
+    "child_limit_bytes": 4294967296,
+    "swap_growth_bytes": 0,
+    "swapouts_growth": 0,
+    "probe_seconds": 5,
+    "max_sample_gap_seconds": 5,
+    "hard_allocation_cap": false
+  },
+  "scope": "Native-M8 versus shared M8, two real-weight projections with synthetic BF16 inputs; no full-model or HTTP speed.",
+  "outputs": {
+    "execution": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-shared-projection-execution-v1",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-shared-projection-lease-v1"
+  }
+}
