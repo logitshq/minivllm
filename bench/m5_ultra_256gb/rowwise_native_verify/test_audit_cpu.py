@@ -162,4 +162,22 @@ class Tests(unittest.TestCase):
         self.assertEqual(out.read_text(),'first attempt\n')
 
 
+    def test_head_receipt_requires_one_evaluated_full_vocab_projection(self):
+        for width in a.WIDTHS:
+            row=dict(calls=1,status='EVALUATED',x=dict(shape=[width,5120],dtype='mlx.core.bfloat16'),
+                weight=dict(shape=[248320,640],dtype='mlx.core.uint32'),scales=dict(shape=[248320,320],dtype='mlx.core.uint8'),
+                output=dict(shape=[width,248320],dtype='mlx.core.bfloat16'))
+            a.head_receipt(row,width)
+            for key,value in (('calls',0),('calls',True),('calls',2),('status','RETURNED'),('status','NOT_CALLED')):
+                with self.subTest(width=width,key=key,value=value),self.assertRaisesRegex(ValueError,'head call'):
+                    a.head_receipt({**row,key:value},width)
+            broken=copy.deepcopy(row); broken['output']['shape'][1]=64
+            with self.assertRaises(ValueError): a.head_receipt(broken,width)
+
+    def test_actual_sealed_kernel_and_candidate_bindings_match_qualifier(self):
+        for name,path,digest in [('CANDIDATE_SHA',a.HERE/'candidate.py',a.CANDIDATE_SHA),('HEAD_SHA',a.HEAD,a.HEAD_SHA),('BRIDGE_SHA',a.BRIDGE,a.BRIDGE_SHA)]:
+            with self.subTest(name=name):
+                self.assertEqual(a.sha(path),digest); self.assertEqual(a.literal(a.HERE/'qualify.py',name),digest)
+
+
 if __name__=='__main__': unittest.main()

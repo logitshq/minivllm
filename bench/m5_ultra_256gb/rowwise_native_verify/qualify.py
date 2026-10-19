@@ -1,4 +1,4 @@
-"""Unsealed, default-inert rowwise C1 numerical qualifier; no device run yet.
+"""Default-inert rowwise C1 qualifier with explicit multirow vocabulary-head reuse.
 
 No arguments describes the contract. An external cold/resource owner may later
 invoke --plan FILE --plan-sha256 SHA --out NEW after both source pins are sealed.
@@ -21,8 +21,10 @@ from types import SimpleNamespace
 
 HERE = Path(__file__).resolve().parent
 BRIDGE = HERE.parent/'exact_verifier_bridge/qualify.py'
-BRIDGE_SHA = 'UNSEALED'
-CANDIDATE_SHA = 'UNSEALED'
+BRIDGE_SHA = 'eda7001a1a9b08231ad3111f8b7b677b5a6d464cb065ee444dc23a4b99babd0f'
+CANDIDATE_SHA = '4ce1b1720dc256b01d30a0f9b19b109bde9949050e98b50a31d308f9e71c8f15'
+HEAD = HERE.parent/'nvfp4_multirow_reuse/candidate.py'
+HEAD_SHA = 'ee9c5eef0e1282125310ee6661be1ec5ce64dc93a82add48a6d6c17f8958816f'
 WIDTHS = (2,4,8)
 USED = (257,1023,1024)
 BACKING = 1536
@@ -53,13 +55,14 @@ def load(path, name, digest):
 
 def contract():
     return dict(schema='Rowwise-native-verifier-contract-v1',enabled_by_default=False,
-        sources_sealed=sealed(BRIDGE_SHA) and sealed(CANDIDATE_SHA),widths=list(WIDTHS),used=list(USED),
+        sources_sealed=sealed(BRIDGE_SHA) and sealed(CANDIDATE_SHA) and sealed(HEAD_SHA),widths=list(WIDTHS),used=list(USED),
         cases=9,compared_prefixes=42,states_per_prefix=128,KV_backing=BACKING,
         seed='shortest original D8 fixture; used257 uses its first256 IDs as a NEW diagnostic prompt',
         position='used is the first decode attention bound; pending token writes at used-1',
         teacher='independent original C1 greedy continuation, normal EOS/cap512, no forced continuation',
         oracle='source-pinned runner.decode_model, one actual token and absolute position per call',
-        candidate='uncompiled layer-major B1 calls; each prefix retained; fixed teacher IDs only',
+        candidate='uncompiled layer-major B1 layers and M1 norms; explicit T2/4/8 NVFP4 head reuse; each prefix retained',
+        head_projection=dict(path=str(HEAD),sha256=HEAD_SHA),head_projection_calls=9,
         configuration=dict(max_seqs=1,max_len=2048,max_batched_tokens=16384,cache_limit_gib=2,
             compile_decode=True,fuse_decode=True,gates_compile=True,norm_reuse=False),
         arrays='full-vocabulary logits plus every original-dtype state including full KV padding at EACH prefix',
@@ -71,12 +74,13 @@ def contract():
 
 
 def validate(plan):
-    need(set(plan)=={'schema','qualifier_sha256','candidate','bridge','e024_plan','deadline_s'}
-         and plan['schema']=='Rowwise-native-verifier-plan-v1','exact rowwise plan')
+    need(set(plan)=={'schema','qualifier_sha256','candidate','bridge','head_projection','e024_plan','deadline_s'}
+         and plan['schema']=='Rowwise-native-verifier-plan-v2','exact rowwise plan')
     need(sealed(BRIDGE_SHA) and sealed(CANDIDATE_SHA),'sources remain UNSEALED')
     need(plan['qualifier_sha256']==sha(__file__),'actual qualifier source')
     need(plan['candidate']==dict(path=str(HERE/'candidate.py'),sha256=CANDIDATE_SHA)
          and plan['bridge']==dict(path=str(BRIDGE),sha256=BRIDGE_SHA),'real adjacent source bindings')
+    need(plan['head_projection']==dict(path=str(HEAD),sha256=HEAD_SHA) and sha(HEAD)==HEAD_SHA,'actual multirow kernel binding')
     budget=plan['deadline_s']
     need(type(budget) in (int,float) and math.isfinite(budget) and 0<budget<=1800,'bounded child deadline')
     bridge=load(BRIDGE,'_rowwise_reference_bridge',BRIDGE_SHA)
@@ -183,18 +187,34 @@ def prefix_ownership(output,ctx,layout,width):
                 need(len({id(getattr(c,name)) for c in wrappers})==width+1,'prefix-owned KV descriptors')
 
 
-def checked_call(candidate,model,tokens,ctx,runtime,*,before,evaluate,after,compare):
+def checked_call(candidate,model,tokens,ctx,runtime,*,before,evaluate,after,compare,head_project=None):
     """Retain/compare actual supplied input even if candidate raises; never retry."""
     before()
     try:
-        output=candidate.verify(model,tokens,ctx,runtime,enabled=True)
+        options={} if head_project is None else dict(head_project=head_project)
+        output=candidate.verify(model,tokens,ctx,runtime,enabled=True,**options)
         evaluate(output)
         return output
     finally:
         after(); compare()
 
 
-def compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,width,row,out,deadline):
+def counted_head(project,mx,model,width,row):
+    """Producer call receipt only; all resulting bytes are audited separately."""
+    row['head_projection']=dict(calls=0,status='NOT_CALLED')
+    def metadata(value): return dict(shape=list(value.shape),dtype=str(value.dtype))
+    def invoke(x,w,scales):
+        receipt=row['head_projection']
+        need(receipt['calls']==0,'exactly one head reuse call per block')
+        need(w is model.lm_head.weight and scales is model.lm_head.scales,'actual live head arrays')
+        receipt.update(calls=1,status='CALLED',x=metadata(x),weight=metadata(w),scales=metadata(scales))
+        output=project(x,w,scales)
+        need(output is not None and output.shape==(width,248320) and output.dtype==mx.bfloat16,'explicit head kernel admitted')
+        receipt.update(status='RETURNED',output=metadata(output)); return output
+    return invoke
+
+
+def compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,width,row,out,deadline,head_project):
     descriptor=seed['canonical']; path=out/descriptor['path']
     need(h.sha(path,deadline)==descriptor['sha256'],'canonical raw source')
     arrays=mx.load(str(path)); mx.eval(*arrays.values())
@@ -203,6 +223,7 @@ def compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,wi
     need(tokens.tolist()==seed['tokens'][:width] and ctx.positions.tolist()==[seed['position']]
          and ctx.lens.tolist()==[seed['used']],'actual teacher IDs and absolute seed metadata')
     tag=f"cases/used{seed['used']}/T{width}"
+    project=counted_head(head_project,mx,engine.model,width,row)
     def before():
         row['input_before']=h.dump(mx,out,tag+'/input-before.safetensors',input_snapshot(support,bridge,tokens,ctx,layout),deadline)
     def after():
@@ -220,8 +241,10 @@ def compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,wi
         need(output.logits.shape==(width,engine.cfg.vocab_size),'complete T x full vocabulary')
         mx.eval(output.logits,*[a for prefix in output.prefixes for a in
             support.snapshot(bridge.canonical_state(prefix,layout))['arrays'].values()])
+        need(row['head_projection']['calls']==1 and row['head_projection']['status']=='RETURNED','actual head invocation required')
+        row['head_projection']['status']='EVALUATED'
     output=checked_call(candidate,engine.model,tokens,ctx,runtime,before=before,evaluate=evaluate,
-                        after=after,compare=unchanged)
+                        after=after,compare=unchanged,head_project=project)
     row['prefixes']=[]
     for index in range(width):
         deadline(); desc=seed['reference_outputs'][index]
@@ -240,12 +263,13 @@ def compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,wi
              row['candidate_greedy_ids'])
 
 
-def rejected_cases(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,out,deadline):
+def rejected_cases(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,out,deadline,head_project):
     desc=seed['canonical']; arrays=mx.load(str(out/desc['path'])); mx.eval(*arrays.values())
     ctx=h.context_from_input(arrays,layout,runtime,seed['used'])
     token=mx.array(seed['tokens'][:2],dtype=mx.int32)
     record=dict(cases=[])
-    need(candidate.verify(None,None,None,None) is None,'default OFF before inspection')
+    need(candidate.verify(None,None,None,None,head_project=head_project) is None,'default OFF before inspection')
+    def forbidden(*args): raise AssertionError('rejected domain called head projector')
     for label,tokens,positions,lens,bound in (
             ('T1',token[:1],ctx.positions,ctx.lens,ctx.max_len),
             ('B2',token,mx.array([256,256],dtype=mx.int32),mx.array([257,257],dtype=mx.int32),257),
@@ -255,7 +279,7 @@ def rejected_cases(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,
         item['input_before']=h.dump(mx,out,'rejections/'+label+'-before.safetensors',
                                    input_snapshot(support,bridge,tokens,other,layout),deadline)
         try:
-            need(candidate.verify(engine.model,tokens,other,runtime,enabled=True) is None,'rejected domain '+label)
+            need(candidate.verify(engine.model,tokens,other,runtime,enabled=True,head_project=forbidden) is None,'rejected domain '+label)
         finally:
             after=input_snapshot(support,bridge,tokens,other,layout)
             item['input_after']=h.dump(mx,out,'rejections/'+label+'-after.safetensors',after,deadline)
@@ -315,17 +339,20 @@ def device(plan,bridge,candidate,h,old,support,original,inherited,out,deadline,e
             values=h.parameter_hashes(mx,model,tree_flatten,deadline); h.write(out/(name+'.json'),values)
             result[name]=dict(path=name+'.json',sha256=h.sha(out/(name+'.json'),deadline),scope='producer original-byte parameter receipt')
             return h.parameter_values(values)
+        kernel=load(HEAD,'_rowwise_multirow_head',HEAD_SHA)
+        head_project=kernel.build(mx,enabled=True)
+        need(head_project is not None,'actual multirow head kernel build required')
         before=parameters('parameters-before')
         for case in seed_cases(bridge,fixtures['fixtures']):
             seed=acquire_seed(mx,cache,context,bridge,support,h,cmp,engine,layout,case,out,deadline,emit)
             result['reference_blocks'].append(seed); h.write(out/'complete.json',result)
             if case['used']==257:
-                result['rejections']=rejected_cases(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,out,deadline)
+                result['rejections']=rejected_cases(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,out,deadline,head_project)
             for width in WIDTHS:
                 row=dict(used=case['used'],width=width,status='INCOMPLETE',checks=[])
                 result['cases'].append(row); h.write(out/'complete.json',result)
                 try:
-                    compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,width,row,out,deadline)
+                    compare_case(mx,bridge,candidate,h,support,cmp,engine,layout,runtime,seed,width,row,out,deadline,head_project)
                     row['status']='PASS'
                 except BaseException as exc:
                     row.update(status='FAIL',error=dict(type=type(exc).__name__,message=str(exc))); raise
@@ -335,6 +362,8 @@ def device(plan,bridge,candidate,h,old,support,original,inherited,out,deadline,e
                 gc.collect(); mx.synchronize(); mx.clear_cache()
         need(len(result['cases'])==9 and sum(len(c['prefixes']) for c in result['cases'])==42
              and all(c['status']=='PASS' for c in result['cases']),'nine complete cases/all42 prefixes')
+        result['head_projection_calls']=sum(row['head_projection']['calls'] for row in result['cases'])
+        need(result['head_projection_calls']==9,'all nine actual head calls')
         need(engine.runner.decode_model._functions=={} and engine.runner.decode_model._packed is None
              and engine.runner._ahead is None,'all used lengths above original compiled256 route; no ahead')
         cmp.meta('all parameter values unchanged',before,parameters('parameters-after'))
@@ -361,10 +390,10 @@ def main(argv=None):
         print(json.dumps(contract(),indent=2)); return 0
     if args.plan is None or args.plan_sha256 is None or args.out is None: parser.error('all three owned-child arguments required')
     args.out.mkdir(parents=True,exist_ok=False); started=time.monotonic(); previous={}; bridge=None
-    result=dict(schema='Rowwise-native-verifier-result-v1',status='INCOMPLETE',device_run=False,contract=contract(),
+    result=dict(schema='Rowwise-native-verifier-result-v2',status='INCOMPLETE',device_run=False,contract=contract(),
         pid=os.getpid(),ppid=os.getppid(),plan_sha256=args.plan_sha256,reference_blocks=[],cases=[],forward_prefix_qualified=False,
         compiled_qualified=False,rollback_qualified=False,full_model_qualified=False,http_qualified=False,performance_qualified=False,
-        source_model_pins_rechecked=False,device_cleanup_completed=False)
+        source_model_pins_rechecked=False,device_cleanup_completed=False,head_projection_calls=0)
     def write(name,value): (args.out/name).write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
     write('complete.json',result)
     try:
@@ -373,7 +402,7 @@ def main(argv=None):
         bridge,candidate,h,old,support,original,inherited=validate(plan)
         write('inherited-e024-plan.json',original); write('inherited-e023-plan.json',inherited)
         result['sources']={str(Path(__file__).resolve()):plan['qualifier_sha256'],str(HERE/'candidate.py'):CANDIDATE_SHA,
-            str(BRIDGE):BRIDGE_SHA,str(bridge.HELPER):bridge.HELPER_SHA,str(bridge.OLD):bridge.OLD_SHA,
+            str(HEAD):HEAD_SHA,str(BRIDGE):BRIDGE_SHA,str(bridge.HELPER):bridge.HELPER_SHA,str(bridge.OLD):bridge.OLD_SHA,
             str(bridge.CORE_PINS):old.MODEL_SOURCE_SHA,original['e023_qualifier']['path']:old.SUPPORT_SHA}
         need(signal.getitimer(signal.ITIMER_REAL)==(0.0,0.0),'existing alarm')
         def deadline():

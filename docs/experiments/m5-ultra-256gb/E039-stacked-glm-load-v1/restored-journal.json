@@ -1,0 +1,2619 @@
+{
+  "schema": "GLM-cold-load-journal-v3",
+  "id": "ff0658a5-a493-4d87-a496-3da2669ab2c5",
+  "state": "RESTORED",
+  "plan_sha256": "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+  "controller_sha256": "09d72c5ec88f3a07a5dbce3e4b4fd15f98aeb7d9fc6731af0f68527e75dd847c",
+  "support_sha256": "aad297fb08515d6304fd3ae435301318650e8443ad22628c1ed2e4791887f0f3",
+  "original": {
+    "pid": 39988,
+    "ppid": 1,
+    "start": "Mon Oct 19 00:56:46 2026",
+    "comm": "omlx-server"
+  },
+  "original_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "global_settings_stat": {
+    "dev": 16777231,
+    "ino": 816826,
+    "size": 3516,
+    "mtime_ns": 1792162741806656607
+  },
+  "model_metadata": {
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/config.json": "237c4cda786207d2bebe2d8a1cf157419bec5cc01bbd03b4ed41e888dc1e5af7",
+    "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp/model.safetensors.index.json": "380e393bb71519d6f9dc6eb1c3d681b0ca16986285640784fbd33a45bb0ec298"
+  },
+  "log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 456269,
+    "mtime_ns": 1792396636763501285
+  },
+  "owner_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1",
+  "owner_plan": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-registration-v1/owner-plan.json",
+    "sha256": "ca2a2e280c29aea239c640d41a5b1e9e6af71138cabfac6f02e22d887967affa"
+  },
+  "owner_source": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_stacked_load_v1/owner.py",
+    "sha256": "bfcba6459dc167996833e2582e6caf04753765efd1fc0cf2f5e47f83a9059386"
+  },
+  "trials": [
+    "glm-official-load"
+  ],
+  "predecessor": {
+    "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E035-c1-pipeline-profile/restored-journal.json",
+    "sha256": "0fcf1db55221e5234074dac4394bc318c400fc20b79ad46a6b8d136dc7e020f5",
+    "audit": {
+      "path": "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E035-c1-pipeline-profile/restoration-audit.json",
+      "sha256": "91307fc58033b4c4548149b9289e23e1e076daea1a06725c79a7dc10032531b5"
+    }
+  },
+  "predecessor_copies": {
+    "predecessor.json": "0fcf1db55221e5234074dac4394bc318c400fc20b79ad46a6b8d136dc7e020f5",
+    "predecessor-audit.json": "91307fc58033b4c4548149b9289e23e1e076daea1a06725c79a7dc10032531b5"
+  },
+  "resource_samples": [
+    {
+      "time": 1792426922.599637,
+      "system_footprint": 22823976960,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-4d927953edfb4d05983a0ce091206bfc/footprint.raw.json",
+        "sha256": "4d122643d73f64ae0458c07237e759c88e2350b553dbcd9bed1714deccd752dd",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-4d927953edfb4d05983a0ce091206bfc/commands.json",
+        "commands_sha256": "624b6f99c5aef8c277821e9c5b2962648e86240ee53d716c10b6bc2d8f76d9a0"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792426927.6593852,
+      "system_footprint": 22723608576,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e2d055b1579d424fa572fab80364f1b4/footprint.raw.json",
+        "sha256": "57e24a90028a1282e5de878576d8b45ed3387ccd2b1d860e0d4168873575a058",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e2d055b1579d424fa572fab80364f1b4/commands.json",
+        "commands_sha256": "fcc4bd4280da8f75b099c6601a593b2ac9d80ba280e4789e695d108f150734ad"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792426930.8099341,
+      "system_footprint": 22816899072,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-0394054fa5f042dda42cf95bff455653/footprint.raw.json",
+        "sha256": "b6db7d54165b4955e7dcb2b8b5e616ef7f440886d4678bb71554168e161b4d76",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-0394054fa5f042dda42cf95bff455653/commands.json",
+        "commands_sha256": "1aca76100424a14f3d7d49aa07d894d17992827a50fee96441a4d65e844735da"
+      },
+      "label": "cold-stability-1"
+    },
+    {
+      "time": 1792426935.85569,
+      "system_footprint": 22803005440,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e17650023a63418fb10a1fee45f0bce5/footprint.raw.json",
+        "sha256": "e31a825a26472b7e0b796ef14ca9581112d22b1bc9a7b4f4223ee834d44ee82a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e17650023a63418fb10a1fee45f0bce5/commands.json",
+        "commands_sha256": "15378b0b6f7017e2506cb1514f5af28f4fef30d8436ea6ebc3a7b80b20dcf35c"
+      },
+      "label": "cold-stability-2"
+    },
+    {
+      "time": 1792426936.758432,
+      "system_footprint": 22767140864,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-d75b69264e3641258115ab42edc768d0/footprint.raw.json",
+        "sha256": "6a5be4ef16aa9623df66d50581b7034b478036093fe4e52476a2a646b3c08382",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-d75b69264e3641258115ab42edc768d0/commands.json",
+        "commands_sha256": "e696e257fb6d15fb0f425506c5ac8c92631ba2ad1ef641f14967ec079869c883"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426938.870767,
+      "system_footprint": 33719418880,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-70b9789f9ea04289af5e1f30b06ef91b/footprint.raw.json",
+        "sha256": "494ac16a1fded108b247f92e07a662dd1b7b55f4cc4736868dc3283b0614f0e9",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-70b9789f9ea04289af5e1f30b06ef91b/commands.json",
+        "commands_sha256": "22b7e38fb2d09b3f9fd6e0a34eaa8be7d975a70c9d7ddaf40321d1110ff789ee"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426940.995898,
+      "system_footprint": 54471458816,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-ee95b8a01f554c089290f80c0384d6b1/footprint.raw.json",
+        "sha256": "997d96ef781ae976d3eb6ad1e7ece642dc635e2075cbd19b97a7bccfb696ea3a",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-ee95b8a01f554c089290f80c0384d6b1/commands.json",
+        "commands_sha256": "824a214f7d100fc36a6c34904a171ddcbb605d3f7d20b7b8fde7bca194e37253"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426943.1178088,
+      "system_footprint": 112851419136,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-b973f5463a0345fa8a71b21c7d266f47/footprint.raw.json",
+        "sha256": "5206079f1f18bf02c56eacad5239df9c3d8148f78b617e384a5cc0ae9903d8aa",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-b973f5463a0345fa8a71b21c7d266f47/commands.json",
+        "commands_sha256": "7d6e1bc472aa7763bedfcdf719d968274ebf2a576e6ef3530634feaa6c9e1920"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426945.2289631,
+      "system_footprint": 82815598592,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-31940c7bc93d49c497e3ed656d11f574/footprint.raw.json",
+        "sha256": "0528ef63a4f51b477d5cf53a415a64c0b704eede09fc69f34fc03eff9afdc383",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-31940c7bc93d49c497e3ed656d11f574/commands.json",
+        "commands_sha256": "423535a9cfceaf5e3eb4255cd862e2d85f0a74fbabb9c7fa36b6e15dde4ef97f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426947.347845,
+      "system_footprint": 103870218240,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-764dae4c35ab45b2bf34d1d56df3adac/footprint.raw.json",
+        "sha256": "437cbaa767489762e4b6fcd0ae1eaa635f2383c35ed979af50e255fa349f513e",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-764dae4c35ab45b2bf34d1d56df3adac/commands.json",
+        "commands_sha256": "b9f7d6e651c10d99baa0d2b704e549933732e51134cb059a5a9d8afffda8092b"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426949.4690418,
+      "system_footprint": 124399828992,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e5f8426be33e4c7ea2cbf17de014696b/footprint.raw.json",
+        "sha256": "8ff3c8cef0be8a4c632d4a12e95e1a077641a48f313ca9d02f64d79f295c581f",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-e5f8426be33e4c7ea2cbf17de014696b/commands.json",
+        "commands_sha256": "1004c83956ba73b4450db9236681b794cca01c4f958d58b94822613a38c3bad4"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426951.6042528,
+      "system_footprint": 142308098048,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8882af9e76ef41eeb34f8e0d5cd77d71/footprint.raw.json",
+        "sha256": "cc481612229b3f802da0acba6b07065d2fac655a87da8532a4098d59123ca892",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8882af9e76ef41eeb34f8e0d5cd77d71/commands.json",
+        "commands_sha256": "122114e810ca657c8ac24b53def5c23cfbb765854b29121fc1cfc4ffe27d2c33"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426953.729158,
+      "system_footprint": 152034295808,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-c8a94cb68dc14b4b80d50a0419337101/footprint.raw.json",
+        "sha256": "49e8766fff6091acf1d3226a48ff3a6ebe877a6f620adfb730645849d2328158",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-c8a94cb68dc14b4b80d50a0419337101/commands.json",
+        "commands_sha256": "9aeb51b2effc212b2db0038a3846711ce3eaf44d229f7cb94e2c579142e6253a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426955.879055,
+      "system_footprint": 171619352576,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-dee6bfe57c07484ab964ed88be9bb689/footprint.raw.json",
+        "sha256": "57c8e476c88c9574eebfce820b6921551bd9c499f32623481ff4fd6d1818b70c",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-dee6bfe57c07484ab964ed88be9bb689/commands.json",
+        "commands_sha256": "e5f5bf55a92aae83796d900b6a1e61fa9c962ed6f01693c46bb3170f45cd8e9a"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426958.007091,
+      "system_footprint": 175324381184,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8d181d025fcb4445a758ab4a4e664c13/footprint.raw.json",
+        "sha256": "b5a76d4e152782416696e51bf27d026eed645828a3538cfbea91a24cb12d55c9",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8d181d025fcb4445a758ab4a4e664c13/commands.json",
+        "commands_sha256": "91baac443b70246f9e0556d87c2b2a25e9c87524b75b520ad01ed257a5a4c550"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426960.133743,
+      "system_footprint": 174227193856,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-62ab2ff81277448e9289378626c4f285/footprint.raw.json",
+        "sha256": "efb2f82985718b53033348b9d0a2d95cb28625f0bb3745eeacd4aa6b874921b3",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-62ab2ff81277448e9289378626c4f285/commands.json",
+        "commands_sha256": "15f82c715836b738aaf59b2e9983a3bbd38c9b3444b417c923082e94e5150c8f"
+      },
+      "label": "during-load-POST"
+    },
+    {
+      "time": 1792426960.233707,
+      "system_footprint": 174227079168,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-6edf296bd2c34449b10fede7a412bcb6/footprint.raw.json",
+        "sha256": "40e24b9fa2c20a2e0a56c55850669f08b464599af63c4f7b590af0a34cb89f1b",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-6edf296bd2c34449b10fede7a412bcb6/commands.json",
+        "commands_sha256": "4b8009b7802def1f9046f4bd824b3d43ed8160bb46dc62d3b7c11306cb7238a6"
+      },
+      "label": "load-reconciliation"
+    },
+    {
+      "time": 1792426960.335028,
+      "system_footprint": 174227079168,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8002594a532f410cbb7ff6bdf928ff4b/footprint.raw.json",
+        "sha256": "747aa9e372abf2257a20c29c859cbeb55c7725df41ee5f68baa8146d8e1317ef",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-8002594a532f410cbb7ff6bdf928ff4b/commands.json",
+        "commands_sha256": "5f98aa2cb8cdb404d8be68f4664d1b030afe39b7437f04e4158c108eecf32757"
+      },
+      "label": "loaded-stability-1"
+    },
+    {
+      "time": 1792426965.400519,
+      "system_footprint": 173841776640,
+      "pressure": 1,
+      "swap_bytes": 2389117501,
+      "physical_ram": 274877906944,
+      "raw": {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-b8012922427649e99d449bb1abb15374/footprint.raw.json",
+        "sha256": "36d2f8f1d4b5bedf1a67678dc591aba8b240ea0410fa9a2142e319092fb6de4e",
+        "commands_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/physical-b8012922427649e99d449bb1abb15374/commands.json",
+        "commands_sha256": "0eec630f66f5edc27e19feca04ae37dde7d0a888913b789d809f63476fd8f3d7"
+      },
+      "label": "loaded-stability-2"
+    }
+  ],
+  "events": [
+    {
+      "event": "prepared_glm_read_only",
+      "time": 1792426851.469701,
+      "monotonic": 304170.504533666
+    },
+    {
+      "event": "bootout_intent",
+      "time": 1792426878.0728881,
+      "monotonic": 304197.107560375
+    },
+    {
+      "event": "bootout_returned",
+      "time": 1792426878.0775108,
+      "monotonic": 304197.112183625
+    },
+    {
+      "event": "service_absent",
+      "time": 1792426880.189099,
+      "monotonic": 304199.223758791
+    },
+    {
+      "event": "experiment_terminal_checked",
+      "time": 1792426922.506216,
+      "monotonic": 304241.5406225
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426922.599961,
+      "monotonic": 304241.6343665
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426927.65966,
+      "monotonic": 304246.694034375
+    },
+    {
+      "event": "bootstrap_intent",
+      "time": 1792426928.508599,
+      "monotonic": 304247.542968791
+    },
+    {
+      "event": "bootstrap_returned",
+      "time": 1792426928.514569,
+      "monotonic": 304247.548938916
+    },
+    {
+      "event": "job_reconciled",
+      "time": 1792426930.701225,
+      "monotonic": 304249.735581916
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426930.810457,
+      "monotonic": 304249.844812916
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426935.85617,
+      "monotonic": 304254.890495125
+    },
+    {
+      "event": "load_intent_monitored",
+      "time": 1792426936.727322,
+      "monotonic": 304255.761642541
+    },
+    {
+      "event": "post_worker_started",
+      "time": 1792426936.7303371,
+      "monotonic": 304255.764659
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426936.7587578,
+      "monotonic": 304255.793077666
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426938.871202,
+      "monotonic": 304257.905509416
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426940.996296,
+      "monotonic": 304260.030591
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426943.118052,
+      "monotonic": 304262.152333375
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426945.2291908,
+      "monotonic": 304264.263460083
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426947.348074,
+      "monotonic": 304266.382330166
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426949.4693382,
+      "monotonic": 304268.503582208
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426951.604661,
+      "monotonic": 304270.638892291
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426953.7295082,
+      "monotonic": 304272.76372625
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426955.879421,
+      "monotonic": 304274.913626416
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426958.007324,
+      "monotonic": 304277.041516583
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426960.133991,
+      "monotonic": 304279.168171041
+    },
+    {
+      "event": "post_worker_returned",
+      "time": 1792426960.203066,
+      "monotonic": 304279.237245083
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426960.233906,
+      "monotonic": 304279.268085208
+    },
+    {
+      "event": "raw_log_window_retained",
+      "time": 1792426960.309935,
+      "monotonic": 304279.344114
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426960.335243,
+      "monotonic": 304279.369421958
+    },
+    {
+      "event": "resource_sample_retained",
+      "time": 1792426965.400855,
+      "monotonic": 304284.43500275
+    },
+    {
+      "event": "restored_persisted_visible_variant",
+      "time": 1792426967.019915,
+      "monotonic": 304286.054053708
+    }
+  ],
+  "approved_contract": "cold-restart-persisted-visible-v1",
+  "bootout_returncode": 0,
+  "removed_at": 1792426880.189086,
+  "reap": {
+    "no_experiment": false,
+    "no_child_started": false,
+    "owner_pid": 52470,
+    "receipts": [
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/attempt.json",
+        "sha256": "bb9455a14b2b3d05e2e8793da6cfa822584567a78c442bac339720f663540cf2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/stopped-journal.json",
+        "sha256": "52d0c5ea3f70d760dc7cdd9d024aee832c0660070883ba786c311534049cb2db"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/spawn-intent.json",
+        "sha256": "73211c53d53f073390b43fea8e9f95f9f39de959ab22cac630a7ff23ffb44619"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/children.json",
+        "sha256": "bc3d8eeaf09517a1f81c27d56ec0ebb72b25b3c27819ece899b716349884772f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/release.json",
+        "sha256": "08d3a5b54d0d83424ba310f4a33574d6f3ebfa0b7fd0d35d4fe6eeb08091322a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/phases/glm-official-load/intent.json",
+        "sha256": "73211c53d53f073390b43fea8e9f95f9f39de959ab22cac630a7ff23ffb44619"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/phases/glm-official-load/child.json",
+        "sha256": "b27ab13436a6d9c9523433a8536e481c648d9750ac3ea68d910404ab90f61f40"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/phases/glm-official-load/release.json",
+        "sha256": "315d478dfcf15c9ab853914b32425de24dfbde3f009d2057f64cf20949fe2a09"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/monitor.json",
+        "sha256": "6f9fc453608bb25d7da348faac8572ed85010b27c16f20c749801ea877c28925"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0000.intent.json",
+        "sha256": "fa9f496b6700123d320aa7dfb74a9b284d056cd400cf7841dd8c6ebfc76344a9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0000.child.json",
+        "sha256": "fd576225dca032aa30fd83e5e72e3bd48f390693c050bc6772fc4a7a2ca5a15c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0000.json",
+        "sha256": "d7f40c2ff8308408cad9430e6d24b89234dd9f19a37eabd616393a2a6b953ebb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0001.intent.json",
+        "sha256": "1fcd83ffe7b1fc98cff57e72f58b1aeb6d525ebc4e3b79e32e5872f433d47cc7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0001.child.json",
+        "sha256": "c9e64ce561c3f89609f575fb552bf6a631edf53eafc000415a2ce790ce8c376c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0001.json",
+        "sha256": "8bca755aa6ad4ce3961c9611d0b53d74214a41102e937c61f4e2b2508666addb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0002.intent.json",
+        "sha256": "133f1380e72c7c6f66ba59d617417d589d36d39bf5b01463cb414e53226a27cf"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0002.child.json",
+        "sha256": "2ef2966ad22ca5ba186c77364434bbfea0c342fd929b73370e438189c7fbda9b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0002.json",
+        "sha256": "13412a0f34cfdeb0b3112b1ea2ff0d8d900bdfab05f0ac91d5735a0d6f181f40"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0003.intent.json",
+        "sha256": "cd3ea3f6544fbba795fff883d44dc10aa57286b981a476d6a18ead8618d0a55c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0003.child.json",
+        "sha256": "3cdee46fddba5c1791635e71f08427ac5714c12f5b5108895a8ec2531b0fd817"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0003.json",
+        "sha256": "9bb3a17688438be8902d1e121483eca77128bb2701dab3a1f9e6a971974c8bca"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0004.intent.json",
+        "sha256": "e53e5176b0c648bc9d750571b12939ea69206fba1f96d8d28412429f54dcbc7a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0004.child.json",
+        "sha256": "0f9255aaa361aebb09965b30ee633deceb010658ef2bbaaf0db73c10f25644e1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0004.json",
+        "sha256": "1d8c0b5982d0c55fbeab8d0d1a24addcdf2c2a15aede92225403da75b091827c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0005.intent.json",
+        "sha256": "bebb24804e57d498c2c68e82430d3c1afecf15d84c2c3175fd60977ef073051f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0005.child.json",
+        "sha256": "d606fa0a30c3504ad1951c233b65993e11568b93876ec7138b1ea3c2cc89c3b9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0005.json",
+        "sha256": "cd80c6db6b988bde6268d3a06887e4d002af409450cde2964659113bdab0f289"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0006.intent.json",
+        "sha256": "0e2d02ac5d0e5541fa3f56d1fc9421f786514ab75081d412aeb48b1b3c48c5c0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0006.child.json",
+        "sha256": "62ab9ac6959238e6d9cbbb69eee127aef471987e8b06066325d691f11f29b329"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0006.json",
+        "sha256": "ff6b8fa98dd0be9a4a985665bdabfe860372153dfab9b66cdd4dfc70a9c56406"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0007.intent.json",
+        "sha256": "fa421bfc124820084192304b967e8d14ec4da45b6cf2bb7841cb050904acd441"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0007.child.json",
+        "sha256": "865e779d6c2e76aed3beb760bbe118d409d9cdc11c646da029f4a8750c014769"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0007.json",
+        "sha256": "26746bdde3f406a4d60e3acb62172956178ccc488731149017626f04d5113c76"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0008.intent.json",
+        "sha256": "3c20355b54cf5a18ee9d70f64e72080a0a0cc0cbeae6e506f7b906a1331bef9c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0008.child.json",
+        "sha256": "b40e2e52fa08c24ebfd6d716d99e663c40c68070ee2cbbe48bcae40ea2fd8db1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0008.json",
+        "sha256": "82c55ca5e2d7406b30c9a1cf7260eaa98eed65573cda68008a8ff53db15ed6cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0009.intent.json",
+        "sha256": "5bba2b22768cd6b23c5f5a32b034bb1ff820974943efba3bb1857ccfbb7788ec"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0009.child.json",
+        "sha256": "5beb29e0c75bc9b1fb14ddda16e9baf10b69925a5157c93b152a3d657732c849"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0009.json",
+        "sha256": "1a62b21481e86121d801056755c22988e13bc4c1a8ebd1cd4900ebe407f042aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0010.intent.json",
+        "sha256": "9eaa3c43aee2a9f9c24f238078a4b9e20acee77823c63b351a152adb46c4e919"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0010.child.json",
+        "sha256": "44375169419b4c635f8c9b5384a01f565229d94583949ad910482c1c088740a9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0010.json",
+        "sha256": "0e2ea4d38253d536a9afa55f884dec0d0ec3983e18e7a2071032eb70d27b4293"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0011.intent.json",
+        "sha256": "5c45aa2a009eb3e92f0e6e05ee3ce326841405ade4c1a5674a20410850e220c4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0011.child.json",
+        "sha256": "96e8facfb2cf9a2a973817c449e10c551d68aded01bf7bb728a3e2df6f134dbe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0011.json",
+        "sha256": "91be06f540eee3847d7cff5561bcbec0d082f0f30c0a531b80304d0cc7f2b56d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0012.intent.json",
+        "sha256": "2fa44f15714fbbcf18934a55c238690c1321af242ec814b121b08759acef0847"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0012.child.json",
+        "sha256": "d6437a8a1cc6263233f256aca1bb1e1740b9146003353392e6d0471af9598472"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0012.json",
+        "sha256": "32781d7b1d279d0901fa804c0ca8353a67e7fd25760e5ae182cff583185d0ad1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0013.intent.json",
+        "sha256": "fbc6e27a3b9f58f17af80e2852b730df302620dfdc65f537faea51ad9e253457"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0013.child.json",
+        "sha256": "7568b15c62c54868a647a6591217177f89ae8dbfe521c675653a9f098c561f7b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0013.json",
+        "sha256": "57b0bdd1cd2ab413d757430165a9296ecabec7641085d0e2f415015fdf52b83d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0014.intent.json",
+        "sha256": "409171674ec1878f5836240495cc3277da3dc7d4e89b53e3f626036b5963a634"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0014.child.json",
+        "sha256": "4f275ae92ef69be656f48dc8617f34939413fa018b36d1412baa5cd573557b27"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0014.json",
+        "sha256": "642edf6d8b7b4c4d8f9dae8ce4b3e1eaf52a319e8331b55a9d83deadda6155aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0015.intent.json",
+        "sha256": "3ef51a92fbad8f6550b33047d62b6dccebab2abf9dca19f54950493fdaef2c52"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0015.child.json",
+        "sha256": "97eee6b53f4ca05fe718e158dbdc96cdf432e86557a069c6b92652f45a8648f4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0015.json",
+        "sha256": "42a44932929e1d29729463b0e5c7d1857cc7b5c3ffeb71a330b944d2b2a28d36"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0016.intent.json",
+        "sha256": "b179cba9b1ca27e00d06dbfde3579fc6cbec8e392fddd4923a85e9b6ae1fd8fd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0016.child.json",
+        "sha256": "3e36a7712064be9faa04efcf5c914c66948c05ba5e3be231612cf350550b00e2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0016.json",
+        "sha256": "8fa7e02694ce1ca2ad428e031310f65b8f132088ef0d196fbd437634fa6afe20"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0017.intent.json",
+        "sha256": "52abe6a23ed4b15fb8eaee41bb2410e35e20934a22bd5345927ba6e07226a4e7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0017.child.json",
+        "sha256": "80edb1f81e9ed4f353c54dc4417fa68edad7b1b44c2111f02f3774cce8658cf3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0017.json",
+        "sha256": "d26ee8e4a68356789cf5de1283e723e60a151e263d5d94c8c275936dc5c7ae10"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0018.intent.json",
+        "sha256": "da7204419aa25a1f3e57e30dfd51ce25c1ac87aa88ef4bfda099a8e2e65f8b36"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0018.child.json",
+        "sha256": "acb7b055682a32b11a156ade3c92026d19355c75cb275aaf2d0c3cc4bfb5daf6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0018.json",
+        "sha256": "77d20840b7756ec2c8deee36fb6d08159a91340606aea7cf6f9b2732fab62de9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0019.intent.json",
+        "sha256": "aa9cce6cb356a7a08150a7d74eb2e886d3f46e19c34f8740d608d963e0d36260"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0019.child.json",
+        "sha256": "1034b900fffdd610c446c9b2002ec0f6cce8faed230b36f8620c35248b773afe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0019.json",
+        "sha256": "ae04c3c20beaffabb5a4a1a59521ffeb8edb7b55c213eb4be8e9c4e9ecf52cce"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0020.intent.json",
+        "sha256": "990cbe07a3b8cfae180d76790b48839ea1259ba97f1d891413bb56aa57596a1a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0020.child.json",
+        "sha256": "28a7fd6ec20bb942aaa2fc63e02b8968dbc09d79a20411d67e5cbcbfb8b01fbe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0020.json",
+        "sha256": "8da0016c6e7aef8192a6deec73531db9ef1f6d83c979fa105cefdaaf24a7793e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0021.intent.json",
+        "sha256": "dc19647f3338005bde1674d8be9d3556fb59bf07105390abb2e2c92d9a995343"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0021.child.json",
+        "sha256": "7a04138a27fbc148daef2a7b85b565514f07d88d19356f82cc710d0cf9a719d6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0021.json",
+        "sha256": "816198f4d79f583a606f6c289aba62824cb60849745e2906012fd1cc6d307908"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0022.intent.json",
+        "sha256": "671d9cdc792b95f8c8dc4ab56b40ba8f305d188e0ebe73513c6e9329d5aa8ee3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0022.child.json",
+        "sha256": "9c06b843b31c840372f15365aed21852938541c5ba126731eb62b0e5d0a99aec"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0022.json",
+        "sha256": "ab7652d7e680f855d30091de1f271d6f558ddb8ae1b18b01e561a70b81268792"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0023.intent.json",
+        "sha256": "a315b9c0c1ab34ea041849a1969860e7cf18f66df03ae9e73cee7b78ddb8bb4a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0023.child.json",
+        "sha256": "2f04cfee1c09d59f2374aea571a994790c7e32a9e9372b0247d33111a60bbbe2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0023.json",
+        "sha256": "ab6fe69785265e2c6cb7f1e675bca5d17daae15ef877d1dce853600b62d05b7e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0024.intent.json",
+        "sha256": "3f57b9ad481b90cff5463d8ddf4877597d0d197e68cd6d5b41d798e37cfd089c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0024.child.json",
+        "sha256": "56164d8ffd3983fdfa86e9c22ebfeb16686b6d4e21dd02275af9241de217ec6f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0024.json",
+        "sha256": "6587e5d2841796f1c9bb650b6e8e8742a4e9b4b2f72178674750601234c4025e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0025.intent.json",
+        "sha256": "a4cbe996c2bc326c572d29a13787c8f5d0363a8c9c4ac5294f089fe897eb2682"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0025.child.json",
+        "sha256": "1f9d640a581f8b2b135e53e580ef6d65d72bdba332825a604b5c6507518e9fde"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0025.json",
+        "sha256": "dd921a048212b6b20b32a650557802b4733f1793a5892009e1c2aecb668efc76"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0026.intent.json",
+        "sha256": "812611f2feb10dab3cd184c6a0bd3de32fd05665d6e70bf7d9c903ec110f470b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0026.child.json",
+        "sha256": "e96bd7cf33df05d5df2be1bfc6377f3a45d3b58ed1845c17a45deb406ec9e578"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0026.json",
+        "sha256": "e34eb470e4ebd63c2948e6430ada01a58e886b764515f4a268e4c6b6030dce48"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0027.intent.json",
+        "sha256": "2a1bbe4b37434e032a5ccfc58295deafee2c1a2b4a7703cd5853ed2b9d848939"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0027.child.json",
+        "sha256": "b639e0a43b2487ba0d6fb2e84ce5b0a1c17eecbf195b98d9b5235674943d9b64"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0027.json",
+        "sha256": "a01dff2c9eca35ca020cb8f8e1ed7c09381de91aee34964e7778cd89382062dc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0028.intent.json",
+        "sha256": "11708e704ac6abbd81191f7c9b528ab15530f33456d56f35f52ec9b528e64117"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0028.child.json",
+        "sha256": "78b0fea8c25acb4d99da1efa9e82955354ddc9c882f6671976e8c2bfa86f8e41"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0028.json",
+        "sha256": "884ce0e9f5d9673ef584a8fb0d81027a86610088390bcda48d65c9c2fb91cd0d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0029.intent.json",
+        "sha256": "c0d8aa9bb4d8b572bf262cda1eceaaffd4e2f41d007cb856a168330d574daa31"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0029.child.json",
+        "sha256": "7e5c72d407b95b8bacbfd39c8f36069454635cfbcdf0d7be24b77ecbc4bc769c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0029.json",
+        "sha256": "a0757219b90483c031dad6eba5b5b19b246c993c9155f009247318774122bbf8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0030.intent.json",
+        "sha256": "f836d6a838d4881709d10710cdeb0b33fb2d4106506e20636fad4f8db5bf3f8e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0030.child.json",
+        "sha256": "0b6d2cbeb465ea73cec23a8d13df267073bfc1cfa8e791c399aa04b17f201ee2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0030.json",
+        "sha256": "5cd891ae7dd21354e30ab9c06b4346bad4d0a70a64ef145d6aeab71fe4db5eff"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0031.intent.json",
+        "sha256": "9fbf0f83cd9c4b65c16280c18eeb797d379b6e81d243fccec987194e3c8273b0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0031.child.json",
+        "sha256": "ca816c690ca881d5e3b18aaaa785ea37610e6f6bb60dad78fbfb3f73eadd00ed"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0031.json",
+        "sha256": "7da4e8f05174432c6b06d82d688fe5f822f90f6128f3af304bda593bf24d4c7e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0032.intent.json",
+        "sha256": "8fa40d8f1b85ebab50f5f84e54bd5cb82b321b6a0e456702402aa4663fb2e1ee"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0032.child.json",
+        "sha256": "c38e1d0cfd428a3cb75b054f7a1ce341e6aa062b7b0deaa1680523be4bc64acb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0032.json",
+        "sha256": "a64c5c809d2f787ad8ec30ae341288627cf166838cc72df95b6c0802f9890245"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0033.intent.json",
+        "sha256": "8725b7a315f5ade730fe596704a82fdfe686d5d94c0efddc7a770e23611ae5c0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0033.child.json",
+        "sha256": "2402d50bfede0fdceb1d784a3c0ac2624c2e4d76b056ecc65aa05752dbfad939"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0033.json",
+        "sha256": "909f7a3d8bc0e5db643e8fa34b6ef41802d1398b38cc3700f865baf729fb1705"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0034.intent.json",
+        "sha256": "9740d2e073f5e184fb28ead392abeaa01843418ef893b53c6e87717765aea0a6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0034.child.json",
+        "sha256": "7703aa33c05a57daa03cbac410eed97189d9fc07227116e2ce787843523248e1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0034.json",
+        "sha256": "56e3f3f75c71998ae7098596ce6bbc093b0b949e23ecd997a517693f405563af"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0035.intent.json",
+        "sha256": "3e19f14412d77c6641d90a744304a55afc774eaf8aba65c5dcab2c273d50a83f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0035.child.json",
+        "sha256": "3342d3f7176af507e8ba475ecb8be3d4ab7c8e8e50c0e11c2de8db5accb131ab"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0035.json",
+        "sha256": "959a28f8fa547893ea11963817386fac75f112fe306e135ba59214401c0efd5d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0036.intent.json",
+        "sha256": "a97d71ca1e173b8b157931f40821ae943c607aa1b44f441d01bbcb0267e021da"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0036.child.json",
+        "sha256": "ab8129cfb7ee053424ba4ca375f1fbf97083327045b4a2c2e14f5b246c0583d9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0036.json",
+        "sha256": "c2d2e1bcb5787f3681bd5b539d2861dfde04a576a80af2a7c5a1cc2cd2b43ca2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0037.intent.json",
+        "sha256": "6f725ba11ef2fbc4be7e77edeef5152b5f5170db3fda57574c805c7791b12328"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0037.child.json",
+        "sha256": "cefe8da9cb62055f5798aa9c83d270ae409995ba3e75a25a7b3ed30714394b53"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0037.json",
+        "sha256": "9f4dbe5f6442609326a64dfb95c1e75d2ca805eab060183b8585a87f55e7b6a6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0038.intent.json",
+        "sha256": "ef4eb31908f9db02576377c1a462ee9db956795ea09b261f4f01a59b2786c5af"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0038.child.json",
+        "sha256": "4c732eb9bfb137eb619ddde5202f883fc46d9ddc96194128d65f8ebad423a03c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0038.json",
+        "sha256": "7d173b75a455bc839f1b88dad145c71892887574c7345e7fd7aa8984bb54104d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0039.intent.json",
+        "sha256": "b415429751e8dbf5925c6c68e7fc7c10d020729185237c2f764d772d6cd1cb94"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0039.child.json",
+        "sha256": "0e4d634ffd865164bd07756d7fe23aae315b2edf16149e91878ba2ea2ccc61c0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0039.json",
+        "sha256": "331b0c479592cd156fb7980c60cb4db39da324ae42431b376b619842e3cc2daf"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0040.intent.json",
+        "sha256": "356f9dce76b978912f8eac90153f89ad9f569998189f6a13a2dbf4e943067232"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0040.child.json",
+        "sha256": "ed93a553f455eec688ba6547d5a5fe51187f58c32c8028fce180d2060e973189"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0040.json",
+        "sha256": "10e55bd09abe9155eade3d0139ac3feb0b3a0d968d3548ed2fbbe80e6f1d5377"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0041.intent.json",
+        "sha256": "07c62ebe811b019612ba3b5b4cfb0e748e9d60d3b12c8d8524539e82c3ec7ce2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0041.child.json",
+        "sha256": "088fe9aab3214efedfdc9ad7803729c7929af1d5b08dcd1ccf948ba9c53b9d1f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0041.json",
+        "sha256": "5cd7dffd8584ee0cc069212b6812c0efdf47697baa71d01fdd1692befcad1212"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0042.intent.json",
+        "sha256": "a29c6f8b345f0afe128f5697bedd4c7a98c2630ac8aad710ffd2c852070d4bb2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0042.child.json",
+        "sha256": "c43c64fa41ef8208ea6474819467e7a50506bc7be0eec16dba575e5fac53e0b5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0042.json",
+        "sha256": "0a588813dce0e21678f96f7bc02c3d1387d732681008c7d8458a91016b4d8769"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0043.intent.json",
+        "sha256": "66bd0bb841da90c9b4487ce45b1156a5ac03699e947d995835ee0a293c3a5eb1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0043.child.json",
+        "sha256": "a00a144361c68228f1216380ffd88a16766aeb14e5c3e4b76bfaca0ea24cdfe9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0043.json",
+        "sha256": "2448312b3e94e24823d5546aa51298b40bbdbab3049775790266f084972f9c0d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0044.intent.json",
+        "sha256": "842a634f6b6ccaef4870e8a404469dd7cf18e753e0fdcb44d2f5a9ada7bb1379"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0044.child.json",
+        "sha256": "03695e76f0e43cab105277c98453a33aced7432289f7b7b85a126737d4d6251b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0044.json",
+        "sha256": "1e4b8c7494ba172d11d3a20e8f376ead2a5271b06558ee3fbe5bab1f47e57040"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0045.intent.json",
+        "sha256": "d624f56db30b9296a423636558297e29b80e767ec08f9ff139c40050fdca333f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0045.child.json",
+        "sha256": "f966f45eb910173389045841145869e89058d5cf23e12d0131eaaecfc3bd8290"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0045.json",
+        "sha256": "9ab6a3075c8d600818853783b8f61ad75c34310ffb26a60a631d44fa9ea5f32f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0046.intent.json",
+        "sha256": "de62e285c065af71636724178dbf4c699902edb2672589664801fca5d0f55537"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0046.child.json",
+        "sha256": "84a3c84340846788d20c80b553ebe8321c5973d88d9acbcd8ee75d9bede3ca47"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0046.json",
+        "sha256": "1be7bbe8b48fad10e5086747598348d14337b58d3a32aa0e15e5b2e1d4ad5c9d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0047.intent.json",
+        "sha256": "d41df82fba4178b605e33a8fb8c7868d480f3c6a42ce8c1dd0be21fd7806fbd6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0047.child.json",
+        "sha256": "bc6d1862435a9358ac3b37298c3f5ab5d3562c29e8bd49995243dea7f49fbe0b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0047.json",
+        "sha256": "0ea14f762f777ed045b5e95895b8bcdbe8837c782d5c12003637584489d475df"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0048.intent.json",
+        "sha256": "e59f1ef6ca53a916292d514b78c43a2bb7e3c10384751d63d6de1f057c85fe1e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0048.child.json",
+        "sha256": "d12b3ecc654588e5afb072cbae4530176f289ea5bc9344cf9a8e515e7fa09d51"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0048.json",
+        "sha256": "9f54c1c4fb114a1ca6680146ff9b9718973384ed8d6b5df6a0d595d5767ed473"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0049.intent.json",
+        "sha256": "70ea9e173e315969bcc9d554d5f1523d91b1d075c682c7bacb1e82e227bcd95f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0049.child.json",
+        "sha256": "1ce35905b81c4438e1e3f2b5dbcea923e70727b13d15269e5852bff92bb263ed"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0049.json",
+        "sha256": "4ef696caa6b106a0b5ae5c4443208ebeb9d0df6ef237816fc33a785dc683ee95"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0050.intent.json",
+        "sha256": "d560046e51cc92e7054044ca074e9bc7f4788ef70c7965f2501acc273ea5143f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0050.child.json",
+        "sha256": "94b7963231f84f86c86de782c982cb307c99f014bf235e22c2512ce86ec58316"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0050.json",
+        "sha256": "45ce45a8425cca4888378a10eac21eceeeea0cdeb137c4502e020fba55d7e5e6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0051.intent.json",
+        "sha256": "d4923b09c79c9b79fb6fee9140ec68a44418930e5eaf37e1a3299ac68734ae74"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0051.child.json",
+        "sha256": "9164261c09053c50fd81822a652c8b8f95d2353fe45f693e32c9cc0c2a318cdd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0051.json",
+        "sha256": "93e5111b68dd7dac649252bad836f1b4f63d79021309e9b1936961ae922a52e5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0052.intent.json",
+        "sha256": "23a2d71f9ec8ef355887784e5bb90a4fe8c5c1d3a460d277f716dffc635edf19"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0052.child.json",
+        "sha256": "4451e6cdfd3e3853c8d253fd158bda2b192477fbc10412cc1828548d88a40960"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0052.json",
+        "sha256": "98071cc948eba152111d831f547ec08dfc1b033cbbb78d3e9fc56bc374ce7ed4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0053.intent.json",
+        "sha256": "7a7a18c026ee4a1e39532c161c2d5ef5f0a996f72f03bd9577934fd70ba9363e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0053.child.json",
+        "sha256": "fa7aeb0a11001baa5bf8d45e8e4076c5eb9b0477663674f70ed0d7f8917a0e0e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0053.json",
+        "sha256": "ba1f9a0279083203c1fa0a49f279c6f27f5440798742af6e745f3ff3b91c4c13"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0054.intent.json",
+        "sha256": "f7207ef093f9d3f67af44fa4f1c003cfaaf026d2f1526236c35129111744bd8c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0054.child.json",
+        "sha256": "71037c8b9a3c03a010722336a90c0c3aa121c2fd47d3241841178f0ba96cc1cc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0054.json",
+        "sha256": "62c21fa89ef2291f59dd3b60260656370431b226fa8ee93f72bc2e291e39e8ba"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0055.intent.json",
+        "sha256": "642e371fde2ad3b1875d80bf4e9442eddde7e7d10bdffc4c27e2259c39900270"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0055.child.json",
+        "sha256": "d5af9690e2d06510d1ad13f7c48e450b6c22f6d08a52cbfabf87e110babec49c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0055.json",
+        "sha256": "2bc0d53dd8d957445ce43d72765f67f6e48bf66ffba01abd1c840108c5f2a315"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0056.intent.json",
+        "sha256": "7d096e12dc249c0f17240d8d2f6397d837dbe7bc980abea78f352443f1950694"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0056.child.json",
+        "sha256": "5b37ff6c9c1c69dbd7e259adc00640a87c9e181445922818e91caddd1243781d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0056.json",
+        "sha256": "d6fca039f1005cbaa5c3f01d951865b114e62430d92ca5abfd143a18a1bf0f30"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0057.intent.json",
+        "sha256": "b4b072206bc4776a378bbb0de40b8f81512e5207bd8363156a8f40691e475e84"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0057.child.json",
+        "sha256": "3be933d505716ca04deec2eadf1f124003c271d255637081cd1f6b71b71e6972"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0057.json",
+        "sha256": "e5cf809831eadd5b74155810623ab2ee01d8e26da2bf34b4248e52fa9a597827"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0058.intent.json",
+        "sha256": "c6d2d41161c1c6265ee00cf4ee34051a460e5651838e621c74d2efc4cbec9a9a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0058.child.json",
+        "sha256": "a4944e07de9d117f7e0d37aa4b66dc4a7955f9f9ee59ca02f8b73203c075d411"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0058.json",
+        "sha256": "3c45c3d4557a4ed04f321ba1c1e00166719486e6f417e538f18a49e9273a4efc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0059.intent.json",
+        "sha256": "59ecd228eacd278a752d0bfbbcb4d2a11ce069dd2ebc078954041d48c2375a4e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0059.child.json",
+        "sha256": "2a3a38dfc49bebde27e99c23c28c3b7b299329541277f14e7b56834c522ceee8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0059.json",
+        "sha256": "8dcf43103a776e312a565ace51fbc116bcd2d2be496d884ad2b60217a378d49f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0060.intent.json",
+        "sha256": "cc032d027f4187d90b056e9f931295286831fb30e8ab844ad949e389a5e7b22d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0060.child.json",
+        "sha256": "58816ddc9505c49040e710278f904e177ffcaa2c4fba8777bc0b2abaaaf52d8a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0060.json",
+        "sha256": "50f37984a4d0a0c4d3e2bd9f686acea9adb27bb2da032af3dc3172d3aeaf698e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0061.intent.json",
+        "sha256": "997daa715f7f472440cd418150a591e738c5bee5e4d236be8627dc86bbe24d2f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0061.child.json",
+        "sha256": "f8391ad71e8a467b89fa8792e50e45b5b302ba1938f4bca2772a88004d6ae232"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0061.json",
+        "sha256": "bf6e7e4bdbdb9f2993553f9eb54a0fa1277d9a6cfaacc37130a0bbeb6456bab5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0062.intent.json",
+        "sha256": "a1fe69e7d085171e7160b5f54ea99c925e567b661c166ab07bb07dc383086200"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0062.child.json",
+        "sha256": "3b6332187fb1142843a8a31b2075052167d455e951581c9f2458f7e9ae1591ed"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0062.json",
+        "sha256": "5bad26eeb354d6f7177820b1d28ff12c64d4833ee9612610e431acac27fd8389"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0063.intent.json",
+        "sha256": "3bf63fe8af7828758d1970f669ff25caae6efcf1b5c5161b90974a7c5f368a51"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0063.child.json",
+        "sha256": "3bd8219724f5b151f647d83fe0bbe69a98cb1095f978b2fa2e04a971ae5cf688"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0063.json",
+        "sha256": "a4a889ed2763670139141b3c29c04c1e0a2b7a3a8ddd43b2f7e2371414526183"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0064.intent.json",
+        "sha256": "061814a837e857800f060723db8661529fe1c095932f1b757ee4ef750d13b38b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0064.child.json",
+        "sha256": "542697cb33805b4600f78b5ad4ee5db8450690248f3afcb3c4c7092e24b06930"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0064.json",
+        "sha256": "1dc4261b99609a3adeba369513d285952c35ef1c7f95d2c99bbded079c5b0e34"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0065.intent.json",
+        "sha256": "65a7a7df07f0618a22665beb5c3a2d424a2c7a019f49b9166b757d6485f3f603"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0065.child.json",
+        "sha256": "7241865e9d3cd8308482ce036becc24365353cca6ca464c5349a360482d1d6bd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0065.json",
+        "sha256": "92a4e67b9cc56e25b6ed510283d82d4f5cb55704950ded880e4c9ee5eec7bd2c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0066.intent.json",
+        "sha256": "ffdf559bf60f5c71c4400a9afdce2404ea72af3bd25c8774b6fec33ee35c5dfe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0066.child.json",
+        "sha256": "029194fac4b8e8f9aabba068203d51f40b46b8b4728e4246af4e9b541372dca9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0066.json",
+        "sha256": "f3a248a79ff7ea0fb8856ec09ecc1c3f4580ee44649dd7616456d86bbb16289a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0067.intent.json",
+        "sha256": "a4da55fce573a567f1790701e646c756d5040152687817d6c6d0a6b7b42ef5aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0067.child.json",
+        "sha256": "5ed2d77833dce15fc09db2063f0921dbf144cc5540a98a6ab951dcb761b6d571"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0067.json",
+        "sha256": "dcacace29eaa9ad83a2d15908dd07cc4537926996cdfa4bff2d2c20d700fb56d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0068.intent.json",
+        "sha256": "183c0f0b4aeab966d98f5636c31159ea36ec15494a9889e613a206ac29f8538e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0068.child.json",
+        "sha256": "53dffb5f578be8c61cdea7c823796ee161d392f246658c2807cf658ef511e819"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0068.json",
+        "sha256": "f6576281d29c61ec54f90919bb6064d14b5393dec1b17dd94f411e3bbc77ba74"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0069.intent.json",
+        "sha256": "23b86b10d96842b30bc4eb87738ff189286df6df206fa58fb0726db5c2445394"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0069.child.json",
+        "sha256": "89dbb3da539bc976bf1a85f8b2a53622ca58870f143dac65d32a625fd4d0eca2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0069.json",
+        "sha256": "1abdae5e24dbfe1e6df080103545d2becc72a6665823ccde8a30c4a8a1c56da4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0070.intent.json",
+        "sha256": "118f1599cee4b63ffc513d16607d98ea77002653d595373d8605b5e64bd4d583"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0070.child.json",
+        "sha256": "6dee7138fdd0f20a07bd83d1965c5fd7b6fe1691167634c0946dc89a08848109"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0070.json",
+        "sha256": "15f5c7cac9ebe65ee6ceb34056efeea9b06508b7220cb95b098f7169907c6af4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0071.intent.json",
+        "sha256": "3d62ab488317f0abbacaa3dde52601d5964e7281df73e484855fe8384163d7fd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0071.child.json",
+        "sha256": "eee75bff36b5a1339451cfee1b8eea58d7679169ce6d7ef2f44c30b44b0428e1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0071.json",
+        "sha256": "494130b2b6305008ecf3baebd289a2257154de1d9ab27eba7fd9884e73512b12"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0072.intent.json",
+        "sha256": "d6c75f9df5f345c829941f1bf2a7a99001cb82386dc8e0d5329cc3ac66661200"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0072.child.json",
+        "sha256": "b54360870a56e7a30d3a73ceae694c5049f4691c5136e7f28833c9a24530e536"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0072.json",
+        "sha256": "a4dff506816bd6f7afeef894e44e0c6d5d022b0787e6547fc2db47b893f697f1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0073.intent.json",
+        "sha256": "582261c7258a7185d7c5f15d39e69488197f430cbc0f9ce83af303a1d69194d7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0073.child.json",
+        "sha256": "fa87fa065b592873cd194fc0f7cfff79c2eb6fc65de5514729a4490224641570"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0073.json",
+        "sha256": "66575de6eabbddf81576606ddadaa02bf82e476bb53e1852471809ab33ce8c1a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0074.intent.json",
+        "sha256": "b13abb6fc353c5262a649243a8c39b614d011de4deedf9b54733d2e6cccf8e0e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0074.child.json",
+        "sha256": "7a66479924ea0400e502b935744cbe3de7b40c8d34b4a90f364474365c844ef3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0074.json",
+        "sha256": "6ec52350520ac1c1c98df577075fcf68032ffb67ec4170ccd0acff890dab3070"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0075.intent.json",
+        "sha256": "c4e6d4401a92e80afd3b309390442dd7515b671a637a62eaaf6ff9caee9c493c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0075.child.json",
+        "sha256": "077d9bb7e25ac682709db29e4729f6bae2ab4eecc74e0a351d154222464736a2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0075.json",
+        "sha256": "c98289c0a4cec4cd637c80f51aaefa1662f005ea80731f09fd939e049ad37bae"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0076.intent.json",
+        "sha256": "d7ffde5646f047aa0179939ec1d4d0aadf3cabf22e693297c51916ba5d8b47cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0076.child.json",
+        "sha256": "8a9fbba44428ff48211e443c6d7b640aa5f77a178ccb3ee9c06f66b33d9a160a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0076.json",
+        "sha256": "9f0a0e34fff1cb5ccb99fbe7e8784110da35bbac396ecd9e748342fcb0e417c5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0077.intent.json",
+        "sha256": "34f4a402942299326444f40fe391ff932e8f38bd8a9da49906f8c2cdd012781d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0077.child.json",
+        "sha256": "d85f6af812661e3111f147dc553829a4b535e54745f1bf03b122fe0d822e13aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0077.json",
+        "sha256": "eb6db112db396f28603e75f59dbc1d61612e4c80d18c9180f7a6ec5400da5b79"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0078.intent.json",
+        "sha256": "a1f0d0af6a7c78e07026f808ff7b2b84faef4a1821e6e9b0d7e641538bf571f4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0078.child.json",
+        "sha256": "55badd6c5cef06af93b20b33d1ea318acea05c15cdebdc6e1da46a6334ab14e0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0078.json",
+        "sha256": "6341b151168d59c435d666661d4ce6d88a5ecd40077ecee7935575ff58a229a2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0079.intent.json",
+        "sha256": "fa61ffe2a1864da25a8fe07eb8dbce1af8c4b08d04abbee0d2b0a94b134dfb5f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0079.child.json",
+        "sha256": "03a4bf1e10bd1b0d906cb5a520d72ac9fe6646f7d8f7a8dd95e6fdcf147ec084"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0079.json",
+        "sha256": "132510a43e5caa61f0079b4a5a355cb425dd2e2ef299f4cb2c07356e32b04a9f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0080.intent.json",
+        "sha256": "6f397ead6654ecca54e6400ed13e79c8a3a5f1af2f658ea496fb0e46978e2591"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0080.child.json",
+        "sha256": "39914d3d05f64f1bb04ed8f595cdd0ddb84f49e37f68624ae889d5c299e03d48"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0080.json",
+        "sha256": "c1c5ae8e950780eacd7cdcc2bcc74b485300b404dace357b9fc53594db8f0d03"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0081.intent.json",
+        "sha256": "7ae9c9858883d0b3ff3a741176c0a5286323c120ed85f095bab51939c58c7171"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0081.child.json",
+        "sha256": "832021b5a5a9cac53c710e3fe06a37a628250aa186eb38a34245b3ad3e820470"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0081.json",
+        "sha256": "d6759b89e60aae8608c8b21657d698a7b98f9a64b41d6c206646f819ebae6f2d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0082.intent.json",
+        "sha256": "1c94057bb0debd877e547ed38706d7725490db663c1405090504bbcb90f3fac3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0082.child.json",
+        "sha256": "d16ccf6e3e13b3251199d68fd626c9a95a3383dc60c958c1a7c1a814c3d716b2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0082.json",
+        "sha256": "ee479eeee36ba2ccd1f4cc674a45a2ac62721b0a05ca7135b3aa3486ca6c98e9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0083.intent.json",
+        "sha256": "bb5145f7da33e03e86e1c18623742d76638b13449c0f45b7e6eb98639fdad29c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0083.child.json",
+        "sha256": "85db762b2e715ee5b58ab8fc79f57417416482d7335ff9860eb71fe048d7bb20"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0083.json",
+        "sha256": "bbbc2197053b87992f578d29c50c2b84b1aa9cf614ec48cc2a6954dad4a4b3bc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0084.intent.json",
+        "sha256": "0c0c6d8a47994e8ea24dda1d7e2c4757c48c231cf6b0cb4180ea44f109b2f404"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0084.child.json",
+        "sha256": "1f3d6614902b33b4eb8e7ebc2acc7a474c7768b8b8808aab8c1d4e777b0b022b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0084.json",
+        "sha256": "b8f09fc26d12ba76773bdcdaffa614bb1417efd94efcdbc8bf72c1e967a9d84a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0085.intent.json",
+        "sha256": "85a2d8c56918e7b6db46cb6513802f9f2762c368f462a0e46541f45a3def3cf1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0085.child.json",
+        "sha256": "b3e672b1d97f7c01272c248ad6dadb78891ee660a521454f1530599f8341a8f4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0085.json",
+        "sha256": "5b7b863e10056c6b3b49a92cb292e468dc5c21bf23d916215a4129f40308b113"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0086.intent.json",
+        "sha256": "4c2a49284025bed521e2ecc5856f25a3fd8ec5cefe9ed11536daea9e210f4531"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0086.child.json",
+        "sha256": "6ccdef63554605a8a2d3ca9be4d1e464f42eca6653b2ad4d27d5a536de923c07"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0086.json",
+        "sha256": "f8cf8b216ad355e06c93e240618874fc6083ef06cd362dfa190d2f4436342edf"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0087.intent.json",
+        "sha256": "1596d0b7cf72f29b521f247aedda299f7b5d788ddade20a0353e9ef0783bd3a0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0087.child.json",
+        "sha256": "54d050d49b552ba0c199d6171060fb3ab08f706a95288804ecb40ccd4cbd1ffe"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0087.json",
+        "sha256": "64865e2f632fa81eefe3cd0b3aadd7fecffacbeb67eac9e5d4c7ec466c984075"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0088.intent.json",
+        "sha256": "0e709ef5fb61bc5010d1550c62e8fd73bbd02ef69ec813ae9ff0bc637818ce04"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0088.child.json",
+        "sha256": "9421ec3a18c8e443335994067c42fe471769fde0b6142df6b560dbfcbcfdacca"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0088.json",
+        "sha256": "9d00ce5ffb45445e8d89c6d8a0f0b6c8dedf5d271d2d25623697825bd774c668"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0089.intent.json",
+        "sha256": "1887ff9f48a9fcb77242e84f727ab1dd365eeb646ca20502627bbafc5c4d355f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0089.child.json",
+        "sha256": "33e28c44139568b442c83121829b893eb7192c03cea02a3c54bc70efe07097cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0089.json",
+        "sha256": "21ca5a61a8a4d90df327b2979763d8822fd296a3ac710e035bd854214e0a5008"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0090.intent.json",
+        "sha256": "b467658b9a875411855ffb063c33e1695ba449c9097b3e2128dd11b6eb017457"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0090.child.json",
+        "sha256": "b412212b101522992f58d7e336a2bf40da4f7fe22a2022ac7d1ba7d4361bb848"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0090.json",
+        "sha256": "cf4fd867e95862316f1ef94111354f8f31d432c263c1e78498600784e4e12438"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0091.intent.json",
+        "sha256": "228ec6a06635f83ca0a9c8387820e04f1861489979834eaaa73959c0af2d55f8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0091.child.json",
+        "sha256": "af2f96c8a150806e30a610764d75db58b43b5d037028e6f378d24f19be9f341a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0091.json",
+        "sha256": "90b868c6dbc06143153a306f6cca2305d21ace96b574a6511ecf1be6a3dabfea"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0092.intent.json",
+        "sha256": "28520be22e58d5dde1cc0df7cd035749378fc65523af4528922d617cd31f1bbb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0092.child.json",
+        "sha256": "f22547db44909fd50698322073ba9ed122b561bbb7de92e861e1bcd3e499e55b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0092.json",
+        "sha256": "852bc526ef69bf861e43935ca390482f2b3e2cf0fefa42ee86b52dc306b9a51e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0093.intent.json",
+        "sha256": "3ffa47fed21606657040685aa1a95a0637418adae6e94087fa73a90446353769"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0093.child.json",
+        "sha256": "17cdb032b2da120f4051f9c77693cc0d3561e8c8a51a6012fa95271e5f15c609"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0093.json",
+        "sha256": "f96514d3c72ba50df9a1ff5a63d2bf4557478d164e23f3d271b41841b71895aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0094.intent.json",
+        "sha256": "e0244434cc0576a994235a942dc08c0312232c7c6226181ddcaff6ced203d724"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0094.child.json",
+        "sha256": "b2617840ecceb94dc0f2f738a4209767e36ed42f5dd51d48fbaa45942e7e3eda"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0094.json",
+        "sha256": "1137eda111b1fbd36cfe44c30bd42e065e9ebea0f46240ab0670034b2184e763"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0095.intent.json",
+        "sha256": "6164b88a24d2011ba9de4614a321112039d2a28d8dd8548dcc7926b1b96cc553"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0095.child.json",
+        "sha256": "8c0367621d9d9f2d123a9d63110975c289fea30541b954545ca87ff0de1f1ea6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0095.json",
+        "sha256": "5ddbb02c161b8899ba87ee36c9c9e6e72471ac90c530f394153af3b3332c8eba"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0096.intent.json",
+        "sha256": "b0235b77feddf54278519bbcd7b7342d3407cfac9050c0b4d50a41f560e26373"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0096.child.json",
+        "sha256": "c3ea3731a1a455d181d5af4735aa660c4116487abaec33b5cdfcf69845893091"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0096.json",
+        "sha256": "bd86445588c754214bd17c9933b2ea51f259a90895b19549dfe32308715ba7c0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0097.intent.json",
+        "sha256": "1e88af80579d19f01450f02766acf289e11822922792a8a27310f39274506fa5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0097.child.json",
+        "sha256": "7222eeccea4d62a92f6684133da85c7ef6b769d426f5749b43795a82e64356f3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0097.json",
+        "sha256": "c73fa63ddb94dec5f6f40b9a487497d04b28b5b8ebebc1b2d890026e27273a70"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0098.intent.json",
+        "sha256": "697589b63b18a8b4d02472c45ae309e17a1019e89db3a006e6a0d653ea18a13b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0098.child.json",
+        "sha256": "fa16fc8ba2179cc1be3cd9579f79bd57307f266270725229f4536831ee55699b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0098.json",
+        "sha256": "13c6759da9081b2f1fd5ad48ca9cf115defed00b9a7a801094902571affb4b0e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0099.intent.json",
+        "sha256": "319f9c0991b29798a7c9b08dd959341b10a92f1381a267853635aa17742a6db9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0099.child.json",
+        "sha256": "4c733e0a58a59cd8990dc8aba6313913237bc26157bb3625b1636e188194f325"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0099.json",
+        "sha256": "3f46f41744bccab5a559b4d21cd98a3ed1641c7121f227b1105d5e3ac59e69a8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0100.intent.json",
+        "sha256": "7c4ea042de3b9ba118d2f65ce6170b86ac1c37a4881ec5f3b3e1ae400777e28c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0100.child.json",
+        "sha256": "87e70a76b5f3bcf98fb535537962a6119e1233f5eb0908b9fd9052bf3a9c119c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0100.json",
+        "sha256": "62ef98bc0957a71916541e65641052ce5092a80bcb9a1f4d004fdc12723acd7c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0101.intent.json",
+        "sha256": "27ced334e2524f99113ff2f9e4210ba06cb366c2092478a91babd3844dffbb0d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0101.child.json",
+        "sha256": "f7f1af283b5f564855334da8fa5f7e30da2d53786623a09754c480172ee9d9d4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0101.json",
+        "sha256": "3678a1012dd06beb29e56e05c289230996df8befaaa2cabdfd2d534b26462e25"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0102.intent.json",
+        "sha256": "3793f6c713c3e9c42f65c16ffb5f6b4836c8d5cda98aaf2df9a4384076e32f7f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0102.child.json",
+        "sha256": "5c8d4f042412a826d6f0d87cd4c95641c087665c0f40c24c1c952517f62d2896"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0102.json",
+        "sha256": "029423404e916f382f1cc0342bb0a40a2fc2229ed6be9fec8922842079721e1b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0103.intent.json",
+        "sha256": "cd3f15484e7a6e27ebe1074ee33ab636c44a569aad04d854f1653b4c21464d02"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0103.child.json",
+        "sha256": "c457fa7e48a335cf7a0cbe66c12356b2ae1df867729448b90f4b4922a605426b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0103.json",
+        "sha256": "b6af23f0822d506d99d4e12427a51548f5fa8bd5950edc5410421cd41c668b0f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0104.intent.json",
+        "sha256": "d99b96a4224c0e2c7c6481c8643de252d0e07d5254988cd7a6a4abbefa7e9b69"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0104.child.json",
+        "sha256": "2e7a6682853ea591d2d60f64ecd11d6bcdd23961aeace36d762010fdd72572ca"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0104.json",
+        "sha256": "4f17b98be5c5e53e9907dba2909d72b60fe417df9ebc8216fbcadaa4a61fccf2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0105.intent.json",
+        "sha256": "f10a0368f4d33ada3b23c3ab2d331c949d72e89c29fdfa9a6d6a39a1d4761ed3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0105.child.json",
+        "sha256": "c9cfd3fa8d225d104fbacc9664e097f2bc48c73ab6532c27d6dabef229160299"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0105.json",
+        "sha256": "16c2138348e0da5203fa69bea23fc3b0edc7f8378776a6493c8f4661cc712dda"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0106.intent.json",
+        "sha256": "05889a2df75470244a2cdb1843759caa4ceeb2e7f65bfa348477598c76c3826d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0106.child.json",
+        "sha256": "978b8b1bb35d0a3b971c56d8910c461c7e5bab735ae5adc53f2b444fc65d88db"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0106.json",
+        "sha256": "e062f49af15e98fb73d8e378a2d697f3d91e8d9f9e151a5f8d5efebb1687f2ab"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0107.intent.json",
+        "sha256": "1ae9da51e2d54e9e9035a09595b23a4867076abd8afced06b83c0e8d1f85ffbd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0107.child.json",
+        "sha256": "b8449d013102dedbae671004845d8796475a0b26a957c5aced06e635068e041f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0107.json",
+        "sha256": "e1273ee6ea88e15b5026a43f8ee84bb61ad6620177b8e8d0e37683c94a3e5ea6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0108.intent.json",
+        "sha256": "294822f038992c03904c30890a2fe5a7397cf40d04bfbf200e7d544247e2f58f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0108.child.json",
+        "sha256": "2787abc0bc1b3a6aee4ae3b614757023d592fd365ffe806e8fe81ab2f206b149"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0108.json",
+        "sha256": "513f363c81dac7b64b208e694517c7d4ce083073872dd7f19489a9a7870f99af"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0109.intent.json",
+        "sha256": "c55e6a6aab6302c159dcd625ed801b362f538c91897257d811efcea288fa1232"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0109.child.json",
+        "sha256": "ee051dcf224d912bbcfd71d91db8ff8cb2a2321647f0334d97206a32809d2baf"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0109.json",
+        "sha256": "340798e71b273da2dc5ff065b2131e8d44a6d6d8def27aa0258c0f98620bf440"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0110.intent.json",
+        "sha256": "7600b7e50ee5bd5dadce18f66e00df956e15a9800398ac12d317692dee7539a0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0110.child.json",
+        "sha256": "90338a3672f4c5ed96b16c4c4879f1b829fa83c375d661f2643e63de9369f969"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0110.json",
+        "sha256": "318ddc0cf2c9b7c1e99b99c0a21d4622f8f686be5f86d440d49c890d20e3404c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0111.intent.json",
+        "sha256": "b1ce1d7f1ca2c01494ef8db10c4d711b94059ae22c6ad7ac2533cbe56fc7301d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0111.child.json",
+        "sha256": "d491ba282affcd901eed875eda174b0dd31e23a1e9a5f6a544b3c6c741ecff35"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0111.json",
+        "sha256": "e0356fc75deadca947561aa66804ba61f2fb63612cc0d5811a585e018846dd35"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0112.intent.json",
+        "sha256": "249b4fa74cc1b869feb033f231f67058c3b009ce3b1010451ce1ca94c72e4257"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0112.child.json",
+        "sha256": "fa4e82b573da8998b8246cfa55db4ffdc0e84c23e833cbd38fb5cc8cae72a79d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0112.json",
+        "sha256": "7b426672726d1be9dcae5cad17a2c4cdd6d212aa6f1bf708e88006d7e8efd418"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0113.intent.json",
+        "sha256": "26170cddeaf76776ac4bd8b928ee4a18aaa92f0e74448cbbc9e9affb484c5fe6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0113.child.json",
+        "sha256": "286de801fab39441cab525288088efe3b033521eb797aef167ce95e0c5de1545"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0113.json",
+        "sha256": "cc4ad14f0a2d071c1722ec24a251899acbcd26ee108603ecc2852d397083f271"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0114.intent.json",
+        "sha256": "f312b8e04f3ab4269e43fc7b9e3b9807b5024931ab872ce2a847f8805fc7fcf3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0114.child.json",
+        "sha256": "f4d91ce2636cc14d889ad80e1f20d6b0a8f90efd4212fd3f5cf611aefc86192d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0114.json",
+        "sha256": "815f06b4d7b572781caf815194981c89c6d30ad453ac2e7f371ca8e9418b99c7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0115.intent.json",
+        "sha256": "a37fd06a07b0adcd98d3ab5926519679fa119d7bfeb6bf64cb851524aeefe802"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0115.child.json",
+        "sha256": "61548d4bfb87c4335977150073b7fd4bcd6cc10a2c3d8d7613e54e7ba24814f3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0115.json",
+        "sha256": "ff5b2ba5c8005c217036774e6df114fc0e3b2897b6a1d05c1d432bfdeef1f162"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0116.intent.json",
+        "sha256": "ddc2e71f1b8726e2cb52b160484a92c8f356944176df1048a60398424736b585"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0116.child.json",
+        "sha256": "474a7db4475e9dcbf8f3eeae50927fd697b2d7d653c2c95ef027a69641c1300d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0116.json",
+        "sha256": "ccdc97f4a94340d6bdddc01a6f834579786de89de03a4d134854abcb729fb0bc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0117.intent.json",
+        "sha256": "bf23125004a674d6c613cdebeba1251808a0ee65f67bfe2a4553edb46e3e2094"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0117.child.json",
+        "sha256": "3534b1dd78fb5b15baf9be37c874809de600c75c258a82e0f8756d0e7fb81597"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0117.json",
+        "sha256": "3f3fbcb8e6ba12157671aebe2c2c0ffc0fa243e98885c33c904adaba3118b43c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0118.intent.json",
+        "sha256": "854a0407cdb561fd60b109afc7971f152ee3c210a52b90ebf7b92f0c9a033475"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0118.child.json",
+        "sha256": "0dc7efce2251620a5c3417bba11c563c5622307566783dee6b8238be22538420"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0118.json",
+        "sha256": "dc0ce9b676006966b87bbc5c687745c6bb54ec93d4aa3172a3cbc5edc6a8ecc0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0119.intent.json",
+        "sha256": "cf06a280f54d711433e154d183e70bf5446aabc6ca9051d7f9fa1362458dcceb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0119.child.json",
+        "sha256": "d68812187adf93ebf8e05855617b1b660db3bfe0f1be44b9f7cfb34ab7390e6a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0119.json",
+        "sha256": "edc4f7fc8c69ab8696848240d66f7a289289bd3063b61595d9dfd1168f3ae206"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0120.intent.json",
+        "sha256": "29a393fd4325a33da1803939d3df6bdfb5616a11ca851ef1fda4ab569be2cd45"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0120.child.json",
+        "sha256": "e06f01721088d5948456a88ac74f2ffa7bb57ae87b8d679cf0a9e6b98fcd277f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0120.json",
+        "sha256": "b2a988580857e1fed45172a517620e7b04cbedd0d65c11ccfa2a84cbead9f18e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0121.intent.json",
+        "sha256": "bb55861adc0c7b09c16baad4cd8b485bb8349e7ed681d7b029ea16fc9d40dbcb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0121.child.json",
+        "sha256": "710777f18f7d5f8e8d5e6308439f41d2d4cf395d1d6e69cec178b76b7a9479aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0121.json",
+        "sha256": "c1ce0c8f9c13eae0d3ff6278a6aa492fd7520bedc65d90b1a188f0d2335bc6ab"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0122.intent.json",
+        "sha256": "d31bad12748b2d049cbdc3815b112dd469f8772a4fa3af1728bf346700675533"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0122.child.json",
+        "sha256": "4c035ca943c28797cc24764a7c11b5d49730c3e6732f5ef5c39d34d7037c281e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0122.json",
+        "sha256": "782ad39aedbc8333ad43e9870b4c9a563acfea52c60cc88b929ca5e8bfd35c2b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0123.intent.json",
+        "sha256": "0fe5d8b05cd540eb0d315a69fafda9622e291ea5a28cb8f1a0a0743a65ead4c4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0123.child.json",
+        "sha256": "83510b055a30d85249cd467d51c1fd7a678855a1b5de99025b3fd9d093cd492c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0123.json",
+        "sha256": "792da426480c5795327fd79efe0a121acde668b712d9460cda1a8de7182454e6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0124.intent.json",
+        "sha256": "5f448c361fae54a4d1ea9d66d74b510b0cca0f818bd478322e915d2e50c81290"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0124.child.json",
+        "sha256": "bc1ede5118f023b99a517cf0d496be72c68ac39c4f1a0c0e3da26b478f657db2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0124.json",
+        "sha256": "862fe3aff291c6be6fa94f8619bc059ac0a5d7141913c38fc71029971d1d59a6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0125.intent.json",
+        "sha256": "67f8ae7fb5345ba48165c1336fee26fb3878024eb88e4cf92375f69c307bf9a5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0125.child.json",
+        "sha256": "f3a182a4c0d7ba9c6bf7183a84ecef9644aafd27277e37265322b7ccb3de1c43"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0125.json",
+        "sha256": "30fe9662b283e19758158d9ac6088fa634cdfd0b53eb22401730724ba16189bd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0126.intent.json",
+        "sha256": "a1c2e78be26359d7079fc96ec2d70b1137679ce2a5a10e2a4a2544350324e59c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0126.child.json",
+        "sha256": "db0819a73e70a7efb1a0a15b5dd66d85c065727d3af9359fa980b83d464124ad"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0126.json",
+        "sha256": "d188d91f9fbb2f4ed21038d73cbc2de958c3feda7bfd0c4c8c1178620e519430"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0127.intent.json",
+        "sha256": "a29031d889b053bf315d49bed81cf649910839bd651f82053cc88407d3019395"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0127.child.json",
+        "sha256": "adb98f5e0785daad30ed7ddf081d687d55b094ff4777836fd3762dc23febfcf6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0127.json",
+        "sha256": "7ba97cd715386e834c81e24b80dcdaccaf461c442f23e6e0246a45631ff9115e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0128.intent.json",
+        "sha256": "f1b264138f99eed57de016835ccee74480ed79eb0b52b57f46dd4e64e0dc590f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0128.child.json",
+        "sha256": "b171e8249fe5f1d3cbfdf08550b5cb9905268b4d1fcd032a2dd648a4bf53fae1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0128.json",
+        "sha256": "10b80e14da3c488bb5c58f854ca6e6853359f5ab3c65002a19e72ca3902cd748"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0129.intent.json",
+        "sha256": "857bc0002e1299f83a487ffe73ee542215d57b69d9eb0c05c3770d69674e098f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0129.child.json",
+        "sha256": "f8dbcdf2dbd841098d82d4b683fb04e4a3bd8cbd165ba583d790a9f070072734"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0129.json",
+        "sha256": "0f4b09f43fa3b803a42b86e2a61786bae5858d8c1f8a316f530a7bf964234413"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0130.intent.json",
+        "sha256": "30d0e8184b350db56ae8ee14c18096db04d28ea9b2b22322e0c360deb81df908"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0130.child.json",
+        "sha256": "9e4b3cfb96b609f6a5171144ca922d00a04c8b40f877608ce5e52b985532f5fd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0130.json",
+        "sha256": "e0bc2b04cd4437f1be23636c3d9869a051aedfde132e3eebe1e08a11f60adabb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0131.intent.json",
+        "sha256": "242be134c3e600a35afe6cbc08b9e4afb6d3858437e6e15a335bd51cab30c65a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0131.child.json",
+        "sha256": "f7fb63ca6aef3bef2b4aa064d23f93bf6510c1a61a22bf5a8ec9dfda0a49a107"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/physical/command-0131.json",
+        "sha256": "f4c397c539e736076300e51117c08d99a042d8463dd6144c518d7374c5abcf8f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0000.intent.json",
+        "sha256": "5c473af1342914666b9d9d126fb8c3aa9ee91b8f854d02f22d8ba1f5a02fe18a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0000.child.json",
+        "sha256": "360f5b4bafdfc77c0f3e0d0b12325d12c4b623eb45da48347eb75fb4665e2108"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0000.json",
+        "sha256": "ae2baa0677cdbbc7fcdb55bdbcb65b63a79dab58bdb856b0332675a4b0b8eb33"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0001.intent.json",
+        "sha256": "cc69f1e4bfa911b2b4956eff72404af272cd2f48a38e28319ebd565e898fdd73"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0001.child.json",
+        "sha256": "6e3573f2ba4c6e92cba958cb401cc8d9768c8281311c2e9b9c4ddfeef6173af4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0001.json",
+        "sha256": "a7e4f8fca7db3a987255f5a205c07ca8222d7f95e90aafd372f35c38a127dd47"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0002.intent.json",
+        "sha256": "71cef5a29b2fe0b3c392fc745c47c5363a36fdea97bce3bff86b6ec0fc62b8d4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0002.child.json",
+        "sha256": "fab5da2193256b515d80e23a9077f2ea298b0d4777ec4b9210fba1c5fb7d621f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0002.json",
+        "sha256": "5afeeb89c0d7a13fc6492f73772345a8d1b072dfbd914281e7e6494ae7b44291"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0003.intent.json",
+        "sha256": "a0f64d93bd996760f04bf082267137425c5d211e1733335e12000760666594af"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0003.child.json",
+        "sha256": "805dc627584fa6979a069d2ca133b6578254eeedb14ba3f5efb15a6a838facbb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0003.json",
+        "sha256": "2383900d07f7cae73207713ea7475e4dbc0f37a89dc6e071290c6c22810df1fb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0004.intent.json",
+        "sha256": "8f1035674d25bd5a755613623b00aa80014a87fb60d84f90cbb7261dafdd9c41"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0004.child.json",
+        "sha256": "b131a4b614c8657e5a52eec0b804de8c1990be0e225ec8bd49f3555df3a46bb8"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0004.json",
+        "sha256": "a8789ad66fdf146b7f5b455f515948c5da4c997fe22fedf15ec0b5867dacdd3d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0005.intent.json",
+        "sha256": "1d9fe87f115e0009f20630c25c021e845aa04abaf37e4cb63c8bf3cc8a2687a1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0005.child.json",
+        "sha256": "e00452ccfae5820d33384067207f58b782338f56949df5d3f50f20ce058b44f6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0005.json",
+        "sha256": "8fa77acb4e107a4caf68b74e34eee9b0878f4d878a639aca414eaab5047a315a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0006.intent.json",
+        "sha256": "fa2aaa8378c792f67f2b1207c8d42721e3c9649c5ee13e7839d26e628d397d8a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0006.child.json",
+        "sha256": "354fffc34b175c138cb99d6d75286d58d80e638c9f6084c55ccfa0046b501c70"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0006.json",
+        "sha256": "0d8a36bc74492724e0af7a5ead586eda7257039f8d8c75b8989a48d5b698e64e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0007.intent.json",
+        "sha256": "31ef327a550ae182981adea880f25ddab7fced275bf837c03769212aa331c199"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0007.child.json",
+        "sha256": "94533cd672009f11bd8f67eca4cf2c98fb077750e364ce91de08e6d5ca308b8c"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0007.json",
+        "sha256": "b45258fd39d73d75f03391ae67218b6339d35fd0b83643173b340d14b5c6863f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0008.intent.json",
+        "sha256": "3e6757c6aec23d72965051bcd3e7ea0d826fa26b9765640cf884c2d32e73ae31"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0008.child.json",
+        "sha256": "8641f65c2879171901faee8584c2157fd01f8de45ff6a96af6764c5b28a3bfc5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0008.json",
+        "sha256": "f929e0c7f91670854b6748dc291e89c019358c2aea4ee4e6293653328c9a1556"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0009.intent.json",
+        "sha256": "fc6dd4c52d707f0dd52ffdab96ffffd2b6a39d145b9551a9669b4478c839f4ee"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0009.child.json",
+        "sha256": "3fcd9c7d9df2a23c806a142c335e6065b2ac74912b981a70ee8fe822c57c5b92"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0009.json",
+        "sha256": "3215d2786596e810e647a094d68381a214255104d3752eb3c782ca4c89193099"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0010.intent.json",
+        "sha256": "51060e891e79f948d6c20e7a80b9811920d6ce6780616185cc5888f0c21cf98e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0010.child.json",
+        "sha256": "7314f3c08cb13830569ba18aec5f90d73f189618ca6c8e3514f618eef600cb66"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0010.json",
+        "sha256": "7f856e84aeb48a30058999ab84a4e3604db5246f9ebd538ff2a17a0386e6a367"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0011.intent.json",
+        "sha256": "4aed6759519bfba5fc975c46ddfb6da65ddc025564d0bde18a8a393b5c8e1135"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0011.child.json",
+        "sha256": "c9f0ff1b9227d9177b0ab53156ae36c674d0df16ad12dba87c70b979d9e3322a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0011.json",
+        "sha256": "364047bd89146577643b87e0bb810e8fca92b87d0fa15f429b0851ef4906dad5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0012.intent.json",
+        "sha256": "bc692285e8df2d99757246beac8b8488c5a387e32f9f2c3e1b307eaafde634b7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0012.child.json",
+        "sha256": "3955735c3f905fb2fc8cb67bb2ff1cf73daa37b0bdc875eccf6ca9d4cadb9d27"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0012.json",
+        "sha256": "62ec9628d942d34be44ac0d9d8277e13c0d10709505451c1912153f6ebc54b31"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0013.intent.json",
+        "sha256": "3eb8eab5f612e053dc0840359cd1a071a3a94e2ad48b34692b46dd9c3c57f6f4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0013.child.json",
+        "sha256": "7be3b445f4518a89a96871f3a1b190b8ff452a5025208b57f22b5fe95f8e1b81"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0013.json",
+        "sha256": "4650b8e6af9c6571cf197540621ed25d972a365aadf71fdac9232099575fde27"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0014.intent.json",
+        "sha256": "f7ef3fcc01ee18f0cc54039a49220622f1027047d36e332dbd9f8ab022d01cba"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0014.child.json",
+        "sha256": "703166a5f6afc6680a7b05f0bcdf4fe9956dd8cb4e688f168bfde5ed01bd564f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0014.json",
+        "sha256": "eae4be8b417a02719905aaaf8736128f4d4f6b807c13f17fa827cdc856c729e4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0015.intent.json",
+        "sha256": "8d8cc21f5097cc42b36214391c490020873bb40c00ac66c860d91112742278dd"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0015.child.json",
+        "sha256": "5429f5de6268ae3e93a9b3bf471c775899eef46ed98102139c8f7d665a64664e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0015.json",
+        "sha256": "97c0b8cfb51269d2da62123c9b90f007f9d17cc4fedfc06de4e39dd629ccbfa3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0016.intent.json",
+        "sha256": "b13c8e1a9716ffe824ec574bf0d59f9daf2e0a5f4191045e202d9516f8bc9d9a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0016.child.json",
+        "sha256": "ea62995069a0e58700ac66565415977d2d0af9ba21e59c502fb9fcdeece1c491"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0016.json",
+        "sha256": "5ef954f1b2f7145d417a83195c9ce8a86775cd02e3be056065e70e76b77875b0"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0017.intent.json",
+        "sha256": "956d3730320ff8762d42679c21571d16aaf5928391524ebe8a0f69092367da7a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0017.child.json",
+        "sha256": "8d9543d470fc78b8a07095dfe2252572d041932b1e293171d6a4c259e130af04"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0017.json",
+        "sha256": "efa7e464a145dff2ce91251940048b0badbc55404a895efcde0bd749e81547be"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0018.intent.json",
+        "sha256": "95cd49186e317be774cd1416779faa737da0d638a1306f48b8433ebd9b11c680"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0018.child.json",
+        "sha256": "8f97a6dd8cd2db2e2ea83f97bce2ca43904e109e04fbcc4505d1bfdacd5ebe23"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0018.json",
+        "sha256": "819e4c93e97b315de4e7c8bfa42c24f28ba8fed94461223bb89c2970b05204d6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0019.intent.json",
+        "sha256": "bca1ee896006496c90fb40fecd97fd37de3bf25f0953029be0ccd6c0140c054e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0019.child.json",
+        "sha256": "39a29cd2c8c2e74521121a35841cc4d7f2faa174fd8ddd7fa8e5c42cd68bc67a"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0019.json",
+        "sha256": "94515e27237a5cde0109e84caacf984c90aa43d5971447ad75051afe03731ae2"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0020.intent.json",
+        "sha256": "6282c933a500da5d395d8c5ae7d2ea4fed6fdb7c9d701b7535d4c5444662823e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0020.child.json",
+        "sha256": "94670042b2c3273e0e046beacfee660d78fa4c83a54b33f88bfac63402b1af74"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0020.json",
+        "sha256": "3b7fd512dca40adfaa38b8abdd817bcd14c2a0bc75bf6bd83cb58540776826bb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0021.intent.json",
+        "sha256": "462664aa2422daa66b17808ee152322aa4b3286712fa47d485395471118bc68b"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0021.child.json",
+        "sha256": "9cd16351ec04c38222094f49af95ad60d9cacbc9d73318753f97b39982ff7e02"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0021.json",
+        "sha256": "519998d258f66ecef9af7a5e841a38d982f0e154add9d3d0094ce1a7df9d21f6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0022.intent.json",
+        "sha256": "65b2999299fc69f39972e83c2574c2aab52548c80127e5f00a1342280c285b52"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0022.child.json",
+        "sha256": "500aa9ec45d76c6212589f2e57b862fdeec6ea7bd54db1e2f96a97a9d906f488"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0022.json",
+        "sha256": "5a61df9b5d15379120ea1cd7266e7ceba92b0ea74a26360eac49dc17b220db44"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0023.intent.json",
+        "sha256": "4d50d2dda512b6ccb7a7dcf521f47acbd3c11523644c925f05c9662fe90ab022"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0023.child.json",
+        "sha256": "10061c9313a49ecc300b8df7935848648ce0686843545b709b36f44fd18b0e37"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0023.json",
+        "sha256": "e46aee6f81dabd660298e550fada718077b2d321660c09f3a1d959ca9deba72f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0024.intent.json",
+        "sha256": "16a0ea228e155ff79718036dc5471b5f4f224769a91e369b09ea40dbca7801cb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0024.child.json",
+        "sha256": "241835505c54e7706c466d7e40ec15580bd897c7926368332490141cbc3dfc08"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0024.json",
+        "sha256": "946459f526f66d4536bee5a243437d613811acf8dabef7c8a00a062efb522a81"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0025.intent.json",
+        "sha256": "14128dfcf77197c36247b9834b024c712c000b183d3bf4cf4eefd2bb246c733d"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0025.child.json",
+        "sha256": "001c814dfd0eb5836fb511214e300cb4db7573f886ddb287d7302bd660663aa5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0025.json",
+        "sha256": "c7c0e2d6f41e4e25fb44456ece32390dd6dbce77318acbc4324d1dc319a638f3"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0026.intent.json",
+        "sha256": "a921ad614d2bcdf385d53ca469b337986cd1beb5ddb77283045615392d273299"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0026.child.json",
+        "sha256": "6fe24f646b46c53040beafa7acba4e94cb23003a0fdbc60e9bb3519cc71230be"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0026.json",
+        "sha256": "cc438631caeb806fce88e30c2d7cb52c3f14a63a41ed63d1d214ab4c46e6433f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0027.intent.json",
+        "sha256": "8ebc9120aa675dc9fc380127e8d6228be39cc38a0b5784795c656f77f86037ba"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0027.child.json",
+        "sha256": "bbb4ae43a82363b4ab4857ece99bc89ffe33bfeffb33645db0654dcec51ce71f"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0027.json",
+        "sha256": "de26aaf1e91eae6dbcd520aa17a1833ec6ed90e6947ab35ae6c1933c8b2b85d6"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0028.intent.json",
+        "sha256": "ac2bf5f7f25143388191cfd995e04ea3eed96fce1d17bb2141bb5df61e1fbcfc"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0028.child.json",
+        "sha256": "052540dca2e600701242729f72a2ea5e00a52b274b36bf06a388668c998b434e"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0028.json",
+        "sha256": "4b2ea7715495b44ee0e4bada19ccf195742166a3e33ed821c2eb7189363e4756"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0029.intent.json",
+        "sha256": "088fa3f38dae0fdd26eafa4d76daf2695a896e3711b4931db9986adb70db2fcb"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0029.child.json",
+        "sha256": "3a2c0e3e6d8450a6b02b98925229899a2e043544e386d9cf5efafc13ca29c8f9"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0029.json",
+        "sha256": "b5752b5108b65563129eeffaf1476646d4d6645f70b22691af7c2544ee062a45"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0030.intent.json",
+        "sha256": "9b907e87fbf75397d6ba7b51f8d7040d2ebc7503ad70af29071d8be4c6da39e4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0030.child.json",
+        "sha256": "afad917e815ea2143acaa01ca0cf23eede52fb9b8183e978d67c69fa2c0b1609"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0030.json",
+        "sha256": "c15275f3037f93251e4ea2995aa79e661c08441367fa6a759497aced4400bbc5"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0031.intent.json",
+        "sha256": "92041d9752e93635dd8a0adf01cbaf94713013138e037c77f97fb310a4ff9061"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0031.child.json",
+        "sha256": "3633a198ee0bb5cf65a2e57ce8863f901c3778d4bfa8fc0b24544e71ec902654"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0031.json",
+        "sha256": "c5b058351cb948e3326f990ad783400ad974e0ef2c856d7b61edc1a745d63aa1"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0032.intent.json",
+        "sha256": "80f480bfd64766fe6345a2062d3ce8dbce837df7790fa56668b270ff2eb2d697"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0032.child.json",
+        "sha256": "dbc1c7d30b3ff11cd7a4d799b8d09482862ae7762038c68c6854d45f8cb80102"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0032.json",
+        "sha256": "02279baa449619fe2293ccf98352094f70e489ec3340e04cba45e013a0377ac7"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0033.intent.json",
+        "sha256": "515df3973822bdf16dd434e537c5da45fc261f7e6c24ef925fb01060cb251509"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0033.child.json",
+        "sha256": "04b10a19cecec9958584d4ed89c4230a4bd1a8cdb325532cfa88f792d5aa6850"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0033.json",
+        "sha256": "09bdf4034429776f4694988afaf4bc75e2ecbd7afb8207c55c5c4ec5ad68a7e4"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0034.intent.json",
+        "sha256": "28a1886078f3a329a5aabadb5c44cb76999c02d8022743d78813953cafb5e9aa"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0034.child.json",
+        "sha256": "73ad135e82d313dd31aba0e8a927a04ef06fa4ae52ea276d6ea0e53befb40bde"
+      },
+      {
+        "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/monitor/metadata/command-0034.json",
+        "sha256": "4bac2912bd1b1d10743ab0c5cbc51e48c912d6089006a1381ab154bd4d82d97d"
+      }
+    ]
+  },
+  "recovery_log_start": {
+    "dev": 16777231,
+    "ino": 2115962,
+    "size": 457789,
+    "mtime_ns": 1792426879247688827
+  },
+  "bootstrap_returncode": 0,
+  "replacement": {
+    "pid": 52818,
+    "ppid": 1,
+    "start": "Mon Oct 19 09:22:08 2026",
+    "comm": "omlx-server"
+  },
+  "load_baseline_swap_bytes": 2389117501,
+  "load_worker": {
+    "nonce": "24f77d6ecf8140cc98e3b39daf8e65f9",
+    "directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/load-worker",
+    "parent_identity": {
+      "pid": 52775,
+      "ppid": 52437,
+      "start": "Mon Oct 19 09:22:00 2026",
+      "comm": "/Users/ryanli/code/minivllm/.venv/bin/python"
+    }
+  },
+  "post_worker_pid": 52853,
+  "post_result": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/load-worker/result.json",
+    "sha256": "f0d5a4f394059ac26bf58e4717c9a39ab22d1e29b6c3c046bfa353ebb720638c"
+  },
+  "log_window": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-cold-journal-v1/evidence/log-c3905e88e581400285a9b45a7195611f/window.raw.log",
+    "sha256": "b388327119582bae85016133609725fe4d65ffb6476699244bf75bba151832f0",
+    "bytes": 11301,
+    "source": "/Users/ryanli/.omlx/logs/service.stderr.log",
+    "before": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 457789,
+      "mtime_ns": 1792426879247688827
+    },
+    "captured": {
+      "dev": 16777231,
+      "ino": 2115962,
+      "size": 469090,
+      "mtime_ns": 1792426959560726332
+    },
+    "start_offset": 457789,
+    "end_offset": 469090
+  },
+  "final_status": {
+    "version": "0.7.0",
+    "default_model": "Qwen3.8-Flash-Next-oQ6e-mtp",
+    "loaded": [
+      "Qwen3.8-Flash-Next-oQ6e-mtp"
+    ],
+    "loading": 0,
+    "target_loading": false,
+    "path": "/Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "pinned": false,
+    "engine_type": "vlm",
+    "config_model_type": "qwen4_exp"
+  },
+  "log_markers": [
+    "Qwen4-Exp PLE mode for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp: resident",
+    "Qwen4-Exp Lightning MTP enabled for /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Fused 1 resident Qwen4-Exp PLE table into one packed device-side embedding",
+    "VLMBatchedEngine loaded: /Users/ryanli/code/models/mlx/Qwen3.8-Flash-Next-oQ6e-mtp",
+    "Loaded model: Qwen3.8-Flash-Next-oQ6e-mtp ("
+  ],
+  "exact_runtime_signature_restored": false,
+  "warm_kv_restored": false,
+  "monitoring_scope": "observed physical bounds; no OS hard cap; HTTP cancellation does not cancel server loader"
+}

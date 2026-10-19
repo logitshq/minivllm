@@ -18,7 +18,7 @@ class Output:
     prefixes: list
 
 
-def verify(model, tokens, context, runtime, *, enabled=False):
+def verify(model, tokens, context, runtime, *, enabled=False, head_project=None):
     """Dependency-injected research seam; not a source-qualified production API.
 
     OFF returns None without inspecting inputs. ON is only for a source-verified
@@ -56,6 +56,16 @@ def verify(model, tokens, context, runtime, *, enabled=False):
                   and cache.conv.shape == (1,3,10240) and cache.conv.dtype == mx.bfloat16
                   and cache.S.shape == (1,48,128,128) and cache.S.dtype == mx.float32):
             return None
+    if head_project is not None:
+        head = getattr(model, 'lm_head', None)
+        need(callable(head_project) and model.cfg.tie_word_embeddings is False
+             and getattr(model.cfg, 'vocab_size', None) == 248320
+             and getattr(head, 'q', None) == {'group_size':16,'bits':4,'mode':'nvfp4'}
+             and getattr(head, 'biases', None) is None
+             and getattr(head, 'in_features', None) == 5120 and getattr(head, 'out_features', None) == 248320
+             and head.weight.shape == (248320,640) and head.weight.dtype == mx.uint32
+             and head.scales.shape == (248320,320) and head.scales.dtype == mx.uint8,
+             'explicit head reuse requires the actual untied NVFP4 vocabulary head')
     T = tokens.shape[0]
     # Only the current layer's entry is read by the frozen DecoderLayer. All
     # entries are replaced with independent prefix-owned wrappers before return.
@@ -76,6 +86,14 @@ def verify(model, tokens, context, runtime, *, enabled=False):
         # A layer-wide dependency exposes nearby same-weight B1 operations.
         # MLX's eventual scheduling/cache behavior must be measured, not assumed.
         x = mx.concatenate(rows,axis=0)
+    if head_project is not None:
+        # Preserve original M1 norm rounding; only the final projection shares rows.
+        normalized = mx.concatenate([model.norm(x[t:t+1]) for t in range(T)],axis=0)
+        need(normalized.shape == (T,5120) and normalized.dtype == mx.bfloat16,'original row norms')
+        logits = head_project(normalized,model.lm_head.weight,model.lm_head.scales)
+        need(logits is not None and logits.shape == (T,248320) and logits.dtype == mx.bfloat16,
+             'explicit head reuse rejected or returned an incomplete vocabulary')
+        return Output(logits,prefixes)
     logits=[]
     for t in range(T):
         row=model.norm(x[t:t+1])

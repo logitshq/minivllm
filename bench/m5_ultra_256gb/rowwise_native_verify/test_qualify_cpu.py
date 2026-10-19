@@ -56,8 +56,8 @@ class Tests(unittest.TestCase):
             self.assertEqual(error.exception.code,2); self.assertFalse(out.exists())
 
     def test_unsealed_sources_fail_before_source_or_model_load(self):
-        plan=dict(schema='Rowwise-native-verifier-plan-v1',qualifier_sha256='pending',candidate={},
-                  bridge={},e024_plan={},deadline_s=1800)
+        plan=dict(schema='Rowwise-native-verifier-plan-v2',qualifier_sha256='pending',candidate={},
+                  bridge={},head_projection={},e024_plan={},deadline_s=1800)
         with patch.object(q,'BRIDGE_SHA','UNSEALED'),patch.object(q,'sha',side_effect=AssertionError('no hash/load yet')), \
              self.assertRaisesRegex(ValueError,'UNSEALED'):
             q.validate(plan)
@@ -187,6 +187,46 @@ class Tests(unittest.TestCase):
             for flag in ('forward_prefix_qualified','compiled_qualified','rollback_qualified','http_qualified','performance_qualified'):
                 self.assertFalse(result[flag])
             self.assertFalse(result['source_model_pins_rechecked'])
+
+
+    def test_counted_head_requires_live_parameters_exactly_once_and_retains_failure(self):
+        mx=SimpleNamespace(bfloat16='mlx.core.bfloat16'); row={}
+        tensor=lambda shape,dtype:SimpleNamespace(shape=shape,dtype=dtype)
+        x=tensor((2,5120),mx.bfloat16); w=tensor((248320,640),'mlx.core.uint32'); scales=tensor((248320,320),'mlx.core.uint8')
+        model=SimpleNamespace(lm_head=SimpleNamespace(weight=w,scales=scales)); calls=[]
+        def project(*args): calls.append(args); return tensor((2,248320),mx.bfloat16)
+        call=q.counted_head(project,mx,model,2,row)
+        self.assertEqual(row['head_projection'],dict(calls=0,status='NOT_CALLED'))
+        with self.assertRaisesRegex(ValueError,'live head'): call(x,tensor(w.shape,w.dtype),scales)
+        self.assertEqual(calls,[]); call(x,w,scales)
+        self.assertEqual(row['head_projection']['status'],'RETURNED'); self.assertEqual(row['head_projection']['calls'],1)
+        with self.assertRaisesRegex(ValueError,'exactly one'): call(x,w,scales)
+        failed={}; call=q.counted_head(lambda *args:None,mx,model,2,failed)
+        with self.assertRaisesRegex(ValueError,'admitted'): call(x,w,scales)
+        self.assertEqual(failed['head_projection']['status'],'CALLED'); self.assertEqual(failed['head_projection']['calls'],1)
+
+    def test_explicit_projector_reaches_candidate_and_cleanup_after_failure(self):
+        projector=object(); events=[]
+        def verify(*args,**kwargs):
+            self.assertIs(kwargs['head_project'],projector); events.append('verify'); raise RuntimeError('head rejected')
+        with self.assertRaisesRegex(RuntimeError,'head rejected'):
+            q.checked_call(SimpleNamespace(verify=verify),None,None,None,None,head_project=projector,
+                before=lambda:events.append('before'),evaluate=lambda value:events.append('eval'),
+                after=lambda:events.append('after'),compare=lambda:events.append('compare'))
+        self.assertEqual(events,['before','verify','after','compare'])
+
+    def test_actual_sealed_sources_validate_without_device_or_model_payload(self):
+        parent=Path(q.__file__).resolve().parents[3]
+        old=parent/'.artifacts/m5-ultra-256gb/long-decode-graph-v1-inputs/qualification-plan.json'
+        self.assertEqual(q.sha(old),bridge.OLD_PLAN_SHA)
+        plan=dict(schema='Rowwise-native-verifier-plan-v2',qualifier_sha256=q.sha(q.__file__),
+            candidate=dict(path=str(q.HERE/'candidate.py'),sha256=q.CANDIDATE_SHA),
+            bridge=dict(path=str(q.BRIDGE),sha256=q.BRIDGE_SHA),head_projection=dict(path=str(q.HEAD),sha256=q.HEAD_SHA),
+            e024_plan=dict(path=str(old),sha256=bridge.OLD_PLAN_SHA),deadline_s=1800)
+        self.assertEqual(len(q.validate(plan)),7)
+        for field in ('candidate','head_projection','bridge'):
+            broken={**plan,field:{**plan[field],'sha256':'0'*64}}
+            with self.subTest(field=field),self.assertRaises(ValueError): q.validate(broken)
 
 
 if __name__=='__main__': unittest.main()

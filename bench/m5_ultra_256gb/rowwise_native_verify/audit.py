@@ -16,7 +16,9 @@ import struct
 HERE = Path(__file__).resolve().parent
 RAW = HERE.parent/'long_decode_isolation/audit_raw.py'
 RAW_SHA = 'b3bffc7bd261b9b347b5d299d965273ff2406a92c27576747867aa515be62261'
-CANDIDATE_SHA = '5903f60ceef9ff5429e21c0c3d38b6ac67a6a25423d71a6cafc47715ac0f6b34'
+CANDIDATE_SHA = '4ce1b1720dc256b01d30a0f9b19b109bde9949050e98b50a31d308f9e71c8f15'
+HEAD = HERE.parent/'nvfp4_multirow_reuse/candidate.py'
+HEAD_SHA = 'ee9c5eef0e1282125310ee6661be1ec5ce64dc93a82add48a6d6c17f8958816f'
 BRIDGE = HERE.parent/'exact_verifier_bridge/qualify.py'
 BRIDGE_SHA = 'eda7001a1a9b08231ad3111f8b7b677b5a6d464cb065ee444dc23a4b99babd0f'
 E024_SHA = '5025d37768a5fa74d6e3e256a96ff8b8e4e92b31837183d5ffe031d9473e7123'
@@ -82,17 +84,19 @@ def literal(path,name):
 def identities(child,complete,plan_sha):
     plan=read(child/'plan.json')
     need(sha(child/'plan.json')==plan_sha==complete['plan_sha256'],'actual registered child plan SHA')
-    need(set(plan)=={'schema','qualifier_sha256','candidate','bridge','e024_plan','deadline_s'}
-         and plan['schema']=='Rowwise-native-verifier-plan-v1','exact rowwise plan')
+    need(set(plan)=={'schema','qualifier_sha256','candidate','bridge','head_projection','e024_plan','deadline_s'}
+         and plan['schema']=='Rowwise-native-verifier-plan-v2','exact rowwise plan')
     need(finite(plan['deadline_s']) and 0<plan['deadline_s']<=1800,'bounded deadline')
     need(plan['qualifier_sha256']==sha(HERE/'qualify.py'),'actual qualifier source')
     for key,path,digest in (('candidate',HERE/'candidate.py',CANDIDATE_SHA),('bridge',BRIDGE,BRIDGE_SHA)):
         same(plan[key],dict(path=str(path),sha256=digest),'fixed adjacent '+key)
         need(sha(path)==digest and literal(HERE/'qualify.py',key.upper()+'_SHA')==digest,'sealed '+key+' binding')
+    same(plan['head_projection'],dict(path=str(HEAD),sha256=HEAD_SHA),'fixed multirow head kernel')
+    need(sha(HEAD)==HEAD_SHA==literal(HERE/'qualify.py','HEAD_SHA'),'sealed head kernel binding')
     old=ref_json(plan['e024_plan'],E024_SHA); inherited=ref_json(old['e023_plan'],E023_SHA)
     same(read(child/'inherited-e024-plan.json'),old,'retained inherited E024 plan')
     same(read(child/'inherited-e023-plan.json'),inherited,'retained inherited E023 plan')
-    sources={str(HERE/'qualify.py'):plan['qualifier_sha256'],str(HERE/'candidate.py'):CANDIDATE_SHA,str(BRIDGE):BRIDGE_SHA,
+    sources={str(HEAD):HEAD_SHA,str(HERE/'qualify.py'):plan['qualifier_sha256'],str(HERE/'candidate.py'):CANDIDATE_SHA,str(BRIDGE):BRIDGE_SHA,
         str(HERE.parent/'long_decode_isolation/qualify.py'):'9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e',
         str(HERE.parent/'long_decode_graph/qualify.py'):'c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7',
         str(CORE):CORE_SHA,old['e023_qualifier']['path']:'26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf'}
@@ -200,17 +204,26 @@ def events(child,complete):
         need(not stream.read(1),'unexpected event after release')
 
 
+def head_receipt(row,width):
+    same(row,dict(calls=1,status='EVALUATED',
+        x=dict(shape=[width,5120],dtype='mlx.core.bfloat16'),
+        weight=dict(shape=[248320,640],dtype='mlx.core.uint32'),
+        scales=dict(shape=[248320,320],dtype='mlx.core.uint8'),
+        output=dict(shape=[width,248320],dtype='mlx.core.bfloat16')),'actual evaluated head call receipt')
+
+
 def audit(child,plan_sha256):
     child=Path(child).resolve(); seen={}
     result=dict(schema='Rowwise-native-verifier-independent-v1',status='INCOMPLETE',forward_prefix_qualified=False,
         **{key:False for key in EXCLUDED},child_directory=str(child),plan_sha256=plan_sha256,cases=[],raw_files=0,
         limits=['Only nine fixed teacher-forced blocks and all42 prefixes; no acceptance/rollback, compile, HTTP or speed qualification.',
             'Pre-anchor arithmetic and separate device execution/storage ownership are source-bound producer receipts, not independently recomputed histories.',
+            'Head dispatch and live-array identity are source-bound producer receipts; numerical equality is recomputed from all saved output/state bytes.',
             'All parameter before/after original-byte receipts are compared; parameter payloads and model/runtime payloads are not rehashed here.',
             'Input preservation is recomputed from saved original bytes, including complete KV padding; no resource/lifecycle qualification.'])
     try:
         complete=read(child/'complete.json'); terminal_sha=sha(child/'complete.json')
-        need(complete['schema']=='Rowwise-native-verifier-result-v1','fixed producer schema')
+        need(complete['schema']=='Rowwise-native-verifier-result-v2','fixed producer schema')
         result['producer_status']=complete['status']; result['producer_error']=complete.get('error')
         need(complete['status'] in ('PASS','FAIL','INCOMPLETE'),'known producer status')
         if not complete.get('sources'):
@@ -264,11 +277,13 @@ def audit(child,plan_sha256):
                     need(item['status']=='PASS','prefix checks incomplete')
                 if len(outputs)!=width: raise FileNotFoundError('missing candidate prefixes: '+tag)
                 same(outputs,row['candidate_greedy_ids'],'candidate full saved vocabulary'); same(outputs,seed['raw_ids'][seed['start']:seed['start']+width],'causal output IDs')
+                head_receipt(row['head_projection'],width)
                 need(row['status']=='PASS','case checks incomplete'); result['cases'].append(dict(case=tag,prefixes=width,output_tensor_pairs=pairs)); cursor+=1
             need(seed['status']=='PASS','reference seed checks incomplete')
         result['raw_files']=len(seen)
         if complete['status']!='PASS' or len(blocks)!=3 or cursor!=9:
             result.update(status='FAIL' if complete['status']=='FAIL' else 'INCOMPLETE',first_failure='producer did not complete all nine cases and postchecks'); return result
+        need(type(complete['head_projection_calls']) is int and complete['head_projection_calls']==9,'nine actual head invocation receipts')
         need(complete['forward_prefix_qualified'] is True and complete['source_model_pins_rechecked'] is True
              and complete['device_cleanup_completed'] is True and complete['device_run'] is True
              and not complete.get('error') and not complete.get('first_device_error'),'complete producer gates')
@@ -283,7 +298,7 @@ def audit(child,plan_sha256):
         need(all(sha(child/path)==digest for path,digest in seen.items()) and sha(child/'complete.json')==terminal_sha,'evidence changed during audit')
         result.update(status='PASS',forward_prefix_qualified=True,complete_sha256=terminal_sha,audit_sha256=sha(__file__),
             output_tensor_pairs=sum(row['output_tensor_pairs'] for row in result['cases']),reference_vocabulary_rows=24,candidate_vocabulary_rows=42,
-            parameter_value_receipts=1349,ledger_sha256=sha(child/'events.jsonl'))
+            head_projection_calls=9,parameter_value_receipts=1349,ledger_sha256=sha(child/'events.jsonl'))
     except BitMismatch as exc: result.update(status='FAIL',first_failure=str(exc),first_difference=exc.details)
     except FileNotFoundError as exc: result['first_failure']='missing required evidence: '+str(exc)
     except Exception as exc: result.update(status='FAIL',first_failure=type(exc).__name__+': '+str(exc))

@@ -1,0 +1,44 @@
+{
+  "schema": "E038-references-v1",
+  "actual_device_execution": {
+    "tool_id": "2ed171",
+    "session_id": 22339,
+    "completion_tool_id": "13fd56",
+    "returncode": 0,
+    "provenance": "Coordinator-reported tool/session references; retained lease job and execution final independently record exit 0."
+  },
+  "original_roots": {
+    "probe": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-v1",
+    "execution": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-execution-v1",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-lease-v1",
+    "cpu": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-cpu-v1"
+  },
+  "offline_attempts": [
+    {
+      "tool_id": "084c9a",
+      "returncode": 1,
+      "reason": "Reader did not handle observed null safetensors metadata; raw archive integrity PASS."
+    },
+    {
+      "tool_id": "e1af9e",
+      "returncode": 0,
+      "reason": "Explicit null metadata handling; original archive reused."
+    }
+  ],
+  "render_attempts": [
+    {
+      "tool_id": "4d9f02",
+      "returncode": 0,
+      "retained": "attempts/render-v1-layout",
+      "reason": "PNG inspection found crowded labels/footer."
+    },
+    {
+      "tool_id": "eb1ffb",
+      "returncode": 0,
+      "reason": "Layout repaired and inspected."
+    }
+  ],
+  "scope": "Real projection weights and synthetic BF16 inputs; local speed screening only.",
+  "full_model_qualified": false,
+  "engine_pareto_point": false
+}

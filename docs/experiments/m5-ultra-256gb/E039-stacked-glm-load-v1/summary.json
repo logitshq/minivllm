@@ -1,0 +1,64 @@
+{
+  "schema": "GLM-stacked-closed-load-archive-v1",
+  "status": "FAIL",
+  "owner_plan_sha256": "ca2a2e280c29aea239c640d41a5b1e9e6af71138cabfac6f02e22d887967affa",
+  "registration_receipt_sha256": "9d3cd2212212d6000d7f87e5a07947108bf0053dc26274e6387aacd11a1450aa",
+  "journal_state": "RESTORED",
+  "owner_status": "FAIL",
+  "audit_statuses": {
+    "restoration": "PASS",
+    "closed_diagnostic": "FAIL"
+  },
+  "execution_returncodes": {
+    "stop_returncode": 0,
+    "owner_returncode": 1,
+    "recovery_returncode": 0
+  },
+  "observed_diagnostic_complete": false,
+  "requests": null,
+  "resources": null,
+  "restoration_qualified": true,
+  "full_model_correctness_qualified": false,
+  "chat_quality_qualified": false,
+  "performance_qualified": false,
+  "physical_resource_safety_qualified": false,
+  "errors": {
+    "owner": [
+      {
+        "phase": "glm-official-load",
+        "type": "MonitorError",
+        "message": "Live monitoring incomplete; see monitor.json and retained lane/command receipts",
+        "time": 1792426900.3198268
+      }
+    ],
+    "restoration": null,
+    "closed_diagnostic": "load diagnostic did not complete"
+  },
+  "evidence_roots": {
+    "owner": {
+      "exists": true,
+      "files": 668
+    },
+    "cold-journal": {
+      "exists": true,
+      "files": 68
+    },
+    "execution": {
+      "exists": true,
+      "files": 15
+    },
+    "registration": {
+      "exists": true,
+      "files": 5
+    },
+    "analysis": {
+      "exists": true,
+      "files": 7
+    },
+    "inputs": {
+      "exists": true,
+      "files": 4
+    }
+  },
+  "scope": "Original official oMLX EnginePool ordinary GLM glm5_next load and four sequential C1 plain completions capped 8/32/32/32, normal EOS, repeated greedy token receipt checks and drained queues; actual outcome is given by the unchanged audits. Raw observed physical resources and two-lane monitor receipts retained. No mini-engine, full-state/reference, independent text decode, HTTP, chat-quality, performance or physical-safety qualification. No weight payload was copied or rehashed by this archive."
+}

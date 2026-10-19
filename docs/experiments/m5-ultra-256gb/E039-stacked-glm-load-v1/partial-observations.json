@@ -1,0 +1,99 @@
+{
+  "scope": "Unqualified producer/raw observations, retained even when diagnostic fails.",
+  "cold_admission": {
+    "owner_pid": 52470,
+    "baseline_swap_bytes": 1978925056,
+    "baseline_swapouts": 782442,
+    "last_sample_monotonic": 304204.87434125,
+    "cold_system_bytes": 24103616512,
+    "scope": "Observed cold physical prerequisite only; no model fit or service absence assertion."
+  },
+  "last_physical_sample": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-stacked-owner-v1/physical-0018/sample.json",
+    "parsed": {
+      "pid": 52523,
+      "top_bytes": 148261492112,
+      "aux_current_bytes": 148245616016,
+      "aux_peak_bytes": 148245616016,
+      "current_bytes": 148261492112,
+      "peak_bytes": 148261492112,
+      "system_bytes": 171148001280,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 1980172861,
+      "swapouts": 782518
+    },
+    "started_at": 1792426899.83327,
+    "ended_at": 1792426900.308928
+  },
+  "swap_deltas": {
+    "bytes": 1247805,
+    "swapouts": 76,
+    "scope": "System-wide counters; swap bytes derived by original parser from reported sysctl units. No process attribution."
+  },
+  "monitor": {
+    "status": "INCOMPLETE",
+    "errors": [
+      {
+        "lane": "physical",
+        "type": "ValueError",
+        "message": "runtime swap growth"
+      }
+    ],
+    "read_commands_settled": true,
+    "unjoined_workers": [],
+    "unresolved_read_commands": []
+  },
+  "observed_memory_boundaries": [
+    {
+      "kind": "memory",
+      "time": 1792426887.301611,
+      "monotonic": 304206.33622825,
+      "pid": 52523,
+      "thread": 8373239680,
+      "phase": "before_pool_load",
+      "active_bytes": 1032,
+      "cache_bytes": 4,
+      "peak_bytes": 1036,
+      "memory_limit_bytes": 261134011596
+    },
+    {
+      "kind": "memory",
+      "time": 1792426887.4250398,
+      "monotonic": 304206.459656708,
+      "pid": 52523,
+      "thread": 6106492928,
+      "phase": "official_vlm_load:before",
+      "active_bytes": 1032,
+      "cache_bytes": 4,
+      "peak_bytes": 1036,
+      "memory_limit_bytes": 261134011596,
+      "path": "/Users/ryanli/code/minivllm/.artifacts/models/GLM-5.3-Flash-4bit-stacked-v1",
+      "lazy": false,
+      "trust_remote_code": false
+    },
+    {
+      "kind": "memory",
+      "time": 1792426900.326259,
+      "monotonic": 304219.360797708,
+      "pid": 52523,
+      "thread": 8373239680,
+      "phase": "before_pool_shutdown",
+      "active_bytes": 159942916072,
+      "cache_bytes": 4289494612,
+      "peak_bytes": 159945275368,
+      "memory_limit_bytes": 261134011596
+    }
+  ],
+  "loaded_engine_receipt_present": false,
+  "request_receipts_present": 0,
+  "actual_request_count": 0,
+  "batch_before_events": 0,
+  "official_load_before_events": 1,
+  "official_load_after_events": 0,
+  "pool_load_returned_events": 0,
+  "probe_terminal_present": false,
+  "cooperative_shutdown_receipt_present": false,
+  "child_returncode": -9,
+  "scope_note": "No loader-return, await-success or request completion is inferred from restoration or shutdown-start events."
+}

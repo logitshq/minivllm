@@ -44,6 +44,7 @@ class StateArray:
 
 class MX:
     int32, int64, bfloat16, float32 = 'i32', 'i64', 'bf16', 'f32'
+    uint32, uint8 = 'u32', 'u8'
 
     @staticmethod
     def concatenate(arrays, axis=0):
@@ -326,6 +327,64 @@ class Tests(unittest.TestCase):
         self.assertNotEqual(first.logits.values,second.logits.values)
         self.assertEqual(tuple(layer.weight for layer in model.layers),parameters)
         self.assertEqual(state_value(canonical.caches),before)
+
+
+    def head_model(self):
+        model=Model(); model.cfg.vocab_size=248320
+        model.lm_head=SimpleNamespace(q=model.cfg.quantization,in_features=5120,out_features=248320,
+            weight=Array((248320,640),'u32',[29]),scales=Array((248320,320),'u8',[1]))
+        return model
+
+    def test_head_reuse_keeps_all_nine_prefix_traversals_and_m1_norms(self):
+        for used in (257,1023,1024):
+            for width in (2,4,8):
+                with self.subTest(used=used,width=width):
+                    model=self.head_model(); ctx=seed(used); tokens=Array((width,),'i32',range(width)); calls=[]
+                    before=state_value(ctx.caches)
+                    def project(x,w,scales):
+                        self.assertEqual(x.shape,(width,5120)); self.assertIs(w,model.lm_head.weight); self.assertIs(scales,model.lm_head.scales)
+                        calls.append(x); return Array((width,248320),'bf16',[v+w.values[0] for v in x.values])
+                    actual=c.verify(model,tokens,ctx,RUNTIME,enabled=True,head_project=project)
+                    expected=token_major_reference(Model(),tokens,ctx)
+                    self.assertEqual(actual.logits.values,expected.logits.values); self.assertEqual(len(calls),1)
+                    self.assertEqual([state_value(s) for s in actual.prefixes],[state_value(s) for s in expected.prefixes])
+                    self.assertEqual(sum(e[0]=='norm' for e in model.events),width)
+                    self.assertFalse(any(e[0].endswith('-head') for e in model.events)); self.assertEqual(state_value(ctx.caches),before)
+
+    def test_enabled_head_rejection_or_error_never_falls_back_or_mutates_input(self):
+        for returned in (None,Array((2,12),'bf16',[1,2]),Array((2,248320),'f32',[1,2]),RuntimeError('kernel failure')):
+            model=self.head_model(); ctx=seed(); before=state_value(ctx.caches); calls=[]
+            def project(*args):
+                calls.append(1)
+                if isinstance(returned,Exception): raise returned
+                return returned
+            with self.subTest(returned=type(returned).__name__),self.assertRaises((ValueError,RuntimeError)):
+                c.verify(model,Array((2,),'i32',[1,2]),ctx,RUNTIME,enabled=True,head_project=project)
+            self.assertEqual(calls,[1]); self.assertEqual(state_value(ctx.caches),before)
+            self.assertFalse(any(e[0].endswith('-head') for e in model.events))
+
+    def test_head_arm_checks_metadata_before_layers_and_uses_live_replacements(self):
+        for change in (lambda m:setattr(m.cfg,'tie_word_embeddings',True),lambda m:setattr(m.lm_head,'biases',object()),
+                       lambda m:setattr(m.lm_head.weight,'shape',(4,640)),lambda m:setattr(m.lm_head.scales,'dtype','f32')):
+            model=self.head_model(); change(model)
+            with self.assertRaisesRegex(ValueError,'untied NVFP4'):
+                c.verify(model,Array((2,),'i32',[1,2]),seed(),RUNTIME,enabled=True,head_project=lambda *args:None)
+            self.assertEqual(model.events,[])
+        model=self.head_model(); calls=[]
+        def project(x,w,s):
+            calls.append((w,s)); return Array((2,248320),'bf16',[v+w.values[0] for v in x.values])
+        first=c.verify(model,Array((2,),'i32',[1,2]),seed(),RUNTIME,enabled=True,head_project=project)
+        model.lm_head.weight=Array((248320,640),'u32',[31])
+        second=c.verify(model,Array((2,),'i32',[1,2]),seed(),RUNTIME,enabled=True,head_project=project)
+        self.assertIsNot(calls[0][0],calls[1][0]); self.assertIs(calls[1][0],model.lm_head.weight)
+        self.assertEqual(tuple(v+2 for v in first.logits.values),second.logits.values)
+
+    def test_head_project_is_not_inspected_for_off_or_rejected_domains(self):
+        class Poison:
+            def __getattribute__(self,name): raise AssertionError('unexpected head access')
+            def __call__(self,*args): raise AssertionError('unexpected head invocation')
+        self.assertIsNone(c.verify(None,None,None,None,head_project=Poison()))
+        self.assertIsNone(c.verify(Model(),Array((1,),'i32',[1]),seed(),RUNTIME,enabled=True,head_project=Poison()))
 
 
 if __name__ == '__main__': unittest.main()
