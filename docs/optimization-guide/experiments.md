@@ -1225,3 +1225,17 @@ filename、cached-file-like、F_NOCACHE-file-like三条路径；默认描述命�
 tar SHA1f1cc198e8632886c8f97a17295bae73fd06900ca69da3381f6c4705d535efc9。
 96份24,476,249,870B原始快照留本地，以path/size/已被独立reader验证的SHA引用；
 归档本身只回读metadata，不重复22.8GiB扫描。全部原始attempt/父v1准备保留；正式v16仍不变。
+
+
+## E043：native M8 shared wide局部数值通过，速度明确拒绝 · 2026-10-19
+
+计划先提交cc3b2bb，SHA9f0dbea058ee647c0ccf16eb1f9e3badf86a06686e9385ca4ae81d81130ac2ed。
+实际device/owner退出0；两T8 case真实head/up权重、合成BF16输入，baseline为一次native M8，
+不是八次M1。四矩阵2,125,824 pairwise原word全部finite/equal，独立复算400timings/10组ratio。
+Head native/candidate=0.5458300112，up=0.6937056746，全部组<1，因此拒绝速度采用。
+五child物理观察、六indexed资源样本+after，pressure1/swap无增长，原52818同身份T→S恢复。
+[92成员归档](../experiments/m5-ultra-256gb/E043-native-m8-shared-screen-v1/README.md)首轮audit/archive均PASS，
+tar SHA635604cff085caa99c8866f1c211db531c87f5d0ff2dc917015d970d39d72ecb。
+765,296,968B真实权重slice排除，全部实际输入输出/计时保留；CPU8与11两次PASS准备保留。
+新candidate默认OFF，无full-prefix/engine/HTTP资格；E040不同oracle，不能当同基线回退。
+热重复局部访问与整模型缓存驻留可能不同，无cache容量/硬件计数器归因。v16完全不变。

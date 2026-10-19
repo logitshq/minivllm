@@ -1274,3 +1274,16 @@ E042 shared-head实际producer已完成：九case/42prefix/九head调用PASS，5
 正式前沿仍[v16](../optimization-guide/progress/2026-10-19-v16/README.md)：C1低于历史oMLX
 约4.77%，C8最好点仅高约1.34%；C2–7和GLM正式点未知，目标尚未达成。
 本条仅追加Git交接内容，没有执行新的fetch/push，也不声称M4 agent已阅读或已测收益。
+
+
+### 2026-10-19 — E043 native M8 shared wide：正确但更慢，拒绝采用
+
+一次native M8矩阵调用作基线，新shared wide保留其kl16运算合同，不混用八次M1。
+真实head/up权重、合成输入两case输出全部BF16 exact/finite；独立复算400原timings，
+head native/candidate=0.5458300112，up=0.6937056746，十个组ratio全部<1。
+[92成员完整小证据](../experiments/m5-ultra-256gb/E043-native-m8-shared-screen-v1/README.md)
+保留CPU8/11、源、实际执行及原输入/输出，真实模型slice不入Git。服务52818已同身份恢复。
+候选默认OFF，因速度拒绝；没有full-prefix/HTTP/engine速度点，也不继承E042资格。
+E040的逐行B1基线与本轮nativeM8不同，不把两个ratio拼成配对回退图。
+热重复权重的缓存驻留未知，不据此断言整模型流式复用一定无效；但这版实现不值得采用。
+035教程已记录该负结果，正式v16保持原样。此追加没有执行fetch/push或声称M4已阅读。

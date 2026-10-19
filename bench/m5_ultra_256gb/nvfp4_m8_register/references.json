@@ -1,0 +1,18 @@
+{
+  "schema": "native-m8-register-source-reference-v1",
+  "paths": {
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp4.h": "e3159945d7e5ae24f7a1ca9c4875b2a5d15cfb6952405df24a0df1bb2622a93a",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp8.h": "9a9d77a6295f66b4ada4311c3b855b6ecb7a2b38f28623109e3c61d2e17e81ae",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/nax-prefill-source-review/quantized.cpp": "36b79607ee01bc213511dcdad590b2dc3b96099300551cbc3e7e6c7e13ba5982",
+    "/Users/ryanli/code/minivllm/THIRD_PARTY_NOTICES/MLX.txt": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01"
+  },
+  "upstream": "https://github.com/ml-explore/mlx/tree/v0.32.3",
+  "arithmetic": "Verbatim fp_qmv_wide_impl<BF16,16,4,8,16>; native helper changes only vecs_per_tg instantiation from 4 to 8",
+  "dispatch": "One 64-thread group per four output columns, one eight-vector tile; native uses two four-vector tiles",
+  "binary_compile_options_verified": false,
+  "numerical_qualified": false,
+  "performance_qualified": false,
+  "wrapper_source": "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.3/mlx/backend/common/metal_kernel.cpp",
+  "wrapper_evidence": "write_signature passes *_shape as const constant int*, matching the unchanged native const constant int& arguments"
+}

@@ -1,6 +1,6 @@
 # 035：权重复用要测实际形状，局部赢了再接整模型
 
-2026-10-19。本章记录 E038、E039、E040 的真实结果，并追加 E041 小型 CPU I/O、E042 固定 prefix 资格结果。目标仍是手写专用推理引擎，
+2026-10-19。本章记录 E038、E039、E040 的真实结果，并追加 E041 小型 CPU I/O、E042 固定 prefix 资格与 E043 native M8 负结果。目标仍是手写专用推理引擎，
 在相同正确性合同下，每个目标 batch 都明显领先 oMLX、Lithos。**这些实验没有新增
 引擎 Pareto 点。** 新 shared kernel 仍默认 OFF；head T4/T8 的局部收益值得继续，
 但不能代表全部 projection、整模型或 HTTP 已经更快。
@@ -135,6 +135,25 @@ Head 约占逻辑投影权重/scale 扫描字节的 4.9621%，不是测得的耗
 不能把 1.258× head 加速乘到整模型，也不能把这个字节份额直接塞进 Amdahl 公式
 当作运行时间份额。真正的大方向仍是减少主要 decoder 投影的重复权重/状态流量，
 用局部实测筛掉不合算方案，再验证端到端；生产路径保持小且可开关。
+
+## E043：换成真实 native M8 基线后，shared wide 候选明显更慢
+
+[E043实际筛选](../../experiments/m5-ultra-256gb/E043-native-m8-shared-screen-v1/README.md)
+改为一次原生 `quantized_matmul(X[8,5120], W, S)` 作为 oracle，不用八次M1。
+新默认OFF候选保留 native wide 的kl16/four-dot/scale/shuffle运算合同，四输出列共
+11,520B shared权重/scale，八token并行。两组真实head/up权重、合成BF16输入均
+输出exact/finite；独立复核四矩阵、2,125,824对word和全部400条计时通过。
+
+速度仍然失败：head的native M8/candidate中位数为 **0.545830×**，up为
+**0.693706×**，十组ratio全部小于1。因此拒绝按这次筛选采用该候选，不进入昂贵
+整模型资格。原服务52818已同身份恢复，原数据、源码和两个CPU准备attempt均保留。
+这不是数值失败；也不能把E040的1.258×与此0.546×写成同一基线的配对退步。
+新M8 kernel没有继承E042旧shared-head的prefix资格。
+
+源代码节省一份全局权重tile不等于实际更快：本候选也付出了额外shared访问、线程、
+barrier和每token解码。没有硬件计数器就不能给慢因定案；重复同权重的热局部筛选
+不代表整模型流式访问，但其明显负结果已足够拒绝本次采用。下一项候选若存在，
+仍应先做同一实际baseline的最小字节与速度筛选，不用代码体积或理论load次数代替测量。
 
 正式三引擎前沿仍完全保持 [v16](../progress/2026-10-19-v16/README.md)：
 C1 minivllm 48.357772 tok/s 对 oMLX 50.781568，约低 4.77%；C8 最好点

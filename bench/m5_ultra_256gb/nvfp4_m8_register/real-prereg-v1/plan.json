@@ -1,0 +1,43 @@
+{
+  "schema": "native-m8-register-projection-pause-v1",
+  "pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real-prereg-v1/execute.py": "3c9a6261203ca562e86640d79eb488c510d61cc5ca42dbcf3affd0a762b5a013",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real_projection_probe_v1.py": "734bb1b7e14a054d2be90846bb3527d574f4c368f2b26dc26138a78b2c98820a",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/candidate.py": "361fe483cde02a13c505287652249016f74b16d1d179c3741da843a3060cf71a",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp_quantized.h": "359a1ea9008f74cc15c61e9d39c6300dcffb9cfb9cc0ebd59ec7c00b789d719f",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp4.h": "e3159945d7e5ae24f7a1ca9c4875b2a5d15cfb6952405df24a0df1bb2622a93a",
+    "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/include/mlx/backend/metal/kernels/fp8.h": "9a9d77a6295f66b4ada4311c3b855b6ecb7a2b38f28623109e3c61d2e17e81ae"
+  },
+  "service_pid": 52818,
+  "service_identity": "Mon Oct 19 09:22:08 2026 omlx-server",
+  "environment": {},
+  "child": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real_projection_probe_v1.py",
+    "--run",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-register-real-projection-v1"
+  ],
+  "owner_deadline_seconds": 160,
+  "physical": {
+    "system_limit_bytes": 257698037760,
+    "child_limit_bytes": 4294967296,
+    "swap_growth_bytes": 0,
+    "swapouts_growth": 0,
+    "probe_seconds": 5,
+    "max_sample_gap_seconds": 5,
+    "hard_allocation_cap": false
+  },
+  "scope": "Native-M8 nv4 tiles versus native nv8 register tile, two real-weight projections with synthetic BF16 inputs; no full-model or HTTP speed.",
+  "outputs": {
+    "execution": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-register-projection-execution-v1",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/m8-register-projection-lease-v1"
+  }
+}
