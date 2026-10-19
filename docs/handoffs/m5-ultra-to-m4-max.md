@@ -1232,3 +1232,45 @@ GLM无损离线重排真实退出0：113446→4960张量，378个expert stacks�
 继续按手写specialized engine推进：减少权重/状态流量和设备等待，模块可开关；
 每个目标batch都要正确且明显领先oMLX和Lithos，局部略快不算完成。
 本次fetch的M4分支仍无未合入提交。以上通过Git同步，不声称M4 agent已阅读。
+
+
+### 2026-10-19 — E038/E039/E040 实际结果：保留小候选，先筛掉不赚钱的复用
+
+E038第一版register多行NVFP4复用数值全部通过，但六case×两基线的十二个median
+baseline/candidate ratio全部小于1，因此因速度拒绝，旧head full-model计划不自动跑。
+Head T2/4/8对原生为0.931513/0.922243/0.820917；失败性能结果和首轮离线reader
+null-metadata错误、修图历史均已归档。原candidate和原计划保留。
+
+E040换成K5120专用shared tile：两输出列共5,760B权重/scale，token各有SIMD group，
+B1算术不变，仍默认OFF；每token仍各自解码，不能说只解码一次。
+Head T4/T8对独立native M1为1.169216×/1.258057×，对custom B1为
+1.095522×/1.136031×，全部五组均大于1；head T2仍慢，up仍mixed。
+六组原始BF16全词表/投影字节finite+equal，2,400samples逐条独立重算通过。
+[图和完整证据](../experiments/m5-ultra-256gb/E040-shared-projection-screen-v1/README.md)；
+[035教程](../optimization-guide/tutorials/035-shared-weight-screen-and-load-boundary.md)。
+两个局部screen各自在暂停原oMLX期间执行并恢复；不是正式引擎、speculation或HTTP收益。
+M5设备/MLX身份有显式guard，M4不能直接去掉guard就宣称已适用，应独立移植和资格验证。
+
+E039真实58分片GLM派生checkpoint进入官方loader后再次触发原swap增长门槛，
++1,247,805B/+76 Swapouts；0完成请求/0token batch事件，无loader返回或loaded-engine证明。
+子进程严格回收，stop0/owner1/recover0，RESTORED，独立恢复PASS，服务替代为52818；
+诊断仍FAIL。E036离线字节重排证明仍有效，但尚未解决实际加载，未放宽gate。
+[E039证据](../experiments/m5-ultra-256gb/E039-stacked-glm-load-v1/README.md)。
+
+E041 tiny CPU file-like I/O已实际3/3 PASS_BYTES_ONLY并提交327441c：276B fixture、
+U32/F16/BF16原字节保留，两个file-like关闭fd后CPU eval/save仍成功且无后续I/O事件。
+不代表大模型加载或内存收益；cached/uncached file-like对照仍需独立验证。
+[小型I/O证据](../experiments/m5-ultra-256gb/E041-glm-filelike-io-smoke-v1/README.md)。
+
+E042 shared-head实际producer已完成：九case/42prefix/九head调用PASS，58.171206s；
+47个子进程物理样本、lease闭环、服务52818恢复。独立字节审计也实际退出0，
+96原始快照、5418输出tensorpairs、全部42prefix与1349参数值收据通过。
+父v2计划SHA55dbd68bb64a80b3091e629a20b6915a19d3ab92fb92c0b29417700aaefa6b7a；
+父v1仅CPU准备未运行并保留，模型/子计划冻结。40项CPU准备与实际设备资格分别保存。
+仅forward_prefix_qualified=true，full_model/compiled/rollback/HTTP/performance均false。
+[E042 metadata归档](../experiments/m5-ultra-256gb/E042-shared-head-prefix-v1/README.md)包含474成员；
+96份24,476,249,870B原始hidden/state/logits保留在M5本地，附path/size/已审计SHA，
+不把22.8GiB打包进Git。下一道门是verifier总成本与接受/回滚/HTTP范围，未有加速结论。
+正式前沿仍[v16](../optimization-guide/progress/2026-10-19-v16/README.md)：C1低于历史oMLX
+约4.77%，C8最好点仅高约1.34%；C2–7和GLM正式点未知，目标尚未达成。
+本条仅追加Git交接内容，没有执行新的fetch/push，也不声称M4 agent已阅读或已测收益。

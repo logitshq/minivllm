@@ -45,6 +45,7 @@ M5 Ultra 256 GiB 和 Qwen3.8-27B / GLM-5.3-Flash 的结构，在正确性不变�
 [GLM加载与内存：失败也要闭环](tutorials/032-glm-load-and-memory.md) ·
 [E035 C1 profile and real weight reuse](tutorials/033-profile-before-large-optimization.md) ·
 [E036/E037 actual GLM layout and 36 GPU byte checks](tutorials/034-real-weight-reuse-and-glm-layout.md) ·
+[E038–E040：真实形状筛选、shared head 局部收益与 GLM 加载失败](tutorials/035-shared-weight-screen-and-load-boundary.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
@@ -57,6 +58,16 @@ C8组合ON为170.3790 tok/s，没有稳定超过同轮OFF。当前Native C8最�
 E024-only的170.6198 tok/s，比历史oMLX约高1.34%，远未达到大幅领先目标。
 组合已取得真实速度点，不能再写成未测试。[v16](progress/2026-10-19-v16/README.md)保留全部50进程观察、18组汇总；
 C2–7和GLM正式前沿仍未知。跨引擎历史点不是本轮同时配对测量。
+
+最新局部实验：E038 第一版多行复用 kernel 数值通过，但十二个 median ratio 全部更慢，
+因速度拒绝。E040 新 shared kernel 的 head T4/T8 对原生逐行调用为 1.169216×/1.258057×，
+对 custom B1 为 1.095522×/1.136031×；head T2 和 up 的结果仍混合。候选默认 OFF，
+输入仍为合成 BF16；[局部结果图](../experiments/m5-ultra-256gb/E040-shared-projection-screen-v1/local-projection-speed.png)
+不进入上述正式 v16 前沿。E039 重排后的 GLM 官方加载仍因 swap 增长门槛失败，
+0 请求，服务恢复独立 PASS。E041 小型 CPU file-like smoke 已实际 3/3 字节通过；
+E042 shared head 的实际固定 prefix 与独立字节审计均通过：九case/42prefix/96快照。
+只取得 forward-prefix 资格；接受/回滚、完整模型通用资格、HTTP与速度仍未通过。
+详见[035 教程](tutorials/035-shared-weight-screen-and-load-boundary.md)。
 
 ## 1. 先算每个 token 为哪些字节和等待付钱
 
@@ -213,7 +224,7 @@ C8/C32/C64配对吞吐约+14.7%/+12.3%/+14.5%，只改两个核心文件。
 2026-10-18：[E030组合教程](tutorials/031-gdn-graph-composition.md)的42次参数诊断/37请求整模型检查、独立资源与恢复审计全部通过。实际C1/C8 HTTP捕获/回放已启动；无新增速度点，当前Pareto仍见v15。
 
 
-### GLM更新：2026-10-19
+### GLM v3历史记录：2026-10-19（后续E039见035教程）
 
 v3实际加载被系统swap增长231.62 MiB门槛拒绝，0请求/0tokens；非OOM结论。
 子进程约182.45 GiB、系统约203.92 GiB，均低于本轮硬上限。底层加载线程在取消期间返回，

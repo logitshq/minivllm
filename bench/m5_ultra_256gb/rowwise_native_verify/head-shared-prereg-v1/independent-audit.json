@@ -1,0 +1,88 @@
+{
+  "schema": "Rowwise-native-verifier-independent-v1",
+  "status": "PASS",
+  "forward_prefix_qualified": true,
+  "compiled_qualified": false,
+  "rollback_qualified": false,
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "child_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/rowwise-head-shared-v1-child",
+  "plan_sha256": "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+  "cases": [
+    {
+      "case": "cases/used257/T2",
+      "prefixes": 2,
+      "output_tensor_pairs": 258
+    },
+    {
+      "case": "cases/used257/T4",
+      "prefixes": 4,
+      "output_tensor_pairs": 516
+    },
+    {
+      "case": "cases/used257/T8",
+      "prefixes": 8,
+      "output_tensor_pairs": 1032
+    },
+    {
+      "case": "cases/used1023/T2",
+      "prefixes": 2,
+      "output_tensor_pairs": 258
+    },
+    {
+      "case": "cases/used1023/T4",
+      "prefixes": 4,
+      "output_tensor_pairs": 516
+    },
+    {
+      "case": "cases/used1023/T8",
+      "prefixes": 8,
+      "output_tensor_pairs": 1032
+    },
+    {
+      "case": "cases/used1024/T2",
+      "prefixes": 2,
+      "output_tensor_pairs": 258
+    },
+    {
+      "case": "cases/used1024/T4",
+      "prefixes": 4,
+      "output_tensor_pairs": 516
+    },
+    {
+      "case": "cases/used1024/T8",
+      "prefixes": 8,
+      "output_tensor_pairs": 1032
+    }
+  ],
+  "raw_files": 96,
+  "limits": [
+    "Only nine fixed teacher-forced blocks and all42 prefixes; no acceptance/rollback, compile, HTTP or speed qualification.",
+    "Pre-anchor arithmetic and separate device execution/storage ownership are source-bound producer receipts, not independently recomputed histories.",
+    "Head dispatch and live-array identity are source-bound producer receipts; numerical equality is recomputed from all saved output/state bytes.",
+    "All parameter before/after original-byte receipts are compared; parameter payloads and model/runtime payloads are not rehashed here.",
+    "Input preservation is recomputed from saved original bytes, including complete KV padding; no resource/lifecycle qualification."
+  ],
+  "producer_status": "PASS",
+  "producer_error": null,
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/candidate.py": "d1826b3c4d07d44adbae071ef2da43197348c09b2d8be1035eb1a0c2788d132e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/qualify.py": "0a7d81f835be9a1ac2328feec8a455bd85464077cd1661be0350e1772cde701a",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/candidate.py": "4ce1b1720dc256b01d30a0f9b19b109bde9949050e98b50a31d308f9e71c8f15",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/exact_verifier_bridge/qualify.py": "eda7001a1a9b08231ad3111f8b7b677b5a6d464cb065ee444dc23a4b99babd0f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/audit_raw.py": "b3bffc7bd261b9b347b5d299d965273ff2406a92c27576747867aa515be62261"
+  },
+  "complete_sha256": "dc7840b0efd2e5cf58f7e2fec2006489a017148f6da17a8d4b234b92ef528237",
+  "audit_sha256": "cbae7b60f1aa10c2be6965d5ab4cc8bdc104edf61822802c889e01a2969299af",
+  "output_tensor_pairs": 5418,
+  "reference_vocabulary_rows": 24,
+  "candidate_vocabulary_rows": 42,
+  "head_projection_calls": 9,
+  "parameter_value_receipts": 1349,
+  "ledger_sha256": "494d698f778711543850be0fbc78cee7703002ce15b6c8c641f14c7c3e2b7c50"
+}

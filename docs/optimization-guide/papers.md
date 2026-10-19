@@ -321,3 +321,6 @@ or reason to adopt a broad serving framework.
 
 
 2026-10-17: [Draft budgets and state ownership](research/2026-10-17-draft-budget-and-state-ownership.md) adds October14 bounded-drafter and October6 DLoop primary-source reading, September21 branch-state constraints, and a pinned BaseRT public-interface audit. Source hypotheses only; no new timing point.
+
+
+2026-10-19: [Expert coactivation and fixed-GLM applicability](../../bench/reviews/2026-10-19-moe-speculation-coactivation.md) records the primary September paper and a proposed natural-route byte-overlap screen. The GLM loader must first pass; this is neither a routing change nor a new measured speed result.

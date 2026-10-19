@@ -84,3 +84,11 @@ operations forbidden. It covers 13 candidate, 13 qualifier and 14 auditor
 methods. Fake arrays prove mechanism only, not native arithmetic, MLX storage
 ownership, compiler behavior or device performance. The original CPU snapshots
 remain in earlier experiment artifacts; this change does not promote them.
+
+
+2026-10-19 shared-kernel successor: current `qualify.py`/`audit.py` bind the
+separate `nvfp4_multirow_shared/candidate.py`; only HEAD path/SHA changed.
+`head-shared-prereg-v1/` is the new CPU-validated plan; 40/40 focused tests passed
+in `cpu-head-shared-v1/`. The old plan and `cpu-head-reuse-v2/sources/` retain the
+previous source identity and pending/no-adoption decision. No full-prefix device
+result is implied by either CPU result; use the exact new command arrays.

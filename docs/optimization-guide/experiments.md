@@ -1159,3 +1159,69 @@ MLX观测peak71516160B。原oMLX已恢复、离线GLM复制已结束；本轮无
 正式Pareto保持v16，没有把正确性通过画成加速测点。
 
 E037 independent offline audit v1 exited1 because it wrongly required empty stderr; the actual104B stderr was only the known mx.metal.device_info deprecation warning. The failed source/commands/logs/results are retained. With only that exact warning accepted, v2 exited0:36cases/108BF16 matrices,559104pairwise word comparisons all finite and byte-identical. No device rerun or numeric gate relaxation. E036 independent header/index/manifest audit also PASS;164metadata members verified.
+
+
+## E038：真实投影筛选数值通过，第一版多行 kernel 因速度拒绝 · 2026-10-19
+
+实际使用 head K5120/N248320、layer0 up K5120/N17408 权重，合成 BF16 输入，T2/4/8。
+六组逐行原生 M1/custom B1/candidate 全输出字节相同且有限，2,400 原始计时完整。
+十二个 median baseline/candidate 比值全部低于1；head 对原生为
+0.931513/0.922243/0.820917，up 为0.931196/0.857143/0.801152。
+默认OFF候选因速度拒绝，不自动执行旧整模型资格。原服务39988暂停后同身份恢复。
+[独立审计/图/原始证据](../experiments/m5-ultra-256gb/E038-real-projection-screen-v1/README.md)
+保留70成员，权重payload排除。首次离线reader因null metadata格式假设失败和首张图
+排版修复均保留；不是设备数值失败。无新引擎Pareto点。
+
+## E039：58分片重排GLM实际加载失败，恢复通过 · 2026-10-19
+
+真实E036派生checkpoint进入官方loader；物理0018触发不变的swap增长门槛：
+全系统+1,247,805B（约1.19MiB），Swapouts+76，pressure1。
+子进程148,261,492,112B、system171,148,001,280B，均低于观测门槛，但不能据此认定fit。
+0完成请求/0token batch事件，无loader-after、loaded-engine、complete或协作shutdown收据。
+子进程最终-9且严格回收；stop0/owner1/recover0，RESTORED，服务恢复52818。
+独立恢复PASS、诊断FAIL，不能将E036字节通过或恢复通过升级为加载/性能通过。
+[860成员实际证据](../experiments/m5-ultra-256gb/E039-stacked-glm-load-v1/README.md)
+归档SHA ff464cfdfe7df2def16148d0fb229c8c08cb441cd6db45597a4922c7261985f3。
+原始计数器是全系统观察，不证明具体换页原因；较低的提前中止footprint不是内存收益。
+
+## E040：shared tile 保留B1算术，head T4/T8有局部收益 · 2026-10-19
+
+新默认OFF候选将两个输出列的packed权重/scale装入5,760B shared tile，token SIMD
+并行，各自解码/累加。K5120、T2/4/8、BF16专用，无生产安装。
+六case/18完整矩阵三路finite且exact；独立复算2,400timings/60group ratios。
+Head T4/T8对native为1.169216/1.258057，对custom为1.095522/1.136031；
+两个T下所有五组均赢两个基线。Head T2为0.991231/0.928371；up T2/T4/T8
+对native为0.910122/1.002304/0.995709，对custom为0.985041/1.022069/1.073009，仍mixed。
+每组20对AB/BA，ratio为组内各自延迟median之比，再取五组median；不是独立进程置信区间。
+服务52818同身份T→R恢复、health通过，所存资源pressure1且swap/Swapouts不增长。
+[图和78成员独立归档](../experiments/m5-ultra-256gb/E040-shared-projection-screen-v1/README.md)
+首轮audit/render均PASS，tar SHA57800d10708e247bba3dac8d6f4635644fede945b22275f8e2a2a3f6d106fcb7。
+这只是实际权重+合成hidden的局部投影筛选，不是整模型、HTTP或engine Pareto。
+
+[035教程](tutorials/035-shared-weight-screen-and-load-boundary.md)串联上述三轮实际结果。
+正式v16的50观察/18组与三引擎前沿完全不变；后续资格进度另记如下。
+
+## E041：tiny CPU file-like I/O实际3/3字节通过 · 2026-10-19
+
+实际MLX0.32.3/CPU，276B fixture（84B payload，U32[9]/F16[11]/BF16[13]）依次通过
+filename、cached-file-like、F_NOCACHE-file-like三条路径；默认描述命令与唯一实际run均退出0。
+同一fd在首个I/O前fcntl48返回0；两个file-like均关闭fd后CPU eval/save成功、关闭后I/O事件0。
+输入和三份输出原dtype/shape/字节独立复核相同，包含正负零、subnormal与有限极值。
+[实际证据](../experiments/m5-ultra-256gb/E041-glm-filelike-io-smoke-v1/README.md)已提交327441c。
+只取得小型API/字节/生命周期资格，不代表大分片内存、swap、官方loader或性能通过。
+后续cached-file-like与uncached-file-like对照才能隔离cache假设；filename的lazy时机不同。
+
+## E042：shared head固定prefix与独立字节审计实际PASS · 2026-10-19
+
+父head-prereg-v2计划SHA55dbd68bb64a80b3091e629a20b6915a19d3ab92fb92c0b29417700aaefa6b7a，
+实际启动工具e2753e/session60473→b38bd6退出0，producer九case/42prefix/九head调用PASS，
+58.171206s；47个子进程物理样本、lease闭环、原服务52818同身份恢复。
+独立字节审计c20a5f/session53351→09357a退出0，40.454174s；全部九case/42prefix、
+5418输出tensorpairs、96原始文件、九head调用与1349参数值收据核对通过。
+父v1仅CPU准备未运行，保留因子进程回收/环境审查修正的源；模型和子计划冻结。
+只有forward_prefix_qualified=true；full_model/compiled/rollback/HTTP/performance仍false，
+不代表接受/回滚协议或端到端收益。
+[474成员metadata归档](../experiments/m5-ultra-256gb/E042-shared-head-prefix-v1/README.md)首跑PASS，
+tar SHA1f1cc198e8632886c8f97a17295bae73fd06900ca69da3381f6c4705d535efc9。
+96份24,476,249,870B原始快照留本地，以path/size/已被独立reader验证的SHA引用；
+归档本身只回读metadata，不重复22.8GiB扫描。全部原始attempt/父v1准备保留；正式v16仍不变。
