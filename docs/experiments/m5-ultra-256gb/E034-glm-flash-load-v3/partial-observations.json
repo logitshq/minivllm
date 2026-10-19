@@ -1,0 +1,150 @@
+{
+  "scope": "Unqualified producer/raw observations, retained even when diagnostic fails.",
+  "cold_admission": {
+    "owner_pid": 34153,
+    "baseline_swap_bytes": 1664614400,
+    "baseline_swapouts": 743802,
+    "last_sample_monotonic": 272652.13677875,
+    "cold_system_bytes": 25051250688,
+    "scope": "Observed cold physical prerequisite only; no model fit or service absence assertion."
+  },
+  "last_physical_sample": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0031/sample.json",
+    "parsed": {
+      "pid": 34218,
+      "top_bytes": 195899489688,
+      "aux_current_bytes": 195821469080,
+      "aux_peak_bytes": 195821469080,
+      "current_bytes": 195899489688,
+      "peak_bytes": 195899489688,
+      "system_bytes": 218957332480,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 1907485573,
+      "swapouts": 758682
+    },
+    "started_at": 1792395355.1304379,
+    "ended_at": 1792395356.4330082
+  },
+  "swap_deltas": {
+    "bytes": 242871173,
+    "swapouts": 14880,
+    "scope": "System-wide counters; swap bytes derived by original parser from reported sysctl units. No process attribution."
+  },
+  "monitor": {
+    "status": "INCOMPLETE",
+    "errors": [
+      {
+        "lane": "physical",
+        "type": "ValueError",
+        "message": "runtime swap growth"
+      }
+    ],
+    "read_commands_settled": true,
+    "unjoined_workers": [],
+    "unresolved_read_commands": []
+  },
+  "probe": {
+    "status": "FAIL",
+    "completed_requests": [],
+    "error": {
+      "type": "CancelledError",
+      "message": "",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/load_probe.py\", line 441, in probe\n    engine = await pool.get_engine(MODEL_ID, runtime_settings=settings)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/engine_pool.py\", line 2453, in get_engine\n    await self._load_engine(\n    ...<3 lines>...\n    )\n  File \"/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/engine_pool.py\", line 3759, in _load_engine\n    await engine.start()\n  File \"/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/lib/python3.13/site-packages/omlx/engine/vlm.py\", line 2174, in start\n    self._vlm_model, self._processor = await loop.run_in_executor(\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        get_mlx_executor(), _load_vlm_sync\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nasyncio.exceptions.CancelledError\n"
+    },
+    "shutdown": {
+      "attempted": true,
+      "complete": false,
+      "load_attempted": true,
+      "load_await_returned": false,
+      "returned": true,
+      "retained_entries": [],
+      "engine_references_cleared": true,
+      "hook_restoration": {
+        "complete": true,
+        "restored": [
+          "_process_batch_responses",
+          "apply_moe_gate_up_fusion",
+          "materialize_lazy_state",
+          "load"
+        ],
+        "errors": [],
+        "active_at_restore": {},
+        "scope": "attribute identities restored; active old wrapper calls may still require outer hard reap"
+      },
+      "active_observed_calls": {},
+      "runtime_work_unsettled": true,
+      "outer_wait_reap_required": true
+    }
+  },
+  "observed_memory_boundaries": [
+    {
+      "kind": "memory",
+      "time": 1792395334.137291,
+      "monotonic": 272653.354213541,
+      "pid": 34218,
+      "thread": 8373239680,
+      "phase": "before_pool_load",
+      "active_bytes": 1032,
+      "cache_bytes": 4,
+      "peak_bytes": 1036,
+      "memory_limit_bytes": 261134011596
+    },
+    {
+      "kind": "memory",
+      "time": 1792395334.4071622,
+      "monotonic": 272653.624082958,
+      "pid": 34218,
+      "thread": 6116159488,
+      "phase": "official_vlm_load:before",
+      "active_bytes": 1032,
+      "cache_bytes": 4,
+      "peak_bytes": 1036,
+      "memory_limit_bytes": 261134011596,
+      "path": "/Users/ryanli/code/minivllm/.artifacts/models/huggingface/models--mlx-community--GLM-5.3-Flash-4bit/snapshots/fa04cbc3622b16aa7475404060b05e506d81bd4e",
+      "lazy": false,
+      "trust_remote_code": false
+    },
+    {
+      "kind": "memory",
+      "time": 1792395356.73436,
+      "monotonic": 272675.951152416,
+      "pid": 34218,
+      "thread": 8373239680,
+      "phase": "before_pool_shutdown",
+      "active_bytes": 195157120188,
+      "cache_bytes": 3403185748,
+      "peak_bytes": 195157120188,
+      "memory_limit_bytes": 261134011596
+    },
+    {
+      "kind": "memory",
+      "time": 1792395360.7528162,
+      "monotonic": 272679.96958475,
+      "pid": 34218,
+      "thread": 6116159488,
+      "phase": "official_vlm_load:after",
+      "active_bytes": 204148686728,
+      "cache_bytes": 5984321108,
+      "peak_bytes": 206754463624,
+      "memory_limit_bytes": 261134011596,
+      "path": "/Users/ryanli/code/minivllm/.artifacts/models/huggingface/models--mlx-community--GLM-5.3-Flash-4bit/snapshots/fa04cbc3622b16aa7475404060b05e506d81bd4e",
+      "lazy": false,
+      "trust_remote_code": false
+    },
+    {
+      "kind": "memory",
+      "time": 1792395360.861202,
+      "monotonic": 272680.077969708,
+      "pid": 34218,
+      "thread": 8373239680,
+      "phase": "after_pool_shutdown",
+      "active_bytes": 204148686720,
+      "cache_bytes": 8,
+      "peak_bytes": 206754463624,
+      "memory_limit_bytes": 261134011596
+    }
+  ],
+  "loaded_engine_receipt_present": false,
+  "request_receipts_present": 0
+}

@@ -1116,3 +1116,15 @@ C1中位数45.81897→48.35777tok/s；C8 170.46064→170.37898，无稳定增量
 154通过，GLM注册负例因期待ValueError而实际得到Refuse产生1error。
 生产代码正确拒绝尚未封存的前序证据；修复测试期待并将前序状态改成确定性fixture后单独重跑。
 这些CPU检查没有加载模型、使用GPU或赋予任何新性能资格；两次尝试与源码快照完整保留。
+
+
+## E034：GLM加载v3实际FAIL，服务恢复PASS · 2026-10-19
+
+实际计划dba39963057c9db9d8c77f40afbdae3df9d0b175b69812c9262632752cea9023先提交8c3a640再启动。
+stop0/owner1/recover0，状态RESTORED，服务21938→34623。物理样本0031触发runtime swap growth，
+系统swap比冷基线增加242,871,173B，Swapouts增加14,880；子进程182.45 GiB、系统203.92 GiB。
+底层官方加载线程在取消清理时返回，EnginePool await未正常返回，0请求、0tokens。
+独立恢复审计PASS/诊断审计FAIL，未得到GLM数值或性能资格。
+[032教程](tutorials/032-glm-load-and-memory.md)记录假设、原门槛、实际边界和下一步。
+首次离线审计wrapper因analysis目录已存在但为空而在启动审计前失败；修正目录创建后两个真实审计执行。
+首次归档程序拒绝模型目录symlink，未跟随或打包权重；保留失败后显式记录该已注册别名再归档。

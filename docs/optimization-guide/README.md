@@ -42,6 +42,7 @@ M5 Ultra 256 GiB 和 Qwen3.8-27B / GLM-5.3-Flash 的结构，在正确性不变�
 [E029 GDN 长路径预处理融合与37请求验证](tutorials/029-unbound-gdn-prework.md) ·
 [C1差距定位与下一项可证伪实验](tutorials/030-c1-gap-diagnosis.md) ·
 [GDN与长decode图组合、失败与重试记录](tutorials/031-gdn-graph-composition.md) ·
+[GLM加载与内存：失败也要闭环](tutorials/032-glm-load-and-memory.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
@@ -208,3 +209,11 @@ C8/C32/C64配对吞吐约+14.7%/+12.3%/+14.5%，只改两个核心文件。
 2026-10-17：[E024四组诊断教程](tutorials/024-decode-graph-dispatch.md)确认在B1/used257同长度编译全部逐位一致，改变补齐长度重现失败。无新速度点；下一步保持SDPA归约路径再验证。
 
 2026-10-18：[E030组合教程](tutorials/031-gdn-graph-composition.md)的42次参数诊断/37请求整模型检查、独立资源与恢复审计全部通过。实际C1/C8 HTTP捕获/回放已启动；无新增速度点，当前Pareto仍见v15。
+
+
+### GLM更新：2026-10-19
+
+v3实际加载被系统swap增长231.62 MiB门槛拒绝，0请求/0tokens；非OOM结论。
+子进程约182.45 GiB、系统约203.92 GiB，均低于本轮硬上限。底层加载线程在取消期间返回，
+不等同于EnginePool准入成功。模型进程已回收，外部oMLX服务已恢复且独立恢复PASS。
+见[032教程](tutorials/032-glm-load-and-memory.md)；GLM尚无我们的正式前沿。

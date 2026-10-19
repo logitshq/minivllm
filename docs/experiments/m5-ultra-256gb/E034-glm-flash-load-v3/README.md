@@ -1,0 +1,7 @@
+# E034: GLM official load v3 diagnostic
+
+Status: **FAIL**. Journal: `RESTORED`. Restoration: **PASS**; closed diagnostic: **FAIL**.
+
+Original official oMLX EnginePool ordinary GLM glm5_next load and four sequential C1 plain completions capped 8/32/32/32, normal EOS, repeated greedy token receipt checks and drained queues; actual outcome is given by the unchanged audits. Raw observed physical resources and two-lane monitor receipts retained. No mini-engine, full-state/reference, independent text decode, HTTP, chat-quality, performance or physical-safety qualification. No weight payload was copied or rehashed by this archive.
+
+This archive preserves failures and incomplete outcomes. `summary.json` reports the actual audit statuses without turning restoration into model or performance success. `evidence.tar.xz` retains owner, journal, execution, registration, analysis, and explicit registered text sources including original driver and monitor dependencies. `manifest.json` maps each member to its source and SHA256; archive verification rereads every member and original byte stream. Binary/runtime/model references remain in their original manifests; the one registered model-directory alias is retained as literal target/lstat in `model-alias-evidence.json`, never followed. No model directory is traversed. The original v1 symlink-refusal attempt and source are retained in `archive-attempt-v1/`.
