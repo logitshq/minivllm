@@ -1,0 +1,125 @@
+{
+  "mode": "cached-filelike",
+  "status": "PASS_BYTES_ONLY",
+  "load_returned_before_close": true,
+  "fd_closed_before_eval": true,
+  "post_close_io_events": 0,
+  "comparisons": {
+    "half": {
+      "dtype": "F16",
+      "shape": [
+        11
+      ],
+      "bytes": 22,
+      "exact_original_bytes": true,
+      "finite": true,
+      "signed_zeros": true,
+      "payload_sha256": "168500026163b3ae28a9cedd2fb5e3567f4d8dd67a9264f48c26bfe076456249"
+    },
+    "brain": {
+      "dtype": "BF16",
+      "shape": [
+        13
+      ],
+      "bytes": 26,
+      "exact_original_bytes": true,
+      "finite": true,
+      "signed_zeros": true,
+      "payload_sha256": "9c3e05d247cc95bccca149067dee91f0d0e67a2b3bb6e051d716faf23135bb4b"
+    },
+    "packed": {
+      "dtype": "U32",
+      "shape": [
+        9
+      ],
+      "bytes": 36,
+      "exact_original_bytes": true,
+      "finite": null,
+      "signed_zeros": null,
+      "payload_sha256": "87cd747a343f3428c2f54d8dd5339b52a9acd0218f4749be879676641c62603b"
+    }
+  },
+  "output": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-filelike-io-smoke-v1/cached-filelike.safetensors",
+    "bytes": 292,
+    "sha256": "12473e2954920de4b2a227c1f2fe9e3ef7d9e034f0674857cb553bdf16dabaab"
+  },
+  "fd_closed": true,
+  "policy": "ordinary-file-descriptor",
+  "io_events": [
+    {
+      "operation": "readinto",
+      "offset": 0,
+      "requested": 8,
+      "returned": 8
+    },
+    {
+      "operation": "seek",
+      "args": [
+        0,
+        2
+      ],
+      "result": 276
+    },
+    {
+      "operation": "seek",
+      "args": [
+        8,
+        0
+      ],
+      "result": 8
+    },
+    {
+      "operation": "readinto",
+      "offset": 8,
+      "requested": 184,
+      "returned": 184
+    },
+    {
+      "operation": "seek",
+      "args": [
+        214,
+        0
+      ],
+      "result": 214
+    },
+    {
+      "operation": "readinto",
+      "offset": 214,
+      "requested": 26,
+      "returned": 26
+    },
+    {
+      "operation": "seek",
+      "args": [
+        192,
+        0
+      ],
+      "result": 192
+    },
+    {
+      "operation": "readinto",
+      "offset": 192,
+      "requested": 22,
+      "returned": 22
+    },
+    {
+      "operation": "seek",
+      "args": [
+        240,
+        0
+      ],
+      "result": 240
+    },
+    {
+      "operation": "readinto",
+      "offset": 240,
+      "requested": 36,
+      "returned": 36
+    },
+    {
+      "operation": "explicit-close",
+      "closed": true
+    }
+  ]
+}

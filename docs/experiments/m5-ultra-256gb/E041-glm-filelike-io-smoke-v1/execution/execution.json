@@ -1,0 +1,32 @@
+{
+  "attempts": [
+    {
+      "name": "default",
+      "command": [
+        "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_filelike_io_smoke_v1/smoke.py"
+      ],
+      "returncode": 0,
+      "started_unix": 1792427393.942409,
+      "elapsed_seconds": 0.02828192710876465
+    },
+    {
+      "name": "actual",
+      "command": [
+        "/Users/ryanli/code/minivllm/.artifacts/omlx-baseline/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_filelike_io_smoke_v1/smoke.py",
+        "--run",
+        "--out",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-filelike-io-smoke-v1"
+      ],
+      "returncode": 0,
+      "started_unix": 1792427393.970878,
+      "elapsed_seconds": 0.06575798988342285
+    }
+  ],
+  "script_sha256": "f08ad8ad837dd90a814529a52016e77ef98783c7b32523de695071f9aacaeba8"
+}

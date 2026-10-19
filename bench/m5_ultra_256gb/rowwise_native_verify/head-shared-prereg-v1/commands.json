@@ -1,0 +1,33 @@
+{
+  "child": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/qualify.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/plan.json",
+    "--plan-sha256",
+    "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/rowwise-head-shared-v1-child"
+  ],
+  "audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/audit.py",
+    "--child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/rowwise-head-shared-v1-child",
+    "--plan-sha256",
+    "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+    "--out",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/independent-audit.json"
+  ],
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "scope": "Root-owned cold/resource/lifecycle execution required; these commands have not been run."
+}

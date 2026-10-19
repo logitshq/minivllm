@@ -1,0 +1,68 @@
+{
+  "schema": "shared-head-prefix-pause-v1",
+  "pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/head-prereg-v2/execute.py": "80eec1522a35d0f7c9ed283cb6511bce724a2a7b1580dbd5968637dd0115c3b5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/plan.json": "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/commands.json": "fe6d94ae8eff2ff4e7a7e5e34e52869bcf2a62ba4e335975d0fd88827afabacb",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/candidate.py": "d1826b3c4d07d44adbae071ef2da43197348c09b2d8be1035eb1a0c2788d132e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/audit.py": "cbae7b60f1aa10c2be6965d5ab4cc8bdc104edf61822802c889e01a2969299af",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/candidate.py": "4ce1b1720dc256b01d30a0f9b19b109bde9949050e98b50a31d308f9e71c8f15",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/prepare_head.py": "bdb6f54762252a27d067c5c965d593c9796f120c70f57e715ef294f7bc1fbef1",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/qualify.py": "0a7d81f835be9a1ac2328feec8a455bd85464077cd1661be0350e1772cde701a",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/test_audit_cpu.py": "a6dd80212d8d52567869c1adb3de25202f707f246894194a57182216f433d1d7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/test_candidate_cpu.py": "d41bd9598d07e00ad1ce36305fc15b05d8e507d74e31c2ebdc3f71eb00db1b0a",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/test_qualify_cpu.py": "141e2f30da91b814c9aff11c8dbcc30ce406f0021b8234892b52344216be3157"
+  },
+  "service_pid": 52818,
+  "service_identity": "Mon Oct 19 09:22:08 2026 omlx-server",
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "child": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/qualify.py",
+    "--plan",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/plan.json",
+    "--plan-sha256",
+    "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/rowwise-head-shared-v1-child"
+  ],
+  "audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/audit.py",
+    "--child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/rowwise-head-shared-v1-child",
+    "--plan-sha256",
+    "f6aeddb2af9e0958e16b45c03c1360cd96f5662ad65c43700809382f2ff3df92",
+    "--out",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/head-shared-prereg-v1/independent-audit.json"
+  ],
+  "owner_deadline_seconds": 1840,
+  "physical": {
+    "system_limit_bytes": 257698037760,
+    "child_limit_bytes": 68719476736,
+    "swap_growth_bytes": 0,
+    "swapouts_growth": 0,
+    "probe_seconds": 5,
+    "max_sample_gap_seconds": 5,
+    "hard_allocation_cap": false
+  },
+  "scope": "Nine full-model forward-prefix numerical cases only; original oMLX temporarily paused then resumed; no acceptance/rollback/HTTP/speed qualification.",
+  "outputs": {
+    "execution": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/shared-head-prefix-execution-v1",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/shared-head-prefix-lease-v1"
+  }
+}
