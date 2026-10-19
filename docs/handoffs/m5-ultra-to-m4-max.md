@@ -1202,3 +1202,14 @@ E034实际更新：GLMv3在加载过程中因系统swap+231.62MiB/Swapouts+14880
 非OOM，0请求/0tokens。子进程182.45GiB/系统203.92GiB，服务21938→34623恢复且独立PASS。
 官方loader线程在取消中返回不等于EnginePool加载成功。下一步查wired/allocator/临时加载成本，
 同时准备Qwen C1的三个profile模式。详见032教程。前沿仍是v16，GLM没有速度点。
+
+
+### 2026-10-19 — large-change candidates and actual GLM layout preparation
+
+Qwen C1 profiling completed all48 requests across off/runner/full; actual driver returned0 and service34623 restored39988. Independent restoration and three-mode closure audits both PASS. Detailed interval analysis is in progress; these observations do not create new Pareto points. The mission remains a small specialized engine with repeatable, substantial wins at every target batch, correct original outputs, Qwen3.8-27B + GLM5.3Flash.
+
+New `nvfp4_multirow_reuse` is107lines/defaultOFF: T2/4/8 share each loaded/dequantizedweight across separate B1-order accumulators, instead of relying on adjacent launches hitting cache. Five guarded CPU mechanism tests passed; no Metal, arithmetic, full-prefix or speed qualification. GPU testing must compare native MLX B1 AND customB1 independently, then completeprefix state.
+
+GLM offline exact-byte repacker now passes15 guarded CPU checks including actual Darwin F_NOCACHE unaligned IO and exact pinned container/MTP/DSV32 fakebyte paths. Actual headerplan SHA323ff8da5d2faf6bb774b1c03f3a52f49198cbb9898f21c91ac25aa546a4c50a passed:113446→4960tensors,378backbone stacks,203976457080payloadB. MTP45 remains byteidentical and still uses nine officialstack tensors. Independent review found no blocker. Payloadcopy will run only after this commit, into a fresh~190GiB derived checkpoint with fullsourceSHA+independentreadback; original checkpoint stays unchanged. Actual loader/memoryfit andGLM speed remain unqualified.
+
+Fresh fetch found no unmerged M4 commits; its branch remains94c070e. These Git notes make the result available, without claiming the other agent has read it.

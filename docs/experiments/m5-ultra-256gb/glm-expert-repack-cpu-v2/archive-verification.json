@@ -1,0 +1,67 @@
+{
+  "schema": "glm-expert-repack-cpu-archive-verification-v1",
+  "status": "PASS",
+  "attempts": [
+    {
+      "attempt": "glm-expert-repack-cpu-v1",
+      "result_sha256": "baf196b7b4bd5575eab167c26fd65d30fad522cc87b63ec4afd7bbb401564f16",
+      "status": "PASS",
+      "tests_run": 11,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "exception": null,
+      "forbidden": [],
+      "source_unchanged": true,
+      "elapsed_seconds": 0.03271920798579231,
+      "scope": "Tiny CPU files only; exact reviewed original DSV32 sanitize AST on fake packed arrays; no model/backend/mmap/process/network operations; no real payload copying or device qualification."
+    },
+    {
+      "attempt": "glm-expert-repack-cpu-v2",
+      "result_sha256": "f7874fac9020e392062283214d80e4c968e6511a04840e1fb0ce8e0e97c8055d",
+      "status": "PASS",
+      "tests_run": 15,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "exception": null,
+      "forbidden": [],
+      "source_unchanged": true,
+      "elapsed_seconds": 0.0673939170083031,
+      "platform": "darwin",
+      "scope": "Tiny CPU files only; reviewed container/language/DSV32/MTP sanitize and quantization alias AST on fake packed arrays; real local payload IO with Darwin F_NOCACHE including unaligned offset and short tail; no model/backend/mmap/process/network operations; no actual model payload copying or device qualification."
+    }
+  ],
+  "failed_cpu_attempts": [],
+  "members": 31,
+  "raw_bytes": 488590,
+  "archive": {
+    "filename": "evidence.tar.xz",
+    "bytes": 112024,
+    "sha256": "9860434049c2f42a760d80c53a6f8929f95f27dc5732fb26545232237a88442d"
+  },
+  "manifest_sha256": "b658e317ade53173de2725de391e907f08df528dae80a8ead600170ad12f657d",
+  "actual_header_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_expert_repack/prereg-v1/plan.json",
+    "sha256": "323ff8da5d2faf6bb774b1c03f3a52f49198cbb9898f21c91ac25aa546a4c50a",
+    "summary": {
+      "experts": 288,
+      "input_tensors": 113446,
+      "layers": 45,
+      "output_tensors": 4960,
+      "payload_bytes": 203976457080,
+      "source_file_bytes": 203992076296,
+      "stacked_tensors": 378
+    },
+    "status": "HEADER_PLAN_ONLY"
+  },
+  "every_member_reread_sha_verified": true,
+  "every_original_file_rechecked": true,
+  "tree_membership_verified": true,
+  "actual_payload_copy": false,
+  "device_executed": false,
+  "model_loaded": false,
+  "numerical_qualified": false,
+  "performance_qualified": false,
+  "scope": "Archive integrity only. Retains both original CPU results and actual header-only plan; no full-checkpoint repack, model evaluation or memory-fit/performance claim. No failed CPU attempt in these two runs; source-edit syntax errors are documented separately in the retained review."
+}
