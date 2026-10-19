@@ -18,7 +18,7 @@ M5 Ultra 256 GiB 和 Qwen3.8-27B / GLM-5.3-Flash 的结构，在正确性不变�
 主图使用完整请求 p50/p95 延迟与总输出吞吐；交互速度图必须写明定义，
 `512 / E2E p50` 不冒充截图的 P90 interactivity，也不把成本效率改名成吞吐。
 
-入口：[论文与设计笔记](papers.md) · [当前对手兼容性矩阵](research/2026-10-17-frontier-candidates.md) · [新近状态与运行时论文](research/2026-10-17-state-and-runtime-papers.md) · [逐步实验账本](experiments.md) ·
+入口：[论文与设计笔记](papers.md) · [专用运行时与真实请求速度](research/2026-10-19-specialization-and-real-speed.md) · [当前对手兼容性矩阵](research/2026-10-17-frontier-candidates.md) · [新近状态与运行时论文](research/2026-10-17-state-and-runtime-papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
 [D512 三引擎吞吐—延迟前沿线（v16，2026-10-19）](progress/2026-10-19-v16/README.md) ·
 [历史 cap32 分面图](progress/2026-10-17-v5/README.md) ·

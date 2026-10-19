@@ -1,0 +1,1337 @@
+{
+  "schema": "E034-raw-memory-diagnostic-v1",
+  "qualification": "DIAGNOSTIC_ONLY_FAILED_LOAD",
+  "origin": {
+    "event": "official_vlm_load:before",
+    "monotonic": 272653.624082958,
+    "pid": 34218
+  },
+  "guard_rejection": {
+    "monotonic": 272675.650846208,
+    "elapsed_s": 22.02676325000357,
+    "error": {
+      "type": "ValueError",
+      "message": "runtime swap growth"
+    },
+    "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/monitor/monitor.json",
+    "failed_sample_retained": true
+  },
+  "baseline": {
+    "observation": "cold-1",
+    "swap_used_bytes": 1664614400,
+    "swapouts": 743802
+  },
+  "rows": [
+    {
+      "observation": "cold-0",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/cold-0/sample.json",
+      "pid": 34153,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272647.788707041,
+      "ended_monotonic": 272647.817068875,
+      "elapsed_start_s": -5.835375916969497,
+      "elapsed_end_s": -5.807014082965907,
+      "sample_seconds": 0.028361834003590047,
+      "child_footprint_bytes": null,
+      "system_footprint_bytes": 24514019328,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13406358,
+          "Pages active": 1464774,
+          "Pages inactive": 1418694,
+          "Pages wired down": 370075,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1385826,
+          "Anonymous pages": 1552826,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "cold-1",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/cold-1/sample.json",
+      "pid": 34153,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272652.111880916,
+      "ended_monotonic": 272652.13677875,
+      "elapsed_start_s": -1.5122020419803448,
+      "elapsed_end_s": -1.4873042079852894,
+      "sample_seconds": 0.024897833995055407,
+      "child_footprint_bytes": null,
+      "system_footprint_bytes": 25051250688,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13372835,
+          "Pages active": 1465656,
+          "Pages inactive": 1418580,
+          "Pages wired down": 402830,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1385855,
+          "Anonymous pages": 1553565,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0000",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0000/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272652.306635083,
+      "ended_monotonic": 272652.334419666,
+      "elapsed_start_s": -1.317447874986101,
+      "elapsed_end_s": -1.2896632920019329,
+      "sample_seconds": 0.027784582984168082,
+      "child_footprint_bytes": 16040440,
+      "system_footprint_bytes": 25066930176,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13371326,
+          "Pages active": 1468942,
+          "Pages inactive": 1420164,
+          "Pages wired down": 399469,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1385901,
+          "Anonymous pages": 1558389,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0001",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0001/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272652.852053541,
+      "ended_monotonic": 272652.879581,
+      "elapsed_start_s": -0.7720294169848785,
+      "elapsed_end_s": -0.7445019579608925,
+      "sample_seconds": 0.027527459023986012,
+      "child_footprint_bytes": 69124792,
+      "system_footprint_bytes": 24948490240,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13380100,
+          "Pages active": 1477555,
+          "Pages inactive": 1434097,
+          "Pages wired down": 368102,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1384757,
+          "Anonymous pages": 1582124,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0002",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0002/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272653.389998,
+      "ended_monotonic": 272653.419475583,
+      "elapsed_start_s": -0.23408495797775686,
+      "elapsed_end_s": -0.20460737496614456,
+      "sample_seconds": 0.029477583011612296,
+      "child_footprint_bytes": 146441032,
+      "system_footprint_bytes": 25250906112,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13363218,
+          "Pages active": 1447460,
+          "Pages inactive": 1424751,
+          "Pages wired down": 426523,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1383188,
+          "Anonymous pages": 1542124,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0003",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0003/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272653.947342875,
+      "ended_monotonic": 272653.976233125,
+      "elapsed_start_s": 0.3232599170296453,
+      "elapsed_end_s": 0.3521501670475118,
+      "sample_seconds": 0.028890250017866492,
+      "child_footprint_bytes": 392856584,
+      "system_footprint_bytes": 25483608064,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 13348248,
+          "Pages active": 1461830,
+          "Pages inactive": 1422168,
+          "Pages wired down": 429800,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1383893,
+          "Anonymous pages": 1553144,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0004",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0004/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272654.489478333,
+      "ended_monotonic": 272654.581163375,
+      "elapsed_start_s": 0.8653953750035726,
+      "elapsed_end_s": 0.9570804170216434,
+      "sample_seconds": 0.09168504201807082,
+      "child_footprint_bytes": 7507498480,
+      "system_footprint_bytes": 32233504768,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 12316665,
+          "Pages active": 1604857,
+          "Pages inactive": 1814669,
+          "Pages wired down": 907642,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 1785693,
+          "Anonymous pages": 1696760,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0005",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0005/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272655.102831208,
+      "ended_monotonic": 272655.173735833,
+      "elapsed_start_s": 1.4787482499959879,
+      "elapsed_end_s": 1.5496528750518337,
+      "sample_seconds": 0.07090462505584583,
+      "child_footprint_bytes": 16652310888,
+      "system_footprint_bytes": 41702916096,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 11402579,
+          "Pages active": 1661535,
+          "Pages inactive": 2274683,
+          "Pages wired down": 1322369,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 2238021,
+          "Anonymous pages": 1751348,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0006",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0006/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272655.693896291,
+      "ended_monotonic": 272655.779113,
+      "elapsed_start_s": 2.0698133330442943,
+      "elapsed_end_s": 2.155030042049475,
+      "sample_seconds": 0.08521670900518075,
+      "child_footprint_bytes": 21822888920,
+      "system_footprint_bytes": 46796423168,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 10503896,
+          "Pages active": 1997434,
+          "Pages inactive": 2735814,
+          "Pages wired down": 1424107,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 2700716,
+          "Anonymous pages": 2085586,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0007",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0007/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272656.301338916,
+      "ended_monotonic": 272656.380553916,
+      "elapsed_start_s": 2.677255958027672,
+      "elapsed_end_s": 2.7564709580037743,
+      "sample_seconds": 0.07921499997610226,
+      "child_footprint_bytes": 31491726944,
+      "system_footprint_bytes": 56408883200,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9682789,
+          "Pages active": 2367168,
+          "Pages inactive": 3192421,
+          "Pages wired down": 1418537,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 3159070,
+          "Anonymous pages": 2453715,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0008",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0008/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272656.900145625,
+      "ended_monotonic": 272656.987299333,
+      "elapsed_start_s": 3.2760626670205966,
+      "elapsed_end_s": 3.363216375000775,
+      "sample_seconds": 0.0871537079801783,
+      "child_footprint_bytes": 40706023344,
+      "system_footprint_bytes": 65510391808,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 8651141,
+          "Pages active": 2812163,
+          "Pages inactive": 3655971,
+          "Pages wired down": 1541988,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 3622551,
+          "Anonymous pages": 2898669,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0009",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0009/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272657.503170291,
+      "ended_monotonic": 272657.601609583,
+      "elapsed_start_s": 3.8790873330435716,
+      "elapsed_end_s": 3.977526625036262,
+      "sample_seconds": 0.09843929199269041,
+      "child_footprint_bytes": 45382738128,
+      "system_footprint_bytes": 70536429568,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 7750293,
+          "Pages active": 3083682,
+          "Pages inactive": 4122148,
+          "Pages wired down": 1705077,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 4088912,
+          "Anonymous pages": 3170009,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0010",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0010/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272658.122443625,
+      "ended_monotonic": 272658.220740208,
+      "elapsed_start_s": 4.498360667028464,
+      "elapsed_end_s": 4.596657250018325,
+      "sample_seconds": 0.09829658298986033,
+      "child_footprint_bytes": 54748439216,
+      "system_footprint_bytes": 79907028992,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 6844667,
+          "Pages active": 3669049,
+          "Pages inactive": 4596312,
+          "Pages wired down": 1550917,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 4563343,
+          "Anonymous pages": 3755295,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0011",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0011/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272658.733626666,
+      "ended_monotonic": 272658.842587125,
+      "elapsed_start_s": 5.109543708036654,
+      "elapsed_end_s": 5.218504167045467,
+      "sample_seconds": 0.1089604590088129,
+      "child_footprint_bytes": 64293987616,
+      "system_footprint_bytes": 89458016256,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 5718889,
+          "Pages active": 4213514,
+          "Pages inactive": 5070836,
+          "Pages wired down": 1657747,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 5037961,
+          "Anonymous pages": 4299757,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0012",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0012/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272659.354210833,
+      "ended_monotonic": 272659.470893375,
+      "elapsed_start_s": 5.7301278749946505,
+      "elapsed_end_s": 5.846810417016968,
+      "sample_seconds": 0.11668254202231765,
+      "child_footprint_bytes": 69154154048,
+      "system_footprint_bytes": 94234181632,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 4872411,
+          "Pages active": 4590447,
+          "Pages inactive": 5539296,
+          "Pages wired down": 1658692,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 5506510,
+          "Anonymous pages": 4676683,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0013",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0013/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272659.98820825,
+      "ended_monotonic": 272660.099811666,
+      "elapsed_start_s": 6.364125292049721,
+      "elapsed_end_s": 6.475728708028328,
+      "sample_seconds": 0.11160341597860679,
+      "child_footprint_bytes": 78196680640,
+      "system_footprint_bytes": 103029325824,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 4005261,
+          "Pages active": 5222442,
+          "Pages inactive": 6022002,
+          "Pages wired down": 1410977,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 5989245,
+          "Anonymous pages": 5308676,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0014",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0014/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272660.619534166,
+      "ended_monotonic": 272660.740999375,
+      "elapsed_start_s": 6.995451208029408,
+      "elapsed_end_s": 7.116916417027824,
+      "sample_seconds": 0.12146520899841562,
+      "child_footprint_bytes": 87569541536,
+      "system_footprint_bytes": 112511156224,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 2960079,
+          "Pages active": 5507937,
+          "Pages inactive": 6488414,
+          "Pages wired down": 1704167,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 6455664,
+          "Anonymous pages": 5594167,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0015",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0015/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272661.260680583,
+      "ended_monotonic": 272661.387148416,
+      "elapsed_start_s": 7.636597625038121,
+      "elapsed_end_s": 7.763065458042547,
+      "sample_seconds": 0.1264678330044262,
+      "child_footprint_bytes": 95353629352,
+      "system_footprint_bytes": 120108761088,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 1896473,
+          "Pages active": 6118424,
+          "Pages inactive": 6986887,
+          "Pages wired down": 1659034,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 6954097,
+          "Anonymous pages": 6204646,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0016",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0016/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272661.905357708,
+      "ended_monotonic": 272662.036244375,
+      "elapsed_start_s": 8.281274750013836,
+      "elapsed_end_s": 8.412161417014431,
+      "sample_seconds": 0.13088666700059548,
+      "child_footprint_bytes": 101577895024,
+      "system_footprint_bytes": 126538055680,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 1118849,
+          "Pages active": 6746510,
+          "Pages inactive": 7474416,
+          "Pages wired down": 1321850,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 7443054,
+          "Anonymous pages": 6831268,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0017",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0017/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272662.547520541,
+      "ended_monotonic": 272662.685091208,
+      "elapsed_start_s": 8.923437583027408,
+      "elapsed_end_s": 9.061008250049781,
+      "sample_seconds": 0.13757066702237353,
+      "child_footprint_bytes": 110937026104,
+      "system_footprint_bytes": 135901937664,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 61401,
+          "Pages active": 7045239,
+          "Pages inactive": 7959168,
+          "Pages wired down": 1594746,
+          "Pages stored in compressor": 43181,
+          "Pages occupied by compressor": 13650,
+          "File-backed pages": 7931057,
+          "Anonymous pages": 7126780,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0018",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0018/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272663.200006,
+      "ended_monotonic": 272663.370248083,
+      "elapsed_start_s": 9.575923042022623,
+      "elapsed_end_s": 9.74616512504872,
+      "sample_seconds": 0.17024208302609622,
+      "child_footprint_bytes": 115676622776,
+      "system_footprint_bytes": 138973593600,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 109267,
+          "Pages active": 7546598,
+          "Pages inactive": 7717779,
+          "Pages wired down": 1332693,
+          "Pages stored in compressor": 72436,
+          "Pages occupied by compressor": 22046,
+          "File-backed pages": 7748935,
+          "Anonymous pages": 7515676,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0019",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0019/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272663.884680875,
+      "ended_monotonic": 272664.065471041,
+      "elapsed_start_s": 10.260597917018458,
+      "elapsed_end_s": 10.441388083039783,
+      "sample_seconds": 0.1807901660213247,
+      "child_footprint_bytes": 121225818376,
+      "system_footprint_bytes": 143981576192,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 109327,
+          "Pages active": 7795535,
+          "Pages inactive": 7649791,
+          "Pages wired down": 1043537,
+          "Pages stored in compressor": 268233,
+          "Pages occupied by compressor": 130323,
+          "File-backed pages": 7715676,
+          "Anonymous pages": 7729834,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0020",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0020/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272664.577515708,
+      "ended_monotonic": 272664.726298458,
+      "elapsed_start_s": 10.953432750015054,
+      "elapsed_end_s": 11.102215500024613,
+      "sample_seconds": 0.1487827500095591,
+      "child_footprint_bytes": 129553003024,
+      "system_footprint_bytes": 152399085568,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9778,
+          "Pages active": 7381108,
+          "Pages inactive": 7388119,
+          "Pages wired down": 1443610,
+          "Pages stored in compressor": 643224,
+          "Pages occupied by compressor": 505113,
+          "File-backed pages": 7370542,
+          "Anonymous pages": 7398909,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0021",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0021/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272665.243747125,
+      "ended_monotonic": 272665.405224833,
+      "elapsed_start_s": 11.61966416699579,
+      "elapsed_end_s": 11.781141875020694,
+      "sample_seconds": 0.16147770802490413,
+      "child_footprint_bytes": 138729796496,
+      "system_footprint_bytes": 161963261952,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 10864,
+          "Pages active": 7092290,
+          "Pages inactive": 7099116,
+          "Pages wired down": 1600051,
+          "Pages stored in compressor": 1063273,
+          "Pages occupied by compressor": 925372,
+          "File-backed pages": 6785416,
+          "Anonymous pages": 7406200,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0022",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0022/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272665.923257083,
+      "ended_monotonic": 272666.105065083,
+      "elapsed_start_s": 12.29917412501527,
+      "elapsed_end_s": 12.480982125038281,
+      "sample_seconds": 0.18180800002301112,
+      "child_footprint_bytes": 146375062656,
+      "system_footprint_bytes": 169204252672,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9321,
+          "Pages active": 6898949,
+          "Pages inactive": 6905673,
+          "Pages wired down": 1596393,
+          "Pages stored in compressor": 1455596,
+          "Pages occupied by compressor": 1317127,
+          "File-backed pages": 6214200,
+          "Anonymous pages": 7590649,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0023",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0023/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272666.625706833,
+      "ended_monotonic": 272666.808938083,
+      "elapsed_start_s": 13.001623874995857,
+      "elapsed_end_s": 13.184855125029571,
+      "sample_seconds": 0.18323125003371388,
+      "child_footprint_bytes": 152607897040,
+      "system_footprint_bytes": 175848800256,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 10348,
+          "Pages active": 6594810,
+          "Pages inactive": 6601488,
+          "Pages wired down": 1754816,
+          "Pages stored in compressor": 1904648,
+          "Pages occupied by compressor": 1766245,
+          "File-backed pages": 5759471,
+          "Anonymous pages": 7437012,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0024",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0024/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272667.328918583,
+      "ended_monotonic": 272667.495216333,
+      "elapsed_start_s": 13.70483562501613,
+      "elapsed_end_s": 13.87113337503979,
+      "sample_seconds": 0.16629775002365932,
+      "child_footprint_bytes": 161979938760,
+      "system_footprint_bytes": 184950063104,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 10611,
+          "Pages active": 6529812,
+          "Pages inactive": 6536135,
+          "Pages wired down": 1453813,
+          "Pages stored in compressor": 2336619,
+          "Pages occupied by compressor": 2198170,
+          "File-backed pages": 5384125,
+          "Anonymous pages": 7681949,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0025",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0025/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272668.012586791,
+      "ended_monotonic": 272668.191508583,
+      "elapsed_start_s": 14.38850383303361,
+      "elapsed_end_s": 14.567425625049509,
+      "sample_seconds": 0.17892179201589897,
+      "child_footprint_bytes": 171192449328,
+      "system_footprint_bytes": 194041364480,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9465,
+          "Pages active": 6281682,
+          "Pages inactive": 6288671,
+          "Pages wired down": 1536188,
+          "Pages stored in compressor": 2749843,
+          "Pages occupied by compressor": 2611492,
+          "File-backed pages": 4827795,
+          "Anonymous pages": 7742792,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0026",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0026/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272668.72520275,
+      "ended_monotonic": 272670.013421791,
+      "elapsed_start_s": 15.101119792030659,
+      "elapsed_end_s": 16.389338833047077,
+      "sample_seconds": 1.2882190410164185,
+      "child_footprint_bytes": 174880045600,
+      "system_footprint_bytes": 198518472704,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9915,
+          "Pages active": 6157556,
+          "Pages inactive": 6165053,
+          "Pages wired down": 575823,
+          "Pages stored in compressor": 3958112,
+          "Pages occupied by compressor": 3820211,
+          "File-backed pages": 4507214,
+          "Anonymous pages": 7815572,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0027",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0027/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272670.744217291,
+      "ended_monotonic": 272670.923857625,
+      "elapsed_start_s": 17.120134333032183,
+      "elapsed_end_s": 17.2997746670153,
+      "sample_seconds": 0.17964033398311585,
+      "child_footprint_bytes": 180557380368,
+      "system_footprint_bytes": 204247367680,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 9537,
+          "Pages active": 5598191,
+          "Pages inactive": 5605370,
+          "Pages wired down": 1128655,
+          "Pages stored in compressor": 4523611,
+          "Pages occupied by compressor": 4385864,
+          "File-backed pages": 4204000,
+          "Anonymous pages": 6999775,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0028",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0028/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272671.486869833,
+      "ended_monotonic": 272671.826194416,
+      "elapsed_start_s": 17.862786875048187,
+      "elapsed_end_s": 18.2021114579984,
+      "sample_seconds": 0.33932458295021206,
+      "child_footprint_bytes": 184306105368,
+      "system_footprint_bytes": 208040640512,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 7428,
+          "Pages active": 5292759,
+          "Pages inactive": 5299123,
+          "Pages wired down": 1238647,
+          "Pages stored in compressor": 5028547,
+          "Pages occupied by compressor": 4890628,
+          "File-backed pages": 3918621,
+          "Anonymous pages": 6673431,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0029",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0029/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272672.799318208,
+      "ended_monotonic": 272673.021858833,
+      "elapsed_start_s": 19.175235250033438,
+      "elapsed_end_s": 19.397775874997023,
+      "sample_seconds": 0.2225406249635853,
+      "child_footprint_bytes": 185235962904,
+      "system_footprint_bytes": 208962732032,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 11314,
+          "Pages active": 5287948,
+          "Pages inactive": 5297914,
+          "Pages wired down": 429949,
+          "Pages stored in compressor": 5838886,
+          "Pages occupied by compressor": 5700937,
+          "File-backed pages": 3922243,
+          "Anonymous pages": 6663835,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0030",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0030/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "ACCEPTED",
+      "started_monotonic": 272673.541204708,
+      "ended_monotonic": 272673.754763208,
+      "elapsed_start_s": 19.917121750011574,
+      "elapsed_end_s": 20.130680250003934,
+      "sample_seconds": 0.21355849999235943,
+      "child_footprint_bytes": 191539625080,
+      "system_footprint_bytes": 215077306368,
+      "pressure": 1,
+      "swap_used_bytes": 1664614400,
+      "swapouts": 743802,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 7007,
+          "Pages active": 4650582,
+          "Pages inactive": 4657746,
+          "Pages wired down": 1281071,
+          "Pages stored in compressor": 6270335,
+          "Pages occupied by compressor": 6132229,
+          "File-backed pages": 3443403,
+          "Anonymous pages": 5864993,
+          "Swapouts": 743802,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 0,
+      "swapouts_growth_pages": 0
+    },
+    {
+      "observation": "physical-0031",
+      "source": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0031/sample.json",
+      "pid": 34218,
+      "sample_status": "MEASURED",
+      "guard_status": "REJECTED",
+      "started_monotonic": 272674.347238041,
+      "ended_monotonic": 272675.64980075,
+      "elapsed_start_s": 20.723155083018355,
+      "elapsed_end_s": 22.025717792042997,
+      "sample_seconds": 1.3025627090246417,
+      "child_footprint_bytes": 195899489688,
+      "system_footprint_bytes": 218957332480,
+      "pressure": 1,
+      "swap_used_bytes": 1907485573,
+      "swapouts": 758682,
+      "vm_stat": {
+        "page_size": 16384,
+        "pages": {
+          "Pages free": 5977,
+          "Pages active": 4522274,
+          "Pages inactive": 4523392,
+          "Pages wired down": 562594,
+          "Pages stored in compressor": 7215257,
+          "Pages occupied by compressor": 7117468,
+          "File-backed pages": 3305407,
+          "Anonymous pages": 5740552,
+          "Swapouts": 758682,
+          "Swapins": 124449
+        }
+      },
+      "swap_growth_bytes": 242871173,
+      "swapouts_growth_pages": 14880
+    }
+  ],
+  "source_pins": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/phases/glm-official-load/probe/events.jsonl": {
+      "sha256": "27d9f0f7ca9618bf381d314279f402d0c083ca3ebd26ae6bf5ee4840d9ecf9bb",
+      "bytes": 3376
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/monitor/monitor.json": {
+      "sha256": "26da1ce872e557f99eeffa2a8c837d26feef1b3965d7e2d2b20c6a83edca47f9",
+      "bytes": 962200
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/cold-0/sample.json": {
+      "sha256": "3e756be88cbe1e5b5336790d35cf14cf968bd0b0c293eb3f769b8c4aa7b1e61f",
+      "bytes": 4358
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/cold-1/sample.json": {
+      "sha256": "7770dc3613a2e7610d3650dbb4f79f99f5598aa3186e87cec18e2a58a82c15b1",
+      "bytes": 4359
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0000/sample.json": {
+      "sha256": "45b09027f8d49df1be1fa5e18078a01de00ef75ccec94ba770678680217babee",
+      "bytes": 4372
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0001/sample.json": {
+      "sha256": "b66a036824b4765d03d23788323478962880697cbccf776c1c71f1ddc60474f1",
+      "bytes": 4369
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0002/sample.json": {
+      "sha256": "bffe38704b148d36ca8e25c548829f9bfb702169ac126a1a8df888a85b40a3a6",
+      "bytes": 4378
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0003/sample.json": {
+      "sha256": "1a5ea3e5782883a81cdb808f3f6a276e6c00ea30905ec16ab881d03b49895e09",
+      "bytes": 4381
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0004/sample.json": {
+      "sha256": "bc0059769ddd9238fb7ef3df7cade8dcb8955df806bb8a359a0d9447dfcc8e5c",
+      "bytes": 4388
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0005/sample.json": {
+      "sha256": "61522644962436095b4176e26625a3001bca931660fca52f296f84431329025e",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0006/sample.json": {
+      "sha256": "53d8c33e07ebad77a7b6b8ec5fade952888759d09f82413a3024e076cb1ea35e",
+      "bytes": 4395
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0007/sample.json": {
+      "sha256": "4ea282d9b10cef2b36996a4f7fc36b57f4e8ef0f4381c990430a0237891d1763",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0008/sample.json": {
+      "sha256": "a20d4f2af1afef788c5a1f7d21488d8c98ba61622e65eb0192fc24662cd01d24",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0009/sample.json": {
+      "sha256": "b9fb7496de9da1785a2dd3dbcc8f09715beaff04eca8c6a8e07e9f72774fe333",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0010/sample.json": {
+      "sha256": "e438d5b40c54ee3f5ee2f20af0c8f8003c9de7564eb3503a28fbe223cd66e2e6",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0011/sample.json": {
+      "sha256": "295c947a1b599bae57f9c83e6f384ba08271147d4d1c6fa4d27947657f74f252",
+      "bytes": 4397
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0012/sample.json": {
+      "sha256": "ee47a303664de03e953aeea7ec807ef9f6da173b2643a2e9fe669e3bc518c8e9",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0013/sample.json": {
+      "sha256": "216c41749ad3070509e2359bb87aa55818159d7f5378b99d3ab5c86c4ede2d1c",
+      "bytes": 4398
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0014/sample.json": {
+      "sha256": "34caf61107a140873ec6d97568ea6578ca61ce5b3d118a3f88d5811114a6b019",
+      "bytes": 4396
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0015/sample.json": {
+      "sha256": "3c8f81355ad8319c244c78455fd76fe827e13dd36a7671f85875d143070d8bdd",
+      "bytes": 4397
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0016/sample.json": {
+      "sha256": "c723de1c8ab301e56a9631021073f306c81e814c7e0e35df6d69bbfb76dabcad",
+      "bytes": 4407
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0017/sample.json": {
+      "sha256": "aa3134922f6762dd4cd97f7a504813732882fb125d5055d561836348210320a8",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0018/sample.json": {
+      "sha256": "72b23e46000d7d17f9ce879447166fd863c36fa55801dfe6cc06933cbc0b5323",
+      "bytes": 4403
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0019/sample.json": {
+      "sha256": "0c7b8594313cd4bb39a35ea5abc3e62c5f4db585b922c03b2ca68ea47347bb7f",
+      "bytes": 4404
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0020/sample.json": {
+      "sha256": "5dbc577e4e5071bc49dca38fd7d253fb2cf42b3eb4732b1291338c44ebf046b0",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0021/sample.json": {
+      "sha256": "ae30370db72c4f6eeca811aec6484d8b7440e5b042f73eeb1a93a6623b7cdc5f",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0022/sample.json": {
+      "sha256": "a9418d0e1d326c7e9b4598ab3ef23216347b08d079bb451f8f00c2288abf714b",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0023/sample.json": {
+      "sha256": "bbd9d859b1b575f3261d583f3390d683da88669602f395a0da92ae5da39454ef",
+      "bytes": 4406
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0024/sample.json": {
+      "sha256": "e2d56cb2b38b9724da5cc72fccdffad86ed376929e81cf933e7e305dbf30d0d7",
+      "bytes": 4407
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0025/sample.json": {
+      "sha256": "42b5470bf527fb75524ab9d3f543f0886c6254258a3d8f80aabb6891c71398e0",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0026/sample.json": {
+      "sha256": "4cdbbfe4c4a79fbbfc3128a692eae589f699ebc1f3af288c699f655536b48c04",
+      "bytes": 4404
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0027/sample.json": {
+      "sha256": "ccc81d04e34efe03874230669b369d8b7334369087a10eb65a3f584bbd35eeab",
+      "bytes": 4406
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0028/sample.json": {
+      "sha256": "246c1288b34351162b9fec2f534844716b506ec345e70ba12b7ff43453137a3a",
+      "bytes": 4406
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0029/sample.json": {
+      "sha256": "097769369fd99b4eec97b6b774e3b8eb86c3a3e5eb9d1285142582ff3f8bc3e5",
+      "bytes": 4405
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0030/sample.json": {
+      "sha256": "cbdf9b69e040578e1ee104309048604c4d6dacc75a2c448915686c0bea67abae",
+      "bytes": 4406
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1/physical-0031/sample.json": {
+      "sha256": "5c245a405cbbc6dd6128d165f7dbcb1d6d5d2bbadcf15043d2dddfda6c00e08b",
+      "bytes": 4406
+    }
+  },
+  "scope": [
+    "34 actual observations including failed last guard observation; no post-abort physical samples.",
+    "Points use measurement completion time; commands within each sample were sequential, not simultaneous.",
+    "Cold samples target the owner, not the future child, so child footprint is null.",
+    "Footprint fields are accounting observations; not added to each other or vm_stat categories.",
+    "Compressor occupied is physical pages; stored is logical pages represented by the compressor.",
+    "Swap/Swapouts are system-global and cannot identify which process caused them.",
+    "No safe-fit, correctness, or inference performance qualification."
+  ]
+}
