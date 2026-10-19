@@ -1,0 +1,36 @@
+{
+  "schema": "real-projection-probe-pause-v1",
+  "pins": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_reuse/real-prereg-v1/execute.py": "87c924201fadaa419760cc2da575a8ada40b3709eba8d623abba24bc171f7102",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_reuse/real_projection_probe_v1.py": "10753926e5fff26053c079ba56b22fba4d78140a59364dc596ac41b0bc8d8c21",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_reuse/candidate.py": "ee9c5eef0e1282125310ee6661be1ec5ce64dc93a82add48a6d6c17f8958816f",
+    "/Users/ryanli/code/minivllm/tutorial_code/miniengine/kernels/nvfp4_qmv.py": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32"
+  },
+  "service_pid": 39988,
+  "service_identity": "Mon Oct 19 00:56:46 2026 omlx-server",
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": null,
+    "MLX_MAX_MB_PER_BUFFER": null,
+    "MLX_BFS_MAX_WIDTH": null,
+    "MLX_METAL_FAST_SYNCH": null
+  },
+  "child": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_reuse/real_projection_probe_v1.py",
+    "--run",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-v1"
+  ],
+  "owner_deadline_seconds": 160,
+  "scope": "Local projection diagnostic only; original oMLX is temporarily SIGSTOPed and resumed; no engine Pareto.",
+  "outputs": {
+    "execution": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-execution-v1",
+    "lease": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/real-projection-probe-lease-v1"
+  }
+}
