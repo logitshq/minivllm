@@ -1287,3 +1287,21 @@ head native/candidate=0.5458300112，up=0.6937056746，十个组ratio全部<1。
 E040的逐行B1基线与本轮nativeM8不同，不把两个ratio拼成配对回退图。
 热重复权重的缓存驻留未知，不据此断言整模型流式复用一定无效；但这版实现不值得采用。
 035教程已记录该负结果，正式v16保持原样。此追加没有执行fetch/push或声称M4已阅读。
+
+
+### 2026-10-19 — E044 nv8 register负结果、退出竞态与最新Git同步
+
+新默认OFF candidate直接用native wide helper的nv8寄存器tile，仍64threads、无shared/barrier。
+两真实projection输出相同且有限，400rawtimings独立核验；head native/candidate
+0.7647025469，up0.8177880323，全部十组<1，拒绝采用。
+[原证据及E043/E044合图](../experiments/m5-ultra-256gb/E044-native-m8-register-screen-v1/README.md)。
+数值child57173已waited/0，但原父natural-exit identity竞态FAIL，清理中断lease正常恢复，
+原lease−2/closedfalse完整保留。Watchdog恢复原52818，之后fresh只读核对同身份/S、
+全部health与两owned进程不存在，状态仅PASS_RESTORATION_ONLY，不能覆盖原FAIL。
+新父v2有CPU5再7项PASS，无实际设备重跑；历史源/失败均留档。归档首次遇到未来测试
+5→7源码版本差异而停止，保留后按各自快照重新封存。没有改写测量或升级性能资格。
+
+Root已实际fresh fetch（ae4469），origin/tutorial/18-gdn-projection-packing仍为
+94c070e6bbf0cf0e229261f1d019fd0b2032c4a7，并核对为当前HEAD祖先（108499）；
+没有新的M4未合入提交。这是Git可用性记录，不声称M4 agent已阅读。
+正式v16/逐batch目标与缺测范围不变；此归档步骤没有新增GPU实验或推送。

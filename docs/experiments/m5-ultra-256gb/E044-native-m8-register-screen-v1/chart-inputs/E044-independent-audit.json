@@ -1,0 +1,245 @@
+{
+  "status": "PASS_OFFLINE_AUDIT",
+  "candidate_decision": "REJECT_NATIVE_M8_REGISTER_FOR_SPEED",
+  "cases": [
+    {
+      "projection": "head",
+      "T": 8,
+      "elements_per_route": 1986560,
+      "output_matrices": 2,
+      "status": "PASS"
+    },
+    {
+      "projection": "up",
+      "T": 8,
+      "elements_per_route": 139264,
+      "output_matrices": 2,
+      "status": "PASS"
+    }
+  ],
+  "case_count": 2,
+  "output_matrices": 4,
+  "elements_per_route": 2125824,
+  "pairwise_BF16_word_comparisons": 2125824,
+  "raw_timing_samples": 400,
+  "rows": [
+    {
+      "projection": "head",
+      "T": 8,
+      "K": 5120,
+      "N": 248320,
+      "baseline": "native_m8",
+      "groups": [
+        {
+          "group": 0,
+          "median_ns": {
+            "native_m8": 1614146.0,
+            "candidate": 2108645.5
+          },
+          "ratio_baseline_over_candidate": 0.76548950499266
+        },
+        {
+          "group": 1,
+          "median_ns": {
+            "native_m8": 1618333.5,
+            "candidate": 2116291.5
+          },
+          "ratio_baseline_over_candidate": 0.7647025468844911
+        },
+        {
+          "group": 2,
+          "median_ns": {
+            "native_m8": 1613333.5,
+            "candidate": 2114791.5
+          },
+          "ratio_baseline_over_candidate": 0.7628806433163742
+        },
+        {
+          "group": 3,
+          "median_ns": {
+            "native_m8": 1607729.0,
+            "candidate": 2113854.0
+          },
+          "ratio_baseline_over_candidate": 0.7605676645596148
+        },
+        {
+          "group": 4,
+          "median_ns": {
+            "native_m8": 1620000.0,
+            "candidate": 2111375.0
+          },
+          "ratio_baseline_over_candidate": 0.767272511988633
+        }
+      ],
+      "median_group_ratio": 0.7647025468844911,
+      "candidate_latency_increase_percent": 30.769801156560117
+    },
+    {
+      "projection": "up",
+      "T": 8,
+      "K": 5120,
+      "N": 17408,
+      "baseline": "native_m8",
+      "groups": [
+        {
+          "group": 0,
+          "median_ns": {
+            "native_m8": 349250.0,
+            "candidate": 413354.0
+          },
+          "ratio_baseline_over_candidate": 0.8449174315477774
+        },
+        {
+          "group": 1,
+          "median_ns": {
+            "native_m8": 308354.0,
+            "candidate": 380729.0
+          },
+          "ratio_baseline_over_candidate": 0.8099041575503836
+        },
+        {
+          "group": 2,
+          "median_ns": {
+            "native_m8": 295750.5,
+            "candidate": 364791.5
+          },
+          "ratio_baseline_over_candidate": 0.8107384629301944
+        },
+        {
+          "group": 3,
+          "median_ns": {
+            "native_m8": 296312.0,
+            "candidate": 362333.5
+          },
+          "ratio_baseline_over_candidate": 0.8177880322962133
+        },
+        {
+          "group": 4,
+          "median_ns": {
+            "native_m8": 307603.5,
+            "candidate": 366041.5
+          },
+          "ratio_baseline_over_candidate": 0.8403514355612683
+        }
+      ],
+      "median_group_ratio": 0.8177880322962133,
+      "candidate_latency_increase_percent": 22.281075353006297
+    }
+  ],
+  "resource_observations": [
+    {
+      "file": "resource-000.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    },
+    {
+      "file": "resource-001.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    },
+    {
+      "file": "resource-002.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    },
+    {
+      "file": "resource-003.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    },
+    {
+      "file": "resource-004.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    },
+    {
+      "file": "after-resource.json",
+      "pressure": 1,
+      "swap_used_mib": 2262.44,
+      "Swapouts": 807478
+    }
+  ],
+  "physical_observations": [
+    {
+      "file": "physical-0000/sample.json",
+      "pid": 57173,
+      "top_bytes": 41386632,
+      "aux_current_bytes": 41386632,
+      "aux_peak_bytes": 41386632,
+      "current_bytes": 41386632,
+      "peak_bytes": 41386632,
+      "system_bytes": 173401538560,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 2372340285,
+      "swapouts": 807478
+    },
+    {
+      "file": "physical-0001/sample.json",
+      "pid": 57173,
+      "top_bytes": 41386632,
+      "aux_current_bytes": 41386632,
+      "aux_peak_bytes": 41386632,
+      "current_bytes": 41386632,
+      "peak_bytes": 41386632,
+      "system_bytes": 173372243968,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 2372340285,
+      "swapouts": 807478
+    },
+    {
+      "file": "physical-0002/sample.json",
+      "pid": 57173,
+      "top_bytes": 1008092432,
+      "aux_current_bytes": 1008092432,
+      "aux_peak_bytes": 1008534800,
+      "current_bytes": 1008092432,
+      "peak_bytes": 1008534800,
+      "system_bytes": 174375387136,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 2372340285,
+      "swapouts": 807478
+    },
+    {
+      "file": "physical-0003/sample.json",
+      "pid": 57173,
+      "top_bytes": 309150512,
+      "aux_current_bytes": 309150512,
+      "aux_peak_bytes": 1033061672,
+      "current_bytes": 309150512,
+      "peak_bytes": 1033061672,
+      "system_bytes": 173648265216,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 2372340285,
+      "swapouts": 807478
+    }
+  ],
+  "execution_complete": false,
+  "numerical_child_complete": true,
+  "original_parent_status": "FAIL",
+  "original_lease_closed": false,
+  "original_lease_returncode": -2,
+  "saved_watchdog_restore_and_reconciliation_consistent": true,
+  "restoration_status": "PASS_RESTORATION_ONLY",
+  "median_ratios_above_one": 0,
+  "median_ratios_below_one": 2,
+  "full_model_qualified": false,
+  "engine_pareto_point": false,
+  "limits": [
+    "Parent execution remains FAIL and lease remains unclosed; this independent PASS covers saved numerics/timing and restoration receipt consistency only.",
+    "Original BF16 saved outputs independently checked; not a new GPU computation or per-timed-sample output check.",
+    "Timing order and medians recomputed from raw JSONL; clocks/5 warmups/fresh dispatch/sync follow frozen source and execution records.",
+    "Real weight payloads excluded; original source/slice hashes are producer evidence, not rehashed by this audit.",
+    "Only synthetic BF16 activations with real projection weights; no full hidden-state/model qualification.",
+    "Five sequential within-process groups show observed variability, not independent-run confidence intervals.",
+    "Resource and service checks reparse saved observations; no continuous isolation or independent present-time service probe."
+  ]
+}

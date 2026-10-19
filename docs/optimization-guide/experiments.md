@@ -1239,3 +1239,20 @@ tar SHA635604cff085caa99c8866f1c211db531c87f5d0ff2dc917015d970d39d72ecb。
 765,296,968B真实权重slice排除，全部实际输入输出/计时保留；CPU8与11两次PASS准备保留。
 新candidate默认OFF，无full-prefix/engine/HTTP资格；E040不同oracle，不能当同基线回退。
 热重复局部访问与整模型缓存驻留可能不同，无cache容量/硬件计数器归因。v16完全不变。
+
+
+## E044：native nv8 register局部仍慢，原父FAIL/后续恢复单独保留 · 2026-10-19
+
+两T8真实head/up投影与native M8完整BF16 exact/finite；独立400timings、十组ratio均复算通过。
+Head native/candidate=0.7647025469、up=0.8177880323，全部组<1，拒绝采用。
+数值child57173 waited=true/0；原父却因自然退出后的identity检查竞态FAIL，
+随后lease57165恢复被中断，原lease−2/closedfalse，stderr KeyboardInterrupt15保留。
+Watchdog同身份T→S恢复52818；fresh只读reconciliation PASS_RESTORATION_ONLY，
+三个health端点与57173/57165不存在核对，SHAbee0a1ca402151f9f30dd975e8fe194efe64aae4715c71655f0cc90c80607d0a。
+原parent FAIL不变，数值/计时PASS不升级为完整性能闭环。四child物理/五indexed资源+after保留。
+[108成员原始证据与E043/E044合图](../experiments/m5-ultra-256gb/E044-native-m8-register-screen-v1/README.md)，
+tar SHA f1400de1d2f0fa94c012fe98ae7cdf964e94c97c5fa679e7d7f19157d6e43982；真实模型slice排除。
+父v2清理修复仅CPU5/7 PASS，无新设备周期。首次archive在audit前因未来测试5→7的
+current-source SHA差异失败，源码/命令/日志完整保留后改用各自历史快照，第二次PASS。
+合图20组点和四medians不跨轮配对，明确E044原父FAIL；作者与root均实际看图PASS。
+正式v16完全不变，无新engine Pareto、HTTP或整模型速度点。

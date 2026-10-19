@@ -1,6 +1,6 @@
 # 035：权重复用要测实际形状，局部赢了再接整模型
 
-2026-10-19。本章记录 E038、E039、E040 的真实结果，并追加 E041 小型 CPU I/O、E042 固定 prefix 资格与 E043 native M8 负结果。目标仍是手写专用推理引擎，
+2026-10-19。本章记录 E038、E039、E040 的真实结果，并追加 E041 小型 CPU I/O、E042 固定 prefix 资格与 E043/E044 native M8 负结果。目标仍是手写专用推理引擎，
 在相同正确性合同下，每个目标 batch 都明显领先 oMLX、Lithos。**这些实验没有新增
 引擎 Pareto 点。** 新 shared kernel 仍默认 OFF；head T4/T8 的局部收益值得继续，
 但不能代表全部 projection、整模型或 HTTP 已经更快。
@@ -154,6 +154,28 @@ Head 约占逻辑投影权重/scale 扫描字节的 4.9621%，不是测得的耗
 barrier和每token解码。没有硬件计数器就不能给慢因定案；重复同权重的热局部筛选
 不代表整模型流式访问，但其明显负结果已足够拒绝本次采用。下一项候选若存在，
 仍应先做同一实际baseline的最小字节与速度筛选，不用代码体积或理论load次数代替测量。
+
+## E044：原生nv8寄存器tile仍慢，父流程退出竞态也必须留下
+
+[E044](../../experiments/m5-ultra-256gb/E044-native-m8-register-screen-v1/README.md)
+直接实例化原生wide helper的nv8版本，保持64线程，用八份累加器共享解码，避免
+shared tile/barrier。两组完整BF16输出与native M8相同，400条计时独立复算通过，
+head native/candidate=**0.764703×**、up=**0.817788×**，十组全部低于1，仍拒绝采用。
+
+![E043/E044全部局部组点](../../experiments/m5-ultra-256gb/E044-native-m8-register-screen-v1/native-m8-screen-comparison.png)
+
+数值子进程57173已waited=true/退出0，但父监控在自然退出后仍要求存活child身份，
+触发`owned numerical child identity`，随后清理中断lease的正常恢复，出现
+`lease did not close`。原父状态 **FAIL**、lease **−2/closed=false**完整保留。
+Watchdog实际恢复52818；之后fresh只读reconciliation核对同启动身份/S、三个健康
+端点及57173/57165已不存在，得到 **PASS_RESTORATION_ONLY**。恢复通过不改写
+父失败，保存的数值/计时可作为拒绝候选的诊断，不升级为完整性能闭环。
+
+另建父v2处理此退出竞态，先5项再7项CPU检查通过，**尚未执行新设备周期**。
+第一次离线归档在audit前因未来CPU测试从5扩到7导致当前source SHA不同而停止；
+保留失败后，分别绑定两次自带源码快照，再归档通过。设备源码与结果未改变。
+108成员原始证据及全部400timings保留，两个真实权重slice不入Git；合图保留20组
+点、两轮不同process和E044父FAIL。没有用后来的修复抹掉原失败或重画成功结论。
 
 正式三引擎前沿仍完全保持 [v16](../progress/2026-10-19-v16/README.md)：
 C1 minivllm 48.357772 tok/s 对 oMLX 50.781568，约低 4.77%；C8 最好点
