@@ -1,0 +1,3 @@
+# Fixed synthetic numerical smoke
+
+Source-reviewed standalone child. Smoke SHA cac89f54ce7ded33e09b7b8e6bfa61caa03af1ae80f2c36b4b2e658afa0e8213. Run only after actual GLM offline-copy parent returned zero; wrapper checks its receipt and uses fresh outputs. 36 fixed cases, native-M1/custom-B1 independent original BF16 byte comparisons, child120s default SIGALRM and parent150s timeout/kill/wait. Parent requires actualexit0 plus all36casePASS. No service operation, fullmodel qualification or performance point. The restored service may coexist because this is numerical-only work. Exact command and receipts are retained by execute.py.

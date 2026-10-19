@@ -1,0 +1,141 @@
+{
+  "schema": "C1-profile-archive-v1",
+  "status": "PASS",
+  "owner_plan_sha256": "f70b5cf3015f3c382696ce24e4f2891e66e56916c68b0617ec81f3ab31911343",
+  "registration_receipt_sha256": "d5e267d72e3c0c956919e854b72decf00c52a3a2a1de7680a1e9722a08194957",
+  "journal_state": "RESTORED",
+  "owner_status": "PASS",
+  "audit_statuses": {
+    "restoration": "PASS",
+    "closed_diagnostic": "PASS"
+  },
+  "execution_returncodes": {
+    "stop_returncode": 0,
+    "owner_returncode": 0,
+    "recovery_returncode": 0
+  },
+  "diagnostic_complete": true,
+  "modes": [
+    {
+      "mode": "off",
+      "pid": 36635,
+      "requests": 16,
+      "metrics": {
+        "warm": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.48377241601702,
+          "aggregate_output_tok_s": 48.482683512644044,
+          "e2e_p50_s": 10.52772706199903,
+          "e2e_p95_s": 10.68933249998372
+        },
+        "diagnostic": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.59512354101753,
+          "aggregate_output_tok_s": 48.41886657939541,
+          "e2e_p50_s": 10.540678082994418,
+          "e2e_p95_s": 10.78651412500767
+        }
+      },
+      "natural_exit": true
+    },
+    {
+      "mode": "runner",
+      "pid": 37413,
+      "requests": 16,
+      "metrics": {
+        "warm": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.50473537499784,
+          "aggregate_output_tok_s": 48.47065648834481,
+          "e2e_p50_s": 10.561387728987029,
+          "e2e_p95_s": 10.61899283400271
+        },
+        "diagnostic": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.52106362499762,
+          "aggregate_output_tok_s": 48.46129265685889,
+          "e2e_p50_s": 10.561301208508667,
+          "e2e_p95_s": 10.616479415970389
+        }
+      },
+      "natural_exit": true
+    },
+    {
+      "mode": "full",
+      "pid": 38870,
+      "requests": 16,
+      "metrics": {
+        "warm": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.58561529102735,
+          "aggregate_output_tok_s": 48.42430933329741,
+          "e2e_p50_s": 10.567817708011717,
+          "e2e_p95_s": 10.645340500050224
+        },
+        "diagnostic": {
+          "concurrency": 1,
+          "repeat": 1,
+          "requests": 8,
+          "committed_output_tokens": 4096,
+          "common_window_s": 84.55693974997848,
+          "aggregate_output_tok_s": 48.44073132390109,
+          "e2e_p50_s": 10.565086812479421,
+          "e2e_p95_s": 10.6172634169925
+        }
+      },
+      "natural_exit": true
+    }
+  ],
+  "resources": {
+    "samples": 132,
+    "known_owned_samples": {
+      "off": 40,
+      "runner": 40,
+      "full": 40
+    },
+    "pressure": 1,
+    "authorized_suspended_pids": [],
+    "swap_delta_mb": -8.0,
+    "vm_counter_delta": {
+      "Swapouts": 0,
+      "Swapins": 616,
+      "Pageouts": 0,
+      "Compressions": 0,
+      "Decompressions": 4587
+    },
+    "scope": "Original raw pressure/AC/thermal/sustained-swap gates; retained process inventory cannot exclude unknown runtimes or GUI GPU activity."
+  },
+  "restoration_qualified": true,
+  "numerical_qualified": false,
+  "performance_qualified": false,
+  "errors": {
+    "owner": [],
+    "restoration": null,
+    "closed_diagnostic": null
+  },
+  "evidence_roots": {
+    "owner": 846,
+    "journal": 68,
+    "execution": 15,
+    "registration": 18,
+    "analysis": 19,
+    "cpu_v1": 4,
+    "cpu_v2": 4
+  },
+  "scope": "Three C1 diagnostic modes off/runner/full, eight warm plus eight diagnostic requests each if complete. Shared admission/DONE/drain overhead. Python spans overlap and are not exclusive GPU time. No Pareto point, speedup qualification or new numerical qualification; actual failed/incomplete attempts remain unchanged. No model weights copied or rehashed."
+}

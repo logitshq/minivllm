@@ -1,0 +1,107 @@
+{
+  "schema": "C1-async-call-ordinal-readout-v1",
+  "performance_qualified": false,
+  "modes": {
+    "runner": {
+      "step_counts": {
+        "prefill_calls_0": 8,
+        "current_required_calls_2": 8,
+        "ahead_consumed_calls_2": 4072,
+        "ahead_consumed_calls_0": 8
+      },
+      "call_ms": {
+        "ahead_consumed_ordinal_1": {
+          "count": 4072,
+          "sum": 19.62136600000026,
+          "mean": 0.004818606581532416,
+          "p50": 0.004375,
+          "p95": 0.006583,
+          "max": 0.108667
+        },
+        "ahead_consumed_ordinal_2": {
+          "count": 4072,
+          "sum": 75655.02516900023,
+          "mean": 18.579328381385068,
+          "p50": 18.635270499999997,
+          "p95": 18.793875,
+          "max": 19.639666
+        },
+        "current_required_ordinal_1": {
+          "count": 8,
+          "sum": 169.416001,
+          "mean": 21.177000125,
+          "p50": 19.885417,
+          "p95": 26.104792,
+          "max": 26.104792
+        },
+        "current_required_ordinal_2": {
+          "count": 8,
+          "sum": 149.338124,
+          "mean": 18.6672655,
+          "p50": 18.706604,
+          "p95": 18.848,
+          "max": 18.848
+        }
+      },
+      "service_seconds": 84.5079045
+    },
+    "full": {
+      "step_counts": {
+        "prefill_calls_0": 8,
+        "current_required_calls_2": 8,
+        "ahead_consumed_calls_2": 4072,
+        "ahead_consumed_calls_0": 8
+      },
+      "call_ms": {
+        "ahead_consumed_ordinal_1": {
+          "count": 4072,
+          "sum": 18.523077000000047,
+          "mean": 0.004548889243614932,
+          "p50": 0.004042,
+          "p95": 0.006209,
+          "max": 0.14825
+        },
+        "ahead_consumed_ordinal_2": {
+          "count": 4072,
+          "sum": 75821.62509400009,
+          "mean": 18.620241918958744,
+          "p50": 18.6621875,
+          "p95": 18.820042,
+          "max": 19.559375
+        },
+        "current_required_ordinal_1": {
+          "count": 8,
+          "sum": 167.68533499999998,
+          "mean": 20.960666875,
+          "p50": 20.061125500000003,
+          "p95": 24.786125,
+          "max": 24.786125
+        },
+        "current_required_ordinal_2": {
+          "count": 8,
+          "sum": 149.62562500000004,
+          "mean": 18.703203125,
+          "p50": 18.712854,
+          "p95": 18.9095,
+          "max": 18.9095
+        }
+      },
+      "service_seconds": 84.54310496
+    }
+  },
+  "input_files": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_profile_cycle_v1/analysis-v1/readout-v1/readout.json": {
+      "sha256": "e59a7c22f793fab8fd8d4b9a4698735b19d0f32e2f5a3f9b757152a473492b61",
+      "bytes": 36653
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c1-profile-cycle-v1-owner/phases/runner/trial/server/profile.json": {
+      "sha256": "857d67af125c606dbc482750b88786534000c2998313fe41e0cc6d994bae7f3c",
+      "bytes": 17678442
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c1-profile-cycle-v1-owner/phases/full/trial/server/profile.json": {
+      "sha256": "3a5ad1348059e9621a458e72fa729a48a92d52c214650a4eff519f89468bdd03",
+      "bytes": 26605668
+    }
+  },
+  "scope": "Sequential call ordinal inside an actual runner step, not GPU-time attribution. Candidate ahead_submit_once only targets the first already-submitted call on an eligible ahead hit; no claim that second-call waiting can be deleted."
+}

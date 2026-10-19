@@ -1213,3 +1213,6 @@ New `nvfp4_multirow_reuse` is107lines/defaultOFF: T2/4/8 share each loaded/dequa
 GLM offline exact-byte repacker now passes15 guarded CPU checks including actual Darwin F_NOCACHE unaligned IO and exact pinned container/MTP/DSV32 fakebyte paths. Actual headerplan SHA323ff8da5d2faf6bb774b1c03f3a52f49198cbb9898f21c91ac25aa546a4c50a passed:113446→4960tensors,378backbone stacks,203976457080payloadB. MTP45 remains byteidentical and still uses nine officialstack tensors. Independent review found no blocker. Payloadcopy will run only after this commit, into a fresh~190GiB derived checkpoint with fullsourceSHA+independentreadback; original checkpoint stays unchanged. Actual loader/memoryfit andGLM speed remain unqualified.
 
 Fresh fetch found no unmerged M4 commits; its branch remains94c070e. These Git notes make the result available, without claiming the other agent has read it.
+
+
+E035 complete readout: repeatedcurrent-root async4072calls total18.523ms(0.02191%); successor submission mean18.620ms, long-wrapper minuscompiled interval0.4609%; activeHTTPdelivery99.831%overlapsworker. These tinywrapperchanges are not the main substantial-speedup direction. Backenddependency/encoding and deviceexecution remain unresolved. Tutorial033 and completeE035archive/staticdiagnostic saved; no newParetopoint.

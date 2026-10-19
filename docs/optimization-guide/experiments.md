@@ -1128,3 +1128,10 @@ stop0/owner1/recover0，状态RESTORED，服务21938→34623。物理样本0031�
 [032教程](tutorials/032-glm-load-and-memory.md)记录假设、原门槛、实际边界和下一步。
 首次离线审计wrapper因analysis目录已存在但为空而在启动审计前失败；修正目录创建后两个真实审计执行。
 首次归档程序拒绝模型目录symlink，未跟随或打包权重；保留失败后显式记录该已注册别名再归档。
+
+
+## E035: actual C1 diagnostic and restoration PASS - 2026-10-19
+
+Three fresh off/runner/full processes, each8warm+8diagnostic:48requests/24576outputtokens. All natural exits/reaps; stop0/owner0/recover0, service34623 restored39988; independent diagnostic/restorationPASS. Archive1084members/96,896,227rawB/6,629,976xzB, SHA2f1b1b8abc64ac822c295ce588b64d69bd798ac0183d694d0936ce0b03d2b763. Both analyses and first static rendering succeeded; root visual reviewPASS. No new Pareto point.
+
+4072 duplicate-current-root async calls total18.523ms(0.02191%); successor calls average18.620ms. Visible long-wrapper interval0.4609%; delivery99.831% overlaps worker. Prioritize actual model/backend and multirow weight reuse, not removal of small wrapper costs. These are Python wall intervals, never exclusive GPU time. [Tutorial033](tutorials/033-profile-before-large-optimization.md) retains the method and limits.

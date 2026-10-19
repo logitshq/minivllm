@@ -1,0 +1,39 @@
+{
+  "events": [
+    {
+      "name": "restoration_audit",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_profile_cycle_v1/audit_restore.py",
+        "--journal",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c1-profile-cycle-v1-journal",
+        "--out",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_profile_cycle_v1/analysis-v1/restoration-audit.json"
+      ],
+      "started_at": 1792396670.017653,
+      "ended_at": 1792396671.601554,
+      "returncode": 0
+    },
+    {
+      "name": "closed_audit",
+      "command": [
+        "/Users/ryanli/code/minivllm/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_profile_cycle_v1/audit_closed.py",
+        "--journal",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c1-profile-cycle-v1-journal",
+        "--plan-sha256",
+        "f70b5cf3015f3c382696ce24e4f2891e66e56916c68b0617ec81f3ab31911343",
+        "--out",
+        "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_profile_cycle_v1/analysis-v1/independent-diagnostic.json"
+      ],
+      "started_at": 1792396671.6018538,
+      "ended_at": 1792396675.2409291,
+      "returncode": 0
+    }
+  ],
+  "completed_at": "2026-10-19T07:57:55.241291+00:00"
+}
