@@ -1,4 +1,55 @@
-# Future v3 registration — source prepared, not executed
+# Actual E033-bound v3 registration — PREPARED, not executed
+
+On 2026-10-19, the real E033 retry-v2 archive closed `RESTORED`, with independent
+restoration and formal audits PASS. This v3 namespace now binds that exact
+archived journal/audit and the reviewed source chain. Nothing here grants GLM
+load, numerical, HTTP or performance qualification: the GLM owner has not run.
+
+The current preparation is retained in
+`docs/experiments/m5-ultra-256gb/glm-v3-e033-preregistration-v1/`.
+
+- First broad CPU attempt after E033: 154/155 passed; the one failure was a test
+  expecting `ValueError` for the controller's actual `Refuse`. Production rejected
+  the unsealed predecessor correctly. Earlier broad import failure is retained
+  separately by root. No production rejection was loosened.
+- The three unsealed-predecessor tests now inject an explicit `UNSEALED` pin;
+  they remain valid after the real source has been sealed. Focused guarded runs
+  passed 16/16 both before and after sealing. The latter also ran real
+  `require_seals()` under the same backend/process/network/service prohibitions.
+  Both report unchanged sources, no forbidden operation and no skips.
+- Actual CPU registration, read-only `controller prepare` and
+  `--seal-prepared` each returned zero. The observed service is PID **21938**,
+  start **Sun Oct 18 14:48:05 2026**, `omlx-server`, parent 1.
+- Registration: `.artifacts/m5-ultra-256gb/glm-flash-v3-registration-v1`.
+  Owner plan SHA256:
+  `dba39963057c9db9d8c77f40afbdae3df9d0b175b69812c9262632752cea9023`.
+  Receipt SHA256:
+  `a1d273bd00330981b16d8450b5a8b0478b60f7ae61d16f7e209d56b49901ddb4`,
+  with **61** pinned inputs/sources. Journal state is `PREPARED`.
+- Owner output is `glm-flash-v3-owner-v1`; journal is
+  `glm-flash-v3-cold-journal-v1`; analysis directory is
+  `glm-flash-v3-analysis-v1`, all under `.artifacts/m5-ultra-256gb`.
+  Saved `restoration_audit` emits `restoration-audit.json`; saved `closed_audit`
+  emits `closed-audit.json` there. Driver output is the fresh
+  `glm-flash-v3-execution-v1` directory.
+
+Root must commit/push the actual source and this registration archive before
+running the saved driver. No second service owner or model load is permitted
+from this preparation task. The exact future command is:
+
+```sh
+/Users/ryanli/code/minivllm/.venv/bin/python -I -B \
+  /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/execute.py \
+  --run \
+  --registration /Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-registration-v1 \
+  --out /Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-execution-v1
+```
+
+The original historical notes below describe earlier unsealed snapshots; their
+“not executed” statements apply to those snapshots. The actual current evidence
+is the status above and the retained preregistration archive.
+
+# Historical preparation notes
 
 The new `preregister.py` and `execute.py` have not performed real registration or
 execution. The earlier E032-bound source snapshot passed seven focused fake CPU

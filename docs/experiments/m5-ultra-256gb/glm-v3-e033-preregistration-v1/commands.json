@@ -1,0 +1,83 @@
+{
+  "controller_prepare": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/controller.py",
+    "prepare",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-cold-journal-v1",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--owner-directory",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1",
+    "--owner-plan",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-registration-v1/owner-plan.json",
+    "--owner-plan-sha256",
+    "dba39963057c9db9d8c77f40afbdae3df9d0b175b69812c9262632752cea9023"
+  ],
+  "controller_stop": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/controller.py",
+    "stop",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-cold-journal-v1",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1"
+  ],
+  "owner": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/owner.py",
+    "--run",
+    "--plan",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-registration-v1/owner-plan.json",
+    "--plan-sha256",
+    "dba39963057c9db9d8c77f40afbdae3df9d0b175b69812c9262632752cea9023",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-owner-v1"
+  ],
+  "controller_recover": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/controller.py",
+    "recover",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-cold-journal-v1",
+    "--plan-sha256",
+    "e96a4a4d5be6f6a69d597387bbc566eadedae81065bfa879445352d986515cb8",
+    "--approved-contract",
+    "cold-restart-persisted-visible-v1",
+    "--watchdog-seconds",
+    "3600"
+  ],
+  "closed_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/audit_closed.py",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-cold-journal-v1",
+    "--plan-sha256",
+    "dba39963057c9db9d8c77f40afbdae3df9d0b175b69812c9262632752cea9023",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-analysis-v1/closed-audit.json"
+  ],
+  "sequence": "Actual read-only prepare, separately seal PREPARED bytes, then stop; owner; recover in finally. Only a proven pre-Popen non-start may use recover --no-experiment. Unknown launch never gets that flag.",
+  "restoration_audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/audit_restore.py",
+    "--journal",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-cold-journal-v1",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/glm-flash-v3-analysis-v1/restoration-audit.json"
+  ]
+}

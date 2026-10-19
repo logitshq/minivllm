@@ -1,6 +1,6 @@
 """GLM v3 recovery: unchanged cold lifecycle, explicit dual-monitor reap proof.
 
-The predecessor manifest is deliberately unsealed until a real twelve-phase combined formal cycle has
+The predecessor manifest binds the actual twelve-phase E033 combined formal cycle,
 closed RESTORED with its independent audit. No observed LOAD_INTENT exception is
 accepted here. This real module remains the actual recovery load-worker entry.
 """
@@ -21,7 +21,7 @@ _original = _reuse.install(globals(), 'controller.py', dict(
     PRIOR_SHA='ca441479a0d2049bcb4daa5a8009b26824b7557a31be8c5c1c2ca57e01ce33cd',
     PRIOR_AUDIT_PATH=_Path(__file__).resolve().parents[1]/'gdn_graph_combined_formal_retry_v2/audit_restore.py',
     PRIOR_AUDIT_SHA='7ab477f0d449bf08f78259a820d067f902d2032314ff4ebd389157b2578ec57d'))
-BOUND_MANIFEST_SHA = 'UNSEALED'
+BOUND_MANIFEST_SHA = '159b0eb0781f1ab7f60fd8e0698962a9379061d2fff645ac67b7dcdd5f5713f6'
 PRIOR_OWNER_PATH = PRIOR_PATH.with_name('owner.py')
 PRIOR_OWNER_SHA = 'f7f44001d11533aa6106d3e5dc5c2635dfb736433f10e7ea680a5a83f2863d9e'
 PRIOR_ARCHIVE = ARCHIVE_ROOT/'E033-gdn-graph-combined-formal-v2'

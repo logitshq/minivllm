@@ -1180,3 +1180,19 @@ The rowwise proposal retains ordinary C1 arithmetic and every prefix state;
 weight-cache reuse is only a hypothesis. New C1 diagnostic capture/owner glue
 also remains source-only and still requires the registered outer cold lifecycle.
 None of these preparations changes the running frozen inference source.
+
+
+## 2026-10-19：用户目标、E033完整结果与下一轮
+
+用户再次明确：目标是手写针对两模型/M5的specialized engine，正确性不变，
+每个目标batch都大幅领先oMLX/Lithos。图必须有清晰的三引擎前沿线和测点；
+HTTP并发与实际GPUbatch分别标明，未知点不填造。没有完成目标，不能停在局部略快。
+
+E033十二进程、864请求正式/恢复独立审计PASS。C1 graph+GDN ON中位数48.35777tok/s，
+p50 10.58590s/p95 10.63603s；OFF45.81897，三配对增益5.53–5.66%。
+仍低于历史oMLX50.78157约4.77%。C8 ON170.37898/OFF170.46064，不采用稳定加速结论。
+此前E024-only170.61984仍是Native C8最好点，仅高于历史oMLX约1.34%。
+E033归档与031教程提供完整证据；v16纳入所有50观察、18组，C2–7和GLM正式前沿仍未知。
+
+本次fetch仍为M4分支94c070e，已合入，无新未合入提交；这不意味着M4 agent已经阅读本消息。
+下一步继续默认OFF候选的实际数值/成本验证，GLM使用实际E033恢复证据封存新加载周期。

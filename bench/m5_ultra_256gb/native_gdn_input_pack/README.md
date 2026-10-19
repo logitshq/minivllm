@@ -1,6 +1,7 @@
 # B1 native GDN input projection pack — source prepared, unqualified
 
-2026-10-18. Default OFF. Ten fake CPU test methods are written but **not run**.
+Updated 2026-10-19. Default OFF. Ten fake CPU tests passed in the retained
+next-candidate-cpu-v2 run; no device or performance qualification.
 No MLX import, GPU execution, numerical qualification, model integration or
 performance claim has occurred for these files.
 

@@ -108,7 +108,7 @@ def main():
             inset.errorbar(xx, yy, xerr=[[xx-lo], [hi-xx]],
                 yerr=[[yy-m[h.Y]['minimum']], [m[h.Y]['maximum']-yy]], fmt=markers[c], ms=5.5,
                 color=color, mfc='white' if c.endswith('-off') else color, elinewidth=.6, capsize=2)
-            offsets = ({'native-on': (8, -9), 'native-gdn-on': (7, 5), 'omlx': (-46, 7), 'lithos': (5, -13),
+            offsets = ({'native-on': (8, -9), 'native-gdn-on': (-16, -17), 'omlx': (-46, 7), 'lithos': (5, -13),
                         'native-combined-on': (8, 18)} if normalized else
                        {'native-on': (-58, 8), 'native-gdn-on': (6, 6), 'omlx': (6, -1), 'lithos': (-35, -12),
                         'native-combined-on': (8, 20)})
@@ -129,7 +129,7 @@ def main():
         lines = [
             'Markers = process-metric medians; whiskers = observed process min–max, not confidence intervals. minivllm historical N=1; other groups N=3.',
             'New paired cycle keeps graph ON, compares GDN OFF/ON. Older cycles stay separate; combined ON is measured, never summed percentage gains.',
-            'Lines only join measured endpoints. C2–7 are UNKNOWN; neither a connecting segment nor an engine switch is an executable/interpolated setting.',
+            'Lines join measured endpoints only. HTTP concurrency C is not GPU batch size. C2–7 are UNKNOWN; segments are not measured settings.',
             'Full POST→DONE includes first-output latency and delivery. 512/p50 is not ITL/TPOT. Formal observers OFF; no formal graph/GDN hit-count proof.'
         ]
         for y, line in zip((.143, .112, .081, .050), lines):
@@ -149,6 +149,75 @@ def main():
             path = args.out / f'D512-frontier-{name}.{ext}'
             fig.savefig(path, dpi=170, metadata={'Date': None} if ext == 'svg' else None); files.append(path)
         plt.close(fig)
+    # A concise, endpoint-only view for the user's engine-frontier comparison.
+    # Detailed historical observations remain in the two figures above.
+    fig = plt.figure(figsize=(16, 10))
+    main_ax = fig.add_axes([.07, .27, .56, .51])
+    c8_ax = fig.add_axes([.72, .53, .24, .25])
+    c1_ax = fig.add_axes([.72, .18, .24, .25])
+    engine_names = {'native': 'minivllm', 'omlx': 'oMLX', 'lithos': 'Lithos'}
+    engine_markers = {'native': 'o', 'omlx': 's', 'lithos': '^'}
+    selected = fronts[h.XS[0]]
+    by_c = {c: {engine: next(r for r in selected[engine] if r['concurrency'] == c)
+                for engine in selected} for c in (1, 8)}
+    def pair(row):
+        return 512 / row['metrics'][h.XS[0]]['median'], row['metrics'][h.Y]['median']
+    for ax in (main_ax, c1_ax, c8_ax):
+        ax.set_axisbelow(True); ax.grid(color='#e2e8f0', lw=.75)
+    for engine, series in selected.items():
+        coords = sorted(pair(r) for r in series)
+        main_ax.plot([x for x, y in coords], [y for x, y in coords],
+            color=colors[engine], marker=engine_markers[engine], lw=2.5, ms=8,
+            label=engine_names[engine], zorder=3)
+    for c, ax in ((1, c1_ax), (8, c8_ax)):
+        for engine, row in by_c[c].items():
+            x, y = pair(row); m = row['metrics']; color = colors[engine]
+            limits = sorted(512 / m[h.XS[0]][bound] for bound in ('minimum', 'maximum'))
+            ax.errorbar(x, y, xerr=[[x-limits[0]], [limits[1]-x]],
+                yerr=[[y-m[h.Y]['minimum']], [m[h.Y]['maximum']-y]],
+                fmt=engine_markers[engine], ms=7, color=color, elinewidth=1, capsize=3, zorder=3)
+        # Lithos C8 is fully retained in the main chart; this zoom separates the
+        # nearly coincident minivllm/oMLX endpoints without changing their values.
+        zoom_engines = ('native', 'omlx') if c == 8 else tuple(by_c[c])
+        xr = [512 / by_c[c][e]['metrics'][h.XS[0]][bound]
+              for e in zoom_engines for bound in ('minimum', 'maximum')]
+        yr = [by_c[c][e]['metrics'][h.Y][bound]
+              for e in zoom_engines for bound in ('minimum', 'maximum')]
+        xm=max(.1, (max(xr)-min(xr))*.35); ym=max(.2, (max(yr)-min(yr))*.45)
+        ax.set_xlim(min(xr)-xm, max(xr)+xm); ax.set_ylim(min(yr)-ym, max(yr)+ym)
+        for engine in zoom_engines:
+            x,y=pair(by_c[c][engine]); label=engine_names[engine]
+            offsets = {'native':(-6,12), 'omlx':(5,-18)} if c==8 else {'native':(-35,12),'omlx':(-35,10),'lithos':(5,-18)}
+            ax.annotate(label,(x,y),xytext=offsets[engine],textcoords='offset points',color=colors[engine],fontsize=10)
+        ratio=by_c[c]['native']['metrics'][h.Y]['median']/by_c[c]['omlx']['metrics'][h.Y]['median']-1
+        ax.set_title(f'C{c} zoom · minivllm throughput {ratio:+.2%} vs oMLX',loc='left',fontsize=11,pad=12)
+        ax.tick_params(labelsize=9)
+        ax.set_xlabel('Full-request speed (tokens/s)', fontsize=10)
+        ax.set_ylabel('Total output (tokens/s)', fontsize=10)
+    # Explicit endpoint labels; C means measured HTTP concurrency, not batch.
+    positions = {(1,'native'):(35,70),(1,'omlx'):(48,88),(1,'lithos'):(34,26),
+                 (8,'native'):(27,185),(8,'omlx'):(7,145),(8,'lithos'):(2,68)}
+    for c, group in by_c.items():
+        for engine,row in group.items():
+            x,y=pair(row)
+            main_ax.annotate(f'{engine_names[engine]} C{c}',(x,y),xytext=positions[c,engine],
+                textcoords='data',fontsize=11,color=colors[engine],
+                arrowprops=dict(arrowstyle='-',color=colors[engine],lw=.8))
+    main_ax.set_xlim(0,56); main_ax.set_ylim(0,200)
+    main_ax.set_xlabel('Full-request speed: 512 / median-process p50 POST→DONE (tokens/s) →',labelpad=10,fontsize=11)
+    main_ax.set_ylabel('Aggregate committed output throughput (tokens/s) →',fontsize=12)
+    main_ax.text(.03,.95,'BETTER ↗',transform=main_ax.transAxes,color='#475569',weight='bold')
+    fig.suptitle('minivllm vs oMLX vs Lithos: measured engine frontiers',x=.07,ha='left',y=.965,fontsize=22,weight='bold',color='#172536')
+    fig.text(.07,.918,'M5 Ultra · Qwen3.8-27B NVFP4 · 512 output tokens/request · HTTP C1 and C8 · 3 fresh processes/group',fontsize=12,color='#475569')
+    main_ax.legend(loc='upper left',bbox_to_anchor=(0,1.17),ncol=3,frameon=False,fontsize=12)
+    fig.text(.07,.185,'minivllm frontier: C1 = graph + GDN; C8 = E024 graph. Each endpoint is a measured executable configuration.',fontsize=10,color='#475569')
+    fig.text(.07,.145,'Lines connect measured endpoints only. C2–7 are unmeasured. HTTP concurrency C does not mean GPU batch size.',fontsize=10,color='#475569')
+    fig.text(.07,.105,'Horizontal axis is full-request speed, not P90 token interactivity or ITL. Vertical axis is throughput, not tokens per dollar.',fontsize=10,color='#475569')
+    fig.text(.07,.065,'Zoom whiskers show process min–max, not confidence intervals. Lithos C8 uses its measured FIFO service; full value is on the main chart.',fontsize=10,color='#475569')
+    for ext in ('png','svg'):
+        path=args.out/f'D512-engine-frontier.{ext}'
+        fig.savefig(path,dpi=170,metadata={'Date':None} if ext=='svg' else None); files.append(path)
+    plt.close(fig)
     report = dict(schema='D512-v16-render-verification-v1', status='RENDERED', visual_review='PENDING',
         renderer_sha256=h.sha(Path(__file__).read_bytes()), preparation_source_sha256=receipt['source_sha256'],
         chartdata_sha256=h.sha(blob), original_38_points_unchanged=True, all_50_medians_and_frontiers_recomputed=True,

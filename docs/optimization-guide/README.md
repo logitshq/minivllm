@@ -1,12 +1,26 @@
 # 从瓶颈到实现：M5 Ultra 推理优化攻略
 
-更新：2026-10-18。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
+更新：2026-10-19。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
 主线为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`，第二重点为 GLM-5.3-Flash；后者尚未完成本机资格。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
+**长期目标（用户于2026-10-19再次明确）：手写 specialized inference engine，专门利用
+M5 Ultra 256 GiB 和 Qwen3.8-27B / GLM-5.3-Flash 的结构，在正确性不变的条件下，
+每个目标 batch size 都明显领先 oMLX 与 Lithos，并把整条吞吐—延迟前沿向外推进。**
+目标是可重复的大幅收益；单点略快、短输出胜出或一项 kernel 加速均不能判定完成。
+当前尚未达成，不以目标措辞代替测量结论。采用第一性原理、有限专用路径与可独立
+开关的模块；每次尝试保留成功、失败、完整请求结果、教程与 Git 记录。
+
+验收逐模型、同权重/量化、同输入输出分布、同正常EOS与质量合同进行。对手使用本机
+可用且符合相同合同的强配置。完整请求图分别标明 HTTP 并发 C、batch 上限和实际
+活跃 B；C 不等于 B，尤其 Lithos 的并发排队不能标成 GPU batch。测点足够后各引擎
+画明确前沿线，逐并发/批量给出相对两对手的速度与延迟；缺测保持未知，连线不算实测。
+主图使用完整请求 p50/p95 延迟与总输出吞吐；交互速度图必须写明定义，
+`512 / E2E p50` 不冒充截图的 P90 interactivity，也不把成本效率改名成吞吐。
+
 入口：[论文与设计笔记](papers.md) · [当前对手兼容性矩阵](research/2026-10-17-frontier-candidates.md) · [新近状态与运行时论文](research/2026-10-17-state-and-runtime-papers.md) · [逐步实验账本](experiments.md) ·
 [Qwen3.8 / GLM-5.3-Flash 模型路线](model-roadmap.md) ·
-[D512 三引擎吞吐—延迟对比（v15，2026-10-18）](progress/2026-10-17-v15/README.md) ·
+[D512 三引擎吞吐—延迟前沿线（v16，2026-10-19）](progress/2026-10-19-v16/README.md) ·
 [历史 cap32 分面图](progress/2026-10-17-v5/README.md) ·
 [并发 throughput–latency Pareto](progress/2026-10-17-v3/README.md) ·
 [最新官方 MTP / DSpark 同轮 HTTP 对照](progress/2026-10-17-v4/README.md) ·
@@ -27,12 +41,19 @@
 [E025 相同 split-K NAX 筛选与拒绝](tutorials/025-same-split-nax.md) ·
 [E029 GDN 长路径预处理融合与37请求验证](tutorials/029-unbound-gdn-prework.md) ·
 [C1差距定位与下一项可证伪实验](tutorials/030-c1-gap-diagnosis.md) ·
+[GDN与长decode图组合、失败与重试记录](tutorials/031-gdn-graph-composition.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
 [上一轮完整 Pareto 结果](../experiments/m5-ultra-256gb/pareto-batch-v1/m5-ultra-pareto-report.txt)。
 
-最新D512图包含38个进程观察、14组独立配置/并发汇总。按各配置进程指标的中位数比较，GDN ON的C1为47.86tok/s、完整POST→DONE p50为10.69s，吞吐仍低于oMLX约5.75%；Native的C8前沿保留E024 ON的170.62tok/s。**E024与GDN是分开的开关配置，组合未验证**，也不合并两轮OFF或历史N=1。p50/p95联合前沿仍为oMLX C1与E024 C8；C2–7未知。实际更新日期为10月18日，v15目录保留历史命名。
+最新完整E033运行已经闭环：12个全新进程、96 warm与768 formal请求，
+独立HTTP/计时、资源与恢复审计PASS。三进程中位数：组合ON在C1为
+48.3578 tok/s、POST→DONE p50 10.5859s，仍低于历史oMLX约4.77%；
+C8组合ON为170.3790 tok/s，没有稳定超过同轮OFF。当前Native C8最好点仍为
+E024-only的170.6198 tok/s，比历史oMLX约高1.34%，远未达到大幅领先目标。
+组合已取得真实速度点，不能再写成未测试。[v16](progress/2026-10-19-v16/README.md)保留全部50进程观察、18组汇总；
+C2–7和GLM正式前沿仍未知。跨引擎历史点不是本轮同时配对测量。
 
 ## 1. 先算每个 token 为哪些字节和等待付钱
 

@@ -1,7 +1,7 @@
 # Small next execution boundary — prepared, not run
 
-2026-10-18. `owner.py` and ten fake CPU test methods are source-only and have not
-been executed or AST/hash checked. No service, model or performance result is
+Updated 2026-10-19. All ten fake CPU owner tests passed in the retained
+next-candidate-cpu-v2 run. Actual device integration is still unexecuted. No service, model or performance result is
 created. Existing active formal sources and plans are untouched.
 
 The existing multi-server owner is the right operational model: its Python

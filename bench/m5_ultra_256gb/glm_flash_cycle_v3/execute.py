@@ -15,7 +15,7 @@ if _hashlib.sha256(_reuse_path.read_bytes()).hexdigest() != 'fbf523c586629ce6e5e
     raise ValueError('fixed original execution reuse source changed')
 _spec = _importlib.spec_from_file_location('_glm_v3_execute_reuse', _reuse_path)
 _reuse = _importlib.module_from_spec(_spec); _spec.loader.exec_module(_reuse)
-_original = _reuse.install(globals(), 'execute.py', dict(REGISTRAR_SHA='UNSEALED'))
+_original = _reuse.install(globals(), 'execute.py', dict(REGISTRAR_SHA='319df1f18efee2ec5587d353c213a79aa8e7373ece904c13e1fd0e06529f68af'))
 
 _preflight_source = _inspect.getsource(_original.preflight)
 for _before, _after in (

@@ -1080,3 +1080,39 @@ GLM first33-test run had32PASS+1fixtureERROR: the preintent test omitted the ext
 ## v13 actual rendering and layout repair · 2026-10-17
 
 Predeclaredv12 policy retained:14historical+12newprocess points,10groups,6pairs. v13preparePASS; first renderFAIL missingMatplotlib inroot.venv, identical source/data rendered in existingplotvenv. Root+independentvisualreview found x-axis/tableheading overlap. Separate render_v2 moves only subplotbottom.585→.615 and output/provenance names. FinalPNG viewedPASS/SVGparsed, chartdataSHAff7d06adbe1ecda482173a6747a7e673aa71a73a54713bfd2d8f2f6b52551ef0 unchanged. Allthree actualcommand attempts, bothimages/sources/receipts and failedreview retained. Currentroot/guide links [v13](progress/2026-10-17-v13/README.md). No new timing samples collected.
+
+
+## E030–E033：组合资格与正式计时完成 · 更新2026-10-19
+
+[E030](../experiments/m5-ultra-256gb/E030-gdn-graph-combined-serving-v1/README.md)
+组合GDN+E024完成原42参数诊断与37请求同调度比较；独立数值、资源、恢复通过。
+[E031](../experiments/m5-ultra-256gb/E031-gdn-graph-combined-http-v1/README.md)
+随后完成实际C1/C8的24请求、捕获后独立历史重放，四子进程回收与恢复通过。
+这两轮只有数值/HTTP资格，插桩耗时未进入Pareto。
+
+[E032](../experiments/m5-ultra-256gb/E032-gdn-graph-combined-formal-v1/README.md)
+正式driver误传owner不支持的--run，真实CLI以2退出，模型子进程和请求均为0；
+原失败代码、命令与正常恢复证据保留。新的retry-v2在停止服务前执行真实
+prepare-only入口，19项focused CPU通过，源与计划在启动前提交。
+
+实际E033 retry-v2于20:06:57 UTC启动owner93089，现已完成12进程、96warm+768formal。
+同一combined server、graph恒ON、GDN OFF/ON、每C1/C8三对fresh process；
+正式计时/资源与恢复审计PASS，服务91373→21938，四阶段退出码全0。
+C1中位数45.81897→48.35777tok/s；C8 170.46064→170.37898，无稳定增量收益。
+[3472成员完整归档](../experiments/m5-ultra-256gb/E033-gdn-graph-combined-formal-v2/README.md)
+和031教程保留所有配对。C1仍低于oMLX约4.77%，尚未实现逐batch领先目标。
+
+[首轮C1时间戳诊断](../experiments/m5-ultra-256gb/combined-v2-r1-c1-diagnostic-v1/README.md)
+保留三组各64请求和首次计算错误。当前ON比历史oMLX平均E2E慢0.51371s，
+其中post-first-output为0.43960s；这是HTTP边界分解，不能归因为GPU或ITL，
+也不是同时配对外部对照。新默认OFF候选与对应未执行测试源、最新论文和M4同步
+均已提交df21dab。完整正式运行结束后才执行新候选检查、绘图与下一轮设备工作。
+
+
+## 下一批候选CPU首跑 · 2026-10-19
+
+正式运行完全闭环后执行155项fake/小数组CPU检查。v1因runner未使用package名称导入
+相对import的测试模块而在执行任何测试前失败；修正runner、保留v1后，v2实际执行155项，
+154通过，GLM注册负例因期待ValueError而实际得到Refuse产生1error。
+生产代码正确拒绝尚未封存的前序证据；修复测试期待并将前序状态改成确定性fixture后单独重跑。
+这些CPU检查没有加载模型、使用GPU或赋予任何新性能资格；两次尝试与源码快照完整保留。

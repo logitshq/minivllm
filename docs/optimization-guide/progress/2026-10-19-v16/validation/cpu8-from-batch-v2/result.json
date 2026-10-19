@@ -1,0 +1,418 @@
+{
+  "schema": "Next-candidate-CPU-v1",
+  "status": "FAIL",
+  "expected": 155,
+  "modules": [
+    {
+      "path": "ahead_submit_once/test_candidate_cpu.py",
+      "expected": 12,
+      "discovered": 12
+    },
+    {
+      "path": "long_decode_onepass/test_candidate_cpu.py",
+      "expected": 11,
+      "discovered": 11
+    },
+    {
+      "path": "exact_verifier_bridge/test_qualify_cpu.py",
+      "expected": 8,
+      "discovered": 8
+    },
+    {
+      "path": "gdn_graph_combined_c24/test_domain_cpu.py",
+      "expected": 6,
+      "discovered": 6
+    },
+    {
+      "path": "gdn_graph_combined_c24/test_http_cpu.py",
+      "expected": 12,
+      "discovered": 12
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_registration_cpu.py",
+      "expected": 7,
+      "discovered": 7
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_predecessor_cpu.py",
+      "expected": 3,
+      "discovered": 3
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_controller_cpu.py",
+      "expected": 6,
+      "discovered": 6
+    },
+    {
+      "path": "c1_pipeline_profile/test_http_server_cpu.py",
+      "expected": 16,
+      "discovered": 16
+    },
+    {
+      "path": "progress_v16/test_cpu.py",
+      "expected": 8,
+      "discovered": 8
+    },
+    {
+      "path": "c1_pipeline_profile/test_capture_cpu.py",
+      "expected": 15,
+      "discovered": 15
+    },
+    {
+      "path": "exact_verifier_bridge/test_audit_cpu.py",
+      "expected": 12,
+      "discovered": 12
+    },
+    {
+      "path": "native_gdn_input_pack/test_candidate_cpu.py",
+      "expected": 10,
+      "discovered": 10
+    },
+    {
+      "path": "rowwise_native_verify/test_candidate_cpu.py",
+      "expected": 9,
+      "discovered": 9
+    },
+    {
+      "path": "c1_pipeline_profile/test_owner_cpu.py",
+      "expected": 10,
+      "discovered": 10
+    },
+    {
+      "path": "rowwise_native_verify/test_qualify_cpu.py",
+      "expected": 10,
+      "discovered": 10
+    }
+  ],
+  "tests_run": 155,
+  "failures": [],
+  "errors": [
+    [
+      "bench.m5_ultra_256gb.glm_flash_cycle_v3.test_registration_cpu.Tests.test_actual_registration_rejects_unsealed_E033_and_old_E032_before_output",
+      "Traceback (most recent call last):\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/test_registration_cpu.py\", line 82, in test_actual_registration_rejects_unsealed_E033_and_old_E032_before_output\n    with self.assertRaisesRegex(ValueError,'not sealed'):r.main(args)\n                                                         ~~~~~~^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle/preregister.py\", line 153, in main\n    prepare(a);return 0\n    ~~~~~~~^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/preregister.py\", line 2, in prepare\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/preregister.py\", line 30, in require_seals\n    manifest = controller.predecessor_manifest()\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash_cycle_v3/controller.py\", line 45, in predecessor_manifest\n    need(type(BOUND_MANIFEST_SHA) is str and re.fullmatch('[0-9a-f]{64}', BOUND_MANIFEST_SHA),\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n         'actual RESTORED predecessor manifest is not sealed')\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/omlx_cold_restart/controller.py\", line 46, in need\n    raise Refuse(message)\nfixed_omlx_cold_v1_support.Refuse: actual RESTORED predecessor manifest is not sealed\n"
+    ]
+  ],
+  "skipped": [],
+  "exception": null,
+  "forbidden": [],
+  "asyncio_sigint_fakes": [
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    },
+    {
+      "signal": 2,
+      "caller": "/Users/ryanli/.local/share/uv/python/cpython-3.13.16-macos-aarch64-none/lib/python3.13/asyncio/runners.py",
+      "effect": "suppressed OS handler mutation"
+    }
+  ],
+  "source_unchanged": true,
+  "elapsed_seconds": 3.0279725420405157,
+  "scope": "CPU fake/control and tiny NumPy scheduler tests only; no model/backend/process/service operations; no device or performance qualification"
+}

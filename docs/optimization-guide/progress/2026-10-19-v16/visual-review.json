@@ -1,0 +1,26 @@
+{
+  "schema": "D512-v16-visual-review-v1",
+  "status": "PASS",
+  "reviewed_at": "2026-10-19T07:34:17.172228+00:00",
+  "images": [
+    "D512-engine-frontier.png",
+    "D512-frontier-interactivity.png",
+    "D512-frontier-latency.png"
+  ],
+  "method": "Actual view_image inspection of all three final PNGs; source-backed metric/frontier recomputation in renderer.",
+  "first_render": "Retained; GDN-only inset annotation moved to separate it from combined point; concise three-engine overview added.",
+  "checks": [
+    "Six selected endpoints match exact measured engine p50 frontiers.",
+    "C1/C8 main labels and engine shapes identify points without color alone.",
+    "C1 -4.77% and C8 +1.34% throughput vs oMLX recomputed from medians.",
+    "All three engine lines visible; zooms expose close competitors.",
+    "No clipped text or material mark/label overlap observed.",
+    "Full 50 observations and 18 independent groups retained in detailed plots.",
+    "HTTP C distinct from GPU batch; C2\u20137 unmeasured; axis distinct from P90 interactivity and tokens/dollar."
+  ],
+  "limits": [
+    "Static PNG/SVG, no interactive UI or narrow responsive browser test.",
+    "Whiskers are observed process range, not confidence intervals.",
+    "Historical peer cycles and new combined cycle are not a simultaneous paired engine experiment."
+  ]
+}

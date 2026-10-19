@@ -79,7 +79,9 @@ class Tests(unittest.TestCase):
             verification_sha256='2'*64,predecessor_journal_sha256='3'*64,predecessor_audit_sha256='4'*64,
             child_limit_bytes=220*(1<<30)).items():
             args+=['--'+name.replace('_','-'),str(value)]
-        with self.assertRaisesRegex(ValueError,'not sealed'):r.main(args)
+        # Explicit fake unsealed pin keeps this rejection test deterministic after sealing.
+        with patch.object(c,'BOUND_MANIFEST_SHA','UNSEALED'),patch.object(r,'module',return_value=c):
+            with self.assertRaisesRegex(c.Refuse,'not sealed'):r.main(args)
         self.assertFalse((self.root/'reg').exists())
         old=SimpleNamespace(PRIOR_ARCHIVE=r.REQUIRED_PREDECESSOR_ARCHIVE.with_name('E032-gdn-graph-combined-formal-v1'))
         with patch.object(r,'module',return_value=old):

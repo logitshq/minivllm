@@ -71,7 +71,8 @@ class PredecessorTests(unittest.TestCase):
         with self.assertRaises(Exception):self.check(prior,a)
 
     def test_unsealed_real_binding_wrong_archive_and_source_change_fail_closed(self):
-        with self.assertRaisesRegex(Exception,'not sealed'):c.predecessor({})
+        with patch.object(c,'BOUND_MANIFEST_SHA','UNSEALED'):
+            with self.assertRaisesRegex(c.Refuse,'not sealed'):c.predecessor({})
         prior,audit=self.fixtures()
         with self.assertRaisesRegex(Exception,'exact E033'):self.check(prior,audit,wrong_path=True)
         with self.assertRaisesRegex(Exception,'owner source changed'):self.check(prior,audit,bad_owner_source=True)

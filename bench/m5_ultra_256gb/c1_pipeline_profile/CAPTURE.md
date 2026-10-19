@@ -1,7 +1,8 @@
 # C1 pipeline diagnostic capture
 
-This is source-only preparation. `capture.py` and its ten focused fake test
-methods have not been executed. The existing server/instrumentation/delivery
+This remains device-unexecuted preparation. On 2026-10-19, all fifteen focused
+CPU capture tests passed in next-candidate-cpu-v2 (the combined suite retained
+one unrelated GLM exception-expectation error). The existing server/instrumentation/delivery
 sources are unchanged. No diagnostic result, model qualification or performance
 point is supplied by this work.
 

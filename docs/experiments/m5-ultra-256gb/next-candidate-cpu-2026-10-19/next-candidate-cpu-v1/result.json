@@ -1,0 +1,61 @@
+{
+  "schema": "Next-candidate-CPU-v1",
+  "status": "FAIL",
+  "expected": 155,
+  "modules": [
+    {
+      "path": "ahead_submit_once/test_candidate_cpu.py",
+      "expected": 12,
+      "discovered": 12
+    },
+    {
+      "path": "long_decode_onepass/test_candidate_cpu.py",
+      "expected": 11,
+      "discovered": 11
+    },
+    {
+      "path": "exact_verifier_bridge/test_qualify_cpu.py",
+      "expected": 8,
+      "discovered": 8
+    },
+    {
+      "path": "gdn_graph_combined_c24/test_domain_cpu.py",
+      "expected": 6,
+      "discovered": 6
+    },
+    {
+      "path": "gdn_graph_combined_c24/test_http_cpu.py",
+      "expected": 12,
+      "discovered": 12
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_registration_cpu.py",
+      "expected": 7,
+      "discovered": 7
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_predecessor_cpu.py",
+      "expected": 3,
+      "discovered": 3
+    },
+    {
+      "path": "glm_flash_cycle_v3/test_controller_cpu.py",
+      "expected": 6,
+      "discovered": 6
+    }
+  ],
+  "tests_run": 0,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "exception": {
+    "type": "ImportError",
+    "message": "attempted relative import with no known parent package",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/run-next-candidate-cpu-v1.py\", line 51, in main\n    name='next_candidate_cpu_'+rel.replace('/','_').removesuffix('.py');spec=importlib.util.spec_from_file_location(name,BASE/rel);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\n                                                                                                                                                                                ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 1027, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c1_pipeline_profile/test_http_server_cpu.py\", line 19, in <module>\n    from . import http_server as entry\nImportError: attempted relative import with no known parent package\n"
+  },
+  "forbidden": [],
+  "asyncio_sigint_fakes": [],
+  "source_unchanged": true,
+  "elapsed_seconds": 0.27769437502138317,
+  "scope": "CPU fake/control and tiny NumPy scheduler tests only; no model/backend/process/service operations; no device or performance qualification"
+}

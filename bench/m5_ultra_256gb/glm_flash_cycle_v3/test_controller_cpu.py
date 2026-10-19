@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 def load(name):
@@ -48,8 +49,9 @@ class Tests(unittest.TestCase):
         self.write(root/'complete.json',complete)
 
     def test_unsealed_actual_predecessor_has_no_success_path(self):
-        with self.assertRaisesRegex(Exception,'not sealed'): c.predecessor_manifest()
-        with self.assertRaisesRegex(Exception,'not sealed'): c.predecessor({})
+        with patch.object(c,'BOUND_MANIFEST_SHA','UNSEALED'):
+            with self.assertRaisesRegex(c.Refuse,'not sealed'): c.predecessor_manifest()
+            with self.assertRaisesRegex(c.Refuse,'not sealed'): c.predecessor({})
 
     def test_failed_but_waited_probe_allows_restoration_file_proof(self):
         with tempfile.TemporaryDirectory() as temp:

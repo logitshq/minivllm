@@ -20,7 +20,7 @@ _spec = _importlib.spec_from_file_location('_glm_v3_closed_reuse', _reuse_path)
 _reuse = _importlib.module_from_spec(_spec); _spec.loader.exec_module(_reuse)
 _original = _reuse.install(globals(), 'audit_closed.py', dict(
     OWNER_SHA='9d69c5a64dc50b7d65330ad130b8af9f757b91e884aa197d1e828775b27c88a8',
-    RESTORE_SHA='UNSEALED'))
+    RESTORE_SHA='fca6b668df7240ac12ce47380f99af5e670eecd885af4d21d44462268f3c7bab'))
 
 MONITOR_POLICY = dict(schema='GLM-dual-cadence-policy-v1', physical_max_gap_seconds=1.0,
     metadata_max_gap_seconds=5.0, callback_seconds=5.0, target_gap_fraction=.5,

@@ -1,0 +1,58 @@
+{
+  "restoration-audit": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_formal_retry_v2/audit_restore.py",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-cold-journal",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-analysis/restoration-audit.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_formal_retry_v2/audit_restore.py",
+      "sha256": "7ab477f0d449bf08f78259a820d067f902d2032314ff4ebd389157b2578ec57d",
+      "bytes": 1618
+    },
+    "started_at": 1792360149.055989,
+    "returncode": 0,
+    "ended_at": 1792360151.526989,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-analysis/restoration-audit.json",
+      "sha256": "f4b7e283d3f4b2e6502bf8f82001fb9dee2904d0cc227f8270e2495cd3fb0d13",
+      "bytes": 14183
+    },
+    "status": "PASS"
+  },
+  "independent-formal": {
+    "command": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_formal_retry_v2/audit_formal.py",
+      "--owner",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-owner",
+      "--journal",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-cold-journal",
+      "--plan-sha256",
+      "f4e19bd0a842b48ea26fb2d27f870fdf62409897c7f862067c7800de5949b6f1",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-analysis/independent-formal.json"
+    ],
+    "source": {
+      "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_formal_retry_v2/audit_formal.py",
+      "sha256": "2391e9d4eab39df75064ae6ce07f6a0328e04ff21cbc977342d3f420d8e20b34",
+      "bytes": 15161
+    },
+    "started_at": 1792360149.056105,
+    "returncode": 0,
+    "ended_at": 1792360162.006697,
+    "output": {
+      "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-v2-analysis/independent-formal.json",
+      "sha256": "d8167179cc9f3d0890426f555ee8bb46ca6136f1a6e3cb80e56ed541593dfaa7",
+      "bytes": 459357
+    },
+    "status": "PASS"
+  }
+}
