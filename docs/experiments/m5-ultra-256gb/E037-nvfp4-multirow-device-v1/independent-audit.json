@@ -1,0 +1,1395 @@
+{
+  "schema": "E037-independent-raw-audit-v2",
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "K512-N64/T2-finite-stride1",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6",
+        "custom_b1": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6",
+        "candidate": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6"
+      },
+      "input_sha256": "7cca160cd8ce881471b4f3afcf88e254a22cf15ab4a28903238d7038bac188cb",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 21248,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 21248
+      }
+    },
+    {
+      "case": "K512-N64/T2-finite-stride2",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6",
+        "custom_b1": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6",
+        "candidate": "84952f070b140b4ba09252f5a497d134875e18025148be5ad466ee2687b2bce6"
+      },
+      "input_sha256": "7cca160cd8ce881471b4f3afcf88e254a22cf15ab4a28903238d7038bac188cb",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 60160,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 41728
+      }
+    },
+    {
+      "case": "K512-N64/T2-zero-stride1",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "custom_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "candidate": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+      },
+      "input_sha256": "e5a00aa9991ac8a5ee3109844d84a55583bd20572ad3ffcd42792f3c36b183ad",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 21248,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 21248
+      }
+    },
+    {
+      "case": "K512-N64/T2-zero-stride2",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "custom_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "candidate": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+      },
+      "input_sha256": "e5a00aa9991ac8a5ee3109844d84a55583bd20572ad3ffcd42792f3c36b183ad",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 60160,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 41728
+      }
+    },
+    {
+      "case": "K512-N64/T2-negative-zero-stride1",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "custom_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "candidate": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+      },
+      "input_sha256": "e595cebf33d435d88cc1e2d0d7382a122ed389f76f97b41ec9e62d736662bdf3",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 21248,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 21248
+      }
+    },
+    {
+      "case": "K512-N64/T2-negative-zero-stride2",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "custom_b1": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "candidate": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+      },
+      "input_sha256": "e595cebf33d435d88cc1e2d0d7382a122ed389f76f97b41ec9e62d736662bdf3",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 60160,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 41728
+      }
+    },
+    {
+      "case": "K512-N64/T2-stress-stride1",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403",
+        "custom_b1": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403",
+        "candidate": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403"
+      },
+      "input_sha256": "85b534d6b408bd3a76668bd08008261510117f2494b57042d27188b6bed6207b",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 21248,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 21248
+      }
+    },
+    {
+      "case": "K512-N64/T2-stress-stride2",
+      "T": 2,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403",
+        "custom_b1": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403",
+        "candidate": "858191b6ce7765d19b6fdff9244a8691c0ebe316dd8b725738ff8d05528ed403"
+      },
+      "input_sha256": "85b534d6b408bd3a76668bd08008261510117f2494b57042d27188b6bed6207b",
+      "elements_per_route": 128,
+      "reported_memory": {
+        "active": 60160,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 41728
+      }
+    },
+    {
+      "case": "K512-N64/T4-finite-stride1",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3",
+        "custom_b1": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3",
+        "candidate": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3"
+      },
+      "input_sha256": "7973e922e6054a12e4f419ab8781f4eb6ca1a83b48b33ae8b7e69743eca0420f",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 24064,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 24064
+      }
+    },
+    {
+      "case": "K512-N64/T4-finite-stride2",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3",
+        "custom_b1": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3",
+        "candidate": "9ef2d66731d6cae3273fb0b1cf3d9bb769720d8206f8c4c5e89bf9fa235d78d3"
+      },
+      "input_sha256": "7973e922e6054a12e4f419ab8781f4eb6ca1a83b48b33ae8b7e69743eca0420f",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 65024,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 46592
+      }
+    },
+    {
+      "case": "K512-N64/T4-zero-stride1",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "custom_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "candidate": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      },
+      "input_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 24064,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 24064
+      }
+    },
+    {
+      "case": "K512-N64/T4-zero-stride2",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "custom_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "candidate": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      },
+      "input_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 65024,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 46592
+      }
+    },
+    {
+      "case": "K512-N64/T4-negative-zero-stride1",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "custom_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "candidate": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      },
+      "input_sha256": "60bdaf64cd242fcb640dd306529d057580b1b192ac4d88a6b6becfad62b02c6c",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 24064,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 24064
+      }
+    },
+    {
+      "case": "K512-N64/T4-negative-zero-stride2",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "custom_b1": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "candidate": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+      },
+      "input_sha256": "60bdaf64cd242fcb640dd306529d057580b1b192ac4d88a6b6becfad62b02c6c",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 65024,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 46592
+      }
+    },
+    {
+      "case": "K512-N64/T4-stress-stride1",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f",
+        "custom_b1": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f",
+        "candidate": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f"
+      },
+      "input_sha256": "b4450801493d8ea8918e500083d643b9fafcbd533d7444b29ada3c07853e7d69",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 24064,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 24064
+      }
+    },
+    {
+      "case": "K512-N64/T4-stress-stride2",
+      "T": 4,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f",
+        "custom_b1": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f",
+        "candidate": "b479dc25167ba99eac3f0b25b742e12ce33c5b6e929d8b3d278831b74c58dc7f"
+      },
+      "input_sha256": "b4450801493d8ea8918e500083d643b9fafcbd533d7444b29ada3c07853e7d69",
+      "elements_per_route": 256,
+      "reported_memory": {
+        "active": 65024,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 46592
+      }
+    },
+    {
+      "case": "K512-N64/T8-finite-stride1",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d",
+        "custom_b1": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d",
+        "candidate": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d"
+      },
+      "input_sha256": "c84f405e6184fa608ffcc7c18aa4b2e0b44c2f6e49fe52c2868d230616b5637c",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 29696,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 29696
+      }
+    },
+    {
+      "case": "K512-N64/T8-finite-stride2",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d",
+        "custom_b1": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d",
+        "candidate": "2ea684d97d317ba0ba676bcbf85f8320f9ad0f439f2d6734b72adc01c63c962d"
+      },
+      "input_sha256": "c84f405e6184fa608ffcc7c18aa4b2e0b44c2f6e49fe52c2868d230616b5637c",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 74752,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 56320
+      }
+    },
+    {
+      "case": "K512-N64/T8-zero-stride1",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "custom_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "candidate": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      "input_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 29696,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 29696
+      }
+    },
+    {
+      "case": "K512-N64/T8-zero-stride2",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "custom_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "candidate": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      "input_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 74752,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 56320
+      }
+    },
+    {
+      "case": "K512-N64/T8-negative-zero-stride1",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "custom_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "candidate": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      "input_sha256": "2d2da937cbc95d110dda3aa53b6c2ebb3218026035f1a3c6bbf3508b791d4fe4",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 29696,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 29696
+      }
+    },
+    {
+      "case": "K512-N64/T8-negative-zero-stride2",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "negative-zero",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "custom_b1": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "candidate": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      "input_sha256": "2d2da937cbc95d110dda3aa53b6c2ebb3218026035f1a3c6bbf3508b791d4fe4",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 74752,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 56320
+      }
+    },
+    {
+      "case": "K512-N64/T8-stress-stride1",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0",
+        "custom_b1": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0",
+        "candidate": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0"
+      },
+      "input_sha256": "e26e6aa0441c7246e8c5aa7d0fdc3930f9baa95e30e08cb729f704b012ee0830",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 29696,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 29696
+      }
+    },
+    {
+      "case": "K512-N64/T8-stress-stride2",
+      "T": 8,
+      "K": 512,
+      "N": 64,
+      "kind": "stress",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0",
+        "custom_b1": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0",
+        "candidate": "1e1d65428680734c631aacdc8985fb2bb95ea14c0dea539e6f239c8ae5d31ce0"
+      },
+      "input_sha256": "e26e6aa0441c7246e8c5aa7d0fdc3930f9baa95e30e08cb729f704b012ee0830",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 74752,
+        "peak": 217364,
+        "cache": 0,
+        "buffers": 56320
+      }
+    },
+    {
+      "case": "K5120-N256/T2-finite-stride1",
+      "T": 2,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5",
+        "custom_b1": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5",
+        "candidate": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5"
+      },
+      "input_sha256": "629982387d63ee49ab8d52279c66f70df3326bcb04750d97880746d2bd25c82c",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 773120,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 773120
+      }
+    },
+    {
+      "case": "K5120-N256/T2-finite-stride2",
+      "T": 2,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5",
+        "custom_b1": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5",
+        "candidate": "2a74b5b5933f7e6dd79681cc90c1a2f95dc99c42977f6c0130af4d6f7409b5c5"
+      },
+      "input_sha256": "629982387d63ee49ab8d52279c66f70df3326bcb04750d97880746d2bd25c82c",
+      "elements_per_route": 512,
+      "reported_memory": {
+        "active": 2264064,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 1526784
+      }
+    },
+    {
+      "case": "K5120-N256/T4-finite-stride1",
+      "T": 4,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7",
+        "custom_b1": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7",
+        "candidate": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7"
+      },
+      "input_sha256": "5a63b8753d224755c4d42ad97e09ba8df890dd58a1575a0c1e8f4ed262ffc1c8",
+      "elements_per_route": 1024,
+      "reported_memory": {
+        "active": 792576,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 792576
+      }
+    },
+    {
+      "case": "K5120-N256/T4-finite-stride2",
+      "T": 4,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7",
+        "custom_b1": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7",
+        "candidate": "0861101610e36bfc81521701cf2f9058e29c5de7ae9ba0a220541dc4a692b7e7"
+      },
+      "input_sha256": "5a63b8753d224755c4d42ad97e09ba8df890dd58a1575a0c1e8f4ed262ffc1c8",
+      "elements_per_route": 1024,
+      "reported_memory": {
+        "active": 2299904,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 1562624
+      }
+    },
+    {
+      "case": "K5120-N256/T8-finite-stride1",
+      "T": 8,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb",
+        "custom_b1": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb",
+        "candidate": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb"
+      },
+      "input_sha256": "622b2b837b8c15ed562aa147d083aa55556e4a4a1574a5f1d6d808e81c957b96",
+      "elements_per_route": 2048,
+      "reported_memory": {
+        "active": 831488,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 831488
+      }
+    },
+    {
+      "case": "K5120-N256/T8-finite-stride2",
+      "T": 8,
+      "K": 5120,
+      "N": 256,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb",
+        "custom_b1": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb",
+        "candidate": "ee26cbea4d587e67df9902e7218a33c9551d22a152ef0ffc9b2bfcc6cafdedfb"
+      },
+      "input_sha256": "622b2b837b8c15ed562aa147d083aa55556e4a4a1574a5f1d6d808e81c957b96",
+      "elements_per_route": 2048,
+      "reported_memory": {
+        "active": 2387968,
+        "peak": 8635412,
+        "cache": 0,
+        "buffers": 1650688
+      }
+    },
+    {
+      "case": "K5120-N6144/T2-finite-stride1",
+      "T": 2,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7",
+        "custom_b1": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7",
+        "candidate": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7"
+      },
+      "input_sha256": "629982387d63ee49ab8d52279c66f70df3326bcb04750d97880746d2bd25c82c",
+      "elements_per_route": 12288,
+      "reported_memory": {
+        "active": 17825792,
+        "peak": 35389440,
+        "cache": 0,
+        "buffers": 17825792
+      }
+    },
+    {
+      "case": "K5120-N6144/T2-finite-stride2",
+      "T": 2,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7",
+        "custom_b1": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7",
+        "candidate": "b07844eb44d2988ef0860b1c191dea2b6ab6f1a93ce3be1e4953451382b491a7"
+      },
+      "input_sha256": "629982387d63ee49ab8d52279c66f70df3326bcb04750d97880746d2bd25c82c",
+      "elements_per_route": 12288,
+      "reported_memory": {
+        "active": 53231616,
+        "peak": 71008256,
+        "cache": 0,
+        "buffers": 35536896
+      }
+    },
+    {
+      "case": "K5120-N6144/T4-finite-stride1",
+      "T": 4,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0",
+        "custom_b1": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0",
+        "candidate": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0"
+      },
+      "input_sha256": "5a63b8753d224755c4d42ad97e09ba8df890dd58a1575a0c1e8f4ed262ffc1c8",
+      "elements_per_route": 24576,
+      "reported_memory": {
+        "active": 17891328,
+        "peak": 71008256,
+        "cache": 0,
+        "buffers": 17891328
+      }
+    },
+    {
+      "case": "K5120-N6144/T4-finite-stride2",
+      "T": 4,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0",
+        "custom_b1": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0",
+        "candidate": "9231186c1a9e4034f75cd8830b819679d066b9483812452268dec1639cc637b0"
+      },
+      "input_sha256": "5a63b8753d224755c4d42ad97e09ba8df890dd58a1575a0c1e8f4ed262ffc1c8",
+      "elements_per_route": 24576,
+      "reported_memory": {
+        "active": 53313536,
+        "peak": 71155712,
+        "cache": 0,
+        "buffers": 35618816
+      }
+    },
+    {
+      "case": "K5120-N6144/T8-finite-stride1",
+      "T": 8,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 1,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621",
+        "custom_b1": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621",
+        "candidate": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621"
+      },
+      "input_sha256": "622b2b837b8c15ed562aa147d083aa55556e4a4a1574a5f1d6d808e81c957b96",
+      "elements_per_route": 49152,
+      "reported_memory": {
+        "active": 18071552,
+        "peak": 71155712,
+        "cache": 0,
+        "buffers": 18071552
+      }
+    },
+    {
+      "case": "K5120-N6144/T8-finite-stride2",
+      "T": 8,
+      "K": 5120,
+      "N": 6144,
+      "kind": "finite",
+      "declared_stride": 2,
+      "status": "PASS",
+      "finite": true,
+      "comparisons": {
+        "candidate__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "candidate__custom_b1": {
+          "equal": true,
+          "first_mismatch": null
+        },
+        "custom_b1__native_b1": {
+          "equal": true,
+          "first_mismatch": null
+        }
+      },
+      "original_dtype_sha256": {
+        "native_b1": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621",
+        "custom_b1": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621",
+        "candidate": "186b498d3ae406fa73ccf9d723ca08d39ff6efd90981b3e17532f4bcaf5cd621"
+      },
+      "input_sha256": "622b2b837b8c15ed562aa147d083aa55556e4a4a1574a5f1d6d808e81c957b96",
+      "elements_per_route": 49152,
+      "reported_memory": {
+        "active": 53542912,
+        "peak": 71516160,
+        "cache": 0,
+        "buffers": 35848192
+      }
+    }
+  ],
+  "case_count": 36,
+  "output_matrices": 108,
+  "elements_per_route": 186368,
+  "pairwise_word_comparisons": 559104,
+  "source_BF16_values_verified": 32800768,
+  "packed_payload_bytes": 18450432,
+  "device_files": 180,
+  "source_checks": {
+    "candidate.py": {
+      "path": "smoke-cpu/sources/candidate.py",
+      "sha256": "ee9c5eef0e1282125310ee6661be1ec5ce64dc93a82add48a6d6c17f8958816f"
+    },
+    "nvfp4_qmv.py": {
+      "path": "smoke-cpu/sources/nvfp4_qmv.py",
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32"
+    },
+    "smoke.py": {
+      "path": "smoke-cpu/sources/smoke.py",
+      "sha256": "cac89f54ce7ded33e09b7b8e6bfa61caa03af1ae80f2c36b4b2e658afa0e8213"
+    }
+  },
+  "cpu_results": {
+    "smoke-cpu": {
+      "tests": 1,
+      "source_unchanged": true,
+      "scope": "One default-inert smoke entry/invalid-argument guard test only; no actual MLX/model/GPU/Metal compilation, mmap, child process, timers, signals or network; no arithmetic, numerical, memory-fit or performance qualification."
+    },
+    "mechanism-cpu": {
+      "tests": 5,
+      "source_unchanged": true,
+      "scope": "Five source/dispatch mechanism tests with injected fake backend only; no actual MLX/model/GPU/Metal compilation, mmap, child process, signals or network; no arithmetic, numerical or performance qualification."
+    }
+  },
+  "reported_peak_bytes": 71516160,
+  "reported_peak_mib": 68.203125,
+  "runtime_receipt": {
+    "version": "0.32.3",
+    "name": "Apple M5 Ultra",
+    "architecture": "applegpu_g17d",
+    "core_path": "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/mlx/core.cpython-313-darwin.so"
+  },
+  "observed_stderr": "mx.metal.device_info is deprecated and will be removed in a future version. Use mx.device_info instead.\n",
+  "independently_proven": [
+    "Complete exact saved case matrix and safetensors layout/span coverage",
+    "Full original BF16 output bytes finite and three-way equal in all cases",
+    "Original x values including negative zero and all BF16 source-band values equal the fixed recipes",
+    "Packed weight/scale shapes, full-file hashes, source pins, driver/child/CPU receipt consistency",
+    "Declared stride1/2 pairs have identical saved logical inputs and outputs"
+  ],
+  "receipt_or_source_only": [
+    "Actual native M1 dispatch, NVFP4 quantizer execution and kernel compilation follow source/producer execution records; no hardware trace",
+    "Physical stride/view/staging behavior is not preserved by contiguous safetensors",
+    "Device/runtime identity and allocator active/cache/peak are producer records; not independent RSS/system memory measurements",
+    "Returned process exit and service coexistence are execution context, not a performance isolation proof"
+  ],
+  "full_model_qualified": false,
+  "performance_qualified": false
+}

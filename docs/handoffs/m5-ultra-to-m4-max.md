@@ -1216,3 +1216,19 @@ Fresh fetch found no unmerged M4 commits; its branch remains94c070e. These Git n
 
 
 E035 complete readout: repeatedcurrent-root async4072calls total18.523ms(0.02191%); successor submission mean18.620ms, long-wrapper minuscompiled interval0.4609%; activeHTTPdelivery99.831%overlapsworker. These tinywrapperchanges are not the main substantial-speedup direction. Backenddependency/encoding and deviceexecution remain unresolved. Tutorial033 and completeE035archive/staticdiagnostic saved; no newParetopoint.
+
+
+### 2026-10-19 — E036 / E037 实际完成，目标保持大幅逐 batch 领先
+
+GLM无损离线重排真实退出0：113446→4960张量，378个expert stacks，58分片，
+203976457080B原始payload；完整source SHA和输出回读通过。实际官方loader和内存fit仍待测。
+多行NVFP4候选真实GPU smoke36/36通过，三路BF16输出字节一致，MLX peak约68.2MiB；
+未做整模型或性能资格。原oMLX服务已恢复，PID39988；正式前沿仍v16。
+见[034教程](../optimization-guide/tutorials/034-real-weight-reuse-and-glm-layout.md)及E036/E037归档。
+
+实际head形状适配新kernel，但head仅约占4.96%的逻辑投影权重字节，不能用head-only
+通过代表骨干网络权重复用或巨大收益。下一步以真实模型合同验证最小接入面，再覆盖大头投影。
+源审查见[head接入分析](../../bench/reviews/2026-10-19-multirow-head-integration.md)。
+继续按手写specialized engine推进：减少权重/状态流量和设备等待，模块可开关；
+每个目标batch都要正确且明显领先oMLX和Lithos，局部略快不算完成。
+本次fetch的M4分支仍无未合入提交。以上通过Git同步，不声称M4 agent已阅读。

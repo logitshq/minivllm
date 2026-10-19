@@ -77,3 +77,6 @@ GLM 无损重排计划和 CPU 证据在 096a7af 提交并推送。GLM 使用独�
 
 文档写入的首轮 heredoc 被 Python 的源编码检查拒绝，退出 1，未执行任何文件改动；
 改为直接 UTF-8 Markdown 文件后写入。实验、分析和图的原始结果均未受影响。
+
+
+2026-10-19 subsequent result: the fixed multirow GPU smoke completed 36/36 raw-BF16 checks, and the GLM exact-byte repack completed with exit 0. Full-model and speed qualification remain pending; see [tutorial 034](034-real-weight-reuse-and-glm-layout.md). The earlier CPU-only statements above describe the preregistration stage.

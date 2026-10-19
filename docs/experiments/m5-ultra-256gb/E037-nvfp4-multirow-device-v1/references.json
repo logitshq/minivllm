@@ -1,0 +1,47 @@
+{
+  "schema": "E037-references-v1",
+  "repo": "/Users/ryanli/code/minivllm",
+  "actual_device_execution": {
+    "directory": ".artifacts/m5-ultra-256gb/nvfp4-multirow-reuse-device-execution-v1",
+    "tool_id": "0f09da",
+    "tool_id_provenance": "Coordinator-reported; archived execution/final.json independently records exit 0.",
+    "result_scope": "PASS_SYNTHETIC_BYTES_ONLY"
+  },
+  "actual_device_output": ".artifacts/m5-ultra-256gb/nvfp4-multirow-reuse-device-v1",
+  "cpu_sources": [
+    ".artifacts/m5-ultra-256gb/nvfp4-multirow-smoke-cpu-v1",
+    ".artifacts/m5-ultra-256gb/nvfp4-multirow-reuse-cpu-v1"
+  ],
+  "frozen_source_pins": {
+    "candidate.py": {
+      "path": "smoke-cpu/sources/candidate.py",
+      "sha256": "ee9c5eef0e1282125310ee6661be1ec5ce64dc93a82add48a6d6c17f8958816f"
+    },
+    "nvfp4_qmv.py": {
+      "path": "smoke-cpu/sources/nvfp4_qmv.py",
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32"
+    },
+    "smoke.py": {
+      "path": "smoke-cpu/sources/smoke.py",
+      "sha256": "cac89f54ce7ded33e09b7b8e6bfa61caa03af1ae80f2c36b4b2e658afa0e8213"
+    }
+  },
+  "audit_attempts": [
+    {
+      "directory": "attempts/audit-v1-failed",
+      "tool_id": "ee0071",
+      "returncode": 1,
+      "reason": "Auditor incorrectly required empty stderr; raw payload archive verified."
+    },
+    {
+      "directory": ".",
+      "tool_id": "389558",
+      "returncode": 0,
+      "change": "Accept only exact observed 104-byte deprecation warning; all numerical checks unchanged."
+    }
+  ],
+  "runtime_identity_provenance": "Producer runtime.json, no independent GPU/runtime recomputation or MLX binary SHA.",
+  "service_context_provenance": "Execution invocation/final scope records restored oMLX; coordinator reports other services present. No independent service inventory in this audit.",
+  "full_model_qualified": false,
+  "performance_qualified": false
+}

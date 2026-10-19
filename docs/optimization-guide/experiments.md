@@ -1135,3 +1135,27 @@ stop0/owner1/recover0，状态RESTORED，服务21938→34623。物理样本0031�
 Three fresh off/runner/full processes, each8warm+8diagnostic:48requests/24576outputtokens. All natural exits/reaps; stop0/owner0/recover0, service34623 restored39988; independent diagnostic/restorationPASS. Archive1084members/96,896,227rawB/6,629,976xzB, SHA2f1b1b8abc64ac822c295ce588b64d69bd798ac0183d694d0936ce0b03d2b763. Both analyses and first static rendering succeeded; root visual reviewPASS. No new Pareto point.
 
 4072 duplicate-current-root async calls total18.523ms(0.02191%); successor calls average18.620ms. Visible long-wrapper interval0.4609%; delivery99.831% overlaps worker. Prioritize actual model/backend and multirow weight reuse, not removal of small wrapper costs. These are Python wall intervals, never exclusive GPU time. [Tutorial033](tutorials/033-profile-before-large-optimization.md) retains the method and limits.
+
+
+## E036：GLM 离线 expert 重排实际完成 · 2026-10-19
+
+计划先提交096a7af；真实执行502.305588s，退出0，PASS_BYTES_ONLY。
+完整原始分片SHA校验、分组复制SHA和输出独立回读均通过。
+113446→4960张量，378个backbone stacks，58个输出分片；payload保持203976457080B。
+原checkpoint保留，MTP原字节和官方处理路径保留。无数值转换。
+[E036 metadata归档](../experiments/m5-ultra-256gb/E036-glm-expert-repack-v1/README.md)
+区分运行时完整payload校验与事后独立header/index/manifest核验，Git不打包模型权重。
+未执行实际loader、整模型正确性或性能；不宣称解决了E034的内存问题。
+
+## E037：NVFP4 多行权重复用真实 GPU smoke · 2026-10-19
+
+源码和运行器先提交2dd1e44；实际子进程退出0，36/36固定用例PASS_SYNTHETIC_BYTES_ONLY。
+T2/4/8、三个矩阵形状、连续/stride2，小形状另含正负零和较大有限值；
+三路完整BF16输出逐字节相同且有限：candidate、独立原生M1、现有customB1。
+MLX观测peak71516160B。原oMLX已恢复、离线GLM复制已结束；本轮无速度计时结论。
+[E037原始输入/输出/执行与独立审计](../experiments/m5-ultra-256gb/E037-nvfp4-multirow-device-v1/README.md)。
+候选仍默认OFF、107行；尚未做实际整模型prefix/state、接受/拒绝、回滚或HTTP资格。
+[034教程](tutorials/034-real-weight-reuse-and-glm-layout.md)记录两个真实结果和后续范围。
+正式Pareto保持v16，没有把正确性通过画成加速测点。
+
+E037 independent offline audit v1 exited1 because it wrongly required empty stderr; the actual104B stderr was only the known mx.metal.device_info deprecation warning. The failed source/commands/logs/results are retained. With only that exact warning accepted, v2 exited0:36cases/108BF16 matrices,559104pairwise word comparisons all finite and byte-identical. No device rerun or numeric gate relaxation. E036 independent header/index/manifest audit also PASS;164metadata members verified.

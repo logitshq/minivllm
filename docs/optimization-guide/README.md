@@ -44,6 +44,7 @@ M5 Ultra 256 GiB 和 Qwen3.8-27B / GLM-5.3-Flash 的结构，在正确性不变�
 [GDN与长decode图组合、失败与重试记录](tutorials/031-gdn-graph-composition.md) ·
 [GLM加载与内存：失败也要闭环](tutorials/032-glm-load-and-memory.md) ·
 [E035 C1 profile and real weight reuse](tutorials/033-profile-before-large-optimization.md) ·
+[E036/E037 actual GLM layout and 36 GPU byte checks](tutorials/034-real-weight-reuse-and-glm-layout.md) ·
 [版本化进展图与逐点数据](progress/README.md) ·
 [M4 Max 交接](../handoffs/m5-ultra-to-m4-max.md) ·
 [最新分组prefill与Pareto结果](../experiments/m5-ultra-256gb/prefill-nax-v2/README.md) ·
