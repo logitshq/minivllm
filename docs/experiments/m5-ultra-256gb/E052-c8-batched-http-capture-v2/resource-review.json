@@ -1,0 +1,441 @@
+{
+  "schema": "E052-v2-saved-resource-review-v1",
+  "status": "PASS_SAVED_OBSERVATIONS",
+  "errors": [],
+  "live_checks_performed": false,
+  "performance_qualified": false,
+  "hard_allocation_cap": false,
+  "limitations": [
+    "Observed physical ceilings do not bound inter-sample allocation peaks or establish physical fit.",
+    "Native/known inventories are saved parsed observations; full original ps inventory text was not retained.",
+    "Initial child start identity and raw PID/PPID/executable are checked; repeated start/service identity assertions are source-bound, not independently replayable raw ps.",
+    "Final/lease/health are original recorded facts, not fresh live restoration checks; GUI/unrecognized GPU use remains unknown."
+  ],
+  "original_final_status": "PASS_CAPTURE_AND_RESTORE",
+  "original_screen_status": "PASS_CAPTURE_ONLY",
+  "original_lease_closed": true,
+  "original_lease_returncode": 0,
+  "baseline": {
+    "pid": 1205,
+    "top_bytes": 70419032,
+    "aux_current_bytes": 70419032,
+    "aux_peak_bytes": 72335960,
+    "current_bytes": 70419032,
+    "peak_bytes": 72335960,
+    "system_bytes": 172956188672,
+    "pressure": 1,
+    "physical_ram": 274877906944,
+    "swap_bytes": 1616442819,
+    "swapouts": 807478
+  },
+  "physical_samples": 20,
+  "metadata_samples": 20,
+  "servers": 1,
+  "max_observation_gap_seconds": 3.186006667034235,
+  "baseline_to_first_gap_seconds": 2.7025407910114154,
+  "max_system_bytes": 199554482176,
+  "max_child_current_bytes": 26230763472,
+  "max_child_historical_peak_bytes": 29104303960,
+  "observed_pressure_values": [
+    1
+  ],
+  "observed_thermal_codes": [
+    0
+  ],
+  "max_swap_growth_bytes": 0,
+  "swapouts_values": [
+    807478
+  ],
+  "all_saved_health_contracts_pass": true,
+  "recorded_cycle_restored": true,
+  "sampled_native_inventory_guard_pass": true,
+  "raw_full_process_inventory_reparsed": false,
+  "inputs": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/final.json": {
+      "bytes": 335,
+      "sha256": "e8b033e6745ef86bed2f098438dba544f74f51e08104516721e5d22631d23c8b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/execution-plan.json": {
+      "bytes": 14079,
+      "sha256": "03886e2296f7c57270f7e64f2b5137358dbdc54b087dc48546c01daa848c206b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/plan.json": {
+      "bytes": 14079,
+      "sha256": "03886e2296f7c57270f7e64f2b5137358dbdc54b087dc48546c01daa848c206b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/plan.json": {
+      "bytes": 13739,
+      "sha256": "5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/invocation.json": {
+      "bytes": 528,
+      "sha256": "c01df9f4b0abf9b06ae3bade1d75ba77bea5e59f9bb4570979b204695d014ba9"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "bytes": 2705,
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "bytes": 4027,
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "bytes": 4155,
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": {
+      "bytes": 16619,
+      "sha256": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": {
+      "bytes": 4093,
+      "sha256": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/runner.py": {
+      "bytes": 7045,
+      "sha256": "dfb0b6f07e775249babab6e76c62dbf1ab8012027e3cb46f6c694b8b2b730577"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/execute.py": {
+      "bytes": 10975,
+      "sha256": "34a604c62f6de4eddcff2be53abd2d72716384ee67d13d1bf963869d35695a20"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real-prereg-v2/execute.py": {
+      "bytes": 14621,
+      "sha256": "9d07896bde97159be5d766f3e7cf7a73ea2900270f0a842a503a9bdfd1e7052d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/result.json": {
+      "bytes": 618,
+      "sha256": "6af996d364e254a4d6968df1eaaf642cc99851a176a0374c8a9b9216f1bf9bf6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-lease/lease.json": {
+      "bytes": 962,
+      "sha256": "a7971058989b25e63f8db25909ef86829c5266065bc87770ce873aaea20595a7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-lease/job-0.json": {
+      "bytes": 548,
+      "sha256": "43767653fed16a4d27a394ffbf96cd56fd7a52b69758640a024ce20da86cd583"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-lease/resume.json": {
+      "bytes": 103,
+      "sha256": "15985d59bb2e45c8b86ed2adf6fdaf0efbf6725ba9d0ba0af4ba509f62604916"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/runner-identity.json": {
+      "bytes": 137,
+      "sha256": "1f4a4ee55bb8d9b2c26b6c46e69cb41ba129196b5e6c2fac2dd259ef7d51a35a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/jobs.json": {
+      "bytes": 485,
+      "sha256": "fc1a1d606c7a6522cc8e7734489a74a6d50b356c3c9eb43430168b46319a4871"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/before-health.json": {
+      "bytes": 12476,
+      "sha256": "3213191dc27e3863186c19e3aeef951058785ccd4a10cc97d7d435c382ca7771"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/after-health.json": {
+      "bytes": 12476,
+      "sha256": "08960611794caa811d966432965588c9e4bc33442c320baff0d4c34379ff2e48"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/physical-before/sample.json": {
+      "bytes": 4386,
+      "sha256": "8e5db50299adc2739cae881e7193537548d35185ec100836fa0775e87cdb25cb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-execution/physical-before/footprint.raw.json": {
+      "bytes": 853,
+      "sha256": "f2913b130c6496f451b05410c5ac17789aa216e2f7ef35460c3884f697fb9d9f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child.json": {
+      "bytes": 47,
+      "sha256": "c55f9c119552a4c3938f4fe022f19f6747136101c5022ef9f73fd8814b915471"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/release.json": {
+      "bytes": 143,
+      "sha256": "6988db9a787b5fd0cca7346ddd8d7bfed2cb2449661edb95342465734edcd69e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/complete.json": {
+      "bytes": 3158,
+      "sha256": "d5fc883eeb6afbe8768e19fbe5841494754e5a91bb611d5aa4de021c383cc881"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/identity-1254.json": {
+      "bytes": 137,
+      "sha256": "348e28ecdb965cf6d900dddbfbed8baeecb288359127b47e44e185d927e94b28"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child-identity.json": {
+      "bytes": 239,
+      "sha256": "40715909e3a3ab2ab8a3b263646447f562b3493a57489be47d278c441ca81c27"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/events.jsonl": {
+      "bytes": 19285,
+      "sha256": "03fb05516cf31d87dc521b6baf837493dc0803eaab25a91bf92acda99f5294c9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child-absence.json": {
+      "bytes": 132,
+      "sha256": "1d3de7c2062bd605cef17570bb2c73188af2d7e827dec657f073475c5e5acf86"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0000/sample.json": {
+      "bytes": 4396,
+      "sha256": "dfacc1b0218cd8e8b2891c14a0dfc04d6464490142a8da08686295b5b1485065"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0000/footprint.raw.json": {
+      "bytes": 853,
+      "sha256": "ddab9c098d9e3cdd829f8483b4e325908cedd27589195a7941afd33600454334"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0000.json": {
+      "bytes": 4731,
+      "sha256": "bb50c414c962a9358cd2584d41109c1404da07fd256630ab3f7a6c53757e765e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0001/sample.json": {
+      "bytes": 4396,
+      "sha256": "622673e4092fe825d20c71a53212218fce74515e425a4dd8334a0382a04e75d9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0001/footprint.raw.json": {
+      "bytes": 853,
+      "sha256": "4fb003ad1c64ef3dce7bcd3d07fdc797978729a23bc6a0c3484c893442c96b44"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0001.json": {
+      "bytes": 5570,
+      "sha256": "04acb3c47994e2c683468519fd17a43682524fe22a9e77bf7164ff35a4e351e7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0002/sample.json": {
+      "bytes": 4421,
+      "sha256": "6ed4656102dba18ce2c61a626a54562acc69ed866a7de009e636881b66104d17"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0002/footprint.raw.json": {
+      "bytes": 880,
+      "sha256": "263cb06fa58cc6cc5e4bb5ed967ce5253841e65a587103408a880f6ec0ccb3f2"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0002.json": {
+      "bytes": 5576,
+      "sha256": "d4780afb263088fc58e6ffe20a2d647f4859487e240bab0ea30115d7dca09271"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0003/sample.json": {
+      "bytes": 4422,
+      "sha256": "5d555465a33172aa3b846d01c20261ffc02ee8ac174cfbcbcaaf9980123ed8c6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0003/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "a78730d0ff74f82669b1767391a3773a62ed0e9d87f251d711910065e3b651d8"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0003.json": {
+      "bytes": 5580,
+      "sha256": "7d21746396841353e27ad164a68d9ac9d8f352eb272a3da9efaf194c6236f729"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0004/sample.json": {
+      "bytes": 4421,
+      "sha256": "354fa14d9cfbfe0052139559321eaf29c4f91bd6506f40dc6d5a41c95cac1ffc"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0004/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "78971c15602995c9612127a08ad477e1c7b7e412a5e3c0d3a4eecec687d8ea43"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0004.json": {
+      "bytes": 5580,
+      "sha256": "a034fe6fe106655aa395fa33aa4b7f7d434cf91688c607ee0c2c95e926d016f8"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0005/sample.json": {
+      "bytes": 4418,
+      "sha256": "654389b164f4597e88a6c99514a2f8d14c76f7d6ae5c31daa2116eca537df075"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0005/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "c720f1e09cc3b005f789abbe1a9a7cc3b34927ee3de7b37081f1854aeb40979e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0005.json": {
+      "bytes": 5580,
+      "sha256": "482fbc23cd0648cf201b98031d573bd4eef1a919e3b6824394ac46d562857ee1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0006/sample.json": {
+      "bytes": 4422,
+      "sha256": "e2a2d13ac65baa77b348ecf930ab06f1e5f5219469f65dd71e55406dd3ec266b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0006/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "090c7049cedf1e729c0e9a26d06ce606df19e74ced966a59f0da370021912be9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0006.json": {
+      "bytes": 5580,
+      "sha256": "92535c76e831515e9052e5c5ac1f8970a17da1b77952bb6a63b4b7b53bc70019"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0007/sample.json": {
+      "bytes": 4421,
+      "sha256": "85aba58cd053902a432b99a65c31005cc01f9c017f095fd327d8cfdc732c6b13"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0007/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "46e94e18b7d79b446aa9ca2ef85b8c17146a6f8b7cdd8be373b8cb5c15af2db6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0007.json": {
+      "bytes": 5580,
+      "sha256": "eb37200eae98ba44816b8e5815992e05bc12e638ea1c62908afcdde781ab6dd9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0008/sample.json": {
+      "bytes": 4420,
+      "sha256": "a4aba03a8b00616f58e47b2f48d055aef0d42898ffbaaaea47fbc9d229cfb1f4"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0008/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "b12958c1d03a52ea37b734fc32d7f54a432ac1816d35f1eff183822bf7138e1a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0008.json": {
+      "bytes": 5580,
+      "sha256": "824abb4f9f77e2d438e75bbe287d48103ec1961999a5e7228e8e6279ccd1743a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0009/sample.json": {
+      "bytes": 4421,
+      "sha256": "da668edfa0ec1f1920e2eaa719040ff31f745837c4d4d2802ea3d6c4bf517f96"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0009/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "349de869d6a7d79766e62eb9c507a1eafd24c0f2a6e6ee35a1ddce253775c777"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0009.json": {
+      "bytes": 5580,
+      "sha256": "67dd8e9c48aa1e9e91e6106ec06f0caa91d70fce2b71b50f5ce8d0224c2b9f0a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0010/sample.json": {
+      "bytes": 4421,
+      "sha256": "73bc53b9c58785343b9a5e7fd27443e415ea28f3b7bd03e1c273d5f47cff0d8b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0010/footprint.raw.json": {
+      "bytes": 884,
+      "sha256": "275fc1e44b413d84df34a6f3c7db84f9d3c1cb70206d7e3faa7aa0275147188b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0010.json": {
+      "bytes": 5580,
+      "sha256": "9bffd3b80150872e4e009ed76f8805056130f63f6f3c81c9e236ea54e0771895"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0011/sample.json": {
+      "bytes": 4420,
+      "sha256": "a7a7d1154c061a81d7c0b20f03eeafa0b9901e5754d86667bc1c8f4a388fcef0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0011/footprint.raw.json": {
+      "bytes": 884,
+      "sha256": "5935278cb23c063eb34fb590a6b66d17d50b45d5d71b3e666c7f46c93ec102ac"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0011.json": {
+      "bytes": 5580,
+      "sha256": "a685fa40a49be43c8703850b42f7c56f923033ffb449131869960521c522001f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0012/sample.json": {
+      "bytes": 4417,
+      "sha256": "b89b0495930cfac580095e892da553d26ed3052cac55cfd6c520f070f36d81f0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0012/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "4eb812a11e7facb4f7b9090f15b28ff5e67e2ee39215151a864d090c7582a55b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0012.json": {
+      "bytes": 5580,
+      "sha256": "8f26d289fe9e083f64ffe21678154fbbc11d36a5de3a238ea42434f683dd8bb6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0013/sample.json": {
+      "bytes": 4421,
+      "sha256": "b0035d481e190513359b23249d27b6f4db0ad83b0b4e79d6fd944d033b613456"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0013/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "345038cffbe947673f65aba16cd2876749610197e72990a413fa57e00bbf20cf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0013.json": {
+      "bytes": 5580,
+      "sha256": "98d0c9c8ec553f61d5308a1e627f93305dd042e32165490ba105130c12fbd828"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0014/sample.json": {
+      "bytes": 4418,
+      "sha256": "7bce5ad3eb6f7980099324681bd857d4e3c4cae9d64b33671c8dfcdaee9a33bf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0014/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "8f7554b150e6c2b516da5a9ea77623b245f50c8f92881c9d1831c89cbe739e92"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0014.json": {
+      "bytes": 5580,
+      "sha256": "15fea9f3c30b2ed9b1cf6622353451f3c884b6aadb58ccdcfcdad5be140df1db"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0015/sample.json": {
+      "bytes": 4420,
+      "sha256": "55f847926dd0a4e7f705bda5d593e773c7ff0b3e1267e13e4ac057dde0335c1f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0015/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "d6868a6b343dff2b3b3a695278599fae85cf2fc64fc3a573dcbd2a1bbed7420e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0015.json": {
+      "bytes": 5580,
+      "sha256": "7aff12c6987c22a88cef7817fce0e57cac2dd86346af994083d543fa1e589518"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0016/sample.json": {
+      "bytes": 4418,
+      "sha256": "9b862443275d3fbf66c552d0a5a189e0d081e1e1e499eb79aa93aa9543750209"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0016/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "e7445e28065211b2eb9c9ae7992faac7e9aa03fdb90cf837dfeb515f85725e59"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0016.json": {
+      "bytes": 5580,
+      "sha256": "51f9c23fc08e104b74e8a53e538a0090753e9dda8e1a86f6c3b81d600f65dcf1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0017/sample.json": {
+      "bytes": 4421,
+      "sha256": "6b22eadcf0880e21ff6448d25341caaa1a20fa73c9449153b15db44326aeb46b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0017/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "932c77b60aed954b28a42c504ba08991cef53de02e94202f6fcb8401ecb54a0f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0017.json": {
+      "bytes": 5580,
+      "sha256": "fcbe835d14f2a1663b1ea3f0865fd8d64de1d12d881f627abd76983c5607cc19"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0018/sample.json": {
+      "bytes": 4420,
+      "sha256": "0017c1894099c52a99276551492075ed2f88d0ed8984240ee3935d928fb0f72b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0018/footprint.raw.json": {
+      "bytes": 883,
+      "sha256": "4573644a978a58d44c7638beb3491228fe9f404973d8fc5e966a510d9dda9562"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0018.json": {
+      "bytes": 5583,
+      "sha256": "0cd6ea71410e71fb2d69b92b9c9b7eb67a41d877315887e0fe8153ba229bf3a7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0019/sample.json": {
+      "bytes": 4396,
+      "sha256": "67dc170a2600f6c031bf97538eb258c524529b80b71ce893dc447fa1fd1d6944"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/physical-0019/footprint.raw.json": {
+      "bytes": 861,
+      "sha256": "9795049d859fdf88393f073cb997c754d2d3eea70633aa8b28e23fa21910e01d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/resources/resource-0019.json": {
+      "bytes": 4731,
+      "sha256": "36bc2dcdcc9d926894db970109dce5ca0d31dc13d1e13163cd560e4cb0f5c22c"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/prereg-v1/plan.json": {
+      "bytes": 13739,
+      "sha256": "5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/execute.py": {
+      "bytes": 6285,
+      "sha256": "e937a5ce65869d02b0eeabc4980fb84f34c951eb606dbe4f638e746e40af2282"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/runner.py": {
+      "bytes": 1084,
+      "sha256": "225604196781925a9b15c866f2d6d4e82f2dfadf249765a7748c185d9d96e85a"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/test_cpu.py": {
+      "bytes": 5553,
+      "sha256": "67d2f887e106351f62bf5365626478092307f6cb3e8ea73e3fe26da7aeb28f65"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/trial.py": {
+      "bytes": 3303,
+      "sha256": "a45bd7db4a30c6d6e16b1b2b2ef0ce4c139f9cc8b6fc344ee92219c42e1c7a72"
+    }
+  },
+  "donor_review_source_sha256": "0f1b4c0092f5af909a9bb5e3afb87a2dead071b2c8ae4bd7ffbb43fea7d961f9",
+  "review_source_sha256": "b2839fef741cfeb7b0fa8d0de637a5ee215f4ffcbd48983310b8924ad340f4ee",
+  "numerical_qualified_here": false,
+  "full_state_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Saved resource and closure facts only; instrumented batched GDN+graph two-wave C8 capture. Its new arrival history still requires independent numerical replay; no timing or numerical qualification."
+}
