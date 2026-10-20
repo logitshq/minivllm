@@ -1256,3 +1256,14 @@ tar SHA f1400de1d2f0fa94c012fe98ae7cdf964e94c97c5fa679e7d7f19157d6e43982；真�
 current-source SHA差异失败，源码/命令/日志完整保留后改用各自历史快照，第二次PASS。
 合图20组点和四medians不跨轮配对，明确E044原父FAIL；作者与root均实际看图PASS。
 正式v16完全不变，无新engine Pareto、HTTP或整模型速度点。
+
+
+## E045：按C1/C8独立选择提交配置，预注册 · 2026-10-19
+
+[执行器与方案](../../bench/m5_ultra_256gb/concurrency_config_v1/README.md)仅扫描
+MLX_MAX_MB_PER_BUFFER=16/50/200/800，其他OPS50/BFS20/FAST_SYNCH0固定。
+C1使用E033 GDN+graph，C8使用同入口graph-only；每C均有前后50基线。
+每新进程8 warm+8 admission_probe，完整raw SSE与输出IDs留存；不称formal/Pareto。
+候选需两端漂移均≤2%、吞吐与p50均对两端改善≥3%才能进入确认。
+旧环境数值资格不继承，新环境仍需完整logit/cache数值与长配对验证。
+本段为运行前计划；实际结果在闭环和独立审计完成后追加，包括失败。
