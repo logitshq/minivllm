@@ -1,0 +1,736 @@
+{
+  "schema": "E045-archive-summary-v1",
+  "engine_pareto_point": false,
+  "performance_qualified": false,
+  "formal_v16_unchanged": true,
+  "original_v1_parent": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "FAIL",
+    "errors": [
+      {
+        "type": "AssertionError",
+        "message": "screen/lease failed"
+      },
+      {
+        "type": "AssertionError",
+        "message": "closure: "
+      }
+    ],
+    "lease_returncode": 1,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 175.11473625001963,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "original_v2_parent": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "errors": [],
+    "lease_returncode": 0,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 1124.4536273750127,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "independent_audit": {
+    "status": "FAIL_TOKEN_EQUIVALENCE",
+    "errors": [],
+    "requests_reparsed": 160,
+    "exact_returned_ids": false,
+    "points": {
+      "c1-start50": {
+        "concurrency": 1,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 84.6439905000152,
+        "aggregate_output_tok_s": 48.390913233223145,
+        "e2e_p50_s": 10.575679833011236,
+        "e2e_p95_s": 10.647297666990198
+      },
+      "c1-mb200": {
+        "concurrency": 1,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 83.35302558302647,
+        "aggregate_output_tok_s": 49.14038778256522,
+        "e2e_p50_s": 10.419658062484814,
+        "e2e_p95_s": 10.438617875042837
+      },
+      "c1-mb16": {
+        "concurrency": 1,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 86.32528054196155,
+        "aggregate_output_tok_s": 47.4484412246884,
+        "e2e_p50_s": 10.79067577101523,
+        "e2e_p95_s": 10.82713283400517
+      },
+      "c1-mb800": {
+        "concurrency": 1,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 83.42850137501955,
+        "aggregate_output_tok_s": 49.09593163597732,
+        "e2e_p50_s": 10.420366208505584,
+        "e2e_p95_s": 10.50106862501707
+      },
+      "c1-end50": {
+        "concurrency": 1,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 84.60347345896298,
+        "aggregate_output_tok_s": 48.41408789187326,
+        "e2e_p50_s": 10.57373818749329,
+        "e2e_p95_s": 10.613803958985955
+      },
+      "c8-start50": {
+        "concurrency": 8,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 24.181869167019613,
+        "aggregate_output_tok_s": 169.3831015174923,
+        "e2e_p50_s": 24.14091049999115,
+        "e2e_p95_s": 24.181654708983842
+      },
+      "c8-mb800": {
+        "concurrency": 8,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 23.81868058402324,
+        "aggregate_output_tok_s": 171.9658645889671,
+        "e2e_p50_s": 23.775282416521804,
+        "e2e_p95_s": 23.818198541994207
+      },
+      "c8-mb16": {
+        "concurrency": 8,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 24.675972625031136,
+        "aggregate_output_tok_s": 165.99143070231185,
+        "e2e_p50_s": 24.63650404146756,
+        "e2e_p95_s": 24.675781917001586
+      },
+      "c8-mb200": {
+        "concurrency": 8,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 23.937372374988627,
+        "aggregate_output_tok_s": 171.11318384635132,
+        "e2e_p50_s": 23.893876646005083,
+        "e2e_p95_s": 23.937163458031137
+      },
+      "c8-end50": {
+        "concurrency": 8,
+        "repeat": 1,
+        "requests": 8,
+        "committed_output_tokens": 4096,
+        "common_window_s": 24.283146958972793,
+        "aggregate_output_tok_s": 168.67665492122302,
+        "e2e_p50_s": 24.240931333013577,
+        "e2e_p95_s": 24.2829213750083
+      }
+    },
+    "token_checks": {
+      "c1-start50": {
+        "equal_to_same_C_start50_warm": true,
+        "mismatches": [],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c1-mb200": {
+        "equal_to_same_C_start50_warm": true,
+        "mismatches": [],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c1-mb16": {
+        "equal_to_same_C_start50_warm": true,
+        "mismatches": [],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c1-mb800": {
+        "equal_to_same_C_start50_warm": true,
+        "mismatches": [],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c1-end50": {
+        "equal_to_same_C_start50_warm": true,
+        "mismatches": [],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c8-start50": {
+        "equal_to_same_C_start50_warm": false,
+        "mismatches": [
+          {
+            "phase": "formal",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 187,
+            "expected_id": 638,
+            "actual_id": 653
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 209,
+            "expected_id": 554,
+            "actual_id": 687
+          }
+        ],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c8-mb800": {
+        "equal_to_same_C_start50_warm": false,
+        "mismatches": [
+          {
+            "phase": "warm",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 335,
+            "expected_id": 10839,
+            "actual_id": 8977
+          }
+        ],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c8-mb16": {
+        "equal_to_same_C_start50_warm": false,
+        "mismatches": [
+          {
+            "phase": "warm",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D05-retry-budget",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 301,
+            "expected_id": 25,
+            "actual_id": 283
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 187,
+            "expected_id": 638,
+            "actual_id": 653
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 234,
+            "expected_id": 524,
+            "actual_id": 1328
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          }
+        ],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c8-mb200": {
+        "equal_to_same_C_start50_warm": false,
+        "mismatches": [
+          {
+            "phase": "warm",
+            "fixture_id": "D01-ttl-lru",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 148,
+            "expected_id": 1848,
+            "actual_id": 1942
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 335,
+            "expected_id": 10839,
+            "actual_id": 8977
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 381,
+            "expected_id": 631,
+            "actual_id": 57316
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 341,
+            "expected_id": 271,
+            "actual_id": 198
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 160,
+            "expected_id": 8134,
+            "actual_id": 70229
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 176,
+            "expected_id": 2610,
+            "actual_id": 6635
+          }
+        ],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      },
+      "c8-end50": {
+        "equal_to_same_C_start50_warm": false,
+        "mismatches": [
+          {
+            "phase": "warm",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D06-interval-booking",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 22,
+            "expected_id": 816,
+            "actual_id": 19916
+          },
+          {
+            "phase": "warm",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 176,
+            "expected_id": 2610,
+            "actual_id": 6635
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D04-frame-parser",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 59,
+            "expected_id": 406,
+            "actual_id": 262
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D05-retry-budget",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 39,
+            "expected_id": 71483,
+            "actual_id": 13
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D07-versioned-store",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 160,
+            "expected_id": 8134,
+            "actual_id": 70229
+          },
+          {
+            "phase": "formal",
+            "fixture_id": "D08-sliding-limit",
+            "expected_length": 512,
+            "actual_length": 512,
+            "first_index": 176,
+            "expected_id": 2610,
+            "actual_id": 6635
+          }
+        ],
+        "scope": "All eight fixtures, complete returned raw IDs in both warm and screen. No C1-to-C8 comparison."
+      }
+    },
+    "ranking": {
+      "1": {
+        "bookend_drift": {
+          "aggregate_output_tok_s": 0.0004789051725149207,
+          "e2e_p50_s": 0.00018362905185620448
+        },
+        "bookends_stable": true,
+        "candidates": [
+          {
+            "label": "c1-mb200",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": true,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 1.015487919100223,
+                "p50_speed_ratio": 1.0149737898874212
+              },
+              {
+                "throughput_ratio": 1.0150018294739758,
+                "p50_speed_ratio": 1.014787445430981
+              }
+            ],
+            "point": {
+              "concurrency": 1,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 83.35302558302647,
+              "aggregate_output_tok_s": 49.14038778256522,
+              "e2e_p50_s": 10.419658062484814,
+              "e2e_p95_s": 10.438617875042837
+            }
+          },
+          {
+            "label": "c1-mb16",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": true,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 0.9805237813142224,
+                "p50_speed_ratio": 0.9800757670264272
+              },
+              {
+                "throughput_ratio": 0.9800544281792212,
+                "p50_speed_ratio": 0.9798958296843044
+              }
+            ],
+            "point": {
+              "concurrency": 1,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 86.32528054196155,
+              "aggregate_output_tok_s": 47.4484412246884,
+              "e2e_p50_s": 10.79067577101523,
+              "e2e_p95_s": 10.82713283400517
+            }
+          },
+          {
+            "label": "c1-mb800",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": true,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 1.0145692311975245,
+                "p50_speed_ratio": 1.0149048144180266
+              },
+              {
+                "throughput_ratio": 1.0140835813250655,
+                "p50_speed_ratio": 1.0147184826251612
+              }
+            ],
+            "point": {
+              "concurrency": 1,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 83.42850137501955,
+              "aggregate_output_tok_s": 49.09593163597732,
+              "e2e_p50_s": 10.420366208505584,
+              "e2e_p95_s": 10.50106862501707
+            }
+          }
+        ],
+        "ranked_for_confirmation": []
+      },
+      "8": {
+        "bookend_drift": {
+          "aggregate_output_tok_s": 0.004188170536101765,
+          "e2e_p50_s": 0.004143208808237153
+        },
+        "bookends_stable": false,
+        "candidates": [
+          {
+            "label": "c8-mb800",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": false,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 1.0152480563192903,
+                "p50_speed_ratio": 1.0153784959128505
+              },
+              {
+                "throughput_ratio": 1.0195000883156013,
+                "p50_speed_ratio": 1.019585421040811
+              }
+            ],
+            "point": {
+              "concurrency": 8,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 23.81868058402324,
+              "aggregate_output_tok_s": 171.9658645889671,
+              "e2e_p50_s": 23.775282416521804,
+              "e2e_p95_s": 23.818198541994207
+            }
+          },
+          {
+            "label": "c8-mb16",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": false,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 0.9799763330297138,
+                "p50_speed_ratio": 0.9798837716324427
+              },
+              {
+                "throughput_ratio": 0.9840806410337859,
+                "p50_speed_ratio": 0.9839436347061188
+              }
+            ],
+            "point": {
+              "concurrency": 8,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 24.675972625031136,
+              "aggregate_output_tok_s": 165.99143070231185,
+              "e2e_p50_s": 24.63650404146756,
+              "e2e_p95_s": 24.675781917001586
+            }
+          },
+          {
+            "label": "c8-mb200",
+            "eligible_for_confirmation": false,
+            "exact_returned_ids": false,
+            "comparisons_to_start_end": [
+              {
+                "throughput_ratio": 1.0102140196593363,
+                "p50_speed_ratio": 1.0103387933923804
+              },
+              {
+                "throughput_ratio": 1.0144449682516306,
+                "p50_speed_ratio": 1.0145248379804672
+              }
+            ],
+            "point": {
+              "concurrency": 8,
+              "repeat": 1,
+              "requests": 8,
+              "committed_output_tokens": 4096,
+              "common_window_s": 23.937372374988627,
+              "aggregate_output_tok_s": 171.11318384635132,
+              "e2e_p50_s": 23.893876646005083,
+              "e2e_p95_s": 23.937163458031137
+            }
+          }
+        ],
+        "ranked_for_confirmation": []
+      }
+    }
+  },
+  "resource_review": {
+    "schema": "E045-saved-resource-review-v1",
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "errors": [],
+    "live_checks_performed": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Observed physical ceilings do not bound inter-sample allocation peaks or establish physical fit.",
+      "Native/known inventories are saved parsed observations; full original ps inventory text was not retained.",
+      "Initial child start identity and raw PID/PPID/executable are checked; repeated start/service identity assertions are source-bound, not independently replayable raw ps.",
+      "Final/lease/health are original recorded facts, not fresh live restoration checks; GUI/unrecognized GPU use remains unknown."
+    ],
+    "original_final_status": "PASS_CAPTURE_AND_RESTORE",
+    "original_screen_status": "PASS_CAPTURE_ONLY",
+    "original_lease_closed": true,
+    "original_lease_returncode": 0,
+    "baseline": {
+      "pid": 74282,
+      "top_bytes": 71303768,
+      "aux_current_bytes": 71303768,
+      "aux_peak_bytes": 72811096,
+      "current_bytes": 71303768,
+      "peak_bytes": 72811096,
+      "system_bytes": 174621589504,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 1666910781,
+      "swapouts": 807478
+    },
+    "physical_samples": 400,
+    "metadata_samples": 400,
+    "servers": 10,
+    "max_observation_gap_seconds": 3.2524890420027077,
+    "baseline_to_first_gap_seconds": 2.433405000017956,
+    "max_system_bytes": 197455822848,
+    "max_child_current_bytes": 24023723840,
+    "max_child_historical_peak_bytes": 26038497256,
+    "observed_pressure_values": [
+      1
+    ],
+    "observed_thermal_codes": [
+      0
+    ],
+    "max_swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "all_saved_health_contracts_pass": true,
+    "recorded_cycle_restored": true,
+    "sampled_native_inventory_guard_pass": true,
+    "raw_full_process_inventory_reparsed": false,
+    "review_source_sha256": "0f1b4c0092f5af909a9bb5e3afb87a2dead071b2c8ae4bd7ffbb43fea7d961f9"
+  },
+  "archive_verification": {
+    "status": "PASS_ARCHIVE_INTEGRITY",
+    "members": 1805,
+    "uncompressed_bytes": 148303716,
+    "archive_bytes": 14451583,
+    "evidence_sha256": "939b8f187eed63f94e91328fe9535ff8d0f95a772ae76242a7a12bcde36b23dc",
+    "manifest_sha256": "9df4fa9484f0d6e4e800d5fc471d4646c216554ea99bd074de11401c96a616d8",
+    "all_members_reread_size_sha_and_source_match": true,
+    "missing_requested_directories": [],
+    "excluded_count": 0,
+    "original_v1_parent_status": "FAIL",
+    "original_v2_token_audit_status": "FAIL_TOKEN_EQUIVALENCE",
+    "latest_chart_visual_review": "PASS",
+    "performance_qualified": false
+  },
+  "visual_review": {
+    "status": "PASS",
+    "reviewed_with": "functions.view_image",
+    "reviewer": "pareto_v16 independent visual review; root separately reported PASS",
+    "source_path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/concurrency-config-v2-chart-layout2/concurrency-config-screen.png",
+    "sha256": "1f6afde3ee9803a1d9009df30d8ca71e78bb707804b75b4fb4d02cec98aa4fbc",
+    "observed": [
+      "Both panel titles and drift annotations are separated; no overlap observed.",
+      "All ten measured settings visible; all C8 points and table decisions retain IDs FAIL.",
+      "N8 screen-only, independent focused scales, latency-derived x-axis and no engine-frontier scope are readable."
+    ],
+    "original_render_receipt_unchanged": true,
+    "first_layout_status": "FAIL_LAYOUT retained verbatim in original chart evidence"
+  }
+}

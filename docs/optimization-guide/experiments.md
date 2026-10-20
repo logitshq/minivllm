@@ -1267,3 +1267,28 @@ C1使用E033 GDN+graph，C8使用同入口graph-only；每C均有前后50基线�
 候选需两端漂移均≤2%、吞吐与p50均对两端改善≥3%才能进入确认。
 旧环境数值资格不继承，新环境仍需完整logit/cache数值与长配对验证。
 本段为运行前计划；实际结果在闭环和独立审计完成后追加，包括失败。
+
+
+## E045：C1配置收益不足门槛，C8基准自身返回 IDs 不一致 · 2026-10-19
+
+v2真实运行退出0、PASS_CAPTURE_AND_RESTORE，十个新服务器共160请求、每次512 tokens。
+独立raw审计和第二份stdlib reader均复算20组；C1所有返回IDs相同，MB200最好49.140388tok/s、
+p50 10.419658s，对两端最小吞吐收益1.5002%、p50速度1.4787%，未到预设3%。
+C8默认MB50 warm/probe已有4/8 fixture IDs不同，所有配置不合格；计时首尾漂移约0.42%仍通过，
+不能混淆计时稳定和token一致。MB800原始171.965865tok/s不升级为优化收益。
+输出原因未定位，不能归因MB或断言engine bug；先记录真实scheduler trace再做同schedule重放。
+400物理/400metadata观察，最大系统183.895GiB、child current22.374GiB、swap增长0，
+服务52818同身份恢复，lease闭环；独立saved-observation审计PASS，不是未采样峰值保证。
+[完整1805成员证据/图](../experiments/m5-ultra-256gb/E045-concurrency-config-screen-v2/README.md)
+全部回读size/SHA PASS，tar SHA939b8f187eed63f94e91328fe9535ff8d0f95a772ae76242a7a12bcde36b23dc。
+v1 duplicate-label FAIL、首CPU失败和首图布局失败全部保留；正式v16不变。
+[036教程](tutorials/036-concurrency-specific-configurations.md)记录按C独立选择的办法与失败。
+
+## E046：B2/B8 GDN原始字节canary准备完成 · 2026-10-19
+
+仅本段准备状态：新owner CPU实际12/12 PASS、现场source/服务检查PASS；未运行GPU。
+父plan SHA08325135360d35faa5bc0b9294aca21ee4dc8fa7c974c49b752682184bc13e3b，
+child plan SHA7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003。
+保留native batched projections，仅融合prework；四条B2/B8早晚链、36calls、原始输出/conv/S，
+graph OFF。它是独立局部数值门槛，不解决E045 schedule变化、不构成HTTP/速度资格。
+执行后追加真实结果，原准备记录保留。

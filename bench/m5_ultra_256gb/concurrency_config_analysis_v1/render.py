@@ -63,6 +63,7 @@ def read_audit(path):
             x_512_over_p50_tok_s_user=512 / point['e2e_p50_s'],
             aggregate_output_tok_s=point['aggregate_output_tok_s'], e2e_p50_s=point['e2e_p50_s'],
             exact_returned_ids=token_ok, bookends_stable=rank['bookends_stable'],
+            timing_bookends_stable=all(v <= .02 for v in rank['bookend_drift'].values()),
             worst_throughput_ratio=min(point['aggregate_output_tok_s'] / a['aggregate_output_tok_s'] for a in anchors),
             worst_p50_speed_ratio=min(a['e2e_p50_s'] / point['e2e_p50_s'] for a in anchors),
             eligible_for_confirmation=name in rank['ranked_for_confirmation']))
@@ -89,7 +90,7 @@ def render(audit_path, out):
         dy = max(max(ys) - min(ys), max(ys) * .01)
         ax.set_xlim(min(xs) - dx * .22, max(xs) + dx * .85)
         ax.set_ylim(min(ys) - dy * .23, max(ys) + dy * .23)
-        ax.set_title(f'HTTP C{C} · {entry}', loc='left', fontsize=14, pad=14)
+        ax.set_title(f'HTTP C{C} · {entry}', loc='left', fontsize=14, y=1.10, pad=0)
         ax.set_xlabel('512 / median end-to-end latency (tok/s/user)', labelpad=10)
         ax.set_ylabel('Aggregate committed output (tok/s)', labelpad=10)
         ax.grid(color='#e2e8f0', linewidth=.7)
@@ -122,8 +123,10 @@ def render(audit_path, out):
         decision = 'baseline' if baseline else 'confirm next' if row['eligible_for_confirmation'] else 'not selected'
         if not row['exact_returned_ids']:
             decision = 'IDs FAIL'
-        elif not row['bookends_stable']:
+        elif not row['timing_bookends_stable']:
             decision += '; drift gate fails'
+        elif not row['bookends_stable']:
+            decision = 'baseline IDs differ'
         table_rows.append([f"C{row['concurrency']} · {row['display']}",
             f"{row['aggregate_output_tok_s']:.3f}", f"{row['e2e_p50_s']:.4f}",
             '—' if baseline else f"{row['worst_throughput_ratio']:.4f}×",
@@ -138,7 +141,7 @@ def render(audit_path, out):
             cell.set_facecolor('#eef2f6'); cell.set_text_props(weight='bold')
     fig.text(.085, .112, '¹ Minimum ratio against both 50-MB bookends. Selection requires both ratios ≥1.03 and both bookend drifts ≤2%, plus exact returned IDs.', fontsize=10, color='#475569')
     fig.text(.085, .077, 'Axes use separate focused scales; label leaders are not performance curves. 512/p50 is latency-derived, not P90 interactivity or measured ITL.', fontsize=10, color='#475569')
-    fig.text(.085, .042, f"Audit: {audit['status']}. Returned-ID equality is not full-state qualification. No historical engine comparison or statistical interval.", fontsize=10, color='#475569')
+    fig.text(.085, .042, f"Audit: {audit['status']}. C8 baseline also differs between runs; cause is unclassified. No full-state or engine-frontier claim.", fontsize=10, color='#475569')
     (out / 'audit-source.json').write_bytes(raw)
     (out / 'chartdata.json').write_text(json.dumps(dict(rows=rows, source_path=str(audit_path),
         source_sha256=sha(raw), schema='E045-screen-chart-v1', engine_pareto_point=False), indent=2, allow_nan=False) + '\n')

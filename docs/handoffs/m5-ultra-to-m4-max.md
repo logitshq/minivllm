@@ -1305,3 +1305,22 @@ Root已实际fresh fetch（ae4469），origin/tutorial/18-gdn-projection-packing
 94c070e6bbf0cf0e229261f1d019fd0b2032c4a7，并核对为当前HEAD祖先（108499）；
 没有新的M4未合入提交。这是Git可用性记录，不声称M4 agent已阅读。
 正式v16/逐batch目标与缺测范围不变；此归档步骤没有新增GPU实验或推送。
+
+
+### 2026-10-19 — E045 C1/C8配置扫描结束，E046局部数值实验准备
+
+C1 MB200原始49.140388tok/s，比两个MB50基准至少快1.5002%；p50速度至少1.4787%，
+低于预设3%，不升级正式点。C8基准自身warm/probe输出4/8 fixture不同，其他MB配置也有差异；
+计时漂移约0.42%通过，但输出合同FAIL，171.965865tok/s不能算有效新收益。
+两个独立SSE reader复核160请求；原因未定位，后续用精确scheduler trace固定数值路径再对照。
+不要把跨schedule差异直接归因MB，也不要从已有固定schedule资格推断batch invariance。
+原52818同身份恢复、400资源样本swap增长0，所有证据含失败封存E045，正式v16不变。
+见[036教程](../optimization-guide/tutorials/036-concurrency-specific-configurations.md)与
+[E045图/归档](../experiments/m5-ultra-256gb/E045-concurrency-config-screen-v2/README.md)。
+
+E046 B2/B8 GDN prework canary准备完成，owner12项CPU通过、现场预检查通过，尚未GPU。
+保持五个native batched projections，仅复用已有conv/activation/QKnorm融合，默认OFF；
+不把B1收益移植给B8，也不当作E045差异修复。当前父plan08325135、child7df6cff9。
+[Kapitsa/M5设计阅读](../../bench/reviews/2026-10-19-kapitsa-m5-designs.md)记录按并发选speculation深度、
+verify与commit分离；其affineQ4与我们的NVFP4不同，不能引用其102tok/s作同条件比较。
+本条是可随Git推送的交接记录，不声称另一agent已阅读。

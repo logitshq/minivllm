@@ -1,0 +1,23 @@
+{
+  "run": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/execute.py",
+    "--run",
+    "--plan-sha256",
+    "08325135360d35faa5bc0b9294aca21ee4dc8fa7c974c49b752682184bc13e3b"
+  ],
+  "audit": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/audit.py",
+    "--child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-numerical",
+    "--plan-sha256",
+    "7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003",
+    "--out",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-independent-numerical.json"
+  ]
+}
