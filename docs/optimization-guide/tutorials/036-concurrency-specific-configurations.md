@@ -110,3 +110,39 @@ E046 已实际完成：36次候选调用全部通过，独立 reader 核对140�
 若 state 路径值得优化，再试保持 SPLIT4 与原累加顺序的驻留链，先保留完整 prefix 作比较。
 48个 GDN 的 S 合计144MiB逻辑存量，完整投影权重/scale全扫约14.412GB；它们都不是实测DRAM。
 局部 head、state 或 canary 加速不能升级为整引擎结论，最终仍看准确输出下的吞吐与延迟。
+
+
+## 局部实测：B8 融合收益成立，仍需 graph 组合验证
+
+E048 直接读取 E046 的真实激活，原生基准保持一次 B2/B8 的五个 Linear，
+候选只融合卷积、激活和 Q/K norm 前处理。每臂使用独立 seed，重新构造完整层调用；
+计时含 output/conv/S 的求值与同步，加载、hash、seed reset 和证据落盘在计时外。
+每点5次 warmup、5组×10对 AB/BA，全部1200个测量值保留。
+
+| 实际张量 batch | 六个 case 的中位速度比范围 | 结论范围 |
+|---|---|---|
+| B2 | 1.071695–1.089616× | 局部完整 GDN 层，约 +7.17%–8.96% |
+| B8 | 1.047935–1.066748× | 局部完整 GDN 层，约 +4.79%–6.67% |
+
+独立 reader 重读48个原始文件，核对72组 output/conv/S 比较并重算60个 group。
+所有12个 case 中位数均大于1，但 B8 early/layer32 的 group0为0.880700，原样保留。
+这些是同一进程内的 warm-resident 组统计；组间离散不是置信区间，也没有跨机器外推。
+
+![全部分组与中位数](../../experiments/m5-ultra-256gb/E048-gdn-batched-local-timing-v1/chart-layout2/gdn-local-timing-ratios.png)
+
+这不是 C8 HTTP 吞吐提升。当前候选的下一道门是同 schedule 的完整 logits/state、
+graph tracing/reuse 与 continued state 检查，通过后再测端到端。`gdn_batched_graph/integration.py` 只替换已有组合的 GDN 依赖，仍默认 OFF；
+11个 CPU 生命周期检查通过，不等于设备组合资格。
+
+## 真实调度排除一个过早归因
+
+E047 固定 MB50、GDN OFF、graph ON，同进程记录两轮各8请求、共1030步。
+D06 的 prefill 两轮都为 `[935]`，但早期 decode 路径为 warm 的 B2→B4→B6→B8/row1，
+对照 screen 的 B4→B6→B8/row3，第46个输出 ID 分歧为24959/52883。
+因此“prefill分块不同”不能独自解释 D06；batch形状、行位置、进程历史仍有差异。
+其他 fixture 有改变分块却不改变返回 IDs 的例子，也不能只凭关联宣布因果。
+[精确调度和原始记录](../../experiments/m5-ultra-256gb/E047-c8-schedule-diagnostic-v1/README.md)已封存。
+
+E049准备对 warm 原始历史前49步做 eager/graph 同 schedule 完整比较；所有共批请求、
+原始cap512和实际到达保持不变，在检查完第49步后明确停止为 `INCOMPLETE_BY_DESIGN`。
+8个请求仍活跃，后8个尚未到达，不能伪造终止或称完整HTTP资格。

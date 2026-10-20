@@ -1,0 +1,210 @@
+{
+  "status": "PASS_CAPTURE_JOIN_RESOURCE_REVIEW",
+  "original_final": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "errors": [],
+    "lease_returncode": 0,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 54.37962212500861,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "join": {
+    "returncode": 0,
+    "elapsed_s": 0.46787375
+  },
+  "analysis": {
+    "status": "PASS_RAW_ANALYSIS",
+    "requests": 16,
+    "steps": 1030,
+    "differences": [
+      {
+        "fixture_id": "D01-ttl-lru",
+        "warm_rid": "7a9e32d8286d4160ab6903afda033dc5",
+        "screen_rid": "0ad36664bebe439eb9cc2e5191de7ad5",
+        "first_difference_index": null,
+        "warm_id": null,
+        "screen_id": null,
+        "warm_prefill_chunks": [
+          978
+        ],
+        "screen_prefill_chunks": [
+          978
+        ]
+      },
+      {
+        "fixture_id": "D02-dag-scheduler",
+        "warm_rid": "0cf1fdfa066440e5ac0e41df2e26d1fb",
+        "screen_rid": "5966a734a7c8409491dd92ed5618baee",
+        "first_difference_index": null,
+        "warm_id": null,
+        "screen_id": null,
+        "warm_prefill_chunks": [
+          886
+        ],
+        "screen_prefill_chunks": [
+          352,
+          534
+        ]
+      },
+      {
+        "fixture_id": "D03-event-rollup",
+        "warm_rid": "8da3336944d144b1a8c14548e4a58842",
+        "screen_rid": "22a77e0b010a4822bfab4c8db2688075",
+        "first_difference_index": null,
+        "warm_id": null,
+        "screen_id": null,
+        "warm_prefill_chunks": [
+          926
+        ],
+        "screen_prefill_chunks": [
+          926
+        ]
+      },
+      {
+        "fixture_id": "D04-frame-parser",
+        "warm_rid": "7ba12f93e62e424d86609d78beae8e6b",
+        "screen_rid": "a938da26d91e43e09e29ec7ddb63e41e",
+        "first_difference_index": 92,
+        "warm_id": 18,
+        "screen_id": 19,
+        "warm_prefill_chunks": [
+          257,
+          664
+        ],
+        "screen_prefill_chunks": [
+          921
+        ]
+      },
+      {
+        "fixture_id": "D05-retry-budget",
+        "warm_rid": "f084efbd0f2b464fb9eeb774fc8abcfd",
+        "screen_rid": "a61677010ec94f31a2a63cb6e72f2f70",
+        "first_difference_index": null,
+        "warm_id": null,
+        "screen_id": null,
+        "warm_prefill_chunks": [
+          454,
+          500
+        ],
+        "screen_prefill_chunks": [
+          552,
+          402
+        ]
+      },
+      {
+        "fixture_id": "D06-interval-booking",
+        "warm_rid": "93f79410dd74462c98a477df47f9132b",
+        "screen_rid": "e42db2b6ceab449392c07beee68c9548",
+        "first_difference_index": 46,
+        "warm_id": 24959,
+        "screen_id": 52883,
+        "warm_prefill_chunks": [
+          935
+        ],
+        "screen_prefill_chunks": [
+          935
+        ]
+      },
+      {
+        "fixture_id": "D07-versioned-store",
+        "warm_rid": "307e4a3b9f974c008f64e0a72b49e593",
+        "screen_rid": "528de83c75084bebad731176c0223831",
+        "first_difference_index": 35,
+        "warm_id": 791,
+        "screen_id": 2243,
+        "warm_prefill_chunks": [
+          903
+        ],
+        "screen_prefill_chunks": [
+          144,
+          759
+        ]
+      },
+      {
+        "fixture_id": "D08-sliding-limit",
+        "warm_rid": "a293d1f818ba422584ebbb5501751d62",
+        "screen_rid": "1b57f07abf5f4457ba2981acd293a196",
+        "first_difference_index": 209,
+        "warm_id": 687,
+        "screen_id": 554,
+        "warm_prefill_chunks": [
+          958
+        ],
+        "screen_prefill_chunks": [
+          958
+        ]
+      }
+    ],
+    "causal_attribution": false,
+    "performance_qualified": false,
+    "scope": "Instrumented arrival/schedule association only."
+  },
+  "resources": {
+    "schema": "E047-saved-resource-review-v1",
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "errors": [],
+    "live_checks_performed": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Observed physical ceilings do not bound inter-sample allocation peaks or establish physical fit.",
+      "Native/known inventories are saved parsed observations; full original ps inventory text was not retained.",
+      "Initial child start identity and raw PID/PPID/executable are checked; repeated start/service identity assertions are source-bound, not independently replayable raw ps.",
+      "Final/lease/health are original recorded facts, not fresh live restoration checks; GUI/unrecognized GPU use remains unknown."
+    ],
+    "original_final_status": "PASS_CAPTURE_AND_RESTORE",
+    "original_screen_status": "PASS_CAPTURE_ONLY",
+    "original_lease_closed": true,
+    "original_lease_returncode": 0,
+    "baseline": {
+      "pid": 88766,
+      "top_bytes": 70926960,
+      "aux_current_bytes": 70926960,
+      "aux_peak_bytes": 72450672,
+      "current_bytes": 70926960,
+      "peak_bytes": 72450672,
+      "system_bytes": 172752764928,
+      "pressure": 1,
+      "physical_ram": 274877906944,
+      "swap_bytes": 1666910781,
+      "swapouts": 807478
+    },
+    "physical_samples": 20,
+    "metadata_samples": 20,
+    "servers": 1,
+    "max_observation_gap_seconds": 3.2099264999851584,
+    "baseline_to_first_gap_seconds": 2.261000457976479,
+    "max_system_bytes": 195548004352,
+    "max_child_current_bytes": 22563614528,
+    "max_child_historical_peak_bytes": 25205387024,
+    "observed_pressure_values": [
+      1
+    ],
+    "observed_thermal_codes": [
+      0
+    ],
+    "max_swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "all_saved_health_contracts_pass": true,
+    "recorded_cycle_restored": true,
+    "sampled_native_inventory_guard_pass": true,
+    "raw_full_process_inventory_reparsed": false,
+    "donor_review_source_sha256": "0f1b4c0092f5af909a9bb5e3afb87a2dead071b2c8ae4bd7ffbb43fea7d961f9",
+    "review_source_sha256": "d4e821660bcd15b50bc186f7462dbfde8decd35c829e010d671de727cceb8c52",
+    "numerical_qualified_here": false,
+    "full_state_qualified": false,
+    "engine_pareto_point": false,
+    "scope": "Saved resource and closure facts only; instrumented two-wave C8 diagnosis. No timing or numerical qualification."
+  },
+  "original_pending_fields_preserved": true,
+  "numerical_qualified": false,
+  "full_state_qualified": false,
+  "performance_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Instrumented C8 MB50 two-wave diagnostic, with raw saved schedule associations. No replay performed in this archive."
+}

@@ -1326,3 +1326,23 @@ child current28110909200B、aux peak28744347504B，swap增长0/Swapouts807478，
 owner13CPU及screen6CPU均实际通过；现场metadata/evidence预检查通过。尚未设备执行。
 父plan8c1fdfe2bcaa5d45e49b87120650949b879eef616ec1aaf881e49a00a381386a。
 只能判断local warm-resident层成本，不把微测速度或producer时长变成引擎吞吐。
+
+
+## E048：真实激活局部GDN层计时独立PASS · 2026-10-19
+
+计划先commit+pushb85d6b1；e7e79b/session65941→af7b46exit0，owner15.352015s且原52818恢复。
+12case/1200measured/120warmups、672candidatecalls/fallback0；所有完整原输出/state数值通过。
+独立audit003e46/session91399→0bc50bexit0，48rawfiles、72bytepairs、60groups全部重算；
+report SHA22141e12f3eda94f762ec77fbbe51d87c825853b62152510dee3985055b8ba1a。
+B2六case median1.071695–1.089616；B8六case1.047935–1.066748。全部12median>1，
+B8earlylayer32 group0=.880700仍保留，无删点。仅local eager/warm-resident层成本，不是HTTP或Pareto。
+[全部组图及证据](../experiments/m5-ultra-256gb/E048-gdn-batched-local-timing-v1/README.md)。
+6资源观察与原服务恢复独立saved-audit通过；首图轴标题裁边FAIL与layout2双方viewPASS分别保留。
+
+## E049：warm49 faithful prefix准备 · 2026-10-19
+
+原E047recording/caps不改，eager和原graph同实际schedule到49步，明确INCOMPLETE_BY_DESIGN。
+7项prefix CPU PASS（首轮toy期望错误FAIL保留），13项owner CPU PASS，现场prepare PASS。
+父plan eb89c92e329f7bc1e5629ae05ac911457ed86bd656a92cc1fed9ac63be6099a5，
+child71f2891f24045f539a195711e8cdc97ea190bedd214e42173ab006b7eb700f1c。
+64GiB child/240GiBsystem/no swap原gate不改，实际prefix峰值未知。尚未设备运行。

@@ -1,0 +1,867 @@
+{
+  "schema": "E048-saved-resource-review-v1",
+  "status": "PASS_SAVED_OBSERVATIONS",
+  "errors": [],
+  "live_checks_performed": false,
+  "numerical_qualified_here": false,
+  "performance_qualified": false,
+  "hard_allocation_cap": false,
+  "limitations": [
+    "Sampled observations do not bound inter-sample allocation peaks or establish physical fit.",
+    "Known/native process inventories and repeated start-time assertions have source-bound saved scope; their full raw ps history is unavailable.",
+    "Final, lease and health are recorded facts, not new live checks. Numerical raw-byte audit is separate."
+  ],
+  "original_parent_status": "PASS_CAPTURE_AND_RESTORE",
+  "original_owner_status": "PASS_CAPTURE_ONLY",
+  "saved_health_contracts_pass": true,
+  "recorded_service_restored": true,
+  "original_lease_returncode": 0,
+  "physical_samples": 6,
+  "metadata_samples": 6,
+  "child_pid": 89684,
+  "owner_pid": 89666,
+  "max_gap_seconds": 3.2897929580067284,
+  "baseline_to_first_gap_seconds": 2.1059152090456337,
+  "max_system_bytes": 188859121664,
+  "max_child_current_bytes": 16033230656,
+  "max_child_historical_peak_bytes": 16034672448,
+  "pressure_values": [
+    1
+  ],
+  "thermal_codes": [
+    0
+  ],
+  "swap_growth_bytes": 0,
+  "swapouts_values": [
+    807478
+  ],
+  "terminal_final_sample_ack_wait_reap_verified": true,
+  "raw_full_process_inventory_reparsed": false,
+  "inputs": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_analysis_v1/resources.py": {
+      "bytes": 19776,
+      "sha256": "0f1b4c0092f5af909a9bb5e3afb87a2dead071b2c8ae4bd7ffbb43fea7d961f9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/execution-plan.json": {
+      "bytes": 36535,
+      "sha256": "3222b8bf40cc1321f30bd2be11389d49c8664a571223c603fad218fe32a6797f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/plan.json": {
+      "bytes": 36194,
+      "sha256": "8c1fdfe2bcaa5d45e49b87120650949b879eef616ec1aaf881e49a00a381386a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/plan.json": {
+      "bytes": 36535,
+      "sha256": "3222b8bf40cc1321f30bd2be11389d49c8664a571223c603fad218fe32a6797f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/execute.py": {
+      "bytes": 8077,
+      "sha256": "125fee3f213890af3a7cb17f8ca4311e4eebb789eea38948a5f7b86525bb7654"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/runner.py": {
+      "bytes": 10814,
+      "sha256": "20e80deb22e14f394becaabe3dfa04a10512b4bcac1c4b4b7f2c88a25ccf225e"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/terminal_hold.py": {
+      "bytes": 3620,
+      "sha256": "f6ab7334b1a2221cadb5296d6ea61d8b3bca429b3029d14b5428d042fd3ca1a3"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/prereg-v1/plan.json": {
+      "bytes": 14614,
+      "sha256": "7b14c40ddf20381dd6fc130addfe18706eb0935d6c54fb105bea39b1667a057b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/concurrency-config-v2-lease/lease.json": {
+      "bytes": 972,
+      "sha256": "2ef4f47f3254191edd9db59fa99cf68226b1dfd3c5a19e88540774a60a2fbfc8"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/concurrency-config-v2-lease/resume.json": {
+      "bytes": 101,
+      "sha256": "917dd599e60e0dea2fed288e5f8590a92e5fcd47a80d949786a319b444b80f3a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/concurrency-config-v2-lease/job-0.json": {
+      "bytes": 558,
+      "sha256": "aecfc02c9ece264dbb698d9ef21d9f101eddb6734a0eb2f0fc2e0e61aa364425"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/concurrency-config-v2-execution/final.json": {
+      "bytes": 336,
+      "sha256": "019fc6b3aa915600d2cebde96b185735dca5f7149e132441d3aa9277ab6f373f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/qualify.py": {
+      "bytes": 24150,
+      "sha256": "8b0f0fc0060d918f1eb3a169e702985642f10d6b03760546941308846256425c"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/candidate.py": {
+      "bytes": 8068,
+      "sha256": "acd2a23802296b9e420108203cc215c3170cd1eccd9a859e1a787432f98a5353"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/audit.py": {
+      "bytes": 21686,
+      "sha256": "911a3008d126ec5a5f3c6f25df17bea54e5333251639f5eee82b66a67f95eb04"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/audit.py": {
+      "bytes": 23833,
+      "sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/qualify.py": {
+      "bytes": 26961,
+      "sha256": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_isolation/qualify.py": {
+      "bytes": 23270,
+      "sha256": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": {
+      "bytes": 24275,
+      "sha256": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": {
+      "bytes": 3046,
+      "sha256": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": {
+      "bytes": 32756,
+      "sha256": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": {
+      "bytes": 7077,
+      "sha256": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/long-decode-graph-v1-inputs/qualification-plan.json": {
+      "bytes": 784,
+      "sha256": "5025d37768a5fa74d6e3e256a96ff8b8e4e92b31837183d5ffe031d9473e7123"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json": {
+      "bytes": 22310,
+      "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/prereg-v1/child-plan.json": {
+      "bytes": 593,
+      "sha256": "7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/execute.py": {
+      "bytes": 10975,
+      "sha256": "34a604c62f6de4eddcff2be53abd2d72716384ee67d13d1bf963869d35695a20"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/runner.py": {
+      "bytes": 7045,
+      "sha256": "dfb0b6f07e775249babab6e76c62dbf1ab8012027e3cb46f6c694b8b2b730577"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real-prereg-v2/execute.py": {
+      "bytes": 14621,
+      "sha256": "9d07896bde97159be5d766f3e7cf7a73ea2900270f0a842a503a9bdfd1e7052d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": {
+      "bytes": 4093,
+      "sha256": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "bytes": 2705,
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "bytes": 4027,
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "bytes": 4155,
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": {
+      "bytes": 16619,
+      "sha256": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json": {
+      "bytes": 2912,
+      "sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/model-manifest.json": {
+      "bytes": 1870,
+      "sha256": "de8ae0d26b5db015b9dc690bcaaec86cbbd5f1435c439baca22c589c7441fa1d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/fixtures/prepared-D-v1/fixtures.json": {
+      "bytes": 181812,
+      "sha256": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/eos.py": {
+      "bytes": 1272,
+      "sha256": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/config.py": {
+      "bytes": 2584,
+      "sha256": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/sampling_params.py": {
+      "bytes": 586,
+      "sha256": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/cache.py": {
+      "bytes": 7580,
+      "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/__init__.py": {
+      "bytes": 75,
+      "sha256": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/context.py": {
+      "bytes": 804,
+      "sha256": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/sampler.py": {
+      "bytes": 1682,
+      "sha256": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/norm_metal.py": {
+      "bytes": 2966,
+      "sha256": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/gdn_decode_fused.py": {
+      "bytes": 3891,
+      "sha256": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/gdn.py": {
+      "bytes": 5145,
+      "sha256": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/gdn_metal.py": {
+      "bytes": 6277,
+      "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/nvfp4_qmv.py": {
+      "bytes": 2975,
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/kernels/gdn_norm_reuse_metal.py": {
+      "bytes": 8203,
+      "sha256": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/spec/dflash2.py": {
+      "bytes": 12925,
+      "sha256": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/spec/__init__.py": {
+      "bytes": 55,
+      "sha256": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/spec/device_selector.py": {
+      "bytes": 640,
+      "sha256": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/attention.py": {
+      "bytes": 5566,
+      "sha256": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/gdn.py": {
+      "bytes": 15135,
+      "sha256": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/qwen3_5.py": {
+      "bytes": 5562,
+      "sha256": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/loader.py": {
+      "bytes": 2423,
+      "sha256": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/model/layers.py": {
+      "bytes": 8258,
+      "sha256": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/model_runner.py": {
+      "bytes": 12040,
+      "sha256": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/spec_runner.py": {
+      "bytes": 4539,
+      "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/llm_engine.py": {
+      "bytes": 4259,
+      "sha256": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/request.py": {
+      "bytes": 1354,
+      "sha256": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/packed_decode.py": {
+      "bytes": 3022,
+      "sha256": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/__init__.py": {
+      "bytes": 62,
+      "sha256": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/compiled_decode.py": {
+      "bytes": 4805,
+      "sha256": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/frozen-native/tutorial_code/miniengine/engine/scheduler.py": {
+      "bytes": 4796,
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/screen.py": {
+      "bytes": 17511,
+      "sha256": "aa8972ddc48f74e45cdd4cdaa6c7c3a81520a3d8dfafb7b401d8f4c7bc02ec70"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/runner.py": {
+      "bytes": 11459,
+      "sha256": "2d401254b34e4d5e4a20ee0cad4c95453f655fa22be727280c30552923a54735"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/execute.py": {
+      "bytes": 4894,
+      "sha256": "b62d6294c177911d4cc250d78b972200a8b39fbe073007db0a75d344137cd7aa"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/terminal_hold.py": {
+      "bytes": 3647,
+      "sha256": "7c640bc31e128f1786148ba690d5fc1bd77a1c7a38a7d3c1a1c25130e7777a37"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/test_screen_cpu.py": {
+      "bytes": 4863,
+      "sha256": "094d60ed78aced6a4ea497b0d3d1c6d7841dbeb3959681ce4a8c1ad0cb587a0d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_timing_v1/test_owner_cpu.py": {
+      "bytes": 11947,
+      "sha256": "bd95399e0173a70268372ff0428d48aac0d4728692232fc12d54bcb28b0966ee"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/prereg-v1/plan.json": {
+      "bytes": 33686,
+      "sha256": "08325135360d35faa5bc0b9294aca21ee4dc8fa7c974c49b752682184bc13e3b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-lease/lease.json": {
+      "bytes": 958,
+      "sha256": "cd1f8885cf06bddf6f60dbb69611f354af3b051e3fc9400893e8b0157ae22292"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-lease/job-0.json": {
+      "bytes": 543,
+      "sha256": "ab6562d2c435d4d6a41e1780c40ce017029a4096f667dd1fb6aa71c108aeaf67"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-lease/resume.json": {
+      "bytes": 104,
+      "sha256": "480ab2032a1c59941558d743856e4cb9837f01e4fd4da5d4ae305df7cf5826ef"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-execution/final.json": {
+      "bytes": 335,
+      "sha256": "b87e004cc4fbffa14a0ed933c6679676e3cab2b10d09a8bd328f1a430bac00cb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-independent-numerical.json": {
+      "bytes": 2586,
+      "sha256": "ce6c9c840360f336febe20d84081da2c84b3e93252b1b7733d3a9761358a1bce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-numerical/captures.json": {
+      "bytes": 245334,
+      "sha256": "ea7b87878037ceec085d97958c9b41972bf80a6cff1a3563771fdf14b9d1dc99"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-numerical/complete.json": {
+      "bytes": 4474,
+      "sha256": "94e6b0a2dbb9c1beebf3026258709532837219b3aaa69379fa9d7ce9c22dde3b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-numerical/events.jsonl": {
+      "bytes": 300574,
+      "sha256": "48f74c6c240c078b67fb8214cb6247cee1e5f80c247987074e16698a762cd513"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/source-copies.json": {
+      "bytes": 28286,
+      "sha256": "1efe1cdca60391e0977c4ba084d3a2fe887eb10b5f6b8fbde625b17ab5adad29"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/000-final.json": {
+      "bytes": 336,
+      "sha256": "019fc6b3aa915600d2cebde96b185735dca5f7149e132441d3aa9277ab6f373f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/001-job-0.json": {
+      "bytes": 558,
+      "sha256": "aecfc02c9ece264dbb698d9ef21d9f101eddb6734a0eb2f0fc2e0e61aa364425"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/002-lease.json": {
+      "bytes": 972,
+      "sha256": "2ef4f47f3254191edd9db59fa99cf68226b1dfd3c5a19e88540774a60a2fbfc8"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/003-resume.json": {
+      "bytes": 101,
+      "sha256": "917dd599e60e0dea2fed288e5f8590a92e5fcd47a80d949786a319b444b80f3a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/004-__init__.py": {
+      "bytes": 75,
+      "sha256": "3de7b566c5b214ea1489d67d1ba764a6d523aa423e47e44dfcafa3f79cc18dcf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/005-cache.py": {
+      "bytes": 7580,
+      "sha256": "056a3bf3bc42163e93f55eb914fa35d5c081f803da9b5faa740588a67057a791"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/006-config.py": {
+      "bytes": 2584,
+      "sha256": "cfcc6f08c1063c59097886c89759bdfbe662be853432e4b3286169b8ea35f1c0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/007-context.py": {
+      "bytes": 804,
+      "sha256": "134614bd19cedae748b0db415cf1feac70cebd9826a641a843936db8327d6ba7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/008-__init__.py": {
+      "bytes": 62,
+      "sha256": "f069283cc5f3eef0a1224ea07343b256d778aa3250c4c36ac3b7cf089cd92663"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/009-compiled_decode.py": {
+      "bytes": 4805,
+      "sha256": "22111101109b9d9c69e8fd114aa114533fe708e462303d5e72bedd6d217da1bf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/010-llm_engine.py": {
+      "bytes": 4259,
+      "sha256": "f43ef9cdcd5c1c4bcc61ef767830dbbb65d00ade80bba1d33e5811349659cece"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/011-model_runner.py": {
+      "bytes": 12040,
+      "sha256": "14fd964c57814846887585a9cbbdf1e11d2500ab80c23b10c945d2aa9316b7b1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/012-packed_decode.py": {
+      "bytes": 3022,
+      "sha256": "46b97dc657589d23e48d72f26888ea1f36b5b02d6131907f8caeb3d45ac4d233"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/013-request.py": {
+      "bytes": 1354,
+      "sha256": "ff1814b9a7b4939826df1475fbdf0d922fabffe1def1862dbbe23ec1b4f07ccb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/014-scheduler.py": {
+      "bytes": 4796,
+      "sha256": "268ff516b94d4ec932259775b0834014601a732a3839df7ba0a90a594eee7009"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/015-spec_runner.py": {
+      "bytes": 4539,
+      "sha256": "b6e83506633b92e75998dd51d85488fccff12aa3bb69611ad31729a0c9040a73"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/016-eos.py": {
+      "bytes": 1272,
+      "sha256": "b01e21c613ace9a56db9c45dcdfde7de47a63103050cb82217c2b1156a617915"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/017-__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/018-gdn.py": {
+      "bytes": 5145,
+      "sha256": "6be56a7d7ef41d3d422973a5385f598182b56f2cfd7495f6559d964460b6b0ab"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/019-gdn_decode_fused.py": {
+      "bytes": 3891,
+      "sha256": "16389d6dd99103db2a4d6649c5c2ab45ce94c966a24d9643ed9ad16bcb77a500"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/020-gdn_metal.py": {
+      "bytes": 6277,
+      "sha256": "51757224b18a424eaee5ebb7346075837bf768c289b8721f6279b6d844de13a9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/021-gdn_norm_reuse_metal.py": {
+      "bytes": 8203,
+      "sha256": "b42aaceb140c53d87b9d5c5ebc6392a1e1ca0bcf7b55266afc6f68b22e0defd1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/022-norm_metal.py": {
+      "bytes": 2966,
+      "sha256": "404a4481604adeb136190b76e83637882e7d1ac2890495dee4167f74fc84b884"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/023-nvfp4_qmv.py": {
+      "bytes": 2975,
+      "sha256": "d79f6b3c44eb0003f9c6a4b5ece79c1d8bdd896fc6095c4458e4ea400b1c9c32"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/024-__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/025-attention.py": {
+      "bytes": 5566,
+      "sha256": "112997ec74e55ecdb88641e86f7bb29ad8c6c6a73481f1afe463a4332156d52c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/026-gdn.py": {
+      "bytes": 15135,
+      "sha256": "c88096bf3b51a1ad7a24dd4f4e2c71bbb6b220b288b83a9242ca190d6c0a5030"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/027-layers.py": {
+      "bytes": 8258,
+      "sha256": "c2c9936df2a34877edb5e1702152583e54549f69b37d7c93e9996af1e7c20908"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/028-loader.py": {
+      "bytes": 2423,
+      "sha256": "e5170e97f1fdc747ae1d8485b7f1bdf086e4aa55930c0cbedfed90e343a13a2a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/029-qwen3_5.py": {
+      "bytes": 5562,
+      "sha256": "dae9694d717a0ebe80c9c54317c65f5d206e4d5695bc898fe0e93eb04a8590ce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/030-sampler.py": {
+      "bytes": 1682,
+      "sha256": "0a8c2d69e3cadfb980a652f6de8516a0884155b602f606d32d640c6fc46cc57e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/031-sampling_params.py": {
+      "bytes": 586,
+      "sha256": "9d6c0b0506a42bd8bd3b39d54023651dc98441d50d78eeacffbc10a717d704a5"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/032-__init__.py": {
+      "bytes": 55,
+      "sha256": "dffc2dabeef027100d530bb7a17c0072870025066ab0b1f843f4b0e673eedc4b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/033-device_selector.py": {
+      "bytes": 640,
+      "sha256": "1531a99855b96231cb47b1b779bae895a11b2b5a3d4630d4fd7188eb24fd87da"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/034-dflash2.py": {
+      "bytes": 12925,
+      "sha256": "e8dba82e540a621f644bdc44bf1037df2b7c0f79d3b391426619ae179d405655"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/035-native-source.json": {
+      "bytes": 2912,
+      "sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/036-final.json": {
+      "bytes": 335,
+      "sha256": "b87e004cc4fbffa14a0ed933c6679676e3cab2b10d09a8bd328f1a430bac00cb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/037-gdn-batched-v1-independent-numerical.json": {
+      "bytes": 2586,
+      "sha256": "ce6c9c840360f336febe20d84081da2c84b3e93252b1b7733d3a9761358a1bce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/038-job-0.json": {
+      "bytes": 543,
+      "sha256": "ab6562d2c435d4d6a41e1780c40ce017029a4096f667dd1fb6aa71c108aeaf67"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/039-lease.json": {
+      "bytes": 958,
+      "sha256": "cd1f8885cf06bddf6f60dbb69611f354af3b051e3fc9400893e8b0157ae22292"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/040-resume.json": {
+      "bytes": 104,
+      "sha256": "480ab2032a1c59941558d743856e4cb9837f01e4fd4da5d4ae305df7cf5826ef"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/041-captures.json": {
+      "bytes": 245334,
+      "sha256": "ea7b87878037ceec085d97958c9b41972bf80a6cff1a3563771fdf14b9d1dc99"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/042-complete.json": {
+      "bytes": 4474,
+      "sha256": "94e6b0a2dbb9c1beebf3026258709532837219b3aaa69379fa9d7ce9c22dde3b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/043-events.jsonl": {
+      "bytes": 300574,
+      "sha256": "48f74c6c240c078b67fb8214cb6247cee1e5f80c247987074e16698a762cd513"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/044-qualification-plan.json": {
+      "bytes": 784,
+      "sha256": "5025d37768a5fa74d6e3e256a96ff8b8e4e92b31837183d5ffe031d9473e7123"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/045-model-manifest.json": {
+      "bytes": 1870,
+      "sha256": "de8ae0d26b5db015b9dc690bcaaec86cbbd5f1435c439baca22c589c7441fa1d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/046-plan.json": {
+      "bytes": 22310,
+      "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/047-execute.py": {
+      "bytes": 10975,
+      "sha256": "34a604c62f6de4eddcff2be53abd2d72716384ee67d13d1bf963869d35695a20"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/048-plan.json": {
+      "bytes": 14614,
+      "sha256": "7b14c40ddf20381dd6fc130addfe18706eb0935d6c54fb105bea39b1667a057b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/049-runner.py": {
+      "bytes": 7045,
+      "sha256": "dfb0b6f07e775249babab6e76c62dbf1ab8012027e3cb46f6c694b8b2b730577"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/050-execute.py": {
+      "bytes": 8077,
+      "sha256": "125fee3f213890af3a7cb17f8ca4311e4eebb789eea38948a5f7b86525bb7654"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/051-child-plan.json": {
+      "bytes": 593,
+      "sha256": "7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/052-plan.json": {
+      "bytes": 33686,
+      "sha256": "08325135360d35faa5bc0b9294aca21ee4dc8fa7c974c49b752682184bc13e3b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/053-runner.py": {
+      "bytes": 10814,
+      "sha256": "20e80deb22e14f394becaabe3dfa04a10512b4bcac1c4b4b7f2c88a25ccf225e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/054-terminal_hold.py": {
+      "bytes": 3620,
+      "sha256": "f6ab7334b1a2221cadb5296d6ea61d8b3bca429b3029d14b5428d042fd3ca1a3"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/055-execute.py": {
+      "bytes": 4894,
+      "sha256": "b62d6294c177911d4cc250d78b972200a8b39fbe073007db0a75d344137cd7aa"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/056-runner.py": {
+      "bytes": 11459,
+      "sha256": "2d401254b34e4d5e4a20ee0cad4c95453f655fa22be727280c30552923a54735"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/057-screen.py": {
+      "bytes": 17511,
+      "sha256": "aa8972ddc48f74e45cdd4cdaa6c7c3a81520a3d8dfafb7b401d8f4c7bc02ec70"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/058-terminal_hold.py": {
+      "bytes": 3647,
+      "sha256": "7c640bc31e128f1786148ba690d5fc1bd77a1c7a38a7d3c1a1c25130e7777a37"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/059-test_owner_cpu.py": {
+      "bytes": 11947,
+      "sha256": "bd95399e0173a70268372ff0428d48aac0d4728692232fc12d54bcb28b0966ee"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/060-test_screen_cpu.py": {
+      "bytes": 4863,
+      "sha256": "094d60ed78aced6a4ea497b0d3d1c6d7841dbeb3959681ce4a8c1ad0cb587a0d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/061-audit.py": {
+      "bytes": 21686,
+      "sha256": "911a3008d126ec5a5f3c6f25df17bea54e5333251639f5eee82b66a67f95eb04"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/062-candidate.py": {
+      "bytes": 8068,
+      "sha256": "acd2a23802296b9e420108203cc215c3170cd1eccd9a859e1a787432f98a5353"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/063-qualify.py": {
+      "bytes": 24150,
+      "sha256": "8b0f0fc0060d918f1eb3a169e702985642f10d6b03760546941308846256425c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/064-audit.py": {
+      "bytes": 23833,
+      "sha256": "a3e97dc368da47735d7c8e9fd2bcb40d7decaccb9c5926084d53cffb10495d3d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/065-qualify.py": {
+      "bytes": 26961,
+      "sha256": "f3088a98d2aca6b4f267e7d4c258efbbf9f83e1beccb6745c88ae42343f88e89"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/066-physical_guard.py": {
+      "bytes": 16619,
+      "sha256": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/067-candidate.py": {
+      "bytes": 7077,
+      "sha256": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/068-model-source-pins.json": {
+      "bytes": 3046,
+      "sha256": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/069-qualify.py": {
+      "bytes": 24275,
+      "sha256": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/070-qualify.py": {
+      "bytes": 23270,
+      "sha256": "9d8c17a4bfc7f6ea9d61f79f466cad45059b71c9606d7b8d29c05c40213cad9e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/071-execute.py": {
+      "bytes": 14621,
+      "sha256": "9d07896bde97159be5d766f3e7cf7a73ea2900270f0a842a503a9bdfd1e7052d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/072-fixtures.json": {
+      "bytes": 181812,
+      "sha256": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/073-qualify_native.py": {
+      "bytes": 32756,
+      "sha256": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/074-resource_base.py": {
+      "bytes": 4155,
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/075-resources.py": {
+      "bytes": 4027,
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/076-resources_v2.py": {
+      "bytes": 2705,
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/sources/077-suspended_service.py": {
+      "bytes": 4093,
+      "sha256": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/runtime-pins-verified.json": {
+      "bytes": 19775,
+      "sha256": "f413098782ccf050bf4b93876ffeed9f2ace3a0b726ae3b0605a970b92b2d1fa"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/invocation.json": {
+      "bytes": 533,
+      "sha256": "0b51add3f16943555a60825017fdcca9d3de42f1d55f78fa96a923fab7ee511c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/final.json": {
+      "bytes": 336,
+      "sha256": "c4ec6f25e939fca7dcc19fe72857b1d7f18e999266fad9eebc0d250fe080036f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/result.json": {
+      "bytes": 381,
+      "sha256": "dd456607238b76278ac3d071a2cf5fe82aa4d3e0e0dee7abe23748f45efba2c4"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-lease/lease.json": {
+      "bytes": 972,
+      "sha256": "10e3ee111675746890516ae9a480059942bb742688daa7d3f522c0b227cf6bce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-lease/job-0.json": {
+      "bytes": 557,
+      "sha256": "ef7bcf0965405c4f6979bee595b3270325eaf4c6a49ce6ac2eec9962f09b9832"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-lease/resume.json": {
+      "bytes": 103,
+      "sha256": "48db0c03fb41f1751845d768ad6f1089e84004780f58a9bc23e2ba0edf3776a0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/runner-identity.json": {
+      "bytes": 139,
+      "sha256": "71d9815a577652dff0c5d8071f86b31659239521f36fd1764f543ce83f5da88a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/jobs.json": {
+      "bytes": 493,
+      "sha256": "6eff8d315fe6913be88f74dd1d9a887fff63102db350f7a4d085ec822c0e883b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/before-health.json": {
+      "bytes": 12476,
+      "sha256": "9dd4a883284e046be0a67403c5bd29864eca2d10242c764793d707e1ac2b9d47"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/after-health.json": {
+      "bytes": 12476,
+      "sha256": "ed90eee40fd1ad6bd46123f36c0768fca79fb4ed567757e7b4524864df7cb853"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-numerical/complete.json": {
+      "bytes": 42440,
+      "sha256": "ccb8422d3b4d788ec9f0434d94cec7993a17678ff64fc778a9762cc6701c242a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/numerical-done.json": {
+      "bytes": 965,
+      "sha256": "3442b1bbb766ad7e8688830b5c66d771046ba34943d532ae3f9adc0c6b7f561c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/numerical-exit-ack.json": {
+      "bytes": 861,
+      "sha256": "6fb0474ddb6efa1ae152c2c9415cb0ee9760d3e861a64f05308269c46404e8d1"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/identity-89684.json": {
+      "bytes": 139,
+      "sha256": "d7a0311ba4d1b0a2f7a3c76df1774ad8ebb17d75178490ab3396b2a0a62a702c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/original-qualifier-command.json": {
+      "bytes": 471,
+      "sha256": "5897c3eb0a347b499b1d8eac260d30dcfa39b7207f093201fe2309067356270a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/child-command.json": {
+      "bytes": 506,
+      "sha256": "d00a97cad5e6053d215d1bea1ab127a689d5ed8c0acd37f8d24f124b635b43c0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/child-reap.json": {
+      "bytes": 280,
+      "sha256": "d8fe47e065ac2229ef32cebdf2964ee62e96def97ef84b237e9f635380e94959"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/child-reap-raw.json": {
+      "bytes": 519,
+      "sha256": "ceaf5223afde06407649997f49dbdd3599bae9828accf86483867ec6a0b01b96"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/physical-before/sample.json": {
+      "bytes": 4397,
+      "sha256": "07087916606f9a5f8f6ffa884909c224ca6d3293a5b8ecf08af6be453d3eac06"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-execution/physical-before/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "f5ad0ed5ae25f8cbbdc99ddee36d9dc51ca4eca86f7f41de978e7abb88937aec"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0000/sample.json": {
+      "bytes": 4403,
+      "sha256": "06fb440d594b9db9817fb44f54ce4703ce813fb702ee5075643877de5c717785"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0000/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "83bb7c48dcd16b467e5e8180b52afeb3607330d3ebcb3a3322302c30483b099c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0000.json": {
+      "bytes": 4738,
+      "sha256": "d8fc0fd86528f8b12f00d38f369812e15b2214a1d0ccb059666c67f2e5d8a5b4"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0000.json": {
+      "bytes": 5034,
+      "sha256": "50894221f715ca15684863a6378354d98ca6e04a59170a066c1b14acbb002a93"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0001/sample.json": {
+      "bytes": 4402,
+      "sha256": "8f59a661af84a40feda142ebfc5ab1fec5a76ffeec79c9ca3b3d9f8175f856f7"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0001/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "ef58475e8c677761d5db6071837f12da04d42a4c7dd05032f0e16b113d867e71"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0001.json": {
+      "bytes": 5586,
+      "sha256": "3542a81e3b6a813fa9d014554e5b8b995b52dc40686e991f429a9c656fac811a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0001.json": {
+      "bytes": 5788,
+      "sha256": "9b0e16518a04a76260e71c7631f23041160b9a06e439177712a2664e6cffd0bb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0002/sample.json": {
+      "bytes": 4405,
+      "sha256": "90677ec176a2300c521e49b7508e57df40790f1e869686bc899a1ec661a415ce"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0002/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "d1d62537de4eefca5ee50b2113e22cb6469289b04a545321fac2abfe847ede37"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0002.json": {
+      "bytes": 5586,
+      "sha256": "6a56a54b5945900273a57500d96defc77e1c3b6f0fd7578afc4e7b01dc1382bc"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0002.json": {
+      "bytes": 5788,
+      "sha256": "efc6d3ff0e1f30aa938efdb3606841da9010f9492aa59f7bc0f694a1aca24877"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0003/sample.json": {
+      "bytes": 4430,
+      "sha256": "f3ef89d916f5e7dea5a45db7348e1352f4c609d149bebd31fd5ba0cf6ae74494"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0003/footprint.raw.json": {
+      "bytes": 879,
+      "sha256": "c16bba256f332b623e885d259c8552749788b8edae55d9133c2c6f375e51fc9c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0003.json": {
+      "bytes": 5597,
+      "sha256": "8370dbdb1de561fe4635723f5387b56418d1042aa186024d407c68d7cbf27f27"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0003.json": {
+      "bytes": 5799,
+      "sha256": "10defb513eb731a42739a7133b0b36633b8dbe68cb3475f37d8dead654e918d2"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0004/sample.json": {
+      "bytes": 4420,
+      "sha256": "ba078db50b679114eb5fa667b460ba796afbd642552cd73f3dcf0c28fde36e86"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0004/footprint.raw.json": {
+      "bytes": 871,
+      "sha256": "4ea45703737651714dcd56fc1eb698b05d0e1a53c3de33894bed3a13b674a348"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0004.json": {
+      "bytes": 5589,
+      "sha256": "b207e556301801f3fa68d8006f27707f544e66ede8d9af5f3f8882b102d0ee2e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0004.json": {
+      "bytes": 5791,
+      "sha256": "9089e9bc62c6dea0f9482658f36b3aa361363edcf563296a21a68638534c2a1d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0005/sample.json": {
+      "bytes": 4419,
+      "sha256": "017b017054528f8e98803903cbd193a1960523974e53d3c2e13390559402451a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/physical-0005/footprint.raw.json": {
+      "bytes": 871,
+      "sha256": "7879fc84f293c378ea433fbee1048e695d66289cd0adad01e0e3fd644d52d10c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/resource-0005.json": {
+      "bytes": 5596,
+      "sha256": "b3a88e9a451d580337a9e92cf24e54c6e2b5596a2376cf0a59b6fb85dbae3735"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-timing-v1-owner/resources/probe-0005.json": {
+      "bytes": 5805,
+      "sha256": "75a760e2daba86886e1d2d242b9d87cc897d223dc0ed631e062ad3fd419c2929"
+    }
+  },
+  "review_source_sha256": "e8055dd24a0e1554c1f34b94cc1e5e831100d20eb74ec56c5e2080af86c7bfae"
+}

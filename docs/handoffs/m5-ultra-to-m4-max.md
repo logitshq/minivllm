@@ -1335,3 +1335,14 @@ verify与commit分离；其affineQ4与我们的NVFP4不同，不能引用其102t
 下一步E048用同real captures测完整层AB/BA；E047另查MB50 C8基准跨schedule输出变化。
 本轮fresh fetch工具1c9d23成功，M4 branch仍94c070e且为当前HEAD祖先，无未合入更新。
 最新已确认远端40eeb84；这一追加尚待下一次push，不声称M4 agent已阅读。
+
+
+### 2026-10-19 — E048局部GDN明确收益，C8差异定位到需同schedule对照
+
+E04812点真实activations完整GDN层ABBA，独立raw字节/1200timings全部PASS；
+B2 median+7.17–8.96%，B8+4.79–6.67%。保留B8早期layer32的一组回退.8807，
+不能把层收益升级为engine吞吐。原52818恢复，图和原始数据在E048归档、教程036。
+E047两轮D06 prefill均[935]但earlybatch/row不同，输出idx46分歧；现准备E049同原history
+warm49 eager/graph核验，8active/8future保持，不伪造completed。candidate组合另有默认OFF
+小adapter gdn_batched_graph，11CPU通过，尚无设备组合资格。
+正式v16仍不变：全batch/GLM目标未达成。当前已确认push b85d6b1；本结果随下次commit同步。
