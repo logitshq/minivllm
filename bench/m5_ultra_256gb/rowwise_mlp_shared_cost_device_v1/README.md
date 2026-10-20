@@ -1,8 +1,8 @@
-# E057 full shared MLP+head cost owner — prepared, not device-run
+# E057 full shared MLP+head cost owner — executed and audited
 
 Default inert. Prepare requires actual closed E056 canary with independent audit;
 the E056 predecessor SHA and E057 producer SHA must be sealed before CPU tests
-and preparation. The actual parent plan is now frozen; no device run has occurred at this checkpoint.
+and preparation. The frozen parent plan was executed after commit7e2aea0; original oMLX was restored, and both independent numerical and saved-resource audits pass.
 
 The E054 bounded direct-child, terminal ACK, reap and service-restoration lifecycle
 is reused with 1500/1650/1800-second child/owner/outer deadlines, 64 GiB child and

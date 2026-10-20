@@ -1413,3 +1413,10 @@ Logits DeepSeek v4.1 Flash, Kimi K3 and Muse Spark Open passed authenticated API
 E057 complete shared MLP+head cost adapter, owner and independent audit remain source-prepared/CPU-tested, not device-run. Next action is freeze a concrete owner plan, commit it, then run with the existing bounded pause/restore lifecycle; no new timing is asserted.
 
 E057 actual preparation now PASS (`edae68`): parent `9ef4dda5a8cc95b7ab53df20a0e88273ff7a2d5ba03d3781b0ed1d66f0577ac4`, child `12fd8caa2130792295927a11c87673c84e8a34aeaab2d5440cdb34965ba2e89b`. No GPU execution at this pre-run checkpoint.
+
+
+### E057 actual full shared MLP verifier — 2026-10-20
+
+Plan/source first committed and pushed7e2aea0. Actual3d8cd7/session70588→a813a6 rc0:87.718875875s lifecycle,PASS_CAPTURE_AND_RESTORE,same52818 restored. Independent87f36e/session78556→eda8e7 PASS:32rawfiles/2064tensorpairs/768MLPcalls/400timings. DeviceT4 native85.7917→58.9421ms pooledp50,pairedratio1.45442×; T8 168.9082→107.8756ms,pairedratio1.56605×. These exclude drafting/acceptance/scheduling/HTTP. HistoricalE054 is not a paired third arm and cannot establish the incremental MLP benefit. Saved resources27samples,zero swap growth,allclosurechecksPASS.
+
+E055 andE057 figures rendered from independent audits and visually checked; all paired points retained. E055 still fails its3% gate. New tutorial038 explains complete serving break-even and why local speedups are not frontier wins. Read October9 AdaptiveDHiSparse architecture/discussion and MLX4198 source discussion; notes preserve hardware/quantization scope and rejected transfer assumptions. Logits private-source workers still have not started, awaiting explicit data-transmission authorization; all three synthetic coding tests remainPASS.

@@ -1,6 +1,6 @@
 # E057 independent shared MLP + head local-cost audit
 
-Prepared and CPU tested; the actual E057 device run and saved-result audit have not run. This default-OFF script imports only small source modules and the standard library. It never loads a model, invokes a backend, probes a service, or changes resource policy.
+Actual E057 device execution and independent saved-result audit now PASS (2026-10-20); see the E057 experiment README and local evidence manifest. This default-OFF script imports only small source modules and the standard library. It never loads a model, invokes a backend, probes a service, or changes resource policy.
 
 The auditor retains the frozen E054 v2 raw tensor, qualification, canonical-state and timing mechanisms. It reads all 32 saved safetensors files from 16 qualification pairs, verifies original dtype, full shape, finite bits and every byte across 2,064 tensor pairs, including selected prefix state and native continuation. It independently recomputes all 400 ordered timing records and 20 groups, keeping negative break-even budgets. Timed calls retain output IDs; this does not establish 400 full-tensor comparisons.
 

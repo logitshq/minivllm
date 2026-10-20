@@ -27,3 +27,5 @@ E057, or yield a claimed paired MLP contribution. This small script intentionall
 has no historical-comparison pipeline.
 
 2026-10-20 update: parent/auditor placeholder is now sealed from the actual prepared plan and frozen independent auditor. Device run, saved-result review and figure rendering remain pending.
+
+Actual update 2026-10-20: v2 source renders the closed independent audit; render-v2 PNG/SVG, plot-data and visual-review receipts are saved. Original v1 source remains as the earlier draft. All figures retain diagnostic/local-cost scope.

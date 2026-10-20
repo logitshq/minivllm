@@ -74,3 +74,5 @@ closed raw-metric and resource/restoration audits, prepare a new v17 extension:
 
 This update needs a small data append plus a renderer adjustment, not another
 experiment or audit framework. No v17 source or data has been written here.
+
+Actual update 2026-10-20: v2 source renders the closed independent audit; render-v2 PNG/SVG, plot-data and visual-review receipts are saved. Original v1 source remains as the earlier draft. All figures retain diagnostic/local-cost scope.
