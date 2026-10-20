@@ -51,26 +51,71 @@ operations, source hashes unchanged. Evidence is retained at
 runner/argv, stdout/stderr, rc, copied sources and before/after hashes. This was
 the first attempt; no failed CPU attempt preceded it.
 
-## Minimal next actual-activation canary
+## Prepared actual-activation canary (device NOT RUN)
 
-Reuse E042 canonical used1023 state and T4/T8 original teacher tokens inside the
-existing owned model lifecycle. Supply this candidate with a `probe_project`
-callback which maps the actual live `(weight,scales)` objects to the original
-layer gate/up Linear. For every layer, its returned value is concatenated
-**original M1 Linear outputs**, not unqualified shared outputs. At layers0/32/63
-only, also run the pinned shared projector from the same actual post-norm input
-and compare/save all BF16 words plus finiteness. Keeping native returned values
-prevents a failed local candidate from affecting later captured inputs. Keep the
-already-qualified shared-head route or original M1 head explicitly identified.
+`canary.py` is default OFF and imports only stdlib at module scope. It binds the
+actual independently audited E054 child plan/result/audit, then reuses its
+source/model/loading/canonical helpers. The new child plan has exactly these keys:
 
-This is12 projection pairs (3layers×2widths×2projections),24 output files, plus6
-shared gate/up input files: roughly5.13MiB of raw tensor payloads, excluding
-metadata. They are live normalized activations collected by the new callback,
-not E040 synthetic X or previously saved E042 hidden arrays. Bind the original
-model's `mlx.nn.silu` into `runtime.silu`; preserve original per-row norms,
-mixers, native down and independent state reset per width. Actual kernel
-dispatch and captured inputs require source-bound receipts. This first canary
-is projection correctness only; a subsequent full logits/prefix/continuation
-qualification must validate that the collector/new scheduling preserves the
-whole model before treating shared MLP outputs as production values. No new
-owner or formal performance claim is needed.
+```json
+{
+  "schema": "C1-MLP-shared-activation-plan-v1",
+  "canary_sha256": "<actual source SHA>",
+  "e054_plan": {"path": "<absolute child-plan.json>", "sha256": "3d10d60dc72eff7e2c70444239c61be09c865b6e15109c7f43b8cdf8a6a66c2c"},
+  "e054_result": {"path": "<absolute complete.json>", "sha256": "b719a1c25257e0b0fc93e80a8d49215e223d02f708ab5f879558ffe94968e9de"},
+  "e054_audit": {"path": "<absolute independent-v2.json>", "sha256": "7fe77b62600f36b27823b68b80e54ee32815e9b830178870679540b5e3835972"},
+  "deadline_s": 900
+}
+```
+
+The owner supplies the lifecycle/resource policy and later E055 closed
+prerequisite. No plan, owner or device execution has been created here.
+
+```sh
+.venv/bin/python -B bench/m5_ultra_256gb/rowwise_mlp_shared/canary.py
+# Only under the later external owner:
+.venv/bin/python -B bench/m5_ultra_256gb/rowwise_mlp_shared/canary.py \
+  --run --plan ABSOLUTE_CHILD_PLAN --plan-sha256 EXACT_SHA --out FRESH_OUTPUT
+```
+
+From the original E042 used1023/position1022 canonical state, native causal
+execution generates nine tokens and must reproduce the original eight teacher
+inputs. T4/T8 get independent evaluated seed storage. At every layer the callback
+returns concatenated **original M1 Linear outputs**. At layers0/32/63 only, the
+pinned shared kernel also consumes the same actual post-norm X/live weights;
+its output is saved and compared but never returned to the decoder. The head
+also remains original M1, and runtime.silu must be the original model's
+`mlx.nn.silu` function. Norms, mixers, native down and row residuals retain their
+original arithmetic.
+
+There are12 projection pairs,24 BF16 output files and6 input files (roughly
+5.13MiB tensor payloads). Every raw file has a full original-dtype shape/hash/
+finiteness descriptor. Before success, both new native-returning traversals must
+match the **full vocabulary logits and complete selected k=T state** of both
+frozen original verifier and native causal oracle. This produces4 live
+comparisons of129 arrays, including full padded KV state. These provenance
+checks are producer receipts, not saved raw state evidence. Canonical storage
+and every original parameter's bytes must remain unchanged. Failure preserves
+all partial outputs and cannot produce a successful canary receipt.
+
+`complete.json` schema is `C1-MLP-shared-activation-canary-result-v1`; success is
+`PASS_PROJECTION_CANARY_ONLY`. It records pid/ppid/plan_sha256,6 `captures`,
+2 `traversals`,2 `provenance` receipts (native+frozen comparisons each),
+projection_pairs12/raw_files30/callback_count256/native_m1_projection_calls1536/
+shadow_projection_calls12/shared_outputs_returned0. Required terminal flags:
+`projection_canary_complete`, `native_returning_provenance_complete`,
+`device_cleanup_completed`, `source_model_pins_rechecked`. HTTP, full-model,
+performance and Pareto qualification remain false. No timing samples are taken.
+A later canary which actually returns shared MLP values and checks complete
+logits/prefix/continuation is still required before cost measurements or use.
+
+Guarded canary CPU v1 (tool `9e7300`) ran10 tests:9 passed,1 fixture error because
+a fake immutable tuple was assigned in place. The failed attempt and exact
+source/argv/output are retained in
+`.artifacts/m5-ultra-256gb/rowwise-mlp-shared-canary-cpu-v1`. Only that test fixture
+was corrected. Fresh v2 (tool `572749`) **10/10 PASS**, no errors/failures/skips,
+forbidden operations empty, source hashes unchanged; evidence is in
+`.artifacts/m5-ultra-256gb/rowwise-mlp-shared-canary-cpu-v2`. These scalar tests
+include deliberately wrong shadow values which must never affect later model
+results, and rejected corrupt native-state/frozen-logit provenance. They do not
+establish device numerical equivalence. No GPU/model payload work was run.
