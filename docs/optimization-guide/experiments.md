@@ -1308,3 +1308,21 @@ child current28110909200B、aux peak28744347504B，swap增长0/Swapouts807478，
 [402成员metadata归档](../experiments/m5-ultra-256gb/E046-gdn-batched-device-v1/README.md)
 全部回读size/SHA PASS，tar SHAec41ba39432f7a0ae3850eddd9f3b43fb9353dce930b712d58d661cf6e806a95。
 原始pending字段不改写，后续独立审计单独记录；首次device和audit即通过，无重跑。
+
+
+## E047：C8默认MB50两轮调度观察实际完成 · 2026-10-19
+
+计划先commit+push0bcb086；父plan6d31b9f9efbdb453b02675c3d0fcba666f49b48b3e1b8fc7aca8189f42fae9b7。
+9项CPU通过后实际8849da/session19491→705ce4 exit0、54.379622s、PASS_CAPTURE_AND_RESTORE。
+同PID52818恢复。两轮各八请求完整raw及scheduler trace已保存；闭环后join d2fb75 exit0。
+这是observer ON的诊断，会改变调度时机；不加入性能/Pareto。精确trace分析和原生同schedule
+重放尚未完成，不能根据输出差异直接断言实现错误。
+
+## E048：真实B2/B8 GDN局部计时准备 · 2026-10-19
+
+从E046已审计real captures选12点：B2/B8、early/late、layer0/32/62。保留native batched
+五个Linear；每臂独立seed，先完整output/conv/S字节比较，再5warmup+5组×10pairs AB/BA。
+共1200 measured durations，完整forward+output/state eval+sync，reset/load/hash/I/O在计时外。
+owner13CPU及screen6CPU均实际通过；现场metadata/evidence预检查通过。尚未设备执行。
+父plan8c1fdfe2bcaa5d45e49b87120650949b879eef616ec1aaf881e49a00a381386a。
+只能判断local warm-resident层成本，不把微测速度或producer时长变成引擎吞吐。

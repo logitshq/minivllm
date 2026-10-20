@@ -45,10 +45,16 @@ setup inside both arms. Do not clear the allocator cache asymmetrically or inclu
 file I/O, parameter hashing, comparator or full snapshot serialization.
 
 The candidate measured interval is: start after an idle synchronize; construct
-all64 layers and shared head; evaluate **all T full-vocabulary rows and all T
-complete prefix states**, as E042 did; compute/return greedy IDs; select a
+all64 layers and shared head; evaluate **all T full-vocabulary rows and only the
+selected prefix state needed for commit**; compute/return greedy IDs; select a
 registered prefix; publish it into an isolated `DecodeBatch` holder; drop
-unselected prefixes/temporaries; final synchronize; stop. Record total wall ns.
+unselected prefixes/temporaries; final synchronize; stop. Retain necessary causal
+dependencies but do not force every rejected full KV/backing to materialize. E042
+evaluated all prefixes to produce audit evidence; that is not automatically a
+production cost. An optional all-prefix-materialized diagnostic can measure the
+difference. If the candidate graph itself forces more materialization, measure
+that cost honestly. The selected-only evaluation policy must pass the same
+chosen-state/logits/continuation checks before timing. Record total wall ns.
 Keep that total as primary: internal host build/submit timings are overlapping
 observations and must not be added as GPU-exclusive time.
 
