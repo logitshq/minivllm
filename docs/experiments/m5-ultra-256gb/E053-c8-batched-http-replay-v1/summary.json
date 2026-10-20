@@ -1,0 +1,2930 @@
+{
+  "status": "ARCHIVED_FULL_RECORDED_HISTORY",
+  "original_child_status": "PASS",
+  "steps": 1030,
+  "completed_requests": 16,
+  "raw_output_count": 8192,
+  "committed_output_count": 8192,
+  "independent_ledger_audit": {
+    "schema": "E053-independent-http-replay-audit-v1",
+    "status": "PASS",
+    "qualified": true,
+    "recorded_history_verified": true,
+    "http_history_qualified": true,
+    "candidate_http_capture_qualified": true,
+    "performance_qualified": false,
+    "owner_resources_restore_qualified": false,
+    "offline_tensor_bytes_rechecked": false,
+    "weight_shards_rehashed": false,
+    "child": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical",
+    "plan_sha256": "26f5d003fc61f96a22939750e7732858beeaa9313f4de40b94a0e4a0009c9431",
+    "audit_source_sha256": "1576466a27c3e5463401ce19c14c9c4cb936a342cf920e90dc232c364699e4ec",
+    "scope": "Only the complete actual candidate two-wave HTTP history. No arbitrary arrivals, unobserved workloads or performance grant.",
+    "evidence_limit": "Complete source-bound device full-array bit/finite receipts, independently reconstructed IDs/schedule/route/tracing. Successful raw tensor payloads not retained; no offline arithmetic or tensor-byte reread.",
+    "private_source_binding": "Actual qualifier clones original combined adapted/Handle constructor globals to the pinned server TraceGraph, whose delta policy is B1..8 candidate/zero fallback. Original replay arithmetic and restore are unchanged.",
+    "ledger": {
+      "sha256": "7e73fb53b5cb5118338eee873c041a6b81e9ceef1026eacd6741c23e7d50aee7",
+      "bytes": 553638749,
+      "lines": 1034,
+      "events": [
+        {
+          "event": "load-pair-start",
+          "elapsed_wall_s": 5.161752125015482,
+          "max_seqs": 8,
+          "model_instances": 2
+        },
+        {
+          "event": "load-pair-complete",
+          "elapsed_wall_s": 6.277141542057507,
+          "max_seqs": 8,
+          "independent_weight_arrays": 1349
+        },
+        {
+          "event": "release-pair-start",
+          "elapsed_wall_s": 507.65594175003935,
+          "model_instances": 2
+        },
+        {
+          "event": "release-pair-complete",
+          "elapsed_wall_s": 507.7669761670404,
+          "qualification_only": true
+        }
+      ],
+      "requests": 16,
+      "steps": 1030,
+      "raw_output_count": 8192,
+      "committed_output_count": 8192,
+      "observed_terminal_eos": 0,
+      "decode_batch_histogram": {
+        "0": 2,
+        "2": 4,
+        "4": 4,
+        "6": 4,
+        "8": 1016
+      },
+      "array_counts": {
+        "full_vocabulary_logits": 2064,
+        "all_arrays": 1324530,
+        "state_arrays": 1319424,
+        "ahead_token_arrays": 3042
+      },
+      "ahead_counts": {
+        "produced": 1014,
+        "carried": 1014,
+        "consumed": 1014,
+        "invalidated": 0
+      },
+      "bit_equal_checks": 1324530,
+      "finite_checks": 2649060
+    },
+    "routes": {
+      "captured": {
+        "sha256": "ba8db30472ea51c8c96106b95d303edc522805caa8afcf3a0ef4795208bfcaee",
+        "bytes": 4018506,
+        "lines": 2057,
+        "parameter_direct_calls": 0,
+        "meaningful_eager_change_receipts": 0,
+        "parameter_array_comparisons": 0,
+        "route_hits": {
+          "HTTP-C8": {
+            "1023": 92,
+            "1536": 936
+          }
+        },
+        "long_fallback_calls": 0,
+        "call_binding": "CPU case-step/direct label plus independently inferred within-step order; no explicit token-key receipt"
+      },
+      "replay": {
+        "sha256": "1cbbf02e2523825c12b6cb77f8bdc763c8e5bfbf4063f9f0015e24974ba5c760",
+        "bytes": 4010372,
+        "lines": 2057,
+        "parameter_direct_calls": 0,
+        "meaningful_eager_change_receipts": 0,
+        "parameter_array_comparisons": 0,
+        "route_hits": {
+          "HTTP-C8": {
+            "1023": 92,
+            "1536": 936
+          }
+        },
+        "long_fallback_calls": 0,
+        "call_binding": "CPU case-step/direct label plus independently inferred within-step order; no explicit token-key receipt"
+      },
+      "replay_pid": 2441,
+      "calls": 1028,
+      "combined": {
+        "installs": 1,
+        "restores": 1,
+        "layer_installs": 48,
+        "layer_restores": 48,
+        "compiled-tracing": 8,
+        "compiled-reuse": 1020,
+        "eager-fallback": 0,
+        "traced_batches": [
+          {
+            "installation": 0,
+            "bound": 1023,
+            "B": 2,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1023,
+            "B": 4,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1023,
+            "B": 6,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1023,
+            "B": 8,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1536,
+            "B": 8,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1536,
+            "B": 6,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1536,
+            "B": 4,
+            "python_passes": 1
+          },
+          {
+            "installation": 0,
+            "bound": 1536,
+            "B": 2,
+            "python_passes": 1
+          }
+        ]
+      },
+      "actual_domains": [
+        {
+          "B": 2,
+          "used": 955,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 2,
+          "used": 979,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 2,
+          "used": 1446,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 2,
+          "used": 1469,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 4,
+          "used": 956,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 4,
+          "used": 980,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 4,
+          "used": 1465,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 4,
+          "used": 1489,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 6,
+          "used": 979,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 6,
+          "used": 981,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 6,
+          "used": 1469,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 6,
+          "used": 1488,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 980,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 981,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 982,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 983,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 984,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 985,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 986,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 987,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 988,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 989,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 990,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 991,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 992,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 993,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 994,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 995,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 996,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 997,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 998,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 999,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1000,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1001,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1002,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1003,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1004,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1005,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1006,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1007,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1008,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1009,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1010,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1011,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1012,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1013,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1014,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1015,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1016,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1017,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1018,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1019,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1020,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1021,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1022,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1023,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1024,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1025,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1026,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1027,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1028,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1029,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1030,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1031,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1032,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1033,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1034,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1035,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1036,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1037,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1038,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1039,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1040,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1041,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1042,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1043,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1044,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1045,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1046,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1047,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1048,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1049,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1050,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1051,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1052,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1053,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1054,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1055,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1056,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1057,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1058,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1059,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1060,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1061,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1062,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1063,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1064,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1065,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1066,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1067,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1068,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1069,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1070,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1071,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1072,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1073,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1074,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1075,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1076,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1077,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1078,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1079,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1080,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1081,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1082,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1083,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1084,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1085,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1086,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1087,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1088,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1089,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1090,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1091,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1092,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1093,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1094,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1095,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1096,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1097,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1098,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1099,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1100,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1101,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1102,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1103,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1104,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1105,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1106,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1107,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1108,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1109,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1110,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1111,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1112,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1113,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1114,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1115,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1116,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1117,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1118,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1119,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1120,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1121,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1122,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1123,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1124,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1125,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1126,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1127,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1128,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1129,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1130,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1131,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1132,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1133,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1134,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1135,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1136,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1137,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1138,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1139,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1140,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1141,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1142,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1143,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1144,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1145,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1146,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1147,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1148,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1149,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1150,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1151,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1152,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1153,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1154,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1155,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1156,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1157,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1158,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1159,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1160,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1161,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1162,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1163,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1164,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1165,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1166,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1167,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1168,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1169,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1170,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1171,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1172,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1173,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1174,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1175,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1176,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1177,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1178,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1179,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1180,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1181,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1182,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1183,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1184,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1185,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1186,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1187,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1188,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1189,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1190,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1191,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1192,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1193,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1194,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1195,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1196,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1197,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1198,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1199,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1200,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1201,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1202,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1203,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1204,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1205,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1206,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1207,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1208,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1209,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1210,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1211,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1212,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1213,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1214,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1215,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1216,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1217,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1218,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1219,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1220,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1221,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1222,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1223,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1224,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1225,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1226,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1227,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1228,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1229,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1230,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1231,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1232,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1233,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1234,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1235,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1236,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1237,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1238,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1239,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1240,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1241,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1242,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1243,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1244,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1245,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1246,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1247,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1248,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1249,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1250,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1251,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1252,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1253,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1254,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1255,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1256,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1257,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1258,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1259,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1260,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1261,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1262,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1263,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1264,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1265,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1266,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1267,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1268,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1269,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1270,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1271,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1272,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1273,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1274,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1275,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1276,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1277,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1278,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1279,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1280,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1281,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1282,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1283,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1284,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1285,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1286,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1287,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1288,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1289,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1290,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1291,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1292,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1293,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1294,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1295,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1296,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1297,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1298,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1299,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1300,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1301,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1302,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1303,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1304,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1305,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1306,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1307,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1308,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1309,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1310,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1311,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1312,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1313,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1314,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1315,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1316,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1317,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1318,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1319,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1320,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1321,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1322,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1323,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1324,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1325,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1326,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1327,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1328,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1329,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1330,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1331,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1332,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1333,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1334,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1335,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1336,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1337,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1338,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1339,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1340,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1341,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1342,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1343,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1344,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1345,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1346,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1347,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1348,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1349,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1350,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1351,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1352,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1353,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1354,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1355,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1356,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1357,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1358,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1359,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1360,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1361,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1362,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1363,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1364,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1365,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1366,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1367,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1368,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1369,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1370,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1371,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1372,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1373,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1374,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1375,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1376,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1377,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1378,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1379,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1380,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1381,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1382,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1383,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1384,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1385,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1386,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1387,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1388,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1389,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1390,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1391,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1392,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1393,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1394,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1395,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1396,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1397,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1398,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1399,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1400,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1401,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1402,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1403,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1404,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1405,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1406,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1407,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1408,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1409,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1410,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1411,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1412,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1413,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1414,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1415,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1416,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1417,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1418,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1419,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1420,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1421,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1422,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1423,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1424,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1425,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1426,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1427,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1428,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1429,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1430,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1431,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1432,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1433,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1434,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1435,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1436,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1437,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1438,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1439,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1440,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1441,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1442,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1443,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1444,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1445,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1446,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1447,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1448,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1449,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1450,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1451,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1452,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1453,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1454,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1455,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1456,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1457,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1458,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1459,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1460,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1461,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1462,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1463,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1464,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1465,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1466,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1467,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1468,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1469,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1470,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1471,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1472,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1473,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1474,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1475,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1476,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1477,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1478,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1479,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1480,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1481,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1482,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1483,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1484,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1485,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1486,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1487,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1488,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1489,
+          "physical_capacity": 1536
+        }
+      ],
+      "call_binding": "Independent semantic calls, consumed ahead skipped; no one-call-per-step or48-Python-calls-per-GPU assumption"
+    },
+    "terminal_sha256": {
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical/plan.json": "26f5d003fc61f96a22939750e7732858beeaa9313f4de40b94a0e4a0009c9431",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical/complete.json": "d1d86d89ced057e96b25707c5d08df07d436650d7e498c83098a6988694b12ef",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical/base/plan.json": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical/base/complete.json": "4c3f4b33547b460a24bfc2820b75b10f0044de1449e67d5753e1bc168d953e22",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-replay-v1-numerical/recording.json": "9803e6ff113ab14ca678e5847e17e4accb9768e48f8f97bc7ef30572e4dd38d5"
+    },
+    "raw_inputs": {
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child-absence.json": "1d3de7c2062bd605cef17570bb2c73188af2d7e827dec657f073475c5e5acf86",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child-identity.json": "40715909e3a3ab2ab8a3b263646447f562b3493a57489be47d278c441ca81c27",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/child.json": "c55f9c119552a4c3938f4fe022f19f6747136101c5022ef9f73fd8814b915471",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/client/screen/group.json": "485704405e589ccbd4eda500336d0a15259b56c23562385efeb2a35a12a70440",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/client/warm/group.json": "bc58edc8ed4ecf41a6163ae0c917e5107ca93cede4cf72fe2c08c9f10a53e295",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/complete.json": "d5fc883eeb6afbe8768e19fbe5841494754e5a91bb611d5aa4de021c383cc881",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/events.jsonl": "03fb05516cf31d87dc521b6baf837493dc0803eaab25a91bf92acda99f5294c9",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/group.json": "21aa04d3fb07054401e546bb817a91d6ee0d34720994619fb48ad7ad4274ec1a",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/joined-input/receipt.json": "17d2a5e8d703e9590b8a90fdf256d8d3181a6ec83f30023db086cfa23ffe5ae1",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/joined-input/recording.json": "9803e6ff113ab14ca678e5847e17e4accb9768e48f8f97bc7ef30572e4dd38d5",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/launch.json": "270f601492268fc674435a295a82ee9e123dab9b5281c625fdb0022fbb107060",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/listener.json": "07b6e1ec553377e033d5099ddbb95a623782dcad8c45c296ef7aff7d546f8d76",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/port-after.json": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/port-before.json": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/ready-after-client.json": "509b0a1b7a5b28e01d7f549f4af9b56d848b11cab42a26a2945f9c4db5a41735",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/ready.json": "47a2a93456649e9d6937552604da45dd5003e5674289b23180d1680d0f912992",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/release.json": "6988db9a787b5fd0cca7346ddd8d7bfed2cb2449661edb95342465734edcd69e",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/route-events.jsonl": "ba8db30472ea51c8c96106b95d303edc522805caa8afcf3a0ef4795208bfcaee",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/server.stderr": "64531e3bb6c92346715ddeb6e4fa21056dbdd7f09fa4c521c998a6d35fa41af1",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/server.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/spawn-intent.json": "ea56475be97df3aae6de2285692a196b15f7231921b699ef1c667b70b68f1724",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/spec.json": "e94ae435be73d39b060bafb7a24724011de48d03a485b1876ba0ecb07ee10a1d",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2/trace.jsonl": "de172ac1a4bd151acb5a8deeb8015b35735c0e87b68860316cd9b0b4619af593"
+    },
+    "helper_sources": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_replay_analysis_v1/routes.py": "6c214e1a101481deccdc9ceed9a60f7d083055d26b5e7dd569022b873aeba2e6",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py": "e41abc8e5073ca812ffdcfc398471a028a6bbd0e12c03a39ec75b0c0e4498717"
+    },
+    "actual_candidate_sources": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_replay_v1/qualify.py": "c0a73e649718586365b42e6fcb67e4d0fbdb309f2238526b798952a9bfd18ad5",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/server.py": "a3737f1b364e190e3fe45a1779e1be228c4f434701bf8875dbe18f1d519afc7b",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/trial.py": "a45bd7db4a30c6d6e16b1b2b2ef0ce4c139f9cc8b6fc344ee92219c42e1c7a72",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_graph/integration.py": "6e2e4d4350c36476292f2d0ff2bc7e095561f76a2c233b1a99575027378d50b7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/candidate.py": "acd2a23802296b9e420108203cc215c3170cd1eccd9a859e1a787432f98a5353",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_qualification.py": "33b86cb57bf3c4616762c1bd1cfea0abb8f7f063325e9dfe815642e8f591bc7d"
+    },
+    "tokenizer_runtime_pins": {
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers-0.23.3.dist-info/METADATA": "87032ea29ec14be956ce0f15d164a8f436d6f1adbe19b261d6c179d9184f5cba",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/__init__.py": "b1cee924695651af5c3dab98e8c34406ab355a2cc1d633228646c470210e649e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/decoders/__init__.py": "85fc0ce821540ef94c1862f8fb1b1a698cfcd4af4fe6b408e592f950758af18e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/__init__.py": "57302ca65688a3bae5e0014ef0c8aeee283b31f663be89f055b959c34d7347a3",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/base_tokenizer.py": "b20192817decd800a26b6b0401afcb5f3ddcf9dc2bcf2e949619087bd73b6575",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/bert_wordpiece.py": "b0a0ae9b414a3d875280914937c2c37ab541a130d14aacaa49dadc9be96f42a2",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/byte_level_bpe.py": "8817a933fcf5b392b2ef314356b60b7372f96f262b228ba4efe934246b85d74b",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/char_level_bpe.py": "35a83f1c5abc46f72e72a8bc321575fb4c6da11d02ec58c739e70555444beecb",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_bpe.py": "734f1f29fea2f7613646c2a0b31cbb2f365f617f3e3000874911bc53f239cad6",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_unigram.py": "d91a087c556988c9093ad382b2433f54278210b59a0bf6cd9ddb3a1afb44d0a4",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/models/__init__.py": "d86e49a8152f16b2a2684a45125b95524b414f0f2d942619fb6a3c83b67c72a2",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/normalizers/__init__.py": "ff4eb0e1ca9122dbde12021d75868b3127209123a4200308cd809eb1be400385",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/pre_tokenizers/__init__.py": "584db71f3ea5c969b8dfe99bac7e57122744e00bf1f0e80bc3e5df3822fa8deb",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/processors/__init__.py": "990538dd3ce6c8570467f7900c82d243341bc477d78ec8fd967eed3db6229b3c",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tokenizers.abi3.so": "83c58f9ec4937f86521c76ba5222215d3e7707a25818d5ea69604e230fd4a96c",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/__init__.py": "c46f1c681f4e1c2f1c6c1d354b9bd8575e0767184ee9e59b2de86c6fbd29a62a",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/visualizer.py": "fbcfedafd89b0f9784f4e0ce6a80cacc964906458fb8ff9d9a685adfda85b97e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/trainers/__init__.py": "92179215cac004d76afa167a978f5ea88105c52d2c247913ebdb827fc4a61adf"
+    },
+    "ahead_retirement": {
+      "HTTP-C8": {
+        "consumed": 1014,
+        "discarded_prior": 0,
+        "partial_retirement": 6,
+        "refills": 6
+      }
+    },
+    "peak_mlx_bytes_receipt": 75192321312,
+    "mlx_peak_is_physical_footprint": false,
+    "tracing_scope": "Observed per-layer Python tracing/eager deltas and same-key compiled reuse; no GPU kernel/completion count."
+  },
+  "resource_review": {
+    "schema": "E053-saved-resource-review-v1",
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "errors": [],
+    "live_checks_performed": false,
+    "numerical_qualified_here": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Sampled observations do not bound inter-sample allocation peaks or establish physical fit.",
+      "Known/native process inventories and repeated start-time assertions have source-bound saved scope; their full raw ps history is unavailable.",
+      "Final, lease and health are recorded facts, not new live checks. Numerical ledger audit is separate; successful full tensor payloads are not retained."
+    ],
+    "original_parent_status": "PASS_CAPTURE_AND_RESTORE",
+    "original_owner_status": "PASS_CAPTURE_ONLY",
+    "saved_health_contracts_pass": true,
+    "recorded_service_restored": true,
+    "original_lease_returncode": 0,
+    "original_child_status": "PASS",
+    "original_child_replay_numerical_checks_passed": true,
+    "independent_numerical_audit_required": true,
+    "full_history_qualified_here": false,
+    "http_qualified": false,
+    "engine_pareto_point": false,
+    "physical_samples": 151,
+    "metadata_samples": 151,
+    "child_pid": 2441,
+    "owner_pid": 2423,
+    "max_gap_seconds": 3.3671266669989564,
+    "baseline_to_first_gap_seconds": 2.1181490830495022,
+    "max_system_bytes": 245604433920,
+    "max_child_current_bytes": 72306334208,
+    "max_child_historical_peak_bytes": 77319018864,
+    "pressure_values": [
+      1
+    ],
+    "thermal_codes": [
+      0
+    ],
+    "swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "terminal_final_sample_ack_wait_reap_verified": true,
+    "raw_full_process_inventory_reparsed": false,
+    "review_source_sha256": "ba1c9b98be094b34459049240e8021170cf5950fe3cb06ccb2f9507269ead6b8"
+  },
+  "original_final": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "errors": [],
+    "lease_returncode": 0,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 518.8214363339939,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "reported_peak_mlx_bytes": 75192321312,
+  "original_pending_fields_preserved": true,
+  "http_history_qualified_by_independent_audit": true,
+  "candidate_http_capture_qualified": true,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Only the exact new E052 v2 candidate HTTP recording. Independent audit verifies full source-bound ledger/ID/route receipts; no arbitrary-history or performance claim. Successful raw tensor payloads were not retained."
+}
