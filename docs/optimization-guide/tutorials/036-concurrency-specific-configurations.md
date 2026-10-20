@@ -93,7 +93,14 @@ logits/state 逐字节合同。可学习状态驻留，不能直接把其因子�
 现有 qualifier 覆盖 B2/B8、早晚历史、GDN0/24/47、各三次连续状态，共36次调用。
 用原生 batched 输出/conv/S 的原始字节比较，通过后再做局部 ABBA 和 graph 组合实验。
 它的 graph OFF 配置不等于当前 HTTP 路径，也不能解释上述 C8 schedule 差异。
-E046 的12项 ownership CPU检查和现场预检查已通过，执行方案已准备；截至本次记录尚未运行设备。
+E046 已实际完成：36次候选调用全部通过，独立 reader 核对140原始文件、108输出/状态对、
+48个连续状态对、80行 greedy logits 和324个设备比较数组，全部 PASS。
+13次资源观察、退出确认/回收/恢复闭环也通过；原 oMLX 52818 同身份恢复。
+这是 B2/B8 局部 real-activation canary；B3–7、完整模型、graph组合和速度仍未取得资格。
+下一步用这些相同真实输入测 native batched 与候选的完整层耗时，逐样本保留 AB/BA 计时，
+不把加载、hash 或写证据的时间当作 kernel latency。
+[402成员元数据归档](../../experiments/m5-ultra-256gb/E046-gdn-batched-device-v1/README.md)
+引用留在本机的140份原始张量，保留了当时的 pending 字段和独立审计时间顺序。
 
 **C1：先测完整 verifier 是否值得，再增加算法。**
 [E042](../../experiments/m5-ultra-256gb/E042-shared-head-prefix-v1/README.md)

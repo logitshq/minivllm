@@ -1324,3 +1324,14 @@ E046 B2/B8 GDN prework canary准备完成，owner12项CPU通过、现场预检�
 [Kapitsa/M5设计阅读](../../bench/reviews/2026-10-19-kapitsa-m5-designs.md)记录按并发选speculation深度、
 verify与commit分离；其affineQ4与我们的NVFP4不同，不能引用其102tok/s作同条件比较。
 本条是可随Git推送的交接记录，不声称另一agent已阅读。
+
+
+### 2026-10-19 — E046局部B2/B8 GDN真实原字节检查通过
+
+计划先commit+push40eeb84，再执行设备：36calls零fallback，140rawfiles独立审计PASS，
+108output/state pairs和48continuing-state pairs全同；13资源观察/退出握手/回收/原52818恢复PASS。
+[实际E046证据](../experiments/m5-ultra-256gb/E046-gdn-batched-device-v1/README.md)。
+这是局部B2/B8 realactivation canary，不含B3–7/graph组合/HTTP/速度；候选仍默认OFF。
+下一步E048用同real captures测完整层AB/BA；E047另查MB50 C8基准跨schedule输出变化。
+本轮fresh fetch工具1c9d23成功，M4 branch仍94c070e且为当前HEAD祖先，无未合入更新。
+最新已确认远端40eeb84；这一追加尚待下一次push，不声称M4 agent已阅读。

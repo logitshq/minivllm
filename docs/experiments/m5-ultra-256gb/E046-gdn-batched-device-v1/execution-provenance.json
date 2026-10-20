@@ -1,0 +1,58 @@
+{
+  "provenance_kind": "reported-by-root-tool-observation",
+  "cwd": "/Users/ryanli/code/minivllm",
+  "prepared_commands": {
+    "run": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_device_v1/execute.py",
+      "--run",
+      "--plan-sha256",
+      "08325135360d35faa5bc0b9294aca21ee4dc8fa7c974c49b752682184bc13e3b"
+    ],
+    "audit": [
+      "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/audit.py",
+      "--child",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-numerical",
+      "--plan-sha256",
+      "7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003",
+      "--out",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-batched-v1-independent-numerical.json"
+    ]
+  },
+  "actual_numerical_audit_argv_reported_by_root": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "bench/m5_ultra_256gb/gdn_prework_batched/audit.py",
+    "--child",
+    ".artifacts/m5-ultra-256gb/gdn-batched-v1-numerical",
+    "--plan-sha256",
+    "7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003",
+    "--out",
+    ".artifacts/m5-ultra-256gb/gdn-batched-v1-independent-numerical.json"
+  ],
+  "device_run": {
+    "start_tool": "2a413a",
+    "session_id": 16488,
+    "completion_tool": "deea7d",
+    "reported_exit_code": 0
+  },
+  "numerical_audit": {
+    "start_tool": "edb9ec",
+    "session_id": 12053,
+    "completion_tool": "acfa34",
+    "reported_exit_code": 0,
+    "reported_stdout_json": {
+      "status": "PASS",
+      "canary_qualified": true,
+      "raw_files": 140
+    }
+  },
+  "numerical_audit_stdout_stderr_files_retained": false,
+  "scope": "Tool IDs, exit status and shown stdout attributed to root tool observation. Not independently retained original stdout/stderr files. Prepared absolute argv and reported actual relative argv are retained separately."
+}

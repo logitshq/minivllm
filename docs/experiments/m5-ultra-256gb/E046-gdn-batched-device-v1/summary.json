@@ -1,0 +1,65 @@
+{
+  "status": "PASS_LOCAL_B2_B8_CANARY_AND_RECORDED_CLOSURE",
+  "producer_status": "PASS",
+  "numerical_audit": {
+    "status": "PASS",
+    "canary_qualified": true,
+    "raw_files": 140,
+    "full_output_state_pairs": 108,
+    "causal_state_pairs": 48,
+    "full_vocabulary_greedy_checks": 80,
+    "device_comparison_arrays": 324,
+    "scope": "Only local B2/B8 reference-activation layers; all saved original bytes independently read. No candidate full-model rollout, HTTP, resource, restoration or performance qualification."
+  },
+  "candidate_calls": 36,
+  "producer_elapsed_seconds": 34.99356337497011,
+  "outer_elapsed_seconds": 39.52663020900218,
+  "resource_review": {
+    "schema": "E046-saved-resource-review-v1",
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "errors": [],
+    "live_checks_performed": false,
+    "numerical_qualified_here": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Sampled observations do not bound inter-sample allocation peaks or establish physical fit.",
+      "Known/native process inventories and repeated start-time assertions have source-bound saved scope; their full raw ps history is unavailable.",
+      "Final, lease and health are recorded facts, not new live checks. Numerical raw-byte audit is separate."
+    ],
+    "original_parent_status": "PASS_CAPTURE_AND_RESTORE",
+    "original_owner_status": "PASS_CAPTURE_ONLY",
+    "saved_health_contracts_pass": true,
+    "recorded_service_restored": true,
+    "original_lease_returncode": 0,
+    "physical_samples": 13,
+    "metadata_samples": 13,
+    "child_pid": 87235,
+    "owner_pid": 87217,
+    "max_gap_seconds": 3.323249999957625,
+    "baseline_to_first_gap_seconds": 2.107868042017799,
+    "max_system_bytes": 201556377600,
+    "max_child_current_bytes": 28110909200,
+    "max_child_historical_peak_bytes": 28744347504,
+    "pressure_values": [
+      1
+    ],
+    "thermal_codes": [
+      0
+    ],
+    "swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "terminal_final_sample_ack_wait_reap_verified": true,
+    "raw_full_process_inventory_reparsed": false,
+    "review_source_sha256": "85640b4010350372a962337a162c113b9ab4244e98e400451954cc2901922f77"
+  },
+  "raw_payload_local_bytes": 1777163588,
+  "raw_payload_archived": false,
+  "original_pending_fields_preserved": true,
+  "full_model_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "Local GDN layers at B2/B8 on reference activations and their own continued states; no candidate model rollout, E024 composition, C8 token-variance diagnosis or speed claim."
+}

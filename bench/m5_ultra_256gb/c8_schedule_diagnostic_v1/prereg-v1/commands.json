@@ -1,0 +1,21 @@
+{
+  "run": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_schedule_diagnostic_v1/execute.py",
+    "--run",
+    "--plan-sha256",
+    "6d31b9f9efbdb453b02675c3d0fcba666f49b48b3e1b8fc7aca8189f42fae9b7"
+  ],
+  "join": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_schedule_diagnostic_v1/trial.py",
+    "--join-child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves",
+    "--spec-sha256",
+    "f405435b0ceb70820992d2f3fae57ac56b734b84eb026f239e3510e443b2562f"
+  ]
+}

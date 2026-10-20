@@ -1292,3 +1292,19 @@ child plan SHA7df6cff99425698a1fb134df4f25dc8de4e717482f73039e56ec5a0a00930003�
 保留native batched projections，仅融合prework；四条B2/B8早晚链、36calls、原始输出/conv/S，
 graph OFF。它是独立局部数值门槛，不解决E045 schedule变化、不构成HTTP/速度资格。
 执行后追加真实结果，原准备记录保留。
+
+
+## E046：B2/B8真实激活原字节canary与独立审计实际PASS · 2026-10-19
+
+已提交执行计划40eeb84后运行，tool2a413a/session16488→deea7d exit0，
+outer PASS_CAPTURE_AND_RESTORE、39.526630s；producer34.993563s仅数值资格时长。
+四个B2/B8早晚reference chains、三层×三步，共36candidate calls/零fallback全部通过。
+独立audit edb9ec/session12053→acfa34 exit0，140原始文件、108输出/state pairs、
+48continuing-state pairs、80greedy rows、324device comparisons全部PASS。
+原文件1,777,163,588B留本机；不把局部canary提升为整模型、HTTP、compiled或速度资格。
+13physical/13metadata独立saved-observation审计PASS；最大系统201556377600B、
+child current28110909200B、aux peak28744347504B，swap增长0/Swapouts807478，
+最后done→resource→ack→wait/reap、原52818同身份恢复和health闭环通过。
+[402成员metadata归档](../experiments/m5-ultra-256gb/E046-gdn-batched-device-v1/README.md)
+全部回读size/SHA PASS，tar SHAec41ba39432f7a0ae3850eddd9f3b43fb9353dce930b712d58d661cf6e806a95。
+原始pending字段不改写，后续独立审计单独记录；首次device和audit即通过，无重跑。
