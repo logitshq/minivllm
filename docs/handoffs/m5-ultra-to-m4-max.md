@@ -1346,3 +1346,7 @@ E047两轮D06 prefill均[935]但earlybatch/row不同，输出idx46分歧；现�
 warm49 eager/graph核验，8active/8future保持，不伪造completed。candidate组合另有默认OFF
 小adapter gdn_batched_graph，11CPU通过，尚无设备组合资格。
 正式v16仍不变：全batch/GLM目标未达成。当前已确认push b85d6b1；本结果随下次commit同步。
+
+## E049 audited; E050 ready (2026-10-19)
+
+C8 native vs existing graph warm49 same-history replay passed; independent audit verifies 380 IDs and complete per-array receipts (65,005 bit-equal /130,010 finite), without claiming offline tensor reread. All original caps remain512; no completed requests and no new performance point. E050 will compose the actual batched GDN candidate (E046 bytes, E048 local median gains) with graph using private engine-aware observer installation, with all48 handles traced/restored. Separate C1/C8 settings are intentional; aggregate Python trace counters do not imply per-GPU-call counts. E050 plan/CPU evidence is committed before device execution.

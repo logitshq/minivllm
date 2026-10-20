@@ -146,3 +146,9 @@ D06 的 prefill 两轮都为 `[935]`，但早期 decode 路径为 warm 的 B2→
 E049准备对 warm 原始历史前49步做 eager/graph 同 schedule 完整比较；所有共批请求、
 原始cap512和实际到达保持不变，在检查完第49步后明确停止为 `INCOMPLETE_BY_DESIGN`。
 8个请求仍活跃，后8个尚未到达，不能伪造终止或称完整HTTP资格。
+
+## E049: same-history prefix is correct; E050: compose the batched kernel
+
+The actual E049 warm49 replay passed and was independently audited: 49 steps, 380 delivered IDs, 65,005 bit-equality receipts and 130,010 finite-value receipts. The original eager and route-graph engines replay the same captured scheduling history, including the D06 divergence position. All 8 admitted requests are still active, 8 future requests are unadmitted and zero requests are complete. Full tensors were compared by the pinned producer but not saved for an independent offline byte reread. This narrows the cross-wave diagnosis; it does not establish full-history qualification or an engine speedup. See [the immutable E049 evidence](../../experiments/m5-ultra-256gb/E049-c8-warm-prefix-diagnostic-v1/README.md).
+
+E050 now prepares the same prefix with the real batched GDN candidate plus graph. The five original batched Linear projections stay intact. Installation precedes graph tracing, all 48 actual layers must take the candidate at least once without fallback, and teardown must restore every handle and cache. These are aggregate Python trace counters, not GPU-call counts or independent per-batch-size branch proof. The unchanged full-logit/state comparator checks the actual hooked model. Adapter CPU tests passed 10/10; owner tests passed 13/13. At this entry's commit E050 is prepared, not yet run. C1 and C8 remain independent configuration choices; no new Pareto point is claimed.

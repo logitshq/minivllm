@@ -1346,3 +1346,9 @@ B8earlylayer32 group0=.880700仍保留，无删点。仅local eager/warm-residen
 父plan eb89c92e329f7bc1e5629ae05ac911457ed86bd656a92cc1fed9ac63be6099a5，
 child71f2891f24045f539a195711e8cdc97ea190bedd214e42173ab006b7eb700f1c。
 64GiB child/240GiBsystem/no swap原gate不改，实际prefix峰值未知。尚未设备运行。
+
+### E049 actual / E050 prepared: C8 batched GDN composition
+
+E049 actual device execution d8e806/session53359 → 7e5ce0 returned 0, PASS_CAPTURE_AND_RESTORE (51.460662s diagnostic lifecycle, not engine latency), original oMLX PID52818 restored. Independent ledger audit 06dc48 PASS and resource audit 1a6652 PASS; 49 steps/380 IDs/65,005 bit receipts/130,010 finite receipts. E049 remains INCOMPLETE_BY_DESIGN: 0 completed, 8 active, 8 future. Archive 262 members, SHA256 `2c854df325a00847883cdca0bf79c1432bb672754077983811e1839a7faa7967`.
+
+E050 adapter10/10 CPU PASS (687d78) and owner13/13 CPU PASS (cf7efb). Prepare86df9c: parent `14b61d284a088e7c799fb91ee11d45dce8379c79d5e2a071bcb4f40da5072fcc`, child `b939013497400d24ef4d5a26d24142fddc424d6f611b09a9f63a07995caa4155`. Same warm49 schedule, native oracle versus actual batched GDN+graph. Scope remains numerical prefix only; all raw failures retained. Runtime not yet executed at this commit.

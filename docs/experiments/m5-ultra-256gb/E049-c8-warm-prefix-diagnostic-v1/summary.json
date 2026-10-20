@@ -1,0 +1,1070 @@
+{
+  "status": "ARCHIVED_PREFIX_DIAGNOSTIC",
+  "original_child_status": "DIAGNOSTIC_PREFIX_COMPLETE",
+  "original_completion_state": "INCOMPLETE_BY_DESIGN",
+  "prefix_steps": 49,
+  "completed_requests": [],
+  "active_requests": 8,
+  "future_unadmitted_requests": 8,
+  "independent_ledger_audit": {
+    "schema": "E049-independent-prefix-audit-v1",
+    "status": "PASS",
+    "prefix_receipts_verified": true,
+    "completion_state": "INCOMPLETE_BY_DESIGN",
+    "full_history_qualified": false,
+    "performance_qualified": false,
+    "owner_resources_restore_qualified": false,
+    "offline_tensor_bytes_rechecked": false,
+    "weight_shards_rehashed": false,
+    "audit_source_sha256": "936a21667c91b0f7e821628798b5398be973d075b581613ec1c729683999fe83",
+    "child": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-prefix-v1-numerical",
+    "plan_sha256": "71f2891f24045f539a195711e8cdc97ea190bedd214e42173ab006b7eb700f1c",
+    "evidence_limit": "Finite/bit equality is the source-pinned GPU producer per-array receipt. Raw full tensor bytes were not saved; no offline arithmetic or tensor-byte reread.",
+    "scope": "Independently reconstructed 49-step warm history, IDs, state coverage and route prefix; not complete HTTP requests or a performance point.",
+    "ledger": {
+      "sha256": "5a9ee1cf0b0bb0bef10c16b913b7fc0bd009197c402ae0ca063491b34fab30e3",
+      "bytes": 25120835,
+      "lines": 53,
+      "events": [
+        {
+          "event": "load-pair-start",
+          "elapsed_wall_s": 5.076001291978173,
+          "max_seqs": 8,
+          "model_instances": 2
+        },
+        {
+          "event": "load-pair-complete",
+          "elapsed_wall_s": 6.255337417009287,
+          "max_seqs": 8,
+          "independent_weight_arrays": 1349
+        },
+        {
+          "event": "release-pair-start",
+          "elapsed_wall_s": 40.369838709011674,
+          "model_instances": 2
+        },
+        {
+          "event": "release-pair-complete",
+          "elapsed_wall_s": 40.47727700002724,
+          "qualification_only": true
+        }
+      ],
+      "bit_equal_receipts": 65005,
+      "finite_receipts": 130010,
+      "steps": 49,
+      "active_requests": 8,
+      "future_unadmitted_requests": 8,
+      "completed_requests": 0,
+      "delivered_ids": 380,
+      "d06_ids": [
+        71093,
+        12305,
+        198,
+        12237,
+        9950,
+        21185,
+        45366,
+        440,
+        23735,
+        10480,
+        71483,
+        271,
+        1445,
+        1259,
+        20409,
+        548,
+        1120,
+        31144,
+        1358,
+        727,
+        696,
+        6847,
+        19916,
+        10324,
+        25,
+        514,
+        11,
+        809,
+        25,
+        514,
+        8,
+        1411,
+        2168,
+        25,
+        198,
+        262,
+        4071,
+        17390,
+        421,
+        1151,
+        321,
+        809,
+        513,
+        2397,
+        12,
+        2554,
+        24959,
+        440,
+        1151
+      ],
+      "by_fixture": {
+        "D01-ttl-lru": {
+          "rid": "7a9e32d8286d4160ab6903afda033dc5",
+          "count": 49,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            8037,
+            290,
+            436,
+            34810,
+            6297,
+            440,
+            19260,
+            56538,
+            3330,
+            854,
+            71483,
+            271,
+            1445,
+            14856,
+            1120,
+            51425,
+            1358,
+            1005,
+            18887,
+            25,
+            198,
+            262,
+            4071,
+            8037,
+            290,
+            436,
+            34810,
+            6297,
+            440,
+            19260,
+            56538,
+            3330,
+            854,
+            13,
+            271,
+            262,
+            733,
+            52778,
+            25,
+            198,
+            262,
+            471,
+            696,
+            12569,
+            369
+          ]
+        },
+        "D06-interval-booking": {
+          "rid": "93f79410dd74462c98a477df47f9132b",
+          "count": 49,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            9950,
+            21185,
+            45366,
+            440,
+            23735,
+            10480,
+            71483,
+            271,
+            1445,
+            1259,
+            20409,
+            548,
+            1120,
+            31144,
+            1358,
+            727,
+            696,
+            6847,
+            19916,
+            10324,
+            25,
+            514,
+            11,
+            809,
+            25,
+            514,
+            8,
+            1411,
+            2168,
+            25,
+            198,
+            262,
+            4071,
+            17390,
+            421,
+            1151,
+            321,
+            809,
+            513,
+            2397,
+            12,
+            2554,
+            24959,
+            440,
+            1151
+          ]
+        },
+        "D07-versioned-store": {
+          "rid": "307e4a3b9f974c008f64e0a72b49e593",
+          "count": 48,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            63636,
+            2243,
+            290,
+            1328,
+            18509,
+            6937,
+            3436,
+            71483,
+            271,
+            1445,
+            1259,
+            20409,
+            548,
+            1120,
+            31144,
+            1358,
+            1005,
+            8856,
+            25,
+            198,
+            262,
+            4071,
+            623,
+            61932,
+            34745,
+            14429,
+            15501,
+            1328,
+            18509,
+            3436,
+            440,
+            791,
+            15697,
+            10478,
+            13,
+            271,
+            262,
+            3130,
+            25,
+            198,
+            285,
+            696,
+            673,
+            25
+          ]
+        },
+        "D02-dag-scheduler": {
+          "rid": "0cf1fdfa066440e5ac0e41df2e26d1fb",
+          "count": 48,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            89454,
+            4384,
+            59056,
+            77231,
+            27867,
+            71483,
+            271,
+            1445,
+            1259,
+            20409,
+            548,
+            1120,
+            31144,
+            1358,
+            1005,
+            43270,
+            25,
+            198,
+            262,
+            687,
+            1259,
+            2251,
+            3676,
+            701,
+            11,
+            18948,
+            25,
+            6249,
+            16793,
+            11,
+            1103,
+            16793,
+            19867,
+            15250,
+            25,
+            514,
+            8,
+            1411,
+            2168,
+            25,
+            198,
+            285,
+            653,
+            22558
+          ]
+        },
+        "D04-frame-parser": {
+          "rid": "7ba12f93e62e424d86609d78beae8e6b",
+          "count": 47,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            37041,
+            278,
+            2984,
+            2195,
+            1062,
+            3179,
+            19464,
+            12,
+            23,
+            3899,
+            6518,
+            71483,
+            271,
+            1445,
+            1259,
+            20409,
+            548,
+            1120,
+            31144,
+            271,
+            464,
+            1968,
+            1358,
+            1005,
+            15842,
+            6363,
+            25,
+            198,
+            262,
+            4071,
+            37041,
+            278,
+            6518,
+            364,
+            220,
+            19,
+            52141,
+            2330,
+            12692,
+            1068,
+            2984,
+            2195,
+            1062
+          ]
+        },
+        "D03-event-rollup": {
+          "rid": "8da3336944d144b1a8c14548e4a58842",
+          "count": 47,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            33,
+            12705,
+            1484,
+            7019,
+            6299,
+            446,
+            364,
+            264,
+            4129,
+            314,
+            17723,
+            7189,
+            71483,
+            271,
+            1445,
+            14856,
+            1120,
+            40565,
+            1358,
+            1005,
+            14263,
+            446,
+            25,
+            198,
+            262,
+            4071,
+            32,
+            59056,
+            1484,
+            7019,
+            6299,
+            446,
+            421,
+            68159,
+            17723,
+            7189,
+            1083,
+            8097,
+            9069,
+            10708,
+            13,
+            271,
+            262
+          ]
+        },
+        "D05-retry-budget": {
+          "rid": "f084efbd0f2b464fb9eeb774fc8abcfd",
+          "count": 46,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            49823,
+            48038,
+            440,
+            264,
+            5904,
+            24528,
+            7019,
+            7786,
+            71483,
+            271,
+            1445,
+            1259,
+            20409,
+            548,
+            1120,
+            31144,
+            1358,
+            1005,
+            76176,
+            19860,
+            25,
+            198,
+            262,
+            4071,
+            89454,
+            4384,
+            21979,
+            48038,
+            440,
+            56768,
+            1142,
+            1783,
+            321,
+            264,
+            20771,
+            71483,
+            271,
+            262,
+            687,
+            1259,
+            2251,
+            3676
+          ]
+        },
+        "D08-sliding-limit": {
+          "rid": "a293d1f818ba422584ebbb5501751d62",
+          "count": 46,
+          "ids": [
+            71093,
+            12305,
+            198,
+            12237,
+            8037,
+            290,
+            32713,
+            40387,
+            4238,
+            216387,
+            71483,
+            271,
+            1445,
+            14856,
+            1120,
+            40565,
+            1358,
+            1005,
+            13196,
+            1947,
+            25,
+            198,
+            262,
+            687,
+            1259,
+            2251,
+            3676,
+            701,
+            11,
+            8390,
+            25,
+            514,
+            11,
+            3136,
+            25,
+            514,
+            8,
+            1411,
+            2168,
+            25,
+            198,
+            285,
+            413,
+            11074,
+            49657,
+            3883
+          ]
+        }
+      },
+      "decode_batch_histogram": {
+        "0": 1,
+        "2": 1,
+        "4": 1,
+        "6": 1,
+        "8": 45
+      },
+      "array_counts": {
+        "full_vocabulary_logits": 103,
+        "all_arrays": 65005,
+        "state_arrays": 64768,
+        "ahead_token_arrays": 134
+      },
+      "ahead_counts": {
+        "produced": 45,
+        "carried": 45,
+        "consumed": 44,
+        "invalidated": 0
+      }
+    },
+    "routes": {
+      "captured_prefix": {
+        "calls": 49,
+        "hits": 49,
+        "fallbacks": 0,
+        "consumed_bytes": 28556,
+        "consumed_lines": 50,
+        "consumed_sha256": "06ac3d4dd15cdbcf5747ed52b0df4e0a1c955ca3910d6099c3531b4cdf1ed2f1",
+        "full_route_stream_consumed": false
+      },
+      "replay": {
+        "sha256": "2518ee55505015e42af0fc9209a67c2d33c5bf2c7f29d86a2a590fba872b5142",
+        "bytes": 21292,
+        "lines": 50,
+        "parameter_direct_calls": 0,
+        "meaningful_eager_change_receipts": 0,
+        "parameter_array_comparisons": 0,
+        "route_hits": {
+          "HTTP-C8": {
+            "1023": 45,
+            "1536": 4
+          }
+        },
+        "long_fallback_calls": 0,
+        "call_binding": "CPU case-step/direct label plus independently inferred within-step order; no explicit token-key receipt"
+      },
+      "next_unconsumed_route": {
+        "event": "route-call",
+        "phase": "HTTP-C8",
+        "step": 50,
+        "direct_label": null,
+        "status": "SUBMITTED",
+        "B": 8,
+        "used": 1028,
+        "capacities": [
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ],
+          [
+            1536,
+            1536
+          ]
+        ],
+        "expected_graph": true,
+        "actual_invocations": 1,
+        "functions": 2
+      },
+      "actual_domains": [
+        {
+          "B": 2,
+          "used": 979,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 4,
+          "used": 980,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 6,
+          "used": 981,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 982,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 983,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 984,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 985,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 986,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 987,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 988,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 989,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 990,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 991,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 992,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 993,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 994,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 995,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 996,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 997,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 998,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 999,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1000,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1001,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1002,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1003,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1004,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1005,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1006,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1007,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1008,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1009,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1010,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1011,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1012,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1013,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1014,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1015,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1016,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1017,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1018,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1019,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1020,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1021,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1022,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1023,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1024,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1025,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1026,
+          "physical_capacity": 1536
+        },
+        {
+          "B": 8,
+          "used": 1027,
+          "physical_capacity": 1536
+        }
+      ]
+    },
+    "terminal_sha256": {
+      "plan.json": "71f2891f24045f539a195711e8cdc97ea190bedd214e42173ab006b7eb700f1c",
+      "complete.json": "49d2f864f05d8c523c9e752d58c2d95067efb402ca2be9a703df178ed03ecf8a",
+      "base/plan.json": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb",
+      "base/complete.json": "0984f1bb994dafbe61e035ed43782026958e628e503e1da63d679a17152e8cd6"
+    },
+    "helper_sources": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_audit_v2.py": "88f32e3b3f44206b48a1f581cbfe0bde0788060cbd2a0c5030a3ec472a0139fe",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_qualification.py": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_serving.py": "064634acae9510b5744b7c848f09ee0854ee8bf26fc480af78dbed7f159573ba"
+    },
+    "tokenizer_runtime_pins": {
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers-0.23.3.dist-info/METADATA": "87032ea29ec14be956ce0f15d164a8f436d6f1adbe19b261d6c179d9184f5cba",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/__init__.py": "b1cee924695651af5c3dab98e8c34406ab355a2cc1d633228646c470210e649e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/decoders/__init__.py": "85fc0ce821540ef94c1862f8fb1b1a698cfcd4af4fe6b408e592f950758af18e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/__init__.py": "57302ca65688a3bae5e0014ef0c8aeee283b31f663be89f055b959c34d7347a3",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/base_tokenizer.py": "b20192817decd800a26b6b0401afcb5f3ddcf9dc2bcf2e949619087bd73b6575",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/bert_wordpiece.py": "b0a0ae9b414a3d875280914937c2c37ab541a130d14aacaa49dadc9be96f42a2",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/byte_level_bpe.py": "8817a933fcf5b392b2ef314356b60b7372f96f262b228ba4efe934246b85d74b",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/char_level_bpe.py": "35a83f1c5abc46f72e72a8bc321575fb4c6da11d02ec58c739e70555444beecb",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_bpe.py": "734f1f29fea2f7613646c2a0b31cbb2f365f617f3e3000874911bc53f239cad6",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/implementations/sentencepiece_unigram.py": "d91a087c556988c9093ad382b2433f54278210b59a0bf6cd9ddb3a1afb44d0a4",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/models/__init__.py": "d86e49a8152f16b2a2684a45125b95524b414f0f2d942619fb6a3c83b67c72a2",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/normalizers/__init__.py": "ff4eb0e1ca9122dbde12021d75868b3127209123a4200308cd809eb1be400385",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/pre_tokenizers/__init__.py": "584db71f3ea5c969b8dfe99bac7e57122744e00bf1f0e80bc3e5df3822fa8deb",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/processors/__init__.py": "990538dd3ce6c8570467f7900c82d243341bc477d78ec8fd967eed3db6229b3c",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tokenizers.abi3.so": "83c58f9ec4937f86521c76ba5222215d3e7707a25818d5ea69604e230fd4a96c",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/__init__.py": "c46f1c681f4e1c2f1c6c1d354b9bd8575e0767184ee9e59b2de86c6fbd29a62a",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/tools/visualizer.py": "fbcfedafd89b0f9784f4e0ce6a80cacc964906458fb8ff9d9a685adfda85b97e",
+      "/Users/ryanli/code/minivllm/.venv/lib/python3.13/site-packages/tokenizers/trainers/__init__.py": "92179215cac004d76afa167a978f5ea88105c52d2c247913ebdb827fc4a61adf"
+    },
+    "raw_inputs": {
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/spec.json": "f405435b0ceb70820992d2f3fae57ac56b734b84eb026f239e3510e443b2562f",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/complete.json": "791244171ee7bb77abce23fdbe1c5b2047482757588c017a2527a8002f2b84c6",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/release.json": "2620b28dc4a75a2d51898782ccb14e510a2aaf7e6bbf13d263c59e6339c04bdc",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/child-absence.json": "20327aa4dc9ab963c12b1bae0212b6137a559014101d9258b831f416a6ed4979",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/port-after.json": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/group.json": "e44b84f5c9a48097cfad2cff3cdffad0dfb9666f61dc9adbd1667a9b9f6af3fd",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/trace.jsonl": "319639ea525fa48e60c05b6eba397846ec11a878fc846c5a9da8b86cdf22d004",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/route-events.jsonl": "e01d5fec1169eeabedf60d30238a5668ece8d263bbcf52f8a0ca3dc041f69f25",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/joined-input/receipt.json": "69f137d117ff824a718d11a5248146af979360f3f02cd53af6bda1bd419967cd",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/client/warm/group.json": "3a13c5404308bf3f1a7a793106cb9a67ca0af241d13cad123521bf278da97f14",
+      "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/client/screen/group.json": "cede772b40878894e9df0123dcddbc8983f40a87dd21a2f11904a17acf4003b5"
+    },
+    "ahead_retirement": {
+      "HTTP-C8": {
+        "consumed": 44,
+        "discarded_prior": 0,
+        "partial_retirement": 0,
+        "refills": 3
+      }
+    },
+    "peak_mlx_bytes_receipt": 53161955496,
+    "mlx_peak_is_physical_footprint": false
+  },
+  "resource_review": {
+    "schema": "E049-saved-resource-review-v1",
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "errors": [],
+    "live_checks_performed": false,
+    "numerical_qualified_here": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Sampled observations do not bound inter-sample allocation peaks or establish physical fit.",
+      "Known/native process inventories and repeated start-time assertions have source-bound saved scope; their full raw ps history is unavailable.",
+      "Final, lease and health are recorded facts, not new live checks. Numerical raw-byte audit is separate."
+    ],
+    "original_parent_status": "PASS_CAPTURE_AND_RESTORE",
+    "original_owner_status": "PASS_CAPTURE_ONLY",
+    "saved_health_contracts_pass": true,
+    "recorded_service_restored": true,
+    "original_lease_returncode": 0,
+    "original_child_status": "DIAGNOSTIC_PREFIX_COMPLETE",
+    "original_completion_state": "INCOMPLETE_BY_DESIGN",
+    "full_history_qualified": false,
+    "engine_pareto_point": false,
+    "physical_samples": 16,
+    "metadata_samples": 16,
+    "child_pid": 90983,
+    "owner_pid": 90965,
+    "max_gap_seconds": 3.356490959005896,
+    "baseline_to_first_gap_seconds": 2.1197002910193987,
+    "max_system_bytes": 223244599296,
+    "max_child_current_bytes": 50352937112,
+    "max_child_historical_peak_bytes": 54774503576,
+    "pressure_values": [
+      1
+    ],
+    "thermal_codes": [
+      0
+    ],
+    "swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "terminal_final_sample_ack_wait_reap_verified": true,
+    "raw_full_process_inventory_reparsed": false,
+    "review_source_sha256": "bca6f0cb8cd184921d10107aecbba983136ebd74c9bf99dab94e79443e690dd5"
+  },
+  "original_final": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "errors": [],
+    "lease_returncode": 0,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 51.46066200005589,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "reported_peak_mlx_bytes": 53161955496,
+  "original_cpu_v1": {
+    "status": "FAIL",
+    "tests": 7,
+    "failures": 1,
+    "errors": 0,
+    "started": 1792471989.9857311,
+    "ended": 1792471990.56225,
+    "forbidden": [
+      "MLX import",
+      "subprocess.Popen",
+      "os.kill",
+      "os.killpg"
+    ],
+    "suite": "bench.m5_ultra_256gb.c8_prefix_replay_v1.test_cpu",
+    "sources": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_prefix_replay_v1/prefix.py": "a71b2e2fc3ff2b063efe234c5a75f9f85588f6b285e4daf3c82cee2f35d3f0b7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_prefix_replay_v1/test_cpu.py": "dcf5cb45837247830429035c93e4fdf30d93840376169895783bcbb6a0e83ff7"
+    }
+  },
+  "original_cpu_v2": {
+    "status": "PASS",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "started": 1792472004.2199051,
+    "ended": 1792472004.7570848,
+    "forbidden": [
+      "MLX import",
+      "subprocess.Popen",
+      "os.kill",
+      "os.killpg"
+    ],
+    "suite": "bench.m5_ultra_256gb.c8_prefix_replay_v1.test_cpu",
+    "prior_attempt": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-prefix-cpu-v1",
+    "correction": "Toy r1 has max_tokens=2 and legitimately completes at step2; test now checks this actual completion and the remaining active requests.",
+    "sources": {
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_prefix_replay_v1/prefix.py": "a71b2e2fc3ff2b063efe234c5a75f9f85588f6b285e4daf3c82cee2f35d3f0b7",
+      "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_prefix_replay_v1/test_cpu.py": "41d7bd9832dd2f83c0b2ec037358981172f758ecfcd48671b9a3e74d15b775d1"
+    }
+  },
+  "original_pending_fields_preserved": true,
+  "full_history_qualified": false,
+  "performance_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Warm49 diagnostic only; screen565 and full original 1030-step history are not replayed. No raw full tensor files were retained."
+}

@@ -1,0 +1,40 @@
+{
+  "scope": "Tool IDs reported by parent/sibling are explicitly attributed; retained files remain the execution evidence.",
+  "device_run": {
+    "tool": "d8e806",
+    "session": 53359,
+    "completion_tool": "7e5ce0",
+    "reported_exit_code": 0,
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "raw_execution": ".artifacts/m5-ultra-256gb/c8-prefix-v1-execution"
+  },
+  "ledger_attempt1": {
+    "path": ".artifacts/m5-ultra-256gb/c8-prefix-v1-independent-audit-attempt1",
+    "status": "FAIL",
+    "cause": "Auditor compared full environment to MLX-only schema; actual device experiment not rerun."
+  },
+  "ledger_attempt2": {
+    "tool": "06dc48",
+    "reported_by": "/root/rowwise_audit",
+    "reported_exit_code": 0,
+    "path": ".artifacts/m5-ultra-256gb/c8-prefix-v1-independent-audit-attempt2",
+    "status": "PASS"
+  },
+  "ledger_cpu": {
+    "failed_attempt": ".artifacts/m5-ultra-256gb/c8-prefix-audit-cpu-v1",
+    "failure": "Test selector error",
+    "passed_attempt": ".artifacts/m5-ultra-256gb/c8-prefix-audit-cpu-v2",
+    "tool": "8216fd",
+    "reported_exit_code": 0,
+    "tests": 7
+  },
+  "resource_review": {
+    "tool": "1a6652",
+    "actual_exit_code": 0,
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "command": "resource-command.json",
+    "stdout": "resource-stdout.txt",
+    "stderr": "resource-stderr.txt",
+    "receipt": "resource-execution.json"
+  }
+}
