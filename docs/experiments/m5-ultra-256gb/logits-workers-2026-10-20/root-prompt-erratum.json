@@ -1,0 +1,11 @@
+{
+  "root_prompt_error": true,
+  "actual_formula": "(max(rates)-min(rates))/statistics.median(rates)",
+  "incorrectly_supplied_formula": "max(rates)/min(rates)-1",
+  "source": "bench/m5_ultra_256gb/c8_batched_formal_v1/audit.py",
+  "source_sha256": "7b054fbf35772730b8e9f4522f46622819622001064bfb81537ce031ac6e4fca",
+  "source_line": 62,
+  "range_over_median": 0.0013176325739758456,
+  "max_over_min_minus_one": 0.0013190588434455197,
+  "conclusion": "Not equivalent. Original Kimi v1 calculation was correct. Archived prompts/replies remain unchanged."
+}

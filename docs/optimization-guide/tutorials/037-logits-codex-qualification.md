@@ -66,3 +66,6 @@ Sources: [Logits Codex setup](https://logits.com/docs/codex), [OpenAI Docs: conf
 ## Private repository research handoff
 
 The three private-repository research worker processes were NOT started. Automatic approval review rejected transmission of private minivllm source/docs/experiment data to Logits without explicit payload authorization. The concrete dispatch script is prepared; user clarification is pending. Public connectivity and synthetic coding tests do not require sending minivllm source. Existing GPT child workers report usage limits; no successful new GPT worker is claimed.
+
+
+2026-10-20 update: explicit source/data transmission authorization received. All three actual repository workers completed; research inaccuracies and Kimi's direct-API empty-content failure are preserved in [tutorial039](039-multimodel-review-and-speculative-features.md). The earlier blocked state is historical.

@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-20",
+  "user_authorization": "Explicit approval to send related E055/E057 and C1/C8 source, documents and experiment data to api.logits.com.",
+  "native_gpt_config_changed": false,
+  "native_gpt_subagents": "Existing agents reported account usage limit; no new native GPT worker used.",
+  "first_round": [
+    {
+      "name": "e057-review",
+      "model": "deepseek-v4.1-flash",
+      "exit_code": 0,
+      "elapsed_s": 13.491,
+      "route_bindings": [
+        {
+          "model_provider": "logits-local"
+        },
+        {
+          "model": "deepseek-v4.1-flash"
+        },
+        {
+          "model": "deepseek-v4.1-flash"
+        }
+      ],
+      "review": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/logits-research-2026-10-20-v1/e057-review/review.md",
+      "review_exists": true,
+      "completed_shell_calls": 12,
+      "failed_shell_calls": 0,
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,260p' bench/m5_ultra_256gb/rowwise_mlp_shared/candidate.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,240p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/README.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'wc -l bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/README.md bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py bench/m5_ultra_256gb/rowwise_mlp_shared/candidate.py bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,220p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '1,300p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '58,120p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'shasum -a 256 bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py bench/m5_ultra_256gb/rowwise_mlp_shared/candidate.py bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"SHA=|CANDIDATE_SHA|SCREEN_SHA|SOURCE_PINS|def mlp_receipts|def closed_owner|def numerical_files|def audit|class CountedMLP|def adapted_device|def run\\\\(r|def verify\\\\(model|parameters-before|same\\\\(|raw_files|tensor_pairs|count\\\\(\\\" bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py bench/m5_ultra_256gb/rowwise_mlp_shared/candidate.py bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/README.md\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"sed -n '120,145p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py; sed -n '150,195p' bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"def verify|def contract|qualification|siLU|silu|row|T4|T8|1\\\\.430|1\\\\.550\\\" bench/m5_ultra_256gb/rowwise_native_verify/candidate.py bench/m5_ultra_256gb/rowwise_native_verify_cost_v1/screen.py\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cd /Users/ryanli/code/minivllm && shasum -a 256 bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py bench/m5_ultra_256gb/rowwise_mlp_shared_analysis_v1/audit.py && nl -ba bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py | sed -n '1,170p' && nl -ba bench/m5_ultra_256gb/rowwise_mlp_shared_cost_analysis_v1/audit.py | sed -n '1,45p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cd /Users/ryanli/code/minivllm && nl -ba bench/m5_ultra_256gb/rowwise_mlp_shared_cost_v1/screen.py | sed -n '54,130p'\"",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "name": "e055-review",
+      "model": "kimi-k3",
+      "exit_code": 0,
+      "elapsed_s": 38.022,
+      "route_bindings": [
+        {
+          "model_provider": "logits-local"
+        },
+        {
+          "model": "kimi-k3"
+        },
+        {
+          "model": "kimi-k3"
+        }
+      ],
+      "review": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/logits-research-2026-10-20-v1/e055-review/review.md",
+      "review_exists": true,
+      "completed_shell_calls": 16,
+      "failed_shell_calls": 1,
+      "commands": [
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_analysis_v2/audit.py | sed -n '1,260p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_v1/README.md | sed -n '1,220p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba .artifacts/m5-ultra-256gb/c8-batched-formal-v1-independent.json | sed -n '1,240p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_v1/audit.py | sed -n '1,260p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_v1/audit.py | sed -n '70,150p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"awk 'BEGIN{on[1]=173.895257145; off[1]=170.691158478; on[2]=174.067278449; off[2]=170.466303393; on[3]=174.264897536; off[3]=170.650824396; for(i=1;i<=3;i++){r=on[i]/off[i]; g=(r-1)*100; printf(\\\"pair%d ratio %.9f gain %.6f%%\\\\n\\\", i, r, g)}; printf(\\\"off spread %.6f%%\\\\n\\\", ((170.691158478-170.466303393)/170.650824396)*100)}'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"min_median_throughput_ratio|preregistered|decision|1\\\\.03|fc24144f|win gate\\\" bench/m5_ultra_256gb/c8_batched_formal_v1 bench/m5_ultra_256gb -g '*.json' -g '*.py' -g '*.md'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_v1/test_audit_cpu.py | sed -n '1,220p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"nl -ba bench/m5_ultra_256gb/c8_batched_formal_v1/prereg-v1/plan.json | sed -n '130,155p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"pinned\\\\(|tokenizer|output_ids|symlink|sha256\\\" bench/m5_ultra_256gb/c8_batched_formal_v1/trial.py bench/m5_ultra_256gb/c8_batched_formal_v1/formal.py bench/m5_ultra_256gb/pareto_realistic/native_formal.py\"",
+          "exit_code": 2
+        },
+        {
+          "command": "/bin/zsh -lc \"rg -n \\\"v2|pinned_tokenizer|adapted_load|symlink|TOKENIZER_SHA|tokenizer_resolution\\\" bench/m5_ultra_256gb/c8_batched_formal_analysis_v2 bench/m5_ultra_256gb/c8_batched_formal_v1 -g '*.py' -g '*.md' -g '*.json'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat -n bench/m5_ultra_256gb/c8_batched_formal_analysis_v2/audit.py | sed -n '1,80p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat -n .artifacts/m5-ultra-256gb/c8-batched-formal-v1-independent.json | sed -n '1,80p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat -n bench/m5_ultra_256gb/c8_batched_formal_v1/audit.py | sed -n '1,160p'\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"cat -n bench/m5_ultra_256gb/c8_batched_formal_v1/README.md | sed -n '35,70p'; echo '---PLAN---'; sed -n '135,152p' bench/m5_ultra_256gb/c8_batched_formal_v1/prereg-v1/plan.json\"",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc \"python3 -c \\\"pairs=[(173.895257145,170.691158478),(174.067278449,170.466303393),(174.264897536,170.650824396)];[print(a/b,(a/b-1)*100) for a,b in pairs];offs=[b for _,b in pairs];s=sorted(offs);print('spread%',(s[-1]-s[0])/s[1]*100)\\\"\"",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "name": "optimization-research",
+      "model": "muse-spark-open",
+      "exit_code": 0,
+      "elapsed_s": 12.279,
+      "route_bindings": [
+        {
+          "model_provider": "logits-local"
+        },
+        {
+          "model": "muse-spark-open"
+        }
+      ],
+      "review": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/logits-research-2026-10-20-v1/optimization-research/review.md",
+      "review_exists": true,
+      "completed_shell_calls": 6,
+      "failed_shell_calls": 0,
+      "commands": [
+        {
+          "command": "/bin/zsh -lc 'cat /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_mlp_shared/candidate.py'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat /Users/ryanli/code/minivllm/docs/optimization-guide/tutorials/036-concurrency-specific-configurations.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat /Users/ryanli/code/minivllm/bench/reviews/2026-10-19-adaptive-verification-and-upstream-qmv.md'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'ls /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/ 2>&1 | head -n 50'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'ls /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_mlp_shared/\nls /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/ 2>&1 | head -n 50\n'",
+          "exit_code": 0
+        },
+        {
+          "command": "/bin/zsh -lc 'cat /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/candidate.py\ncat /Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_native_verify/candidate.py | head -n 120\n'",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "bounded_rounds": [
+    {
+      "version": 2,
+      "results": [
+        {
+          "model": "deepseek-v4.1-flash",
+          "transport": "direct bounded Chat Completions",
+          "tools_enabled": false,
+          "http_status": 200,
+          "returned_model": "deepseek-v4.1-flash",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7506,
+            "total_tokens": 12192,
+            "completion_tokens": 4686,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "created_cache_tokens": 7424,
+              "multimodal_tokens": null
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 3670
+            }
+          },
+          "review_chars": 3927,
+          "transport_pass": true,
+          "elapsed_s": 9.699
+        },
+        {
+          "model": "kimi-k3",
+          "transport": "direct bounded Chat Completions",
+          "tools_enabled": false,
+          "http_status": 200,
+          "returned_model": "kimi-k3",
+          "finish_reason": "length",
+          "usage": {
+            "completion_tokens": 6000,
+            "completion_tokens_details": {
+              "reasoning_tokens": 6000
+            },
+            "prompt_tokens": 6405,
+            "prompt_tokens_details": {
+              "cached_tokens": 64
+            },
+            "total_tokens": 12405
+          },
+          "review_chars": 0,
+          "transport_pass": false,
+          "elapsed_s": 24.652
+        },
+        {
+          "model": "muse-spark-open",
+          "transport": "direct bounded Chat Completions",
+          "tools_enabled": false,
+          "http_status": 200,
+          "returned_model": "muse-spark-open",
+          "finish_reason": "stop",
+          "usage": {
+            "completion_tokens": 4502,
+            "completion_tokens_details": {
+              "reasoning_tokens": 3072
+            },
+            "prompt_tokens": 5007,
+            "prompt_tokens_details": {},
+            "total_tokens": 9509
+          },
+          "review_chars": 5299,
+          "transport_pass": true,
+          "elapsed_s": 15.561
+        }
+      ]
+    },
+    {
+      "version": 3,
+      "results": [
+        {
+          "model": "kimi-k3",
+          "reasoning_effort": "none",
+          "http_status": 200,
+          "returned_model": "kimi-k3",
+          "finish_reason": "stop",
+          "usage": {
+            "completion_tokens": 1129,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "prompt_tokens": 6338,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "total_tokens": 7467
+          },
+          "review_chars": 4849,
+          "transport_pass": true,
+          "elapsed_s": 5.11
+        },
+        {
+          "model": "muse-spark-open",
+          "reasoning_effort": "none",
+          "http_status": 200,
+          "returned_model": "muse-spark-open",
+          "finish_reason": "stop",
+          "usage": {
+            "completion_tokens": 913,
+            "completion_tokens_details": {
+              "reasoning_tokens": 51
+            },
+            "prompt_tokens": 6101,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "total_tokens": 7014
+          },
+          "review_chars": 2978,
+          "transport_pass": true,
+          "elapsed_s": 3.91
+        }
+      ]
+    }
+  ],
+  "known_failures": [
+    "v1 harness uses stale frozen preparation README; results must come from latest experiment reports.",
+    "v1 six-file read cap is prompt-only and was exceeded by broad source searches; bounded follow-ups send exact file excerpts with no tools.",
+    "DeepSeek v1 confuses E056 canary auditor hash with E057 cost auditor hash; corrected explicitly in v2.",
+    "Root v2/v3 correction prompt incorrectly states OFF spread uses max/min-1. Actual reducer and Kimi v1 use range/median. Kimi v3 falsely reconciles them as equivalent, mislabels pair1 as median gain, and gives inconsistent non-tokenizer fallback behavior.",
+    "Muse v1 has dimensionally wrong traffic equation and stale execution status; v2 proposes wrong feature capture location; v3 corrects location but still mixes old cache path and inconsistent break-even statements.",
+    "Kimi v2 HTTP200 finish_reason=length, 6000 reasoning tokens and empty content; v3 reasoning_effort=none yields nonempty stop response."
+  ],
+  "conclusion": "Three-model connectivity/tool execution passes on tested text workflow. Research output is untrusted draft material; reviewed conclusions only. Not a general reasoning benchmark."
+}

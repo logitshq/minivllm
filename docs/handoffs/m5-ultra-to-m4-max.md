@@ -1420,3 +1420,23 @@ E057 actual preparation now PASS (`edae68`): parent `9ef4dda5a8cc95b7ab53df20a0e
 Plan/source first committed and pushed7e2aea0. Actual3d8cd7/session70588→a813a6 rc0:87.718875875s lifecycle,PASS_CAPTURE_AND_RESTORE,same52818 restored. Independent87f36e/session78556→eda8e7 PASS:32rawfiles/2064tensorpairs/768MLPcalls/400timings. DeviceT4 native85.7917→58.9421ms pooledp50,pairedratio1.45442×; T8 168.9082→107.8756ms,pairedratio1.56605×. These exclude drafting/acceptance/scheduling/HTTP. HistoricalE054 is not a paired third arm and cannot establish the incremental MLP benefit. Saved resources27samples,zero swap growth,allclosurechecksPASS.
 
 E055 andE057 figures rendered from independent audits and visually checked; all paired points retained. E055 still fails its3% gate. New tutorial038 explains complete serving break-even and why local speedups are not frontier wins. Read October9 AdaptiveDHiSparse architecture/discussion and MLX4198 source discussion; notes preserve hardware/quantization scope and rejected transfer assumptions. Logits private-source workers still have not started, awaiting explicit data-transmission authorization; all three synthetic coding tests remainPASS.
+
+
+### 2026-10-20: Logits real workers and E058 source checkpoint
+
+User authorized sending related C1/C8/E055/E057 source and experiment data.
+DeepSeek/Kimi/Muse actual Codex workers completed12/16/6 shell calls respectively;
+one Kimi shell failure retained. Bounded correction packets expose accuracy
+issues and Kimi HTTP200/empty-content reasoning exhaustion; explicit none
+retry returns a final answer. All errors and rejected advice are in tutorial039
+and docs/experiments/m5-ultra-256gb/logits-workers-2026-10-20.
+
+E058 adds default-OFF target-layer feature capture to a fresh shared-verifier
+candidate, preserving frozen E057. Capture complete decoder outputs at5/19/33/47/61,
+not MLP-input/final norm. Pure greedy selection retains anchor+n accepted inputs
+and n+1 feature rows; correction/bonus stays pending. CPU-only, no device result,
+no core integration, no new Pareto point. Next gate is full feature/state bytes
+and real draft rounds, then complete round economics. Native GPT child quota
+remains limited. This is a Git handoff record, not confirmation that M4 read it.
+
+E058 final source CPU checkpoint: 8/8 PASS, actual tool605bf7; first7/7 also retained. Root follow-up prompt's OFF-spread correction was itself wrong: frozen reducer uses range/median. Erratum preserved with both original worker replies and prompts.

@@ -1430,3 +1430,8 @@ E057 actual preparation now PASS (`edae68`): parent `9ef4dda5a8cc95b7ab53df20a0e
 Plan/source first committed and pushed7e2aea0. Actual3d8cd7/session70588→a813a6 rc0:87.718875875s lifecycle,PASS_CAPTURE_AND_RESTORE,same52818 restored. Independent87f36e/session78556→eda8e7 PASS:32rawfiles/2064tensorpairs/768MLPcalls/400timings. DeviceT4 native85.7917→58.9421ms pooledp50,pairedratio1.45442×; T8 168.9082→107.8756ms,pairedratio1.56605×. These exclude drafting/acceptance/scheduling/HTTP. HistoricalE054 is not a paired third arm and cannot establish the incremental MLP benefit. Saved resources27samples,zero swap growth,allclosurechecksPASS.
 
 E055 andE057 figures rendered from independent audits and visually checked; all paired points retained. E055 still fails its3% gate. New tutorial038 explains complete serving break-even and why local speedups are not frontier wins. Read October9 AdaptiveDHiSparse architecture/discussion and MLX4198 source discussion; notes preserve hardware/quantization scope and rejected transfer assumptions. Logits private-source workers still have not started, awaiting explicit data-transmission authorization; all three synthetic coding tests remainPASS.
+
+
+2026-10-20: [Logits actual repository review and failures](../experiments/m5-ultra-256gb/logits-workers-2026-10-20/README.md);
+[E058 feature-interface source checkpoint](../../bench/m5_ultra_256gb/rowwise_mlp_shared_features/README.md),
+defaultOFF and CPU-only. No new device or Pareto result.
