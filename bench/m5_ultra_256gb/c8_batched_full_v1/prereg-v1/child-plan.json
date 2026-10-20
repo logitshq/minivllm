@@ -1,0 +1,79 @@
+{
+  "schema": "c8-batched-gdn-graph-full-plan-v1",
+  "sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_capture.py": "b331a02988413356e113b3a1283ab0eb8d40de17796b5623a17df312c214151f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_server_v2.py": "8ed952b4870465718a33e0af7e4ecddbf3fbd6265571e7efd3467b904c5621b7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/integration.py": "4a8dc5518f2ea0a913ad0a5d753a5032324ccb69bacede416abe8ae126bfa800",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/serving_qualification.py": "75de7205febdae2698e99353bfc2908a79044591fbf67abb30a07cb4e54a7264",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_serving.py": "064634acae9510b5744b7c848f09ee0854ee8bf26fc480af78dbed7f159573ba",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_qualification_v2.py": "d3e2a4f76b7c384f6c6c986d0838b68227618502b0552e5cdf74f149029e39e7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_schedule_diagnostic_v1/trial.py": "a140fa0b2cf4d6eb1bd58286696d4cc16ad3747bf396497817c91dcb98f5bad5",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_prefix_replay_v1/prefix.py": "a71b2e2fc3ff2b063efe234c5a75f9f85588f6b285e4daf3c82cee2f35d3f0b7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/integration.py": "24f89e06f7e6d01041e6daaead40d1bacd927032a68218f8aa5a495bc092b851",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/candidate.py": "acd2a23802296b9e420108203cc215c3170cd1eccd9a859e1a787432f98a5353",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_graph/integration.py": "6e2e4d4350c36476292f2d0ff2bc7e095561f76a2c233b1a99575027378d50b7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_prefix_v1/bridge.py": "ee212bee9b0bf9e82d62c762b21dc630294e588538342b70df0f19fbf940bd07",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_prefix_v1/prefix.py": "d16318dbad1181caac964ec5b331b4b208ca92c0ccd66fe87bbb01a54d4cd12e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_full_v1/qualify.py": "7c2b5d6596ae23e8d7eb550a8121ab3c5fece370e803614cfaaa97f96b26eeb3"
+  },
+  "prefix_plan": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_prefix_v1/prereg-v1/child-plan.json",
+    "sha256": "b939013497400d24ef4d5a26d24142fddc424d6f611b09a9f63a07995caa4155"
+  },
+  "predecessor": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/complete.json",
+    "sha256": "22e697b9680225ca049cb31b746ad78a98ac361855e8eb279703c0343689279d"
+  },
+  "predecessor_inputs": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/plan.json": "b939013497400d24ef4d5a26d24142fddc424d6f611b09a9f63a07995caa4155",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/inherited/complete.json": "c4bdc5649062208eb3f0fbe6d503f797fb15ffc7b049f7b8eb64114f47bd4507",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/inherited/base/complete.json": "c8382488ce620b38c4cca0dea430b517245064000a53684df67c8e3e2b1165e7",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/inherited/base/steps.jsonl": "72b13a1144c4b7649463351c7cd10755b53504f3895ee86963b35297a2105899",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/inherited/replay-route-events.jsonl": "0bb20e4c1b58837cdc283140ef364205cb93535e1a829e58311c4bcfbe98bd9e",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-prefix-v1-numerical/composition.jsonl": "9a4b1e6bfd5587dc5a77fc00fa9a2bf14ac41cfabaeb8868e562cb019366a8d7"
+  },
+  "qualification": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json",
+    "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+  },
+  "recording": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/joined-input/recording.json",
+    "sha256": "b37a907baf85757a63a5ef3176ab7114d811e870516f889df2562ef4b882a540"
+  },
+  "capture_directory": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves",
+  "route_events": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-schedule-v1-screen/trials/c8-mb50-two-waves/route-events.jsonl",
+    "sha256": "e01d5fec1169eeabedf60d30238a5668ece8d263bbcf52f8a0ca3dc041f69f25"
+  },
+  "switches": {
+    "gdn_prework": true,
+    "route_graph": true
+  },
+  "environment": {
+    "MLX_MAX_OPS_PER_BUFFER": "50",
+    "MLX_MAX_MB_PER_BUFFER": "50",
+    "MLX_BFS_MAX_WIDTH": "20",
+    "MLX_METAL_FAST_SYNCH": "0"
+  },
+  "allocator_cache_policy": "unchanged-2gib",
+  "expected_steps": 1030,
+  "expected_requests": 16,
+  "expected_route_calls": 1028,
+  "full_history_qualified": false,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "scope": "Complete original E047 1030-step/16-request recorded-history numerical replay only; no new HTTP capture, arbitrary-arrival guarantee, performance or Pareto qualification."
+}

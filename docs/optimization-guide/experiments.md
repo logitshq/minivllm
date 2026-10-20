@@ -1352,3 +1352,9 @@ child71f2891f24045f539a195711e8cdc97ea190bedd214e42173ab006b7eb700f1c。
 E049 actual device execution d8e806/session53359 → 7e5ce0 returned 0, PASS_CAPTURE_AND_RESTORE (51.460662s diagnostic lifecycle, not engine latency), original oMLX PID52818 restored. Independent ledger audit 06dc48 PASS and resource audit 1a6652 PASS; 49 steps/380 IDs/65,005 bit receipts/130,010 finite receipts. E049 remains INCOMPLETE_BY_DESIGN: 0 completed, 8 active, 8 future. Archive 262 members, SHA256 `2c854df325a00847883cdca0bf79c1432bb672754077983811e1839a7faa7967`.
 
 E050 adapter10/10 CPU PASS (687d78) and owner13/13 CPU PASS (cf7efb). Prepare86df9c: parent `14b61d284a088e7c799fb91ee11d45dce8379c79d5e2a071bcb4f40da5072fcc`, child `b939013497400d24ef4d5a26d24142fddc424d6f611b09a9f63a07995caa4155`. Same warm49 schedule, native oracle versus actual batched GDN+graph. Scope remains numerical prefix only; all raw failures retained. Runtime not yet executed at this commit.
+
+### E050 actual / E051 prepared: full C8 history next
+
+E050 actual root5c2103/session42008 →9e79c1 exit0,51.39823474996956s PASS_CAPTURE_AND_RESTORE. Original PID52818 resumed. Independent audit181b1f PASS; CPU73e20f7/7; saved resources c1c4ba PASS16physical+16metadata, child historical peak58,537,679,096B/system231,469,989,888B, zero swap growth. Same49-step scope as E049, all48 candidate layers5 Python branches/fallback0. Archive306members SHA38719a8a6832226970d27476c43936fe5b90f1b0b1c02baee7364f048de24db6.
+
+E051 actual CPU qualifier132a7d8/8, ownerb5090a13/13; metadata prepare8a97d9, parentc895c6e85c9c6e7ef8928f749086fd8012777a67c769b20b3cd13d7eaae4f618, child9ff6bcd67e6526f3ae6ac1e1fcfb5dd07b5077768844e3061ad2469ccdb3ae8a. Full1030step/16request/cap512 replay using frozen E050 bridge and original numeric comparator. Preregistered80GiB child/240GiB system/zero-swap sampled guards, unchanged2GiB cache. Prepared, not device-executed at this commit.

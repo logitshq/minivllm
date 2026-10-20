@@ -1350,3 +1350,7 @@ warm49 eager/graph核验，8active/8future保持，不伪造completed。candidat
 ## E049 audited; E050 ready (2026-10-19)
 
 C8 native vs existing graph warm49 same-history replay passed; independent audit verifies 380 IDs and complete per-array receipts (65,005 bit-equal /130,010 finite), without claiming offline tensor reread. All original caps remain512; no completed requests and no new performance point. E050 will compose the actual batched GDN candidate (E046 bytes, E048 local median gains) with graph using private engine-aware observer installation, with all48 handles traced/restored. Separate C1/C8 settings are intentional; aggregate Python trace counters do not imply per-GPU-call counts. E050 plan/CPU evidence is committed before device execution.
+
+## E050 actual candidate prefix passes; E051 full history prepared
+
+E050 batched GDN+graph passed the same-history native comparison and independent audit:380IDs/65,005 bit-equality receipts/130,010finite receipts. All48 real layers had5 Python candidate executions and0fallback; same52818 service restored. This is49 steps, not a performance point. E051 now prepares1030 steps/all16requests, retaining caps512 and complete drain/route stream checks. Existing complete numerical peak68.55GiB justifies preregistered80GiB child sample threshold; system240GiB/no swap remain. C1/C8 may select different algorithms/settings; current frontier figures remain unchanged.

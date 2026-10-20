@@ -26,3 +26,7 @@ The owner invokes the same fixed argument layout as E049:
 ```
 
 The exact MLX environment is inherited from the original plan: ops50, MB50, BFS20, fast-sync0. The new complete schema is `c8-batched-gdn-graph-prefix-result-v1`, with status `DIAGNOSTIC_PREFIX_COMPLETE`, `FAIL`, or initially `INCOMPLETE`. It retains `pid`, `ppid`, new `plan_sha256`, `base_result`, `prefix`, `coverage`, `route_prefix`, and scope booleans, adding `inherited_result`, `composition`, and `composition_events`. Only actual E050 execution can supply numerical evidence for this composition.
+
+## Actual execution appended after source freeze
+
+E050 ran successfully (5c2103/session42008 → 9e79c1, exit0) and restored original oMLX PID52818. Independent audit181b1f passed the complete49-step ledger: 380 IDs,65,005 bit-equality/130,010 finite receipts; all48 layers recorded5 candidate Python branches each and zero fallback. Original observations/failed audit attempt and CPU guard attempt are retained in [E050 evidence](../../../docs/experiments/m5-ultra-256gb/E050-c8-batched-gdn-graph-prefix-v1/README.md). It remains INCOMPLETE_BY_DESIGN, with zero completed requests. Successful full tensors were checked by the producer, not retained for offline byte reread.

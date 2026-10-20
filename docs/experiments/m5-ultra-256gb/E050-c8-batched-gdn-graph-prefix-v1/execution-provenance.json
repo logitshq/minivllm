@@ -1,0 +1,45 @@
+{
+  "scope": "Tool observations attributed to parent/sibling; recorded command/log/result files remain the execution authority.",
+  "device_run": {
+    "tool": "5c2103",
+    "session": 42008,
+    "completion_tool": "9e79c1",
+    "reported_exit_code": 0,
+    "status": "PASS_CAPTURE_AND_RESTORE",
+    "raw_execution": ".artifacts/m5-ultra-256gb/c8-batched-prefix-v1-execution"
+  },
+  "adapter_cpu": {
+    "failed_attempt": ".artifacts/m5-ultra-256gb/c8-batched-prefix-cpu-v1",
+    "failure": "CPU guard replaced socket class before stdlib ssl import; harness failed before test execution.",
+    "passed_attempt": ".artifacts/m5-ultra-256gb/c8-batched-prefix-cpu-v2",
+    "tests": 10,
+    "owner_tests": 13
+  },
+  "ledger_attempt1": {
+    "path": ".artifacts/m5-ultra-256gb/c8-batched-prefix-v1-independent-audit-attempt1",
+    "status": "FAIL",
+    "cause": "Auditor assumed pre-restore graph caches nonempty, but frozen RouteObserver restores original empty cache before combined restore."
+  },
+  "ledger_attempt2": {
+    "tool": "181b1f",
+    "reported_by": "/root/rowwise_audit",
+    "reported_exit_code": 0,
+    "path": ".artifacts/m5-ultra-256gb/c8-batched-prefix-v1-independent-audit-attempt2",
+    "status": "PASS"
+  },
+  "ledger_cpu": {
+    "path": ".artifacts/m5-ultra-256gb/c8-batched-prefix-audit-cpu-v1",
+    "tool": "73e20f",
+    "reported_exit_code": 0,
+    "tests": 7
+  },
+  "resource_review": {
+    "tool": "c1c4ba",
+    "actual_exit_code": 0,
+    "status": "PASS_SAVED_OBSERVATIONS",
+    "command": "resource-command.json",
+    "stdout": "resource-stdout.txt",
+    "stderr": "resource-stderr.txt",
+    "receipt": "resource-execution.json"
+  }
+}
