@@ -1,0 +1,401 @@
+{
+  "schema": "E055-six-process-metrics-ids-v2",
+  "status": "PASS_METRICS_AND_IDS",
+  "performance_qualified": false,
+  "owner_resources_restore_qualified": false,
+  "formal_full_state_replayed": false,
+  "diagnostic_throughput_only": true,
+  "timing_valid": true,
+  "same_schedule_numerical_prerequisite": true,
+  "cross_schedule_token_equal": false,
+  "audit_source_sha256": "79a22462ce49584b483cdea53cc5c7255e8721464cd497c3a4cdaa0896ad72c8",
+  "scope": "Actual observer-OFF6process C8 counts/timing/IDs; external lifecycle/resource audit required. No automatic Pareto point.",
+  "numerical_prerequisite_scope": "Source-bound E053 complete captured history; not all formal schedules.",
+  "cross_schedule_differences": [
+    {
+      "repeat": 1,
+      "phase": "warm",
+      "requests_compared": 8,
+      "different_trajectories": 4,
+      "first_difference": {
+        "fixture_id": "D03-event-rollup",
+        "occurrence": 0,
+        "raw_index": 29,
+        "left_token": 4071,
+        "right_token": 687,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    },
+    {
+      "repeat": 1,
+      "phase": "formal",
+      "requests_compared": 64,
+      "different_trajectories": 4,
+      "first_difference": {
+        "fixture_id": "D04-frame-parser",
+        "occurrence": 0,
+        "raw_index": 59,
+        "left_token": 262,
+        "right_token": 406,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    },
+    {
+      "repeat": 2,
+      "phase": "warm",
+      "requests_compared": 8,
+      "different_trajectories": 3,
+      "first_difference": {
+        "fixture_id": "D04-frame-parser",
+        "occurrence": 0,
+        "raw_index": 59,
+        "left_token": 406,
+        "right_token": 262,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    },
+    {
+      "repeat": 2,
+      "phase": "formal",
+      "requests_compared": 64,
+      "different_trajectories": 4,
+      "first_difference": {
+        "fixture_id": "D04-frame-parser",
+        "occurrence": 0,
+        "raw_index": 92,
+        "left_token": 19,
+        "right_token": 18,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    },
+    {
+      "repeat": 3,
+      "phase": "warm",
+      "requests_compared": 8,
+      "different_trajectories": 4,
+      "first_difference": {
+        "fixture_id": "D04-frame-parser",
+        "occurrence": 0,
+        "raw_index": 92,
+        "left_token": 18,
+        "right_token": 19,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    },
+    {
+      "repeat": 3,
+      "phase": "formal",
+      "requests_compared": 64,
+      "different_trajectories": 4,
+      "first_difference": {
+        "fixture_id": "D04-frame-parser",
+        "occurrence": 0,
+        "raw_index": 59,
+        "left_token": 406,
+        "right_token": 262,
+        "left_raw_length": 512,
+        "right_raw_length": 512
+      },
+      "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+      "numerical_error_inferred": false
+    }
+  ],
+  "points": [
+    {
+      "phase": "r1-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 188.43527154199546,
+      "aggregate_output_tok_s": 173.89525714508915,
+      "e2e_p50_s": 23.536699499964016,
+      "e2e_p95_s": 24.978387832990848
+    },
+    {
+      "phase": "r1-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 1,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 191.97245066601317,
+      "aggregate_output_tok_s": 170.69115847777866,
+      "e2e_p50_s": 23.971562749997247,
+      "e2e_p95_s": 25.464255958038848
+    },
+    {
+      "phase": "r2-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 192.22567362501286,
+      "aggregate_output_tok_s": 170.46630339255657,
+      "e2e_p50_s": 23.99909622949781,
+      "e2e_p95_s": 25.524519375001546
+    },
+    {
+      "phase": "r2-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 2,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 188.24905112496344,
+      "aggregate_output_tok_s": 174.06727844937691,
+      "e2e_p50_s": 23.501041146024363,
+      "e2e_p95_s": 25.015545208007097
+    },
+    {
+      "phase": "r3-c8-on",
+      "arm": "on",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 188.03557379200356,
+      "aggregate_output_tok_s": 174.26489753607197,
+      "e2e_p50_s": 23.478161520994036,
+      "e2e_p95_s": 24.98035691602854
+    },
+    {
+      "phase": "r3-c8-off",
+      "arm": "off",
+      "concurrency": 8,
+      "repeat": 3,
+      "requests": 64,
+      "committed_output_tokens": 32768,
+      "common_window_s": 192.01782420900417,
+      "aggregate_output_tok_s": 170.65082439603765,
+      "e2e_p50_s": 23.964851812488632,
+      "e2e_p95_s": 25.546749208995607
+    }
+  ],
+  "comparison": {
+    "pairs": [
+      {
+        "repeat": 1,
+        "order": [
+          "on",
+          "off"
+        ],
+        "throughput_ratio": 1.018771321818216,
+        "p50_ratio": 0.9818592031496453,
+        "p95_ratio": 0.9809196025264341,
+        "output_comparison": {
+          "warm": {
+            "requests_compared": 8,
+            "different_trajectories": 4,
+            "first_difference": {
+              "fixture_id": "D03-event-rollup",
+              "occurrence": 0,
+              "raw_index": 29,
+              "left_token": 4071,
+              "right_token": 687,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          },
+          "formal": {
+            "requests_compared": 64,
+            "different_trajectories": 4,
+            "first_difference": {
+              "fixture_id": "D04-frame-parser",
+              "occurrence": 0,
+              "raw_index": 59,
+              "left_token": 262,
+              "right_token": 406,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "off",
+          "on"
+        ],
+        "throughput_ratio": 1.0211242631837207,
+        "p50_ratio": 0.9792469233545021,
+        "p95_ratio": 0.9800594025095363,
+        "output_comparison": {
+          "warm": {
+            "requests_compared": 8,
+            "different_trajectories": 3,
+            "first_difference": {
+              "fixture_id": "D04-frame-parser",
+              "occurrence": 0,
+              "raw_index": 59,
+              "left_token": 406,
+              "right_token": 262,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          },
+          "formal": {
+            "requests_compared": 64,
+            "different_trajectories": 4,
+            "first_difference": {
+              "fixture_id": "D04-frame-parser",
+              "occurrence": 0,
+              "raw_index": 92,
+              "left_token": 19,
+              "right_token": 18,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "on",
+          "off"
+        ],
+        "throughput_ratio": 1.0211781756860838,
+        "p50_ratio": 0.979691495891455,
+        "p95_ratio": 0.9778291833401791,
+        "output_comparison": {
+          "warm": {
+            "requests_compared": 8,
+            "different_trajectories": 4,
+            "first_difference": {
+              "fixture_id": "D04-frame-parser",
+              "occurrence": 0,
+              "raw_index": 92,
+              "left_token": 18,
+              "right_token": 19,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          },
+          "formal": {
+            "requests_compared": 64,
+            "different_trajectories": 4,
+            "first_difference": {
+              "fixture_id": "D04-frame-parser",
+              "occurrence": 0,
+              "raw_index": 59,
+              "left_token": 406,
+              "right_token": 262,
+              "left_raw_length": 512,
+              "right_raw_length": 512
+            },
+            "status": "DIFFERENT_GREEDY_TRAJECTORIES",
+            "numerical_error_inferred": false
+          }
+        }
+      }
+    ],
+    "median_pair_ratios": {
+      "throughput_ratio": 1.0211242631837207,
+      "p50_ratio": 0.979691495891455,
+      "p95_ratio": 0.9800594025095363
+    },
+    "off_rate_spread_fraction": 0.0013176325752769682,
+    "speed_gate_passed": false,
+    "all_pair_output_ids_identical": false,
+    "output_comparison_status": "DIFFERENT_GREEDY_TRAJECTORIES",
+    "numerical_error_inferred": false,
+    "process_summary": {
+      "off": {
+        "aggregate_output_tok_s": {
+          "median": 170.65082439603765,
+          "minimum": 170.46630339255657,
+          "maximum": 170.69115847777866
+        },
+        "e2e_p50_s": {
+          "median": 23.971562749997247,
+          "minimum": 23.964851812488632,
+          "maximum": 23.99909622949781
+        },
+        "e2e_p95_s": {
+          "median": 25.524519375001546,
+          "minimum": 25.464255958038848,
+          "maximum": 25.546749208995607
+        }
+      },
+      "on": {
+        "aggregate_output_tok_s": {
+          "median": 174.06727844937691,
+          "minimum": 173.89525714508915,
+          "maximum": 174.26489753607197
+        },
+        "e2e_p50_s": {
+          "median": 23.501041146024363,
+          "minimum": 23.478161520994036,
+          "maximum": 23.536699499964016
+        },
+        "e2e_p95_s": {
+          "median": 24.98035691602854,
+          "minimum": 24.978387832990848,
+          "maximum": 25.015545208007097
+        }
+      }
+    },
+    "scope": "Three adjacent process pairs; no pooled-request statistical claim. Different schedules/greedy trajectories are reported, not labeled arithmetic errors."
+  },
+  "actual_request_count": 432,
+  "plan_sha256": "fc24144f4c0676ca6de3aa26f93bb6eabb2976d8addbc403ec35e228b484ed4b",
+  "screen": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen",
+  "terminal_sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_formal_v1/prereg-v1/plan.json": "fc24144f4c0676ca6de3aa26f93bb6eabb2976d8addbc403ec35e228b484ed4b",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/plan.json": "c424ea23734a1b8aae213633d146bbe4214f84ac3370ac736c70839eb2a27136",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/result.json": "ddc96f8008b11c0a8e4183f40554c1e718b826ab23ff1bdd26945a5647ab352b",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r1-c8-on/complete.json": "eb320536562323c542d48f19760cfb23736136dd968f25c9cfd6e2102dc14595",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r1-c8-off/complete.json": "a315487711f23826f4676d1ac261ab6bb1e45e31c00d358a47a02ebd685be7a6",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r2-c8-off/complete.json": "067f35c189e5d9aa13b8c709c48915da6fca974d5efb9f8cb79a0066da4e3769",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r2-c8-on/complete.json": "3790ce4b204a6ff01a94178c2622fc0f0479c89f60bd3c4ebca9d757082f6684",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r3-c8-on/complete.json": "45a6f712c699ae105fa379c107b843af7d78b4dc5803a0006aa65631627f5a91",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-formal-v1-screen/trials/r3-c8-off/complete.json": "6fa916066b702028a7b130424d6c955586140afb5b3dddfe90f92bb7b234fe55"
+  },
+  "support_sources": {
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_formal_v1/trial.py": "b6c5c8603ee877a3e68f8de4b551bd54fa71887389af117c1f1f31caa0ef5bd7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_native_formal.py": "b57e4e9657f3dddb04069290bdfbab4c99b0d6cbfb1427e454d0217d5463c870"
+  },
+  "note": "Speed gate is separate from output comparison. Either result remains diagnostic until external correctness/resource review.",
+  "previous_auditor": {
+    "path": "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_formal_v1/audit.py",
+    "sha256": "7b054fbf35772730b8e9f4522f46622819622001064bfb81537ce031ac6e4fca"
+  },
+  "correction": "Only the literal original tokenizer reference may resolve to the exact hash-verified HF blob; all raw checks/math/gates unchanged.",
+  "tokenizer_resolution": {
+    "original_path": "/Users/ryanli/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-nvfp4/snapshots/5ff8ef173ad0d7c3aae92f0be43031a6ab8067c6/tokenizer.json",
+    "resolved_path": "/Users/ryanli/.cache/huggingface/hub/blobs/77/777bcaa63794fa47b8f53680be9d6d176f1fcbd7ba03cdc6c3bae2b3d76b323f",
+    "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "bytes": 19989325,
+    "rechecked_after_audit": true,
+    "other_symlinks_allowed": false
+  }
+}

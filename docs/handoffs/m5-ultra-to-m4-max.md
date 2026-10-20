@@ -1400,3 +1400,16 @@ The next source-only MLP prototype shares gate/up acrossT while preserving each 
 C1 now targets the64 MLP gate/up pairs with the existing K5120 shared projector, preserving native per-row mixer/norm/SiLU/down arithmetic. E056 source binds real T4/T8 activations at layers0/32/63:12 native-vs-shared projection pairs and30 small tensor files. Shared shadow values never feed later layers. The native-returning new layer loop is compared with both original verifier and causal native full logits/final128-state arrays. The latter is a live producer comparison, with no successful full-state payload retained. Canary CPU10/10, owner19/19(dfe65b), independent audit9/9(9a96cf) pass. The first canary CPU fixture failure is preserved; no GPU result at this entry.
 
 E057 prepares the full shared MLP+head path through a private adapter of the frozen E054 cost loop: six selected-prefix/continuation cases and32 full raw files must pass before400 timings. It records128 ordered actual MLP calls in each untimed qualification and checks all parameter bytes again before timing. Adapter CPU8/8 pass6f1ead; a first test-harness SSL import failure151b0d is preserved. Both experiments remain defaultOFF, independently selectable from the C8 batchedGDN/graph configuration. Formal engine/Pareto results remain separate from local verifier costs.
+
+
+### 2026-10-20: E055/E056 audits closed; Logits worker qualification
+
+E055 independent v1 FAIL retained (strict tokenizer symlink resolver). Narrow v2 passed 12 CPU regressions and actual raw audit:432 requests,6 fresh C8 processes, median throughput ratio1.0211242632/p50 .9796914959/p95 .9800594025, OFF spread .0013176326. Preregistered3% adoption gate NOT met. Cross-schedule greedy IDs differ; no arithmetic error is inferred from that alone, and formal full-state qualification remains incomplete. No new frontier point. Saved resources285+285 and same52818 restoration passed.
+
+E056 actual shadow canary and independent30-file/12-projection-byte audit PASS. Shared shadows never fed later layers; full shared-model behavior remains unqualified. Saved-resource audit now PASS:9samples, maxgap3.290104s, system192669237248B/child-current19411186072B, zero swap growth, same52818 restoration verified from saved observations.
+
+Logits DeepSeek v4.1 Flash, Kimi K3 and Muse Spark Open passed authenticated API, streaming bridge, real Codex shell coding, same-session follow-up and installed-profile checks. Failures preserved: profile suppressed by --ignore-user-config, DeepSeek exact-output mismatch, Muse ambiguous cross-turn prohibition, and test invocation MCP-key quoting. See tutorial037. Native GPT config/auth unchanged. Private-source research dispatch was blocked by automatic approval review pending explicit data-scope authorization; no research worker result is claimed.
+
+E057 complete shared MLP+head cost adapter, owner and independent audit remain source-prepared/CPU-tested, not device-run. Next action is freeze a concrete owner plan, commit it, then run with the existing bounded pause/restore lifecycle; no new timing is asserted.
+
+E057 actual preparation now PASS (`edae68`): parent `9ef4dda5a8cc95b7ab53df20a0e88273ff7a2d5ba03d3781b0ed1d66f0577ac4`, child `12fd8caa2130792295927a11c87673c84e8a34aeaab2d5440cdb34965ba2e89b`. No GPU execution at this pre-run checkpoint.
