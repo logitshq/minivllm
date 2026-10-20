@@ -1358,3 +1358,8 @@ E050 batched GDN+graph passed the same-history native comparison and independent
 ## E051 full candidate history passes (2026-10-19)
 
 Batched GDN+graph passed1030steps/16requests/8192IDs with complete source-bound logits/state/ahead/retirement receipts and independent audit. New actual candidate HTTP capture E052 is prepared using unchanged worker/transport and source shared with future observer-free formal mode. C1 has a separate full-verifier-cost draft (7CPU PASS, no GPU), with device-dependent AR baseline and selected-prefix commit. No new frontier point yet. Latest remote check612b44 found M4 branch still94c070e with no unmerged commits.
+
+
+## E052 correction, C1/C8 independent configurations
+
+The batched GDN + graph full1030-step/16-request replay E051 passes; actual candidate HTTP capture E052v1 failed readiness only (legacy expected identity field), generated0 requests, and restored same52818. Failure archive is committed. v2 retains the frozen server and removes only the stale expected field, with an actual-startup CPU regression7/7PASS; prepared parent5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c. C1 and C8 configurations are independent; no new formal throughput/Pareto claim.

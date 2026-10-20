@@ -1366,3 +1366,10 @@ E051 root edb8f7/session89344→afb109 exit0,516.0877691670321s diagnostic lifec
 E052 CPUd1849a10PASS; prepare8d4a5a parent3e14ce911125eb46147943d5024510414271198984588dd91fea8319df8947e6, spec8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c. New actual candidate HTTP warm8/screen8, MB50; qualification trace and future formal mode use same source. Prepared-only at this commit; no performance point.
 
 C1 full-verifier-cost source draft prepared separately,7CPU PASS8517f1. No plan or GPU result. Timed candidate excludes audit-only checks and measures k=T only against causal device-dependent native AR(T) plus the secondary host-synchronous oracle.
+
+
+### E052 v1 actual FAIL; v2 prepared
+
+v1 root85aab4/session95143→937e57 rc1,6.164382s: readiness identity mismatch solely `/diagnostic_only` expectedTrue/actualmissing. 7 readiness GETs,0 generation requests. Child reaped and same52818 restored; independent failure-resource44c4ff PASS_SAVED_FAILURE_RESTORE.145-member archive e620f7 verified SHA5df09b1c424ca03fb03eb0e69cb8bf63abc96fb1cda0f47c50d2f509a397a9fb.
+
+v2 keeps actual server frozen;7CPU PASS2701d4 tests exact actual-startup regression. Metadata prepare45edb8 PASS (first wrong review filename failure8f88b2 retained), parent5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c, spece94ae435be73d39b060bafb7a24724011de48d03a485b1876ba0ecb07ee10a1d. Not device-run at this commit.

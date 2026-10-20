@@ -166,3 +166,12 @@ E051 now passes the complete1030-step,16-request history:8192 original IDs,1028 
 E052 prepares a new observed HTTP capture from the actual batched GDN+graph server. It uses the same frozen loader/worker/transport and two eight-request waves. Qualification and formal modes share this new source; formal disables observers. The original combined observer assumed the GDN candidate was B1-only, so the new private trace policy explicitly admits B1..8 and requires zero fallback, retaining same-bound/batch tracing before compiled reuse. Ten CPU contracts passed. New captured arrivals still require their own full same-schedule replay before formal throughput claims.
 
 C1 proceeds separately: a default-inert full T4/T8 verifier cost draft now compares against native device-dependent AR(T), with selected-prefix commit and continuation checked first. Audit-only ownership checks and head counters stay outside timing. Its7 CPU contracts pass, but there is no device timing or speculative speedup result yet.
+
+
+## E052 v1 readiness failure and v2 correction
+
+The first actual HTTP candidate capture failed before generation: the inherited expected identity contained `diagnostic_only: true`, absent from the real frozen combined server. Seven readiness GETs occurred; zero generation requests were sent. The original FAIL/exit1 remains preserved, the candidate server was reaped and original oMLX PID52818 restored. [Failure evidence](../../experiments/m5-ultra-256gb/E052-c8-batched-http-capture-v1/README.md) contains all145 archive members, independently reread.
+
+The v2 trial removes only that expected identity field; its actual server, candidate math and transport remain frozen. Seven CPU contracts pass, including original readiness validation against the real v1 startup bytes. Parent plan `5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c`, spec `e94ae435be73d39b060bafb7a24724011de48d03a485b1876ba0ecb07ee10a1d` are prepared. A metadata-only first prepare used the wrong closed-review filename (8f88b2); that failure is saved and corrected in45edb8 before any device run. v2 has not run at this commit.
+
+C1 and C8 choose independent configurations. The C8 complete replay establishes exact-history correctness; future actual HTTP replay and observer-free measurements must establish serving correctness and speed. C1's full-verifier cost measurement will determine whether a speculative path can repay its verification/commit overhead. No new formal Pareto point is claimed.

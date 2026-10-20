@@ -1,0 +1,197 @@
+{
+  "status": "ARCHIVED_FAILED_READINESS",
+  "original_final": {
+    "schema": "E045-config-driver-result-v1",
+    "status": "FAIL",
+    "errors": [
+      {
+        "type": "AssertionError",
+        "message": "screen/lease failed"
+      },
+      {
+        "type": "AssertionError",
+        "message": "closure: "
+      }
+    ],
+    "lease_returncode": 1,
+    "service_identity_after": "Mon Oct 19 09:22:08 2026 omlx-server",
+    "elapsed_seconds": 6.164382375020068,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false
+  },
+  "original_screen": {
+    "schema": "E045-concurrency-config-screen-result-v1",
+    "status": "FAIL",
+    "trials": [
+      {
+        "label": "c8-batched-mb50-two-waves",
+        "status": "FAIL",
+        "point": null,
+        "server_reaped": true
+      }
+    ],
+    "errors": [
+      {
+        "type": "AssertionError",
+        "message": "trial failed: c8-batched-mb50-two-waves"
+      }
+    ],
+    "resource_samples": 3,
+    "physical_samples": 3,
+    "elapsed_seconds": 2.6001871249754913,
+    "full_state_qualified": false,
+    "performance_qualified": false,
+    "engine_pareto_point": false,
+    "scope": "8 warm plus8 measured requests per fresh process. New environment has no inherited full-state qualification; later independent raw-output audit required."
+  },
+  "original_trial": {
+    "schema": "c8-batched-http-result-v1",
+    "status": "FAIL",
+    "numerical_qualified": false,
+    "performance_qualified": false,
+    "cleanup_complete": true,
+    "server_reaped": true,
+    "started_at": 1792473669.0388968,
+    "errors": [
+      {
+        "phase": "readiness",
+        "type": "ValueError",
+        "message": "actual startup identity differs from capture contract"
+      }
+    ],
+    "scope": "Actual candidate warm8/screen8 HTTP capture only; new-history numerical replay and independent audit outstanding.",
+    "cleanup_task_resolved": true,
+    "client_task_resolved": true,
+    "small_pins_rechecked": true,
+    "ended_at": 1792473671.074516,
+    "artifacts": {
+      "child-absence.json": {
+        "sha256": "4f0993f506e58b624cba473c60572c3200da3460f51820c85b8cba2075190342",
+        "bytes": 133
+      },
+      "child-identity.json": {
+        "sha256": "838a6139cbab42171d67da3c80276fb830ebfac85f9cb661b02b36ffc48b1fe5",
+        "bytes": 240
+      },
+      "child.json": {
+        "sha256": "f540325c1034405b5f7c4f0e88d6498e239b87110049dfd67cb70a6e8202ceb4",
+        "bytes": 48
+      },
+      "events.jsonl": {
+        "sha256": "9c5f413f9d104543022d8f13996687583ae02839e14a53c7ee6c0f4c893bcc81",
+        "bytes": 17306
+      },
+      "launch.json": {
+        "sha256": "63f5baacf12547e3b20aba194315f009a946ccddcae98d64aaa7f1a86c05267b",
+        "bytes": 2724
+      },
+      "port-after.json": {
+        "sha256": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e",
+        "bytes": 167
+      },
+      "port-before.json": {
+        "sha256": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e",
+        "bytes": 167
+      },
+      "release.json": {
+        "sha256": "3d12eb9db3d8eecaf8053732f9da9f418a6a6ef63896531e7ee0d5472855f8b4",
+        "bytes": 143
+      },
+      "route-events.jsonl": {
+        "sha256": "f18dba2a71970a6e632d4ebebae0855a67e9931492ce10c4b2e0e5908696fa27",
+        "bytes": 8507
+      },
+      "server.stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "server.stdout": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "spawn-intent.json": {
+        "sha256": "9a6780d1b555f1812dc82d76dfdcadf288508f1f34075891270498216a527852",
+        "bytes": 1521
+      },
+      "spec.json": {
+        "sha256": "8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c",
+        "bytes": 282219
+      },
+      "trace.jsonl": {
+        "sha256": "1b72cbc2557312a25049e63e98d42c3c564675cf2120b815f59992a0f7b03e3f",
+        "bytes": 8420
+      }
+    },
+    "label": "c8-batched-mb50-two-waves",
+    "diagnostic_only": true,
+    "full_state_qualified": false,
+    "replay_input_checked": false
+  },
+  "generation_requests": 0,
+  "readiness_polls": 7,
+  "raw_join_performed": false,
+  "resources": {
+    "schema": "E052-saved-failure-resource-review-v1",
+    "status": "PASS_SAVED_FAILURE_RESTORE",
+    "errors": [],
+    "live_checks_performed": false,
+    "performance_qualified": false,
+    "hard_allocation_cap": false,
+    "limitations": [
+      "Observed physical ceilings do not bound inter-sample allocation peaks or establish physical fit.",
+      "Native/known inventories are saved parsed observations; full original ps inventory text was not retained.",
+      "Initial child start identity and raw PID/PPID/executable are checked; repeated start/service identity assertions are source-bound, not independently replayable raw ps.",
+      "Final/lease/health are original recorded facts, not fresh live restoration checks; GUI/unrecognized GPU use remains unknown."
+    ],
+    "original_final_status": "FAIL",
+    "original_screen_status": "FAIL",
+    "original_lease_closed": true,
+    "original_lease_returncode": 1,
+    "physical_samples": 3,
+    "metadata_samples": 3,
+    "servers": 1,
+    "max_observation_gap_seconds": 2.6790612500044517,
+    "baseline_to_first_gap_seconds": 2.6790612500044517,
+    "max_system_bytes": 172894044160,
+    "max_child_current_bytes": 14189048,
+    "max_child_historical_peak_bytes": 13910520,
+    "observed_pressure_values": [
+      1
+    ],
+    "observed_thermal_codes": [
+      0
+    ],
+    "max_swap_growth_bytes": 0,
+    "swapouts_values": [
+      807478
+    ],
+    "all_saved_health_contracts_pass": true,
+    "recorded_cycle_restored": true,
+    "sampled_native_inventory_guard_pass": true,
+    "raw_full_process_inventory_reparsed": false,
+    "review_source_sha256": "3dbac43c15446bd5be160345d7d8580a72243d2d59c7790063b006c30fa67a6c",
+    "original_experiment_status": "FAIL",
+    "generation_requests": 0,
+    "readiness_polls": 7,
+    "successful_readiness_bodies": 1,
+    "identity_difference": {
+      "key": "diagnostic_only",
+      "expected": true,
+      "actual": "ABSENT"
+    },
+    "original_failure_preserved": true,
+    "full_state_qualified": false,
+    "numerical_qualified": false,
+    "http_qualified": false,
+    "engine_pareto_point": false,
+    "scope": "Only exact saved readiness failure, resource observations and restoration. No generation request, raw join, numerical or performance qualification."
+  },
+  "original_pending_fields_preserved": true,
+  "numerical_qualified": false,
+  "full_state_qualified": false,
+  "candidate_http_history_qualified": false,
+  "performance_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Actual v1 readiness identity mismatch; no generation requests. Source-only capture drafts retained but not executed as success audits."
+}

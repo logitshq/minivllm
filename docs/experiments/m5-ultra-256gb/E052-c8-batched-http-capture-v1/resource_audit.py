@@ -1,0 +1,60 @@
+"""E052 offline saved-resource review; no live/device actions, default inert."""
+import argparse
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+from types import FunctionType
+
+R=Path('/Users/ryanli/code/minivllm'); B=R/'bench/m5_ultra_256gb'
+HELPER=B/'concurrency_config_analysis_v1/resources.py'
+HELPER_SHA='0f1b4c0092f5af909a9bb5e3afb87a2dead071b2c8ae4bd7ffbb43fea7d961f9'
+LABEL='c8-batched-mb50-two-waves'
+PLAN_SHA='3e14ce911125eb46147943d5024510414271198984588dd91fea8319df8947e6'
+SPEC_SHA='8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c'
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def review(execution):
+    assert sha(HELPER)==HELPER_SHA, 'frozen pure resource readers changed'
+    spec=importlib.util.spec_from_file_location('_e052_saved_resources',HELPER)
+    h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
+    # Identical raw readers, ceilings, zero-swap, cadence, identity and restoration
+    # checks. The sole donor change is the explicitly preregistered one-trial list.
+    namespace=dict(vars(h),LABELS=(LABEL,))
+    fn=h.audit; call=FunctionType(fn.__code__,namespace,fn.__name__,fn.__defaults__,fn.__closure__)
+    result=call(execution);result['schema']='E052-saved-resource-review-v1'
+    result['donor_review_source_sha256']=result.pop('review_source_sha256')
+    result['review_source_sha256']=sha(__file__)
+    try:
+        plan_path=execution/'plan.json';plan=json.loads(plan_path.read_bytes())
+        assert plan['schema']=='E052-c8-batched-http-plan-v1' and len(plan['specs'])==1
+        prereg=B/'c8_batched_http_v1/prereg-v1/plan.json'
+        assert sha(prereg)==sha(plan_path)==PLAN_SHA, 'prepared/executed E052 plan mismatch'
+        ref=plan['specs'][0]
+        assert ref['sha256']==SPEC_SHA==sha(ref['path']), 'registered candidate HTTP spec'
+        spec_value=json.loads(Path(ref['path']).read_bytes())
+        assert spec_value['schema']=='c8-batched-http-spec-v1' and spec_value['label']==LABEL
+        assert spec_value['concurrency']==8 and spec_value['wave_names']==['warm','screen'] and len(spec_value['jobs'])==16
+        small=[prereg,*sorted((B/'c8_batched_http_v1').glob('*.py'))]
+        for path in small:
+            if path!=prereg:assert sha(path)==plan['pins'][str(path)], 'E052 source changed: '+str(path)
+            result['inputs'][str(path)]=dict(bytes=path.stat().st_size,sha256=sha(path))
+        path=Path(plan['outputs']['screen'])/'trials'/LABEL/'complete.json'
+        complete=json.loads(path.read_bytes())
+        assert complete['schema']=='c8-batched-http-result-v1' and complete['label']==LABEL
+        assert complete['diagnostic_only'] is True and all(complete[k] is False for k in
+            ('numerical_qualified','full_state_qualified','performance_qualified','replay_input_checked'))
+        result.update(numerical_qualified_here=False,full_state_qualified=False,engine_pareto_point=False,
+            scope='Saved resource and closure facts only; instrumented batched GDN+graph two-wave C8 capture. Its new arrival history still requires independent numerical replay; no timing or numerical qualification.')
+    except Exception as exc:
+        result['status']='FAIL_OR_UNKNOWN';result['errors'].append(dict(type=type(exc).__name__,message=str(exc)))
+    return result
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--execution',type=Path);p.add_argument('--out',type=Path);a=p.parse_args()
+    if a.execution is None and a.out is None:print('Inert: explicit --execution closed-directory --out fresh.json required.')
+    else:
+        assert a.execution is not None and a.out is not None
+        result=review(a.execution.resolve())
+        with a.out.open('x') as f:json.dump(result,f,indent=2);f.write('\n')
+        print(json.dumps({k:result[k] for k in ('status','errors')}));raise SystemExit(0 if result['status']=='PASS_SAVED_OBSERVATIONS' else 1)

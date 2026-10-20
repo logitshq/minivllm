@@ -1,0 +1,527 @@
+{
+  "schema": "E052-saved-failure-resource-review-v1",
+  "status": "PASS_SAVED_FAILURE_RESTORE",
+  "errors": [],
+  "live_checks_performed": false,
+  "performance_qualified": false,
+  "hard_allocation_cap": false,
+  "limitations": [
+    "Observed physical ceilings do not bound inter-sample allocation peaks or establish physical fit.",
+    "Native/known inventories are saved parsed observations; full original ps inventory text was not retained.",
+    "Initial child start identity and raw PID/PPID/executable are checked; repeated start/service identity assertions are source-bound, not independently replayable raw ps.",
+    "Final/lease/health are original recorded facts, not fresh live restoration checks; GUI/unrecognized GPU use remains unknown."
+  ],
+  "original_final_status": "FAIL",
+  "original_screen_status": "FAIL",
+  "original_lease_closed": true,
+  "original_lease_returncode": 1,
+  "baseline": {
+    "pid": 99705,
+    "top_bytes": 70910576,
+    "aux_current_bytes": 70910576,
+    "aux_peak_bytes": 72434288,
+    "current_bytes": 70910576,
+    "peak_bytes": 72434288,
+    "system_bytes": 172855558144,
+    "pressure": 1,
+    "physical_ram": 274877906944,
+    "swap_bytes": 1666910781,
+    "swapouts": 807478
+  },
+  "physical_samples": 3,
+  "metadata_samples": 3,
+  "servers": 1,
+  "max_observation_gap_seconds": 2.6790612500044517,
+  "baseline_to_first_gap_seconds": 2.6790612500044517,
+  "max_system_bytes": 172894044160,
+  "max_child_current_bytes": 14189048,
+  "max_child_historical_peak_bytes": 13910520,
+  "observed_pressure_values": [
+    1
+  ],
+  "observed_thermal_codes": [
+    0
+  ],
+  "max_swap_growth_bytes": 0,
+  "swapouts_values": [
+    807478
+  ],
+  "all_saved_health_contracts_pass": true,
+  "recorded_cycle_restored": true,
+  "sampled_native_inventory_guard_pass": true,
+  "raw_full_process_inventory_reparsed": false,
+  "inputs": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/final.json": {
+      "bytes": 475,
+      "sha256": "33ddfdb00cbd6d20fbc9b32b756ceffc2c29af611532cb8f84b72a7c973960bb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/execution-plan.json": {
+      "bytes": 13726,
+      "sha256": "4cccde4527727ed9c73810dae37c182abb99086a2ca03c8471b7d7699ee6db40"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/plan.json": {
+      "bytes": 13726,
+      "sha256": "4cccde4527727ed9c73810dae37c182abb99086a2ca03c8471b7d7699ee6db40"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/plan.json": {
+      "bytes": 13385,
+      "sha256": "3e14ce911125eb46147943d5024510414271198984588dd91fea8319df8947e6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/invocation.json": {
+      "bytes": 527,
+      "sha256": "071130f06825b2e36888846afa6f1e5a57ae3f8da431be608c3dd9dd637bc178"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources_v2.py": {
+      "bytes": 2705,
+      "sha256": "15a207240436e92500c76b2ae791ba896540e53cd52c1f9c6237b83976b072d0"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resources.py": {
+      "bytes": 4027,
+      "sha256": "5a743d8ba5e0f1ab211a044fb1a1006b940163bb62f652e93dd849afe05da200"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/resource_base.py": {
+      "bytes": 4155,
+      "sha256": "41e23aed50dca8782bc1e182237f2dfe63bf6a2b9bf8061932ba2df1cdf2bf26"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/glm_flash/physical_guard.py": {
+      "bytes": 16619,
+      "sha256": "908e0dc74812fd82b65c63a22e03ed8c5692e812bdbf3d6957e219aa52b14166"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/suspended_service.py": {
+      "bytes": 4093,
+      "sha256": "76108bc98300183658a2ad71cb542c0dc8e061253c5120daf86074e43e0b248f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/runner.py": {
+      "bytes": 7045,
+      "sha256": "dfb0b6f07e775249babab6e76c62dbf1ab8012027e3cb46f6c694b8b2b730577"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/concurrency_config_v2/execute.py": {
+      "bytes": 10975,
+      "sha256": "34a604c62f6de4eddcff2be53abd2d72716384ee67d13d1bf963869d35695a20"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_m8_register/real-prereg-v2/execute.py": {
+      "bytes": 14621,
+      "sha256": "9d07896bde97159be5d766f3e7cf7a73ea2900270f0a842a503a9bdfd1e7052d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/result.json": {
+      "bytes": 707,
+      "sha256": "efd284b0dceba784c725b0147991181270701d142d0d48a214289bdf32ada82a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-lease/lease.json": {
+      "bytes": 964,
+      "sha256": "15038b09f67b10ef711672ff886808ae2335aae9efb7cb869531da0514dd60a6"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-lease/job-0.json": {
+      "bytes": 549,
+      "sha256": "7dd36599335e777ad2afc9931c7969600ece0e04bb477fba1df2e205dda27774"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-lease/resume.json": {
+      "bytes": 103,
+      "sha256": "7573980ced1ca3315bde4ead3c25438b519e09392779eee21123aa39d0050eb9"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/runner-identity.json": {
+      "bytes": 139,
+      "sha256": "814e765690550a20a9a7b157fdb53cc70fd0c00afe929dd95893b3b62dca5daf"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/jobs.json": {
+      "bytes": 485,
+      "sha256": "d09b30f20c2998d58101c18afa8655dbcc44f4837c80297cc1203ff1921dbdec"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/before-health.json": {
+      "bytes": 12476,
+      "sha256": "e71189f4eecfbf577293c19b15ce0bd6d1674c774030b4c6ce601566a4c1d89d"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/after-health.json": {
+      "bytes": 12476,
+      "sha256": "8b857cb4fe6cd9841c988e022601381a1a6c664ab9e8299d3498424467e0b66e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/physical-before/sample.json": {
+      "bytes": 4391,
+      "sha256": "874ce6c4c3386b1580c1828df190b1ca4b86682b44f31c4c8f852092e247430a"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-execution/physical-before/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "b4fc530d0f4ece931d0c5aa67fea4ce38095069ecba6af6a07a0584013a8c1c0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/child.json": {
+      "bytes": 48,
+      "sha256": "f540325c1034405b5f7c4f0e88d6498e239b87110049dfd67cb70a6e8202ceb4"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/release.json": {
+      "bytes": 143,
+      "sha256": "3d12eb9db3d8eecaf8053732f9da9f418a6a6ef63896531e7ee0d5472855f8b4"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/complete.json": {
+      "bytes": 2669,
+      "sha256": "9714deef629cf6cb384b34de4869c4082d93a66f55a122097e16bc883b23e675"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/identity-99766.json": {
+      "bytes": 139,
+      "sha256": "e5a1d076a4e6df951a4bfd34fb56a70c16bdf60f32158472c6e1415ea6a6b2f0"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/child-identity.json": {
+      "bytes": 240,
+      "sha256": "838a6139cbab42171d67da3c80276fb830ebfac85f9cb661b02b36ffc48b1fe5"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/events.jsonl": {
+      "bytes": 17306,
+      "sha256": "9c5f413f9d104543022d8f13996687583ae02839e14a53c7ee6c0f4c893bcc81"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/child-absence.json": {
+      "bytes": 133,
+      "sha256": "4f0993f506e58b624cba473c60572c3200da3460f51820c85b8cba2075190342"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0000/sample.json": {
+      "bytes": 4402,
+      "sha256": "efdb1a7e351277128456b2ac4e3497386137de9debc8ec8945aae188ff2af5fb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0000/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "7256518c6452a935d70e9cd23495afc280b0fce745a9aa19f201c2b6aebced72"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/resource-0000.json": {
+      "bytes": 4731,
+      "sha256": "428130ecf793c849c0239745fa68c3be64a2f41b5feb7370f6534142fa28890b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0001/sample.json": {
+      "bytes": 4397,
+      "sha256": "52726fc6ea45a0db30b48314cc47c353642a9e5dd61ea704037e11ee3b14b095"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0001/footprint.raw.json": {
+      "bytes": 854,
+      "sha256": "7e83f4bdd0abe49744cbf2f263457a996e923df9a9b70ec5e21b8ca1e196c411"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/resource-0001.json": {
+      "bytes": 5577,
+      "sha256": "8bd97e90864872718de5e5965d4931b35a82397153f3b52694f625c352fa1267"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0002/sample.json": {
+      "bytes": 4406,
+      "sha256": "218104fb96c8acdc2fe5b9798f580c18e9e86ff09b7246050e964a89c95109de"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/physical-0002/footprint.raw.json": {
+      "bytes": 859,
+      "sha256": "60c83a2e74930456c63bdae9c129f4a4a4fe8960daf4538d819fc3bda53d483b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/resources/resource-0002.json": {
+      "bytes": 4732,
+      "sha256": "4ffac5c92fd0d2ab45a17a1eb6206a001efe5ddfb71272c3d1f71b8a5df81a8c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/spec.json": {
+      "bytes": 282219,
+      "sha256": "8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/launch.json": {
+      "bytes": 2724,
+      "sha256": "63f5baacf12547e3b20aba194315f009a946ccddcae98d64aaa7f1a86c05267b"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/port-after.json": {
+      "bytes": 167,
+      "sha256": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/port-before.json": {
+      "bytes": 167,
+      "sha256": "15358214e66099345e443908c353cfe9206732e50fc299cfabee565afe49283e"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/route-events.jsonl": {
+      "bytes": 8507,
+      "sha256": "f18dba2a71970a6e632d4ebebae0855a67e9931492ce10c4b2e0e5908696fa27"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/server.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/server.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/spawn-intent.json": {
+      "bytes": 1521,
+      "sha256": "9a6780d1b555f1812dc82d76dfdcadf288508f1f34075891270498216a527852"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v1-screen/trials/c8-batched-mb50-two-waves/trace.jsonl": {
+      "bytes": 8420,
+      "sha256": "1b72cbc2557312a25049e63e98d42c3c564675cf2120b815f59992a0f7b03e3f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_formal.py": {
+      "bytes": 24693,
+      "sha256": "ec9cdc924f7987ad46eac6820b6264495c95fb182c726545a6e3ce283df7e654"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_server_v2.py": {
+      "bytes": 17869,
+      "sha256": "8ed952b4870465718a33e0af7e4ecddbf3fbd6265571e7efd3467b904c5621b7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_qualification_v2.py": {
+      "bytes": 23998,
+      "sha256": "d3e2a4f76b7c384f6c6c986d0838b68227618502b0552e5cdf74f149029e39e7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_audit_v2.py": {
+      "bytes": 25638,
+      "sha256": "88f32e3b3f44206b48a1f581cbfe0bde0788060cbd2a0c5030a3ec472a0139fe"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/audit_cycle.py": {
+      "bytes": 30385,
+      "sha256": "bdcd32a06133bae37786eb148318a0d38847df2f2a20c94c984104394570cca4"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/owner.py": {
+      "bytes": 37836,
+      "sha256": "c279e9de954080894ed2b8f35f169cb30f485f93b08568991cd61a61e13bd4f9"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/controller.py": {
+      "bytes": 39215,
+      "sha256": "e6bc72007043ed0376e98ea7f28ee152587294dec200953e93a5c7c736a90694"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_cycle/audit_restore.py": {
+      "bytes": 12078,
+      "sha256": "a51c4a838230fb5d1e3dbbc788dea12df5f78eb360006e657e47f19ea56d83a7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_owner_v2.py": {
+      "bytes": 22889,
+      "sha256": "8d8aee0372497fcf591d53e4bc02b3d1e7eac7eb1d2bf639168a72802e2395bd"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_http_formal/formal.py": {
+      "bytes": 24785,
+      "sha256": "0e590191d32b12027bc8b5f4f76335ed42a633a4179d90431427aa42c6e18f30"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_server.py": {
+      "bytes": 16884,
+      "sha256": "287f34561c83437823923cf45b67f0aa6811f7eba911ee375f62519ba508ef64"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_qualification.py": {
+      "bytes": 19368,
+      "sha256": "33b86cb57bf3c4616762c1bd1cfea0abb8f7f063325e9dfe815642e8f591bc7d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_audit.py": {
+      "bytes": 21004,
+      "sha256": "e41abc8e5073ca812ffdcfc398471a028a6bbd0e12c03a39ec75b0c0e4498717"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_cycle.py": {
+      "bytes": 17167,
+      "sha256": "45c98bf8d8eacbb07c060b05310c686320fd9cce3cd9bbaece0cd6fc887c492f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/owner.py": {
+      "bytes": 39545,
+      "sha256": "58c35e3a8f8e758bca0792e7c1d2819a96bc7c0aac0cd5dd9169fab4c7e6de9d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/controller.py": {
+      "bytes": 8396,
+      "sha256": "0f48afb64d769bbc1e24bcd0bbfaa9303d8727526c1f9ebfa1ef27903d865ad8"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_http_cycle/audit_restore.py": {
+      "bytes": 12074,
+      "sha256": "0946be64082a5a9264b04606b1a865bcaca1bf266aa3fb42888d2d21ad4bd184"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_capture_v2.py": {
+      "bytes": 21342,
+      "sha256": "536fe41d6c8e2bdffe83ba6f43fba87dd6265deb4c84f6204bc9c7220f8280e3"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_qualification.py": {
+      "bytes": 11520,
+      "sha256": "471bebd8a114d3a7f5a190c20909f6896f17fd39f282656546c1366c3fa2c6e2"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_join.py": {
+      "bytes": 16512,
+      "sha256": "a362c321c2329d7ab53ab6a1a5a96981bb95b44733739fdbb56dd3d38bef7b4e"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_cleanup.py": {
+      "bytes": 4648,
+      "sha256": "6c292a9d3cb28c047d1dc92ac0fec4abe19fa8df84c172ef61d2f6ce41157ca6"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/client.py": {
+      "bytes": 33926,
+      "sha256": "ef64a114f4f7d90ec5044d6bdcf058ca05f98dea445d6639db706a4fc75217dc"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/native_server.py": {
+      "bytes": 19587,
+      "sha256": "9bcb37eff8bdecd79800afdedc82deacf9f7a0a9a7a1e0d62dc8ba49e70fb68f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay.py": {
+      "bytes": 17813,
+      "sha256": "1e26e35bdde5cf7b81da37101326a4ef6f87ef7db2775c6324b56d053645c995"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_http_replay_v2.py": {
+      "bytes": 24158,
+      "sha256": "7cdcf5a2f02768ef75686b0ff0b0da9d21f5f9c82ee3866e24c1f869c709f031"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/integration.py": {
+      "bytes": 5909,
+      "sha256": "4a8dc5518f2ea0a913ad0a5d753a5032324ccb69bacede416abe8ae126bfa800"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/candidate.py": {
+      "bytes": 6175,
+      "sha256": "6531be25acb53713d6ddcd930d2c778f6640a3b1f53304fd5375d20b044525c3"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/candidate.py": {
+      "bytes": 7077,
+      "sha256": "eb14b671a66764fe677219762090acb495b89d384cf078f3f63b918a40aa2b84"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/model-source-pins.json": {
+      "bytes": 3046,
+      "sha256": "7143538a168bfcd8b01292c9687472c8647db393c6d2a510d628f71c670260c5"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/serving_qualification.py": {
+      "bytes": 19245,
+      "sha256": "75de7205febdae2698e99353bfc2908a79044591fbf67abb30a07cb4e54a7264"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/long_decode_graph/qualify.py": {
+      "bytes": 24275,
+      "sha256": "c24219f431b08502a26a4f7a83c002214bddd7ea3962d6b1869b313e4c13faf7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/qualify_native.py": {
+      "bytes": 32756,
+      "sha256": "26964fcbed9a2e5dcefaee4888244987897f3138d4a2b7add59bf63a7461b7bf"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/http_replay.py": {
+      "bytes": 9881,
+      "sha256": "1304c58c66e56b3aeaa582ef9f7d61317280cf3107f8f600485426119970fb65"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/http_capture.py": {
+      "bytes": 16345,
+      "sha256": "b331a02988413356e113b3a1283ab0eb8d40de17796b5623a17df312c214151f"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/route_decode_graph/audit_serving.py": {
+      "bytes": 21405,
+      "sha256": "064634acae9510b5744b7c848f09ee0854ee8bf26fc480af78dbed7f159573ba"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/integration.py": {
+      "bytes": 8260,
+      "sha256": "24f89e06f7e6d01041e6daaead40d1bacd927032a68218f8aa5a495bc092b851"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/qualify.py": {
+      "bytes": 13877,
+      "sha256": "f131f3da91e847cf4f00e0644120919c49050227f5a35679b7a446aee8eaa6ee"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_unbound/candidate.py": {
+      "bytes": 7730,
+      "sha256": "1bf5a837c6515ca505bc5d1beaa1718b88e1ccd52609f6814bb995afbe6c1260"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/audit.py": {
+      "bytes": 17327,
+      "sha256": "7e7718ddf1e1b6d744ec374e19b5513248f0374306503aeb8908391edb403270"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined/http_capture.py": {
+      "bytes": 5345,
+      "sha256": "9b98abc3d8f383dba9bd25eafade73cea62e198abde0d734a1e0d2b8ed3a58f2"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/audit_qualification.py": {
+      "bytes": 42483,
+      "sha256": "b6d90413911f2b17e0951a2fcfdb5fe00666aa06d4382b603e29e5dc4659d4f1"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_graph_combined_formal/formal.py": {
+      "bytes": 14758,
+      "sha256": "4b567f8ed6090175f3639aa109584ca26c1426165c03de3167c3ebde74891a89"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_schedule_diagnostic_v1/server.py": {
+      "bytes": 3766,
+      "sha256": "c3f16b97ec59101e065c5dcd98dc7fb4f0192ac10d50d1fdb75975aa90b82ba0"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_schedule_diagnostic_v1/trial.py": {
+      "bytes": 11605,
+      "sha256": "a140fa0b2cf4d6eb1bd58286696d4cc16ad3747bf396497817c91dcb98f5bad5"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_prework_batched/candidate.py": {
+      "bytes": 8068,
+      "sha256": "acd2a23802296b9e420108203cc215c3170cd1eccd9a859e1a787432f98a5353"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/gdn_batched_graph/integration.py": {
+      "bytes": 2152,
+      "sha256": "6e2e4d4350c36476292f2d0ff2bc7e095561f76a2c233b1a99575027378d50b7"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/server.py": {
+      "bytes": 5721,
+      "sha256": "a3737f1b364e190e3fe45a1779e1be228c4f434701bf8875dbe18f1d519afc7b"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_full_v1/qualify.py": {
+      "bytes": 13702,
+      "sha256": "7c2b5d6596ae23e8d7eb550a8121ab3c5fece370e803614cfaaa97f96b26eeb3"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/trial.py": {
+      "bytes": 8243,
+      "sha256": "49d07aad7045a2d05a4e8474476fb4d73e51834f309215e024ca178178957404"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/runner.py": {
+      "bytes": 1079,
+      "sha256": "3ebdf1f085594e18583d89bef2fe0707a3c507a8836dc82eb3aaa0c8488d4e05"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/test_cpu.py": {
+      "bytes": 10098,
+      "sha256": "7eddc2c7792fea3e161cc18d4793357f18f6134da7eb6783e3acf003ee1633d0"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/execute.py": {
+      "bytes": 6048,
+      "sha256": "5b68e6af1d463aaba92fe774324ab10f75e6cfa94d8025da7782e71d58487ccf"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_full_v1/prereg-v1/plan.json": {
+      "bytes": 46682,
+      "sha256": "c895c6e85c9c6e7ef8928f749086fd8012777a67c769b20b3cd13d7eaae4f618"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/gdn-graph-combined-formal-prepare-v1/specs/r1-c8-off.json": {
+      "bytes": 567308,
+      "sha256": "25e0f4b4d27c87ebf429adbb56cc63590e70cfa67be3b9623346720adbdce562"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v1/prereg-v1/specs/c8-batched-mb50-two-waves.json": {
+      "bytes": 282219,
+      "sha256": "8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-numerical/complete.json": {
+      "bytes": 279638,
+      "sha256": "ae2f082be20f321f80fae108ffcbbacbacc4669e67c01422846a73a12ccdb72f"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-independent-audit-attempt1/audit.json": {
+      "bytes": 61485,
+      "sha256": "a25400fae7556b0d49661dfea1812639913687575e0c9759ea24ea78a2731dd0"
+    },
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E051-c8-batched-gdn-graph-full-v1/resource-review.json": {
+      "bytes": 208011,
+      "sha256": "b704dbb6111808345b4e8a97bf23628f35c51aebf9541642626ad9ea1edd9363"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-lease/lease.json": {
+      "bytes": 963,
+      "sha256": "f96766c2d15a83be046b7418ebb18d7aa203d4ba1267ea62f21c17cba1f4cf5c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-lease/job-0.json": {
+      "bytes": 548,
+      "sha256": "b23c3d17ac9a3dd145f1951a49152785a18d5f046b4afed744287a97c9870f15"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-lease/resume.json": {
+      "bytes": 103,
+      "sha256": "37db1b5fd935f061c06973dfb40ecf945b0b034f834a3b41e394f7aa229a02f2"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-full-v1-execution/final.json": {
+      "bytes": 335,
+      "sha256": "0e8887afdf9e68ed2a49d30af21cd700758127e9a5c6c2796a9ddd50d4d31c8c"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/plan.json": {
+      "bytes": 22310,
+      "sha256": "21ba52e43ce54c2b463ab46bfd212c53d06d6303530c77939e3e6b801df547fb"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/external-spec-http-v1-inputs/native-source.json": {
+      "bytes": 2912,
+      "sha256": "93bf4b26318a1a7820c00eecec5b134f93f1f516435e4b9709e91e8b186a4050"
+    },
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/realistic-qualification-v1-inputs/model-manifest.json": {
+      "bytes": 1870,
+      "sha256": "de8ae0d26b5db015b9dc690bcaaec86cbbd5f1435c439baca22c589c7441fa1d"
+    },
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/pareto_realistic/fixtures/prepared-D-v1/fixtures.json": {
+      "bytes": 181812,
+      "sha256": "6a4f7ce1578a0c6fead596e8b3d646033d90a2e2b843263747b89a3c6b3c88db"
+    }
+  },
+  "review_source_sha256": "3dbac43c15446bd5be160345d7d8580a72243d2d59c7790063b006c30fa67a6c",
+  "original_experiment_status": "FAIL",
+  "generation_requests": 0,
+  "readiness_polls": 7,
+  "successful_readiness_bodies": 1,
+  "identity_difference": {
+    "key": "diagnostic_only",
+    "expected": true,
+    "actual": "ABSENT"
+  },
+  "original_failure_preserved": true,
+  "full_state_qualified": false,
+  "numerical_qualified": false,
+  "http_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Only exact saved readiness failure, resource observations and restoration. No generation request, raw join, numerical or performance qualification."
+}

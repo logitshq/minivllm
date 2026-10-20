@@ -1,0 +1,21 @@
+{
+  "run": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/execute.py",
+    "--run",
+    "--plan-sha256",
+    "5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c"
+  ],
+  "join": [
+    "/Users/ryanli/code/minivllm/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/c8_batched_http_v2/trial.py",
+    "--join-child",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/c8-batched-http-v2-screen/trials/c8-batched-mb50-two-waves-v2",
+    "--spec-sha256",
+    "e94ae435be73d39b060bafb7a24724011de48d03a485b1876ba0ecb07ee10a1d"
+  ]
+}
