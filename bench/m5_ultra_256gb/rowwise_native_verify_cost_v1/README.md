@@ -1,9 +1,9 @@
-# C1 full-verifier cost screen — source draft, not run
+# C1 full-verifier cost screen — prepared, not run
 
 This default-inert probe measures complete T4/T8 forward cost at used1023 with the
 frozen E042 rowwise verifier and shared head. It loads the original E042 canonical
-seed and model; no model source is modified, no engine integration or owner is
-added. No plan is prepared and no GPU result is claimed here.
+seed and model; no model source is modified, no engine integration is
+added. A bounded external owner is now prepared; no GPU result is claimed here.
 
 New qualification is required before timing: an independent original native host
 AR(9) generates causal teacher inputs, full logits and state. For each T, the
@@ -55,3 +55,10 @@ draft rejection/acceptance rate, scheduler publication, HTTP qualification,
 performance qualification or Pareto point. Timed sample outputs are checked for
 IDs/lens but their full tensors are not saved each iteration; saved full-byte
 qualification covers the admitted deterministic routes and initial states.
+
+The owner has19/19 guarded CPU checks (627aad), source snapshots preserved in
+`.artifacts/m5-ultra-256gb/c1-verifier-cost-owner-cpu-v1`. It binds the restored
+E052v2 service and uses child1500s/owner1650s/outer1800s deadlines. ACK arrival
+rechecks parent identity and deadline before exit, then the actual owner reaps.
+Metadata prepare1abb6c produced parentf613b5df1494e9064ba84e2dd025b437177891b00bf5d98bcf18d03e5eb960ce,
+child3d10d60dc72eff7e2c70444239c61be09c865b6e15109c7f43b8cdf8a6a66c2c.

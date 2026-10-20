@@ -1363,3 +1363,12 @@ Batched GDN+graph passed1030steps/16requests/8192IDs with complete source-bound 
 ## E052 correction, C1/C8 independent configurations
 
 The batched GDN + graph full1030-step/16-request replay E051 passes; actual candidate HTTP capture E052v1 failed readiness only (legacy expected identity field), generated0 requests, and restored same52818. Failure archive is committed. v2 retains the frozen server and removes only the stale expected field, with an actual-startup CPU regression7/7PASS; prepared parent5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c. C1 and C8 configurations are independent; no new formal throughput/Pareto claim.
+
+
+### E052 v2 actual / E053 and E054 prepared
+
+E052v2 root15a76c/session12844→dcb9e0 exit0,54.879346s PASS_CAPTURE_AND_RESTORE, same52818 restored. Raw join986843 exit0:16requests/1030steps. Independent saved resources9f1484 PASS20physical+20metadata, maxgap3.186007s, zero swap growth. The capture has no formal performance claim.
+
+E053 prepares full same-history native-versus-batched replay of this actual candidate HTTP capture.11qualifier CPU/11independent-audit CPU/13owner CPU checks pass. Prepare22e0ca: parent4a2d6cc768545654a7931ea4dbc3afc8837b0bdc16a159021c9ade2f0104de47, child26f5d003fc61f96a22939750e7732858beeaa9313f4de40b94a0e4a0009c9431. Expected counts are derived from the actual history.
+
+E054 prepares independent C1 T4/T8 full-verifier/commit cost, source CPU7 and owner CPU19pass; prepare1abb6c: parentf613b5df1494e9064ba84e2dd025b437177891b00bf5d98bcf18d03e5eb960ce, child3d10d60dc72eff7e2c70444239c61be09c865b6e15109c7f43b8cdf8a6a66c2c. No speculative or engine speed claim before measurement. Both E053 and E054 are prepared only at this commit and will use GPU serially.

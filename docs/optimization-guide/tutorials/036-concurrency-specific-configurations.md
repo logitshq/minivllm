@@ -175,3 +175,12 @@ The first actual HTTP candidate capture failed before generation: the inherited 
 The v2 trial removes only that expected identity field; its actual server, candidate math and transport remain frozen. Seven CPU contracts pass, including original readiness validation against the real v1 startup bytes. Parent plan `5290ddc18239d422e846f76ff4fa222b48188c6fb57bae68ea5119ec3bd9066c`, spec `e94ae435be73d39b060bafb7a24724011de48d03a485b1876ba0ecb07ee10a1d` are prepared. A metadata-only first prepare used the wrong closed-review filename (8f88b2); that failure is saved and corrected in45edb8 before any device run. v2 has not run at this commit.
 
 C1 and C8 choose independent configurations. The C8 complete replay establishes exact-history correctness; future actual HTTP replay and observer-free measurements must establish serving correctness and speed. C1's full-verifier cost measurement will determine whether a speculative path can repay its verification/commit overhead. No new formal Pareto point is claimed.
+
+
+### E052 v2 actual / E053 and E054 prepared
+
+E052v2 root15a76c/session12844→dcb9e0 exit0,54.879346s PASS_CAPTURE_AND_RESTORE, same52818 restored. Raw join986843 exit0:16requests/1030steps. Independent saved resources9f1484 PASS20physical+20metadata, maxgap3.186007s, zero swap growth. The capture has no formal performance claim.
+
+E053 prepares full same-history native-versus-batched replay of this actual candidate HTTP capture.11qualifier CPU/11independent-audit CPU/13owner CPU checks pass. Prepare22e0ca: parent4a2d6cc768545654a7931ea4dbc3afc8837b0bdc16a159021c9ade2f0104de47, child26f5d003fc61f96a22939750e7732858beeaa9313f4de40b94a0e4a0009c9431. Expected counts are derived from the actual history.
+
+E054 prepares independent C1 T4/T8 full-verifier/commit cost, source CPU7 and owner CPU19pass; prepare1abb6c: parentf613b5df1494e9064ba84e2dd025b437177891b00bf5d98bcf18d03e5eb960ce, child3d10d60dc72eff7e2c70444239c61be09c865b6e15109c7f43b8cdf8a6a66c2c. No speculative or engine speed claim before measurement. Both E053 and E054 are prepared only at this commit and will use GPU serially.
