@@ -1,0 +1,39 @@
+{
+  "schema": "E054-execution-provenance-v1",
+  "scope": "Tool IDs below were reported by the parent or observed in this subtask; exact command/stdout/stderr/return code remain in archived actual execution receipts. No invented separate tool stdout file.",
+  "device": {
+    "origin": "reported-by-root-tool-observation",
+    "call": "f2a538",
+    "session": 61249,
+    "completion": "acf7fc",
+    "returncode": 0,
+    "elapsed_seconds": 81.5620721669984,
+    "status": "PASS_CAPTURE_AND_RESTORE"
+  },
+  "independent_audit_attempt1": {
+    "origin": "reported-by-root-tool-observation",
+    "call": "536f83",
+    "session": 16947,
+    "completion": "ca85b4",
+    "returncode": 1,
+    "status": "FAIL",
+    "cause": "Auditor expected canonical producer receipt root/ names; actual source-bound names use root/root/. All original raw outputs and records remain unchanged."
+  },
+  "independent_audit_attempt2": {
+    "origin": "reported-by-root-tool-observation",
+    "call": "1bcb4f",
+    "session": 84669,
+    "completion": "6d7069",
+    "returncode": 0,
+    "elapsed_seconds": 9.529179417,
+    "status": "PASS",
+    "source_sha256": "483fac0a92befa1d946a9b7dd75a578f0564a167e175f29661da6cf81847afcb"
+  },
+  "saved_resource_review": {
+    "origin": "actual-subtask-tool-observation",
+    "call": "0321f7",
+    "returncode": 0,
+    "status": "PASS_SAVED_OBSERVATIONS"
+  },
+  "no_device_rerun_for_audit_repair": true
+}
