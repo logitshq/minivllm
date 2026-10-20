@@ -1358,3 +1358,11 @@ E050 adapter10/10 CPU PASS (687d78) and owner13/13 CPU PASS (cf7efb). Prepare86d
 E050 actual root5c2103/session42008 →9e79c1 exit0,51.39823474996956s PASS_CAPTURE_AND_RESTORE. Original PID52818 resumed. Independent audit181b1f PASS; CPU73e20f7/7; saved resources c1c4ba PASS16physical+16metadata, child historical peak58,537,679,096B/system231,469,989,888B, zero swap growth. Same49-step scope as E049, all48 candidate layers5 Python branches/fallback0. Archive306members SHA38719a8a6832226970d27476c43936fe5b90f1b0b1c02baee7364f048de24db6.
 
 E051 actual CPU qualifier132a7d8/8, ownerb5090a13/13; metadata prepare8a97d9, parentc895c6e85c9c6e7ef8928f749086fd8012777a67c769b20b3cd13d7eaae4f618, child9ff6bcd67e6526f3ae6ac1e1fcfb5dd07b5077768844e3061ad2469ccdb3ae8a. Full1030step/16request/cap512 replay using frozen E050 bridge and original numeric comparator. Preregistered80GiB child/240GiB system/zero-swap sampled guards, unchanged2GiB cache. Prepared, not device-executed at this commit.
+
+### E051 actual complete correctness / E052 prepared actual HTTP capture
+
+E051 root edb8f7/session89344→afb109 exit0,516.0877691670321s diagnostic lifecycle PASS_CAPTURE_AND_RESTORE; same52818 restored. ChildPASS1030steps/16requests/8192IDs/1028compiled routes0fallback. Independent audit6c969e/session92141→2fa572 rc0:1,324,017bit/2,648,034finite receipts, all full drain checked; successful tensors not saved for offline byte reread. Resource163a80 PASS149+149, systemmax242615992320B, child historicalpeak74747271392B, zero swap growth. Archive833members SHA8705dbad87774f383dde26e04329de0e548674ec85b62355683f9c9e7faad3d0.
+
+E052 CPUd1849a10PASS; prepare8d4a5a parent3e14ce911125eb46147943d5024510414271198984588dd91fea8319df8947e6, spec8f7d0095c98d70bb4d72609a1a91e48581da32fc0695e6363f0fadbafa0c281c. New actual candidate HTTP warm8/screen8, MB50; qualification trace and future formal mode use same source. Prepared-only at this commit; no performance point.
+
+C1 full-verifier-cost source draft prepared separately,7CPU PASS8517f1. No plan or GPU result. Timed candidate excludes audit-only checks and measures k=T only against causal device-dependent native AR(T) plus the secondary host-synchronous oracle.

@@ -31,3 +31,7 @@ Actual child command, owned by the external lifecycle:
 ```
 
 No explicit mode only describes the experiment. The complete schema is `c8-batched-gdn-graph-full-result-v1`; success is `PASS`, with actual pid/ppid, new plan SHA, base result, complete case, steps1030, total_requests16, composition, full route comparison, and checked source/input pins. `full_history_qualified` means only this registered recording; `http_qualified` and `performance_qualified` remain false. The parent separately binds independent E050 audit and current service identity/resources. A future candidate HTTP capture, its full numerical replay, and observer-OFF formal timings remain separate work.
+
+## Actual complete history result
+
+E051 ran on device and passed:1030 steps,16 completed requests,8192 IDs,1028 compiled route invocations and zero fallback. Independent audit6c969e/session92141→2fa572 checked1,324,017 full-array bit-equality receipts and2,648,034 finite receipts, plus complete drain/ahead/retirement. Successful full tensor payloads were not retained; the independent check audits source-bound producer receipts rather than repeating GPU arithmetic. Lifecycleedb8f7/session89344→afb109 returned0 and restored same oMLX PID52818. Full archived evidence is [E051](../../../docs/experiments/m5-ultra-256gb/E051-c8-batched-gdn-graph-full-v1/README.md). Qualification applies to this exact captured history; no throughput result is granted.

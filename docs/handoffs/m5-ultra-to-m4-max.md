@@ -1354,3 +1354,7 @@ C8 native vs existing graph warm49 same-history replay passed; independent audit
 ## E050 actual candidate prefix passes; E051 full history prepared
 
 E050 batched GDN+graph passed the same-history native comparison and independent audit:380IDs/65,005 bit-equality receipts/130,010finite receipts. All48 real layers had5 Python candidate executions and0fallback; same52818 service restored. This is49 steps, not a performance point. E051 now prepares1030 steps/all16requests, retaining caps512 and complete drain/route stream checks. Existing complete numerical peak68.55GiB justifies preregistered80GiB child sample threshold; system240GiB/no swap remain. C1/C8 may select different algorithms/settings; current frontier figures remain unchanged.
+
+## E051 full candidate history passes (2026-10-19)
+
+Batched GDN+graph passed1030steps/16requests/8192IDs with complete source-bound logits/state/ahead/retirement receipts and independent audit. New actual candidate HTTP capture E052 is prepared using unchanged worker/transport and source shared with future observer-free formal mode. C1 has a separate full-verifier-cost draft (7CPU PASS, no GPU), with device-dependent AR baseline and selected-prefix commit. No new frontier point yet. Latest remote check612b44 found M4 branch still94c070e with no unmerged commits.
