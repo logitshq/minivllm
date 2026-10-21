@@ -1,0 +1,76 @@
+import math
+
+def _is_bool(x):
+    return isinstance(x, bool)
+
+def survival_from_full_width(accepted):
+    if not isinstance(accepted, list):
+        raise TypeError("accepted must be list")
+    if len(accepted) == 0:
+        raise ValueError("need >=1 sample")
+    n = len(accepted)
+    for v in accepted:
+        if _is_bool(v) or not isinstance(v, int):
+            raise TypeError("elements must be int 0..7")
+        if v < 0 or v > 7:
+            raise ValueError("elements must be 0..7")
+        if not math.isfinite(v):
+            raise ValueError("non-finite")
+    # for each j=1..7, P(A>=j)
+    surv = []
+    for j in range(1,8):
+        cnt = sum(1 for v in accepted if v >= j)
+        surv.append(cnt / n)
+    return surv
+
+def choose_width(survival, round_cost_ns, remaining):
+    # validate survival len7, nonincreasing finite 0..1
+    if not isinstance(survival, (list, tuple)):
+        raise TypeError("survival must be list len 7")
+    if len(survival) != 7:
+        raise ValueError("survival len must be 7")
+    for v in survival:
+        if _is_bool(v):
+            raise TypeError("survival values must not be bool")
+        if not isinstance(v, (int, float)):
+            raise TypeError("survival values must be numbers")
+        if not math.isfinite(v):
+            raise ValueError("survival must be finite")
+        if v < 0 or v > 1:
+            raise ValueError("survival values 0..1")
+    for i in range(1,7):
+        if survival[i] > survival[i-1]:
+            raise ValueError("survival must be nonincreasing")
+    # remaining strict positive integer non-bool
+    if _is_bool(remaining) or not isinstance(remaining, int):
+        raise TypeError("remaining must be int")
+    if remaining <= 0:
+        raise ValueError("remaining must be >0")
+    # round_cost_ns exact keys 4,8
+    if not isinstance(round_cost_ns, dict):
+        raise TypeError("round_cost_ns must be dict")
+    if set(round_cost_ns.keys()) != {4,8}:
+        raise ValueError("round_cost_ns must have exactly keys {4,8}")
+    for k,c in round_cost_ns.items():
+        if _is_bool(c):
+            raise TypeError("cost must not be bool")
+        if not isinstance(c, (int,float)):
+            raise TypeError("cost must be number")
+        if not math.isfinite(c):
+            raise ValueError("cost must be finite")
+        if c <= 0:
+            raise ValueError("cost must be positive")
+    def expected(width):
+        # 1+ sum survival[:width-1] capped by remaining
+        take = min(width-1, remaining-1)
+        return 1 + sum(survival[:take]) if take>0 else 1
+    exp4 = expected(4)
+    exp8 = expected(8)
+    rate4 = exp4 / round_cost_ns[4]
+    rate8 = exp8 / round_cost_ns[8]
+    if rate4 > rate8:
+        return 4
+    elif rate8 > rate4:
+        return 8
+    else:
+        return 4
