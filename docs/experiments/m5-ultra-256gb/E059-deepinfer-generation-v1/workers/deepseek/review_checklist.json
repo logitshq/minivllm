@@ -1,0 +1,17 @@
+{
+  "scope": "multi-round greedy cache/feature commit review; no GPU claims",
+  "cases": [
+    {"id": "partial_prefix_only", "setup": "Anchor plus 3 extra rows, draft[0] accepted, draft[1] mismatches", "must": "commit anchor, draft[0], and the bonus token exactly once; next anchor is the bonus; hidden later-row KV/GDN/features never leak into canonical state"},
+    {"id": "full_accept_bonus", "setup": "All 7 drafts match at width 8", "must": "commit 8 tokens but only prefixes/features through the bonus row; the bonus's own logits/state are computed in the next round, not fabricated"},
+    {"id": "later_match_not_rescue", "setup": "DFlash width 8, draft[1] mismatches while draft[2..6] also match", "must": "stop at draft[1]; later matches do not extend acceptance; width stays 8; target verification prefix may be 4 or 8 consistently"},
+    {"id": "prefix4_after_width8_round", "setup": "Round A commits 5 rows (prefix 5), round B verifies target prefix 4", "must": "B's anchor position equals A's committed length; caches come from A's committed prefix, not A's last computed row"},
+    {"id": "prefix8_after_partial_round", "setup": "Round A accepts only anchor+bonus (count 2), round B requests prefix 8", "must": "B reads prefix from count 2 and appends 7 inputs; no stale rows from A's private prefix 8"},
+    {"id": "ambiguous_candidate_equality", "setup": "Corrected bonus row or next draft equals an earlier draft token", "must": "select by position/count, never by first occurrence of a token ID"},
+    {"id": "eos_or_cap_mid_round", "setup": "Bonus or an accepted draft reaches EOS/output cap", "must": "truncate emitted tokens, prefixes, and feature rows to the same committed count; caller owns handling; no post-cap inputs committed"},
+    {"id": "feature_rows_match_prefix", "setup": "Partial acceptance in any round", "must": "features.shape[0] equals selected prefix count and every row belongs to that request's same private prefix; no cross-request or unaccepted-row reuse"},
+    {"id": "retry_after_rejection", "setup": "Selector rejects width 8 and retries width 4, or a round fails admission", "must": "rejections/failures do not increment caches, positions, counters, or acceptance stats; no partial canonical commit before a complete round"},
+    {"id": "round_cost_accounting", "setup": "Width changes between rounds", "must": "measured cost covers the full round including commit/features/sync and labels whether 4 or 8 was verified; no whole-block charge for prefix 4 and no kernel-only gain claim"},
+    {"id": "commit_order", "setup": "Bonus emitted, then commit cache and features", "must": "next round's anchor/position equals the number of tokens committed, including the bonus; cache and features commit atomically with token emission order"},
+    {"id": "causal_censoring_stats", "setup": "Mismatch at position j; later positions match", "must": "record only positions <= accepted as observations; later positions are censored, not failures and not accepts; no posterior confidence claim"}
+  ]
+}

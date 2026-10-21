@@ -1,5 +1,27 @@
 # E059: DeepInfer-inspired verification budgeting
 
+**Closed: GPU correctness and independent raw audit PASS; no overall performance win.** Run from daec7b5, M5 Ultra / MLX0.32.3 / original frozen Qwen3.8-27B NVFP4.
+
+| Prompt | native | fixed4 | fixed8 | adaptive |
+|---|---:|---:|---:|---:|
+| Math | 731.070 ms | 660.645 ms | 819.857 ms | 670.261 ms |
+| Chinese | 730.261 ms | 927.405 ms | 1407.501 ms | 933.301 ms |
+
+Three samples/arm/prompt, medians above. Full generation loop includes draft8, actual accept/reject, target feature capture, selected-state install and synchronization. Prefill and HTTP are excluded; denominator is31 new decoded tokens, excluding the initial prefill token. Native uses the existing decode_model runner through a host-driven loop, not the serving scheduler/lookahead.
+
+Combined two-context throughput relative to native: fixed4 0.919817×, fixed8 0.655987×, adaptive 0.912342×. These are exploratory synthetic-context results, not a production adoption decision. Frozen calibration selected T4 throughout and failed to generalize to the Chinese acceptance pattern.
+
+![All local generation samples](generation-cost.png)
+
+Independent audit:16 raw final files,1040 tensor pairs, all24 timings and token/round/EOS/cap accounting PASS. 8 unique seed files rehashed;1349 target and175 drafter parameter receipts unchanged. Final-state/raw qualification covers the dedicated untimed trajectories, not full per-round raw state for every timed run. All timed outputs match the qualified IDs. CPU: 38 root +12 independent audit checks pass.
+
+Resource observations:28 physical+metadata samples, max system187.31GiB / child physical peak22.46GiB, zero swap/swapout growth. Bounded child reaped and same oMLX PID52818 restored. Final live health is saved in the E060 report after the second experiment. MLX active bytes at in-function cleanup were209,409,032 (residual allocations before function return; retained local references are a likely cause), cache0; process exit/reap releases the remainder. No zero-residual-memory claim.
+
+[Independent audit](independent-audit.json) · [all timings/IDs](complete.json) · [resource review](resource-review.json) · [source/receipt manifest](device-evidence-manifest.json). Raw multi-GiB tensors remain under `.artifacts` and are indexed by `pairs.json`; no weights or credentials are committed.
+
+## Original pre-run record
+
+
 Status: implementation/CPU checks complete, GPU NOT RUN yet. Default OFF, experimental bench module.
 
 Official source pinned at `deepseek-ai/DeepInfer@9bd9cf243fc53ef9afbf8f04d391d989117d6ab9`. The release supports V4.1-Flash on SM100/Ascend950, not Apple GPU. We reuse the principle of expected emitted tokens per measured round cost, not its CUDA/distributed infrastructure or checkpoint. See [official scheduler](https://github.com/deepseek-ai/DeepInfer/blob/9bd9cf243fc53ef9afbf8f04d391d989117d6ab9/csrc/engine/mtp_varlen.hpp#L150-L265).

@@ -37,3 +37,8 @@ GPU descriptor核对；[完整证据](../../experiments/m5-ultra-256gb/E027-shar
 与[教程](../tutorials/027-shared-weight-m1.md)已保存。默认OFF，整模型与HTTP性能待验证。
 **这不是新的吞吐—完整请求延迟测量，该批没有改变v5的历史Pareto。** 正确性是入图硬门槛，
 内存/核级收益作为诊断证据分别保存。
+
+
+### 2026-10-21：E059/E060真实生成成本（独立局部图）
+
+[DeepInfer预算策略与真实草稿 E059](../../experiments/m5-ultra-256gb/E059-deepinfer-generation-v1/README.md) · [T2/T4/T8 E060图与全样本](../../experiments/m5-ultra-256gb/E060-short-verify-v1/README.md)。两轮各24个生成计时、1040对终态张量审计PASS；数学T4局部吞吐约+10.76%，中文T2仍未超过native。此处是同机greedy生成循环成本，不是HTTP Pareto；v16正式前沿保持不变。

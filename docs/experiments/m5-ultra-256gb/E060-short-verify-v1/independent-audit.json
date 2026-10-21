@@ -1,0 +1,409 @@
+{
+  "schema": "E060-independent-generation-audit-v1",
+  "status": "PASS",
+  "audit_source_sha256": "9a1b3b74fcb53cccb0308c91bd099ea25176e4a7f8b6f51e7a3874754e863716",
+  "raw_parser_sha256": "ce9273057d6308411cfedb72e4dfd95d59f759f8dce09556153fc416a1fac44b",
+  "plan_sha256": "e27e239a3f2c11edba8d74f50aa6545c7f03dda89f4a52d12dc635d4b171f6c7",
+  "raw_files": 16,
+  "tensor_pairs": 1040,
+  "raw_bytes": 4107243600,
+  "pairs": [
+    {
+      "label": "math-fixed2",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "math-fixed4",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "math-fixed8",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "math-stress",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "chinese-fixed2",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "chinese-fixed4",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "chinese-fixed8",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    },
+    {
+      "label": "chinese-stress",
+      "arrays": 130,
+      "bytes": 513405450,
+      "computed_rows": 31
+    }
+  ],
+  "generation_bytes_audited": true,
+  "http_qualified": false,
+  "performance_qualified": false,
+  "engine_pareto_point": false,
+  "scope": "Closed saved local greedy generation.16 final snapshots/1040 tensor pairs; no per-round raw state or24 full timed-state comparisons. Prefill excluded. Same full8 drafter; only verification width changes.",
+  "limits": [
+    "Seed files are rehashed and paired for equality; producer full-array comparison is source-bound. They are not counted as final raw tensor pairs.",
+    "No calibration or adaptive policy. These two prompts were observed in E059; this is exploratory follow-up, not held-out evidence.",
+    "No model/runtime payload rehash, GPU execution or live restoration/resource probe. Owner closure is audited separately.",
+    "Only two synthetic test contexts, three samples/arm/context. Native uses the strong no-capture decode_model runner through a host-driven loop, without HTTP lookahead. No serving, HTTP, global engine winner or Pareto qualification."
+  ],
+  "pairs_checked": 8,
+  "arrays_checked": 1040,
+  "timing_count": 24,
+  "seed_checks": 4,
+  "seed_files_hashed": 6,
+  "seed_bytes_hashed": 1845265962,
+  "target_parameter_count": 1349,
+  "drafter_parameter_count": 175,
+  "timing_summary": [
+    {
+      "arm": "native",
+      "samples": 6,
+      "total_ns": 4409601499,
+      "decoded_tokens": 186,
+      "ns_per_token": 23707534.940860216,
+      "tokens_per_second": 42.18068232292208,
+      "native_over_arm": 1.0,
+      "groups": [
+        {
+          "group": 0,
+          "seconds": 1.467672875,
+          "decoded_tokens": 62,
+          "native_over_arm": 1.0
+        },
+        {
+          "group": 1,
+          "seconds": 1.476215708,
+          "decoded_tokens": 62,
+          "native_over_arm": 1.0
+        },
+        {
+          "group": 2,
+          "seconds": 1.465712916,
+          "decoded_tokens": 62,
+          "native_over_arm": 1.0
+        }
+      ]
+    },
+    {
+      "arm": "fixed2",
+      "samples": 6,
+      "total_ns": 4504089750,
+      "decoded_tokens": 186,
+      "ns_per_token": 24215536.29032258,
+      "tokens_per_second": 41.295802331647586,
+      "native_over_arm": 0.979021676688392,
+      "groups": [
+        {
+          "group": 0,
+          "seconds": 1.501947667,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9771797694732861
+        },
+        {
+          "group": 1,
+          "seconds": 1.497873083,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9855412482901263
+        },
+        {
+          "group": 2,
+          "seconds": 1.504269,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9743688901386653
+        }
+      ]
+    },
+    {
+      "arm": "fixed4",
+      "samples": 6,
+      "total_ns": 4770997207,
+      "decoded_tokens": 186,
+      "ns_per_token": 25650522.61827957,
+      "tokens_per_second": 38.98556044574939,
+      "native_over_arm": 0.9242515364566216,
+      "groups": [
+        {
+          "group": 0,
+          "seconds": 1.594352625,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9205447101139248
+        },
+        {
+          "group": 1,
+          "seconds": 1.591111332,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9277890731533046
+        },
+        {
+          "group": 2,
+          "seconds": 1.58553325,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.9244289995179855
+        }
+      ]
+    },
+    {
+      "arm": "fixed8",
+      "samples": 6,
+      "total_ns": 6694194291,
+      "decoded_tokens": 186,
+      "ns_per_token": 35990291.88709678,
+      "tokens_per_second": 27.785270626230172,
+      "native_over_arm": 0.6587202742126087,
+      "groups": [
+        {
+          "group": 0,
+          "seconds": 2.231917959,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.6575837024303455
+        },
+        {
+          "group": 1,
+          "seconds": 2.233051291,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.6610755937177442
+        },
+        {
+          "group": 2,
+          "seconds": 2.229225041,
+          "decoded_tokens": 62,
+          "native_over_arm": 0.6574988567966656
+        }
+      ]
+    }
+  ],
+  "total_timed_ns": 20378882747,
+  "complete_sha256": "7621270715a546227c72f5f7404dfa20ef1b0a5100f0c15decd9d166c1ffff55",
+  "closed_execution_sha256": "f8dc6908e87393f003b79d96630300a62c5dc9e10242743021f005e5c58fe5e3",
+  "source_and_small_evidence": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-execution/final.json": "f8dc6908e87393f003b79d96630300a62c5dc9e10242743021f005e5c58fe5e3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/prereg-v1/child-plan.json": "e27e239a3f2c11edba8d74f50aa6545c7f03dda89f4a52d12dc635d4b171f6c7",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/plan.json": "e27e239a3f2c11edba8d74f50aa6545c7f03dda89f4a52d12dc635d4b171f6c7",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/screen.py": "d805bbfc981847825f792ed769af3d1a9dafa83efd21a897e6f88022351ca045",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/runner.py": "65fabe51595b797378ed87635583df3ece707d44acb3e34fa98016c0700600c8",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/execute.py": "2a8665b2985fb83628e1a6896e684f9ef725262e239db53e3bec4cd72e269cec",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/terminal_hold.py": "42c76c8fc609d9f0a6caaf436ef8894cd9cb264b8f39baafb29fb7f7f3451a71",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/test_selection.py": "d66ba0e1dabb3868569098cba4f9b0ec682862afaeffdfe0d8f5cddbd73a066e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/selection.py": "2f6f5c011e7eb44290eb6da3fd77419b06b25a07834e5d2c086e1a2d580561e9",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e060_short_verify_v1/test_owner_cpu.py": "9aac6548237b4812767b83bb09065ca64377ed5a0be8127d6c8e11eda4be5bbd",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_mlp_shared_features/test_cpu.py": "c80a56e6aa81b24d74a27169db178eee3debee1654156aaace5a7ed31a5fcf1d",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_mlp_shared_features/round.py": "3fc784409c1af37fa108d42a9c8f045f0bb0d646e04f86f03168a78ede1f9ed9",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/rowwise_mlp_shared_features/candidate.py": "948c741ee701310c78fd7aaa99420987ef6c3f2f85947fd54b486d7b926a4832",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/test_cpu.py": "7a776f2586d4818416511c7ed55799a84e7519c61c04efed7c9d5c4d88338152",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/test_real_projection_probe_cpu.py": "e7a48d095703f440d1567d7c9ecfe73ff2d1e1792a55aa860adb01c3199a43b3",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/candidate.py": "d1826b3c4d07d44adbae071ef2da43197348c09b2d8be1035eb1a0c2788d132e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/nvfp4_multirow_shared/real_projection_probe_v1.py": "e873c448d335bec69b15f9523e3f9ff89a8ec5d8048a793e24934720a3e9d2b9",
+    "/private/tmp/e060-audit/audit.py": "9a1b3b74fcb53cccb0308c91bd099ea25176e4a7f8b6f51e7a3874754e863716",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/prereg-v1/child-plan.json": "89f4b815bd706a16012d351b88e6b3490fe514db0d834f36a59c62a7c41ec29e",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e058-agent-features-v1-numerical/complete.json": "86e5346a5f923065936c58e7ed356eff8aa6388c2531a591d883b3fb3b1320b8",
+    "/Users/ryanli/code/minivllm/docs/experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/independent-audit.json": "181ee0308d05625f925bafedccfddd66a922b66af2a5354cb5f3ed3aa700b332",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e059-deepinfer-v1-numerical/complete.json": "32debef274bbbd9780d53fc6702658afcf39dc706d97d9e0af6cedb6ac59c09f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/screen.py": "cc92bbcc04dbb7061b4f162bcdf49824020317c0fb801bdb8747fef58803625c",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/test_timing.py": "64a52064f206bbc4f096eb6bfe99a882941ea8abfa04db852742d173e708a853",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/runner.py": "6c7916c8eeff00982d58531ed6ae0097d4a6d52ad4dd4db6f2aa4f6e1bed7b87",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py": "82525dc74426384317cc51953c3cab750f97492e86df37fdfaecea270981620b",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/execute.py": "fe4172f9a98425623a5ff3e5fcb6669d61b213ddd9f15fef4960612dfdcc90e4",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/terminal_hold.py": "b1756fcb875db2e6d7bea0e96fae49df22230d529ff4c4eb2a717c614936641f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/test_integration_cpu.py": "f45f0d5b3c736eea67e5b374bf883a8f526608085d5074498874149488b4986f",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/timing.py": "7d4c0c349164dddec548f65e5788aa90e8c30fc6794d584770cb05466680878e",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/test_audit.py": "4db2ccf048622304d2dfb215844b0233987b4e648d1a88c986e40a3087b5dda0",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/implementation.py": "ce6754aea5386ca6c6f2b4c99ad31b560d2dfcaebe3bbd93ff821ce9ce567302",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/test_owner_cpu.py": "48db306a832e3f5ec14ea8fff6f932b1a2dffa58a20e50d60090bfb86a0b4d65",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/complete.json": "7621270715a546227c72f5f7404dfa20ef1b0a5100f0c15decd9d166c1ffff55",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/pairs.json": "79c21551d31704b601927ddae6defd5ff3d6ed6aec04119bbd4d2612a17d9744",
+    "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_audit_v2/audit.py": "ce9273057d6308411cfedb72e4dfd95d59f759f8dce09556153fc416a1fac44b",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/timings-partial.json": "78ff68e4b7b52ebcfb820e1996778df63796a9e1632f676a4c1f4ed4eb51405b",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/parameters-before.json": "ebb001301c85de8da504ba08e5c758d252d6d10779d53254971df11282b28fb2",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/parameters-before-timing.json": "ebb001301c85de8da504ba08e5c758d252d6d10779d53254971df11282b28fb2",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/parameters-after.json": "ebb001301c85de8da504ba08e5c758d252d6d10779d53254971df11282b28fb2",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/drafter-before.json": "d0174b2dce66e39594c913902d4dca8b8aed56b9363b5126dde8b3d51c1d1d57",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/drafter-after.json": "d0174b2dce66e39594c913902d4dca8b8aed56b9363b5126dde8b3d51c1d1d57"
+  },
+  "seed_file_hashes": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-math-before.safetensors": "8c8de86c2c855bc05bdaae8faeb079ca8b904a8dbd5bc300e69ddc2a67e0b73f",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-math-after-qualification.safetensors": "8c8de86c2c855bc05bdaae8faeb079ca8b904a8dbd5bc300e69ddc2a67e0b73f",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-chinese-before.safetensors": "e25b9e3fb813eaedceb5800c747bf81167c6aac582244679ef58532dca456a3e",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-chinese-after-qualification.safetensors": "e25b9e3fb813eaedceb5800c747bf81167c6aac582244679ef58532dca456a3e",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-test0-after-timing.safetensors": "8c8de86c2c855bc05bdaae8faeb079ca8b904a8dbd5bc300e69ddc2a67e0b73f",
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-test1-after-timing.safetensors": "e25b9e3fb813eaedceb5800c747bf81167c6aac582244679ef58532dca456a3e"
+  },
+  "snapshot_file_stats": {
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed2-reference.safetensors": [
+      16777231,
+      3529199,
+      256702725,
+      1792602085261724800,
+      1792602085261724800
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed2-candidate.safetensors": [
+      16777231,
+      3529200,
+      256702725,
+      1792602085369111031,
+      1792602085369111031
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed4-reference.safetensors": [
+      16777231,
+      3529204,
+      256702725,
+      1792602086157778623,
+      1792602086157778623
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed4-candidate.safetensors": [
+      16777231,
+      3529205,
+      256702725,
+      1792602086261719875,
+      1792602086261719875
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed8-reference.safetensors": [
+      16777231,
+      3529207,
+      256702725,
+      1792602087212198443,
+      1792602087212198443
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-fixed8-candidate.safetensors": [
+      16777231,
+      3529208,
+      256702725,
+      1792602087318379000,
+      1792602087318379000
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-stress-reference.safetensors": [
+      16777231,
+      3529292,
+      256702725,
+      1792602090491048725,
+      1792602090491048725
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/math-stress-candidate.safetensors": [
+      16777231,
+      3529293,
+      256702725,
+      1792602090597983078,
+      1792602090597983078
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed2-reference.safetensors": [
+      16777231,
+      3529303,
+      256702725,
+      1792602093917696690,
+      1792602093917696690
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed2-candidate.safetensors": [
+      16777231,
+      3529304,
+      256702725,
+      1792602094023346911,
+      1792602094023346911
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed4-reference.safetensors": [
+      16777231,
+      3529305,
+      256702725,
+      1792602095062378638,
+      1792602095062378638
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed4-candidate.safetensors": [
+      16777231,
+      3529306,
+      256702725,
+      1792602095169632702,
+      1792602095169632702
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed8-reference.safetensors": [
+      16777231,
+      3529317,
+      256702725,
+      1792602096709773285,
+      1792602096709773285
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-fixed8-candidate.safetensors": [
+      16777231,
+      3529318,
+      256702725,
+      1792602096819649490,
+      1792602096819649490
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-stress-reference.safetensors": [
+      16777231,
+      3529328,
+      256702725,
+      1792602099983632454,
+      1792602099983632454
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/raw/chinese-stress-candidate.safetensors": [
+      16777231,
+      3529329,
+      256702725,
+      1792602100090843726,
+      1792602100090843726
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-math-before.safetensors": [
+      16777231,
+      3529194,
+      307544327,
+      1792602083669082691,
+      1792602083669082691
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-math-after-qualification.safetensors": [
+      16777231,
+      3529294,
+      307544327,
+      1792602090725072095,
+      1792602090725072095
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-chinese-before.safetensors": [
+      16777231,
+      3529301,
+      307544327,
+      1792602092257732550,
+      1792602092257732550
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-chinese-after-qualification.safetensors": [
+      16777231,
+      3529330,
+      307544327,
+      1792602100219015082,
+      1792602100219015082
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-test0-after-timing.safetensors": [
+      16777231,
+      3529579,
+      307544327,
+      1792602139608216476,
+      1792602139608216476
+    ],
+    "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e060-short-verify-v1-numerical/seed-test1-after-timing.safetensors": [
+      16777231,
+      3529580,
+      307544327,
+      1792602139751737426,
+      1792602139751737426
+    ]
+  },
+  "audit_elapsed_s": 2.5747572079999372
+}

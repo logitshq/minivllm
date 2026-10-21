@@ -1446,3 +1446,14 @@ E058 final source CPU checkpoint: 8/8 PASS, actual tool605bf7; first7/7 also ret
 已fetch：M4分支最新仍94c070e，无新增待合并提交。M5从2c29d3e执行新的默认OFF实验，DeepSeek写参考接口、Kimi写并运行独立byte auditor、Muse写计时器；失败/修复原样留档。T4/T8所有k前缀和continuation的3120对张量一致；teacher-forced native+capture93.00079/185.64746ms，shared+capture59.75785/110.11562ms，五组配对ratio中位1.56014×/1.68432×。不是新C1/C8 HTTP结果或Pareto胜出。
 
 可复用的是五层特征capture接口、every-prefix测试和各模块显式开关。M5专用kernel/资源owner不要直接搬到M4；须按本机重测。v1审计器因MLX `__metadata__: null`拒绝，使用独立版本`bench/m5_ultra_256gb/e058_agent_audit_v2/`；不要改冻结的GPU源。原oMLX PID52818已恢复，零swap增长。见[完整图和实验](../experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md)、[第040课](../optimization-guide/tutorials/040-logits-coding-agents-and-feature-cost.md)。
+
+
+## 2026-10-21：DeepInfer研究与真实多轮投机（E059/E060）
+
+已fetch，M4分支仍为94c070e；本次只推M5实验分支。官方DeepInfer9bd9cf2的实测成本/接受概率预算思想已做成独立实验，没有导入其分布式框架。真实Logits DeepSeek/Kimi/Muse分别做研究、EOS/cap selector、成本策略；默认OFF。
+
+源计划daec7b5（E059）和d12dbdd（E060）已推送。E058不再只有teacher-forced局部结果：新完整DFlash8→verify→select→commit循环在两上下文产生真实输出，并通过2080对终态张量独立bytes/finite审计，48计时全部保留。E060数学T4 662.17ms vs native733.42ms；中文T2 794.60 vs native734.25ms。不能宣传全线赢；固定长度和冻结先验都未总体胜出。T2/T4/T8是验证宽度，不是并发B/C。
+
+新脚本在bench/m5_ultra_256gb/e059_deepinfer_v1和e060_short_verify_v1；审计器在对应generation_audit_v1。冻结脚本与owner绑定M5路径/服务身份，不要直接在M4运行；取用纯selection/policy可CPU复现，模型与资源资格应独立重做。每次先cap/EOS后按len(produced)提交，最后token仍pending；GDN状态不能按DeepInfer的SWA/YoCo随意截断。
+
+[第041课](../optimization-guide/tutorials/041-deepinfer-and-real-speculative-cost.md)含新图、负结果与下一项native fallback设计。正式HTTP v16不变，GLM无新资格。两次暂停/恢复均同PID52818、零swap增长，最终health正常。

@@ -1443,3 +1443,12 @@ defaultOFF and CPU-only. No new device or Pareto result.
 三臂各10次/width，T4 native+capture93.00079ms→shared+capture59.75785ms，T8 185.64746→110.11562ms；五组ratio中位1.56014×/1.68432×。额外capture的观测中位开销0.4070%/0.3220%，无显著性推断。15次资源观测、零swap增长；相同PID52818恢复健康。此为teacher-forced局部验证器成本，T不是并发量，未测真实drafter/acceptance/HTTP，正式v16 Pareto不变。
 
 [图/独立证据/版本和失败](../experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md) · [第040课](tutorials/040-logits-coding-agents-and-feature-cost.md)。下一步是完整真实drafter round，按实际输出token数归一化总成本。
+
+
+## E059/E060：DeepInfer-inspired actual generation · 2026-10-21
+
+官方DeepInfer9bd9cf2已clone并核对confidence预算、async与batch invariant；三个Logits模型实际参与研究/selector/策略。E059先推daec7b5，再有界GPU85.937s/整体90.701s完成，独立16files/1040tensorpairs/24timings与8seed文件PASS，CPU38+12。数学T4约1.107×；中文0.787×；冻结校准策略总体0.912342×，拒绝普遍采用。
+
+E060先推d12dbdd，扩展T2并保留draft8，GPU79.980s/整体84.609s；另16files/1040pairs/24timings/6seed文件PASS，CPU30+13。数学native/T2/T4/T8中位733.42/706.99/662.17/822.35ms；中文734.25/794.60/929.21/1407.15ms。T2相对T4降低中文延迟14.49%，仍未超native；合并速度比0.979022×。两项都保留默认OFF，不进入v16 HTTP Pareto。28/27资源采样、零swap增长、相同PID52818恢复并健康。
+
+所有失败保留：DeepSeek错误bonus/删失建议被拒绝；root补seed不变性和native无capture资格；E060首轮枚举断言仍旧2928导致29/30，修正为实际3072后30/30。图、审计、教程与M4交接均归档，详见[041](tutorials/041-deepinfer-and-real-speculative-cost.md)。

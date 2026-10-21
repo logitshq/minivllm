@@ -1,6 +1,6 @@
 # 从瓶颈到实现：M5 Ultra 推理优化攻略
 
-更新：2026-10-19。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
+更新：2026-10-21。目标机器是 M5 Ultra / 80 GPU cores / 256 GiB；目标模型
 主线为 `mlx-community/Qwen3.8-27B-nvfp4@5ff8ef1`，第二重点为 GLM-5.3-Flash；后者尚未完成本机资格。代码在
 `tutorial_code/miniengine`。这是可复查的实验手册，新的结果按编号追加。
 
@@ -68,6 +68,8 @@ C2–7和GLM正式前沿仍未知。跨引擎历史点不是本轮同时配对�
 E042 shared head 的实际固定 prefix 与独立字节审计均通过：九case/42prefix/96快照。
 只取得 forward-prefix 资格；接受/回滚、完整模型通用资格、HTTP与速度仍未通过。
 详见[035 教程](tutorials/035-shared-weight-screen-and-load-boundary.md)。
+
+最新 E059/E060 已跑真实 DFlash 多轮生成并独立审计：两轮共48计时、2080对终态数组。数学 T4 局部吞吐约+10.76%；中文缩短到 T2 后仍慢于 native，历史接受率策略未泛化，均不默认采用。已增加默认OFF的 T2/T4/T8 selector/完整生成原型；[第041课：DeepInfer与真实投机成本](tutorials/041-deepinfer-and-real-speculative-cost.md)保留实现、失败和新图。正式 v16 oMLX/Lithos 前沿未变化，GLM 没有新增设备结果。
 
 ## 1. 先算每个 token 为哪些字节和等待付钱
 

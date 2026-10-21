@@ -1,0 +1,133 @@
+{
+  "label": "e059-generation-running",
+  "recorded_at": "2026-10-21T17:02:02.479986+00:00",
+  "monotonic_s": 479440.499684791,
+  "owned_model_pid": 67740,
+  "memory_pressure": {
+    "returncode": 0,
+    "text": "The system has 274877906944 (16777216 pages with a page size of 16384).\nSystem-wide memory free percentage: 89%",
+    "error": ""
+  },
+  "pressure_level": {
+    "returncode": 0,
+    "text": "1",
+    "error": ""
+  },
+  "swap": {
+    "returncode": 0,
+    "text": "vm.swapusage: total = 3072.00M  used = 1421.56M  free = 1650.44M  (encrypted)",
+    "error": ""
+  },
+  "vm_stat": {
+    "returncode": 0,
+    "text": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    52457.\nPages active:                                6517346.\nPages inactive:                              8437716.\nPages speculative:                               453.\nPages throttled:                                   0.\nPages wired down:                            1611323.\nPages purgeable:                              151572.\n\"Translation faults\":                     3044444409.\nPages copy-on-write:                       115354569.\nPages zero filled:                       15341399366.\nPages reactivated:                           5771991.\nPages purged:                                7620494.\nFile-backed pages:                           3824168.\nAnonymous pages:                            11131347.\nPages stored in compressor:                   152447.\nPages occupied by compressor:                 114744.\nDecompressions:                             30805091.\nCompressions:                               83057499.\nPageins:                                   466416570.\nPageouts:                                      18971.\nSwapins:                                      165663.\nSwapouts:                                     807478.\nPages tagged:                                 210340.\nPages tagged resident:                        205682.\nPages tagged compressed:                        4658.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                11274.\nPages tag-storage free:                          914.\nPages tag-storage non-tag pageable:           511704.\nPages tag-storage non-tag wired:                  21.\nBytes of compressed tags:                     609152.\nTagged compressions:                          124808.\nTagged decompressions:                         64860.",
+    "error": ""
+  },
+  "thermal": {
+    "returncode": 0,
+    "text": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+    "error": ""
+  },
+  "free_percent": 89,
+  "swap_used_mb": 1421.56,
+  "pressure_level_value": 1,
+  "vm_counters": {
+    "Swapouts": 807478,
+    "Swapins": 165663,
+    "Pageouts": 18971,
+    "Compressions": 83057499,
+    "Decompressions": 30805091
+  },
+  "process_inventory_ok": true,
+  "known_inference_processes": [],
+  "known_inference_process_count": 0,
+  "only_owned_known_inference_processes": true,
+  "exactly_one_owned_known_model": false,
+  "process_scope": "known benchmark command matches only; GUI GPU use and unrecognized runtimes unknown",
+  "owned_pid_rss_kib": 17823616,
+  "owned_pid_rss_scope": "exact owned PID, independent of process title; unavailable is unknown",
+  "power_metadata": {
+    "status": "known",
+    "percent": null,
+    "source": "AC Power",
+    "state_text": null,
+    "raw": {
+      "command": [
+        "/usr/bin/pmset",
+        "-g",
+        "batt"
+      ],
+      "returncode": 0,
+      "stdout": "Now drawing from 'AC Power'",
+      "stderr": ""
+    }
+  },
+  "processinfo_thermal_metadata": {
+    "status": "known",
+    "code": 0,
+    "name": "nominal",
+    "raw": {
+      "command": [
+        "/usr/bin/osascript",
+        "-l",
+        "JavaScript",
+        "-e",
+        "ObjC.import(\"Foundation\"); String($.NSProcessInfo.processInfo.thermalState)"
+      ],
+      "returncode": 0,
+      "stdout": "0",
+      "stderr": ""
+    },
+    "scope": "NSProcessInfo system thermal state at this sample; no causal attribution"
+  },
+  "exact_owned_pid_metadata": {
+    "status": "known",
+    "pid": 67740,
+    "raw": {
+      "command": [
+        "/bin/ps",
+        "-p",
+        "67740",
+        "-o",
+        "pid=,ppid=,rss=,comm="
+      ],
+      "returncode": 0,
+      "stdout": "67740 67722 17823616 /Users/ryanli/code/minivllm/.venv/bin/python",
+      "stderr": ""
+    },
+    "scope": "Exact supplied PID only; process existence/RSS does not prove model residency or sole GPU use",
+    "ppid": 67722,
+    "rss_kib": 17823616,
+    "executable": "/Users/ryanli/code/minivllm/.venv/bin/python"
+  },
+  "native_process_inventory_ok": true,
+  "native_inference_processes": [
+    {
+      "pid": 52818,
+      "ppid": 1,
+      "rss_kib": 37405408,
+      "cpu_percent": 0.0,
+      "state": "T",
+      "executable": "omlx-server",
+      "engine": "omlx",
+      "owned": false,
+      "authorized_suspended": true
+    },
+    {
+      "pid": 67740,
+      "ppid": 67722,
+      "rss_kib": 17823616,
+      "cpu_percent": 66.4,
+      "state": "S",
+      "executable": "/Users/ryanli/code/minivllm/.venv/bin/python",
+      "engine": "explicit-owned-pid",
+      "owned": true,
+      "authorized_suspended": false
+    }
+  ],
+  "authorized_suspended_pids": [
+    52818
+  ],
+  "native_process_scope": "Executable titles plus exact owned PID; no command arguments; unrecognized runtimes/GUI GPU use remain unknown",
+  "no_active_foreign_native_processes": true
+}

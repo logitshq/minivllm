@@ -1,0 +1,83 @@
+{
+  "schema": "GLM-physical-sample-v1",
+  "pid": 66648,
+  "owner_pid": 66630,
+  "started_monotonic": 479170.483910416,
+  "started_at": 1792601852.462753,
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/footprint",
+        "-p",
+        "66648",
+        "--noCategories",
+        "--sysFootprint",
+        "-f",
+        "bytes",
+        "-j",
+        "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e059-deepinfer-v1-owner/resources/physical-0017/footprint.raw.json"
+      ],
+      "returncode": 0,
+      "stdout": "======================================================================\npython [66648]: 64-bit    Footprint: 22608199832 B (16384 bytes per page)\n======================================================================\n\nAuxiliary data:\n    phys_footprint: 22608199832 B\n    phys_footprint_peak: 24116919608 B\n\n\nSystem auxiliary data:\n    boot_carveout:         929120256 B\n    sys_wired:           27029946368 B\n    sys_unwired:        172773392384 B\n    ---------------------------------------\n    sys_footprint:      200732459008 B\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/sbin/sysctl",
+        "-n",
+        "kern.memorystatus_vm_pressure_level"
+      ],
+      "returncode": 0,
+      "stdout": "1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/sbin/sysctl",
+        "vm.swapusage"
+      ],
+      "returncode": 0,
+      "stdout": "vm.swapusage: total = 3072.00M  used = 1421.56M  free = 1650.44M  (encrypted)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/sbin/sysctl",
+        "-n",
+        "hw.memsize"
+      ],
+      "returncode": 0,
+      "stdout": "274877906944\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/vm_stat"
+      ],
+      "returncode": 0,
+      "stdout": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    82683.\nPages active:                                6458104.\nPages inactive:                              8425221.\nPages speculative:                              3515.\nPages throttled:                                   0.\nPages wired down:                            1649770.\nPages purgeable:                              162480.\n\"Translation faults\":                     3041014147.\nPages copy-on-write:                       115133702.\nPages zero filled:                       15331150108.\nPages reactivated:                           5771132.\nPages purged:                                7616124.\nFile-backed pages:                           3827394.\nAnonymous pages:                            11059446.\nPages stored in compressor:                   152445.\nPages occupied by compressor:                 114746.\nDecompressions:                             30804969.\nCompressions:                               83057499.\nPageins:                                   466412894.\nPageouts:                                      18971.\nSwapins:                                      165651.\nSwapouts:                                     807478.\nPages tagged:                                 210535.\nPages tagged resident:                        205861.\nPages tagged compressed:                        4674.\nPages tag-storage:                            524288.\nPages tag-storage holding tags:                11285.\nPages tag-storage free:                         9426.\nPages tag-storage non-tag pageable:           502956.\nPages tag-storage non-tag wired:                  21.\nBytes of compressed tags:                     610176.\nTagged compressions:                          124808.\nTagged decompressions:                         64860.\n",
+      "stderr": ""
+    }
+  ],
+  "status": "MEASURED",
+  "raw": {
+    "path": "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e059-deepinfer-v1-owner/resources/physical-0017/footprint.raw.json",
+    "bytes": 883,
+    "sha256": "63831e9d3e8e9debb6a0fd0c717968e0983b8f3c67e252ad866b7534d5529bc1"
+  },
+  "parsed": {
+    "pid": 66648,
+    "top_bytes": 22608199832,
+    "aux_current_bytes": 22608199832,
+    "aux_peak_bytes": 24116919608,
+    "current_bytes": 22608199832,
+    "peak_bytes": 24116919608,
+    "system_bytes": 200732459008,
+    "pressure": 1,
+    "physical_ram": 274877906944,
+    "swap_bytes": 1490613699,
+    "swapouts": 807478
+  },
+  "ended_monotonic": 479170.576119375,
+  "ended_at": 1792601852.5549629
+}
