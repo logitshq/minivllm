@@ -1,0 +1,1 @@
+Corrected `integration-review.md` in place: retracted position-0, file-attribution, extra-write, and E057 130-entry claims; no actionable issues substantiated; no timing.py/tests or root edits, no GPU/service ops.

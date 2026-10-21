@@ -1,0 +1,1 @@
+Wrote `integration-review.md` (CPU-only static review). No root files or `timing.py` edited, no GPU/MLX/network executed. Covers cache ownership, positions, JSON serialization, timing scope, cleanup, and original-model capture with filename:line refs.
