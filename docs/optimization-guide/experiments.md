@@ -1435,3 +1435,11 @@ E055 andE057 figures rendered from independent audits and visually checked; all 
 2026-10-20: [Logits actual repository review and failures](../experiments/m5-ultra-256gb/logits-workers-2026-10-20/README.md);
 [E058 feature-interface source checkpoint](../../bench/m5_ultra_256gb/rowwise_mlp_shared_features/README.md),
 defaultOFF and CPU-only. No new device or Pareto result.
+
+## E058：Logits三模型写代码并跑真实特征验证 · 2026-10-21
+
+从已推送的2c29d3e执行。DeepSeek参考/接口、Kimi审计器、Muse计时器实际参与；root执行单GPU有界任务。63项CPU测试后，真实T4/T8所有k前缀及continuation通过，24对记录/48文件/3120对张量/12,285,255,872B经独立v2审计。Kimi首版未处理MLX空metadata、Muse后处理递归自调用、DeepSeek测试脚手架和公式错误均保留并修复或拒绝。
+
+三臂各10次/width，T4 native+capture93.00079ms→shared+capture59.75785ms，T8 185.64746→110.11562ms；五组ratio中位1.56014×/1.68432×。额外capture的观测中位开销0.4070%/0.3220%，无显著性推断。15次资源观测、零swap增长；相同PID52818恢复健康。此为teacher-forced局部验证器成本，T不是并发量，未测真实drafter/acceptance/HTTP，正式v16 Pareto不变。
+
+[图/独立证据/版本和失败](../experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md) · [第040课](tutorials/040-logits-coding-agents-and-feature-cost.md)。下一步是完整真实drafter round，按实际输出token数归一化总成本。

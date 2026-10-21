@@ -230,3 +230,7 @@ v3实际加载被系统swap增长231.62 MiB门槛拒绝，0请求/0tokens；非O
 子进程约182.45 GiB、系统约203.92 GiB，均低于本轮硬上限。底层加载线程在取消期间返回，
 不等同于EnginePool准入成功。模型进程已回收，外部oMLX服务已恢复且独立恢复PASS。
 见[032教程](tutorials/032-glm-load-and-memory.md)；GLM尚无我们的正式前沿。
+
+### E058：三个 Logits coding agent 的真实 GPU 实验（2026-10-21）
+
+DeepSeek 实现、Kimi 原始字节审计、Muse 计时模块已实际使用。T4/T8验证器含五层特征，局部配对组中位比为1.56014×/1.68432×；3120对张量字节一致，原oMLX服务已恢复。尚非新的服务Pareto点。见[第040课](tutorials/040-logits-coding-agents-and-feature-cost.md)、[图及全部失败记录](../experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md)。

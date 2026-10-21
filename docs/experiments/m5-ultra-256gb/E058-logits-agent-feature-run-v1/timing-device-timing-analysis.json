@@ -1,0 +1,142 @@
+{
+  "arms": {
+    "4_native": {
+      "max_ms": 97.665125,
+      "median_ms": 93.0007915,
+      "min_ms": 92.424541,
+      "n": 10,
+      "vals_ms": [
+        92.424541,
+        92.574375,
+        92.5805,
+        92.792,
+        92.936041,
+        93.065542,
+        93.082167,
+        93.205791,
+        93.2695,
+        97.665125
+      ]
+    },
+    "4_shared_with_features": {
+      "max_ms": 60.55175,
+      "median_ms": 59.757854,
+      "min_ms": 58.632209,
+      "n": 10,
+      "vals_ms": [
+        58.632209,
+        58.784417,
+        59.021209,
+        59.591125,
+        59.718958,
+        59.79675,
+        60.109083,
+        60.373917,
+        60.403917,
+        60.55175
+      ]
+    },
+    "4_shared_without_features": {
+      "max_ms": 60.495459,
+      "median_ms": 59.515625,
+      "min_ms": 58.321541,
+      "n": 10,
+      "vals_ms": [
+        58.321541,
+        59.048209,
+        59.350709,
+        59.422625,
+        59.454125,
+        59.577125,
+        60.08825,
+        60.115833,
+        60.173333,
+        60.495459
+      ]
+    },
+    "8_native": {
+      "max_ms": 186.178666,
+      "median_ms": 185.6474585,
+      "min_ms": 183.738,
+      "n": 10,
+      "vals_ms": [
+        183.738,
+        183.75675,
+        184.61175,
+        185.204208,
+        185.583584,
+        185.711333,
+        185.984958,
+        186.029625,
+        186.053083,
+        186.178666
+      ]
+    },
+    "8_shared_with_features": {
+      "max_ms": 111.222625,
+      "median_ms": 110.1156245,
+      "min_ms": 108.546958,
+      "n": 10,
+      "vals_ms": [
+        108.546958,
+        109.164291,
+        109.431709,
+        109.457917,
+        110.101958,
+        110.129291,
+        110.780292,
+        110.932792,
+        111.122042,
+        111.222625
+      ]
+    },
+    "8_shared_without_features": {
+      "max_ms": 114.878708,
+      "median_ms": 109.7621875,
+      "min_ms": 108.237208,
+      "n": 10,
+      "vals_ms": [
+        108.237208,
+        108.750916,
+        108.788667,
+        109.457959,
+        109.607375,
+        109.917,
+        110.118542,
+        110.362667,
+        110.518542,
+        114.878708
+      ]
+    }
+  },
+  "independent_recompute_verified": true,
+  "pass_capture_and_restore": "PASS_CAPTURE_AND_RESTORE",
+  "pass_features_local_cost": "PASS_FEATURES_LOCAL_COST",
+  "ratios": {
+    "4": {
+      "capture_overhead": 1.0040700068259385,
+      "group_ratios": [
+        1.5381480839795574,
+        1.6091535703095634,
+        1.5645431456404115,
+        1.5481076587073639,
+        1.5601387328997967
+      ],
+      "median_ratio": 1.5601387328997967
+    },
+    "8": {
+      "capture_overhead": 1.0032200251111068,
+      "group_ratios": [
+        1.661188433443026,
+        1.6876313067061226,
+        1.6843183709418297,
+        1.6837274214954356,
+        1.6986534214408002
+      ],
+      "median_ratio": 1.6843183709418297
+    }
+  },
+  "samples_per_arm_width": 10,
+  "scope_notes": "10 samples/arm/width, no CI, T=verifier input width not concurrency; native uses ORIGINAL MODEL CAPTURE on supplied teacher tokens (not device-dependent AR). Does not measure draft, actual acceptance, full serving throughput or Pareto. Isolated latency ratio is not end-to-end speedup.",
+  "timing_summary_verified": true
+}

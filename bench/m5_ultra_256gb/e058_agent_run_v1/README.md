@@ -47,3 +47,5 @@ Run CPU tests from this directory with `PYTHONDONTWRITEBYTECODE=1` and the repos
 venv. Explicit `execute.py --prepare` creates a source-pinned plan; `--run` requires
 its exact SHA. An invocation without a flag is inert. Never rerun into an existing
 output directory or change pinned code after preparation.
+
+Closed device result: T4/T8 all-prefix feature/state checks passed; Kimi auditor v2 independently checked3120 tensor pairs. Local median group ratios1.56014×/1.68432×; the same oMLX service was restored. See [full evidence and failures](../../../docs/experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md). The v1 auditor here intentionally remains frozen and rejects MLX's null metadata; use the separately versioned `../e058_agent_audit_v2/audit.py` for the raw evidence.

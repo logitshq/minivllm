@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py", line 392, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py", line 382, in main
+    report = audit(args.root, args.manifest)
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py", line 346, in audit
+    rel_path, arrays, file_bytes = _load_member(root, side, pair[side])
+                                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py", line 289, in _load_member
+    return info['path'], parse_safetensors(data), len(data)
+                         ~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/audit.py", line 173, in parse_safetensors
+    raise ValueError('malformed tensor metadata for {!r}'.format(name))
+ValueError: malformed tensor metadata for '__metadata__'

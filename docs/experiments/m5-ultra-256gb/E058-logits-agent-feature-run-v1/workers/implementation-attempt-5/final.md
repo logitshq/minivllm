@@ -1,0 +1,1 @@
+Wrote `gpu-feedback-v2.md` (122 words). It acknowledges the dimensional error and missing baseline, defines all `C` terms as measured seconds, counts only emitted outputs after truncation, and recommends measuring the complete real-drafter loop next. The original file is untouched.

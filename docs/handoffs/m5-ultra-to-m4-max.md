@@ -1440,3 +1440,9 @@ and real draft rounds, then complete round economics. Native GPT child quota
 remains limited. This is a Git handoff record, not confirmation that M4 read it.
 
 E058 final source CPU checkpoint: 8/8 PASS, actual tool605bf7; first7/7 also retained. Root follow-up prompt's OFF-spread correction was itself wrong: frozen reducer uses range/median. Erratum preserved with both original worker replies and prompts.
+
+## E058：真实 Logits coding agents + M5 特征路径通过（2026-10-21）
+
+已fetch：M4分支最新仍94c070e，无新增待合并提交。M5从2c29d3e执行新的默认OFF实验，DeepSeek写参考接口、Kimi写并运行独立byte auditor、Muse写计时器；失败/修复原样留档。T4/T8所有k前缀和continuation的3120对张量一致；teacher-forced native+capture93.00079/185.64746ms，shared+capture59.75785/110.11562ms，五组配对ratio中位1.56014×/1.68432×。不是新C1/C8 HTTP结果或Pareto胜出。
+
+可复用的是五层特征capture接口、every-prefix测试和各模块显式开关。M5专用kernel/资源owner不要直接搬到M4；须按本机重测。v1审计器因MLX `__metadata__: null`拒绝，使用独立版本`bench/m5_ultra_256gb/e058_agent_audit_v2/`；不要改冻结的GPU源。原oMLX PID52818已恢复，零swap增长。见[完整图和实验](../experiments/m5-ultra-256gb/E058-logits-agent-feature-run-v1/README.md)、[第040课](../optimization-guide/tutorials/040-logits-coding-agents-and-feature-cost.md)。

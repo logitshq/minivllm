@@ -1,0 +1,74 @@
+import json, hashlib, pathlib, subprocess, sys, statistics, importlib.util, os
+src_py = "/Users/ryanli/code/minivllm/bench/m5_ultra_256gb/e058_agent_run_v1/timing.py"
+complete_path = "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e058-agent-features-v1-numerical/complete.json"
+parent_path = "/Users/ryanli/code/minivllm/.artifacts/m5-ultra-256gb/e058-agent-features-v1-execution/final.json"
+complete = json.load(open(complete_path))
+parent = json.load(open(parent_path))
+assert complete["status"]=="PASS_FEATURES_LOCAL_COST", "need PASS_FEATURES_LOCAL_COST"
+assert parent["status"]=="PASS_CAPTURE_AND_RESTORE", "need PASS_CAPTURE_AND_RESTORE"
+rows = complete["timings"]
+timing_summary = complete["timing_summary"]
+spec = importlib.util.spec_from_file_location("timing", src_py)
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+reduced = mod.reduce(rows)
+# json-normalized comparison
+def norm_keys(o): return json.loads(json.dumps(o, sort_keys=True))
+assert norm_keys(reduced)==norm_keys({int(k):v for k,v in timing_summary.items()}) or norm_keys({str(k):v for k,v in reduced.items()})==norm_keys(timing_summary), f"mismatch {reduced} vs {timing_summary}"
+# independent recompute via sorted central two
+indep={}
+for w in (4,8):
+    gr=[]
+    for g in range(5):
+        n=sorted([r["elapsed_ns"] for r in rows if r["width"]==w and r["group"]==g and r["arm"]=="native"])
+        s=sorted([r["elapsed_ns"] for r in rows if r["width"]==w and r["group"]==g and r["arm"]=="shared_with_features"])
+        # central two values median
+        med_n=(n[0]+n[1])/2
+        med_s=(s[0]+s[1])/2
+        gr.append(med_n/med_s)
+    all_with=sorted([r["elapsed_ns"] for r in rows if r["width"]==w and r["arm"]=="shared_with_features"])
+    all_without=sorted([r["elapsed_ns"] for r in rows if r["width"]==w and r["arm"]=="shared_without_features"])
+    # median of 10 = avg of 2 middle
+    med_with=(all_with[4]+all_with[5])/2
+    med_without=(all_without[4]+all_without[5])/2
+    indep[w]={"group_ratios":gr,"median_ratio":statistics.median(gr),"capture_overhead":med_with/med_without}
+# verify independent equals reducer
+for w in (4,8):
+    for a,b in zip(indep[w]["group_ratios"], reduced[w]["group_ratios"] if isinstance(list(reduced.keys())[0], int) else reduced[str(w)]["group_ratios"]):
+        assert abs(a-b)<1e-12
+
+# 3-arm stats
+arms={}
+for w in (4,8):
+    for arm in ("native","shared_without_features","shared_with_features"):
+        vals=sorted([r["elapsed_ns"] for r in rows if r["width"]==w and r["arm"]==arm])
+        med=(vals[4]+vals[5])/2
+        arms[f"{w}_{arm}"]={"median_ms":med/1e6,"min_ms":min(vals)/1e6,"max_ms":max(vals)/1e6,"n":len(vals),"vals_ms":[v/1e6 for v in vals]}
+
+out={
+ "pass_features_local_cost":complete["status"],
+ "pass_capture_and_restore":parent["status"],
+ "samples_per_arm_width":10,
+ "arms":arms,
+ "ratios":indep,
+ "timing_summary_verified":True,
+ "independent_recompute_verified":True,
+ "scope_notes":"10 samples/arm/width, no CI, T=verifier input width not concurrency; native uses ORIGINAL MODEL CAPTURE on supplied teacher tokens (not device-dependent AR). Does not measure draft, actual acceptance, full serving throughput or Pareto. Isolated latency ratio is not end-to-end speedup."
+}
+open("device-timing-analysis.json","w").write(json.dumps(out,indent=2,sort_keys=True))
+# command/exit/hashes
+cmd=[sys.executable,"device-timing-analysis.py"]
+proc=subprocess.run(cmd,capture_output=True,text=True)
+info={
+ "command":cmd,
+ "exit_status":proc.returncode,
+ "stdout":proc.stdout,
+ "stderr":proc.stderr,
+ "source_sha256":hashlib.sha256(open(src_py,"rb").read()).hexdigest(),
+ "result_sha256":hashlib.sha256(open("device-timing-analysis.json","rb").read()).hexdigest(),
+ "complete_sha256":hashlib.sha256(open(complete_path,"rb").read()).hexdigest(),
+}
+open("device-timing-analysis.json","r")
+# we also need actual command that was run externally; store
+json.dump(info, open("device-timing-meta.json","w"), indent=2)
+print("DONE",out)

@@ -1,0 +1,1 @@
+Wrote `device-timing-analysis-v2.py` with no `subprocess`/self-launch, single-pass compute, direct SHA provenance without exit-code assertion, full metric comparison (`group_ratios`, `median_ratio`, `capture_overhead`). Wrote `recursion-erratum.md` acknowledging defect. V1 script/JSON/meta preserved. No execution performed.
